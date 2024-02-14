@@ -3,7 +3,7 @@ import { UPTI } from "./pages/upti/upti-list/upti-list-types";
 
 export type AppState = {
   SocketServer: WebSocket,
-  IsConnected: boolean | null,
+  IsConnected: boolean | null, //null - transition state. used to determine when a connection has been initiated, but confirmation has not yet been received.
   IsSideBarCollapsed: boolean,
   NodeList: any[],
   GroupList: any[],
@@ -12,7 +12,9 @@ export type AppState = {
   UPTI: UPTI,
   SystemMetrics: any,
   CommissionableDevices: CommissionableDevice[],
-  AppMonitoringList: any
+  AppMonitoringList: any,
+  ShowRedirectModal:boolean,
+  ShowRedirectSpinner: boolean
 }
 
 export type LocalStorage = {

@@ -124,7 +124,7 @@ typedef struct ts_param
 
 #ifdef __C51__
 
-#define VOID_CALLBACKFUNC_PVOID(func, puser) void func(void* puser);\
+#define VOID_CALLBACKFUNC_PVOID(func, puser) void func(__attribute__((unused)) void* puser);\
 code const void (code * func##_p)(void* puser) = &##func;\
 void func(void *puser)
 

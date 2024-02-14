@@ -123,6 +123,8 @@ function isStruct(type) {
     case 'DiskUsageData': return true
     case 'NetworkManagementState': return true
     case 'SSceneTable': return true
+    case 'DeviceTypeStruct': return true
+    case 'CredentialStruct': return true
     default: return false
   }
 }
@@ -159,6 +161,7 @@ function isMonotonousArray(label) {
     case 'RequestedStateParameters': return true
     // Scenes cluster:
     case 'SceneTable': return true
+    case 'DeviceTypeList': return true
     default: return false
   }
 }
@@ -232,8 +235,10 @@ function asSnakeCaseLower(str) {
   if (!str) {
     return str
   }
-  var label = str.replace(/\.?([A-Z][a-z])/g, function (x, y) {
-    return '_' + y
+  var label = str.replace(/([A-Z]{1}[a-z])/g, function(x, y) {
+      return '_' + y
+  }).replace(/([A-Z]{2,}_[A-Z]{1})/g, function(x, y) {
+      return '_' + y
   })
   label = asCleanSymbol(label)
   if (label.startsWith('_')) {

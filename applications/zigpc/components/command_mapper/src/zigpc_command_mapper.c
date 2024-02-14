@@ -163,52 +163,73 @@ sl_status_t zigpc_command_mapper_handle_groups(
   sl_status_t status = SL_STATUS_OK;
 
   //ADD GROUP
-  if ((cluster_id == zigpc_group_get_cluster_id())
-      && (command_id == zigpc_group_add_get_id())) {
-    if ((command_arg_count == 1) && (command_arg_list != NULL)
-        && (command_arg_list[0].type == ZIGPC_ZCL_DATA_TYPE_UINT16)) {
-      uint16_t group_id = *((uint16_t *)command_arg_list[0].data);
-      status            = zigpc_group_add_desired(group_id, eui64, endpoint);
-    } else if ((command_arg_count == 2) && (command_arg_list != NULL)
-               && (command_arg_list[0].type == ZIGPC_ZCL_DATA_TYPE_UINT16)
-               && (command_arg_list[1].type == ZIGPC_ZCL_DATA_TYPE_STRING)) {
-      uint16_t group_id = *((uint16_t *)command_arg_list[0].data);
-      char *group_name  = (char *)command_arg_list[1].data;
+  if (
+      (cluster_id == zigpc_group_get_cluster_id()) &&
+      (command_id == zigpc_group_add_get_id()))
+  {
+      if (
+          (command_arg_count == 1) && (command_arg_list != NULL) &&
+          (command_arg_list[0].type == ZIGPC_ZCL_DATA_TYPE_UINT16))
+      {
+          uint16_t group_id = *((uint16_t *)command_arg_list[0].data);
+          status = zigpc_group_add_desired(group_id, eui64, endpoint);
+      }
+      else if (
+          (command_arg_count == 2) && (command_arg_list != NULL) &&
+          (command_arg_list[0].type == ZIGPC_ZCL_DATA_TYPE_UINT16) &&
+          (command_arg_list[1].type == ZIGPC_ZCL_DATA_TYPE_STRING))
+      {
+          uint16_t group_id = *((uint16_t *)command_arg_list[0].data);
+          char *group_name  = (char *)command_arg_list[1].data;
 
-      status = zigpc_group_add_desired_with_name(group_id,
-                                                 group_name,
-                                                 eui64,
-                                                 endpoint);
-    } else {
-      sl_log_warning(
+          status = zigpc_group_add_desired_with_name(
+                      group_id,
+                      group_name,
+                      eui64,
+                      endpoint);
+      }
+      else
+      {
+        sl_log_warning(
         LOG_TAG,
         "Unable to handle add groups command - invalid argument data");
-    }
+      }
   }
   //REMOVE GROUP
-  else if ((cluster_id == zigpc_group_get_cluster_id())
-           && (command_id == zigpc_group_remove_get_id())) {
-    if ((command_arg_count == 1) && (command_arg_list != NULL)
-        && (command_arg_list[0].type == ZIGPC_ZCL_DATA_TYPE_UINT16)) {
-      uint16_t group_id = *((uint16_t *)command_arg_list[0].data);
-      status
-        = zigpc_group_remove(group_id, eui64, endpoint, ATTR_DIRECTION_DESIRED);
-    } else {
-      sl_log_warning(
-        LOG_TAG,
-        "Unable to handle remove groups command - invalid argument data");
-    }
+  else if (
+      (cluster_id == zigpc_group_get_cluster_id()) &&
+      (command_id == zigpc_group_remove_get_id()))
+  {
+      if (
+          (command_arg_count == 1) &&
+          (command_arg_list != NULL) &&
+          (command_arg_list[0].type == ZIGPC_ZCL_DATA_TYPE_UINT16))
+      {
+          uint16_t group_id = *((uint16_t *)command_arg_list[0].data);
+          status
+            = zigpc_group_remove(group_id, eui64, endpoint, ATTR_DIRECTION_DESIRED);
+      }
+      else
+      {
+          sl_log_warning(
+            LOG_TAG,
+          "Unable to handle remove groups command - invalid argument data");
+      }
   }
   //REMOVE ALL GROUPS
-  else if ((cluster_id == zigpc_group_get_cluster_id())
-           && (command_id == zigpc_group_removeall_get_id())) {
-    status = zigpc_group_remove_all(eui64, endpoint);
-  } else {
-    sl_log_debug(
-      LOG_TAG,
-      "Ignoring unsupported GroupMgmt cluster[0x%04X] command[0x%02X]",
-      cluster_id,
-      command_id);
+  else if (
+      (cluster_id == zigpc_group_get_cluster_id()) &&
+      (command_id == zigpc_group_removeall_get_id()))
+  {
+      status = zigpc_group_remove_all(eui64, endpoint);
+  }
+  else
+  {
+      sl_log_debug(
+          LOG_TAG,
+          "Ignoring unsupported GroupMgmt cluster[0x%04X] command[0x%02X]",
+          cluster_id,
+          command_id);
   }
 
   return status;

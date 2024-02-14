@@ -13,6 +13,42 @@ applicable to this document can be found in the LICENSE.md file.
   xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
   id="0101" revision="2" name="DoorLock">
   <classification role="application" picsCode="DRLK" primaryTransaction="2" />
+  
+  <type:type short="CredentialStruct" name="CredentialStruct" id="22">
+    <restriction>
+      <type:sequence>
+        <field name="CredentialType" type="CredentialTypeEnum" />
+        <field name="CredentialIndex" type="uint16" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+  
+  <type:type short="CredentialTypeEnum" name="CredentialTypeEnum" id="30" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration value="00" name="ProgrammingPIN" />
+      <type:enumeration value="01" name="PIN" />
+      <type:enumeration value="02" name="RFID" />
+      <type:enumeration value="03" name="Fingerprint" />
+      <type:enumeration value="04" name="FingerVein" />
+      <type:enumeration value="05" name="Face" />
+    </restriction>
+  </type:type>
+
+  <type:type short="DataOperationTypeEnum" name="DataOperationTypeEnum" id="30" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration value="00" name="Add" />
+      <type:enumeration value="01" name="Clear" />
+      <type:enumeration value="02" name="Modify" />
+    </restriction>
+  </type:type>
+  
+  <type:type short="CredentialRuleEnum" name="CredentialRuleEnum" id="30" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration value="00" name="Single" />
+      <type:enumeration value="01" name="Dual" />
+      <type:enumeration value="02" name="Tri" />
+    </restriction>
+  </type:type>
 
   <type:type short="DrlkUserStatus" name="DrlkUserStatus" id="20" inheritsFrom="uint8">
     <restriction>
@@ -39,6 +75,11 @@ applicable to this document can be found in the LICENSE.md file.
       <type:enumeration value="02" name="WeekDayScheduleUser" />
       <type:enumeration value="03" name="MasterUser" />
       <type:enumeration value="04" name="NonAccessUser" />
+      <type:enumeration value="05" name="ForcedUser" />
+      <type:enumeration value="06" name="DisposableUser" />
+      <type:enumeration value="07" name="ExpiringUser" />
+      <type:enumeration value="08" name="ScheduleRestrictedUser" />
+      <type:enumeration value="09" name="RemoteOnlyUser" />
       <type:enumeration value="FF" name="NotSupported" />
     </restriction>
   </type:type>
@@ -131,6 +172,24 @@ applicable to this document can be found in the LICENSE.md file.
 
   <server>
     <attributes>
+      <!-- Global -->
+      <attribute id="FFFC" name="FeatureMap" type="map16" default="0" >
+        <bitmap>
+          <element name="PINCredential" type="bool" mask="0001" />
+          <element name="RFIDCredential" type="bool" mask="0002" shiftRight="1" />
+          <element name="FingerCredentials" type="bool" mask="0004" shiftRight="2" />
+          <element name="Logging" type="bool" mask="0008" shiftRight="3" />
+          <element name="WeekDayAccessSchedules" type="bool" mask="0010" shiftRight="4" />
+          <element name="DoorPositionSensor" type="bool" mask="0020" shiftRight="5" />
+          <element name="FaceCredentials" type="bool" mask="0040" shiftRight="6" />
+          <element name="CredentialOverTheAirAccess" type="bool" mask="0080" shiftRight="7" />
+          <element name="User" type="bool" mask="0100" shiftRight="8" />
+          <element name="Notification" type="bool" mask="0200" shiftRight="9" />
+          <element name="YearDayAccessSchedules" type="bool" mask="0400" shiftRight="a" />
+          <element name="HolidaySchedules" type="bool" mask="0800" shiftRight="b" />
+          <element name="Unbolting" type="bool" mask="1000" shiftRight="c" />
+        </bitmap>
+      </attribute>
 
       <!--  Basic Information Attribute Set -->
 
@@ -139,6 +198,7 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="00" name="NotFullyLocked" />
           <type:enumeration value="01" name="Locked" />
           <type:enumeration value="02" name="Unlocked" />
+          <type:enumeration value="03" name="Unlatched" />
           <type:enumeration value="FF" name="Undefined" />
         </restriction>
       </attribute>
@@ -155,6 +215,7 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="08" name="InterconnectedLock" />
           <type:enumeration value="09" name="DeadLatch" />
           <type:enumeration value="0A" name="DoorFurniture" />
+          <type:enumeration value="0B" name="Eurocylinder" />
         </restriction>
       </attribute>
       <attribute id="0002" name="ActuatorEnabled" type="bool" required="true" />
@@ -165,6 +226,7 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="02" name="ErrorJammed" />
           <type:enumeration value="03" name="ErrorForcedOpen" />
           <type:enumeration value="04" name="ErrorUnspecified" />
+          <type:enumeration value="05" name="DoorAjar" />
           <type:enumeration value="FF" name="Undefined" />
         </restriction>
       </attribute>
@@ -196,6 +258,15 @@ applicable to this document can be found in the LICENSE.md file.
       <attribute id="0018" name="MinPINCodeLength" type="uint8" default="4" />
       <attribute id="0019" name="MaxRFIDCodeLength" type="uint8" default="20" />
       <attribute id="001A" name="MinRFIDCodeLength" type="uint8" default="8" />
+      <attribute id="001B" name="CredentialRulesSupport" type="map8" default="1">
+        <bitmap>
+          <element name="Single" type="bool" mask="0001" />
+          <element name="Dual" type="bool" mask="0002" shiftRight="1"/>
+          <element name="Tri" type="bool" mask="0004" shiftRight="2"/>
+        </bitmap>
+      </attribute>
+      <attribute id="001C" name="NumberOfCredentialsSupportedPerUser" type="uint8" default="0" />
+
 
       <!--  Operational Settings Attribute Set -->
 
@@ -222,10 +293,11 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="00" name="SilentMode" />
           <type:enumeration value="01" name="LowVolume" />
           <type:enumeration value="02" name="HighVolume" />
+          <type:enumeration value="03" name="MediumVolume" />
         </restriction>
       </attribute>
       <attribute id="0025" name="OperatingMode" type="DrlkOperMode" writable="true" writeOptional="true" reportRequired="true" default="0" />
-      <attribute id="0026" name="SupportedOperatingModes" type="map16" default="1" >
+      <attribute id="0026" name="SupportedOperatingModes" type="map16" default="FF6" >
         <bitmap>
           <element name="NormalModeSupported" type="bool" mask="0001" />
           <element name="VacationModeSupported" type="bool" mask="0002" shiftRight="1" />
@@ -249,6 +321,14 @@ applicable to this document can be found in the LICENSE.md file.
       <attribute id="0029" name="EnableOneTouchLocking" type="bool" writable="true" reportRequired="true" default="0" />
       <attribute id="002A" name="EnableInsideStatusLED" type="bool" writable="true" reportRequired="true" default="0" />
       <attribute id="002B" name="EnablePrivacyModeButton" type="bool" writable="true" reportRequired="true" default="0" />
+      <attribute id="002C" name="LocalProgrammingFeatures" type="map8" writable="true" writeOptional="true" reportRequired="true" default="0" >
+        <bitmap>
+          <element name="AddUsersCredentialsSchedulesLocally" type="bool" mask="0001" />
+          <element name="ModifyUsersCredentialsSchedulesLocally" type="bool" mask="0002" shiftRight="1" />
+          <element name="ClearUsersCredentialsSchedulesLocally" type="bool" mask="0004" shiftRight="2" />
+          <element name="AdjustLockSettingsLocally" type="bool" mask="0008" shiftRight="3" />
+        </bitmap>
+      </attribute>
 
       <!--  Security Settings Attribute Set -->
 
@@ -262,10 +342,16 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="01" name="APS" />
         </restriction>
       </attribute>
+      <attribute id="0035" name="ExpiringUserTimeout" type="uint16" writable="true" writeOptional="true" reportRequired="true" >
+        <restriction>
+          <type:minInclusive value="1"/>
+          <type:maxInclusive value="2880" />
+        </restriction>
+      </attribute>
 
       <!--  Alarm and Event Masks Attribute Set -->
 
-      <attribute id="0040" name="AlarmMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0040" name="AlarmMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="DeadboltJammed" type="bool" mask="0001" />
           <element name="LockResetToFactoryDefaults" type="bool" mask="0002" shiftRight="1" />
@@ -276,7 +362,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="ForcedDoorOpenUnderDoorLockedCondition" type="bool" mask="0040" shiftRight="6" />
         </bitmap>
       </attribute>
-      <attribute id="0041" name="KeypadOperationEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0041" name="KeypadOperationEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="KeypadOpUnknownOrMS" type="bool" mask="0001" />
           <element name="KeypadOpLock" type="bool" mask="0002" shiftRight="1" />
@@ -288,7 +374,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="KeypadOpNonAccessUser" type="bool" mask="0080" shiftRight="7" />
         </bitmap>
       </attribute>
-      <attribute id="0042" name="RFOperationEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0042" name="RFOperationEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="RFOpUnknownOrMS" type="bool" mask="0001" />
           <element name="RFOpLock" type="bool" mask="0002" shiftRight="1" />
@@ -299,7 +385,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="RFOpUnlockInvalidSchedule" type="bool" mask="0040" shiftRight="6" />
         </bitmap>
       </attribute>
-      <attribute id="0043" name="ManualOperationEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0043" name="ManualOperationEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="ManualOpUnknownOrMS" type="bool" mask="0001" />
           <element name="ManualOpThumbturnLock" type="bool" mask="0002" shiftRight="1" />
@@ -314,7 +400,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="ManualOpUnlock" type="bool" mask="0400" shiftRight="10" />
         </bitmap>
       </attribute>
-      <attribute id="0044" name="RFIDOperationEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0044" name="RFIDOperationEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="RFIDOpUnknownOrMS" type="bool" mask="0001" />
           <element name="RFIDOpLock" type="bool" mask="0002" shiftRight="1" />
@@ -325,7 +411,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="RFIDOpUnlockErrorInvalidSchedule" type="bool" mask="0040" shiftRight="6" />
         </bitmap>
       </attribute>
-      <attribute id="0045" name="KeypadProgrammingEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0045" name="KeypadProgrammingEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="KeypadProgUnknownOrMS" type="bool" mask="0001" />
           <element name="KeypadProgMasterCodeChanged" type="bool" mask="0002" shiftRight="1" />
@@ -334,7 +420,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="KeypadProgPINChanged" type="bool" mask="0010" shiftRight="4" />
         </bitmap>
       </attribute>
-      <attribute id="0046" name="RFProgrammingEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0046" name="RFProgrammingEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
         <bitmap>
           <element name="RFProgUnknownOrMS" type="bool" mask="0001" />
           <!--  Bit 1 not defined.  -->
@@ -345,7 +431,7 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="RFProgRFIDDeleted" type="bool" mask="0040" shiftRight="6" />
         </bitmap>
       </attribute>
-      <attribute id="0047" name="RFIDProgrammingEventMask" type="map16" writable="true" reportRequired="true" default="0" >
+      <attribute id="0047" name="RFIDProgrammingEventMask" type="map16" writable="true" reportRequired="true" default="FFFF" >
          <bitmap>
           <element name="RFIDProgUnknownOrMS" type="bool" mask="0001" />
           <!--  Bits 1-4 not defined. -->
@@ -549,6 +635,52 @@ applicable to this document can be found in the LICENSE.md file.
         </fields>
       </command>
       <command id="19" name="ClearAllRFIDCodes" />
+      <command id="1A" name="SetUser">
+        <fields>
+          <field name="OperationType" type="DataOperationTypeEnum" />
+          <field name="UserIndex" type="uint16" />
+          <field name="UserName" type="string" />
+          <field name="UserUniqueID" type="uint32"  />
+          <field name="UserStatus" type="DrlkUserStatus"  />
+          <field name="UserType" type="DrlkUserType"  />
+          <field name="CredentialRule" type="CredentialRuleEnum"  />
+        </fields>
+      </command>
+      <command id="1B" name="GetUser">
+        <fields>
+          <field name="UserIndex" type="uint16" />
+        </fields>
+      </command>
+      <command id="1D" name="ClearUser">
+        <fields>
+          <field name="UserIndex" type="uint16" />
+        </fields>
+      </command>
+      <command id="22" name="SetCredential">
+        <fields>
+          <field name="OperationType" type="DataOperationTypeEnum" />
+          <field name="Credential" type="CredentialStruct" />
+          <field name="CredentialData" type="octstr" />
+          <field name="UserIndex" type="uint16"  />
+          <field name="UserStatus" type="DrlkUserStatus"  />
+          <field name="UserType" type="DrlkUserType"  />
+        </fields>
+      </command>
+      <command id="24" name="GetCredentialStatus">
+        <fields>
+          <field name="Credential" type="CredentialStruct" />
+        </fields>
+      </command>
+      <command id="26" name="ClearCredential">
+        <fields>
+          <field name="Credential" type="CredentialStruct" />
+        </fields>
+      </command>
+      <command id="27" name="UnboltDoor">
+        <fields>
+          <field name="PINCode" type="octstr" />
+        </fields>
+      </command>
     </commands>
   </server>
   <client>
@@ -815,6 +947,26 @@ applicable to this document can be found in the LICENSE.md file.
           <field name="LocalTime" type="uint32" />
           <field name="Data" type="string" />
         </fields>
+      </command>
+      <command id="1C" name="GetUserResponse">
+            <field name="UserIndex" type="uint16" />
+            <field name="UserName" type="string"  />
+            <field name="UserUniqueID" type="uint32"  />
+            <field name="UserStatus" type="DrlkUserStatus"  />
+            <field name="UserType" type="DrlkUserType"  />
+            <field name="CredentialRule" type="CredentialRuleEnum"  />
+            <field name="Credentials" type="CredentialStruct" array="true"/>
+            <field name="NextUserIndex" type="uint16"  />
+        </command>
+      <command id="23" name="SetCredentialResponse">
+            <field name="Status" type="zclStatus" />
+            <field name="UserIndex" type="uint16"  />
+            <field name="NextCredentialIndex" type="uint16"  />
+      </command>
+      <command id="25" name="GetCredentialStatusResponse">
+            <field name="CredentialExists" type="bool" />
+            <field name="UserIndex" type="uint16"  />
+            <field name="NextCredentialIndex" type="uint16"  />
       </command>
     </commands>
   </client>

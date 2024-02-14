@@ -117,10 +117,25 @@ common_resources = [
     },
     {
         'download_name'   : 'Unify Debian packages',
-        'download_url'    : 'https://github.com/SiliconLabs/UnifySDK/releases/download/ver_1.3.2/unify_1.3.2_x86_64.zip',
-        'download_sha256' : '5a022a368f40887ffd99e7dd92038190c0504d19762ab265eedb308c6f771870',
+        'download_url'    : 'https://github.com/SiliconLabs/UnifySDK/releases/download/ver_1.4.0/unify_1.4.0_x86_64.zip',
+        'download_sha256' : 'd779b5b2cbd67a9f3f044a407b14501a1362d2fde9cfc88eb857c76435f80f26',
         'extract_details' : [
             {
+                'extract_dst' : 'docker-files/',
+            }
+        ],
+    },
+    {
+        'download_name'   : 'Matter Bridge Binaries',
+        'download_url'    : 'https://www.dropbox.com/scl/fi/2554rb5bnvcr50iv4jd2u/bridge_binaries.zip?rlkey=4dd7yi9zfnmv3uuxkuvx8u7yp&dl=1',
+        'download_sha256' : 'c2c5a0a8d147f3286427954df6821976c777734c788af7cf568a027a52b34f9e',
+        'extract_details' : [
+            {
+                'extract_src' : 'bridge_binaries/uic-mb_1.1.0_amd64.deb',
+                'extract_dst' : 'docker-files/',
+            },
+            {
+                'extract_src' : 'bridge_binaries/chip-tool',
                 'extract_dst' : 'docker-files/',
             }
         ],
@@ -129,6 +144,8 @@ common_resources = [
 
 def download_file(download_folder, link):
     file_name = link.split('/')[-1]
+    # Removes query parameters, if present.
+    file_name = file_name.split('?')[0]
     file_path = f"{download_folder}/{file_name}"
     r = requests.get(link, stream = True)
     with open(file_path, 'wb') as f:
@@ -186,6 +203,28 @@ def verify_hash(file_path, known_hash):
         print(f"Calculated hash: {sha256_hash.hexdigest()}")
         assert (sha256_hash.hexdigest() == known_hash)
 
+def get_local_resources(resource, target_folder, src_file_path):
+    with tempfile.TemporaryDirectory() as extract_folder:
+        extract_srcs = list(filter(lambda e: 'extract_src' in e, resource['extract_details']))
+
+        if len(extract_srcs) > 0:
+            extract_file_to_folder(src_file_path, extract_folder)
+
+        for extract in resource['extract_details']:
+            move_from = f"{extract_folder}/{extract['extract_src']}" if 'extract_src' in extract else src_file_path
+            move_to = f"{target_folder}/{extract['extract_dst']}"
+
+            move_to_path = Path(move_to)
+
+            move_from_path = Path(move_from)
+            print(f"Copying {move_from} to {move_to}")
+            if os.path.isdir(move_from_path):
+                shutil.rmtree(move_to_path, ignore_errors=True)
+                shutil.copytree(move_from_path, move_to_path, symlinks=True)
+            else:
+                os.makedirs(move_to_path.parent.absolute(), exist_ok=True)
+                shutil.copy(move_from_path, move_to_path)
+
 def get_resources(resource, target_folder):
     with tempfile.TemporaryDirectory() as download_folder_path:
         print(f"Downloading {resource['download_name']} from {resource['download_url']}")
@@ -194,26 +233,7 @@ def get_resources(resource, target_folder):
         print(f"Downloaded file path: {file_path}")
         verify_hash(file_path, resource['download_sha256'])
 
-        with tempfile.TemporaryDirectory() as extract_folder:
-            extract_srcs = list(filter(lambda e: 'extract_src' in e, resource['extract_details']))
-
-            if len(extract_srcs) > 0:
-                extract_file_to_folder(file_path, extract_folder)
-
-            for extract in resource['extract_details']:
-                move_from = f"{extract_folder}/{extract['extract_src']}" if 'extract_src' in extract else file_path
-                move_to = f"{target_folder}/{extract['extract_dst']}"
-
-                move_to_path = Path(move_to)
-
-                move_from_path = Path(move_from)
-                print(f"Copying {move_from} to {move_to}")
-                if os.path.isdir(move_from_path):
-                    shutil.rmtree(move_to_path, ignore_errors=True)
-                    shutil.copytree(move_from_path, move_to_path, symlinks=True)
-                else:
-                    os.makedirs(move_to_path.parent.absolute(), exist_ok=True)
-                    shutil.copy(move_from_path, move_to_path)
+        get_local_resources(resource, target_folder, file_path)
 
 def arguments_parsing():
     parser = argparse.ArgumentParser(
@@ -222,6 +242,7 @@ def arguments_parsing():
     parser.add_argument("--build_folder", default=os.path.join(os.path.dirname(__file__), "../target"))
     parser.add_argument("--build_type", choices=["debug", "release"], default="release")
     parser.add_argument("--unify_path", type=str, required=False)
+    parser.add_argument("--resource_path", type=str, default=os.path.join(os.path.dirname(__file__), "../resources_local"))
     args = parser.parse_args()
     return args
 
@@ -240,7 +261,10 @@ if __name__ == "__main__":
     shutil.copytree(resource_folder, copy_dst, symlinks=True)
 
     for resource in platform_resources['resources']:
-        get_resources(resource, copy_dst)
+        if args.resource_path is not None:
+            get_local_resources(resource, copy_dst, args.resource_path + "/" + resource["download_name"] + "_" + args.target + ".zip")
+        else:
+            get_resources(resource, copy_dst)
         print()
 
     for resource in common_resources:
@@ -248,6 +272,8 @@ if __name__ == "__main__":
             # Copy the unifySDK to all the destinations mentioned in common_resources
             for extract in resource["extract_details"]:
                 shutil.copy(args.unify_path, copy_dst + "/" + extract["extract_dst"])
+        elif resource['download_name'] == 'Matter Bridge Binaries' and args.resource_path is not None:
+            get_local_resources(resource, copy_dst, args.resource_path + "/bridge_binaries.zip")
         else:
             get_resources(resource, copy_dst)
         print()

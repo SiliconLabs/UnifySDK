@@ -3,7 +3,7 @@ Description=Unify Z-Wave protocol controller
 After=network.target mosquitto.service
 
 [Service]
-WorkingDirectory=/var/lib/uic
+WorkingDirectory=/var/lib/uic/zpc
 ExecStart=/usr/bin/zpc
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure

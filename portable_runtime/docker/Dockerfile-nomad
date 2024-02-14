@@ -1,0 +1,59 @@
+FROM openjdk:17.0.2-slim-buster as builder
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y -qq curl openssl ca-certificates
+
+RUN curl -k https://vault.silabs.net/v1/pki/ca/pem -o /usr/local/share/ca-certificates/vault-ca-prod.pem
+RUN curl -k https://vault.dev.silabs.net/v1/pki/ca/pem -o /usr/local/share/ca-certificates/vault-ca-dev.pem
+RUN curl -k http://pkicorp.silabs.com/certdata/SL%20Root%20CA.crt -o /usr/local/share/ca-certificates/sl-root-ca.der
+RUN curl -k http://pkicorp.silabs.com/certdata/SL%20Enterprise%20CA01.crt -o /usr/local/share/ca-certificates/sl-enterprise-ca01.der
+
+RUN openssl x509 -inform pem -in /usr/local/share/ca-certificates/vault-ca-prod.pem -out /usr/local/share/ca-certificates/vault-ca-prod.crt
+RUN openssl x509 -inform pem -in /usr/local/share/ca-certificates/vault-ca-dev.pem -out /usr/local/share/ca-certificates/vault-ca-dev.crt
+RUN openssl x509 -inform der -in /usr/local/share/ca-certificates/sl-root-ca.der -out /usr/local/share/ca-certificates/sl-root-ca.crt
+RUN openssl x509 -inform der -in /usr/local/share/ca-certificates/sl-enterprise-ca01.der -out /usr/local/share/ca-certificates/sl-enterprise-ca01.crt
+RUN /usr/sbin/update-ca-certificates
+
+RUN for cert in /usr/local/share/ca-certificates/*.*; do \
+    cd $JAVA_HOME/lib/security \
+    && keytool -import -noprompt -keystore cacerts -storepass changeit  -trustcacerts -alias $(basename $cert) -file $cert; done
+
+FROM joseluisq/rust-linux-darwin-builder:1.71.0
+
+ARG DEBIAN_FRONTEND=noninteractive
+# ARG ARCH="amd64"
+RUN apt-get update \
+ && apt-get install --no-install-recommends -y g++-mingw-w64-x86-64 python3 python3-requests python3-pip unzip zip openjdk-17-jre git git-lfs openssh-server docker.io docker-compose wget sudo\
+ nodejs npm libwebkit2gtk-4.0-dev build-essential\
+ && rm -rf /var/lib/apt/lists/*
+
+ARG USER=jenkins
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+ARG AGENT_WORKDIR="/home/${USER}/agent"
+
+RUN groupadd --gid $USER_GID $USER \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USER
+
+RUN chown -R $USER_UID:$USER_GID /root
+
+USER $USER
+
+RUN ln -s /root/.cargo ~ && ln -s /root/.rustup ~
+
+ENV PATH="$PATH:/home/$USER/.cargo/bin"
+ENV TARGET="x86_64-unknown-linux-gnu"
+
+RUN rustup target add x86_64-pc-windows-gnu && \
+    rustup target add x86_64-apple-darwin && \
+    rustup toolchain install stable-x86_64-pc-windows-gnu
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH "${JAVA_HOME}/bin:${PATH}"
+COPY --from=builder /usr/local/share/ca-certificates/*.crt /usr/local/share/ca-certificates/
+COPY --from=builder /usr/local/openjdk-17/lib/security/cacerts $JAVA_HOME/lib/security/cacerts
+COPY --from=builder /etc/ssl/certs /etc/ssl/certs
+COPY ./daemon.json /etc/docker/daemon.json
+ENV AGENT_WORKDIR=${AGENT_WORKDIR}
+RUN mkdir /home/${USER}/.jenkins && mkdir -p ${AGENT_WORKDIR}
+WORKDIR /home/${USER}
+USER root

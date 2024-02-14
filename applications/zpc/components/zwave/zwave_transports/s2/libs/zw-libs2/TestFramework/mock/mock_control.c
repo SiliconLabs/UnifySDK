@@ -12,9 +12,9 @@
 #include <string.h>
 #include "unity.h"
 
-#define MOCK_CALL_DB_SIZE  2048 /**< Size of the mock call database. */
-#define FAKE_CALL_DB_SIZE  255  /**< Size of the fake call database. */
-#define STUB_CALL_DB_SIZE  255  /**< Size of the stub call database. */
+#define MOCK_CALL_DB_SIZE  8192  /**< Size of the mock call database. */
+#define FAKE_CALL_DB_SIZE  255   /**< Size of the fake call database. */
+#define STUB_CALL_DB_SIZE  255   /**< Size of the stub call database. */
 #define MAX_MESSAGE_LENGTH 4096  /**< Size of error message length, increase value if long messages are needed. */
 
 
@@ -49,6 +49,7 @@ void mock_call_expect_ex(uint32_t line_number, const char * p_func_name, mock_t 
   (*pp_mock)->p_func_name = p_func_name;
   (*pp_mock)->executed    = false;
   (*pp_mock)->line_number = line_number;
+  (*pp_mock)->mock_id     = 0;
   mock_db_idx++;
 }
 

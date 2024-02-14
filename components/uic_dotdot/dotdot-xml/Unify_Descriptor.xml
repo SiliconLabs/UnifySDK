@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+Descriptor Cluster
+This is a manufacturer specific cluster, representing descriptive details of Node
+-->
+<zcl:cluster	
+  xmlns:zcl="http://zigbee.org/zcl/clusters"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:type="http://zigbee.org/zcl/types"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+  id="FD13" revision="2" name="Descriptor">
+  <classification role="utility" picsCode="UDES" />
+  
+  <type:type short="DevTypeId" name="DevTypeId" id="31" inheritsFrom="enum16">
+    <restriction>
+      <type:enumeration value="000A" name="DoorLock" />
+      <type:enumeration value="000B" name="DoorLockController" />
+      <type:enumeration value="002B" name="Fan" />
+      <type:enumeration value="002D" name="AirPurifier" />
+      <type:enumeration value="0072" name="RoomAirConditioner" />
+      <type:enumeration value="0078" name="Cooktop" />
+      <type:enumeration value="007A" name="ExtractorHood" />
+      <type:enumeration value="0100" name="OnOffLight" />
+      <type:enumeration value="0101" name="DimmableLight" />
+      <type:enumeration value="0103" name="OnOffLightSwitch" />
+      <type:enumeration value="0104" name="DimmerSwitch" />
+      <type:enumeration value="0105" name="ColorDimmerSwitch" />
+      <type:enumeration value="0106" name="LightSensor" />
+      <type:enumeration value="0107" name="OccupancySensor" />
+      <type:enumeration value="010A" name="OnOffPluginUnit" />
+      <type:enumeration value="010B" name="DimmablePlugInUnit" />
+      <type:enumeration value="010C" name="ColorTemperatureLight" />
+      <type:enumeration value="010D" name="ExtendedColorLight" />
+      <type:enumeration value="0202" name="WindowCovering" />
+      <type:enumeration value="0203" name="WindowCoveringController" />
+      <type:enumeration value="0300" name="HeatingCoolingUnit" />
+      <type:enumeration value="0301" name="Thermostat" />
+      <type:enumeration value="0302" name="TemperatureSensor" />  
+      <type:enumeration value="0303" name="Pump" />
+      <type:enumeration value="0305" name="PressureSensor" />
+      <type:enumeration value="0306" name="FlowSensor" />
+      <type:enumeration value="0307" name="HumiditySensor" />
+      <type:enumeration value="0840" name="ControlBridge" />      
+      <type:enumeration value="0850" name="OnOffSensor" />
+    </restriction>
+  </type:type>
+  
+  <type:type short="DeviceTypeStruct" name="DeviceTypeStruct" id="22">
+    <restriction>
+      <type:sequence>
+        <field name="DeviceType" type="DevTypeId" />
+        <field name="Revision" type="uint16" min="0" max="65535"/>
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <server>
+    <attributes>
+      <attribute id="0000" name="DeviceTypeList" type="DeviceTypeStruct" array="true" required="true"/>
+    </attributes>
+  </server>
+</zcl:cluster>

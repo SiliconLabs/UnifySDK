@@ -326,6 +326,12 @@ void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* aps
     uint8_t index = emberGetLastAppZigDevRequestSequence();
     uint8_t status = message[1];
  
+// TODO, may be reworked in GCC 13+
+// Check if binding_buffer[index].sourceEui64 and binding_buffer[index].destEui64 can be NULL in any ways
+#if defined(__GNUC__) && (__GNUC__ == 12)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
     //check to see if entry is in the binding buffer
     if( (binding_buffer[index].sourceEui64 != NULL) &&
         (binding_buffer[index].destEui64 != NULL))
@@ -348,5 +354,8 @@ void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* aps
                 binding_buffer[index].isBindResponse,
                 status);
     }
+#if defined(__GNUC__) && (__GNUC__ == 12)
+#pragma GCC diagnostic pop
+#endif
   }
 }

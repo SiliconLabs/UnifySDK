@@ -44,7 +44,7 @@
 
 // Log tag
 static constexpr char LOG_TAG[] = "zwave_command_class_notification";
-static constexpr unsigned int MAX_SUPPORTED_NOTIFICATION_TYPES  = 20;
+static constexpr unsigned int MAX_SUPPORTED_NOTIFICATION_TYPES  = 24;
 static constexpr unsigned int MAX_SUPPORTED_NOTIFICATION_STATES = 256;
 static constexpr unsigned int NOTIFICATION_REPORT_EVENT_STATE_PARAMETER_OFFSET
   = 9;
@@ -263,20 +263,28 @@ static sl_status_t
                                            connection_info->remote.node_id,
                                            connection_info->remote.endpoint_id);
   // Extracting supported notification types for Notification_CC_V4
-  uint16_t notification_types_bits               = 0x0000;
-  uint16_t notification_type_mask                = 0x0000;
+  uint32_t notification_types_bits               = 0x0000;
+  uint32_t notification_type_mask                = 0x0000;
   uint8_t number_of_supported_notification_types = 0;
   uint8_t supported_notification_types[MAX_SUPPORTED_NOTIFICATION_TYPES];
   uint8_t number_of_bit_masks
     = frame_data[2]
       & NOTIFICATION_SUPPORTED_REPORT_PROPERTIES1_NUMBER_OF_BIT_MASKS_MASK_V4;
-  if (number_of_bit_masks == 1) {
-    notification_types_bits = frame_data[3];
-  } else if (number_of_bit_masks == 2) {
-    notification_types_bits = (frame_data[4] << 8) | frame_data[3];
+
+  if (number_of_bit_masks == 0 || (number_of_bit_masks > 3)) {
+    sl_log_warning(
+      LOG_TAG,
+      "Supported notification types Bit Masks length is not supported\n");
   } else {
-    sl_log_debug(LOG_TAG,
-                 "Supported notification types Bit Masks length is wrong\n");
+    if (number_of_bit_masks == 3) {
+      notification_types_bits = frame_data[5];
+    }
+    if (number_of_bit_masks >= 2) {
+      notification_types_bits = (notification_types_bits << 8) | frame_data[4];
+    }
+    if (number_of_bit_masks >= 1) {
+      notification_types_bits = (notification_types_bits << 8) | frame_data[3];
+    }
   }
 
   for (size_t i = 1; i <= MAX_SUPPORTED_NOTIFICATION_TYPES; i++) {
@@ -343,6 +351,34 @@ static sl_status_t
         case 0x8000:
           supported_notification_types[number_of_supported_notification_types]
             = NOTIFICATION_GET_WATER_VALVE_V7;
+          break;
+        case 0x10000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_WEATHER_ALARM_V8;
+          break;
+        case 0x20000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_IRRIGATION_V8;
+          break;
+        case 0x40000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_GAS_ALARM_V8;
+          break;
+        case 0x80000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_PEST_CONTROL_V8;
+          break;
+        case 0x100000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_LIGHT_SENSOR_V8;
+          break;
+        case 0x200000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_WATER_QUALITY_MONITORING_V8;
+          break;
+        case 0x400000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_HOME_MONITORING_V8;
           break;
       }
       number_of_supported_notification_types++;

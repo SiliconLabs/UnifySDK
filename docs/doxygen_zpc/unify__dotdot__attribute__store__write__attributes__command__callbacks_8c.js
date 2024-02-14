@@ -14,6 +14,7 @@ var unify__dotdot__attribute__store__write__attributes__command__callbacks_8c =
     [ "color_control_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#aa93b2b245dee46275a43f65c0a328979", null ],
     [ "configuration_parameters_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a98cacbb0eafdc447ca9b438623b8a301", null ],
     [ "dehumidification_control_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a528d066879d3c0e9e24c4922ac9f4848", null ],
+    [ "descriptor_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a2e4282a5c63099c703de6fb8de26a1e7", null ],
     [ "device_temperature_configuration_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a8859fcd84b22e67bd56aa9d1051f8d0f", null ],
     [ "diagnostics_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a233adf07e70efd12cf7a5c9d4142a629", null ],
     [ "door_lock_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a3c33276ebd07682cade97052a86d2ec5", null ],

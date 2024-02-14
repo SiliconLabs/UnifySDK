@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -109,6 +109,9 @@ $(document).ready(function(){initNavTree('functions_u.html',''); initResizable()
 </li>
 <li>unbind_from_protocol_controller
 : <a class="el" href="struct__uic__mqtt__dotdot__binding__supported__commands__.html#a4a46b209fcc719041a0b5a8dcb048586">_uic_mqtt_dotdot_binding_supported_commands_</a>
+</li>
+<li>unbolt_door
+: <a class="el" href="struct__uic__mqtt__dotdot__door__lock__supported__commands__.html#a846b9a084fcbc4202b0276f12e6b7277">_uic_mqtt_dotdot_door_lock_supported_commands_</a>
 </li>
 <li>undergoing_deletion
 : <a class="el" href="classattribute__store__node.html#ad85acb84d0172e3a3bd2be29d1cf1320">attribute_store_node</a>
@@ -223,33 +226,53 @@ $(document).ready(function(){initNavTree('functions_u.html',''); initResizable()
 : <a class="el" href="structuic__mqtt__dotdot__door__lock__state__t.html#a46f58ed1c00d7e19bde4fe606ffbd940">uic_mqtt_dotdot_door_lock_state_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__updated__state__t.html#a477dfb0e4abe33b06053ee9002e21c20">uic_mqtt_dotdot_door_lock_updated_state_t</a>
 </li>
+<li>user_index
+: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clear__user__fields__t.html#a565bbab90e713dc0958b87ebf31a191b">uic_mqtt_dotdot_door_lock_command_clear_user_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__fields__t.html#aa2a5127362de606fbabdd28307a10346">uic_mqtt_dotdot_door_lock_command_get_user_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__credential__fields__t.html#aa113c2144c2bed08917d6e20888921e1">uic_mqtt_dotdot_door_lock_command_set_credential_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__fields__t.html#a12ad540afa56127e0693b400d35ef55e">uic_mqtt_dotdot_door_lock_command_set_user_fields_t</a>
+</li>
+<li>user_name
+: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__fields__t.html#a17c50d9ebe05a6c7290e46f69c0aee60">uic_mqtt_dotdot_door_lock_command_set_user_fields_t</a>
+</li>
 <li>user_status
-: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__status__response__fields__t.html#aa69e39205f9eb5491f3736accd33fc0f">uic_mqtt_dotdot_door_lock_command_get_user_status_response_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getpin__code__response__fields__t.html#aff4c7dd8e5d30a12663bf5ad8e8edbb8">uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getrfid__code__response__fields__t.html#ab9b4f1a9e63876418668af3022ad7f5a">uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t</a>
+: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__pin__code__response__fields__t.html#a7492cfdf4d13793b1db4ba419d14e8fe">uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__rfid__code__response__fields__t.html#a3793c0ba0f44ae3c52de5457f5cc96c9">uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__status__response__fields__t.html#aa69e39205f9eb5491f3736accd33fc0f">uic_mqtt_dotdot_door_lock_command_get_user_status_response_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__programming__event__notification__fields__t.html#a303e54fdad2bfd51c19f37ef9d33e29f">uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__credential__fields__t.html#ab641c0f505632aeb0bccde7c7411901b">uic_mqtt_dotdot_door_lock_command_set_credential_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#a79d12c37b760bf52d56f5d3ecdf478a5">uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#a9d39603137d0dc07447c8489f5cadb6f">uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__fields__t.html#a4ae82f4845940bb68857864f66cf0035">uic_mqtt_dotdot_door_lock_command_set_user_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__status__fields__t.html#ae9303a264aae55234a2b3cf22f337d43">uic_mqtt_dotdot_door_lock_command_set_user_status_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__setpin__code__fields__t.html#abb3da68cb14f89576ab6a10b16c839bc">uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__setrfid__code__fields__t.html#a3085ddc3bc0ef9da886c9681a4ae9c69">uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t</a>
 </li>
 <li>user_type
-: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__type__response__fields__t.html#adb62b5eaecdcdb06074bcf800c7afde1">uic_mqtt_dotdot_door_lock_command_get_user_type_response_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getpin__code__response__fields__t.html#a8eeaaf73ec8bbd05c9364ee537a575aa">uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getrfid__code__response__fields__t.html#acca4514276aed270f36cee8b0b6b209e">uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t</a>
+: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__pin__code__response__fields__t.html#ace2e6ab2715e5feb4215e749b3f52ace">uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__rfid__code__response__fields__t.html#a43830446e1fa0086de5eccb0e32ce909">uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__type__response__fields__t.html#adb62b5eaecdcdb06074bcf800c7afde1">uic_mqtt_dotdot_door_lock_command_get_user_type_response_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__programming__event__notification__fields__t.html#a101ad178a261b8ee876b29dec3325d16">uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__credential__fields__t.html#a4058d6256903d40a792354aee5e98d92">uic_mqtt_dotdot_door_lock_command_set_credential_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#a8752b1d14aa78bd255d9d82d2eff4b96">uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#aeb5bac94f02069af1ec80c9cbfb0510f">uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__fields__t.html#a2ec551be66567abf8775b0231c1d180d">uic_mqtt_dotdot_door_lock_command_set_user_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__type__fields__t.html#af129770bf72e030eae33352afd3bd731">uic_mqtt_dotdot_door_lock_command_set_user_type_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__setpin__code__fields__t.html#a6772978ff7fb88bed3748233db1b0262">uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__setrfid__code__fields__t.html#aba60c658bf95a0db6f7fa24364c52170">uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t</a>
+</li>
+<li>user_uniqueid
+: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__fields__t.html#abf598076303cb9c4fcb5444b1b7dcffb">uic_mqtt_dotdot_door_lock_command_set_user_fields_t</a>
 </li>
 <li>UserAccept
 : <a class="el" href="struct__NM__StateParameters.html#a41519b474f0d3c72f1a91961ef49fd71">_NM_StateParameters</a>
 </li>
 <li>userid
-: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html#ac960f31cc8ce24e3dcf16a59e1938fad">uic_mqtt_dotdot_door_lock_command_clear_weekday_schedule_fields_t</a>
+: <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clear__pin__code__fields__t.html#a4a96be5a922cc7834ad4987f5c062dea">uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clear__rfid__code__fields__t.html#a3e51b2a97f64b579689f5b447db74970">uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html#ac960f31cc8ce24e3dcf16a59e1938fad">uic_mqtt_dotdot_door_lock_command_clear_weekday_schedule_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__fields__t.html#a163a7690b2f84ce4466fa6e480431e12">uic_mqtt_dotdot_door_lock_command_clear_year_day_schedule_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clearpin__code__fields__t.html#a00c8266fc061ae945143342f412ab69f">uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__clearrfid__code__fields__t.html#af73a8cf74cb4956bab8118e74c60c587">uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__log__record__response__fields__t.html#ad41a44f0b2dee151bd5d305aa8f9a6fb">uic_mqtt_dotdot_door_lock_command_get_log_record_response_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__pin__code__fields__t.html#a68368e1692bd10ce94f0303ef3345c3b">uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__pin__code__response__fields__t.html#a6aafdab3f39ef718b8854e0ca662a5a7">uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__rfid__code__fields__t.html#abfb85cf03f94db91cc875a9add90ae04">uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__rfid__code__response__fields__t.html#a9d014c1f50ef65a6742c1476fa4aa219">uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__status__fields__t.html#a72493bd9107a3566099297ee5acd49db">uic_mqtt_dotdot_door_lock_command_get_user_status_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__status__response__fields__t.html#a84c4ba80a85b5c4ffe2ee8195e9e5b21">uic_mqtt_dotdot_door_lock_command_get_user_status_response_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__user__type__fields__t.html#a6ba3bba8d04ae95a2d01a81d9fe68cb5">uic_mqtt_dotdot_door_lock_command_get_user_type_fields_t</a>
@@ -258,18 +281,14 @@ $(document).ready(function(){initNavTree('functions_u.html',''); initResizable()
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__response__fields__t.html#ab2017ead76c54e8e7418a18f41c78f66">uic_mqtt_dotdot_door_lock_command_get_weekday_schedule_response_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__fields__t.html#a5aefc884b7c3406beb38afad720b4d9c">uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__response__fields__t.html#a50bb64baa3811f4fbd32694b573e440a">uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_response_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getpin__code__fields__t.html#ad0c25fc485926a19796a6049474afef1">uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getpin__code__response__fields__t.html#af4035b8e00fcd02a857e1d2d51221e44">uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getrfid__code__fields__t.html#a702aa3c53242a4bfd36ae91951f7dc25">uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__getrfid__code__response__fields__t.html#a58d75a4da18a6a44b3df365d5aab8641">uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__operating__event__notification__fields__t.html#a1f8b451588f3cdec9aef359e849eb979">uic_mqtt_dotdot_door_lock_command_operating_event_notification_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__programming__event__notification__fields__t.html#a0dd96a4844534c75c225b8d3b162662f">uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#ad128f04ad11d7b82659d624eb241b35b">uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t</a>
+, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#aa755a4a5b64f6283184a75085cee35d9">uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__status__fields__t.html#ab83bc22a47158fc297a37665ea51278e">uic_mqtt_dotdot_door_lock_command_set_user_status_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__user__type__fields__t.html#aa48eead46ab3812b954536b9b76180a9">uic_mqtt_dotdot_door_lock_command_set_user_type_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#ae0f53d72c1edc6458abdce104689e907">uic_mqtt_dotdot_door_lock_command_set_weekday_schedule_fields_t</a>
 , <a class="el" href="structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a6b593b5adbc40bc71ee05ff0a7bc73af">uic_mqtt_dotdot_door_lock_command_set_year_day_schedule_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__setpin__code__fields__t.html#aa4277fc0e2e05b778e105d85f2201115">uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t</a>
-, <a class="el" href="structuic__mqtt__dotdot__door__lock__command__setrfid__code__fields__t.html#a506bfdf852929f4eee58f8b2d5b5fe24">uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t</a>
 </li>
 <li>UUID
 : <a class="el" href="struct__DiskIOCounters.html#aba6ff9979126a13972675034bce87a27">_DiskIOCounters</a>
@@ -281,7 +300,7 @@ $(document).ready(function(){initNavTree('functions_u.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:56:14 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:13 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

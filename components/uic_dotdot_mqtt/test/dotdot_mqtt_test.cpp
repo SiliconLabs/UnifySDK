@@ -232,7 +232,7 @@ static uint16_t user_id_value     = 0;
 static uint8_t user_status_value  = 0;
 static uint8_t user_type_value    = 0;
 static std::string pin_code_value = "";
-static sl_status_t uic_mqtt_dotdot_door_lock_setpin_code_test_callback(
+static sl_status_t uic_mqtt_dotdot_door_lock_set_pin_code_test_callback(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -254,8 +254,8 @@ void test_dotdot_mqtt_enum_commands()
   const char topic[]
     = "ucl/by-unid/zwDEADBEEF/ep0/DoorLock/Commands/SetPINCode";
 
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_set(
-    &uic_mqtt_dotdot_door_lock_setpin_code_test_callback);
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_set(
+    &uic_mqtt_dotdot_door_lock_set_pin_code_test_callback);
   uic_mqtt_dotdot_init();
 
   std::string payload = R"({

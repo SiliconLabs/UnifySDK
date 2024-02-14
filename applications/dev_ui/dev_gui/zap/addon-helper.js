@@ -8,6 +8,7 @@ const supportedClusters = [
     "CarbonDioxide",
     "CarbonMonoxide",
     "ConfigurationParameters",
+    "Descriptor",
     "DoorLock",
     "ElectricalConductivityMeasurement",
     "ElectricalMeasurement",
@@ -22,6 +23,7 @@ const supportedClusters = [
     "OnOff",
     "PhMeasurement",
     "PM25",
+    "PowerConfiguration",
     "PressureMeasurement",
     "ProtocolController-NetworkManagement",
     "ProtocolController-RFTelemetry",
@@ -32,8 +34,7 @@ const supportedClusters = [
     "TemperatureMeasurement",
     "Thermostat",
     "WindSpeedMeasurement",
-    "WindowCovering",
-    "PowerConfiguration"
+    "WindowCovering"
 ];
 
 let enums = new Set();

@@ -7,6 +7,7 @@ extern crate lazy_static;
 // See run_unify.py for features not yet ported.
 #[cfg(target_os = "windows")]
 use std::os::windows::process::CommandExt;
+use std::collections::HashMap;
 
 use file_matcher::FileNamed;
 use port_selector::{is_free, Port};
@@ -18,7 +19,7 @@ use std::{
     io::{Write, stdout},
     net::IpAddr,
     path::{Path, PathBuf},
-    process::{Child, Command, ExitStatus},
+    process::{Child, Command, ExitStatus, Stdio},
     str::FromStr,
 };
 use regex::Regex;
@@ -27,6 +28,11 @@ use bimap::BiMap;
 const LOG_NAME: &str = "./portable_runtime.log";
 
 const DOCKER_CTX: &str = "resources/docker-files";
+
+pub static SILINK_DEFAULT_PORT: &str = "4901";
+pub static ZIGPC_PORT_KEY: &str = "ZIGPC_PORT";
+pub static AOXPC_PORT_KEY: &str = "AOXPC_PORT";
+pub static MULTIPROTOCOL_PORT_KEY: &str = "MULTIPROTOCOL_PORT";
 
 #[cfg(target_os = "windows")]
 lazy_static! { static ref SILINK_PATH: PathBuf = PathBuf::from(r#".\resources\silink\silink.exe"#); }
@@ -72,6 +78,7 @@ macro_rules! run_cmd_in_dir {
             cmd.current_dir($working_dir);
         }
         cmd.stdout(get_log_file()).stderr(get_log_file());
+        cmd.stdin(Stdio::null());
         cmd
     }};
 }
@@ -201,19 +208,40 @@ pub fn silink_get_device_count() -> Result<i32, Box<dyn std::error::Error>> {
     }
 }
 
-pub fn silink_automap(serial_number: &str) -> Result<Child, std::io::Error> {
-    _ = silink_prepare().expect("Failed to set execution permissions for Silink.");
+lazy_static! {
+    pub static ref PORTS: HashMap<&'static str, &'static str> = {
+        let mut ports = HashMap::new();
+            ports.insert("Z-Wave", "4900");
+            ports.insert("Zigbee-NCP", "5000");
+            ports.insert("AoX-Bluetooth", "5100");
+            ports.insert("MultiProtocol", "6100");
+            ports
+    };
+}
 
-    if serial_number.is_empty() {
-      run_cmd_in_dir!([SILINK_PATH.to_str().unwrap(), "-automap", "4900"], "").spawn()
+pub fn silink_automap(serial_number: &str, protocol: &str) -> Result<Child, std::io::Error> {
+    _ = silink_prepare().expect("Failed to set execution permissions for Silink.");
+    
+
+    let port = match PORTS.get(protocol) {
+        Some(&p) => p,
+        None => return Err(std::io::Error::new(
+            std::io::ErrorKind::InvalidInput,
+            "Unsupported protocol",
+        )),
+    };
+
+    if serial_number.is_empty(){
+        run_cmd_in_dir!([SILINK_PATH.to_str().unwrap(), "-automap", port ], "").spawn()
     } else {
-      run_cmd_in_dir!(
+        run_cmd_in_dir!(
             [
                 SILINK_PATH.to_str().unwrap(),
                 "-sn",
                 serial_number,
                 "-automap",
-                "4900"
+                port,
+
             ],
             ""
         ).spawn()
@@ -232,22 +260,125 @@ pub fn silink_inspect() -> Result<String, &'static str> {
 
 pub fn set_zpc_device(device_str: &str) {
     match IpAddr::from_str(device_str) {
-        Ok(_)  => env::set_var("ZPC_DEVICE_IP", device_str),
-        Err(_) => env::set_var("ZPC_DEVICE_TTY", device_str)
+        Ok(_)  => set_env_var("ZPC_DEVICE_IP", device_str),
+        Err(_) => set_env_var("ZPC_DEVICE_TTY", device_str)
     }
 }
 
 pub fn set_zpc_config_args(arg_str: &str) {
-    env::set_var("ZPC_CONFIG_ARGS", arg_str);
+    set_env_var("ZPC_CONFIG_ARGS", arg_str);
 }
 
-pub fn docker_compose_up() -> Result<ExitStatus, std::io::Error> {
+pub fn set_zigpc_device(device_str: &str) {
+    match IpAddr::from_str(device_str) {
+        Ok(_)  => set_env_var("ZIGPC_DEVICE_IP", device_str),
+        Err(_) => set_env_var("ZIGPC_DEVICE_TTY", device_str)
+    }
+}
+
+pub fn set_aoxpc_device(device_str: &str) {
+    match IpAddr::from_str(device_str) {
+        Ok(_)  => set_env_var("AOXPC_DEVICE_IP", device_str),
+        Err(_) => set_env_var("AOXPC_DEVICE_TTY", device_str)
+    }
+}
+
+pub fn set_multiprotocol_device(device_str: &str) {
+    match IpAddr::from_str(device_str) {
+        Ok(_)  => set_env_var("MULTIPROTOCOL_DEVICE_IP", device_str),
+        Err(_) => set_env_var("MULTIPROTOCOL_DEVICE_TTY", device_str)
+    }
+}
+
+pub fn set_env_var(key: &str, value: &str) {
+    env::set_var(key, value);
+}
+
+// Add to below map when new service (PC/others) support is added
+lazy_static! {
+    pub static ref SERVICES: HashMap<&'static str, &'static str> = {
+        HashMap::from_iter(vec![
+            ("MultiProtocol", "unify-multiprotocol"),
+            ("AoX-Bluetooth", "unify-aoxpc"),
+            ("Zigbee-NCP", "unify-zigpc"),
+            ("Z-Wave", "unify-zpc"),
+            ("NAL", "unify-nal"),
+            ("Image-Provider", "unify-image-provider"),
+            ("GMS", "unify-gms"),
+            ("UPVL", "unify-upvl"),
+            ("UMB","unify-matter-bridge"),
+        ])
+    };
+}
+
+
+// This is used by clap to validate the modules argument used to select services. 
+//  Ensure to sync it with keys from above HashMap
+pub static PROTCOL_MODULE_LIST:[&str; 4] = ["Z-Wave", "Zigbee-NCP", "AoX-Bluetooth", "MultiProtocol"];
+pub static HELPER_MODULE_LIST:[&str; 4] = ["NAL", "Image-Provider", "GMS", "UPVL"];
+pub static APPLICATIONS_LIST:[&str; 1] = ["UMB"];
+
+// Update the below function to indicate conflicts in current configuration in return value
+//   Currently it is bool since only one PC is supported update needed when more gets added.
+//   We can have list of tuple returned where each tuple has service name and its conflict details if any
+pub fn validate_configuration(service_list: &str) -> Vec<(&str, &str)> {
+    let mut conflict_list: Vec<(&str, &str)> = vec![];
+    if service_list != "" {
+        let mut protocol_service_configured: bool = false;
+        let mut zigbee_ncp_or_multi_protocol_configured = false;
+        let services = service_list.split(',');
+        services.for_each( |x| match x {
+            "Z-Wave" | "AoX-Bluetooth" => {
+                protocol_service_configured = true;
+                // Also check if device config conflicts that of other PCs/Services
+            },
+            "Zigbee-NCP" | "MultiProtocol" => {
+                if zigbee_ncp_or_multi_protocol_configured {
+                    conflict_list.push((x, "Cannot configure Zigbee-NCP and MultiProtocol together."));
+                } else {
+                    zigbee_ncp_or_multi_protocol_configured = true;
+                    protocol_service_configured = true;
+                    conflict_list.clear();
+                }
+            },
+            // Add case for PCs/services when added
+            srv => {
+                if !protocol_service_configured {
+                    conflict_list.push((srv, "No protocol configured!"));
+                }
+            }
+        });
+    }
+    conflict_list
+}
+
+pub fn docker_compose_up(service_list: &str) -> Result<ExitStatus, std::io::Error> {
+    let mut up_list : Vec<&str>  = vec!["mqtt-broker", "unify-dev-gui-server"];
+    if service_list != "" {
+        let split = service_list.split(',');
+        split.for_each( |x| if let Some(y) = SERVICES.get(x) {
+            up_list.push(y);
+        });
+    }
+    else {
+        up_list.extend(["unify-zpc", "unify-nal", "unify-gms", "unify-upvl", "unify-image-provider"]);
+    }
+
     println!("Starting Unify Portable Runtime...");
     run_cmd_in_dir!(
-        ["docker-compose", "up", "-d"],
+        ["docker-compose", "up", "-d", up_list.join(" ").as_str()],
         Path::new(DOCKER_CTX).to_str().unwrap()
     ).spawn()?
     .wait()
+}
+
+pub fn docker_retriev_status() ->  Result<String, &'static str> {
+    match run_cmd!(["docker", "ps", "-a", "--filter name=unify --no-trunc --format=json"]).output() {
+        Ok(result) => {
+            Ok(String::from_utf8_lossy(&result.stdout).to_string())
+        }
+        Err(_) => Err("Failed to retriev status!")
+    }
 }
 
 pub fn docker_compose_down() -> Result<ExitStatus, std::io::Error> {
@@ -348,6 +479,29 @@ pub fn flash_device(name_path: &str, serialnum: &str, proccesor_type: &str, regi
     }
 }
 
+//check the type of chip on the target device.
+pub fn check_chip_type(proccesor_type: &Option<String>, serialnum: &str) -> Result<String, &'static str> {
+    let chip;
+    if proccesor_type.is_none() {
+        println!("Processor type is not given as parameter. Using default ZGM230S.");
+        chip = "ZGM230S".to_string();
+    } else {
+        chip = proccesor_type.to_owned().unwrap();
+    }
+
+    let commander_path = commander_prepare().unwrap();
+
+    //if the chip type on the target device is different, the function returns an error.
+    match run_cmd_in_dir!([commander_path, "device", "info", "-s", serialnum, "-d", chip.as_str()], "").status() {
+        Err(_) => return Err("The target device has a different chip type"),
+        Ok(stat) => if ! stat.success() { 
+            return Err("The target device has a different chip type"); 
+        } else { 
+            return Ok(chip.to_string()) 
+        },
+    }
+}
+
 fn read_mfg_token(serial_number: &str, proccesor_type: Option<&str>, token: &str, regex: Regex) -> Result<String, Box<dyn std::error::Error>> {
     let commander_path = commander_prepare().unwrap();
     let mut command_parts = vec![commander_path, "tokendump", "--tokengroup", "znet", "--token", token, "-s", serial_number];
@@ -380,6 +534,35 @@ fn read_freq(serial_number: &str, proccesor_type: Option<&str>) -> Option<String
         Some(region) => Some(region.to_string()),
         None => None
     }
+}
+
+pub fn filtered_mapped_devices(silink_result_tmp: &str, mapped_devices: Vec<String>) -> Result<String, &'static str>{    
+    let mut filtered_string = silink_result_tmp.to_string().clone();
+
+    let re_device = Regex::new(r#"(\{(.|\n)*?\})"#).unwrap();
+    let re_serial = Regex::new(r#"serialNumber=([0-9]{9})"#).unwrap();
+
+   for mapped_device in mapped_devices {
+      let devices_to_remove: Vec<_> = re_device
+        .find_iter(&filtered_string)
+        .filter_map(|device| {
+            let device_string = device.as_str();
+            let serial_number = re_serial.captures(&device_string)
+                .unwrap()[1].to_owned();
+            if serial_number == mapped_device{
+                Some(device_string.to_owned())
+            } else {
+                None
+            }
+        })
+        .collect();
+
+        // Remove mapped devices from the list of devices
+        for device in devices_to_remove {
+            filtered_string = filtered_string.replace(&device, "");
+        }
+    }
+    return Ok(filtered_string);
 }
 
 pub fn list_devices(silink_result_tmp: &str, print_output: bool) -> Vec<DeviceInfo> {

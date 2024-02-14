@@ -785,6 +785,10 @@ static sl_status_t door_lock_cluster_write_attributes_callback(
      sl_log_debug(LOG_TAG, "Updating desired value for EnablePrivacyModeButton attribute");
     dotdot_set_door_lock_enable_privacy_mode_button(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.enable_privacy_mode_button);
   }
+  if (true == updated_attributes.local_programming_features) {
+     sl_log_debug(LOG_TAG, "Updating desired value for LocalProgrammingFeatures attribute");
+    dotdot_set_door_lock_local_programming_features(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.local_programming_features);
+  }
   if (true == updated_attributes.wrong_code_entry_limit) {
      sl_log_debug(LOG_TAG, "Updating desired value for WrongCodeEntryLimit attribute");
     dotdot_set_door_lock_wrong_code_entry_limit(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.wrong_code_entry_limit);
@@ -793,13 +797,17 @@ static sl_status_t door_lock_cluster_write_attributes_callback(
      sl_log_debug(LOG_TAG, "Updating desired value for UserCodeTemporaryDisableTime attribute");
     dotdot_set_door_lock_user_code_temporary_disable_time(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.user_code_temporary_disable_time);
   }
-  if (true == updated_attributes.sendpin_over_the_air) {
+  if (true == updated_attributes.send_pin_over_the_air) {
      sl_log_debug(LOG_TAG, "Updating desired value for SendPINOverTheAir attribute");
-    dotdot_set_door_lock_sendpin_over_the_air(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.sendpin_over_the_air);
+    dotdot_set_door_lock_send_pin_over_the_air(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.send_pin_over_the_air);
   }
-  if (true == updated_attributes.requirepi_nforrf_operation) {
+  if (true == updated_attributes.require_pi_nfor_rf_operation) {
      sl_log_debug(LOG_TAG, "Updating desired value for RequirePINforRFOperation attribute");
-    dotdot_set_door_lock_requirepi_nforrf_operation(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.requirepi_nforrf_operation);
+    dotdot_set_door_lock_require_pi_nfor_rf_operation(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.require_pi_nfor_rf_operation);
+  }
+  if (true == updated_attributes.expiring_user_timeout) {
+     sl_log_debug(LOG_TAG, "Updating desired value for ExpiringUserTimeout attribute");
+    dotdot_set_door_lock_expiring_user_timeout(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.expiring_user_timeout);
   }
   if (true == updated_attributes.alarm_mask) {
      sl_log_debug(LOG_TAG, "Updating desired value for AlarmMask attribute");
@@ -1999,17 +2007,17 @@ static sl_status_t electrical_measurement_cluster_write_attributes_callback(
                "electrical_measurement: Incoming WriteAttributes command for %s, endpoint %d.\n",
                unid,
                endpoint_id);
-  if (true == updated_attributes.averagerms_voltage_measurement_period) {
+  if (true == updated_attributes.average_rms_voltage_measurement_period) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSVoltageMeasurementPeriod attribute");
-    dotdot_set_electrical_measurement_averagerms_voltage_measurement_period(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_voltage_measurement_period);
+    dotdot_set_electrical_measurement_average_rms_voltage_measurement_period(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_voltage_measurement_period);
   }
-  if (true == updated_attributes.averagerms_over_voltage_counter) {
+  if (true == updated_attributes.average_rms_over_voltage_counter) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSOverVoltageCounter attribute");
-    dotdot_set_electrical_measurement_averagerms_over_voltage_counter(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_over_voltage_counter);
+    dotdot_set_electrical_measurement_average_rms_over_voltage_counter(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_over_voltage_counter);
   }
-  if (true == updated_attributes.averagerms_under_voltage_counter) {
+  if (true == updated_attributes.average_rms_under_voltage_counter) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSUnderVoltageCounter attribute");
-    dotdot_set_electrical_measurement_averagerms_under_voltage_counter(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_under_voltage_counter);
+    dotdot_set_electrical_measurement_average_rms_under_voltage_counter(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_under_voltage_counter);
   }
   if (true == updated_attributes.rms_extreme_over_voltage_period) {
      sl_log_debug(LOG_TAG, "Updating desired value for RMSExtremeOverVoltagePeriod attribute");
@@ -2051,17 +2059,17 @@ static sl_status_t electrical_measurement_cluster_write_attributes_callback(
      sl_log_debug(LOG_TAG, "Updating desired value for RMSVoltageSwell attribute");
     dotdot_set_electrical_measurement_rms_voltage_swell(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.rms_voltage_swell);
   }
-  if (true == updated_attributes.averagerms_voltage_measurement_period_phb) {
+  if (true == updated_attributes.average_rms_voltage_measurement_period_phb) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSVoltageMeasurementPeriodPhB attribute");
-    dotdot_set_electrical_measurement_averagerms_voltage_measurement_period_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_voltage_measurement_period_phb);
+    dotdot_set_electrical_measurement_average_rms_voltage_measurement_period_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_voltage_measurement_period_phb);
   }
-  if (true == updated_attributes.averagerms_over_voltage_counter_phb) {
+  if (true == updated_attributes.average_rms_over_voltage_counter_phb) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSOverVoltageCounterPhB attribute");
-    dotdot_set_electrical_measurement_averagerms_over_voltage_counter_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_over_voltage_counter_phb);
+    dotdot_set_electrical_measurement_average_rms_over_voltage_counter_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_over_voltage_counter_phb);
   }
-  if (true == updated_attributes.averagerms_under_voltage_counter_phb) {
+  if (true == updated_attributes.average_rms_under_voltage_counter_phb) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSUnderVoltageCounterPhB attribute");
-    dotdot_set_electrical_measurement_averagerms_under_voltage_counter_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_under_voltage_counter_phb);
+    dotdot_set_electrical_measurement_average_rms_under_voltage_counter_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_under_voltage_counter_phb);
   }
   if (true == updated_attributes.rms_extreme_over_voltage_period_phb) {
      sl_log_debug(LOG_TAG, "Updating desired value for RMSExtremeOverVoltagePeriodPhB attribute");
@@ -2079,17 +2087,17 @@ static sl_status_t electrical_measurement_cluster_write_attributes_callback(
      sl_log_debug(LOG_TAG, "Updating desired value for RMSVoltageSwellPeriodPhB attribute");
     dotdot_set_electrical_measurement_rms_voltage_swell_period_phb(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.rms_voltage_swell_period_phb);
   }
-  if (true == updated_attributes.averagerms_voltage_measurement_period_phc) {
+  if (true == updated_attributes.average_rms_voltage_measurement_period_phc) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSVoltageMeasurementPeriodPhC attribute");
-    dotdot_set_electrical_measurement_averagerms_voltage_measurement_period_phc(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_voltage_measurement_period_phc);
+    dotdot_set_electrical_measurement_average_rms_voltage_measurement_period_phc(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_voltage_measurement_period_phc);
   }
-  if (true == updated_attributes.averagerms_over_voltage_counter_phc) {
+  if (true == updated_attributes.average_rms_over_voltage_counter_phc) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSOverVoltageCounterPhC attribute");
-    dotdot_set_electrical_measurement_averagerms_over_voltage_counter_phc(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_over_voltage_counter_phc);
+    dotdot_set_electrical_measurement_average_rms_over_voltage_counter_phc(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_over_voltage_counter_phc);
   }
-  if (true == updated_attributes.averagerms_under_voltage_counter_phc) {
+  if (true == updated_attributes.average_rms_under_voltage_counter_phc) {
      sl_log_debug(LOG_TAG, "Updating desired value for AverageRMSUnderVoltageCounterPhC attribute");
-    dotdot_set_electrical_measurement_averagerms_under_voltage_counter_phc(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.averagerms_under_voltage_counter_phc);
+    dotdot_set_electrical_measurement_average_rms_under_voltage_counter_phc(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.average_rms_under_voltage_counter_phc);
   }
   if (true == updated_attributes.rms_extreme_over_voltage_period_phc) {
      sl_log_debug(LOG_TAG, "Updating desired value for RMSExtremeOverVoltagePeriodPhC attribute");
@@ -2547,6 +2555,36 @@ static sl_status_t protocol_controller_network_management_cluster_write_attribut
                endpoint_id);
   return SL_STATUS_OK;
 }
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster Descriptor
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks descriptor
+static sl_status_t descriptor_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_descriptor_state_t attributes,
+  uic_mqtt_dotdot_descriptor_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_descriptor_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "descriptor: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  return SL_STATUS_OK;
+}
 // clang-format on
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -2710,6 +2748,9 @@ sl_status_t
   
   uic_mqtt_dotdot_set_protocol_controller_network_management_write_attributes_callback(
     &protocol_controller_network_management_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_descriptor_write_attributes_callback(
+    &descriptor_cluster_write_attributes_callback);
   
   // clang-format on
 

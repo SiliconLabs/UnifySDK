@@ -52,6 +52,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * The data-store component depends on the config component for
    * database location.
    */
+  {zigpc_ncp_updater_setup, "ZigPC NCP Updater"},
   {&zigpc_application_monitoring_init, "ZigPC ApplicationMonitoring"},
   {&zigpc_uic_datastore_fixt_setup, "Datastore"},
   {&attribute_store_init, "Attribute store"},
@@ -93,18 +94,9 @@ static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
   {zigpc_gateway_process_shutdown, "ZigPC Gateway"},
   {attribute_store_teardown, "Attribute store"},
   {datastore_fixt_teardown, "Datastore"},
+  {zigpc_ncp_updater_shutdown, "ZigPC NCP Updater"},
   {NULL, "Terminator"},
 };
-
-static uic_fixt_setup_step_t zigpc_ncp_updater_setup_list[]
-  = {{zigpc_gateway_process_setup, "ZigPC Gateway"},
-     {zigpc_ncp_updater_setup, "ZigPC NCP Updater"},
-     {NULL, "TERMINATOR"}};
-
-static uic_fixt_shutdown_step_t zigpc_ncp_updater_shutdown_list[]
-  = {{zigpc_gateway_process_shutdown, "ZigPC Gateway"},
-     {zigpc_ncp_updater_shutdown, "ZigPC NCP Updater"},
-     {NULL, "TERMINATOR"}};
 
 int main(int argc, char **argv)
 {
@@ -113,30 +105,13 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  config_status_t config_status
-    = config_parse(argc, argv, CMAKE_PROJECT_VERSION);
-
-  if (config_status != CONFIG_STATUS_OK) {
-    return -1;
-  }
-
   int main_status = 0;
 
-  config_status_t has_ncp_update_flag = config_has_flag("zigpc.ncp_update");
-
-  if (CONFIG_STATUS_OK == has_ncp_update_flag) {
-    main_status = uic_main(zigpc_ncp_updater_setup_list,
-                           zigpc_ncp_updater_shutdown_list,
-                           argc,
-                           argv,
-                           CMAKE_PROJECT_VERSION);
-  } else {
-    main_status = uic_main(uic_fixt_setup_steps_list,
-                           uic_fixt_shutdown_steps_list,
-                           argc,
-                           argv,
-                           CMAKE_PROJECT_VERSION);
-  }
+  main_status = uic_main(uic_fixt_setup_steps_list,
+                         uic_fixt_shutdown_steps_list,
+                         argc,
+                         argv,
+                         CMAKE_PROJECT_VERSION);
 
   return main_status;
 }

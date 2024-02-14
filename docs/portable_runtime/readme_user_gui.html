@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portable runtime GUI &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/portable_runtime/readme_user_gui.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="portable-runtime-gui">
+<h1>Portable runtime GUI<a class="headerlink" href="#portable-runtime-gui" title="Permalink to this heading"></a></h1>
+<section id="unify-portable-runtime-environment">
+<h2>Unify Portable Runtime Environment<a class="headerlink" href="#unify-portable-runtime-environment" title="Permalink to this heading"></a></h2>
+<p><strong>Disclaimer</strong>: Currently the Unify Portable Runtime environment does not supports the following protocol:</p>
+<ul class="simple">
+<li><p>Bluetooth in Multiprotocol</p></li>
+<li><p>Thread in Multiprotocol</p></li>
+<li><p>Matter</p></li>
+</ul>
+<p><strong>Prerequisites</strong>:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG12/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
+<li><p>Docker version &gt; 20.10.12 installed.</p></li>
+<li><p>docker-compose version &gt; 2.5.1</p></li>
+<li><p>x86-64/amd64 CPU architecture.</p></li>
+</ol>
+<p>The Unify Portable Runtime Environment strives to get Unify running as fast as
+possible on your desktop. The portable runtime comes as a binary executable GUI,
+together with Unify Debian packages, a docker-compose file and a tool which can
+map a Silicon Labs device into a Linux docker environment on Windows and
+Linux.</p>
+<section id="start-docker-service">
+<h3>Start docker service<a class="headerlink" href="#start-docker-service" title="Permalink to this heading"></a></h3>
+<p>Refer to <span class="xref myst">Docker Service Pre-requisite</span>.</p>
+</section>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p><strong>Note</strong>: If you are running Linux, you need the right permissions to run the <code class="docutils literal notranslate"><span class="pre">Commander</span></code> and <code class="docutils literal notranslate"><span class="pre">Silink</span></code> tools.</p>
+<p>For handling these permissions, you either need to:</p>
+<ol class="arabic">
+<li><p>copy the Udev rules from <code class="docutils literal notranslate"><span class="pre">./resources/commander/99-jlink.rules</span></code> to the system folder <code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/</span></code> and run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">control</span> <span class="pre">--reload</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">trigger</span></code>.</p>
+<p>or</p>
+</li>
+<li><p>run all the commands as root with eg. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./unify_portable_gui....</span></code>.</p></li>
+</ol>
+<p><strong>WARNING</strong>: If you start up the portable docker environment on a host already
+running Unify Framework applications, this will cause unexpected behavior.</p>
+<p>Setting up the portable runtime environment should be as easy as downloading
+<code class="docutils literal notranslate"><span class="pre">portable_runtime_gui_&lt;OS&gt;.&lt;zip/tar.bz2&gt;</span></code> file from the
+<a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>
+and extracting it.</p>
+<section id="launching-portable-runtime-gui">
+<h3>Launching Portable Runtime GUI<a class="headerlink" href="#launching-portable-runtime-gui" title="Permalink to this heading"></a></h3>
+<p>After extraction, make sure you have modules connected to your desktop and run the binary <code class="docutils literal notranslate"><span class="pre">unify_portable_gui</span></code>.
+This should launch up the Unify Portable Runtime GUI.</p>
+<p><strong>Note</strong>: The configuration pages have <code class="docutils literal notranslate"><span class="pre">Back</span></code> button to go to previous page and edit configurations made.</p>
+<section id="protocol-selection">
+<h4>Protocol Selection<a class="headerlink" href="#protocol-selection" title="Permalink to this heading"></a></h4>
+<p>After initial pre-requisites check, the GUI will render protocol selection page.</p>
+<a class="reference internal image-reference" href="../_images/protocols.jpg"><img alt="../_images/protocols.jpg" src="../_images/protocols.jpg" style="width: 200px; height: 250px;" /></a>
+<p><strong>Note</strong>:</p>
+<ul class="simple">
+<li><p>_Zigbee(RCP) is disabled until <em>MultiProtocol</em> is selected and enabled automatically upon enabling <em>MultiProtocol</em></p></li>
+<li><p><em>Zigbee(NCP)</em> and <em>Zigbee(RCP)</em> are mutually exclusive options.</p></li>
+</ul>
+<p>By default only Z-Wave (ZPC) is selected. Select other protocols as needed and
+click on <code class="docutils literal notranslate"><span class="pre">Next</span></code>.</p>
+</section>
+<section id="framework-services-and-application-selection">
+<h4>Framework Services and Application Selection<a class="headerlink" href="#framework-services-and-application-selection" title="Permalink to this heading"></a></h4>
+<a class="reference internal image-reference" href="../_images/framework_and_application.jpg"><img alt="../_images/framework_and_application.jpg" src="../_images/framework_and_application.jpg" style="width: 200px; height: 250px;" /></a>
+<p>Select the framework services and the unify matter bridge application as needed and click <code class="docutils literal notranslate"><span class="pre">Next</span></code>.</p>
+<p><strong>Note</strong>: Dev-GUI Application will be enabled by default.</p>
+</section>
+<section id="configuration">
+<h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h4>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">Device</span></code> for each protocol selected in <span class="xref myst">Protocol Selection page</span>. If Z-Wave was selected then also configure <code class="docutils literal notranslate"><span class="pre">RF</span> <span class="pre">Region</span></code>.</p>
+<a class="reference internal image-reference" href="../_images/configuration.jpg"><img alt="../_images/configuration.jpg" src="../_images/configuration.jpg" style="width: 200px; height: 250px;" /></a>
+<p>If the required device is not yet connected, connect the device to the host and click <code class="docutils literal notranslate"><span class="pre">Discover</span> <span class="pre">Device</span></code> for it to show up in the drop-down list.</p>
+<p>If you wish manual input serial number or have connected the device remotely over ethernet and wish to input its IP address, tick the <code class="docutils literal notranslate"><span class="pre">manual</span></code> check box and type in the serial-no or IP address of the device.</p>
+<p>After setting up configurations, click <code class="docutils literal notranslate"><span class="pre">Next</span></code>.</p>
+</section>
+<section id="review-configuration">
+<h4>Review Configuration:<a class="headerlink" href="#review-configuration" title="Permalink to this heading"></a></h4>
+<a class="reference internal image-reference" href="../_images/review.jpg"><img alt="../_images/review.jpg" src="../_images/review.jpg" style="width: 200px; height: 250px;" /></a>
+<p>This page is for users to review the selections and configurations that has been setup so far, if configuration looks good click <code class="docutils literal notranslate"><span class="pre">Run</span></code> else click <code class="docutils literal notranslate"><span class="pre">Back</span></code> to redo configuration setup.</p>
+<p><strong>Note</strong>: Currently the Conflicts do not indicate much, it is intended for future use.</p>
+</section>
+<section id="running-status">
+<h4>Running Status<a class="headerlink" href="#running-status" title="Permalink to this heading"></a></h4>
+<p>Once <code class="docutils literal notranslate"><span class="pre">Run</span></code> is clicked on <span class="xref myst">Review Configuration</span> page, the selected protocol controllers and framework services bring-up within portable runtime environment starts. On successful bring up, the Status page is displayed which periodically renders the running status of each service.</p>
+<a class="reference internal image-reference" href="../_images/running.jpg"><img alt="../_images/running.jpg" src="../_images/running.jpg" style="width: 200px; height: 250px;" /></a>
+</section>
+<section id="error">
+<h4>Error<a class="headerlink" href="#error" title="Permalink to this heading"></a></h4>
+<p>In case of any issues in bring-up or pre-requisites check, error page is displayed with relevant message.</p>
+<a class="reference internal image-reference" href="../_images/error.jpg"><img alt="../_images/error.jpg" src="../_images/error.jpg" style="width: 200px; height: 250px;" /></a>
+</section>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

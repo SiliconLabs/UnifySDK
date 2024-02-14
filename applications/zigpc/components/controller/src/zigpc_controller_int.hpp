@@ -142,6 +142,7 @@ void on_startup(void);
  */
 void on_shutdown(void);
 
+
 }  // namespace zigpc_ctrl
 
 #endif  // ZIGPC_CONTROLLER_INT_HPP

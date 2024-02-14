@@ -37,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -48,13 +48,24 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/license.html">License</a></li>
 </ul>
 
@@ -78,12 +89,13 @@
   <section class="tex2jax_ignore mathjax_ignore" id="portable-environment">
 <h1>Portable environment<a class="headerlink" href="#portable-environment" title="Permalink to this heading"></a></h1>
 <p>At the moment the Portable Runtime is comprised of a command line application (CLI), <em><code class="docutils literal notranslate"><span class="pre">unify_portable_cli</span></code></em>, with support for Linux, MacOS and Windows on the x86_64 architecture.
-There is also an experimental GUI, <em>unify_portable_gui</em>, that for the time being, has only been tested on Windows.</p>
+There is also a GUI, <em>unify_portable_gui</em>, that for the time being, has only been tested on Windows and Linux. Refer <a class="reference internal" href="readme_developer_gui.html"><span class="doc std std-doc">Portable Environment GUI Developer Guide</span></a> for more details.</p>
 <p>The applications are written in Rust and rely on some platform specific tools, that are to be packaged and placed relative to the executable in a subfolder called <em><code class="docutils literal notranslate"><span class="pre">./resources</span></code></em>.</p>
 <section id="prepare-runtime-dependencies">
 <h2>Prepare runtime dependencies<a class="headerlink" href="#prepare-runtime-dependencies" title="Permalink to this heading"></a></h2>
 <p>The runtime dependencies for the applications, can be downloaded by running the Python script located in <em><code class="docutils literal notranslate"><span class="pre">./scripts/prepare-resources.py</span></code></em>.
-This script contains links for the various dependencies and as such downloads and extracts them to the correct location in the local filesystem.</p>
+This script contains links for the various dependencies and as such downloads and extracts them to the correct location in the local filesystem.
+This script also allows picking up the runtime dependencies for the applications from local filesystem using <code class="docutils literal notranslate"><span class="pre">--resource_path</span></code> option.</p>
 <p>It makes sense to run this before starting to compile the application, as one can then just run <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--target</span> <span class="pre">x86_64-unknown-linux-gnu</span> <span class="pre">--release</span> <span class="pre">--package</span> <span class="pre">unify_portable_cli</span></code> from the top level <code class="docutils literal notranslate"><span class="pre">portable_runtime</span></code> folder.</p>
 <p>The script has some arguments that needs to be specified so it knows where to place the dependencies in the filesystem.
 You should specify which target OS you are building for with the <code class="docutils literal notranslate"><span class="pre">--target</span></code> argument.

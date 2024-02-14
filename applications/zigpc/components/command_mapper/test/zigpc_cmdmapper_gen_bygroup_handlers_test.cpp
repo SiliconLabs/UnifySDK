@@ -23,9 +23,9 @@
 void zigpc_command_mapper_bygroup_on_off_toggle_handler(
   const dotdot_group_id_t group_id);
 
-void zigpc_command_mapper_bygroup_door_lock_setpin_code_handler(
+void zigpc_command_mapper_bygroup_door_lock_set_pin_code_handler(
   const dotdot_group_id_t group_id,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields);
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields);
 
 void zigpc_command_mapper_bygroup_identify_write_attributes_handler(
   const dotdot_group_id_t group_id,
@@ -170,7 +170,7 @@ void test_bygroup_command_with_primitive_arguments(void)
   dotdot_group_id_t group_id = 1;
   // ucl command data
   std::string ucl_pin = "Hello 1234 World!?";
-  uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t ucl_cmd_fields = {
+  uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t ucl_cmd_fields = {
     .userid      = 0x1234,
     .user_status = ZCL_DRLK_SETTABLE_USER_STATUS_OCCUPIED_ENABLED,
     .user_type   = ZCL_DRLK_USER_TYPE_MASTER_USER,
@@ -190,7 +190,7 @@ void test_bygroup_command_with_primitive_arguments(void)
   stub_frame_builder_data.frame_type = ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER;
   stub_frame_builder_data.cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
   stub_frame_builder_data.command_id
-    = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE;
+    = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE;
   stub_frame_builder_data.command_arg_count = cmd_arg_count;
   stub_frame_builder_data.command_arg_list  = cmd_arg_list;
   zigpc_zcl_build_command_frame_StubWithCallback(stub_frame_builder_cb);
@@ -198,7 +198,7 @@ void test_bygroup_command_with_primitive_arguments(void)
   zigpc_gateway_send_zcl_frame_multicast_IgnoreAndReturn(SL_STATUS_OK);
 
   // ACT
-  zigpc_command_mapper_bygroup_door_lock_setpin_code_handler(group_id,
+  zigpc_command_mapper_bygroup_door_lock_set_pin_code_handler(group_id,
                                                              &ucl_cmd_fields);
 
   // ASSERT

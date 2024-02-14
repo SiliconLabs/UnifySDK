@@ -1355,129 +1355,129 @@ void uic_mqtt_dotdot_by_group_door_lock_get_log_record_response_callback_set(con
 /**
  * @brief Callback signature for by-group DoorLock::SetPINCode command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/setpin_code is received.
+ * ucl/by-group/+/DoorLock/set_pin_code is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::SetPINCodeResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/setpin_code_response is received.
+ * ucl/by-group/+/DoorLock/set_pin_code_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::GetPINCode command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/getpin_code is received.
+ * ucl/by-group/+/DoorLock/get_pin_code is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::GetPINCodeResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/getpin_code_response is received.
+ * ucl/by-group/+/DoorLock/get_pin_code_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearPINCode command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clearpin_code is received.
+ * ucl/by-group/+/DoorLock/clear_pin_code is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearPINCodeResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clearpin_code_response is received.
+ * ucl/by-group/+/DoorLock/clear_pin_code_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearAllPINCodes command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback_t)(
     const dotdot_group_id_t group_id
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clear_allpin_codes is received.
+ * ucl/by-group/+/DoorLock/clear_all_pin_codes is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearAllPINCodesResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clear_allpin_codes_response is received.
+ * ucl/by-group/+/DoorLock/clear_all_pin_codes_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::SetUserStatus command.
@@ -1898,129 +1898,192 @@ void uic_mqtt_dotdot_by_group_door_lock_get_user_type_response_callback_set(cons
 /**
  * @brief Callback signature for by-group DoorLock::SetRFIDCode command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/setrfid_code is received.
+ * ucl/by-group/+/DoorLock/set_rfid_code is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::SetRFIDCodeResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/setrfid_code_response is received.
+ * ucl/by-group/+/DoorLock/set_rfid_code_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::GetRFIDCode command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/getrfid_code is received.
+ * ucl/by-group/+/DoorLock/get_rfid_code is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::GetRFIDCodeResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/getrfid_code_response is received.
+ * ucl/by-group/+/DoorLock/get_rfid_code_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearRFIDCode command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clearrfid_code is received.
+ * ucl/by-group/+/DoorLock/clear_rfid_code is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearRFIDCodeResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clearrfid_code_response is received.
+ * ucl/by-group/+/DoorLock/clear_rfid_code_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearAllRFIDCodes command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback_t)(
     const dotdot_group_id_t group_id
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clear_allrfid_codes is received.
+ * ucl/by-group/+/DoorLock/clear_all_rfid_codes is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::ClearAllRFIDCodesResponse command.
  */
-typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_t)(
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback_t)(
     const dotdot_group_id_t group_id,
-    const uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t *fields
+    const uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t *fields
 );
 
 /**
  * Setup handler to be called when a
- * ucl/by-group/+/DoorLock/clear_allrfid_codes_response is received.
+ * ucl/by-group/+/DoorLock/clear_all_rfid_codes_response is received.
  * Setting this callback will overwrite the previous set callback.
  *
  */
-void uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_t callback);
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::SetUser command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_user_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_set_user_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/set_user is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_set_user_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_user_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::GetUser command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_user_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_get_user_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/get_user is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_get_user_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_user_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::GetUserResponse command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback_t)(
+    const dotdot_group_id_t group_id
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/get_user_response is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::ClearUser command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_user_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_clear_user_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/clear_user is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_clear_user_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_user_callback_t callback);
 
 /**
  * @brief Callback signature for by-group DoorLock::OperatingEventNotification command.
@@ -2053,6 +2116,100 @@ typedef void (*uic_mqtt_dotdot_by_group_door_lock_programming_event_notification
  *
  */
 void uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_set(const uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::SetCredential command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_credential_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_set_credential_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/set_credential is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_set_credential_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_credential_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::SetCredentialResponse command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback_t)(
+    const dotdot_group_id_t group_id
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/set_credential_response is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::GetCredentialStatus command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/get_credential_status is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::GetCredentialStatusResponse command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback_t)(
+    const dotdot_group_id_t group_id
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/get_credential_status_response is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::ClearCredential command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/clear_credential is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group DoorLock::UnboltDoor command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/DoorLock/unbolt_door is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback_set(const uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback_t callback);
 
 typedef void (*uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback_t)(
     const dotdot_group_id_t group_id,
@@ -3531,6 +3688,23 @@ typedef void (*uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes
  */
 void uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback_t callback
+);
+
+
+
+typedef void (*uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_descriptor_state_t,
+    uic_mqtt_dotdot_descriptor_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/descriptor/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t callback
 );
 
 

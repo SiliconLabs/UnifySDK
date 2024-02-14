@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started as a Developer &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/getting_started_as_developer.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unify Developer Guide" href="readme_developer.html" />
+    <link rel="prev" title="Unify Matter Bridge" href="protocol/matter/matter_umb.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started as a Developer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-platform-recommendations">Development Platform Recommendations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-protocol-controllers">Developing protocol controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extend-ucl-clusters">Extend UCL clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-as-a-developer">
+<h1>Getting Started as a Developer<a class="headerlink" href="#getting-started-as-a-developer" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>The <a class="reference internal" href="readme_developer.html"><span class="doc std std-doc">Unify Developer Guide</span></a> contains a lot of useful information for Unify developers.</p>
+<p>The <a class="reference internal" href="readme_building.html"><span class="doc std std-doc">Unify Build Guide</span></a> is the best starting point for working with the source code.</p>
+<p>The <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify User Guide</span></a> contains helpful tips on debugging within Unify.</p>
+<section id="development-platform-recommendations">
+<h2>Development Platform Recommendations<a class="headerlink" href="#development-platform-recommendations" title="Permalink to this heading"></a></h2>
+<p>The Unify reference platform is a Raspberry Pi 4 however it is understood that users may not wish to run on a Raspberry Pi in a final product. Porting to Debian based linux should be straightforward.</p>
+<p>System requirements for flash, RAM, and dependencies are listed at <a class="reference internal" href="system_requirements.html"><span class="doc std std-doc">here</span></a></p>
+</section>
+<section id="developing-iot-services">
+<h2>Developing IoT Services<a class="headerlink" href="#developing-iot-services" title="Permalink to this heading"></a></h2>
+<p>The IoT or cloud connector must use UCL (MQTT) to communicate with the other components of Unify. See <a class="reference internal" href="how_to_develop_an_iot_service.html"><span class="doc std std-doc">How to Develop an IoT service</span></a> Unify uses MQTT to communicate among each component using the Mosquitto MQTT broker. UCL is the format of the MQTT messages. The <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a> contains the definitions for UCL.</p>
+<p>Also see <a href="../reference_ucl_mqtt/index.html">UCL MQTT API</a></p>
+</section>
+<section id="developing-protocol-controllers">
+<h2>Developing protocol controllers<a class="headerlink" href="#developing-protocol-controllers" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="how_to_develop_a_protocol_controller.html"><span class="doc std std-doc">How to Develop a Protocol Controller</span></a></p>
+<p>The attribute mapper helps to translate protocol commands to UCL MQTT messages.
+See <a class="reference internal" href="how_to_write_uam_files.html"><span class="doc std std-doc">How to write UAM files</span></a></p>
+</section>
+<section id="extend-ucl-clusters">
+<h2>Extend UCL clusters<a class="headerlink" href="#extend-ucl-clusters" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="how_to_write_new_cluster.html"><span class="doc std std-doc">How to write a new Cluster</span></a></p>
+<p>It might be needed for non-zigbee controllers if some description are missing.</p>
+</section>
+<section id="overview-of-relations-among-unify-applications">
+<h2>Overview of relations among Unify Applications<a class="headerlink" href="#overview-of-relations-among-unify-applications" title="Permalink to this heading"></a></h2>
+<p>The Unify Framework consists of several applications including Protocol Controllers, IoT
+Services (e.g. Developer GUI, UPTICap) and multiple application services that
+facilitate various functionalities such as SmartStart Provisioning, Group
+Management, Name and Location Service and OTA Image Provider.</p>
+<p>The following table presents the relationship amongst Unify Framework applications and
+the Unify Protocol Controllers. If a given component is supported via a
+Protocol Controller, it will be marked as [x].</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th></th>
+<th style="text-align: left;"><a href="../applications/zpc/readme_user.md">ZPC</a></th>
+<th style="text-align: left;"><a href="../applications/zigpc/readme_user.md">ZigPC</a></th>
+<th style="text-align: left;"><a href="../applications/aox/applications/aoxpc/readme_user.md">AoXPC</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../applications/upvl/readme_user.md">UPVL</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td><a href="../applications/gms/readme_user.md">GMS</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td><a href="../applications/nal/readme_user.md">NAL</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+</tr>
+<tr>
+<td><a href="../applications/image_provider/readme_user.md">OTA Image Provider</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td><a href="../applications/dev_ui/dev_gui/readme_user.md">Dev GUI</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+</tr>
+<tr>
+<td><a href="../applications/upti_cap/readme_user.md">UPTICap</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td><a href="../applications/upti_writer/readme_user.md">UPTIWriter</a></td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;">[x]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td><a href="../applications/aox/applications/positioning/readme_user.md">AoX Positioning</a></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">[x]</td>
+</tr>
+</tbody>
+</table></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -31,6 +31,637 @@
 
 static const char LOG_TAG[] = "zigpc_attrmgmt";
 
+sl_status_t zigpc_attrmgmt_basic_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ZCL_VERSION:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_zcl_version_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_APPLICATION_VERSION:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_application_version_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_STACK_VERSION:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_stack_version_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_HW_VERSION:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_hw_version_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MANUFACTURER_NAME:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_manufacturer_name_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MODEL_IDENTIFIER:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_model_identifier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DATE_CODE:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_date_code_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_POWER_SOURCE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_power_source_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_GENERIC_DEVICE_CLASS:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_generic_device_class_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_GENERIC_DEVICE_TYPE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_generic_device_type_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCT_CODE:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_product_code_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCTURL:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_producturl_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MANUFACTURER_VERSION_DETAILS:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_manufacturer_version_details_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SERIAL_NUMBER:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_serial_number_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCT_LABEL:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_product_label_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_LOCATION_DESCRIPTION:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_location_description_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PHYSICAL_ENVIRONMENT:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_physical_environment_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DEVICE_ENABLED:
+      {
+        bool value;
+        memcpy(&value, attr_value, sizeof(bool));
+        status = uic_mqtt_dotdot_basic_device_enabled_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ALARM_MASK:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_alarm_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DISABLE_LOCAL_CONFIG:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_disable_local_config_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SW_BUILDID:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_basic_sw_buildid_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 2) {
+          value = 2; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_basic_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
+sl_status_t zigpc_attrmgmt_power_configuration_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_mains_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_FREQUENCY:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_mains_frequency_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_ALARM_MASK:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_mains_alarm_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MIN_THRESHOLD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MAX_THRESHOLD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_DWELL_TRIP_POINT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_REMAINING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_percentage_remaining_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_MANUFACTURER:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_power_configuration_battery_manufacturer_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_SIZE:
+      {
+        BatterySize value;
+        memcpy(&value, attr_value, sizeof(BatterySize));
+        status = uic_mqtt_dotdot_power_configuration_battery_size_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERYA_HR_RATING:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_batterya_hr_rating_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_QUANTITY:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_quantity_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_RATED_VOLTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_rated_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_MASK:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_alarm_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_MIN_THRESHOLD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD1:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD2:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD3:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_MIN_THRESHOLD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD1:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD2:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD3:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_percentage_threshold3_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_STATE:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_power_configuration_battery_alarm_state_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_REMAINING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_percentage_remaining_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_MANUFACTURER:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_power_configuration_battery2_manufacturer_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_SIZE:
+      {
+        BatterySize value;
+        memcpy(&value, attr_value, sizeof(BatterySize));
+        status = uic_mqtt_dotdot_power_configuration_battery2_size_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2A_HR_RATING:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_QUANTITY:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_quantity_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_RATED_VOLTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_rated_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_MASK:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_alarm_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_MIN_THRESHOLD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD1:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD2:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD3:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_MIN_THRESHOLD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD1:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD2:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD3:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold3_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_STATE:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_power_configuration_battery2_alarm_state_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_REMAINING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_percentage_remaining_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_MANUFACTURER:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_power_configuration_battery3_manufacturer_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_SIZE:
+      {
+        BatterySize value;
+        memcpy(&value, attr_value, sizeof(BatterySize));
+        status = uic_mqtt_dotdot_power_configuration_battery3_size_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3A_HR_RATING:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_QUANTITY:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_quantity_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_RATED_VOLTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_rated_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_MASK:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_alarm_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_MIN_THRESHOLD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD1:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD2:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD3:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_MIN_THRESHOLD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshold_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD1:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD2:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD3:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold3_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_STATE:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_power_configuration_battery3_alarm_state_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 1) {
+          value = 1; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_power_configuration_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
 sl_status_t zigpc_attrmgmt_identify_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
 {
   sl_status_t status = SL_STATUS_OK;
@@ -411,18 +1042,18 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
         status = uic_mqtt_dotdot_door_lock_number_of_total_users_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OFPIN_USERS_SUPPORTED:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_PIN_USERS_SUPPORTED:
       {
         uint16_t value;
         memcpy(&value, attr_value, sizeof(uint16_t));
-        status = uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OFRFID_USERS_SUPPORTED:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_RFID_USERS_SUPPORTED:
       {
         uint16_t value;
         memcpy(&value, attr_value, sizeof(uint16_t));
-        status = uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER:
@@ -446,32 +1077,46 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
         status = uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAXPIN_CODE_LENGTH:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAX_PIN_CODE_LENGTH:
       {
         uint8_t value;
         memcpy(&value, attr_value, sizeof(uint8_t));
-        status = uic_mqtt_dotdot_door_lock_maxpin_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MINPIN_CODE_LENGTH:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MIN_PIN_CODE_LENGTH:
       {
         uint8_t value;
         memcpy(&value, attr_value, sizeof(uint8_t));
-        status = uic_mqtt_dotdot_door_lock_minpin_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAXRFID_CODE_LENGTH:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAX_RFID_CODE_LENGTH:
       {
         uint8_t value;
         memcpy(&value, attr_value, sizeof(uint8_t));
-        status = uic_mqtt_dotdot_door_lock_maxrfid_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MINRFID_CODE_LENGTH:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MIN_RFID_CODE_LENGTH:
       {
         uint8_t value;
         memcpy(&value, attr_value, sizeof(uint8_t));
-        status = uic_mqtt_dotdot_door_lock_minrfid_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_CREDENTIAL_RULES_SUPPORT:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_door_lock_credential_rules_support_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_ENABLE_LOGGING:
@@ -561,6 +1206,13 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
         status = uic_mqtt_dotdot_door_lock_enable_privacy_mode_button_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_LOCAL_PROGRAMMING_FEATURES:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_door_lock_local_programming_features_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_WRONG_CODE_ENTRY_LIMIT:
       {
         uint8_t value;
@@ -575,18 +1227,18 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
         status = uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SENDPIN_OVER_THE_AIR:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SEND_PIN_OVER_THE_AIR:
       {
         bool value;
         memcpy(&value, attr_value, sizeof(bool));
-        status = uic_mqtt_dotdot_door_lock_sendpin_over_the_air_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_send_pin_over_the_air_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIREPI_NFORRF_OPERATION:
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIRE_PI_NFOR_RF_OPERATION:
       {
         bool value;
         memcpy(&value, attr_value, sizeof(bool));
-        status = uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+        status = uic_mqtt_dotdot_door_lock_require_pi_nfor_rf_operation_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SECURITY_LEVEL:
@@ -594,6 +1246,13 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
         uint8_t value;
         memcpy(&value, attr_value, sizeof(uint8_t));
         status = uic_mqtt_dotdot_door_lock_security_level_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_EXPIRING_USER_TIMEOUT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_ALARM_MASK:
@@ -652,6 +1311,13 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
         status = uic_mqtt_dotdot_door_lock_rfid_programming_event_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_FEATURE_MAP:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_door_lock_feature_map_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
     case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
       {
         uint16_t value;
@@ -660,6 +1326,175 @@ sl_status_t zigpc_attrmgmt_door_lock_publish(const char* unid_ep_topic, const zc
           value = 2; // take min of: device-reported vs. dotdot-spec-based
         }
         uic_mqtt_dotdot_door_lock_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
+sl_status_t zigpc_attrmgmt_window_covering_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_WINDOW_COVERING_TYPE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_window_covering_window_covering_type_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_PHYSICAL_CLOSED_LIMIT_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_PHYSICAL_CLOSED_LIMIT_TILT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_current_position_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_TILT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_current_position_tilt_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_NUMBER_OF_ACTUATIONS_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_number_of_actuations_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_NUMBER_OF_ACTUATIONS_TILT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_number_of_actuations_tilt_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CONFIG_OR_STATUS:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_window_covering_config_or_status_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_LIFT_PERCENTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_window_covering_current_position_lift_percentage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_TILT_PERCENTAGE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_OPEN_LIMIT_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_installed_open_limit_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_CLOSED_LIMIT_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_OPEN_LIMIT_TILT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_CLOSED_LIMIT_TILT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_VELOCITY_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_velocity_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_ACCELERATION_TIME_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_acceleration_time_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_DECELERATION_TIME_LIFT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_window_covering_deceleration_time_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_MODE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_window_covering_mode_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INTERMEDIATE_SETPOINTS_LIFT:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INTERMEDIATE_SETPOINTS_TILT:
+      {
+        // NOTE: the first byte is the string length
+        uint8_t value_strlen = *attr_value;
+        char value[value_strlen + 1];
+        memcpy(value, attr_value + 1, sizeof(char) * value_strlen);
+        value[value_strlen] = '\0';
+        status = uic_mqtt_dotdot_window_covering_intermediate_setpoints_tilt_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 2) {
+          value = 2; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_window_covering_publish_cluster_revision(unid_ep_topic, value);
       }
       break;
     default:
@@ -1432,6 +2267,57 @@ sl_status_t zigpc_attrmgmt_color_control_publish(const char* unid_ep_topic, cons
 
   return status;
 }
+sl_status_t zigpc_attrmgmt_temperature_measurement_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MEASURED_VALUE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_temperature_measurement_measured_value_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MIN_MEASURED_VALUE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_temperature_measurement_min_measured_value_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MAX_MEASURED_VALUE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_temperature_measurement_max_measured_value_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_TOLERANCE:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_temperature_measurement_tolerance_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 2) {
+          value = 2; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_temperature_measurement_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
 sl_status_t zigpc_attrmgmt_occupancy_sensing_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
 {
   sl_status_t status = SL_STATUS_OK;
@@ -1641,6 +2527,1123 @@ sl_status_t zigpc_attrmgmt_iaswd_publish(const char* unid_ep_topic, const zcl_at
 
   return status;
 }
+sl_status_t zigpc_attrmgmt_metering_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_SUMMATION_DELIVERED:
+      {
+        uint64_t value;
+        memcpy(&value, attr_value, sizeof(uint64_t));
+        status = uic_mqtt_dotdot_metering_current_summation_delivered_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_SUMMATION_RECEIVED:
+      {
+        uint64_t value;
+        memcpy(&value, attr_value, sizeof(uint64_t));
+        status = uic_mqtt_dotdot_metering_current_summation_received_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_DELIVERED:
+      {
+        uint64_t value;
+        memcpy(&value, attr_value, sizeof(uint64_t));
+        status = uic_mqtt_dotdot_metering_current_max_demand_delivered_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_RECEIVED:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_metering_current_max_demand_received_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_POWER_FACTOR:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_metering_power_factor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_READING_SNAP_SHOT_TIME:
+      {
+        UTC value;
+        memcpy(&value, attr_value, sizeof(UTC));
+        status = uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_DELIVERED_TIME:
+      {
+        UTC value;
+        memcpy(&value, attr_value, sizeof(UTC));
+        status = uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_RECEIVED_TIME:
+      {
+        UTC value;
+        memcpy(&value, attr_value, sizeof(UTC));
+        status = uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_DEFAULT_UPDATE_PERIOD:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_default_update_period_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_SUPPLY_STATUS:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_supply_status_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_INLET_ENERGY_CARRIER_SUMMATION:
+      {
+        uint64_t value;
+        memcpy(&value, attr_value, sizeof(uint64_t));
+        status = uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION:
+      {
+        uint64_t value;
+        memcpy(&value, attr_value, sizeof(uint64_t));
+        status = uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_INLET_TEMPERATURE:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_metering_inlet_temperature_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_OUTLET_TEMPERATURE:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_metering_outlet_temperature_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_UNITOF_MEASURE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_unitof_measure_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_MULTIPLIER:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_metering_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_DIVISOR:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_metering_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_SUMMATION_FORMATTING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_summation_formatting_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_DEMAND_FORMATTING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_demand_formatting_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_HISTORICAL_CONSUMPTION_FORMATTING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_historical_consumption_formatting_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_METERING_DEVICE_TYPE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_metering_device_type_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_UNIT_OF_MEASURE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_energy_carrier_unit_of_measure_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_SUMMATION_FORMATTING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_energy_carrier_summation_formatting_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_DEMAND_FORMATTING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_energy_carrier_demand_formatting_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_TEMPERATURE_UNIT_OF_MEASURE:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_temperature_unit_of_measure_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING_ATTR_TEMPERATURE_FORMATTING:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_metering_temperature_formatting_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 1) {
+          value = 1; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_metering_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
+sl_status_t zigpc_attrmgmt_electrical_measurement_publish(const char* unid_ep_topic, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  // NOTE: Only server cluster attributes are supported to be published
+  switch(attr_id) {
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASUREMENT_TYPE:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measurement_type_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MIN:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_voltage_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MAX:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_voltage_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MIN:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_current_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MAX:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_current_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MIN:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_power_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MAX:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_power_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_frequency_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MIN:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MAX:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_NEUTRAL_CURRENT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_neutral_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_ACTIVE_POWER:
+      {
+        int32_t value;
+        memcpy(&value, attr_value, sizeof(int32_t));
+        status = uic_mqtt_dotdot_electrical_measurement_total_active_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_REACTIVE_POWER:
+      {
+        int32_t value;
+        memcpy(&value, attr_value, sizeof(int32_t));
+        status = uic_mqtt_dotdot_electrical_measurement_total_reactive_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_APPARENT_POWER:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_electrical_measurement_total_apparent_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED1ST_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured1st_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED3RD_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured3rd_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED5TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured5th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED7TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured7th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED9TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured9th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED11TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured11th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE1ST_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured_phase1st_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE3RD_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured_phase3rd_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE5TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured_phase5th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE7TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured_phase7th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE9TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured_phase9th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE11TH_HARMONIC_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_measured_phase11th_harmonic_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_MULTIPLIER:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_electrical_measurement_power_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_DIVISOR:
+      {
+        uint32_t value;
+        memcpy(&value, attr_value, sizeof(uint32_t));
+        status = uic_mqtt_dotdot_electrical_measurement_power_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_HARMONIC_CURRENT_MULTIPLIER:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_electrical_measurement_harmonic_current_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_PHASE_HARMONIC_CURRENT_MULTIPLIER:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_electrical_measurement_phase_harmonic_current_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_line_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_reactive_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_min_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_max_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_reactive_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_apparent_power_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_electrical_measurement_power_factor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_POWER_MULTIPLIER:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_POWER_DIVISOR:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_power_divisor_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_OVERLOAD_ALARMS_MASK:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_overload_alarms_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_OVERLOAD:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_voltage_overload_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_OVERLOAD:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_dc_current_overload_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ALARMS_MASK:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_alarms_mask_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_OVERLOAD:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_voltage_overload_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_OVERLOAD:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_current_overload_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ACTIVE_POWER_OVERLOAD:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_active_power_overload_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_REACTIVE_POWER_OVERLOAD:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_ac_reactive_power_overload_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_line_current_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT_PHB:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_current_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT_PHB:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_reactive_current_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_max_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_PHB:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN_PHB:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_min_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX_PHB:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_max_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER_PHB:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_reactive_power_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_apparent_power_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR_PHB:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_electrical_measurement_power_factor_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHB:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_line_current_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT_PHC:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_current_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT_PHC:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_reactive_current_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_current_max_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_PHC:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN_PHC:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_min_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX_PHC:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_active_power_max_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER_PHC:
+      {
+        int16_t value;
+        memcpy(&value, attr_value, sizeof(int16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_reactive_power_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_apparent_power_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR_PHC:
+      {
+        int8_t value;
+        memcpy(&value, attr_value, sizeof(int8_t));
+        status = uic_mqtt_dotdot_electrical_measurement_power_factor_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHC:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        status = uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phc_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
+      {
+        uint16_t value;
+        memcpy(&value, attr_value, sizeof(uint16_t));
+        if (value > 2) {
+          value = 2; // take min of: device-reported vs. dotdot-spec-based
+        }
+        uic_mqtt_dotdot_electrical_measurement_publish_cluster_revision(unid_ep_topic, value);
+      }
+      break;
+    default:
+      status = SL_STATUS_NOT_FOUND;
+      break;
+  }
+
+  return status;
+}
 
 sl_status_t zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64, const zigbee_endpoint_id_t endpoint_id, const zcl_cluster_id_t cluster_id, const zcl_attribute_id_t attr_id, const uint8_t *attr_value)
 {
@@ -1660,6 +3663,12 @@ sl_status_t zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64, con
   }
 
   switch(cluster_id) {
+    case ZIGPC_ZCL_CLUSTER_BASIC:
+      status = zigpc_attrmgmt_basic_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
+    case ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION:
+      status = zigpc_attrmgmt_power_configuration_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
     case ZIGPC_ZCL_CLUSTER_IDENTIFY:
       status = zigpc_attrmgmt_identify_publish(unid_ep_topic.c_str(), attr_id, attr_value);
       break;
@@ -1678,11 +3687,17 @@ sl_status_t zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64, con
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK:
       status = zigpc_attrmgmt_door_lock_publish(unid_ep_topic.c_str(), attr_id, attr_value);
       break;
+    case ZIGPC_ZCL_CLUSTER_WINDOW_COVERING:
+      status = zigpc_attrmgmt_window_covering_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
     case ZIGPC_ZCL_CLUSTER_THERMOSTAT:
       status = zigpc_attrmgmt_thermostat_publish(unid_ep_topic.c_str(), attr_id, attr_value);
       break;
     case ZIGPC_ZCL_CLUSTER_COLOR_CONTROL:
       status = zigpc_attrmgmt_color_control_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
+    case ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT:
+      status = zigpc_attrmgmt_temperature_measurement_publish(unid_ep_topic.c_str(), attr_id, attr_value);
       break;
     case ZIGPC_ZCL_CLUSTER_OCCUPANCY_SENSING:
       status = zigpc_attrmgmt_occupancy_sensing_publish(unid_ep_topic.c_str(), attr_id, attr_value);
@@ -1692,6 +3707,12 @@ sl_status_t zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64, con
       break;
     case ZIGPC_ZCL_CLUSTER_IASWD:
       status = zigpc_attrmgmt_iaswd_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
+    case ZIGPC_ZCL_CLUSTER_METERING:
+      status = zigpc_attrmgmt_metering_publish(unid_ep_topic.c_str(), attr_id, attr_value);
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT:
+      status = zigpc_attrmgmt_electrical_measurement_publish(unid_ep_topic.c_str(), attr_id, attr_value);
       break;
     default:
       status = SL_STATUS_NOT_FOUND;

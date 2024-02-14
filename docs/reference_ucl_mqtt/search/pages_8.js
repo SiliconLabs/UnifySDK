@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level_20cluster_84',['Level Cluster',['../level.html',1,'']]]
+  ['level_20cluster_86',['Level Cluster',['../level.html',1,'']]]
 ];

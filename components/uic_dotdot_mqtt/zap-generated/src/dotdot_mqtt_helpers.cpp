@@ -133,24 +133,24 @@ uint32_t aox_locator_aox_mode_get_enum_value_number(const std::string &str)
 }
 
 // Enum to string map for AoXLocatorCTEMode
-const std::map<uint32_t, std::string> aox_locatorcte_mode_enum_id_to_string_map {
+const std::map<uint32_t, std::string> aox_locator_cte_mode_enum_id_to_string_map {
   { 0, "Silicon Labs" },
   { 1, "Connection" },
   { 2, "Connectionless" },
 };
 
 // String to enum map for AoXLocatorCTEMode
-const std::map<std::string, uint32_t> aox_locatorcte_mode_enum_string_to_id_map {
+const std::map<std::string, uint32_t> aox_locator_cte_mode_enum_string_to_id_map {
   { "Silicon Labs", 0 },
   { "Connection", 1 },
   { "Connectionless", 2 },
 };
 
-std::string aox_locatorcte_mode_get_enum_value_name(
+std::string aox_locator_cte_mode_get_enum_value_name(
   uint32_t value)
 {
-  auto it = aox_locatorcte_mode_enum_id_to_string_map.find(value);
-  if (it != aox_locatorcte_mode_enum_id_to_string_map.end()){
+  auto it = aox_locator_cte_mode_enum_id_to_string_map.find(value);
+  if (it != aox_locator_cte_mode_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -159,10 +159,10 @@ std::string aox_locatorcte_mode_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t aox_locatorcte_mode_get_enum_value_number(const std::string &str)
+uint32_t aox_locator_cte_mode_get_enum_value_number(const std::string &str)
 {
-  auto it = aox_locatorcte_mode_enum_string_to_id_map.find(str);
-  if (it != aox_locatorcte_mode_enum_string_to_id_map.end()){
+  auto it = aox_locator_cte_mode_enum_string_to_id_map.find(str);
+  if (it != aox_locator_cte_mode_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -815,7 +815,7 @@ uint32_t battery_size_get_enum_value_number(const std::string &str)
 }
 
 // Enum to string map for BypassResponseZoneIDBypassResult
-const std::map<uint32_t, std::string> bypass_response_zoneid_bypass_result_enum_id_to_string_map {
+const std::map<uint32_t, std::string> bypass_response_zone_id_bypass_result_enum_id_to_string_map {
   { 0, "ZoneBypassed" },
   { 1, "ZoneNotBypassed" },
   { 2, "NotAllowed" },
@@ -825,7 +825,7 @@ const std::map<uint32_t, std::string> bypass_response_zoneid_bypass_result_enum_
 };
 
 // String to enum map for BypassResponseZoneIDBypassResult
-const std::map<std::string, uint32_t> bypass_response_zoneid_bypass_result_enum_string_to_id_map {
+const std::map<std::string, uint32_t> bypass_response_zone_id_bypass_result_enum_string_to_id_map {
   { "ZoneBypassed", 0 },
   { "ZoneNotBypassed", 1 },
   { "NotAllowed", 2 },
@@ -834,11 +834,11 @@ const std::map<std::string, uint32_t> bypass_response_zoneid_bypass_result_enum_
   { "InvalidArmDisarmCode", 5 },
 };
 
-std::string bypass_response_zoneid_bypass_result_get_enum_value_name(
+std::string bypass_response_zone_id_bypass_result_get_enum_value_name(
   uint32_t value)
 {
-  auto it = bypass_response_zoneid_bypass_result_enum_id_to_string_map.find(value);
-  if (it != bypass_response_zoneid_bypass_result_enum_id_to_string_map.end()){
+  auto it = bypass_response_zone_id_bypass_result_enum_id_to_string_map.find(value);
+  if (it != bypass_response_zone_id_bypass_result_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -847,10 +847,10 @@ std::string bypass_response_zoneid_bypass_result_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t bypass_response_zoneid_bypass_result_get_enum_value_number(const std::string &str)
+uint32_t bypass_response_zone_id_bypass_result_get_enum_value_number(const std::string &str)
 {
-  auto it = bypass_response_zoneid_bypass_result_enum_string_to_id_map.find(str);
-  if (it != bypass_response_zoneid_bypass_result_enum_string_to_id_map.end()){
+  auto it = bypass_response_zone_id_bypass_result_enum_string_to_id_map.find(str);
+  if (it != bypass_response_zone_id_bypass_result_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -1360,6 +1360,129 @@ uint32_t commissioning_startup_control_get_enum_value_number(const std::string &
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for CredentialRuleEnum
+const std::map<uint32_t, std::string> credential_rule_enum_enum_id_to_string_map {
+  { 0, "Single" },
+  { 1, "Dual" },
+  { 2, "Tri" },
+};
+
+// String to enum map for CredentialRuleEnum
+const std::map<std::string, uint32_t> credential_rule_enum_enum_string_to_id_map {
+  { "Single", 0 },
+  { "Dual", 1 },
+  { "Tri", 2 },
+};
+
+std::string credential_rule_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = credential_rule_enum_enum_id_to_string_map.find(value);
+  if (it != credential_rule_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t credential_rule_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = credential_rule_enum_enum_string_to_id_map.find(str);
+  if (it != credential_rule_enum_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for CredentialTypeEnum
+const std::map<uint32_t, std::string> credential_type_enum_enum_id_to_string_map {
+  { 0, "ProgrammingPIN" },
+  { 1, "PIN" },
+  { 2, "RFID" },
+  { 3, "Fingerprint" },
+  { 4, "FingerVein" },
+  { 5, "Face" },
+};
+
+// String to enum map for CredentialTypeEnum
+const std::map<std::string, uint32_t> credential_type_enum_enum_string_to_id_map {
+  { "ProgrammingPIN", 0 },
+  { "PIN", 1 },
+  { "RFID", 2 },
+  { "Fingerprint", 3 },
+  { "FingerVein", 4 },
+  { "Face", 5 },
+};
+
+std::string credential_type_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = credential_type_enum_enum_id_to_string_map.find(value);
+  if (it != credential_type_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t credential_type_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = credential_type_enum_enum_string_to_id_map.find(str);
+  if (it != credential_type_enum_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for DataOperationTypeEnum
+const std::map<uint32_t, std::string> data_operation_type_enum_enum_id_to_string_map {
+  { 0, "Add" },
+  { 1, "Clear" },
+  { 2, "Modify" },
+};
+
+// String to enum map for DataOperationTypeEnum
+const std::map<std::string, uint32_t> data_operation_type_enum_enum_string_to_id_map {
+  { "Add", 0 },
+  { "Clear", 1 },
+  { "Modify", 2 },
+};
+
+std::string data_operation_type_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = data_operation_type_enum_enum_id_to_string_map.find(value);
+  if (it != data_operation_type_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t data_operation_type_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = data_operation_type_enum_enum_string_to_id_map.find(str);
+  if (it != data_operation_type_enum_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for DehumidificationControlDehumidificationLockout
 const std::map<uint32_t, std::string> dehumidification_control_dehumidification_lockout_enum_id_to_string_map {
   { 0, "DehumidificationNotAllowed." },
@@ -1471,6 +1594,97 @@ uint32_t dehumidification_control_relative_humidity_mode_get_enum_value_number(c
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for DevTypeId
+const std::map<uint32_t, std::string> dev_type_id_enum_id_to_string_map {
+  { 10, "DoorLock" },
+  { 11, "DoorLockController" },
+  { 43, "Fan" },
+  { 45, "AirPurifier" },
+  { 114, "RoomAirConditioner" },
+  { 120, "Cooktop" },
+  { 122, "ExtractorHood" },
+  { 256, "OnOffLight" },
+  { 257, "DimmableLight" },
+  { 259, "OnOffLightSwitch" },
+  { 260, "DimmerSwitch" },
+  { 261, "ColorDimmerSwitch" },
+  { 262, "LightSensor" },
+  { 263, "OccupancySensor" },
+  { 266, "OnOffPluginUnit" },
+  { 267, "DimmablePlugInUnit" },
+  { 268, "ColorTemperatureLight" },
+  { 269, "ExtendedColorLight" },
+  { 514, "WindowCovering" },
+  { 515, "WindowCoveringController" },
+  { 768, "HeatingCoolingUnit" },
+  { 769, "Thermostat" },
+  { 770, "TemperatureSensor" },
+  { 771, "Pump" },
+  { 773, "PressureSensor" },
+  { 774, "FlowSensor" },
+  { 775, "HumiditySensor" },
+  { 2112, "ControlBridge" },
+  { 2128, "OnOffSensor" },
+};
+
+// String to enum map for DevTypeId
+const std::map<std::string, uint32_t> dev_type_id_enum_string_to_id_map {
+  { "DoorLock", 10 },
+  { "DoorLockController", 11 },
+  { "Fan", 43 },
+  { "AirPurifier", 45 },
+  { "RoomAirConditioner", 114 },
+  { "Cooktop", 120 },
+  { "ExtractorHood", 122 },
+  { "OnOffLight", 256 },
+  { "DimmableLight", 257 },
+  { "OnOffLightSwitch", 259 },
+  { "DimmerSwitch", 260 },
+  { "ColorDimmerSwitch", 261 },
+  { "LightSensor", 262 },
+  { "OccupancySensor", 263 },
+  { "OnOffPluginUnit", 266 },
+  { "DimmablePlugInUnit", 267 },
+  { "ColorTemperatureLight", 268 },
+  { "ExtendedColorLight", 269 },
+  { "WindowCovering", 514 },
+  { "WindowCoveringController", 515 },
+  { "HeatingCoolingUnit", 768 },
+  { "Thermostat", 769 },
+  { "TemperatureSensor", 770 },
+  { "Pump", 771 },
+  { "PressureSensor", 773 },
+  { "FlowSensor", 774 },
+  { "HumiditySensor", 775 },
+  { "ControlBridge", 2112 },
+  { "OnOffSensor", 2128 },
+};
+
+std::string dev_type_id_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = dev_type_id_enum_id_to_string_map.find(value);
+  if (it != dev_type_id_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t dev_type_id_get_enum_value_number(const std::string &str)
+{
+  auto it = dev_type_id_enum_string_to_id_map.find(str);
+  if (it != dev_type_id_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for DoorLockDoorState
 const std::map<uint32_t, std::string> door_lock_door_state_enum_id_to_string_map {
   { 0, "Open" },
@@ -1478,6 +1692,7 @@ const std::map<uint32_t, std::string> door_lock_door_state_enum_id_to_string_map
   { 2, "ErrorJammed" },
   { 3, "ErrorForcedOpen" },
   { 4, "ErrorUnspecified" },
+  { 5, "DoorAjar" },
   { 255, "Undefined" },
 };
 
@@ -1488,6 +1703,7 @@ const std::map<std::string, uint32_t> door_lock_door_state_enum_string_to_id_map
   { "ErrorJammed", 2 },
   { "ErrorForcedOpen", 3 },
   { "ErrorUnspecified", 4 },
+  { "DoorAjar", 5 },
   { "Undefined", 255 },
 };
 
@@ -1517,24 +1733,24 @@ uint32_t door_lock_door_state_get_enum_value_number(const std::string &str)
 }
 
 // Enum to string map for DoorLockLEDSettings
-const std::map<uint32_t, std::string> door_lockled_settings_enum_id_to_string_map {
+const std::map<uint32_t, std::string> door_lock_led_settings_enum_id_to_string_map {
   { 0, "NeverUseLED" },
   { 1, "UseLEDExceptForAccessAllowed" },
   { 2, "UseLEDForAllEvents" },
 };
 
 // String to enum map for DoorLockLEDSettings
-const std::map<std::string, uint32_t> door_lockled_settings_enum_string_to_id_map {
+const std::map<std::string, uint32_t> door_lock_led_settings_enum_string_to_id_map {
   { "NeverUseLED", 0 },
   { "UseLEDExceptForAccessAllowed", 1 },
   { "UseLEDForAllEvents", 2 },
 };
 
-std::string door_lockled_settings_get_enum_value_name(
+std::string door_lock_led_settings_get_enum_value_name(
   uint32_t value)
 {
-  auto it = door_lockled_settings_enum_id_to_string_map.find(value);
-  if (it != door_lockled_settings_enum_id_to_string_map.end()){
+  auto it = door_lock_led_settings_enum_id_to_string_map.find(value);
+  if (it != door_lock_led_settings_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -1543,10 +1759,10 @@ std::string door_lockled_settings_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t door_lockled_settings_get_enum_value_number(const std::string &str)
+uint32_t door_lock_led_settings_get_enum_value_number(const std::string &str)
 {
-  auto it = door_lockled_settings_enum_string_to_id_map.find(str);
-  if (it != door_lockled_settings_enum_string_to_id_map.end()){
+  auto it = door_lock_led_settings_enum_string_to_id_map.find(str);
+  if (it != door_lock_led_settings_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -1560,6 +1776,7 @@ const std::map<uint32_t, std::string> door_lock_lock_state_enum_id_to_string_map
   { 0, "NotFullyLocked" },
   { 1, "Locked" },
   { 2, "Unlocked" },
+  { 3, "Unlatched" },
   { 255, "Undefined" },
 };
 
@@ -1568,6 +1785,7 @@ const std::map<std::string, uint32_t> door_lock_lock_state_enum_string_to_id_map
   { "NotFullyLocked", 0 },
   { "Locked", 1 },
   { "Unlocked", 2 },
+  { "Unlatched", 3 },
   { "Undefined", 255 },
 };
 
@@ -1609,6 +1827,7 @@ const std::map<uint32_t, std::string> door_lock_lock_type_enum_id_to_string_map 
   { 8, "InterconnectedLock" },
   { 9, "DeadLatch" },
   { 10, "DoorFurniture" },
+  { 11, "Eurocylinder" },
 };
 
 // String to enum map for DoorLockLockType
@@ -1624,6 +1843,7 @@ const std::map<std::string, uint32_t> door_lock_lock_type_enum_string_to_id_map 
   { "InterconnectedLock", 8 },
   { "DeadLatch", 9 },
   { "DoorFurniture", 10 },
+  { "Eurocylinder", 11 },
 };
 
 std::string door_lock_lock_type_get_enum_value_name(
@@ -1693,6 +1913,7 @@ const std::map<uint32_t, std::string> door_lock_sound_volume_enum_id_to_string_m
   { 0, "SilentMode" },
   { 1, "LowVolume" },
   { 2, "HighVolume" },
+  { 3, "MediumVolume" },
 };
 
 // String to enum map for DoorLockSoundVolume
@@ -1700,6 +1921,7 @@ const std::map<std::string, uint32_t> door_lock_sound_volume_enum_string_to_id_m
   { "SilentMode", 0 },
   { "LowVolume", 1 },
   { "HighVolume", 2 },
+  { "MediumVolume", 3 },
 };
 
 std::string door_lock_sound_volume_get_enum_value_name(
@@ -1976,6 +2198,11 @@ const std::map<uint32_t, std::string> drlk_user_type_enum_id_to_string_map {
   { 2, "WeekDayScheduleUser" },
   { 3, "MasterUser" },
   { 4, "NonAccessUser" },
+  { 5, "ForcedUser" },
+  { 6, "DisposableUser" },
+  { 7, "ExpiringUser" },
+  { 8, "ScheduleRestrictedUser" },
+  { 9, "RemoteOnlyUser" },
   { 255, "NotSupported" },
 };
 
@@ -1986,6 +2213,11 @@ const std::map<std::string, uint32_t> drlk_user_type_enum_string_to_id_map {
   { "WeekDayScheduleUser", 2 },
   { "MasterUser", 3 },
   { "NonAccessUser", 4 },
+  { "ForcedUser", 5 },
+  { "DisposableUser", 6 },
+  { "ExpiringUser", 7 },
+  { "ScheduleRestrictedUser", 8 },
+  { "RemoteOnlyUser", 9 },
   { "NotSupported", 255 },
 };
 
@@ -4097,20 +4329,20 @@ uint32_t squawk_configuration_squawk_mode_get_enum_value_number(const std::strin
 }
 
 // Enum to string map for ThermostatACCapacityFormat
-const std::map<uint32_t, std::string> thermostatac_capacity_format_enum_id_to_string_map {
+const std::map<uint32_t, std::string> thermostat_ac_capacity_format_enum_id_to_string_map {
   { 0, "BTUh" },
 };
 
 // String to enum map for ThermostatACCapacityFormat
-const std::map<std::string, uint32_t> thermostatac_capacity_format_enum_string_to_id_map {
+const std::map<std::string, uint32_t> thermostat_ac_capacity_format_enum_string_to_id_map {
   { "BTUh", 0 },
 };
 
-std::string thermostatac_capacity_format_get_enum_value_name(
+std::string thermostat_ac_capacity_format_get_enum_value_name(
   uint32_t value)
 {
-  auto it = thermostatac_capacity_format_enum_id_to_string_map.find(value);
-  if (it != thermostatac_capacity_format_enum_id_to_string_map.end()){
+  auto it = thermostat_ac_capacity_format_enum_id_to_string_map.find(value);
+  if (it != thermostat_ac_capacity_format_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -4119,10 +4351,10 @@ std::string thermostatac_capacity_format_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t thermostatac_capacity_format_get_enum_value_number(const std::string &str)
+uint32_t thermostat_ac_capacity_format_get_enum_value_number(const std::string &str)
 {
-  auto it = thermostatac_capacity_format_enum_string_to_id_map.find(str);
-  if (it != thermostatac_capacity_format_enum_string_to_id_map.end()){
+  auto it = thermostat_ac_capacity_format_enum_string_to_id_map.find(str);
+  if (it != thermostat_ac_capacity_format_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -4132,24 +4364,24 @@ uint32_t thermostatac_capacity_format_get_enum_value_number(const std::string &s
 }
 
 // Enum to string map for ThermostatACCompressorType
-const std::map<uint32_t, std::string> thermostatac_compressor_type_enum_id_to_string_map {
+const std::map<uint32_t, std::string> thermostat_ac_compressor_type_enum_id_to_string_map {
   { 1, "T1" },
   { 2, "T2" },
   { 3, "T3" },
 };
 
 // String to enum map for ThermostatACCompressorType
-const std::map<std::string, uint32_t> thermostatac_compressor_type_enum_string_to_id_map {
+const std::map<std::string, uint32_t> thermostat_ac_compressor_type_enum_string_to_id_map {
   { "T1", 1 },
   { "T2", 2 },
   { "T3", 3 },
 };
 
-std::string thermostatac_compressor_type_get_enum_value_name(
+std::string thermostat_ac_compressor_type_get_enum_value_name(
   uint32_t value)
 {
-  auto it = thermostatac_compressor_type_enum_id_to_string_map.find(value);
-  if (it != thermostatac_compressor_type_enum_id_to_string_map.end()){
+  auto it = thermostat_ac_compressor_type_enum_id_to_string_map.find(value);
+  if (it != thermostat_ac_compressor_type_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -4158,10 +4390,10 @@ std::string thermostatac_compressor_type_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t thermostatac_compressor_type_get_enum_value_number(const std::string &str)
+uint32_t thermostat_ac_compressor_type_get_enum_value_number(const std::string &str)
 {
-  auto it = thermostatac_compressor_type_enum_string_to_id_map.find(str);
-  if (it != thermostatac_compressor_type_enum_string_to_id_map.end()){
+  auto it = thermostat_ac_compressor_type_enum_string_to_id_map.find(str);
+  if (it != thermostat_ac_compressor_type_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -4171,7 +4403,7 @@ uint32_t thermostatac_compressor_type_get_enum_value_number(const std::string &s
 }
 
 // Enum to string map for ThermostatACLouverPosition
-const std::map<uint32_t, std::string> thermostatac_louver_position_enum_id_to_string_map {
+const std::map<uint32_t, std::string> thermostat_ac_louver_position_enum_id_to_string_map {
   { 1, "FullyClosed" },
   { 2, "FullyOpen" },
   { 3, "QuarterOpen" },
@@ -4180,7 +4412,7 @@ const std::map<uint32_t, std::string> thermostatac_louver_position_enum_id_to_st
 };
 
 // String to enum map for ThermostatACLouverPosition
-const std::map<std::string, uint32_t> thermostatac_louver_position_enum_string_to_id_map {
+const std::map<std::string, uint32_t> thermostat_ac_louver_position_enum_string_to_id_map {
   { "FullyClosed", 1 },
   { "FullyOpen", 2 },
   { "QuarterOpen", 3 },
@@ -4188,11 +4420,11 @@ const std::map<std::string, uint32_t> thermostatac_louver_position_enum_string_t
   { "ThreeQuartersOpen", 5 },
 };
 
-std::string thermostatac_louver_position_get_enum_value_name(
+std::string thermostat_ac_louver_position_get_enum_value_name(
   uint32_t value)
 {
-  auto it = thermostatac_louver_position_enum_id_to_string_map.find(value);
-  if (it != thermostatac_louver_position_enum_id_to_string_map.end()){
+  auto it = thermostat_ac_louver_position_enum_id_to_string_map.find(value);
+  if (it != thermostat_ac_louver_position_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -4201,10 +4433,10 @@ std::string thermostatac_louver_position_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t thermostatac_louver_position_get_enum_value_number(const std::string &str)
+uint32_t thermostat_ac_louver_position_get_enum_value_number(const std::string &str)
 {
-  auto it = thermostatac_louver_position_enum_string_to_id_map.find(str);
-  if (it != thermostatac_louver_position_enum_string_to_id_map.end()){
+  auto it = thermostat_ac_louver_position_enum_string_to_id_map.find(str);
+  if (it != thermostat_ac_louver_position_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -4214,24 +4446,24 @@ uint32_t thermostatac_louver_position_get_enum_value_number(const std::string &s
 }
 
 // Enum to string map for ThermostatACRefrigerantType
-const std::map<uint32_t, std::string> thermostatac_refrigerant_type_enum_id_to_string_map {
+const std::map<uint32_t, std::string> thermostat_ac_refrigerant_type_enum_id_to_string_map {
   { 1, "R22" },
   { 2, "R410a" },
   { 3, "R407c" },
 };
 
 // String to enum map for ThermostatACRefrigerantType
-const std::map<std::string, uint32_t> thermostatac_refrigerant_type_enum_string_to_id_map {
+const std::map<std::string, uint32_t> thermostat_ac_refrigerant_type_enum_string_to_id_map {
   { "R22", 1 },
   { "R410a", 2 },
   { "R407c", 3 },
 };
 
-std::string thermostatac_refrigerant_type_get_enum_value_name(
+std::string thermostat_ac_refrigerant_type_get_enum_value_name(
   uint32_t value)
 {
-  auto it = thermostatac_refrigerant_type_enum_id_to_string_map.find(value);
-  if (it != thermostatac_refrigerant_type_enum_id_to_string_map.end()){
+  auto it = thermostat_ac_refrigerant_type_enum_id_to_string_map.find(value);
+  if (it != thermostat_ac_refrigerant_type_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -4240,10 +4472,10 @@ std::string thermostatac_refrigerant_type_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t thermostatac_refrigerant_type_get_enum_value_number(const std::string &str)
+uint32_t thermostat_ac_refrigerant_type_get_enum_value_number(const std::string &str)
 {
-  auto it = thermostatac_refrigerant_type_enum_string_to_id_map.find(str);
-  if (it != thermostatac_refrigerant_type_enum_string_to_id_map.end()){
+  auto it = thermostat_ac_refrigerant_type_enum_string_to_id_map.find(str);
+  if (it != thermostat_ac_refrigerant_type_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -4253,7 +4485,7 @@ uint32_t thermostatac_refrigerant_type_get_enum_value_number(const std::string &
 }
 
 // Enum to string map for ThermostatACType
-const std::map<uint32_t, std::string> thermostatac_type_enum_id_to_string_map {
+const std::map<uint32_t, std::string> thermostat_ac_type_enum_id_to_string_map {
   { 1, "CoolingAndFixedSpeed" },
   { 2, "HeatPumpAndFixedSpeed" },
   { 3, "CoolingAndInverter" },
@@ -4261,18 +4493,18 @@ const std::map<uint32_t, std::string> thermostatac_type_enum_id_to_string_map {
 };
 
 // String to enum map for ThermostatACType
-const std::map<std::string, uint32_t> thermostatac_type_enum_string_to_id_map {
+const std::map<std::string, uint32_t> thermostat_ac_type_enum_string_to_id_map {
   { "CoolingAndFixedSpeed", 1 },
   { "HeatPumpAndFixedSpeed", 2 },
   { "CoolingAndInverter", 3 },
   { "HeatPumpAndInverter", 4 },
 };
 
-std::string thermostatac_type_get_enum_value_name(
+std::string thermostat_ac_type_get_enum_value_name(
   uint32_t value)
 {
-  auto it = thermostatac_type_enum_id_to_string_map.find(value);
-  if (it != thermostatac_type_enum_id_to_string_map.end()){
+  auto it = thermostat_ac_type_enum_id_to_string_map.find(value);
+  if (it != thermostat_ac_type_enum_id_to_string_map.end()){
     return it->second;
   }
 
@@ -4281,10 +4513,10 @@ std::string thermostatac_type_get_enum_value_name(
   return std::to_string(value);
 }
 
-uint32_t thermostatac_type_get_enum_value_number(const std::string &str)
+uint32_t thermostat_ac_type_get_enum_value_number(const std::string &str)
 {
-  auto it = thermostatac_type_enum_string_to_id_map.find(str);
-  if (it != thermostatac_type_enum_string_to_id_map.end()){
+  auto it = thermostat_ac_type_enum_string_to_id_map.find(str);
+  if (it != thermostat_ac_type_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -5115,6 +5347,7 @@ const std::map<uint32_t, std::string> zcl_type_enum_id_to_string_map {
   { 76, "struct" },
   { 80, "set" },
   { 81, "bag" },
+  { 197, "fabric_idx" },
   { 224, "ToD" },
   { 225, "date" },
   { 226, "UTC" },
@@ -5175,6 +5408,7 @@ const std::map<std::string, uint32_t> zcl_type_enum_string_to_id_map {
   { "struct", 76 },
   { "set", 80 },
   { "bag", 81 },
+  { "fabric_idx", 197 },
   { "ToD", 224 },
   { "date", 225 },
   { "UTC", 226 },
@@ -6135,16 +6369,16 @@ std::string get_enum_value_name(
       return door_lock_number_of_total_users_supported_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
     if (18 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofpin_users_supported instead of this: door_lock_number_ofpin_users_supported
-      return door_lock_number_ofpin_users_supported_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_pin_users_supported instead of this: door_lock_number_of_pin_users_supported
+      return door_lock_number_of_pin_users_supported_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
     if (19 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofrfid_users_supported instead of this: door_lock_number_ofrfid_users_supported
-      return door_lock_number_ofrfid_users_supported_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_rfid_users_supported instead of this: door_lock_number_of_rfid_users_supported
+      return door_lock_number_of_rfid_users_supported_get_enum_value_name(value);
     }
   #endif
   #ifdef DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
@@ -6165,28 +6399,40 @@ std::string get_enum_value_name(
       return door_lock_number_of_holiday_schedules_supported_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_MAXPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MAX_PIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (23 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxpin_code_length instead of this: door_lock_maxpin_code_length
-      return door_lock_maxpin_code_length_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmax_pin_code_length instead of this: door_lock_max_pin_code_length
+      return door_lock_max_pin_code_length_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_MINPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MIN_PIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (24 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminpin_code_length instead of this: door_lock_minpin_code_length
-      return door_lock_minpin_code_length_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmin_pin_code_length instead of this: door_lock_min_pin_code_length
+      return door_lock_min_pin_code_length_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_MAXRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MAX_RFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (25 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxrfid_code_length instead of this: door_lock_maxrfid_code_length
-      return door_lock_maxrfid_code_length_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmax_rfid_code_length instead of this: door_lock_max_rfid_code_length
+      return door_lock_max_rfid_code_length_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_MINRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MIN_RFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (26 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminrfid_code_length instead of this: door_lock_minrfid_code_length
-      return door_lock_minrfid_code_length_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmin_rfid_code_length instead of this: door_lock_min_rfid_code_length
+      return door_lock_min_rfid_code_length_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_CREDENTIAL_RULES_SUPPORT_ENUM_NAME_AVAILABLE
+    if (27 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockcredential_rules_support instead of this: door_lock_credential_rules_support
+      return door_lock_credential_rules_support_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
+    if (28 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_credentials_supported_per_user instead of this: door_lock_number_of_credentials_supported_per_user
+      return door_lock_number_of_credentials_supported_per_user_get_enum_value_name(value);
     }
   #endif
   #ifdef DOOR_LOCK_ENABLE_LOGGING_ENUM_NAME_AVAILABLE
@@ -6261,6 +6507,12 @@ std::string get_enum_value_name(
       return door_lock_enable_privacy_mode_button_get_enum_value_name(value);
     }
   #endif
+  #ifdef DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES_ENUM_NAME_AVAILABLE
+    if (44 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklocal_programming_features instead of this: door_lock_local_programming_features
+      return door_lock_local_programming_features_get_enum_value_name(value);
+    }
+  #endif
   #ifdef DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ENUM_NAME_AVAILABLE
     if (48 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockwrong_code_entry_limit instead of this: door_lock_wrong_code_entry_limit
@@ -6273,22 +6525,28 @@ std::string get_enum_value_name(
       return door_lock_user_code_temporary_disable_time_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_SENDPIN_OVER_THE_AIR_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_SEND_PIN_OVER_THE_AIR_ENUM_NAME_AVAILABLE
     if (50 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksendpin_over_the_air instead of this: door_lock_sendpin_over_the_air
-      return door_lock_sendpin_over_the_air_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksend_pin_over_the_air instead of this: door_lock_send_pin_over_the_air
+      return door_lock_send_pin_over_the_air_get_enum_value_name(value);
     }
   #endif
-  #ifdef DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION_ENUM_NAME_AVAILABLE
     if (51 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrequirepi_nforrf_operation instead of this: door_lock_requirepi_nforrf_operation
-      return door_lock_requirepi_nforrf_operation_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrequire_pi_nfor_rf_operation instead of this: door_lock_require_pi_nfor_rf_operation
+      return door_lock_require_pi_nfor_rf_operation_get_enum_value_name(value);
     }
   #endif
   #ifdef DOOR_LOCK_SECURITY_LEVEL_ENUM_NAME_AVAILABLE
     if (52 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksecurity_level instead of this: door_lock_security_level
       return door_lock_security_level_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_EXPIRING_USER_TIMEOUT_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockexpiring_user_timeout instead of this: door_lock_expiring_user_timeout
+      return door_lock_expiring_user_timeout_get_enum_value_name(value);
     }
   #endif
   #ifdef DOOR_LOCK_ALARM_MASK_ENUM_NAME_AVAILABLE
@@ -6337,6 +6595,12 @@ std::string get_enum_value_name(
     if (71 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrfid_programming_event_mask instead of this: door_lock_rfid_programming_event_mask
       return door_lock_rfid_programming_event_mask_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef DOOR_LOCK_FEATURE_MAP_ENUM_NAME_AVAILABLE
+    if (65532 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockfeature_map instead of this: door_lock_feature_map
+      return door_lock_feature_map_get_enum_value_name(value);
     }
   #endif
   }
@@ -8484,22 +8748,22 @@ std::string get_enum_value_name(
       return electrical_measurement_power_factor_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_ENUM_NAME_AVAILABLE
     if (1297 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period instead of this: electrical_measurement_averagerms_voltage_measurement_period
-      return electrical_measurement_averagerms_voltage_measurement_period_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_voltage_measurement_period instead of this: electrical_measurement_average_rms_voltage_measurement_period
+      return electrical_measurement_average_rms_voltage_measurement_period_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
     if (1298 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter instead of this: electrical_measurement_averagerms_over_voltage_counter
-      return electrical_measurement_averagerms_over_voltage_counter_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage_counter instead of this: electrical_measurement_average_rms_over_voltage_counter
+      return electrical_measurement_average_rms_over_voltage_counter_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
     if (1299 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter instead of this: electrical_measurement_averagerms_under_voltage_counter
-      return electrical_measurement_averagerms_under_voltage_counter_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage_counter instead of this: electrical_measurement_average_rms_under_voltage_counter
+      return electrical_measurement_average_rms_under_voltage_counter_get_enum_value_name(value);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ENUM_NAME_AVAILABLE
@@ -8610,16 +8874,16 @@ std::string get_enum_value_name(
       return electrical_measurement_ac_reactive_power_overload_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
     if (2053 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage instead of this: electrical_measurement_averagerms_over_voltage
-      return electrical_measurement_averagerms_over_voltage_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage instead of this: electrical_measurement_average_rms_over_voltage
+      return electrical_measurement_average_rms_over_voltage_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
     if (2054 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage instead of this: electrical_measurement_averagerms_under_voltage
-      return electrical_measurement_averagerms_under_voltage_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage instead of this: electrical_measurement_average_rms_under_voltage
+      return electrical_measurement_average_rms_under_voltage_get_enum_value_name(value);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
@@ -8736,22 +9000,22 @@ std::string get_enum_value_name(
       return electrical_measurement_power_factor_phb_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ENUM_NAME_AVAILABLE
     if (2321 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phb instead of this: electrical_measurement_averagerms_voltage_measurement_period_phb
-      return electrical_measurement_averagerms_voltage_measurement_period_phb_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_voltage_measurement_period_phb instead of this: electrical_measurement_average_rms_voltage_measurement_period_phb
+      return electrical_measurement_average_rms_voltage_measurement_period_phb_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
     if (2322 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phb instead of this: electrical_measurement_averagerms_over_voltage_counter_phb
-      return electrical_measurement_averagerms_over_voltage_counter_phb_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage_counter_phb instead of this: electrical_measurement_average_rms_over_voltage_counter_phb
+      return electrical_measurement_average_rms_over_voltage_counter_phb_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
     if (2323 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phb instead of this: electrical_measurement_averagerms_under_voltage_counter_phb
-      return electrical_measurement_averagerms_under_voltage_counter_phb_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage_counter_phb instead of this: electrical_measurement_average_rms_under_voltage_counter_phb
+      return electrical_measurement_average_rms_under_voltage_counter_phb_get_enum_value_name(value);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ENUM_NAME_AVAILABLE
@@ -8868,22 +9132,22 @@ std::string get_enum_value_name(
       return electrical_measurement_power_factor_phc_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ENUM_NAME_AVAILABLE
     if (2577 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phc instead of this: electrical_measurement_averagerms_voltage_measurement_period_phc
-      return electrical_measurement_averagerms_voltage_measurement_period_phc_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_voltage_measurement_period_phc instead of this: electrical_measurement_average_rms_voltage_measurement_period_phc
+      return electrical_measurement_average_rms_voltage_measurement_period_phc_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
     if (2578 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phc instead of this: electrical_measurement_averagerms_over_voltage_counter_phc
-      return electrical_measurement_averagerms_over_voltage_counter_phc_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage_counter_phc instead of this: electrical_measurement_average_rms_over_voltage_counter_phc
+      return electrical_measurement_average_rms_over_voltage_counter_phc_get_enum_value_name(value);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
     if (2579 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phc instead of this: electrical_measurement_averagerms_under_voltage_counter_phc
-      return electrical_measurement_averagerms_under_voltage_counter_phc_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage_counter_phc instead of this: electrical_measurement_average_rms_under_voltage_counter_phc
+      return electrical_measurement_average_rms_under_voltage_counter_phc_get_enum_value_name(value);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ENUM_NAME_AVAILABLE
@@ -9075,10 +9339,10 @@ std::string get_enum_value_name(
       return diagnostics_relayed_ucast_get_enum_value_name(value);
     }
   #endif
-  #ifdef DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ENUM_NAME_AVAILABLE
+  #ifdef DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED_ENUM_NAME_AVAILABLE
     if (281 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsphy_tomac_queue_limit_reached instead of this: diagnostics_phy_tomac_queue_limit_reached
-      return diagnostics_phy_tomac_queue_limit_reached_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsphy_to_mac_queue_limit_reached instead of this: diagnostics_phy_to_mac_queue_limit_reached
+      return diagnostics_phy_to_mac_queue_limit_reached_get_enum_value_name(value);
     }
   #endif
   #ifdef DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ENUM_NAME_AVAILABLE
@@ -9087,10 +9351,10 @@ std::string get_enum_value_name(
       return diagnostics_packet_validate_drop_count_get_enum_value_name(value);
     }
   #endif
-  #ifdef DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ENUM_NAME_AVAILABLE
+  #ifdef DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT_ENUM_NAME_AVAILABLE
     if (283 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaveragemac_retry_peraps_message_sent instead of this: diagnostics_averagemac_retry_peraps_message_sent
-      return diagnostics_averagemac_retry_peraps_message_sent_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaverage_mac_retry_per_aps_message_sent instead of this: diagnostics_average_mac_retry_per_aps_message_sent
+      return diagnostics_average_mac_retry_per_aps_message_sent_get_enum_value_name(value);
     }
   #endif
   #ifdef DIAGNOSTICS_LAST_MESSAGELQI_ENUM_NAME_AVAILABLE
@@ -9360,10 +9624,10 @@ std::string get_enum_value_name(
       return application_monitoring_application_connected_get_enum_value_name(value);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS_ENUM_NAME_AVAILABLE
     if (5 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationmqtt_topics instead of this: application_monitoring_applicationmqtt_topics
-      return application_monitoring_applicationmqtt_topics_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_mqtt_topics instead of this: application_monitoring_application_mqtt_topics
+      return application_monitoring_application_mqtt_topics_get_enum_value_name(value);
     }
   #endif
   #ifdef APPLICATION_MONITORING_UPTIME_MINUTES_ENUM_NAME_AVAILABLE
@@ -9450,34 +9714,34 @@ std::string get_enum_value_name(
       return application_monitoring_application_statistics_reporting_interval_seconds_get_enum_value_name(value);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (65 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_usage_percent instead of this: application_monitoring_applicationcpu_usage_percent
-      return application_monitoring_applicationcpu_usage_percent_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_usage_percent instead of this: application_monitoring_application_cpu_usage_percent
+      return application_monitoring_application_cpu_usage_percent_get_enum_value_name(value);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (66 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_average_usage_percent instead of this: application_monitoring_applicationcpu_average_usage_percent
-      return application_monitoring_applicationcpu_average_usage_percent_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_average_usage_percent instead of this: application_monitoring_application_cpu_average_usage_percent
+      return application_monitoring_application_cpu_average_usage_percent_get_enum_value_name(value);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (67 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_min_usage_percent instead of this: application_monitoring_applicationcpu_min_usage_percent
-      return application_monitoring_applicationcpu_min_usage_percent_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_min_usage_percent instead of this: application_monitoring_application_cpu_min_usage_percent
+      return application_monitoring_application_cpu_min_usage_percent_get_enum_value_name(value);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (68 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_max_usage_percent instead of this: application_monitoring_applicationcpu_max_usage_percent
-      return application_monitoring_applicationcpu_max_usage_percent_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_max_usage_percent instead of this: application_monitoring_application_cpu_max_usage_percent
+      return application_monitoring_application_cpu_max_usage_percent_get_enum_value_name(value);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB_ENUM_NAME_AVAILABLE
     if (69 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationram_usagemb instead of this: application_monitoring_applicationram_usagemb
-      return application_monitoring_applicationram_usagemb_get_enum_value_name(value);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_ram_usagemb instead of this: application_monitoring_application_ram_usagemb
+      return application_monitoring_application_ram_usagemb_get_enum_value_name(value);
     }
   #endif
   }
@@ -9631,6 +9895,15 @@ std::string get_enum_value_name(
     if (1 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: protocol_controller_network_managementnetwork_management_state instead of this: protocol_controller_network_management_network_management_state
       return protocol_controller_network_management_network_management_state_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64787 == cluster_id) {
+  #ifdef DESCRIPTOR_DEVICE_TYPE_LIST_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: descriptordevice_type_list instead of this: descriptor_device_type_list
+      return descriptor_device_type_list_get_enum_value_name(value);
     }
   #endif
   }
@@ -10564,16 +10837,16 @@ uint32_t get_enum_name_value(
       return door_lock_number_of_total_users_supported_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
     if (18 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofpin_users_supported instead of this: door_lock_number_ofpin_users_supported
-      return door_lock_number_ofpin_users_supported_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_pin_users_supported instead of this: door_lock_number_of_pin_users_supported
+      return door_lock_number_of_pin_users_supported_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED_ENUM_NAME_AVAILABLE
     if (19 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_ofrfid_users_supported instead of this: door_lock_number_ofrfid_users_supported
-      return door_lock_number_ofrfid_users_supported_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_rfid_users_supported instead of this: door_lock_number_of_rfid_users_supported
+      return door_lock_number_of_rfid_users_supported_get_enum_value_number(name);
     }
   #endif
   #ifdef DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
@@ -10594,28 +10867,40 @@ uint32_t get_enum_name_value(
       return door_lock_number_of_holiday_schedules_supported_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_MAXPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MAX_PIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (23 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxpin_code_length instead of this: door_lock_maxpin_code_length
-      return door_lock_maxpin_code_length_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmax_pin_code_length instead of this: door_lock_max_pin_code_length
+      return door_lock_max_pin_code_length_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_MINPIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MIN_PIN_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (24 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminpin_code_length instead of this: door_lock_minpin_code_length
-      return door_lock_minpin_code_length_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmin_pin_code_length instead of this: door_lock_min_pin_code_length
+      return door_lock_min_pin_code_length_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_MAXRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MAX_RFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (25 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmaxrfid_code_length instead of this: door_lock_maxrfid_code_length
-      return door_lock_maxrfid_code_length_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmax_rfid_code_length instead of this: door_lock_max_rfid_code_length
+      return door_lock_max_rfid_code_length_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_MINRFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_MIN_RFID_CODE_LENGTH_ENUM_NAME_AVAILABLE
     if (26 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockminrfid_code_length instead of this: door_lock_minrfid_code_length
-      return door_lock_minrfid_code_length_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockmin_rfid_code_length instead of this: door_lock_min_rfid_code_length
+      return door_lock_min_rfid_code_length_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_CREDENTIAL_RULES_SUPPORT_ENUM_NAME_AVAILABLE
+    if (27 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockcredential_rules_support instead of this: door_lock_credential_rules_support
+      return door_lock_credential_rules_support_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER_ENUM_NAME_AVAILABLE
+    if (28 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locknumber_of_credentials_supported_per_user instead of this: door_lock_number_of_credentials_supported_per_user
+      return door_lock_number_of_credentials_supported_per_user_get_enum_value_number(name);
     }
   #endif
   #ifdef DOOR_LOCK_ENABLE_LOGGING_ENUM_NAME_AVAILABLE
@@ -10690,6 +10975,12 @@ uint32_t get_enum_name_value(
       return door_lock_enable_privacy_mode_button_get_enum_value_number(name);
     }
   #endif
+  #ifdef DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES_ENUM_NAME_AVAILABLE
+    if (44 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locklocal_programming_features instead of this: door_lock_local_programming_features
+      return door_lock_local_programming_features_get_enum_value_number(name);
+    }
+  #endif
   #ifdef DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ENUM_NAME_AVAILABLE
     if (48 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockwrong_code_entry_limit instead of this: door_lock_wrong_code_entry_limit
@@ -10702,22 +10993,28 @@ uint32_t get_enum_name_value(
       return door_lock_user_code_temporary_disable_time_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_SENDPIN_OVER_THE_AIR_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_SEND_PIN_OVER_THE_AIR_ENUM_NAME_AVAILABLE
     if (50 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksendpin_over_the_air instead of this: door_lock_sendpin_over_the_air
-      return door_lock_sendpin_over_the_air_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksend_pin_over_the_air instead of this: door_lock_send_pin_over_the_air
+      return door_lock_send_pin_over_the_air_get_enum_value_number(name);
     }
   #endif
-  #ifdef DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ENUM_NAME_AVAILABLE
+  #ifdef DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION_ENUM_NAME_AVAILABLE
     if (51 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrequirepi_nforrf_operation instead of this: door_lock_requirepi_nforrf_operation
-      return door_lock_requirepi_nforrf_operation_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrequire_pi_nfor_rf_operation instead of this: door_lock_require_pi_nfor_rf_operation
+      return door_lock_require_pi_nfor_rf_operation_get_enum_value_number(name);
     }
   #endif
   #ifdef DOOR_LOCK_SECURITY_LEVEL_ENUM_NAME_AVAILABLE
     if (52 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: door_locksecurity_level instead of this: door_lock_security_level
       return door_lock_security_level_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_EXPIRING_USER_TIMEOUT_ENUM_NAME_AVAILABLE
+    if (53 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockexpiring_user_timeout instead of this: door_lock_expiring_user_timeout
+      return door_lock_expiring_user_timeout_get_enum_value_number(name);
     }
   #endif
   #ifdef DOOR_LOCK_ALARM_MASK_ENUM_NAME_AVAILABLE
@@ -10766,6 +11063,12 @@ uint32_t get_enum_name_value(
     if (71 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockrfid_programming_event_mask instead of this: door_lock_rfid_programming_event_mask
       return door_lock_rfid_programming_event_mask_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef DOOR_LOCK_FEATURE_MAP_ENUM_NAME_AVAILABLE
+    if (65532 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: door_lockfeature_map instead of this: door_lock_feature_map
+      return door_lock_feature_map_get_enum_value_number(name);
     }
   #endif
   }
@@ -12913,22 +13216,22 @@ uint32_t get_enum_name_value(
       return electrical_measurement_power_factor_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_ENUM_NAME_AVAILABLE
     if (1297 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period instead of this: electrical_measurement_averagerms_voltage_measurement_period
-      return electrical_measurement_averagerms_voltage_measurement_period_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_voltage_measurement_period instead of this: electrical_measurement_average_rms_voltage_measurement_period
+      return electrical_measurement_average_rms_voltage_measurement_period_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
     if (1298 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter instead of this: electrical_measurement_averagerms_over_voltage_counter
-      return electrical_measurement_averagerms_over_voltage_counter_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage_counter instead of this: electrical_measurement_average_rms_over_voltage_counter
+      return electrical_measurement_average_rms_over_voltage_counter_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_ENUM_NAME_AVAILABLE
     if (1299 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter instead of this: electrical_measurement_averagerms_under_voltage_counter
-      return electrical_measurement_averagerms_under_voltage_counter_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage_counter instead of this: electrical_measurement_average_rms_under_voltage_counter
+      return electrical_measurement_average_rms_under_voltage_counter_get_enum_value_number(name);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ENUM_NAME_AVAILABLE
@@ -13039,16 +13342,16 @@ uint32_t get_enum_name_value(
       return electrical_measurement_ac_reactive_power_overload_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
     if (2053 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage instead of this: electrical_measurement_averagerms_over_voltage
-      return electrical_measurement_averagerms_over_voltage_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage instead of this: electrical_measurement_average_rms_over_voltage
+      return electrical_measurement_average_rms_over_voltage_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_ENUM_NAME_AVAILABLE
     if (2054 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage instead of this: electrical_measurement_averagerms_under_voltage
-      return electrical_measurement_averagerms_under_voltage_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage instead of this: electrical_measurement_average_rms_under_voltage
+      return electrical_measurement_average_rms_under_voltage_get_enum_value_number(name);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ENUM_NAME_AVAILABLE
@@ -13165,22 +13468,22 @@ uint32_t get_enum_name_value(
       return electrical_measurement_power_factor_phb_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ENUM_NAME_AVAILABLE
     if (2321 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phb instead of this: electrical_measurement_averagerms_voltage_measurement_period_phb
-      return electrical_measurement_averagerms_voltage_measurement_period_phb_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_voltage_measurement_period_phb instead of this: electrical_measurement_average_rms_voltage_measurement_period_phb
+      return electrical_measurement_average_rms_voltage_measurement_period_phb_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
     if (2322 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phb instead of this: electrical_measurement_averagerms_over_voltage_counter_phb
-      return electrical_measurement_averagerms_over_voltage_counter_phb_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage_counter_phb instead of this: electrical_measurement_average_rms_over_voltage_counter_phb
+      return electrical_measurement_average_rms_over_voltage_counter_phb_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB_ENUM_NAME_AVAILABLE
     if (2323 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phb instead of this: electrical_measurement_averagerms_under_voltage_counter_phb
-      return electrical_measurement_averagerms_under_voltage_counter_phb_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage_counter_phb instead of this: electrical_measurement_average_rms_under_voltage_counter_phb
+      return electrical_measurement_average_rms_under_voltage_counter_phb_get_enum_value_number(name);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ENUM_NAME_AVAILABLE
@@ -13297,22 +13600,22 @@ uint32_t get_enum_name_value(
       return electrical_measurement_power_factor_phc_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ENUM_NAME_AVAILABLE
     if (2577 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_voltage_measurement_period_phc instead of this: electrical_measurement_averagerms_voltage_measurement_period_phc
-      return electrical_measurement_averagerms_voltage_measurement_period_phc_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_voltage_measurement_period_phc instead of this: electrical_measurement_average_rms_voltage_measurement_period_phc
+      return electrical_measurement_average_rms_voltage_measurement_period_phc_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
     if (2578 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_over_voltage_counter_phc instead of this: electrical_measurement_averagerms_over_voltage_counter_phc
-      return electrical_measurement_averagerms_over_voltage_counter_phc_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_over_voltage_counter_phc instead of this: electrical_measurement_average_rms_over_voltage_counter_phc
+      return electrical_measurement_average_rms_over_voltage_counter_phc_get_enum_value_number(name);
     }
   #endif
-  #ifdef ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
+  #ifdef ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC_ENUM_NAME_AVAILABLE
     if (2579 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaveragerms_under_voltage_counter_phc instead of this: electrical_measurement_averagerms_under_voltage_counter_phc
-      return electrical_measurement_averagerms_under_voltage_counter_phc_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: electrical_measurementaverage_rms_under_voltage_counter_phc instead of this: electrical_measurement_average_rms_under_voltage_counter_phc
+      return electrical_measurement_average_rms_under_voltage_counter_phc_get_enum_value_number(name);
     }
   #endif
   #ifdef ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ENUM_NAME_AVAILABLE
@@ -13504,10 +13807,10 @@ uint32_t get_enum_name_value(
       return diagnostics_relayed_ucast_get_enum_value_number(name);
     }
   #endif
-  #ifdef DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ENUM_NAME_AVAILABLE
+  #ifdef DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED_ENUM_NAME_AVAILABLE
     if (281 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsphy_tomac_queue_limit_reached instead of this: diagnostics_phy_tomac_queue_limit_reached
-      return diagnostics_phy_tomac_queue_limit_reached_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsphy_to_mac_queue_limit_reached instead of this: diagnostics_phy_to_mac_queue_limit_reached
+      return diagnostics_phy_to_mac_queue_limit_reached_get_enum_value_number(name);
     }
   #endif
   #ifdef DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ENUM_NAME_AVAILABLE
@@ -13516,10 +13819,10 @@ uint32_t get_enum_name_value(
       return diagnostics_packet_validate_drop_count_get_enum_value_number(name);
     }
   #endif
-  #ifdef DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ENUM_NAME_AVAILABLE
+  #ifdef DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT_ENUM_NAME_AVAILABLE
     if (283 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaveragemac_retry_peraps_message_sent instead of this: diagnostics_averagemac_retry_peraps_message_sent
-      return diagnostics_averagemac_retry_peraps_message_sent_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: diagnosticsaverage_mac_retry_per_aps_message_sent instead of this: diagnostics_average_mac_retry_per_aps_message_sent
+      return diagnostics_average_mac_retry_per_aps_message_sent_get_enum_value_number(name);
     }
   #endif
   #ifdef DIAGNOSTICS_LAST_MESSAGELQI_ENUM_NAME_AVAILABLE
@@ -13789,10 +14092,10 @@ uint32_t get_enum_name_value(
       return application_monitoring_application_connected_get_enum_value_number(name);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS_ENUM_NAME_AVAILABLE
     if (5 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationmqtt_topics instead of this: application_monitoring_applicationmqtt_topics
-      return application_monitoring_applicationmqtt_topics_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_mqtt_topics instead of this: application_monitoring_application_mqtt_topics
+      return application_monitoring_application_mqtt_topics_get_enum_value_number(name);
     }
   #endif
   #ifdef APPLICATION_MONITORING_UPTIME_MINUTES_ENUM_NAME_AVAILABLE
@@ -13879,34 +14182,34 @@ uint32_t get_enum_name_value(
       return application_monitoring_application_statistics_reporting_interval_seconds_get_enum_value_number(name);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (65 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_usage_percent instead of this: application_monitoring_applicationcpu_usage_percent
-      return application_monitoring_applicationcpu_usage_percent_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_usage_percent instead of this: application_monitoring_application_cpu_usage_percent
+      return application_monitoring_application_cpu_usage_percent_get_enum_value_number(name);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (66 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_average_usage_percent instead of this: application_monitoring_applicationcpu_average_usage_percent
-      return application_monitoring_applicationcpu_average_usage_percent_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_average_usage_percent instead of this: application_monitoring_application_cpu_average_usage_percent
+      return application_monitoring_application_cpu_average_usage_percent_get_enum_value_number(name);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (67 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_min_usage_percent instead of this: application_monitoring_applicationcpu_min_usage_percent
-      return application_monitoring_applicationcpu_min_usage_percent_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_min_usage_percent instead of this: application_monitoring_application_cpu_min_usage_percent
+      return application_monitoring_application_cpu_min_usage_percent_get_enum_value_number(name);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT_ENUM_NAME_AVAILABLE
     if (68 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationcpu_max_usage_percent instead of this: application_monitoring_applicationcpu_max_usage_percent
-      return application_monitoring_applicationcpu_max_usage_percent_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_cpu_max_usage_percent instead of this: application_monitoring_application_cpu_max_usage_percent
+      return application_monitoring_application_cpu_max_usage_percent_get_enum_value_number(name);
     }
   #endif
-  #ifdef APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ENUM_NAME_AVAILABLE
+  #ifdef APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB_ENUM_NAME_AVAILABLE
     if (69 == attribute_id) {
-      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplicationram_usagemb instead of this: application_monitoring_applicationram_usagemb
-      return application_monitoring_applicationram_usagemb_get_enum_value_number(name);
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: application_monitoringapplication_ram_usagemb instead of this: application_monitoring_application_ram_usagemb
+      return application_monitoring_application_ram_usagemb_get_enum_value_number(name);
     }
   #endif
   }
@@ -14064,6 +14367,15 @@ uint32_t get_enum_name_value(
   #endif
   }
 
+  if (64787 == cluster_id) {
+  #ifdef DESCRIPTOR_DEVICE_TYPE_LIST_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: descriptordevice_type_list instead of this: descriptor_device_type_list
+      return descriptor_device_type_list_get_enum_value_number(name);
+    }
+  #endif
+  }
+
 
   // No known numeric value is set for this string.
   // Return UINT32_MAX to indicate an error.
@@ -14094,16 +14406,16 @@ uint32_t aox_locator_aox_mode_get_enum_value_number_c(const char *str)
 {
   return aox_locator_aox_mode_get_enum_value_number(std::string(str));
 }
-char *aox_locatorcte_mode_get_enum_value_name_c(
+char *aox_locator_cte_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", aox_locatorcte_mode_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", aox_locator_cte_mode_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t aox_locatorcte_mode_get_enum_value_number_c(const char *str)
+uint32_t aox_locator_cte_mode_get_enum_value_number_c(const char *str)
 {
-  return aox_locatorcte_mode_get_enum_value_number(std::string(str));
+  return aox_locator_cte_mode_get_enum_value_number(std::string(str));
 }
 char *aox_locator_reporting_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
@@ -14204,16 +14516,16 @@ uint32_t battery_size_get_enum_value_number_c(const char *str)
 {
   return battery_size_get_enum_value_number(std::string(str));
 }
-char *bypass_response_zoneid_bypass_result_get_enum_value_name_c(
+char *bypass_response_zone_id_bypass_result_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", bypass_response_zoneid_bypass_result_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", bypass_response_zone_id_bypass_result_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t bypass_response_zoneid_bypass_result_get_enum_value_number_c(const char *str)
+uint32_t bypass_response_zone_id_bypass_result_get_enum_value_number_c(const char *str)
 {
-  return bypass_response_zoneid_bypass_result_get_enum_value_number(std::string(str));
+  return bypass_response_zone_id_bypass_result_get_enum_value_number(std::string(str));
 }
 char *cc_color_loop_direction_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
@@ -14358,6 +14670,39 @@ uint32_t commissioning_startup_control_get_enum_value_number_c(const char *str)
 {
   return commissioning_startup_control_get_enum_value_number(std::string(str));
 }
+char *credential_rule_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", credential_rule_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t credential_rule_enum_get_enum_value_number_c(const char *str)
+{
+  return credential_rule_enum_get_enum_value_number(std::string(str));
+}
+char *credential_type_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", credential_type_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t credential_type_enum_get_enum_value_number_c(const char *str)
+{
+  return credential_type_enum_get_enum_value_number(std::string(str));
+}
+char *data_operation_type_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", data_operation_type_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t data_operation_type_enum_get_enum_value_number_c(const char *str)
+{
+  return data_operation_type_enum_get_enum_value_number(std::string(str));
+}
 char *dehumidification_control_dehumidification_lockout_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -14391,6 +14736,17 @@ uint32_t dehumidification_control_relative_humidity_mode_get_enum_value_number_c
 {
   return dehumidification_control_relative_humidity_mode_get_enum_value_number(std::string(str));
 }
+char *dev_type_id_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", dev_type_id_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t dev_type_id_get_enum_value_number_c(const char *str)
+{
+  return dev_type_id_get_enum_value_number(std::string(str));
+}
 char *door_lock_door_state_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -14402,16 +14758,16 @@ uint32_t door_lock_door_state_get_enum_value_number_c(const char *str)
 {
   return door_lock_door_state_get_enum_value_number(std::string(str));
 }
-char *door_lockled_settings_get_enum_value_name_c(
+char *door_lock_led_settings_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", door_lockled_settings_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", door_lock_led_settings_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t door_lockled_settings_get_enum_value_number_c(const char *str)
+uint32_t door_lock_led_settings_get_enum_value_number_c(const char *str)
 {
-  return door_lockled_settings_get_enum_value_number(std::string(str));
+  return door_lock_led_settings_get_enum_value_number(std::string(str));
 }
 char *door_lock_lock_state_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
@@ -15062,60 +15418,60 @@ uint32_t squawk_configuration_squawk_mode_get_enum_value_number_c(const char *st
 {
   return squawk_configuration_squawk_mode_get_enum_value_number(std::string(str));
 }
-char *thermostatac_capacity_format_get_enum_value_name_c(
+char *thermostat_ac_capacity_format_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", thermostatac_capacity_format_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", thermostat_ac_capacity_format_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t thermostatac_capacity_format_get_enum_value_number_c(const char *str)
+uint32_t thermostat_ac_capacity_format_get_enum_value_number_c(const char *str)
 {
-  return thermostatac_capacity_format_get_enum_value_number(std::string(str));
+  return thermostat_ac_capacity_format_get_enum_value_number(std::string(str));
 }
-char *thermostatac_compressor_type_get_enum_value_name_c(
+char *thermostat_ac_compressor_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", thermostatac_compressor_type_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", thermostat_ac_compressor_type_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t thermostatac_compressor_type_get_enum_value_number_c(const char *str)
+uint32_t thermostat_ac_compressor_type_get_enum_value_number_c(const char *str)
 {
-  return thermostatac_compressor_type_get_enum_value_number(std::string(str));
+  return thermostat_ac_compressor_type_get_enum_value_number(std::string(str));
 }
-char *thermostatac_louver_position_get_enum_value_name_c(
+char *thermostat_ac_louver_position_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", thermostatac_louver_position_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", thermostat_ac_louver_position_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t thermostatac_louver_position_get_enum_value_number_c(const char *str)
+uint32_t thermostat_ac_louver_position_get_enum_value_number_c(const char *str)
 {
-  return thermostatac_louver_position_get_enum_value_number(std::string(str));
+  return thermostat_ac_louver_position_get_enum_value_number(std::string(str));
 }
-char *thermostatac_refrigerant_type_get_enum_value_name_c(
+char *thermostat_ac_refrigerant_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", thermostatac_refrigerant_type_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", thermostat_ac_refrigerant_type_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t thermostatac_refrigerant_type_get_enum_value_number_c(const char *str)
+uint32_t thermostat_ac_refrigerant_type_get_enum_value_number_c(const char *str)
 {
-  return thermostatac_refrigerant_type_get_enum_value_number(std::string(str));
+  return thermostat_ac_refrigerant_type_get_enum_value_number(std::string(str));
 }
-char *thermostatac_type_get_enum_value_name_c(
+char *thermostat_ac_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
-  snprintf(result, max_result_size, "%s", thermostatac_type_get_enum_value_name(value).c_str());
+  snprintf(result, max_result_size, "%s", thermostat_ac_type_get_enum_value_name(value).c_str());
   return result;
 }
 
-uint32_t thermostatac_type_get_enum_value_number_c(const char *str)
+uint32_t thermostat_ac_type_get_enum_value_number_c(const char *str)
 {
-  return thermostatac_type_get_enum_value_number(std::string(str));
+  return thermostat_ac_type_get_enum_value_number(std::string(str));
 }
 char *thermostat_control_sequence_of_operation_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

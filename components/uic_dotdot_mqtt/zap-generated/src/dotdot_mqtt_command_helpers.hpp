@@ -1861,7 +1861,7 @@ std::string get_json_payload_for_door_lock_lock_door_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_lock_door(
   nlohmann::json &jsn,
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
 
 );
 
@@ -1917,7 +1917,7 @@ std::string get_json_payload_for_door_lock_unlock_door_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_unlock_door(
   nlohmann::json &jsn,
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
 
 );
 
@@ -1973,7 +1973,7 @@ std::string get_json_payload_for_door_lock_toggle_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_toggle(
   nlohmann::json &jsn,
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
 
 );
 
@@ -2031,7 +2031,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
   nlohmann::json &jsn,
   uint16_t &timeout_in_seconds,
 
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
 
 );
 
@@ -2123,7 +2123,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
 
   DrlkOperEventSource &source_operation_event,
 
-  uint8_t &eventid_or_alarm_code,
+  uint8_t &event_id_or_alarm_code,
 
   uint16_t &userid,
 
@@ -2141,9 +2141,9 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_setpin_code_command(
+std::string get_json_payload_for_door_lock_set_pin_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields
   
 );
 
@@ -2153,7 +2153,7 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_setpin_code(
+void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
   nlohmann::json &jsn,
   DrlkPINUserID &userid,
 
@@ -2175,9 +2175,9 @@ void uic_mqtt_dotdot_parse_door_lock_setpin_code(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_setpin_code_response_command(
+std::string get_json_payload_for_door_lock_set_pin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t *fields
   
 );
 
@@ -2187,7 +2187,7 @@ std::string get_json_payload_for_door_lock_setpin_code_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
+void uic_mqtt_dotdot_parse_door_lock_set_pin_code_response(
   nlohmann::json &jsn,
   DrlkSetCodeStatus &status
 
@@ -2203,9 +2203,9 @@ void uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_getpin_code_command(
+std::string get_json_payload_for_door_lock_get_pin_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t *fields
   
 );
 
@@ -2215,7 +2215,7 @@ std::string get_json_payload_for_door_lock_getpin_code_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_getpin_code(
+void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
   nlohmann::json &jsn,
   DrlkPINUserID &userid
 
@@ -2231,9 +2231,9 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_getpin_code_response_command(
+std::string get_json_payload_for_door_lock_get_pin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 );
 
@@ -2243,7 +2243,7 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
+void uic_mqtt_dotdot_parse_door_lock_get_pin_code_response(
   nlohmann::json &jsn,
   uint16_t &userid,
 
@@ -2265,9 +2265,9 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clearpin_code_command(
+std::string get_json_payload_for_door_lock_clear_pin_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t *fields
   
 );
 
@@ -2277,7 +2277,7 @@ std::string get_json_payload_for_door_lock_clearpin_code_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_clearpin_code(
+void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
   nlohmann::json &jsn,
   DrlkPINUserID &userid
 
@@ -2293,9 +2293,9 @@ void uic_mqtt_dotdot_parse_door_lock_clearpin_code(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clearpin_code_response_command(
+std::string get_json_payload_for_door_lock_clear_pin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t *fields
   
 );
 
@@ -2305,7 +2305,7 @@ std::string get_json_payload_for_door_lock_clearpin_code_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_pin_code_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
 
@@ -2319,7 +2319,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clear_allpin_codes_command(
+std::string get_json_payload_for_door_lock_clear_all_pin_codes_command(
   
 );
 
@@ -2334,9 +2334,9 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_command(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
+std::string get_json_payload_for_door_lock_clear_all_pin_codes_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t *fields
   
 );
 
@@ -2346,7 +2346,7 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_clear_allpin_codes_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_all_pin_codes_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
 
@@ -3160,9 +3160,9 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_setrfid_code_command(
+std::string get_json_payload_for_door_lock_set_rfid_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t *fields
   
 );
 
@@ -3172,7 +3172,7 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_setrfid_code(
+void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
   nlohmann::json &jsn,
   DrlkRFIDUserID &userid,
 
@@ -3194,9 +3194,9 @@ void uic_mqtt_dotdot_parse_door_lock_setrfid_code(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_setrfid_code_response_command(
+std::string get_json_payload_for_door_lock_set_rfid_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t *fields
   
 );
 
@@ -3206,7 +3206,7 @@ std::string get_json_payload_for_door_lock_setrfid_code_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
+void uic_mqtt_dotdot_parse_door_lock_set_rfid_code_response(
   nlohmann::json &jsn,
   DrlkSetCodeStatus &status
 
@@ -3222,9 +3222,9 @@ void uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_getrfid_code_command(
+std::string get_json_payload_for_door_lock_get_rfid_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t *fields
   
 );
 
@@ -3234,7 +3234,7 @@ std::string get_json_payload_for_door_lock_getrfid_code_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_getrfid_code(
+void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
   nlohmann::json &jsn,
   DrlkRFIDUserID &userid
 
@@ -3250,9 +3250,9 @@ void uic_mqtt_dotdot_parse_door_lock_getrfid_code(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_getrfid_code_response_command(
+std::string get_json_payload_for_door_lock_get_rfid_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t *fields
   
 );
 
@@ -3262,7 +3262,7 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
+void uic_mqtt_dotdot_parse_door_lock_get_rfid_code_response(
   nlohmann::json &jsn,
   uint16_t &userid,
 
@@ -3284,9 +3284,9 @@ void uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clearrfid_code_command(
+std::string get_json_payload_for_door_lock_clear_rfid_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t *fields
   
 );
 
@@ -3296,7 +3296,7 @@ std::string get_json_payload_for_door_lock_clearrfid_code_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
+void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
   nlohmann::json &jsn,
   DrlkRFIDUserID &userid
 
@@ -3312,9 +3312,9 @@ void uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
+std::string get_json_payload_for_door_lock_clear_rfid_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t *fields
   
 );
 
@@ -3324,7 +3324,7 @@ std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
 
@@ -3338,7 +3338,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clear_allrfid_codes_command(
+std::string get_json_payload_for_door_lock_clear_all_rfid_codes_command(
   
 );
 
@@ -3353,9 +3353,9 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_command(
  * 
  * @returns std::string that contains JSON payload
  */
-std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
+std::string get_json_payload_for_door_lock_clear_all_rfid_codes_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t *fields
   
 );
 
@@ -3365,9 +3365,118 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
-void uic_mqtt_dotdot_parse_door_lock_clear_allrfid_codes_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_all_rfid_codes_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock SetUser command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_set_user_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_set_user_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock SetUser command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_set_user(
+  nlohmann::json &jsn,
+  DataOperationTypeEnum &operation_type,
+
+  uint16_t &user_index,
+
+  std::string &user_name,
+
+  uint32_t &user_uniqueid,
+
+  DrlkUserStatus &user_status,
+
+  DrlkUserType &user_type,
+
+  CredentialRuleEnum &credential_rule
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock GetUser command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_get_user_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_get_user_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock GetUser command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_get_user(
+  nlohmann::json &jsn,
+  uint16_t &user_index
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock GetUserResponse command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_get_user_response_command(
+  
+);
+
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock ClearUser command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_clear_user_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_clear_user_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock ClearUser command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_clear_user(
+  nlohmann::json &jsn,
+  uint16_t &user_index
 
 );
 
@@ -3448,6 +3557,154 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
   uint32_t &local_time,
 
   std::string &data
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock SetCredential command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_set_credential_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_set_credential_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock SetCredential command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_set_credential(
+  nlohmann::json &jsn,
+  DataOperationTypeEnum &operation_type,
+
+  CredentialStruct &credential,
+
+  std::string &credential_data,
+
+  uint16_t &user_index,
+
+  DrlkUserStatus &user_status,
+
+  DrlkUserType &user_type
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock SetCredentialResponse command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_set_credential_response_command(
+  
+);
+
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock GetCredentialStatus command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_get_credential_status_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock GetCredentialStatus command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_get_credential_status(
+  nlohmann::json &jsn,
+  CredentialStruct &credential
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock GetCredentialStatusResponse command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_get_credential_status_response_command(
+  
+);
+
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock ClearCredential command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_clear_credential_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock ClearCredential command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_clear_credential(
+  nlohmann::json &jsn,
+  CredentialStruct &credential
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a DoorLock UnboltDoor command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_door_lock_unbolt_door_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for DoorLock UnboltDoor command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_door_lock_unbolt_door(
+  nlohmann::json &jsn,
+  std::string &pin_code
 
 );
 
@@ -5221,7 +5478,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
 
   std::vector<std::string> &last_route_repeaters,
 
-  std::vector<int8_t> &incomingrssi_repeaters,
+  std::vector<int8_t> &incoming_rssi_repeaters,
 
   int8_t &ackrssi,
 
@@ -5799,6 +6056,18 @@ void uic_mqtt_dotdot_parse_protocol_controller_network_management_write_attribut
   nlohmann::json &jsn,
   uic_mqtt_dotdot_protocol_controller_network_management_state_t &new_state,
   uic_mqtt_dotdot_protocol_controller_network_management_updated_state_t &new_updated_state
+);
+
+
+/**
+ * @brief JSON parser for Descriptor WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_descriptor_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_descriptor_state_t &new_state,
+  uic_mqtt_dotdot_descriptor_updated_state_t &new_updated_state
 );
 
 

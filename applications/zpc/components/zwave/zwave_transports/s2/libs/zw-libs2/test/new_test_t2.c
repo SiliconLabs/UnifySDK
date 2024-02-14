@@ -284,7 +284,7 @@ void fire_timer_btwn_2_frags(int test_type) {
 }
 
 extern void fc_timer_expired(void *nthing);
-void fire_fc_timer()
+void fire_fc_timer(void)
 {
     fc_timer_expired(NULL);
 }
@@ -294,7 +294,7 @@ void fire_rx_timer(){
     test_rx_timer_expired(0);
 }
 
-void ask_TS_to_send()
+void ask_TS_to_send(void)
 {
     ZW_TransportService_SendData(&p, raw_data2, sizeof(raw_data2), status_callback);
 }
@@ -322,7 +322,7 @@ int print_failed_if_nonzero(int ret, const char *test_name)
     3. send third subseq fragment
     4. check if fragment complete is sent
 */
-int simple_test()
+int simple_test(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -357,7 +357,7 @@ fail:
     3. Send last subseq fragment
     4. Check if fragment complete is sent
 */
-int simple_test_non_uniform_fragment_sizes()
+int simple_test_non_uniform_fragment_sizes(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -393,7 +393,7 @@ fail:
     3. Send last subseq fragment
     4. Check if fragment complete is sent
 */
-int simple_test_non_sequential_fragments()
+int simple_test_non_sequential_fragments(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -426,7 +426,7 @@ fail:
 /*
  * Send first and third fragment and see if Transport service sends request for second fragment
  */
-int miss_one_frag()
+int miss_one_frag(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -461,7 +461,7 @@ fail:
 /*
  * Send first, second and fourt fragment and see if Transport service sends request for third fragment
  */
-int miss_one_frag1()
+int miss_one_frag1(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -501,7 +501,7 @@ fail:
     5. send third fragment
     6. Check that fragment complete is sent
 */
-int dont_send_one_frag()
+int dont_send_one_frag(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -532,7 +532,7 @@ fail:
 /* 1. send subseq fragment
    2. check that fragment wait is sent with 0 pending fragments
 */
-int test_dont_send_first_frag()
+int test_dont_send_first_frag(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -562,7 +562,7 @@ fail:
    6. Check that fragment complete is sent
 */
 
-int test_frag_wait_fn()
+int test_frag_wait_fn(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -605,7 +605,7 @@ Steps:
 3. Ask TS to receive Fragment_complete and see if it has processed the fragment complete
     by checking if the scb.current_dnode == 0
 */
-int test_send_whole_datagram()
+int test_send_whole_datagram(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -658,7 +658,7 @@ Steps:
 4. ask the TS to send second frag and check
 */
 
-int test_jakob()
+int test_jakob(void)
 {
     int ret = 0;
     unsigned backup_byte;
@@ -724,7 +724,7 @@ steps:
 6. ask TS to receive second frag
 7. check if we recive frag_compl
 */
-int test_tie_break()
+int test_tie_break(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -769,7 +769,7 @@ steps:
 3. ask TS to send second frag again by firing the fc_timer and check if we receive it
 4. check if the flag_fc_timer_expired_once is 1
 */
-int test_two_last_fragments()
+int test_two_last_fragments(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -815,7 +815,7 @@ fail:
     return 1;
 }
 
-int test_send_frag_compl_from_diff_session()
+int test_send_frag_compl_from_diff_session(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -889,7 +889,7 @@ void restore_crc(unsigned char *array, unsigned int len, unsigned char *crc)
         array[len-1] = crc[1];
 }
 
-int test_abort_transmission()
+int test_abort_transmission(void)
 {
         int ret = 0;
         unsigned char backup_byte;
@@ -944,7 +944,7 @@ fail:
         return 1;
 }
 
-int test_fc_timer_after_frag_req()
+int test_fc_timer_after_frag_req(void)
 {   
         int ret = 0;
         memset(output, 0, sizeof(output));
@@ -985,7 +985,7 @@ fail:
 
 }
 
-int test_fc_timer_after_frag_compl_of_aborted_transmission()
+int test_fc_timer_after_frag_compl_of_aborted_transmission(void)
 {
         int ret = 0;
         unsigned char backup_byte;
@@ -1060,7 +1060,7 @@ fail:
         return 1;
 }
 
-int test_fc_timer_after_last_frag_twice()
+int test_fc_timer_after_last_frag_twice(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -1106,7 +1106,7 @@ fail:
     return 1;
 }
 
-int test_frag_wait_for_completed_session()
+int test_frag_wait_for_completed_session(void)
 {
     int ret = 0;
     memset(output, 0, sizeof(output));
@@ -1148,7 +1148,7 @@ fail:
    
 }
 
-int three_node_test()
+int three_node_test(void)
 {
     int ret = 0;
     global_status = 0xff;
@@ -1206,7 +1206,7 @@ fail:
     return 1;
 }
 
-int send_big_datagram()
+int send_big_datagram(void)
 {
     int ret = 0;
     unsigned char backup[2];
@@ -1247,7 +1247,7 @@ fail:
 
 }
 
-int send_big_datagram2()
+int send_big_datagram2(void)
 {
     int ret = 0;
     unsigned char backup[2];
@@ -1384,7 +1384,7 @@ fail:
 
 }
 
-int call_ask_TS_to_receive_with_large_size()
+int call_ask_TS_to_receive_with_large_size(void)
 {
     int ret = 0;
     
@@ -1401,7 +1401,7 @@ fail:
     return 1;
 }
 
-int main()
+int main(void)
 {
     memset(&p, 0, sizeof(ts_param_t));
     p.snode = 0xff;

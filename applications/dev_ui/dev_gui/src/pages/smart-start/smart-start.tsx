@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Form, Modal, Row, Table } from 'react-bootstrap';
 import * as FiIcons from 'react-icons/fi';
 import * as RiIcons from 'react-icons/ri';
 import { SmartStartProps, SmartStartState } from './smart-start-types';
@@ -16,7 +16,8 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
     this.state = {
       SmartStartList: this.props.SmartStartList,
       Filter: "",
-      ShowModal: false
+      ShowModal: false,
+      ShowRedirectModal: false
     };
     this.add = this.add.bind(this);
     this.search = this.search.bind(this);
@@ -138,6 +139,19 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
     this.props.SocketServer.send(JSON.stringify({ type: "get-smart-start-list" }));
   }
 
+  scanQRCode(item: any) {
+    if (window.location.protocol === "https:")
+      this.changeQrCodeDlg.current?.updateState(true, item)
+    else
+      this.setState({ ShowRedirectModal: true });
+  }
+
+  redirectToQRCodeScanner = (isRedirect: boolean) => {
+    this.setState({ ShowRedirectModal: false });
+    if (isRedirect)
+      window.open('https://siliconlabs.github.io/UnifySDK/doc/qr_code_scanner.html', '_blank');
+  }
+
   getField(item: any, fieldName: string, index: number) {
     switch (fieldName) {
       case "DSK":
@@ -146,7 +160,7 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
             InputProps={{
               endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
                 <span className="icon">
-                  <RiIcons.RiQrScan2Line onClick={() => window.open('https://siliconlabs.github.io/UnifySDK/doc/qr_code_scanner.html', '_blank')} />
+                  <RiIcons.RiQrScan2Line onClick={() => this.scanQRCode(index)} />
                 </span>
               </Tooltip> </InputAdornment>
             }}
@@ -264,19 +278,8 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
               <tbody>
                 {this.state.SmartStartList.map((item, index) =>
                   <tr key={index} className={`${item.IsNew || item.IsEdit ? `editable-tr ${item.IsError ? "blinking-error" : ""}` : ""}`}>
-                    <td>{this.getField(item, "DSK", index)}
-                      {/* {item.IsEdit
-                            ? <TextField value={item.DSK} className="flex-input" label="DSK" size="small" type="text" />
-                            : <TextField value={item.DSK} onChange={this.updateStateByEvent.bind(this, index, 'DSK')} className="flex-input" label="DSK" size="small" type="text" variant="outlined"
-                              InputProps={window.location.protocol === "https:" ? {
-                                endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
-                                  <span className="icon">
-                                    <RiIcons.RiQrScan2Line onClick={() => this.changeQrCodeDlg.current?.updateState(true, index)} />
-                                  </span>
-                                </Tooltip> </InputAdornment>
-                              } : {}}
-                            />
-                          } */}
+                    <td>
+                      {this.getField(item, "DSK", index)}
                     </td>
                     <td className="text-center vertical-middle">
                       {this.getField(item, "Include", index)}
@@ -289,16 +292,6 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                     </td>
                     <td className="text-center vertical-middle">
                       {this.getField(item, "Actions", index)}
-                      {/* <Tooltip title="Save">
-                            <span className="icon">
-                              <FiIcons.FiSave className="margin-h-5" onClick={this.save.bind(this, item)} />
-                            </span>
-                          </Tooltip>
-                          <Tooltip title="Cancel">
-                            <span className="icon">
-                              <FiIcons.FiXCircle color="#dc3545" onClick={this.cancel.bind(this)} />
-                            </span>
-                          </Tooltip> */}
                     </td>
                   </tr>
                 )}
@@ -309,6 +302,24 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
         <PreferredProtocolsDlg ref={this.changePreferredDlg} SaveFunc={this.savePreferred.bind(this)} />
         <ConfirmDlg ref={this.changeConfirmDlg} />
         <QrCodeDlg ref={this.changeQrCodeDlg} UpdateDSK={this.updateState.bind(this)} />
+
+        <Modal show={this.state.ShowRedirectModal} >
+          <Modal.Header>
+            <Modal.Title>
+              QR-Code Scanner
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Due to security restrictions, using the QR-code scanner via the http protocol is not possible.
+            We can redirect you to the QR-code scanner at https://siliconlabs.github.io/UnifySDK.
+            <br />
+            Press 'Ok' to open the scanner in a new window or enter it manually.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary-outline" onClick={() => this.redirectToQRCodeScanner(false)}>No</Button>
+            <Button variant="primary" onClick={() => this.redirectToQRCodeScanner(true)}>Ok</Button>
+          </Modal.Footer>
+        </Modal>
       </>
     )
   };

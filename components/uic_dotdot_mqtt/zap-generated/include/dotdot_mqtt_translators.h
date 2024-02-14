@@ -192,6 +192,58 @@ inline void to_json(nlohmann::json& jsn, const CoordinateAndOrientation& field)
 
 
 /**
+ * Parse CredentialStruct type from json object.
+ *
+ * @param jsn     JSON object to parse from.
+ * @param field  field to be populated from JSON object.
+ */
+inline void from_json(const nlohmann::json& jsn, CredentialStruct& field)
+{
+  jsn.at("CredentialType").get_to(field.CredentialType);
+  jsn.at("CredentialIndex").get_to(field.CredentialIndex);
+}
+
+
+/**
+ * Build JSON object from CredentialStruct type.
+ *
+ * @param jsn     JSON object to be populated.
+ * @param field   Reference data.
+ */
+inline void to_json(nlohmann::json& jsn, const CredentialStruct& field)
+{
+  jsn["CredentialType"] = field.CredentialType;
+  jsn["CredentialIndex"] = field.CredentialIndex;
+}
+
+
+/**
+ * Parse DeviceTypeStruct type from json object.
+ *
+ * @param jsn     JSON object to parse from.
+ * @param field  field to be populated from JSON object.
+ */
+inline void from_json(const nlohmann::json& jsn, DeviceTypeStruct& field)
+{
+  jsn.at("DeviceType").get_to(field.DeviceType);
+  jsn.at("Revision").get_to(field.Revision);
+}
+
+
+/**
+ * Build JSON object from DeviceTypeStruct type.
+ *
+ * @param jsn     JSON object to be populated.
+ * @param field   Reference data.
+ */
+inline void to_json(nlohmann::json& jsn, const DeviceTypeStruct& field)
+{
+  jsn["DeviceType"] = field.DeviceType;
+  jsn["Revision"] = field.Revision;
+}
+
+
+/**
  * Parse DiskIOCounters type from json object.
  *
  * @param jsn     JSON object to parse from.

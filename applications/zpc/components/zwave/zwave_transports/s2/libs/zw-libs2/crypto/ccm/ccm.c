@@ -140,29 +140,37 @@ static void debug_print_block(uint8_t *block, int size)
 }
 #endif
 
+// TODO, may be reworked to avoid build errors
+#if defined(__GNUC__) && (__GNUC__ == 12)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
 static void bit_xor(const uint8_t *block, uint8_t *next_block, int size)
 {
     int i;
     for (i = 0; i < size; i++)
         next_block[i] = block[i] ^ next_block[i];
 }
+#if defined(__GNUC__) && (__GNUC__ == 12)
+#pragma GCC diagnostic pop
+#endif
 
 /*See section A.2.2 in NIST pdf */
 static int format_aad(uint8_t blocks[2][BLOCK_SIZE], const uint8_t *aad, const uint32_t aad_len, const uint8_t *key)
 {
     int i;
     int offset;
-    int new_aad_len = 0;
-    int no_of_blocks_for_aad = 0;
+    int new_aad_len;
+    int no_of_blocks_for_aad;
     int aad_bytes_in_first_block;
     int aad_start = 2;
 
     /* See more about this lenghth ranges in beginning of page 14 in the document mentioned in header */
-    if (aad_len < 65280) { 
+    if (aad_len < 65280) {
         blocks[1][0] = 0x0;
         blocks[1][1] = aad_len;
         aad_bytes_in_first_block = 14;
-    }else if ((aad_len >= 65280) && (aad_len <= 0xffffffff)) { /*TODO Check the limits */
+    }else if (aad_len <= 0xffffffff) { /*TODO Check the limits */
         blocks[1][0] = 0xff;
         blocks[1][1] = 0xfe;
         blocks[1][2] = 0;
@@ -229,10 +237,6 @@ static void format_payload_block(uint8_t blocks[2][BLOCK_SIZE], const uint8_t *P
     //int bytes_to_pad;
     int offset = 0;
 
-//#ifdef __C51__
-//    UNUSED(mac_len);
-//#endif
-
     if (text_to_encrypt_len % BLOCK_SIZE)
         no_blocks_payload++;
 
@@ -267,12 +271,12 @@ static void encrypt_or_decrypt(
         const uint8_t* key,
         uint8_t *mac,
         int mode)
-                                  
+
 {
     uint16_t i;
     uint8_t ctr[BLOCK_SIZE];
     uint16_t length = data_len;
-    
+
     ccm_print_str("cntr_blks: \n");
     for (i = 0; i < num_ctr_blks; i++) {
         memset(ctr, 0, BLOCK_SIZE);
@@ -305,7 +309,7 @@ static void encrypt_or_decrypt(
             length = length - BLOCK_SIZE;
         }
     }
-    
+
 }
 
 uint32_t CCM_encrypt_and_auth(

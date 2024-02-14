@@ -901,6 +901,17 @@ sl_status_t zigpc_datastore_log_device(const char *log_tag,
                                        const char *log_prefix,
                                        const zigbee_eui64_t eui64);
 
+/**
+ * @brief Log clusters on an EUI64, endpoint. Logs both server and client
+ * clusters
+ *
+ * @param eui64       Address whose clusters should be logged
+ * @param endpoint_id Endpoint whose clusters should be logged
+ */
+void zigpc_datastore_log_clusters(
+    const zigbee_eui64_t eui64,
+    const zigbee_endpoint_id_t endpoint_id);
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,21 +1,40 @@
-add_executable(cpc-hci-bridge cpc-hci-bridge.c)
+find_package(GeckoSDK 4.3.0 REQUIRED)
+find_package(CPCD 4.3.0 REQUIRED)
+
+set(CPC_HCI_BRIDGE_SOURCE_FILES
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/example_host/bt_host_cpc_hci_bridge/main.c
+  ${GeckoSDK_ROOT_DIR}/app/common/util/app_log/app_log.c
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/iostream_mock/sl_iostream_handles.c
+)
+
+set(CPC_HCI_BRIDGE_INCLUDES
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/example_host/bt_host_cpc_hci_bridge
+  ${GeckoSDK_ROOT_DIR}/platform/common/inc
+  ${GeckoSDK_ROOT_DIR}/protocol/bluetooth/bgstack/ll/utils/hci_packet/inc
+  ${GeckoSDK_ROOT_DIR}/app/common/util/app_log
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/iostream_mock
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/app_log
+  ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/app_log/config
+)
+
+add_executable(cpc-hci-bridge ${CPC_HCI_BRIDGE_SOURCE_FILES})
+
+target_include_directories(cpc-hci-bridge BEFORE PRIVATE
+  ${CPC_HCI_BRIDGE_INCLUDES}
+  ${cpcd_SOURCE_DIR}/lib
+)
+
+target_compile_definitions(cpc-hci-bridge PRIVATE
+  -DHOST_TOOLCHAIN
+  -DPOSIX
+)
 
 target_link_libraries(cpc-hci-bridge
   cpc
-  unify
   util
   pthread
 )
-
-if(CPCD_LOCATION)
-  target_include_directories(cpc-hci-bridge PRIVATE ${CPCD_LOCATION}/include)
-  set_source_files_properties(
-    cpc-hci-bridge.c PROPERTIES COMPILE_FLAGS -Wno-error=unused-result
-  )
-else()
-  get_target_property(CPC_SOURCE_DIR cpc SOURCE_DIR)
-  target_include_directories(cpc-hci-bridge PRIVATE ${CPC_SOURCE_DIR}/lib)
-endif()
+target_link_directories(cpc-hci-bridge PRIVATE ${cpcd_BINARY_DIR})
 
 install(TARGETS cpc-hci-bridge RUNTIME DESTINATION "bin" COMPONENT uic-cpc-hci-bridge)
 
@@ -51,7 +70,7 @@ add_component_to_uic(
   uic-cpc-hci-bridge
   "Universal IOT controller - cpc-hci-bridge"
   "${CMAKE_PROJECT_NAME}-cpc-hci-bridge"
-  ""
+  "${CMAKE_PROJECT_NAME}-cpcd"
   ""
   "${CMAKE_BINARY_DIR}/applications/aox/applications/cpc-hci-bridge/debconf/postinst;\
   ${CMAKE_BINARY_DIR}/applications/aox/applications/cpc-hci-bridge/debconf/prerm")

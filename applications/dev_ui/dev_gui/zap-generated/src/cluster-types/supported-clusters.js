@@ -12,6 +12,7 @@ const SupportedClusters = {
 	CarbonDioxide: "CarbonDioxide", 
 	CarbonMonoxide: "CarbonMonoxide", 
 	ConfigurationParameters: "ConfigurationParameters", 
+	Descriptor: "Descriptor", 
 	DoorLock: "DoorLock", 
 	ElectricalConductivityMeasurement: "ElectricalConductivityMeasurement", 
 	ElectricalMeasurement: "ElectricalMeasurement", 
@@ -26,6 +27,7 @@ const SupportedClusters = {
 	OnOff: "OnOff", 
 	PhMeasurement: "PhMeasurement", 
 	PM25: "PM25", 
+	PowerConfiguration: "PowerConfiguration", 
 	PressureMeasurement: "PressureMeasurement", 
 	RelativityHumidity: "RelativityHumidity", 
 	Scenes: "Scenes", 
@@ -33,8 +35,7 @@ const SupportedClusters = {
 	TemperatureMeasurement: "TemperatureMeasurement", 
 	Thermostat: "Thermostat", 
 	WindSpeedMeasurement: "WindSpeedMeasurement", 
-	WindowCovering: "WindowCovering", 
-	PowerConfiguration: "PowerConfiguration"
+	WindowCovering: "WindowCovering"
 }
 
 module.exports.SupportedClusters = SupportedClusters;

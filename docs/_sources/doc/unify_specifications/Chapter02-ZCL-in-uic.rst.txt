@@ -908,7 +908,8 @@ if they are not published/advertised for a node.
 Door Lock Cluster (0x0101)
 ''''''''''''''''''''''''''
 
-This cluster is used as a generic interface to secure a door. The ZCL Door Lock
+This cluster is used as a generic interface to secure a door. The Door Lock cluster in 
+UCL is based on the Matter version 1.2 specification. The Matter Door Lock
 cluster contains a lot of optional attributes, such as logging events,
 alarms, security setting, and so on and commands, such as setting user PIN, getting
 log events, setting schedules, and so on. However, this section lists only the mandatory
@@ -916,16 +917,30 @@ attributes and commands used for basic door operations.
 
 Mandatory Attributes:
 
-* LockState (0x0000): NotFullyLocked (0x00), Locked (0x01), Unlocked (0x02) and Undefined (0xFF) are the possible attribute values that describe the state of the door.
-* LockType(0x0001): defines the door lock types such as Deadbolt (0x00), Magnetic (0x01), Other (0x02), Latch Bolt (0x05) and etc.
-* ActuatorEnabled (0x002): defines if the actuator is Enables (true) or Disable (false).
+* LockState (0x0000): NotFullyLocked (0x00), Locked (0x01), Unlocked (0x02), Unlatched (0x03), and Undefined (0xFF) are the possible attribute values that describe the state of the door.
+* LockType(0x0001): defines the door lock types such as Deadbolt (0x00), Magnetic (0x01), Other (0x02), Latch Bolt (0x05), etc.
+* ActuatorEnabled (0x002): defines if the actuator is Enabled (true) or Disabled (false).
+* OperatingMode (0x0025): defines the current operating mode of the door lock, such as Normal (0x00), Vacation (0x01), Privacy (0x02), etc.
+* SupportedOperatingModes (0x0026): defines the operating modes that are supported by the lock, represented in MQTT as an array of strings. For e.g.
+  
+.. code-block:: mqtt
+  
+  ucl/by-unid/<UNID>/ep<EndpointId>/DoorLock/Attributes/SupportedOperatingModes/Actual - { "value": [ "Normal", "Vacation" ] }
+  ucl/by-unid/<UNID>/ep<EndpointId>/DoorLock/Attributes/SupportedOperatingModes/Desired - { "value": [ "Normal", "Vacation" ] }
+
+.. note:: Protocol controllers MAY implement all the mandatory elements, the implementation is recommended.
 
 Mandatory Request Commands (client to a device):
 
-* LockDoor (0x00): a command used to lock a door with PINOrRFIDCode code.
-* UnlockDoor( 0x01): a command used to unlock the door with PINOrRFIDCode Code.
+* LockDoor (0x00): a command used to lock a door with an optional PINOrRFIDCode parameter value.
+* UnlockDoor (0x01): a command used to unlock a door with an optional PINOrRFIDCode parameter value.
 
-Note if the PIN or RFID is not defined on the device, the PINOrRFIDCode field value can be empty string (i.e., " ").
+.. note::
+
+  If the RequirePINForRemoteOperation attribute is true, PINOrRFIDCode shall be a mandatory parameter 
+  in the above commands and other commands that require it.
+
+For more details on the UCL Door Lock cluster based on Matter, see :ref:`unify_specifications_chapter_unify_controller_language_data_model`.
 
 Thermostat Cluster (0x0201)
 '''''''''''''''''''''''''''

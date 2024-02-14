@@ -17241,18 +17241,18 @@ sl_status_t dotdot_create_door_lock_number_of_total_users_supported(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_number_ofpin_users_supported(
+bool dotdot_is_supported_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_number_ofpin_users_supported(
+uint16_t dotdot_get_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17261,7 +17261,7 @@ uint16_t dotdot_get_door_lock_number_ofpin_users_supported(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -17271,11 +17271,11 @@ uint16_t dotdot_get_door_lock_number_ofpin_users_supported(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_number_ofpin_users_supported(
+sl_status_t dotdot_set_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_ofpin_users_supported
+  uint16_t new_number_of_pin_users_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17283,27 +17283,27 @@ sl_status_t dotdot_set_door_lock_number_ofpin_users_supported(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_number_ofpin_users_supported,
+                                                  (uint8_t *)&new_number_of_pin_users_supported,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_door_lock_number_ofpin_users_supported_undefine_reported(
+sl_status_t dotdot_door_lock_number_of_pin_users_supported_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_number_ofpin_users_supported_undefine_desired(
+sl_status_t dotdot_door_lock_number_of_pin_users_supported_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -17311,13 +17311,13 @@ sl_status_t dotdot_door_lock_number_ofpin_users_supported_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_number_ofpin_users_supported_is_reported_defined(
+bool dotdot_door_lock_number_of_pin_users_supported_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17325,11 +17325,11 @@ bool dotdot_door_lock_number_ofpin_users_supported_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_number_ofpin_users_supported_is_desired_defined(
+bool dotdot_door_lock_number_of_pin_users_supported_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17337,33 +17337,33 @@ bool dotdot_door_lock_number_ofpin_users_supported_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_number_ofpin_users_supported(
+sl_status_t dotdot_create_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_number_ofrfid_users_supported(
+bool dotdot_is_supported_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_number_ofrfid_users_supported(
+uint16_t dotdot_get_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17372,7 +17372,7 @@ uint16_t dotdot_get_door_lock_number_ofrfid_users_supported(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -17382,11 +17382,11 @@ uint16_t dotdot_get_door_lock_number_ofrfid_users_supported(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_number_ofrfid_users_supported(
+sl_status_t dotdot_set_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_ofrfid_users_supported
+  uint16_t new_number_of_rfid_users_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17394,27 +17394,27 @@ sl_status_t dotdot_set_door_lock_number_ofrfid_users_supported(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_number_ofrfid_users_supported,
+                                                  (uint8_t *)&new_number_of_rfid_users_supported,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_door_lock_number_ofrfid_users_supported_undefine_reported(
+sl_status_t dotdot_door_lock_number_of_rfid_users_supported_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_number_ofrfid_users_supported_undefine_desired(
+sl_status_t dotdot_door_lock_number_of_rfid_users_supported_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -17422,13 +17422,13 @@ sl_status_t dotdot_door_lock_number_ofrfid_users_supported_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_number_ofrfid_users_supported_is_reported_defined(
+bool dotdot_door_lock_number_of_rfid_users_supported_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17436,11 +17436,11 @@ bool dotdot_door_lock_number_ofrfid_users_supported_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_number_ofrfid_users_supported_is_desired_defined(
+bool dotdot_door_lock_number_of_rfid_users_supported_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17448,18 +17448,18 @@ bool dotdot_door_lock_number_ofrfid_users_supported_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_number_ofrfid_users_supported(
+sl_status_t dotdot_create_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -17796,18 +17796,18 @@ sl_status_t dotdot_create_door_lock_number_of_holiday_schedules_supported(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_maxpin_code_length(
+bool dotdot_is_supported_door_lock_max_pin_code_length(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_maxpin_code_length(
+uint8_t dotdot_get_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17816,7 +17816,7 @@ uint8_t dotdot_get_door_lock_maxpin_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
 
   uint8_t result = {};
   attribute_store_read_value(node,
@@ -17826,11 +17826,11 @@ uint8_t dotdot_get_door_lock_maxpin_code_length(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_maxpin_code_length(
+sl_status_t dotdot_set_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_maxpin_code_length
+  uint8_t new_max_pin_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17838,27 +17838,27 @@ sl_status_t dotdot_set_door_lock_maxpin_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_maxpin_code_length,
+                                                  (uint8_t *)&new_max_pin_code_length,
                                                   sizeof(uint8_t));
   }
 
-sl_status_t dotdot_door_lock_maxpin_code_length_undefine_reported(
+sl_status_t dotdot_door_lock_max_pin_code_length_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_maxpin_code_length_undefine_desired(
+sl_status_t dotdot_door_lock_max_pin_code_length_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -17866,13 +17866,13 @@ sl_status_t dotdot_door_lock_maxpin_code_length_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_maxpin_code_length_is_reported_defined(
+bool dotdot_door_lock_max_pin_code_length_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17880,11 +17880,11 @@ bool dotdot_door_lock_maxpin_code_length_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_maxpin_code_length_is_desired_defined(
+bool dotdot_door_lock_max_pin_code_length_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17892,33 +17892,33 @@ bool dotdot_door_lock_maxpin_code_length_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_maxpin_code_length(
+sl_status_t dotdot_create_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_minpin_code_length(
+bool dotdot_is_supported_door_lock_min_pin_code_length(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_minpin_code_length(
+uint8_t dotdot_get_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17927,7 +17927,7 @@ uint8_t dotdot_get_door_lock_minpin_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
 
   uint8_t result = {};
   attribute_store_read_value(node,
@@ -17937,11 +17937,11 @@ uint8_t dotdot_get_door_lock_minpin_code_length(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_minpin_code_length(
+sl_status_t dotdot_set_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_minpin_code_length
+  uint8_t new_min_pin_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17949,27 +17949,27 @@ sl_status_t dotdot_set_door_lock_minpin_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_minpin_code_length,
+                                                  (uint8_t *)&new_min_pin_code_length,
                                                   sizeof(uint8_t));
   }
 
-sl_status_t dotdot_door_lock_minpin_code_length_undefine_reported(
+sl_status_t dotdot_door_lock_min_pin_code_length_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_minpin_code_length_undefine_desired(
+sl_status_t dotdot_door_lock_min_pin_code_length_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -17977,13 +17977,13 @@ sl_status_t dotdot_door_lock_minpin_code_length_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_minpin_code_length_is_reported_defined(
+bool dotdot_door_lock_min_pin_code_length_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -17991,11 +17991,11 @@ bool dotdot_door_lock_minpin_code_length_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_minpin_code_length_is_desired_defined(
+bool dotdot_door_lock_min_pin_code_length_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -18003,33 +18003,33 @@ bool dotdot_door_lock_minpin_code_length_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_minpin_code_length(
+sl_status_t dotdot_create_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_maxrfid_code_length(
+bool dotdot_is_supported_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_maxrfid_code_length(
+uint8_t dotdot_get_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18038,7 +18038,7 @@ uint8_t dotdot_get_door_lock_maxrfid_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
 
   uint8_t result = {};
   attribute_store_read_value(node,
@@ -18048,11 +18048,11 @@ uint8_t dotdot_get_door_lock_maxrfid_code_length(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_maxrfid_code_length(
+sl_status_t dotdot_set_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_maxrfid_code_length
+  uint8_t new_max_rfid_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18060,27 +18060,27 @@ sl_status_t dotdot_set_door_lock_maxrfid_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_maxrfid_code_length,
+                                                  (uint8_t *)&new_max_rfid_code_length,
                                                   sizeof(uint8_t));
   }
 
-sl_status_t dotdot_door_lock_maxrfid_code_length_undefine_reported(
+sl_status_t dotdot_door_lock_max_rfid_code_length_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_maxrfid_code_length_undefine_desired(
+sl_status_t dotdot_door_lock_max_rfid_code_length_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -18088,13 +18088,13 @@ sl_status_t dotdot_door_lock_maxrfid_code_length_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_maxrfid_code_length_is_reported_defined(
+bool dotdot_door_lock_max_rfid_code_length_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -18102,11 +18102,11 @@ bool dotdot_door_lock_maxrfid_code_length_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_maxrfid_code_length_is_desired_defined(
+bool dotdot_door_lock_max_rfid_code_length_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -18114,33 +18114,33 @@ bool dotdot_door_lock_maxrfid_code_length_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_maxrfid_code_length(
+sl_status_t dotdot_create_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_minrfid_code_length(
+bool dotdot_is_supported_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_minrfid_code_length(
+uint8_t dotdot_get_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18149,7 +18149,7 @@ uint8_t dotdot_get_door_lock_minrfid_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
 
   uint8_t result = {};
   attribute_store_read_value(node,
@@ -18159,11 +18159,11 @@ uint8_t dotdot_get_door_lock_minrfid_code_length(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_minrfid_code_length(
+sl_status_t dotdot_set_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_minrfid_code_length
+  uint8_t new_min_rfid_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18171,27 +18171,27 @@ sl_status_t dotdot_set_door_lock_minrfid_code_length(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_minrfid_code_length,
+                                                  (uint8_t *)&new_min_rfid_code_length,
                                                   sizeof(uint8_t));
   }
 
-sl_status_t dotdot_door_lock_minrfid_code_length_undefine_reported(
+sl_status_t dotdot_door_lock_min_rfid_code_length_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_minrfid_code_length_undefine_desired(
+sl_status_t dotdot_door_lock_min_rfid_code_length_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -18199,13 +18199,13 @@ sl_status_t dotdot_door_lock_minrfid_code_length_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_minrfid_code_length_is_reported_defined(
+bool dotdot_door_lock_min_rfid_code_length_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -18213,11 +18213,11 @@ bool dotdot_door_lock_minrfid_code_length_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_minrfid_code_length_is_desired_defined(
+bool dotdot_door_lock_min_rfid_code_length_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -18225,18 +18225,240 @@ bool dotdot_door_lock_minrfid_code_length_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_minrfid_code_length(
+sl_status_t dotdot_create_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_door_lock_credential_rules_support(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_door_lock_credential_rules_support(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_door_lock_credential_rules_support(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_credential_rules_support
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_credential_rules_support,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_door_lock_credential_rules_support_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_door_lock_credential_rules_support_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_credential_rules_support_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_credential_rules_support_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_door_lock_credential_rules_support(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_door_lock_number_of_credentials_supported_per_user(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_door_lock_number_of_credentials_supported_per_user(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_door_lock_number_of_credentials_supported_per_user(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_number_of_credentials_supported_per_user
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_number_of_credentials_supported_per_user,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_door_lock_number_of_credentials_supported_per_user_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_door_lock_number_of_credentials_supported_per_user_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_number_of_credentials_supported_per_user_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_number_of_credentials_supported_per_user_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_door_lock_number_of_credentials_supported_per_user(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -19573,6 +19795,117 @@ sl_status_t dotdot_create_door_lock_enable_privacy_mode_button(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
+bool dotdot_is_supported_door_lock_local_programming_features(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_door_lock_local_programming_features(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_door_lock_local_programming_features(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_local_programming_features
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_local_programming_features,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_door_lock_local_programming_features_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_door_lock_local_programming_features_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_local_programming_features_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_local_programming_features_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_door_lock_local_programming_features(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
 bool dotdot_is_supported_door_lock_wrong_code_entry_limit(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
@@ -19795,18 +20128,18 @@ sl_status_t dotdot_create_door_lock_user_code_temporary_disable_time(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_sendpin_over_the_air(
+bool dotdot_is_supported_door_lock_send_pin_over_the_air(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
   return attribute_store_node_exists(node);
 }
 
-bool dotdot_get_door_lock_sendpin_over_the_air(
+bool dotdot_get_door_lock_send_pin_over_the_air(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -19815,7 +20148,7 @@ bool dotdot_get_door_lock_sendpin_over_the_air(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
 
   bool result = {};
   attribute_store_read_value(node,
@@ -19825,11 +20158,11 @@ bool dotdot_get_door_lock_sendpin_over_the_air(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_sendpin_over_the_air(
+sl_status_t dotdot_set_door_lock_send_pin_over_the_air(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  bool new_sendpin_over_the_air
+  bool new_send_pin_over_the_air
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -19837,27 +20170,27 @@ sl_status_t dotdot_set_door_lock_sendpin_over_the_air(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_sendpin_over_the_air,
+                                                  (uint8_t *)&new_send_pin_over_the_air,
                                                   sizeof(bool));
   }
 
-sl_status_t dotdot_door_lock_sendpin_over_the_air_undefine_reported(
+sl_status_t dotdot_door_lock_send_pin_over_the_air_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_sendpin_over_the_air_undefine_desired(
+sl_status_t dotdot_door_lock_send_pin_over_the_air_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -19865,13 +20198,13 @@ sl_status_t dotdot_door_lock_sendpin_over_the_air_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_sendpin_over_the_air_is_reported_defined(
+bool dotdot_door_lock_send_pin_over_the_air_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -19879,11 +20212,11 @@ bool dotdot_door_lock_sendpin_over_the_air_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_sendpin_over_the_air_is_desired_defined(
+bool dotdot_door_lock_send_pin_over_the_air_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -19891,33 +20224,33 @@ bool dotdot_door_lock_sendpin_over_the_air_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_sendpin_over_the_air(
+sl_status_t dotdot_create_door_lock_send_pin_over_the_air(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_door_lock_requirepi_nforrf_operation(
+bool dotdot_is_supported_door_lock_require_pi_nfor_rf_operation(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
   return attribute_store_node_exists(node);
 }
 
-bool dotdot_get_door_lock_requirepi_nforrf_operation(
+bool dotdot_get_door_lock_require_pi_nfor_rf_operation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -19926,7 +20259,7 @@ bool dotdot_get_door_lock_requirepi_nforrf_operation(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
 
   bool result = {};
   attribute_store_read_value(node,
@@ -19936,11 +20269,11 @@ bool dotdot_get_door_lock_requirepi_nforrf_operation(
   return result;
 }
 
-sl_status_t dotdot_set_door_lock_requirepi_nforrf_operation(
+sl_status_t dotdot_set_door_lock_require_pi_nfor_rf_operation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  bool new_requirepi_nforrf_operation
+  bool new_require_pi_nfor_rf_operation
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -19948,27 +20281,27 @@ sl_status_t dotdot_set_door_lock_requirepi_nforrf_operation(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_requirepi_nforrf_operation,
+                                                  (uint8_t *)&new_require_pi_nfor_rf_operation,
                                                   sizeof(bool));
   }
 
-sl_status_t dotdot_door_lock_requirepi_nforrf_operation_undefine_reported(
+sl_status_t dotdot_door_lock_require_pi_nfor_rf_operation_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_door_lock_requirepi_nforrf_operation_undefine_desired(
+sl_status_t dotdot_door_lock_require_pi_nfor_rf_operation_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -19976,13 +20309,13 @@ sl_status_t dotdot_door_lock_requirepi_nforrf_operation_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_door_lock_requirepi_nforrf_operation_is_reported_defined(
+bool dotdot_door_lock_require_pi_nfor_rf_operation_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -19990,11 +20323,11 @@ bool dotdot_door_lock_requirepi_nforrf_operation_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_door_lock_requirepi_nforrf_operation_is_desired_defined(
+bool dotdot_door_lock_require_pi_nfor_rf_operation_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -20002,18 +20335,18 @@ bool dotdot_door_lock_requirepi_nforrf_operation_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_door_lock_requirepi_nforrf_operation(
+sl_status_t dotdot_create_door_lock_require_pi_nfor_rf_operation(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -20125,6 +20458,117 @@ sl_status_t dotdot_create_door_lock_security_level(
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
                                            DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_door_lock_expiring_user_timeout(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+  return attribute_store_node_exists(node);
+}
+
+uint16_t dotdot_get_door_lock_expiring_user_timeout(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+
+  uint16_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_door_lock_expiring_user_timeout(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_expiring_user_timeout
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_expiring_user_timeout,
+                                                  sizeof(uint16_t));
+  }
+
+sl_status_t dotdot_door_lock_expiring_user_timeout_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_door_lock_expiring_user_timeout_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_expiring_user_timeout_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_expiring_user_timeout_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_door_lock_expiring_user_timeout(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -21016,6 +21460,117 @@ sl_status_t dotdot_create_door_lock_rfid_programming_event_mask(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
+bool dotdot_is_supported_door_lock_feature_map(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+  return attribute_store_node_exists(node);
+}
+
+uint16_t dotdot_get_door_lock_feature_map(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+
+  uint16_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_door_lock_feature_map(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_feature_map
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_feature_map,
+                                                  sizeof(uint16_t));
+  }
+
+sl_status_t dotdot_door_lock_feature_map_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_door_lock_feature_map_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_door_lock_feature_map_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_door_lock_feature_map_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_door_lock_feature_map(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
 
 bool dotdot_is_any_door_lock_attribute_supported(
   const dotdot_unid_t unid,
@@ -21048,10 +21603,10 @@ bool dotdot_is_any_door_lock_attribute_supported(
   if (true == dotdot_is_supported_door_lock_number_of_total_users_supported(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_number_ofpin_users_supported(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_number_of_pin_users_supported(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_number_ofrfid_users_supported(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_number_of_rfid_users_supported(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_number_of_week_day_schedules_supported_per_user(unid, endpoint_id)) {
@@ -21063,16 +21618,22 @@ bool dotdot_is_any_door_lock_attribute_supported(
   if (true == dotdot_is_supported_door_lock_number_of_holiday_schedules_supported(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_maxpin_code_length(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_max_pin_code_length(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_minpin_code_length(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_min_pin_code_length(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_maxrfid_code_length(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_max_rfid_code_length(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_minrfid_code_length(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_min_rfid_code_length(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_door_lock_credential_rules_support(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_door_lock_number_of_credentials_supported_per_user(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_enable_logging(unid, endpoint_id)) {
@@ -21111,19 +21672,25 @@ bool dotdot_is_any_door_lock_attribute_supported(
   if (true == dotdot_is_supported_door_lock_enable_privacy_mode_button(unid, endpoint_id)) {
     return true;
   }
+  if (true == dotdot_is_supported_door_lock_local_programming_features(unid, endpoint_id)) {
+    return true;
+  }
   if (true == dotdot_is_supported_door_lock_wrong_code_entry_limit(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_user_code_temporary_disable_time(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_sendpin_over_the_air(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_send_pin_over_the_air(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_requirepi_nforrf_operation(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_require_pi_nfor_rf_operation(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_security_level(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_door_lock_expiring_user_timeout(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_alarm_mask(unid, endpoint_id)) {
@@ -21148,6 +21715,9 @@ bool dotdot_is_any_door_lock_attribute_supported(
     return true;
   }
   if (true == dotdot_is_supported_door_lock_rfid_programming_event_mask(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_door_lock_feature_map(unid, endpoint_id)) {
     return true;
   }
 
@@ -21197,16 +21767,22 @@ bool dotdot_is_any_door_lock_writable_attribute_supported(
   if (true == dotdot_is_supported_door_lock_enable_privacy_mode_button(unid, endpoint_id)) {
     return true;
   }
+  if (true == dotdot_is_supported_door_lock_local_programming_features(unid, endpoint_id)) {
+    return true;
+  }
   if (true == dotdot_is_supported_door_lock_wrong_code_entry_limit(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_user_code_temporary_disable_time(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_sendpin_over_the_air(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_send_pin_over_the_air(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_door_lock_requirepi_nforrf_operation(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_door_lock_require_pi_nfor_rf_operation(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_door_lock_expiring_user_timeout(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_door_lock_alarm_mask(unid, endpoint_id)) {
@@ -61053,18 +61629,18 @@ sl_status_t dotdot_create_electrical_measurement_power_factor(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period(
+bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period(
+uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61073,7 +61649,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -61083,11 +61659,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_voltage_measurement_period(
+sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_voltage_measurement_period
+  uint16_t new_average_rms_voltage_measurement_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61095,27 +61671,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_voltage_measurement_per
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_voltage_measurement_period,
+                                                  (uint8_t *)&new_average_rms_voltage_measurement_period,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -61123,13 +61699,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_voltage_measurement_period_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -61137,11 +61713,11 @@ bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_is_repo
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_voltage_measurement_period_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -61149,33 +61725,33 @@ bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_is_desi
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_voltage_measurement_period(
+sl_status_t dotdot_create_electrical_measurement_average_rms_voltage_measurement_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter(
+bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter(
+uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61184,7 +61760,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -61194,11 +61770,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage_counter(
+sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_over_voltage_counter
+  uint16_t new_average_rms_over_voltage_counter
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61206,27 +61782,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage_counter(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_over_voltage_counter,
+                                                  (uint8_t *)&new_average_rms_over_voltage_counter,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -61234,13 +61810,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_undefi
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_counter_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_counter_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -61248,11 +61824,11 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_counter_is_reported_d
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_counter_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_counter_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -61260,33 +61836,33 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_counter_is_desired_de
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage_counter(
+sl_status_t dotdot_create_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter(
+bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter(
+uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61295,7 +61871,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -61305,11 +61881,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage_counter(
+sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_under_voltage_counter
+  uint16_t new_average_rms_under_voltage_counter
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61317,27 +61893,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage_counter(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_under_voltage_counter,
+                                                  (uint8_t *)&new_average_rms_under_voltage_counter,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -61345,13 +61921,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_undef
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_counter_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_counter_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -61359,11 +61935,11 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_counter_is_reported_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_counter_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_counter_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -61371,18 +61947,18 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_counter_is_desired_d
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage_counter(
+sl_status_t dotdot_create_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -63384,18 +63960,18 @@ sl_status_t dotdot_create_electrical_measurement_ac_reactive_power_overload(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_over_voltage(
+bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
   return attribute_store_node_exists(node);
 }
 
-int16_t dotdot_get_electrical_measurement_averagerms_over_voltage(
+int16_t dotdot_get_electrical_measurement_average_rms_over_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -63404,7 +63980,7 @@ int16_t dotdot_get_electrical_measurement_averagerms_over_voltage(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
 
   int16_t result = {};
   attribute_store_read_value(node,
@@ -63414,11 +63990,11 @@ int16_t dotdot_get_electrical_measurement_averagerms_over_voltage(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage(
+sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_averagerms_over_voltage
+  int16_t new_average_rms_over_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -63426,27 +64002,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_over_voltage,
+                                                  (uint8_t *)&new_average_rms_over_voltage,
                                                   sizeof(int16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -63454,13 +64030,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_undefine_desir
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -63468,11 +64044,11 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -63480,33 +64056,33 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage(
+sl_status_t dotdot_create_electrical_measurement_average_rms_over_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_under_voltage(
+bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
   return attribute_store_node_exists(node);
 }
 
-int16_t dotdot_get_electrical_measurement_averagerms_under_voltage(
+int16_t dotdot_get_electrical_measurement_average_rms_under_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -63515,7 +64091,7 @@ int16_t dotdot_get_electrical_measurement_averagerms_under_voltage(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
 
   int16_t result = {};
   attribute_store_read_value(node,
@@ -63525,11 +64101,11 @@ int16_t dotdot_get_electrical_measurement_averagerms_under_voltage(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage(
+sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_averagerms_under_voltage
+  int16_t new_average_rms_under_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -63537,27 +64113,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_under_voltage,
+                                                  (uint8_t *)&new_average_rms_under_voltage,
                                                   sizeof(int16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -63565,13 +64141,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_undefine_desi
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -63579,11 +64155,11 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -63591,18 +64167,18 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage(
+sl_status_t dotdot_create_electrical_measurement_average_rms_under_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -65715,18 +66291,18 @@ sl_status_t dotdot_create_electrical_measurement_power_factor_phb(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period_phb(
+bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period_phb(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period_phb(
+uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65735,7 +66311,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -65745,11 +66321,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_voltage_measurement_period_phb(
+sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_voltage_measurement_period_phb
+  uint16_t new_average_rms_voltage_measurement_period_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65757,27 +66333,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_voltage_measurement_per
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_voltage_measurement_period_phb,
+                                                  (uint8_t *)&new_average_rms_voltage_measurement_period_phb,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -65785,13 +66361,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -65799,11 +66375,11 @@ bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_is_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -65811,33 +66387,33 @@ bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_is_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_voltage_measurement_period_phb(
+sl_status_t dotdot_create_electrical_measurement_average_rms_voltage_measurement_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter_phb(
+bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter_phb(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter_phb(
+uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65846,7 +66422,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter_phb(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -65856,11 +66432,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter_phb(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage_counter_phb(
+sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_over_voltage_counter_phb
+  uint16_t new_average_rms_over_voltage_counter_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65868,27 +66444,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage_counter_ph
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_over_voltage_counter_phb,
+                                                  (uint8_t *)&new_average_rms_over_voltage_counter_phb,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -65896,13 +66472,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_un
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -65910,11 +66486,11 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_is_report
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -65922,33 +66498,33 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_is_desire
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage_counter_phb(
+sl_status_t dotdot_create_electrical_measurement_average_rms_over_voltage_counter_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter_phb(
+bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter_phb(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter_phb(
+uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65957,7 +66533,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter_phb(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -65967,11 +66543,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter_phb(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage_counter_phb(
+sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_under_voltage_counter_phb
+  uint16_t new_average_rms_under_voltage_counter_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65979,27 +66555,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage_counter_p
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_under_voltage_counter_phb,
+                                                  (uint8_t *)&new_average_rms_under_voltage_counter_phb,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -66007,13 +66583,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_u
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -66021,11 +66597,11 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_is_repor
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -66033,18 +66609,18 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_is_desir
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage_counter_phb(
+sl_status_t dotdot_create_electrical_measurement_average_rms_under_voltage_counter_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -68157,18 +68733,18 @@ sl_status_t dotdot_create_electrical_measurement_power_factor_phc(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period_phc(
+bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period_phc(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period_phc(
+uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68177,7 +68753,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -68187,11 +68763,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_voltage_measurement_period
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_voltage_measurement_period_phc(
+sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_voltage_measurement_period_phc
+  uint16_t new_average_rms_voltage_measurement_period_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68199,27 +68775,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_voltage_measurement_per
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_voltage_measurement_period_phc,
+                                                  (uint8_t *)&new_average_rms_voltage_measurement_period_phc,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -68227,13 +68803,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_voltage_measurement_period_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -68241,11 +68817,11 @@ bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_is_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -68253,33 +68829,33 @@ bool dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_is_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_voltage_measurement_period_phc(
+sl_status_t dotdot_create_electrical_measurement_average_rms_voltage_measurement_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter_phc(
+bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter_phc(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter_phc(
+uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68288,7 +68864,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter_phc(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -68298,11 +68874,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_over_voltage_counter_phc(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage_counter_phc(
+sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_over_voltage_counter_phc
+  uint16_t new_average_rms_over_voltage_counter_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68310,27 +68886,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_over_voltage_counter_ph
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_over_voltage_counter_phc,
+                                                  (uint8_t *)&new_average_rms_over_voltage_counter_phc,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -68338,13 +68914,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_un
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -68352,11 +68928,11 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_is_report
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -68364,33 +68940,33 @@ bool dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_is_desire
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_over_voltage_counter_phc(
+sl_status_t dotdot_create_electrical_measurement_average_rms_over_voltage_counter_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter_phc(
+bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter_phc(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter_phc(
+uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68399,7 +68975,7 @@ uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter_phc(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -68409,11 +68985,11 @@ uint16_t dotdot_get_electrical_measurement_averagerms_under_voltage_counter_phc(
   return result;
 }
 
-sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage_counter_phc(
+sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagerms_under_voltage_counter_phc
+  uint16_t new_average_rms_under_voltage_counter_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68421,27 +68997,27 @@ sl_status_t dotdot_set_electrical_measurement_averagerms_under_voltage_counter_p
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagerms_under_voltage_counter_phc,
+                                                  (uint8_t *)&new_average_rms_under_voltage_counter_phc,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_undefine_reported(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_undefine_desired(
+sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -68449,13 +69025,13 @@ sl_status_t dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_u
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_is_reported_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -68463,11 +69039,11 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_is_repor
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_is_desired_defined(
+bool dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -68475,18 +69051,18 @@ bool dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_is_desir
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_electrical_measurement_averagerms_under_voltage_counter_phc(
+sl_status_t dotdot_create_electrical_measurement_average_rms_under_voltage_counter_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+                                           DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -69107,13 +69683,13 @@ bool dotdot_is_any_electrical_measurement_attribute_supported(
   if (true == dotdot_is_supported_electrical_measurement_power_factor(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period(unid, endpoint_id)) {
@@ -69170,10 +69746,10 @@ bool dotdot_is_any_electrical_measurement_attribute_supported(
   if (true == dotdot_is_supported_electrical_measurement_ac_reactive_power_overload(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage(unid, endpoint_id)) {
@@ -69233,13 +69809,13 @@ bool dotdot_is_any_electrical_measurement_attribute_supported(
   if (true == dotdot_is_supported_electrical_measurement_power_factor_phb(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period_phb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period_phb(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter_phb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter_phb(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter_phb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter_phb(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_phb(unid, endpoint_id)) {
@@ -69299,13 +69875,13 @@ bool dotdot_is_any_electrical_measurement_attribute_supported(
   if (true == dotdot_is_supported_electrical_measurement_power_factor_phc(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period_phc(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period_phc(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter_phc(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter_phc(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter_phc(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter_phc(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_phc(unid, endpoint_id)) {
@@ -69328,13 +69904,13 @@ bool dotdot_is_any_electrical_measurement_writable_attribute_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period(unid, endpoint_id)) {
@@ -69367,13 +69943,13 @@ bool dotdot_is_any_electrical_measurement_writable_attribute_supported(
   if (true == dotdot_is_supported_electrical_measurement_rms_voltage_swell(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period_phb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period_phb(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter_phb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter_phb(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter_phb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter_phb(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_phb(unid, endpoint_id)) {
@@ -69388,13 +69964,13 @@ bool dotdot_is_any_electrical_measurement_writable_attribute_supported(
   if (true == dotdot_is_supported_electrical_measurement_rms_voltage_swell_period_phb(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_voltage_measurement_period_phc(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_period_phc(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_over_voltage_counter_phc(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter_phc(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_electrical_measurement_averagerms_under_voltage_counter_phc(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counter_phc(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_phc(unid, endpoint_id)) {
@@ -72412,18 +72988,18 @@ sl_status_t dotdot_create_diagnostics_relayed_ucast(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_diagnostics_phy_tomac_queue_limit_reached(
+bool dotdot_is_supported_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_phy_tomac_queue_limit_reached(
+uint16_t dotdot_get_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72432,7 +73008,7 @@ uint16_t dotdot_get_diagnostics_phy_tomac_queue_limit_reached(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -72442,11 +73018,11 @@ uint16_t dotdot_get_diagnostics_phy_tomac_queue_limit_reached(
   return result;
 }
 
-sl_status_t dotdot_set_diagnostics_phy_tomac_queue_limit_reached(
+sl_status_t dotdot_set_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_phy_tomac_queue_limit_reached
+  uint16_t new_phy_to_mac_queue_limit_reached
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72454,27 +73030,27 @@ sl_status_t dotdot_set_diagnostics_phy_tomac_queue_limit_reached(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_phy_tomac_queue_limit_reached,
+                                                  (uint8_t *)&new_phy_to_mac_queue_limit_reached,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_diagnostics_phy_tomac_queue_limit_reached_undefine_reported(
+sl_status_t dotdot_diagnostics_phy_to_mac_queue_limit_reached_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_diagnostics_phy_tomac_queue_limit_reached_undefine_desired(
+sl_status_t dotdot_diagnostics_phy_to_mac_queue_limit_reached_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -72482,13 +73058,13 @@ sl_status_t dotdot_diagnostics_phy_tomac_queue_limit_reached_undefine_desired(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_diagnostics_phy_tomac_queue_limit_reached_is_reported_defined(
+bool dotdot_diagnostics_phy_to_mac_queue_limit_reached_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -72496,11 +73072,11 @@ bool dotdot_diagnostics_phy_tomac_queue_limit_reached_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_diagnostics_phy_tomac_queue_limit_reached_is_desired_defined(
+bool dotdot_diagnostics_phy_to_mac_queue_limit_reached_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -72508,18 +73084,18 @@ bool dotdot_diagnostics_phy_tomac_queue_limit_reached_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_diagnostics_phy_tomac_queue_limit_reached(
+sl_status_t dotdot_create_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+                                           DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -72634,18 +73210,18 @@ sl_status_t dotdot_create_diagnostics_packet_validate_drop_count(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_diagnostics_averagemac_retry_peraps_message_sent(
+bool dotdot_is_supported_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_averagemac_retry_peraps_message_sent(
+uint16_t dotdot_get_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72654,7 +73230,7 @@ uint16_t dotdot_get_diagnostics_averagemac_retry_peraps_message_sent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
 
   uint16_t result = {};
   attribute_store_read_value(node,
@@ -72664,11 +73240,11 @@ uint16_t dotdot_get_diagnostics_averagemac_retry_peraps_message_sent(
   return result;
 }
 
-sl_status_t dotdot_set_diagnostics_averagemac_retry_peraps_message_sent(
+sl_status_t dotdot_set_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_averagemac_retry_peraps_message_sent
+  uint16_t new_average_mac_retry_per_aps_message_sent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72676,27 +73252,27 @@ sl_status_t dotdot_set_diagnostics_averagemac_retry_peraps_message_sent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_averagemac_retry_peraps_message_sent,
+                                                  (uint8_t *)&new_average_mac_retry_per_aps_message_sent,
                                                   sizeof(uint16_t));
   }
 
-sl_status_t dotdot_diagnostics_averagemac_retry_peraps_message_sent_undefine_reported(
+sl_status_t dotdot_diagnostics_average_mac_retry_per_aps_message_sent_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_diagnostics_averagemac_retry_peraps_message_sent_undefine_desired(
+sl_status_t dotdot_diagnostics_average_mac_retry_per_aps_message_sent_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -72704,13 +73280,13 @@ sl_status_t dotdot_diagnostics_averagemac_retry_peraps_message_sent_undefine_des
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_diagnostics_averagemac_retry_peraps_message_sent_is_reported_defined(
+bool dotdot_diagnostics_average_mac_retry_per_aps_message_sent_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -72718,11 +73294,11 @@ bool dotdot_diagnostics_averagemac_retry_peraps_message_sent_is_reported_defined
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_diagnostics_averagemac_retry_peraps_message_sent_is_desired_defined(
+bool dotdot_diagnostics_average_mac_retry_per_aps_message_sent_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -72730,18 +73306,18 @@ bool dotdot_diagnostics_averagemac_retry_peraps_message_sent_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_diagnostics_averagemac_retry_peraps_message_sent(
+sl_status_t dotdot_create_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+                                           DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -73053,13 +73629,13 @@ bool dotdot_is_any_diagnostics_attribute_supported(
   if (true == dotdot_is_supported_diagnostics_relayed_ucast(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_diagnostics_phy_tomac_queue_limit_reached(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_diagnostics_phy_to_mac_queue_limit_reached(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_diagnostics_packet_validate_drop_count(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_diagnostics_averagemac_retry_peraps_message_sent(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_diagnostics_average_mac_retry_per_aps_message_sent(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_diagnostics_last_messagelqi(unid, endpoint_id)) {
@@ -77761,18 +78337,18 @@ sl_status_t dotdot_create_application_monitoring_application_connected(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_application_monitoring_applicationmqtt_topics(
+bool dotdot_is_supported_application_monitoring_application_mqtt_topics(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
   return attribute_store_node_exists(node);
 }
 
-const char* dotdot_get_application_monitoring_applicationmqtt_topics(
+const char* dotdot_get_application_monitoring_application_mqtt_topics(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -77781,7 +78357,7 @@ const char* dotdot_get_application_monitoring_applicationmqtt_topics(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
 
   if (REPORTED_ATTRIBUTE == value_state) {
     attribute_store_get_reported_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
@@ -77791,12 +78367,12 @@ const char* dotdot_get_application_monitoring_applicationmqtt_topics(
   return received_string;
 }
 
-sl_status_t dotdot_set_application_monitoring_applicationmqtt_topics(
+sl_status_t dotdot_set_application_monitoring_application_mqtt_topics(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  size_t new_applicationmqtt_topics_count,
-  const char** new_applicationmqtt_topics
+  size_t new_application_mqtt_topics_count,
+  const char** new_application_mqtt_topics
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -77804,7 +78380,7 @@ sl_status_t dotdot_set_application_monitoring_applicationmqtt_topics(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
 
   // Skip attribute ApplicationMQTTTopics because it is an array,
   // we typically don't save them as array in the attribute store.
@@ -77814,19 +78390,19 @@ sl_status_t dotdot_set_application_monitoring_applicationmqtt_topics(
   return SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationmqtt_topics_undefine_reported(
+sl_status_t dotdot_application_monitoring_application_mqtt_topics_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationmqtt_topics_undefine_desired(
+sl_status_t dotdot_application_monitoring_application_mqtt_topics_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -77834,13 +78410,13 @@ sl_status_t dotdot_application_monitoring_applicationmqtt_topics_undefine_desire
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_application_monitoring_applicationmqtt_topics_is_reported_defined(
+bool dotdot_application_monitoring_application_mqtt_topics_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -77848,11 +78424,11 @@ bool dotdot_application_monitoring_applicationmqtt_topics_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_application_monitoring_applicationmqtt_topics_is_desired_defined(
+bool dotdot_application_monitoring_application_mqtt_topics_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -77860,18 +78436,18 @@ bool dotdot_application_monitoring_applicationmqtt_topics_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_application_monitoring_applicationmqtt_topics(
+sl_status_t dotdot_create_application_monitoring_application_mqtt_topics(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -79431,18 +80007,18 @@ sl_status_t dotdot_create_application_monitoring_application_statistics_reportin
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_application_monitoring_applicationcpu_usage_percent(
+bool dotdot_is_supported_application_monitoring_application_cpu_usage_percent(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
   return attribute_store_node_exists(node);
 }
 
-double dotdot_get_application_monitoring_applicationcpu_usage_percent(
+double dotdot_get_application_monitoring_application_cpu_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79451,7 +80027,7 @@ double dotdot_get_application_monitoring_applicationcpu_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
 
   double result = {};
   attribute_store_read_value(node,
@@ -79461,11 +80037,11 @@ double dotdot_get_application_monitoring_applicationcpu_usage_percent(
   return result;
 }
 
-sl_status_t dotdot_set_application_monitoring_applicationcpu_usage_percent(
+sl_status_t dotdot_set_application_monitoring_application_cpu_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  double new_applicationcpu_usage_percent
+  double new_application_cpu_usage_percent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79473,27 +80049,27 @@ sl_status_t dotdot_set_application_monitoring_applicationcpu_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_applicationcpu_usage_percent,
+                                                  (uint8_t *)&new_application_cpu_usage_percent,
                                                   sizeof(double));
   }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_usage_percent_undefine_reported(
+sl_status_t dotdot_application_monitoring_application_cpu_usage_percent_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_usage_percent_undefine_desired(
+sl_status_t dotdot_application_monitoring_application_cpu_usage_percent_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -79501,13 +80077,13 @@ sl_status_t dotdot_application_monitoring_applicationcpu_usage_percent_undefine_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_application_monitoring_applicationcpu_usage_percent_is_reported_defined(
+bool dotdot_application_monitoring_application_cpu_usage_percent_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79515,11 +80091,11 @@ bool dotdot_application_monitoring_applicationcpu_usage_percent_is_reported_defi
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_application_monitoring_applicationcpu_usage_percent_is_desired_defined(
+bool dotdot_application_monitoring_application_cpu_usage_percent_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79527,33 +80103,33 @@ bool dotdot_application_monitoring_applicationcpu_usage_percent_is_desired_defin
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_application_monitoring_applicationcpu_usage_percent(
+sl_status_t dotdot_create_application_monitoring_application_cpu_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_application_monitoring_applicationcpu_average_usage_percent(
+bool dotdot_is_supported_application_monitoring_application_cpu_average_usage_percent(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
   return attribute_store_node_exists(node);
 }
 
-double dotdot_get_application_monitoring_applicationcpu_average_usage_percent(
+double dotdot_get_application_monitoring_application_cpu_average_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79562,7 +80138,7 @@ double dotdot_get_application_monitoring_applicationcpu_average_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
 
   double result = {};
   attribute_store_read_value(node,
@@ -79572,11 +80148,11 @@ double dotdot_get_application_monitoring_applicationcpu_average_usage_percent(
   return result;
 }
 
-sl_status_t dotdot_set_application_monitoring_applicationcpu_average_usage_percent(
+sl_status_t dotdot_set_application_monitoring_application_cpu_average_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  double new_applicationcpu_average_usage_percent
+  double new_application_cpu_average_usage_percent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79584,27 +80160,27 @@ sl_status_t dotdot_set_application_monitoring_applicationcpu_average_usage_perce
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_applicationcpu_average_usage_percent,
+                                                  (uint8_t *)&new_application_cpu_average_usage_percent,
                                                   sizeof(double));
   }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_average_usage_percent_undefine_reported(
+sl_status_t dotdot_application_monitoring_application_cpu_average_usage_percent_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_average_usage_percent_undefine_desired(
+sl_status_t dotdot_application_monitoring_application_cpu_average_usage_percent_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -79612,13 +80188,13 @@ sl_status_t dotdot_application_monitoring_applicationcpu_average_usage_percent_u
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_application_monitoring_applicationcpu_average_usage_percent_is_reported_defined(
+bool dotdot_application_monitoring_application_cpu_average_usage_percent_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79626,11 +80202,11 @@ bool dotdot_application_monitoring_applicationcpu_average_usage_percent_is_repor
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_application_monitoring_applicationcpu_average_usage_percent_is_desired_defined(
+bool dotdot_application_monitoring_application_cpu_average_usage_percent_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79638,33 +80214,33 @@ bool dotdot_application_monitoring_applicationcpu_average_usage_percent_is_desir
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_application_monitoring_applicationcpu_average_usage_percent(
+sl_status_t dotdot_create_application_monitoring_application_cpu_average_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_application_monitoring_applicationcpu_min_usage_percent(
+bool dotdot_is_supported_application_monitoring_application_cpu_min_usage_percent(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
   return attribute_store_node_exists(node);
 }
 
-double dotdot_get_application_monitoring_applicationcpu_min_usage_percent(
+double dotdot_get_application_monitoring_application_cpu_min_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79673,7 +80249,7 @@ double dotdot_get_application_monitoring_applicationcpu_min_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
 
   double result = {};
   attribute_store_read_value(node,
@@ -79683,11 +80259,11 @@ double dotdot_get_application_monitoring_applicationcpu_min_usage_percent(
   return result;
 }
 
-sl_status_t dotdot_set_application_monitoring_applicationcpu_min_usage_percent(
+sl_status_t dotdot_set_application_monitoring_application_cpu_min_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  double new_applicationcpu_min_usage_percent
+  double new_application_cpu_min_usage_percent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79695,27 +80271,27 @@ sl_status_t dotdot_set_application_monitoring_applicationcpu_min_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_applicationcpu_min_usage_percent,
+                                                  (uint8_t *)&new_application_cpu_min_usage_percent,
                                                   sizeof(double));
   }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_min_usage_percent_undefine_reported(
+sl_status_t dotdot_application_monitoring_application_cpu_min_usage_percent_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_min_usage_percent_undefine_desired(
+sl_status_t dotdot_application_monitoring_application_cpu_min_usage_percent_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -79723,13 +80299,13 @@ sl_status_t dotdot_application_monitoring_applicationcpu_min_usage_percent_undef
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_application_monitoring_applicationcpu_min_usage_percent_is_reported_defined(
+bool dotdot_application_monitoring_application_cpu_min_usage_percent_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79737,11 +80313,11 @@ bool dotdot_application_monitoring_applicationcpu_min_usage_percent_is_reported_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_application_monitoring_applicationcpu_min_usage_percent_is_desired_defined(
+bool dotdot_application_monitoring_application_cpu_min_usage_percent_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79749,33 +80325,33 @@ bool dotdot_application_monitoring_applicationcpu_min_usage_percent_is_desired_d
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_application_monitoring_applicationcpu_min_usage_percent(
+sl_status_t dotdot_create_application_monitoring_application_cpu_min_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_application_monitoring_applicationcpu_max_usage_percent(
+bool dotdot_is_supported_application_monitoring_application_cpu_max_usage_percent(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
   return attribute_store_node_exists(node);
 }
 
-double dotdot_get_application_monitoring_applicationcpu_max_usage_percent(
+double dotdot_get_application_monitoring_application_cpu_max_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79784,7 +80360,7 @@ double dotdot_get_application_monitoring_applicationcpu_max_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
 
   double result = {};
   attribute_store_read_value(node,
@@ -79794,11 +80370,11 @@ double dotdot_get_application_monitoring_applicationcpu_max_usage_percent(
   return result;
 }
 
-sl_status_t dotdot_set_application_monitoring_applicationcpu_max_usage_percent(
+sl_status_t dotdot_set_application_monitoring_application_cpu_max_usage_percent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  double new_applicationcpu_max_usage_percent
+  double new_application_cpu_max_usage_percent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79806,27 +80382,27 @@ sl_status_t dotdot_set_application_monitoring_applicationcpu_max_usage_percent(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_applicationcpu_max_usage_percent,
+                                                  (uint8_t *)&new_application_cpu_max_usage_percent,
                                                   sizeof(double));
   }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_max_usage_percent_undefine_reported(
+sl_status_t dotdot_application_monitoring_application_cpu_max_usage_percent_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationcpu_max_usage_percent_undefine_desired(
+sl_status_t dotdot_application_monitoring_application_cpu_max_usage_percent_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -79834,13 +80410,13 @@ sl_status_t dotdot_application_monitoring_applicationcpu_max_usage_percent_undef
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_application_monitoring_applicationcpu_max_usage_percent_is_reported_defined(
+bool dotdot_application_monitoring_application_cpu_max_usage_percent_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79848,11 +80424,11 @@ bool dotdot_application_monitoring_applicationcpu_max_usage_percent_is_reported_
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_application_monitoring_applicationcpu_max_usage_percent_is_desired_defined(
+bool dotdot_application_monitoring_application_cpu_max_usage_percent_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79860,33 +80436,33 @@ bool dotdot_application_monitoring_applicationcpu_max_usage_percent_is_desired_d
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_application_monitoring_applicationcpu_max_usage_percent(
+sl_status_t dotdot_create_application_monitoring_application_cpu_max_usage_percent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
-bool dotdot_is_supported_application_monitoring_applicationram_usagemb(
+bool dotdot_is_supported_application_monitoring_application_ram_usagemb(
   const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
   return attribute_store_node_exists(node);
 }
 
-double dotdot_get_application_monitoring_applicationram_usagemb(
+double dotdot_get_application_monitoring_application_ram_usagemb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79895,7 +80471,7 @@ double dotdot_get_application_monitoring_applicationram_usagemb(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
 
   double result = {};
   attribute_store_read_value(node,
@@ -79905,11 +80481,11 @@ double dotdot_get_application_monitoring_applicationram_usagemb(
   return result;
 }
 
-sl_status_t dotdot_set_application_monitoring_applicationram_usagemb(
+sl_status_t dotdot_set_application_monitoring_application_ram_usagemb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  double new_applicationram_usagemb
+  double new_application_ram_usagemb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79917,27 +80493,27 @@ sl_status_t dotdot_set_application_monitoring_applicationram_usagemb(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
 
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
-                                                  (uint8_t *)&new_applicationram_usagemb,
+                                                  (uint8_t *)&new_application_ram_usagemb,
                                                   sizeof(double));
   }
 
-sl_status_t dotdot_application_monitoring_applicationram_usagemb_undefine_reported(
+sl_status_t dotdot_application_monitoring_application_ram_usagemb_undefine_reported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
   attribute_store_undefine_reported(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
-sl_status_t dotdot_application_monitoring_applicationram_usagemb_undefine_desired(
+sl_status_t dotdot_application_monitoring_application_ram_usagemb_undefine_desired(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -79945,13 +80521,13 @@ sl_status_t dotdot_application_monitoring_applicationram_usagemb_undefine_desire
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
   attribute_store_undefine_desired(node);
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 
-bool dotdot_application_monitoring_applicationram_usagemb_is_reported_defined(
+bool dotdot_application_monitoring_application_ram_usagemb_is_reported_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79959,11 +80535,11 @@ bool dotdot_application_monitoring_applicationram_usagemb_is_reported_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
   return attribute_store_is_reported_defined(node);
 }
 
-bool dotdot_application_monitoring_applicationram_usagemb_is_desired_defined(
+bool dotdot_application_monitoring_application_ram_usagemb_is_desired_defined(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id)
 {
@@ -79971,18 +80547,18 @@ bool dotdot_application_monitoring_applicationram_usagemb_is_desired_defined(
   attribute_store_node_t node
     = attribute_store_get_first_child_by_type(
       endpoint_node,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
   return attribute_store_is_desired_defined(node);
 }
 
-sl_status_t dotdot_create_application_monitoring_applicationram_usagemb(
+sl_status_t dotdot_create_application_monitoring_application_ram_usagemb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
   attribute_store_node_t node =
     attribute_store_create_child_if_missing(endpoint_node,
-                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+                                           DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
@@ -80000,7 +80576,7 @@ bool dotdot_is_any_application_monitoring_attribute_supported(
   if (true == dotdot_is_supported_application_monitoring_application_connected(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_application_monitoring_applicationmqtt_topics(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_application_monitoring_application_mqtt_topics(unid, endpoint_id)) {
     return true;
   }
   if (true == dotdot_is_supported_application_monitoring_uptime_minutes(unid, endpoint_id)) {
@@ -80045,19 +80621,19 @@ bool dotdot_is_any_application_monitoring_attribute_supported(
   if (true == dotdot_is_supported_application_monitoring_application_statistics_reporting_interval_seconds(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_application_monitoring_applicationcpu_usage_percent(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_application_monitoring_application_cpu_usage_percent(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_application_monitoring_applicationcpu_average_usage_percent(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_application_monitoring_application_cpu_average_usage_percent(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_application_monitoring_applicationcpu_min_usage_percent(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_application_monitoring_application_cpu_min_usage_percent(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_application_monitoring_applicationcpu_max_usage_percent(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_application_monitoring_application_cpu_max_usage_percent(unid, endpoint_id)) {
     return true;
   }
-  if (true == dotdot_is_supported_application_monitoring_applicationram_usagemb(unid, endpoint_id)) {
+  if (true == dotdot_is_supported_application_monitoring_application_ram_usagemb(unid, endpoint_id)) {
     return true;
   }
 
@@ -82877,6 +83453,142 @@ bool dotdot_is_any_protocol_controller_network_management_attribute_supported(
 }
 
 bool dotdot_is_any_protocol_controller_network_management_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+
+  return false;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster Descriptor
+////////////////////////////////////////////////////////////////////////////////
+bool dotdot_is_supported_descriptor_device_type_list(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+  return attribute_store_node_exists(node);
+}
+
+DeviceTypeStruct dotdot_get_descriptor_device_type_list(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+
+  DeviceTypeStruct result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_descriptor_device_type_list(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  size_t new_device_type_list_count,
+  const DeviceTypeStruct* new_device_type_list
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+
+  // Skip attribute DeviceTypeList because it is an array,
+  // we typically don't save them as array in the attribute store.
+  sl_log_error(LOG_TAG, "Error, skipping to change the desired value of DeviceTypeList, Attribute %d, "
+                        "because it is a complicated type (array: DeviceTypeStruct). "
+                        "Please change the code to do this manually.",node);
+  return SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_descriptor_device_type_list_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_descriptor_device_type_list_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_descriptor_device_type_list_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_descriptor_device_type_list_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_descriptor_device_type_list(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+bool dotdot_is_any_descriptor_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  if (true == dotdot_is_supported_descriptor_device_type_list(unid, endpoint_id)) {
+    return true;
+  }
+
+  return false;
+}
+
+bool dotdot_is_any_descriptor_writable_attribute_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 

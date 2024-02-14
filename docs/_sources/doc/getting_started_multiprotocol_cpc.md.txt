@@ -160,3 +160,5 @@ the proper multiprotocol RCP image with BLE HCI support to the EFR32
 (rcp-uart-802154-blehci), and that you've successfully connected CPCd to the
 RCP as described above. Next, a small utility called `cpc-hci-bridge` must be
 started to connect BlueZ to CPCd. See the [cpc-hci-bridge user guide](../applications/cpc-hci-bridge/readme_user.md)
+
+

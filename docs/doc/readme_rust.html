@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Unify Library Overview" href="unify_library_overview.html" />
-    <link rel="prev" title="Unify Debugging Guide" href="readme_debug.html" /> 
+    <link rel="prev" title="CMake coding standard" href="standards/cmake-standard.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,47 +49,53 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="readme_building.html">Unify Build Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_cmake.html">CMake Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_debug.html">Unify Debugging Guide</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Unify Rust Development</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#using-cargo-standalone">Using cargo standalone</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#setting-up-environment">Setting up environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started_as_developer.html">Getting Started as a Developer</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="readme_building.html">Unify Build Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_cmake.html">CMake Integration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Unify Rust Development</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-cargo-standalone">Using cargo standalone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-new-rust-projects">Creating new rust projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-c-binding-generation">C/C++ Binding generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rust-to-c-c">Rust to C/C++</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-new-rust-projects">Creating new rust projects</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#creating-unit-tests">Creating Unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_write_new_cluster.html">How to implement a custom cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#c-c-binding-generation">C/C++ Binding generation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#declare-a-cargo-build">1. Declare a cargo build</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#define-link-libraries">2. Define link libraries</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#configure-bindings">3. Configure bindings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#include-bindings">4. Include bindings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sys-crates">_sys crates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#development-platform-recommendations">Development Platform Recommendations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-protocol-controllers">Developing protocol controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters">Extend UCL clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#rust-to-c-c">Rust to C/C++</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -254,7 +260,7 @@ information about the usage of this command.</p></li>
 <li><p>Declare your Rust project as a static native library. Add the following to
 your <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file:</p></li>
 </ul>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[lib] crate-type = [&quot;staticlib&quot;]</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[lib]</span><span class="w"> </span><span class="n">crate-type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;staticlib&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">

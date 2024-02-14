@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -325,9 +325,25 @@ $(document).ready(function(){initNavTree('globals_a.html',''); initResizable(); 
 <li>aox_locator_cluster_write_attributes_callback()
 : <a class="el" href="unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a5bdede5734b84d7400c59a962a26e148">unify_dotdot_attribute_store_write_attributes_command_callbacks.c</a>
 </li>
+<li>AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
+: <a class="el" href="group__dotdot__mqtt__helpers.html#gaf693a22790c2e628ee809f2b187becb0">dotdot_mqtt_helpers.h</a>
+, <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gaf693a22790c2e628ee809f2b187becb0">dotdot_mqtt_helpers.hpp</a>
+</li>
+<li>aox_locator_cte_mode_get_enum_value_name()
+: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gaa9596929507d1f4e8927512b88d73465">dotdot_mqtt_helpers.hpp</a>
+</li>
+<li>aox_locator_cte_mode_get_enum_value_name_c()
+: <a class="el" href="group__dotdot__mqtt__helpers.html#gad4ebb570490027a24b61e17c0fa5e67a">dotdot_mqtt_helpers.h</a>
+</li>
+<li>aox_locator_cte_mode_get_enum_value_number()
+: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga06739014882a57243dfa10cb299786f1">dotdot_mqtt_helpers.hpp</a>
+</li>
+<li>aox_locator_cte_mode_get_enum_value_number_c()
+: <a class="el" href="group__dotdot__mqtt__helpers.html#ga1544aaacfbcdabe8a9041447795bbf0e">dotdot_mqtt_helpers.h</a>
+</li>
 <li>AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
-: <a class="el" href="group__dotdot__mqtt__helpers.html#ga7f172e36b6358fc81f35e98910b20871">dotdot_mqtt_helpers.h</a>
-, <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga7f172e36b6358fc81f35e98910b20871">dotdot_mqtt_helpers.hpp</a>
+: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga7f172e36b6358fc81f35e98910b20871">dotdot_mqtt_helpers.hpp</a>
+, <a class="el" href="group__dotdot__mqtt__helpers.html#ga7f172e36b6358fc81f35e98910b20871">dotdot_mqtt_helpers.h</a>
 </li>
 <li>aox_locator_reporting_mode_get_enum_value_name()
 : <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gadfd5655fc079b78c9c3fc59530c0476e">dotdot_mqtt_helpers.hpp</a>
@@ -340,22 +356,6 @@ $(document).ready(function(){initNavTree('globals_a.html',''); initResizable(); 
 </li>
 <li>aox_locator_reporting_mode_get_enum_value_number_c()
 : <a class="el" href="group__dotdot__mqtt__helpers.html#gacf26182cfd25d29eee6833e26be24ee5">dotdot_mqtt_helpers.h</a>
-</li>
-<li>AOX_LOCATORCTE_MODE_ENUM_NAME_AVAILABLE
-: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gaa3d2c9dc2d2a054b39fec696be191bd6">dotdot_mqtt_helpers.hpp</a>
-, <a class="el" href="group__dotdot__mqtt__helpers.html#gaa3d2c9dc2d2a054b39fec696be191bd6">dotdot_mqtt_helpers.h</a>
-</li>
-<li>aox_locatorcte_mode_get_enum_value_name()
-: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga13b591107a30644d819661dff171165c">dotdot_mqtt_helpers.hpp</a>
-</li>
-<li>aox_locatorcte_mode_get_enum_value_name_c()
-: <a class="el" href="group__dotdot__mqtt__helpers.html#ga1bf1c907b3d5e1ae71b86440caf4c158">dotdot_mqtt_helpers.h</a>
-</li>
-<li>aox_locatorcte_mode_get_enum_value_number()
-: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga1fae8e41589e0b4ef3fd6c66e643db4c">dotdot_mqtt_helpers.hpp</a>
-</li>
-<li>aox_locatorcte_mode_get_enum_value_number_c()
-: <a class="el" href="group__dotdot__mqtt__helpers.html#ga887ae727072d0306b57fa85eb9c42247">dotdot_mqtt_helpers.h</a>
 </li>
 <li>aox_position_estimation_cluster_write_attributes_callback()
 : <a class="el" href="unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#ac4d2242421470a62e341f685643082bb">unify_dotdot_attribute_store_write_attributes_command_callbacks.c</a>
@@ -1291,7 +1291,7 @@ $(document).ready(function(){initNavTree('globals_a.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:56:14 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:13 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

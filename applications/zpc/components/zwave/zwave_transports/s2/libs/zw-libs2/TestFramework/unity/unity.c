@@ -15,8 +15,8 @@
 struct _Unity Unity;
 
 const char UnityStrOk[]                     = "OK";
-const char UnityStrPass[]                   = "PASS";
-const char UnityStrFail[]                   = "FAIL";
+const char UnityStrPass[]                   = "  <PASS>";
+const char UnityStrFail[]                   = "                <FAIL>   ";
 const char UnityStrIgnore[]                 = "IGNORE";
 const char UnityStrNull[]                   = "NULL";
 const char UnityStrSpacer[]                 = ". ";

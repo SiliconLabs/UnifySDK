@@ -36,6 +36,7 @@
 #include "zwave_command_class_security_0.h"
 #include "zwave_command_class_security_2.h"
 #include "zwave_command_class_supervision.h"
+#include "zwave_command_class_sound_switch.h"
 #include "zwave_command_class_switch_color.h"
 #include "zwave_command_class_switch_multilevel.h"
 #include "zwave_command_class_thermostat_mode.h"
@@ -102,6 +103,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_scene_controller_configuration_control_init();
   status |= zwave_command_class_security_0_init();
   status |= zwave_command_class_security_2_init();
+  status |= zwave_command_class_sound_switch_init();
   status |= zwave_command_class_supervision_init();
   status |= zwave_command_class_switch_color_init();
   status |= zwave_command_class_switch_multilevel_init();

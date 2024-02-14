@@ -14,6 +14,7 @@ var dotdot__cluster__id__definitions_8h =
     [ "DOTDOT_COMMISSIONING_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#ga3c8391adf3c07d0f2dfd7c7f3035e650", null ],
     [ "DOTDOT_CONFIGURATION_PARAMETERS_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#ga64fc596ee22fc1dc1c19bb1bd7f134d9", null ],
     [ "DOTDOT_DEHUMIDIFICATION_CONTROL_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gaf40ae65340a7e7db62f9b0e339e75686", null ],
+    [ "DOTDOT_DESCRIPTOR_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gad5c2f6876c028faf242fd6bf9031c455", null ],
     [ "DOTDOT_DEVICE_TEMPERATURE_CONFIGURATION_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#gab13b5af6a575fa240968002c3ff32bfb", null ],
     [ "DOTDOT_DIAGNOSTICS_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#ga64a64d76573912584d9f37532eaaca69", null ],
     [ "DOTDOT_DOOR_LOCK_CLUSTER_ID", "group__dotdot__cluster__id__definitions.html#ga52e3dca8879b0375f8fc91b3e4760496", null ],

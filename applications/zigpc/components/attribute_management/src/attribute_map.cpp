@@ -50,7 +50,7 @@ bool operator==(const attribute_key &a, const attribute_key &b)
 }
 
 static std::unordered_map<attribute_key, std::list<zcl_attribute_t>>
-  attribute_map;
+  attribute_map; //NOSONAR - need this to be modifiable for the map to work properly
 
 sl_status_t register_node_attributes(const zigbee_node_t node)
 {
@@ -136,7 +136,8 @@ sl_status_t register_attributes(const attribute_key key,
   attr_it = attribute_map.find(key);
 
   //only insert if the entry does not already exist
-  if ((attributes != NULL) && (attr_it == attribute_map.end())) {
+  if ((nullptr != attributes) && (attr_it == attribute_map.end()))
+  {
     std::list<zcl_attribute_t> attr_list(attributes,
                                          attributes + num_attributes);
 
@@ -145,7 +146,9 @@ sl_status_t register_attributes(const attribute_key key,
     attribute_map.insert(key_pair);
 
     status = SL_STATUS_OK;
-  } else {
+  }
+  else
+  {
     status = SL_STATUS_FAIL;
   }
 
@@ -172,7 +175,7 @@ sl_status_t read_attributes(const attribute_key key,
     status = SL_STATUS_FAIL;
   }
 
-  if ((attr_list_size <= num_attributes) && (attributes != NULL)
+  if ((attr_list_size <= num_attributes) && (nullptr != attributes)
       && (status == SL_STATUS_OK)) {
     zcl_attribute_t attr_list[attr_list_raw.size()];
 
@@ -207,7 +210,7 @@ sl_status_t read_single_attribute(const attribute_key key,
   to_find.attribute_id = attribute_id;
   to_find.cluster_id   = key.cluster_id;
 
-  if ((dest_attribute != NULL) && (attr_it != attribute_map.end())) {
+  if ((nullptr != dest_attribute) && (attr_it != attribute_map.end())) {
     std::list<zcl_attribute_t> attr_list = attr_it->second;
     auto entry = std::find(attr_list.begin(), attr_list.end(), to_find);
 

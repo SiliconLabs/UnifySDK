@@ -152,7 +152,7 @@ sl_status_t stub_attr_report_request(const zigbee_eui64_t eui64,
 void helper_expect_endpoint_configure_actions(zigbee_eui64_t dev,
                                               zigbee_endpoint_t &ep_obj)
 {
-    
+
     zigpc_network_data_t network_data;
   zigbee_eui64_t gw_eui64       = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
     memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
@@ -211,7 +211,7 @@ void test_endpoint_configuration_sanity(void)
     = {{.cluster_id = 0x02}, {.cluster_id = 0x05}, {.cluster_id = 0x29}},
     .cluster_count = 3,
   };
-  
+
     zigpc_network_data_t network_data;
     memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
 
@@ -224,7 +224,7 @@ void test_endpoint_configuration_sanity(void)
       SL_STATUS_OK);
   zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
   zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&(ep_obj.cluster_list[0].cluster_id));
-  
+
   zigpc_datastore_find_cluster_by_index_ExpectAndReturn
       (dev,
       1,
@@ -234,7 +234,7 @@ void test_endpoint_configuration_sanity(void)
       SL_STATUS_OK);
   zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
   zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&(ep_obj.cluster_list[1].cluster_id));
-    
+
   zigpc_datastore_find_cluster_by_index_ExpectAndReturn
       (dev,
       1,
@@ -244,7 +244,7 @@ void test_endpoint_configuration_sanity(void)
       SL_STATUS_OK);
   zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
   zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&(ep_obj.cluster_list[2].cluster_id));
-  
+
     zigpc_datastore_get_cluster_count_ExpectAndReturn(dev, ep_obj.endpoint_id, ZCL_CLUSTER_SERVER_SIDE, 3);
 
   zigpc_datastore_read_network_ExpectAndReturn(NULL, SL_STATUS_OK);
@@ -257,10 +257,10 @@ void test_endpoint_configuration_sanity(void)
                                                          SL_STATUS_OK);
 
   //configure_attributes_endpoint_ExpectAndReturn(dev, ep_obj, SL_STATUS_OK);
-    
+
   uic_mqtt_publish_Ignore();
   uic_mqtt_subscribe_Ignore();
-    
+
   zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
 
   // ACT
@@ -332,7 +332,7 @@ void test_device_interviewed_sanity(void)
   std::string topic      = topic_unid + "/State";
   std::string payload
     = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online functional","Security":"Zigbee Z3"})";
-  
+
   zigpc_network_data_t network_data;
   zigbee_eui64_t gw_eui64       = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1};
   memcpy(network_data.gateway_eui64,gw_eui64, sizeof(zigbee_eui64_t));
@@ -374,6 +374,8 @@ void test_device_interviewed_sanity(void)
   zigpc_datastore_get_cluster_count_IgnoreAndReturn(0);
   configure_attributes_endpoint_IgnoreAndReturn(SL_STATUS_OK);
   zigpc_binding_init_mqtt_IgnoreAndReturn(SL_STATUS_OK);
+
+  zigpc_datastore_log_clusters_Expect(dev, ep_obj.endpoint_id);
   //zigpc_gateway_request_binding_endpoint
   // ACT
   sl_status_t status = zigpc_ctrl::on_device_interviewed(dev, true);
@@ -628,6 +630,8 @@ void test_controller_startup_sanity(void)
   zigpc_binding_init_mqtt_IgnoreAndReturn(SL_STATUS_OK);
   configure_attributes_endpoint_IgnoreAndReturn(SL_STATUS_OK);
   zigpc_datastore_read_network_IgnoreAndReturn(SL_STATUS_OK);
+
+  zigpc_datastore_log_clusters_Ignore();
 
   // ACT
   zigpc_ctrl::on_startup();

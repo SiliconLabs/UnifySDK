@@ -113,8 +113,16 @@ static void ucl_nm_request_node_neighbor_update_callback(uint8_t status)
 static void ucl_nm_request_node_neighbor_on_node_resolution_resumed(
   attribute_store_node_t node_id_node)
 {
+// TODO, may be reworked to avoid build errors
+#if defined(__GNUC__) && (__GNUC__ == 12)
   zwave_node_id_t node_id = 0;
-  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+  zwave_node_id_t node_id_tmp = 0;
+  attribute_store_get_reported(node_id_node, &node_id_tmp, sizeof(node_id_tmp));
+  node_id = node_id_tmp; 
+#else
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id)); 
+#endif
 
   if ((zwave_network_management_get_state() == NM_IDLE)
       && (!on_going_requested_node_neighbor_update)) {

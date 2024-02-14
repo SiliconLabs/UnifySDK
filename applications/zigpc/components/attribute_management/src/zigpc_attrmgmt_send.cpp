@@ -74,7 +74,7 @@ size_t zigpc_attrmgmt_get_records_to_send_in_message(size_t start_index,
 
 void zigpc_attrmgmt_send_delayed_read_command_callback(void *data)
 {
-  if (data != NULL) {
+  if (nullptr != data) {
     const zigpc_attr_mgmt_read_data_t *read_data
       = (zigpc_attr_mgmt_read_data_t *)data;
 
@@ -97,7 +97,7 @@ void zigpc_attrmgmt_send_delayed_read_command(const zigbee_eui64_t eui64,
                                               zcl_cluster_id_t cluster_id,
                                               unsigned int delay_ms)
 {
-  if (eui64 != NULL) {
+  if (nullptr != eui64 ) {
     // NOTE: will be freed in zigpc_attrmgmt_send_delayed_read_command_callback
     zigpc_attr_mgmt_read_data_t *read_data = new zigpc_attr_mgmt_read_data_t;
 
@@ -165,7 +165,7 @@ sl_status_t
   }
 
   for (size_t i = 0U; (i < endpoint.cluster_count) && (status == SL_STATUS_OK);
-       i++) 
+       i++)
   {
     zigbee_endpoint_id_t endpoint_id = endpoint.endpoint_id;
     zcl_cluster_id_t cluster_id      = endpoint.cluster_list[i].cluster_id;
@@ -268,7 +268,7 @@ sl_status_t
   sl_status_t status  = SL_STATUS_OK;
   size_t record_count = 0U;
 
-  if (eui64 == NULL) {
+  if (nullptr == eui64 ) {
     status = SL_STATUS_NULL_POINTER;
   } else {
     record_count = zigpc_zclprofiles_get_cluster_attribute_count(cluster_id);

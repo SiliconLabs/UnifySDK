@@ -156,6 +156,18 @@ config file of the components.
 
 >NOTE: the DevUI will need the certificates as input from the user interface itself.
 
+### Using MQTT Explorer to Monitor Messages
+
+You can publish MQTT message and observe the MQTT messages stored in the broker
+with a [MQTT Explorer](https://mqtt-explorer.com/).
+[MQTT Explorer](https://mqtt-explorer.com/) is an MQTT client that provides a
+structured overview of your MQTT topics.
+
+Configure [MQTT Explorer](https://mqtt-explorer.com/) to connect to the host
+where your MQTT broker is located and the topics can be observed. Use the
+[Unify Specifications](./unify_specifications/index.rst)
+if you need assistance to understand what topics and they data represent.
+
 ## Evaluation
 
 Once all Unify Application components are installed and configured, one can

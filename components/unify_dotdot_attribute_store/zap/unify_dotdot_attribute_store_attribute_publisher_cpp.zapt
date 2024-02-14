@@ -108,7 +108,7 @@ static void {{asSnakeCaseLower label}}_cluster_publish_desired_value_callback(
   try {
     attribute_store::attribute attr(updated_node);
   {{#zcl_attributes}}
-    {{#if (isMonotonousArray label)}} 
+    {{#if (isMonotonousArray label)}}
     // Skip attribute {{label}} because it is an array,
     // we typically don't save them as array in the attribute store.
     sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute {{parent.label}} {{label}}. Arrays are not supported");

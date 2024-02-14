@@ -16,7 +16,7 @@
 
 #ifdef __C51__
 /* Local stub implementation of ZW_WatchDogKick() when compiling for C51. */
-void ZW_WatchDogKick()
+void ZW_WatchDogKick(void)
 {
   // Do nothing. Stub implementation.
 }

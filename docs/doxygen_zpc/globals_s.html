@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -262,8 +262,8 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="zwave__s0__transport_8c.html#a20f43508fd693122a975aa360c39b424">zwave_s0_transport.c</a>
 </li>
 <li>s0_timeout()
-: <a class="el" href="zwave__s0__sm_8c.html#aaf909f4fdf4e6d4d910f4ab30f2e9c21">zwave_s0_sm.c</a>
-, <a class="el" href="zwave__s0__transport_8c.html#adb0e729c11b7fdb81d7c2f776453e8ab">zwave_s0_transport.c</a>
+: <a class="el" href="zwave__s0__transport_8c.html#adb0e729c11b7fdb81d7c2f776453e8ab">zwave_s0_transport.c</a>
+, <a class="el" href="zwave__s0__sm_8c.html#aaf909f4fdf4e6d4d910f4ab30f2e9c21">zwave_s0_sm.c</a>
 </li>
 <li>s0_transition_table
 : <a class="el" href="zwave__s0__sm_8c.html#a0294061b89bc67f118ed4c24f0e7a9e9">zwave_s0_sm.c</a>
@@ -341,11 +341,11 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 <li>S2_stop_timeout()
 : <a class="el" href="zwave__s2__process_8c.html#ad2a18168c048d7eb245437440deed436">zwave_s2_process.c</a>
 </li>
-<li>S2_TIMER
-: <a class="el" href="zwave__s2__process_8c.html#a99fb83031ce9923c84392b4e92f956b5a5f7720096a8b1cd6f9bd4fc57796bcbd">zwave_s2_process.c</a>
-</li>
 <li>s2_timer
 : <a class="el" href="zwave__s2__process_8c.html#a1b47233a956d43b76e573b999126ee93">zwave_s2_process.c</a>
+</li>
+<li>S2_TIMER
+: <a class="el" href="zwave__s2__process_8c.html#a99fb83031ce9923c84392b4e92f956b5a5f7720096a8b1cd6f9bd4fc57796bcbd">zwave_s2_process.c</a>
 </li>
 <li>S2_TIMER_STOP
 : <a class="el" href="zwave__s2__process_8c.html#a99fb83031ce9923c84392b4e92f956b5ab94a2d4404427acb3946832e72cb2b36">zwave_s2_process.c</a>
@@ -378,8 +378,8 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="transport__service_8c.html#abb27e54b01ede01227c8359a38fa0662">transport_service.c</a>
 </li>
 <li>scene_activation_control_handler()
-: <a class="el" href="zwave__command__class__scene__controller__configuration__control_8c.html#a52651398e7c2ace0acdaef0235a93d3b">zwave_command_class_scene_controller_configuration_control.c</a>
-, <a class="el" href="zwave__command__class__scene__activation__control_8c.html#a52651398e7c2ace0acdaef0235a93d3b">zwave_command_class_scene_activation_control.c</a>
+: <a class="el" href="zwave__command__class__scene__activation__control_8c.html#a52651398e7c2ace0acdaef0235a93d3b">zwave_command_class_scene_activation_control.c</a>
+, <a class="el" href="zwave__command__class__scene__controller__configuration__control_8c.html#a52651398e7c2ace0acdaef0235a93d3b">zwave_command_class_scene_controller_configuration_control.c</a>
 </li>
 <li>scene_activation_set()
 : <a class="el" href="zwave__command__class__scene__activation__control_8c.html#a6fb26f777876cb7217ef202121e97234">zwave_command_class_scene_activation_control.c</a>
@@ -476,8 +476,8 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="group__zwave__api__transport.html#ga2e8fc628baf0457d194ffff89564063d">zwave_api_transport.h</a>
 </li>
 <li>send_data_state_t
-: <a class="el" href="zwave__multi__channel__transport_8c.html#a9ef36a53accfd16bfe5b3ed3c4dc6e07">zwave_multi_channel_transport.c</a>
-, <a class="el" href="group__zwave__api__transport.html#ga9ef36a53accfd16bfe5b3ed3c4dc6e07">zwave_api_transport.h</a>
+: <a class="el" href="group__zwave__api__transport.html#ga9ef36a53accfd16bfe5b3ed3c4dc6e07">zwave_api_transport.h</a>
+, <a class="el" href="zwave__multi__channel__transport_8c.html#a9ef36a53accfd16bfe5b3ed3c4dc6e07">zwave_multi_channel_transport.c</a>
 </li>
 <li>send_data_t
 : <a class="el" href="group__transport__service.html#ga08d9a01057b0bbc641a3b61ab5efe623">transport_service.h</a>
@@ -618,6 +618,9 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__binary__switch_8c.html#af14f9eebfd6f8269664ad5265b41e704">zwave_command_class_binary_switch.c</a>
 , <a class="el" href="zwave__command__class__switch__multilevel_8c.html#af14f9eebfd6f8269664ad5265b41e704">zwave_command_class_switch_multilevel.c</a>
 </li>
+<li>set_duration()
+: <a class="el" href="zwave__command__class__switch__color_8c.html#a7f118ad6ee04056d064819ad0b9e1de3">zwave_command_class_switch_color.c</a>
+</li>
 <li>SET_DURATION_INDEX
 : <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a5578d49693226d95eec22af717e7f871">zwave_command_class_switch_multilevel.c</a>
 </li>
@@ -625,8 +628,8 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="posix_2uic__main__externals__platform_8c.html#a11e515c8525912be10aba68af9664ff8">uic_main_externals_platform.c</a>
 </li>
 <li>set_firmware_transfer_file()
-: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gab86aadb90742bb9d3d954a1def8290ad">zwave_command_class_firmware_update_internals.h</a>
-, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gab86aadb90742bb9d3d954a1def8290ad">zwave_command_class_firmware_update.c</a>
+: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gab86aadb90742bb9d3d954a1def8290ad">zwave_command_class_firmware_update.c</a>
+, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gab86aadb90742bb9d3d954a1def8290ad">zwave_command_class_firmware_update_internals.h</a>
 </li>
 <li>set_firmware_transfer_fragment_size()
 : <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga53a41379bc0348edd498d92c04d94cd6">zwave_command_class_firmware_update.c</a>
@@ -664,12 +667,12 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__powerlevel_8c.html#a41c9cf0a97c1b6f6249486895fc97abf">zwave_command_class_powerlevel.c</a>
 </li>
 <li>set_reported_duration()
-: <a class="el" href="zwave__command__class__switch__multilevel_8c.html#ad9c702f574d93ec670441aa7b9344375">zwave_command_class_switch_multilevel.c</a>
-, <a class="el" href="zwave__command__class__binary__switch_8c.html#ad9c702f574d93ec670441aa7b9344375">zwave_command_class_binary_switch.c</a>
+: <a class="el" href="zwave__command__class__binary__switch_8c.html#ad9c702f574d93ec670441aa7b9344375">zwave_command_class_binary_switch.c</a>
+, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#ad9c702f574d93ec670441aa7b9344375">zwave_command_class_switch_multilevel.c</a>
 </li>
 <li>set_reported_value()
-: <a class="el" href="zwave__command__class__binary__switch_8c.html#acc9175dc30996e464bf423af23dd6418">zwave_command_class_binary_switch.c</a>
-, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#acc9175dc30996e464bf423af23dd6418">zwave_command_class_switch_multilevel.c</a>
+: <a class="el" href="zwave__command__class__switch__multilevel_8c.html#acc9175dc30996e464bf423af23dd6418">zwave_command_class_switch_multilevel.c</a>
+, <a class="el" href="zwave__command__class__binary__switch_8c.html#acc9175dc30996e464bf423af23dd6418">zwave_command_class_binary_switch.c</a>
 </li>
 <li>set_reports_to_follow()
 : <a class="el" href="group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513">zwave_command_classes_utils.h</a>
@@ -731,8 +734,8 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#af7669988914297e4325696d9cc45ba9d">unify_dotdot_attribute_store_write_attributes_command_callbacks.c</a>
 </li>
 <li>SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE
-: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gaf0aa0723393c8aaef880af273cba0551">dotdot_mqtt_helpers.hpp</a>
-, <a class="el" href="group__dotdot__mqtt__helpers.html#gaf0aa0723393c8aaef880af273cba0551">dotdot_mqtt_helpers.h</a>
+: <a class="el" href="group__dotdot__mqtt__helpers.html#gaf0aa0723393c8aaef880af273cba0551">dotdot_mqtt_helpers.h</a>
+, <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gaf0aa0723393c8aaef880af273cba0551">dotdot_mqtt_helpers.hpp</a>
 </li>
 <li>shade_configuration_mode_get_enum_value_name()
 : <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#gad387a60578b403e2a33eee04224b0823">dotdot_mqtt_helpers.hpp</a>
@@ -825,8 +828,8 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="group__dotdot__mqtt__helpers.html#ga6934ca6a5eb81bebdb28ef7a0b8d6754">dotdot_mqtt_helpers.h</a>
 </li>
 <li>SIREN_CONFIGURATION_WARNING_MODE_ENUM_NAME_AVAILABLE
-: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga155ac181aaeb758751946453576d3c50">dotdot_mqtt_helpers.hpp</a>
-, <a class="el" href="group__dotdot__mqtt__helpers.html#ga155ac181aaeb758751946453576d3c50">dotdot_mqtt_helpers.h</a>
+: <a class="el" href="group__dotdot__mqtt__helpers.html#ga155ac181aaeb758751946453576d3c50">dotdot_mqtt_helpers.h</a>
+, <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga155ac181aaeb758751946453576d3c50">dotdot_mqtt_helpers.hpp</a>
 </li>
 <li>siren_configuration_warning_mode_get_enum_value_name()
 : <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga5a7cd575c4c8be3146ace50dd2b9d02f">dotdot_mqtt_helpers.hpp</a>
@@ -867,11 +870,11 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 <li>sl_log_debug
 : <a class="el" href="group__sl__log.html#gae930e46685c82b35f34eb8318a094f7f">sl_log.h</a>
 </li>
-<li>sl_log_error
-: <a class="el" href="group__sl__log.html#ga9f10c1dd2f7a05a8ccba92b0c1ce9dca">sl_log.h</a>
-</li>
 <li>SL_LOG_ERROR
 : <a class="el" href="group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba0340f23d9f5c82a359ab93111544c5b8">sl_log.h</a>
+</li>
+<li>sl_log_error
+: <a class="el" href="group__sl__log.html#ga9f10c1dd2f7a05a8ccba92b0c1ce9dca">sl_log.h</a>
 </li>
 <li>SL_LOG_INFO
 : <a class="el" href="group__sl__log.html#ggaf7788b8693561747f76339f6537ff8abae29b58ec6ba251db0a06ffcf7e709887">sl_log.h</a>
@@ -1146,6 +1149,21 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 <li>soil_moisture_cluster_write_attributes_callback()
 : <a class="el" href="unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a9d3dab58ec3cd7d3edc6615407e3ae69">unify_dotdot_attribute_store_write_attributes_command_callbacks.c</a>
 </li>
+<li>sound_switch_configuration_t
+: <a class="el" href="zwave__command__class__sound__switch_8c.html#a3affca3b74770a63c64b06027a847f88">zwave_command_class_sound_switch.c</a>
+</li>
+<li>sound_switch_tone_duration_t
+: <a class="el" href="group__zwave__command__class__sound__switch__types.html#ga6705866d11f16b558f1def705f127d23">zwave_command_class_sound_switch_types.h</a>
+</li>
+<li>sound_switch_tone_id_t
+: <a class="el" href="group__zwave__command__class__sound__switch__types.html#ga14e556da73cd822102661ceb7f9c50e4">zwave_command_class_sound_switch_types.h</a>
+</li>
+<li>SOUND_SWITCH_VERSION_V2
+: <a class="el" href="zwave__command__class__sound__switch_8c.html#a4fee72f93acf4c0ca5be7514d5c03828">zwave_command_class_sound_switch.c</a>
+</li>
+<li>sound_switch_volume_t
+: <a class="el" href="group__zwave__command__class__sound__switch__types.html#ga26abbb1d4ada6c4140d4cd43a03aea30">zwave_command_class_sound_switch_types.h</a>
+</li>
 <li>span_entry_t
 : <a class="el" href="group__zwave__s2__nonce__management.html#ga4b39a8e6ee88b81d0b9ed916331d5e68">zwave_s2_nonce_management.h</a>
 </li>
@@ -1370,10 +1388,10 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 : <a class="el" href="group__zwave__command__class__supervision__internals.html#ga2da358ecf6727ac98d8db446f0b717b9">zwave_command_class_supervision_internals.h</a>
 </li>
 <li>SUPPORTED_REPORT_BITMASK_INDEX
-: <a class="el" href="zwave__command__class__thermostat__setpoint_8h.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_thermostat_setpoint.h</a>
-, <a class="el" href="zwave__command__class__multilevel__sensor_8h.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_multilevel_sensor.h</a>
+: <a class="el" href="zwave__command__class__alarm__sensor_8c.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_alarm_sensor.c</a>
 , <a class="el" href="zwave__command__class__barrier__operator_8c.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_barrier_operator.c</a>
-, <a class="el" href="zwave__command__class__alarm__sensor_8c.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_alarm_sensor.c</a>
+, <a class="el" href="zwave__command__class__multilevel__sensor_8h.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_multilevel_sensor.h</a>
+, <a class="el" href="zwave__command__class__thermostat__setpoint_8h.html#a31baa5e0b507bffb2f47dce852fef824">zwave_command_class_thermostat_setpoint.h</a>
 </li>
 <li>SUPPORTED_REPORT_BITMASK_LENGTH_INDEX
 : <a class="el" href="zwave__command__class__alarm__sensor_8c.html#a5343e2bbdba5113331a2469176cedb28">zwave_command_class_alarm_sensor.c</a>
@@ -1411,6 +1429,9 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 <li>supports_frame_at_security_level()
 : <a class="el" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">zwave_command_handler_internals.h</a>
 </li>
+<li>switch_color_undefine_reported()
+: <a class="el" href="zwave__command__class__switch__color_8c.html#a0d327a0fd6576449cb30fb40634849fb">zwave_command_class_switch_color.c</a>
+</li>
 <li>system_metrics_cluster_write_attributes_callback()
 : <a class="el" href="unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#ad6ab5e5449425cd22593cf86d6b66dd1">unify_dotdot_attribute_store_write_attributes_command_callbacks.c</a>
 </li>
@@ -1420,7 +1441,7 @@ $(document).ready(function(){initNavTree('globals_s.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:56:14 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:13 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

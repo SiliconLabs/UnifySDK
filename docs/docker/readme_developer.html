@@ -37,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -48,13 +48,24 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc/license.html">License</a></li>
 </ul>
 
@@ -95,6 +106,264 @@
 </div>
 <p>This will build the Unify toolchain docker images and name it <em>uic_arm64</em>.</p>
 </section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th style="text-align: left;">Package</th>
+<th style="text-align: left;">Needed By</th>
+<th style="text-align: left;">Needed/Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">libavahi-client-dev</td>
+<td style="text-align: left;">OTBR</td>
+<td style="text-align: left;">Multicast DNS Service Discovery.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libboost-filesystem-dev</td>
+<td style="text-align: left;">attribute mapper</td>
+<td style="text-align: left;">portable facilities to query and manipulate paths, files, and directories.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libboost-log-dev</td>
+<td style="text-align: left;">uic log</td>
+<td style="text-align: left;">to make logging significantly easier for the application developer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libboost-program-options-dev</td>
+<td style="text-align: left;">uic config</td>
+<td style="text-align: left;">to make obtaining program options easier for the application developer.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libboost-system-dev</td>
+<td style="text-align: left;">cmake</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">libboost-thread-dev</td>
+<td style="text-align: left;">cmake</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">libedit-dev</td>
+<td style="text-align: left;">uic stdin</td>
+<td style="text-align: left;">generic line editing, history, and tokenization functions.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libjsoncpp-dev</td>
+<td style="text-align: left;">OTBR</td>
+<td style="text-align: left;">JSON reader and writer</td>
+</tr>
+<tr>
+<td style="text-align: left;">libmbedtls-dev</td>
+<td style="text-align: left;">CPCD</td>
+<td style="text-align: left;">crypto and SSL/TLS library</td>
+</tr>
+<tr>
+<td style="text-align: left;">libmosquitto-dev</td>
+<td style="text-align: left;">uic mqtt</td>
+<td style="text-align: left;">mosquitto mqtt library</td>
+</tr>
+<tr>
+<td style="text-align: left;">libreadline-dev</td>
+<td style="text-align: left;">uic stdin</td>
+<td style="text-align: left;">consistency of user interface across discrete programs that need to provide a command line interface.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libsqlite3-dev</td>
+<td style="text-align: left;">uic datastore<br>NAL<br>GMS<br>UPVL</td>
+<td style="text-align: left;">SQL database engine.</td>
+</tr>
+<tr>
+<td style="text-align: left;">libssl-dev</td>
+<td style="text-align: left;">cmake</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">libyaml-cpp-dev</td>
+<td style="text-align: left;">uic config<br>uic rust</td>
+<td style="text-align: left;">parsing and emitting data in YAML</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">build-essential</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">contains a list of packages that are required to create a Debian package</td>
+</tr>
+<tr>
+<td style="text-align: left;">clang</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">provides a language front-end and tooling infrastructure for languages in the C language</td>
+</tr>
+<tr>
+<td style="text-align: left;">cm-super-minimal</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">docs generation with Doxygen</td>
+</tr>
+<tr>
+<td style="text-align: left;">curl</td>
+<td style="text-align: left;">Docker</td>
+<td style="text-align: left;">downloading files</td>
+</tr>
+<tr>
+<td style="text-align: left;">doxygen</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">docs generation with Doxygen</td>
+</tr>
+<tr>
+<td style="text-align: left;">dpkg</td>
+<td style="text-align: left;">Docker</td>
+<td style="text-align: left;">package manager for Debian-based systems</td>
+</tr>
+<tr>
+<td style="text-align: left;">ghostscript</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">docs generation with Doxygen</td>
+</tr>
+<tr>
+<td style="text-align: left;">git</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">download gecko_sdk and cpc-deamon</td>
+</tr>
+<tr>
+<td style="text-align: left;">git-lfs</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">download gecko_sdk and cpc-deamon</td>
+</tr>
+<tr>
+<td style="text-align: left;">graphviz</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">libasound2</td>
+<td style="text-align: left;">ZAP generation</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">libgbm1</td>
+<td style="text-align: left;">ZAP generation</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">ninja-build</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">Build system</td>
+</tr>
+<tr>
+<td style="text-align: left;">nlohmann-json3-dev</td>
+<td style="text-align: left;">ZigPC<br>ZPC<br>testframework<br> uic dotdot mqtt<br>uic smartstart management</td>
+<td style="text-align: left;">Read JSON from a file.</td>
+</tr>
+<tr>
+<td style="text-align: left;">nodejs</td>
+<td style="text-align: left;">Dev-GUI</td>
+<td style="text-align: left;">JavaScript runtime built on Chrome`s</td>
+</tr>
+<tr>
+<td style="text-align: left;">npm</td>
+<td style="text-align: left;">Dev-GUI</td>
+<td style="text-align: left;">package manager for the JavaScript runtime environment Node.js</td>
+</tr>
+<tr>
+<td style="text-align: left;">openjdk-11-jre</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">pkg-config</td>
+<td style="text-align: left;">Portable Runtime<br>NAL<br>GMS</td>
+<td style="text-align: left;">insert the compiler options on the command line</td>
+</tr>
+<tr>
+<td style="text-align: left;">python3-pip</td>
+<td style="text-align: left;">Docker</td>
+<td style="text-align: left;">Install pip3 packages</td>
+</tr>
+<tr>
+<td style="text-align: left;">ruby</td>
+<td style="text-align: left;">testframework<br>zwave_transport</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">ruby-dev</td>
+<td style="text-align: left;">testframework<br>zwave_transport</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">sudo</td>
+<td style="text-align: left;">Docker</td>
+<td style="text-align: left;">run commands with sudo permissions</td>
+</tr>
+<tr>
+<td style="text-align: left;">texlive-extra-utils</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">texlive-font-utils</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">texlive-fonts-recommended</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">texlive-latex-extra</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">texlive-latex-recommended</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">texlive-plain-generic</td>
+<td style="text-align: left;">build-system</td>
+<td style="text-align: left;">For docs generation</td>
+</tr>
+<tr>
+<td style="text-align: left;">unzip</td>
+<td style="text-align: left;">Docker</td>
+<td style="text-align: left;">Unzip files</td>
+</tr>
+<tr>
+<td style="text-align: left;">valgrind</td>
+<td style="text-align: left;">Tests</td>
+<td style="text-align: left;">instrumentation framework for building dynamic analysis tools</td>
+</tr>
+<tr>
+<td style="text-align: left;">wget</td>
+<td style="text-align: left;">Docker</td>
+<td style="text-align: left;">Downloading files</td>
+</tr>
+<tr>
+<td style="text-align: left;">xauth</td>
+<td style="text-align: left;">ZAP generation</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">xvfb</td>
+<td style="text-align: left;">ZAP generation</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;">zip</td>
+<td style="text-align: left;">Zwave_Transports</td>
+<td style="text-align: left;">Zip files</td>
+</tr>
+</tbody>
+</table></section>
 </section>
 
 

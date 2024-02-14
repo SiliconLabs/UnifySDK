@@ -303,9 +303,6 @@ clusters or to override the functionality of default clusters. This step must
 be run at compilation time in order to properly include the necessary MQTT
 topics and other related ZCL information.
 
-Please note, there has been limited testing on custom clusters and more changes
-may be needed to support custom applications.
-
 * Step 1: Adding the custom cluster to the Unify framework
 
 Add a custom XML file (or modify an existing XML file) in the shared components
@@ -322,23 +319,41 @@ templates will generate for the new cluster by adding the name to:
 Specifically, the 'SUPPORTED\_CLUSTERS' and 'SUPPORTED\_CLUSTER\_ATTRIBUTES'
 lists must reference the new cluster.
 
-*Step 3: Re-generate all ZAP templates
+* Step 3: Adding the custom clusters in the zigbeeHost gateway level
+
+ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that
+this layer can also access the new ZCL cluster by modifying the slcp file
+in 'uic/applications/zigpc/components/zigpc\_gateway/libs/zigbee\_host/src/libzigbee\_host.slcp'
+Add the new cluster in the same format as all the existing clusters at this layer.
+
+*Step 4: Re-generate all ZAP templates
 
 Unify uses ZAP to generate ZCL cluster information (as discussed in step #2).
 Make sure that zap can find the library by modifying its configuration file.
 
-Alternatively, compile with the cmake option 'ZAP\_GENERATE' set to 'ON' to
+Alternatively, compile with the cmake option 'ZAP_GENERATE' set to 'ON' to
 automatically re-generate zap output files as part of the compilation process.
 
 Re-generate all zap output in the top level uic for the following components:
-uic\_dotdot, uic\_dotdot\_mqtt, unify\_dotdot\_attribute\_store
+uic_dotdot, uic_dotdot_mqtt, unify_dotdot_attribute_store
 
 Re-generate all zap output in the zigpc level for the following components:
-command\_mapper, zcl\_util, zcl\_command\_parser, zcl\_profiles, attribute\_management
+command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management
 
 Please take a look at [https://github.com/SiliconLabs/zap] for more detailed
 information.
 
-* Step 4:
+* Step 5: Re-generate the zigbee_host
 
-Compile ZigPC as normal. ZigPC should now support your custom cluster.
+Re-generate the zigbee_host slcp, in the autogen folder. Set the
+STUDIO_ADAPTER_PATH to point to zap, which should already be configured
+to point to the custom xml. Otherwise, it will be necessary to edit the
+zap-config of the zigbee_host folder.
+
+Please read [https://siliconlabs.github.io/slc-specification/1.0/] and
+[https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf]
+for more information on using the slc_cli.
+
+* Step 6:
+
+Compile ZigPC as normal. ZigPC should now support your custom cluster

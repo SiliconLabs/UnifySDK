@@ -479,12 +479,39 @@ void test_zwave_command_class_notification_report_idle_no_param()
 void helper_test_zwave_command_class_supported_notification_types_report(
   const unsigned int version)
 {
-  static uint8_t test_frame_data[]            = {COMMAND_CLASS_NOTIFICATION_V4,
-                                                 NOTIFICATION_SUPPORTED_REPORT_V4,
-                                                 0x01,
-                                                 0x80};
-  static unid_t test_unid                     = "zw000001";
-  static attribute_store_node_t endpoint_node = 0x011;
+  uint8_t notification_count  = 0;
+  uint8_t test_frame_data_1[] = {
+    COMMAND_CLASS_NOTIFICATION_V4,
+    NOTIFICATION_SUPPORTED_REPORT_V4,
+    0x01,
+    0x80,  // NOTIFICATION_REPORT_HOME_SECURITY_V4
+  };
+  uint8_t test_frame_data_2[] = {
+    COMMAND_CLASS_NOTIFICATION_V7,
+    NOTIFICATION_SUPPORTED_REPORT_V7,
+    0x02,
+    0x16,  // NOTIFICATION_REPORT_SMOKE_V8 + NOTIFICATION_REPORT_CO_V8 + NOTIFICATION_REPORT_HEAT_V4
+    0x18   // NOTIFICATION_REPORT_CLOCK_V4 + NOTIFICATION_REPORT_APPLIANCE_V4};
+  };
+  uint8_t test_frame_data_3[] = {
+    COMMAND_CLASS_NOTIFICATION_V8,
+    NOTIFICATION_SUPPORTED_REPORT_V8,
+    0x03,
+    0x04,  // NOTIFICATION_REPORT_CO_V4
+    0x20,  // NOTIFICATION_REPORT_HOME_HEALTH_V4
+    0x7F,  // NOTIFICATION_GET_WEATHER_ALARM_V8 + NOTIFICATION_GET_IRRIGATION_V8 +NOTIFICATION_GET_GAS_ALARM_V8 + NOTIFICATION_GET_PEST_CONTROL_V8 + NOTIFICATION_GET_LIGHT_SENSOR_V8 + NOTIFICATION_GET_WATER_QUALITY_MONITORING_V8 + NOTIFICATION_GET_HOME_MONITORING_V8
+  };
+
+  if (version < 5) {
+    notification_count = 1;
+  } else if (version < 8) {
+    notification_count = 5;
+  } else {
+    notification_count = 9;
+  }
+
+  static unid_t test_unid                                        = "zw000001";
+  static attribute_store_node_t endpoint_node                    = 0x011;
   static attribute_store_node_t supported_notification_type_node = 0x012;
   static attribute_store_node_t notification_type_node           = 0x013;
 
@@ -514,52 +541,69 @@ void helper_test_zwave_command_class_supported_notification_types_report(
     supported_notification_type_node,
     REPORTED_ATTRIBUTE,
     NULL,
-    sizeof(uint8_t),
+    notification_count * sizeof(uint8_t),
     SL_STATUS_OK);
   attribute_store_set_node_attribute_value_IgnoreArg_value();
 
-  attribute_store_get_node_child_by_value_ExpectAndReturn(
-    endpoint_node,
-    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
-    REPORTED_ATTRIBUTE,
-    NULL,
-    sizeof(uint8_t),
-    0,
-    ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_get_node_child_by_value_IgnoreArg_value();
-
-  attribute_store_add_node_ExpectAndReturn(
-    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
-    endpoint_node,
-    notification_type_node);
-
-  attribute_store_set_node_attribute_value_ExpectAndReturn(
-    notification_type_node,
-    REPORTED_ATTRIBUTE,
-    NULL,
-    sizeof(uint8_t),
-    SL_STATUS_OK);
-  attribute_store_set_node_attribute_value_IgnoreArg_value();
-
-  // Only add ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS
-  // for version greater than 2
-  if (version > 2) {
-    attribute_store_add_node_ExpectAndReturn(
-      ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS,
-      notification_type_node,
+  for (int i = 0; i < notification_count; i++) {
+    attribute_store_get_node_child_by_value_ExpectAndReturn(
+      endpoint_node,
+      ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
+      REPORTED_ATTRIBUTE,
+      NULL,
+      sizeof(uint8_t),
+      0,
       ATTRIBUTE_STORE_INVALID_NODE);
+    attribute_store_get_node_child_by_value_IgnoreArg_value();
+
+    attribute_store_add_node_ExpectAndReturn(
+      ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
+      endpoint_node,
+      notification_type_node);
+
+    attribute_store_set_node_attribute_value_ExpectAndReturn(
+      notification_type_node,
+      REPORTED_ATTRIBUTE,
+      NULL,
+      sizeof(uint8_t),
+      SL_STATUS_OK);
+    attribute_store_set_node_attribute_value_IgnoreArg_value();
+
+    // Only add ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS
+    // for version greater than 2
+    if (version > 2) {
+      attribute_store_add_node_ExpectAndReturn(
+        ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS,
+        notification_type_node,
+        ATTRIBUTE_STORE_INVALID_NODE);
+    }
   }
 
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    command_handler.control_handler(&test_connection_info,
-                                                    test_frame_data,
-                                                    sizeof(test_frame_data)));
+  if (version < 5) {
+    TEST_ASSERT_EQUAL(
+      SL_STATUS_OK,
+      command_handler.control_handler(&test_connection_info,
+                                      test_frame_data_1,
+                                      sizeof(test_frame_data_1)));
+  } else if (version < 8) {
+    TEST_ASSERT_EQUAL(
+      SL_STATUS_OK,
+      command_handler.control_handler(&test_connection_info,
+                                      test_frame_data_2,
+                                      sizeof(test_frame_data_2)));
+  } else {
+    TEST_ASSERT_EQUAL(
+      SL_STATUS_OK,
+      command_handler.control_handler(&test_connection_info,
+                                      test_frame_data_3,
+                                      sizeof(test_frame_data_3)));
+  }
 }
 
 #if 1
 void test_zwave_command_class_supported_notification_types_report()
 {
-  for (size_t version = 0; version < 8; version++) {
+  for (size_t version = 0; version <= 8; version++) {
     helper_test_zwave_command_class_supported_notification_types_report(
       version);
   }

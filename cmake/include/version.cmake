@@ -27,6 +27,8 @@ if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/../release-version.cmake")
   include(${CMAKE_CURRENT_LIST_DIR}/../release-version.cmake)
   MESSAGE(STATUS "GIT_VERSION from cmake/release-version.cmake: "
           ${GIT_VERSION})
+  MESSAGE(STATUS "GIT_VERSION_SHA from cmake/release-version.cmake: "
+          ${GIT_VERSION_SHA})
 endif()
 
 if ("${GIT_VERSION}" STREQUAL "")
@@ -39,6 +41,11 @@ if ("${GIT_VERSION}" STREQUAL "")
         ERROR_QUIET
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     )
+    execute_process (
+          COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD
+          OUTPUT_VARIABLE GIT_VERSION_SHA
+          ERROR_QUIET
+      )
     if ("${GIT_VERSION}" STREQUAL "")
       execute_process (
           COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD
@@ -59,8 +66,10 @@ if ("${GIT_VERSION}" STREQUAL "")
                     "git describe not available")
   else()
     string(REGEX REPLACE "\n$" "" GIT_VERSION "${GIT_VERSION}")
+    string(REGEX REPLACE "\n$" "" GIT_VERSION_SHA "${GIT_VERSION_SHA}")
   endif()
   MESSAGE(STATUS "GIT_VERSION from git describe is: " ${GIT_VERSION})
+  MESSAGE(STATUS "GIT_VERSION_SHA from git rev-parse is: " ${GIT_VERSION_SHA})
 endif()
 
 # If GIT_VERSION is not in format ver_1.2.3

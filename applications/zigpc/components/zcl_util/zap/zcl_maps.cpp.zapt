@@ -35,6 +35,7 @@ static const std::unordered_map<{{component_zigpc_zcl_prefix}}_data_type_t, size
   { {{asZigPCZclDataType 'octstr'}}, 1 },
   { {{asZigPCZclDataType 'attribId'}}, 2 },
   { {{asZigPCZclDataType 'StructTransitionType'}}, sizeof({{asZigPCZclStructType 'TransitionType'}}) },
+  { {{asZigPCZclDataType 'CredentialStructType'}}, sizeof({{asZigPCZclStructType 'CredentialStruct'}}) },
 };
 /* TODO: Investigate following data type sizes missing from ZAP autogeneration.
  * {{asZigPCZclDataType 'semi'}}

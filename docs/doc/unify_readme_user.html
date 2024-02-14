@@ -25,9 +25,7 @@
         <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Unify Framework Getting Started" href="getting_started_unify_sdk.html" />
-    <link rel="prev" title="Portable runtime environment" href="../portable_runtime/readme_user.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,31 +47,25 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../portable_runtime/readme_user.html">Portable runtime environment</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="getting_started.html#prerequisites">Prerequisites</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Unify Host SDK User guide</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#running-using-systemd">Running Using Systemd</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#configuring-unify-components">Configuring Unify Components</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#configuring-logging">Configuring logging</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setting-up-mosquitto">Setting up Mosquitto</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#evaluation">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_framework_services.html">Framework Services</a></li>
 </ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#how-to-install-packages">How to install packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#unify-framework">Unify Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#multiprotocol-setup">Multiprotocol Setup</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_as_developer.html">Getting Started as a Developer</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -248,6 +240,17 @@ config file of the components.</p>
 <blockquote>
 <div><p>NOTE: the DevUI will need the certificates as input from the user interface itself.</p>
 </div></blockquote>
+</section>
+<section id="using-mqtt-explorer-to-monitor-messages">
+<h3>Using MQTT Explorer to Monitor Messages<a class="headerlink" href="#using-mqtt-explorer-to-monitor-messages" title="Permalink to this heading"></a></h3>
+<p>You can publish MQTT message and observe the MQTT messages stored in the broker
+with a <a class="reference external" href="https://mqtt-explorer.com/">MQTT Explorer</a>.
+<a class="reference external" href="https://mqtt-explorer.com/">MQTT Explorer</a> is an MQTT client that provides a
+structured overview of your MQTT topics.</p>
+<p>Configure <a class="reference external" href="https://mqtt-explorer.com/">MQTT Explorer</a> to connect to the host
+where your MQTT broker is located and the topics can be observed. Use the
+<a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Specifications</span></a>
+if you need assistance to understand what topics and they data represent.</p>
 </section>
 </section>
 <section id="evaluation">

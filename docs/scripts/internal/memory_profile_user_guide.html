@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unify Memory Profiling User Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/scripts/internal/memory_profile_user_guide.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="unify-memory-profiling-user-guide">
+<h1>Unify Memory Profiling User Guide<a class="headerlink" href="#unify-memory-profiling-user-guide" title="Permalink to this heading"></a></h1>
+<p>This guide is to explain the usage of the memory profiling scripts. At present, we support flash memory profiling and RAM memory profiling.</p>
+<section id="flash-memory-profiling">
+<h2>Flash Memory Profiling<a class="headerlink" href="#flash-memory-profiling" title="Permalink to this heading"></a></h2>
+<p>Flash memory profiling script is located at “scripts/internal”.</p>
+<section id="flash-memory-script-execution">
+<h3>Flash Memory Script Execution<a class="headerlink" href="#flash-memory-script-execution" title="Permalink to this heading"></a></h3>
+<p>Note: Please unzip the unify package before running the script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./flash_memory_profile.sh<span class="w"> </span>&lt;Directory<span class="w"> </span>path&gt;
+</pre></div>
+</div>
+<p>Above Directory path should contain the location where the debain packages are placed.
+the expected output will Package name and memory size.</p>
+</section>
+</section>
+<section id="ram-memory-profiling">
+<h2>RAM Memory Profiling<a class="headerlink" href="#ram-memory-profiling" title="Permalink to this heading"></a></h2>
+<p>RAM memory profiling script is located at “scripts/internal”.</p>
+<section id="ram-memory-script-execution">
+<h3>RAM Memory Script Execution<a class="headerlink" href="#ram-memory-script-execution" title="Permalink to this heading"></a></h3>
+<p>Note: Please install the unify package before running the script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>//<span class="w"> </span><span class="k">for</span><span class="w"> </span>any<span class="w"> </span>single<span class="w"> </span>UIC<span class="w"> </span>process
+<span class="w">     </span>./RAM_memory_profile.sh<span class="w"> </span>&lt;Process<span class="w"> </span>Name&gt;
+
+//<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>UIC<span class="w"> </span>processes
+<span class="w">     </span>./RAM_memory_profile.sh<span class="w"> </span>uic
+
+//<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>UIC<span class="w"> </span>processes<span class="w"> </span>and<span class="w"> </span>mosquitto
+<span class="w">     </span>./RAM_memory_profile.sh<span class="w"> </span>all
+</pre></div>
+</div>
+<p>the expected output will be RAM usage in KB based on RSS memory values for the Processes.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

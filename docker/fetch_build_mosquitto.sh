@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# manually compile and install mosquitto v2.0.11.
+# manually compile and install latest mosquitto release
 
 ARCH=$1
+
+# Track: https://mosquitto.org/security/
+MOSQUITTO_VERSION=2.0.18
+
 
 armhf_cmake_params='-DCMAKE_C_COMPILER=/usr/bin/arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=/usr/bin/arm-linux-gnueabihf-g++ -DPACK_DEBIAN_PACKAGE_ARCHITECTURE=armhf \
   -DCPACK_FILE_NAME_EXTRA=bullseye -DPKG_CONFIG_EXECUTABLE=usr/bin/arm-linux-gnueabihf-pkg-config -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=armhf -DCONFIGURE_HOST=arm-linux'
@@ -10,9 +14,9 @@ armhf_cmake_params='-DCMAKE_C_COMPILER=/usr/bin/arm-linux-gnueabihf-gcc -DCMAKE_
 arm64_cmake_params='-DCMAKE_C_COMPILER=/usr/bin/aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=/usr/bin/aarch64-linux-gnu-g++ -DPACK_DEBIAN_PACKAGE_ARCHITECTURE=arm64 -DCPACK_FILE_NAME_EXTRA=bullseye -DPKG_CONFIG_EXECUTABLE=usr/bin/aarch64-linux-gnu-pkg-config -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=arm64 -DCONFIGURE_HOST=arm64-linux'
 
 cd /tmp \
-    && wget https://mosquitto.org/files/source/mosquitto-2.0.14.tar.gz \
-    && tar -xf mosquitto-2.0.14.tar.gz \
-    && mv mosquitto-2.0.14 mosquitto \
+    && wget https://mosquitto.org/files/source/mosquitto-${MOSQUITTO_VERSION}.tar.gz \
+    && tar -xf mosquitto-${MOSQUITTO_VERSION}.tar.gz \
+    && mv mosquitto-${MOSQUITTO_VERSION} mosquitto \
     && mkdir /tmp/mosquitto/build
 
 cmake_build_params=""

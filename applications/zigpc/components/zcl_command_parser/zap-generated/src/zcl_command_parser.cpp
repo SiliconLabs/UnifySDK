@@ -81,10 +81,10 @@ static std::unordered_map<zcl_cluster_id_t, std::set<zcl_command_id_t>>  command
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_TOGGLE_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_UNLOCK_WITH_TIMEOUT_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_LOG_RECORD_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETPIN_CODE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARPIN_CODE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLPIN_CODES_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_PIN_CODE_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_PIN_CODE_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_PIN_CODES_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_USER_STATUS_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_STATUS_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_WEEKDAY_SCHEDULE_RESPONSE,
@@ -98,12 +98,15 @@ static std::unordered_map<zcl_cluster_id_t, std::set<zcl_command_id_t>>  command
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_HOLIDAY_SCHEDULE_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_USER_TYPE_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_TYPE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETRFID_CODE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETRFID_CODE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARRFID_CODE_RESPONSE,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLRFID_CODES_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_RFID_CODE_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_RFID_CODE_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_RFID_CODE_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_RFID_CODES_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_RESPONSE,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_OPERATING_EVENT_NOTIFICATION,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_PROGRAMMING_EVENT_NOTIFICATION,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_CREDENTIAL_RESPONSE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_CREDENTIAL_STATUS_RESPONSE,
     }
   },
   {
@@ -118,6 +121,13 @@ static std::unordered_map<zcl_cluster_id_t, std::set<zcl_command_id_t>>  command
     {
       ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION,
       ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST,
+    }
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+    {
+      ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_PROFILE_INFO,
+      ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_MEASUREMENT_PROFILE,
     }
   },
 };
@@ -706,7 +716,7 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_log_record_response_command(
     } else if (cmd->frame.size < (payload_offset + arg_size)) {
       status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
     } else {
-      std::memcpy(&data->eventid_or_alarm_code, &cmd->frame.buffer[payload_offset], arg_size);
+      std::memcpy(&data->event_id_or_alarm_code, &cmd->frame.buffer[payload_offset], arg_size);
       payload_offset += arg_size;
     }
   }
@@ -747,7 +757,7 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_log_record_response_command(
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_setpin_code_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_set_pin_code_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -756,8 +766,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_setpin_code_response_command(
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_setpin_code_response_t *data;
-  data = &result->data.door_lock_setpin_code_response;
+  zigpc_zclcmdparse_door_lock_set_pin_code_response_t *data;
+  data = &result->data.door_lock_set_pin_code_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
@@ -774,13 +784,13 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_setpin_code_response_command(
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "SetPINCodeResponse");
   }
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_getpin_code_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_pin_code_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -789,8 +799,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_getpin_code_response_command(
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_getpin_code_response_t *data;
-  data = &result->data.door_lock_getpin_code_response;
+  zigpc_zclcmdparse_door_lock_get_pin_code_response_t *data;
+  data = &result->data.door_lock_get_pin_code_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT16;
@@ -849,13 +859,13 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_getpin_code_response_command(
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETPIN_CODE_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_PIN_CODE_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "GetPINCodeResponse");
   }
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clearpin_code_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_pin_code_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -864,8 +874,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clearpin_code_response_command(
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_clearpin_code_response_t *data;
-  data = &result->data.door_lock_clearpin_code_response;
+  zigpc_zclcmdparse_door_lock_clear_pin_code_response_t *data;
+  data = &result->data.door_lock_clear_pin_code_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
@@ -882,13 +892,13 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clearpin_code_response_command(
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARPIN_CODE_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_PIN_CODE_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "ClearPINCodeResponse");
   }
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_all_pin_codes_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -897,8 +907,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_comma
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_t *data;
-  data = &result->data.door_lock_clear_allpin_codes_response;
+  zigpc_zclcmdparse_door_lock_clear_all_pin_codes_response_t *data;
+  data = &result->data.door_lock_clear_all_pin_codes_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
@@ -915,7 +925,7 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_comma
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLPIN_CODES_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_PIN_CODES_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "ClearAllPINCodesResponse");
   }
   return status;
@@ -1571,7 +1581,7 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_user_type_response_command(
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_setrfid_code_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_set_rfid_code_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -1580,8 +1590,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_setrfid_code_response_command(
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_setrfid_code_response_t *data;
-  data = &result->data.door_lock_setrfid_code_response;
+  zigpc_zclcmdparse_door_lock_set_rfid_code_response_t *data;
+  data = &result->data.door_lock_set_rfid_code_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
@@ -1598,13 +1608,13 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_setrfid_code_response_command(
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETRFID_CODE_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_RFID_CODE_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "SetRFIDCodeResponse");
   }
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_getrfid_code_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_rfid_code_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -1613,8 +1623,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_getrfid_code_response_command(
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_getrfid_code_response_t *data;
-  data = &result->data.door_lock_getrfid_code_response;
+  zigpc_zclcmdparse_door_lock_get_rfid_code_response_t *data;
+  data = &result->data.door_lock_get_rfid_code_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT16;
@@ -1673,13 +1683,13 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_getrfid_code_response_command(
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETRFID_CODE_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_RFID_CODE_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "GetRFIDCodeResponse");
   }
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clearrfid_code_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_rfid_code_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -1688,8 +1698,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clearrfid_code_response_command(
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_clearrfid_code_response_t *data;
-  data = &result->data.door_lock_clearrfid_code_response;
+  zigpc_zclcmdparse_door_lock_clear_rfid_code_response_t *data;
+  data = &result->data.door_lock_clear_rfid_code_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
@@ -1706,13 +1716,13 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clearrfid_code_response_command(
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARRFID_CODE_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_RFID_CODE_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "ClearRFIDCodeResponse");
   }
   return status;
 }
 
-zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_command(
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_all_rfid_codes_response_command(
   const zigpc_gateway_on_command_received_t *cmd,
   zigpc_zclcmdparse_result_t *result
 ) {
@@ -1721,8 +1731,8 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_comm
   size_t payload_offset = cmd->frame_payload_offset;
   zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
   size_t arg_size = 0;
-  zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_t *data;
-  data = &result->data.door_lock_clear_allrfid_codes_response;
+  zigpc_zclcmdparse_door_lock_clear_all_rfid_codes_response_t *data;
+  data = &result->data.door_lock_clear_all_rfid_codes_response;
 
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
@@ -1739,8 +1749,22 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_comm
   }
   if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
-    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLRFID_CODES_RESPONSE;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_RFID_CODES_RESPONSE;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "ClearAllRFIDCodesResponse");
+  }
+  return status;
+}
+
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_user_response_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_RESPONSE;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "GetUserResponse");
   }
   return status;
 }
@@ -1975,6 +1999,34 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_programming_event_notification_co
     result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
     result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_PROGRAMMING_EVENT_NOTIFICATION;
     sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "ProgrammingEventNotification");
+  }
+  return status;
+}
+
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_set_credential_response_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_CREDENTIAL_RESPONSE;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "SetCredentialResponse");
+  }
+  return status;
+}
+
+zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_get_credential_status_response_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK;
+    result->command_id = ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_CREDENTIAL_STATUS_RESPONSE;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "DoorLock", "GetCredentialStatusResponse");
   }
   return status;
 }
@@ -2270,6 +2322,79 @@ zigpc_zcl_status_t zigpc_zclcmdparse_ias_zone_zone_enroll_request_command(
   return status;
 }
 
+zigpc_zcl_status_t zigpc_zclcmdparse_electrical_measurement_get_profile_info_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT;
+    result->command_id = ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_PROFILE_INFO;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "ElectricalMeasurement", "GetProfileInfo");
+  }
+  return status;
+}
+
+zigpc_zcl_status_t zigpc_zclcmdparse_electrical_measurement_get_measurement_profile_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_SUCCESS;
+  size_t payload_offset = cmd->frame_payload_offset;
+  zigpc_zcl_data_type_t arg_type = ZIGPC_ZCL_DATA_TYPE_NODATA;
+  size_t arg_size = 0;
+  zigpc_zclcmdparse_electrical_measurement_get_measurement_profile_t *data;
+  data = &result->data.electrical_measurement_get_measurement_profile;
+
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_ATTRIB_ID;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->attributeid, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_UTC;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->start_time, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    arg_type = ZIGPC_ZCL_DATA_TYPE_UINT8;
+    arg_size = zigpc_zcl_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = ZIGPC_ZCL_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->number_of_intervals, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+  if (status == ZIGPC_ZCL_STATUS_SUCCESS) {
+    result->cluster_id = ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT;
+    result->command_id = ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_MEASUREMENT_PROFILE;
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "ElectricalMeasurement", "GetMeasurementProfile");
+  }
+  return status;
+}
+
 
 
 zigpc_zcl_status_t zigpc_zclcmdparse_identify_client_cluster(
@@ -2356,17 +2481,17 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_client_cluster(
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_LOG_RECORD_RESPONSE:
       status = zigpc_zclcmdparse_door_lock_get_log_record_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_setpin_code_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_set_pin_code_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETPIN_CODE_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_getpin_code_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_PIN_CODE_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_get_pin_code_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARPIN_CODE_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_clearpin_code_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_PIN_CODE_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_clear_pin_code_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLPIN_CODES_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_PIN_CODES_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_clear_all_pin_codes_response_command(cmd, result);
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_USER_STATUS_RESPONSE:
       status = zigpc_zclcmdparse_door_lock_set_user_status_response_command(cmd, result);
@@ -2407,23 +2532,32 @@ zigpc_zcl_status_t zigpc_zclcmdparse_door_lock_client_cluster(
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_TYPE_RESPONSE:
       status = zigpc_zclcmdparse_door_lock_get_user_type_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETRFID_CODE_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_setrfid_code_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_RFID_CODE_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_set_rfid_code_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETRFID_CODE_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_getrfid_code_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_RFID_CODE_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_get_rfid_code_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARRFID_CODE_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_clearrfid_code_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_RFID_CODE_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_clear_rfid_code_response_command(cmd, result);
       break;
-    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLRFID_CODES_RESPONSE:
-      status = zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_command(cmd, result);
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_RFID_CODES_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_clear_all_rfid_codes_response_command(cmd, result);
+      break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_get_user_response_command(cmd, result);
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_OPERATING_EVENT_NOTIFICATION:
       status = zigpc_zclcmdparse_door_lock_operating_event_notification_command(cmd, result);
       break;
     case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_PROGRAMMING_EVENT_NOTIFICATION:
       status = zigpc_zclcmdparse_door_lock_programming_event_notification_command(cmd, result);
+      break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_CREDENTIAL_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_set_credential_response_command(cmd, result);
+      break;
+    case ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_CREDENTIAL_STATUS_RESPONSE:
+      status = zigpc_zclcmdparse_door_lock_get_credential_status_response_command(cmd, result);
       break;
     default:
       break;
@@ -2467,6 +2601,24 @@ zigpc_zcl_status_t zigpc_zclcmdparse_ias_zone_client_cluster(
   return status;
 }
 
+zigpc_zcl_status_t zigpc_zclcmdparse_electrical_measurement_client_cluster(
+  const zigpc_gateway_on_command_received_t *cmd,
+  zigpc_zclcmdparse_result_t *result
+) {
+  zigpc_zcl_status_t status = ZIGPC_ZCL_STATUS_UNSUP_CLUSTER_COMMAND;
+  switch(cmd->command_id) {
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_PROFILE_INFO:
+      status = zigpc_zclcmdparse_electrical_measurement_get_profile_info_command(cmd, result);
+      break;
+    case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_MEASUREMENT_PROFILE:
+      status = zigpc_zclcmdparse_electrical_measurement_get_measurement_profile_command(cmd, result);
+      break;
+    default:
+      break;
+  }
+  return status;
+}
+
 void zigpc_zclcmdparse_on_command_received(void* event_data) {
   zigpc_zclcmdparse_result_t result;
   zigpc_gateway_on_command_received_t *cmd
@@ -2496,6 +2648,9 @@ void zigpc_zclcmdparse_on_command_received(void* event_data) {
           break;
         case ZIGPC_ZCL_CLUSTER_IAS_ZONE:
           cmd->return_status = zigpc_zclcmdparse_ias_zone_client_cluster(cmd, &result);
+          break;
+        case ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT:
+          cmd->return_status = zigpc_zclcmdparse_electrical_measurement_client_cluster(cmd, &result);
           break;
         default:
           break;

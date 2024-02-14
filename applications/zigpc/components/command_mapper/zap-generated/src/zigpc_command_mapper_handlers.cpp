@@ -106,6 +106,1257 @@ void zigpc_command_mapper_populate_read_attr_record(
 }
 
 /******************
+ * DotDot MQTT Command Handlers for Basic cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for ZCLVersion/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_basic_state_t Attribute values
+ * uic_mqtt_dotdot_basic_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_basic_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_basic_state_t values,
+  uic_mqtt_dotdot_basic_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_BASIC);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if (values_to_write.location_description == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_LOCATION_DESCRIPTION,
+        ZIGPC_ZCL_DATA_TYPE_STRING,
+        &values.location_description
+      );
+    }
+
+    if (values_to_write.physical_environment == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PHYSICAL_ENVIRONMENT,
+        ZIGPC_ZCL_DATA_TYPE_ENUM8,
+        &values.physical_environment
+      );
+    }
+
+    if (values_to_write.device_enabled == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DEVICE_ENABLED,
+        ZIGPC_ZCL_DATA_TYPE_BOOL,
+        &values.device_enabled
+      );
+    }
+
+    if (values_to_write.alarm_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ALARM_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.alarm_mask
+      );
+    }
+
+    if (values_to_write.disable_local_config == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DISABLE_LOCAL_CONFIG,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.disable_local_config
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_BASIC,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for ZCLVersion/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_basic_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_basic_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_basic_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_BASIC);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.zcl_version == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ZCL_VERSION
+      );
+    }
+    if (attributes_to_read.application_version == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_APPLICATION_VERSION
+      );
+    }
+    if (attributes_to_read.stack_version == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_STACK_VERSION
+      );
+    }
+    if (attributes_to_read.hw_version == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_HW_VERSION
+      );
+    }
+    if (attributes_to_read.manufacturer_name == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MANUFACTURER_NAME
+      );
+    }
+    if (attributes_to_read.model_identifier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MODEL_IDENTIFIER
+      );
+    }
+    if (attributes_to_read.date_code == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DATE_CODE
+      );
+    }
+    if (attributes_to_read.power_source == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_POWER_SOURCE
+      );
+    }
+    if (attributes_to_read.generic_device_class == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_GENERIC_DEVICE_CLASS
+      );
+    }
+    if (attributes_to_read.generic_device_type == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_GENERIC_DEVICE_TYPE
+      );
+    }
+    if (attributes_to_read.product_code == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCT_CODE
+      );
+    }
+    if (attributes_to_read.producturl == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCTURL
+      );
+    }
+    if (attributes_to_read.manufacturer_version_details == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MANUFACTURER_VERSION_DETAILS
+      );
+    }
+    if (attributes_to_read.serial_number == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SERIAL_NUMBER
+      );
+    }
+    if (attributes_to_read.product_label == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCT_LABEL
+      );
+    }
+    if (attributes_to_read.location_description == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_LOCATION_DESCRIPTION
+      );
+    }
+    if (attributes_to_read.physical_environment == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PHYSICAL_ENVIRONMENT
+      );
+    }
+    if (attributes_to_read.device_enabled == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DEVICE_ENABLED
+      );
+    }
+    if (attributes_to_read.alarm_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ALARM_MASK
+      );
+    }
+    if (attributes_to_read.disable_local_config == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DISABLE_LOCAL_CONFIG
+      );
+    }
+    if (attributes_to_read.sw_buildid == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SW_BUILDID
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_BASIC,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT translator handler for Basic/ResetToFactoryDefaults command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_basic_reset_to_factory_defaults_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_BASIC);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_BASIC,
+      ZIGPC_ZCL_CLUSTER_BASIC_COMMAND_RESET_TO_FACTORY_DEFAULTS,
+      0,
+      nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/******************
+ * DotDot MQTT Command Handlers for PowerConfiguration cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for MainsVoltage/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_power_configuration_state_t Attribute values
+ * uic_mqtt_dotdot_power_configuration_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_power_configuration_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_power_configuration_state_t values,
+  uic_mqtt_dotdot_power_configuration_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if (values_to_write.mains_alarm_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_ALARM_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.mains_alarm_mask
+      );
+    }
+
+    if (values_to_write.mains_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.mains_voltage_min_threshold
+      );
+    }
+
+    if (values_to_write.mains_voltage_max_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MAX_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.mains_voltage_max_threshold
+      );
+    }
+
+    if (values_to_write.mains_voltage_dwell_trip_point == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_DWELL_TRIP_POINT,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.mains_voltage_dwell_trip_point
+      );
+    }
+
+    if (values_to_write.battery_manufacturer == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_MANUFACTURER,
+        ZIGPC_ZCL_DATA_TYPE_STRING,
+        &values.battery_manufacturer
+      );
+    }
+
+    if (values_to_write.battery_size == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_SIZE,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_size
+      );
+    }
+
+    if (values_to_write.batterya_hr_rating == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERYA_HR_RATING,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.batterya_hr_rating
+      );
+    }
+
+    if (values_to_write.battery_quantity == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_QUANTITY,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_quantity
+      );
+    }
+
+    if (values_to_write.battery_rated_voltage == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_RATED_VOLTAGE,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_rated_voltage
+      );
+    }
+
+    if (values_to_write.battery_alarm_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.battery_alarm_mask
+      );
+    }
+
+    if (values_to_write.battery_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_voltage_min_threshold
+      );
+    }
+
+    if (values_to_write.battery_voltage_threshold1 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD1,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_voltage_threshold1
+      );
+    }
+
+    if (values_to_write.battery_voltage_threshold2 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD2,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_voltage_threshold2
+      );
+    }
+
+    if (values_to_write.battery_voltage_threshold3 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD3,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_voltage_threshold3
+      );
+    }
+
+    if (values_to_write.battery_percentage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_percentage_min_threshold
+      );
+    }
+
+    if (values_to_write.battery_percentage_threshold1 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD1,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_percentage_threshold1
+      );
+    }
+
+    if (values_to_write.battery_percentage_threshold2 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD2,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_percentage_threshold2
+      );
+    }
+
+    if (values_to_write.battery_percentage_threshold3 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD3,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery_percentage_threshold3
+      );
+    }
+
+    if (values_to_write.battery2_manufacturer == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_MANUFACTURER,
+        ZIGPC_ZCL_DATA_TYPE_STRING,
+        &values.battery2_manufacturer
+      );
+    }
+
+    if (values_to_write.battery2_size == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_SIZE,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_size
+      );
+    }
+
+    if (values_to_write.battery2a_hr_rating == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2A_HR_RATING,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.battery2a_hr_rating
+      );
+    }
+
+    if (values_to_write.battery2_quantity == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_QUANTITY,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_quantity
+      );
+    }
+
+    if (values_to_write.battery2_rated_voltage == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_RATED_VOLTAGE,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_rated_voltage
+      );
+    }
+
+    if (values_to_write.battery2_alarm_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.battery2_alarm_mask
+      );
+    }
+
+    if (values_to_write.battery2_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_voltage_min_threshold
+      );
+    }
+
+    if (values_to_write.battery2_voltage_threshold1 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD1,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_voltage_threshold1
+      );
+    }
+
+    if (values_to_write.battery2_voltage_threshold2 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD2,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_voltage_threshold2
+      );
+    }
+
+    if (values_to_write.battery2_voltage_threshold3 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD3,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_voltage_threshold3
+      );
+    }
+
+    if (values_to_write.battery2_percentage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_percentage_min_threshold
+      );
+    }
+
+    if (values_to_write.battery2_percentage_threshold1 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD1,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_percentage_threshold1
+      );
+    }
+
+    if (values_to_write.battery2_percentage_threshold2 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD2,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_percentage_threshold2
+      );
+    }
+
+    if (values_to_write.battery2_percentage_threshold3 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD3,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery2_percentage_threshold3
+      );
+    }
+
+    if (values_to_write.battery3_manufacturer == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_MANUFACTURER,
+        ZIGPC_ZCL_DATA_TYPE_STRING,
+        &values.battery3_manufacturer
+      );
+    }
+
+    if (values_to_write.battery3_size == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_SIZE,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_size
+      );
+    }
+
+    if (values_to_write.battery3a_hr_rating == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3A_HR_RATING,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.battery3a_hr_rating
+      );
+    }
+
+    if (values_to_write.battery3_quantity == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_QUANTITY,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_quantity
+      );
+    }
+
+    if (values_to_write.battery3_rated_voltage == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_RATED_VOLTAGE,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_rated_voltage
+      );
+    }
+
+    if (values_to_write.battery3_alarm_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.battery3_alarm_mask
+      );
+    }
+
+    if (values_to_write.battery3_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_voltage_min_threshold
+      );
+    }
+
+    if (values_to_write.battery3_voltage_threshold1 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD1,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_voltage_threshold1
+      );
+    }
+
+    if (values_to_write.battery3_voltage_threshold2 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD2,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_voltage_threshold2
+      );
+    }
+
+    if (values_to_write.battery3_voltage_threshold3 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD3,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_voltage_threshold3
+      );
+    }
+
+    if (values_to_write.battery3_percentage_min_threshold == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_MIN_THRESHOLD,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_percentage_min_threshold
+      );
+    }
+
+    if (values_to_write.battery3_percentage_threshold1 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD1,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_percentage_threshold1
+      );
+    }
+
+    if (values_to_write.battery3_percentage_threshold2 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD2,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_percentage_threshold2
+      );
+    }
+
+    if (values_to_write.battery3_percentage_threshold3 == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD3,
+        ZIGPC_ZCL_DATA_TYPE_UINT8,
+        &values.battery3_percentage_threshold3
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for MainsVoltage/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_power_configuration_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_power_configuration_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_power_configuration_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.mains_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE
+      );
+    }
+    if (attributes_to_read.mains_frequency == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_FREQUENCY
+      );
+    }
+    if (attributes_to_read.mains_alarm_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_ALARM_MASK
+      );
+    }
+    if (attributes_to_read.mains_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.mains_voltage_max_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MAX_THRESHOLD
+      );
+    }
+    if (attributes_to_read.mains_voltage_dwell_trip_point == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_DWELL_TRIP_POINT
+      );
+    }
+    if (attributes_to_read.battery_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE
+      );
+    }
+    if (attributes_to_read.battery_percentage_remaining == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_REMAINING
+      );
+    }
+    if (attributes_to_read.battery_manufacturer == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_MANUFACTURER
+      );
+    }
+    if (attributes_to_read.battery_size == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_SIZE
+      );
+    }
+    if (attributes_to_read.batterya_hr_rating == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERYA_HR_RATING
+      );
+    }
+    if (attributes_to_read.battery_quantity == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_QUANTITY
+      );
+    }
+    if (attributes_to_read.battery_rated_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_RATED_VOLTAGE
+      );
+    }
+    if (attributes_to_read.battery_alarm_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_MASK
+      );
+    }
+    if (attributes_to_read.battery_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.battery_voltage_threshold1 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD1
+      );
+    }
+    if (attributes_to_read.battery_voltage_threshold2 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD2
+      );
+    }
+    if (attributes_to_read.battery_voltage_threshold3 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD3
+      );
+    }
+    if (attributes_to_read.battery_percentage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.battery_percentage_threshold1 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD1
+      );
+    }
+    if (attributes_to_read.battery_percentage_threshold2 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD2
+      );
+    }
+    if (attributes_to_read.battery_percentage_threshold3 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD3
+      );
+    }
+    if (attributes_to_read.battery_alarm_state == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_STATE
+      );
+    }
+    if (attributes_to_read.battery2_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE
+      );
+    }
+    if (attributes_to_read.battery2_percentage_remaining == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_REMAINING
+      );
+    }
+    if (attributes_to_read.battery2_manufacturer == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_MANUFACTURER
+      );
+    }
+    if (attributes_to_read.battery2_size == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_SIZE
+      );
+    }
+    if (attributes_to_read.battery2a_hr_rating == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2A_HR_RATING
+      );
+    }
+    if (attributes_to_read.battery2_quantity == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_QUANTITY
+      );
+    }
+    if (attributes_to_read.battery2_rated_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_RATED_VOLTAGE
+      );
+    }
+    if (attributes_to_read.battery2_alarm_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_MASK
+      );
+    }
+    if (attributes_to_read.battery2_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.battery2_voltage_threshold1 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD1
+      );
+    }
+    if (attributes_to_read.battery2_voltage_threshold2 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD2
+      );
+    }
+    if (attributes_to_read.battery2_voltage_threshold3 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD3
+      );
+    }
+    if (attributes_to_read.battery2_percentage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.battery2_percentage_threshold1 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD1
+      );
+    }
+    if (attributes_to_read.battery2_percentage_threshold2 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD2
+      );
+    }
+    if (attributes_to_read.battery2_percentage_threshold3 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD3
+      );
+    }
+    if (attributes_to_read.battery2_alarm_state == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_STATE
+      );
+    }
+    if (attributes_to_read.battery3_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE
+      );
+    }
+    if (attributes_to_read.battery3_percentage_remaining == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_REMAINING
+      );
+    }
+    if (attributes_to_read.battery3_manufacturer == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_MANUFACTURER
+      );
+    }
+    if (attributes_to_read.battery3_size == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_SIZE
+      );
+    }
+    if (attributes_to_read.battery3a_hr_rating == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3A_HR_RATING
+      );
+    }
+    if (attributes_to_read.battery3_quantity == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_QUANTITY
+      );
+    }
+    if (attributes_to_read.battery3_rated_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_RATED_VOLTAGE
+      );
+    }
+    if (attributes_to_read.battery3_alarm_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_MASK
+      );
+    }
+    if (attributes_to_read.battery3_voltage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.battery3_voltage_threshold1 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD1
+      );
+    }
+    if (attributes_to_read.battery3_voltage_threshold2 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD2
+      );
+    }
+    if (attributes_to_read.battery3_voltage_threshold3 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD3
+      );
+    }
+    if (attributes_to_read.battery3_percentage_min_threshold == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_MIN_THRESHOLD
+      );
+    }
+    if (attributes_to_read.battery3_percentage_threshold1 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD1
+      );
+    }
+    if (attributes_to_read.battery3_percentage_threshold2 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD2
+      );
+    }
+    if (attributes_to_read.battery3_percentage_threshold3 == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD3
+      );
+    }
+    if (attributes_to_read.battery3_alarm_state == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_STATE
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/******************
  * DotDot MQTT Command Handlers for Identify cluster
  ******************/
 
@@ -230,14 +1481,14 @@ sl_status_t zigpc_command_mapper_identify_identify_handler(
     uint16_t identify_time
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IDENTIFY);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IDENTIFY);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -245,7 +1496,7 @@ sl_status_t zigpc_command_mapper_identify_identify_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &identify_time });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -276,20 +1527,20 @@ sl_status_t zigpc_command_mapper_identify_identify_query_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IDENTIFY);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IDENTIFY);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -328,14 +1579,14 @@ sl_status_t zigpc_command_mapper_identify_trigger_effect_handler(
     TriggerEffectEffectVariant effect_variant
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IDENTIFY);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IDENTIFY);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -344,7 +1595,7 @@ sl_status_t zigpc_command_mapper_identify_trigger_effect_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &effect_identifier });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &effect_variant });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -478,14 +1729,14 @@ sl_status_t zigpc_command_mapper_groups_add_group_handler(
     const char* group_name
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -494,7 +1745,7 @@ sl_status_t zigpc_command_mapper_groups_add_group_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &group_id });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_STRING, group_name });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -529,14 +1780,14 @@ sl_status_t zigpc_command_mapper_groups_view_group_handler(
     uint16_t group_id
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -544,7 +1795,7 @@ sl_status_t zigpc_command_mapper_groups_view_group_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &group_id });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -580,14 +1831,14 @@ sl_status_t zigpc_command_mapper_groups_get_group_membership_handler(
     const uint16_t *group_list
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
   if ((group_list_count > 0U) && (group_list == nullptr)) {
@@ -602,7 +1853,7 @@ sl_status_t zigpc_command_mapper_groups_get_group_membership_handler(
     cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &group_list[i] });
   }
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -637,14 +1888,14 @@ sl_status_t zigpc_command_mapper_groups_remove_group_handler(
     uint16_t group_id
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -652,7 +1903,7 @@ sl_status_t zigpc_command_mapper_groups_remove_group_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &group_id });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -683,20 +1934,20 @@ sl_status_t zigpc_command_mapper_groups_remove_all_groups_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -735,14 +1986,14 @@ sl_status_t zigpc_command_mapper_groups_add_group_if_identifying_handler(
     const char* group_name
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_GROUPS);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -751,7 +2002,7 @@ sl_status_t zigpc_command_mapper_groups_add_group_if_identifying_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &group_id });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_STRING, group_name });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -934,20 +2185,20 @@ sl_status_t zigpc_command_mapper_on_off_off_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -978,20 +2229,20 @@ sl_status_t zigpc_command_mapper_on_off_on_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1022,20 +2273,20 @@ sl_status_t zigpc_command_mapper_on_off_toggle_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1074,14 +2325,14 @@ sl_status_t zigpc_command_mapper_on_off_off_with_effect_handler(
     uint8_t effect_variant
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1090,7 +2341,7 @@ sl_status_t zigpc_command_mapper_on_off_off_with_effect_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &effect_identifier });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &effect_variant });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1121,20 +2372,20 @@ sl_status_t zigpc_command_mapper_on_off_on_with_recall_global_scene_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1177,14 +2428,14 @@ sl_status_t zigpc_command_mapper_on_off_on_with_timed_off_handler(
     uint16_t off_wait_time
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ON_OFF);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1194,7 +2445,7 @@ sl_status_t zigpc_command_mapper_on_off_on_with_timed_off_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &on_time });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &off_wait_time });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1491,14 +2742,14 @@ sl_status_t zigpc_command_mapper_level_move_to_level_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1509,7 +2760,7 @@ sl_status_t zigpc_command_mapper_level_move_to_level_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1556,14 +2807,14 @@ sl_status_t zigpc_command_mapper_level_move_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1574,7 +2825,7 @@ sl_status_t zigpc_command_mapper_level_move_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1625,14 +2876,14 @@ sl_status_t zigpc_command_mapper_level_step_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1644,7 +2895,7 @@ sl_status_t zigpc_command_mapper_level_step_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1683,14 +2934,14 @@ sl_status_t zigpc_command_mapper_level_stop_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1699,7 +2950,7 @@ sl_status_t zigpc_command_mapper_level_stop_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1746,14 +2997,14 @@ sl_status_t zigpc_command_mapper_level_move_to_level_with_on_off_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1764,7 +3015,7 @@ sl_status_t zigpc_command_mapper_level_move_to_level_with_on_off_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1811,14 +3062,14 @@ sl_status_t zigpc_command_mapper_level_move_with_on_off_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1829,7 +3080,7 @@ sl_status_t zigpc_command_mapper_level_move_with_on_off_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1880,14 +3131,14 @@ sl_status_t zigpc_command_mapper_level_step_with_on_off_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1899,7 +3150,7 @@ sl_status_t zigpc_command_mapper_level_step_with_on_off_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1938,14 +3189,14 @@ sl_status_t zigpc_command_mapper_level_stop_with_on_off_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -1954,7 +3205,7 @@ sl_status_t zigpc_command_mapper_level_stop_with_on_off_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -1989,14 +3240,14 @@ sl_status_t zigpc_command_mapper_level_move_to_closest_frequency_handler(
     uint16_t frequency
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_LEVEL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -2004,7 +3255,7 @@ sl_status_t zigpc_command_mapper_level_move_to_closest_frequency_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &frequency });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -2188,20 +3439,20 @@ sl_status_t zigpc_command_mapper_poll_control_check_in_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_POLL_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_POLL_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -2390,6 +3641,17 @@ sl_status_t zigpc_command_mapper_door_lock_write_attributes_handler(
       );
     }
 
+    if (values_to_write.local_programming_features == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_LOCAL_PROGRAMMING_FEATURES,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.local_programming_features
+      );
+    }
+
     if (values_to_write.wrong_code_entry_limit == true) {
       zigpc_command_mapper_populate_write_attr_record(
         write_attr_data,
@@ -2412,25 +3674,36 @@ sl_status_t zigpc_command_mapper_door_lock_write_attributes_handler(
       );
     }
 
-    if (values_to_write.sendpin_over_the_air == true) {
+    if (values_to_write.send_pin_over_the_air == true) {
       zigpc_command_mapper_populate_write_attr_record(
         write_attr_data,
         attr_id_list,
         attr_data_type_list,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SENDPIN_OVER_THE_AIR,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SEND_PIN_OVER_THE_AIR,
         ZIGPC_ZCL_DATA_TYPE_BOOL,
-        &values.sendpin_over_the_air
+        &values.send_pin_over_the_air
       );
     }
 
-    if (values_to_write.requirepi_nforrf_operation == true) {
+    if (values_to_write.require_pi_nfor_rf_operation == true) {
       zigpc_command_mapper_populate_write_attr_record(
         write_attr_data,
         attr_id_list,
         attr_data_type_list,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIREPI_NFORRF_OPERATION,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIRE_PI_NFOR_RF_OPERATION,
         ZIGPC_ZCL_DATA_TYPE_BOOL,
-        &values.requirepi_nforrf_operation
+        &values.require_pi_nfor_rf_operation
+      );
+    }
+
+    if (values_to_write.expiring_user_timeout == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_EXPIRING_USER_TIMEOUT,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.expiring_user_timeout
       );
     }
 
@@ -2617,16 +3890,16 @@ sl_status_t zigpc_command_mapper_door_lock_force_read_attributes_handler(
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_TOTAL_USERS_SUPPORTED
       );
     }
-    if (attributes_to_read.number_ofpin_users_supported == true) {
+    if (attributes_to_read.number_of_pin_users_supported == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OFPIN_USERS_SUPPORTED
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_PIN_USERS_SUPPORTED
       );
     }
-    if (attributes_to_read.number_ofrfid_users_supported == true) {
+    if (attributes_to_read.number_of_rfid_users_supported == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OFRFID_USERS_SUPPORTED
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_RFID_USERS_SUPPORTED
       );
     }
     if (attributes_to_read.number_of_week_day_schedules_supported_per_user == true) {
@@ -2647,28 +3920,40 @@ sl_status_t zigpc_command_mapper_door_lock_force_read_attributes_handler(
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED
       );
     }
-    if (attributes_to_read.maxpin_code_length == true) {
+    if (attributes_to_read.max_pin_code_length == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAXPIN_CODE_LENGTH
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAX_PIN_CODE_LENGTH
       );
     }
-    if (attributes_to_read.minpin_code_length == true) {
+    if (attributes_to_read.min_pin_code_length == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MINPIN_CODE_LENGTH
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MIN_PIN_CODE_LENGTH
       );
     }
-    if (attributes_to_read.maxrfid_code_length == true) {
+    if (attributes_to_read.max_rfid_code_length == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAXRFID_CODE_LENGTH
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAX_RFID_CODE_LENGTH
       );
     }
-    if (attributes_to_read.minrfid_code_length == true) {
+    if (attributes_to_read.min_rfid_code_length == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MINRFID_CODE_LENGTH
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MIN_RFID_CODE_LENGTH
+      );
+    }
+    if (attributes_to_read.credential_rules_support == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_CREDENTIAL_RULES_SUPPORT
+      );
+    }
+    if (attributes_to_read.number_of_credentials_supported_per_user == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER
       );
     }
     if (attributes_to_read.enable_logging == true) {
@@ -2743,6 +4028,12 @@ sl_status_t zigpc_command_mapper_door_lock_force_read_attributes_handler(
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_ENABLE_PRIVACY_MODE_BUTTON
       );
     }
+    if (attributes_to_read.local_programming_features == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_LOCAL_PROGRAMMING_FEATURES
+      );
+    }
     if (attributes_to_read.wrong_code_entry_limit == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
@@ -2755,22 +4046,28 @@ sl_status_t zigpc_command_mapper_door_lock_force_read_attributes_handler(
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_USER_CODE_TEMPORARY_DISABLE_TIME
       );
     }
-    if (attributes_to_read.sendpin_over_the_air == true) {
+    if (attributes_to_read.send_pin_over_the_air == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SENDPIN_OVER_THE_AIR
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SEND_PIN_OVER_THE_AIR
       );
     }
-    if (attributes_to_read.requirepi_nforrf_operation == true) {
+    if (attributes_to_read.require_pi_nfor_rf_operation == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
-        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIREPI_NFORRF_OPERATION
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIRE_PI_NFOR_RF_OPERATION
       );
     }
     if (attributes_to_read.security_level == true) {
       zigpc_command_mapper_populate_read_attr_record(
         read_attr_data, read_attr_ids,
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SECURITY_LEVEL
+      );
+    }
+    if (attributes_to_read.expiring_user_timeout == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_EXPIRING_USER_TIMEOUT
       );
     }
     if (attributes_to_read.alarm_mask == true) {
@@ -2821,6 +4118,12 @@ sl_status_t zigpc_command_mapper_door_lock_force_read_attributes_handler(
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_RFID_PROGRAMMING_EVENT_MASK
       );
     }
+    if (attributes_to_read.feature_map == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_FEATURE_MAP
+      );
+    }
 
     if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
       zigpc_command_mapper_send_unicast(
@@ -2846,7 +4149,7 @@ sl_status_t zigpc_command_mapper_door_lock_force_read_attributes_handler(
  * @param endpoint  Unify device endpoint identifier
  * @param callback_type Callback type
 
- * @param pin_orrfid_code  Command argument of type const char*
+ * @param pin_or_rfid_code  Command argument of type const char*
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
@@ -2855,25 +4158,25 @@ sl_status_t zigpc_command_mapper_door_lock_lock_door_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
-  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_orrfid_code });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_or_rfid_code });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -2896,7 +4199,7 @@ sl_status_t zigpc_command_mapper_door_lock_lock_door_handler(
  * @param endpoint  Unify device endpoint identifier
  * @param callback_type Callback type
 
- * @param pin_orrfid_code  Command argument of type const char*
+ * @param pin_or_rfid_code  Command argument of type const char*
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
@@ -2905,25 +4208,25 @@ sl_status_t zigpc_command_mapper_door_lock_unlock_door_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
-  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_orrfid_code });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_or_rfid_code });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -2946,7 +4249,7 @@ sl_status_t zigpc_command_mapper_door_lock_unlock_door_handler(
  * @param endpoint  Unify device endpoint identifier
  * @param callback_type Callback type
 
- * @param pin_orrfid_code  Command argument of type const char*
+ * @param pin_or_rfid_code  Command argument of type const char*
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
@@ -2955,25 +4258,25 @@ sl_status_t zigpc_command_mapper_door_lock_toggle_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
-  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_orrfid_code });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_or_rfid_code });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -2998,7 +4301,7 @@ sl_status_t zigpc_command_mapper_door_lock_toggle_handler(
 
  * @param timeout_in_seconds  Command argument of type uint16_t
 
- * @param pin_orrfid_code  Command argument of type const char*
+ * @param pin_or_rfid_code  Command argument of type const char*
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
@@ -3009,26 +4312,26 @@ sl_status_t zigpc_command_mapper_door_lock_unlock_with_timeout_handler(
   uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint16_t timeout_in_seconds,
 
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &timeout_in_seconds });
-  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_orrfid_code });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_or_rfid_code });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3063,14 +4366,14 @@ sl_status_t zigpc_command_mapper_door_lock_get_log_record_handler(
     uint16_t log_index
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3078,7 +4381,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_log_record_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &log_index });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3112,7 +4415,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_log_record_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_setpin_code_handler(
+sl_status_t zigpc_command_mapper_door_lock_set_pin_code_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -3125,14 +4428,14 @@ sl_status_t zigpc_command_mapper_door_lock_setpin_code_handler(
     const char* pin
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3143,13 +4446,13 @@ sl_status_t zigpc_command_mapper_door_lock_setpin_code_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &user_type });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE,
       cmd_arg_list.size(),
       cmd_arg_list.data()
     );
@@ -3171,21 +4474,21 @@ sl_status_t zigpc_command_mapper_door_lock_setpin_code_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_getpin_code_handler(
+sl_status_t zigpc_command_mapper_door_lock_get_pin_code_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPINUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3193,13 +4496,13 @@ sl_status_t zigpc_command_mapper_door_lock_getpin_code_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETPIN_CODE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_PIN_CODE,
       cmd_arg_list.size(),
       cmd_arg_list.data()
     );
@@ -3221,21 +4524,21 @@ sl_status_t zigpc_command_mapper_door_lock_getpin_code_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_clearpin_code_handler(
+sl_status_t zigpc_command_mapper_door_lock_clear_pin_code_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPINUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3243,13 +4546,13 @@ sl_status_t zigpc_command_mapper_door_lock_clearpin_code_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARPIN_CODE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_PIN_CODE,
       cmd_arg_list.size(),
       cmd_arg_list.data()
     );
@@ -3269,31 +4572,31 @@ sl_status_t zigpc_command_mapper_door_lock_clearpin_code_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_clear_allpin_codes_handler(
+sl_status_t zigpc_command_mapper_door_lock_clear_all_pin_codes_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLPIN_CODES,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_PIN_CODES,
       0,
       nullptr
     );
@@ -3326,14 +4629,14 @@ sl_status_t zigpc_command_mapper_door_lock_set_user_status_handler(
     DrlkSettableUserStatus user_status
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3342,7 +4645,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_user_status_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &user_status });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3377,14 +4680,14 @@ sl_status_t zigpc_command_mapper_door_lock_get_user_status_handler(
     DrlkTotalUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3392,7 +4695,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_user_status_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3451,14 +4754,14 @@ sl_status_t zigpc_command_mapper_door_lock_set_weekday_schedule_handler(
     uint8_t end_minute
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3472,7 +4775,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_weekday_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &end_hour });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &end_minute });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3511,14 +4814,14 @@ sl_status_t zigpc_command_mapper_door_lock_get_weekday_schedule_handler(
     DrlkTotalUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3527,7 +4830,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_weekday_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &scheduleid });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3566,14 +4869,14 @@ sl_status_t zigpc_command_mapper_door_lock_clear_weekday_schedule_handler(
     DrlkTotalUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3582,7 +4885,7 @@ sl_status_t zigpc_command_mapper_door_lock_clear_weekday_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &scheduleid });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3629,14 +4932,14 @@ sl_status_t zigpc_command_mapper_door_lock_set_year_day_schedule_handler(
     uint32_t local_end_time
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3647,7 +4950,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_year_day_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT32, &local_start_time });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT32, &local_end_time });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3686,14 +4989,14 @@ sl_status_t zigpc_command_mapper_door_lock_get_year_day_schedule_handler(
     DrlkTotalUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3702,7 +5005,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_year_day_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &scheduleid });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3741,14 +5044,14 @@ sl_status_t zigpc_command_mapper_door_lock_clear_year_day_schedule_handler(
     DrlkTotalUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3757,7 +5060,7 @@ sl_status_t zigpc_command_mapper_door_lock_clear_year_day_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &scheduleid });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3804,14 +5107,14 @@ sl_status_t zigpc_command_mapper_door_lock_set_holiday_schedule_handler(
     DrlkOperMode operating_mode_during_holiday
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3822,7 +5125,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_holiday_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT32, &local_end_time });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &operating_mode_during_holiday });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3857,14 +5160,14 @@ sl_status_t zigpc_command_mapper_door_lock_get_holiday_schedule_handler(
     DrlkHolidayScheduleID holiday_scheduleid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3872,7 +5175,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_holiday_schedule_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &holiday_scheduleid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3907,14 +5210,14 @@ sl_status_t zigpc_command_mapper_door_lock_clear_holiday_schedule_handler(
     DrlkHolidayScheduleID holiday_scheduleid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3922,7 +5225,7 @@ sl_status_t zigpc_command_mapper_door_lock_clear_holiday_schedule_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &holiday_scheduleid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -3961,14 +5264,14 @@ sl_status_t zigpc_command_mapper_door_lock_set_user_type_handler(
     DrlkUserType user_type
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -3977,7 +5280,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_user_type_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &user_type });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -4012,14 +5315,14 @@ sl_status_t zigpc_command_mapper_door_lock_get_user_type_handler(
     DrlkTotalUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -4027,7 +5330,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_user_type_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -4061,7 +5364,7 @@ sl_status_t zigpc_command_mapper_door_lock_get_user_type_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_setrfid_code_handler(
+sl_status_t zigpc_command_mapper_door_lock_set_rfid_code_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -4074,14 +5377,14 @@ sl_status_t zigpc_command_mapper_door_lock_setrfid_code_handler(
     const char* rfid_code
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -4092,13 +5395,13 @@ sl_status_t zigpc_command_mapper_door_lock_setrfid_code_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &user_type });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, rfid_code });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETRFID_CODE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_RFID_CODE,
       cmd_arg_list.size(),
       cmd_arg_list.data()
     );
@@ -4120,21 +5423,21 @@ sl_status_t zigpc_command_mapper_door_lock_setrfid_code_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_getrfid_code_handler(
+sl_status_t zigpc_command_mapper_door_lock_get_rfid_code_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkRFIDUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -4142,13 +5445,13 @@ sl_status_t zigpc_command_mapper_door_lock_getrfid_code_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETRFID_CODE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_RFID_CODE,
       cmd_arg_list.size(),
       cmd_arg_list.data()
     );
@@ -4170,21 +5473,21 @@ sl_status_t zigpc_command_mapper_door_lock_getrfid_code_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_clearrfid_code_handler(
+sl_status_t zigpc_command_mapper_door_lock_clear_rfid_code_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkRFIDUserID userid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -4192,13 +5495,13 @@ sl_status_t zigpc_command_mapper_door_lock_clearrfid_code_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &userid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARRFID_CODE,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_RFID_CODE,
       cmd_arg_list.size(),
       cmd_arg_list.data()
     );
@@ -4218,33 +5521,1024 @@ sl_status_t zigpc_command_mapper_door_lock_clearrfid_code_handler(
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
  * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
  */
-sl_status_t zigpc_command_mapper_door_lock_clear_allrfid_codes_handler(
+sl_status_t zigpc_command_mapper_door_lock_clear_all_rfid_codes_handler(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLRFID_CODES,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_RFID_CODES,
       0,
       nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/SetUser command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param operation_type  Command argument of type DataOperationTypeEnum
+
+ * @param user_index  Command argument of type uint16_t
+
+ * @param user_name  Command argument of type const char*
+
+ * @param user_uniqueid  Command argument of type uint32_t
+
+ * @param user_status  Command argument of type DrlkUserStatus
+
+ * @param user_type  Command argument of type DrlkUserType
+
+ * @param credential_rule  Command argument of type CredentialRuleEnum
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_set_user_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    DataOperationTypeEnum operation_type,
+
+    uint16_t user_index,
+
+    const char* user_name,
+
+    uint32_t user_uniqueid,
+
+    DrlkUserStatus user_status,
+
+    DrlkUserType user_type,
+
+    CredentialRuleEnum credential_rule
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &operation_type });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &user_index });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_STRING, user_name });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT32, &user_uniqueid });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &user_status });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &user_type });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &credential_rule });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_USER,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/GetUser command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param user_index  Command argument of type uint16_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_get_user_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_index
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &user_index });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/ClearUser command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param user_index  Command argument of type uint16_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_clear_user_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_index
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &user_index });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_USER,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/SetCredential command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param operation_type  Command argument of type DataOperationTypeEnum
+
+ * @param credential  Command argument of type CredentialStruct
+
+ * @param credential_data  Command argument of type const char*
+
+ * @param user_index  Command argument of type uint16_t
+
+ * @param user_status  Command argument of type DrlkUserStatus
+
+ * @param user_type  Command argument of type DrlkUserType
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_set_credential_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    DataOperationTypeEnum operation_type,
+
+    CredentialStruct credential,
+
+    const char* credential_data,
+
+    uint16_t user_index,
+
+    DrlkUserStatus user_status,
+
+    DrlkUserType user_type
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+  zigpc_zcl_credential_struct_t zigpc_credential = {
+    .credential_type = (zigpc_credential_type_enum_t)(int)credential.CredentialType,
+    .credential_index = credential.CredentialIndex,
+  };
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &operation_type });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_CREDENTIAL_STRUCT_TYPE, &zigpc_credential });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, credential_data });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &user_index });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &user_status });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &user_type });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_CREDENTIAL,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/GetCredentialStatus command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param credential  Command argument of type CredentialStruct
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_get_credential_status_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredentialStruct credential
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+  zigpc_zcl_credential_struct_t zigpc_credential = {
+    .credential_type = (zigpc_credential_type_enum_t)(int)credential.CredentialType,
+    .credential_index = credential.CredentialIndex,
+  };
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_CREDENTIAL_STRUCT_TYPE, &zigpc_credential });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_CREDENTIAL_STATUS,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/ClearCredential command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param credential  Command argument of type CredentialStruct
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_clear_credential_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredentialStruct credential
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+  zigpc_zcl_credential_struct_t zigpc_credential = {
+    .credential_type = (zigpc_credential_type_enum_t)(int)credential.CredentialType,
+    .credential_index = credential.CredentialIndex,
+  };
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_CREDENTIAL_STRUCT_TYPE, &zigpc_credential });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_CREDENTIAL,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for DoorLock/UnboltDoor command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param pin_code  Command argument of type const char*
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_door_lock_unbolt_door_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    const char* pin_code
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_DOOR_LOCK);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_OCTSTR, pin_code });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+      ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_UNBOLT_DOOR,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/******************
+ * DotDot MQTT Command Handlers for WindowCovering cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for WindowCoveringType/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_window_covering_state_t Attribute values
+ * uic_mqtt_dotdot_window_covering_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_window_covering_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_window_covering_state_t values,
+  uic_mqtt_dotdot_window_covering_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if (values_to_write.velocity_lift == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_VELOCITY_LIFT,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.velocity_lift
+      );
+    }
+
+    if (values_to_write.acceleration_time_lift == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_ACCELERATION_TIME_LIFT,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.acceleration_time_lift
+      );
+    }
+
+    if (values_to_write.deceleration_time_lift == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_DECELERATION_TIME_LIFT,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.deceleration_time_lift
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for WindowCoveringType/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_window_covering_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_window_covering_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_window_covering_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.window_covering_type == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_WINDOW_COVERING_TYPE
+      );
+    }
+    if (attributes_to_read.physical_closed_limit_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_PHYSICAL_CLOSED_LIMIT_LIFT
+      );
+    }
+    if (attributes_to_read.physical_closed_limit_tilt == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_PHYSICAL_CLOSED_LIMIT_TILT
+      );
+    }
+    if (attributes_to_read.current_position_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_LIFT
+      );
+    }
+    if (attributes_to_read.current_position_tilt == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_TILT
+      );
+    }
+    if (attributes_to_read.number_of_actuations_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_NUMBER_OF_ACTUATIONS_LIFT
+      );
+    }
+    if (attributes_to_read.number_of_actuations_tilt == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_NUMBER_OF_ACTUATIONS_TILT
+      );
+    }
+    if (attributes_to_read.config_or_status == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CONFIG_OR_STATUS
+      );
+    }
+    if (attributes_to_read.current_position_lift_percentage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_LIFT_PERCENTAGE
+      );
+    }
+    if (attributes_to_read.current_position_tilt_percentage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_TILT_PERCENTAGE
+      );
+    }
+    if (attributes_to_read.installed_open_limit_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_OPEN_LIMIT_LIFT
+      );
+    }
+    if (attributes_to_read.installed_closed_limit_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_CLOSED_LIMIT_LIFT
+      );
+    }
+    if (attributes_to_read.installed_open_limit_tilt == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_OPEN_LIMIT_TILT
+      );
+    }
+    if (attributes_to_read.installed_closed_limit_tilt == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_CLOSED_LIMIT_TILT
+      );
+    }
+    if (attributes_to_read.velocity_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_VELOCITY_LIFT
+      );
+    }
+    if (attributes_to_read.acceleration_time_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_ACCELERATION_TIME_LIFT
+      );
+    }
+    if (attributes_to_read.deceleration_time_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_DECELERATION_TIME_LIFT
+      );
+    }
+    if (attributes_to_read.mode == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_MODE
+      );
+    }
+    if (attributes_to_read.intermediate_setpoints_lift == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INTERMEDIATE_SETPOINTS_LIFT
+      );
+    }
+    if (attributes_to_read.intermediate_setpoints_tilt == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INTERMEDIATE_SETPOINTS_TILT
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/UpOrOpen command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_up_or_open_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_UP_OR_OPEN,
+      0,
+      nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/DownOrClose command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_down_or_close_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_DOWN_OR_CLOSE,
+      0,
+      nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/Stop command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_stop_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_STOP,
+      0,
+      nullptr
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/GoToLiftValue command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param lift_value  Command argument of type uint16_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_go_to_lift_value_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t lift_value
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &lift_value });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_GO_TO_LIFT_VALUE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/GoToLiftPercentage command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param percentage_lift_value  Command argument of type uint8_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_go_to_lift_percentage_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t percentage_lift_value
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &percentage_lift_value });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_GO_TO_LIFT_PERCENTAGE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/GoToTiltValue command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param tilt_value  Command argument of type uint16_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_go_to_tilt_value_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t tilt_value
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &tilt_value });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_GO_TO_TILT_VALUE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for WindowCovering/GoToTiltPercentage command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param percentage_tilt_value  Command argument of type uint8_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_window_covering_go_to_tilt_percentage_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t percentage_tilt_value
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_WINDOW_COVERING);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &percentage_tilt_value });
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING,
+      ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_COMMAND_GO_TO_TILT_PERCENTAGE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
     );
   }
 
@@ -4961,14 +7255,14 @@ sl_status_t zigpc_command_mapper_thermostat_setpoint_raise_or_lower_handler(
     int8_t amount
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -4977,7 +7271,7 @@ sl_status_t zigpc_command_mapper_thermostat_setpoint_raise_or_lower_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &mode });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_INT8, &amount });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5025,14 +7319,14 @@ sl_status_t zigpc_command_mapper_thermostat_set_weekly_schedule_handler(
     const TransitionType *transitions
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
   if ((transitions_count > 0U) && (transitions == nullptr)) {
@@ -5058,7 +7352,7 @@ sl_status_t zigpc_command_mapper_thermostat_set_weekly_schedule_handler(
     cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_STRUCT_TRANSITION_TYPE, &zigpc_transitions_vec[i] });
   }
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5097,14 +7391,14 @@ sl_status_t zigpc_command_mapper_thermostat_get_weekly_schedule_handler(
     uint8_t mode_to_return
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -5113,7 +7407,7 @@ sl_status_t zigpc_command_mapper_thermostat_get_weekly_schedule_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &days_to_return });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &mode_to_return });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5144,20 +7438,20 @@ sl_status_t zigpc_command_mapper_thermostat_clear_weekly_schedule_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5188,20 +7482,20 @@ sl_status_t zigpc_command_mapper_thermostat_get_relay_status_log_handler(
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_THERMOSTAT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5796,14 +8090,14 @@ sl_status_t zigpc_command_mapper_color_control_move_to_hue_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -5815,7 +8109,7 @@ sl_status_t zigpc_command_mapper_color_control_move_to_hue_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5862,14 +8156,14 @@ sl_status_t zigpc_command_mapper_color_control_move_hue_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -5880,7 +8174,7 @@ sl_status_t zigpc_command_mapper_color_control_move_hue_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5931,14 +8225,14 @@ sl_status_t zigpc_command_mapper_color_control_step_hue_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -5950,7 +8244,7 @@ sl_status_t zigpc_command_mapper_color_control_step_hue_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -5997,14 +8291,14 @@ sl_status_t zigpc_command_mapper_color_control_move_to_saturation_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6015,7 +8309,7 @@ sl_status_t zigpc_command_mapper_color_control_move_to_saturation_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6062,14 +8356,14 @@ sl_status_t zigpc_command_mapper_color_control_move_saturation_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6080,7 +8374,7 @@ sl_status_t zigpc_command_mapper_color_control_move_saturation_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6131,14 +8425,14 @@ sl_status_t zigpc_command_mapper_color_control_step_saturation_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6150,7 +8444,7 @@ sl_status_t zigpc_command_mapper_color_control_step_saturation_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6201,14 +8495,14 @@ sl_status_t zigpc_command_mapper_color_control_move_to_hue_and_saturation_handle
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6220,7 +8514,7 @@ sl_status_t zigpc_command_mapper_color_control_move_to_hue_and_saturation_handle
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6271,14 +8565,14 @@ sl_status_t zigpc_command_mapper_color_control_move_to_color_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6290,7 +8584,7 @@ sl_status_t zigpc_command_mapper_color_control_move_to_color_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6337,14 +8631,14 @@ sl_status_t zigpc_command_mapper_color_control_move_color_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6355,7 +8649,7 @@ sl_status_t zigpc_command_mapper_color_control_move_color_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6406,14 +8700,14 @@ sl_status_t zigpc_command_mapper_color_control_step_color_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6425,7 +8719,7 @@ sl_status_t zigpc_command_mapper_color_control_step_color_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6472,14 +8766,14 @@ sl_status_t zigpc_command_mapper_color_control_move_to_color_temperature_handler
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6490,7 +8784,7 @@ sl_status_t zigpc_command_mapper_color_control_move_to_color_temperature_handler
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6541,14 +8835,14 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_move_to_hue_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6560,7 +8854,7 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_move_to_hue_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6607,14 +8901,14 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_move_hue_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6625,7 +8919,7 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_move_hue_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6676,14 +8970,14 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_step_hue_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6695,7 +8989,7 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_step_hue_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6746,14 +9040,14 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_move_to_hue_and_saturati
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6765,7 +9059,7 @@ sl_status_t zigpc_command_mapper_color_control_enhanced_move_to_hue_and_saturati
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6824,14 +9118,14 @@ sl_status_t zigpc_command_mapper_color_control_color_loop_set_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6845,7 +9139,7 @@ sl_status_t zigpc_command_mapper_color_control_color_loop_set_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6884,14 +9178,14 @@ sl_status_t zigpc_command_mapper_color_control_stop_move_step_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6900,7 +9194,7 @@ sl_status_t zigpc_command_mapper_color_control_stop_move_step_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -6955,14 +9249,14 @@ sl_status_t zigpc_command_mapper_color_control_move_color_temperature_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -6975,7 +9269,7 @@ sl_status_t zigpc_command_mapper_color_control_move_color_temperature_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7034,14 +9328,14 @@ sl_status_t zigpc_command_mapper_color_control_step_color_temperature_handler(
     uint8_t options_override
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_COLOR_CONTROL);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -7055,7 +9349,7 @@ sl_status_t zigpc_command_mapper_color_control_step_color_temperature_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_mask });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &options_override });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7069,6 +9363,119 @@ sl_status_t zigpc_command_mapper_color_control_step_color_temperature_handler(
 
   // Always return SL_STATUS_OK if being called normally.
   return SL_STATUS_OK;
+}
+
+/******************
+ * DotDot MQTT Command Handlers for TemperatureMeasurement cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for MeasuredValue/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_temperature_measurement_state_t Attribute values
+ * uic_mqtt_dotdot_temperature_measurement_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_temperature_measurement_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_temperature_measurement_state_t values,
+  uic_mqtt_dotdot_temperature_measurement_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for MeasuredValue/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_temperature_measurement_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_temperature_measurement_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_temperature_measurement_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.measured_value == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MEASURED_VALUE
+      );
+    }
+    if (attributes_to_read.min_measured_value == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MIN_MEASURED_VALUE
+      );
+    }
+    if (attributes_to_read.max_measured_value == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MAX_MEASURED_VALUE
+      );
+    }
+    if (attributes_to_read.tolerance == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_TOLERANCE
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
 }
 
 /******************
@@ -7507,14 +9914,14 @@ sl_status_t zigpc_command_mapper_ias_zone_zone_enroll_response_handler(
     uint8_t zoneid
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -7523,7 +9930,7 @@ sl_status_t zigpc_command_mapper_ias_zone_zone_enroll_response_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &enroll_response_code });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &zoneid });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7554,20 +9961,20 @@ sl_status_t zigpc_command_mapper_ias_zone_initiate_normal_operation_mode_handler
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
 
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7606,14 +10013,14 @@ sl_status_t zigpc_command_mapper_ias_zone_initiate_test_mode_handler(
     uint8_t current_zone_sensitivity_level
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IAS_ZONE);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -7622,7 +10029,7 @@ sl_status_t zigpc_command_mapper_ias_zone_initiate_test_mode_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &test_mode_duration });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &current_zone_sensitivity_level });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7775,14 +10182,14 @@ sl_status_t zigpc_command_mapper_iaswd_start_warning_handler(
     IaswdLevel strobe_level
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -7793,7 +10200,7 @@ sl_status_t zigpc_command_mapper_iaswd_start_warning_handler(
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &strobe_duty_cycle });
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &strobe_level });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7828,14 +10235,14 @@ sl_status_t zigpc_command_mapper_iaswd_squawk_handler(
     uint8_t squawk_configuration
 
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_IASWD);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 
@@ -7843,7 +10250,7 @@ sl_status_t zigpc_command_mapper_iaswd_squawk_handler(
   std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
   cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &squawk_configuration });
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     zigpc_command_mapper_send_unicast(
       unid,
       endpoint,
@@ -7859,12 +10266,1576 @@ sl_status_t zigpc_command_mapper_iaswd_squawk_handler(
   return SL_STATUS_OK;
 }
 
+/******************
+ * DotDot MQTT Command Handlers for Metering cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for CurrentSummationDelivered/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_metering_state_t Attribute values
+ * uic_mqtt_dotdot_metering_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_metering_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_metering_state_t values,
+  uic_mqtt_dotdot_metering_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_METERING);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_METERING,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for CurrentSummationDelivered/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_metering_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_metering_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_metering_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_METERING);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.current_summation_delivered == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_SUMMATION_DELIVERED
+      );
+    }
+    if (attributes_to_read.current_summation_received == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_SUMMATION_RECEIVED
+      );
+    }
+    if (attributes_to_read.current_max_demand_delivered == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_DELIVERED
+      );
+    }
+    if (attributes_to_read.current_max_demand_received == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_RECEIVED
+      );
+    }
+    if (attributes_to_read.power_factor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_POWER_FACTOR
+      );
+    }
+    if (attributes_to_read.reading_snap_shot_time == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_READING_SNAP_SHOT_TIME
+      );
+    }
+    if (attributes_to_read.current_max_demand_delivered_time == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_DELIVERED_TIME
+      );
+    }
+    if (attributes_to_read.current_max_demand_received_time == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_RECEIVED_TIME
+      );
+    }
+    if (attributes_to_read.default_update_period == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_DEFAULT_UPDATE_PERIOD
+      );
+    }
+    if (attributes_to_read.supply_status == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_SUPPLY_STATUS
+      );
+    }
+    if (attributes_to_read.current_inlet_energy_carrier_summation == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_INLET_ENERGY_CARRIER_SUMMATION
+      );
+    }
+    if (attributes_to_read.current_outlet_energy_carrier_summation == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION
+      );
+    }
+    if (attributes_to_read.inlet_temperature == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_INLET_TEMPERATURE
+      );
+    }
+    if (attributes_to_read.outlet_temperature == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_OUTLET_TEMPERATURE
+      );
+    }
+    if (attributes_to_read.unitof_measure == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_UNITOF_MEASURE
+      );
+    }
+    if (attributes_to_read.multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_DIVISOR
+      );
+    }
+    if (attributes_to_read.summation_formatting == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_SUMMATION_FORMATTING
+      );
+    }
+    if (attributes_to_read.demand_formatting == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_DEMAND_FORMATTING
+      );
+    }
+    if (attributes_to_read.historical_consumption_formatting == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_HISTORICAL_CONSUMPTION_FORMATTING
+      );
+    }
+    if (attributes_to_read.metering_device_type == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_METERING_DEVICE_TYPE
+      );
+    }
+    if (attributes_to_read.energy_carrier_unit_of_measure == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_UNIT_OF_MEASURE
+      );
+    }
+    if (attributes_to_read.energy_carrier_summation_formatting == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_SUMMATION_FORMATTING
+      );
+    }
+    if (attributes_to_read.energy_carrier_demand_formatting == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_DEMAND_FORMATTING
+      );
+    }
+    if (attributes_to_read.temperature_unit_of_measure == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_TEMPERATURE_UNIT_OF_MEASURE
+      );
+    }
+    if (attributes_to_read.temperature_formatting == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_METERING_ATTR_TEMPERATURE_FORMATTING
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_METERING,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/******************
+ * DotDot MQTT Command Handlers for ElectricalMeasurement cluster
+ ******************/
+
+/**
+ * @brief DotDot MQTT handler for MeasurementType/WriteAttributes command.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_electrical_measurement_state_t Attribute values
+ * uic_mqtt_dotdot_electrical_measurement_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t zigpc_command_mapper_electrical_measurement_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_electrical_measurement_state_t values,
+  uic_mqtt_dotdot_electrical_measurement_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+    if (values_to_write.average_rms_voltage_measurement_period == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_voltage_measurement_period
+      );
+    }
+
+    if (values_to_write.average_rms_over_voltage_counter == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_over_voltage_counter
+      );
+    }
+
+    if (values_to_write.average_rms_under_voltage_counter == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_under_voltage_counter
+      );
+    }
+
+    if (values_to_write.rms_extreme_over_voltage_period == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_extreme_over_voltage_period
+      );
+    }
+
+    if (values_to_write.rms_extreme_under_voltage_period == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_extreme_under_voltage_period
+      );
+    }
+
+    if (values_to_write.rms_voltage_sag_period == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_voltage_sag_period
+      );
+    }
+
+    if (values_to_write.rms_voltage_swell_period == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_voltage_swell_period
+      );
+    }
+
+    if (values_to_write.dc_overload_alarms_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_OVERLOAD_ALARMS_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP8,
+        &values.dc_overload_alarms_mask
+      );
+    }
+
+    if (values_to_write.ac_alarms_mask == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ALARMS_MASK,
+        ZIGPC_ZCL_DATA_TYPE_MAP16,
+        &values.ac_alarms_mask
+      );
+    }
+
+    if (values_to_write.rms_extreme_over_voltage == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE,
+        ZIGPC_ZCL_DATA_TYPE_INT16,
+        &values.rms_extreme_over_voltage
+      );
+    }
+
+    if (values_to_write.rms_extreme_under_voltage == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE,
+        ZIGPC_ZCL_DATA_TYPE_INT16,
+        &values.rms_extreme_under_voltage
+      );
+    }
+
+    if (values_to_write.rms_voltage_sag == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG,
+        ZIGPC_ZCL_DATA_TYPE_INT16,
+        &values.rms_voltage_sag
+      );
+    }
+
+    if (values_to_write.rms_voltage_swell == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL,
+        ZIGPC_ZCL_DATA_TYPE_INT16,
+        &values.rms_voltage_swell
+      );
+    }
+
+    if (values_to_write.average_rms_voltage_measurement_period_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_voltage_measurement_period_phb
+      );
+    }
+
+    if (values_to_write.average_rms_over_voltage_counter_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_over_voltage_counter_phb
+      );
+    }
+
+    if (values_to_write.average_rms_under_voltage_counter_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_under_voltage_counter_phb
+      );
+    }
+
+    if (values_to_write.rms_extreme_over_voltage_period_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_extreme_over_voltage_period_phb
+      );
+    }
+
+    if (values_to_write.rms_extreme_under_voltage_period_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_extreme_under_voltage_period_phb
+      );
+    }
+
+    if (values_to_write.rms_voltage_sag_period_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_voltage_sag_period_phb
+      );
+    }
+
+    if (values_to_write.rms_voltage_swell_period_phb == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHB,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_voltage_swell_period_phb
+      );
+    }
+
+    if (values_to_write.average_rms_voltage_measurement_period_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_voltage_measurement_period_phc
+      );
+    }
+
+    if (values_to_write.average_rms_over_voltage_counter_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_over_voltage_counter_phc
+      );
+    }
+
+    if (values_to_write.average_rms_under_voltage_counter_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.average_rms_under_voltage_counter_phc
+      );
+    }
+
+    if (values_to_write.rms_extreme_over_voltage_period_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_extreme_over_voltage_period_phc
+      );
+    }
+
+    if (values_to_write.rms_extreme_under_voltage_period_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_extreme_under_voltage_period_phc
+      );
+    }
+
+    if (values_to_write.rms_voltage_sag_period_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_voltage_sag_period_phc
+      );
+    }
+
+    if (values_to_write.rms_voltage_swell_period_phc == true) {
+      zigpc_command_mapper_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHC,
+        ZIGPC_ZCL_DATA_TYPE_UINT16,
+        &values.rms_voltage_swell_period_phc
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT handler for MeasurementType/Commands/ForceReadAttributes.
+ *
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
+ * uic_mqtt_dotdot_electrical_measurement_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t zigpc_command_mapper_electrical_measurement_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_electrical_measurement_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<zigpc_zcl_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+    if (attributes_to_read.measurement_type == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASUREMENT_TYPE
+      );
+    }
+    if (attributes_to_read.dc_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE
+      );
+    }
+    if (attributes_to_read.dc_voltage_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MIN
+      );
+    }
+    if (attributes_to_read.dc_voltage_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MAX
+      );
+    }
+    if (attributes_to_read.dc_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT
+      );
+    }
+    if (attributes_to_read.dc_current_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MIN
+      );
+    }
+    if (attributes_to_read.dc_current_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MAX
+      );
+    }
+    if (attributes_to_read.dc_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER
+      );
+    }
+    if (attributes_to_read.dc_power_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MIN
+      );
+    }
+    if (attributes_to_read.dc_power_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MAX
+      );
+    }
+    if (attributes_to_read.dc_voltage_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.dc_voltage_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_DIVISOR
+      );
+    }
+    if (attributes_to_read.dc_current_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.dc_current_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_DIVISOR
+      );
+    }
+    if (attributes_to_read.dc_power_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.dc_power_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_DIVISOR
+      );
+    }
+    if (attributes_to_read.ac_frequency == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY
+      );
+    }
+    if (attributes_to_read.ac_frequency_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MIN
+      );
+    }
+    if (attributes_to_read.ac_frequency_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MAX
+      );
+    }
+    if (attributes_to_read.neutral_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_NEUTRAL_CURRENT
+      );
+    }
+    if (attributes_to_read.total_active_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_ACTIVE_POWER
+      );
+    }
+    if (attributes_to_read.total_reactive_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_REACTIVE_POWER
+      );
+    }
+    if (attributes_to_read.total_apparent_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_APPARENT_POWER
+      );
+    }
+    if (attributes_to_read.measured1st_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED1ST_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured3rd_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED3RD_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured5th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED5TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured7th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED7TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured9th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED9TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured11th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED11TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured_phase1st_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE1ST_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured_phase3rd_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE3RD_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured_phase5th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE5TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured_phase7th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE7TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured_phase9th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE9TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.measured_phase11th_harmonic_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE11TH_HARMONIC_CURRENT
+      );
+    }
+    if (attributes_to_read.ac_frequency_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.ac_frequency_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_DIVISOR
+      );
+    }
+    if (attributes_to_read.power_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.power_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_DIVISOR
+      );
+    }
+    if (attributes_to_read.harmonic_current_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_HARMONIC_CURRENT_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.phase_harmonic_current_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_PHASE_HARMONIC_CURRENT_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.line_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT
+      );
+    }
+    if (attributes_to_read.active_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT
+      );
+    }
+    if (attributes_to_read.reactive_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT
+      );
+    }
+    if (attributes_to_read.rms_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE
+      );
+    }
+    if (attributes_to_read.rms_voltage_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN
+      );
+    }
+    if (attributes_to_read.rms_voltage_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX
+      );
+    }
+    if (attributes_to_read.rms_current == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT
+      );
+    }
+    if (attributes_to_read.rms_current_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN
+      );
+    }
+    if (attributes_to_read.rms_current_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX
+      );
+    }
+    if (attributes_to_read.active_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER
+      );
+    }
+    if (attributes_to_read.active_power_min == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN
+      );
+    }
+    if (attributes_to_read.active_power_max == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX
+      );
+    }
+    if (attributes_to_read.reactive_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER
+      );
+    }
+    if (attributes_to_read.apparent_power == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER
+      );
+    }
+    if (attributes_to_read.power_factor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR
+      );
+    }
+    if (attributes_to_read.average_rms_voltage_measurement_period == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD
+      );
+    }
+    if (attributes_to_read.average_rms_over_voltage_counter == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER
+      );
+    }
+    if (attributes_to_read.average_rms_under_voltage_counter == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER
+      );
+    }
+    if (attributes_to_read.rms_extreme_over_voltage_period == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD
+      );
+    }
+    if (attributes_to_read.rms_extreme_under_voltage_period == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD
+      );
+    }
+    if (attributes_to_read.rms_voltage_sag_period == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD
+      );
+    }
+    if (attributes_to_read.rms_voltage_swell_period == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD
+      );
+    }
+    if (attributes_to_read.ac_voltage_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.ac_voltage_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_DIVISOR
+      );
+    }
+    if (attributes_to_read.ac_current_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.ac_current_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_DIVISOR
+      );
+    }
+    if (attributes_to_read.ac_power_multiplier == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_POWER_MULTIPLIER
+      );
+    }
+    if (attributes_to_read.ac_power_divisor == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_POWER_DIVISOR
+      );
+    }
+    if (attributes_to_read.dc_overload_alarms_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_OVERLOAD_ALARMS_MASK
+      );
+    }
+    if (attributes_to_read.dc_voltage_overload == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_OVERLOAD
+      );
+    }
+    if (attributes_to_read.dc_current_overload == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_OVERLOAD
+      );
+    }
+    if (attributes_to_read.ac_alarms_mask == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ALARMS_MASK
+      );
+    }
+    if (attributes_to_read.ac_voltage_overload == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_OVERLOAD
+      );
+    }
+    if (attributes_to_read.ac_current_overload == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_OVERLOAD
+      );
+    }
+    if (attributes_to_read.ac_active_power_overload == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ACTIVE_POWER_OVERLOAD
+      );
+    }
+    if (attributes_to_read.ac_reactive_power_overload == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_REACTIVE_POWER_OVERLOAD
+      );
+    }
+    if (attributes_to_read.average_rms_over_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE
+      );
+    }
+    if (attributes_to_read.average_rms_under_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE
+      );
+    }
+    if (attributes_to_read.rms_extreme_over_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE
+      );
+    }
+    if (attributes_to_read.rms_extreme_under_voltage == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE
+      );
+    }
+    if (attributes_to_read.rms_voltage_sag == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG
+      );
+    }
+    if (attributes_to_read.rms_voltage_swell == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL
+      );
+    }
+    if (attributes_to_read.line_current_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT_PHB
+      );
+    }
+    if (attributes_to_read.active_current_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT_PHB
+      );
+    }
+    if (attributes_to_read.reactive_current_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT_PHB
+      );
+    }
+    if (attributes_to_read.rms_voltage_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_PHB
+      );
+    }
+    if (attributes_to_read.rms_voltage_min_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN_PHB
+      );
+    }
+    if (attributes_to_read.rms_voltage_max_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX_PHB
+      );
+    }
+    if (attributes_to_read.rms_current_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_PHB
+      );
+    }
+    if (attributes_to_read.rms_current_min_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN_PHB
+      );
+    }
+    if (attributes_to_read.rms_current_max_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX_PHB
+      );
+    }
+    if (attributes_to_read.active_power_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_PHB
+      );
+    }
+    if (attributes_to_read.active_power_min_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN_PHB
+      );
+    }
+    if (attributes_to_read.active_power_max_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX_PHB
+      );
+    }
+    if (attributes_to_read.reactive_power_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER_PHB
+      );
+    }
+    if (attributes_to_read.apparent_power_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER_PHB
+      );
+    }
+    if (attributes_to_read.power_factor_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR_PHB
+      );
+    }
+    if (attributes_to_read.average_rms_voltage_measurement_period_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB
+      );
+    }
+    if (attributes_to_read.average_rms_over_voltage_counter_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB
+      );
+    }
+    if (attributes_to_read.average_rms_under_voltage_counter_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB
+      );
+    }
+    if (attributes_to_read.rms_extreme_over_voltage_period_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB
+      );
+    }
+    if (attributes_to_read.rms_extreme_under_voltage_period_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB
+      );
+    }
+    if (attributes_to_read.rms_voltage_sag_period_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHB
+      );
+    }
+    if (attributes_to_read.rms_voltage_swell_period_phb == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHB
+      );
+    }
+    if (attributes_to_read.line_current_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT_PHC
+      );
+    }
+    if (attributes_to_read.active_current_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT_PHC
+      );
+    }
+    if (attributes_to_read.reactive_current_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT_PHC
+      );
+    }
+    if (attributes_to_read.rms_voltage_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_PHC
+      );
+    }
+    if (attributes_to_read.rms_voltage_min_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN_PHC
+      );
+    }
+    if (attributes_to_read.rms_voltage_max_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX_PHC
+      );
+    }
+    if (attributes_to_read.rms_current_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_PHC
+      );
+    }
+    if (attributes_to_read.rms_current_min_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN_PHC
+      );
+    }
+    if (attributes_to_read.rms_current_max_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX_PHC
+      );
+    }
+    if (attributes_to_read.active_power_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_PHC
+      );
+    }
+    if (attributes_to_read.active_power_min_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN_PHC
+      );
+    }
+    if (attributes_to_read.active_power_max_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX_PHC
+      );
+    }
+    if (attributes_to_read.reactive_power_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER_PHC
+      );
+    }
+    if (attributes_to_read.apparent_power_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER_PHC
+      );
+    }
+    if (attributes_to_read.power_factor_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR_PHC
+      );
+    }
+    if (attributes_to_read.average_rms_voltage_measurement_period_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC
+      );
+    }
+    if (attributes_to_read.average_rms_over_voltage_counter_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC
+      );
+    }
+    if (attributes_to_read.average_rms_under_voltage_counter_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC
+      );
+    }
+    if (attributes_to_read.rms_extreme_over_voltage_period_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC
+      );
+    }
+    if (attributes_to_read.rms_extreme_under_voltage_period_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC
+      );
+    }
+    if (attributes_to_read.rms_voltage_sag_period_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHC
+      );
+    }
+    if (attributes_to_read.rms_voltage_swell_period_phc == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHC
+      );
+    }
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      zigpc_command_mapper_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+
+/**
+ * @brief DotDot MQTT translator handler for ElectricalMeasurement/GetProfileInfoResponse command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param profile_count  Command argument of type uint8_t
+
+ * @param profile_interval_period  Command argument of type ProfileIntervalPeriod
+
+ * @param max_number_of_intervals  Command argument of type uint8_t
+ * @param list_of_attributes_count  Count of uint16_t items
+ * @param list_of_attributes  Command argument of type uint16_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_electrical_measurement_get_profile_info_response_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t profile_count,
+
+    ProfileIntervalPeriod profile_interval_period,
+
+    uint8_t max_number_of_intervals,
+
+    uint8_t list_of_attributes_count,
+    const uint16_t *list_of_attributes
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+  if ((list_of_attributes_count > 0U) && (list_of_attributes == nullptr)) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELD_LIST, "ElectricalMeasurement", "GetProfileInfoResponse", "ListOfAttributes");
+    return SL_STATUS_INVALID_PARAMETER;
+  }
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &profile_count });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &profile_interval_period });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &max_number_of_intervals });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &list_of_attributes_count });
+  for(uint8_t i = 0U; i < list_of_attributes_count; i++) {
+    cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ATTRIB_ID, &list_of_attributes[i] });
+  }
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+      ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_PROFILE_INFO_RESPONSE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+/**
+ * @brief DotDot MQTT translator handler for ElectricalMeasurement/GetMeasurementProfileResponse command.
+ *
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
+ * @param callback_type Callback type
+
+ * @param start_time  Command argument of type UTC
+
+ * @param status  Command argument of type GetMeasurementProfileResponseStatus
+
+ * @param profile_interval_period  Command argument of type ProfileIntervalPeriod
+
+ * @param number_of_intervals_delivered  Command argument of type uint8_t
+
+ * @param attribute_id  Command argument of type uint16_t
+ * @param intervals_count  Count of uint8_t items
+ * @param intervals  Command argument of type uint8_t
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t zigpc_command_mapper_electrical_measurement_get_measurement_profile_response_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t callback_type,
+    UTC start_time,
+
+    GetMeasurementProfileResponseStatus status,
+
+    ProfileIntervalPeriod profile_interval_period,
+
+    uint8_t number_of_intervals_delivered,
+
+    uint16_t attribute_id,
+
+    uint8_t intervals_count,
+    const uint8_t *intervals
+
+) {
+  sl_status_t temp_status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    temp_status  = zigpc_command_mapper_cluster_support_check(unid, endpoint, ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT);
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
+    }
+    return temp_status ;
+  }
+
+  if ((intervals_count > 0U) && (intervals == nullptr)) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELD_LIST, "ElectricalMeasurement", "GetMeasurementProfileResponse", "Intervals");
+    return SL_STATUS_INVALID_PARAMETER;
+  }
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UTC, &start_time });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &status });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &profile_interval_period });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &number_of_intervals_delivered });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ATTRIB_ID, &attribute_id });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &intervals_count });
+  for(uint8_t i = 0U; i < intervals_count; i++) {
+    cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &intervals[i] });
+  }
+
+  if (temp_status  == SL_STATUS_OK) {
+    zigpc_command_mapper_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+      ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_MEASUREMENT_PROFILE_RESPONSE,
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
 
 /**
  * @brief Register the callbacks for the DotDot Commands supported.
  */
 sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
 {
+  uic_mqtt_dotdot_set_basic_write_attributes_callback(
+    zigpc_command_mapper_basic_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_basic_force_read_attributes_callback(
+    zigpc_command_mapper_basic_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_basic_reset_to_factory_defaults_callback_set(
+    zigpc_command_mapper_basic_reset_to_factory_defaults_handler
+  );
+  uic_mqtt_dotdot_set_power_configuration_write_attributes_callback(
+    zigpc_command_mapper_power_configuration_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_power_configuration_force_read_attributes_callback(
+    zigpc_command_mapper_power_configuration_force_read_attributes_handler
+  );
   uic_mqtt_dotdot_set_identify_write_attributes_callback(
     zigpc_command_mapper_identify_write_attributes_handler
   );
@@ -7991,17 +11962,17 @@ sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
   uic_mqtt_dotdot_door_lock_get_log_record_callback_set(
     zigpc_command_mapper_door_lock_get_log_record_handler
   );
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_set(
-    zigpc_command_mapper_door_lock_setpin_code_handler
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_set(
+    zigpc_command_mapper_door_lock_set_pin_code_handler
   );
-  uic_mqtt_dotdot_door_lock_getpin_code_callback_set(
-    zigpc_command_mapper_door_lock_getpin_code_handler
+  uic_mqtt_dotdot_door_lock_get_pin_code_callback_set(
+    zigpc_command_mapper_door_lock_get_pin_code_handler
   );
-  uic_mqtt_dotdot_door_lock_clearpin_code_callback_set(
-    zigpc_command_mapper_door_lock_clearpin_code_handler
+  uic_mqtt_dotdot_door_lock_clear_pin_code_callback_set(
+    zigpc_command_mapper_door_lock_clear_pin_code_handler
   );
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set(
-    zigpc_command_mapper_door_lock_clear_allpin_codes_handler
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_set(
+    zigpc_command_mapper_door_lock_clear_all_pin_codes_handler
   );
   uic_mqtt_dotdot_door_lock_set_user_status_callback_set(
     zigpc_command_mapper_door_lock_set_user_status_handler
@@ -8042,17 +12013,65 @@ sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
   uic_mqtt_dotdot_door_lock_get_user_type_callback_set(
     zigpc_command_mapper_door_lock_get_user_type_handler
   );
-  uic_mqtt_dotdot_door_lock_setrfid_code_callback_set(
-    zigpc_command_mapper_door_lock_setrfid_code_handler
+  uic_mqtt_dotdot_door_lock_set_rfid_code_callback_set(
+    zigpc_command_mapper_door_lock_set_rfid_code_handler
   );
-  uic_mqtt_dotdot_door_lock_getrfid_code_callback_set(
-    zigpc_command_mapper_door_lock_getrfid_code_handler
+  uic_mqtt_dotdot_door_lock_get_rfid_code_callback_set(
+    zigpc_command_mapper_door_lock_get_rfid_code_handler
   );
-  uic_mqtt_dotdot_door_lock_clearrfid_code_callback_set(
-    zigpc_command_mapper_door_lock_clearrfid_code_handler
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_set(
+    zigpc_command_mapper_door_lock_clear_rfid_code_handler
   );
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_set(
-    zigpc_command_mapper_door_lock_clear_allrfid_codes_handler
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_set(
+    zigpc_command_mapper_door_lock_clear_all_rfid_codes_handler
+  );
+  uic_mqtt_dotdot_door_lock_set_user_callback_set(
+    zigpc_command_mapper_door_lock_set_user_handler
+  );
+  uic_mqtt_dotdot_door_lock_get_user_callback_set(
+    zigpc_command_mapper_door_lock_get_user_handler
+  );
+  uic_mqtt_dotdot_door_lock_clear_user_callback_set(
+    zigpc_command_mapper_door_lock_clear_user_handler
+  );
+  uic_mqtt_dotdot_door_lock_set_credential_callback_set(
+    zigpc_command_mapper_door_lock_set_credential_handler
+  );
+  uic_mqtt_dotdot_door_lock_get_credential_status_callback_set(
+    zigpc_command_mapper_door_lock_get_credential_status_handler
+  );
+  uic_mqtt_dotdot_door_lock_clear_credential_callback_set(
+    zigpc_command_mapper_door_lock_clear_credential_handler
+  );
+  uic_mqtt_dotdot_door_lock_unbolt_door_callback_set(
+    zigpc_command_mapper_door_lock_unbolt_door_handler
+  );
+  uic_mqtt_dotdot_set_window_covering_write_attributes_callback(
+    zigpc_command_mapper_window_covering_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_window_covering_force_read_attributes_callback(
+    zigpc_command_mapper_window_covering_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_window_covering_up_or_open_callback_set(
+    zigpc_command_mapper_window_covering_up_or_open_handler
+  );
+  uic_mqtt_dotdot_window_covering_down_or_close_callback_set(
+    zigpc_command_mapper_window_covering_down_or_close_handler
+  );
+  uic_mqtt_dotdot_window_covering_stop_callback_set(
+    zigpc_command_mapper_window_covering_stop_handler
+  );
+  uic_mqtt_dotdot_window_covering_go_to_lift_value_callback_set(
+    zigpc_command_mapper_window_covering_go_to_lift_value_handler
+  );
+  uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback_set(
+    zigpc_command_mapper_window_covering_go_to_lift_percentage_handler
+  );
+  uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback_set(
+    zigpc_command_mapper_window_covering_go_to_tilt_value_handler
+  );
+  uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback_set(
+    zigpc_command_mapper_window_covering_go_to_tilt_percentage_handler
   );
   uic_mqtt_dotdot_set_thermostat_write_attributes_callback(
     zigpc_command_mapper_thermostat_write_attributes_handler
@@ -8138,6 +12157,12 @@ sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
   uic_mqtt_dotdot_color_control_step_color_temperature_callback_set(
     zigpc_command_mapper_color_control_step_color_temperature_handler
   );
+  uic_mqtt_dotdot_set_temperature_measurement_write_attributes_callback(
+    zigpc_command_mapper_temperature_measurement_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_temperature_measurement_force_read_attributes_callback(
+    zigpc_command_mapper_temperature_measurement_force_read_attributes_handler
+  );
   uic_mqtt_dotdot_set_occupancy_sensing_write_attributes_callback(
     zigpc_command_mapper_occupancy_sensing_write_attributes_handler
   );
@@ -8170,6 +12195,24 @@ sl_status_t zigpc_command_mapper_register_dotdot_mqtt_handlers(void)
   );
   uic_mqtt_dotdot_iaswd_squawk_callback_set(
     zigpc_command_mapper_iaswd_squawk_handler
+  );
+  uic_mqtt_dotdot_set_metering_write_attributes_callback(
+    zigpc_command_mapper_metering_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_metering_force_read_attributes_callback(
+    zigpc_command_mapper_metering_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_set_electrical_measurement_write_attributes_callback(
+    zigpc_command_mapper_electrical_measurement_write_attributes_handler
+  );
+  uic_mqtt_dotdot_set_electrical_measurement_force_read_attributes_callback(
+    zigpc_command_mapper_electrical_measurement_force_read_attributes_handler
+  );
+  uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback_set(
+    zigpc_command_mapper_electrical_measurement_get_profile_info_response_handler
+  );
+  uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback_set(
+    zigpc_command_mapper_electrical_measurement_get_measurement_profile_response_handler
   );
   return SL_STATUS_OK;
 }

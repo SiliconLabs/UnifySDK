@@ -269,8 +269,8 @@ static void
   fields.measured_noise_floord_bm     = tx_report->measured_noise_floor;
   fields.last_route_repeaters_count   = tx_report->number_of_repeaters;
   fields.last_route_repeaters         = (const char **)repeaters_unid;
-  fields.incomingrssi_repeaters_count = tx_report->number_of_repeaters;
-  fields.incomingrssi_repeaters
+  fields.incoming_rssi_repeaters_count = tx_report->number_of_repeaters;
+  fields.incoming_rssi_repeaters
     = (const int8_t *)tx_report->rssi_values.incoming;
   fields.ackrssi                               = tx_report->ack_rssi;
   fields.ack_channel                           = tx_report->ack_channel_number;

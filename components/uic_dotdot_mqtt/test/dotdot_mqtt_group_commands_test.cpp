@@ -42,8 +42,8 @@ static void stub_by_group_dl_lock_door_callback(
   const uic_mqtt_dotdot_door_lock_command_lock_door_fields_t *fields)
 {
   TEST_ASSERT_EQUAL(stub_by_group_dl_lock.group_id, group_id);
-  TEST_ASSERT_EQUAL_STRING(stub_by_group_dl_lock.fields.pin_orrfid_code,
-                           fields->pin_orrfid_code);
+  TEST_ASSERT_EQUAL_STRING(stub_by_group_dl_lock.fields.pin_or_rfid_code,
+                           fields->pin_or_rfid_code);
   stub_by_group_dl_lock.num_callbacks++;
 }
 
@@ -52,7 +52,7 @@ void test_dotdot_mqtt_by_group_command_with_argument(void)
   // We're arbitrarily using the DoorLock_LockDoor because it's as good as any.
   stub_by_group_dl_lock.num_callbacks          = 0;
   stub_by_group_dl_lock.group_id               = 12;
-  stub_by_group_dl_lock.fields.pin_orrfid_code = "1 Two Three!";
+  stub_by_group_dl_lock.fields.pin_or_rfid_code = "1 Two Three!";
 
   uic_mqtt_dotdot_by_group_door_lock_lock_door_callback_set(
     &stub_by_group_dl_lock_door_callback);

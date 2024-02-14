@@ -1,0 +1,56 @@
+@@@UnifyCore @naagarwa @mamehta @sushanka
+@@@UnifyZWave @phcoval @jeboullo
+@@@UnifyZigbee @jolitwin @mpbreton
+@@@UnifyBT @tabenyhe @tahornos
+@@@Documentation @naagarwa @mamehta @phcoval @jolitwin @mpbreton @nibertol @tabenyhe @jeboullo
+@@@UnifyFwkServices @naagarwa @mamehta @sushanka
+@@@UnifyIoTServices @naagarwa @sushanka @sepastuk
+@@@CICD @naagarwa @dethammi @sushanka
+@@@UnifyMultiProtcol @nibertol @supratap @frkillee @ismaghni @alautott
+
+# Pipeline rule and scripts
+Jenkinsfile @@CICD
+scripts/ @@CICD
+
+# Documentations
+**/*.md @@Documentation
+doc/ @@Documentation
+
+components/ @@UnifyCore
+docker/ @@UnifyCore
+cmake/ @@UnifyCore
+portable_runtime/ @@UnifyCore
+applications/aox/  @@UnifyBT
+applications/bt_host_empty/ @@UnifyBT
+applications/cpc-hci-bridge/ @@UnifyBT
+applications/cpcd/ @@UnifyMultiProtcol
+applications/dev_ui/ @@UnifyIoTServices
+applications/examples/ @@UnifyCore
+applications/gms/ @@UnifyFwkServices
+applications/home_assistant/ @@UnifyIoTServices
+applications/image_provider/ @@UnifyFwkServices
+applications/nal/ @@UnifyFwkServices
+applications/openthread_border_router/ @@UnifyMultiProtcol
+applications/upti_cap/ @@UnifyFwkServices
+applications/upti_writer/ @@UnifyFwkServices
+applications/upvl/ @@UnifyFwkServices
+applications/zigbeed/ @@UnifyZigbee
+applications/zigpc/ @@UnifyZigbee
+applications/zpc/ @@UnifyZWave
+
+CODEOWNERS               @@UnifyCore
+
+
+
+# If a group is involved, at least one reviewer of the group must approve
+(Check(@@UnifyCore >= 1))
+(Check(@@UnifyZigbee >= 1))
+(Check(@@UnifyZWave >= 1))
+(Check(@@UnifyBT >= 1))
+(Check(@@UnifyFwkServices >= 1))
+(Check(@@UnifyIoTServices >= 1))
+(Check(@@UnifyMultiProtcol >= 1))
+(Check(@@CICD >= 1))
+(Check(@@Documentation >= 1))
+
+OverallCheck(2)

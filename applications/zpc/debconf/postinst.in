@@ -5,7 +5,7 @@
 
 . /usr/share/debconf/confmodule
 
-UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/"
+UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/zpc"
 
 UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
 UIC_CONFFILE=$UIC_CONFDIR/uic.cfg

@@ -26,8 +26,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Unify Specifications" href="../../../doc/unify_specifications/index.html" />
-    <link rel="prev" title="UPVL User’s Guide" href="../../upvl/readme_user.html" /> 
+    <link rel="next" title="Unify Matter Bridge" href="../../../doc/protocol/matter/matter_umb.html" />
+    <link rel="prev" title="IoT Services" href="../../../doc/unify_iot_services.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -49,33 +49,53 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../doc/introduction.html">Unify Host SDK</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../doc/UnifySDK.html">Unify Framework</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#systems-overview">Systems Overview</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../../doc/UnifySDK.html#unify-applications-overview">Unify Applications Overview</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../../doc/UnifySDK.html#unify-framework-protocol-controllers">Unify Framework Protocol Controllers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../doc/UnifySDK.html#the-unify-framework-services">The Unify Framework Services</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../../doc/UnifySDK.html#iot-services">IoT Services</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Dev GUI User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/readme_user.html">https://siliconlabs.github.io/matter/latest/unify/readme_user.html</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../doc/unify_iot_services.html">IoT Services</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dev GUI User’s Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#access-developer-gui">Access Developer GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-the-developer-gui">Connecting the Developer GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#node-inclusion">Node Inclusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartstart-list">SmartStart List</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-smartstart-with-different-phys">Using SmartStart with different PHYs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clusters">Clusters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cluster-page-examples">Cluster page examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#measurements">Measurements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#groups">Groups</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-group">Create Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sending-command-to-group">Sending Command to Group</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#name-and-location">Name and Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-monitoring">Application Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ota">OTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commissionable-devices">Commissionable Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upti">UPTI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../doc/protocol/matter/matter_umb.html">Unify Matter Bridge</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../doc/UnifySDK.html#resources">Resources</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../doc/system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../doc/qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../doc/license.html">License</a></li>
 </ul>
 

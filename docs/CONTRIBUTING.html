@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing to UnifySDK &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/CONTRIBUTING.html" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/charenc.js"></script>
+        <script src="_static/js/crypt.js"></script>
+        <script src="_static/js/sha1.js"></script>
+        <script src="_static/js/html5-qrcode.min.js"></script>
+        <script src="_static/js/qr_code_scanner.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="doc/introduction.html" class="icon icon-home"> Unify
+            <img src="_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="contributing-to-unifysdk">
+<h1>Contributing to UnifySDK<a class="headerlink" href="#contributing-to-unifysdk" title="Permalink to this heading"></a></h1>
+<section id="reporting-issues">
+<h2>Reporting issues<a class="headerlink" href="#reporting-issues" title="Permalink to this heading"></a></h2>
+<p>Currently there is no way to report issue in the github project,
+however supported &#64;SiliconLabs customers can report cases individually.</p>
+</section>
+<section id="git-branch-naming-conventions">
+<h2>Git Branch naming conventions<a class="headerlink" href="#git-branch-naming-conventions" title="Permalink to this heading"></a></h2>
+<p>There is no strong requirement for now, but user are encouraged to
+track their changes by prefixing branch names with meaningful prefixes
+such as “feature” or “bugfix”.</p>
+<p>If the change refers to existing context id, feel free to add it.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Sl No</th>
+<th>Type of Branch</th>
+<th>Use Case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Feature Branches</td>
+<td>For developing new features or functionalities. These branches are often used for longer-lived work and may be merged into the main branch when completed.</td>
+<td>feature/user-authentication</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bugfix Branches</td>
+<td>For addressing specific issues or bugs. Bugfix branches are created to isolate and fix a problem, and they're often merged back into the main branch (or a release branch) once the fix is verified.</td>
+<td>bugfix/GH-1234-fix-for-UMB-crash</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Experimental Branches</td>
+<td>For highly experimental or uncertain work that may or may not make it into the main codebase. These branches allow team members to collaborate on new ideas without affecting the main development flow</td>
+<td>experimental/GH-1234-migration-of-core</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Documentation Branches</td>
+<td>For creating or updating documentation, such as README files, user guides, or API documentation. Separate documentation branches make it easier to manage documentation changes independently from code changes</td>
+<td>docs/GH-1234-updates-readme</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Refactoring Branches</td>
+<td>For making significant changes to the codebase that don't add new features or fix bugs but improve the code's structure, readability, or maintainability. Separate refactoring branches help keep refactoring efforts organized</td>
+<td>refactor/GH-1234-refactors-authentication-module</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Test Branches</td>
+<td>For adding or modifying test cases. These branches allow for the isolation of test-related changes and help maintain a robust testing suit</td>
+<td>test/adds -thermostat-test-cases</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="commit-message-format">
+<h2>Commit message format<a class="headerlink" href="#commit-message-format" title="Permalink to this heading"></a></h2>
+<p>Commit message should not exceed 50 characters.</p>
+<p>Within your commits, you can include a commit description,
+allowing to add even more detail / context as to what you did.</p>
+<p>Add an empty line underneath the commit message,
+and begin writing a description from line 3.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GH</span><span class="o">-</span><span class="n">XYZ</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">issue</span> <span class="k">with</span> <span class="n">login</span> <span class="n">button</span> <span class="ow">not</span> <span class="n">showing</span><span class="o">.</span>
+
+<span class="o">-</span> <span class="n">Update</span> <span class="n">login</span> <span class="n">form</span> <span class="n">validation</span>
+<span class="o">-</span> <span class="n">Update</span> <span class="n">login</span> <span class="n">styling</span> <span class="k">for</span> <span class="n">showing</span> <span class="n">the</span> <span class="n">button</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Sl No</th>
+<th>Commit Message Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Add support for thermostat cluster</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Remove python2 deprecated dependencies</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Update rust dependencies to latest version</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Fix portable runtime crash</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Refactor core components into rust</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Add unit tests for thermostat cluster</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pull-request-guidelines">
+<h2>Pull request guidelines<a class="headerlink" href="#pull-request-guidelines" title="Permalink to this heading"></a></h2>
+<section id="as-a-developer">
+<h3>As a Developer<a class="headerlink" href="#as-a-developer" title="Permalink to this heading"></a></h3>
+<p>What to consider while raising a Pull Request</p>
+<ul class="simple">
+<li><p>Pull request naming</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Context</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">message</span> <span class="n">clearing</span> <span class="n">explaining</span> <span class="n">what</span> <span class="n">commit</span> <span class="n">does</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Write a useful description in the “details” section of the pull request. i.e, mention the root cause of problem and approach of the solution.</p></li>
+<li><p>Max size of Pull request should be &lt; 300 lines (excluding autogenerated code)</p></li>
+<li><p>If Changes are greater than 300 lines, split the changes into logical groups using multiple PRs.</p></li>
+<li><p>Pull Request should be raised only after successful execution of the existing unit Test cases.</p></li>
+<li><p>One Pull Request should address only one issues (don’t combine multiple changes, this applies for indentation changes as well)</p></li>
+<li><p>Don’t change the code while reviewing, use “Draft” state for asking developers not to review the code or to block merging of code.</p></li>
+<li><p>Design the code in a modular fashion that allows functional tesing.</p></li>
+</ul>
+</section>
+<section id="as-a-reviewer">
+<h3>As a Reviewer<a class="headerlink" href="#as-a-reviewer" title="Permalink to this heading"></a></h3>
+<p>What to consider while reviewing a Pull Request</p>
+<ul class="simple">
+<li><p>Does the code has successful build?</p></li>
+<li><p>Does the code follow unify coding guidelines?</p></li>
+<li><p>Does the code meet its objective / acceptance criteria?</p></li>
+<li><p>Does the code have unit test and documentation included?</p></li>
+<li><p>Does the code need any refactoring, considering security, performance or simply ease of reading?</p></li>
+<li><p>Use “Suggestion” feature which allows you to add a code suggestion directly into the comment, which can instantly be accepted and committed from within the PR.</p></li>
+<li><p>Write clear comments. Describe the issue, why you don’t agree (mistakes, errors, violations against conventions, performance risk, security issues, etc.), and propose other solutions to simplify and improve the code.</p></li>
+<li><p>If any of the comments need to be addressed mandatorily, mark the pull request as “Draft”</p></li>
+</ul>
+</section>
+</section>
+<section id="unit-tests">
+<h2>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this heading"></a></h2>
+<p>All contributors have to manually run the unit test locally before raising the Pull request.</p>
+<ul class="simple">
+<li><p>Inside docker, build with -DBUILD_TESTING=ON.</p></li>
+<li><p>Then “ninja” and “ninja test” (this command runs all the tests.)</p></li>
+</ul>
+<p>If you want to test individually
+you can do by running test executables from shell</p>
+<p>Build and unit tests are run from contributor fork using github actions.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

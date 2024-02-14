@@ -1,5 +1,10 @@
 # Dev GUI Release Notes
 
+## [1.5.0] - Feb 2024
+
+* Removed QR-Code scanner when Dev GUI is connected through non-secure mode(eg http)
+* Fixed Battery cluster name in Dev UI.
+
 ## [1.4.0] - Aug 2023
 
 * ForcereadAttributes is removed from commands List in clusters, as the same is available as Action Button

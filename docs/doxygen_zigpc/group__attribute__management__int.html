@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -85,9 +85,9 @@ $(document).ready(function(){initNavTree('group__attribute__management__int.html
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">ZigPC Attribute Management Internals<div class="ingroups"><a class="el" href="group__zigpc__components.html">ZigPC components</a> &raquo; <a class="el" href="group__attribute__management.html">ZigPC Attribute Management component</a></div></div>  </div>
 </div><!--header-->
@@ -102,14 +102,9 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">the structure representing a configure reporting response frame  <a href="structzigpc__attrmgmt__configure__status__record__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gad4f252f590e302c1e7682dd7a2d3540a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#gad4f252f590e302c1e7682dd7a2d3540a">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>&#160;&#160;&#160;4</td></tr>
-<tr class="separator:gad4f252f590e302c1e7682dd7a2d3540a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga35f45362ac1a4fe282d7b3c0dadc335a"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga35f45362ac1a4fe282d7b3c0dadc335a">configure_response_buffer_t</a>[<a class="el" href="group__attribute__management__int.html#gad4f252f590e302c1e7682dd7a2d3540a">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>]</td></tr>
+<tr class="memitem:ga35f45362ac1a4fe282d7b3c0dadc335a"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga35f45362ac1a4fe282d7b3c0dadc335a">configure_response_buffer_t</a>[<a class="el" href="group__attribute__management__int.html#gacda8f1a0c0f56ff3a34941e11e93ac23">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>]</td></tr>
 <tr class="separator:ga35f45362ac1a4fe282d7b3c0dadc335a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -132,24 +127,14 @@ Functions</h2></td></tr>
 <tr class="memitem:ga594928750f167b071f7eb0ec59a48990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga594928750f167b071f7eb0ec59a48990">zigpc_attrmgmt_buffer_to_configure_status_list</a> (const uint8_t *buffer, size_t buffer_len, std::list&lt; <a class="el" href="structzigpc__attrmgmt__configure__status__record__t.html">zigpc_attrmgmt_configure_status_record_t</a> &gt; &amp;record_list)</td></tr>
 <tr class="memdesc:ga594928750f167b071f7eb0ec59a48990"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_buffer_to_configure_status_list Extracts a series of records from a buffer of bytes  <a href="group__attribute__management__int.html#ga594928750f167b071f7eb0ec59a48990">More...</a><br /></td></tr>
 <tr class="separator:ga594928750f167b071f7eb0ec59a48990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gacda8f1a0c0f56ff3a34941e11e93ac23"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#gacda8f1a0c0f56ff3a34941e11e93ac23">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a> = 4</td></tr>
+<tr class="separator:gacda8f1a0c0f56ff3a34941e11e93ac23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Internal API for attribute management functionality. </p>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="gad4f252f590e302c1e7682dd7a2d3540a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad4f252f590e302c1e7682dd7a2d3540a">&#9670;&nbsp;</a></span>ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ZCL_CONFIGURE_STATUS_RESPONSE_SIZE&#160;&#160;&#160;4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga35f45362ac1a4fe282d7b3c0dadc335a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga35f45362ac1a4fe282d7b3c0dadc335a">&#9670;&nbsp;</a></span>configure_response_buffer_t</h2>
@@ -158,7 +143,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef uint8_t configure_response_buffer_t[<a class="el" href="group__attribute__management__int.html#gad4f252f590e302c1e7682dd7a2d3540a">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>]</td>
+          <td class="memname">typedef uint8_t configure_response_buffer_t[<a class="el" href="group__attribute__management__int.html#gacda8f1a0c0f56ff3a34941e11e93ac23">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -436,12 +421,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="gacda8f1a0c0f56ff3a34941e11e93ac23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacda8f1a0c0f56ff3a34941e11e93ac23">&#9670;&nbsp;</a></span>ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned int ZCL_CONFIGURE_STATUS_RESPONSE_SIZE = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:08 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

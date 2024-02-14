@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -395,12 +395,16 @@ $(document).ready(function(){initNavTree('zigpc__datastore_8h_source.html',''); 
 <div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;                                       <span class="keyword">const</span> <span class="keywordtype">char</span> *log_prefix,</div>
 <div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;                                       <span class="keyword">const</span> <a class="code" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64);</div>
 <div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160; </div>
-<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;}</div>
-<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160; </div>
-<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// ZIGPC_DATASTORE_H</span></div>
-<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160; </div>
+<div class="line"><a name="l00911"></a><span class="lineno"><a class="line" href="group__zigpc__datastore.html#gab6ef17ac6d64aec627f9171e6312e193">  911</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zigpc__datastore.html#gab6ef17ac6d64aec627f9171e6312e193">zigpc_datastore_log_clusters</a>(</div>
+<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;    <span class="keyword">const</span> <a class="code" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64,</div>
+<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;    <span class="keyword">const</span> <a class="code" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id);</div>
+<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160; </div>
+<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;}</div>
+<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160; </div>
+<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// ZIGPC_DATASTORE_H</span></div>
+<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160; </div>
 <div class="ttc" id="agroup__ctimer_html_ga43a278d13284fb3412e9eee1db1d967e"><div class="ttname"><a href="group__ctimer.html#ga43a278d13284fb3412e9eee1db1d967e">data</a></div><div class="ttdeci">#define data</div><div class="ttdef"><b>Definition:</b> ctimer.c:49</div></div>
 <div class="ttc" id="agroup__mqtt__client_html_ga0ca7f88ce34fc77632b52fdc1b7f426a"><div class="ttname"><a href="group__mqtt__client.html#ga0ca7f88ce34fc77632b52fdc1b7f426a">__attribute__</a></div><div class="ttdeci">__attribute__((unused)) static const char *event_names[]</div></div>
 <div class="ttc" id="agroup__sl__log_html_gacd69524374ffb27db69ca4d5ed0e6851"><div class="ttname"><a href="group__sl__log.html#gacd69524374ffb27db69ca4d5ed0e6851">sl_log_level_t</a></div><div class="ttdeci">enum sl_log_level sl_log_level_t</div><div class="ttdoc">Log levels.</div></div>
@@ -450,6 +454,7 @@ $(document).ready(function(){initNavTree('zigpc__datastore_8h_source.html',''); 
 <div class="ttc" id="agroup__zigpc__datastore_html_ga95041f1583eaa56584fdb3ad05c56ac5"><div class="ttname"><a href="group__zigpc__datastore.html#ga95041f1583eaa56584fdb3ad05c56ac5">zigpc_datastore_write_network</a></div><div class="ttdeci">sl_status_t zigpc_datastore_write_network(const zigpc_network_data_t *data)</div><div class="ttdoc">Write data to persisted network entity.</div></div>
 <div class="ttc" id="agroup__zigpc__datastore_html_ga9ac930469e7098dcc25d5b95d25e6b6f"><div class="ttname"><a href="group__zigpc__datastore.html#ga9ac930469e7098dcc25d5b95d25e6b6f">zigpc_datastore_remove_device</a></div><div class="ttdeci">sl_status_t zigpc_datastore_remove_device(const zigbee_eui64_t eui64)</div><div class="ttdoc">Remove persisted device entity.</div></div>
 <div class="ttc" id="agroup__zigpc__datastore_html_gaae53c3a56652dd496b0f68e4d1e8b643"><div class="ttname"><a href="group__zigpc__datastore.html#gaae53c3a56652dd496b0f68e4d1e8b643">zigpc_datastore_write_device</a></div><div class="ttdeci">sl_status_t zigpc_datastore_write_device(const zigbee_eui64_t eui64, const zigpc_device_data_t *data)</div><div class="ttdoc">Write data to a persisted device entity.</div></div>
+<div class="ttc" id="agroup__zigpc__datastore_html_gab6ef17ac6d64aec627f9171e6312e193"><div class="ttname"><a href="group__zigpc__datastore.html#gab6ef17ac6d64aec627f9171e6312e193">zigpc_datastore_log_clusters</a></div><div class="ttdeci">void zigpc_datastore_log_clusters(const zigbee_eui64_t eui64, const zigbee_endpoint_id_t endpoint_id)</div><div class="ttdoc">Log clusters on an EUI64, endpoint. Logs both server and client clusters.</div></div>
 <div class="ttc" id="agroup__zigpc__datastore_html_gabec65f1f0f37ae2fe2ebb73736a34ec7"><div class="ttname"><a href="group__zigpc__datastore.html#gabec65f1f0f37ae2fe2ebb73736a34ec7">zigpc_datastore_find_cluster_by_index</a></div><div class="ttdeci">sl_status_t zigpc_datastore_find_cluster_by_index(const zigbee_eui64_t eui64, zigbee_endpoint_id_t endpoint_id, zcl_cluster_side_t cluster_side, size_t index, zcl_cluster_id_t *cluster_id)</div><div class="ttdoc">Find a particular cluster entity persisted under a device endpoint and retrieve its search key (clust...</div></div>
 <div class="ttc" id="agroup__zigpc__datastore_html_gac007d70b235cfc66043f354a5d0330d6"><div class="ttname"><a href="group__zigpc__datastore.html#gac007d70b235cfc66043f354a5d0330d6">zigpc_datastore_contains_group</a></div><div class="ttdeci">bool zigpc_datastore_contains_group(const zigbee_eui64_t eui64, zigbee_endpoint_id_t endpoint_id, bool is_reported, zigbee_group_id_t group_id)</div><div class="ttdoc">Determine if a particular group ID is supported under a device endpoint.</div></div>
 <div class="ttc" id="agroup__zigpc__datastore_html_gacc4295407e045503061e209122138761"><div class="ttname"><a href="group__zigpc__datastore.html#gacc4295407e045503061e209122138761">zigpc_datastore_write_attribute_list</a></div><div class="ttdeci">sl_status_t zigpc_datastore_write_attribute_list(const zigbee_eui64_t eui64, zigbee_endpoint_id_t endpoint_id, zcl_cluster_side_t cluster_side, zcl_cluster_id_t cluster_id, const zcl_attribute_id_t *attribute_list, size_t attribute_count)</div><div class="ttdoc">Write attribute list under a given cluster. This function will overwrite any existing list by removin...</div></div>
@@ -478,7 +483,7 @@ $(document).ready(function(){initNavTree('zigpc__datastore_8h_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_fd74d2cee03cec1d978c7e6c3dd4b8d0.html">datastore</a></li><li class="navelem"><a class="el" href="dir_80fe3481d5903cb87f5f36bba7d2331b.html">include</a></li><li class="navelem"><a class="el" href="zigpc__datastore_8h.html">zigpc_datastore.h</a></li>
-    <li class="footer">Generated on Wed Aug 9 2023 15:55:50 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:06 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

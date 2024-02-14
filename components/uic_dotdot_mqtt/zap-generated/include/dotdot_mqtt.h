@@ -9429,7 +9429,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_lock_door_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_lock_door_response_callback_t)(
@@ -9443,7 +9443,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_door_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_door_response_callback_t)(
@@ -9457,7 +9457,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_toggle_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_toggle_response_callback_t)(
@@ -9473,7 +9473,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint16_t timeout_in_seconds,
 
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_with_timeout_response_callback_t)(
@@ -9502,14 +9502,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_log_record_response_callback
 
     DrlkOperEventSource source_operation_event,
 
-    uint8_t eventid_or_alarm_code,
+    uint8_t event_id_or_alarm_code,
 
     uint16_t userid,
 
     const char* pin
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_setpin_code_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
@@ -9522,21 +9522,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_setpin_code_callback_t)(
     const char* pin
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_setpin_code_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkSetCodeStatus status
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_getpin_code_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkPINUserID userid
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
@@ -9549,26 +9549,26 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t)
     const char* code
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clearpin_code_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkPINUserID userid
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkPassFailStatus status
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
@@ -9827,7 +9827,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_type_response_callback_
     DrlkUserType user_type
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_setrfid_code_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
@@ -9840,21 +9840,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_setrfid_code_callback_t)(
     const char* rfid_code
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkSetCodeStatus status
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_getrfid_code_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkRFIDUserID userid
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
@@ -9867,30 +9867,68 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t
     const char* rfid_code
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clearrfid_code_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkRFIDUserID userid
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkPassFailStatus status
 
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DrlkPassFailStatus status
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    DataOperationTypeEnum operation_type,
+
+    uint16_t user_index,
+
+    const char* user_name,
+
+    uint32_t user_uniqueid,
+
+    DrlkUserStatus user_status,
+
+    DrlkUserType user_type,
+
+    CredentialRuleEnum credential_rule
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_index
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_response_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_index
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_operating_event_notification_callback_t)(
@@ -9931,6 +9969,54 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_programming_event_notification_c
     const char* data
 
 );
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_credential_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    DataOperationTypeEnum operation_type,
+
+    CredentialStruct credential,
+
+    const char* credential_data,
+
+    uint16_t user_index,
+
+    DrlkUserStatus user_status,
+
+    DrlkUserType user_type
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_credential_response_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_credential_status_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    CredentialStruct credential
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_credential_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    CredentialStruct credential
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unbolt_door_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    const char* pin_code
+
+);
 
 typedef struct {
   uint8_t lock_state;
@@ -9942,15 +10028,17 @@ typedef struct {
   uint16_t open_period;
   uint16_t number_of_log_records_supported;
   uint16_t number_of_total_users_supported;
-  uint16_t number_ofpin_users_supported;
-  uint16_t number_ofrfid_users_supported;
+  uint16_t number_of_pin_users_supported;
+  uint16_t number_of_rfid_users_supported;
   uint8_t number_of_week_day_schedules_supported_per_user;
   uint8_t number_of_year_day_schedules_supported_per_user;
   uint8_t number_of_holiday_schedules_supported;
-  uint8_t maxpin_code_length;
-  uint8_t minpin_code_length;
-  uint8_t maxrfid_code_length;
-  uint8_t minrfid_code_length;
+  uint8_t max_pin_code_length;
+  uint8_t min_pin_code_length;
+  uint8_t max_rfid_code_length;
+  uint8_t min_rfid_code_length;
+  uint8_t credential_rules_support;
+  uint8_t number_of_credentials_supported_per_user;
   bool enable_logging;
   const char* language;
   uint8_t led_settings;
@@ -9963,11 +10051,13 @@ typedef struct {
   bool enable_one_touch_locking;
   bool enable_inside_statusled;
   bool enable_privacy_mode_button;
+  uint8_t local_programming_features;
   uint8_t wrong_code_entry_limit;
   uint8_t user_code_temporary_disable_time;
-  bool sendpin_over_the_air;
-  bool requirepi_nforrf_operation;
+  bool send_pin_over_the_air;
+  bool require_pi_nfor_rf_operation;
   uint8_t security_level;
+  uint16_t expiring_user_timeout;
   uint16_t alarm_mask;
   uint16_t keypad_operation_event_mask;
   uint16_t rf_operation_event_mask;
@@ -9976,6 +10066,7 @@ typedef struct {
   uint16_t keypad_programming_event_mask;
   uint16_t rf_programming_event_mask;
   uint16_t rfid_programming_event_mask;
+  uint16_t feature_map;
 } uic_mqtt_dotdot_door_lock_state_t;
 
 typedef struct {
@@ -9988,15 +10079,17 @@ typedef struct {
   bool open_period;
   bool number_of_log_records_supported;
   bool number_of_total_users_supported;
-  bool number_ofpin_users_supported;
-  bool number_ofrfid_users_supported;
+  bool number_of_pin_users_supported;
+  bool number_of_rfid_users_supported;
   bool number_of_week_day_schedules_supported_per_user;
   bool number_of_year_day_schedules_supported_per_user;
   bool number_of_holiday_schedules_supported;
-  bool maxpin_code_length;
-  bool minpin_code_length;
-  bool maxrfid_code_length;
-  bool minrfid_code_length;
+  bool max_pin_code_length;
+  bool min_pin_code_length;
+  bool max_rfid_code_length;
+  bool min_rfid_code_length;
+  bool credential_rules_support;
+  bool number_of_credentials_supported_per_user;
   bool enable_logging;
   bool language;
   bool led_settings;
@@ -10009,11 +10102,13 @@ typedef struct {
   bool enable_one_touch_locking;
   bool enable_inside_statusled;
   bool enable_privacy_mode_button;
+  bool local_programming_features;
   bool wrong_code_entry_limit;
   bool user_code_temporary_disable_time;
-  bool sendpin_over_the_air;
-  bool requirepi_nforrf_operation;
+  bool send_pin_over_the_air;
+  bool require_pi_nfor_rf_operation;
   bool security_level;
+  bool expiring_user_timeout;
   bool alarm_mask;
   bool keypad_operation_event_mask;
   bool rf_operation_event_mask;
@@ -10022,6 +10117,7 @@ typedef struct {
   bool keypad_programming_event_mask;
   bool rf_programming_event_mask;
   bool rfid_programming_event_mask;
+  bool feature_map;
 } uic_mqtt_dotdot_door_lock_updated_state_t;
 
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_write_attributes_callback_t)(
@@ -10044,7 +10140,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_force_read_attributes_callback_t
  * @brief Command fields for DoorLock/LockDoor
  */
 typedef struct {
-  const char* pin_orrfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_lock_door_fields_t;
 
 /**
@@ -10058,7 +10154,7 @@ typedef struct {
  * @brief Command fields for DoorLock/UnlockDoor
  */
 typedef struct {
-  const char* pin_orrfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_unlock_door_fields_t;
 
 /**
@@ -10072,7 +10168,7 @@ typedef struct {
  * @brief Command fields for DoorLock/Toggle
  */
 typedef struct {
-  const char* pin_orrfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_toggle_fields_t;
 
 /**
@@ -10088,7 +10184,7 @@ typedef struct {
 typedef struct {
   uint16_t timeout_in_seconds;
 
-  const char* pin_orrfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_unlock_with_timeout_fields_t;
 
 /**
@@ -10117,7 +10213,7 @@ typedef struct {
 
   DrlkOperEventSource source_operation_event;
 
-  uint8_t eventid_or_alarm_code;
+  uint8_t event_id_or_alarm_code;
 
   uint16_t userid;
 
@@ -10135,21 +10231,21 @@ typedef struct {
   DrlkUserType user_type;
 
   const char* pin;
-} uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t;
+} uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/SetPINCodeResponse
  */
 typedef struct {
   DrlkSetCodeStatus status;
-} uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetPINCode
  */
 typedef struct {
   DrlkPINUserID userid;
-} uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t;
+} uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetPINCodeResponse
@@ -10162,28 +10258,28 @@ typedef struct {
   DrlkUserType user_type;
 
   const char* code;
-} uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearPINCode
  */
 typedef struct {
   DrlkPINUserID userid;
-} uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t;
+} uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearPINCodeResponse
  */
 typedef struct {
   DrlkPassFailStatus status;
-} uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearAllPINCodesResponse
  */
 typedef struct {
   DrlkPassFailStatus status;
-} uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/SetUserStatus
@@ -10448,21 +10544,21 @@ typedef struct {
   DrlkUserType user_type;
 
   const char* rfid_code;
-} uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t;
+} uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/SetRFIDCodeResponse
  */
 typedef struct {
   DrlkSetCodeStatus status;
-} uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetRFIDCode
  */
 typedef struct {
   DrlkRFIDUserID userid;
-} uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t;
+} uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetRFIDCodeResponse
@@ -10475,28 +10571,61 @@ typedef struct {
   DrlkUserType user_type;
 
   const char* rfid_code;
-} uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearRFIDCode
  */
 typedef struct {
   DrlkRFIDUserID userid;
-} uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t;
+} uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearRFIDCodeResponse
  */
 typedef struct {
   DrlkPassFailStatus status;
-} uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearAllRFIDCodesResponse
  */
 typedef struct {
   DrlkPassFailStatus status;
-} uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t;
+} uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/SetUser
+ */
+typedef struct {
+  DataOperationTypeEnum operation_type;
+
+  uint16_t user_index;
+
+  const char* user_name;
+
+  uint32_t user_uniqueid;
+
+  DrlkUserStatus user_status;
+
+  DrlkUserType user_type;
+
+  CredentialRuleEnum credential_rule;
+} uic_mqtt_dotdot_door_lock_command_set_user_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/GetUser
+ */
+typedef struct {
+  uint16_t user_index;
+} uic_mqtt_dotdot_door_lock_command_get_user_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/ClearUser
+ */
+typedef struct {
+  uint16_t user_index;
+} uic_mqtt_dotdot_door_lock_command_clear_user_fields_t;
 
 /**
  * @brief Command fields for DoorLock/OperatingEventNotification
@@ -10535,6 +10664,44 @@ typedef struct {
 
   const char* data;
 } uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/SetCredential
+ */
+typedef struct {
+  DataOperationTypeEnum operation_type;
+
+  CredentialStruct credential;
+
+  const char* credential_data;
+
+  uint16_t user_index;
+
+  DrlkUserStatus user_status;
+
+  DrlkUserType user_type;
+} uic_mqtt_dotdot_door_lock_command_set_credential_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/GetCredentialStatus
+ */
+typedef struct {
+  CredentialStruct credential;
+} uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/ClearCredential
+ */
+typedef struct {
+  CredentialStruct credential;
+} uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t;
+
+/**
+ * @brief Command fields for DoorLock/UnboltDoor
+ */
+typedef struct {
+  const char* pin_code;
+} uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t;
 
 
 /**
@@ -10939,324 +11106,324 @@ void uic_mqtt_dotdot_door_lock_generated_get_log_record_response_callback_unset(
 void uic_mqtt_dotdot_door_lock_generated_get_log_record_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/setpin_code is received.
+ * DoorLock/Commands/set_pin_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setpin_code_callback_set(const uic_mqtt_dotdot_door_lock_setpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_pin_code_callback_set(const uic_mqtt_dotdot_door_lock_set_pin_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/setpin_code is received.
+ * DoorLock/Commands/set_pin_code is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setpin_code_callback_unset(const uic_mqtt_dotdot_door_lock_setpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_pin_code_callback_unset(const uic_mqtt_dotdot_door_lock_set_pin_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/setpin_code is received.
+ * DoorLock/Commands/set_pin_code is received.
  */
-void uic_mqtt_dotdot_door_lock_setpin_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_set_pin_code_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/setpin_code is received.
+ * +/DoorLock/GeneratedCommands/set_pin_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setpin_code_callback_set(const uic_mqtt_dotdot_door_lock_setpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_pin_code_callback_set(const uic_mqtt_dotdot_door_lock_set_pin_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/setpin_code is received.
+ * +/DoorLock/GeneratedCommands/set_pin_code is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setpin_code_callback_unset(const uic_mqtt_dotdot_door_lock_setpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_pin_code_callback_unset(const uic_mqtt_dotdot_door_lock_set_pin_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/setpin_code is received.
+ * +/DoorLock/GeneratedCommands/set_pin_code is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_setpin_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_set_pin_code_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/setpin_code_response is received.
+ * DoorLock/Commands/set_pin_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setpin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_setpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/setpin_code_response is received.
+ * DoorLock/Commands/set_pin_code_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setpin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_setpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/setpin_code_response is received.
+ * DoorLock/Commands/set_pin_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_setpin_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/setpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/set_pin_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setpin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_setpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_pin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/setpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/set_pin_code_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setpin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_setpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_pin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/setpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/set_pin_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_setpin_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_set_pin_code_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/getpin_code is received.
+ * DoorLock/Commands/get_pin_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getpin_code_callback_set(const uic_mqtt_dotdot_door_lock_getpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_pin_code_callback_set(const uic_mqtt_dotdot_door_lock_get_pin_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/getpin_code is received.
+ * DoorLock/Commands/get_pin_code is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getpin_code_callback_unset(const uic_mqtt_dotdot_door_lock_getpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_pin_code_callback_unset(const uic_mqtt_dotdot_door_lock_get_pin_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/getpin_code is received.
+ * DoorLock/Commands/get_pin_code is received.
  */
-void uic_mqtt_dotdot_door_lock_getpin_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_get_pin_code_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/getpin_code is received.
+ * +/DoorLock/GeneratedCommands/get_pin_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getpin_code_callback_set(const uic_mqtt_dotdot_door_lock_getpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_pin_code_callback_set(const uic_mqtt_dotdot_door_lock_get_pin_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/getpin_code is received.
+ * +/DoorLock/GeneratedCommands/get_pin_code is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getpin_code_callback_unset(const uic_mqtt_dotdot_door_lock_getpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_pin_code_callback_unset(const uic_mqtt_dotdot_door_lock_get_pin_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/getpin_code is received.
+ * +/DoorLock/GeneratedCommands/get_pin_code is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_getpin_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_get_pin_code_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/getpin_code_response is received.
+ * DoorLock/Commands/get_pin_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getpin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/getpin_code_response is received.
+ * DoorLock/Commands/get_pin_code_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getpin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/getpin_code_response is received.
+ * DoorLock/Commands/get_pin_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_getpin_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/getpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/get_pin_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getpin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_pin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/getpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/get_pin_code_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getpin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_pin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/getpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/get_pin_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_getpin_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_get_pin_code_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clearpin_code is received.
+ * DoorLock/Commands/clear_pin_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearpin_code_callback_set(const uic_mqtt_dotdot_door_lock_clearpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_pin_code_callback_set(const uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clearpin_code is received.
+ * DoorLock/Commands/clear_pin_code is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearpin_code_callback_unset(const uic_mqtt_dotdot_door_lock_clearpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_pin_code_callback_unset(const uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clearpin_code is received.
+ * DoorLock/Commands/clear_pin_code is received.
  */
-void uic_mqtt_dotdot_door_lock_clearpin_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_pin_code_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clearpin_code is received.
+ * +/DoorLock/GeneratedCommands/clear_pin_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearpin_code_callback_set(const uic_mqtt_dotdot_door_lock_clearpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_pin_code_callback_set(const uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clearpin_code is received.
+ * +/DoorLock/GeneratedCommands/clear_pin_code is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearpin_code_callback_unset(const uic_mqtt_dotdot_door_lock_clearpin_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_pin_code_callback_unset(const uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clearpin_code is received.
+ * +/DoorLock/GeneratedCommands/clear_pin_code is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clearpin_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_pin_code_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clearpin_code_response is received.
+ * DoorLock/Commands/clear_pin_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clearpin_code_response is received.
+ * DoorLock/Commands/clear_pin_code_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clearpin_code_response is received.
+ * DoorLock/Commands/clear_pin_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clearpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/clear_pin_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearpin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_pin_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clearpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/clear_pin_code_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearpin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_pin_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clearpin_code_response is received.
+ * +/DoorLock/GeneratedCommands/clear_pin_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clearpin_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_pin_code_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clear_allpin_codes is received.
+ * DoorLock/Commands/clear_all_pin_codes is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clear_allpin_codes is received.
+ * DoorLock/Commands/clear_all_pin_codes is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clear_allpin_codes is received.
+ * DoorLock/Commands/clear_all_pin_codes is received.
  */
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allpin_codes is received.
+ * +/DoorLock/GeneratedCommands/clear_all_pin_codes is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allpin_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_pin_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allpin_codes is received.
+ * +/DoorLock/GeneratedCommands/clear_all_pin_codes is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allpin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_pin_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clear_allpin_codes is received.
+ * +/DoorLock/GeneratedCommands/clear_all_pin_codes is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allpin_codes_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_all_pin_codes_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clear_allpin_codes_response is received.
+ * DoorLock/Commands/clear_all_pin_codes_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clear_allpin_codes_response is received.
+ * DoorLock/Commands/clear_all_pin_codes_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clear_allpin_codes_response is received.
+ * DoorLock/Commands/clear_all_pin_codes_response is received.
  */
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allpin_codes_response is received.
+ * +/DoorLock/GeneratedCommands/clear_all_pin_codes_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allpin_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_pin_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allpin_codes_response is received.
+ * +/DoorLock/GeneratedCommands/clear_all_pin_codes_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allpin_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_pin_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clear_allpin_codes_response is received.
+ * +/DoorLock/GeneratedCommands/clear_all_pin_codes_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allpin_codes_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_all_pin_codes_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
  * DoorLock/Commands/set_user_status is received.
@@ -12299,324 +12466,484 @@ void uic_mqtt_dotdot_door_lock_generated_get_user_type_response_callback_unset(c
 void uic_mqtt_dotdot_door_lock_generated_get_user_type_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/setrfid_code is received.
+ * DoorLock/Commands/set_rfid_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setrfid_code_callback_set(const uic_mqtt_dotdot_door_lock_setrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_rfid_code_callback_set(const uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/setrfid_code is received.
+ * DoorLock/Commands/set_rfid_code is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setrfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_setrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_rfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/setrfid_code is received.
+ * DoorLock/Commands/set_rfid_code is received.
  */
-void uic_mqtt_dotdot_door_lock_setrfid_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_set_rfid_code_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/setrfid_code is received.
+ * +/DoorLock/GeneratedCommands/set_rfid_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setrfid_code_callback_set(const uic_mqtt_dotdot_door_lock_setrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_rfid_code_callback_set(const uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/setrfid_code is received.
+ * +/DoorLock/GeneratedCommands/set_rfid_code is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setrfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_setrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_rfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/setrfid_code is received.
+ * +/DoorLock/GeneratedCommands/set_rfid_code is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_setrfid_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_set_rfid_code_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/setrfid_code_response is received.
+ * DoorLock/Commands/set_rfid_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/setrfid_code_response is received.
+ * DoorLock/Commands/set_rfid_code_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/setrfid_code_response is received.
+ * DoorLock/Commands/set_rfid_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/setrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/set_rfid_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setrfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_rfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/setrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/set_rfid_code_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_setrfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_set_rfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/setrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/set_rfid_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_setrfid_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_set_rfid_code_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/getrfid_code is received.
+ * DoorLock/Commands/get_rfid_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getrfid_code_callback_set(const uic_mqtt_dotdot_door_lock_getrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_rfid_code_callback_set(const uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/getrfid_code is received.
+ * DoorLock/Commands/get_rfid_code is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getrfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_getrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_rfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/getrfid_code is received.
+ * DoorLock/Commands/get_rfid_code is received.
  */
-void uic_mqtt_dotdot_door_lock_getrfid_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_get_rfid_code_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/getrfid_code is received.
+ * +/DoorLock/GeneratedCommands/get_rfid_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getrfid_code_callback_set(const uic_mqtt_dotdot_door_lock_getrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_rfid_code_callback_set(const uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/getrfid_code is received.
+ * +/DoorLock/GeneratedCommands/get_rfid_code is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getrfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_getrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_rfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/getrfid_code is received.
+ * +/DoorLock/GeneratedCommands/get_rfid_code is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_getrfid_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_get_rfid_code_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/getrfid_code_response is received.
+ * DoorLock/Commands/get_rfid_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/getrfid_code_response is received.
+ * DoorLock/Commands/get_rfid_code_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/getrfid_code_response is received.
+ * DoorLock/Commands/get_rfid_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/getrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/get_rfid_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getrfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_rfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/getrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/get_rfid_code_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_getrfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_get_rfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/getrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/get_rfid_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_getrfid_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_get_rfid_code_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clearrfid_code is received.
+ * DoorLock/Commands/clear_rfid_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearrfid_code_callback_set(const uic_mqtt_dotdot_door_lock_clearrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_set(const uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clearrfid_code is received.
+ * DoorLock/Commands/clear_rfid_code is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearrfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_clearrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clearrfid_code is received.
+ * DoorLock/Commands/clear_rfid_code is received.
  */
-void uic_mqtt_dotdot_door_lock_clearrfid_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clearrfid_code is received.
+ * +/DoorLock/GeneratedCommands/clear_rfid_code is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearrfid_code_callback_set(const uic_mqtt_dotdot_door_lock_clearrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_rfid_code_callback_set(const uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clearrfid_code is received.
+ * +/DoorLock/GeneratedCommands/clear_rfid_code is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearrfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_clearrfid_code_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_rfid_code_callback_unset(const uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clearrfid_code is received.
+ * +/DoorLock/GeneratedCommands/clear_rfid_code is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clearrfid_code_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_rfid_code_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clearrfid_code_response is received.
+ * DoorLock/Commands/clear_rfid_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clearrfid_code_response is received.
+ * DoorLock/Commands/clear_rfid_code_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clearrfid_code_response is received.
+ * DoorLock/Commands/clear_rfid_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clearrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/clear_rfid_code_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearrfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_rfid_code_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clearrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/clear_rfid_code_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clearrfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_rfid_code_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clearrfid_code_response is received.
+ * +/DoorLock/GeneratedCommands/clear_rfid_code_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clearrfid_code_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_rfid_code_response_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clear_allrfid_codes is received.
+ * DoorLock/Commands/clear_all_rfid_codes is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clear_allrfid_codes is received.
+ * DoorLock/Commands/clear_all_rfid_codes is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clear_allrfid_codes is received.
+ * DoorLock/Commands/clear_all_rfid_codes is received.
  */
-void uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allrfid_codes is received.
+ * +/DoorLock/GeneratedCommands/clear_all_rfid_codes is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allrfid_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_rfid_codes_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allrfid_codes is received.
+ * +/DoorLock/GeneratedCommands/clear_all_rfid_codes is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allrfid_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_rfid_codes_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clear_allrfid_codes is received.
+ * +/DoorLock/GeneratedCommands/clear_all_rfid_codes is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allrfid_codes_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_all_rfid_codes_callback_clear();
 /**
  * @brief Setup callback to be called when a
- * DoorLock/Commands/clear_allrfid_codes_response is received.
+ * DoorLock/Commands/clear_all_rfid_codes_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * DoorLock/Commands/clear_allrfid_codes_response is received.
+ * DoorLock/Commands/clear_all_rfid_codes_response is received.
  *
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * DoorLock/Commands/clear_allrfid_codes_response is received.
+ * DoorLock/Commands/clear_all_rfid_codes_response is received.
  */
-void uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_clear();
 
 /**
  * @brief Setup callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allrfid_codes_response is received.
+ * +/DoorLock/GeneratedCommands/clear_all_rfid_codes_response is received.
  *
  * Setting this callback will not overwrite the previous set callback
  * @param callback      Function to be called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allrfid_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_rfid_codes_response_callback_set(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t callback);
 /**
  * @brief Unsets callback to be called when a
- * +/DoorLock/GeneratedCommands/clear_allrfid_codes_response is received.
+ * +/DoorLock/GeneratedCommands/clear_all_rfid_codes_response is received.
  * @param callback      Function to be no longer called on command reception
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allrfid_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_t callback);
+void uic_mqtt_dotdot_door_lock_generated_clear_all_rfid_codes_response_callback_unset(const uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t callback);
 /**
  * @brief Clears all callbacks registered for when
- * +/DoorLock/GeneratedCommands/clear_allrfid_codes_response is received.
+ * +/DoorLock/GeneratedCommands/clear_all_rfid_codes_response is received.
  */
-void uic_mqtt_dotdot_door_lock_generated_clear_allrfid_codes_response_callback_clear();
+void uic_mqtt_dotdot_door_lock_generated_clear_all_rfid_codes_response_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/set_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_set_user_callback_set(const uic_mqtt_dotdot_door_lock_set_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/set_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_set_user_callback_unset(const uic_mqtt_dotdot_door_lock_set_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/set_user is received.
+ */
+void uic_mqtt_dotdot_door_lock_set_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/set_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_user_callback_set(const uic_mqtt_dotdot_door_lock_set_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/set_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_user_callback_unset(const uic_mqtt_dotdot_door_lock_set_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/set_user is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_user_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/get_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_user_callback_set(const uic_mqtt_dotdot_door_lock_get_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/get_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_user_callback_unset(const uic_mqtt_dotdot_door_lock_get_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/get_user is received.
+ */
+void uic_mqtt_dotdot_door_lock_get_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_user_callback_set(const uic_mqtt_dotdot_door_lock_get_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_user_callback_unset(const uic_mqtt_dotdot_door_lock_get_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/get_user is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_user_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/get_user_response is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_user_response_callback_set(const uic_mqtt_dotdot_door_lock_get_user_response_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/get_user_response is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_user_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_user_response_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/get_user_response is received.
+ */
+void uic_mqtt_dotdot_door_lock_get_user_response_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_user_response is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_user_response_callback_set(const uic_mqtt_dotdot_door_lock_get_user_response_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_user_response is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_user_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_user_response_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/get_user_response is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_user_response_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/clear_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_clear_user_callback_set(const uic_mqtt_dotdot_door_lock_clear_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/clear_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_clear_user_callback_unset(const uic_mqtt_dotdot_door_lock_clear_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/clear_user is received.
+ */
+void uic_mqtt_dotdot_door_lock_clear_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/clear_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_clear_user_callback_set(const uic_mqtt_dotdot_door_lock_clear_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/clear_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_clear_user_callback_unset(const uic_mqtt_dotdot_door_lock_clear_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/clear_user is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_clear_user_callback_clear();
 /**
  * @brief Setup callback to be called when a
  * DoorLock/Commands/operating_event_notification is received.
@@ -12697,6 +13024,246 @@ void uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback
  * +/DoorLock/GeneratedCommands/programming_event_notification is received.
  */
 void uic_mqtt_dotdot_door_lock_generated_programming_event_notification_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/set_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_set_credential_callback_set(const uic_mqtt_dotdot_door_lock_set_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/set_credential is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_set_credential_callback_unset(const uic_mqtt_dotdot_door_lock_set_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/set_credential is received.
+ */
+void uic_mqtt_dotdot_door_lock_set_credential_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/set_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_credential_callback_set(const uic_mqtt_dotdot_door_lock_set_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/set_credential is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_credential_callback_unset(const uic_mqtt_dotdot_door_lock_set_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/set_credential is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_credential_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/set_credential_response is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_set_credential_response_callback_set(const uic_mqtt_dotdot_door_lock_set_credential_response_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/set_credential_response is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_set_credential_response_callback_unset(const uic_mqtt_dotdot_door_lock_set_credential_response_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/set_credential_response is received.
+ */
+void uic_mqtt_dotdot_door_lock_set_credential_response_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/set_credential_response is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_credential_response_callback_set(const uic_mqtt_dotdot_door_lock_set_credential_response_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/set_credential_response is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_credential_response_callback_unset(const uic_mqtt_dotdot_door_lock_set_credential_response_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/set_credential_response is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_set_credential_response_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/get_credential_status is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_credential_status_callback_set(const uic_mqtt_dotdot_door_lock_get_credential_status_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/get_credential_status is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_credential_status_callback_unset(const uic_mqtt_dotdot_door_lock_get_credential_status_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/get_credential_status is received.
+ */
+void uic_mqtt_dotdot_door_lock_get_credential_status_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_credential_status is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_credential_status_callback_set(const uic_mqtt_dotdot_door_lock_get_credential_status_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_credential_status is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_credential_status_callback_unset(const uic_mqtt_dotdot_door_lock_get_credential_status_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/get_credential_status is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_credential_status_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/get_credential_status_response is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_set(const uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/get_credential_status_response is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/get_credential_status_response is received.
+ */
+void uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_credential_status_response is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_credential_status_response_callback_set(const uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/get_credential_status_response is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_credential_status_response_callback_unset(const uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/get_credential_status_response is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_get_credential_status_response_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/clear_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_clear_credential_callback_set(const uic_mqtt_dotdot_door_lock_clear_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/clear_credential is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_clear_credential_callback_unset(const uic_mqtt_dotdot_door_lock_clear_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/clear_credential is received.
+ */
+void uic_mqtt_dotdot_door_lock_clear_credential_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/clear_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_clear_credential_callback_set(const uic_mqtt_dotdot_door_lock_clear_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/clear_credential is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_clear_credential_callback_unset(const uic_mqtt_dotdot_door_lock_clear_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/clear_credential is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_clear_credential_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * DoorLock/Commands/unbolt_door is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_unbolt_door_callback_set(const uic_mqtt_dotdot_door_lock_unbolt_door_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * DoorLock/Commands/unbolt_door is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_unbolt_door_callback_unset(const uic_mqtt_dotdot_door_lock_unbolt_door_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * DoorLock/Commands/unbolt_door is received.
+ */
+void uic_mqtt_dotdot_door_lock_unbolt_door_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/DoorLock/GeneratedCommands/unbolt_door is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_unbolt_door_callback_set(const uic_mqtt_dotdot_door_lock_unbolt_door_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/DoorLock/GeneratedCommands/unbolt_door is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_door_lock_generated_unbolt_door_callback_unset(const uic_mqtt_dotdot_door_lock_unbolt_door_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/DoorLock/GeneratedCommands/unbolt_door is received.
+ */
+void uic_mqtt_dotdot_door_lock_generated_unbolt_door_callback_clear();
 
 /**
  * @brief Setup a callback for WriteAttribute to be called when a
@@ -13020,14 +13587,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_total_users_supported_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/NumberOfPINUsersSupported
  *
- * @param base_topic    topic prefix to publish, /number_ofpin_users_supported
+ * @param base_topic    topic prefix to publish, /number_of_pin_users_supported
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13036,13 +13603,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/NumberOfPINUsersSupported
  *
- * @param base_topic    topic prefix to publish, /number_ofpin_users_supported
+ * @param base_topic    topic prefix to publish, /number_of_pin_users_supported
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13050,14 +13617,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/NumberOfRFIDUsersSupported
  *
- * @param base_topic    topic prefix to publish, /number_ofrfid_users_supported
+ * @param base_topic    topic prefix to publish, /number_of_rfid_users_supported
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13066,13 +13633,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/NumberOfRFIDUsersSupported
  *
- * @param base_topic    topic prefix to publish, /number_ofrfid_users_supported
+ * @param base_topic    topic prefix to publish, /number_of_rfid_users_supported
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13170,14 +13737,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_unre
 /**
  * @brief Publish the attribute; DoorLock/Attributes/MaxPINCodeLength
  *
- * @param base_topic    topic prefix to publish, /maxpin_code_length
+ * @param base_topic    topic prefix to publish, /max_pin_code_length
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_maxpin_code_length_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
   const char *base_topic,
   uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13186,13 +13753,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_maxpin_code_length_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/MaxPINCodeLength
  *
- * @param base_topic    topic prefix to publish, /maxpin_code_length
+ * @param base_topic    topic prefix to publish, /max_pin_code_length
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_maxpin_code_length_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_max_pin_code_length_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13200,14 +13767,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_maxpin_code_length_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/MinPINCodeLength
  *
- * @param base_topic    topic prefix to publish, /minpin_code_length
+ * @param base_topic    topic prefix to publish, /min_pin_code_length
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_minpin_code_length_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
   const char *base_topic,
   uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13216,13 +13783,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_minpin_code_length_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/MinPINCodeLength
  *
- * @param base_topic    topic prefix to publish, /minpin_code_length
+ * @param base_topic    topic prefix to publish, /min_pin_code_length
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_minpin_code_length_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_min_pin_code_length_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13230,14 +13797,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_minpin_code_length_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/MaxRFIDCodeLength
  *
- * @param base_topic    topic prefix to publish, /maxrfid_code_length
+ * @param base_topic    topic prefix to publish, /max_rfid_code_length
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_maxrfid_code_length_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
   const char *base_topic,
   uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13246,13 +13813,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_maxrfid_code_length_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/MaxRFIDCodeLength
  *
- * @param base_topic    topic prefix to publish, /maxrfid_code_length
+ * @param base_topic    topic prefix to publish, /max_rfid_code_length
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_maxrfid_code_length_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_max_rfid_code_length_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13260,14 +13827,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_maxrfid_code_length_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/MinRFIDCodeLength
  *
- * @param base_topic    topic prefix to publish, /minrfid_code_length
+ * @param base_topic    topic prefix to publish, /min_rfid_code_length
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_minrfid_code_length_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
   const char *base_topic,
   uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13276,13 +13843,73 @@ sl_status_t uic_mqtt_dotdot_door_lock_minrfid_code_length_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/MinRFIDCodeLength
  *
- * @param base_topic    topic prefix to publish, /minrfid_code_length
+ * @param base_topic    topic prefix to publish, /min_rfid_code_length
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_minrfid_code_length_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_min_rfid_code_length_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; DoorLock/Attributes/CredentialRulesSupport
+ *
+ * @param base_topic    topic prefix to publish, /credential_rules_support
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_credential_rules_support_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; DoorLock/Attributes/CredentialRulesSupport
+ *
+ * @param base_topic    topic prefix to publish, /credential_rules_support
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_credential_rules_support_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; DoorLock/Attributes/NumberOfCredentialsSupportedPerUser
+ *
+ * @param base_topic    topic prefix to publish, /number_of_credentials_supported_per_user
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; DoorLock/Attributes/NumberOfCredentialsSupportedPerUser
+ *
+ * @param base_topic    topic prefix to publish, /number_of_credentials_supported_per_user
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13648,6 +14275,36 @@ sl_status_t uic_mqtt_dotdot_door_lock_enable_privacy_mode_button_unretain(
 );
 
 /**
+ * @brief Publish the attribute; DoorLock/Attributes/LocalProgrammingFeatures
+ *
+ * @param base_topic    topic prefix to publish, /local_programming_features
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_local_programming_features_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; DoorLock/Attributes/LocalProgrammingFeatures
+ *
+ * @param base_topic    topic prefix to publish, /local_programming_features
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_local_programming_features_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
  * @brief Publish the attribute; DoorLock/Attributes/WrongCodeEntryLimit
  *
  * @param base_topic    topic prefix to publish, /wrong_code_entry_limit
@@ -13710,14 +14367,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/SendPINOverTheAir
  *
- * @param base_topic    topic prefix to publish, /sendpin_over_the_air
+ * @param base_topic    topic prefix to publish, /send_pin_over_the_air
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_sendpin_over_the_air_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_send_pin_over_the_air_publish(
   const char *base_topic,
   bool value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13726,13 +14383,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_sendpin_over_the_air_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/SendPINOverTheAir
  *
- * @param base_topic    topic prefix to publish, /sendpin_over_the_air
+ * @param base_topic    topic prefix to publish, /send_pin_over_the_air
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_sendpin_over_the_air_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_send_pin_over_the_air_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13740,14 +14397,14 @@ sl_status_t uic_mqtt_dotdot_door_lock_sendpin_over_the_air_unretain(
 /**
  * @brief Publish the attribute; DoorLock/Attributes/RequirePINforRFOperation
  *
- * @param base_topic    topic prefix to publish, /requirepi_nforrf_operation
+ * @param base_topic    topic prefix to publish, /require_pi_nfor_rf_operation
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_publish(
+sl_status_t uic_mqtt_dotdot_door_lock_require_pi_nfor_rf_operation_publish(
   const char *base_topic,
   bool value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -13756,13 +14413,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_publish(
 /**
  * @brief Unretains a published attribute; DoorLock/Attributes/RequirePINforRFOperation
  *
- * @param base_topic    topic prefix to publish, /requirepi_nforrf_operation
+ * @param base_topic    topic prefix to publish, /require_pi_nfor_rf_operation
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_unretain(
+sl_status_t uic_mqtt_dotdot_door_lock_require_pi_nfor_rf_operation_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -13793,6 +14450,36 @@ sl_status_t uic_mqtt_dotdot_door_lock_security_level_publish(
  * @returns SL_STATUS_OK on success
  */
 sl_status_t uic_mqtt_dotdot_door_lock_security_level_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; DoorLock/Attributes/ExpiringUserTimeout
+ *
+ * @param base_topic    topic prefix to publish, /expiring_user_timeout
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; DoorLock/Attributes/ExpiringUserTimeout
+ *
+ * @param base_topic    topic prefix to publish, /expiring_user_timeout
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_expiring_user_timeout_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -14033,6 +14720,36 @@ sl_status_t uic_mqtt_dotdot_door_lock_rfid_programming_event_mask_publish(
  * @returns SL_STATUS_OK on success
  */
 sl_status_t uic_mqtt_dotdot_door_lock_rfid_programming_event_mask_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; DoorLock/Attributes/FeatureMap
+ *
+ * @param base_topic    topic prefix to publish, /feature_map
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_feature_map_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; DoorLock/Attributes/FeatureMap
+ *
+ * @param base_topic    topic prefix to publish, /feature_map
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_door_lock_feature_map_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -29083,9 +29800,9 @@ typedef struct {
   int16_t reactive_power;
   uint16_t apparent_power;
   int8_t power_factor;
-  uint16_t averagerms_voltage_measurement_period;
-  uint16_t averagerms_over_voltage_counter;
-  uint16_t averagerms_under_voltage_counter;
+  uint16_t average_rms_voltage_measurement_period;
+  uint16_t average_rms_over_voltage_counter;
+  uint16_t average_rms_under_voltage_counter;
   uint16_t rms_extreme_over_voltage_period;
   uint16_t rms_extreme_under_voltage_period;
   uint16_t rms_voltage_sag_period;
@@ -29104,8 +29821,8 @@ typedef struct {
   int16_t ac_current_overload;
   int16_t ac_active_power_overload;
   int16_t ac_reactive_power_overload;
-  int16_t averagerms_over_voltage;
-  int16_t averagerms_under_voltage;
+  int16_t average_rms_over_voltage;
+  int16_t average_rms_under_voltage;
   int16_t rms_extreme_over_voltage;
   int16_t rms_extreme_under_voltage;
   int16_t rms_voltage_sag;
@@ -29125,9 +29842,9 @@ typedef struct {
   int16_t reactive_power_phb;
   uint16_t apparent_power_phb;
   int8_t power_factor_phb;
-  uint16_t averagerms_voltage_measurement_period_phb;
-  uint16_t averagerms_over_voltage_counter_phb;
-  uint16_t averagerms_under_voltage_counter_phb;
+  uint16_t average_rms_voltage_measurement_period_phb;
+  uint16_t average_rms_over_voltage_counter_phb;
+  uint16_t average_rms_under_voltage_counter_phb;
   uint16_t rms_extreme_over_voltage_period_phb;
   uint16_t rms_extreme_under_voltage_period_phb;
   uint16_t rms_voltage_sag_period_phb;
@@ -29147,9 +29864,9 @@ typedef struct {
   int16_t reactive_power_phc;
   uint16_t apparent_power_phc;
   int8_t power_factor_phc;
-  uint16_t averagerms_voltage_measurement_period_phc;
-  uint16_t averagerms_over_voltage_counter_phc;
-  uint16_t averagerms_under_voltage_counter_phc;
+  uint16_t average_rms_voltage_measurement_period_phc;
+  uint16_t average_rms_over_voltage_counter_phc;
+  uint16_t average_rms_under_voltage_counter_phc;
   uint16_t rms_extreme_over_voltage_period_phc;
   uint16_t rms_extreme_under_voltage_period_phc;
   uint16_t rms_voltage_sag_period_phc;
@@ -29213,9 +29930,9 @@ typedef struct {
   bool reactive_power;
   bool apparent_power;
   bool power_factor;
-  bool averagerms_voltage_measurement_period;
-  bool averagerms_over_voltage_counter;
-  bool averagerms_under_voltage_counter;
+  bool average_rms_voltage_measurement_period;
+  bool average_rms_over_voltage_counter;
+  bool average_rms_under_voltage_counter;
   bool rms_extreme_over_voltage_period;
   bool rms_extreme_under_voltage_period;
   bool rms_voltage_sag_period;
@@ -29234,8 +29951,8 @@ typedef struct {
   bool ac_current_overload;
   bool ac_active_power_overload;
   bool ac_reactive_power_overload;
-  bool averagerms_over_voltage;
-  bool averagerms_under_voltage;
+  bool average_rms_over_voltage;
+  bool average_rms_under_voltage;
   bool rms_extreme_over_voltage;
   bool rms_extreme_under_voltage;
   bool rms_voltage_sag;
@@ -29255,9 +29972,9 @@ typedef struct {
   bool reactive_power_phb;
   bool apparent_power_phb;
   bool power_factor_phb;
-  bool averagerms_voltage_measurement_period_phb;
-  bool averagerms_over_voltage_counter_phb;
-  bool averagerms_under_voltage_counter_phb;
+  bool average_rms_voltage_measurement_period_phb;
+  bool average_rms_over_voltage_counter_phb;
+  bool average_rms_under_voltage_counter_phb;
   bool rms_extreme_over_voltage_period_phb;
   bool rms_extreme_under_voltage_period_phb;
   bool rms_voltage_sag_period_phb;
@@ -29277,9 +29994,9 @@ typedef struct {
   bool reactive_power_phc;
   bool apparent_power_phc;
   bool power_factor_phc;
-  bool averagerms_voltage_measurement_period_phc;
-  bool averagerms_over_voltage_counter_phc;
-  bool averagerms_under_voltage_counter_phc;
+  bool average_rms_voltage_measurement_period_phc;
+  bool average_rms_over_voltage_counter_phc;
+  bool average_rms_under_voltage_counter_phc;
   bool rms_extreme_over_voltage_period_phc;
   bool rms_extreme_under_voltage_period_phc;
   bool rms_voltage_sag_period_phc;
@@ -31239,14 +31956,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_unretain(
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod
  *
- * @param base_topic    topic prefix to publish, /averagerms_voltage_measurement_period
+ * @param base_topic    topic prefix to publish, /average_rms_voltage_measurement_period
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -31255,13 +31972,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod
  *
- * @param base_topic    topic prefix to publish, /averagerms_voltage_measurement_period
+ * @param base_topic    topic prefix to publish, /average_rms_voltage_measurement_period
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -31269,14 +31986,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage_counter
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage_counter
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -31285,13 +32002,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage_counter
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage_counter
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -31299,14 +32016,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage_counter
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage_counter
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -31315,13 +32032,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_coun
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage_counter
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage_counter
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -31869,14 +32586,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_reactive_power_overload_un
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltage
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_publish(
   const char *base_topic,
   int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -31885,13 +32602,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_publi
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltage
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -31899,14 +32616,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_unret
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltage
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_publish(
   const char *base_topic,
   int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -31915,13 +32632,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_publ
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltage
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -32499,14 +33216,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phb_unretain(
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB
  *
- * @param base_topic    topic prefix to publish, /averagerms_voltage_measurement_period_phb
+ * @param base_topic    topic prefix to publish, /average_rms_voltage_measurement_period_phb
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -32515,13 +33232,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB
  *
- * @param base_topic    topic prefix to publish, /averagerms_voltage_measurement_period_phb
+ * @param base_topic    topic prefix to publish, /average_rms_voltage_measurement_period_phb
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -32529,14 +33246,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage_counter_phb
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage_counter_phb
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -32545,13 +33262,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage_counter_phb
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage_counter_phb
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -32559,14 +33276,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage_counter_phb
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage_counter_phb
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -32575,13 +33292,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_coun
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage_counter_phb
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage_counter_phb
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -33159,14 +33876,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phc_unretain(
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC
  *
- * @param base_topic    topic prefix to publish, /averagerms_voltage_measurement_period_phc
+ * @param base_topic    topic prefix to publish, /average_rms_voltage_measurement_period_phc
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -33175,13 +33892,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC
  *
- * @param base_topic    topic prefix to publish, /averagerms_voltage_measurement_period_phc
+ * @param base_topic    topic prefix to publish, /average_rms_voltage_measurement_period_phc
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -33189,14 +33906,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measuremen
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage_counter_phc
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage_counter_phc
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -33205,13 +33922,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC
  *
- * @param base_topic    topic prefix to publish, /averagerms_over_voltage_counter_phc
+ * @param base_topic    topic prefix to publish, /average_rms_over_voltage_counter_phc
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -33219,14 +33936,14 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_count
 /**
  * @brief Publish the attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage_counter_phc
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage_counter_phc
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_publish(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -33235,13 +33952,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_coun
 /**
  * @brief Unretains a published attribute; ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC
  *
- * @param base_topic    topic prefix to publish, /averagerms_under_voltage_counter_phc
+ * @param base_topic    topic prefix to publish, /average_rms_under_voltage_counter_phc
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_unretain(
+sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -33440,9 +34157,9 @@ typedef struct {
   uint16_t aps_decrypt_failures;
   uint16_t packet_buffer_allocate_failures;
   uint16_t relayed_ucast;
-  uint16_t phy_tomac_queue_limit_reached;
+  uint16_t phy_to_mac_queue_limit_reached;
   uint16_t packet_validate_drop_count;
-  uint16_t averagemac_retry_peraps_message_sent;
+  uint16_t average_mac_retry_per_aps_message_sent;
   uint8_t last_messagelqi;
   int8_t last_messagerssi;
 } uic_mqtt_dotdot_diagnostics_state_t;
@@ -33475,9 +34192,9 @@ typedef struct {
   bool aps_decrypt_failures;
   bool packet_buffer_allocate_failures;
   bool relayed_ucast;
-  bool phy_tomac_queue_limit_reached;
+  bool phy_to_mac_queue_limit_reached;
   bool packet_validate_drop_count;
-  bool averagemac_retry_peraps_message_sent;
+  bool average_mac_retry_per_aps_message_sent;
   bool last_messagelqi;
   bool last_messagerssi;
 } uic_mqtt_dotdot_diagnostics_updated_state_t;
@@ -34362,14 +35079,14 @@ sl_status_t uic_mqtt_dotdot_diagnostics_relayed_ucast_unretain(
 /**
  * @brief Publish the attribute; Diagnostics/Attributes/PHYToMACQueueLimitReached
  *
- * @param base_topic    topic prefix to publish, /phy_tomac_queue_limit_reached
+ * @param base_topic    topic prefix to publish, /phy_to_mac_queue_limit_reached
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_publish(
+sl_status_t uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -34378,13 +35095,13 @@ sl_status_t uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_publish(
 /**
  * @brief Unretains a published attribute; Diagnostics/Attributes/PHYToMACQueueLimitReached
  *
- * @param base_topic    topic prefix to publish, /phy_tomac_queue_limit_reached
+ * @param base_topic    topic prefix to publish, /phy_to_mac_queue_limit_reached
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_unretain(
+sl_status_t uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -34422,14 +35139,14 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_unretain(
 /**
  * @brief Publish the attribute; Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent
  *
- * @param base_topic    topic prefix to publish, /averagemac_retry_peraps_message_sent
+ * @param base_topic    topic prefix to publish, /average_mac_retry_per_aps_message_sent
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_publish(
+sl_status_t uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
   const char *base_topic,
   uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -34438,13 +35155,13 @@ sl_status_t uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_pub
 /**
  * @brief Unretains a published attribute; Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent
  *
- * @param base_topic    topic prefix to publish, /averagemac_retry_peraps_message_sent
+ * @param base_topic    topic prefix to publish, /average_mac_retry_per_aps_message_sent
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_unretain(
+sl_status_t uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -34581,8 +35298,8 @@ typedef sl_status_t (*uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report
     uint8_t last_route_repeaters_count,
     const char* *last_route_repeaters,
 
-    uint8_t incomingrssi_repeaters_count,
-    const int8_t *incomingrssi_repeaters,
+    uint8_t incoming_rssi_repeaters_count,
+    const int8_t *incoming_rssi_repeaters,
 
     int8_t ackrssi,
 
@@ -34653,8 +35370,8 @@ typedef struct {
   uint8_t last_route_repeaters_count;
   const char* *last_route_repeaters;
 
-  uint8_t incomingrssi_repeaters_count;
-  const int8_t *incomingrssi_repeaters;
+  uint8_t incoming_rssi_repeaters_count;
+  const int8_t *incoming_rssi_repeaters;
 
   int8_t ackrssi;
 
@@ -36858,8 +37575,8 @@ typedef struct {
   const char* application_name;
   const char* application_version;
   bool application_connected;
-  size_t applicationmqtt_topics_count;
-  const char** applicationmqtt_topics;
+  size_t application_mqtt_topics_count;
+  const char** application_mqtt_topics;
   uint64_t uptime_minutes;
   uint64_t process_id;
   const char* hostname;
@@ -36874,18 +37591,18 @@ typedef struct {
   double mqtt_min_delivery_time_seconds;
   double mqtt_max_delivery_time_seconds;
   uint32_t application_statistics_reporting_interval_seconds;
-  double applicationcpu_usage_percent;
-  double applicationcpu_average_usage_percent;
-  double applicationcpu_min_usage_percent;
-  double applicationcpu_max_usage_percent;
-  double applicationram_usagemb;
+  double application_cpu_usage_percent;
+  double application_cpu_average_usage_percent;
+  double application_cpu_min_usage_percent;
+  double application_cpu_max_usage_percent;
+  double application_ram_usagemb;
 } uic_mqtt_dotdot_application_monitoring_state_t;
 
 typedef struct {
   bool application_name;
   bool application_version;
   bool application_connected;
-  bool applicationmqtt_topics;
+  bool application_mqtt_topics;
   bool uptime_minutes;
   bool process_id;
   bool hostname;
@@ -36900,11 +37617,11 @@ typedef struct {
   bool mqtt_min_delivery_time_seconds;
   bool mqtt_max_delivery_time_seconds;
   bool application_statistics_reporting_interval_seconds;
-  bool applicationcpu_usage_percent;
-  bool applicationcpu_average_usage_percent;
-  bool applicationcpu_min_usage_percent;
-  bool applicationcpu_max_usage_percent;
-  bool applicationram_usagemb;
+  bool application_cpu_usage_percent;
+  bool application_cpu_average_usage_percent;
+  bool application_cpu_min_usage_percent;
+  bool application_cpu_max_usage_percent;
+  bool application_ram_usagemb;
 } uic_mqtt_dotdot_application_monitoring_updated_state_t;
 
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_write_attributes_callback_t)(
@@ -37120,7 +37837,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_connected_unretai
 /**
  * @brief Publish the attribute; ApplicationMonitoring/Attributes/ApplicationMQTTTopics
  *
- * @param base_topic    topic prefix to publish, /applicationmqtt_topics
+ * @param base_topic    topic prefix to publish, /application_mqtt_topics
  *                      will be appended
  * @param value_count   Size of the array contained at value
  * @param value         Value to publish
@@ -37128,7 +37845,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_connected_unretai
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationmqtt_topics_publish(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_mqtt_topics_publish(
   const char *base_topic,
   size_t value_count,
   const char** value,
@@ -37138,13 +37855,13 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationmqtt_topics_publis
 /**
  * @brief Unretains a published attribute; ApplicationMonitoring/Attributes/ApplicationMQTTTopics
  *
- * @param base_topic    topic prefix to publish, /applicationmqtt_topics
+ * @param base_topic    topic prefix to publish, /application_mqtt_topics
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationmqtt_topics_unretain(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_mqtt_topics_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -37572,14 +38289,14 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_statistics_report
 /**
  * @brief Publish the attribute; ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_usage_percent
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_publish(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_usage_percent_publish(
   const char *base_topic,
   double value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -37588,13 +38305,13 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_
 /**
  * @brief Unretains a published attribute; ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_usage_percent
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_unretain(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_usage_percent_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -37602,14 +38319,14 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_
 /**
  * @brief Publish the attribute; ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_average_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_average_usage_percent
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_percent_publish(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_average_usage_percent_publish(
   const char *base_topic,
   double value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -37618,13 +38335,13 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_
 /**
  * @brief Unretains a published attribute; ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_average_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_average_usage_percent
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_percent_unretain(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_average_usage_percent_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -37632,14 +38349,14 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_
 /**
  * @brief Publish the attribute; ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_min_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_min_usage_percent
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_percent_publish(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_min_usage_percent_publish(
   const char *base_topic,
   double value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -37648,13 +38365,13 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_perc
 /**
  * @brief Unretains a published attribute; ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_min_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_min_usage_percent
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_percent_unretain(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_min_usage_percent_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -37662,14 +38379,14 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_perc
 /**
  * @brief Publish the attribute; ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_max_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_max_usage_percent
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_percent_publish(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_max_usage_percent_publish(
   const char *base_topic,
   double value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -37678,13 +38395,13 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_perc
 /**
  * @brief Unretains a published attribute; ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent
  *
- * @param base_topic    topic prefix to publish, /applicationcpu_max_usage_percent
+ * @param base_topic    topic prefix to publish, /application_cpu_max_usage_percent
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_percent_unretain(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_cpu_max_usage_percent_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -37692,14 +38409,14 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_perc
 /**
  * @brief Publish the attribute; ApplicationMonitoring/Attributes/ApplicationRAMUsageMB
  *
- * @param base_topic    topic prefix to publish, /applicationram_usagemb
+ * @param base_topic    topic prefix to publish, /application_ram_usagemb
  *                      will be appended
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_publish(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_ram_usagemb_publish(
   const char *base_topic,
   double value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
@@ -37708,13 +38425,13 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_publis
 /**
  * @brief Unretains a published attribute; ApplicationMonitoring/Attributes/ApplicationRAMUsageMB
  *
- * @param base_topic    topic prefix to publish, /applicationram_usagemb
+ * @param base_topic    topic prefix to publish, /application_ram_usagemb
  *                      will be appended
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
  *
  * @returns SL_STATUS_OK on success
  */
-sl_status_t uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_unretain(
+sl_status_t uic_mqtt_dotdot_application_monitoring_application_ram_usagemb_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
@@ -39573,6 +40290,160 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_co
 void uic_mqtt_dotdot_protocol_controller_network_management_publish_empty_supported_commands(
   const dotdot_unid_t unid
   );
+// Callback types used by the descriptor cluster
+
+typedef struct {
+  size_t device_type_list_count;
+  const DeviceTypeStruct* device_type_list;
+} uic_mqtt_dotdot_descriptor_state_t;
+
+typedef struct {
+  bool device_type_list;
+} uic_mqtt_dotdot_descriptor_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_descriptor_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_descriptor_state_t,
+    uic_mqtt_dotdot_descriptor_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_descriptor_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_descriptor_updated_state_t
+);
+
+
+
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/descriptor/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_descriptor_write_attributes_callback(
+  const uic_mqtt_dotdot_descriptor_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/descriptor/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_descriptor_write_attributes_callback(
+  const uic_mqtt_dotdot_descriptor_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/descriptor/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_descriptor_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/descriptor/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_descriptor_force_read_attributes_callback(
+  const uic_mqtt_dotdot_descriptor_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/descriptor/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_descriptor_force_read_attributes_callback(
+  const uic_mqtt_dotdot_descriptor_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/descriptor/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_descriptor_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; Descriptor/Attributes/DeviceTypeList
+ *
+ * @param base_topic    topic prefix to publish, /device_type_list
+ *                      will be appended
+ * @param value_count   Size of the array contained at value
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_descriptor_device_type_list_publish(
+  const char *base_topic,
+  size_t value_count,
+  const DeviceTypeStruct* value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; Descriptor/Attributes/DeviceTypeList
+ *
+ * @param base_topic    topic prefix to publish, /device_type_list
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_descriptor_device_type_list_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the Descriptor/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /Descriptor/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_descriptor_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to Descriptor/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /Descriptor/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_descriptor_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the Descriptor Cluster
+ *
+ * This function will iterate over all Commands in the Descriptor Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_descriptor_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the Descriptor Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 
 /**
  * @brief Publish the SupportedCommands for UNID/EndPoint

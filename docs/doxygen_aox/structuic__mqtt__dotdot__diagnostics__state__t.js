@@ -9,7 +9,7 @@ var structuic__mqtt__dotdot__diagnostics__state__t =
     [ "aps_tx_ucast_success", "structuic__mqtt__dotdot__diagnostics__state__t.html#a60e6a7e07b33e4cc98e06379dd2b1c78", null ],
     [ "aps_unauthorized_key", "structuic__mqtt__dotdot__diagnostics__state__t.html#a348aa0b48f7747ee96d34f7ae528195a", null ],
     [ "apsfc_failure", "structuic__mqtt__dotdot__diagnostics__state__t.html#a1a0f29138a74e59a0b9abddfd5b7e9d2", null ],
-    [ "averagemac_retry_peraps_message_sent", "structuic__mqtt__dotdot__diagnostics__state__t.html#a26697cfb04d721c1a4ccbd95637fbdc2", null ],
+    [ "average_mac_retry_per_aps_message_sent", "structuic__mqtt__dotdot__diagnostics__state__t.html#a9bdbdc053c457525ec1bd2bb2b9b0086", null ],
     [ "child_moved", "structuic__mqtt__dotdot__diagnostics__state__t.html#acfdfc64f07ca641d89406bc484f69ef1", null ],
     [ "join_indication", "structuic__mqtt__dotdot__diagnostics__state__t.html#ae9db1f46c59b60a3da0515bdcd2e9bab", null ],
     [ "last_messagelqi", "structuic__mqtt__dotdot__diagnostics__state__t.html#a53692ce098d9acf88c81f530b8c47cba", null ],
@@ -29,7 +29,7 @@ var structuic__mqtt__dotdot__diagnostics__state__t =
     [ "packet_buffer_allocate_failures", "structuic__mqtt__dotdot__diagnostics__state__t.html#ab23ea256ff2801babdc3cc7e8bade3fa", null ],
     [ "packet_validate_drop_count", "structuic__mqtt__dotdot__diagnostics__state__t.html#a512cd0aae833e7cd65a1c73d88c6b18c", null ],
     [ "persistent_memory_writes", "structuic__mqtt__dotdot__diagnostics__state__t.html#a5164d6f0309029655044070cda49b9d0", null ],
-    [ "phy_tomac_queue_limit_reached", "structuic__mqtt__dotdot__diagnostics__state__t.html#acbe85bd8dbcb296204011a639f395721", null ],
+    [ "phy_to_mac_queue_limit_reached", "structuic__mqtt__dotdot__diagnostics__state__t.html#a2803de026825083fb5fb26a94b7c607c", null ],
     [ "relayed_ucast", "structuic__mqtt__dotdot__diagnostics__state__t.html#a5871f4f21c0d40ee03fd9625aa557895", null ],
     [ "route_disc_initiated", "structuic__mqtt__dotdot__diagnostics__state__t.html#a12ca3a74559c67bb7af4329e66ee4a25", null ]
 ];

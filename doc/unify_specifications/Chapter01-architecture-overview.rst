@@ -2,8 +2,6 @@
   :description: Unify Architecture Overview
   :keywords: Architecture
 
-.. |ZCL2019| replace:: `ZCL 2019 <https://zigbeealliance.org/wp-content/uploads/2019/12/07-5123-06-zigbee-cluster-library-specification.pdf>`__
-
 .. raw:: latex
 
  \newpage
@@ -293,15 +291,10 @@ Unify Controller Language Definition
 The Unify Controller Language (UCL) is developed to allow the easiest possible
 translation to and from as many PHYs and cloud services as possible. The UCL
 serves as an abstraction layer between the PHY-specific data models and the
-models used in various cloud services for controlling IoT devices. The UCL data
-model MUST be the
-Zigbee Cluster Library |ZCL2019| / DotDot
-(DotDot is ZCL transported over CoAP, whereas UCL will be transported
-over MQTT). ZCL has been chosen to align
-Unify with the high-profile `Matter project <https://csa-iot.org/>`__.
+models used in various Unify services for controlling IoT devices.
 
-In addition to the existing Zigbee Clusters, UCL is extended with the necessary
-commands to support all features of the supported PHYs.
+See :ref:`unify_specifications_chapter_unify_controller_language_data_model`
+for details.
 
 UNID: Unified Node IDs
 ----------------------

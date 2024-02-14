@@ -61,7 +61,7 @@ RUN touch /dummyroot/etc/ld.so.cache
 ENV QEMU_LD_PREFIX=/dummyroot
 
 # Rust Version to install
-ENV RUST_VERSION=1.65.0
+ENV RUST_VERSION=1.71.0
 # Rust and Cargo home directories
 ENV RUSTUP_HOME=/opt/rustup-home
 ENV CARGO_HOME=/opt/cargo-home
@@ -73,8 +73,8 @@ RUN curl https://sh.rustup.rs -sSf --output /tmp/sh.rustup.rs \
   && if [[ $ARCH == *"arm64"* ]]; then export RUST_TRIPLES="$RUST_TRIPLES aarch64-unknown-linux-gnu"; fi \
   && ./sh.rustup.rs -y --profile minimal --target ${RUST_TRIPLES} --default-toolchain ${RUST_VERSION}\
   && rm /tmp/sh.rustup.rs \
-  && /opt/cargo-home/bin/cargo install cargo2junit --locked \
-  && /opt/cargo-home/bin/cargo install --version 1.41.3 cargo-deb \ 
+  && /opt/cargo-home/bin/cargo install --version 0.1.13 --locked cargo2junit \
+  && /opt/cargo-home/bin/cargo install --version 1.44.0 --locked cargo-deb \
   && chmod -R a+rw ${RUSTUP_HOME} ${CARGO_HOME} \
   && find ${RUSTUP_HOME} ${CARGO_HOME} -type d -exec chmod a+x {} \;
 ENV PATH="${CARGO_HOME}/bin:${PATH}"

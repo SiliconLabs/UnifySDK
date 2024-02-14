@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -265,7 +265,6 @@ Decrypting Network Traffic in Simplicity Studio</h2>
 <h2><a class="anchor" id="autotoc_md41"></a>
 Adding custom clusters</h2>
 <p>It is possible to add custom ZCL info to ZigPC to add natively unsupported clusters or to override the functionality of default clusters. This step must be run at compilation time in order to properly include the necessary MQTT topics and other related ZCL information.</p>
-<p>Please note, there has been limited testing on custom clusters and more changes may be needed to support custom applications.</p>
 <ul>
 <li>Step 1: Adding the custom cluster to the Unify framework</li>
 </ul>
@@ -274,23 +273,32 @@ Adding custom clusters</h2>
 <li>Step 2: Adding the custom cluster in the ZigPC</li>
 </ul>
 <p>ZigPC generates ZCL-cluster code and structures using ZAP. Ensure that the ZAP templates will generate for the new cluster by adding the name to: 'uic/applications/zigpc/components/zcl_util/zap/addon-helper.js Specifically, the 'SUPPORTED_CLUSTERS' and 'SUPPORTED_CLUSTER_ATTRIBUTES' lists must reference the new cluster.</p>
-<p>*Step 3: Re-generate all ZAP templates</p>
+<ul>
+<li>Step 3: Adding the custom clusters in the zigbeeHost gateway level</li>
+</ul>
+<p>ZigPC uses a custom zigbeeHost layer to manage the zigbee stack. Ensure that this layer can also access the new ZCL cluster by modifying the slcp file in 'uic/applications/zigpc/components/zigpc_gateway/libs/zigbee_host/src/libzigbee_host.slcp' Add the new cluster in the same format as all the existing clusters at this layer.</p>
+<p>*Step 4: Re-generate all ZAP templates</p>
 <p>Unify uses ZAP to generate ZCL cluster information (as discussed in step #2). Make sure that zap can find the library by modifying its configuration file.</p>
 <p>Alternatively, compile with the cmake option 'ZAP_GENERATE' set to 'ON' to automatically re-generate zap output files as part of the compilation process.</p>
 <p>Re-generate all zap output in the top level uic for the following components: uic_dotdot, <a class="el" href="namespaceuic__dotdot__mqtt.html">uic_dotdot_mqtt</a>, unify_dotdot_attribute_store</p>
 <p>Re-generate all zap output in the zigpc level for the following components: command_mapper, zcl_util, zcl_command_parser, zcl_profiles, attribute_management</p>
 <p>Please take a look at [<a href="https://github.com/SiliconLabs/zap">https://github.com/SiliconLabs/zap</a>] for more detailed information.</p>
 <ul>
-<li>Step 4:</li>
+<li>Step 5: Re-generate the zigbee_host</li>
 </ul>
-<p>Compile ZigPC as normal. ZigPC should now support your custom cluster. </p>
+<p>Re-generate the zigbee_host slcp, in the autogen folder. Set the STUDIO_ADAPTER_PATH to point to zap, which should already be configured to point to the custom xml. Otherwise, it will be necessary to edit the zap-config of the zigbee_host folder.</p>
+<p>Please read [<a href="https://siliconlabs.github.io/slc-specification/1.0/">https://siliconlabs.github.io/slc-specification/1.0/</a>] and [<a href="https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf">https://www.silabs.com/documents/public/user-guides/ug520-software-project-generation-configuration-with-slc-cli.pdf</a>] for more information on using the slc_cli.</p>
+<ul>
+<li>Step 6:</li>
+</ul>
+<p>Compile ZigPC as normal. ZigPC should now support your custom cluster </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:55:55 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:08 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

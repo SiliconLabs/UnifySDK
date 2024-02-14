@@ -20,6 +20,7 @@ var modules =
     [ "ZPC Utilities", "group__zpc__utils.html", "group__zpc__utils" ],
     [ "Z-Wave Controller", "group__zwave__controller.html", "group__zwave__controller" ],
     [ "Z-Wave Command Classes", "group__command__classes.html", "group__command__classes" ],
+    [ "Zwave_command_class_sound_switch", "group__zwave__command__class__sound__switch.html", "group__zwave__command__class__sound__switch" ],
     [ "Z-Wave Application Command Class Handler", "group__zwave__command__handler.html", "group__zwave__command__handler" ],
     [ "Z-Wave Command Types", "group__zwave__command__type.html", "group__zwave__command__type" ],
     [ "Z-Wave SmartStart Management", "group__zwave__smartstart__management.html", "group__zwave__smartstart__management" ],

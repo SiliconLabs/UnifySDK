@@ -7,7 +7,7 @@ license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor
 description = "zwave proc macros"
 
 [dependencies]
-once_cell="1.9.*"
+once_cell="1.13.*"
 convert_case="0.5.*"
 quote="1.0.15"
 syn={version="1.0.*", features=["extra-traits", "parsing"]}

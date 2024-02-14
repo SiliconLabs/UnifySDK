@@ -1,5 +1,7 @@
 # Unify Name and location service Release Notes
 
+## [1.5.0] - Feb 2024
+
 ## [1.4.0] - Aug 2023
 
 ## [1.3.2] - Jun 2023

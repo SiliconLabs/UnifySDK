@@ -250,6 +250,10 @@
 #define DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_CLUSTER_ID ((dotdot_cluster_id_t)0xFD12)
 
 
+// Definitions for cluster: Descriptor
+#define DOTDOT_DESCRIPTOR_CLUSTER_ID ((dotdot_cluster_id_t)0xFD13)
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif

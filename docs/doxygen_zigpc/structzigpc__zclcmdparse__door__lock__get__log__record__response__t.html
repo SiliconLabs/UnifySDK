@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -106,8 +106,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a64bb676d93c5f4f028dd54fee600fc77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7dee43323d3db8149f4d30da71f317f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#ab7dee43323d3db8149f4d30da71f317f">source_operation_event</a></td></tr>
 <tr class="separator:ab7dee43323d3db8149f4d30da71f317f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b7401dfc1758c9c8f71488e917be18d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a5b7401dfc1758c9c8f71488e917be18d">eventid_or_alarm_code</a></td></tr>
-<tr class="separator:a5b7401dfc1758c9c8f71488e917be18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da0ab022b0eb47111105b15e6fd6a12"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a4da0ab022b0eb47111105b15e6fd6a12">event_id_or_alarm_code</a></td></tr>
+<tr class="separator:a4da0ab022b0eb47111105b15e6fd6a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad06f967dd8b3c20278bcb0eb4ba6d744"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#ad06f967dd8b3c20278bcb0eb4ba6d744">userid</a></td></tr>
 <tr class="separator:ad06f967dd8b3c20278bcb0eb4ba6d744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a147cedf18367336d01d1a932e0199e4d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a147cedf18367336d01d1a932e0199e4d">pin_length</a></td></tr>
@@ -118,6 +118,21 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Data for DoorLock/GetLogRecordResponse command. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4da0ab022b0eb47111105b15e6fd6a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da0ab022b0eb47111105b15e6fd6a12">&#9670;&nbsp;</a></span>event_id_or_alarm_code</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t zigpc_zclcmdparse_door_lock_get_log_record_response_t::event_id_or_alarm_code</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Command argument of type uint8 </p>
+
+</div>
+</div>
 <a id="a64bb676d93c5f4f028dd54fee600fc77"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64bb676d93c5f4f028dd54fee600fc77">&#9670;&nbsp;</a></span>event_type</h2>
 
@@ -130,21 +145,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Command argument of type GetLogRecordResponseEventType </p>
-
-</div>
-</div>
-<a id="a5b7401dfc1758c9c8f71488e917be18d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b7401dfc1758c9c8f71488e917be18d">&#9670;&nbsp;</a></span>eventid_or_alarm_code</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t zigpc_zclcmdparse_door_lock_get_log_record_response_t::eventid_or_alarm_code</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Command argument of type uint8 </p>
 
 </div>
 </div>
@@ -247,7 +247,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html">zigpc_zclcmdparse_door_lock_get_log_record_response_t</a></li>
-    <li class="footer">Generated on Wed Aug 9 2023 15:56:09 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:14 for Zigbee Protocol Controller by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

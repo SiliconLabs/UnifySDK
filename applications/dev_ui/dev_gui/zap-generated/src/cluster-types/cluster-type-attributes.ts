@@ -1,8 +1,8 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
     Basic: {
@@ -3980,6 +3980,7 @@ export let ClusterTypeAttrs: any = {
                 { name: "NotFullyLocked", value: 0},
 																{ name: "Locked", value: 1},
 																{ name: "Unlocked", value: 2},
+																{ name: "Unlatched", value: 3},
 																{ name: "Undefined", value: 255}
               ],
             },
@@ -4003,7 +4004,8 @@ export let ClusterTypeAttrs: any = {
 																{ name: "TubularLock", value: 7},
 																{ name: "InterconnectedLock", value: 8},
 																{ name: "DeadLatch", value: 9},
-																{ name: "DoorFurniture", value: 10}
+																{ name: "DoorFurniture", value: 10},
+																{ name: "Eurocylinder", value: 11}
               ],
             },
             {                
@@ -4031,6 +4033,7 @@ export let ClusterTypeAttrs: any = {
 																{ name: "ErrorJammed", value: 2},
 																{ name: "ErrorForcedOpen", value: 3},
 																{ name: "ErrorUnspecified", value: 4},
+																{ name: "DoorAjar", value: 5},
 																{ name: "Undefined", value: 255}
               ],
             },
@@ -4186,6 +4189,33 @@ export let ClusterTypeAttrs: any = {
               default: 8,
             },
             {                
+              id: 27,
+              name: "CredentialRulesSupport",
+              type: "bitmap",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 1,
+              bitmap: [
+                { name: "Single", mask: 1, type: "boolean", offset: 0 },
+								{ name: "Dual", mask: 2, type: "boolean", offset: 1 },
+								{ name: "Tri", mask: 4, type: "boolean", offset: 2 }
+              ]
+            },
+            {                
+              id: 28,
+              name: "NumberOfCredentialsSupportedPerUser",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+            },
+            {                
               id: 32,
               name: "EnableLogging",
               type: "boolean",            
@@ -4267,7 +4297,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: false,
               isArray: false,
-              default: 1,
+              default: NaN,
               bitmap: [
                 { name: "NormalModeSupported", mask: 1, type: "boolean", offset: 0 },
 								{ name: "VacationModeSupported", mask: 2, type: "boolean", offset: 1 },
@@ -4340,6 +4370,23 @@ export let ClusterTypeAttrs: any = {
               default: 0,
             },
             {                
+              id: 44,
+              name: "LocalProgrammingFeatures",
+              type: "bitmap",            
+              required: false,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+              default: 0,
+              bitmap: [
+                { name: "AddUsersCredentialsSchedulesLocally", mask: 1, type: "boolean", offset: 0 },
+								{ name: "ModifyUsersCredentialsSchedulesLocally", mask: 2, type: "boolean", offset: 1 },
+								{ name: "ClearUsersCredentialsSchedulesLocally", mask: 4, type: "boolean", offset: 2 },
+								{ name: "AdjustLockSettingsLocally", mask: 8, type: "boolean", offset: 3 }
+              ]
+            },
+            {                
               id: 48,
               name: "WrongCodeEntryLimit",
               type: "number",            
@@ -4399,6 +4446,16 @@ export let ClusterTypeAttrs: any = {
               ],
             },
             {                
+              id: 53,
+              name: "ExpiringUserTimeout",
+              type: "number",            
+              required: false,
+              reportRequired: true,
+              sceneRequired: false,
+              writable: true,
+              isArray: false,
+            },
+            {                
               id: 64,
               name: "AlarmMask",
               type: "bitmap",            
@@ -4407,7 +4464,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "DeadboltJammed", mask: 1, type: "boolean", offset: 0 },
 								{ name: "LockResetToFactoryDefaults", mask: 2, type: "boolean", offset: 1 },
@@ -4426,7 +4483,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "KeypadOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "KeypadOpLock", mask: 2, type: "boolean", offset: 1 },
@@ -4447,7 +4504,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "RFOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "RFOpLock", mask: 2, type: "boolean", offset: 1 },
@@ -4467,7 +4524,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "ManualOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "ManualOpThumbturnLock", mask: 2, type: "boolean", offset: 1 },
@@ -4491,7 +4548,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "RFIDOpUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "RFIDOpLock", mask: 2, type: "boolean", offset: 1 },
@@ -4511,7 +4568,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "KeypadProgUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "KeypadProgMasterCodeChanged", mask: 2, type: "boolean", offset: 1 },
@@ -4529,7 +4586,7 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "RFProgUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "RFProgPINAdded", mask: 4, type: "boolean", offset: 2 },
@@ -4548,11 +4605,37 @@ export let ClusterTypeAttrs: any = {
               sceneRequired: false,
               writable: true,
               isArray: false,
-              default: 0,
+              default: NaN,
               bitmap: [
                 { name: "RFIDProgUnknownOrMS", mask: 1, type: "boolean", offset: 0 },
 								{ name: "RFIDProgRFIDAdded", mask: 32, type: "boolean", offset: 5 },
 								{ name: "RFIDProgRFIDDeleted", mask: 64, type: "boolean", offset: 6 }
+              ]
+            },
+            {                
+              id: 65532,
+              name: "FeatureMap",
+              type: "bitmap",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              default: 0,
+              bitmap: [
+                { name: "PINCredential", mask: 1, type: "boolean", offset: 0 },
+								{ name: "RFIDCredential", mask: 2, type: "boolean", offset: 1 },
+								{ name: "FingerCredentials", mask: 4, type: "boolean", offset: 2 },
+								{ name: "Logging", mask: 8, type: "boolean", offset: 3 },
+								{ name: "WeekDayAccessSchedules", mask: 16, type: "boolean", offset: 4 },
+								{ name: "DoorPositionSensor", mask: 32, type: "boolean", offset: 5 },
+								{ name: "FaceCredentials", mask: 64, type: "boolean", offset: 6 },
+								{ name: "CredentialOverTheAirAccess", mask: 128, type: "boolean", offset: 7 },
+								{ name: "User", mask: 256, type: "boolean", offset: 8 },
+								{ name: "Notification", mask: 512, type: "boolean", offset: 9 },
+								{ name: "YearDayAccessSchedules", mask: 1024, type: "boolean", offset: 10 },
+								{ name: "HolidaySchedules", mask: 2048, type: "boolean", offset: 11 },
+								{ name: "Unbolting", mask: 4096, type: "boolean", offset: 12 }
               ]
             }
         ],
@@ -5367,6 +5450,26 @@ export let ClusterTypeAttrs: any = {
                               value: 4
                             },
                             {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
                               name: "NotSupported",
                               value: 255
                             }
@@ -5478,6 +5581,26 @@ export let ClusterTypeAttrs: any = {
                             {
                               name: "NonAccessUser",
                               value: 4
+                            },
+                            {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
                             },
                             {
                               name: "NotSupported",
@@ -6688,6 +6811,26 @@ export let ClusterTypeAttrs: any = {
                               value: 4
                             },
                             {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
                               name: "NotSupported",
                               value: 255
                             }
@@ -6765,6 +6908,26 @@ export let ClusterTypeAttrs: any = {
                               value: 4
                             },
                             {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
                               name: "NotSupported",
                               value: 255
                             }
@@ -6821,6 +6984,26 @@ export let ClusterTypeAttrs: any = {
                             {
                               name: "NonAccessUser",
                               value: 4
+                            },
+                            {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
                             },
                             {
                               name: "NotSupported",
@@ -6936,6 +7119,26 @@ export let ClusterTypeAttrs: any = {
                               value: 4
                             },
                             {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
                               name: "NotSupported",
                               value: 255
                             }
@@ -7008,6 +7211,171 @@ export let ClusterTypeAttrs: any = {
                               value: 1
                             }
                     ],
+                  }
+              ]              
+            },
+            {
+              id: 26,
+              name: "SetUser",
+              required: false,
+              fields: [
+                  {
+                    name: "OperationType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Add",
+                              value: 0
+                            },
+                            {
+                              name: "Clear",
+                              value: 1
+                            },
+                            {
+                              name: "Modify",
+                              value: 2
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserIndex",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserName",
+                    type: "text",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserStatus",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Available",
+                              value: 0
+                            },
+                            {
+                              name: "OccupiedEnabled",
+                              value: 1
+                            },
+                            {
+                              name: "OccupiedDisabled",
+                              value: 3
+                            },
+                            {
+                              name: "NotSupported",
+                              value: 255
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "UnrestrictedUser",
+                              value: 0
+                            },
+                            {
+                              name: "YearDayScheduleUser",
+                              value: 1
+                            },
+                            {
+                              name: "WeekDayScheduleUser",
+                              value: 2
+                            },
+                            {
+                              name: "MasterUser",
+                              value: 3
+                            },
+                            {
+                              name: "NonAccessUser",
+                              value: 4
+                            },
+                            {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
+                              name: "NotSupported",
+                              value: 255
+                            }
+                    ],
+                  },
+                  {
+                    name: "CredentialRule",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Single",
+                              value: 0
+                            },
+                            {
+                              name: "Dual",
+                              value: 1
+                            },
+                            {
+                              name: "Tri",
+                              value: 2
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 27,
+              name: "GetUser",
+              required: false,
+              fields: [
+                  {
+                    name: "UserIndex",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 28,
+              name: "GetUserResponse",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 29,
+              name: "ClearUser",
+              required: false,
+              fields: [
+                  {
+                    name: "UserIndex",
+                    type: "number",
+                    isArray: false,
                   }
               ]              
             },
@@ -7235,6 +7603,26 @@ export let ClusterTypeAttrs: any = {
                               value: 4
                             },
                             {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
                               name: "NotSupported",
                               value: 255
                             }
@@ -7270,6 +7658,207 @@ export let ClusterTypeAttrs: any = {
                   },
                   {
                     name: "Data",
+                    type: "text",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 34,
+              name: "SetCredential",
+              required: false,
+              fields: [
+                  {
+                    name: "OperationType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Add",
+                              value: 0
+                            },
+                            {
+                              name: "Clear",
+                              value: 1
+                            },
+                            {
+                              name: "Modify",
+                              value: 2
+                            }
+                    ],
+                  },
+                  {
+                    name: "Credential",
+                    type: "struct",
+                    isArray: false,
+                    struct:[
+                      {
+                        name:"CredentialType",
+                        type:"enum",
+                        isArray: false
+                      },
+                      {
+                        name:"CredentialIndex",
+                        type:"number",
+                        isArray: false
+                      }
+                    ],
+                  },
+                  {
+                    name: "CredentialData",
+                    type: "text",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserIndex",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserStatus",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Available",
+                              value: 0
+                            },
+                            {
+                              name: "OccupiedEnabled",
+                              value: 1
+                            },
+                            {
+                              name: "OccupiedDisabled",
+                              value: 3
+                            },
+                            {
+                              name: "NotSupported",
+                              value: 255
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "UnrestrictedUser",
+                              value: 0
+                            },
+                            {
+                              name: "YearDayScheduleUser",
+                              value: 1
+                            },
+                            {
+                              name: "WeekDayScheduleUser",
+                              value: 2
+                            },
+                            {
+                              name: "MasterUser",
+                              value: 3
+                            },
+                            {
+                              name: "NonAccessUser",
+                              value: 4
+                            },
+                            {
+                              name: "ForcedUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "ScheduleRestrictedUser",
+                              value: 8
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            },
+                            {
+                              name: "NotSupported",
+                              value: 255
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 35,
+              name: "SetCredentialResponse",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 36,
+              name: "GetCredentialStatus",
+              required: false,
+              fields: [
+                  {
+                    name: "Credential",
+                    type: "struct",
+                    isArray: false,
+                    struct:[
+                      {
+                        name:"CredentialType",
+                        type:"enum",
+                        isArray: false
+                      },
+                      {
+                        name:"CredentialIndex",
+                        type:"number",
+                        isArray: false
+                      }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 37,
+              name: "GetCredentialStatusResponse",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 38,
+              name: "ClearCredential",
+              required: false,
+              fields: [
+                  {
+                    name: "Credential",
+                    type: "struct",
+                    isArray: false,
+                    struct:[
+                      {
+                        name:"CredentialType",
+                        type:"enum",
+                        isArray: false
+                      },
+                      {
+                        name:"CredentialIndex",
+                        type:"number",
+                        isArray: false
+                      }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 39,
+              name: "UnboltDoor",
+              required: false,
+              fields: [
+                  {
+                    name: "PINCode",
                     type: "text",
                     isArray: false,
                   }
@@ -15211,6 +15800,67 @@ export let ClusterTypeAttrs: any = {
               fields: [
               ]              
             }
+        ] 
+      }
+    },
+    Descriptor: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "DeviceTypeList",
+              type: "struct",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              struct:[
+                {
+                  name:"DeviceType",
+                  type:"enum",
+                  isArray: false,
+                    enum:[
+                      { name: "DoorLock", value: 10},
+																{ name: "DoorLockController", value: 11},
+																{ name: "Fan", value: 43},
+																{ name: "AirPurifier", value: 45},
+																{ name: "RoomAirConditioner", value: 114},
+																{ name: "Cooktop", value: 120},
+																{ name: "ExtractorHood", value: 122},
+																{ name: "OnOffLight", value: 256},
+																{ name: "DimmableLight", value: 257},
+																{ name: "OnOffLightSwitch", value: 259},
+																{ name: "DimmerSwitch", value: 260},
+																{ name: "ColorDimmerSwitch", value: 261},
+																{ name: "LightSensor", value: 262},
+																{ name: "OccupancySensor", value: 263},
+																{ name: "OnOffPluginUnit", value: 266},
+																{ name: "DimmablePlugInUnit", value: 267},
+																{ name: "ColorTemperatureLight", value: 268},
+																{ name: "ExtendedColorLight", value: 269},
+																{ name: "WindowCovering", value: 514},
+																{ name: "WindowCoveringController", value: 515},
+																{ name: "HeatingCoolingUnit", value: 768},
+																{ name: "Thermostat", value: 769},
+																{ name: "TemperatureSensor", value: 770},
+																{ name: "Pump", value: 771},
+																{ name: "PressureSensor", value: 773},
+																{ name: "FlowSensor", value: 774},
+																{ name: "HumiditySensor", value: 775},
+																{ name: "ControlBridge", value: 2112},
+																{ name: "OnOffSensor", value: 2128}
+                    ],
+                },
+                {
+                  name:"Revision",
+                  type:"number",
+                  isArray: false,
+                }
+              ],
+            }
+        ],
+        commands: [
         ] 
       }
     }

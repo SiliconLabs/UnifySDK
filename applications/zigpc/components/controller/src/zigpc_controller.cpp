@@ -24,7 +24,7 @@
 #include "zigpc_controller.h"
 #include "zigpc_controller_int.hpp"
 
-void zigpc_ctrl_on_device_announce(void *event_data)
+void zigpc_ctrl_on_device_announce(void *event_data) //NOSONAR - contiki uses void* for event handling
 {
   if (event_data != nullptr) {
     const zigpc_net_mgmt_on_node_added_t &dev_added
@@ -39,7 +39,7 @@ void zigpc_ctrl_on_device_announce(void *event_data)
   }
 }
 
-void zigpc_ctrl_on_device_leave(void *event_data)
+void zigpc_ctrl_on_device_leave(void *event_data) //NOSONAR - contiki uses void* for event handling
 {
   if (event_data != nullptr) {
     const zigpc_gateway_on_node_removed_t &dev_left
@@ -84,7 +84,7 @@ sl_status_t zigpc_ctrl_fixt_setup(void)
   }
 
   if (status == SL_STATUS_OK) {
-    process_start(&zigpc_ctrl_process, NULL);
+    process_start(&zigpc_ctrl_process, nullptr);
   }
   return status;
 }

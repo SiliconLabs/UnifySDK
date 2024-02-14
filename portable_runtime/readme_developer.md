@@ -1,13 +1,14 @@
 # Portable environment
 
 At the moment the Portable Runtime is comprised of a command line application (CLI), _`unify_portable_cli`_, with support for Linux, MacOS and Windows on the x86_64 architecture.
-There is also an experimental GUI, _unify_portable_gui_, that for the time being, has only been tested on Windows.
+There is also a GUI, _unify_portable_gui_, that for the time being, has only been tested on Windows and Linux. Refer [Portable Environment GUI Developer Guide](./readme_developer_gui.md) for more details.
 
 The applications are written in Rust and rely on some platform specific tools, that are to be packaged and placed relative to the executable in a subfolder called _`./resources`_.
 
 ## Prepare runtime dependencies
 The runtime dependencies for the applications, can be downloaded by running the Python script located in _`./scripts/prepare-resources.py`_.
 This script contains links for the various dependencies and as such downloads and extracts them to the correct location in the local filesystem.
+This script also allows picking up the runtime dependencies for the applications from local filesystem using `--resource_path` option.
 
 It makes sense to run this before starting to compile the application, as one can then just run `cargo build --target x86_64-unknown-linux-gnu --release --package unify_portable_cli` from the top level `portable_runtime` folder.
 

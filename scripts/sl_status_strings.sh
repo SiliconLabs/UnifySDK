@@ -1,5 +1,12 @@
 ARG1=${1:-../include}
 
+file_path="$ARG1/sl_status.h"
+
+if [ ! -e "$file_path" ]; then
+    echo "File not found: $file_path"
+    exit 1  # File not found
+fi
+
 cat << EOF
 #include <sl_status.h>
 

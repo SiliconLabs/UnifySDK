@@ -24,7 +24,7 @@
 
 #ifdef __C51__
 /* Local stub implementation of ZW_WatchDogKick() when compiling for C51. */
-void ZW_WatchDogKick()
+void ZW_WatchDogKick(void)
 {
   // Do nothing. Stub implementation.
 }
@@ -229,7 +229,7 @@ struct S2* ctx2;
 struct S2* ctx3;
 
 static void
-my_setup()
+my_setup(void)
 {
   srand(0x44);
   //reset test state
@@ -344,7 +344,7 @@ void wrap_test_s2_send_data(struct S2* ctx_dest, s2_connection_t* dst)
  * Verify the frame received by the ctx2
  *
  */
-void test_s2_send_data()
+void test_s2_send_data(void)
 {
   my_setup();
 
@@ -359,7 +359,7 @@ void test_s2_send_data()
  * has been established.
  *
  */
-void test_single_frame_transmission()
+void test_single_frame_transmission(void)
 {
   const char hello[] = "HelloWorld Second Frame";
 
@@ -390,7 +390,7 @@ void test_single_frame_transmission()
 /**
  * Make send data return false in nonce get
  */
-void test_send_data_fail_in_nonce_get()
+void test_send_data_fail_in_nonce_get(void)
 {
   my_setup();
   ts.send_data_return_fail = 1;
@@ -403,7 +403,7 @@ void test_send_data_fail_in_nonce_get()
 /**
  * Make send data return transmit complete no ack in nonce get
  */
-void test_transmit_complete_no_ack_in_nonce_get()
+void test_transmit_complete_no_ack_in_nonce_get(void)
 {
   my_setup();
   S2_send_data(ctx1, &conn12, (uint8_t*) hello, sizeof(hello));
@@ -420,7 +420,7 @@ void test_transmit_complete_no_ack_in_nonce_get()
 /**
  * Make make system timeout before nonce report is sent
  */
-void test_transmit_timeout_after_sending_nonce_get()
+void test_transmit_timeout_after_sending_nonce_get(void)
 {
   my_setup();
   S2_send_data(ctx1, &conn12, (uint8_t*) hello, sizeof(hello));
@@ -438,7 +438,7 @@ void test_transmit_timeout_after_sending_nonce_get()
 /**
  * Make make system timeout before before ACK of nonce get is sent.
  */
-void test_transmit_timeout_before_sending_nonce_get()
+void test_transmit_timeout_before_sending_nonce_get(void)
 {
   my_setup();
   S2_send_data(ctx1, &conn12, (uint8_t*) hello, sizeof(hello));
@@ -458,7 +458,7 @@ void test_transmit_timeout_before_sending_nonce_get()
 /* Test that duplicate nonce get frames are ignored
  * Test that duplicate nonce raport frames are ignored
  * Test that duplicate msg enap frames are ignored */
-void test_dup_nonce_get()
+void test_dup_nonce_get(void)
 {
   uint8_t backup_frame[sizeof(ts.frame)];
   uint8_t backup_len;
@@ -524,7 +524,7 @@ void test_dup_nonce_get()
  * fails in encap_message
  *
  */
-void test_send_data_fail_in_encap_message()
+void test_send_data_fail_in_encap_message(void)
 {
   const char hello[] = "HelloWorld Second Frame";
 
@@ -548,7 +548,7 @@ void test_send_data_fail_in_encap_message()
  * fails in encap_message
  *
  */
-void test_send_data_no_ack_in_encap_message()
+void test_send_data_no_ack_in_encap_message(void)
 {
   const char hello[] = "HelloWorld Second Frame";
 
@@ -575,7 +575,7 @@ void test_send_data_no_ack_in_encap_message()
    *     verify message decryption
    *     verify seq increases
    */
-void test_encap_seq_increase()
+void test_encap_seq_increase(void)
 {
   uint8_t test_buf[1280];
   uint8_t seq;
@@ -620,7 +620,7 @@ void test_encap_seq_increase()
   }
 
 /*Validate nonce report */
-void test_nonce_report()
+void test_nonce_report(void)
 {
   uint8_t nonce_get[] = {COMMAND_CLASS_SECURITY_2,SECURITY_2_NONCE_GET,42};
   int seq2;
@@ -686,7 +686,7 @@ void test_nonce_report()
  * B receives MSG 2
  *
  */
-void test_sos_recover_scenario1() {
+void test_sos_recover_scenario1(void) {
 
   const char hello[] = "HelloWorld Second Frame";
 
@@ -759,7 +759,7 @@ void test_sos_recover_scenario1() {
  * A Gets MSG 2
  *
  */
-void test_sos_recover_scenario2() {
+void test_sos_recover_scenario2(void) {
 
   const char hello[] = "HelloWorld Second Frame";
 
@@ -837,7 +837,7 @@ void test_sos_recover_scenario2() {
 /**Verify that message is ignored if MAC is invalid
  */
 
-void test_encap_message_authcheck()
+void test_encap_message_authcheck(void)
 {
   test_s2_send_data();
   /* ----------- now send second frame with SPAN established --------- *
@@ -861,7 +861,7 @@ void test_encap_message_authcheck()
 
 /* Verify we dont go into an infinite loop when parsing a zero-length header extension
  * and more-to-follow is set.*/
-void test_hdr_ext_zero_length_and_more_to_follow()
+void test_hdr_ext_zero_length_and_more_to_follow(void)
 {
   test_s2_send_data();
   /* ----------- now send second frame with SPAN established --------- *
@@ -881,7 +881,7 @@ void test_hdr_ext_zero_length_and_more_to_follow()
 
 /* Verify we dont go into an infinite loop when parsing a zero-length header extension
  * and more-to-follow is set.*/
-void test_hdr_ext_zero_length_and_more_to_follow2()
+void test_hdr_ext_zero_length_and_more_to_follow2(void)
 {
   test_s2_send_data();
   /* ----------- now send second frame with SPAN established --------- *
@@ -898,7 +898,7 @@ void test_hdr_ext_zero_length_and_more_to_follow2()
   TEST_ASSERT_EQUAL(0, ts.sync_ev.count); // Test that no sync events were emitted during test
 }
 
-void test_encap_message_oversize()
+void test_encap_message_oversize(void)
 {
   /*send message which is 1281 byes */
   /* verify rejecting by transport layer */
@@ -909,7 +909,7 @@ void test_encap_message_oversize()
  ;
 }
 
-void test_encap_message_lencheck()
+void test_encap_message_lencheck(void)
 {
   /* loop
    *   establish span
@@ -920,7 +920,7 @@ void test_encap_message_lencheck()
   ;
 }
 
-void test_encap_message_extcheck()
+void test_encap_message_extcheck(void)
 {
   /*construct message with two extensions which are non critical. One of them must be 255 bytes in len
    * verify the message is decrypted
@@ -929,7 +929,7 @@ void test_encap_message_extcheck()
   ;
 }
 
-void test_encap_message_critical_extcheck()
+void test_encap_message_critical_extcheck(void)
 {
   /* construct message with two extensions one are non critical and one is critical, and unknown.
    verify the message is ignored
@@ -938,7 +938,7 @@ void test_encap_message_critical_extcheck()
   ;
 }
 
-void test_encap_message_extlen()
+void test_encap_message_extlen(void)
 {
   /* construct message with an extension of len 0.
    * verify that this message is ignored.
@@ -948,7 +948,7 @@ void test_encap_message_extlen()
 }
 
 
-void test_m_enacap_send()
+void test_m_enacap_send(void)
 {
   /* generate MPAN for nodes 2,3,4 */
   /* send secure single-cast message for node 2 and 3 (SPAN is now established) */
@@ -970,7 +970,7 @@ void test_m_enacap_send()
  * has been established.
  *
  */
-void test_commands_supported_report()
+void test_commands_supported_report(void)
 {
   const uint8_t commands_supported_get[] = {COMMAND_CLASS_SECURITY_2,SECURITY_2_COMMANDS_SUPPORTED_GET};
 
@@ -1008,7 +1008,7 @@ void test_commands_supported_report()
  * Check that we receive S2_TRANSMIT_COMPLETE_OK if we are sending with verify,
  * if the receiving controller is able to decrypt the message
  */
-void test_sd_verify_tx_ok() {
+void test_sd_verify_tx_ok(void) {
 
   const char hello[] = "HelloWorld Second Frame";
 
@@ -1051,7 +1051,7 @@ void test_sd_verify_tx_ok() {
  * Check that we receive S2_TRANSMIT_COMPLETE_NO_ACK if senddata returns false in fist transmission
  * Related to ZGW-XXXX
  */
-void test_sd_verify_tx_sd_false() {
+void test_sd_verify_tx_sd_false(void) {
 
   const char hello[] = "HelloWorld Second Frame";
 
@@ -1079,7 +1079,7 @@ void test_sd_verify_tx_sd_false() {
  * Check that we receive S2_TRANSMIT_COMPLETE_FAIL if send data returns false
  * when trying to do nonce sync in verify delivery.
  */
-void test_sd_verify_tx_sd_false_second_attempt() {
+void test_sd_verify_tx_sd_false_second_attempt(void) {
   const char hello[] = "HelloWorld Second Frame";
   uint8_t bad_frame[1500];
   test_s2_send_data();
@@ -1129,7 +1129,7 @@ void test_sd_verify_tx_sd_false_second_attempt() {
  * if the receiving controller is able to decrypt the message after the
  * second attempt
  */
-void test_sd_verify_tx_ok_second_attempt() {
+void test_sd_verify_tx_ok_second_attempt(void) {
   const char hello[] = "HelloWorld Second Frame";
   uint8_t bad_frame[1500];
   test_s2_send_data();
@@ -1193,7 +1193,7 @@ void test_sd_verify_tx_ok_second_attempt() {
  * if the receiving controller is not able to decrypt, and sends a NONCE_REPORT -
  * after both first and second attempt.
  */
-void test_sd_verify_tx_fail() {
+void test_sd_verify_tx_fail(void) {
   const char hello[] = "HelloWorld Second Frame";
   uint8_t bad_frame[1500];
   test_s2_send_data();
@@ -1266,7 +1266,7 @@ void test_sd_verify_tx_fail() {
  * Check that we receive S2_TRANSMIT_COMPLETE_VERIFIED if we are sending with verify,
  * if the receiving controller is able to decrypt the message,and sends a reply
  */
-void test_sd_verify_tx_verifify() {
+void test_sd_verify_tx_verifify(void) {
   const char ping[] = "PING";
   const char pong[] = "PONG";
 
@@ -1325,7 +1325,7 @@ void test_sd_verify_tx_verifify() {
  * if the receiving controller is able to decrypt the message after the
  * second attempt, and sends a reply message
  */
-void test_sd_verify_tx_verify_second_attempt() {
+void test_sd_verify_tx_verify_second_attempt(void) {
   const char ping[] = "PING";
   const char pong[] = "PONG";
 
@@ -1563,7 +1563,7 @@ establish_mpan(uint8_t group)
  * 5) Send multicast again, verify that the message is received by destination
  * 6) Send singlecast, verify that we do not get NR,MOS
  */
-void test_mulicast_send()
+void test_mulicast_send(void)
 {
   uint8_t buf[1024];
   char hello_mc2[] = "Jello multicast 2";
@@ -1665,7 +1665,7 @@ void test_mulicast_send()
  * Test that we are able to MOS and SOS sync in the same session.
  *
  */
-void test_mulicast_send_mos_sos_sync()
+void test_mulicast_send_mos_sos_sync(void)
 {
   char hello_mc2[] = "Jello multicast 2";
   char hello_single[] = "hello singlecast";
@@ -1793,7 +1793,7 @@ void test_mulicast_send_mos_sos_sync()
 /**
  * Send a frame with sec group 1, verify that it goes just like group 0
  */
-void test_s2_send_data_second_group()
+void test_s2_send_data_second_group(void)
 {
 
   const char hello2[] = "HelloWorld Second Frame";
@@ -1913,7 +1913,7 @@ void test_s2_send_data_second_group()
  * Send a frame to group0, then group 1, then use the follow-up API to try to
  * follow-up on group 0
  */
-void test_s2_send_data_multicast_and_follow_up_with_keyset()
+void test_s2_send_data_multicast_and_follow_up_with_keyset(void)
 {
   char hello_mc2[] = "Hello multicast 2";
   char hello_mc[] = "Hello multicast";
@@ -2009,7 +2009,7 @@ void test_s2_send_data_multicast_and_follow_up_with_keyset()
   TEST_ASSERT_EQUAL(0, ts.sync_ev.count); // Test that no sync events were emitted during test
 }
 
-void test_s2_send_data_with_keyset()
+void test_s2_send_data_with_keyset(void)
 {
   my_setup();
   ts.fcount = 0;
@@ -2035,7 +2035,7 @@ void test_s2_send_data_with_keyset()
 }
 
 
-void test_s2_free_mpan()
+void test_s2_free_mpan(void)
 {
   char hello_mc[] = "Test free MPAN";
   s2_connection_t mc_group1 =
@@ -2066,7 +2066,7 @@ void test_s2_free_mpan()
 /**
  * Check that the sequence number check in verify delivery works
  */
-void test_s2_verify_delivery_seq_no_check()
+void test_s2_verify_delivery_seq_no_check(void)
 {
   my_setup();
   uint8_t dup_nr[64];
@@ -2128,7 +2128,7 @@ void test_s2_verify_delivery_seq_no_check()
   TEST_ASSERT_EQUAL(0, ts.sync_ev.count); // Test that no sync events were emitted during test
 }
 
-void test_s2_exploit()
+void test_s2_exploit(void)
 {
   my_setup();
 
@@ -2195,7 +2195,7 @@ void test_s2_exploit()
  * In this test, the S2 context is idle when the SOS comes in.
  *
  */
-void test_sos_recsync_event_1() {
+void test_sos_recsync_event_1(void) {
 
   uint8_t bad_frame[1500];
 
@@ -2245,7 +2245,7 @@ void test_sos_recsync_event_1() {
  * Test that a resync event is emitted if SOS comes in from Node A, while sending to Node B
  *
  */
-void test_sos_recsync_event_2() {
+void test_sos_recsync_event_2(void) {
 
   uint8_t bad_frame[1500];
   uint8_t nonce_rep_frame[30];
@@ -2323,7 +2323,7 @@ void test_sos_recsync_event_2() {
  * Test that a resync event is emitted if SOS comes in from Node A, while WAIT_NONCE_RAPORT to Node B
  *
  */
-void test_sos_recsync_event_3() {
+void test_sos_recsync_event_3(void) {
 
   uint8_t bad_frame[1500];
   uint8_t nonce_rep_frame[30];
@@ -2390,12 +2390,8 @@ void test_sos_recsync_event_3() {
 }
 
 /* Stub function */
-uint8_t s2_inclusion_set_timeout(struct S2* ctxt, uint32_t interval)
+uint8_t s2_inclusion_set_timeout(__attribute__((unused)) struct S2* ctxt, __attribute__((unused)) uint32_t interval)
 {
-#ifndef SINGLE_CONTEXT
-  UNUSED(ctxt);
-#endif
-  UNUSED(interval);
   return 0;
 }
 
@@ -2403,43 +2399,34 @@ void s2_inclusion_stop_timeout(void)
 {
 }
 
-void keystore_public_key_read(uint8_t *buf)
+void keystore_public_key_read(__attribute__((unused)) uint8_t *buf)
 {
-  UNUSED(buf);
 }
 
-void keystore_dynamic_public_key_read(uint8_t *buf)
+void keystore_dynamic_public_key_read(__attribute__((unused)) uint8_t *buf)
 {
-  UNUSED(buf);
 }
 
-void keystore_private_key_read(uint8_t *buf)
+void keystore_private_key_read(__attribute__((unused)) uint8_t *buf)
 {
-  UNUSED(buf);
 }
 
-void keystore_dynamic_private_key_read(uint8_t *buf)
+void keystore_dynamic_private_key_read(__attribute__((unused)) uint8_t *buf)
 {
-  UNUSED(buf);
 }
 
-bool keystore_network_key_read(uint8_t keyclass, uint8_t *buf)
+bool keystore_network_key_read(__attribute__((unused)) uint8_t keyclass, __attribute__((unused)) uint8_t *buf)
 {
-  UNUSED(keyclass);
-  UNUSED(buf);
   return true;
 }
 
-bool keystore_network_key_write(uint8_t keyclass, const uint8_t *keybuf)
+bool keystore_network_key_write(__attribute__((unused)) uint8_t keyclass, __attribute__((unused)) const uint8_t *keybuf)
 {
-  UNUSED(keyclass);
-  UNUSED(keybuf);
   return true;
 }
 
-bool keystore_network_key_clear(uint8_t keyclass)
+bool keystore_network_key_clear(__attribute__((unused)) uint8_t keyclass)
 {
-  UNUSED(keyclass);
   return true;
 }
 

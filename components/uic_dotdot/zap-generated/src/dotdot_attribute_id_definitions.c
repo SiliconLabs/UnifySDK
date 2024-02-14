@@ -370,7 +370,7 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
         // clang-format off
         case DOTDOT_COMMISSIONING_SHORT_ADDRESS_ATTRIBUTE_ID:
           return "ShortAddress";
-        case DOTDOT_COMMISSIONING_EXTENDEDPAN_ID_ATTRIBUTE_ID:
+        case DOTDOT_COMMISSIONING_EXTENDED_PAN_ID_ATTRIBUTE_ID:
           return "ExtendedPANId";
         case DOTDOT_COMMISSIONING_PAN_ID_ATTRIBUTE_ID:
           return "PANId";
@@ -520,9 +520,9 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "NumberOfLogRecordsSupported";
         case DOTDOT_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED_ATTRIBUTE_ID:
           return "NumberOfTotalUsersSupported";
-        case DOTDOT_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED_ATTRIBUTE_ID:
           return "NumberOfPINUsersSupported";
-        case DOTDOT_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED_ATTRIBUTE_ID:
           return "NumberOfRFIDUsersSupported";
         case DOTDOT_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ATTRIBUTE_ID:
           return "NumberOfWeekDaySchedulesSupportedPerUser";
@@ -530,14 +530,18 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "NumberOfYearDaySchedulesSupportedPerUser";
         case DOTDOT_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED_ATTRIBUTE_ID:
           return "NumberOfHolidaySchedulesSupported";
-        case DOTDOT_DOOR_LOCK_MAXPIN_CODE_LENGTH_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_MAX_PIN_CODE_LENGTH_ATTRIBUTE_ID:
           return "MaxPINCodeLength";
-        case DOTDOT_DOOR_LOCK_MINPIN_CODE_LENGTH_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_MIN_PIN_CODE_LENGTH_ATTRIBUTE_ID:
           return "MinPINCodeLength";
-        case DOTDOT_DOOR_LOCK_MAXRFID_CODE_LENGTH_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_MAX_RFID_CODE_LENGTH_ATTRIBUTE_ID:
           return "MaxRFIDCodeLength";
-        case DOTDOT_DOOR_LOCK_MINRFID_CODE_LENGTH_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_MIN_RFID_CODE_LENGTH_ATTRIBUTE_ID:
           return "MinRFIDCodeLength";
+        case DOTDOT_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT_ATTRIBUTE_ID:
+          return "CredentialRulesSupport";
+        case DOTDOT_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER_ATTRIBUTE_ID:
+          return "NumberOfCredentialsSupportedPerUser";
         case DOTDOT_DOOR_LOCK_ENABLE_LOGGING_ATTRIBUTE_ID:
           return "EnableLogging";
         case DOTDOT_DOOR_LOCK_LANGUAGE_ATTRIBUTE_ID:
@@ -562,16 +566,20 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "EnableInsideStatusLED";
         case DOTDOT_DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON_ATTRIBUTE_ID:
           return "EnablePrivacyModeButton";
+        case DOTDOT_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES_ATTRIBUTE_ID:
+          return "LocalProgrammingFeatures";
         case DOTDOT_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ATTRIBUTE_ID:
           return "WrongCodeEntryLimit";
         case DOTDOT_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME_ATTRIBUTE_ID:
           return "UserCodeTemporaryDisableTime";
-        case DOTDOT_DOOR_LOCK_SENDPIN_OVER_THE_AIR_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_SEND_PIN_OVER_THE_AIR_ATTRIBUTE_ID:
           return "SendPINOverTheAir";
-        case DOTDOT_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION_ATTRIBUTE_ID:
           return "RequirePINforRFOperation";
         case DOTDOT_DOOR_LOCK_SECURITY_LEVEL_ATTRIBUTE_ID:
           return "SecurityLevel";
+        case DOTDOT_DOOR_LOCK_EXPIRING_USER_TIMEOUT_ATTRIBUTE_ID:
+          return "ExpiringUserTimeout";
         case DOTDOT_DOOR_LOCK_ALARM_MASK_ATTRIBUTE_ID:
           return "AlarmMask";
         case DOTDOT_DOOR_LOCK_KEYPAD_OPERATION_EVENT_MASK_ATTRIBUTE_ID:
@@ -588,6 +596,8 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "RFProgrammingEventMask";
         case DOTDOT_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK_ATTRIBUTE_ID:
           return "RFIDProgrammingEventMask";
+        case DOTDOT_DOOR_LOCK_FEATURE_MAP_ATTRIBUTE_ID:
+          return "FeatureMap";
           // clang-format on
         default:
           return "Unknown";
@@ -1528,11 +1538,11 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "ApparentPower";
         case DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_ATTRIBUTE_ID:
           return "PowerFactor";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_ATTRIBUTE_ID:
           return "AverageRMSVoltageMeasurementPeriod";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
           return "AverageRMSOverVoltageCounter";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
           return "AverageRMSUnderVoltageCounter";
         case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ATTRIBUTE_ID:
           return "RMSExtremeOverVoltagePeriod";
@@ -1570,9 +1580,9 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "ACActivePowerOverload";
         case DOTDOT_ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD_ATTRIBUTE_ID:
           return "ACReactivePowerOverload";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_ATTRIBUTE_ID:
           return "AverageRMSOverVoltage";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_ATTRIBUTE_ID:
           return "AverageRMSUnderVoltage";
         case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ATTRIBUTE_ID:
           return "RMSExtremeOverVoltage";
@@ -1612,11 +1622,11 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "ApparentPowerPhB";
         case DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB_ATTRIBUTE_ID:
           return "PowerFactorPhB";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ATTRIBUTE_ID:
           return "AverageRMSVoltageMeasurementPeriodPhB";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
           return "AverageRMSOverVoltageCounterPhB";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
           return "AverageRMSUnderVoltageCounterPhB";
         case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ATTRIBUTE_ID:
           return "RMSExtremeOverVoltagePeriodPhB";
@@ -1656,11 +1666,11 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "ApparentPowerPhC";
         case DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC_ATTRIBUTE_ID:
           return "PowerFactorPhC";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ATTRIBUTE_ID:
           return "AverageRMSVoltageMeasurementPeriodPhC";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
           return "AverageRMSOverVoltageCounterPhC";
-        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
+        case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
           return "AverageRMSUnderVoltageCounterPhC";
         case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ATTRIBUTE_ID:
           return "RMSExtremeOverVoltagePeriodPhC";
@@ -1733,11 +1743,11 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "PacketBufferAllocateFailures";
         case DOTDOT_DIAGNOSTICS_RELAYED_UCAST_ATTRIBUTE_ID:
           return "RelayedUcast";
-        case DOTDOT_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ATTRIBUTE_ID:
+        case DOTDOT_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED_ATTRIBUTE_ID:
           return "PHYToMACQueueLimitReached";
         case DOTDOT_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ATTRIBUTE_ID:
           return "PacketValidateDropCount";
-        case DOTDOT_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ATTRIBUTE_ID:
+        case DOTDOT_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT_ATTRIBUTE_ID:
           return "AverageMACRetryPerAPSMessageSent";
         case DOTDOT_DIAGNOSTICS_LAST_MESSAGELQI_ATTRIBUTE_ID:
           return "LastMessageLQI";
@@ -1868,7 +1878,7 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "ApplicationVersion";
         case DOTDOT_APPLICATION_MONITORING_APPLICATION_CONNECTED_ATTRIBUTE_ID:
           return "ApplicationConnected";
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS_ATTRIBUTE_ID:
           return "ApplicationMQTTTopics";
         case DOTDOT_APPLICATION_MONITORING_UPTIME_MINUTES_ATTRIBUTE_ID:
           return "UptimeMinutes";
@@ -1898,15 +1908,15 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "MQTTMaxDeliveryTimeSeconds";
         case DOTDOT_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS_ATTRIBUTE_ID:
           return "ApplicationStatisticsReportingIntervalSeconds";
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT_ATTRIBUTE_ID:
           return "ApplicationCPUUsagePercent";
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT_ATTRIBUTE_ID:
           return "ApplicationCPUAverageUsagePercent";
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT_ATTRIBUTE_ID:
           return "ApplicationCPUMinUsagePercent";
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT_ATTRIBUTE_ID:
           return "ApplicationCPUMaxUsagePercent";
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB_ATTRIBUTE_ID:
           return "ApplicationRAMUsageMB";
           // clang-format on
         default:
@@ -1999,6 +2009,17 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
         // clang-format off
         case DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ATTRIBUTE_ID:
           return "NetworkManagementState";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
+    case DOTDOT_DESCRIPTOR_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID:
+          return "DeviceTypeList";
           // clang-format on
         default:
           return "Unknown";
@@ -2419,7 +2440,7 @@ dotdot_attribute_id_t
         return DOTDOT_COMMISSIONING_SHORT_ADDRESS_ATTRIBUTE_ID;
       }
       if (strcmp ("ExtendedPANId", attribute_name) == 0) {
-        return DOTDOT_COMMISSIONING_EXTENDEDPAN_ID_ATTRIBUTE_ID;
+        return DOTDOT_COMMISSIONING_EXTENDED_PAN_ID_ATTRIBUTE_ID;
       }
       if (strcmp ("PANId", attribute_name) == 0) {
         return DOTDOT_COMMISSIONING_PAN_ID_ATTRIBUTE_ID;
@@ -2598,10 +2619,10 @@ dotdot_attribute_id_t
         return DOTDOT_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED_ATTRIBUTE_ID;
       }
       if (strcmp ("NumberOfPINUsersSupported", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED_ATTRIBUTE_ID;
       }
       if (strcmp ("NumberOfRFIDUsersSupported", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED_ATTRIBUTE_ID;
       }
       if (strcmp ("NumberOfWeekDaySchedulesSupportedPerUser", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ATTRIBUTE_ID;
@@ -2613,16 +2634,22 @@ dotdot_attribute_id_t
         return DOTDOT_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED_ATTRIBUTE_ID;
       }
       if (strcmp ("MaxPINCodeLength", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_MAXPIN_CODE_LENGTH_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_MAX_PIN_CODE_LENGTH_ATTRIBUTE_ID;
       }
       if (strcmp ("MinPINCodeLength", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_MINPIN_CODE_LENGTH_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_MIN_PIN_CODE_LENGTH_ATTRIBUTE_ID;
       }
       if (strcmp ("MaxRFIDCodeLength", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_MAXRFID_CODE_LENGTH_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_MAX_RFID_CODE_LENGTH_ATTRIBUTE_ID;
       }
       if (strcmp ("MinRFIDCodeLength", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_MINRFID_CODE_LENGTH_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_MIN_RFID_CODE_LENGTH_ATTRIBUTE_ID;
+      }
+      if (strcmp ("CredentialRulesSupport", attribute_name) == 0) {
+        return DOTDOT_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT_ATTRIBUTE_ID;
+      }
+      if (strcmp ("NumberOfCredentialsSupportedPerUser", attribute_name) == 0) {
+        return DOTDOT_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER_ATTRIBUTE_ID;
       }
       if (strcmp ("EnableLogging", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_ENABLE_LOGGING_ATTRIBUTE_ID;
@@ -2660,6 +2687,9 @@ dotdot_attribute_id_t
       if (strcmp ("EnablePrivacyModeButton", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON_ATTRIBUTE_ID;
       }
+      if (strcmp ("LocalProgrammingFeatures", attribute_name) == 0) {
+        return DOTDOT_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES_ATTRIBUTE_ID;
+      }
       if (strcmp ("WrongCodeEntryLimit", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ATTRIBUTE_ID;
       }
@@ -2667,13 +2697,16 @@ dotdot_attribute_id_t
         return DOTDOT_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME_ATTRIBUTE_ID;
       }
       if (strcmp ("SendPINOverTheAir", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_SENDPIN_OVER_THE_AIR_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_SEND_PIN_OVER_THE_AIR_ATTRIBUTE_ID;
       }
       if (strcmp ("RequirePINforRFOperation", attribute_name) == 0) {
-        return DOTDOT_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ATTRIBUTE_ID;
+        return DOTDOT_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION_ATTRIBUTE_ID;
       }
       if (strcmp ("SecurityLevel", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_SECURITY_LEVEL_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ExpiringUserTimeout", attribute_name) == 0) {
+        return DOTDOT_DOOR_LOCK_EXPIRING_USER_TIMEOUT_ATTRIBUTE_ID;
       }
       if (strcmp ("AlarmMask", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_ALARM_MASK_ATTRIBUTE_ID;
@@ -2698,6 +2731,9 @@ dotdot_attribute_id_t
       }
       if (strcmp ("RFIDProgrammingEventMask", attribute_name) == 0) {
         return DOTDOT_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK_ATTRIBUTE_ID;
+      }
+      if (strcmp ("FeatureMap", attribute_name) == 0) {
+        return DOTDOT_DOOR_LOCK_FEATURE_MAP_ATTRIBUTE_ID;
       }
     break;
     case DOTDOT_WINDOW_COVERING_CLUSTER_ID:
@@ -3788,13 +3824,13 @@ dotdot_attribute_id_t
         return DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSVoltageMeasurementPeriod", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSOverVoltageCounter", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSUnderVoltageCounter", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_ATTRIBUTE_ID;
       }
       if (strcmp ("RMSExtremeOverVoltagePeriod", attribute_name) == 0) {
         return DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ATTRIBUTE_ID;
@@ -3851,10 +3887,10 @@ dotdot_attribute_id_t
         return DOTDOT_ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSOverVoltage", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSUnderVoltage", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_ATTRIBUTE_ID;
       }
       if (strcmp ("RMSExtremeOverVoltage", attribute_name) == 0) {
         return DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ATTRIBUTE_ID;
@@ -3914,13 +3950,13 @@ dotdot_attribute_id_t
         return DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSVoltageMeasurementPeriodPhB", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSOverVoltageCounterPhB", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSUnderVoltageCounterPhB", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID;
       }
       if (strcmp ("RMSExtremeOverVoltagePeriodPhB", attribute_name) == 0) {
         return DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ATTRIBUTE_ID;
@@ -3980,13 +4016,13 @@ dotdot_attribute_id_t
         return DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSVoltageMeasurementPeriodPhC", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSOverVoltageCounterPhC", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageRMSUnderVoltageCounterPhC", attribute_name) == 0) {
-        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID;
+        return DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID;
       }
       if (strcmp ("RMSExtremeOverVoltagePeriodPhC", attribute_name) == 0) {
         return DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ATTRIBUTE_ID;
@@ -4084,13 +4120,13 @@ dotdot_attribute_id_t
         return DOTDOT_DIAGNOSTICS_RELAYED_UCAST_ATTRIBUTE_ID;
       }
       if (strcmp ("PHYToMACQueueLimitReached", attribute_name) == 0) {
-        return DOTDOT_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ATTRIBUTE_ID;
+        return DOTDOT_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED_ATTRIBUTE_ID;
       }
       if (strcmp ("PacketValidateDropCount", attribute_name) == 0) {
         return DOTDOT_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ATTRIBUTE_ID;
       }
       if (strcmp ("AverageMACRetryPerAPSMessageSent", attribute_name) == 0) {
-        return DOTDOT_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ATTRIBUTE_ID;
+        return DOTDOT_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT_ATTRIBUTE_ID;
       }
       if (strcmp ("LastMessageLQI", attribute_name) == 0) {
         return DOTDOT_DIAGNOSTICS_LAST_MESSAGELQI_ATTRIBUTE_ID;
@@ -4229,7 +4265,7 @@ dotdot_attribute_id_t
         return DOTDOT_APPLICATION_MONITORING_APPLICATION_CONNECTED_ATTRIBUTE_ID;
       }
       if (strcmp ("ApplicationMQTTTopics", attribute_name) == 0) {
-        return DOTDOT_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ATTRIBUTE_ID;
+        return DOTDOT_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS_ATTRIBUTE_ID;
       }
       if (strcmp ("UptimeMinutes", attribute_name) == 0) {
         return DOTDOT_APPLICATION_MONITORING_UPTIME_MINUTES_ATTRIBUTE_ID;
@@ -4274,19 +4310,19 @@ dotdot_attribute_id_t
         return DOTDOT_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS_ATTRIBUTE_ID;
       }
       if (strcmp ("ApplicationCPUUsagePercent", attribute_name) == 0) {
-        return DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ATTRIBUTE_ID;
+        return DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT_ATTRIBUTE_ID;
       }
       if (strcmp ("ApplicationCPUAverageUsagePercent", attribute_name) == 0) {
-        return DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ATTRIBUTE_ID;
+        return DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT_ATTRIBUTE_ID;
       }
       if (strcmp ("ApplicationCPUMinUsagePercent", attribute_name) == 0) {
-        return DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ATTRIBUTE_ID;
+        return DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT_ATTRIBUTE_ID;
       }
       if (strcmp ("ApplicationCPUMaxUsagePercent", attribute_name) == 0) {
-        return DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ATTRIBUTE_ID;
+        return DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT_ATTRIBUTE_ID;
       }
       if (strcmp ("ApplicationRAMUsageMB", attribute_name) == 0) {
-        return DOTDOT_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ATTRIBUTE_ID;
+        return DOTDOT_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB_ATTRIBUTE_ID;
       }
     break;
     case DOTDOT_NAME_AND_LOCATION_CLUSTER_ID:
@@ -4366,6 +4402,11 @@ dotdot_attribute_id_t
     case DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_CLUSTER_ID:
       if (strcmp ("NetworkManagementState", attribute_name) == 0) {
         return DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ATTRIBUTE_ID;
+      }
+    break;
+    case DOTDOT_DESCRIPTOR_CLUSTER_ID:
+      if (strcmp ("DeviceTypeList", attribute_name) == 0) {
+        return DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID;
       }
     break;
     default:
@@ -4730,7 +4771,7 @@ dotdot_attribute_json_type_t
         // clang-format off
         case DOTDOT_COMMISSIONING_SHORT_ADDRESS_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_COMMISSIONING_EXTENDEDPAN_ID_ATTRIBUTE_ID:
+                case DOTDOT_COMMISSIONING_EXTENDED_PAN_ID_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_COMMISSIONING_PAN_ID_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -4880,9 +4921,9 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -4890,13 +4931,17 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_MAXPIN_CODE_LENGTH_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_MAX_PIN_CODE_LENGTH_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_MINPIN_CODE_LENGTH_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_MIN_PIN_CODE_LENGTH_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_MAXRFID_CODE_LENGTH_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_MAX_RFID_CODE_LENGTH_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_MINRFID_CODE_LENGTH_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_MIN_RFID_CODE_LENGTH_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_ENABLE_LOGGING_ATTRIBUTE_ID:
           return JSON_TYPE_BOOL;
@@ -4922,15 +4967,19 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_BOOL;
         case DOTDOT_DOOR_LOCK_ENABLE_PRIVACY_MODE_BUTTON_ATTRIBUTE_ID:
           return JSON_TYPE_BOOL;
-        case DOTDOT_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DOOR_LOCK_SENDPIN_OVER_THE_AIR_ATTRIBUTE_ID:
+                case DOTDOT_DOOR_LOCK_SEND_PIN_OVER_THE_AIR_ATTRIBUTE_ID:
           return JSON_TYPE_BOOL;
-        case DOTDOT_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION_ATTRIBUTE_ID:
+        case DOTDOT_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION_ATTRIBUTE_ID:
           return JSON_TYPE_BOOL;
         case DOTDOT_DOOR_LOCK_SECURITY_LEVEL_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_DOOR_LOCK_EXPIRING_USER_TIMEOUT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_ALARM_MASK_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -4947,6 +4996,8 @@ dotdot_attribute_json_type_t
                 case DOTDOT_DOOR_LOCK_RF_PROGRAMMING_EVENT_MASK_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_DOOR_LOCK_FEATURE_MAP_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                   // clang-format on
         default:
@@ -5888,11 +5939,11 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -5930,9 +5981,9 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_AC_REACTIVE_POWER_OVERLOAD_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -5972,11 +6023,11 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHB_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -6016,11 +6067,11 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_POWER_FACTOR_PHC_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
+                case DOTDOT_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -6093,11 +6144,11 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DIAGNOSTICS_RELAYED_UCAST_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED_ATTRIBUTE_ID:
+                case DOTDOT_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT_ATTRIBUTE_ID:
+                case DOTDOT_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_DIAGNOSTICS_LAST_MESSAGELQI_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -6228,7 +6279,7 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_STRING;
         case DOTDOT_APPLICATION_MONITORING_APPLICATION_CONNECTED_ATTRIBUTE_ID:
           return JSON_TYPE_BOOL;
-        case DOTDOT_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS_ATTRIBUTE_ID:
+        case DOTDOT_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS_ATTRIBUTE_ID:
           return JSON_TYPE_STRING;
         case DOTDOT_APPLICATION_MONITORING_UPTIME_MINUTES_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
@@ -6258,15 +6309,15 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT_ATTRIBUTE_ID:
+                case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT_ATTRIBUTE_ID:
+                case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT_ATTRIBUTE_ID:
+                case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT_ATTRIBUTE_ID:
+                case DOTDOT_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
-                case DOTDOT_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB_ATTRIBUTE_ID:
+                case DOTDOT_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                   // clang-format on
         default:
@@ -6358,6 +6409,17 @@ dotdot_attribute_json_type_t
       switch (attribute_id) {
         // clang-format off
         case DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ATTRIBUTE_ID:
+          return JSON_TYPE_OBJECT;
+          // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
+    case DOTDOT_DESCRIPTOR_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID:
           return JSON_TYPE_OBJECT;
           // clang-format on
         default:
@@ -6707,6 +6769,9 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   }
 
   if (64786 == cluster_id) {
+  }
+
+  if (64787 == cluster_id) {
   }
 
   return false;

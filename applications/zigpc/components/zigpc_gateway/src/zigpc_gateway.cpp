@@ -42,37 +42,38 @@ sl_status_t
     return status;
   }
 
+
   // Handle Well known Case
 
-  if (is_well_known_key_add) {
-    status = zigpc_gateway_network_permit_joins(true);
-    sl_log_debug(LOG_TAG, "Gateway permits joins with status: 0x%X", status);
-  } else {
-    // Handle install code
-    zigbee_eui64_t eui64_le;
-    zigbee_install_code_t install_code_copy;
+    if (is_well_known_key_add)
+    {
+        status = zigpc_gateway_network_permit_joins(true);
+    }
+    else
+    {
+      // Handle install code
+      zigbee_eui64_t eui64_le;
+      zigbee_install_code_t install_code_copy;
 
-    std::copy(install_code,
-              install_code + sizeof(zigbee_install_code_t),
-              install_code_copy);
+      std::copy(install_code,
+            install_code + sizeof(zigbee_install_code_t),
+            install_code_copy);
 
-    zigbee_eui64_copy_switch_endian(eui64_le, node_eui64);
+      zigbee_eui64_copy_switch_endian(eui64_le, node_eui64);
 
-    status  = zigbeeHostTrustCenterAddDeviceInstallCode(
+      status  = zigbeeHostTrustCenterAddDeviceInstallCode(
                   eui64_le,
                   install_code_copy,
                   install_code_length);
-    
-    sl_log_debug(LOG_TAG, "Add device install code with status: 0x%X", status);
-  }
+    }
 
   status =  zigbeeHostTrustCenterJoinOpen(true);
 
   sl_log(LOG_TAG,
-          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
+           (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
           "Add Node Gateway : %sable permit-join EmberAfStatus: 0x%X",
-          true ? "En" : "Dis",
-          status);
+         true ? "En" : "Dis",
+         status);
 
   return status;
 }
@@ -92,8 +93,10 @@ sl_status_t zigpc_gateway_network_permit_joins(bool enable)
 {
   sl_status_t status = SL_STATUS_OK;
 
-  if (enable) {
-    if(zigpc_get_config()->tc_use_well_known_key == true ){
+  if (enable)
+  {
+      if(zigpc_get_config()->tc_use_well_known_key == true )
+      {
           EmberEUI64 wildcardEui64
             = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
           const EmberKeyData centralizedKey
@@ -109,8 +112,6 @@ sl_status_t zigpc_gateway_network_permit_joins(bool enable)
       }
 
       status = zigbeeHostTrustCenterJoinOpen(true);
-      sl_log_debug(LOG_TAG, "Trust Center permits joins with status: 0x%X", status);
-    
       zigpc_gateway_command_print_nwk_key();
 
   } else {

@@ -23,7 +23,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
     render() {
         return (
-            <div className={`header ${this.state.IsCollapsed ? "collapsed" : ""}`} onMouseDown={() => this.toggleCollapse(null)}>
+            <div className={`header ${this.state.IsCollapsed ? "collapsed" : ""}`} onMouseDown={() => this.toggleCollapse(!this.state.IsCollapsed)}>
                 <div className="col-sm-2 float-left margin-t-10 no-padding-r logo-container">
                     <div className="float-left">
                         <img src={logo} alt="logo" className='margin-b-10' />

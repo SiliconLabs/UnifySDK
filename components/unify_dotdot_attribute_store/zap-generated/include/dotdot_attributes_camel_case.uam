@@ -221,6 +221,8 @@ def zb_MaxPINCodeLength 0x01010017
 def zb_MinPINCodeLength 0x01010018
 def zb_MaxRFIDCodeLength 0x01010019
 def zb_MinRFIDCodeLength 0x0101001a
+def zb_CredentialRulesSupport 0x0101001b
+def zb_NumberOfCredentialsSupportedPerUser 0x0101001c
 def zb_EnableLogging 0x01010020
 def zb_Language 0x01010021
 def zb_LEDSettings 0x01010022
@@ -233,11 +235,13 @@ def zb_EnableLocalProgramming 0x01010028
 def zb_EnableOneTouchLocking 0x01010029
 def zb_EnableInsideStatusLED 0x0101002a
 def zb_EnablePrivacyModeButton 0x0101002b
+def zb_LocalProgrammingFeatures 0x0101002c
 def zb_WrongCodeEntryLimit 0x01010030
 def zb_UserCodeTemporaryDisableTime 0x01010031
 def zb_SendPINOverTheAir 0x01010032
 def zb_RequirePINforRFOperation 0x01010033
 def zb_SecurityLevel 0x01010034
+def zb_ExpiringUserTimeout 0x01010035
 def zb_AlarmMask 0x01010040
 def zb_KeypadOperationEventMask 0x01010041
 def zb_RFOperationEventMask 0x01010042
@@ -246,6 +250,7 @@ def zb_RFIDOperationEventMask 0x01010044
 def zb_KeypadProgrammingEventMask 0x01010045
 def zb_RFProgrammingEventMask 0x01010046
 def zb_RFIDProgrammingEventMask 0x01010047
+def zb_FeatureMap 0x0101fffc
 
 // This represents short CamelCase labels the attributes in the DotDot WindowCovering cluster
 def zb_WindowCoveringType 0x01020000
@@ -854,4 +859,7 @@ def zb_Position 0xfd110001
 
 // This represents short CamelCase labels the attributes in the DotDot ProtocolController-NetworkManagement cluster
 def zb_NetworkManagementState 0xfd120001
+
+// This represents short CamelCase labels the attributes in the DotDot Descriptor cluster
+def zb_DeviceTypeList 0xfd130000
 

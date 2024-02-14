@@ -70,7 +70,7 @@ void compare_any_all_args(mock_t *p_mock)
 /** This is not a real test case but a test to ensure that the including node
  *  code in inclusion is correctly working when building for a controller.
  */
-void test_controller_build()
+void test_controller_build(void)
 {
 #ifndef ZW_CONTROLLER
   TEST_FAIL_MESSAGE("ZW_CONTROLLER is not defined but including node (ZW Controller) test cases are being executed.");
@@ -84,7 +84,7 @@ void test_controller_build()
  * When a node is to be included securely it is expected that a ZW_SendData is send.
  * For this the common S2_send_frame(...) defined in s2.h is used, which will be implemented elsewhere.
  */
-void test_kex_joining_node_state_machine() {
+void test_kex_joining_node_state_machine(void) {
   mock_t * p_kex_get_mock;
   mock_t * p_kex_report_mock;
   mock_t * p_kex_set_mock;

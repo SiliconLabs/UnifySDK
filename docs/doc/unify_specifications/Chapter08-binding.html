@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Unify Binding Cluster" name="description" />
+<meta content="Binding" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. Binding &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter08-binding.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9. The Unify Descriptor Cluster (0xFD13) (Experimental)" href="Chapter09-descriptor-cluster.html" />
+    <link rel="prev" title="7. The Dotdot Scenes Cluster (0x0005) in the Unify Framework" href="Chapter07-scenes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8. Binding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter09-descriptor-cluster.html">9. Descriptor Cluster ( Experimental )</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter10-aox-application.html">10. AoX Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter11-name-and-location-service.html">11. Name and Location Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter13-system-metrics.html">13. System Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter14-unify-controller-language-data-model.html">14. Unify Controller Language Data Model ( Experimental )</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="binding">
+<span id="unify-specifications-chapter-binding"></span><h1><span class="section-number">8. </span>Binding<a class="headerlink" href="#binding" title="Permalink to this heading"></a></h1>
+<p>This chapter describes how to use the binding functionality in Unify.</p>
+<p>The unify binding feature can be used by an IoT service / rules engine to
+impose direct rules between nodes on the PAN or even for nodes between
+PAN and wireless protocols. The benefit of the direct rules are a
+binding between two nodes in the same network will impose less network
+latency compared to a star topology where all events needs to be passed
+though an IoT service. Another benefit is that in the event of the a protocol
+controller going offline the binding rules setup in the network will still work.</p>
+<p>The Unify Binding framework also features a system to identify which nodes
+can be bound. Care must be taken when IoT services setup bindings,
+because the Protocol Controllers will not sanitise whether a binding is safe
+from a security perspective.</p>
+<p>An IoT service MUST verify what a binding is acceptable
+from a security perspective before setting up the binding.</p>
+<section id="establishing-a-binding">
+<h2><span class="section-number">8.1. </span>Establishing a binding<a class="headerlink" href="#establishing-a-binding" title="Permalink to this heading"></a></h2>
+<p>The main use case of a binding is to have a PAN node cluster client issue commands
+directly to another PAN node cluster server.</p>
+<p>An example is shown below.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-b9e872cb82f0722fc5a7772d3c092084390d67de.png" alt="' Allows simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Direct PAN node Binding example
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY messages&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+
+box &quot;PAN 1&quot;
+  participant &quot;Protocol Controller\nUNID: pc&quot; as protocol_controller
+  participant &quot;OnOff cluster client\nUNID: node_1&quot; as client_node
+  participant &quot;OnOff cluster server\nUNID: node_2&quot; as server_node
+end box
+
+protocol_controller -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+
+protocol_controller -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;,&quot;Identify&quot;]}
+
+protocol_controller -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+
+iot_service -&gt; protocol_controller: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/Bind \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;, \n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}
+
+protocol_controller -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+protocol_controller -&gt; client_node: Establish Binding
+client_node -&gt; protocol_controller: Establish Binding Response
+
+protocol_controller -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+rnote over client_node: Node OnOff cluster\n is now bound to &quot;node_2/ep0&quot;.
+
+rnote over client_node: Event Triggering\n OnOff Commands
+client_node -&gt; server_node: OnOff Cluster: On Command
+
+rnote over client_node: Event Triggering\n OnOff Commands
+client_node -&gt; server_node: OnOff Cluster: Toggle Command"/>
+</p>
+</section>
+<section id="binding-object">
+<h2><span class="section-number">8.2. </span>Binding object<a class="headerlink" href="#binding-object" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p>A binding consists of the following elements/fields</p>
+</div></blockquote>
+<ul>
+<li><p><strong>SourceUnid</strong>:</p>
+<p>The UNID of the client node that will issue commands to the server.</p>
+<p>This information will be found in the topic used to issue the command or
+read the attributes</p>
+</li>
+<li><p><strong>SourceEp</strong>:</p>
+<p>The Endpoint ID of the client node that will issue commands to the server</p>
+<p>This information will be found in the topic used to issue the command or
+read the attributes</p>
+</li>
+<li><p><strong>ClusterName</strong>:</p>
+<p>The name of the ClusterID of the client node that will issue commands
+to the server</p>
+</li>
+<li><p><strong>DestinationUnid</strong>:</p>
+<p>The UNID of the server node that will receive commands from the client</p>
+</li>
+<li><p><strong>DestinationEp</strong>:</p>
+<p>The Endpoint ID of the server node that will receive commands from the client</p>
+</li>
+</ul>
+<p>There is no real control over what triggers which commands from the client to
+the server. For example, an OccupancySensor server that is also an OnOff cluster
+client may decide to send On commands to bound device when OccupancySensing is
+True and Off when False, or vice-versa.</p>
+<section id="mqtt-topics-and-parameters">
+<h3><span class="section-number">8.2.1. </span>MQTT Topics and Parameters<a class="headerlink" href="#mqtt-topics-and-parameters" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default" id="table-unify-specifications-binding-mqtt-topics" style="width: 80%">
+<caption><span class="caption-number">Table 8.1 </span><span class="caption-text">Binding MQTT Topics</span><a class="headerlink" href="#table-unify-specifications-binding-mqtt-topics" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ucl/by-unid/+/+/Binding/Commands/&lt;CommandName&gt;</p></td>
+<td><p>Command topic space. IoT services can publish under this topic.</p>
+<p>See the XML file for command definitions.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/+/Binding/Attributes/&lt;AttributeName&gt;/Reported</p></td>
+<td><p>Used to publish the standard and additionnal attributes of the cluster.</p>
+<p>See the XML file for attributes definitions.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/+/+/Binding/Attributes/&lt;AttributeName&gt;/Desired</p></td>
+<td><p>Used to publish the standard and additionnal attributes of the cluster.</p>
+<p>See the XML file for attributes definitions.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/+/Binding/SupportedCommands</p></td>
+<td><p>Used to publish the supported commands.</p></td>
+</tr>
+<tr class="row-even"><td><p>ucl/by-unid/+/+/Binding/SupportedGeneratedCommands</p></td>
+<td><p>Used to publish the supported generated commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ucl/by-unid/+/+/Binding/GeneratedCommands/&lt;CommandName&gt;</p></td>
+<td><p>Used to publish the generated commands.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="additional-attributes">
+<h3><span class="section-number">8.2.2. </span>Additional attributes<a class="headerlink" href="#additional-attributes" title="Permalink to this heading"></a></h3>
+<p>This cluster makes use of several additional attributes. These attributes are
+not present in the XML file.</p>
+<section id="binding-table">
+<h4><span class="section-number">8.2.2.1. </span>Binding Table<a class="headerlink" href="#binding-table" title="Permalink to this heading"></a></h4>
+<p>A binding table will be kept by each PAN node, keeping track of the established
+bindings.</p>
+<p>The value of the binding table is an array of binding objects. Each binding
+object consists in a Cluster ID, Destination UNID and Destination Endpoint.</p>
+<p>For example:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTable/Reported</span> -
+  {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span>{<span class="nt">&quot;ClusterName&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;DestinationUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node_2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;DestinationEp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>}<span class="p">,</span>
+<span class="w">      </span>{<span class="nt">&quot;ClusterName&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;DestinationUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node_2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;DestinationEp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}<span class="p">,</span>
+<span class="w">      </span>{<span class="nt">&quot;ClusterName&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Level&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;DestinationUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node_2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;DestinationEp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>}<span class="p">]</span>
+<span class="w">  </span>}
+</pre></div>
+</div>
+<p>The JSON schema for the BindingTable MUST be as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Binding Table&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Binding Table&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Binding Table Entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;ClusterName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;DestinationUnid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;DestinationEp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;ClusterName&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;DestinationUnid&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;DestinationEp&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/Binding Table Entry&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="discovering-what-can-be-bound">
+<h4><span class="section-number">8.2.2.2. </span>Discovering what can be bound<a class="headerlink" href="#discovering-what-can-be-bound" title="Permalink to this heading"></a></h4>
+<p>Protocol Controller MUST advertise the list of available Clusters for binding
+for each PAN node. The <em>BindableClusterList</em> attribute indicates an array
+of Cluster IDs that can be used for Binding Commands.</p>
+<p>If the list of Cluster IDs that can be bound is unknown to the Protocol
+Controller, it MUST NOT publish any Binding capabilities for that
+UNID/Endpoint.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindableClusterList/Desired</span> - {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;OnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Level&quot;</span><span class="p">]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindableClusterList/Reported</span> - {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;OnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Level&quot;</span><span class="p">]</span>}
+</pre></div>
+</div>
+<p>The JSON schema for this topic MUST be as follows:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Binding Cluster ID list&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Binding Cluster ID list&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>IoT Service SHOULD NOT attempt to bind a node to a destination, if the
+destination does not have any Attributes or SupportedCommands for the Cluster
+used in the binding.</p>
+<p>Protocol Controller MUST reject bindings if the destination cannot receive
+commands from the cluster defined in the binding.</p>
+</section>
+</section>
+</section>
+<section id="binding-levels">
+<h2><span class="section-number">8.3. </span>Binding levels<a class="headerlink" href="#binding-levels" title="Permalink to this heading"></a></h2>
+<p>When a binding is estalished in the Unify system, it is possible that the
+2 nodes cannot communicate directly with each other.</p>
+<p>Therefore, an IoT Service requesting to Bind 2 nodes can lead to 3 (hidden) substates</p>
+<ul>
+<li><p><strong>Direct PAN binding</strong></p>
+<p>When such a binding is established, 2 nodes will communicate directly with
+each other and no Protocol Controller will be involved.</p>
+</li>
+<li><p><strong>Intra Protocol Controller binding</strong></p>
+<p>The 2 nodes cannot communicate directly with each other, but are serviced by
+the same Protocol Controller and therefore the Protocol Controller can “relay”  messages.</p>
+</li>
+<li><p><strong>Inter Protocol Controller binding</strong></p>
+<p>The 2 nodes have 2 different Protocol Controllers and therefore the Protocol
+Controllers will need to send commands to each other to make the binding work.</p>
+</li>
+</ul>
+<p>Both Intra and Inter Protocol Controller Bindings may be treated the same way
+by a Protocol Controller, which can publish a Command to the destination UNID/Ep using the MQTT command space.</p>
+<p>If the Protocol Controller itself is servicing the destination, it will receive
+its own command publication and proceed with sending the command to the destination.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-b6b22dbd428f3bb67c26e10dfe12cec796de245c.png" alt="' Allows simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Inter/Intra Protocol Controller binding example
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY messages&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+box &quot;PAN 1&quot;
+  participant &quot;Protocol Controller 1\nUNID: pc_1&quot; as protocol_controller_1
+  participant &quot;OnOff cluster client\nUNID: node_1&quot; as client_node
+end box
+
+box &quot;PAN 2&quot; #LightBlue
+  participant &quot;Protocol Controller 2\nUNID: pc_2&quot; as protocol_controller_2
+  participant &quot;OnOff cluster server\nUNID: node_2&quot; as server_node
+end box
+
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+
+iot_service -&gt; protocol_controller_1: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/Bind \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;, \n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+rnote over protocol_controller_1: node_1 cannot \ncommunicate with node_2
+
+protocol_controller_1 -&gt; client_node: Establish Binding\ntowards Protocol Controller 1
+client_node -&gt; protocol_controller_1: Establish Binding Response
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+rnote over client_node: Node OnOff cluster\n is now &quot;Inter PC&quot; bound\nto &quot;node_2/ep0&quot;.
+
+rnote over client_node: Event Triggering\n OnOff Commands
+client_node -&gt; protocol_controller_1: OnOff Cluster: Toggle Command
+
+protocol_controller_1 -&gt; protocol_controller_2: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_2/ep0/OnOff/Commands/Toggle &lt;b&gt;{}
+
+protocol_controller_2 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_2/ep0/OnOff/Attributes/OnOff/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: true}
+
+protocol_controller_2 -&gt; server_node: OnOff Cluster:\nToggle Command
+server_node -&gt; protocol_controller_2: OnOff Cluster\nattribute reporting
+
+protocol_controller_2 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_2/ep0/OnOff/Attributes/OnOff/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: true}"/>
+</p>
+<p>Protocol Controllers are not mandated to support creating Intra or Inter
+Protocol Controller bindings. In this case, it will appear from the IoT Service
+as if the Bind command was ignored or rejected.</p>
+<section id="binding-table-capacity">
+<h3><span class="section-number">8.3.1. </span>Binding table capacity<a class="headerlink" href="#binding-table-capacity" title="Permalink to this heading"></a></h3>
+<p>A PAN node may have a limited capacity in its binding table. When that happens,
+a protocol controller can use the <code class="docutils literal notranslate"><span class="pre">BindingTableFull</span></code> attribute to indicate
+that we have reached the limit, and no more bindings can be made.</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTableFull/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
+</pre></div>
+</div>
+<p>Note that Protocol Controllers MAY start establishing Intra Protocol Controller
+bindings when the capacity of the PAN node is reached. In this case,
+the Protocol Controller MUST NOT advertise that the binding table is full.</p>
+<p>A Protocol Controller establishing Intra Protocol Controller Bindings MUST
+advertise that the Binding table is full only if both the PAN node and the
+Protocol Controller have exhausted their binding capacity.</p>
+</section>
+<section id="mqtt-publications-example">
+<h3><span class="section-number">8.3.2. </span>MQTT publications example<a class="headerlink" href="#mqtt-publications-example" title="Permalink to this heading"></a></h3>
+<p>An example of a PAN node with the Bindings server PAN node able to send commands
+for the OnOff and Level clusters will be shown as follows:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTableFull/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTableFull/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindableClusterList/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;OnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Level&quot;</span><span class="p">]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindableClusterList/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;OnOff&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Level&quot;</span><span class="p">]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTable/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTable/Desired</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/SupportedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Bind&quot;</span><span class="p">,</span><span class="s2">&quot;Unbind&quot;</span><span class="p">]</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/SupportedGeneratedCommands</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>}
+</pre></div>
+</div>
+</section>
+<section id="detailed-examples">
+<h3><span class="section-number">8.3.3. </span>Detailed examples<a class="headerlink" href="#detailed-examples" title="Permalink to this heading"></a></h3>
+<section id="happy-case">
+<h4><span class="section-number">8.3.3.1. </span>Happy case<a class="headerlink" href="#happy-case" title="Permalink to this heading"></a></h4>
+<p class="plantuml">
+<img src="../../_images/plantuml-88223828c630a0b26813584722600ed4468d876a.png" alt="' Allows simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Direct binding happy case full example
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY messages&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+box &quot;PAN 1&quot;
+  participant &quot;Protocol Controller 1\nUNID: pc_1&quot; as protocol_controller_1
+  participant &quot;OnOff cluster client\nUNID: node_1&quot; as client_node
+  participant &quot;OnOff cluster server\nUNID: node_2&quot; as server_node
+end box
+
+rnote over protocol_controller_1, client_node: Capability discovery
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Desired \n&lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;]}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Reported \n&lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;]}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+
+iot_service -&gt; protocol_controller_1: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/Bind \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;, \n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+protocol_controller_1 -&gt; client_node: Establish Binding\ntowards node_2, ep 2
+client_node -&gt; protocol_controller_1: Establish Binding Response
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+rnote over client_node: Event Triggering\n OnOff Commands
+client_node -&gt; server_node: OnOff Cluster: On Command
+
+rnote over client_node: Event Triggering\n OnOff Commands
+client_node -&gt; server_node: OnOff Cluster: Off Command
+
+iot_service -&gt; protocol_controller_1: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/Unbind \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;, \n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+
+protocol_controller_1 -&gt; client_node: Remove Binding\ntowards node_2, ep 2
+client_node -&gt; protocol_controller_1: Remove Binding Response
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+
+rnote over client_node: Event Triggering\n OnOff Commands
+rnote over client_node: Do nothing"/>
+</p>
+</section>
+<section id="failed-binding-attempts">
+<h4><span class="section-number">8.3.3.2. </span>Failed binding attempts<a class="headerlink" href="#failed-binding-attempts" title="Permalink to this heading"></a></h4>
+<p class="plantuml">
+<img src="../../_images/plantuml-2e28a429d1c1273826d940e4de44e8b4b6efd317.png" alt="' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Binding rejection examples
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY messages&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+box &quot;PAN 1&quot;
+  participant &quot;Protocol Controller 1\nUNID: pc_1&quot; as protocol_controller_1
+  participant &quot;OnOff cluster client\nUNID: node_1&quot; as client_node
+  participant &quot;OnOff cluster server\nUNID: node_2&quot; as server_node
+end box
+
+rnote over protocol_controller_1, client_node: Capability discovery
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Desired \n&lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;]}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Reported \n&lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;]}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+
+iot_service -&gt; protocol_controller_1: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/Bind \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;, \n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}
+
+rnote over protocol_controller_1: No Endpoint 2 for node_2.\nIgnoring without trying
+
+iot_service -&gt; protocol_controller_1: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/Bind \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;, \n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n&lt;font color=#6C2A0D&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}
+
+rnote over protocol_controller_1: Binding accepted
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;node_2&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 0}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+protocol_controller_1 -&gt; client_node: Establish Binding\ntowards node_2, ep 2
+client_node -&gt; protocol_controller_1: Establish Binding Response\n(Rejected)
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}"/>
+</p>
+</section>
+<section id="explicit-binding-towards-a-protocol-controller">
+<h4><span class="section-number">8.3.3.3. </span>Explicit binding towards a Protocol Controller<a class="headerlink" href="#explicit-binding-towards-a-protocol-controller" title="Permalink to this heading"></a></h4>
+<p>IoT Service MAY use the binding cluster to force binding towards a Protocol
+Controller. The Binding cluster provides a special command for this, so
+IoT services do not need to figure out which UNID/ep to use for the
+Binding to point at the Protocol Controller.</p>
+<p>Protocol Controllers supporting to establish bindings towards themselves
+SHOULD forward commands received by PAN nodes to IoT Services using the
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/&lt;ClusterName&gt;/GeneratedCommands</span></code>
+topic space.</p>
+<p>The diagram below shows an example of an explicit binding to the Protocol
+Controller.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-d5700f215ee0750417ad44c84e6fbb919e4b0ff0.png" alt="' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Binding toward the Protocol Controller
+
+legend top
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY messages&lt;/font&gt;
+endlegend
+
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+box &quot;PAN 1&quot;
+  participant &quot;Protocol Controller 1\nUNID: pc_1&quot; as protocol_controller_1
+  participant &quot;OnOff cluster client\nUNID: node_1&quot; as client_node
+end box
+
+rnote over protocol_controller_1, client_node: Capability discovery
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: []}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Desired \n&lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;]}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindableClusterList/Reported \n&lt;font color=#00003C&gt;&lt;b&gt; {&quot;value&quot;: [&quot;OnOff&quot;, &quot;Level&quot;]}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTableFull/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: false}
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [&quot;BindToProtocolController&quot;,&quot;UnbindFromProtocolController&quot;]}
+
+iot_service -&gt; protocol_controller_1: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Binding/Commands/BindToProtocolController \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;}
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;pc_1&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+protocol_controller_1 -&gt; client_node: Establish Binding\ntowards pc_1, ep 2
+client_node -&gt; protocol_controller_1: Establish Binding Response\n(Accepted)
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Binding/Attributes/BindingTable/Desired \n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;: [\n\t&lt;font color=#00003C&gt;&lt;b&gt;{&quot;ClusterName&quot; : &quot;OnOff&quot;,  \n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationUnid&quot;: &quot;pc_1&quot;,\n\t&lt;font color=#00003C&gt;&lt;b&gt;&quot;DestinationEp&quot;: 2}\n&lt;font color=#00003C&gt;&lt;b&gt;]}
+
+rnote over client_node: Event Triggering\n OnOff Commands
+client_node -&gt; protocol_controller_1: OnOff Cluster: Toggle Command
+
+rnote over iot_service: Gets notified of\nOnOff commands\ngenerated by node_2
+
+protocol_controller_1 -&gt; iot_service: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_2/ep0/OnOff/GeneratedCommand/Toggle &lt;b&gt;{}"/>
+</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

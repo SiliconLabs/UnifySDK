@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="API documentation" href="../api.html" />
-    <link rel="prev" title="How To Make an IoT Service" href="../how_to_develop_an_iot_service.html" /> 
+    <link rel="prev" title="Unify Library Overview" href="../unify_library_overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -49,90 +49,57 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Host SDK</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../readme_building.html">Unify Build Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_cmake.html">CMake Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_debug.html">Unify Debugging Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_rust.html">Unify Rust Development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../unify_library_overview.html">Unify Library Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Unify Coding Standard</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#introduction">1 Introduction</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#purpose-of-this-document">1.1 Purpose of this document</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#structure-and-wording-of-this-document">1.2 Structure and wording of this document</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#application-of-this-standard">1.3 Application of this standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started_as_developer.html">Getting Started as a Developer</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../readme_developer.html">Unify Developer Guide</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../readme_building.html">Unify Build Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_cmake.html">CMake Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_rust.html">Unify Rust Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unify_library_overview.html">Unify Library Overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Unify Coding Standard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">1 Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-guidelines">2 General Guidelines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-specific-guidelines">3 C Specific Guidelines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coding-style-and-formatting">4 Coding style and formatting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentation">5 Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doxygen-coding-style-guide">6 Doxygen Coding Style Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#licensing">7 Licensing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">8 C++ Specific Guidelines</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#general-guidelines">2 General Guidelines</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">2.1 General Guidelines</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#testing">2.2 Testing</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#embedded-coding">2.3 Embedded Coding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../how_to_write_new_cluster.html">How to implement a custom cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#c-specific-guidelines">3 C Specific Guidelines</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#compilers">3.1 Compilers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#preprocessor">3.2 Preprocessor</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#use-of-preprocessor-directive-undef-recommended">3.2.5 Use of preprocessor directive <code class="docutils literal notranslate"><span class="pre">#undef</span></code> (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#use-of-preprocessor-stringify-and-concatenation-recommended">3.2.6 Use of preprocessor ‘stringify’ and concatenation (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#general-use-of-preprocessor-recommended">3.2.7 General use of preprocessor  (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#standard-libraries">3.3 Standard Libraries</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#keywords">3.4 Keywords</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data-types">3.5 Data Types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#variables">3.6 Variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#functions">3.7 Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#macros">3.8 Macros</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#goto-statements">3.9 goto statements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#libraries">3.10 Libraries</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#misc">3.11 Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_as_developer.html#development-platform-recommendations">Development Platform Recommendations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_as_developer.html#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_as_developer.html#developing-protocol-controllers">Developing protocol controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_as_developer.html#extend-ucl-clusters">Extend UCL clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started_as_developer.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#coding-style-and-formatting">4 Coding style and formatting</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#general-formatting">4.1 General formatting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#commenting-code-required">4.2 Commenting code (Required)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bracing-style-required">4.3 Bracing style (Required)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#switch-statements-and-labels">4.4 Switch statements and labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#functions-operators-and-c-keywords">4.5 Functions, operators and C keywords</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#naming">4.6 Naming</a></li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#documentation">5 Documentation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#general">5.1 General</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#comments-should-answer-the-question-why-required">5.2 Comments should answer the question “Why?” (Required)</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#doxygen-coding-style-guide">6 Doxygen Coding Style Guide</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#file-comment-header-required">6.1 File comment header (Required)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#grouping-modules-addtogroup-recommended">6.2 Grouping modules (&#64;addtogroup) (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-module-level-documentation-recommended">6.3 File/module level documentation (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-documentation-required">6.4 Function documentation (Required)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#variable-documentation-required">6.5 Variable documentation (Required)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#header-file-vs-implementation-file-recommended">6.6 Header file vs. implementation file (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#do-not-document-sections-recommended">6.7 Do not document sections (Recommended)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#do-not-release-sections-recommended">6.8 Do not release sections (Recommended)</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#licensing">7 Licensing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#silicon-labs-licenses">7.1 Silicon Labs Licenses</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#third-party-code">7.2 Third-Party Code</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">8 C++ Specific Guidelines</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../api.html">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 </ul>
 
@@ -2058,10 +2025,10 @@ uint8_t sl_my_public_variable;
 // up by Doxygen.
 static uint8_t my_private_variable;
 
-/**
+/*
  * This is a function that will not be documented.
  *
- * Note the lack of the double slash at the end of the top line. That
+ * Note the lack of the double asterisk at the end of the top line. That
  * means this is not a true Javadoc comment block and Doxygen will not
  * see it.
  */

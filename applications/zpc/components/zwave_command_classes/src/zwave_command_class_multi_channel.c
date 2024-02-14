@@ -558,13 +558,41 @@ sl_status_t zwave_command_class_multi_channel_capability_get(
 static sl_status_t zwave_command_class_multi_channel_endpoint_find(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
 {
+  uint8_t generic_device_class = 0;
+  uint8_t specific_device_class = 0;
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+
+  sl_status_t result = attribute_store_get_child_reported(
+    endpoint_node,
+    ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS,
+    &generic_device_class,
+    sizeof(generic_device_class));
+
+  if (result != SL_STATUS_OK) {
+    sl_log_warning(LOG_TAG, "Can't find generic device class. Setting to default 0xff");
+    generic_device_class = 0xFF; 
+  }
+
+ result = attribute_store_get_child_reported(
+    endpoint_node,
+    ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS,
+    &specific_device_class,
+    sizeof(specific_device_class));
+
+  if (result != SL_STATUS_OK) {
+    sl_log_warning(LOG_TAG, "Can't find specific device class. Setting to default 0xff");
+    specific_device_class = 0xFF; 
+  }
+
   // Create a frame for the attribute resolver
   ZW_MULTI_CHANNEL_END_POINT_FIND_V4_FRAME *get_frame
     = (ZW_MULTI_CHANNEL_END_POINT_FIND_V4_FRAME *)frame;
   get_frame->cmdClass            = COMMAND_CLASS_MULTI_CHANNEL_V4;
   get_frame->cmd                 = MULTI_CHANNEL_END_POINT_FIND_V4;
-  get_frame->genericDeviceClass  = 0xFF;
-  get_frame->specificDeviceClass = 0xFF;
+  get_frame->genericDeviceClass  = generic_device_class;
+  get_frame->specificDeviceClass = specific_device_class;
 
   *frame_len = sizeof(ZW_MULTI_CHANNEL_END_POINT_FIND_V4_FRAME);
   return SL_STATUS_OK;

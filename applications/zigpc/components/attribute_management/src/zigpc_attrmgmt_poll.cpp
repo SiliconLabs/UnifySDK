@@ -39,9 +39,9 @@ bool operator==(const attribute_poll_entry_t &A,
 }
 
 boost::circular_buffer<attribute_poll_entry_t>
-  attribute_poll_list(ZIGPC_ATTRMGMT_DEFAULT_POLL_SIZE);
+  attribute_poll_list(ZIGPC_ATTRMGMT_DEFAULT_POLL_SIZE); //NOSONAR - must be non-const to store new entries
 
-auto attribute_poll_iter = attribute_poll_list.begin();
+auto attribute_poll_iter = attribute_poll_list.begin(); //NOSONAR - index must be non-const to keep track of current position
 
 size_t zigpc_attrmgmt_get_poll_list_current_size()
 {
@@ -89,8 +89,8 @@ sl_status_t zigpc_attrmgmt_send_poll_attributes()
     } else {
       sl_log_warning(LOG_TAG, "Error parsing eui64");
     }
-  } 
-  
+  }
+
 
   return status;
 }
@@ -126,7 +126,7 @@ sl_status_t zigpc_attrmgmt_add_poll_entry(const zigbee_eui64_t eui64,
   sl_status_t status = SL_STATUS_OK;
   attribute_poll_entry_t entry;
 
-  if ((eui64 != NULL) && (zigpc_attrmgmt_poll_has_space())) {
+  if ((nullptr != eui64) && (zigpc_attrmgmt_poll_has_space())) {
     entry.eui64       = zigbee_eui64_to_uint(eui64);
     entry.endpoint_id = endpoint_id;
     entry.cluster_id  = cluster_id;

@@ -115,6 +115,19 @@ services:
     volumes:
       - unify_upti_cap:/var/lib
 
+  unify-positioning:
+    image: unify-runtime
+    container_name: unify-positioning
+    restart: on-failure
+    depends_on:
+      - unify-base
+      - mqtt-broker
+    networks:
+      - mqtt-network
+    entrypoint: positioning --mqtt.host mqtt-broker --mqtt.client_id positioning-portable_runtime
+    volumes:
+      - unify_positioning:/var/lib
+
   # Protocol controllers
   unify-zpc:
     image: unify-runtime
@@ -135,14 +148,90 @@ services:
     volumes:
       - unify_zpc:/var/lib
 
+  unify-zigpc:
+    image: unify-runtime
+    container_name: unify-zigpc
+    restart: on-failure
+    depends_on:
+      - unify-base
+      - mqtt-broker
+    networks:
+      - mqtt-network
+    environment:
+      - ZIGPC_DEVICE_TTY
+      - ZIGPC_DEVICE_IP
+      - ZIGPC_PORT
+    devices:
+      - "${ZIGPC_DEVICE_TTY:-/dev/null}:${ZIGPC_DEVICE_TTY:-/dev/null}"
+    entrypoint: "/unify/run_zigpc.sh --mqtt.host mqtt-broker --zigpc.tc_use_well_known_key 0 --mqtt.client_id zigpc-portable_runtime"
+    volumes:
+      - unify_zigpc:/var/lib
+
+  unify-aoxpc:
+    image: unify-runtime
+    container_name: unify-aoxpc
+    restart: on-failure
+    depends_on:
+      - unify-base
+      - mqtt-broker
+      - unify-positioning
+    networks:
+      - mqtt-network
+    environment:
+      - AOXPC_DEVICE_TTY
+      - AOXPC_DEVICE_IP
+      - AOXPC_PORT
+    devices:
+      - "${AOXPC_DEVICE_TTY:-/dev/null}:${AOXPC_DEVICE_TTY:-/dev/null}"
+    entrypoint: "/unify/run_aoxpc.sh --mqtt.host mqtt-broker --mqtt.client_id aoxpc-portable_runtime"
+    volumes:
+      - unify_aoxpc:/var/lib
+
+  unify-multiprotocol:
+    image: unify-runtime
+    container_name: unify-multiprotocol
+    restart: on-failure
+    depends_on:
+      - unify-base
+      - mqtt-broker
+    networks:
+      - mqtt-network
+    environment:
+      - MULTIPROTOCOL_DEVICE_TTY
+      - MULTIPROTOCOL_DEVICE_IP
+      - MULTIPROTOCOL_PORT
+      - MULTIPROTOCOL_SELECTIONS=Zigbee
+    devices:
+      - "${MULTIPROTOCOL_DEVICE_TTY:-/dev/null}:${MULTIPROTOCOL_DEVICE_TTY:-/dev/null}"
+    entrypoint: "/unify/run_multiprotocol.sh --mqtt.host mqtt-broker --mqtt.client_id multiprotocol-portable_runtime"
+    volumes:
+      - unify_multiprotocol:/var/lib
+
+  unify-matter-bridge:
+    image: unify-runtime
+    container_name: unify-matter-bridge
+    restart: on-failure
+    depends_on:
+      - unify-base
+      - mqtt-broker
+    networks:
+      - mqtt-network
+    entrypoint: "/unify/run_matter_bridge.sh --mqtt.host mqtt-broker --mqtt.client_id matter-bridge"
+    volumes:
+      - unify_matter_bridge:/var/lib
+
 volumes:
   unify_gms:
   unify_upvl:
   unify_nal:
   unify_image_provider:
   unify_upti_cap:
+  unify_positioning:
   unify_zpc:
-
+  unify_zigpc:
+  unify_aoxpc:
+  unify_multiprotocol:
+  unify_matter_bridge:
 
 networks:
   mqtt-network:

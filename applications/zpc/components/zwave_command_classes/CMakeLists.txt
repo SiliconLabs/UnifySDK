@@ -41,6 +41,7 @@ add_library(
   src/zwave_command_class_security_2.c
   src/zwave_command_class_supervision.c
   src/zwave_command_class_supervision_process.cpp
+  src/zwave_command_class_sound_switch.c
   src/zwave_command_class_switch_color.c
   src/zwave_command_class_switch_multilevel.c
   src/zwave_command_class_thermostat_mode.c

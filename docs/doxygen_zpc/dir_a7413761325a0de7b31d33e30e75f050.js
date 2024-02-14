@@ -53,6 +53,8 @@ var dir_a7413761325a0de7b31d33e30e75f050 =
     [ "zwave_command_class_security_0.h", "zwave__command__class__security__0_8h.html", "zwave__command__class__security__0_8h" ],
     [ "zwave_command_class_security_2.c", "zwave__command__class__security__2_8c.html", "zwave__command__class__security__2_8c" ],
     [ "zwave_command_class_security_2.h", "zwave__command__class__security__2_8h.html", "zwave__command__class__security__2_8h" ],
+    [ "zwave_command_class_sound_switch.c", "zwave__command__class__sound__switch_8c.html", "zwave__command__class__sound__switch_8c" ],
+    [ "zwave_command_class_sound_switch.h", "zwave__command__class__sound__switch_8h.html", "zwave__command__class__sound__switch_8h" ],
     [ "zwave_command_class_supervision.c", "zwave__command__class__supervision_8c.html", "zwave__command__class__supervision_8c" ],
     [ "zwave_command_class_supervision_internals.h", "zwave__command__class__supervision__internals_8h.html", "zwave__command__class__supervision__internals_8h" ],
     [ "zwave_command_class_supervision_process.h", "zwave__command__class__supervision__process_8h.html", "zwave__command__class__supervision__process_8h" ],

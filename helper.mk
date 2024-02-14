@@ -26,6 +26,7 @@ packages+=nlohmann-json3-dev
 packages+=curl wget python3-pip
 packages+=time
 
+rust_url?=https://sh.rustup.rs
 RUST_VERSION?=1.65.0
 export PATH := ${HOME}/.cargo/bin:${PATH}
 
@@ -60,16 +61,16 @@ help: README.md
 	@echo "# PATH=${PATH}"
 	@echo ""
 
-setup/debian: ${CURDIR}/docker/target_dependencies.apt
+setup/debian: ${CURDIR}/docker/target_dependencies.apt ${CURDIR}/docker/host_dependencies.apt
 	cat /etc/debian_version
 	-${sudo} apt update
-	${sudo} apt install -y $(shell cat $<)
+	${sudo} apt install -y $(shell sort $^ | sed -e 's|//.*||g' )
 	${sudo} apt install -y ${packages}
 	@echo "$@: TODO: Support debian stable rustc=1.63 https://tracker.debian.org/pkg/rustc"
 
 setup/rust:
 	@echo "$@: TODO: Support https://tracker.debian.org/pkg/rustup"
-	curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain ${RUST_VERSION}
+	curl --insecure  --proto '=https' --tlsv1.2 -sSf  ${rust_url} | bash -s -- -y --default-toolchain ${RUST_VERSION}
 	cat $${HOME}/.cargo/env
 	@echo '$@: info: You might like to add ". $${HOME}/.cargo/env" to "$${HOME}/.bashrc"'
 	-which rustc
@@ -139,6 +140,8 @@ all: ${exes}
 test: ${build_dir}
 	ctest --test-dir ${<}
 
+check: test
+
 distclean:
 	rm -rf ${build_dir}
 
@@ -180,7 +183,7 @@ rootfs/%: ${rootfs_dir}
 	${rootfs_shell} apt-get update
 	${rootfs_shell} apt-get install -- make sudo
 	${rootfs_shell}	\
-	      	--bind="${CURDIR}:${CURDIR}" \
+		--bind="${CURDIR}:${CURDIR}" \
 		${MAKE} \
 			--directory="${CURDIR}" \
 			--file="${CURDIR}/helper.mk" \

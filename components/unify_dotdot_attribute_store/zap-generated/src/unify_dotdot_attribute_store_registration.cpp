@@ -3646,7 +3646,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED,
       "ZCL DoorLock NumberOfPINUsersSupported",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -3670,7 +3670,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED,
       "ZCL DoorLock NumberOfRFIDUsersSupported",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -3766,7 +3766,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH,
       "ZCL DoorLock MaxPINCodeLength",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -3790,7 +3790,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH,
       "ZCL DoorLock MinPINCodeLength",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -3814,7 +3814,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH,
       "ZCL DoorLock MaxRFIDCodeLength",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -3838,8 +3838,56 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH,
       "ZCL DoorLock MinRFIDCodeLength",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map8 // map8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL DoorLock CredentialRulesSupport, "
+                     "type:  map8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT,
+      "ZCL DoorLock CredentialRulesSupport",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL DoorLock NumberOfCredentialsSupportedPerUser, "
+                     "type:  uint8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER,
+      "ZCL DoorLock NumberOfCredentialsSupportedPerUser",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }
@@ -4136,6 +4184,30 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
+    // map8 // map8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL DoorLock LocalProgrammingFeatures, "
+                     "type:  map8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES,
+      "ZCL DoorLock LocalProgrammingFeatures",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
     // uint8 // uint8 // uint8_t
     std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
@@ -4198,7 +4270,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR,
       "ZCL DoorLock SendPINOverTheAir",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -4222,7 +4294,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION,
       "ZCL DoorLock RequirePINforRFOperation",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -4248,6 +4320,30 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL,
       "ZCL DoorLock SecurityLevel",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL DoorLock ExpiringUserTimeout, "
+                     "type:  uint16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT,
+      "ZCL DoorLock ExpiringUserTimeout",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }
@@ -4440,6 +4536,30 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK,
       "ZCL DoorLock RFIDProgrammingEventMask",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map16 // map16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL DoorLock FeatureMap, "
+                     "type:  map16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP,
+      "ZCL DoorLock FeatureMap",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }
@@ -12718,7 +12838,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD,
       "ZCL ElectricalMeasurement AverageRMSVoltageMeasurementPeriod",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -12742,7 +12862,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER,
       "ZCL ElectricalMeasurement AverageRMSOverVoltageCounter",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -12766,7 +12886,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER,
       "ZCL ElectricalMeasurement AverageRMSUnderVoltageCounter",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -13222,7 +13342,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE,
       "ZCL ElectricalMeasurement AverageRMSOverVoltage",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -13246,7 +13366,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE,
       "ZCL ElectricalMeasurement AverageRMSUnderVoltage",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -13726,7 +13846,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
       "ZCL ElectricalMeasurement AverageRMSVoltageMeasurementPeriodPhB",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -13750,7 +13870,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB,
       "ZCL ElectricalMeasurement AverageRMSOverVoltageCounterPhB",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -13774,7 +13894,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB,
       "ZCL ElectricalMeasurement AverageRMSUnderVoltageCounterPhB",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -14254,7 +14374,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
       "ZCL ElectricalMeasurement AverageRMSVoltageMeasurementPeriodPhC",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -14278,7 +14398,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC,
       "ZCL ElectricalMeasurement AverageRMSOverVoltageCounterPhC",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -14302,7 +14422,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC,
       "ZCL ElectricalMeasurement AverageRMSUnderVoltageCounterPhC",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -15070,7 +15190,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED,
       "ZCL Diagnostics PHYToMACQueueLimitReached",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -15118,7 +15238,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT,
       "ZCL Diagnostics AverageMACRetryPerAPSMessageSent",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -16150,7 +16270,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS,
       "ZCL ApplicationMonitoring ApplicationMQTTTopics",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -16510,7 +16630,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT,
       "ZCL ApplicationMonitoring ApplicationCPUUsagePercent",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -16534,7 +16654,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT,
       "ZCL ApplicationMonitoring ApplicationCPUAverageUsagePercent",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -16558,7 +16678,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT,
       "ZCL ApplicationMonitoring ApplicationCPUMinUsagePercent",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -16582,7 +16702,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT,
       "ZCL ApplicationMonitoring ApplicationCPUMaxUsagePercent",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -16606,7 +16726,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     }
 
     status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB,
       "ZCL ApplicationMonitoring ApplicationRAMUsageMB",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
@@ -17160,6 +17280,30 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE,
       "ZCL ProtocolController-NetworkManagement NetworkManagementState",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // DeviceTypeStruct // DeviceTypeStruct // DeviceTypeStruct
+    std::string attribute_type_string           = "DeviceTypeStruct";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = BYTE_ARRAY_STORAGE_TYPE;
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL Descriptor DeviceTypeList, "
+                     "type:  DeviceTypeStruct // DeviceTypeStruct");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST,
+      "ZCL Descriptor DeviceTypeList",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }

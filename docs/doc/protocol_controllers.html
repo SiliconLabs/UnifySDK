@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocol Controllers &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/protocol_controllers.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Z-Wave (ZPC)" href="protocol/zwave/zpc_introduction.html" />
+    <link rel="prev" title="UPTI WRITER User’s Guide" href="../applications/upti_writer/readme_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Protocol Controllers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocol/zwave/zpc_introduction.html">Z-Wave (ZPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol/zigbee/zigpc_introduction.html">Zigbee (ZigPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol/matter/matter_mpc.html">Matter (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="protocol-controllers">
+<h1>Protocol Controllers<a class="headerlink" href="#protocol-controllers" title="Permalink to this heading"></a></h1>
+<p>The Unify Framework currently includes several protocol controllers.</p>
+<p>Each protocol controller interfaces with its radio hardware and implements a
+translation between its own wireless protocol and the <em>Unified Command Language</em>
+(UCL), which is defined in the <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.
+In addition, these protocol controllers implement best practices regarding
+message delivery and adherence to regulatory requirements. Protocol-specific
+implementation details can be found in the user guide for each protocol
+controller.</p>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="protocol/zwave/zpc_introduction.html"><span class="doc std std-doc">The Z-Wave protocol controller (ZPC)</span></a> implements the Z-Wave wireless protocol using a Z-Wave NCP.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="protocol/zigbee/zigpc_introduction.html"><span class="doc std std-doc">The Zigbee protocol controller (ZigPC)</span></a> implements the ZigBee wireless protocol using a Zigbee NCP.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="multiprotocol.html"><span class="doc std std-doc">The Multiprotocol Host Software (Zigbee, OpenThread, Bluetooth)</span></a> uses the RCP mode of the wireless SoC to implement Zigbee, OpenThread, and Bluetooth.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="protocol/matter/matter_mpc.html"><span class="doc std std-doc">The Matter protocol controller</span></a> implements the matter protocol.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="protocol/aox/aox_introduction.html"><span class="doc std std-doc">The Bluetooth AoX protocol controller (AoXPC)</span></a> implements Bluetooth AoX functionality.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

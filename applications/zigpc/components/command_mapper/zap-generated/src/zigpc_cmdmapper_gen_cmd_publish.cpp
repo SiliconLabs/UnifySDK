@@ -279,7 +279,7 @@ static void zigpc_command_mapper_publish_door_lock_get_log_record_response(
     (uint32_t) data->door_lock_get_log_record_response.timestamp,
     (GetLogRecordResponseEventType) data->door_lock_get_log_record_response.event_type,
     (DrlkOperEventSource) data->door_lock_get_log_record_response.source_operation_event,
-    (uint8_t) data->door_lock_get_log_record_response.eventid_or_alarm_code,
+    (uint8_t) data->door_lock_get_log_record_response.event_id_or_alarm_code,
     (uint16_t) data->door_lock_get_log_record_response.userid,
     (const char*) data->door_lock_get_log_record_response.pin
   };
@@ -291,75 +291,75 @@ static void zigpc_command_mapper_publish_door_lock_get_log_record_response(
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_setpin_code_response(
+static void zigpc_command_mapper_publish_door_lock_set_pin_code_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t fields = {
-    (DrlkSetCodeStatus) data->door_lock_setpin_code_response.status
+  uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t fields = {
+    (DrlkSetCodeStatus) data->door_lock_set_pin_code_response.status
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_set_pin_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_getpin_code_response(
+static void zigpc_command_mapper_publish_door_lock_get_pin_code_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t fields = {
-    (uint16_t) data->door_lock_getpin_code_response.userid,
-    (DrlkUserStatus) data->door_lock_getpin_code_response.user_status,
-    (DrlkUserType) data->door_lock_getpin_code_response.user_type,
-    (const char*) data->door_lock_getpin_code_response.code
+  uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t fields = {
+    (uint16_t) data->door_lock_get_pin_code_response.userid,
+    (DrlkUserStatus) data->door_lock_get_pin_code_response.user_status,
+    (DrlkUserType) data->door_lock_get_pin_code_response.user_type,
+    (const char*) data->door_lock_get_pin_code_response.code
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_get_pin_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_clearpin_code_response(
+static void zigpc_command_mapper_publish_door_lock_clear_pin_code_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t fields = {
-    (DrlkPassFailStatus) data->door_lock_clearpin_code_response.status
+  uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t fields = {
+    (DrlkPassFailStatus) data->door_lock_clear_pin_code_response.status
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_clear_pin_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_clear_allpin_codes_response(
+static void zigpc_command_mapper_publish_door_lock_clear_all_pin_codes_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t fields = {
-    (DrlkPassFailStatus) data->door_lock_clear_allpin_codes_response.status
+  uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t fields = {
+    (DrlkPassFailStatus) data->door_lock_clear_all_pin_codes_response.status
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_clear_allpin_codes_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_clear_all_pin_codes_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
@@ -617,78 +617,92 @@ static void zigpc_command_mapper_publish_door_lock_get_user_type_response(
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_setrfid_code_response(
+static void zigpc_command_mapper_publish_door_lock_set_rfid_code_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t fields = {
-    (DrlkSetCodeStatus) data->door_lock_setrfid_code_response.status
+  uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t fields = {
+    (DrlkSetCodeStatus) data->door_lock_set_rfid_code_response.status
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_set_rfid_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_getrfid_code_response(
+static void zigpc_command_mapper_publish_door_lock_get_rfid_code_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t fields = {
-    (uint16_t) data->door_lock_getrfid_code_response.userid,
-    (DrlkUserStatus) data->door_lock_getrfid_code_response.user_status,
-    (DrlkUserType) data->door_lock_getrfid_code_response.user_type,
-    (const char*) data->door_lock_getrfid_code_response.rfid_code
+  uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t fields = {
+    (uint16_t) data->door_lock_get_rfid_code_response.userid,
+    (DrlkUserStatus) data->door_lock_get_rfid_code_response.user_status,
+    (DrlkUserType) data->door_lock_get_rfid_code_response.user_type,
+    (const char*) data->door_lock_get_rfid_code_response.rfid_code
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_get_rfid_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_clearrfid_code_response(
+static void zigpc_command_mapper_publish_door_lock_clear_rfid_code_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t fields = {
-    (DrlkPassFailStatus) data->door_lock_clearrfid_code_response.status
+  uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t fields = {
+    (DrlkPassFailStatus) data->door_lock_clear_rfid_code_response.status
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_clear_rfid_code_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
   );
 }
 
-static void zigpc_command_mapper_publish_door_lock_clear_allrfid_codes_response(
+static void zigpc_command_mapper_publish_door_lock_clear_all_rfid_codes_response(
   const zigbee_eui64_t eui64,
   const zigbee_endpoint_id_t endpoint_id,
   const zigpc_zclcmdparse_callback_data_t *data
 ) {
   std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
 
-  uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t fields = {
-    (DrlkPassFailStatus) data->door_lock_clear_allrfid_codes_response.status
+  uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t fields = {
+    (DrlkPassFailStatus) data->door_lock_clear_all_rfid_codes_response.status
   };
 
-  uic_mqtt_dotdot_door_lock_publish_generated_clear_allrfid_codes_response_command(
+  uic_mqtt_dotdot_door_lock_publish_generated_clear_all_rfid_codes_response_command(
     unid.c_str(),
     endpoint_id,
     &fields
+  );
+}
+
+static void zigpc_command_mapper_publish_door_lock_get_user_response(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+
+  uic_mqtt_dotdot_door_lock_publish_generated_get_user_response_command(
+    unid.c_str(),
+    endpoint_id
   );
 }
 
@@ -737,6 +751,34 @@ static void zigpc_command_mapper_publish_door_lock_programming_event_notificatio
     unid.c_str(),
     endpoint_id,
     &fields
+  );
+}
+
+static void zigpc_command_mapper_publish_door_lock_set_credential_response(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+
+  uic_mqtt_dotdot_door_lock_publish_generated_set_credential_response_command(
+    unid.c_str(),
+    endpoint_id
+  );
+}
+
+static void zigpc_command_mapper_publish_door_lock_get_credential_status_response(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+
+  uic_mqtt_dotdot_door_lock_publish_generated_get_credential_status_response_command(
+    unid.c_str(),
+    endpoint_id
   );
 }
 
@@ -819,6 +861,40 @@ static void zigpc_command_mapper_publish_ias_zone_zone_enroll_request(
   };
 
   uic_mqtt_dotdot_ias_zone_publish_generated_zone_enroll_request_command(
+    unid.c_str(),
+    endpoint_id,
+    &fields
+  );
+}
+
+static void zigpc_command_mapper_publish_electrical_measurement_get_profile_info(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+
+  uic_mqtt_dotdot_electrical_measurement_publish_generated_get_profile_info_command(
+    unid.c_str(),
+    endpoint_id
+  );
+}
+
+static void zigpc_command_mapper_publish_electrical_measurement_get_measurement_profile(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+  uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_fields_t fields = {
+    (uint16_t) data->electrical_measurement_get_measurement_profile.attributeid,
+    (UTC) data->electrical_measurement_get_measurement_profile.start_time,
+    (uint8_t) data->electrical_measurement_get_measurement_profile.number_of_intervals
+  };
+
+  uic_mqtt_dotdot_electrical_measurement_publish_generated_get_measurement_profile_command(
     unid.c_str(),
     endpoint_id,
     &fields
@@ -973,8 +1049,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_setpin_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_set_pin_code_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","SetPINCodeResponse", status);
@@ -983,8 +1059,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETPIN_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_getpin_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_PIN_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_pin_code_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","GetPINCodeResponse", status);
@@ -993,8 +1069,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARPIN_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clearpin_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_PIN_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_pin_code_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","ClearPINCodeResponse", status);
@@ -1003,8 +1079,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLPIN_CODES_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clear_allpin_codes_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_PIN_CODES_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_all_pin_codes_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","ClearAllPINCodesResponse", status);
@@ -1143,8 +1219,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETRFID_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_setrfid_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_RFID_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_set_rfid_code_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","SetRFIDCodeResponse", status);
@@ -1153,8 +1229,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETRFID_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_getrfid_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_RFID_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_rfid_code_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","GetRFIDCodeResponse", status);
@@ -1163,8 +1239,8 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARRFID_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clearrfid_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_RFID_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_rfid_code_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","ClearRFIDCodeResponse", status);
@@ -1173,11 +1249,21 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
 
   status = zigpc_zclcmdparse_register_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLRFID_CODES_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clear_allrfid_codes_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_RFID_CODES_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_all_rfid_codes_response
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","ClearAllRFIDCodesResponse", status);
+    return status;
+  }
+
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_user_response
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","GetUserResponse", status);
     return status;
   }
 
@@ -1198,6 +1284,26 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","ProgrammingEventNotification", status);
+    return status;
+  }
+
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_CREDENTIAL_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_set_credential_response
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","SetCredentialResponse", status);
+    return status;
+  }
+
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_CREDENTIAL_STATUS_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_credential_status_response
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"DoorLock","GetCredentialStatusResponse", status);
     return status;
   }
 
@@ -1238,6 +1344,26 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
   );
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"IASZone","ZoneEnrollRequest", status);
+    return status;
+  }
+
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_PROFILE_INFO,
+    zigpc_command_mapper_publish_electrical_measurement_get_profile_info
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"ElectricalMeasurement","GetProfileInfo", status);
+    return status;
+  }
+
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_MEASUREMENT_PROFILE,
+    zigpc_command_mapper_publish_electrical_measurement_get_measurement_profile
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"ElectricalMeasurement","GetMeasurementProfile", status);
     return status;
   }
 
@@ -1333,26 +1459,26 @@ void zigpc_command_mapper_cleanup_gen_cmd_publish_listeners(void) {
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETPIN_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_setpin_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_PIN_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_set_pin_code_response
   );
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETPIN_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_getpin_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_PIN_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_pin_code_response
   );
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARPIN_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clearpin_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_PIN_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_pin_code_response
   );
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLPIN_CODES_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clear_allpin_codes_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_PIN_CODES_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_all_pin_codes_response
   );
 
   zigpc_zclcmdparse_remove_callback(
@@ -1435,26 +1561,32 @@ void zigpc_command_mapper_cleanup_gen_cmd_publish_listeners(void) {
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SETRFID_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_setrfid_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_RFID_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_set_rfid_code_response
   );
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GETRFID_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_getrfid_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_RFID_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_rfid_code_response
   );
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEARRFID_CODE_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clearrfid_code_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_RFID_CODE_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_rfid_code_response
   );
 
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALLRFID_CODES_RESPONSE,
-    zigpc_command_mapper_publish_door_lock_clear_allrfid_codes_response
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_CLEAR_ALL_RFID_CODES_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_clear_all_rfid_codes_response
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_USER_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_user_response
   );
 
   zigpc_zclcmdparse_remove_callback(
@@ -1467,6 +1599,18 @@ void zigpc_command_mapper_cleanup_gen_cmd_publish_listeners(void) {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_PROGRAMMING_EVENT_NOTIFICATION,
     zigpc_command_mapper_publish_door_lock_programming_event_notification
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_SET_CREDENTIAL_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_set_credential_response
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK,
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_COMMAND_GET_CREDENTIAL_STATUS_RESPONSE,
+    zigpc_command_mapper_publish_door_lock_get_credential_status_response
   );
 
   zigpc_zclcmdparse_remove_callback(
@@ -1491,6 +1635,18 @@ void zigpc_command_mapper_cleanup_gen_cmd_publish_listeners(void) {
     ZIGPC_ZCL_CLUSTER_IAS_ZONE,
     ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST,
     zigpc_command_mapper_publish_ias_zone_zone_enroll_request
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_PROFILE_INFO,
+    zigpc_command_mapper_publish_electrical_measurement_get_profile_info
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT,
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_COMMAND_GET_MEASUREMENT_PROFILE,
+    zigpc_command_mapper_publish_electrical_measurement_get_measurement_profile
   );
 }
 

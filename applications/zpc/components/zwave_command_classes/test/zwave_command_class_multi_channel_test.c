@@ -182,6 +182,35 @@ void test_zwave_command_class_multi_channel_capability_get_happy_case()
 void test_zwave_command_class_multi_channel_endpoint_find()
 {
   attribute_store_node_t test_node = 0x9485;
+  attribute_store_node_t test_endpoint_node = 0xf7;
+
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(
+    test_node,
+    ATTRIBUTE_ENDPOINT_ID,
+    test_endpoint_node);
+  
+  // Simulate not existing parameter
+  uint8_t generic_device_class = 0xFF;
+  attribute_store_get_child_reported_ExpectAndReturn(test_endpoint_node,
+                                            ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS,
+                                            NULL,
+                                            sizeof(uint8_t),
+                                            SL_STATUS_FAIL);
+  attribute_store_get_child_reported_IgnoreArg_value();
+
+
+  // Set specific device class
+  uint8_t specific_device_class = 0xEE;
+  attribute_store_get_child_reported_ExpectAndReturn(test_endpoint_node,
+                                            ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS,
+                                            NULL,
+                                            sizeof(uint8_t),
+                                            SL_STATUS_OK);
+  attribute_store_get_child_reported_IgnoreArg_value();
+  attribute_store_get_child_reported_ReturnMemThruPtr_value(
+    &specific_device_class,
+    sizeof(specific_device_class));
+
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     zwave_command_class_multi_channel_endpoint_find(
@@ -191,8 +220,8 @@ void test_zwave_command_class_multi_channel_endpoint_find()
 
   const uint8_t expected_frame_data[] = {COMMAND_CLASS_MULTI_CHANNEL_V4,
                                          MULTI_CHANNEL_END_POINT_FIND_V4,
-                                         0xFF,
-                                         0xFF};
+                                         generic_device_class,
+                                         specific_device_class};
   TEST_ASSERT_EQUAL(sizeof(expected_frame_data), last_received_frame_length);
   TEST_ASSERT_EQUAL_INT8_ARRAY(expected_frame_data,
                                last_received_frame,

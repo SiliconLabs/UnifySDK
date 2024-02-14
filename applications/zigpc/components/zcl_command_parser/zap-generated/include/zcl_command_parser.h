@@ -197,7 +197,7 @@ typedef struct {
   uint32_t timestamp; /**< Command argument of type uint32 */
   uint8_t event_type; /**< Command argument of type GetLogRecordResponseEventType */
   uint8_t source_operation_event; /**< Command argument of type DrlkOperEventSource */
-  uint8_t eventid_or_alarm_code; /**< Command argument of type uint8 */
+  uint8_t event_id_or_alarm_code; /**< Command argument of type uint8 */
   uint16_t userid; /**< Command argument of type uint16 */
   uint8_t pin_length; /**< String length for PIN */
   const char* pin; /**< Command argument of type octstr */
@@ -209,7 +209,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t status; /**< Command argument of type DrlkSetCodeStatus */
-} zigpc_zclcmdparse_door_lock_setpin_code_response_t;
+} zigpc_zclcmdparse_door_lock_set_pin_code_response_t;
 
 /**
  * @brief Data for DoorLock/GetPINCodeResponse command.
@@ -221,7 +221,7 @@ typedef struct {
   uint8_t user_type; /**< Command argument of type DrlkUserType */
   uint8_t code_length; /**< String length for Code */
   const char* code; /**< Command argument of type octstr */
-} zigpc_zclcmdparse_door_lock_getpin_code_response_t;
+} zigpc_zclcmdparse_door_lock_get_pin_code_response_t;
 
 /**
  * @brief Data for DoorLock/ClearPINCodeResponse command.
@@ -229,7 +229,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t status; /**< Command argument of type DrlkPassFailStatus */
-} zigpc_zclcmdparse_door_lock_clearpin_code_response_t;
+} zigpc_zclcmdparse_door_lock_clear_pin_code_response_t;
 
 /**
  * @brief Data for DoorLock/ClearAllPINCodesResponse command.
@@ -237,7 +237,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t status; /**< Command argument of type DrlkPassFailStatus */
-} zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_t;
+} zigpc_zclcmdparse_door_lock_clear_all_pin_codes_response_t;
 
 /**
  * @brief Data for DoorLock/SetUserStatusResponse command.
@@ -366,7 +366,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t status; /**< Command argument of type DrlkSetCodeStatus */
-} zigpc_zclcmdparse_door_lock_setrfid_code_response_t;
+} zigpc_zclcmdparse_door_lock_set_rfid_code_response_t;
 
 /**
  * @brief Data for DoorLock/GetRFIDCodeResponse command.
@@ -378,7 +378,7 @@ typedef struct {
   uint8_t user_type; /**< Command argument of type DrlkUserType */
   uint8_t rfid_code_length; /**< String length for RFIDCode */
   const char* rfid_code; /**< Command argument of type octstr */
-} zigpc_zclcmdparse_door_lock_getrfid_code_response_t;
+} zigpc_zclcmdparse_door_lock_get_rfid_code_response_t;
 
 /**
  * @brief Data for DoorLock/ClearRFIDCodeResponse command.
@@ -386,7 +386,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t status; /**< Command argument of type DrlkPassFailStatus */
-} zigpc_zclcmdparse_door_lock_clearrfid_code_response_t;
+} zigpc_zclcmdparse_door_lock_clear_rfid_code_response_t;
 
 /**
  * @brief Data for DoorLock/ClearAllRFIDCodesResponse command.
@@ -394,7 +394,14 @@ typedef struct {
  */
 typedef struct {
   uint8_t status; /**< Command argument of type DrlkPassFailStatus */
-} zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_t;
+} zigpc_zclcmdparse_door_lock_clear_all_rfid_codes_response_t;
+
+/**
+ * @brief Data for DoorLock/GetUserResponse command.
+ *
+ */
+typedef struct {
+} zigpc_zclcmdparse_door_lock_get_user_response_t;
 
 /**
  * @brief Data for DoorLock/OperatingEventNotification command.
@@ -427,6 +434,20 @@ typedef struct {
   uint8_t data_length; /**< String length for Data */
   const char* data; /**< Command argument of type string */
 } zigpc_zclcmdparse_door_lock_programming_event_notification_t;
+
+/**
+ * @brief Data for DoorLock/SetCredentialResponse command.
+ *
+ */
+typedef struct {
+} zigpc_zclcmdparse_door_lock_set_credential_response_t;
+
+/**
+ * @brief Data for DoorLock/GetCredentialStatusResponse command.
+ *
+ */
+typedef struct {
+} zigpc_zclcmdparse_door_lock_get_credential_status_response_t;
 
 /**
  * @brief Data for Thermostat/GetWeeklyScheduleResponse command.
@@ -474,6 +495,23 @@ typedef struct {
 } zigpc_zclcmdparse_ias_zone_zone_enroll_request_t;
 
 /**
+ * @brief Data for ElectricalMeasurement/GetProfileInfo command.
+ *
+ */
+typedef struct {
+} zigpc_zclcmdparse_electrical_measurement_get_profile_info_t;
+
+/**
+ * @brief Data for ElectricalMeasurement/GetMeasurementProfile command.
+ *
+ */
+typedef struct {
+  uint16_t attributeid; /**< Command argument of type attribId */
+  UTC start_time; /**< Command argument of type UTC */
+  uint8_t number_of_intervals; /**< Command argument of type uint8 */
+} zigpc_zclcmdparse_electrical_measurement_get_measurement_profile_t;
+
+/**
  * @brief Container for the different types of command data that can be
  * received.
  */
@@ -492,10 +530,10 @@ typedef union {
   zigpc_zclcmdparse_door_lock_toggle_response_t door_lock_toggle_response;
   zigpc_zclcmdparse_door_lock_unlock_with_timeout_response_t door_lock_unlock_with_timeout_response;
   zigpc_zclcmdparse_door_lock_get_log_record_response_t door_lock_get_log_record_response;
-  zigpc_zclcmdparse_door_lock_setpin_code_response_t door_lock_setpin_code_response;
-  zigpc_zclcmdparse_door_lock_getpin_code_response_t door_lock_getpin_code_response;
-  zigpc_zclcmdparse_door_lock_clearpin_code_response_t door_lock_clearpin_code_response;
-  zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_t door_lock_clear_allpin_codes_response;
+  zigpc_zclcmdparse_door_lock_set_pin_code_response_t door_lock_set_pin_code_response;
+  zigpc_zclcmdparse_door_lock_get_pin_code_response_t door_lock_get_pin_code_response;
+  zigpc_zclcmdparse_door_lock_clear_pin_code_response_t door_lock_clear_pin_code_response;
+  zigpc_zclcmdparse_door_lock_clear_all_pin_codes_response_t door_lock_clear_all_pin_codes_response;
   zigpc_zclcmdparse_door_lock_set_user_status_response_t door_lock_set_user_status_response;
   zigpc_zclcmdparse_door_lock_get_user_status_response_t door_lock_get_user_status_response;
   zigpc_zclcmdparse_door_lock_set_weekday_schedule_response_t door_lock_set_weekday_schedule_response;
@@ -509,16 +547,21 @@ typedef union {
   zigpc_zclcmdparse_door_lock_clear_holiday_schedule_response_t door_lock_clear_holiday_schedule_response;
   zigpc_zclcmdparse_door_lock_set_user_type_response_t door_lock_set_user_type_response;
   zigpc_zclcmdparse_door_lock_get_user_type_response_t door_lock_get_user_type_response;
-  zigpc_zclcmdparse_door_lock_setrfid_code_response_t door_lock_setrfid_code_response;
-  zigpc_zclcmdparse_door_lock_getrfid_code_response_t door_lock_getrfid_code_response;
-  zigpc_zclcmdparse_door_lock_clearrfid_code_response_t door_lock_clearrfid_code_response;
-  zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_t door_lock_clear_allrfid_codes_response;
+  zigpc_zclcmdparse_door_lock_set_rfid_code_response_t door_lock_set_rfid_code_response;
+  zigpc_zclcmdparse_door_lock_get_rfid_code_response_t door_lock_get_rfid_code_response;
+  zigpc_zclcmdparse_door_lock_clear_rfid_code_response_t door_lock_clear_rfid_code_response;
+  zigpc_zclcmdparse_door_lock_clear_all_rfid_codes_response_t door_lock_clear_all_rfid_codes_response;
+  zigpc_zclcmdparse_door_lock_get_user_response_t door_lock_get_user_response;
   zigpc_zclcmdparse_door_lock_operating_event_notification_t door_lock_operating_event_notification;
   zigpc_zclcmdparse_door_lock_programming_event_notification_t door_lock_programming_event_notification;
+  zigpc_zclcmdparse_door_lock_set_credential_response_t door_lock_set_credential_response;
+  zigpc_zclcmdparse_door_lock_get_credential_status_response_t door_lock_get_credential_status_response;
   zigpc_zclcmdparse_thermostat_get_weekly_schedule_response_t thermostat_get_weekly_schedule_response;
   zigpc_zclcmdparse_thermostat_get_relay_status_log_response_t thermostat_get_relay_status_log_response;
   zigpc_zclcmdparse_ias_zone_zone_status_change_notification_t ias_zone_zone_status_change_notification;
   zigpc_zclcmdparse_ias_zone_zone_enroll_request_t ias_zone_zone_enroll_request;
+  zigpc_zclcmdparse_electrical_measurement_get_profile_info_t electrical_measurement_get_profile_info;
+  zigpc_zclcmdparse_electrical_measurement_get_measurement_profile_t electrical_measurement_get_measurement_profile;
 } zigpc_zclcmdparse_callback_data_t;
 
 typedef void (*zigpc_zclcmdparse_callback_t)(

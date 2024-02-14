@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Unify on Raspberry Pi &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/running_unify.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Z-Wave (ZPC)" href="protocol/zwave/running_zpc.html" />
+    <link rel="prev" title="Unify Overview" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running Unify on Raspberry Pi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocol/zwave/running_zpc.html">Z-Wave (ZPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol/zigbee/running_zigpc.html">Zigbee (ZigPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Multiprotocol Setup</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="running-unify-on-raspberry-pi">
+<h1>Running Unify on Raspberry Pi<a class="headerlink" href="#running-unify-on-raspberry-pi" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>Here we explain how to get up and running quickly to test out Unify on the Raspberry Pi reference platform. Depending on the protocol(s) used this setup may vary so there are several sections that go into more detail for each protocol controller. This page contains the steps to install Unify on the Raspberry Pi regardless of the protocol(s) used.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Raspberry Pi 4</p>
+<ul>
+<li><p>SD card for Raspberry Pi</p></li>
+<li><p>SD card reader</p></li>
+</ul>
+</li>
+<li><p>IP router with built-in DHCP</p></li>
+<li><p>Software tools</p>
+<ul>
+<li><p><a class="reference external" href="https://www.realvnc.com">VNC Viewer</a></p></li>
+<li><p><a class="reference external" href="https://filezilla-project.org">Filezilla</a></p></li>
+<li><p><a class="reference external" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a></p></li>
+<li><p><a class="reference external" href="https://www.putty.org">Putty</a></p></li>
+<li><p><a class="reference external" href="https://www.raspberrypi.com/software/operating-systems/">Raspberry Pi Bullseye OS 64 bit image</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="set-up-raspberry-pi">
+<h2>Set up Raspberry Pi<a class="headerlink" href="#set-up-raspberry-pi" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p>Prepare the SD card</p>
+<ul class="simple">
+<li><p>Insert SD card into SD reader</p></li>
+<li><p>Use Raspberry Pi Imager to load the image to the SD card</p></li>
+</ul>
+<p><img alt="Raspberry Pi Imager" src="../_images/rpi_imager.png" /></p>
+<ul class="simple">
+<li><p>Click on settings and set the following</p>
+<ul>
+<li><p>Enable SSH</p></li>
+<li><p>Set username and password</p></li>
+<li><p>Set hostname</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Raspberry Pi Imager" src="../_images/rpi_imager2.png" /></p>
+</li>
+</ul>
+</section>
+<section id="connect-to-raspberry-pi">
+<h2>Connect to Raspberry Pi<a class="headerlink" href="#connect-to-raspberry-pi" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Power up the router. Connect your PC to the router using ethernet or WiFi. Connect the Raspberry Pi to the router using ethernet.</p></li>
+<li><p>Open a terminal with ssh (such as Putty), and type in either raspberrypi.local or the IP address of the Raspberry Pi in the host name field. After clicking open, click yes to accept the security key, and the default user name is pi and password is raspberry (unless any of this was changed in the previous step when loading the OS image).
+<img alt="Putty" src="../_images/putty.png" /></p></li>
+<li><p>Now we can enable the VNC server. Run raspi-config by typing the command “sudo raspi-config” in the ssh command line. Select “Interfacing Options”, “VNC”, and “yes” to enable. This may also be a good time to increase the screen resolution. Select “Display Options”, “resolution”, and select a suitable resolution. Finally select “Finish” and “yes” to reboot.</p></li>
+</ul>
+<p><img alt="RaspiConfig" src="../_images/raspiconfig.png" /></p>
+<ul class="simple">
+<li><p>Wait for the Raspberry Pi to reboot and then open VNC Viewer. Connect to raspberrypi.local, or use the IP address. Use the same username and password as previously. Upon success you will see the Raspberry Pi desktop.
+<img alt="VNC" src="../_images/vncviewer.png" /></p></li>
+</ul>
+</section>
+<section id="copy-unify-to-raspberry-pi">
+<h2>Copy Unify to Raspberry Pi<a class="headerlink" href="#copy-unify-to-raspberry-pi" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Download the Unify release file from <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">https://github.com/SiliconLabs/UnifySDK/releases</a></p></li>
+<li><p>Open Filezilla and connect to sftp://raspberrypi.local entering the same username and password again
+<img alt="Filezilla" src="../_images/filezilla.png" /></p></li>
+<li><p>On the left side (local) locate the unify zip file, and on the right side (remote) choose a location to copy to</p></li>
+<li><p>Right click on the zip file and “Upload” to transfer the file</p></li>
+<li><p>Go to VNC Viewer and open a terminal on the Raspberry Pi</p></li>
+<li><p>Use the command “unzip” to extract the zip file contents</p></li>
+</ul>
+</section>
+<section id="install-unify">
+<h2>Install Unify<a class="headerlink" href="#install-unify" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Enter the directory of the extracted files and install Unify</p>
+<ul>
+<li><p>Remove the libunify-dev file from the directory then run:</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span><span class="nb">cd</span><span class="w"> </span>unify_*
+<span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mosquitto
+<span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./*deb
+</pre></div>
+</div>
+<p>To finish installing and running Unify choose a protocol to continue with and following the remaining steps</p>
+<p><a class="reference internal" href="protocol/zwave/running_zpc.html"><span class="doc std std-doc">Z-Wave (ZPC)</span></a></p>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="protocol/zigbee/running_zigpc.html"><span class="doc std std-doc">Zigbee (ZigPC)</span></a></p>
+<div class="toctree-wrapper compound">
+</div>
+<p><span class="xref myst">Matter</span></p>
+<div class="toctree-wrapper compound">
+</div>
+<p><a class="reference internal" href="getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol</span></a></p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="portable-runtime">
+<h2>Portable Runtime<a class="headerlink" href="#portable-runtime" title="Permalink to this heading"></a></h2>
+<p>Unify targets our reference platform, a Raspberry Pi 4 (RPi4).
+It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
+If you instead want a quick demo of a Z-Wave only Unify IoT gateway running on
+your Windows, MacOS or Linux desktop, please try our experimental
+<span class="xref myst">Portable Runtime environment User guide</span>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

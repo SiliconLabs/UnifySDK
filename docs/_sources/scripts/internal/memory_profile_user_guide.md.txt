@@ -1,0 +1,39 @@
+# Unify Memory Profiling User Guide
+
+This guide is to explain the usage of the memory profiling scripts. At present, we support flash memory profiling and RAM memory profiling.
+
+## Flash Memory Profiling
+
+Flash memory profiling script is located at "scripts/internal".
+
+### Flash Memory Script Execution
+
+Note: Please unzip the unify package before running the script.
+
+```bash
+./flash_memory_profile.sh <Directory path>
+```
+
+Above Directory path should contain the location where the debain packages are placed.
+the expected output will Package name and memory size.
+
+## RAM Memory Profiling
+
+RAM memory profiling script is located at "scripts/internal".
+
+### RAM Memory Script Execution
+
+Note: Please install the unify package before running the script.
+
+```bash
+// for any single UIC process
+     ./RAM_memory_profile.sh <Process Name>
+
+// for all UIC processes
+     ./RAM_memory_profile.sh uic
+
+// for all UIC processes and mosquitto
+     ./RAM_memory_profile.sh all
+```
+
+the expected output will be RAM usage in KB based on RSS memory values for the Processes.

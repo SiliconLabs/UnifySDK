@@ -26,8 +26,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AoXPC User Guide" href="../applications/aox/applications/aoxpc/readme_user.html" />
-    <link rel="prev" title="Unify Host SDK" href="introduction.html" /> 
+    <link rel="next" title="Framework Services" href="unify_framework_services.html" />
+    <link rel="prev" title="Multiprotocol Setup" href="getting_started_multiprotocol_cpc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.4.0
+                ver_1.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,63 +49,33 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Unify Framework</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#systems-overview">Systems Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#unify-applications-overview">Unify Applications Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#unify-framework-protocol-controllers">Unify Framework Protocol Controllers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../applications/aox/applications/aoxpc/readme_user.html">AoXPC User Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/aox/applications/aoxpc/readme_developer.html">AoXPC Developer’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/zigpc/readme_user.html">ZigPC User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/zigpc/readme_developer.html">ZigPC Developer Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/zigpc/coding_standard.zigpc.html">ZigPC Coding Standard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/zpc/readme_user.html">ZPC User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/zpc/readme_certification.html">ZPC - Z-Wave (certification) Information</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#the-unify-framework-services">The Unify Framework Services</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../applications/aox/applications/positioning/readme_user.html">AoX Positioning User Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/aox/applications/positioning/readme_developer.html">AoX Positioning Developer’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/gms/readme_user.html">GMS User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/image_provider/readme_user.html">Image Provider User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/nal/readme_user.html">Name and location service User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/upti_cap/readme_user.html">UPTI CAP User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/upti_writer/readme_user.html">UPTI WRITER User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../applications/upvl/readme_user.html">UPVL User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-unify-framework-provisioning-list-upvl">The Unify Framework Provisioning List (UPVL)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-unify-framework-group-manager-gms">The Unify Framework Group Manager (GMS)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-unify-name-and-location-service-nal">The Unify Name and Location service (NAL)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-unify-framework-ota-image-provider">The Unify Framework OTA Image Provider</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-unify-aox-positioning-application">The Unify AoX Positioning Application</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-upticap">The UPTICap</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-uptiwriter">The UPTIWriter</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#iot-services">IoT Services</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../applications/dev_ui/dev_gui/readme_user.html">Dev GUI User’s Guide</a></li>
-<li class="toctree-l4"><a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/readme_user.html">https://siliconlabs.github.io/matter/latest/unify/readme_user.html</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unify-applications-overview">Unify Applications Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unify-framework-release-notes">Unify Framework Release Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="unify_framework_services.html">Framework Services</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="qr_code_scanner.html">QR-Code Scanner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -157,164 +127,15 @@ The old name can still be found in some parts of the Framework.</p>
 <section id="unify-applications-overview">
 <h2>Unify Applications Overview<a class="headerlink" href="#unify-applications-overview" title="Permalink to this heading"></a></h2>
 <p>The Unify Framework contains the following applications:</p>
-<section id="unify-framework-protocol-controllers">
-<h3>Unify Framework Protocol Controllers<a class="headerlink" href="#unify-framework-protocol-controllers" title="Permalink to this heading"></a></h3>
-<p>The Unify Framework currently includes the following protocol controllers:</p>
-<div class="toctree-wrapper compound">
-</div>
 <ul class="simple">
-<li><p>Z-Wave Protocol Controller (<a class="reference internal" href="../applications/zpc/readme_user.html"><span class="doc std std-doc">ZPC</span></a>)</p></li>
-<li><p>ZigBee Protocol Controller (<a class="reference internal" href="../applications/zigpc/readme_user.html"><span class="doc std std-doc">ZigPC</span></a>)</p></li>
-<li><p>Angle of Arrival/Departure Protocol Controller (<a class="reference internal" href="../applications/aox/applications/aoxpc/readme_user.html"><span class="doc std std-doc">AoXPC</span></a>)</p></li>
+<li><p><a class="reference internal" href="unify_framework_services.html"><span class="doc std std-doc">Framework Services</span></a></p></li>
+<li><p><a class="reference internal" href="protocol_controllers.html"><span class="doc std std-doc">Protocol Controllers</span></a></p></li>
+<li><p><a class="reference internal" href="unify_iot_services.html"><span class="doc std std-doc">IOT Services</span></a></p></li>
 </ul>
-<p>Each protocol controller interfaces with its radio hardware and implements a
-translation between its own wireless protocol and the <em>Unified Command Language</em>
-(UCL), which is defined in the <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.
-In addition, these protocol controllers implement best practices regarding
-message delivery and adherence to regulatory requirements. Protocol-specific
-implementation details can be found in the user guide for each protocol
-controller.</p>
-</section>
-<section id="the-unify-framework-services">
-<h3>The Unify Framework Services<a class="headerlink" href="#the-unify-framework-services" title="Permalink to this heading"></a></h3>
-<p>Following services facilitate different functionalities in cooperation with
-the Protocol Controller.</p>
-<div class="toctree-wrapper compound">
-</div>
-<section id="the-unify-framework-provisioning-list-upvl">
-<h4>The Unify Framework Provisioning List (UPVL)<a class="headerlink" href="#the-unify-framework-provisioning-list-upvl" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/upvl/readme_user.html"><span class="doc std std-doc">The UPVL</span></a> serves the SmartStart Provisioning
-list to perform SmartStart Security 2 (S2) inclusions and maintains the
-ucl/SmartStart MQTT topic.</p>
-</section>
-<section id="the-unify-framework-group-manager-gms">
-<h4>The Unify Framework Group Manager (GMS)<a class="headerlink" href="#the-unify-framework-group-manager-gms" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/gms/readme_user.html"><span class="doc std std-doc">GMS</span></a> manages groups and bookkeeping between
-protocol controllers and also publishes group state changes to the ucl/by-group
-MQTT topic.</p>
-</section>
-<section id="the-unify-name-and-location-service-nal">
-<h4>The Unify Name and Location service (NAL)<a class="headerlink" href="#the-unify-name-and-location-service-nal" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/nal/readme_user.html"><span class="doc std std-doc">NAL</span></a> is a helper MQTT component that allows for book-keeping of text names and locations that have been assigned. This functionality allows IoT Services to assign and read back a Name and a Location for each node/endpoint.</p>
-</section>
-<section id="the-unify-framework-ota-image-provider">
-<h4>The Unify Framework OTA Image Provider<a class="headerlink" href="#the-unify-framework-ota-image-provider" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/image_provider/readme_user.html"><span class="doc std std-doc">OTA Image Provider</span></a> announces OTA
-images available in OTA storage and publishes OTA binary on request.</p>
-</section>
-<section id="the-unify-aox-positioning-application">
-<h4>The Unify AoX Positioning Application<a class="headerlink" href="#the-unify-aox-positioning-application" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/aox/applications/positioning/readme_user.html"><span class="doc std std-doc">AoX Positioning application</span></a>
-reads configuration and data from AoXPCs and publishes the calculated position
-of asset tags in the system.</p>
-</section>
-<section id="the-upticap">
-<h4>The UPTICap<a class="headerlink" href="#the-upticap" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/upti_cap/readme_user.html"><span class="doc std std-doc">UPTICap (upti_cap)</span></a> is an application to communicate with Silicon Labs WSTK adapters. The adapters capture data on the debug channel and publish the captured data as MQTT messages. Application provided strictly for
-test and demonstration purposes only and is not suitable for production.</p>
-</section>
-<section id="the-uptiwriter">
-<h4>The UPTIWriter<a class="headerlink" href="#the-uptiwriter" title="Permalink to this heading"></a></h4>
-<p><a class="reference internal" href="../applications/upti_writer/readme_user.html"><span class="doc std std-doc">UPTIWriter (upti_writer)</span></a> is an application to receive trace packages captured
-with <em>UPTI_CAP</em> application and save them to a file in <a class="reference external" href="https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-tools-network-analyzer/">Network Analyzer</a> compatible format. Application provided strictly for test and demonstration purposes only
-and is not suitable for production.</p>
-</section>
-</section>
-<section id="iot-services">
-<h3>IoT Services<a class="headerlink" href="#iot-services" title="Permalink to this heading"></a></h3>
-<ul class="simple">
-<li><p>Developer UI</p></li>
-<li><p>Matter Bridge</p></li>
-</ul>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../applications/dev_ui/dev_gui/readme_user.html">Dev GUI User’s Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/readme_user.html">https://siliconlabs.github.io/matter/latest/unify/readme_user.html</a></li>
-</ul>
-</div>
-<p><a class="reference internal" href="../applications/dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Developer GUI (dev_gui)</span></a></p>
-<p>The dev_gui service is a graphical user interface provided for operating and
-provisioning IoT devices using UCL. The dev_gui can be used as a reference for
-basic Unify concepts, such as device provisioning and control. The user
-interface is provided strictly for test and demonstration purposes only and is
-not suitable for production.</p>
-<p><a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/readme_user.html">Matter Bridge (UMB)</a>
-The Unify Matter Bridge is a Unify IoT Service that enables interaction with Unify devices from a Matter fabric.</p>
-</section>
-</section>
-<section id="overview-of-relations-among-unify-applications">
-<h2>Overview of relations among Unify Applications<a class="headerlink" href="#overview-of-relations-among-unify-applications" title="Permalink to this heading"></a></h2>
-<p>The Unify Framework consists of several applications including Protocol Controllers, IoT
-Services (e.g. Developer GUI, UPTICap) and multiple application services that
-facilitate various functionalities such as SmartStart Provisioning, Group
-Management, Name and Location Service and OTA Image Provider.</p>
+<p>The framework services work with the protocol controllers to facilitate different features such as group management, OTA updates etc. See links above for more details.</p>
+<p>The IOT services interface with the MQTT broker to provide high level functionality on top of the Unify framework. See the link above for more information.</p>
 <p>Please read the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a> for details
 on configuring and running Unify Framework applications.</p>
-<p>Please read the <a class="reference internal" href="readme_building.html"><span class="doc std std-doc">Unify Build Guide</span></a> for details on building the Unify
-Framework.</p>
-<p>The following table presents the relationship amongst Unify Framework applications and
-the Unify Protocol Controllers. If a given component is supported via a
-Protocol Controller, it will be marked as [x].</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th></th>
-<th style="text-align: left;"><a href="../applications/zpc/readme_user.md">ZPC</a></th>
-<th style="text-align: left;"><a href="../applications/zigpc/readme_user.md">ZigPC</a></th>
-<th style="text-align: left;"><a href="../applications/aox/applications/aoxpc/readme_user.md">AoXPC</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../applications/upvl/readme_user.md">UPVL</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/gms/readme_user.md">GMS</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/nal/readme_user.md">NAL</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-</tr>
-<tr>
-<td><a href="../applications/image_provider/readme_user.md">OTA Image Provider</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/dev_ui/dev_gui/readme_user.md">Dev GUI</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-</tr>
-<tr>
-<td><a href="../applications/upti_cap/readme_user.md">UPTICap</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/upti_writer/readme_user.md">UPTIWriter</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/aox/applications/positioning/readme_user.md">AoX Positioning</a></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">[x]</td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="overview-of-communication-among-unify-framework-applications">
 <h2>Overview of communication among Unify Framework Applications<a class="headerlink" href="#overview-of-communication-among-unify-framework-applications" title="Permalink to this heading"></a></h2>
@@ -344,29 +165,6 @@ object (e.g., {}).</p>
 <section id="unify-framework-developer-guides">
 <h2>Unify Framework Developer Guides<a class="headerlink" href="#unify-framework-developer-guides" title="Permalink to this heading"></a></h2>
 <p>The developer guides for the Unify Framework includes the <a class="reference internal" href="readme_developer.html"><span class="doc std std-doc">Unify Developer Guide</span></a> and the <a class="reference internal" href="unify_library_overview.html"><span class="doc std std-doc">Unify Library Overview</span></a>.</p>
-</section>
-<section id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="unify_specifications/index.html">Unify Specifications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter03-network-management.html">3. Network Management Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter06-service-discovery.html">6. Service Discovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter08-aox-application.html">8. AoX Application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter09-binding.html">9. Binding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter11-system-metrics.html">11. System Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unify_specifications/Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="standards/known-abbreviations.html">Known Abbreviations</a></li>
-</ul>
-</div>
 </section>
 </section>
 

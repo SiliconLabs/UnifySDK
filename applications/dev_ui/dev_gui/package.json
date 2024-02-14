@@ -30,7 +30,7 @@
         "react-icons": "^4.4.0",
         "react-pro-sidebar": "^0.7.1",
         "react-qr-code": "^2.0.11",
-        "react-qr-reader": "^2.2.1",
+        "react-qr-reader": "^3.0.0-beta-1",
         "react-scripts": "^5.0.1",
         "recharts": "^2.4.1",
         "sha1": "^1.1.1",

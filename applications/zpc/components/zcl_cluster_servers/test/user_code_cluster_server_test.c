@@ -40,38 +40,38 @@
 
 // Callback functions
 // clang-format off
-static uic_mqtt_dotdot_door_lock_setpin_code_callback_t         set_pin_code_command = NULL;
-static uic_mqtt_dotdot_door_lock_getpin_code_callback_t         get_pin_code_command = NULL;
-static uic_mqtt_dotdot_door_lock_clearpin_code_callback_t       clear_pin_code_command = NULL;
-static uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t  clear_all_pin_codes_command = NULL;
+static uic_mqtt_dotdot_door_lock_set_pin_code_callback_t         set_pin_code_command = NULL;
+static uic_mqtt_dotdot_door_lock_get_pin_code_callback_t         get_pin_code_command = NULL;
+static uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t       clear_pin_code_command = NULL;
+static uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t  clear_all_pin_codes_command = NULL;
 static uic_mqtt_dotdot_door_lock_set_user_status_callback_t     set_user_status_command = NULL;
 static uic_mqtt_dotdot_door_lock_get_user_status_callback_t     get_user_status_command = NULL;
 // clang-format on
 
 // Stub functions for intercepting callback registration.
-void uic_mqtt_dotdot_door_lock_setpin_code_callback_set_stub(
-  const uic_mqtt_dotdot_door_lock_setpin_code_callback_t callback,
+void uic_mqtt_dotdot_door_lock_set_pin_code_callback_set_stub(
+  const uic_mqtt_dotdot_door_lock_set_pin_code_callback_t callback,
   int cmock_num_calls)
 {
   set_pin_code_command = callback;
 }
 
-void uic_mqtt_dotdot_door_lock_getpin_code_callback_set_stub(
-  const uic_mqtt_dotdot_door_lock_getpin_code_callback_t callback,
+void uic_mqtt_dotdot_door_lock_get_pin_code_callback_set_stub(
+  const uic_mqtt_dotdot_door_lock_get_pin_code_callback_t callback,
   int cmock_num_calls)
 {
   get_pin_code_command = callback;
 }
 
-void uic_mqtt_dotdot_door_lock_clearpin_code_callback_set_stub(
-  const uic_mqtt_dotdot_door_lock_clearpin_code_callback_t callback,
+void uic_mqtt_dotdot_door_lock_clear_pin_code_callback_set_stub(
+  const uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t callback,
   int cmock_num_calls)
 {
   clear_pin_code_command = callback;
 }
 
-void uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set_stub(
-  const uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t callback,
+void uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_set_stub(
+  const uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t callback,
   int cmock_num_calls)
 {
   clear_all_pin_codes_command = callback;
@@ -122,10 +122,10 @@ void setUp()
   get_user_status_command     = NULL;
 
   // clang-format off
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_set_Stub(&uic_mqtt_dotdot_door_lock_setpin_code_callback_set_stub);
-  uic_mqtt_dotdot_door_lock_getpin_code_callback_set_Stub(&uic_mqtt_dotdot_door_lock_getpin_code_callback_set_stub);
-  uic_mqtt_dotdot_door_lock_clearpin_code_callback_set_Stub(&uic_mqtt_dotdot_door_lock_clearpin_code_callback_set_stub);
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set_Stub(&uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set_stub);
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_set_Stub(&uic_mqtt_dotdot_door_lock_set_pin_code_callback_set_stub);
+  uic_mqtt_dotdot_door_lock_get_pin_code_callback_set_Stub(&uic_mqtt_dotdot_door_lock_get_pin_code_callback_set_stub);
+  uic_mqtt_dotdot_door_lock_clear_pin_code_callback_set_Stub(&uic_mqtt_dotdot_door_lock_clear_pin_code_callback_set_stub);
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_set_Stub(&uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_set_stub);
   uic_mqtt_dotdot_door_lock_set_user_status_callback_set_Stub(uic_mqtt_dotdot_door_lock_set_user_status_callback_set_stub);
   uic_mqtt_dotdot_door_lock_get_user_status_callback_set_Stub(uic_mqtt_dotdot_door_lock_get_user_status_callback_set_stub);
   // clang-format on

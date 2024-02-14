@@ -23,6 +23,7 @@ var dir_4d908a52017a2c1804f64ff3615d4d5e =
     [ "unify_dotdot_attribute_store_command_callbacks_window_covering.c", "unify__dotdot__attribute__store__command__callbacks__window__covering_8c.html", "unify__dotdot__attribute__store__command__callbacks__window__covering_8c" ],
     [ "unify_dotdot_attribute_store_command_callbacks_window_covering.h", "unify__dotdot__attribute__store__command__callbacks__window__covering_8h.html", "unify__dotdot__attribute__store__command__callbacks__window__covering_8h" ],
     [ "unify_dotdot_attribute_store_configuration.h", "unify__dotdot__attribute__store__configuration_8h.html", "unify__dotdot__attribute__store__configuration_8h" ],
+    [ "unify_dotdot_attribute_store_descriptor.h", "unify__dotdot__attribute__store__descriptor_8h.html", "unify__dotdot__attribute__store__descriptor_8h" ],
     [ "unify_dotdot_attribute_store_force_read_attributes_command_callbacks.h", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8h.html", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8h" ],
     [ "unify_dotdot_attribute_store_group_cluster.hpp", "unify__dotdot__attribute__store__group__cluster_8hpp.html", "unify__dotdot__attribute__store__group__cluster_8hpp" ],
     [ "unify_dotdot_attribute_store_registration.h", "unify__dotdot__attribute__store__registration_8h.html", "unify__dotdot__attribute__store__registration_8h" ],

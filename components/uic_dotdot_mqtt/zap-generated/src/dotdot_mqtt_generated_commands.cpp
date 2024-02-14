@@ -3814,10 +3814,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_get_log_record_response_command
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_set_pin_code_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields
   
 ) {
   // Create the topic
@@ -3826,7 +3826,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_command(
   topic += "DoorLock/GeneratedCommands/SetPINCode";
 
   std::string payload =
-    get_json_payload_for_door_lock_setpin_code_command(
+    get_json_payload_for_door_lock_set_pin_code_command(
     fields);
 
   // Publish our command
@@ -3850,10 +3850,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_set_pin_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -3862,7 +3862,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_response_command(
   topic += "DoorLock/GeneratedCommands/SetPINCodeResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_setpin_code_response_command(
+    get_json_payload_for_door_lock_set_pin_code_response_command(
     fields);
 
   // Publish our command
@@ -3886,10 +3886,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setpin_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_get_pin_code_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t *fields
   
 ) {
   // Create the topic
@@ -3898,7 +3898,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_command(
   topic += "DoorLock/GeneratedCommands/GetPINCode";
 
   std::string payload =
-    get_json_payload_for_door_lock_getpin_code_command(
+    get_json_payload_for_door_lock_get_pin_code_command(
     fields);
 
   // Publish our command
@@ -3922,10 +3922,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_get_pin_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -3934,7 +3934,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
   topic += "DoorLock/GeneratedCommands/GetPINCodeResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_getpin_code_response_command(
+    get_json_payload_for_door_lock_get_pin_code_response_command(
     fields);
 
   // Publish our command
@@ -3958,10 +3958,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getpin_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_pin_code_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t *fields
   
 ) {
   // Create the topic
@@ -3970,7 +3970,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_command(
   topic += "DoorLock/GeneratedCommands/ClearPINCode";
 
   std::string payload =
-    get_json_payload_for_door_lock_clearpin_code_command(
+    get_json_payload_for_door_lock_clear_pin_code_command(
     fields);
 
   // Publish our command
@@ -3994,10 +3994,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_pin_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -4006,7 +4006,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_response_command(
   topic += "DoorLock/GeneratedCommands/ClearPINCodeResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_clearpin_code_response_command(
+    get_json_payload_for_door_lock_clear_pin_code_response_command(
     fields);
 
   // Publish our command
@@ -4028,7 +4028,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearpin_code_response_command(
  * 
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clear_allpin_codes_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_all_pin_codes_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint
 ) {
@@ -4038,7 +4038,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clear_allpin_codes_command(
   topic += "DoorLock/GeneratedCommands/ClearAllPINCodes";
 
   std::string payload =
-    get_json_payload_for_door_lock_clear_allpin_codes_command(
+    get_json_payload_for_door_lock_clear_all_pin_codes_command(
     );
 
   // Publish our command
@@ -4062,10 +4062,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clear_allpin_codes_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clear_allpin_codes_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_all_pin_codes_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -4074,7 +4074,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clear_allpin_codes_response_com
   topic += "DoorLock/GeneratedCommands/ClearAllPINCodesResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_clear_allpin_codes_response_command(
+    get_json_payload_for_door_lock_clear_all_pin_codes_response_command(
     fields);
 
   // Publish our command
@@ -5034,10 +5034,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_get_user_type_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_set_rfid_code_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t *fields
   
 ) {
   // Create the topic
@@ -5046,7 +5046,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_command(
   topic += "DoorLock/GeneratedCommands/SetRFIDCode";
 
   std::string payload =
-    get_json_payload_for_door_lock_setrfid_code_command(
+    get_json_payload_for_door_lock_set_rfid_code_command(
     fields);
 
   // Publish our command
@@ -5070,10 +5070,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_set_rfid_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -5082,7 +5082,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_response_command(
   topic += "DoorLock/GeneratedCommands/SetRFIDCodeResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_setrfid_code_response_command(
+    get_json_payload_for_door_lock_set_rfid_code_response_command(
     fields);
 
   // Publish our command
@@ -5106,10 +5106,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_setrfid_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_get_rfid_code_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t *fields
   
 ) {
   // Create the topic
@@ -5118,7 +5118,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_command(
   topic += "DoorLock/GeneratedCommands/GetRFIDCode";
 
   std::string payload =
-    get_json_payload_for_door_lock_getrfid_code_command(
+    get_json_payload_for_door_lock_get_rfid_code_command(
     fields);
 
   // Publish our command
@@ -5142,10 +5142,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_get_rfid_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -5154,7 +5154,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_response_command(
   topic += "DoorLock/GeneratedCommands/GetRFIDCodeResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_getrfid_code_response_command(
+    get_json_payload_for_door_lock_get_rfid_code_response_command(
     fields);
 
   // Publish our command
@@ -5178,10 +5178,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_getrfid_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_rfid_code_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t *fields
   
 ) {
   // Create the topic
@@ -5190,7 +5190,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_command(
   topic += "DoorLock/GeneratedCommands/ClearRFIDCode";
 
   std::string payload =
-    get_json_payload_for_door_lock_clearrfid_code_command(
+    get_json_payload_for_door_lock_clear_rfid_code_command(
     fields);
 
   // Publish our command
@@ -5214,10 +5214,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_rfid_code_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -5226,7 +5226,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_response_command
   topic += "DoorLock/GeneratedCommands/ClearRFIDCodeResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_clearrfid_code_response_command(
+    get_json_payload_for_door_lock_clear_rfid_code_response_command(
     fields);
 
   // Publish our command
@@ -5248,7 +5248,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clearrfid_code_response_command
  * 
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clear_allrfid_codes_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_all_rfid_codes_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint
 ) {
@@ -5258,7 +5258,7 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clear_allrfid_codes_command(
   topic += "DoorLock/GeneratedCommands/ClearAllRFIDCodes";
 
   std::string payload =
-    get_json_payload_for_door_lock_clear_allrfid_codes_command(
+    get_json_payload_for_door_lock_clear_all_rfid_codes_command(
     );
 
   // Publish our command
@@ -5282,10 +5282,10 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clear_allrfid_codes_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_generated_clear_allrfid_codes_response_command(
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_all_rfid_codes_response_command(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t *fields
   
 ) {
   // Create the topic
@@ -5294,7 +5294,147 @@ void uic_mqtt_dotdot_door_lock_publish_generated_clear_allrfid_codes_response_co
   topic += "DoorLock/GeneratedCommands/ClearAllRFIDCodesResponse";
 
   std::string payload =
-    get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
+    get_json_payload_for_door_lock_clear_all_rfid_codes_response_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetUser command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/SetUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_set_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_set_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/SetUser";
+
+  std::string payload =
+    get_json_payload_for_door_lock_set_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetUser command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/GetUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_get_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_get_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/GetUser";
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetUserResponse command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/GetUserResponse
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_get_user_response_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/GetUserResponse";
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_user_response_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ClearUser command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/ClearUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_clear_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/ClearUser";
+
+  std::string payload =
+    get_json_payload_for_door_lock_clear_user_command(
     fields);
 
   // Publish our command
@@ -5367,6 +5507,214 @@ void uic_mqtt_dotdot_door_lock_publish_generated_programming_event_notification_
 
   std::string payload =
     get_json_payload_for_door_lock_programming_event_notification_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetCredential command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/SetCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_set_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_set_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/SetCredential";
+
+  std::string payload =
+    get_json_payload_for_door_lock_set_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetCredentialResponse command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/SetCredentialResponse
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_set_credential_response_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/SetCredentialResponse";
+
+  std::string payload =
+    get_json_payload_for_door_lock_set_credential_response_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetCredentialStatus command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/GetCredentialStatus
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_get_credential_status_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/GetCredentialStatus";
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_credential_status_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetCredentialStatusResponse command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/GetCredentialStatusResponse
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_get_credential_status_response_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/GetCredentialStatusResponse";
+
+  std::string payload =
+    get_json_payload_for_door_lock_get_credential_status_response_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ClearCredential command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/ClearCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_clear_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/ClearCredential";
+
+  std::string payload =
+    get_json_payload_for_door_lock_clear_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated UnboltDoor command for
+ * the DoorLock cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/GeneratedCommands/UnboltDoor
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_generated_unbolt_door_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "DoorLock/GeneratedCommands/UnboltDoor";
+
+  std::string payload =
+    get_json_payload_for_door_lock_unbolt_door_command(
     fields);
 
   // Publish our command
@@ -5539,6 +5887,17 @@ void uic_mqtt_dotdot_door_lock_publish_generated_write_attributes_command(
   }
 
 
+  if (attribute_list.local_programming_features == true) {
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = DoorLockLocalProgrammingFeatures.get_bitmap_values_as_json_tree((uint32_t)attribute_values.local_programming_features);
+  json_object["LocalProgrammingFeatures"] = bitmap_values;
+
+
+  }
+
+
   if (attribute_list.wrong_code_entry_limit == true) {
 
   // This is a single value
@@ -5559,21 +5918,31 @@ void uic_mqtt_dotdot_door_lock_publish_generated_write_attributes_command(
   }
 
 
-  if (attribute_list.sendpin_over_the_air == true) {
+  if (attribute_list.send_pin_over_the_air == true) {
 
   // This is a single value
 
-  json_object["SendPINOverTheAir"] = attribute_values.sendpin_over_the_air;
+  json_object["SendPINOverTheAir"] = attribute_values.send_pin_over_the_air;
 
 
   }
 
 
-  if (attribute_list.requirepi_nforrf_operation == true) {
+  if (attribute_list.require_pi_nfor_rf_operation == true) {
 
   // This is a single value
 
-  json_object["RequirePINforRFOperation"] = attribute_values.requirepi_nforrf_operation;
+  json_object["RequirePINforRFOperation"] = attribute_values.require_pi_nfor_rf_operation;
+
+
+  }
+
+
+  if (attribute_list.expiring_user_timeout == true) {
+
+  // This is a single value
+
+  json_object["ExpiringUserTimeout"] = attribute_values.expiring_user_timeout;
 
 
   }
@@ -9339,31 +9708,31 @@ void uic_mqtt_dotdot_electrical_measurement_publish_generated_write_attributes_c
   nlohmann::json json_object = nlohmann::json::object();
 
 
-  if (attribute_list.averagerms_voltage_measurement_period == true) {
+  if (attribute_list.average_rms_voltage_measurement_period == true) {
 
   // This is a single value
 
-  json_object["AverageRMSVoltageMeasurementPeriod"] = attribute_values.averagerms_voltage_measurement_period;
+  json_object["AverageRMSVoltageMeasurementPeriod"] = attribute_values.average_rms_voltage_measurement_period;
 
 
   }
 
 
-  if (attribute_list.averagerms_over_voltage_counter == true) {
+  if (attribute_list.average_rms_over_voltage_counter == true) {
 
   // This is a single value
 
-  json_object["AverageRMSOverVoltageCounter"] = attribute_values.averagerms_over_voltage_counter;
+  json_object["AverageRMSOverVoltageCounter"] = attribute_values.average_rms_over_voltage_counter;
 
 
   }
 
 
-  if (attribute_list.averagerms_under_voltage_counter == true) {
+  if (attribute_list.average_rms_under_voltage_counter == true) {
 
   // This is a single value
 
-  json_object["AverageRMSUnderVoltageCounter"] = attribute_values.averagerms_under_voltage_counter;
+  json_object["AverageRMSUnderVoltageCounter"] = attribute_values.average_rms_under_voltage_counter;
 
 
   }
@@ -9471,31 +9840,31 @@ void uic_mqtt_dotdot_electrical_measurement_publish_generated_write_attributes_c
   }
 
 
-  if (attribute_list.averagerms_voltage_measurement_period_phb == true) {
+  if (attribute_list.average_rms_voltage_measurement_period_phb == true) {
 
   // This is a single value
 
-  json_object["AverageRMSVoltageMeasurementPeriodPhB"] = attribute_values.averagerms_voltage_measurement_period_phb;
+  json_object["AverageRMSVoltageMeasurementPeriodPhB"] = attribute_values.average_rms_voltage_measurement_period_phb;
 
 
   }
 
 
-  if (attribute_list.averagerms_over_voltage_counter_phb == true) {
+  if (attribute_list.average_rms_over_voltage_counter_phb == true) {
 
   // This is a single value
 
-  json_object["AverageRMSOverVoltageCounterPhB"] = attribute_values.averagerms_over_voltage_counter_phb;
+  json_object["AverageRMSOverVoltageCounterPhB"] = attribute_values.average_rms_over_voltage_counter_phb;
 
 
   }
 
 
-  if (attribute_list.averagerms_under_voltage_counter_phb == true) {
+  if (attribute_list.average_rms_under_voltage_counter_phb == true) {
 
   // This is a single value
 
-  json_object["AverageRMSUnderVoltageCounterPhB"] = attribute_values.averagerms_under_voltage_counter_phb;
+  json_object["AverageRMSUnderVoltageCounterPhB"] = attribute_values.average_rms_under_voltage_counter_phb;
 
 
   }
@@ -9541,31 +9910,31 @@ void uic_mqtt_dotdot_electrical_measurement_publish_generated_write_attributes_c
   }
 
 
-  if (attribute_list.averagerms_voltage_measurement_period_phc == true) {
+  if (attribute_list.average_rms_voltage_measurement_period_phc == true) {
 
   // This is a single value
 
-  json_object["AverageRMSVoltageMeasurementPeriodPhC"] = attribute_values.averagerms_voltage_measurement_period_phc;
+  json_object["AverageRMSVoltageMeasurementPeriodPhC"] = attribute_values.average_rms_voltage_measurement_period_phc;
 
 
   }
 
 
-  if (attribute_list.averagerms_over_voltage_counter_phc == true) {
+  if (attribute_list.average_rms_over_voltage_counter_phc == true) {
 
   // This is a single value
 
-  json_object["AverageRMSOverVoltageCounterPhC"] = attribute_values.averagerms_over_voltage_counter_phc;
+  json_object["AverageRMSOverVoltageCounterPhC"] = attribute_values.average_rms_over_voltage_counter_phc;
 
 
   }
 
 
-  if (attribute_list.averagerms_under_voltage_counter_phc == true) {
+  if (attribute_list.average_rms_under_voltage_counter_phc == true) {
 
   // This is a single value
 
-  json_object["AverageRMSUnderVoltageCounterPhC"] = attribute_values.averagerms_under_voltage_counter_phc;
+  json_object["AverageRMSUnderVoltageCounterPhC"] = attribute_values.average_rms_under_voltage_counter_phc;
 
 
   }
@@ -10973,6 +11342,46 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_generated_wr
   // Create the topic
   std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
   topic += "ProtocolController/NetworkManagement/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the Descriptor cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/Descriptor/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_descriptor_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_descriptor_state_t attribute_values,
+  uic_mqtt_dotdot_descriptor_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "Descriptor/GeneratedCommands/WriteAttributes";
 
   nlohmann::json json_object = nlohmann::json::object();
 

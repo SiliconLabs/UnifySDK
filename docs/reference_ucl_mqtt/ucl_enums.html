@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -133,7 +133,7 @@ AoXLocatorAoXMode Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_aox_locatorcte_mode"></a>
+<h1><a class="anchor" id="enum_aox_locator_cte_mode"></a>
 AoXLocatorCTEMode Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -429,7 +429,7 @@ BatterySize Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_bypass_response_zoneid_bypass_result"></a>
+<h1><a class="anchor" id="enum_bypass_response_zone_id_bypass_result"></a>
 BypassResponseZoneIDBypassResult Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -639,6 +639,54 @@ CommissioningStartupControl Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
+<h1><a class="anchor" id="enum_credential_rule_enum"></a>
+CredentialRuleEnum Enum</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;CredentialRuleEnum Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;string&quot;,</div>
+<div class="line">  &quot;enum&quot;: [</div>
+<div class="line">    &quot;Single&quot;,</div>
+<div class="line">    &quot;Dual&quot;,</div>
+<div class="line">    &quot;Tri&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h1><a class="anchor" id="enum_credential_type_enum"></a>
+CredentialTypeEnum Enum</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;CredentialTypeEnum Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;string&quot;,</div>
+<div class="line">  &quot;enum&quot;: [</div>
+<div class="line">    &quot;ProgrammingPIN&quot;,</div>
+<div class="line">    &quot;PIN&quot;,</div>
+<div class="line">    &quot;RFID&quot;,</div>
+<div class="line">    &quot;Fingerprint&quot;,</div>
+<div class="line">    &quot;FingerVein&quot;,</div>
+<div class="line">    &quot;Face&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h1><a class="anchor" id="enum_data_operation_type_enum"></a>
+DataOperationTypeEnum Enum</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;DataOperationTypeEnum Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;string&quot;,</div>
+<div class="line">  &quot;enum&quot;: [</div>
+<div class="line">    &quot;Add&quot;,</div>
+<div class="line">    &quot;Clear&quot;,</div>
+<div class="line">    &quot;Modify&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
 <h1><a class="anchor" id="enum_dehumidification_control_dehumidification_lockout"></a>
 DehumidificationControlDehumidificationLockout Enum</h1>
 <div class="fragment"><div class="line">{</div>
@@ -681,6 +729,47 @@ DehumidificationControlRelativeHumidityMode Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
+<h1><a class="anchor" id="enum_dev_type_id"></a>
+DevTypeId Enum</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;DevTypeId Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;string&quot;,</div>
+<div class="line">  &quot;enum&quot;: [</div>
+<div class="line">    &quot;DoorLock&quot;,</div>
+<div class="line">    &quot;DoorLockController&quot;,</div>
+<div class="line">    &quot;Fan&quot;,</div>
+<div class="line">    &quot;AirPurifier&quot;,</div>
+<div class="line">    &quot;RoomAirConditioner&quot;,</div>
+<div class="line">    &quot;Cooktop&quot;,</div>
+<div class="line">    &quot;ExtractorHood&quot;,</div>
+<div class="line">    &quot;OnOffLight&quot;,</div>
+<div class="line">    &quot;DimmableLight&quot;,</div>
+<div class="line">    &quot;OnOffLightSwitch&quot;,</div>
+<div class="line">    &quot;DimmerSwitch&quot;,</div>
+<div class="line">    &quot;ColorDimmerSwitch&quot;,</div>
+<div class="line">    &quot;LightSensor&quot;,</div>
+<div class="line">    &quot;OccupancySensor&quot;,</div>
+<div class="line">    &quot;OnOffPluginUnit&quot;,</div>
+<div class="line">    &quot;DimmablePlugInUnit&quot;,</div>
+<div class="line">    &quot;ColorTemperatureLight&quot;,</div>
+<div class="line">    &quot;ExtendedColorLight&quot;,</div>
+<div class="line">    &quot;WindowCovering&quot;,</div>
+<div class="line">    &quot;WindowCoveringController&quot;,</div>
+<div class="line">    &quot;HeatingCoolingUnit&quot;,</div>
+<div class="line">    &quot;Thermostat&quot;,</div>
+<div class="line">    &quot;TemperatureSensor&quot;,</div>
+<div class="line">    &quot;Pump&quot;,</div>
+<div class="line">    &quot;PressureSensor&quot;,</div>
+<div class="line">    &quot;FlowSensor&quot;,</div>
+<div class="line">    &quot;HumiditySensor&quot;,</div>
+<div class="line">    &quot;ControlBridge&quot;,</div>
+<div class="line">    &quot;OnOffSensor&quot;</div>
+<div class="line">  ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
 <h1><a class="anchor" id="enum_door_lock_door_state"></a>
 DoorLockDoorState Enum</h1>
 <div class="fragment"><div class="line">{</div>
@@ -693,13 +782,14 @@ DoorLockDoorState Enum</h1>
 <div class="line">    &quot;ErrorJammed&quot;,</div>
 <div class="line">    &quot;ErrorForcedOpen&quot;,</div>
 <div class="line">    &quot;ErrorUnspecified&quot;,</div>
+<div class="line">    &quot;DoorAjar&quot;,</div>
 <div class="line">    &quot;Undefined&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_door_lockled_settings"></a>
+<h1><a class="anchor" id="enum_door_lock_led_settings"></a>
 DoorLockLEDSettings Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -724,6 +814,7 @@ DoorLockLockState Enum</h1>
 <div class="line">    &quot;NotFullyLocked&quot;,</div>
 <div class="line">    &quot;Locked&quot;,</div>
 <div class="line">    &quot;Unlocked&quot;,</div>
+<div class="line">    &quot;Unlatched&quot;,</div>
 <div class="line">    &quot;Undefined&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
@@ -747,7 +838,8 @@ DoorLockLockType Enum</h1>
 <div class="line">    &quot;TubularLock&quot;,</div>
 <div class="line">    &quot;InterconnectedLock&quot;,</div>
 <div class="line">    &quot;DeadLatch&quot;,</div>
-<div class="line">    &quot;DoorFurniture&quot;</div>
+<div class="line">    &quot;DoorFurniture&quot;,</div>
+<div class="line">    &quot;Eurocylinder&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><br  />
@@ -776,7 +868,8 @@ DoorLockSoundVolume Enum</h1>
 <div class="line">  &quot;enum&quot;: [</div>
 <div class="line">    &quot;SilentMode&quot;,</div>
 <div class="line">    &quot;LowVolume&quot;,</div>
-<div class="line">    &quot;HighVolume&quot;</div>
+<div class="line">    &quot;HighVolume&quot;,</div>
+<div class="line">    &quot;MediumVolume&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><br  />
@@ -888,6 +981,11 @@ DrlkUserType Enum</h1>
 <div class="line">    &quot;WeekDayScheduleUser&quot;,</div>
 <div class="line">    &quot;MasterUser&quot;,</div>
 <div class="line">    &quot;NonAccessUser&quot;,</div>
+<div class="line">    &quot;ForcedUser&quot;,</div>
+<div class="line">    &quot;DisposableUser&quot;,</div>
+<div class="line">    &quot;ExpiringUser&quot;,</div>
+<div class="line">    &quot;ScheduleRestrictedUser&quot;,</div>
+<div class="line">    &quot;RemoteOnlyUser&quot;,</div>
 <div class="line">    &quot;NotSupported&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
@@ -1719,7 +1817,7 @@ SquawkConfigurationSquawkMode Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostatac_capacity_format"></a>
+<h1><a class="anchor" id="enum_thermostat_ac_capacity_format"></a>
 ThermostatACCapacityFormat Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1732,7 +1830,7 @@ ThermostatACCapacityFormat Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostatac_compressor_type"></a>
+<h1><a class="anchor" id="enum_thermostat_ac_compressor_type"></a>
 ThermostatACCompressorType Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1747,7 +1845,7 @@ ThermostatACCompressorType Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostatac_louver_position"></a>
+<h1><a class="anchor" id="enum_thermostat_ac_louver_position"></a>
 ThermostatACLouverPosition Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1764,7 +1862,7 @@ ThermostatACLouverPosition Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostatac_refrigerant_type"></a>
+<h1><a class="anchor" id="enum_thermostat_ac_refrigerant_type"></a>
 ThermostatACRefrigerantType Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1779,7 +1877,7 @@ ThermostatACRefrigerantType Enum</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostatac_type"></a>
+<h1><a class="anchor" id="enum_thermostat_ac_type"></a>
 ThermostatACType Enum</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -2159,6 +2257,7 @@ zclType Enum</h1>
 <div class="line">    &quot;struct&quot;,</div>
 <div class="line">    &quot;set&quot;,</div>
 <div class="line">    &quot;bag&quot;,</div>
+<div class="line">    &quot;fabric_idx&quot;,</div>
 <div class="line">    &quot;ToD&quot;,</div>
 <div class="line">    &quot;date&quot;,</div>
 <div class="line">    &quot;UTC&quot;,</div>
@@ -2183,7 +2282,7 @@ zclType Enum</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:04 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

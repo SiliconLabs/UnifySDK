@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework UCL MQTT Reference
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -405,6 +405,27 @@ DoorLockAlarmMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
+<h1><a class="anchor" id="enum_door_lock_credential_rules_support"></a>
+DoorLockCredentialRulesSupport Bitmap</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;DoorLockCredentialRulesSupport Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;Single&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;Dual&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;Tri&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
 <h1><a class="anchor" id="enum_door_lock_default_configuration_register"></a>
 DoorLockDefaultConfigurationRegister Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
@@ -428,6 +449,57 @@ DoorLockDefaultConfigurationRegister Bitmap</h1>
 <div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
 <div class="line">    },</div>
 <div class="line">    &quot;DefaultLEDSettingsIsEnabled&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
+<h1><a class="anchor" id="enum_door_lock_feature_map"></a>
+DoorLockFeatureMap Bitmap</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;DoorLockFeatureMap Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;PINCredential&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;RFIDCredential&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;FingerCredentials&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;Logging&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;WeekDayAccessSchedules&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;DoorPositionSensor&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;FaceCredentials&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;CredentialOverTheAirAccess&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;User&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;Notification&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;YearDayAccessSchedules&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;HolidaySchedules&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;Unbolting&quot;: {</div>
 <div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
@@ -498,6 +570,30 @@ DoorLockKeypadProgrammingEventMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
+<h1><a class="anchor" id="enum_door_lock_local_programming_features"></a>
+DoorLockLocalProgrammingFeatures Bitmap</h1>
+<div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
+<div class="line">  &quot;title&quot;: &quot;DoorLockLocalProgrammingFeatures Enum Properties&quot;,</div>
+<div class="line">  &quot;type&quot;: &quot;object&quot;,</div>
+<div class="line">  &quot;properties&quot;: {</div>
+<div class="line">    &quot;AddUsersCredentialsSchedulesLocally&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;ModifyUsersCredentialsSchedulesLocally&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;ClearUsersCredentialsSchedulesLocally&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    },</div>
+<div class="line">    &quot;AdjustLockSettingsLocally&quot;: {</div>
+<div class="line">        &quot;type&quot;: &quot;boolean&quot;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><br  />
+<br  />
+</p>
 <h1><a class="anchor" id="enum_door_lock_manual_operation_event_mask"></a>
 DoorLockManualOperationEventMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
@@ -543,7 +639,7 @@ DoorLockManualOperationEventMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_door_lockrfid_operation_event_mask"></a>
+<h1><a class="anchor" id="enum_door_lock_rfid_operation_event_mask"></a>
 DoorLockRFIDOperationEventMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -576,7 +672,7 @@ DoorLockRFIDOperationEventMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_door_lockrfid_programming_event_mask"></a>
+<h1><a class="anchor" id="enum_door_lock_rfid_programming_event_mask"></a>
 DoorLockRFIDProgrammingEventMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -597,7 +693,7 @@ DoorLockRFIDProgrammingEventMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_door_lockrf_operation_event_mask"></a>
+<h1><a class="anchor" id="enum_door_lock_rf_operation_event_mask"></a>
 DoorLockRFOperationEventMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -630,7 +726,7 @@ DoorLockRFOperationEventMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_door_lockrf_programming_event_mask"></a>
+<h1><a class="anchor" id="enum_door_lock_rf_programming_event_mask"></a>
 DoorLockRFProgrammingEventMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -723,7 +819,7 @@ DrlkDaysMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_electrical_measurementac_alarms_mask"></a>
+<h1><a class="anchor" id="enum_electrical_measurement_ac_alarms_mask"></a>
 ElectricalMeasurementACAlarmsMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -765,7 +861,7 @@ ElectricalMeasurementACAlarmsMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_electrical_measurementdc_overload_alarms_mask"></a>
+<h1><a class="anchor" id="enum_electrical_measurement_dc_overload_alarms_mask"></a>
 ElectricalMeasurementDCOverloadAlarmsMask Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1356,7 +1452,7 @@ StartWarningSirenConfiguration Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostatac_error_code"></a>
+<h1><a class="anchor" id="enum_thermostat_ac_error_code"></a>
 ThermostatACErrorCode Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1404,7 +1500,7 @@ ThermostatAlarmMask Bitmap</h1>
 </div><!-- fragment --><p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="enum_thermostathvac_system_type_configuration"></a>
+<h1><a class="anchor" id="enum_thermostat_hvac_system_type_configuration"></a>
 ThermostatHVACSystemTypeConfiguration Bitmap</h1>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,</div>
@@ -1755,7 +1851,7 @@ map8 Bitmap</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 9 2023 15:55:46 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:04 for Unify Framework UCL MQTT Reference by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

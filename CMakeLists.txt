@@ -11,6 +11,10 @@ set(CMAKE_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/include/"
 # ##############################################################################
 # Include Configurations
 # ##############################################################################
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "default build type: Debug" FORCE)
+endif()
+
 message(STATUS "Building Unify with BUILD_TYPE=${CMAKE_BUILD_TYPE}")
 
 include(cmake/include/version.cmake)

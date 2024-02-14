@@ -32,7 +32,7 @@
 #include "zcl_attribute_info.h"
 #include "zcl_definitions.h"
 
-#define ZCL_CONFIGURE_STATUS_RESPONSE_SIZE 4
+static const unsigned int ZCL_CONFIGURE_STATUS_RESPONSE_SIZE = 4;
 
 typedef uint8_t configure_response_buffer_t[ZCL_CONFIGURE_STATUS_RESPONSE_SIZE];
 

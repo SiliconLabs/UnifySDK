@@ -12,12 +12,22 @@ const component_zigpc_cmdparser_prefix = () => "zigpc_zclcmdparse"
  */
 const SUPPORTED_STRUCTS = [
     'TransitionType',
+    'CredentialStruct',
+]
+
+/**
+ * List of ZCL supported enums.
+ */
+const SUPPORTED_ENUMS = [
+    'zclStatus',
+    'CredentialTypeEnum',
 ]
 
 /**
  * List of ZCL server-side cluster supported.
  */
 const SUPPORTED_CLUSTERS = [
+    'Basic',
     'OnOff',
     'Level',
     'OccupancySensing',
@@ -30,9 +40,15 @@ const SUPPORTED_CLUSTERS = [
     'IASZone',
     'IASACE,',
     'IASWD',
+    'Metering',
+    'ElectricalMeasurement',
+    'PowerConfiguration',
+    'WindowCovering',
+    'TemperatureMeasurement',
 ]
 
 const SUPPORTED_CLUSTER_ATTRIBUTES = [
+    'Basic',
     'OnOff',
     'Level',
     'OccupancySensing',
@@ -46,6 +62,11 @@ const SUPPORTED_CLUSTER_ATTRIBUTES = [
     'IASZone',
     'IASACE,',
     'IASWD',
+    'Metering',
+    'ElectricalMeasurement',
+    'PowerConfiguration',
+    'WindowCovering',
+    'TemperatureMeasurement',
 ]
 
 const supportedCluster = (clusterName) => {
@@ -59,8 +80,8 @@ const supportedStruct = (structLabel) => {
     return SUPPORTED_STRUCTS.includes(structLabel)
 }
 
-const isEnumZclStatus = (label) => {
-    return label.toLowerCase() === 'zclstatus'
+const supportedEnums = (enumLabel) => {
+    return SUPPORTED_ENUMS.includes(enumLabel)
 }
 
 /**
@@ -82,10 +103,13 @@ const zigpc_zcl = {
     },
     struct_type: (type) => {
         return component_zigpc_zcl_prefix() + '_' + base_helpers.asSnakeCaseLower(type) + '_t'
+    },
+    enum_type: (type) => {
+        return  'zigpc_' + base_helpers.asSnakeCaseLower(type) + '_t'
     }
 };
 
-exports.isEnumZclStatus = isEnumZclStatus
+exports.supportedEnums = supportedEnums
 exports.isBool = base_helpers.isBool
 exports.isString = base_helpers.isString
 exports.isEnum = base_helpers.isEnum
@@ -106,6 +130,7 @@ exports.asZigPCZclClusterType = zigpc_zcl.cluster_type
 exports.asZigPCZclCommandType = zigpc_zcl.command_type
 exports.asZigPCZclAttributeType = zigpc_zcl.attr_type
 exports.asZigPCZclStructType = zigpc_zcl.struct_type
+exports.asZigPCZclEnumType = zigpc_zcl.enum_type
 exports.asDotDotMqttCommandFieldsType = base_helpers.asCommandFieldsType
 exports.asDotDotMqttByGroupCommandCallback = base_helpers.asByGroupCommandCallback
 exports.asDotDotMqttByGroupWriteAttributesCallback = base_helpers.asByGroupWriteAttributesCallback

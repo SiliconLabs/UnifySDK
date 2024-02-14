@@ -66,6 +66,7 @@ static const std::unordered_map<zigpc_zcl_data_type_t, size_t> zcl_data_type_siz
   { ZIGPC_ZCL_DATA_TYPE_OCTSTR, 1 },
   { ZIGPC_ZCL_DATA_TYPE_ATTRIB_ID, 2 },
   { ZIGPC_ZCL_DATA_TYPE_STRUCT_TRANSITION_TYPE, sizeof(zigpc_zcl_transition_type_t) },
+  { ZIGPC_ZCL_DATA_TYPE_CREDENTIAL_STRUCT_TYPE, sizeof(zigpc_zcl_credential_struct_t) },
 };
 /* TODO: Investigate following data type sizes missing from ZAP autogeneration.
  * ZIGPC_ZCL_DATA_TYPE_SEMI

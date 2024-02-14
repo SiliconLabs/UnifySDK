@@ -32,6 +32,7 @@ import Measurements from './pages/measurements/measurements';
 import Scene from './pages/scenes/scene/scene';
 import EpScenes from './pages/scenes/ep-scenes/ep-scenes';
 import { CommissionableDevices } from './pages/commissionable-devices/commissionable-devices';
+import { Button, Modal, Spinner } from 'react-bootstrap';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -42,7 +43,7 @@ class App extends Component<{}, AppState> {
     this.onMessage = this.onMessage.bind(this);
     this.state = {
       SocketServer: {} as WebSocket,
-      IsConnected: false,
+      IsConnected: null,
       IsSideBarCollapsed: true,
       NodeList: [],
       GroupList: [],
@@ -51,7 +52,9 @@ class App extends Component<{}, AppState> {
       UPTI: { List: [], Trace: {} },
       SystemMetrics: {},
       CommissionableDevices: ([] as CommissionableDevice[]),
-      AppMonitoringList: {}
+      AppMonitoringList: {},
+      ShowRedirectModal: false,
+      ShowRedirectSpinner: false
     }
     this.changeHeader = React.createRef();
     this.changeNodes = React.createRef();
@@ -95,10 +98,12 @@ class App extends Component<{}, AppState> {
     this.setState({ UPTI: { List: [], Trace: {} } });
   }
 
-  handleIsConnectedChange(isConnected: boolean) {
+  handleIsConnectedChange(isConnected: boolean | null) {
     this.setState({ IsConnected: isConnected });
     if (isConnected !== null)
       this.changeHeader?.current.toggleCollapse(isConnected)
+    if (!isConnected)
+      this.resetState();
   }
 
   handleNodesChange(list: any[]) {
@@ -293,6 +298,21 @@ class App extends Component<{}, AppState> {
           pauseOnFocusLoss
           draggable
           pauseOnHover />
+
+        <Modal show={this.state.ShowRedirectModal} >
+          <Modal.Header>
+            <Modal.Title>
+              Security Warning
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Unable to establish a secure connection due to lack of a Trusted Certificate. You will be redirected from https to http protocol.
+          </Modal.Body>
+          <Modal.Footer>
+            <Spinner hidden={!this.state.ShowRedirectSpinner} as="span" animation="border" variant="primary" className='float-right margin-t-10' />
+            <Button variant="primary" onClick={this.redirect} hidden={this.state.ShowRedirectSpinner}>Ok</Button>
+          </Modal.Footer>
+        </Modal>
       </>
     );
   }
@@ -301,34 +321,26 @@ class App extends Component<{}, AppState> {
     let protocol = window.location.protocol === "https:" ? "wss" : "ws";
     let port = window.location.protocol === "https:" ? "1343" : "1337";
     let connection = new WebSocket(`${protocol}://${window.location.hostname}:${port}`);
-    connection.onopen = function () {
+    connection.addEventListener("open", (event) => {
       console.log('Connection established');
-    };
+      this.handleIsConnectedChange(false);
+      this.attemptsCount = 0;
+    });
     connection.addEventListener("error", (error) => {
+      this.handleIsConnectedChange(null);
       console.log(`Some problem with your connection or the server is down: ${JSON.stringify(error)}`);
-      this.toggleConnectState(false);
-      if (window.location.protocol === "https:") {
-        if (this.attemptsCount++ >= 3) {
-          let url = `http://${window.location.hostname}:3080`;
-          console.log("WSS does not support. Redirecting to " + url);
-          window.location.replace(url);
-        }
-      }
+      if (this.attemptsCount++ >= 3) {
+        if (window.location.protocol === "https:")
+          this.setState({ ShowRedirectModal: true });
+      } else
+        setTimeout(() => this.initWebSocket(), 500);
     });
     connection.addEventListener("close", (event) => {
       console.log(`Connection closed`);
-      this.toggleConnectState(false);
-      setTimeout(() => this.initWebSocket(), 2000);
+      this.handleIsConnectedChange(null);
     });
     connection.onmessage = this.onMessage;
     this.setState({ SocketServer: connection });
-  }
-
-  toggleConnectState(isConnected: boolean) {
-    this.setState({ IsConnected: isConnected });
-    if (!isConnected)
-      this.resetState();
-    this.changeHeader?.current.toggleCollapse(isConnected);
   }
 
   onMessage(message: any) {
@@ -401,6 +413,13 @@ class App extends Component<{}, AppState> {
         this.handleCommissionableDevices(mes.data);
         break;
     }
+  }
+
+  redirect = () => {
+    let url = `http://${window.location.hostname}:3080`;
+    console.log("Redirecting to " + url);
+    this.setState({ ShowRedirectSpinner: true });
+    window.location.replace(url);
   }
 }
 

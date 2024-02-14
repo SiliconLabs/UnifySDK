@@ -1887,10 +1887,10 @@ do not want documented.
     // up by Doxygen.
     static uint8_t my_private_variable;
 
-    /**
+    /*
      * This is a function that will not be documented.
      *
-     * Note the lack of the double slash at the end of the top line. That
+     * Note the lack of the double asterisk at the end of the top line. That
      * means this is not a true Javadoc comment block and Doxygen will not
      * see it.
      */

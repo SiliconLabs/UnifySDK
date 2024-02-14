@@ -18,6 +18,7 @@
 #include "unify_dotdot_attribute_store_attribute_publisher.h"
 #include "unify_dotdot_attribute_store_node_state.h"
 #include "unify_dotdot_attribute_store_group_cluster.h"
+#include "unify_dotdot_attribute_store_descriptor.h"
 #include "process.h"
 
 // Private variable avoiding to try to register duplicate attributes to the attribute store.
@@ -51,6 +52,7 @@ sl_status_t unify_dotdot_attribute_store_init()
   // Special clusters
   init_status |= unify_dotdot_attribute_store_node_state_init();
   init_status |= unify_dotdot_attribute_store_group_cluster_init();
+  init_status |= unify_dotdot_attribute_store_descriptor_init();
 
   return init_status;
 }

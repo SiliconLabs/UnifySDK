@@ -12215,15 +12215,17 @@ static uic_mqtt_dotdot_door_lock_attribute_door_closed_events_callback_t uic_mqt
 static uic_mqtt_dotdot_door_lock_attribute_open_period_callback_t uic_mqtt_dotdot_door_lock_attribute_open_period_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_number_of_log_records_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_log_records_supported_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_number_of_year_day_schedules_supported_per_user_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_year_day_schedules_supported_per_user_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_t uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_t uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback_t uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback_t uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_language_callback_t uic_mqtt_dotdot_door_lock_attribute_language_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_led_settings_callback_t uic_mqtt_dotdot_door_lock_attribute_led_settings_callback = nullptr;
@@ -12236,11 +12238,13 @@ static uic_mqtt_dotdot_door_lock_attribute_enable_local_programming_callback_t u
 static uic_mqtt_dotdot_door_lock_attribute_enable_one_touch_locking_callback_t uic_mqtt_dotdot_door_lock_attribute_enable_one_touch_locking_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_enable_inside_statusled_callback_t uic_mqtt_dotdot_door_lock_attribute_enable_inside_statusled_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_button_callback_t uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_button_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback_t uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback_t uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callback_t uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback_t uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback = nullptr;
-static uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback_t uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_t uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback_t uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_security_level_callback_t uic_mqtt_dotdot_door_lock_attribute_security_level_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback_t uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback_t uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_keypad_operation_event_mask_callback_t uic_mqtt_dotdot_door_lock_attribute_keypad_operation_event_mask_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_rf_operation_event_mask_callback_t uic_mqtt_dotdot_door_lock_attribute_rf_operation_event_mask_callback = nullptr;
@@ -12249,6 +12253,7 @@ static uic_mqtt_dotdot_door_lock_attribute_rfid_operation_event_mask_callback_t 
 static uic_mqtt_dotdot_door_lock_attribute_keypad_programming_event_mask_callback_t uic_mqtt_dotdot_door_lock_attribute_keypad_programming_event_mask_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_rf_programming_event_mask_callback_t uic_mqtt_dotdot_door_lock_attribute_rf_programming_event_mask_callback = nullptr;
 static uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback_t uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback = nullptr;
+static uic_mqtt_dotdot_door_lock_attribute_feature_map_callback_t uic_mqtt_dotdot_door_lock_attribute_feature_map_callback = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update handlers for DoorLock
@@ -12961,11 +12966,11 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_total_users_supported_attribu
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_number_ofpin_users_supported_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_number_of_pin_users_supported_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback == nullptr) {
     return;
   }
 
@@ -13005,7 +13010,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_ofpin_users_supported_attribute_
   }
 
 
-  uint16_t number_ofpin_users_supported = {};
+  uint16_t number_of_pin_users_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -13018,7 +13023,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_ofpin_users_supported_attribute_
         return;
       }
 // Start parsing value
-      number_ofpin_users_supported = json_payload.at("value").get<uint16_t>();
+      number_of_pin_users_supported = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -13028,20 +13033,20 @@ static void uic_mqtt_dotdot_on_door_lock_number_ofpin_users_supported_attribute_
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback(
+  uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    number_ofpin_users_supported
+    number_of_pin_users_supported
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_number_ofrfid_users_supported_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_number_of_rfid_users_supported_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback == nullptr) {
     return;
   }
 
@@ -13081,7 +13086,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_ofrfid_users_supported_attribute
   }
 
 
-  uint16_t number_ofrfid_users_supported = {};
+  uint16_t number_of_rfid_users_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -13094,7 +13099,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_ofrfid_users_supported_attribute
         return;
       }
 // Start parsing value
-      number_ofrfid_users_supported = json_payload.at("value").get<uint16_t>();
+      number_of_rfid_users_supported = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -13104,12 +13109,12 @@ static void uic_mqtt_dotdot_on_door_lock_number_ofrfid_users_supported_attribute
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback(
+  uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    number_ofrfid_users_supported
+    number_of_rfid_users_supported
   );
 
 }
@@ -13341,11 +13346,11 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_holiday_schedules_supported_a
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_maxpin_code_length_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_max_pin_code_length_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback == nullptr) {
     return;
   }
 
@@ -13385,7 +13390,7 @@ static void uic_mqtt_dotdot_on_door_lock_maxpin_code_length_attribute_update(
   }
 
 
-  uint8_t maxpin_code_length = {};
+  uint8_t max_pin_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13398,7 +13403,7 @@ static void uic_mqtt_dotdot_on_door_lock_maxpin_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      maxpin_code_length = json_payload.at("value").get<uint8_t>();
+      max_pin_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13408,20 +13413,20 @@ static void uic_mqtt_dotdot_on_door_lock_maxpin_code_length_attribute_update(
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback(
+  uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    maxpin_code_length
+    max_pin_code_length
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_minpin_code_length_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_min_pin_code_length_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback == nullptr) {
     return;
   }
 
@@ -13461,7 +13466,7 @@ static void uic_mqtt_dotdot_on_door_lock_minpin_code_length_attribute_update(
   }
 
 
-  uint8_t minpin_code_length = {};
+  uint8_t min_pin_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13474,7 +13479,7 @@ static void uic_mqtt_dotdot_on_door_lock_minpin_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      minpin_code_length = json_payload.at("value").get<uint8_t>();
+      min_pin_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13484,20 +13489,20 @@ static void uic_mqtt_dotdot_on_door_lock_minpin_code_length_attribute_update(
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback(
+  uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    minpin_code_length
+    min_pin_code_length
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_maxrfid_code_length_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_max_rfid_code_length_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback == nullptr) {
     return;
   }
 
@@ -13537,7 +13542,7 @@ static void uic_mqtt_dotdot_on_door_lock_maxrfid_code_length_attribute_update(
   }
 
 
-  uint8_t maxrfid_code_length = {};
+  uint8_t max_rfid_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13550,7 +13555,7 @@ static void uic_mqtt_dotdot_on_door_lock_maxrfid_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      maxrfid_code_length = json_payload.at("value").get<uint8_t>();
+      max_rfid_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13560,20 +13565,20 @@ static void uic_mqtt_dotdot_on_door_lock_maxrfid_code_length_attribute_update(
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback(
+  uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    maxrfid_code_length
+    max_rfid_code_length
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_minrfid_code_length_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_min_rfid_code_length_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback == nullptr) {
     return;
   }
 
@@ -13613,7 +13618,7 @@ static void uic_mqtt_dotdot_on_door_lock_minrfid_code_length_attribute_update(
   }
 
 
-  uint8_t minrfid_code_length = {};
+  uint8_t min_rfid_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13626,7 +13631,7 @@ static void uic_mqtt_dotdot_on_door_lock_minrfid_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      minrfid_code_length = json_payload.at("value").get<uint8_t>();
+      min_rfid_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13636,12 +13641,164 @@ static void uic_mqtt_dotdot_on_door_lock_minrfid_code_length_attribute_update(
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback(
+  uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    minrfid_code_length
+    min_rfid_code_length
+  );
+
+}
+static void uic_mqtt_dotdot_on_door_lock_credential_rules_support_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t credential_rules_support = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::CredentialRulesSupport: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      credential_rules_support = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, DoorLockCredentialRulesSupport);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    credential_rules_support
+  );
+
+}
+static void uic_mqtt_dotdot_on_door_lock_number_of_credentials_supported_per_user_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t number_of_credentials_supported_per_user = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::NumberOfCredentialsSupportedPerUser: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      number_of_credentials_supported_per_user = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    number_of_credentials_supported_per_user
   );
 
 }
@@ -14565,6 +14722,82 @@ static void uic_mqtt_dotdot_on_door_lock_enable_privacy_mode_button_attribute_up
   );
 
 }
+static void uic_mqtt_dotdot_on_door_lock_local_programming_features_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t local_programming_features = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::LocalProgrammingFeatures: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      local_programming_features = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, DoorLockLocalProgrammingFeatures);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    local_programming_features
+  );
+
+}
 static void uic_mqtt_dotdot_on_door_lock_wrong_code_entry_limit_attribute_update(
   const char *topic,
   const char *message,
@@ -14717,11 +14950,11 @@ static void uic_mqtt_dotdot_on_door_lock_user_code_temporary_disable_time_attrib
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_sendpin_over_the_air_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_send_pin_over_the_air_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback == nullptr) {
     return;
   }
 
@@ -14761,7 +14994,7 @@ static void uic_mqtt_dotdot_on_door_lock_sendpin_over_the_air_attribute_update(
   }
 
 
-  bool sendpin_over_the_air = {};
+  bool send_pin_over_the_air = {};
 
   nlohmann::json json_payload;
   try {
@@ -14774,7 +15007,7 @@ static void uic_mqtt_dotdot_on_door_lock_sendpin_over_the_air_attribute_update(
         return;
       }
 // Start parsing value
-      sendpin_over_the_air = get_bool_from_json(json_payload, "value");
+      send_pin_over_the_air = get_bool_from_json(json_payload, "value");
 
     // End parsing value
     }
@@ -14784,20 +15017,20 @@ static void uic_mqtt_dotdot_on_door_lock_sendpin_over_the_air_attribute_update(
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback(
+  uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    sendpin_over_the_air
+    send_pin_over_the_air
   );
 
 }
-static void uic_mqtt_dotdot_on_door_lock_requirepi_nforrf_operation_attribute_update(
+static void uic_mqtt_dotdot_on_door_lock_require_pi_nfor_rf_operation_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback == nullptr) {
+  if (uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback == nullptr) {
     return;
   }
 
@@ -14837,7 +15070,7 @@ static void uic_mqtt_dotdot_on_door_lock_requirepi_nforrf_operation_attribute_up
   }
 
 
-  bool requirepi_nforrf_operation = {};
+  bool require_pi_nfor_rf_operation = {};
 
   nlohmann::json json_payload;
   try {
@@ -14850,7 +15083,7 @@ static void uic_mqtt_dotdot_on_door_lock_requirepi_nforrf_operation_attribute_up
         return;
       }
 // Start parsing value
-      requirepi_nforrf_operation = get_bool_from_json(json_payload, "value");
+      require_pi_nfor_rf_operation = get_bool_from_json(json_payload, "value");
 
     // End parsing value
     }
@@ -14860,12 +15093,12 @@ static void uic_mqtt_dotdot_on_door_lock_requirepi_nforrf_operation_attribute_up
     return;
   }
 
-  uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback(
+  uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    requirepi_nforrf_operation
+    require_pi_nfor_rf_operation
   );
 
 }
@@ -14950,6 +15183,82 @@ static void uic_mqtt_dotdot_on_door_lock_security_level_attribute_update(
     unretained,
     update_type,
     security_level
+  );
+
+}
+static void uic_mqtt_dotdot_on_door_lock_expiring_user_timeout_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t expiring_user_timeout = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::ExpiringUserTimeout: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      expiring_user_timeout = json_payload.at("value").get<uint16_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    expiring_user_timeout
   );
 
 }
@@ -15561,6 +15870,82 @@ static void uic_mqtt_dotdot_on_door_lock_rfid_programming_event_mask_attribute_u
   );
 
 }
+static void uic_mqtt_dotdot_on_door_lock_feature_map_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_door_lock_attribute_feature_map_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t feature_map = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::FeatureMap: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      feature_map = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, DoorLockFeatureMap);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_door_lock_attribute_feature_map_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    feature_map
+  );
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute init functions for DoorLock
@@ -15606,13 +15991,13 @@ sl_status_t uic_mqtt_dotdot_door_lock_attributes_init()
     subscription_topic = base_topic + "DoorLock/Attributes/NumberOfTotalUsersSupported/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_of_total_users_supported_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/NumberOfPINUsersSupported/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_ofpin_users_supported_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_of_pin_users_supported_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/NumberOfRFIDUsersSupported/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_ofrfid_users_supported_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_of_rfid_users_supported_attribute_update);
   }
   if(uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/NumberOfWeekDaySchedulesSupportedPerUser/#";
@@ -15626,21 +16011,29 @@ sl_status_t uic_mqtt_dotdot_door_lock_attributes_init()
     subscription_topic = base_topic + "DoorLock/Attributes/NumberOfHolidaySchedulesSupported/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_of_holiday_schedules_supported_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/MaxPINCodeLength/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_maxpin_code_length_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_max_pin_code_length_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/MinPINCodeLength/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_minpin_code_length_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_min_pin_code_length_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/MaxRFIDCodeLength/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_maxrfid_code_length_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_max_rfid_code_length_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/MinRFIDCodeLength/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_minrfid_code_length_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_min_rfid_code_length_attribute_update);
+  }
+  if(uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback) {
+    subscription_topic = base_topic + "DoorLock/Attributes/CredentialRulesSupport/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_credential_rules_support_attribute_update);
+  }
+  if(uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback) {
+    subscription_topic = base_topic + "DoorLock/Attributes/NumberOfCredentialsSupportedPerUser/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_number_of_credentials_supported_per_user_attribute_update);
   }
   if(uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/EnableLogging/#";
@@ -15690,6 +16083,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_attributes_init()
     subscription_topic = base_topic + "DoorLock/Attributes/EnablePrivacyModeButton/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_enable_privacy_mode_button_attribute_update);
   }
+  if(uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback) {
+    subscription_topic = base_topic + "DoorLock/Attributes/LocalProgrammingFeatures/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_local_programming_features_attribute_update);
+  }
   if(uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/WrongCodeEntryLimit/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_wrong_code_entry_limit_attribute_update);
@@ -15698,17 +16095,21 @@ sl_status_t uic_mqtt_dotdot_door_lock_attributes_init()
     subscription_topic = base_topic + "DoorLock/Attributes/UserCodeTemporaryDisableTime/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_user_code_temporary_disable_time_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/SendPINOverTheAir/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_sendpin_over_the_air_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_send_pin_over_the_air_attribute_update);
   }
-  if(uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback) {
+  if(uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/RequirePINforRFOperation/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_requirepi_nforrf_operation_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_require_pi_nfor_rf_operation_attribute_update);
   }
   if(uic_mqtt_dotdot_door_lock_attribute_security_level_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/SecurityLevel/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_security_level_attribute_update);
+  }
+  if(uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback) {
+    subscription_topic = base_topic + "DoorLock/Attributes/ExpiringUserTimeout/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_expiring_user_timeout_attribute_update);
   }
   if(uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/AlarmMask/#";
@@ -15741,6 +16142,10 @@ sl_status_t uic_mqtt_dotdot_door_lock_attributes_init()
   if(uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback) {
     subscription_topic = base_topic + "DoorLock/Attributes/RFIDProgrammingEventMask/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_rfid_programming_event_mask_attribute_update);
+  }
+  if(uic_mqtt_dotdot_door_lock_attribute_feature_map_callback) {
+    subscription_topic = base_topic + "DoorLock/Attributes/FeatureMap/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_door_lock_feature_map_attribute_update);
   }
 
   return SL_STATUS_OK;
@@ -15786,13 +16191,13 @@ void uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callbac
 {
   uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback = callback;
 }
 void uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback_t callback)
 {
@@ -15806,21 +16211,29 @@ void uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_c
 {
   uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback = callback;
+}
+void uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_set(const uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback = callback;
+}
+void uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback = callback;
 }
 void uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback_set(const uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback_t callback)
 {
@@ -15870,6 +16283,10 @@ void uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_button_callback_set
 {
   uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_button_callback = callback;
 }
+void uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback_set(const uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback = callback;
+}
 void uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback_set(const uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback_t callback)
 {
   uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback = callback;
@@ -15878,17 +16295,21 @@ void uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callba
 {
   uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback_set(const uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_set(const uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback = callback;
 }
-void uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback_set(const uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback_t callback)
+void uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback_set(const uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback_t callback)
 {
-  uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback = callback;
+  uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback = callback;
 }
 void uic_mqtt_dotdot_door_lock_attribute_security_level_callback_set(const uic_mqtt_dotdot_door_lock_attribute_security_level_callback_t callback)
 {
   uic_mqtt_dotdot_door_lock_attribute_security_level_callback = callback;
+}
+void uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback_set(const uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback = callback;
 }
 void uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback_set(const uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback_t callback)
 {
@@ -15921,6 +16342,10 @@ void uic_mqtt_dotdot_door_lock_attribute_rf_programming_event_mask_callback_set(
 void uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback_set(const uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback_t callback)
 {
   uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback = callback;
+}
+void uic_mqtt_dotdot_door_lock_attribute_feature_map_callback_set(const uic_mqtt_dotdot_door_lock_attribute_feature_map_callback_t callback)
+{
+  uic_mqtt_dotdot_door_lock_attribute_feature_map_callback = callback;
 }
 
 // End of supported cluster.
@@ -41486,9 +41911,9 @@ static uic_mqtt_dotdot_electrical_measurement_attribute_active_power_max_callbac
 static uic_mqtt_dotdot_electrical_measurement_attribute_reactive_power_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_reactive_power_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_callback = nullptr;
@@ -41507,8 +41932,8 @@ static uic_mqtt_dotdot_electrical_measurement_attribute_ac_voltage_overload_call
 static uic_mqtt_dotdot_electrical_measurement_attribute_ac_current_overload_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_ac_current_overload_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_ac_active_power_overload_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_ac_active_power_overload_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_ac_reactive_power_overload_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_ac_reactive_power_overload_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_callback = nullptr;
@@ -41528,9 +41953,9 @@ static uic_mqtt_dotdot_electrical_measurement_attribute_active_power_max_phb_cal
 static uic_mqtt_dotdot_electrical_measurement_attribute_reactive_power_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_reactive_power_phb_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_phb_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_phb_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_phb_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_phb_callback = nullptr;
@@ -41550,9 +41975,9 @@ static uic_mqtt_dotdot_electrical_measurement_attribute_active_power_max_phc_cal
 static uic_mqtt_dotdot_electrical_measurement_attribute_reactive_power_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_reactive_power_phc_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_phc_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback = nullptr;
-static uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback = nullptr;
+static uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_phc_callback = nullptr;
 static uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_phc_callback_t uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_phc_callback = nullptr;
@@ -45817,11 +46242,11 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_factor_attribute_upd
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measurement_period_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measurement_period_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback == nullptr) {
     return;
   }
 
@@ -45861,7 +46286,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
   }
 
 
-  uint16_t averagerms_voltage_measurement_period = {};
+  uint16_t average_rms_voltage_measurement_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -45874,7 +46299,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
         return;
       }
 // Start parsing value
-      averagerms_voltage_measurement_period = json_payload.at("value").get<uint16_t>();
+      average_rms_voltage_measurement_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45884,20 +46309,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_voltage_measurement_period
+    average_rms_voltage_measurement_period
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_counter_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_counter_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback == nullptr) {
     return;
   }
 
@@ -45937,7 +46362,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
   }
 
 
-  uint16_t averagerms_over_voltage_counter = {};
+  uint16_t average_rms_over_voltage_counter = {};
 
   nlohmann::json json_payload;
   try {
@@ -45950,7 +46375,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
         return;
       }
 // Start parsing value
-      averagerms_over_voltage_counter = json_payload.at("value").get<uint16_t>();
+      average_rms_over_voltage_counter = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45960,20 +46385,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_over_voltage_counter
+    average_rms_over_voltage_counter
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_counter_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_counter_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback == nullptr) {
     return;
   }
 
@@ -46013,7 +46438,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
   }
 
 
-  uint16_t averagerms_under_voltage_counter = {};
+  uint16_t average_rms_under_voltage_counter = {};
 
   nlohmann::json json_payload;
   try {
@@ -46026,7 +46451,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
         return;
       }
 // Start parsing value
-      averagerms_under_voltage_counter = json_payload.at("value").get<uint16_t>();
+      average_rms_under_voltage_counter = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46036,12 +46461,12 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_under_voltage_counter
+    average_rms_under_voltage_counter
   );
 
 }
@@ -47413,11 +47838,11 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_reactive_power_overload
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback == nullptr) {
     return;
   }
 
@@ -47457,7 +47882,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_at
   }
 
 
-  int16_t averagerms_over_voltage = {};
+  int16_t average_rms_over_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -47470,7 +47895,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_at
         return;
       }
 // Start parsing value
-      averagerms_over_voltage = json_payload.at("value").get<int16_t>();
+      average_rms_over_voltage = json_payload.at("value").get<int16_t>();
     
     // End parsing value
     }
@@ -47480,20 +47905,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_at
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_over_voltage
+    average_rms_over_voltage
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback == nullptr) {
     return;
   }
 
@@ -47533,7 +47958,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_a
   }
 
 
-  int16_t averagerms_under_voltage = {};
+  int16_t average_rms_under_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -47546,7 +47971,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_a
         return;
       }
 // Start parsing value
-      averagerms_under_voltage = json_payload.at("value").get<int16_t>();
+      average_rms_under_voltage = json_payload.at("value").get<int16_t>();
     
     // End parsing value
     }
@@ -47556,12 +47981,12 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_a
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_under_voltage
+    average_rms_under_voltage
   );
 
 }
@@ -49009,11 +49434,11 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_factor_phb_attribute
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measurement_period_phb_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measurement_period_phb_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback == nullptr) {
     return;
   }
 
@@ -49053,7 +49478,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
   }
 
 
-  uint16_t averagerms_voltage_measurement_period_phb = {};
+  uint16_t average_rms_voltage_measurement_period_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49066,7 +49491,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
         return;
       }
 // Start parsing value
-      averagerms_voltage_measurement_period_phb = json_payload.at("value").get<uint16_t>();
+      average_rms_voltage_measurement_period_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49076,20 +49501,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_voltage_measurement_period_phb
+    average_rms_voltage_measurement_period_phb
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_counter_phb_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_counter_phb_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback == nullptr) {
     return;
   }
 
@@ -49129,7 +49554,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
   }
 
 
-  uint16_t averagerms_over_voltage_counter_phb = {};
+  uint16_t average_rms_over_voltage_counter_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49142,7 +49567,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
         return;
       }
 // Start parsing value
-      averagerms_over_voltage_counter_phb = json_payload.at("value").get<uint16_t>();
+      average_rms_over_voltage_counter_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49152,20 +49577,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_over_voltage_counter_phb
+    average_rms_over_voltage_counter_phb
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_counter_phb_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_counter_phb_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback == nullptr) {
     return;
   }
 
@@ -49205,7 +49630,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
   }
 
 
-  uint16_t averagerms_under_voltage_counter_phb = {};
+  uint16_t average_rms_under_voltage_counter_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49218,7 +49643,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
         return;
       }
 // Start parsing value
-      averagerms_under_voltage_counter_phb = json_payload.at("value").get<uint16_t>();
+      average_rms_under_voltage_counter_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49228,12 +49653,12 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_under_voltage_counter_phb
+    average_rms_under_voltage_counter_phb
   );
 
 }
@@ -50681,11 +51106,11 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_factor_phc_attribute
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measurement_period_phc_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measurement_period_phc_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback == nullptr) {
     return;
   }
 
@@ -50725,7 +51150,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
   }
 
 
-  uint16_t averagerms_voltage_measurement_period_phc = {};
+  uint16_t average_rms_voltage_measurement_period_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50738,7 +51163,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
         return;
       }
 // Start parsing value
-      averagerms_voltage_measurement_period_phc = json_payload.at("value").get<uint16_t>();
+      average_rms_voltage_measurement_period_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50748,20 +51173,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measure
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_voltage_measurement_period_phc
+    average_rms_voltage_measurement_period_phc
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_counter_phc_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_counter_phc_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback == nullptr) {
     return;
   }
 
@@ -50801,7 +51226,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
   }
 
 
-  uint16_t averagerms_over_voltage_counter_phc = {};
+  uint16_t average_rms_over_voltage_counter_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50814,7 +51239,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
         return;
       }
 // Start parsing value
-      averagerms_over_voltage_counter_phc = json_payload.at("value").get<uint16_t>();
+      average_rms_over_voltage_counter_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50824,20 +51249,20 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_co
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_over_voltage_counter_phc
+    average_rms_over_voltage_counter_phc
   );
 
 }
-static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_counter_phc_attribute_update(
+static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_counter_phc_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback == nullptr) {
+  if (uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback == nullptr) {
     return;
   }
 
@@ -50877,7 +51302,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
   }
 
 
-  uint16_t averagerms_under_voltage_counter_phc = {};
+  uint16_t average_rms_under_voltage_counter_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50890,7 +51315,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
         return;
       }
 // Start parsing value
-      averagerms_under_voltage_counter_phc = json_payload.at("value").get<uint16_t>();
+      average_rms_under_voltage_counter_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50900,12 +51325,12 @@ static void uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_c
     return;
   }
 
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback(
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagerms_under_voltage_counter_phc
+    average_rms_under_voltage_counter_phc
   );
 
 }
@@ -51446,17 +51871,17 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_attributes_init()
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/PowerFactor/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_power_factor_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriod/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measurement_period_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measurement_period_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounter/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_counter_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_counter_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounter/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_counter_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_counter_attribute_update);
   }
   if(uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriod/#";
@@ -51530,13 +51955,13 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_attributes_init()
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/ACReactivePowerOverload/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_ac_reactive_power_overload_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSOverVoltage/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSUnderVoltage/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_attribute_update);
   }
   if(uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/RMSExtremeOverVoltage/#";
@@ -51614,17 +52039,17 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_attributes_init()
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/PowerFactorPhB/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_power_factor_phb_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhB/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measurement_period_phb_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measurement_period_phb_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhB/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_counter_phb_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_counter_phb_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhB/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_counter_phb_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_counter_phb_attribute_update);
   }
   if(uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhB/#";
@@ -51702,17 +52127,17 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_attributes_init()
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/PowerFactorPhC/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_power_factor_phc_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSVoltageMeasurementPeriodPhC/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_voltage_measurement_period_phc_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measurement_period_phc_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSOverVoltageCounterPhC/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_over_voltage_counter_phc_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_counter_phc_attribute_update);
   }
-  if(uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback) {
+  if(uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/AverageRMSUnderVoltageCounterPhC/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_averagerms_under_voltage_counter_phc_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_counter_phc_attribute_update);
   }
   if(uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback) {
     subscription_topic = base_topic + "ElectricalMeasurement/Attributes/RMSExtremeOverVoltagePeriodPhC/#";
@@ -51962,17 +52387,17 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback_set(
 {
   uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback = callback;
 }
 void uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback_t callback)
 {
@@ -52046,13 +52471,13 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_ac_reactive_power_overload
 {
   uic_mqtt_dotdot_electrical_measurement_attribute_ac_reactive_power_overload_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback = callback;
 }
 void uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_callback_t callback)
 {
@@ -52130,17 +52555,17 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback_
 {
   uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback = callback;
 }
 void uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback_t callback)
 {
@@ -52218,17 +52643,17 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback_
 {
   uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback = callback;
 }
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback_t callback)
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_t callback)
 {
-  uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback = callback;
+  uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback = callback;
 }
 void uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback_t callback)
 {
@@ -52279,9 +52704,9 @@ static uic_mqtt_dotdot_diagnostics_attribute_nwk_decrypt_failures_callback_t uic
 static uic_mqtt_dotdot_diagnostics_attribute_aps_decrypt_failures_callback_t uic_mqtt_dotdot_diagnostics_attribute_aps_decrypt_failures_callback = nullptr;
 static uic_mqtt_dotdot_diagnostics_attribute_packet_buffer_allocate_failures_callback_t uic_mqtt_dotdot_diagnostics_attribute_packet_buffer_allocate_failures_callback = nullptr;
 static uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback_t uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback = nullptr;
-static uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback_t uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback = nullptr;
+static uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_t uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback = nullptr;
 static uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_t uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback = nullptr;
-static uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback_t uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback = nullptr;
+static uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_t uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback = nullptr;
 static uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback_t uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback = nullptr;
 static uic_mqtt_dotdot_diagnostics_attribute_last_messagerssi_callback_t uic_mqtt_dotdot_diagnostics_attribute_last_messagerssi_callback = nullptr;
 
@@ -54340,11 +54765,11 @@ static void uic_mqtt_dotdot_on_diagnostics_relayed_ucast_attribute_update(
   );
 
 }
-static void uic_mqtt_dotdot_on_diagnostics_phy_tomac_queue_limit_reached_attribute_update(
+static void uic_mqtt_dotdot_on_diagnostics_phy_to_mac_queue_limit_reached_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback == nullptr) {
+  if (uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback == nullptr) {
     return;
   }
 
@@ -54384,7 +54809,7 @@ static void uic_mqtt_dotdot_on_diagnostics_phy_tomac_queue_limit_reached_attribu
   }
 
 
-  uint16_t phy_tomac_queue_limit_reached = {};
+  uint16_t phy_to_mac_queue_limit_reached = {};
 
   nlohmann::json json_payload;
   try {
@@ -54397,7 +54822,7 @@ static void uic_mqtt_dotdot_on_diagnostics_phy_tomac_queue_limit_reached_attribu
         return;
       }
 // Start parsing value
-      phy_tomac_queue_limit_reached = json_payload.at("value").get<uint16_t>();
+      phy_to_mac_queue_limit_reached = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54407,12 +54832,12 @@ static void uic_mqtt_dotdot_on_diagnostics_phy_tomac_queue_limit_reached_attribu
     return;
   }
 
-  uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback(
+  uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    phy_tomac_queue_limit_reached
+    phy_to_mac_queue_limit_reached
   );
 
 }
@@ -54492,11 +54917,11 @@ static void uic_mqtt_dotdot_on_diagnostics_packet_validate_drop_count_attribute_
   );
 
 }
-static void uic_mqtt_dotdot_on_diagnostics_averagemac_retry_peraps_message_sent_attribute_update(
+static void uic_mqtt_dotdot_on_diagnostics_average_mac_retry_per_aps_message_sent_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback == nullptr) {
+  if (uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback == nullptr) {
     return;
   }
 
@@ -54536,7 +54961,7 @@ static void uic_mqtt_dotdot_on_diagnostics_averagemac_retry_peraps_message_sent_
   }
 
 
-  uint16_t averagemac_retry_peraps_message_sent = {};
+  uint16_t average_mac_retry_per_aps_message_sent = {};
 
   nlohmann::json json_payload;
   try {
@@ -54549,7 +54974,7 @@ static void uic_mqtt_dotdot_on_diagnostics_averagemac_retry_peraps_message_sent_
         return;
       }
 // Start parsing value
-      averagemac_retry_peraps_message_sent = json_payload.at("value").get<uint16_t>();
+      average_mac_retry_per_aps_message_sent = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54559,12 +54984,12 @@ static void uic_mqtt_dotdot_on_diagnostics_averagemac_retry_peraps_message_sent_
     return;
   }
 
-  uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback(
+  uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    averagemac_retry_peraps_message_sent
+    average_mac_retry_per_aps_message_sent
   );
 
 }
@@ -54837,17 +55262,17 @@ sl_status_t uic_mqtt_dotdot_diagnostics_attributes_init()
     subscription_topic = base_topic + "Diagnostics/Attributes/RelayedUcast/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_diagnostics_relayed_ucast_attribute_update);
   }
-  if(uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback) {
+  if(uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback) {
     subscription_topic = base_topic + "Diagnostics/Attributes/PHYToMACQueueLimitReached/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_diagnostics_phy_tomac_queue_limit_reached_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_diagnostics_phy_to_mac_queue_limit_reached_attribute_update);
   }
   if(uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback) {
     subscription_topic = base_topic + "Diagnostics/Attributes/PacketValidateDropCount/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_diagnostics_packet_validate_drop_count_attribute_update);
   }
-  if(uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback) {
+  if(uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback) {
     subscription_topic = base_topic + "Diagnostics/Attributes/AverageMACRetryPerAPSMessageSent/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_diagnostics_averagemac_retry_peraps_message_sent_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_diagnostics_average_mac_retry_per_aps_message_sent_attribute_update);
   }
   if(uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback) {
     subscription_topic = base_topic + "Diagnostics/Attributes/LastMessageLQI/#";
@@ -54973,17 +55398,17 @@ void uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback_set(const uic_
 {
   uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback = callback;
 }
-void uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback_t callback)
+void uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_t callback)
 {
-  uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback = callback;
+  uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback = callback;
 }
 void uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_t callback)
 {
   uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback = callback;
 }
-void uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback_t callback)
+void uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_t callback)
 {
-  uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback = callback;
+  uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback = callback;
 }
 void uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback_t callback)
 {
@@ -58389,7 +58814,7 @@ void uic_mqtt_dotdot_system_metrics_attribute_system_interrupts_callback_set(con
 static uic_mqtt_dotdot_application_monitoring_attribute_application_name_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_name_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_application_version_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_version_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_application_connected_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_connected_callback = nullptr;
-static uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback_t uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback = nullptr;
+static uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_uptime_minutes_callback_t uic_mqtt_dotdot_application_monitoring_attribute_uptime_minutes_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_process_id_callback_t uic_mqtt_dotdot_application_monitoring_attribute_process_id_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_hostname_callback_t uic_mqtt_dotdot_application_monitoring_attribute_hostname_callback = nullptr;
@@ -58404,11 +58829,11 @@ static uic_mqtt_dotdot_application_monitoring_attribute_mqtt_average_delivery_ti
 static uic_mqtt_dotdot_application_monitoring_attribute_mqtt_min_delivery_time_seconds_callback_t uic_mqtt_dotdot_application_monitoring_attribute_mqtt_min_delivery_time_seconds_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_mqtt_max_delivery_time_seconds_callback_t uic_mqtt_dotdot_application_monitoring_attribute_mqtt_max_delivery_time_seconds_callback = nullptr;
 static uic_mqtt_dotdot_application_monitoring_attribute_application_statistics_reporting_interval_seconds_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_statistics_reporting_interval_seconds_callback = nullptr;
-static uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback = nullptr;
-static uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback = nullptr;
-static uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback = nullptr;
-static uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback = nullptr;
-static uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback_t uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback = nullptr;
+static uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback = nullptr;
+static uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback = nullptr;
+static uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback = nullptr;
+static uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback = nullptr;
+static uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback_t uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update handlers for ApplicationMonitoring
@@ -58641,11 +59066,11 @@ static void uic_mqtt_dotdot_on_application_monitoring_application_connected_attr
   );
 
 }
-static void uic_mqtt_dotdot_on_application_monitoring_applicationmqtt_topics_attribute_update(
+static void uic_mqtt_dotdot_on_application_monitoring_application_mqtt_topics_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback == nullptr) {
+  if (uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback == nullptr) {
     return;
   }
 
@@ -58685,8 +59110,8 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationmqtt_topics_att
   }
 
 
-  std::vector<const char*> applicationmqtt_topics;
-  size_t applicationmqtt_topics_count = 0;
+  std::vector<const char*> application_mqtt_topics;
+  size_t application_mqtt_topics_count = 0;
 
   nlohmann::json json_payload;
   try {
@@ -58699,12 +59124,12 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationmqtt_topics_att
         return;
       }
 // Start parsing value
-      auto &applicationmqtt_topics_json = json_payload.at("value");
-      for (size_t i = 0; i < applicationmqtt_topics_json.size(); i++) {
-        applicationmqtt_topics.push_back(applicationmqtt_topics_json.at(i).get_ptr<const std::string*>()->c_str());
+      auto &application_mqtt_topics_json = json_payload.at("value");
+      for (size_t i = 0; i < application_mqtt_topics_json.size(); i++) {
+        application_mqtt_topics.push_back(application_mqtt_topics_json.at(i).get_ptr<const std::string*>()->c_str());
       }
       // Take our vector and pack it into the updated state
-      applicationmqtt_topics_count = applicationmqtt_topics.size();
+      application_mqtt_topics_count = application_mqtt_topics.size();
 
     // End parsing value
     }
@@ -58714,13 +59139,13 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationmqtt_topics_att
     return;
   }
 
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback(
+  uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    applicationmqtt_topics_count,
-    applicationmqtt_topics.data()
+    application_mqtt_topics_count,
+    application_mqtt_topics.data()
   );
 
 }
@@ -59796,11 +60221,11 @@ static void uic_mqtt_dotdot_on_application_monitoring_application_statistics_rep
   );
 
 }
-static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_usage_percent_attribute_update(
+static void uic_mqtt_dotdot_on_application_monitoring_application_cpu_usage_percent_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback == nullptr) {
+  if (uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback == nullptr) {
     return;
   }
 
@@ -59840,7 +60265,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_usage_perce
   }
 
 
-  double applicationcpu_usage_percent = {};
+  double application_cpu_usage_percent = {};
 
   nlohmann::json json_payload;
   try {
@@ -59853,7 +60278,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_usage_perce
         return;
       }
 // Start parsing value
-      applicationcpu_usage_percent = json_payload.at("value").get<double>();
+      application_cpu_usage_percent = json_payload.at("value").get<double>();
     
     // End parsing value
     }
@@ -59863,20 +60288,20 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_usage_perce
     return;
   }
 
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback(
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    applicationcpu_usage_percent
+    application_cpu_usage_percent
   );
 
 }
-static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_average_usage_percent_attribute_update(
+static void uic_mqtt_dotdot_on_application_monitoring_application_cpu_average_usage_percent_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback == nullptr) {
+  if (uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback == nullptr) {
     return;
   }
 
@@ -59916,7 +60341,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_average_usa
   }
 
 
-  double applicationcpu_average_usage_percent = {};
+  double application_cpu_average_usage_percent = {};
 
   nlohmann::json json_payload;
   try {
@@ -59929,7 +60354,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_average_usa
         return;
       }
 // Start parsing value
-      applicationcpu_average_usage_percent = json_payload.at("value").get<double>();
+      application_cpu_average_usage_percent = json_payload.at("value").get<double>();
     
     // End parsing value
     }
@@ -59939,20 +60364,20 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_average_usa
     return;
   }
 
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback(
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    applicationcpu_average_usage_percent
+    application_cpu_average_usage_percent
   );
 
 }
-static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_min_usage_percent_attribute_update(
+static void uic_mqtt_dotdot_on_application_monitoring_application_cpu_min_usage_percent_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback == nullptr) {
+  if (uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback == nullptr) {
     return;
   }
 
@@ -59992,7 +60417,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_min_usage_p
   }
 
 
-  double applicationcpu_min_usage_percent = {};
+  double application_cpu_min_usage_percent = {};
 
   nlohmann::json json_payload;
   try {
@@ -60005,7 +60430,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_min_usage_p
         return;
       }
 // Start parsing value
-      applicationcpu_min_usage_percent = json_payload.at("value").get<double>();
+      application_cpu_min_usage_percent = json_payload.at("value").get<double>();
     
     // End parsing value
     }
@@ -60015,20 +60440,20 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_min_usage_p
     return;
   }
 
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback(
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    applicationcpu_min_usage_percent
+    application_cpu_min_usage_percent
   );
 
 }
-static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_max_usage_percent_attribute_update(
+static void uic_mqtt_dotdot_on_application_monitoring_application_cpu_max_usage_percent_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback == nullptr) {
+  if (uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback == nullptr) {
     return;
   }
 
@@ -60068,7 +60493,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_max_usage_p
   }
 
 
-  double applicationcpu_max_usage_percent = {};
+  double application_cpu_max_usage_percent = {};
 
   nlohmann::json json_payload;
   try {
@@ -60081,7 +60506,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_max_usage_p
         return;
       }
 // Start parsing value
-      applicationcpu_max_usage_percent = json_payload.at("value").get<double>();
+      application_cpu_max_usage_percent = json_payload.at("value").get<double>();
     
     // End parsing value
     }
@@ -60091,20 +60516,20 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationcpu_max_usage_p
     return;
   }
 
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback(
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    applicationcpu_max_usage_percent
+    application_cpu_max_usage_percent
   );
 
 }
-static void uic_mqtt_dotdot_on_application_monitoring_applicationram_usagemb_attribute_update(
+static void uic_mqtt_dotdot_on_application_monitoring_application_ram_usagemb_attribute_update(
   const char *topic,
   const char *message,
   const size_t message_length) {
-  if (uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback == nullptr) {
+  if (uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback == nullptr) {
     return;
   }
 
@@ -60144,7 +60569,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationram_usagemb_att
   }
 
 
-  double applicationram_usagemb = {};
+  double application_ram_usagemb = {};
 
   nlohmann::json json_payload;
   try {
@@ -60157,7 +60582,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationram_usagemb_att
         return;
       }
 // Start parsing value
-      applicationram_usagemb = json_payload.at("value").get<double>();
+      application_ram_usagemb = json_payload.at("value").get<double>();
     
     // End parsing value
     }
@@ -60167,12 +60592,12 @@ static void uic_mqtt_dotdot_on_application_monitoring_applicationram_usagemb_att
     return;
   }
 
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback(
+  uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback(
     static_cast<dotdot_unid_t>(unid.c_str()),
     endpoint,
     unretained,
     update_type,
-    applicationram_usagemb
+    application_ram_usagemb
   );
 
 }
@@ -60197,9 +60622,9 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_attributes_init()
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationConnected/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_connected_attribute_update);
   }
-  if(uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback) {
+  if(uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationMQTTTopics/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_applicationmqtt_topics_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_mqtt_topics_attribute_update);
   }
   if(uic_mqtt_dotdot_application_monitoring_attribute_uptime_minutes_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/UptimeMinutes/#";
@@ -60257,25 +60682,25 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_attributes_init()
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationStatisticsReportingIntervalSeconds/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_statistics_reporting_interval_seconds_attribute_update);
   }
-  if(uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback) {
+  if(uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationCPUUsagePercent/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_applicationcpu_usage_percent_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_cpu_usage_percent_attribute_update);
   }
-  if(uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback) {
+  if(uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationCPUAverageUsagePercent/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_applicationcpu_average_usage_percent_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_cpu_average_usage_percent_attribute_update);
   }
-  if(uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback) {
+  if(uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationCPUMinUsagePercent/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_applicationcpu_min_usage_percent_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_cpu_min_usage_percent_attribute_update);
   }
-  if(uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback) {
+  if(uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationCPUMaxUsagePercent/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_applicationcpu_max_usage_percent_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_cpu_max_usage_percent_attribute_update);
   }
-  if(uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback) {
+  if(uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback) {
     subscription_topic = base_topic + "ApplicationMonitoring/Attributes/ApplicationRAMUsageMB/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_applicationram_usagemb_attribute_update);
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_application_monitoring_application_ram_usagemb_attribute_update);
   }
 
   return SL_STATUS_OK;
@@ -60297,9 +60722,9 @@ void uic_mqtt_dotdot_application_monitoring_attribute_application_connected_call
 {
   uic_mqtt_dotdot_application_monitoring_attribute_application_connected_callback = callback;
 }
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback_t callback)
+void uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback_t callback)
 {
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback = callback;
+  uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback = callback;
 }
 void uic_mqtt_dotdot_application_monitoring_attribute_uptime_minutes_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_uptime_minutes_callback_t callback)
 {
@@ -60357,25 +60782,25 @@ void uic_mqtt_dotdot_application_monitoring_attribute_application_statistics_rep
 {
   uic_mqtt_dotdot_application_monitoring_attribute_application_statistics_reporting_interval_seconds_callback = callback;
 }
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback_t callback)
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_t callback)
 {
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback = callback;
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback = callback;
 }
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback_t callback)
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback_t callback)
 {
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback = callback;
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback = callback;
 }
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback_t callback)
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback_t callback)
 {
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback = callback;
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback = callback;
 }
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback_t callback)
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback_t callback)
 {
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback = callback;
+  uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback = callback;
 }
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback_t callback)
+void uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback_t callback)
 {
-  uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback = callback;
+  uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback = callback;
 }
 
 // End of supported cluster.
@@ -62566,6 +62991,128 @@ sl_status_t uic_mqtt_dotdot_protocol_controller_network_management_attributes_in
 void uic_mqtt_dotdot_protocol_controller_network_management_attribute_network_management_state_callback_set(const uic_mqtt_dotdot_protocol_controller_network_management_attribute_network_management_state_callback_t callback)
 {
   uic_mqtt_dotdot_protocol_controller_network_management_attribute_network_management_state_callback = callback;
+}
+
+// End of supported cluster.
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for Descriptor
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_t uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for Descriptor
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_descriptor_device_type_list_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  std::vector<DeviceTypeStruct> device_type_list;
+  size_t device_type_list_count = 0;
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "Descriptor::DeviceTypeList: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      auto &device_type_list_json = json_payload.at("value");
+      for (size_t i = 0; i < device_type_list_json.size(); i++) {
+        DeviceTypeStruct element = {};
+        element.DeviceType = device_type_list_json.at(i).at("DeviceType").get<DevTypeId>();
+        element.Revision = device_type_list_json.at(i).at("Revision").get<uint16_t>();
+        device_type_list.push_back(element);
+      }
+      // Take our vector and pack it into the updated state
+      device_type_list_count = device_type_list.size();
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    device_type_list_count,
+    device_type_list.data()
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for Descriptor
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_descriptor_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback) {
+    subscription_topic = base_topic + "Descriptor/Attributes/DeviceTypeList/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_descriptor_device_type_list_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for Descriptor
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_set(const uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_t callback)
+{
+  uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback = callback;
 }
 
 // End of supported cluster.

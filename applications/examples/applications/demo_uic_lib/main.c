@@ -45,11 +45,19 @@ void demo_mqtt_callback(const char *topic,
   // and send it to the demo process for decoupling
   struct demo_mqtt_payload *demo_mqtt_payload
     = malloc(sizeof(demo_mqtt_payload));
+// TODO, may be reworked to avoid build errors
+#if defined(__GNUC__) && (__GNUC__ == 12)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
   demo_mqtt_payload->topic = malloc(strnlen(topic, 100));
   memcpy(demo_mqtt_payload->topic, topic, strnlen(topic, 100));
   demo_mqtt_payload->payload = malloc(payload_size);
   memcpy(demo_mqtt_payload->payload, payload, payload_size);
   demo_mqtt_payload->size = payload_size;
+#if defined(__GNUC__) && (__GNUC__ == 12)
+#pragma GCC diagnostic pop
+#endif
   process_post(&demo_process, DEMO_EVENT_MQTT, demo_mqtt_payload);
 }
 

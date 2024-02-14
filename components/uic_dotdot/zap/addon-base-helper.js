@@ -97,6 +97,9 @@ zcl_type_map = (function() {
         SetpointRaiseOrLowerMode: 'enum8',
         ZoneEnrollResponseEnrollResponseCode: 'enum8',
         zclStatus: 'enum8',
+        CredentialTypeEnum: 'enum8',
+        DataOperationTypeEnum: 'enum8',
+        CredentialRuleEnum: 'enum8',
         // zclType: 'uint8',
 
         BarrierControlSafetyStatus: 'map16',
@@ -273,6 +276,7 @@ zcl_type_map = (function() {
 
         // generated struct in zcl_definitions.h
         TransitionType: 'StructTransitionType',
+        CredentialStruct: 'CredentialStructType',
     };
 
     return {

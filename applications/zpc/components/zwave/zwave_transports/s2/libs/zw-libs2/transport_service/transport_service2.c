@@ -315,11 +315,9 @@ int compare_received_datagram(const uint8_t *cmp_data, uint16_t len)
 #ifdef __C51__
 VOID_CALLBACKFUNC_PVOID(ZCB_reset_transport_service, puser)
 {
-  UNUSED(puser);
 #else
-static void reset_transport_service(void *ss)
+static void reset_transport_service(__attribute__((unused)) void *ss)
 {
-  UNUSED(ss);
 #endif
   T2_ERR("reset_timer expired going back to ST_IDLE state ");
   ctimer_stop(&scb.reset_timer);
@@ -331,7 +329,7 @@ static void reset_transport_service(void *ss)
 #else
 #define FUNC(STR) STR
 #endif
-static uint8_t recv_or_send()
+static uint8_t recv_or_send(void)
 {
     T2_DBG("sending 1: %s", scb.sending? "true": "false");
     switch (current_state) {
@@ -359,12 +357,12 @@ static uint8_t recv_or_send()
     }
     return -1;
 }
-bool ZW_TransportService_Is_Receving()
+bool ZW_TransportService_Is_Receving(void)
 {
     return (recv_or_send() == 1)? true: false;
 }
 
-bool ZW_TransportService_Is_Sending()
+bool ZW_TransportService_Is_Sending(void)
 {
     return (recv_or_send() == 0)? true: false;
 }
@@ -462,8 +460,16 @@ static void add_crc(uint8_t *buf, uint8_t len)
     uint8_t *tmp_buf = buf;
     uint16_t crc = CRC_FUNC(0x1D0F, tmp_buf, len);
     tmp_buf+=len;
+// TODO, may be reworked to avoid build errors
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
     *tmp_buf++ =  (crc>>8)&0xff;
     *tmp_buf=(crc)&0xff;
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic pop
+#endif
 }
 
 static uint16_t get_next_missing_offset();
@@ -472,11 +478,9 @@ static uint16_t get_next_missing_offset();
 #ifdef __C51__
 VOID_CALLBACKFUNC_PVOID(ZCB_fc_timer_expired, puser)
 {
-  UNUSED(puser);
 #else
-void fc_timer_expired(void *nthing)
+void fc_timer_expired(__attribute__((unused)) void *nthing)
 {
-  UNUSED(nthing);
 #endif
     if (scb.flag_replied_frag_req) {
         scb.transmission_aborted = scb.cmn.session_id;
@@ -542,15 +546,12 @@ void ZCB_temp_callback_last_frag(unsigned char status, void* ts)
 #if defined(ZIPGW)
 static void ZCB_temp_callback_last_frag(unsigned char status, TX_STATUS_TYPE* ts)
 #else
-static void ZCB_temp_callback_last_frag(unsigned char status, TX_STATUS_TYPE* ts)
+static void ZCB_temp_callback_last_frag(unsigned char status, __attribute__((unused)) TX_STATUS_TYPE* ts)
 #endif
 #endif
 {
-  //    UNUSED(user);
 #if defined(ZIPGW) || defined(__C51__)
     memcpy((uint8_t*)&scb.cmn.tx_status, ts, sizeof(TX_STATUS_TYPE));
-#else
-    UNUSED(ts);
 #endif
     if (status != S2_TRANSMIT_COMPLETE_OK) {
             T2_ERR("Transmission status is not TRANSMIT_COMPLETE_OK for last_frag");
@@ -620,7 +621,7 @@ void ZCB_ts_senddata_cb(unsigned char status_send, TX_STATUS_TYPE* txStatus)
 #ifdef ZIPGW
 void ZCB_ts_senddata_cb(unsigned char status_send, TX_STATUS_TYPE* txStatus)
 #else
-void ZCB_ts_senddata_cb(unsigned char status_send, TX_STATUS_TYPE* txStatus)
+void ZCB_ts_senddata_cb(unsigned char status_send, __attribute__((unused)) TX_STATUS_TYPE* txStatus)
 #endif
 #endif
 {
@@ -632,8 +633,6 @@ void ZCB_ts_senddata_cb(unsigned char status_send, TX_STATUS_TYPE* txStatus)
     time to breath - Anders Esbensen*/
 #if defined(__C51__) || defined(ZIPGW)
   memcpy((uint8_t*)&scb.cmn.tx_status, (uint8_t*)txStatus, sizeof(TX_STATUS_TYPE));
-#else
-  UNUSED(txStatus);
 #endif
 #ifndef ZIPGW
   ZW_DEBUG_SEND_STR("1!\r\n");
@@ -691,9 +690,8 @@ void ZCB_ts_senddata_cb(unsigned char status_send, TX_STATUS_TYPE* txStatus)
 #endif
 }
 
-static void send_subseq_frag(void *nthing)
+static void send_subseq_frag(__attribute__((unused)) void *nthing)
 {
-    UNUSED(nthing);
     uint8_t ret = 0;
 
     ctimer_stop(&rcb.fc_timer);
@@ -769,14 +767,9 @@ static void send_subseq_frag(void *nthing)
 #ifdef __C51__
 VOID_CALLBACKFUNC_PVOID(ZCB_wait_restart_from_first, puser)
 #else
-static void wait_restart_from_first(void *nthing)
+static void wait_restart_from_first(__attribute__((unused)) void *nthing)
 #endif
 {
-#ifdef __C51__
-  UNUSED(puser);
-#else
-  UNUSED(nthing);
-#endif
     send_first_frag();
     return;
 }
@@ -795,7 +788,7 @@ static void print_data(unsigned char *buf, uint8_t len)
 }
 #endif
 
-static void send_first_frag()
+static void send_first_frag(void)
 {
 
     uint8_t ret = 0;
@@ -903,15 +896,12 @@ void ZCB_temp_callback_reply_frag_req(unsigned char status, void* ts)
 #ifdef ZIPGW
 static void ZCB_temp_callback_reply_frag_req(unsigned char status, TX_STATUS_TYPE* ts)
 #else
-void ZCB_temp_callback_reply_frag_req(unsigned char status, TX_STATUS_TYPE* ts)
+void ZCB_temp_callback_reply_frag_req(unsigned char status, __attribute__((unused)) TX_STATUS_TYPE* ts)
 #endif
 #endif
 {
-  //    UNUSED(user);
 #if defined(ZIPGW) || defined(__C51__)
     memcpy((uint8_t*)&scb.cmn.tx_status, ts, sizeof(TX_STATUS_TYPE));
-#else
-    UNUSED(ts);
 #endif
     if (status != S2_TRANSMIT_COMPLETE_OK) {
         if (scb.cmn.completedFunc) {
@@ -928,12 +918,9 @@ void ZCB_temp_callback_reply_frag_req(unsigned char status, TX_STATUS_TYPE* ts)
 }
 
 /*TODO this has to be aligned in sending session similarly to send_frag_wait_cmd() */
-static void reply_frag_req(void* nthing)
+static void reply_frag_req(__attribute__((unused)) void* nthing)
 {
     uint8_t ret;
-#if !defined(ZIPGW)
-    UNUSED(nthing);
-#endif
     if (scb.frag_compl_list[scb.cmn.session_id] == true) {
         T2_ERR("Already received frag complete command for this session. Aborting any more fragment sending");
         return;
@@ -1180,7 +1167,7 @@ static uint8_t mark_frag_received(uint16_t offset, uint8_t size)
 
         // set the (i%8)th bit in (i/8)th byte in bitmask, where i is the byte received
 
-        // if 9th byte is received following formula becomes 
+        // if 9th byte is received following formula becomes
         //                rcb.bytes_recvd_bitmask[1] |= ( 1 << 1)
         // if 11th byte is received following formula becomes rcb.bytes_recvd_bitmask[1] |= 4
         //                rcb.bytes_recvd_bitmask[1] |= ( 1 << 3)
@@ -1188,7 +1175,7 @@ static uint8_t mark_frag_received(uint16_t offset, uint8_t size)
         rcb.bytes_recvd_bitmask[ i / 8 ] |= (1 << (i%8));
         if ( i > DATAGRAM_SIZE_MAX) { // Prevent the array over run
             break;
-        } 
+        }
     }
 
    return 0;
@@ -1197,11 +1184,11 @@ static uint8_t mark_frag_received(uint16_t offset, uint8_t size)
 #if 0
 /* Get number of holes in the datagram received */
 /* Also used for Fragment request command */
-static uint8_t get_num_missing_frag()
+static uint8_t get_num_missing_frag(void)
 {
     int i = 0;
     int j = 0;
-    int previous = 1; //used to determine if the byte is cotinuation of a hole. 
+    int previous = 1; //used to determine if the byte is cotinuation of a hole.
 
     int missing_frag = 0;
 
@@ -1216,7 +1203,7 @@ static uint8_t get_num_missing_frag()
                     missing_frag++;
                     previous = 0;
                 }
-            } else { 
+            } else {
                 previous = 1;
             }
         }
@@ -1274,7 +1261,7 @@ static void rx_timer_expired(void *ss)
 }
 #endif
 
-static void find_missing()
+static void find_missing(void)
 {
     uint8_t missing_frag;
 
@@ -1605,7 +1592,7 @@ Then the sending side starts new session which is ignored and then receiving sid
 sending side as the sending side has ended the session. Which makes rx_timer expire and then receiving side figures out that
 receiving side has been sending subseq fragments without first fragment then (as it ignored few fragments).
 Then receiving side sends frag wait which finally makes the transfer happen as sending side restarts the third session */
-static uint8_t send_frag_wait_cmd()
+static uint8_t send_frag_wait_cmd(void)
 {
     uint8_t ret = 0;
     ZW_COMMAND_SEGMENT_WAIT_V2_FRAME frag_wait;
@@ -1646,7 +1633,7 @@ static uint8_t send_frag_wait_cmd()
     return 0;
 }
 
-static uint8_t send_frag_complete_cmd()
+static uint8_t send_frag_complete_cmd(void)
 {
     uint8_t ret = 0;
     //uint8_t i;
@@ -1688,7 +1675,7 @@ static uint8_t send_frag_complete_cmd()
     rcb.recv_frag_compl_list[rcb.cmn.session_id] = true;
     rcb.cmn.session_id = 0x10;
     rcb.current_snode = 0;
-  
+
 #ifdef TIMER
     ctimer_stop(&rcb.rx_timer);
 #endif
@@ -1703,7 +1690,7 @@ static uint8_t send_frag_complete_cmd()
     return 0;
 }
 
-static uint16_t get_next_missing_offset()
+static uint16_t get_next_missing_offset(void)
 {
     int i = 0;
     int j = 0;
@@ -1720,14 +1707,14 @@ static uint16_t get_next_missing_offset()
                 if(missing_offset >= rcb.datagram_size) {
                    return 0;
                 }
-                return missing_offset; 
+                return missing_offset;
             }
         }
     }
     return 0;
 }
 
-static uint8_t send_frag_req_cmd()
+static uint8_t send_frag_req_cmd(void)
 {
   ZW_COMMAND_SEGMENT_REQUEST_V2_FRAME *frag_req =
                     (ZW_COMMAND_SEGMENT_REQUEST_V2_FRAME *) t2_txBuf;

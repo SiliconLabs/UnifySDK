@@ -5,9 +5,9 @@ Raspberry Pi 4 (RPi4), the following prerequisites must be fulfilled:
 
 The Unify Host SDK targets our reference platform, a Raspberry Pi 4 (RPi4).
 It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
-If you instead want a quick demo of a Z-Wave only Unify IoT gateway running on
+If you instead want a quick demo of Unify IoT gateway running on
 your Windows, MacOS or Linux desktop, please try our
-[Portable Runtime environment User guide](../portable_runtime/readme_user.md).
+[Portable Runtime environment User guide](../portable_runtime/readme_user_cli.md).
 
 ```{toctree}
 ---

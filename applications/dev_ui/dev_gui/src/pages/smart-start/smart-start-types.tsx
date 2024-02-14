@@ -7,5 +7,6 @@ export type SmartStartProps = {
 export type SmartStartState = {
   SmartStartList: any[],
   Filter: string,
-  ShowModal: boolean
+  ShowModal: boolean,
+  ShowRedirectModal: boolean
 }

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ZW_s2_key_scrambler.h>
-int main()
+int main(void)
 {
     uint8_t key[16];
     uint8_t out[16];

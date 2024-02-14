@@ -1079,7 +1079,7 @@ S2_decrypt_msg(struct S2* p_context, s2_connection_t* conn,
   aad = &aad_buf[0];
 
   aad_len = S2_make_aad(ctxt, conn->r_node, conn->l_node, msg, hdr_len, msg_len, aad, sizeof(aad_buf));
-  
+
   if (span)
   {
     /*Single cast decryption */
@@ -1408,11 +1408,8 @@ S2_init_ctx(uint32_t home)
 
 uint8_t
 S2_network_key_update(struct S2 *p_context, uint32_t key_id, security_class_t class_id, const network_key_t net_key,
-    uint8_t temp_key_expand, bool make_keys_persist_se)
+    uint8_t temp_key_expand, __attribute__((unused)) bool make_keys_persist_se)
 {
-#ifndef ZWAVE_PSA_SECURE_VAULT
-UNUSED(make_keys_persist_se);
-#endif
   CTX_DEF
   if (class_id >= N_SEC_CLASS)
   {
@@ -1589,7 +1586,7 @@ void
 S2_timeout_notify(struct S2* p_context)
 {
   CTX_DEF
-  S2_fsm_post_event(ctxt, TIMEOUT, 0);
+  S2_fsm_post_event(ctxt, TIMEOUT, NULL);
 }
 
 static void
@@ -1615,7 +1612,19 @@ S2_fsm_post_event(struct S2* p_context, event_t e, event_data_t* d)
   CTX_DEF
 
   uint8_t nr_flag;
-    DPRINT("Got S2 fsm event "); ZW_DEBUG_SEND_NUM((uint8_t)e); ZW_DEBUG_SEND_NL(); ZW_DEBUG_SEND_STR("Is peer node: "); ZW_DEBUG_SEND_NUM(S2_is_peernode(ctxt, d->con)); ZW_DEBUG_SEND_STR(" event data: "); ZW_DEBUG_SEND_NUM(d->con->l_node); ZW_DEBUG_SEND_NUM(d->con->r_node); ZW_DEBUG_SEND_NUM(ctxt->peer.l_node); ZW_DEBUG_SEND_NUM(ctxt->peer.r_node); ZW_DEBUG_SEND_NL();
+  DPRINT("Got S2 fsm event ");
+  ZW_DEBUG_SEND_NUM((uint8_t)e);
+  ZW_DEBUG_SEND_NL();
+  if(d && d->con) {
+    ZW_DEBUG_SEND_STR("Is peer node: ");
+    ZW_DEBUG_SEND_NUM(S2_is_peernode(ctxt, d->con));
+    ZW_DEBUG_SEND_STR(" event data: ");
+    ZW_DEBUG_SEND_NUM(d->con->l_node);
+    ZW_DEBUG_SEND_NUM(d->con->r_node);
+  }
+  ZW_DEBUG_SEND_NUM(ctxt->peer.l_node);
+  ZW_DEBUG_SEND_NUM(ctxt->peer.r_node);
+  ZW_DEBUG_SEND_NL();
 #ifdef DEBUG_S2_FSM
   /* ifdef'ed to save codespace on c51 build for event/state _name() functions */
 DPRINTF("S2_fsm_post_event event: %s, state %s\n", s2_event_name(e), s2_state_name(ctxt->fsm));

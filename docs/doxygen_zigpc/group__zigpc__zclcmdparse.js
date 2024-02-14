@@ -47,8 +47,8 @@ var group__zigpc__zclcmdparse =
       [ "status", "structzigpc__zclcmdparse__door__lock__unlock__with__timeout__response__t.html#a54d31405dd2e589f19621499908569d9", null ]
     ] ],
     [ "zigpc_zclcmdparse_door_lock_get_log_record_response_t", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html", [
+      [ "event_id_or_alarm_code", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a4da0ab022b0eb47111105b15e6fd6a12", null ],
       [ "event_type", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a64bb676d93c5f4f028dd54fee600fc77", null ],
-      [ "eventid_or_alarm_code", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a5b7401dfc1758c9c8f71488e917be18d", null ],
       [ "log_entryid", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a6ccf97b5e2c7060b74d1e156bd3690d5", null ],
       [ "pin", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#afc7f0ea8fded87e59c73bf221f3b882a", null ],
       [ "pin_length", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#a147cedf18367336d01d1a932e0199e4d", null ],
@@ -56,21 +56,21 @@ var group__zigpc__zclcmdparse =
       [ "timestamp", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#aa5c017d6cf0cf86e819302e04a756729", null ],
       [ "userid", "structzigpc__zclcmdparse__door__lock__get__log__record__response__t.html#ad06f967dd8b3c20278bcb0eb4ba6d744", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_setpin_code_response_t", "structzigpc__zclcmdparse__door__lock__setpin__code__response__t.html", [
-      [ "status", "structzigpc__zclcmdparse__door__lock__setpin__code__response__t.html#afc44a44955264f7277c980f3baf80d79", null ]
+    [ "zigpc_zclcmdparse_door_lock_set_pin_code_response_t", "structzigpc__zclcmdparse__door__lock__set__pin__code__response__t.html", [
+      [ "status", "structzigpc__zclcmdparse__door__lock__set__pin__code__response__t.html#a65c4cdc5e84972aea133c352799c7a2f", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_getpin_code_response_t", "structzigpc__zclcmdparse__door__lock__getpin__code__response__t.html", [
-      [ "code", "structzigpc__zclcmdparse__door__lock__getpin__code__response__t.html#ab2ff1796a3b93c71599f5ad89d8a2736", null ],
-      [ "code_length", "structzigpc__zclcmdparse__door__lock__getpin__code__response__t.html#a63c510ae8d349c5beaeaf2262967efb4", null ],
-      [ "user_status", "structzigpc__zclcmdparse__door__lock__getpin__code__response__t.html#a303389604922651d7d751dc73cac6864", null ],
-      [ "user_type", "structzigpc__zclcmdparse__door__lock__getpin__code__response__t.html#a039e1ccd6b1f96c972465606db84d6ee", null ],
-      [ "userid", "structzigpc__zclcmdparse__door__lock__getpin__code__response__t.html#a52a6097843bc57b94f7cee63eb3e4329", null ]
+    [ "zigpc_zclcmdparse_door_lock_get_pin_code_response_t", "structzigpc__zclcmdparse__door__lock__get__pin__code__response__t.html", [
+      [ "code", "structzigpc__zclcmdparse__door__lock__get__pin__code__response__t.html#a7896d40c5769ee7c71831e9df8317e99", null ],
+      [ "code_length", "structzigpc__zclcmdparse__door__lock__get__pin__code__response__t.html#a59b52644a0cde4ce32245f571427bf28", null ],
+      [ "user_status", "structzigpc__zclcmdparse__door__lock__get__pin__code__response__t.html#abd9330e7daf33079b3534cbca4c27f32", null ],
+      [ "user_type", "structzigpc__zclcmdparse__door__lock__get__pin__code__response__t.html#a18b68913c14957632f49ff0b65afdb64", null ],
+      [ "userid", "structzigpc__zclcmdparse__door__lock__get__pin__code__response__t.html#a436362b8444d252db12b4cf20049db8e", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_clearpin_code_response_t", "structzigpc__zclcmdparse__door__lock__clearpin__code__response__t.html", [
-      [ "status", "structzigpc__zclcmdparse__door__lock__clearpin__code__response__t.html#aea19f920ffa58514e2685a35ef19959a", null ]
+    [ "zigpc_zclcmdparse_door_lock_clear_pin_code_response_t", "structzigpc__zclcmdparse__door__lock__clear__pin__code__response__t.html", [
+      [ "status", "structzigpc__zclcmdparse__door__lock__clear__pin__code__response__t.html#aac6d7ea82319d61f72cf4853926cc75c", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_clear_allpin_codes_response_t", "structzigpc__zclcmdparse__door__lock__clear__allpin__codes__response__t.html", [
-      [ "status", "structzigpc__zclcmdparse__door__lock__clear__allpin__codes__response__t.html#a1b919a69f68b37e5303b1e46ebde293a", null ]
+    [ "zigpc_zclcmdparse_door_lock_clear_all_pin_codes_response_t", "structzigpc__zclcmdparse__door__lock__clear__all__pin__codes__response__t.html", [
+      [ "status", "structzigpc__zclcmdparse__door__lock__clear__all__pin__codes__response__t.html#a1068f88ad3546604ae99f12fe923d736", null ]
     ] ],
     [ "zigpc_zclcmdparse_door_lock_set_user_status_response_t", "structzigpc__zclcmdparse__door__lock__set__user__status__response__t.html", [
       [ "status", "structzigpc__zclcmdparse__door__lock__set__user__status__response__t.html#a084313e4e07ebc1951cfece0abdc6f79", null ]
@@ -128,22 +128,23 @@ var group__zigpc__zclcmdparse =
       [ "user_type", "structzigpc__zclcmdparse__door__lock__get__user__type__response__t.html#a88b28954eee7996c5422df1fde0d4ec6", null ],
       [ "userid", "structzigpc__zclcmdparse__door__lock__get__user__type__response__t.html#a5082ce6b845c4749414eff8bedfa0925", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_setrfid_code_response_t", "structzigpc__zclcmdparse__door__lock__setrfid__code__response__t.html", [
-      [ "status", "structzigpc__zclcmdparse__door__lock__setrfid__code__response__t.html#a5db6e7767780b3ef8d690c432691796b", null ]
+    [ "zigpc_zclcmdparse_door_lock_set_rfid_code_response_t", "structzigpc__zclcmdparse__door__lock__set__rfid__code__response__t.html", [
+      [ "status", "structzigpc__zclcmdparse__door__lock__set__rfid__code__response__t.html#a39dea4977ae6ce30fbf790a5eeddb318", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_getrfid_code_response_t", "structzigpc__zclcmdparse__door__lock__getrfid__code__response__t.html", [
-      [ "rfid_code", "structzigpc__zclcmdparse__door__lock__getrfid__code__response__t.html#a6a86d2c43da5b28502170c2c87c023dd", null ],
-      [ "rfid_code_length", "structzigpc__zclcmdparse__door__lock__getrfid__code__response__t.html#acca53f2a9551d12e1e66ada6da2a1988", null ],
-      [ "user_status", "structzigpc__zclcmdparse__door__lock__getrfid__code__response__t.html#a7718ab9f025b549c4a380c6df8ad91f2", null ],
-      [ "user_type", "structzigpc__zclcmdparse__door__lock__getrfid__code__response__t.html#a5c47445e189f75e2aa9b06e18575ea7e", null ],
-      [ "userid", "structzigpc__zclcmdparse__door__lock__getrfid__code__response__t.html#ab5b5b38e2ec85fd944a74d5042dd9487", null ]
+    [ "zigpc_zclcmdparse_door_lock_get_rfid_code_response_t", "structzigpc__zclcmdparse__door__lock__get__rfid__code__response__t.html", [
+      [ "rfid_code", "structzigpc__zclcmdparse__door__lock__get__rfid__code__response__t.html#a135df7a89037a739469e49321ec65255", null ],
+      [ "rfid_code_length", "structzigpc__zclcmdparse__door__lock__get__rfid__code__response__t.html#a9f443e37467b360f8d086b36393dd81f", null ],
+      [ "user_status", "structzigpc__zclcmdparse__door__lock__get__rfid__code__response__t.html#aed038a198c3c3373df25120dcbe2c154", null ],
+      [ "user_type", "structzigpc__zclcmdparse__door__lock__get__rfid__code__response__t.html#ad691859334551706131ae621427d2266", null ],
+      [ "userid", "structzigpc__zclcmdparse__door__lock__get__rfid__code__response__t.html#a187dfb80cf9c6ab0aade5b5189a04f56", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_clearrfid_code_response_t", "structzigpc__zclcmdparse__door__lock__clearrfid__code__response__t.html", [
-      [ "status", "structzigpc__zclcmdparse__door__lock__clearrfid__code__response__t.html#ab7dd255e11abdd5b39709a3fa739b825", null ]
+    [ "zigpc_zclcmdparse_door_lock_clear_rfid_code_response_t", "structzigpc__zclcmdparse__door__lock__clear__rfid__code__response__t.html", [
+      [ "status", "structzigpc__zclcmdparse__door__lock__clear__rfid__code__response__t.html#ad26811e685391bc1dd9e16cdbfc09699", null ]
     ] ],
-    [ "zigpc_zclcmdparse_door_lock_clear_allrfid_codes_response_t", "structzigpc__zclcmdparse__door__lock__clear__allrfid__codes__response__t.html", [
-      [ "status", "structzigpc__zclcmdparse__door__lock__clear__allrfid__codes__response__t.html#ae297ead630f554884fa5d9c6832b74c0", null ]
+    [ "zigpc_zclcmdparse_door_lock_clear_all_rfid_codes_response_t", "structzigpc__zclcmdparse__door__lock__clear__all__rfid__codes__response__t.html", [
+      [ "status", "structzigpc__zclcmdparse__door__lock__clear__all__rfid__codes__response__t.html#a766300539a8aaca737087ca468cf9189", null ]
     ] ],
+    [ "zigpc_zclcmdparse_door_lock_get_user_response_t", "structzigpc__zclcmdparse__door__lock__get__user__response__t.html", null ],
     [ "zigpc_zclcmdparse_door_lock_operating_event_notification_t", "structzigpc__zclcmdparse__door__lock__operating__event__notification__t.html", [
       [ "data", "structzigpc__zclcmdparse__door__lock__operating__event__notification__t.html#a32d9c222495f94c4224a459eeb1e7f15", null ],
       [ "data_length", "structzigpc__zclcmdparse__door__lock__operating__event__notification__t.html#a9153b010e35f3077a13c7379b7b48442", null ],
@@ -166,6 +167,8 @@ var group__zigpc__zclcmdparse =
       [ "user_type", "structzigpc__zclcmdparse__door__lock__programming__event__notification__t.html#a19495445246b5716ef2a4292c33142b2", null ],
       [ "userid", "structzigpc__zclcmdparse__door__lock__programming__event__notification__t.html#a91f6ffa00aec4d92dbd0642c389f5b9a", null ]
     ] ],
+    [ "zigpc_zclcmdparse_door_lock_set_credential_response_t", "structzigpc__zclcmdparse__door__lock__set__credential__response__t.html", null ],
+    [ "zigpc_zclcmdparse_door_lock_get_credential_status_response_t", "structzigpc__zclcmdparse__door__lock__get__credential__status__response__t.html", null ],
     [ "zigpc_zclcmdparse_thermostat_get_weekly_schedule_response_t", "structzigpc__zclcmdparse__thermostat__get__weekly__schedule__response__t.html", [
       [ "day_of_week", "structzigpc__zclcmdparse__thermostat__get__weekly__schedule__response__t.html#aa46ac456cac0a396e03fbf8c7d47adb8", null ],
       [ "mode", "structzigpc__zclcmdparse__thermostat__get__weekly__schedule__response__t.html#a1efb4f3759bbed02223f6cb974855160", null ],
@@ -191,35 +194,46 @@ var group__zigpc__zclcmdparse =
       [ "manufacturer_code", "structzigpc__zclcmdparse__ias__zone__zone__enroll__request__t.html#afdf331f1b0caa63b2d192c8677e97ac3", null ],
       [ "zone_type", "structzigpc__zclcmdparse__ias__zone__zone__enroll__request__t.html#a6be85cb7f7833e86c1dbaee051cc74e7", null ]
     ] ],
+    [ "zigpc_zclcmdparse_electrical_measurement_get_profile_info_t", "structzigpc__zclcmdparse__electrical__measurement__get__profile__info__t.html", null ],
+    [ "zigpc_zclcmdparse_electrical_measurement_get_measurement_profile_t", "structzigpc__zclcmdparse__electrical__measurement__get__measurement__profile__t.html", [
+      [ "attributeid", "structzigpc__zclcmdparse__electrical__measurement__get__measurement__profile__t.html#a04b7a3ffb4cb08c556866a7f78a9b6fe", null ],
+      [ "number_of_intervals", "structzigpc__zclcmdparse__electrical__measurement__get__measurement__profile__t.html#a5d0755406fec034456a80141582d2b82", null ],
+      [ "start_time", "structzigpc__zclcmdparse__electrical__measurement__get__measurement__profile__t.html#a108da38ceb75c38d480c92dc91f4c339", null ]
+    ] ],
     [ "zigpc_zclcmdparse_callback_data_t", "unionzigpc__zclcmdparse__callback__data__t.html", [
-      [ "door_lock_clear_allpin_codes_response", "unionzigpc__zclcmdparse__callback__data__t.html#a00c7f1e0946e5e9fa654829ae5195bb6", null ],
-      [ "door_lock_clear_allrfid_codes_response", "unionzigpc__zclcmdparse__callback__data__t.html#a9ac3850ce712f0ae071c4c0fcff87d7a", null ],
+      [ "door_lock_clear_all_pin_codes_response", "unionzigpc__zclcmdparse__callback__data__t.html#aebe2bd49a5c678c454406154efab1488", null ],
+      [ "door_lock_clear_all_rfid_codes_response", "unionzigpc__zclcmdparse__callback__data__t.html#a47c476d7a3159f3916a5e0aa94c02901", null ],
       [ "door_lock_clear_holiday_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#a4397ec9aa61d0e76c913a30014f49d65", null ],
+      [ "door_lock_clear_pin_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#aef33ed89895685126934eb9bf82f1372", null ],
+      [ "door_lock_clear_rfid_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a6c55163db7c8f0fd475604a2f9d68965", null ],
       [ "door_lock_clear_weekday_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#a244635efc07bfe1f4e7f66a368e9cd8e", null ],
       [ "door_lock_clear_year_day_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#a6718d5782ab9bae01e28c1d88c234ae3", null ],
-      [ "door_lock_clearpin_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#ad484422ed54f6f4c094f68018817549e", null ],
-      [ "door_lock_clearrfid_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a13574189940958225331316f39aa70ca", null ],
+      [ "door_lock_get_credential_status_response", "unionzigpc__zclcmdparse__callback__data__t.html#a29389043fb95314fb4ff9bd62dbb7f83", null ],
       [ "door_lock_get_holiday_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#af42555c5b4e9104311f6f2d0229f60a8", null ],
       [ "door_lock_get_log_record_response", "unionzigpc__zclcmdparse__callback__data__t.html#a33f4c3752734d64ff7bf16677669a45f", null ],
+      [ "door_lock_get_pin_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a525271aabea33a1f6555550e39fb153c", null ],
+      [ "door_lock_get_rfid_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a308eb6d2ff0f59b9a91a813385d5f888", null ],
+      [ "door_lock_get_user_response", "unionzigpc__zclcmdparse__callback__data__t.html#ab1a18c7dc69492ef234d4f91b768e75f", null ],
       [ "door_lock_get_user_status_response", "unionzigpc__zclcmdparse__callback__data__t.html#a07bb039bc0d9086a7d0e6db89a529c68", null ],
       [ "door_lock_get_user_type_response", "unionzigpc__zclcmdparse__callback__data__t.html#a94c7f4e234dcc93b25c4fe66e3a80468", null ],
       [ "door_lock_get_weekday_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#a0a9d2564965c6bc755a8c3491b7239b3", null ],
       [ "door_lock_get_year_day_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#adca4ce85781e93a6fd6eded3f853fb58", null ],
-      [ "door_lock_getpin_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a60c559fa6febb996aaebc76bee859e52", null ],
-      [ "door_lock_getrfid_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#af7e87a004badbc92545f599ed8528aff", null ],
       [ "door_lock_lock_door_response", "unionzigpc__zclcmdparse__callback__data__t.html#a9840d4449ce0d2f55a7e3a5768a22f33", null ],
       [ "door_lock_operating_event_notification", "unionzigpc__zclcmdparse__callback__data__t.html#a011e4ae62ab98fd535af3fe81a8267d6", null ],
       [ "door_lock_programming_event_notification", "unionzigpc__zclcmdparse__callback__data__t.html#a3019cb3a4bac45e77f0310356d8a4df0", null ],
+      [ "door_lock_set_credential_response", "unionzigpc__zclcmdparse__callback__data__t.html#ad5bd7c1c72803951d101472f4be2b633", null ],
       [ "door_lock_set_holiday_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#a5393f8a19173dd542b2d4ff1be5e6cca", null ],
+      [ "door_lock_set_pin_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#aa52b32966643921d2ffe1649e93a62d8", null ],
+      [ "door_lock_set_rfid_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a2a95c6d83eb9546dd6bc69a2954f9116", null ],
       [ "door_lock_set_user_status_response", "unionzigpc__zclcmdparse__callback__data__t.html#ad3917a3f9c70bf968edd49df4f6fe276", null ],
       [ "door_lock_set_user_type_response", "unionzigpc__zclcmdparse__callback__data__t.html#ae7685eb24d6174955eed9b6e37bc691c", null ],
       [ "door_lock_set_weekday_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#a5a92f5f9214584ff6406dca695637b9f", null ],
       [ "door_lock_set_year_day_schedule_response", "unionzigpc__zclcmdparse__callback__data__t.html#ad77a8868da85fe6726bf8b8e2708ca61", null ],
-      [ "door_lock_setpin_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a7aedb78ea22c4c0e3ea131a700c3d924", null ],
-      [ "door_lock_setrfid_code_response", "unionzigpc__zclcmdparse__callback__data__t.html#a78c3c811d248e03e2bdaeaf5219039a0", null ],
       [ "door_lock_toggle_response", "unionzigpc__zclcmdparse__callback__data__t.html#a561a30c89cfa3445601fb3e273d2a891", null ],
       [ "door_lock_unlock_door_response", "unionzigpc__zclcmdparse__callback__data__t.html#a4796e7b6050a47b445581f261a4f366e", null ],
       [ "door_lock_unlock_with_timeout_response", "unionzigpc__zclcmdparse__callback__data__t.html#a4b6055dbc26d8004cba836ecfb88e3de", null ],
+      [ "electrical_measurement_get_measurement_profile", "unionzigpc__zclcmdparse__callback__data__t.html#a13c08b7eeabbc53461ecd724749ad177", null ],
+      [ "electrical_measurement_get_profile_info", "unionzigpc__zclcmdparse__callback__data__t.html#af74f284fba95d6b50aa6451d4c9a3258", null ],
       [ "groups_add_group_response", "unionzigpc__zclcmdparse__callback__data__t.html#a5d9b8a4cb4dea6b90b6ad869db960c75", null ],
       [ "groups_get_group_membership_response", "unionzigpc__zclcmdparse__callback__data__t.html#a7482276f78e83815dbc20e3386cd75eb", null ],
       [ "groups_remove_group_response", "unionzigpc__zclcmdparse__callback__data__t.html#ab6417546e3c117bf53f8cdffded5bb05", null ],

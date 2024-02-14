@@ -16,3 +16,5 @@ You will also see any lint errors in the console.
 
 Builds the app for production to the `target\release` folder.\
 It correctly bundles App in production mode and optimizes the build for the best performance.
+
+Note: copy `resource` folder to current working directory before running portable-runtime gui.

@@ -61,10 +61,17 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
 
 add_subdirectory(${ot-br-posix_SOURCE_DIR} ${ot-br-posix_BINARY_DIR})
 
+# Workaround for gcc12+ and GSDK 4.3.0
+target_compile_options(ot-config
+                        INTERFACE
+                       -Wno-maybe-uninitialized)
+
 # Link vendor interface library directly to cpc
 # as cpc is generated before otbr subdirectory 
 target_link_libraries(rcp-vendor-intf PUBLIC cpc)
 target_include_directories(rcp-vendor-intf PUBLIC ${cpcd_SOURCE_DIR}/lib)
+
+
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/prerm.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/prerm.in)

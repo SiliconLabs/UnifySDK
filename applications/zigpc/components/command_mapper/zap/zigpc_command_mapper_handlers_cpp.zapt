@@ -255,14 +255,14 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
     {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}
 {{/if}}{{/zcl_command_arguments}}
 ) {
-  sl_status_t status = SL_STATUS_OK;
+  sl_status_t temp_status = SL_STATUS_OK;
 
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    status = {{component_zigpc_cmdmapper_prefix}}_cluster_support_check(unid, endpoint, {{asZigPCZclClusterType parent}});
-    if (status != SL_STATUS_OK) {
-      status = SL_STATUS_NOT_AVAILABLE;
+    temp_status  = {{component_zigpc_cmdmapper_prefix}}_cluster_support_check(unid, endpoint, {{asZigPCZclClusterType parent}});
+    if (temp_status  != SL_STATUS_OK) {
+      temp_status  = SL_STATUS_NOT_AVAILABLE;
     }
-    return status;
+    return temp_status ;
   }
 
 {{! check for list argument validity}}
@@ -293,7 +293,11 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
   {{else}}
   {{asZigPCZclStructType type}} zigpc_{{asSnakeCaseLower label}} = {
     {{#zcl_struct_items_by_struct_name type}}
+    {{#if (supportedEnums type)}}
+    .{{asSnakeCaseLower label}} = ({{asZigPCZclEnumType type}})(int){{asSnakeCaseLower parent.label}}.{{label}},
+    {{else}}
     .{{asSnakeCaseLower label}} = {{asSnakeCaseLower parent.label}}.{{label}},
+    {{/if}}
     {{/zcl_struct_items_by_struct_name}}
   };
   {{/if}}
@@ -330,7 +334,7 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
 {{/if}}
 {{/zcl_command_arguments}}
 
-  if (status == SL_STATUS_OK) {
+  if (temp_status  == SL_STATUS_OK) {
     {{component_zigpc_cmdmapper_prefix}}_send_unicast(
       unid,
       endpoint,

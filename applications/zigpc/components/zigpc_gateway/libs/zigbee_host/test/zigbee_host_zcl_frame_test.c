@@ -71,7 +71,7 @@ void test_fill_zcl_frame_should_handle_insufficient_size()
 {
   // ARRANGE
   EmberStatus status;
-  uint8_t buffer;
+  uint8_t buffer = 0;
 
   // ACT
   status = zigbeeHostFillZclFrame(&buffer, EMBER_AF_ZCL_OVERHEAD - 1, 0);
@@ -84,7 +84,7 @@ void test_fill_zcl_frame_should_handle_buffer_overflow()
 {
   // ARRANGE
   EmberStatus status;
-  uint8_t buffer;
+  uint8_t buffer = 0;
 
   // ACT
   status = zigbeeHostFillZclFrame(&buffer, ZCL_BUFFER_SIZE + 1, 0);

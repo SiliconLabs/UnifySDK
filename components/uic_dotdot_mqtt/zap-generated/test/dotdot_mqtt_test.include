@@ -945,7 +945,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_lock_door_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_lock_door_callback_count++;
@@ -971,7 +971,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_unlock_door_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_unlock_door_callback_count++;
@@ -997,7 +997,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_toggle_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_toggle_callback_count++;
@@ -1025,7 +1025,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint16_t timeout_in_seconds,
 
-    const char* pin_orrfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback_count++;
@@ -1072,7 +1072,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_log_record_response_callback_fu
 
     DrlkOperEventSource source_operation_event,
 
-    uint8_t eventid_or_alarm_code,
+    uint8_t event_id_or_alarm_code,
 
     uint16_t userid,
 
@@ -1084,8 +1084,8 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_log_record_response_callback_fu
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_setpin_code_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_setpin_code_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_set_pin_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_pin_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -1098,39 +1098,39 @@ static sl_status_t uic_mqtt_dotdot_door_lock_setpin_code_callback_func(
     const char* pin
 
 ) {
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_count++;
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_setpin_code_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_setpin_code_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkSetCodeStatus status
 
 ) {
-  uic_mqtt_dotdot_door_lock_setpin_code_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_getpin_code_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_getpin_code_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_get_pin_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_pin_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPINUserID userid
 
 ) {
-  uic_mqtt_dotdot_door_lock_getpin_code_callback_count++;
+  uic_mqtt_dotdot_door_lock_get_pin_code_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_getpin_code_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_getpin_code_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -1143,57 +1143,57 @@ static sl_status_t uic_mqtt_dotdot_door_lock_getpin_code_response_callback_func(
     const char* code
 
 ) {
-  uic_mqtt_dotdot_door_lock_getpin_code_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clearpin_code_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clearpin_code_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_pin_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_pin_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPINUserID userid
 
 ) {
-  uic_mqtt_dotdot_door_lock_clearpin_code_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_pin_code_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPassFailStatus status
 
 ) {
-  uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPassFailStatus status
 
 ) {
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
@@ -1606,8 +1606,8 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_user_type_response_callback_fun
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_setrfid_code_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_setrfid_code_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_set_rfid_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_rfid_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -1620,39 +1620,39 @@ static sl_status_t uic_mqtt_dotdot_door_lock_setrfid_code_callback_func(
     const char* rfid_code
 
 ) {
-  uic_mqtt_dotdot_door_lock_setrfid_code_callback_count++;
+  uic_mqtt_dotdot_door_lock_set_rfid_code_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkSetCodeStatus status
 
 ) {
-  uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_getrfid_code_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_getrfid_code_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_get_rfid_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_rfid_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkRFIDUserID userid
 
 ) {
-  uic_mqtt_dotdot_door_lock_getrfid_code_callback_count++;
+  uic_mqtt_dotdot_door_lock_get_rfid_code_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
@@ -1665,57 +1665,119 @@ static sl_status_t uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_func
     const char* rfid_code
 
 ) {
-  uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clearrfid_code_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clearrfid_code_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkRFIDUserID userid
 
 ) {
-  uic_mqtt_dotdot_door_lock_clearrfid_code_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPassFailStatus status
 
 ) {
-  uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type
 ) {
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
 
-static unsigned int uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_count;
-static sl_status_t uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_func(
+static unsigned int uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DrlkPassFailStatus status
 
 ) {
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_count++;
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_set_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    DataOperationTypeEnum operation_type,
+
+    uint16_t user_index,
+
+    const char* user_name,
+
+    uint32_t user_uniqueid,
+
+    DrlkUserStatus user_status,
+
+    DrlkUserType user_type,
+
+    CredentialRuleEnum credential_rule
+
+) {
+  uic_mqtt_dotdot_door_lock_set_user_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_get_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_index
+
+) {
+  uic_mqtt_dotdot_door_lock_get_user_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_get_user_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_user_response_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_door_lock_get_user_response_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_clear_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_index
+
+) {
+  uic_mqtt_dotdot_door_lock_clear_user_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
@@ -1766,6 +1828,90 @@ static sl_status_t uic_mqtt_dotdot_door_lock_programming_event_notification_call
 
 ) {
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_set_credential_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_credential_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    DataOperationTypeEnum operation_type,
+
+    CredentialStruct credential,
+
+    const char* credential_data,
+
+    uint16_t user_index,
+
+    DrlkUserStatus user_status,
+
+    DrlkUserType user_type
+
+) {
+  uic_mqtt_dotdot_door_lock_set_credential_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_set_credential_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_set_credential_response_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_door_lock_set_credential_response_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_get_credential_status_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_credential_status_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredentialStruct credential
+
+) {
+  uic_mqtt_dotdot_door_lock_get_credential_status_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_clear_credential_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_clear_credential_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredentialStruct credential
+
+) {
+  uic_mqtt_dotdot_door_lock_clear_credential_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_door_lock_unbolt_door_callback_count;
+static sl_status_t uic_mqtt_dotdot_door_lock_unbolt_door_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    const char* pin_code
+
+) {
+  uic_mqtt_dotdot_door_lock_unbolt_door_callback_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;
 }
@@ -2592,8 +2738,8 @@ static sl_status_t uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report_ca
     uint8_t last_route_repeaters_count,
     const char* *last_route_repeaters,
 
-    uint8_t incomingrssi_repeaters_count,
-    const int8_t *incomingrssi_repeaters,
+    uint8_t incoming_rssi_repeaters_count,
+    const int8_t *incoming_rssi_repeaters,
 
     int8_t ackrssi,
 
@@ -3018,21 +3164,21 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_door_lock_get_log_record_response_callback_set(&uic_mqtt_dotdot_door_lock_get_log_record_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_set(&uic_mqtt_dotdot_door_lock_setpin_code_callback_func);
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_set(&uic_mqtt_dotdot_door_lock_set_pin_code_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_setpin_code_response_callback_set(&uic_mqtt_dotdot_door_lock_setpin_code_response_callback_func);
+  uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_set(&uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_getpin_code_callback_set(&uic_mqtt_dotdot_door_lock_getpin_code_callback_func);
+  uic_mqtt_dotdot_door_lock_get_pin_code_callback_set(&uic_mqtt_dotdot_door_lock_get_pin_code_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_getpin_code_response_callback_set(&uic_mqtt_dotdot_door_lock_getpin_code_response_callback_func);
+  uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_set(&uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clearpin_code_callback_set(&uic_mqtt_dotdot_door_lock_clearpin_code_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_pin_code_callback_set(&uic_mqtt_dotdot_door_lock_clear_pin_code_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_set(&uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_set(&uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_set(&uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_set(&uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_set(&uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_set(&uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_door_lock_set_user_status_callback_set(&uic_mqtt_dotdot_door_lock_set_user_status_callback_func);
   num_callbacks++;
@@ -3086,25 +3232,45 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_door_lock_get_user_type_response_callback_set(&uic_mqtt_dotdot_door_lock_get_user_type_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_setrfid_code_callback_set(&uic_mqtt_dotdot_door_lock_setrfid_code_callback_func);
+  uic_mqtt_dotdot_door_lock_set_rfid_code_callback_set(&uic_mqtt_dotdot_door_lock_set_rfid_code_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_set(&uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_func);
+  uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_set(&uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_getrfid_code_callback_set(&uic_mqtt_dotdot_door_lock_getrfid_code_callback_func);
+  uic_mqtt_dotdot_door_lock_get_rfid_code_callback_set(&uic_mqtt_dotdot_door_lock_get_rfid_code_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_set(&uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_func);
+  uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_set(&uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clearrfid_code_callback_set(&uic_mqtt_dotdot_door_lock_clearrfid_code_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_set(&uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_set(&uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_set(&uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_set(&uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_set(&uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_func);
   num_callbacks++;
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_set(&uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_func);
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_set(&uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_set_user_callback_set(&uic_mqtt_dotdot_door_lock_set_user_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_get_user_callback_set(&uic_mqtt_dotdot_door_lock_get_user_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_get_user_response_callback_set(&uic_mqtt_dotdot_door_lock_get_user_response_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_clear_user_callback_set(&uic_mqtt_dotdot_door_lock_clear_user_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_door_lock_operating_event_notification_callback_set(&uic_mqtt_dotdot_door_lock_operating_event_notification_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_set(&uic_mqtt_dotdot_door_lock_programming_event_notification_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_set_credential_callback_set(&uic_mqtt_dotdot_door_lock_set_credential_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_set_credential_response_callback_set(&uic_mqtt_dotdot_door_lock_set_credential_response_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_get_credential_status_callback_set(&uic_mqtt_dotdot_door_lock_get_credential_status_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_set(&uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_clear_credential_callback_set(&uic_mqtt_dotdot_door_lock_clear_credential_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_door_lock_unbolt_door_callback_set(&uic_mqtt_dotdot_door_lock_unbolt_door_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_window_covering_up_or_open_callback_set(&uic_mqtt_dotdot_window_covering_up_or_open_callback_func);
   num_callbacks++;
@@ -3324,14 +3490,14 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_door_lock_unlock_with_timeout_response_callback_clear();
   uic_mqtt_dotdot_door_lock_get_log_record_callback_clear();
   uic_mqtt_dotdot_door_lock_get_log_record_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_clear();
-  uic_mqtt_dotdot_door_lock_setpin_code_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_getpin_code_callback_clear();
-  uic_mqtt_dotdot_door_lock_getpin_code_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_clearpin_code_callback_clear();
-  uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_clear();
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_pin_code_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_pin_code_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_clear();
   uic_mqtt_dotdot_door_lock_set_user_status_callback_clear();
   uic_mqtt_dotdot_door_lock_set_user_status_response_callback_clear();
   uic_mqtt_dotdot_door_lock_get_user_status_callback_clear();
@@ -3358,16 +3524,26 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_door_lock_set_user_type_response_callback_clear();
   uic_mqtt_dotdot_door_lock_get_user_type_callback_clear();
   uic_mqtt_dotdot_door_lock_get_user_type_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_setrfid_code_callback_clear();
-  uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_getrfid_code_callback_clear();
-  uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_clearrfid_code_callback_clear();
-  uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_clear();
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_clear();
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_rfid_code_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_rfid_code_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_user_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_user_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_user_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_user_callback_clear();
   uic_mqtt_dotdot_door_lock_operating_event_notification_callback_clear();
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_credential_callback_clear();
+  uic_mqtt_dotdot_door_lock_set_credential_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_credential_status_callback_clear();
+  uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_clear();
+  uic_mqtt_dotdot_door_lock_clear_credential_callback_clear();
+  uic_mqtt_dotdot_door_lock_unbolt_door_callback_clear();
   uic_mqtt_dotdot_clear_door_lock_write_attributes_callbacks();
   uic_mqtt_dotdot_window_covering_up_or_open_callback_clear();
   uic_mqtt_dotdot_window_covering_down_or_close_callback_clear();
@@ -3472,6 +3648,7 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_clear_aox_position_estimation_write_attributes_callbacks();
   uic_mqtt_dotdot_protocol_controller_network_management_write_callback_clear();
   uic_mqtt_dotdot_clear_protocol_controller_network_management_write_attributes_callbacks();
+  uic_mqtt_dotdot_clear_descriptor_write_attributes_callbacks();
 }
 
 static void reset_callback_counters()
@@ -3547,14 +3724,14 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_door_lock_unlock_with_timeout_response_callback_count = 0;
   uic_mqtt_dotdot_door_lock_get_log_record_callback_count = 0;
   uic_mqtt_dotdot_door_lock_get_log_record_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_setpin_code_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_setpin_code_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_getpin_code_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_getpin_code_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clearpin_code_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_pin_code_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_pin_code_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_pin_code_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_count = 0;
   uic_mqtt_dotdot_door_lock_set_user_status_callback_count = 0;
   uic_mqtt_dotdot_door_lock_set_user_status_response_callback_count = 0;
   uic_mqtt_dotdot_door_lock_get_user_status_callback_count = 0;
@@ -3581,16 +3758,26 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_door_lock_set_user_type_response_callback_count = 0;
   uic_mqtt_dotdot_door_lock_get_user_type_callback_count = 0;
   uic_mqtt_dotdot_door_lock_get_user_type_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_setrfid_code_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_getrfid_code_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clearrfid_code_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_count = 0;
-  uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_rfid_code_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_rfid_code_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_user_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_user_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_user_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_user_callback_count = 0;
   uic_mqtt_dotdot_door_lock_operating_event_notification_callback_count = 0;
   uic_mqtt_dotdot_door_lock_programming_event_notification_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_credential_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_set_credential_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_credential_status_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_clear_credential_callback_count = 0;
+  uic_mqtt_dotdot_door_lock_unbolt_door_callback_count = 0;
   uic_mqtt_dotdot_window_covering_up_or_open_callback_count = 0;
   uic_mqtt_dotdot_window_covering_down_or_close_callback_count = 0;
   uic_mqtt_dotdot_window_covering_stop_callback_count = 0;

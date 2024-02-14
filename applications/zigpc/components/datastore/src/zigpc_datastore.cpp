@@ -11,6 +11,8 @@
  *
  *****************************************************************************/
 #include <list>
+#include <cinttypes>
+
 
 #include <vector>
 #include <algorithm>
@@ -726,4 +728,41 @@ sl_status_t zigpc_datastore_log_device(const char *log_tag,
   }
 
   return status;
+}
+
+void zigpc_datastore_log_clusters(
+    const zigbee_eui64_t eui64,
+    const zigbee_endpoint_id_t endpoint_id)
+{
+    std::vector<zcl_cluster_id_t> server_cluster_list
+        = zigpc_datastore::cluster::get_id_list(
+            eui64,
+            endpoint_id,
+            ZCL_CLUSTER_SERVER_SIDE );
+
+    for(const zcl_cluster_id_t &cluster_id: server_cluster_list)
+    {
+      sl_log_debug(
+        LOG_TAG,
+        "Device: %016" PRIX64 " has Endpoint: %d, server cluster:  0x%04X",
+        zigbee_eui64_to_uint(eui64),
+        endpoint_id,
+        &cluster_id);
+    }
+
+    std::vector<zcl_cluster_id_t> client_cluster_list
+        = zigpc_datastore::cluster::get_id_list(
+            eui64,
+            endpoint_id,
+            ZCL_CLUSTER_CLIENT_SIDE );
+
+    for(const zcl_cluster_id_t &cluster_id: client_cluster_list)
+    {
+      sl_log_debug(
+        LOG_TAG,
+        "Device: %016" PRIX64 " has Endpoint: %d, client cluster:  0x%04X",
+        zigbee_eui64_to_uint(eui64),
+        endpoint_id,
+        &cluster_id);
+    }
 }

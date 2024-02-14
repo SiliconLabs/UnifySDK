@@ -1,0 +1,27 @@
+// Sound Switch Command Class
+def zwSOUND_SWITCH_TONE_PLAY 0x7908
+
+// ZCL OnOff Cluster
+def zbON_OFF 0x00060000
+
+def zwave_no_sound_switch (e'zwSOUND_SWITCH_TONE_PLAY == 0)
+
+// 25 is higher priority than other generic switches
+scope 25 chain_reaction(0) {
+  // Linking attributes zwave -> zigbee (note : 0 is stop playing)
+  r'zbON_OFF =
+    if (zwave_no_sound_switch) undefined
+    if (r'zwSOUND_SWITCH_TONE_PLAY != 0) 1 0
+  d'zbON_OFF =
+    if (zwave_no_sound_switch) undefined
+    if (d'zwSOUND_SWITCH_TONE_PLAY != 0) 1 0
+  
+  // Linking attributes zigbee -> zwave
+  d'zwSOUND_SWITCH_TONE_PLAY = 
+    if (zwave_no_sound_switch) undefined
+    if (d'zbON_OFF != 0) 255 0
+
+  r'zwSOUND_SWITCH_TONE_PLAY = 
+    if (zwave_no_sound_switch) undefined
+    if (r'zbON_OFF != 0) 255 0
+}

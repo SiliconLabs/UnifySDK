@@ -31,7 +31,11 @@
 #define NUMBER_OF_ARGS 9
 
 extern uint32_t g_mock_index;
+#if defined(USE_UNITY2)
+extern struct UNITY_STORAGE_T Unity;
+#else
 extern struct _Unity Unity;
+#endif
 
 typedef enum
 {
@@ -96,6 +100,7 @@ typedef struct
   bool         executed;                         /**< Internal boolean used for identifying executed mocks. */
   uint32_t     mock_index;                       /**< Internal index for identifying the index of the mock. */
   uint32_t     line_number;                      /**< Internal line number to identify the line in the unit test where the mock was created. */
+  uint32_t     mock_id;                          /**< A mock id value that can be set by the user to identify the mock in the test-case as the one that is failing. */
 }mock_t;
 // If compare range is added, then consider to also add: expect_arg_bound_upper, expect_arg_bound_lower.
 
@@ -124,17 +129,32 @@ typedef struct
 #define MOCK_CALL_COMPARE_INPUT_INT32(P_MOCK, ARGUMENT, RECV_VALUE) \
         MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, INT32)
 
+#define MOCK_CALL_COMPARE_INPUT_HEX64(P_MOCK, ARGUMENT, RECV_VALUE) \
+        MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, HEX64)
+
+#define MOCK_CALL_COMPARE_INPUT_HEX32(P_MOCK, ARGUMENT, RECV_VALUE) \
+        MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, HEX32)
+
+#define MOCK_CALL_COMPARE_INPUT_HEX16(P_MOCK, ARGUMENT, RECV_VALUE) \
+        MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, HEX16)
+
+#define MOCK_CALL_COMPARE_INPUT_HEX8(P_MOCK, ARGUMENT, RECV_VALUE) \
+        MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, HEX8)
+
+#define MOCK_CALL_COMPARE_INPUT_HEX_ARRAY(P_MOCK, ARGUMENT, RECV_VALUE) \
+        MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, HEX_ARRAY)
+
 
 #define MOCK_CALL_COMPARE_INPUT(P_MOCK, ARGUMENT, RECV_VALUE, TYPE) do {            \
-    char __str[4096];                                                                \
+    char __str[4096];                                                               \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                     \
     {                                                                               \
       case COMPARE_STRICT:                                                          \
-        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_##TYPE##_MESSAGE(P_MOCK->expect_arg[ARGUMENT].v, RECV_VALUE, __str);  \
       break;                                                                        \
       case COMPARE_DELTA:                                                           \
-        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_##TYPE##_WITHIN_MESSAGE(P_MOCK->delta_arg[ARGUMENT].value, P_MOCK->expect_arg[ARGUMENT].value, RECV_VALUE, __str);  \
         break;                                                                      \
       case COMPARE_NOT_NULL:                                                        \
@@ -148,12 +168,12 @@ typedef struct
 
 
 #define MOCK_CALL_COMPARE_INPUT_BOOL(P_MOCK, ARGUMENT, RECV_VALUE)  do {            \
-    char __str[4096];                                                                \
+    char __str[4096];                                                               \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                     \
     {                                                                               \
       case COMPARE_STRICT:                                                          \
-        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
-        TEST_ASSERT_MESSAGE((P_MOCK->expect_arg[ARGUMENT].v == RECV_VALUE), __str);  \
+        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
+        TEST_ASSERT_MESSAGE((P_MOCK->expect_arg[ARGUMENT].v == RECV_VALUE), __str); \
       break;                                                                        \
       case COMPARE_DELTA:                                                           \
         TEST_FAIL_MESSAGE("Comparing as bool in " TO_STR_MACRO(__FILE__) ":" TO_STR_MACRO(__LINE__) );       \
@@ -177,26 +197,26 @@ typedef struct
         MOCK_CALL_COMPARE_STRUCT_MEMBER(P_MOCK, ARGUMENT, RECV_POINTER, STRUCT_TYPE, MEMBER, UINT32)
 
 #define MOCK_CALL_COMPARE_STRUCT_MEMBER(P_MOCK, ARGUMENT, RECV_POINTER, STRUCT_TYPE, MEMBER, TYPE) do { \
-    char __str[4096];                                                                                 \
+    char __str[4096];                                                                                \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                                      \
     {                                                                                                \
       case COMPARE_STRICT:                                                                           \
-        sprintf(__str, " as '" TO_STR(MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as '" TO_STR(MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_##TYPE##_MESSAGE(((STRUCT_TYPE *)P_MOCK->expect_arg[ARGUMENT].p)->MEMBER,  \
                                             ((STRUCT_TYPE *)RECV_POINTER)->MEMBER, __str);           \
       break;                                                                                         \
       case COMPARE_DELTA:                                                                            \
-        sprintf(__str, " as '" TO_STR(MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as '" TO_STR(MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_##TYPE##_WITHIN_MESSAGE(P_MOCK->delta_arg[ARGUMENT].value,                       \
                                             ((STRUCT_TYPE *)P_MOCK->expect_arg[ARGUMENT].p)->MEMBER, \
                                             ((STRUCT_TYPE *)RECV_POINTER)->MEMBER, __str);           \
         break;                                                                                       \
       case COMPARE_NOT_NULL:                                                                         \
-        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_NOT_NULL_MESSAGE(RECV_POINTER, __str);                                           \
         break;                                                                                       \
       case COMPARE_NULL:                                                                             \
-        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s:%lu, ", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s::%lu. mock_id:%lu", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_NULL_MESSAGE(RECV_POINTER, __str);                                               \
         break;                                                                                       \
       case COMPARE_ANY:                                                                              \
@@ -214,24 +234,24 @@ typedef struct
         MOCK_CALL_COMPARE_STRUCT_ARRAY(P_MOCK, ARGUMENT, RECV_POINTER, STRUCT_TYPE, ARRAY_MEMBER, LENGTH_MEMBER, UINT32)
 
 #define MOCK_CALL_COMPARE_STRUCT_ARRAY(P_MOCK, ARGUMENT, RECV_POINTER, STRUCT_TYPE, ARRAY_MEMBER, LENGTH_MEMBER, TYPE) do {   \
-    char __str[4096];                                                                                                          \
+    char __str[4096];                                                                                                         \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                                                               \
     {                                                                                                                         \
       case COMPARE_STRICT:                                                                                                    \
-        sprintf(__str, " as '" TO_STR(LENGTH_MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as '" TO_STR(LENGTH_MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_UINT32_MESSAGE(((STRUCT_TYPE *)P_MOCK->expect_arg[ARGUMENT].p)->LENGTH_MEMBER,                      \
                                          ((STRUCT_TYPE *)RECV_POINTER)->LENGTH_MEMBER, __str);                                \
-        sprintf(__str, " as '" TO_STR(ARRAY_MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as '" TO_STR(ARRAY_MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_##TYPE##_ARRAY_MESSAGE(((STRUCT_TYPE *)P_MOCK->expect_arg[ARGUMENT].p)->ARRAY_MEMBER,               \
                                                  ((STRUCT_TYPE *)RECV_POINTER)->ARRAY_MEMBER,                                 \
                                                  ((STRUCT_TYPE *)P_MOCK->expect_arg[ARGUMENT].p)->LENGTH_MEMBER, __str);      \
       break;                                                                                                                  \
       case COMPARE_NOT_NULL:                                                                                                  \
-        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_NOT_NULL_MESSAGE(((STRUCT_TYPE *)RECV_POINTER)->ARRAY_MEMBER, __str);                                     \
         break;                                                                                                                \
       case COMPARE_NULL:                                                                                                      \
-        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s:%lu, ", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s::%lu. mock_id:%lu", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_NULL_MESSAGE(((STRUCT_TYPE *)RECV_POINTER)->ARRAY_MEMBER, __str);                                         \
         break;                                                                                                                \
       case COMPARE_DELTA:                                                                                                     \
@@ -252,13 +272,13 @@ typedef struct
         MOCK_CALL_COMPARE_STRUCT_ARRAY_LENGTH(P_MOCK, ARGUMENT, RECV_POINTER, STRUCT_TYPE, ARRAY_MEMBER, LENGTH, UINT32)
 
 #define MOCK_CALL_COMPARE_STRUCT_ARRAY_LENGTH(P_MOCK, ARGUMENT, RECV_POINTER, STRUCT_TYPE, ARRAY_MEMBER, LENGTH, TYPE) do {   \
-    char __str[4096];                                                                                                          \
+    char __str[4096];                                                                                                         \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                                                               \
     {                                                                                                                         \
       case COMPARE_STRICT:                                                                                                    \
-        sprintf(__str, " as '" TO_STR(ARRAY_MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as '" TO_STR(ARRAY_MEMBER) "' in argument " #ARGUMENT " in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_##TYPE##_ARRAY_MESSAGE(((STRUCT_TYPE *)P_MOCK->expect_arg[ARGUMENT].p)->ARRAY_MEMBER,               \
-                                                 ((STRUCT_TYPE *)RECV_POINTER)->ARRAY_MEMBER, LENGTH, __str);                         \
+                                                 ((STRUCT_TYPE *)RECV_POINTER)->ARRAY_MEMBER, LENGTH, __str);                 \
       break;                                                                                                                  \
       case COMPARE_NOT_NULL:                                                                                                  \
         TEST_ASSERT_NOT_NULL(((STRUCT_TYPE *)RECV_POINTER)->ARRAY_MEMBER);                                                    \
@@ -287,22 +307,22 @@ typedef struct
         MOCK_CALL_COMPARE_INPUT_ARRAY(P_MOCK, ARGUMENT, EXPECT_LENGTH, P_RECV_ARRAY, RECV_LENGTH, INT)
 
 #define MOCK_CALL_COMPARE_INPUT_ARRAY(P_MOCK, ARGUMENT, EXPECT_LENGTH, P_RECV_ARRAY, RECV_LENGTH, TYPE) do { \
-    char __str[4096];                                                                                         \
+    char __str[4096];                                                                                        \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                                              \
     {                                                                                                        \
       case COMPARE_STRICT:                                                                                   \
-        sprintf(__str, " in %s(...), mock call expect@%s:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as length for array in argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu. mock_id:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_UINT32_MESSAGE(EXPECT_LENGTH, RECV_LENGTH, __str);                                 \
-        sprintf(__str, " as arguments " #ARGUMENT " in %s(...), mock call expect@%s:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " as argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu,  mock_id:%lu.", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_EQUAL_##TYPE##_ARRAY_MESSAGE(P_MOCK->expect_arg[ARGUMENT].p, P_RECV_ARRAY, EXPECT_LENGTH, __str);  \
         break;                                                                                               \
       case COMPARE_NOT_NULL:                                                                                 \
-        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
-	    TEST_ASSERT_NOT_NULL_MESSAGE(P_RECV_ARRAY, __str);                                                   \
+        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s::%lu. mock_id:%lu", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
+	    TEST_ASSERT_NOT_NULL_MESSAGE(P_RECV_ARRAY, __str);                                                     \
         break;                                                                                               \
       case COMPARE_NULL:                                                                                     \
-        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s:%lu, ", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
-	    TEST_ASSERT_NULL_MESSAGE(P_RECV_ARRAY, __str);                                                       \
+        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s::%lu. mock_id:%lu", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
+	    TEST_ASSERT_NULL_MESSAGE(P_RECV_ARRAY, __str);                                                         \
         break;                                                                                               \
       case COMPARE_DELTA:                                                                                    \
         TEST_FAIL_MESSAGE("Comparing delta on array is not possible in " TO_STR_MACRO(__FILE__) ":" TO_STR_MACRO(__LINE__) ); \
@@ -322,7 +342,7 @@ typedef struct
   }while(0)
 
 #define MOCK_CALL_COMPARE_INPUT_POINTER(P_MOCK, ARGUMENT, P_RECV_VALUE) do {                \
-    char __str[4096];                                                                        \
+    char __str[4096];                                                                       \
     switch (P_MOCK->compare_rule_arg[ARGUMENT])                                             \
     {                                                                                       \
       case COMPARE_STRICT:                                                                  \
@@ -330,11 +350,11 @@ typedef struct
         TEST_ASSERT_EQUAL_PTR_MESSAGE(P_MOCK->expect_arg[ARGUMENT].p, P_RECV_VALUE, __str); \
         break;                                                                              \
       case COMPARE_NOT_NULL:                                                                \
-        sprintf(__str, " Expected Non-NULL in %s(...), mock call expect@%s:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " Expected Non-NULL as argument " #ARGUMENT " in %s(...), mock call expect@%s:%lu, mock_id:%lu, ", __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_NOT_NULL_MESSAGE(P_RECV_VALUE, __str);                                  \
         break;                                                                              \
       case COMPARE_NULL:                                                                    \
-        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s:%lu, ", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number); \
+        sprintf(__str, " Expected NULL for argument %u in %s(...), mock call expect@%s::%lu. mock_id:%lu", ARGUMENT, __FUNCTION__, Unity.CurrentTestName, (long unsigned)P_MOCK->line_number, (long unsigned)P_MOCK->mock_id); \
         TEST_ASSERT_NULL_MESSAGE(P_RECV_VALUE, __str);                                      \
         break;                                                                              \
       case COMPARE_ANY:                                                                     \

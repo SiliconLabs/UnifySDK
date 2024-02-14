@@ -776,28 +776,28 @@ void uic_mqtt_dotdot_door_lock_publish_supported_generated_commands(
   if (command_list->get_log_record_response == true) {
     command_vector.emplace_back("GetLogRecordResponse");
   }
-  if (command_list->setpin_code == true) {
+  if (command_list->set_pin_code == true) {
     command_vector.emplace_back("SetPINCode");
   }
-  if (command_list->setpin_code_response == true) {
+  if (command_list->set_pin_code_response == true) {
     command_vector.emplace_back("SetPINCodeResponse");
   }
-  if (command_list->getpin_code == true) {
+  if (command_list->get_pin_code == true) {
     command_vector.emplace_back("GetPINCode");
   }
-  if (command_list->getpin_code_response == true) {
+  if (command_list->get_pin_code_response == true) {
     command_vector.emplace_back("GetPINCodeResponse");
   }
-  if (command_list->clearpin_code == true) {
+  if (command_list->clear_pin_code == true) {
     command_vector.emplace_back("ClearPINCode");
   }
-  if (command_list->clearpin_code_response == true) {
+  if (command_list->clear_pin_code_response == true) {
     command_vector.emplace_back("ClearPINCodeResponse");
   }
-  if (command_list->clear_allpin_codes == true) {
+  if (command_list->clear_all_pin_codes == true) {
     command_vector.emplace_back("ClearAllPINCodes");
   }
-  if (command_list->clear_allpin_codes_response == true) {
+  if (command_list->clear_all_pin_codes_response == true) {
     command_vector.emplace_back("ClearAllPINCodesResponse");
   }
   if (command_list->set_user_status == true) {
@@ -878,35 +878,65 @@ void uic_mqtt_dotdot_door_lock_publish_supported_generated_commands(
   if (command_list->get_user_type_response == true) {
     command_vector.emplace_back("GetUserTypeResponse");
   }
-  if (command_list->setrfid_code == true) {
+  if (command_list->set_rfid_code == true) {
     command_vector.emplace_back("SetRFIDCode");
   }
-  if (command_list->setrfid_code_response == true) {
+  if (command_list->set_rfid_code_response == true) {
     command_vector.emplace_back("SetRFIDCodeResponse");
   }
-  if (command_list->getrfid_code == true) {
+  if (command_list->get_rfid_code == true) {
     command_vector.emplace_back("GetRFIDCode");
   }
-  if (command_list->getrfid_code_response == true) {
+  if (command_list->get_rfid_code_response == true) {
     command_vector.emplace_back("GetRFIDCodeResponse");
   }
-  if (command_list->clearrfid_code == true) {
+  if (command_list->clear_rfid_code == true) {
     command_vector.emplace_back("ClearRFIDCode");
   }
-  if (command_list->clearrfid_code_response == true) {
+  if (command_list->clear_rfid_code_response == true) {
     command_vector.emplace_back("ClearRFIDCodeResponse");
   }
-  if (command_list->clear_allrfid_codes == true) {
+  if (command_list->clear_all_rfid_codes == true) {
     command_vector.emplace_back("ClearAllRFIDCodes");
   }
-  if (command_list->clear_allrfid_codes_response == true) {
+  if (command_list->clear_all_rfid_codes_response == true) {
     command_vector.emplace_back("ClearAllRFIDCodesResponse");
+  }
+  if (command_list->set_user == true) {
+    command_vector.emplace_back("SetUser");
+  }
+  if (command_list->get_user == true) {
+    command_vector.emplace_back("GetUser");
+  }
+  if (command_list->get_user_response == true) {
+    command_vector.emplace_back("GetUserResponse");
+  }
+  if (command_list->clear_user == true) {
+    command_vector.emplace_back("ClearUser");
   }
   if (command_list->operating_event_notification == true) {
     command_vector.emplace_back("OperatingEventNotification");
   }
   if (command_list->programming_event_notification == true) {
     command_vector.emplace_back("ProgrammingEventNotification");
+  }
+  if (command_list->set_credential == true) {
+    command_vector.emplace_back("SetCredential");
+  }
+  if (command_list->set_credential_response == true) {
+    command_vector.emplace_back("SetCredentialResponse");
+  }
+  if (command_list->get_credential_status == true) {
+    command_vector.emplace_back("GetCredentialStatus");
+  }
+  if (command_list->get_credential_status_response == true) {
+    command_vector.emplace_back("GetCredentialStatusResponse");
+  }
+  if (command_list->clear_credential == true) {
+    command_vector.emplace_back("ClearCredential");
+  }
+  if (command_list->unbolt_door == true) {
+    command_vector.emplace_back("UnboltDoor");
   }
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
@@ -2722,6 +2752,49 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_ge
   if (command_list->write == true) {
     command_vector.emplace_back("Write");
   }
+  if (command_list->write_attributes == true) {
+    command_vector.emplace_back("WriteAttributes");
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the Descriptor cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/Descriptor/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_descriptor_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_descriptor_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint);
+  topic +=  "/Descriptor/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
   }

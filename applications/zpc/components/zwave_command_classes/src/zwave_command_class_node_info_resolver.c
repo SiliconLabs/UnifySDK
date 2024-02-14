@@ -330,25 +330,29 @@ static void on_node_information_update(zwave_node_id_t node_id,
                                      sizeof(node_info->specific_device_class));
 }
 
-static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_node)
+static void
+  on_secure_node_info_no_response(attribute_store_node_t secure_nif_node)
 {
   uint8_t nif[ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH];
   uint8_t nif_length = 0;
 
   if ((SL_STATUS_OK
        == attribute_store_get_node_attribute_value(secure_nif_node,
-						   REPORTED_ATTRIBUTE,
-						   nif,
-						   &nif_length))
+                                                   REPORTED_ATTRIBUTE,
+                                                   nif,
+                                                   &nif_length))
       && (nif_length != 0)) {
-      return;
+    return;
   }
 
-  sl_log_warning(LOG_TAG, "Failed to get Secure NIF Attribute ID %d", secure_nif_node);
+  sl_log_warning(LOG_TAG,
+                 "Failed to get Secure NIF Attribute ID %d",
+                 secure_nif_node);
 
   // Are we trying to resolve our own NIF?
   attribute_store_node_t node_id_node
-    = attribute_store_get_first_parent_with_type(secure_nif_node, ATTRIBUTE_NODE_ID);
+    = attribute_store_get_first_parent_with_type(secure_nif_node,
+                                                 ATTRIBUTE_NODE_ID);
 
   if (get_zpc_node_id_node() == node_id_node) {
     return;
@@ -357,7 +361,8 @@ static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_no
   // Find the Endpoint ID for who we want the NIF.
   zwave_endpoint_id_t endpoint_id = 0;
   attribute_store_node_t endpoint_id_node
-    = attribute_store_get_first_parent_with_type(secure_nif_node, ATTRIBUTE_ENDPOINT_ID);
+    = attribute_store_get_first_parent_with_type(secure_nif_node,
+                                                 ATTRIBUTE_ENDPOINT_ID);
   if (endpoint_id_node == ATTRIBUTE_STORE_INVALID_NODE) {
     return;
   }
@@ -369,7 +374,7 @@ static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_no
     return;
   }
 
-  // If Multi Channel endpoint
+  // If not a Multi Channel endpoint, nothing to do
   if (endpoint_id <= 0) {
     return;
   }
@@ -379,18 +384,19 @@ static void on_secure_node_info_no_response(attribute_store_node_t secure_nif_no
 
   if ((non_secure_nif_node != ATTRIBUTE_STORE_INVALID_NODE)
       && (SL_STATUS_OK
-	  == attribute_store_get_node_attribute_value(non_secure_nif_node,
-						      REPORTED_ATTRIBUTE,
-						      nif,
-						      &nif_length))) {
+          == attribute_store_get_node_attribute_value(non_secure_nif_node,
+                                                      REPORTED_ATTRIBUTE,
+                                                      nif,
+                                                      &nif_length))) {
     uint8_t j = 0;
-    for (uint8_t i=0; i<nif_length; i++) {
-      if (nif[i] != COMMAND_CLASS_SECURITY && nif[i] != COMMAND_CLASS_SECURITY_2) {
-	nif[j++] = nif[i];
+    for (uint8_t i = 0; i < nif_length; i++) {
+      if (nif[i] != COMMAND_CLASS_SECURITY
+          && nif[i] != COMMAND_CLASS_SECURITY_2) {
+        nif[j++] = nif[i];
       }
     }
     nif_length = j;
-    
+
     // The implicit rule that all non-secure command classes for an End Point
     // must be controllable securely is still in effect,
     // if the endpoint is reported secure.

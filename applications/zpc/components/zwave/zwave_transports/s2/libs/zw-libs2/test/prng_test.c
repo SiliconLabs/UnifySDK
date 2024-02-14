@@ -4,7 +4,7 @@
  * Check that prng has a random value on initalization.
  * 
  */
-void test_random_init() {
+void test_random_init(void) {
   uint128_t r1;
   uint128_t r2;
  
@@ -21,6 +21,6 @@ void test_random_init() {
  * Check that prng produces random numbers
  */
 
-void test_random_rand() {
+void test_random_rand(void) {
   /*TODO should be use a NIST standard check?*/
 }

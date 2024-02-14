@@ -206,7 +206,7 @@ applicable to this document can be found in the LICENSE.md file.
   <!-- Collections -->
   <type:type id="50" short="set" name="Set" discrete="true" />
   <type:type id="51" short="bag" name="Bag" discrete="true" />
-
+  
   <!-- Time -->
   <type:type id="e0" short="ToD" name="Time of day">
     <restriction>
@@ -316,6 +316,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:enumeration name="struct" value="4c" />
       <type:enumeration name="set" value="50" />
       <type:enumeration name="bag" value="51" />
+      <type:enumeration name="fabric_idx" value="c5" />
       <type:enumeration name="ToD" value="e0" />
       <type:enumeration name="date" value="e1" />
       <type:enumeration name="UTC" value="e2" />
@@ -488,5 +489,6 @@ applicable to this document can be found in the LICENSE.md file.
   <xi:include href="Unify_ConfigurationParameters.xml" parse="xml"/>
   <xi:include href="Unify_SystemMetrics.xml" parse="xml"/>
   <xi:include href="Unify_ApplicationMonitoring.xml" parse="xml"/>
+  <xi:include href="Unify_Descriptor.xml" parse="xml"/>
 
 </zcl:library>

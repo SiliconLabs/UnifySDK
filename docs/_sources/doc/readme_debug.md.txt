@@ -1,10 +1,8 @@
-# Unify Debugging Guide
+# ZPC Debugging Guide
 
-## ZPC Debugging Guide
+## Interpreting ZPC Console Logs for Various Operations
 
-### Interpreting ZPC Console Logs for Various Operations
-
-#### Using the ZPC Command Line Interface
+### Using the ZPC Command Line Interface
 
 Pressing return in ZPC console logs will open Unify Command Line Interface.
 "help" command will display the available commands in Command Line Interface as
@@ -32,7 +30,7 @@ modifying data in the Attribute Store.
 When an unexpected outcome occurs, log the state of the components that are
 expected to perform an action.
 
-#### Incoming Z-Wave Frame to ZPC from Z-Wave Module
+### Incoming Z-Wave Frame to ZPC from Z-Wave Module
 
 Incoming Z-Wave API frames are printed directly to the console, which allows
 detecting incoming Z-Wave frames or other messages from the Z-Wave API module.
@@ -53,7 +51,7 @@ outcome of processing the Z-Wave frame:
 [zwave_command_handler_callbacks] Command Class=0x25 - Command=0x03 from NodeID 004:1 handled successfully.
 ```
 
-#### Outgoing Z-Wave Frame from ZPC to Z-Wave Module
+### Outgoing Z-Wave Frame from ZPC to Z-Wave Module
 
 Outgoing Z-Wave frames can be identified in the console log. For example,
 
@@ -64,7 +62,7 @@ Outgoing Z-Wave frames can be identified in the console log. For example,
 A single frame can result in several TX Queue elements, so multiple TX Queue
 messages may appear.
 
-#### Z-Wave Module Information
+### Z-Wave Module Information
 
 The following console log describes various things about Z-Wave module.
 
@@ -83,7 +81,7 @@ The following console log describes various things about Z-Wave module.
 [zwave_rx] Z-Wave API module RF region 1
 ```
 
-#### Z-Wave Protocol Version
+### Z-Wave Protocol Version
 
 The following console log describes version information about Z-Wave Protocol.
 ```bash
@@ -93,7 +91,7 @@ The following console log describes version information about Z-Wave Protocol.
 [zwave_rx] Z-Wave API protocol git commit: 30313233343536373839414243444546
 ```
 
-#### S2 Keys
+### S2 Keys
 
 S2 keys are printed in console logs under each key level header.
 
@@ -112,7 +110,7 @@ For example,
 [zwave_s2_keystore] CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 ```
 
-#### Unify Build Version
+### Unify Build Version
 
 Unify Build version is printed on the first line after the ZPC starts. It looks
 like the following:
@@ -121,7 +119,7 @@ like the following:
 # uic build: ver_0.0.6_RC1-339-g3af36c4c
 ```
 
-#### MQTT Subscriptions Done by ZPC
+### MQTT Subscriptions Done by ZPC
 
 ```bash
 [mqtt_client] Subscribing to: ucl/by-group/+/Basic/Commands/WriteAttributes
@@ -130,9 +128,9 @@ like the following:
 [mqtt_client] Subscribing to: ucl/by-group/+/DeviceTemperatureConfiguration/Commands/WriteAttributes
 ```
 
-### Changing Log Debug Level in ZPC
+## Changing Log Debug Level in ZPC
 
-#### Log Severity
+### Log Severity
 
 Log level of ZPC can be changed by using the following command line argument or config
 file option.
@@ -147,7 +145,7 @@ w: Warning
 e: Error
 c: Critical
 
-#### Component-Based Log Severity
+### Component-Based Log Severity
 
 Log levels of ZPC can also be changed on component granularity by using the
 following command line argument or config file option for each component.
@@ -167,7 +165,7 @@ zpc --log.tag_level uic_mqtt:i,uic_main:e
 ```
 
 
-### Collecting Z-Wave Serial Logs in ZPC
+## Collecting Z-Wave Serial Logs in ZPC
 
 Serial Log collection in ZPC can be enabled by using the following command line
 argument or config file option.
@@ -189,14 +187,4 @@ Usage:
 ```console
 python serial_decode_zpc.py serial_log.txt
 ```
-### Using MQTT Explorer to Monitor Messages
 
-You can publish MQTT message and observe the MQTT messages stored in the broker
-with a [MQTT Explorer](https://mqtt-explorer.com/).
-[MQTT Explorer](https://mqtt-explorer.com/) is an MQTT client that provides a
-structured overview of your MQTT topics.
-
-Configure [MQTT Explorer](https://mqtt-explorer.com/) to connect to the host
-where your MQTT broker is located and the topics can be observed. Use the
-[Unify Specifications](./unify_specifications/index.rst)
-if you need assistance to understand what topics and they data represent.

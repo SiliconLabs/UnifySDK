@@ -150,14 +150,14 @@ static uic_mqtt_dotdot_by_group_door_lock_unlock_with_timeout_callback_t uic_mqt
 static uic_mqtt_dotdot_by_group_door_lock_unlock_with_timeout_response_callback_t uic_mqtt_dotdot_by_group_door_lock_unlock_with_timeout_response_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_get_log_record_callback_t uic_mqtt_dotdot_by_group_door_lock_get_log_record_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_get_log_record_response_callback_t uic_mqtt_dotdot_by_group_door_lock_get_log_record_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback_t uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_t uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback_t uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback_t uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback_t uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_set_user_status_callback_t uic_mqtt_dotdot_by_group_door_lock_set_user_status_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_set_user_status_response_callback_t uic_mqtt_dotdot_by_group_door_lock_set_user_status_response_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_get_user_status_callback_t uic_mqtt_dotdot_by_group_door_lock_get_user_status_callback = nullptr;
@@ -184,16 +184,26 @@ static uic_mqtt_dotdot_by_group_door_lock_set_user_type_callback_t uic_mqtt_dotd
 static uic_mqtt_dotdot_by_group_door_lock_set_user_type_response_callback_t uic_mqtt_dotdot_by_group_door_lock_set_user_type_response_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_get_user_type_callback_t uic_mqtt_dotdot_by_group_door_lock_get_user_type_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_get_user_type_response_callback_t uic_mqtt_dotdot_by_group_door_lock_get_user_type_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback_t uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_t uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_t uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback = nullptr;
-static uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback_t uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback_t uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_user_callback_t uic_mqtt_dotdot_by_group_door_lock_set_user_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_user_callback_t uic_mqtt_dotdot_by_group_door_lock_get_user_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback_t uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_user_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_user_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback_t uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_t uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_credential_callback_t uic_mqtt_dotdot_by_group_door_lock_set_credential_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback_t uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback_t uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback_t uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback_t uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback = nullptr;
+static uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback_t uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback = nullptr;
 static uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback_t uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback = nullptr;
 
 
@@ -351,6 +361,9 @@ static uic_mqtt_dotdot_by_group_aox_locator_write_attributes_callback_t uic_mqtt
 
 
 static uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback_t uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback = nullptr;
+
+
+static uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback = nullptr;
 
 
 
@@ -884,51 +897,51 @@ void uic_mqtt_dotdot_by_group_door_lock_get_log_record_response_callback_set(con
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback = callback;
 }
 
 
@@ -1088,51 +1101,75 @@ void uic_mqtt_dotdot_by_group_door_lock_get_user_type_response_callback_set(cons
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback = callback;
 }
 
 
-void uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback_t callback)
+void uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback_t callback)
 {
-  uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback = callback;
+  uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_set_user_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_user_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_set_user_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_get_user_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_user_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_get_user_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_clear_user_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_user_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_clear_user_callback = callback;
 }
 
 
@@ -1145,6 +1182,42 @@ void uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback_se
 void uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_set(const uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_set_credential_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_set_credential_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback_set(const uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback_set(const uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback_set(const uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback = callback;
 }
 
 void uic_mqtt_dotdot_by_group_door_lock_write_attributes_callback_set(
@@ -1790,6 +1863,15 @@ void uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback_
   const uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+void uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback = callback;
 }
 
 
@@ -8584,7 +8666,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door(
 
     
     uic_mqtt_dotdot_door_lock_command_lock_door_fields_t fields;
-      std::string pin_orrfid_code;
+      std::string pin_or_rfid_code;
     
 
       nlohmann::json jsn;
@@ -8594,11 +8676,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_lock_door(
       
         uic_mqtt_dotdot_parse_door_lock_lock_door(
           jsn,
-          pin_orrfid_code
+          pin_or_rfid_code
       );
 
       // Populate list fields from vector or string types
-              fields.pin_orrfid_code = pin_orrfid_code.c_str();
+              fields.pin_or_rfid_code = pin_or_rfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8756,7 +8838,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door(
 
     
     uic_mqtt_dotdot_door_lock_command_unlock_door_fields_t fields;
-      std::string pin_orrfid_code;
+      std::string pin_or_rfid_code;
     
 
       nlohmann::json jsn;
@@ -8766,11 +8848,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_door(
       
         uic_mqtt_dotdot_parse_door_lock_unlock_door(
           jsn,
-          pin_orrfid_code
+          pin_or_rfid_code
       );
 
       // Populate list fields from vector or string types
-              fields.pin_orrfid_code = pin_orrfid_code.c_str();
+              fields.pin_or_rfid_code = pin_or_rfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -8928,7 +9010,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle(
 
     
     uic_mqtt_dotdot_door_lock_command_toggle_fields_t fields;
-      std::string pin_orrfid_code;
+      std::string pin_or_rfid_code;
     
 
       nlohmann::json jsn;
@@ -8938,11 +9020,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_toggle(
       
         uic_mqtt_dotdot_parse_door_lock_toggle(
           jsn,
-          pin_orrfid_code
+          pin_or_rfid_code
       );
 
       // Populate list fields from vector or string types
-              fields.pin_orrfid_code = pin_orrfid_code.c_str();
+              fields.pin_or_rfid_code = pin_or_rfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9100,7 +9182,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout(
 
     
     uic_mqtt_dotdot_door_lock_command_unlock_with_timeout_fields_t fields;
-      std::string pin_orrfid_code;
+      std::string pin_or_rfid_code;
     
 
       nlohmann::json jsn;
@@ -9112,11 +9194,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout(
           jsn,
           fields.timeout_in_seconds,
               
-          pin_orrfid_code
+          pin_or_rfid_code
       );
 
       // Populate list fields from vector or string types
-              fields.pin_orrfid_code = pin_orrfid_code.c_str();
+              fields.pin_or_rfid_code = pin_or_rfid_code.c_str();
       
 
       } catch (const nlohmann::json::parse_error& e) {
@@ -9381,7 +9463,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response(
               
           fields.source_operation_event,
               
-          fields.eventid_or_alarm_code,
+          fields.event_id_or_alarm_code,
               
           fields.userid,
               
@@ -9460,12 +9542,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetPINCode
-static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_pin_code(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -9482,10 +9564,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t fields;
       std::string pin;
     
 
@@ -9494,7 +9576,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_setpin_code(
+        uic_mqtt_dotdot_parse_door_lock_set_pin_code(
           jsn,
           fields.userid,
               
@@ -9522,11 +9604,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback(
+      uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setpin_code_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_pin_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9554,7 +9636,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
         "SetPINCode",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_setpin_code);
+        uic_mqtt_dotdot_on_door_lock_set_pin_code);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "SetPINCode: Unable to parse JSON payload.\n");
@@ -9565,12 +9647,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetPINCodeResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_pin_code_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -9587,10 +9669,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -9598,7 +9680,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
+        uic_mqtt_dotdot_parse_door_lock_set_pin_code_response(
           jsn,
           fields.status
               );
@@ -9619,11 +9701,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setpin_code_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_pin_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9639,7 +9721,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
         "SetPINCodeResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_setpin_code_response);
+        uic_mqtt_dotdot_on_door_lock_set_pin_code_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "SetPINCodeResponse: Unable to parse JSON payload.\n");
@@ -9650,12 +9732,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetPINCode
-static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_pin_code(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -9672,10 +9754,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -9683,7 +9765,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_getpin_code(
+        uic_mqtt_dotdot_parse_door_lock_get_pin_code(
           jsn,
           fields.userid
               );
@@ -9704,11 +9786,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback(
+      uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getpin_code_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_pin_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9724,7 +9806,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
         "GetPINCode",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_getpin_code);
+        uic_mqtt_dotdot_on_door_lock_get_pin_code);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "GetPINCode: Unable to parse JSON payload.\n");
@@ -9735,12 +9817,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetPINCodeResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_pin_code_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -9757,10 +9839,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t fields;
       std::string code;
     
 
@@ -9769,7 +9851,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
+        uic_mqtt_dotdot_parse_door_lock_get_pin_code_response(
           jsn,
           fields.userid,
               
@@ -9797,11 +9879,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getpin_code_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_pin_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9829,7 +9911,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
         "GetPINCodeResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_getpin_code_response);
+        uic_mqtt_dotdot_on_door_lock_get_pin_code_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "GetPINCodeResponse: Unable to parse JSON payload.\n");
@@ -9840,12 +9922,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearPINCode
-static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_pin_code(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -9862,10 +9944,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -9873,7 +9955,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_clearpin_code(
+        uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
           jsn,
           fields.userid
               );
@@ -9894,11 +9976,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearpin_code_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_pin_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9914,7 +9996,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
         "ClearPINCode",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clearpin_code);
+        uic_mqtt_dotdot_on_door_lock_clear_pin_code);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearPINCode: Unable to parse JSON payload.\n");
@@ -9925,12 +10007,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearPINCodeResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_pin_code_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -9947,10 +10029,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -9958,7 +10040,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
+        uic_mqtt_dotdot_parse_door_lock_clear_pin_code_response(
           jsn,
           fields.status
               );
@@ -9979,11 +10061,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearpin_code_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -9999,7 +10081,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
         "ClearPINCodeResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clearpin_code_response);
+        uic_mqtt_dotdot_on_door_lock_clear_pin_code_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearPINCodeResponse: Unable to parse JSON payload.\n");
@@ -10010,12 +10092,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearAllPINCodes
-static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_all_pin_codes(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -10032,7 +10114,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback != nullptr) {
 
     
 
@@ -10058,10 +10140,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10073,7 +10155,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
         "ClearAllPINCodes",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clear_allpin_codes);
+        uic_mqtt_dotdot_on_door_lock_clear_all_pin_codes);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearAllPINCodes: Unable to parse JSON payload.\n");
@@ -10084,12 +10166,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearAllPINCodesResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_all_pin_codes_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -10106,10 +10188,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -10117,7 +10199,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_clear_allpin_codes_response(
+        uic_mqtt_dotdot_parse_door_lock_clear_all_pin_codes_response(
           jsn,
           fields.status
               );
@@ -10138,11 +10220,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -10158,7 +10240,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response(
         "ClearAllPINCodesResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clear_allpin_codes_response);
+        uic_mqtt_dotdot_on_door_lock_clear_all_pin_codes_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearAllPINCodesResponse: Unable to parse JSON payload.\n");
@@ -12589,12 +12671,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_type_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetRFIDCode
-static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_rfid_code(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -12611,10 +12693,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t fields;
       std::string rfid_code;
     
 
@@ -12623,7 +12705,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_setrfid_code(
+        uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
           jsn,
           fields.userid,
               
@@ -12651,11 +12733,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback(
+      uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setrfid_code_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_rfid_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12683,7 +12765,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
         "SetRFIDCode",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_setrfid_code);
+        uic_mqtt_dotdot_on_door_lock_set_rfid_code);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "SetRFIDCode: Unable to parse JSON payload.\n");
@@ -12694,12 +12776,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetRFIDCodeResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_rfid_code_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -12716,10 +12798,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -12727,7 +12809,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
+        uic_mqtt_dotdot_parse_door_lock_set_rfid_code_response(
           jsn,
           fields.status
               );
@@ -12748,11 +12830,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_setrfid_code_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12768,7 +12850,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
         "SetRFIDCodeResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_setrfid_code_response);
+        uic_mqtt_dotdot_on_door_lock_set_rfid_code_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "SetRFIDCodeResponse: Unable to parse JSON payload.\n");
@@ -12779,12 +12861,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetRFIDCode
-static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_rfid_code(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -12801,10 +12883,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -12812,7 +12894,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_getrfid_code(
+        uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
           jsn,
           fields.userid
               );
@@ -12833,11 +12915,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback(
+      uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getrfid_code_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_rfid_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12853,7 +12935,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
         "GetRFIDCode",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_getrfid_code);
+        uic_mqtt_dotdot_on_door_lock_get_rfid_code);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "GetRFIDCode: Unable to parse JSON payload.\n");
@@ -12864,12 +12946,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetRFIDCodeResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_rfid_code_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -12886,10 +12968,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t fields;
       std::string rfid_code;
     
 
@@ -12898,7 +12980,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
+        uic_mqtt_dotdot_parse_door_lock_get_rfid_code_response(
           jsn,
           fields.userid,
               
@@ -12926,11 +13008,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_getrfid_code_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -12958,7 +13040,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
         "GetRFIDCodeResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_getrfid_code_response);
+        uic_mqtt_dotdot_on_door_lock_get_rfid_code_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "GetRFIDCodeResponse: Unable to parse JSON payload.\n");
@@ -12969,12 +13051,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearRFIDCode
-static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_rfid_code(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -12991,10 +13073,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -13002,7 +13084,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
+        uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
           jsn,
           fields.userid
               );
@@ -13023,11 +13105,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearrfid_code_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13043,7 +13125,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
         "ClearRFIDCode",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clearrfid_code);
+        uic_mqtt_dotdot_on_door_lock_clear_rfid_code);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearRFIDCode: Unable to parse JSON payload.\n");
@@ -13054,12 +13136,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearRFIDCodeResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_rfid_code_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -13076,10 +13158,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -13087,7 +13169,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
+        uic_mqtt_dotdot_parse_door_lock_clear_rfid_code_response(
           jsn,
           fields.status
               );
@@ -13108,11 +13190,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13128,7 +13210,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
         "ClearRFIDCodeResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clearrfid_code_response);
+        uic_mqtt_dotdot_on_door_lock_clear_rfid_code_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearRFIDCodeResponse: Unable to parse JSON payload.\n");
@@ -13139,12 +13221,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodes
-static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_all_rfid_codes(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -13161,7 +13243,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback != nullptr) {
 
     
 
@@ -13187,10 +13269,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback(
         group_id
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13202,7 +13284,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
         "ClearAllRFIDCodes",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clear_allrfid_codes);
+        uic_mqtt_dotdot_on_door_lock_clear_all_rfid_codes);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearAllRFIDCodes: Unable to parse JSON payload.\n");
@@ -13213,12 +13295,12 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes(
 }
 
 // Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodesResponse
-static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_all_rfid_codes_response(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback == nullptr)) {
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback == nullptr)) {
     return;
   }
   if (message_length == 0) {
@@ -13235,10 +13317,10 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
 
   // Pass to command-specific callback if set. Otherwise, pass to
   // group-dispatch callback
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback != nullptr) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback != nullptr) {
 
     
-    uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t fields;
+    uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t fields;
 
 
       nlohmann::json jsn;
@@ -13246,7 +13328,7 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
         jsn = nlohmann::json::parse(std::string(message));
 
       
-        uic_mqtt_dotdot_parse_door_lock_clear_allrfid_codes_response(
+        uic_mqtt_dotdot_parse_door_lock_clear_all_rfid_codes_response(
           jsn,
           fields.status
               );
@@ -13267,11 +13349,11 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
         return;
       }
 
-      uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback(
+      uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback(
         group_id,
         &fields
       );
-  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback().empty())) {
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback().empty())) {
     // group-dispatch callback only called if the command-specific by-unid
     // callback is set
     try {
@@ -13287,10 +13369,377 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response(
         "ClearAllRFIDCodesResponse",
         message,
         message_length,
-        uic_mqtt_dotdot_on_door_lock_clear_allrfid_codes_response);
+        uic_mqtt_dotdot_on_door_lock_clear_all_rfid_codes_response);
 
     } catch (...) {
       sl_log_debug(LOG_TAG, "ClearAllRFIDCodesResponse: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetUser
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_user_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_set_user_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_set_user_fields_t fields;
+      std::string user_name;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_set_user(
+          jsn,
+          fields.operation_type,
+              
+          fields.user_index,
+              
+          user_name,
+      
+          fields.user_uniqueid,
+              
+          fields.user_status,
+              
+          fields.user_type,
+              
+          fields.credential_rule
+              );
+
+      // Populate list fields from vector or string types
+              fields.user_name = user_name.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "SetUser");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "SetUser", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "SetUser", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_set_user_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_user_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("OperationType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: OperationType\n");
+        return;
+      }
+      if (jsn.find("UserIndex") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: UserIndex\n");
+        return;
+      }
+      if (jsn.find("UserName") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: UserName\n");
+        return;
+      }
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+      if (jsn.find("UserStatus") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: UserStatus\n");
+        return;
+      }
+      if (jsn.find("UserType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: UserType\n");
+        return;
+      }
+      if (jsn.find("CredentialRule") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetUser: Missing command-argument: CredentialRule\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "SetUser",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_set_user);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SetUser: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetUser
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_user_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_get_user_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_get_user_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_get_user(
+          jsn,
+          fields.user_index
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetUser");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetUser", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetUser", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_get_user_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_user_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserIndex") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::GetUser: Missing command-argument: UserIndex\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "GetUser",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_get_user);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "GetUser: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetUserResponse
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_user_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback != nullptr) {
+
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetUserResponse");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetUserResponse", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetUserResponse", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback(
+        group_id
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_user_response_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "GetUserResponse",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_get_user_response);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "GetUserResponse: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearUser
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_user_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_user_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_clear_user_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_clear_user(
+          jsn,
+          fields.user_index
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "ClearUser");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "ClearUser", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "ClearUser", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_clear_user_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_user_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserIndex") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::ClearUser: Missing command-argument: UserIndex\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "ClearUser",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_clear_user);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "ClearUser: Unable to parse JSON payload.\n");
       return;
     }
   }
@@ -13547,6 +13996,528 @@ static void uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification
 
 }
 
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetCredential
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_credential_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_set_credential_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_set_credential_fields_t fields;
+      std::string credential_data;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_set_credential(
+          jsn,
+          fields.operation_type,
+              
+          fields.credential,
+              
+          credential_data,
+      
+          fields.user_index,
+              
+          fields.user_status,
+              
+          fields.user_type
+              );
+
+      // Populate list fields from vector or string types
+              fields.credential_data = credential_data.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "SetCredential");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "SetCredential", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "SetCredential", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_set_credential_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_credential_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("OperationType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetCredential: Missing command-argument: OperationType\n");
+        return;
+      }
+      if (jsn.find("Credential") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetCredential: Missing command-argument: Credential\n");
+        return;
+      }
+      if (jsn.find("CredentialData") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetCredential: Missing command-argument: CredentialData\n");
+        return;
+      }
+      if (jsn.find("UserIndex") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetCredential: Missing command-argument: UserIndex\n");
+        return;
+      }
+      if (jsn.find("UserStatus") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetCredential: Missing command-argument: UserStatus\n");
+        return;
+      }
+      if (jsn.find("UserType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::SetCredential: Missing command-argument: UserType\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "SetCredential",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_set_credential);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SetCredential: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/SetCredentialResponse
+static void uic_mqtt_dotdot_on_by_group_door_lock_set_credential_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback != nullptr) {
+
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "SetCredentialResponse");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "SetCredentialResponse", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "SetCredentialResponse", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback(
+        group_id
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_set_credential_response_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "SetCredentialResponse",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_set_credential_response);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SetCredentialResponse: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetCredentialStatus
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_credential_status(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_get_credential_status(
+          jsn,
+          fields.credential
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetCredentialStatus");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetCredentialStatus", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetCredentialStatus", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_credential_status_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("Credential") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::GetCredentialStatus: Missing command-argument: Credential\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "GetCredentialStatus",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_get_credential_status);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "GetCredentialStatus: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/GetCredentialStatusResponse
+static void uic_mqtt_dotdot_on_by_group_door_lock_get_credential_status_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback != nullptr) {
+
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "GetCredentialStatusResponse");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetCredentialStatusResponse", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "GetCredentialStatusResponse", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback(
+        group_id
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_get_credential_status_response_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "GetCredentialStatusResponse",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_get_credential_status_response);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "GetCredentialStatusResponse: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/ClearCredential
+static void uic_mqtt_dotdot_on_by_group_door_lock_clear_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_clear_credential(
+          jsn,
+          fields.credential
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "ClearCredential");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "ClearCredential", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "ClearCredential", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_clear_credential_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("Credential") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::ClearCredential: Missing command-argument: Credential\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "ClearCredential",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_clear_credential);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "ClearCredential: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/DoorLock/Commands/UnboltDoor
+static void uic_mqtt_dotdot_on_by_group_door_lock_unbolt_door(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t fields;
+      std::string pin_code;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_door_lock_unbolt_door(
+          jsn,
+          pin_code
+      );
+
+      // Populate list fields from vector or string types
+              fields.pin_code = pin_code.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "DoorLock", "UnboltDoor");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "UnboltDoor", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "DoorLock", "UnboltDoor", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_door_lock_unbolt_door_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("PINCode") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "DoorLock::UnboltDoor: Missing command-argument: PINCode\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "DoorLock",
+        "UnboltDoor",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_door_lock_unbolt_door);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "UnboltDoor: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
 static void uic_mqtt_dotdot_on_by_group_door_lock_WriteAttributes(
   const char *topic,
   const char *message,
@@ -13665,37 +14636,37 @@ sl_status_t uic_mqtt_dotdot_by_group_door_lock_init()
     subscription_topic = topic_bygroup + "DoorLock/Commands/GetLogRecordResponse";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_setpin_code_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_pin_code_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/SetPINCode";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_setpin_code);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_pin_code);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_setpin_code_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_pin_code_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/SetPINCodeResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_pin_code_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_getpin_code_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_pin_code_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/GetPINCode";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_getpin_code);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_pin_code);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_getpin_code_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_pin_code_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/GetPINCodeResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_pin_code_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clearpin_code_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearPINCode";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_pin_code);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clearpin_code_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_pin_code_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearPINCodeResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_pin_code_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearAllPINCodes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_all_pin_codes);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allpin_codes_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_pin_codes_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearAllPINCodesResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_all_pin_codes_response);
   }
   if (uic_mqtt_dotdot_by_group_door_lock_set_user_status_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/SetUserStatus";
@@ -13801,37 +14772,53 @@ sl_status_t uic_mqtt_dotdot_by_group_door_lock_init()
     subscription_topic = topic_bygroup + "DoorLock/Commands/GetUserTypeResponse";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_user_type_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_setrfid_code_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/SetRFIDCode";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_rfid_code);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_setrfid_code_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_set_rfid_code_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/SetRFIDCodeResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_rfid_code_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_getrfid_code_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/GetRFIDCode";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_rfid_code);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_getrfid_code_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_get_rfid_code_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/GetRFIDCodeResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_rfid_code_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearRFIDCode";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_rfid_code);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clearrfid_code_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_rfid_code_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearRFIDCodeResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_rfid_code_response);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearAllRFIDCodes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_all_rfid_codes);
   }
-  if (uic_mqtt_dotdot_by_group_door_lock_clear_allrfid_codes_response_callback) {
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_all_rfid_codes_response_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ClearAllRFIDCodesResponse";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response);
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_all_rfid_codes_response);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_set_user_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/SetUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_user);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_get_user_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/GetUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_user);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_get_user_response_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/GetUserResponse";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_user_response);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_user_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/ClearUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_user);
   }
   if (uic_mqtt_dotdot_by_group_door_lock_operating_event_notification_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/OperatingEventNotification";
@@ -13840,6 +14827,30 @@ sl_status_t uic_mqtt_dotdot_by_group_door_lock_init()
   if (uic_mqtt_dotdot_by_group_door_lock_programming_event_notification_callback) {
     subscription_topic = topic_bygroup + "DoorLock/Commands/ProgrammingEventNotification";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_set_credential_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/SetCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_credential);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_set_credential_response_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/SetCredentialResponse";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_set_credential_response);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_get_credential_status_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/GetCredentialStatus";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_credential_status);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_get_credential_status_response_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/GetCredentialStatusResponse";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_get_credential_status_response);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_clear_credential_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/ClearCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_clear_credential);
+  }
+  if (uic_mqtt_dotdot_by_group_door_lock_unbolt_door_callback) {
+    subscription_topic = topic_bygroup + "DoorLock/Commands/UnboltDoor";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_door_lock_unbolt_door);
   }
 
   return SL_STATUS_OK;
@@ -22396,6 +23407,91 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init()
 
 
 
+
+static void uic_mqtt_dotdot_on_by_group_descriptor_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_descriptor_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "Descriptor",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_descriptor_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "Descriptor: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_descriptor_state_t new_state = {};
+    uic_mqtt_dotdot_descriptor_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_descriptor_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "Descriptor", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "Descriptor", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "Descriptor", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_descriptor_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "Descriptor/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_descriptor_WriteAttributes);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
 void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
 {
   // Check for uninitialized value in order to subscribe with on_group handlers
@@ -22497,14 +23593,14 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/UnlockWithTimeoutResponse", uic_mqtt_dotdot_on_by_group_door_lock_unlock_with_timeout_response);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetLogRecord", uic_mqtt_dotdot_on_by_group_door_lock_get_log_record);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetLogRecordResponse", uic_mqtt_dotdot_on_by_group_door_lock_get_log_record_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetPINCode", uic_mqtt_dotdot_on_by_group_door_lock_setpin_code);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetPINCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_setpin_code_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetPINCode", uic_mqtt_dotdot_on_by_group_door_lock_getpin_code);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetPINCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_getpin_code_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearPINCode", uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearPINCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_clearpin_code_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllPINCodes", uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllPINCodesResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_allpin_codes_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetPINCode", uic_mqtt_dotdot_on_by_group_door_lock_set_pin_code);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetPINCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_set_pin_code_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetPINCode", uic_mqtt_dotdot_on_by_group_door_lock_get_pin_code);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetPINCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_get_pin_code_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearPINCode", uic_mqtt_dotdot_on_by_group_door_lock_clear_pin_code);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearPINCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_pin_code_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllPINCodes", uic_mqtt_dotdot_on_by_group_door_lock_clear_all_pin_codes);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllPINCodesResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_all_pin_codes_response);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetUserStatus", uic_mqtt_dotdot_on_by_group_door_lock_set_user_status);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetUserStatusResponse", uic_mqtt_dotdot_on_by_group_door_lock_set_user_status_response);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetUserStatus", uic_mqtt_dotdot_on_by_group_door_lock_get_user_status);
@@ -22531,16 +23627,26 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetUserTypeResponse", uic_mqtt_dotdot_on_by_group_door_lock_set_user_type_response);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetUserType", uic_mqtt_dotdot_on_by_group_door_lock_get_user_type);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetUserTypeResponse", uic_mqtt_dotdot_on_by_group_door_lock_get_user_type_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetRFIDCode", uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetRFIDCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_setrfid_code_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetRFIDCode", uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetRFIDCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_getrfid_code_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearRFIDCode", uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearRFIDCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_clearrfid_code_response);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodes", uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes);
-    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodesResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_allrfid_codes_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetRFIDCode", uic_mqtt_dotdot_on_by_group_door_lock_set_rfid_code);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetRFIDCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_set_rfid_code_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetRFIDCode", uic_mqtt_dotdot_on_by_group_door_lock_get_rfid_code);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetRFIDCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_get_rfid_code_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearRFIDCode", uic_mqtt_dotdot_on_by_group_door_lock_clear_rfid_code);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearRFIDCodeResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_rfid_code_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodes", uic_mqtt_dotdot_on_by_group_door_lock_clear_all_rfid_codes);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearAllRFIDCodesResponse", uic_mqtt_dotdot_on_by_group_door_lock_clear_all_rfid_codes_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetUser", uic_mqtt_dotdot_on_by_group_door_lock_set_user);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetUser", uic_mqtt_dotdot_on_by_group_door_lock_get_user);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetUserResponse", uic_mqtt_dotdot_on_by_group_door_lock_get_user_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearUser", uic_mqtt_dotdot_on_by_group_door_lock_clear_user);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/OperatingEventNotification", uic_mqtt_dotdot_on_by_group_door_lock_operating_event_notification);
     uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ProgrammingEventNotification", uic_mqtt_dotdot_on_by_group_door_lock_programming_event_notification);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetCredential", uic_mqtt_dotdot_on_by_group_door_lock_set_credential);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/SetCredentialResponse", uic_mqtt_dotdot_on_by_group_door_lock_set_credential_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetCredentialStatus", uic_mqtt_dotdot_on_by_group_door_lock_get_credential_status);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/GetCredentialStatusResponse", uic_mqtt_dotdot_on_by_group_door_lock_get_credential_status_response);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/ClearCredential", uic_mqtt_dotdot_on_by_group_door_lock_clear_credential);
+    uic_mqtt_subscribe("ucl/by-group/+/DoorLock/Commands/UnboltDoor", uic_mqtt_dotdot_on_by_group_door_lock_unbolt_door);
 
     uic_mqtt_subscribe("ucl/by-group/+/WindowCovering/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_window_covering_WriteAttributes);
     uic_mqtt_subscribe("ucl/by-group/+/WindowCovering/Commands/UpOrOpen", uic_mqtt_dotdot_on_by_group_window_covering_up_or_open);
@@ -22664,6 +23770,8 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/AoXLocator/Commands/AngleCorrection", uic_mqtt_dotdot_on_by_group_aox_locator_angle_correction);
 
     uic_mqtt_subscribe("ucl/by-group/+/AoXPositionEstimation/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_aox_position_estimation_WriteAttributes);
+
+    uic_mqtt_subscribe("ucl/by-group/+/Descriptor/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_descriptor_WriteAttributes);
 
   }
 

@@ -1007,7 +1007,7 @@ void test_kex_joining_node_state_machine_ssa(void) {
  * When a node is to be included securely it is expected that a ZW_SendData is send.
  * For this the common S2_send_frame(...) defined in s2.h is used, which will be implemented elsewhere.
  */
-void test_kex_joining_node_state_machine_unauthenticated() {
+void test_kex_joining_node_state_machine_unauthenticated(void) {
   uint8_t public_key_b[] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22, // Public key.
                             0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22,
                             0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22,
@@ -1254,7 +1254,7 @@ void test_kex_joining_node_state_machine_unauthenticated() {
  *               relevant for this test as they are verified in: test_kex_joining_node_state_machine()
  *               NOTE: messages related to Timeout will be verified in this test.
  */
-void test_kex_joining_timer_handling() {
+void test_kex_joining_timer_handling(void) {
   mock_t *    p_mock;
   uint8_t     frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2   s2_context;
@@ -1435,7 +1435,7 @@ void test_kex_joining_timer_handling() {
  *        decrement a counter to go one step further on each loop.
  */
  #define NO_OF_STATES 6
-void test_kex_inclusion_timeout_all_states() {
+void test_kex_inclusion_timeout_all_states(void) {
   mock_t    * p_mock;
   uint32_t    i;
   uint8_t     frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -1667,7 +1667,7 @@ void test_kex_inclusion_timeout_all_states() {
  *
  *  An error should still be returned upwards to the application.
  */
-void test_kex_inclusion_invalid_frame_order_all_states() {
+void test_kex_inclusion_invalid_frame_order_all_states(void) {
   mock_t       * p_mock;
   uint32_t       i;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -1889,7 +1889,7 @@ void test_kex_inclusion_invalid_frame_order_all_states() {
 /** Test case for ensuring that the inclusion state machine will not abort if an older inclusion
  *  frame is received multiple times, as example due to retransmission or routing.
  */
-void test_kex_inclusion_duplicate_frame_all_states() {
+void test_kex_inclusion_duplicate_frame_all_states(void) {
   mock_t       * p_mock;
   uint32_t       i;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -2110,7 +2110,7 @@ void test_kex_inclusion_duplicate_frame_all_states() {
  *           schemes supported by both inclusion and joining node. If this cannot be established
  *           between the node, then it must be ensured that appropriate failure is returned.
  */
-void test_kex_inclusion_error_schemes() {
+void test_kex_inclusion_error_schemes(void) {
   mock_t    * p_mock;
   uint32_t    i;
   uint8_t     frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -2214,7 +2214,7 @@ void test_kex_inclusion_error_schemes() {
 /** Test case for ensuring that a proper error message is returned in case the inclusion state
  *  machine is initialized with an invalid set of schemes.
  */
-void test_kex_inclusion_init_errors()
+void test_kex_inclusion_init_errors(void)
 {
   uint8_t ret_val;
 
@@ -2281,7 +2281,7 @@ void test_kex_inclusion_init_errors()
  *
  *  Test: This test case will a KEX_FAIL_CURVES is returned when invalid set of schemes is requested.
  */
-void test_kex_inclusion_error_curves() {
+void test_kex_inclusion_error_curves(void) {
   mock_t         * p_mock;
   zwave_event_t  * p_expected_event;
   uint8_t          frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -2391,7 +2391,7 @@ void test_kex_inclusion_error_curves() {
  *
  *  Test: This test case will a KEX_FAIL_KEY is returned when invalid set of schemes/keys is requested.
  */
-void test_kex_inclusion_error_keys() {
+void test_kex_inclusion_error_keys(void) {
   uint32_t         i;
   mock_t         * p_mock;
   zwave_event_t  * p_expected_event;
@@ -2504,7 +2504,7 @@ void test_kex_inclusion_error_keys() {
  *  Test: This test case will ensure that the state machine returns to idle as the wrong including
  *  bit is identical to a unexpected frame at this stages in the state machine.
  */
-void test_kex_inclusion_error_public_key_including_bit() {
+void test_kex_inclusion_error_public_key_including_bit(void) {
   mock_t         * p_mock;
   zwave_event_t  * p_expected_event;
   uint8_t          frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -2599,7 +2599,7 @@ void test_kex_inclusion_error_public_key_including_bit() {
 /** Test case for ensuring correct handling of node inclusion in case the including node is
  *  transmitting frames with reserved bits set (which should be ignored).
  */
-void test_kex_inclusion_public_key_reserved_bits() {
+void test_kex_inclusion_public_key_reserved_bits(void) {
   mock_t       * p_mock;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2      s2_context;
@@ -2795,7 +2795,7 @@ void test_kex_inclusion_public_key_reserved_bits() {
  *
  *  Test: This test case will verify that a KEX_FAIL_AUTH is returned if the echo'ed KEX Report dod not match.
  */
-void test_kex_inclusion_error_echo_kex_report() {
+void test_kex_inclusion_error_echo_kex_report(void) {
   uint32_t         i;
   mock_t         * p_mock;
   zwave_event_t  * p_expected_event;
@@ -3069,7 +3069,7 @@ void test_kex_inclusion_error_echo_kex_report() {
 
 /**
  */
-void test_kex_inclusion_invalid_key_report_set() {
+void test_kex_inclusion_invalid_key_report_set(void) {
   mock_t       * p_mock;
   zwave_event_t  * p_expected_event;
   uint32_t       i;
@@ -3279,7 +3279,7 @@ void test_kex_inclusion_invalid_key_report_set() {
  *
  *  Test: This test case will ensure a KEX Set is transmitted when a valid set of schemes/keys is requested.
  */
-void test_kex_inclusion_valid_keys() {
+void test_kex_inclusion_valid_keys(void) {
   uint32_t         i;
   mock_t         * p_mock;
   uint8_t          frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -3408,7 +3408,7 @@ void test_kex_inclusion_valid_keys() {
 
 /** Test case for ensuring correct timer handling on timeout while in idle.
  */
-void test_kex_inclusion_timeout_when_idle() {
+void test_kex_inclusion_timeout_when_idle(void) {
   mock_t  * p_mock;
   uint8_t   frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2 s2_context;
@@ -3460,7 +3460,7 @@ void test_kex_inclusion_timeout_when_idle() {
  *
  *  Such frame should be silently ignored.
  */
-void test_kex_inclusion_invalid_frame_idle() {
+void test_kex_inclusion_invalid_frame_idle(void) {
   uint8_t         frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2       s2_context;
 
@@ -3491,7 +3491,7 @@ void test_kex_inclusion_invalid_frame_idle() {
 /** This test case ensure that the system continues to send ECHO KEX Set until a ECHO KEX Report is received regardless if send done fails or succeeds.
  *  When ECHO KEX Report is received the state machine continues.
  */
-void test_kex_inclusion_echo_kex_set_retry() {
+void test_kex_inclusion_echo_kex_set_retry(void) {
   mock_t       * p_mock;
 //  zwave_event_t  * p_expected_event;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -3662,7 +3662,7 @@ void test_kex_inclusion_echo_kex_set_retry() {
  *  - Writing of network keys to keystore when receiving them.
  *  - Restore of all keys when inclusion is complete.
  */
-void test_inclusion_keystore_handling() {
+void test_inclusion_keystore_handling(void) {
   mock_t       * p_mock;
 //  zwave_event_t  * p_expected_event;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -3849,7 +3849,7 @@ void test_inclusion_keystore_handling() {
  *
  *  Test: This test case will a KEX_FAIL_KEY is returned when invalid set of schemes/keys is requested.
  */
-void test_kex_inclusion_received_kex_fail_frame() {
+void test_kex_inclusion_received_kex_fail_frame(void) {
   mock_t         * p_mock;
   zwave_event_t  * p_expected_event;
   uint8_t          frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -3916,7 +3916,7 @@ void test_kex_inclusion_received_kex_fail_frame() {
  *  This feature is requested on nodes that might support both Security 0 and security 2, but where
  *  it is unknown which inclusion mode will be activated.
  */
-void test_kex_inclusion_abort() {
+void test_kex_inclusion_abort(void) {
   struct S2        s2_context;
   uint8_t          frame_buffer[UNIT_TEST_BUF_SIZE];
 
@@ -3962,7 +3962,7 @@ void test_kex_inclusion_abort() {
  *
  *  This failure should result in a KEX Fail - TBD to be transmitted to the inclusion_peer.
  */
-void test_kex_joining_node_wrong_dsk_input() {
+void test_kex_joining_node_wrong_dsk_input(void) {
   uint8_t public_key_b[] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22, // Public key.
                             0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22,
                             0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x11, 0x22,
@@ -4101,7 +4101,7 @@ void test_kex_joining_node_wrong_dsk_input() {
  *  - Writing of network keys to keystore when receiving them.
  *  - Restore of all keys when inclusion is complete.
  */
-void test_keystore_doorlock() {
+void test_keystore_doorlock(void) {
   mock_t       * p_mock;
 //  zwave_event_t  * p_expected_event;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
@@ -4282,7 +4282,7 @@ void test_keystore_doorlock() {
 /** Verification that in case the inclusion state machine is in idle, then AUTH Failed should not
  *  be returned for an invalid encrypted frame. TO#06510
  */
-void test_kex_invalid_crypt_frame_idle() {
+void test_kex_invalid_crypt_frame_idle(void) {
 
   mock_calls_clear();
 
@@ -4315,7 +4315,7 @@ void test_kex_invalid_crypt_frame_idle() {
 /** Test case for ensuring that the inclusion state machine will not abort if an older inclusion
  *  frame is received multiple times, as example due to retransmission or routing.
  */
-void test_kex_inclusion_tx_queue_full() {
+void test_kex_inclusion_tx_queue_full(void) {
   mock_t       * p_mock;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2      s2_context;
@@ -4580,7 +4580,7 @@ void test_kex_inclusion_tx_queue_full() {
  *  SECURITY_2_TRANSFER_END is returned but KeyVerified bit is set to 0.
  *  TO#7507
  */
-void test_kex_inclusion_transfer_end_key_not_verified_TO7507() {
+void test_kex_inclusion_transfer_end_key_not_verified_TO7507(void) {
   mock_t       * p_mock;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2      s2_context;
@@ -4748,7 +4748,7 @@ void test_kex_inclusion_transfer_end_key_not_verified_TO7507() {
 /** Test case for ensuring that in the (including node misbehaving) event where a
  *  SECURITY_2_TRANSFER_END is returned by including node with KeyRequestComplete bit is set to 1.
  */
-void test_kex_inclusion_transfer_end_key_request_complete_error() {
+void test_kex_inclusion_transfer_end_key_request_complete_error(void) {
   mock_t       * p_mock;
   uint8_t        frame_buffer[UNIT_TEST_BUF_SIZE];
   struct S2      s2_context;

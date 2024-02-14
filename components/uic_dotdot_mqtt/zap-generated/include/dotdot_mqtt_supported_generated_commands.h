@@ -444,14 +444,14 @@ typedef struct _uic_mqtt_dotdot_door_lock_supported_commands_ {
   bool unlock_with_timeout_response;
   bool get_log_record;
   bool get_log_record_response;
-  bool setpin_code;
-  bool setpin_code_response;
-  bool getpin_code;
-  bool getpin_code_response;
-  bool clearpin_code;
-  bool clearpin_code_response;
-  bool clear_allpin_codes;
-  bool clear_allpin_codes_response;
+  bool set_pin_code;
+  bool set_pin_code_response;
+  bool get_pin_code;
+  bool get_pin_code_response;
+  bool clear_pin_code;
+  bool clear_pin_code_response;
+  bool clear_all_pin_codes;
+  bool clear_all_pin_codes_response;
   bool set_user_status;
   bool set_user_status_response;
   bool get_user_status;
@@ -478,16 +478,26 @@ typedef struct _uic_mqtt_dotdot_door_lock_supported_commands_ {
   bool set_user_type_response;
   bool get_user_type;
   bool get_user_type_response;
-  bool setrfid_code;
-  bool setrfid_code_response;
-  bool getrfid_code;
-  bool getrfid_code_response;
-  bool clearrfid_code;
-  bool clearrfid_code_response;
-  bool clear_allrfid_codes;
-  bool clear_allrfid_codes_response;
+  bool set_rfid_code;
+  bool set_rfid_code_response;
+  bool get_rfid_code;
+  bool get_rfid_code_response;
+  bool clear_rfid_code;
+  bool clear_rfid_code_response;
+  bool clear_all_rfid_codes;
+  bool clear_all_rfid_codes_response;
+  bool set_user;
+  bool get_user;
+  bool get_user_response;
+  bool clear_user;
   bool operating_event_notification;
   bool programming_event_notification;
+  bool set_credential;
+  bool set_credential_response;
+  bool get_credential_status;
+  bool get_credential_status_response;
+  bool clear_credential;
+  bool unbolt_door;
   bool write_attributes;
 } uic_mqtt_dotdot_door_lock_supported_commands_t;
 
@@ -1623,6 +1633,34 @@ typedef struct _uic_mqtt_dotdot_protocol_controller_network_management_supported
 void uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_generated_commands(
   const dotdot_unid_t unid,
   const uic_mqtt_dotdot_protocol_controller_network_management_supported_commands_t *command_list
+);
+
+
+/**
+ * @brief Struct containing the list of commands for Descriptor
+ */
+typedef struct _uic_mqtt_dotdot_descriptor_supported_commands_ {
+  bool write_attributes;
+} uic_mqtt_dotdot_descriptor_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the Descriptor cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/Descriptor/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_descriptor_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_descriptor_supported_commands_t *command_list
 );
 
 

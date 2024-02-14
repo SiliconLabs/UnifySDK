@@ -1,28 +1,14 @@
-libavahi-client-dev
-libavahi-common-dev
-libboost-atomic-dev
-libboost-chrono-dev
-libboost-date-time-dev
-libboost-filesystem-dev
-libboost-log-dev
-libboost-program-options-dev
-libboost-regex-dev
-libboost-serialization-dev
-libboost-system-dev
-libboost-thread-dev
-libdbus-1-dev
-libedit-dev
-libjsoncpp-dev
-libmbedtls-dev
-libmosquitto-dev
-libncurses5-dev
-libncursesw5-dev
-libnetfilter-queue-dev
-libreadline-dev
-libsqlite3-dev
-libssl-dev
-libsystemd-dev
-libwrap0-dev
-libyaml-cpp-dev
-procps
-uthash-dev
+libavahi-client-dev                 // OT-BR. LGPL framework for Multicast DNS Service Discovery
+libboost-filesystem-dev             // UIC_Log. Provides portable facilities to query and manipulate paths, files, and directories. 
+libboost-log-dev                    // UIC_Log. This library aims to make logging significantly easier for the application developer.
+libboost-program-options-dev        // UIC_Log. Library to let program developers obtain program options
+libboost-system-dev                 // required for cmake
+libboost-thread-dev                 // required for cmake
+libedit-dev                         // STDIN line editor library provides generic line editing, history, and tokenization functions
+libjsoncpp-dev                      // OT-BR. an implementation of a JSON reader and writer in C++
+libmbedtls-dev                      // CPCD crypto and SSL/TLS library
+libmosquitto-dev                    // Mosquitto
+libreadline-dev                     // UIC_Log. The GNU readline library aids in the consistency of user interface across discrete programs that need to provide a command line interface
+libsqlite3-dev                      // GMS, NAL. SQLite is a C library that implements an SQL database engine. 
+libssl-dev                          // required for cmake
+libyaml-cpp-dev                     // UIC_config, UIC_rust. C++ library for parsing and emitting data in YAML

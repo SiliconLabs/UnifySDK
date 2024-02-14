@@ -4358,7 +4358,7 @@ std::string get_json_payload_for_door_lock_lock_door_command(
   command_with_no_fields = false;
   // Single Value
   // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_orrfid_code);
+  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_or_rfid_code);
 
   // Get the string
   if (command_with_no_fields == true) {
@@ -4371,7 +4371,7 @@ std::string get_json_payload_for_door_lock_lock_door_command(
 
 void uic_mqtt_dotdot_parse_door_lock_lock_door(
   nlohmann::json &jsn,
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
   
 ) {
 
@@ -4380,7 +4380,7 @@ void uic_mqtt_dotdot_parse_door_lock_lock_door(
     return;
   }
        
-  pin_orrfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
+  pin_or_rfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
           }
 
 
@@ -4450,7 +4450,7 @@ std::string get_json_payload_for_door_lock_unlock_door_command(
   command_with_no_fields = false;
   // Single Value
   // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_orrfid_code);
+  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_or_rfid_code);
 
   // Get the string
   if (command_with_no_fields == true) {
@@ -4463,7 +4463,7 @@ std::string get_json_payload_for_door_lock_unlock_door_command(
 
 void uic_mqtt_dotdot_parse_door_lock_unlock_door(
   nlohmann::json &jsn,
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
   
 ) {
 
@@ -4472,7 +4472,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_door(
     return;
   }
        
-  pin_orrfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
+  pin_or_rfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
           }
 
 
@@ -4542,7 +4542,7 @@ std::string get_json_payload_for_door_lock_toggle_command(
   command_with_no_fields = false;
   // Single Value
   // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_orrfid_code);
+  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_or_rfid_code);
 
   // Get the string
   if (command_with_no_fields == true) {
@@ -4555,7 +4555,7 @@ std::string get_json_payload_for_door_lock_toggle_command(
 
 void uic_mqtt_dotdot_parse_door_lock_toggle(
   nlohmann::json &jsn,
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
   
 ) {
 
@@ -4564,7 +4564,7 @@ void uic_mqtt_dotdot_parse_door_lock_toggle(
     return;
   }
        
-  pin_orrfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
+  pin_or_rfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
           }
 
 
@@ -4638,7 +4638,7 @@ std::string get_json_payload_for_door_lock_unlock_with_timeout_command(
   command_with_no_fields = false;
   // Single Value
   // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_orrfid_code);
+  json_payload["PINOrRFIDCode"] = nlohmann::json(fields->pin_or_rfid_code);
 
   // Get the string
   if (command_with_no_fields == true) {
@@ -4653,7 +4653,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
   nlohmann::json &jsn,
   uint16_t &timeout_in_seconds,
   
-  std::string &pin_orrfid_code
+  std::string &pin_or_rfid_code
   
 ) {
 
@@ -4668,7 +4668,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
     return;
   }
        
-  pin_orrfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
+  pin_or_rfid_code = jsn.at("PINOrRFIDCode").get<std::string>();
           }
 
 
@@ -4814,7 +4814,7 @@ std::string get_json_payload_for_door_lock_get_log_record_response_command(
   command_with_no_fields = false;
   // Single Value
   // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["EventIDOrAlarmCode"] = nlohmann::json(fields->eventid_or_alarm_code);
+  json_payload["EventIDOrAlarmCode"] = nlohmann::json(fields->event_id_or_alarm_code);
   command_with_no_fields = false;
   // Single Value
   // Non-enum and non-bitmask (struct, string or scalar)
@@ -4843,7 +4843,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
   
   DrlkOperEventSource &source_operation_event,
   
-  uint8_t &eventid_or_alarm_code,
+  uint8_t &event_id_or_alarm_code,
   
   uint16_t &userid,
   
@@ -4890,7 +4890,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
     return;
   }
         
-  eventid_or_alarm_code = jsn.at("EventIDOrAlarmCode").get< uint8_t >();
+  event_id_or_alarm_code = jsn.at("EventIDOrAlarmCode").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -4906,9 +4906,9 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
           }
 
 
-std::string get_json_payload_for_door_lock_setpin_code_command(
+std::string get_json_payload_for_door_lock_set_pin_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -4922,10 +4922,10 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
   command_with_no_fields = false;
   // Single Value
   // Enum SetPINCode / UserStatus
-  #ifdef SETPIN_CODE_USER_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef SET_PIN_CODE_USER_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserStatus"] =
-    setpin_code_user_status_get_enum_value_name(
+    set_pin_code_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
   #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
@@ -4937,10 +4937,10 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
   command_with_no_fields = false;
   // Single Value
   // Enum SetPINCode / UserType
-  #ifdef SETPIN_CODE_USER_TYPE_ENUM_NAME_AVAILABLE
+  #ifdef SET_PIN_CODE_USER_TYPE_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserType"] =
-    setpin_code_user_type_get_enum_value_name(
+    set_pin_code_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
   #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
   json_payload["UserType"] =
@@ -4963,7 +4963,7 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_setpin_code(
+void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
   nlohmann::json &jsn,
   DrlkPINUserID &userid,
   
@@ -5012,9 +5012,9 @@ void uic_mqtt_dotdot_parse_door_lock_setpin_code(
           }
 
 
-std::string get_json_payload_for_door_lock_setpin_code_response_command(
+std::string get_json_payload_for_door_lock_set_pin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -5024,10 +5024,10 @@ std::string get_json_payload_for_door_lock_setpin_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum SetPINCodeResponse / Status
-  #ifdef SETPIN_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef SET_PIN_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["Status"] =
-    setpin_code_response_status_get_enum_value_name(
+    set_pin_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
   #elif defined(DRLK_SET_CODE_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["Status"] =
@@ -5046,7 +5046,7 @@ std::string get_json_payload_for_door_lock_setpin_code_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
+void uic_mqtt_dotdot_parse_door_lock_set_pin_code_response(
   nlohmann::json &jsn,
   DrlkSetCodeStatus &status
   
@@ -5066,9 +5066,9 @@ void uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
 }
 
 
-std::string get_json_payload_for_door_lock_getpin_code_command(
+std::string get_json_payload_for_door_lock_get_pin_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -5089,7 +5089,7 @@ std::string get_json_payload_for_door_lock_getpin_code_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_getpin_code(
+void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
   nlohmann::json &jsn,
   DrlkPINUserID &userid
   
@@ -5104,9 +5104,9 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code(
     }
 
 
-std::string get_json_payload_for_door_lock_getpin_code_response_command(
+std::string get_json_payload_for_door_lock_get_pin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -5120,10 +5120,10 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum GetPINCodeResponse / UserStatus
-  #ifdef GETPIN_CODE_RESPONSE_USER_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef GET_PIN_CODE_RESPONSE_USER_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserStatus"] =
-    getpin_code_response_user_status_get_enum_value_name(
+    get_pin_code_response_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
   #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
@@ -5135,10 +5135,10 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum GetPINCodeResponse / UserType
-  #ifdef GETPIN_CODE_RESPONSE_USER_TYPE_ENUM_NAME_AVAILABLE
+  #ifdef GET_PIN_CODE_RESPONSE_USER_TYPE_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserType"] =
-    getpin_code_response_user_type_get_enum_value_name(
+    get_pin_code_response_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
   #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
   json_payload["UserType"] =
@@ -5161,7 +5161,7 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
+void uic_mqtt_dotdot_parse_door_lock_get_pin_code_response(
   nlohmann::json &jsn,
   uint16_t &userid,
   
@@ -5210,9 +5210,9 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
           }
 
 
-std::string get_json_payload_for_door_lock_clearpin_code_command(
+std::string get_json_payload_for_door_lock_clear_pin_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -5233,7 +5233,7 @@ std::string get_json_payload_for_door_lock_clearpin_code_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_clearpin_code(
+void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
   nlohmann::json &jsn,
   DrlkPINUserID &userid
   
@@ -5248,9 +5248,9 @@ void uic_mqtt_dotdot_parse_door_lock_clearpin_code(
     }
 
 
-std::string get_json_payload_for_door_lock_clearpin_code_response_command(
+std::string get_json_payload_for_door_lock_clear_pin_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -5260,10 +5260,10 @@ std::string get_json_payload_for_door_lock_clearpin_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum ClearPINCodeResponse / Status
-  #ifdef CLEARPIN_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef CLEAR_PIN_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["Status"] =
-    clearpin_code_response_status_get_enum_value_name(
+    clear_pin_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
   #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["Status"] =
@@ -5282,7 +5282,7 @@ std::string get_json_payload_for_door_lock_clearpin_code_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_pin_code_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
   
@@ -5302,7 +5302,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
 }
 
 
-std::string get_json_payload_for_door_lock_clear_allpin_codes_command(
+std::string get_json_payload_for_door_lock_clear_all_pin_codes_command(
   
 ){
   bool command_with_no_fields = true;
@@ -5321,9 +5321,9 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_command(
 
 
 
-std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
+std::string get_json_payload_for_door_lock_clear_all_pin_codes_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -5333,10 +5333,10 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum ClearAllPINCodesResponse / Status
-  #ifdef CLEAR_ALLPIN_CODES_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef CLEAR_ALL_PIN_CODES_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["Status"] =
-    clear_allpin_codes_response_status_get_enum_value_name(
+    clear_all_pin_codes_response_status_get_enum_value_name(
       (uint32_t)fields->status);
   #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["Status"] =
@@ -5355,7 +5355,7 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_clear_allpin_codes_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_all_pin_codes_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
   
@@ -7057,9 +7057,9 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type_response(
 }
 
 
-std::string get_json_payload_for_door_lock_setrfid_code_command(
+std::string get_json_payload_for_door_lock_set_rfid_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7073,10 +7073,10 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
   command_with_no_fields = false;
   // Single Value
   // Enum SetRFIDCode / UserStatus
-  #ifdef SETRFID_CODE_USER_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef SET_RFID_CODE_USER_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserStatus"] =
-    setrfid_code_user_status_get_enum_value_name(
+    set_rfid_code_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
   #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
@@ -7088,10 +7088,10 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
   command_with_no_fields = false;
   // Single Value
   // Enum SetRFIDCode / UserType
-  #ifdef SETRFID_CODE_USER_TYPE_ENUM_NAME_AVAILABLE
+  #ifdef SET_RFID_CODE_USER_TYPE_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserType"] =
-    setrfid_code_user_type_get_enum_value_name(
+    set_rfid_code_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
   #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
   json_payload["UserType"] =
@@ -7114,7 +7114,7 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_setrfid_code(
+void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
   nlohmann::json &jsn,
   DrlkRFIDUserID &userid,
   
@@ -7163,9 +7163,9 @@ void uic_mqtt_dotdot_parse_door_lock_setrfid_code(
           }
 
 
-std::string get_json_payload_for_door_lock_setrfid_code_response_command(
+std::string get_json_payload_for_door_lock_set_rfid_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7175,10 +7175,10 @@ std::string get_json_payload_for_door_lock_setrfid_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum SetRFIDCodeResponse / Status
-  #ifdef SETRFID_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef SET_RFID_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["Status"] =
-    setrfid_code_response_status_get_enum_value_name(
+    set_rfid_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
   #elif defined(DRLK_SET_CODE_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["Status"] =
@@ -7197,7 +7197,7 @@ std::string get_json_payload_for_door_lock_setrfid_code_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
+void uic_mqtt_dotdot_parse_door_lock_set_rfid_code_response(
   nlohmann::json &jsn,
   DrlkSetCodeStatus &status
   
@@ -7217,9 +7217,9 @@ void uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
 }
 
 
-std::string get_json_payload_for_door_lock_getrfid_code_command(
+std::string get_json_payload_for_door_lock_get_rfid_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7240,7 +7240,7 @@ std::string get_json_payload_for_door_lock_getrfid_code_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_getrfid_code(
+void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
   nlohmann::json &jsn,
   DrlkRFIDUserID &userid
   
@@ -7255,9 +7255,9 @@ void uic_mqtt_dotdot_parse_door_lock_getrfid_code(
     }
 
 
-std::string get_json_payload_for_door_lock_getrfid_code_response_command(
+std::string get_json_payload_for_door_lock_get_rfid_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7271,10 +7271,10 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum GetRFIDCodeResponse / UserStatus
-  #ifdef GETRFID_CODE_RESPONSE_USER_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef GET_RFID_CODE_RESPONSE_USER_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserStatus"] =
-    getrfid_code_response_user_status_get_enum_value_name(
+    get_rfid_code_response_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
   #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
@@ -7286,10 +7286,10 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum GetRFIDCodeResponse / UserType
-  #ifdef GETRFID_CODE_RESPONSE_USER_TYPE_ENUM_NAME_AVAILABLE
+  #ifdef GET_RFID_CODE_RESPONSE_USER_TYPE_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["UserType"] =
-    getrfid_code_response_user_type_get_enum_value_name(
+    get_rfid_code_response_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
   #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
   json_payload["UserType"] =
@@ -7312,7 +7312,7 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
+void uic_mqtt_dotdot_parse_door_lock_get_rfid_code_response(
   nlohmann::json &jsn,
   uint16_t &userid,
   
@@ -7361,9 +7361,9 @@ void uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
           }
 
 
-std::string get_json_payload_for_door_lock_clearrfid_code_command(
+std::string get_json_payload_for_door_lock_clear_rfid_code_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7384,7 +7384,7 @@ std::string get_json_payload_for_door_lock_clearrfid_code_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
+void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
   nlohmann::json &jsn,
   DrlkRFIDUserID &userid
   
@@ -7399,9 +7399,9 @@ void uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
     }
 
 
-std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
+std::string get_json_payload_for_door_lock_clear_rfid_code_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7411,10 +7411,10 @@ std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum ClearRFIDCodeResponse / Status
-  #ifdef CLEARRFID_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef CLEAR_RFID_CODE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["Status"] =
-    clearrfid_code_response_status_get_enum_value_name(
+    clear_rfid_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
   #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["Status"] =
@@ -7433,7 +7433,7 @@ std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
   
@@ -7453,7 +7453,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
 }
 
 
-std::string get_json_payload_for_door_lock_clear_allrfid_codes_command(
+std::string get_json_payload_for_door_lock_clear_all_rfid_codes_command(
   
 ){
   bool command_with_no_fields = true;
@@ -7472,9 +7472,9 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_command(
 
 
 
-std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
+std::string get_json_payload_for_door_lock_clear_all_rfid_codes_response_command(
   
-  const uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t *fields
   
 ){
   bool command_with_no_fields = true;
@@ -7484,10 +7484,10 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
   command_with_no_fields = false;
   // Single Value
   // Enum ClearAllRFIDCodesResponse / Status
-  #ifdef CLEAR_ALLRFID_CODES_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
+  #ifdef CLEAR_ALL_RFID_CODES_RESPONSE_STATUS_ENUM_NAME_AVAILABLE
   // Pick up the name from the value.
   json_payload["Status"] =
-    clear_allrfid_codes_response_status_get_enum_value_name(
+    clear_all_rfid_codes_response_status_get_enum_value_name(
       (uint32_t)fields->status);
   #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["Status"] =
@@ -7506,7 +7506,7 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
 }
 
 
-void uic_mqtt_dotdot_parse_door_lock_clear_allrfid_codes_response(
+void uic_mqtt_dotdot_parse_door_lock_clear_all_rfid_codes_response(
   nlohmann::json &jsn,
   DrlkPassFailStatus &status
   
@@ -7524,6 +7524,275 @@ void uic_mqtt_dotdot_parse_door_lock_clear_allrfid_codes_response(
   }
   status = static_cast<DrlkPassFailStatus>(Status_enum_val);
 }
+
+
+std::string get_json_payload_for_door_lock_set_user_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_set_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetUser / OperationType
+  #ifdef SET_USER_OPERATION_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["OperationType"] =
+    set_user_operation_type_get_enum_value_name(
+      (uint32_t)fields->operation_type);
+  #elif defined(DATA_OPERATION_TYPE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["OperationType"] =
+    data_operation_type_enum_get_enum_value_name((uint32_t)fields->operation_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["OperationType"] = fields->operation_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserIndex"] = nlohmann::json(fields->user_index);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserName"] = nlohmann::json(fields->user_name);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetUser / UserStatus
+  #ifdef SET_USER_USER_STATUS_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserStatus"] =
+    set_user_user_status_get_enum_value_name(
+      (uint32_t)fields->user_status);
+  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserStatus"] = fields->user_status;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetUser / UserType
+  #ifdef SET_USER_USER_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserType"] =
+    set_user_user_type_get_enum_value_name(
+      (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserType"] = fields->user_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetUser / CredentialRule
+  #ifdef SET_USER_CREDENTIAL_RULE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialRule"] =
+    set_user_credential_rule_get_enum_value_name(
+      (uint32_t)fields->credential_rule);
+  #elif defined(CREDENTIAL_RULE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialRule"] =
+    credential_rule_enum_get_enum_value_name((uint32_t)fields->credential_rule);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialRule"] = fields->credential_rule;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_set_user(
+  nlohmann::json &jsn,
+  DataOperationTypeEnum &operation_type,
+  
+  uint16_t &user_index,
+  
+  std::string &user_name,
+  
+  uint32_t &user_uniqueid,
+  
+  DrlkUserStatus &user_status,
+  
+  DrlkUserType &user_type,
+  
+  CredentialRuleEnum &credential_rule
+  
+) {
+
+  uint32_t OperationType_enum_val = get_enum_decimal_value<DataOperationTypeEnum>("OperationType", jsn);
+  if (OperationType_enum_val == std::numeric_limits<DataOperationTypeEnum>::max()) {
+    #ifdef DATA_OPERATION_TYPE_ENUM_ENUM_NAME_AVAILABLE
+    OperationType_enum_val = data_operation_type_enum_get_enum_value_number(jsn.at("OperationType").get<std::string>());
+    #endif
+  }
+  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkUserStatus>("UserStatus", jsn);
+  if (UserStatus_enum_val == std::numeric_limits<DrlkUserStatus>::max()) {
+    #ifdef DRLK_USER_STATUS_ENUM_NAME_AVAILABLE
+    UserStatus_enum_val = drlk_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
+    #endif
+  }
+  uint32_t UserType_enum_val = get_enum_decimal_value<DrlkUserType>("UserType", jsn);
+  if (UserType_enum_val == std::numeric_limits<DrlkUserType>::max()) {
+    #ifdef DRLK_USER_TYPE_ENUM_NAME_AVAILABLE
+    UserType_enum_val = drlk_user_type_get_enum_value_number(jsn.at("UserType").get<std::string>());
+    #endif
+  }
+  uint32_t CredentialRule_enum_val = get_enum_decimal_value<CredentialRuleEnum>("CredentialRule", jsn);
+  if (CredentialRule_enum_val == std::numeric_limits<CredentialRuleEnum>::max()) {
+    #ifdef CREDENTIAL_RULE_ENUM_ENUM_NAME_AVAILABLE
+    CredentialRule_enum_val = credential_rule_enum_get_enum_value_number(jsn.at("CredentialRule").get<std::string>());
+    #endif
+  }
+  if (jsn.at("OperationType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  operation_type = static_cast<DataOperationTypeEnum>(OperationType_enum_val);
+  if (jsn.at("UserIndex").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_index = jsn.at("UserIndex").get< uint16_t >();
+      if (jsn.at("UserName").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  user_name = jsn.at("UserName").get<std::string>();
+            if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint32_t >();
+      if (jsn.at("UserStatus").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_status = static_cast<DrlkUserStatus>(UserStatus_enum_val);
+  if (jsn.at("UserType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_type = static_cast<DrlkUserType>(UserType_enum_val);
+  if (jsn.at("CredentialRule").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_rule = static_cast<CredentialRuleEnum>(CredentialRule_enum_val);
+}
+
+
+std::string get_json_payload_for_door_lock_get_user_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_get_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserIndex"] = nlohmann::json(fields->user_index);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_get_user(
+  nlohmann::json &jsn,
+  uint16_t &user_index
+  
+) {
+
+  if (jsn.at("UserIndex").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_index = jsn.at("UserIndex").get< uint16_t >();
+    }
+
+
+std::string get_json_payload_for_door_lock_get_user_response_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_door_lock_clear_user_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_clear_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserIndex"] = nlohmann::json(fields->user_index);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_clear_user(
+  nlohmann::json &jsn,
+  uint16_t &user_index
+  
+) {
+
+  if (jsn.at("UserIndex").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_index = jsn.at("UserIndex").get< uint16_t >();
+    }
 
 
 std::string get_json_payload_for_door_lock_operating_event_notification_command(
@@ -7842,6 +8111,304 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
           }
 
 
+std::string get_json_payload_for_door_lock_set_credential_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_set_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetCredential / OperationType
+  #ifdef SET_CREDENTIAL_OPERATION_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["OperationType"] =
+    set_credential_operation_type_get_enum_value_name(
+      (uint32_t)fields->operation_type);
+  #elif defined(DATA_OPERATION_TYPE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["OperationType"] =
+    data_operation_type_enum_get_enum_value_name((uint32_t)fields->operation_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["OperationType"] = fields->operation_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Credential"] = nlohmann::json(fields->credential);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialData"] = nlohmann::json(fields->credential_data);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserIndex"] = nlohmann::json(fields->user_index);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetCredential / UserStatus
+  #ifdef SET_CREDENTIAL_USER_STATUS_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserStatus"] =
+    set_credential_user_status_get_enum_value_name(
+      (uint32_t)fields->user_status);
+  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserStatus"] = fields->user_status;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetCredential / UserType
+  #ifdef SET_CREDENTIAL_USER_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserType"] =
+    set_credential_user_type_get_enum_value_name(
+      (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserType"] = fields->user_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_set_credential(
+  nlohmann::json &jsn,
+  DataOperationTypeEnum &operation_type,
+  
+  CredentialStruct &credential,
+  
+  std::string &credential_data,
+  
+  uint16_t &user_index,
+  
+  DrlkUserStatus &user_status,
+  
+  DrlkUserType &user_type
+  
+) {
+
+  uint32_t OperationType_enum_val = get_enum_decimal_value<DataOperationTypeEnum>("OperationType", jsn);
+  if (OperationType_enum_val == std::numeric_limits<DataOperationTypeEnum>::max()) {
+    #ifdef DATA_OPERATION_TYPE_ENUM_ENUM_NAME_AVAILABLE
+    OperationType_enum_val = data_operation_type_enum_get_enum_value_number(jsn.at("OperationType").get<std::string>());
+    #endif
+  }
+  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkUserStatus>("UserStatus", jsn);
+  if (UserStatus_enum_val == std::numeric_limits<DrlkUserStatus>::max()) {
+    #ifdef DRLK_USER_STATUS_ENUM_NAME_AVAILABLE
+    UserStatus_enum_val = drlk_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
+    #endif
+  }
+  uint32_t UserType_enum_val = get_enum_decimal_value<DrlkUserType>("UserType", jsn);
+  if (UserType_enum_val == std::numeric_limits<DrlkUserType>::max()) {
+    #ifdef DRLK_USER_TYPE_ENUM_NAME_AVAILABLE
+    UserType_enum_val = drlk_user_type_get_enum_value_number(jsn.at("UserType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("OperationType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  operation_type = static_cast<DataOperationTypeEnum>(OperationType_enum_val);
+  if (jsn.at("Credential").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential = jsn.at("Credential").get< CredentialStruct >();
+      if (jsn.at("CredentialData").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  credential_data = jsn.at("CredentialData").get<std::string>();
+            if (jsn.at("UserIndex").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_index = jsn.at("UserIndex").get< uint16_t >();
+      if (jsn.at("UserStatus").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_status = static_cast<DrlkUserStatus>(UserStatus_enum_val);
+  if (jsn.at("UserType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_type = static_cast<DrlkUserType>(UserType_enum_val);
+}
+
+
+std::string get_json_payload_for_door_lock_set_credential_response_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_door_lock_get_credential_status_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Credential"] = nlohmann::json(fields->credential);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_get_credential_status(
+  nlohmann::json &jsn,
+  CredentialStruct &credential
+  
+) {
+
+  if (jsn.at("Credential").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential = jsn.at("Credential").get< CredentialStruct >();
+    }
+
+
+std::string get_json_payload_for_door_lock_get_credential_status_response_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_door_lock_clear_credential_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Credential"] = nlohmann::json(fields->credential);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_clear_credential(
+  nlohmann::json &jsn,
+  CredentialStruct &credential
+  
+) {
+
+  if (jsn.at("Credential").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential = jsn.at("Credential").get< CredentialStruct >();
+    }
+
+
+std::string get_json_payload_for_door_lock_unbolt_door_command(
+  
+  const uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["PINCode"] = nlohmann::json(fields->pin_code);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_door_lock_unbolt_door(
+  nlohmann::json &jsn,
+  std::string &pin_code
+  
+) {
+
+  if (jsn.at("PINCode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  pin_code = jsn.at("PINCode").get<std::string>();
+          }
+
+
 /**
  * @brief JSON parser for ::WriteAttributes command arguments.
  *
@@ -7953,6 +8520,13 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
     new_updated_state.enable_privacy_mode_button = true;
   }
 
+  if (jsn.find("LocalProgrammingFeatures") != jsn.end()) {
+
+    new_state.local_programming_features = uic_dotdot_mqtt::get_bitmap_decimal_value("LocalProgrammingFeatures", jsn, DoorLockLocalProgrammingFeatures);
+  
+    new_updated_state.local_programming_features = true;
+  }
+
   if (jsn.find("WrongCodeEntryLimit") != jsn.end()) {
 
     new_state.wrong_code_entry_limit = jsn.at("WrongCodeEntryLimit").get<uint8_t>();
@@ -7969,16 +8543,23 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
 
   if (jsn.find("SendPINOverTheAir") != jsn.end()) {
 
-    new_state.sendpin_over_the_air = get_bool_from_json(jsn, "SendPINOverTheAir");
+    new_state.send_pin_over_the_air = get_bool_from_json(jsn, "SendPINOverTheAir");
   
-    new_updated_state.sendpin_over_the_air = true;
+    new_updated_state.send_pin_over_the_air = true;
   }
 
   if (jsn.find("RequirePINforRFOperation") != jsn.end()) {
 
-    new_state.requirepi_nforrf_operation = get_bool_from_json(jsn, "RequirePINforRFOperation");
+    new_state.require_pi_nfor_rf_operation = get_bool_from_json(jsn, "RequirePINforRFOperation");
   
-    new_updated_state.requirepi_nforrf_operation = true;
+    new_updated_state.require_pi_nfor_rf_operation = true;
+  }
+
+  if (jsn.find("ExpiringUserTimeout") != jsn.end()) {
+
+    new_state.expiring_user_timeout = jsn.at("ExpiringUserTimeout").get<uint16_t>();
+        
+    new_updated_state.expiring_user_timeout = true;
   }
 
   if (jsn.find("AlarmMask") != jsn.end()) {
@@ -12506,23 +13087,23 @@ void uic_mqtt_dotdot_parse_electrical_measurement_write_attributes(
 
   if (jsn.find("AverageRMSVoltageMeasurementPeriod") != jsn.end()) {
 
-    new_state.averagerms_voltage_measurement_period = jsn.at("AverageRMSVoltageMeasurementPeriod").get<uint16_t>();
+    new_state.average_rms_voltage_measurement_period = jsn.at("AverageRMSVoltageMeasurementPeriod").get<uint16_t>();
         
-    new_updated_state.averagerms_voltage_measurement_period = true;
+    new_updated_state.average_rms_voltage_measurement_period = true;
   }
 
   if (jsn.find("AverageRMSOverVoltageCounter") != jsn.end()) {
 
-    new_state.averagerms_over_voltage_counter = jsn.at("AverageRMSOverVoltageCounter").get<uint16_t>();
+    new_state.average_rms_over_voltage_counter = jsn.at("AverageRMSOverVoltageCounter").get<uint16_t>();
         
-    new_updated_state.averagerms_over_voltage_counter = true;
+    new_updated_state.average_rms_over_voltage_counter = true;
   }
 
   if (jsn.find("AverageRMSUnderVoltageCounter") != jsn.end()) {
 
-    new_state.averagerms_under_voltage_counter = jsn.at("AverageRMSUnderVoltageCounter").get<uint16_t>();
+    new_state.average_rms_under_voltage_counter = jsn.at("AverageRMSUnderVoltageCounter").get<uint16_t>();
         
-    new_updated_state.averagerms_under_voltage_counter = true;
+    new_updated_state.average_rms_under_voltage_counter = true;
   }
 
   if (jsn.find("RMSExtremeOverVoltagePeriod") != jsn.end()) {
@@ -12597,23 +13178,23 @@ void uic_mqtt_dotdot_parse_electrical_measurement_write_attributes(
 
   if (jsn.find("AverageRMSVoltageMeasurementPeriodPhB") != jsn.end()) {
 
-    new_state.averagerms_voltage_measurement_period_phb = jsn.at("AverageRMSVoltageMeasurementPeriodPhB").get<uint16_t>();
+    new_state.average_rms_voltage_measurement_period_phb = jsn.at("AverageRMSVoltageMeasurementPeriodPhB").get<uint16_t>();
         
-    new_updated_state.averagerms_voltage_measurement_period_phb = true;
+    new_updated_state.average_rms_voltage_measurement_period_phb = true;
   }
 
   if (jsn.find("AverageRMSOverVoltageCounterPhB") != jsn.end()) {
 
-    new_state.averagerms_over_voltage_counter_phb = jsn.at("AverageRMSOverVoltageCounterPhB").get<uint16_t>();
+    new_state.average_rms_over_voltage_counter_phb = jsn.at("AverageRMSOverVoltageCounterPhB").get<uint16_t>();
         
-    new_updated_state.averagerms_over_voltage_counter_phb = true;
+    new_updated_state.average_rms_over_voltage_counter_phb = true;
   }
 
   if (jsn.find("AverageRMSUnderVoltageCounterPhB") != jsn.end()) {
 
-    new_state.averagerms_under_voltage_counter_phb = jsn.at("AverageRMSUnderVoltageCounterPhB").get<uint16_t>();
+    new_state.average_rms_under_voltage_counter_phb = jsn.at("AverageRMSUnderVoltageCounterPhB").get<uint16_t>();
         
-    new_updated_state.averagerms_under_voltage_counter_phb = true;
+    new_updated_state.average_rms_under_voltage_counter_phb = true;
   }
 
   if (jsn.find("RMSExtremeOverVoltagePeriodPhB") != jsn.end()) {
@@ -12646,23 +13227,23 @@ void uic_mqtt_dotdot_parse_electrical_measurement_write_attributes(
 
   if (jsn.find("AverageRMSVoltageMeasurementPeriodPhC") != jsn.end()) {
 
-    new_state.averagerms_voltage_measurement_period_phc = jsn.at("AverageRMSVoltageMeasurementPeriodPhC").get<uint16_t>();
+    new_state.average_rms_voltage_measurement_period_phc = jsn.at("AverageRMSVoltageMeasurementPeriodPhC").get<uint16_t>();
         
-    new_updated_state.averagerms_voltage_measurement_period_phc = true;
+    new_updated_state.average_rms_voltage_measurement_period_phc = true;
   }
 
   if (jsn.find("AverageRMSOverVoltageCounterPhC") != jsn.end()) {
 
-    new_state.averagerms_over_voltage_counter_phc = jsn.at("AverageRMSOverVoltageCounterPhC").get<uint16_t>();
+    new_state.average_rms_over_voltage_counter_phc = jsn.at("AverageRMSOverVoltageCounterPhC").get<uint16_t>();
         
-    new_updated_state.averagerms_over_voltage_counter_phc = true;
+    new_updated_state.average_rms_over_voltage_counter_phc = true;
   }
 
   if (jsn.find("AverageRMSUnderVoltageCounterPhC") != jsn.end()) {
 
-    new_state.averagerms_under_voltage_counter_phc = jsn.at("AverageRMSUnderVoltageCounterPhC").get<uint16_t>();
+    new_state.average_rms_under_voltage_counter_phc = jsn.at("AverageRMSUnderVoltageCounterPhC").get<uint16_t>();
         
-    new_updated_state.averagerms_under_voltage_counter_phc = true;
+    new_updated_state.average_rms_under_voltage_counter_phc = true;
   }
 
   if (jsn.find("RMSExtremeOverVoltagePeriodPhC") != jsn.end()) {
@@ -12782,8 +13363,8 @@ std::string get_json_payload_for_protocol_controller_rf_telemetry_tx_report_comm
   command_with_no_fields = false;
   // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
   json_payload["IncomingRSSIRepeaters"] = std::vector< int8_t >(
-    fields->incomingrssi_repeaters,
-    fields->incomingrssi_repeaters + fields->incomingrssi_repeaters_count);
+    fields->incoming_rssi_repeaters,
+    fields->incoming_rssi_repeaters + fields->incoming_rssi_repeaters_count);
 
   command_with_no_fields = false;
   // Single Value
@@ -12847,7 +13428,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
   
   std::vector<std::string> &last_route_repeaters,
 
-  std::vector<int8_t> &incomingrssi_repeaters,
+  std::vector<int8_t> &incoming_rssi_repeaters,
 
   int8_t &ackrssi,
   
@@ -12943,7 +13524,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
     return;
   }
         
-  incomingrssi_repeaters = jsn.at("IncomingRSSIRepeaters").get< std::vector< int8_t >>();
+  incoming_rssi_repeaters = jsn.at("IncomingRSSIRepeaters").get< std::vector< int8_t >>();
         if (jsn.at("AckRSSI").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -14196,6 +14777,22 @@ void uic_mqtt_dotdot_parse_protocol_controller_network_management_write_attribut
   nlohmann::json &jsn,
   uic_mqtt_dotdot_protocol_controller_network_management_state_t &new_state,
   uic_mqtt_dotdot_protocol_controller_network_management_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_descriptor_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_descriptor_state_t &new_state,
+  uic_mqtt_dotdot_descriptor_updated_state_t &new_updated_state
 ) {
 
 

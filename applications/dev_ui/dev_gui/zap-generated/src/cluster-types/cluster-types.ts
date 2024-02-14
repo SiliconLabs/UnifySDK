@@ -8,6 +8,7 @@ export enum ClusterTypes {
 	ColorControl = "ColorControl", 
 	CarbonDioxide = "CarbonDioxide", 
 	CarbonMonoxide = "CarbonMonoxide", 
+	Descriptor = "Descriptor", 
 	DoorLock = "DoorLock", 
 	ElectricalConductivityMeasurement = "ElectricalConductivityMeasurement", 
 	ElectricalMeasurement = "ElectricalMeasurement", 
@@ -21,6 +22,7 @@ export enum ClusterTypes {
 	OnOff = "OnOff", 
 	PhMeasurement = "PhMeasurement", 
 	PM25 = "PM25", 
+	PowerConfiguration = "PowerConfiguration", 
 	PressureMeasurement = "PressureMeasurement", 
 	RelativityHumidity = "RelativityHumidity", 
 	Scenes = "Scenes", 
@@ -28,8 +30,7 @@ export enum ClusterTypes {
 	TemperatureMeasurement = "TemperatureMeasurement", 
 	Thermostat = "Thermostat", 
 	WindSpeedMeasurement = "WindSpeedMeasurement", 
-	WindowCovering = "WindowCovering", 
-	PowerConfiguration = "PowerConfiguration"
+	WindowCovering = "WindowCovering"
 }
 
 export enum ControllerTypes {

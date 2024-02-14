@@ -390,7 +390,7 @@ export let ClusterViewOverrides = {
             )
         },
         NavbarItem: {
-            name: ClusterTypes.Basic,
+            name: ClusterTypes.PowerConfiguration,
             title: 'Battery',
             path: '/battery',
             icon: <MdIcons.MdBatteryStd />,
@@ -716,6 +716,56 @@ export let ClusterViewOverrides = {
             icon: <MdIcons.MdWindow />,
             cName: 'nav-text',
             subMenu: SideMenu.Actuators
+        } as NavbarItem,
+        IsExpandable: true
+    } as ClusterViewOverride,
+    Descriptor: {
+        ViewTable: [
+          {
+            Name: `Device Type List`,
+            Value: (item: any) => {
+              let deviceTypeList = item.Attributes?.DeviceTypeList?.Reported;
+              return deviceTypeList ? (
+                <ul className='padding-l-5'>
+                  {deviceTypeList.map((device: any, index: number) => (
+                      <li className='list-unstyled padding-t-5'>{device.DeviceType}</li>
+                  ))}
+                </ul>
+              ) : "-";
+            }
+          },
+          {
+            Name: `Revision`,
+            Value: (item: any) => {
+              let deviceTypeList = item.Attributes?.DeviceTypeList?.Reported;
+              return deviceTypeList ? (
+                <ul className='padding-l-15'>
+                  {deviceTypeList.map((device: any, index: number) => (
+                      <li className='padding-t-5 list-unstyled'>{device.Revision}</li>
+                  ))}
+                </ul>
+              ) : "-";
+            }
+          }
+        ],
+        NodesTooltip: (endpoint: string, attr: any) => {
+            return (
+                <Tooltip title={`Endpoint ${endpoint}: Descriptor`}>
+                    <span className="cursor-default">
+                        <Link to={`/descriptor`}>
+                            <IoIcons.IoMdInformationCircleOutline color="#212529" />
+                        </Link>
+                    </span>
+                </Tooltip>
+            )
+        },
+        NavbarItem: {
+            name: ClusterTypes.Descriptor,
+            title: 'Descriptor',
+            path: '/descriptor',
+            icon: <IoIcons.IoMdInformationCircleOutline />,
+            cName: 'nav-text',
+            subMenu: SideMenu.NodeManagement
         } as NavbarItem,
         IsExpandable: true
     } as ClusterViewOverride,

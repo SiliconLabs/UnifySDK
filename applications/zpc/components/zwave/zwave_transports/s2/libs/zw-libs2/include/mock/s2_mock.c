@@ -50,7 +50,7 @@ uint8_t S2_send_data(struct S2* ctx, s2_connection_t* dst ,const uint8_t* buf, u
 }
 
 
-void S2_send_data_abort()
+void S2_send_data_abort(void)
 {
   mock_t * p_mock;
 

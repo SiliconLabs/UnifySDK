@@ -51,9 +51,9 @@ PROCESS_THREAD(ncp_process, ev, data)
   while (1) {
     switch (ev) {
       case PROCESS_EVENT_INIT:
+        ncp_flush();
         sl_log_info(LOG_TAG, "Reset NCP");
         sl_bt_system_reset(sl_bt_system_boot_mode_normal);
-        ncp_flush();
         break;
       case BT_EVENT:
         if (NULL != ncp_bt_on_event) {

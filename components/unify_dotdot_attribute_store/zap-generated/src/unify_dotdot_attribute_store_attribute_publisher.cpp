@@ -5528,15 +5528,15 @@ static void door_lock_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED) {
-          uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED) {
+          uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED) {
-          uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED) {
+          uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -5563,29 +5563,43 @@ static void door_lock_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_maxpin_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_minpin_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_maxrfid_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_minrfid_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT) {
+          uic_mqtt_dotdot_door_lock_credential_rules_support_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER) {
+          uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -5676,6 +5690,13 @@ static void door_lock_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES) {
+          uic_mqtt_dotdot_door_lock_local_programming_features_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT) {
           uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
             base_topic.c_str(),
@@ -5690,15 +5711,15 @@ static void door_lock_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR) {
-          uic_mqtt_dotdot_door_lock_sendpin_over_the_air_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR) {
+          uic_mqtt_dotdot_door_lock_send_pin_over_the_air_publish(
             base_topic.c_str(),
             static_cast<bool>(attr.desired_or_reported<bool>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION) {
-          uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION) {
+          uic_mqtt_dotdot_door_lock_require_pi_nfor_rf_operation_publish(
             base_topic.c_str(),
             static_cast<bool>(attr.desired_or_reported<bool>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -5708,6 +5729,13 @@ static void door_lock_cluster_publish_desired_value_callback(
           uic_mqtt_dotdot_door_lock_security_level_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT) {
+          uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5762,6 +5790,13 @@ static void door_lock_cluster_publish_desired_value_callback(
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK) {
           uic_mqtt_dotdot_door_lock_rfid_programming_event_mask_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP) {
+          uic_mqtt_dotdot_door_lock_feature_map_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -5900,21 +5935,21 @@ static void door_lock_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_door_lock_number_of_total_users_supported_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::NumberOfPINUsersSupported under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::NumberOfRFIDUsersSupported under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER:
         // clang-format on
@@ -5940,37 +5975,53 @@ static void door_lock_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::MaxPINCodeLength under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_maxpin_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_max_pin_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::MinPINCodeLength under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_minpin_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_min_pin_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::MaxRFIDCodeLength under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_maxrfid_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_max_rfid_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::MinRFIDCodeLength under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_minrfid_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_min_rfid_code_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining DoorLock::CredentialRulesSupport under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_door_lock_credential_rules_support_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining DoorLock::NumberOfCredentialsSupportedPerUser under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ENABLE_LOGGING:
         // clang-format on
@@ -6068,6 +6119,14 @@ static void door_lock_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_door_lock_enable_privacy_mode_button_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining DoorLock::LocalProgrammingFeatures under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_door_lock_local_programming_features_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
      case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT:
         // clang-format on
         sl_log_debug(LOG_TAG,
@@ -6084,21 +6143,21 @@ static void door_lock_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::SendPINOverTheAir under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_sendpin_over_the_air_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_send_pin_over_the_air_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION:
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining DoorLock::RequirePINforRFOperation under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_door_lock_require_pi_nfor_rf_operation_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL:
         // clang-format on
@@ -6107,6 +6166,14 @@ static void door_lock_cluster_publish_reported_value_callback(
                      base_topic.c_str());
         // clang-format off
       uic_mqtt_dotdot_door_lock_security_level_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining DoorLock::ExpiringUserTimeout under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_door_lock_expiring_user_timeout_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_ALARM_MASK:
         // clang-format on
@@ -6171,6 +6238,14 @@ static void door_lock_cluster_publish_reported_value_callback(
                      base_topic.c_str());
         // clang-format off
       uic_mqtt_dotdot_door_lock_rfid_programming_event_mask_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining DoorLock::FeatureMap under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_door_lock_feature_map_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
     default:
     break;
@@ -6252,15 +6327,15 @@ static void door_lock_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED) {
-          uic_mqtt_dotdot_door_lock_number_ofpin_users_supported_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED) {
+          uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED) {
-          uic_mqtt_dotdot_door_lock_number_ofrfid_users_supported_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED) {
+          uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -6287,29 +6362,43 @@ static void door_lock_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_maxpin_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_minpin_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_maxrfid_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH) {
-          uic_mqtt_dotdot_door_lock_minrfid_code_length_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH) {
+          uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT) {
+          uic_mqtt_dotdot_door_lock_credential_rules_support_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER) {
+          uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -6400,6 +6489,13 @@ static void door_lock_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES) {
+          uic_mqtt_dotdot_door_lock_local_programming_features_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT) {
           uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
             base_topic.c_str(),
@@ -6414,15 +6510,15 @@ static void door_lock_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR) {
-          uic_mqtt_dotdot_door_lock_sendpin_over_the_air_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR) {
+          uic_mqtt_dotdot_door_lock_send_pin_over_the_air_publish(
             base_topic.c_str(),
             static_cast<bool>(attr.reported<bool>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION) {
-          uic_mqtt_dotdot_door_lock_requirepi_nforrf_operation_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION) {
+          uic_mqtt_dotdot_door_lock_require_pi_nfor_rf_operation_publish(
             base_topic.c_str(),
             static_cast<bool>(attr.reported<bool>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -6432,6 +6528,13 @@ static void door_lock_cluster_publish_reported_value_callback(
           uic_mqtt_dotdot_door_lock_security_level_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT) {
+          uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -6486,6 +6589,13 @@ static void door_lock_cluster_publish_reported_value_callback(
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK) {
           uic_mqtt_dotdot_door_lock_rfid_programming_event_mask_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP) {
+          uic_mqtt_dotdot_door_lock_feature_map_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -18362,22 +18472,22 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -18509,15 +18619,15 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_publish(
             base_topic.c_str(),
             static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_publish(
             base_topic.c_str(),
             static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -18656,22 +18766,22 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -18810,22 +18920,22 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -19368,29 +19478,29 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_electrical_measurement_power_factor_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSVoltageMeasurementPeriod under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSOverVoltageCounter under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSUnderVoltageCounter under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD:
         // clang-format on
@@ -19536,21 +19646,21 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_electrical_measurement_ac_reactive_power_overload_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSOverVoltage under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSUnderVoltage under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE:
         // clang-format on
@@ -19704,29 +19814,29 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_electrical_measurement_power_factor_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSVoltageMeasurementPeriodPhB under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSOverVoltageCounterPhB under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSUnderVoltageCounterPhB under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB:
         // clang-format on
@@ -19880,29 +19990,29 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_electrical_measurement_power_factor_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSVoltageMeasurementPeriodPhC under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSOverVoltageCounterPhC under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC:
+     case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ElectricalMeasurement::AverageRMSUnderVoltageCounterPhC under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC:
         // clang-format on
@@ -20345,22 +20455,22 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -20492,15 +20602,15 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_publish(
             base_topic.c_str(),
             static_cast<int16_t>(attr.reported<int16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_publish(
             base_topic.c_str(),
             static_cast<int16_t>(attr.reported<int16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -20639,22 +20749,22 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -20793,22 +20903,22 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_voltage_measurement_period_phc_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_over_voltage_counter_phc_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC) {
-          uic_mqtt_dotdot_electrical_measurement_averagerms_under_voltage_counter_phc_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC) {
+          uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -21146,8 +21256,8 @@ static void diagnostics_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED) {
-          uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED) {
+          uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -21160,8 +21270,8 @@ static void diagnostics_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT) {
-          uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT) {
+          uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -21458,13 +21568,13 @@ static void diagnostics_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_diagnostics_relayed_ucast_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED:
+     case DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining Diagnostics::PHYToMACQueueLimitReached under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT:
         // clang-format on
@@ -21474,13 +21584,13 @@ static void diagnostics_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT:
+     case DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining Diagnostics::AverageMACRetryPerAPSMessageSent under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGELQI:
         // clang-format on
@@ -21704,8 +21814,8 @@ static void diagnostics_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED) {
-          uic_mqtt_dotdot_diagnostics_phy_tomac_queue_limit_reached_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED) {
+          uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -21718,8 +21828,8 @@ static void diagnostics_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT) {
-          uic_mqtt_dotdot_diagnostics_averagemac_retry_peraps_message_sent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT) {
+          uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
             base_topic.c_str(),
             static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -23419,36 +23529,36 @@ static void application_monitoring_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.desired_or_reported<double>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_average_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.desired_or_reported<double>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_min_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.desired_or_reported<double>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_max_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.desired_or_reported<double>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB) {
-          uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB) {
+          uic_mqtt_dotdot_application_monitoring_application_ram_usagemb_publish(
             base_topic.c_str(),
             static_cast<double>(attr.desired_or_reported<double>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
@@ -23534,13 +23644,13 @@ static void application_monitoring_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_application_monitoring_application_connected_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS:
+     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ApplicationMonitoring::ApplicationMQTTTopics under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_application_monitoring_applicationmqtt_topics_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_application_monitoring_application_mqtt_topics_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
      case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_UPTIME_MINUTES:
         // clang-format on
@@ -23654,45 +23764,45 @@ static void application_monitoring_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_application_monitoring_application_statistics_reporting_interval_seconds_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT:
+     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ApplicationMonitoring::ApplicationCPUUsagePercent under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_application_monitoring_application_cpu_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT:
+     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ApplicationMonitoring::ApplicationCPUAverageUsagePercent under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_application_monitoring_application_cpu_average_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT:
+     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ApplicationMonitoring::ApplicationCPUMinUsagePercent under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_application_monitoring_application_cpu_min_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT:
+     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ApplicationMonitoring::ApplicationCPUMaxUsagePercent under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_application_monitoring_application_cpu_max_usage_percent_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
-     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB:
+     case DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB:
         // clang-format on
         sl_log_debug(LOG_TAG,
                      "Unretaining ApplicationMonitoring::ApplicationRAMUsageMB under topic %s",
                      base_topic.c_str());
         // clang-format off
-      uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      uic_mqtt_dotdot_application_monitoring_application_ram_usagemb_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
     default:
     break;
@@ -23837,36 +23947,36 @@ static void application_monitoring_cluster_publish_reported_value_callback(
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.reported<double>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_average_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_average_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.reported<double>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_min_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_min_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.reported<double>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT) {
-          uic_mqtt_dotdot_application_monitoring_applicationcpu_max_usage_percent_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT) {
+          uic_mqtt_dotdot_application_monitoring_application_cpu_max_usage_percent_publish(
             base_topic.c_str(),
             static_cast<double>(attr.reported<double>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
-          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB) {
-          uic_mqtt_dotdot_application_monitoring_applicationram_usagemb_publish(
+          if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB) {
+          uic_mqtt_dotdot_application_monitoring_application_ram_usagemb_publish(
             base_topic.c_str(),
             static_cast<double>(attr.reported<double>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -25310,6 +25420,213 @@ static void protocol_controller_network_management_cluster_cluster_revision_call
     if (false == dotdot_is_any_protocol_controller_network_management_attribute_supported(unid, endpoint_id)) {
       base_topic +=  "/ProtocolController/NetworkManagement";
       sl_log_debug(LOG_TAG, "No more attributes supported for ProtocolController-NetworkManagement cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
+      uic_mqtt_unretain(base_topic.c_str());
+    }
+  }
+}
+
+
+/**
+ * @brief Publishes the desired value of an updated attribute store node for
+ * the Descriptor cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void descriptor_cluster_publish_desired_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+    // Skip attribute DeviceTypeList because it is an array,
+    // we typically don't save them as array in the attribute store.
+    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute Descriptor DeviceTypeList. Arrays are not supported");
+  } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
+  }
+}
+
+/**
+ * @brief Publishes the reported value of an updated attribute store node for
+ * the Descriptor cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void descriptor_cluster_publish_reported_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // Deletion case:
+  if (change == ATTRIBUTE_DELETED) {
+    // clang-format off
+    switch(type) {
+     case DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining Descriptor::DeviceTypeList under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_descriptor_device_type_list_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+    default:
+    break;
+    }
+    // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
+    return;
+  }
+
+  // Else we assume update case:
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+    // Skip attribute DeviceTypeList because it is an array,
+    // we typically don't save them as array in the attribute store.
+    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute Descriptor DeviceTypeList. Arrays are not supported");
+  } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
+  }
+}
+
+static void descriptor_cluster_cluster_revision_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  // clang-format off
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+
+  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
+    // On attribute creation, make sure to publish the attribute revision for the first time
+    std::string cluster_revision_topic = base_topic + "/Descriptor/Attributes/ClusterRevision";
+    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
+      uic_mqtt_dotdot_descriptor_publish_cluster_revision(base_topic.c_str(), 2);
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // Check if we just erased the last attribute under a cluster, if yes, unretain
+    // the Cluster revision too.
+    if (false == dotdot_is_any_descriptor_attribute_supported(unid, endpoint_id)) {
+      base_topic +=  "/Descriptor";
+      sl_log_debug(LOG_TAG, "No more attributes supported for Descriptor cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
       uic_mqtt_unretain(base_topic.c_str());
     }
   }
@@ -27381,31 +27698,31 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFPIN_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OFRFID_USERS_SUPPORTED);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
@@ -27451,59 +27768,87 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINPIN_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAXRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MINRFID_CODE_LENGTH);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      door_lock_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_CREDENTIAL_RULES_SUPPORT);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      door_lock_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
@@ -27675,6 +28020,20 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      door_lock_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LOCAL_PROGRAMMING_FEATURES);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_desired_value_callback,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
@@ -27703,31 +28062,31 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SENDPIN_OVER_THE_AIR);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SEND_PIN_OVER_THE_AIR);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIREPI_NFORRF_OPERATION);
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_REQUIRE_PI_NFOR_RF_OPERATION);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
@@ -27742,6 +28101,20 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SECURITY_LEVEL);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      door_lock_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       door_lock_cluster_publish_desired_value_callback,
@@ -27854,6 +28227,20 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       door_lock_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_RFID_PROGRAMMING_EVENT_MASK);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      door_lock_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      door_lock_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_FEATURE_MAP);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       window_covering_cluster_publish_desired_value_callback,
@@ -32673,45 +33060,45 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
@@ -32967,31 +33354,31 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
@@ -33261,45 +33648,45 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHB);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
@@ -33569,45 +33956,45 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_OVER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC,
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       electrical_measurement_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGERMS_UNDER_VOLTAGE_COUNTER_PHC);
+      DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       electrical_measurement_cluster_publish_desired_value_callback,
@@ -34045,17 +34432,17 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       diagnostics_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       diagnostics_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       diagnostics_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TOMAC_QUEUE_LIMIT_REACHED);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       diagnostics_cluster_publish_desired_value_callback,
@@ -34073,17 +34460,17 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       diagnostics_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       diagnostics_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT,
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       diagnostics_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGEMAC_RETRY_PERAPS_MESSAGE_SENT);
+      DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       diagnostics_cluster_publish_desired_value_callback,
@@ -34675,17 +35062,17 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       application_monitoring_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONMQTT_TOPICS);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_MQTT_TOPICS);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
@@ -34885,73 +35272,73 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       application_monitoring_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_USAGE_PERCENT);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       application_monitoring_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_AVERAGE_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_AVERAGE_USAGE_PERCENT);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       application_monitoring_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MIN_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MIN_USAGE_PERCENT);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       application_monitoring_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONCPU_MAX_USAGE_PERCENT);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_CPU_MAX_USAGE_PERCENT);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB,
       DESIRED_ATTRIBUTE);
     //Reported attribute state
     attribute_store_register_callback_by_type_and_state(
       application_monitoring_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB,
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB,
       REPORTED_ATTRIBUTE);
     //registering a callback when an attribute is created for publishing cluster revision
     attribute_store_register_callback_by_type(
       application_monitoring_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATIONRAM_USAGEMB);
+      DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_RAM_USAGEMB);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       name_and_location_cluster_publish_desired_value_callback,
@@ -35274,6 +35661,20 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       protocol_controller_network_management_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      descriptor_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      descriptor_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      descriptor_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
 
   return SL_STATUS_OK;
 }

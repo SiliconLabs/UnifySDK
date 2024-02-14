@@ -79,7 +79,7 @@ sl_status_t zigpc_discovery_remove_listener(
     callback);
 }
 
-void zigpc_discovery_on_device_discovered(void *data)
+void zigpc_discovery_on_device_discovered(void *data) //NOSONAR - need void* for event handling
 {
   if (data == nullptr) {
     sl_log_debug(LOG_TAG, "Ignoring empty gateway device discovered event");
@@ -96,7 +96,7 @@ void zigpc_discovery_on_device_discovered(void *data)
                                         ev.endpoint_list + ev.endpoint_count)));
 }
 
-void zigpc_discovery_on_endpoint_discovered(void *data)
+void zigpc_discovery_on_endpoint_discovered(void *data) //NOSONAR - need void* for event handling
 {
   if (data == nullptr) {
     sl_log_debug(LOG_TAG, "Ignoring empty gateway endpoint discovered event");
@@ -109,8 +109,8 @@ void zigpc_discovery_on_endpoint_discovered(void *data)
   std::vector<zcl_cluster_id_t> server_clusters(ev.endpoint.cluster_count);
   for (size_t i = 0U; i < ev.endpoint.cluster_count; i++) {
     server_clusters[i] = ev.endpoint.cluster_list[i].cluster_id;
-    
-    sl_log_debug(LOG_TAG, 
+
+    sl_log_debug(LOG_TAG,
                 "Discovered server cluster: 0x%04X", server_clusters[i]);
   }
 
@@ -118,8 +118,8 @@ void zigpc_discovery_on_endpoint_discovered(void *data)
     ev.endpoint.client_cluster_count);
   for (size_t i = 0U; i < ev.endpoint.client_cluster_count; i++) {
     client_clusters[i] = ev.endpoint.client_cluster_list[i].cluster_id;
-    
-    sl_log_debug(LOG_TAG, 
+
+    sl_log_debug(LOG_TAG,
                 "Discovered client cluster: 0x%04X", client_clusters[i]);
   }
 

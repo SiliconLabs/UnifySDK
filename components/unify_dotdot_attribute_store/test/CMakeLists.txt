@@ -70,3 +70,14 @@ target_add_unittest(
   uic_dotdot_mqtt_mock
   uic_contiki_stub
 )
+
+target_add_unittest(
+  unify_dotdot_attribute_store_shared
+  NAME
+  unify_dotdot_attribute_store_descriptor_test
+  SOURCES
+  unify_dotdot_attribute_store_descriptor_test.c
+  DEPENDS
+  uic_mqtt_mock
+  uic_dotdot_mqtt_mock
+)

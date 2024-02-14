@@ -64,8 +64,8 @@ enable_otbr_services() {
 }
 
 configure_otbr_install
-init_otbr_scripts
-install_services
+init_otbr_scripts > /dev/null
+install_services > /dev/null # Suppress output of otbr install scripts
 enable_otbr_services
 
 exit 0

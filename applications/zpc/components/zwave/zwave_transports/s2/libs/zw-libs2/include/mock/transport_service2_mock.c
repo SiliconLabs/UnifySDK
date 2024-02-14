@@ -9,7 +9,7 @@ void TransportService_ApplicationCommandHandler(ts_param_t* p,uint8_t *pCmd, uin
 
 }
 
-bool ZW_TransportService_Is_Sending()
+bool ZW_TransportService_Is_Sending(void)
 {
   return true;
 }

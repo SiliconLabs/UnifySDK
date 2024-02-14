@@ -1,5 +1,26 @@
 # ZPC Release Notes
 
+## [1.5.0] - Feb 2023
+
+### Added (1.5.0)
+
+* Added SoundSwitch Command Class
+* Added preliminary support for gcc-12
+* Added Base structure of python scripts to interact with CTT
+* Support 3 bit bitmask for notification types report
+
+### Changes (1.5.0)
+
+* Document the process for implementing a new UCL cluster and zwave command classes
+
+### Fixed (1.5.0)
+
+* Fix COMMAND_CLASS_VERSION value for Rust components
+* Fix support for COMMAND_CLASS_METER V1,V2 & V3
+* Fix Multi Channel Handling of Secure NIF
+* Fix Multi-Channel End Point Find command
+* Fix CC SWITCH_COLOR Duration param
+
 ## [1.4.0] - Aug 2023
 
 ### Added (1.4.0)

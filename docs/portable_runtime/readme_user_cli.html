@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portable runtime CLI &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/portable_runtime/readme_user_cli.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/charenc.js"></script>
+        <script src="../_static/js/crypt.js"></script>
+        <script src="../_static/js/sha1.js"></script>
+        <script src="../_static/js/html5-qrcode.min.js"></script>
+        <script src="../_static/js/qr_code_scanner.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.5.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="portable-runtime-cli">
+<h1>Portable runtime CLI<a class="headerlink" href="#portable-runtime-cli" title="Permalink to this heading"></a></h1>
+<section id="unify-portable-runtime-environment">
+<h2>Unify Portable Runtime Environment<a class="headerlink" href="#unify-portable-runtime-environment" title="Permalink to this heading"></a></h2>
+<p><strong>Disclaimer</strong>: Currently the Unify Portable Runtime environment does not support the following protocol:</p>
+<ul class="simple">
+<li><p>Bluetooth in Multiprotocol</p></li>
+<li><p>Thread in Multiprotocol</p></li>
+<li><p>Matter</p></li>
+</ul>
+<p><strong>Prerequisites</strong>:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG12/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
+<li><p>x86-64/amd64 CPU architecture. (Windows, MacOS or Linux)</p></li>
+<li><p>Docker version &gt; 20.10.12 installed.</p></li>
+<li><p>docker-compose version &gt; 2.5.1</p></li>
+</ol>
+<p>The Unify Portable Runtime Environment strives to get Unify running as fast as
+possible on your desktop. The portable runtime comes as a binary executable CLI,
+together with Unify packages, a docker-compose file and a tool which can
+map a Silicon Labs device into a Linux docker environment on Windows, MacOS and
+Linux.</p>
+<section id="start-docker-service">
+<h3>Start docker service<a class="headerlink" href="#start-docker-service" title="Permalink to this heading"></a></h3>
+<p><strong>For Windows and Mac</strong>:
+Start <em>Docker Desktop</em> application to start docker service</p>
+<p><strong>For Linux</strong>:
+Run below command to start docker service</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@ubuntu$ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p><strong>Note</strong>: If you are running Linux, you need the right permissions to run the <code class="docutils literal notranslate"><span class="pre">Commander</span></code> and <code class="docutils literal notranslate"><span class="pre">Silink</span></code> tools.</p>
+<p>For handling these permissions, you either need to:</p>
+<ol class="arabic">
+<li><p>copy the Udev rules from <code class="docutils literal notranslate"><span class="pre">./resources/commander/99-jlink.rules</span></code> to the system folder <code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/</span></code> and run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">control</span> <span class="pre">--reload</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">trigger</span></code>.</p>
+<p>or</p>
+</li>
+<li><p>run all the commands as root with eg. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./unify_portable_cli....</span></code>.</p></li>
+</ol>
+<p><strong>WARNING</strong>: If you start up the portable docker environment on a host already
+running Unify Framework applications, this will cause unexpected behavior.</p>
+<p>Setting up the portable runtime environment should be as easy as downloading
+<code class="docutils literal notranslate"><span class="pre">portable_runtime_&lt;OS&gt;.&lt;zip/tar.bz2&gt;</span></code> file from the
+<a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>
+and extracting it.</p>
+<section id="to-run-legacy-combination-of-portable-runtime-with-only-zpc">
+<h3>To run legacy combination of portable runtime with only ZPC<a class="headerlink" href="#to-run-legacy-combination-of-portable-runtime-with-only-zpc" title="Permalink to this heading"></a></h3>
+<p>After extraction, make sure you only have a single <a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a>
+connected to your desktop and run the binary <code class="docutils literal notranslate"><span class="pre">unify_portable_cli</span></code>.
+This should set up the whole Unify Framework ecosystem.
+An example of this can be seen below on a Windows machine.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">someuser</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">portable_runtime_windows</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">unify_portable_cli</span><span class="p">.</span><span class="n">exe</span>
+<span class="n">Verifying</span> <span class="n">Docker</span> <span class="n">installation</span>
+<span class="n">devices</span><span class="p">:</span> <span class="n">1</span> <span class="n">device</span> <span class="n">found</span><span class="p">.</span>
+
+<span class="n">Identified</span> <span class="n">as</span> <span class="n">440285211</span> <span class="n">Serial</span> <span class="n">API</span> <span class="n">Controller</span>
+<span class="n">Mapping</span> <span class="n">device</span> <span class="n">with</span> <span class="n">Silink</span><span class="p">...</span>
+<span class="n">Building</span> <span class="n">Unify</span> <span class="n">Portable</span> <span class="n">Runtime</span><span class="p">...</span>
+<span class="n">Building</span> <span class="n">docker</span> <span class="n">image</span> <span class="n">with</span> <span class="n">unify_1</span><span class="p">.</span><span class="n">3</span><span class="p">.</span><span class="n">1_x86_64</span><span class="p">.</span><span class="n">zip</span>
+<span class="n">Starting</span> <span class="n">Unify</span> <span class="n">Portable</span> <span class="n">Runtime</span><span class="p">...</span>
+<span class="n">Unify</span> <span class="n">is</span> <span class="n">running</span><span class="p">!</span>
+<span class="n">Please</span> <span class="n">visit</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">3080</span> <span class="k">in</span> <span class="n">your</span> <span class="n">browser</span><span class="p">.</span>
+<span class="n">Change</span> <span class="n">the</span> <span class="s1">&#39;Host&#39;</span> <span class="n">field</span> <span class="n">to</span> <span class="s1">&#39;mqtt-broker&#39;</span> <span class="n">and</span> <span class="n">press</span> <span class="s1">&#39;Connect&#39;</span><span class="p">.</span>
+
+<span class="n">Press</span> <span class="n">Ctrl-C</span> <span class="n">to</span> <span class="n">stop</span><span class="p">...</span>
+</pre></div>
+</div>
+<p>After starting the Portable Runtime, one can test it and control it with
+the developer GUI on <code class="docutils literal notranslate"><span class="pre">http://localhost:3080</span></code>. Details on the developer GUI can
+be found in the <a class="reference internal" href="../applications/dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Dev GUI User’s Guide</span></a>.</p>
+<p><strong>IMPORTANT</strong>: To connect the DevGUI to the correct MQTT broker, change
+<code class="docutils literal notranslate"><span class="pre">localhost</span></code> to <code class="docutils literal notranslate"><span class="pre">mqtt-broker</span></code>.</p>
+</section>
+</section>
+<section id="portable-runtime-combinations">
+<h2>Portable runtime combinations<a class="headerlink" href="#portable-runtime-combinations" title="Permalink to this heading"></a></h2>
+<p>Portable runtime environment now supports more than ZPC. It can run other protocol controllers individually or combination of supported protocol controllers. Also, now the portable runtime environment can be configured to run only the selected framework services.</p>
+<p><strong>Supported Protocol Controllers</strong>:</p>
+<ul class="simple">
+<li><p>Z-Wave Protocol Controller (<code class="docutils literal notranslate"><span class="pre">ZPC</span></code>)</p></li>
+<li><p>Zigbee Protocol Controller (<code class="docutils literal notranslate"><span class="pre">ZigPC</span></code>)</p></li>
+<li><p>AoX Protocol Controller (<code class="docutils literal notranslate"><span class="pre">AoXPC</span></code>)
+<br>Note: ZigPC can be run in NCP mode or in RCP mode with multiprotocol setup.</p></li>
+</ul>
+<p><strong>Supported Applications</strong>:</p>
+<ul class="simple">
+<li><p>Unify Matter Bridge (<code class="docutils literal notranslate"><span class="pre">UMB</span></code>)</p></li>
+<li><p>Dev-GUI
+<br>Note: Dev-GUI Application will be always enabled by default.</p></li>
+</ul>
+</section>
+<section id="advanced-options">
+<h2>Advanced options<a class="headerlink" href="#advanced-options" title="Permalink to this heading"></a></h2>
+<p>To start up the environment, run the <em>unify_portable_cli</em> binary file.
+With only one device connected with only ZPC, you can just run the <em>unify_portable_cli</em> application. For multiple connected devices or new protocol combinations, see below.
+Once it is running, it will wait for you to press ‘<em>CTRL-C</em>’ to end it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli</span>
+</pre></div>
+</div>
+<section id="protocol-controller-selection">
+<h3>Protocol Controller Selection<a class="headerlink" href="#protocol-controller-selection" title="Permalink to this heading"></a></h3>
+<p>The list of protocol controller to be run can be configured using this option. If this option is not configured by default only ZPC will be run within portable runtime environment.
+<br>The option takes a list of comma-separated predefined strings representing each supported protocol controller.
+<br>The predefined strings are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Z-Wave</span></code> for ZPC</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Zigbee-NCP</span></code> for ZigPC in NCP mode</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AoX-Bluetooth</span></code> for AoXPC</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiProtocol</span></code> for multiprotocol (currently only supports ZigPC in RCP mode )</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave,Zigbee-NCP&quot;</span>
+</pre></div>
+</div>
+<p>Note: The list can have single string if only one PC is needed.
+Example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Zigbee-NCP&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="framework-service-selections">
+<h3>Framework Service Selections<a class="headerlink" href="#framework-service-selections" title="Permalink to this heading"></a></h3>
+<p>The list of framework services to be run can be configured using this option. If this option cannot be used without protocol selection configuration.
+<br>The option takes a list of comma-separated predefined strings representing each supported framework service.
+The predefined strings are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NAL</span></code> for <a class="reference external" href="https://siliconlabs.github.io/UnifySDK/applications/nal/readme_user.html">Name And Location(NAL)</a> Service</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Image-Provider</span></code> for <a class="reference external" href="https://siliconlabs.github.io/UnifySDK/applications/image_provider/readme_user.html">Image Provider</a> service used for OTA</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GMS</span></code> for <a class="reference external" href="https://siliconlabs.github.io/UnifySDK/applications/gms/readme_user.html">Group Management Service(GMS)</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UPVL</span></code> for <a class="reference external" href="https://siliconlabs.github.io/UnifySDK/applications/upvl/readme_user.html">Unify Provisioning List</a> Service</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot; -m &quot;NAL,GMS&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="unify-matter-bridge-selection">
+<h3>Unify Matter Bridge selection<a class="headerlink" href="#unify-matter-bridge-selection" title="Permalink to this heading"></a></h3>
+<p>The Unify Matter Bridge is an application that makes legacy devices, such as Z-Wave and Zigbee devices, accessible on a Matter fabric. It does so by acting as an IoT Service in a Unify Framework. Please visit <a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/matter-bridge/readme_overview.html">Unify Matter Bridge</a> for more details.
+<br>The Unify Matter Bridge can be configured to be run using <code class="docutils literal notranslate"><span class="pre">-a</span></code> option. This option cannot be used without a protocol selection configuration.
+<br>The option takes a predefined string “UMB” representing Unify Matter Bridge as shown below.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -a &quot;UMB&quot; -p &quot;Z-Wave&quot;</span>
+</pre></div>
+</div>
+<p>Upon successful bring up of portable runtime for Unify Matter Bridge,
+it will be automatically commissioned by the chip-tool with Matter Fabric Node ID &lt;1&gt;.
+<br>To execute any chiptool commands, we should first access the unify matter bridge bash terminal using the below command.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker exec -it unify-matter-bridge bash</span>
+</pre></div>
+</div>
+<section id="to-verify-chip-tool-successful-commissioning">
+<h4>To verify chip-tool successful commissioning<a class="headerlink" href="#to-verify-chip-tool-successful-commissioning" title="Permalink to this heading"></a></h4>
+<p>In the docker bash terminal, execute the below command, which lists all the bridged endpoints attached to the root node.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker&gt;<span class="w"> </span>chip-tool<span class="w"> </span>descriptor<span class="w"> </span><span class="nb">read</span><span class="w"> </span>parts-list<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>In successful commissioning case, the above command will give output as below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">1701842598</span>.849635<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w"> </span><span class="nv">ReportDataMessage</span><span class="w"> </span><span class="o">=</span>
+<span class="o">[</span><span class="m">1701842598</span>.849653<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w"> </span><span class="o">{</span>
+<span class="o">[</span><span class="m">1701842598</span>.849667<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">        </span><span class="nv">AttributeReportIBs</span><span class="w"> </span><span class="o">=</span>
+<span class="o">[</span><span class="m">1701842598</span>.849690<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">        </span><span class="o">[</span>
+<span class="o">[</span><span class="m">1701842598</span>.849707<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                </span><span class="nv">AttributeReportIB</span><span class="w"> </span><span class="o">=</span>
+<span class="o">[</span><span class="m">1701842598</span>.849731<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                </span><span class="o">{</span>
+<span class="o">[</span><span class="m">1701842598</span>.849750<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                        </span><span class="nv">AttributeDataIB</span><span class="w"> </span><span class="o">=</span>
+<span class="o">[</span><span class="m">1701842598</span>.849771<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                        </span><span class="o">{</span>
+<span class="o">[</span><span class="m">1701842598</span>.849793<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                </span><span class="nv">DataVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x43ceb2aa,
+<span class="o">[</span><span class="m">1701842598</span>.849815<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                </span><span class="nv">AttributePathIB</span><span class="w"> </span><span class="o">=</span>
+<span class="o">[</span><span class="m">1701842598</span>.849837<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                </span><span class="o">{</span>
+<span class="o">[</span><span class="m">1701842598</span>.849861<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                        </span><span class="nv">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x0,
+<span class="o">[</span><span class="m">1701842598</span>.849885<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                        </span><span class="nv">Cluster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x1d,
+<span class="o">[</span><span class="m">1701842598</span>.849909<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                        </span><span class="nv">Attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x0000_0003,
+<span class="o">[</span><span class="m">1701842598</span>.849932<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                </span><span class="o">}</span>
+<span class="o">[</span><span class="m">1701842598</span>.849955<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:
+<span class="o">[</span><span class="m">1701842598</span>.849977<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                </span><span class="nv">Data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<span class="o">[</span><span class="m">1701842598</span>.850003<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                                </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,
+<span class="o">[</span><span class="m">1701842598</span>.850028<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                                </span><span class="o">]</span>,
+<span class="o">[</span><span class="m">1701842598</span>.850049<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                        </span><span class="o">}</span>,
+<span class="o">[</span><span class="m">1701842598</span>.850072<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:
+<span class="o">[</span><span class="m">1701842598</span>.850091<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">                </span><span class="o">}</span>,
+<span class="o">[</span><span class="m">1701842598</span>.850113<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:
+<span class="o">[</span><span class="m">1701842598</span>.850129<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">        </span><span class="o">]</span>,
+<span class="o">[</span><span class="m">1701842598</span>.850152<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:
+<span class="o">[</span><span class="m">1701842598</span>.850170<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">        </span><span class="nv">SuppressResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>true,
+<span class="o">[</span><span class="m">1701842598</span>.850187<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w">        </span><span class="nv">InteractionModelRevision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">11</span>
+<span class="o">[</span><span class="m">1701842598</span>.850203<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:DMG:<span class="w"> </span><span class="o">}</span>
+<span class="o">[</span><span class="m">1701842598</span>.850383<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:TOO:<span class="w"> </span>Endpoint:<span class="w"> </span><span class="m">0</span><span class="w"> </span>Cluster:<span class="w"> </span>0x0000_001D<span class="w"> </span>Attribute<span class="w"> </span>0x0000_0003<span class="w"> </span>DataVersion:<span class="w"> </span><span class="m">1137619626</span>
+<span class="o">[</span><span class="m">1701842598</span>.850442<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:TOO:<span class="w">   </span>PartsList:<span class="w"> </span><span class="m">2</span><span class="w"> </span>entries
+<span class="o">[</span><span class="m">1701842598</span>.850462<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:TOO:<span class="w">     </span><span class="o">[</span><span class="m">1</span><span class="o">]</span>:<span class="w"> </span><span class="m">1</span>
+<span class="o">[</span><span class="m">1701842598</span>.850479<span class="o">][</span><span class="m">1288</span>:1290<span class="o">]</span><span class="w"> </span>CHIP:TOO:<span class="w">     </span><span class="o">[</span><span class="m">2</span><span class="o">]</span>:<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>PartsList will only have entry &lt;1&gt;, when no bridged nodes are attached.</p></li>
+<li><p>PartsList will only have entries &lt;1&gt;,&lt;2&gt;, when 1 bridged endpoint is attached.(shown in above example)
+<br>In this case, &lt;2&gt; will be the bridged endpoint id for attached Unify End-Device w.r.t chip-tool.</p></li>
+<li><p>PartsList will only have entries &lt;1&gt;,&lt;2&gt;,&lt;3&gt; when 2 bridged endpoints are attached and so on.</p></li>
+</ul>
+<p>In case of commissioning failure, we observe <code class="docutils literal notranslate"><span class="pre">CHIP</span> <span class="pre">Error</span> <span class="pre">0x00000032:</span> <span class="pre">Timeout</span></code> as output for above command.</p>
+</section>
+<section id="to-operate-end-point-via-unify-matter-bridge-from-matter-fabric">
+<h4>To operate end point via unify matter bridge from matter fabric<a class="headerlink" href="#to-operate-end-point-via-unify-matter-bridge-from-matter-fabric" title="Permalink to this heading"></a></h4>
+<p>First, add a device with clusters supported by unify matter bridge to the protocol controller. Unify matter bridge supported clusters can be seen in this <a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/matter-bridge/readme_overview.html#supported-clusters-devices">link</a>. After successful addition of device, we can see new bridged endpoint added to the list on the unify matter bridge using the commands mentioned above.</p>
+<p>We can see the capabilities of the newly added bridged endpoint on unify matter bridge using the below command in bash terminal.
+<br>Note: bridged endpoint id in below command, can be obtained from the above parts-list command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker&gt;<span class="w"> </span>chip-tool<span class="w"> </span>descriptor<span class="w"> </span><span class="nb">read</span><span class="w"> </span>device-type-list<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;bridged<span class="w"> </span>endpoint<span class="w"> </span>id&gt;
+</pre></div>
+</div>
+<p>Now, we can use chip-tool commands in bash terminal to operate the device.
+<br> For example, To send an OnOff cluster Toggle command to a bridged endpoint with id 2, via Matter Fabric Node ID 1</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker&gt;<span class="w"> </span>chip-tool<span class="w"> </span>onoff<span class="w"> </span>toggle<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>More detailed information about chip-tool can be found in this <a class="reference external" href="https://project-chip.github.io/connectedhomeip-doc/guides/chip_tool_guide.html">link</a></p>
+</section>
+</section>
+<section id="z-wave-options">
+<h3>Z-Wave options<a class="headerlink" href="#z-wave-options" title="Permalink to this heading"></a></h3>
+<section id="z-wave-rf-region">
+<h4>Z-Wave RF Region<a class="headerlink" href="#z-wave-rf-region" title="Permalink to this heading"></a></h4>
+<p>The Z-Wave controller will default to running the <code class="docutils literal notranslate"><span class="pre">EU</span></code> region setting.
+A command-line switch is available to choose a different region from the region list EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.
+Here is an example on how to start it up in the US region.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zwave-rf-region US</span>
+</pre></div>
+</div>
+</section>
+<section id="serial-no">
+<h4>Serial no<a class="headerlink" href="#serial-no" title="Permalink to this heading"></a></h4>
+<p>Specifying the device’s serial no. that you would like to use, can be done like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --serial-no 440262195</span>
+</pre></div>
+</div>
+<p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
+For Debian based distro, it can be installed like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>libqt5network5
+</pre></div>
+</div>
+</section>
+<section id="ip-address">
+<h4>IP address<a class="headerlink" href="#ip-address" title="Permalink to this heading"></a></h4>
+<p>If you have eg. a WSTK board connected to the same network, you can specify its IP address like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --ip-address 10.0.0.12</span>
+</pre></div>
+</div>
+</section>
+<section id="direct-device">
+<h4>Direct device<a class="headerlink" href="#direct-device" title="Permalink to this heading"></a></h4>
+<p>This method is only supported on Linux.
+By specifying the device path, you can map that device into the portable runtime.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>--device<span class="w"> </span>/dev/ttyUSB0.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="zigbee-options">
+<h3>Zigbee Options<a class="headerlink" href="#zigbee-options" title="Permalink to this heading"></a></h3>
+<section id="zigbee-device-serial-no">
+<h4>Zigbee Device Serial no<a class="headerlink" href="#zigbee-device-serial-no" title="Permalink to this heading"></a></h4>
+<p>Specifying the Zigbee device’s serial no. that you would like to use, can be done like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zigpc_serial_no 440262196</span>
+</pre></div>
+</div>
+<p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
+For Debian based distro, it can be installed like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>libqt5network5
+</pre></div>
+</div>
+</section>
+<section id="zigbee-ip-address">
+<h4>Zigbee IP address<a class="headerlink" href="#zigbee-ip-address" title="Permalink to this heading"></a></h4>
+<p>If you have eg. a WSTK board with Zigbee module connected to the same network, you can specify its IP address like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zigpc-ip-address 10.0.0.13</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h4>Direct device<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>This method is only supported on Linux.
+By specifying the device path, you can map that Zigbee NCP device into the portable runtime.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>--zigpc-device<span class="w"> </span>/dev/ttyUSB1.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="aox-options">
+<h3>AoX Options<a class="headerlink" href="#aox-options" title="Permalink to this heading"></a></h3>
+<section id="aox-device-serial-no">
+<h4>AoX Device Serial no<a class="headerlink" href="#aox-device-serial-no" title="Permalink to this heading"></a></h4>
+<p>Specifying the AoX BT device’s serial no. that you would like to use, can be done like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --aoxpc_serial_no 440262196</span>
+</pre></div>
+</div>
+<p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
+For Debian based distro, it can be installed like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>libqt5network5
+</pre></div>
+</div>
+</section>
+<section id="aox-ip-address">
+<h4>AoX IP address<a class="headerlink" href="#aox-ip-address" title="Permalink to this heading"></a></h4>
+<p>If you have eg. a WSTK board with AoX BT module connected to the same network, you can specify its IP address like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --aoxpc-ip-address 10.0.0.13</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Direct device<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>This method is only supported on Linux.
+By specifying the device path, you can map that AoX BT NCP device into the portable runtime.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>--aoxpc-device<span class="w"> </span>/dev/ttyUSB1.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multiple-devices-connected">
+<h3>Multiple devices connected<a class="headerlink" href="#multiple-devices-connected" title="Permalink to this heading"></a></h3>
+<p>Having multiple Thunderboard or WSTK boards connected via USB, you will have to specify which of the devices to use.
+This can be done by providing the path to a serial device, a serial number or an IP address of the device which can run the respective controller.</p>
+<p>For <em><code class="docutils literal notranslate"><span class="pre">ZPC</span></code></em>:
+<br>If you do not specify a serial number, the portable runtime will attempt to
+identify the controller device based on its application name. If that fails,
+you will be asked to select the controller from a the list of the connected
+devices.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p Z-Wave -m UPVL,GMS,NAL</span>
+<span class="go">Verifying Docker installation</span>
+<span class="go">devices: 2 devices found.</span>
+<span class="go">0: 440297793, J-Link EnergyMicro</span>
+<span class="go">0: 440206482, J-Link EnergyMicro</span>
+
+<span class="go">Attempting to identify the Serial API Controller...</span>
+<span class="go">Identification failed.</span>
+<span class="go">Serial number is not specified.</span>
+
+<span class="go">Device No. | Serial No. | Board No. | Freq. | Application name             </span>
+<span class="go">-----------+------------+-----------+-------+------------------------------</span>
+<span class="go">         0 | 440297793  | 224710182 | ?     | unknown                      </span>
+<span class="go">         1 | 440206482  | 204705627 | ?     | unknown                      </span>
+
+<span class="go">Please select a device for Z-Wave.</span>
+<span class="go">Note that the device&#39;s number may change when multiple boards are connected!</span>
+<span class="go">Type 0, 1, ... or x to cancel:</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">rest</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">protocols</span></code>:
+<br>If you do not specify a serial number, you will be asked to select the controller from a the list of the connected devices.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p Zigbee-NCP -m UPVL,GMS,NAL</span>
+<span class="go">Verifying Docker installation</span>
+<span class="go">devices: 2 devices found.</span>
+<span class="go">0: 440297793, J-Link EnergyMicro</span>
+<span class="go">0: 440206482, J-Link EnergyMicro</span>
+
+<span class="go">Attempting to identify the Serial API Controller...</span>
+<span class="go">Identification failed.</span>
+<span class="go">Serial number is not specified.</span>
+
+<span class="go">Device No. | Serial No. | Board No. | Freq. | Application name             </span>
+<span class="go">-----------+------------+-----------+-------+------------------------------</span>
+<span class="go">         0 | 440297793  | 224710182 | ?     | unknown                      </span>
+<span class="go">         1 | 440206482  | 204705627 | ?     | unknown                      </span>
+
+<span class="go">Please select a device for Zigbee-NCP.</span>
+<span class="go">Note that the device&#39;s number may change when multiple boards are connected!</span>
+<span class="go">Type 0, 1, ... or x to cancel:</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: When multiple protocols are selected and multiple devices are connected, after a device selected on above prompt for a protocol, it will not be displayed again in the next prompt for another protocol to avoid conflict between two PC configuration.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
+</section>
+<section id="additional-subcommands">
+<h2>Additional subcommands<a class="headerlink" href="#additional-subcommands" title="Permalink to this heading"></a></h2>
+<p>The portable runtime CLI includes additional convenience functions that allow
+you to flash the application firmwares, query the DSK values, and list other
+details of connected devices.</p>
+<section id="flash-application">
+<h3>Flash application<a class="headerlink" href="#flash-application" title="Permalink to this heading"></a></h3>
+<p>It is possible to flash the devices with the <code class="docutils literal notranslate"><span class="pre">flash-app</span></code> subcommand. To get help
+on how to use this subcommand, use the <code class="docutils literal notranslate"><span class="pre">-h</span></code> switch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli flash-app -h</span>
+</pre></div>
+</div>
+<p>The package contains several pre-built application firmwares. It is possible to
+flash the pre-built applications using the <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag and one of the following
+names:<br />
+<code class="docutils literal notranslate"><span class="pre">multilevel-sensor</span></code>, <code class="docutils literal notranslate"><span class="pre">power-strip</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor-pir</span></code>, <code class="docutils literal notranslate"><span class="pre">serial-api</span></code>, <code class="docutils literal notranslate"><span class="pre">switch-on-off</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">wall-controller</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -s 440262211 flash-app -n switch-on-off</span>
+</pre></div>
+</div>
+<p>Or a relative path can be specified as an argument for an arbitrary application firmware using the <code class="docutils literal notranslate"><span class="pre">-p</span></code> flag.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -s 440262176 flash-app -u zwave_soc_switch_on_off-brd2603a-us.hex</span>
+</pre></div>
+</div>
+<p>Specifying the serial number is not required - in that case you will be asked to
+select the device that you want to flash.</p>
+<p>If the RF region is not defined by the <code class="docutils literal notranslate"><span class="pre">--zwave-rf</span></code> argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zwave-rf US_LR -s 440262138 flash-app -n switch-on-off</span>
+</pre></div>
+</div>
+<p>After the application firmware is flashed to the device, the DSK of the End Device will be printed.
+Note: In case of flashing serial-api, there is no DSK.</p>
+</section>
+<section id="read-device-specific-key-dsk">
+<h3>Read Device Specific Key (DSK)<a class="headerlink" href="#read-device-specific-key-dsk" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">read-dsk</span></code> subcommand prints the DSK of a device. This DSK value can be used for secure inclusion.
+The device to be queried can be selected from the list of devices interactively,
+or by specifying the serial number <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag before the subcommand.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -s 440262138 read-dsk</span>
+</pre></div>
+</div>
+</section>
+<section id="list-connected-devices">
+<h3>List connected devices<a class="headerlink" href="#list-connected-devices" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">list-devices</span></code> subcommand allows to query the serial number, board number,
+configured radio region, and application name of the connected devices, and can
+be invoked as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli list-devices</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

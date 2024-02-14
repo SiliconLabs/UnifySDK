@@ -9,7 +9,7 @@ var structuic__mqtt__dotdot__diagnostics__updated__state__t =
     [ "aps_tx_ucast_success", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ab2072d9c90bf265c90e7736d25fbd602", null ],
     [ "aps_unauthorized_key", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#a7d4013a21544a92a2019d55018cf70fc", null ],
     [ "apsfc_failure", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ac5724c155bc6059d29a0142719b154db", null ],
-    [ "averagemac_retry_peraps_message_sent", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ac662b40dc1585392d36f7af25ffbbe94", null ],
+    [ "average_mac_retry_per_aps_message_sent", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#a93dc2c17dd8c8bd7859260bf65b970e7", null ],
     [ "child_moved", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#a38b94be18e57f8dcf773784bd21de12c", null ],
     [ "join_indication", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#abe0bc6b4db338aea9c41764f08dcb066", null ],
     [ "last_messagelqi", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#a76a348eb7f5f24091e08e8c203927afd", null ],
@@ -29,7 +29,7 @@ var structuic__mqtt__dotdot__diagnostics__updated__state__t =
     [ "packet_buffer_allocate_failures", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ae3783530c5aa7cba6f06eda2f054a75d", null ],
     [ "packet_validate_drop_count", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ac540cec1cb9b9a8a607c185a38d6c318", null ],
     [ "persistent_memory_writes", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#a456469768b42ecb707d869138f8cda09", null ],
-    [ "phy_tomac_queue_limit_reached", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ad165dccba8f5f1804a26c5f8b161083d", null ],
+    [ "phy_to_mac_queue_limit_reached", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#ad29d8a406deb06ff9d0afd10549993bb", null ],
     [ "relayed_ucast", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#a88d82cefd061838497d4a5ada48d6ff7", null ],
     [ "route_disc_initiated", "structuic__mqtt__dotdot__diagnostics__updated__state__t.html#afc5ac258c808ba744f03997ee0214850", null ]
 ];

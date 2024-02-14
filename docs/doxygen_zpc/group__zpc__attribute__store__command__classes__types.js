@@ -8,5 +8,6 @@ var group__zpc__attribute__store__command__classes__types =
     [ "Generic Type definitions for Command Class attribute storage", "group__zwave__command__class__generic__types.html", "group__zwave__command__class__generic__types" ],
     [ "Type definitions for attribute storage of the Local Scenes Command Classes", "group__zwave__command__class__local__scenes__types.html", "group__zwave__command__class__local__scenes__types" ],
     [ "Type definitions for attribute storage of the Meter Command Class", "group__zwave__command__class__meter__types.html", "group__zwave__command__class__meter__types" ],
+    [ "Type definitions for attribute storage of the Sound Switch Command Class", "group__zwave__command__class__sound__switch__types.html", "group__zwave__command__class__sound__switch__types" ],
     [ "Type definitions for attribute storage of the  Wake Up Command Class.", "group__zwave__command__class__wake__up__types.html", "group__zwave__command__class__wake__up__types" ]
 ];

@@ -25,6 +25,744 @@
 //Lists of attributes
 
 /**
+ * @brief ZCL Attribute list for Basic cluster
+**/
+const zcl_attribute_t basic_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ZCL_VERSION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "ZCLVersion", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_APPLICATION_VERSION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "ApplicationVersion", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_STACK_VERSION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "StackVersion", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_HW_VERSION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "HWVersion", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MANUFACTURER_NAME, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "ManufacturerName", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MODEL_IDENTIFIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "ModelIdentifier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DATE_CODE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "DateCode", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_POWER_SOURCE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "PowerSource", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_GENERIC_DEVICE_CLASS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "GenericDevice-Class", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_GENERIC_DEVICE_TYPE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "GenericDevice-Type", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCT_CODE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_OCTSTR, // type
+    false, // is_reportable
+    "ProductCode", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCTURL, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "ProductURL", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_MANUFACTURER_VERSION_DETAILS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "ManufacturerVersionDetails", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SERIAL_NUMBER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "SerialNumber", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PRODUCT_LABEL, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "ProductLabel", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_LOCATION_DESCRIPTION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "LocationDescription", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_PHYSICAL_ENVIRONMENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "PhysicalEnvironment", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DEVICE_ENABLED, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_BOOL, // type
+    false, // is_reportable
+    "DeviceEnabled", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_ALARM_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "AlarmMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_DISABLE_LOCAL_CONFIG, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "DisableLocalConfig", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SW_BUILDID, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "SWBuildID", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int basic_num_attributes =
+    sizeof(basic_attribute_list)/ sizeof(zcl_attribute_t);
+
+/**
+ * @brief ZCL Attribute list for PowerConfiguration cluster
+**/
+const zcl_attribute_t power_configuration_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "MainsVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_FREQUENCY, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "MainsFrequency", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_ALARM_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "MainsAlarmMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "MainsVoltageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_MAX_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "MainsVoltageMaxThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_MAINS_VOLTAGE_DWELL_TRIP_POINT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "MainsVoltageDwellTripPoint", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_REMAINING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    true, // is_reportable
+    "BatteryPercentageRemaining", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_MANUFACTURER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "BatteryManufacturer", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_SIZE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatterySize", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERYA_HR_RATING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "BatteryAHrRating", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_QUANTITY, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryQuantity", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_RATED_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryRatedVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "BatteryAlarmMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryVoltageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD1, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryVoltageThreshold1", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD2, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryVoltageThreshold2", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_VOLTAGE_THRESHOLD3, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryVoltageThreshold3", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryPercentageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD1, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryPercentageThreshold1", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD2, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryPercentageThreshold2", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_PERCENTAGE_THRESHOLD3, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "BatteryPercentageThreshold3", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY_ALARM_STATE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP32, // type
+    false, // is_reportable
+    "BatteryAlarmState", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2Voltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_REMAINING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    true, // is_reportable
+    "Battery2PercentageRemaining", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_MANUFACTURER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "Battery2Manufacturer", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_SIZE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2Size", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2A_HR_RATING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "Battery2AHrRating", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_QUANTITY, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2Quantity", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_RATED_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2RatedVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "Battery2AlarmMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2VoltageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD1, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2VoltageThreshold1", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD2, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2VoltageThreshold2", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_VOLTAGE_THRESHOLD3, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2VoltageThreshold3", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2PercentageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD1, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2PercentageThreshold1", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD2, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2PercentageThreshold2", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_PERCENTAGE_THRESHOLD3, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery2PercentageThreshold3", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY2_ALARM_STATE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP32, // type
+    false, // is_reportable
+    "Battery2AlarmState", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3Voltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_REMAINING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    true, // is_reportable
+    "Battery3PercentageRemaining", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_MANUFACTURER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_STRING, // type
+    false, // is_reportable
+    "Battery3Manufacturer", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_SIZE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3Size", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3A_HR_RATING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "Battery3AHrRating", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_QUANTITY, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3Quantity", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_RATED_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3RatedVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "Battery3AlarmMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3VoltageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD1, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3VoltageThreshold1", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD2, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3VoltageThreshold2", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_VOLTAGE_THRESHOLD3, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3VoltageThreshold3", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_MIN_THRESHOLD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3PercentageMinThreshold", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD1, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3PercentageThreshold1", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD2, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3PercentageThreshold2", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_PERCENTAGE_THRESHOLD3, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "Battery3PercentageThreshold3", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+    ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION_ATTR_BATTERY3_ALARM_STATE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP32, // type
+    false, // is_reportable
+    "Battery3AlarmState", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_POWER_CONFIGURATION, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int power_configuration_num_attributes =
+    sizeof(power_configuration_attribute_list)/ sizeof(zcl_attribute_t);
+
+/**
  * @brief ZCL Attribute list for Identify cluster
 **/
 const zcl_attribute_t identify_attribute_list[] = {
@@ -471,7 +1209,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OFPIN_USERS_SUPPORTED, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_PIN_USERS_SUPPORTED, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
     false, // is_reportable
     "NumberOfPINUsersSupported", // attribute_name
@@ -480,7 +1218,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OFRFID_USERS_SUPPORTED, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_RFID_USERS_SUPPORTED, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
     false, // is_reportable
     "NumberOfRFIDUsersSupported", // attribute_name
@@ -516,7 +1254,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAXPIN_CODE_LENGTH, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAX_PIN_CODE_LENGTH, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
     false, // is_reportable
     "MaxPINCodeLength", // attribute_name
@@ -525,7 +1263,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MINPIN_CODE_LENGTH, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MIN_PIN_CODE_LENGTH, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
     false, // is_reportable
     "MinPINCodeLength", // attribute_name
@@ -534,7 +1272,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAXRFID_CODE_LENGTH, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MAX_RFID_CODE_LENGTH, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
     false, // is_reportable
     "MaxRFIDCodeLength", // attribute_name
@@ -543,10 +1281,28 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MINRFID_CODE_LENGTH, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_MIN_RFID_CODE_LENGTH, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
     false, // is_reportable
     "MinRFIDCodeLength", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_CREDENTIAL_RULES_SUPPORT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "CredentialRulesSupport", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "NumberOfCredentialsSupportedPerUser", // attribute_name
     "", // desired_payload
     "", // reported_payload
   },
@@ -660,6 +1416,15 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_LOCAL_PROGRAMMING_FEATURES, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    true, // is_reportable
+    "LocalProgrammingFeatures", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_WRONG_CODE_ENTRY_LIMIT, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
     true, // is_reportable
@@ -678,7 +1443,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SENDPIN_OVER_THE_AIR, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_SEND_PIN_OVER_THE_AIR, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_BOOL, // type
     true, // is_reportable
     "SendPINOverTheAir", // attribute_name
@@ -687,7 +1452,7 @@ const zcl_attribute_t door_lock_attribute_list[] = {
   },
   {
     ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
-    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIREPI_NFORRF_OPERATION, // attribute_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_REQUIRE_PI_NFOR_RF_OPERATION, // attribute_id
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_BOOL, // type
     true, // is_reportable
     "RequirePINforRFOperation", // attribute_name
@@ -700,6 +1465,15 @@ const zcl_attribute_t door_lock_attribute_list[] = {
     (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
     true, // is_reportable
     "SecurityLevel", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_EXPIRING_USER_TIMEOUT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ExpiringUserTimeout", // attribute_name
     "", // desired_payload
     "", // reported_payload
   },
@@ -775,6 +1549,15 @@ const zcl_attribute_t door_lock_attribute_list[] = {
     "", // desired_payload
     "", // reported_payload
   },
+  {
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
+    ZIGPC_ZCL_CLUSTER_DOOR_LOCK_ATTR_FEATURE_MAP, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP16, // type
+    false, // is_reportable
+    "FeatureMap", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
     {
         ZIGPC_ZCL_CLUSTER_DOOR_LOCK, // cluster_id
         ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
@@ -788,6 +1571,204 @@ const zcl_attribute_t door_lock_attribute_list[] = {
 
 static const unsigned int door_lock_num_attributes =
     sizeof(door_lock_attribute_list)/ sizeof(zcl_attribute_t);
+
+/**
+ * @brief ZCL Attribute list for WindowCovering cluster
+**/
+const zcl_attribute_t window_covering_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_WINDOW_COVERING_TYPE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "WindowCoveringType", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_PHYSICAL_CLOSED_LIMIT_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "PhysicalClosedLimitLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_PHYSICAL_CLOSED_LIMIT_TILT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "PhysicalClosedLimitTilt", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "CurrentPositionLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_TILT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "CurrentPositionTilt", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_NUMBER_OF_ACTUATIONS_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "NumberOfActuationsLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_NUMBER_OF_ACTUATIONS_TILT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "NumberOfActuationsTilt", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CONFIG_OR_STATUS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "ConfigOrStatus", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_LIFT_PERCENTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    true, // is_reportable
+    "CurrentPositionLiftPercentage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_CURRENT_POSITION_TILT_PERCENTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    true, // is_reportable
+    "CurrentPositionTiltPercentage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_OPEN_LIMIT_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "InstalledOpenLimitLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_CLOSED_LIMIT_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "InstalledClosedLimitLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_OPEN_LIMIT_TILT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "InstalledOpenLimitTilt", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INSTALLED_CLOSED_LIMIT_TILT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "InstalledClosedLimitTilt", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_VELOCITY_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "VelocityLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_ACCELERATION_TIME_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AccelerationTimeLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_DECELERATION_TIME_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "DecelerationTimeLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_MODE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "Mode", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INTERMEDIATE_SETPOINTS_LIFT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_OCTSTR, // type
+    false, // is_reportable
+    "IntermediateSetpointsLift", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_WINDOW_COVERING_ATTR_INTERMEDIATE_SETPOINTS_TILT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_OCTSTR, // type
+    false, // is_reportable
+    "IntermediateSetpointsTilt", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_WINDOW_COVERING, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int window_covering_num_attributes =
+    sizeof(window_covering_attribute_list)/ sizeof(zcl_attribute_t);
 
 /**
  * @brief ZCL Attribute list for Thermostat cluster
@@ -1744,6 +2725,60 @@ static const unsigned int color_control_num_attributes =
     sizeof(color_control_attribute_list)/ sizeof(zcl_attribute_t);
 
 /**
+ * @brief ZCL Attribute list for TemperatureMeasurement cluster
+**/
+const zcl_attribute_t temperature_measurement_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MEASURED_VALUE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredValue", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MIN_MEASURED_VALUE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "MinMeasuredValue", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_MAX_MEASURED_VALUE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "MaxMeasuredValue", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT_ATTR_TOLERANCE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "Tolerance", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_TEMPERATURE_MEASUREMENT, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int temperature_measurement_num_attributes =
+    sizeof(temperature_measurement_attribute_list)/ sizeof(zcl_attribute_t);
+
+/**
  * @brief ZCL Attribute list for OccupancySensing cluster
 **/
 const zcl_attribute_t occupancy_sensing_attribute_list[] = {
@@ -1977,7 +3012,1436 @@ const zcl_attribute_t iaswd_attribute_list[] = {
 static const unsigned int iaswd_num_attributes =
     sizeof(iaswd_attribute_list)/ sizeof(zcl_attribute_t);
 
+/**
+ * @brief ZCL Attribute list for Metering cluster
+**/
+const zcl_attribute_t metering_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_SUMMATION_DELIVERED, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT64, // type
+    false, // is_reportable
+    "CurrentSummationDelivered", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_SUMMATION_RECEIVED, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT64, // type
+    false, // is_reportable
+    "CurrentSummationReceived", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_DELIVERED, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT64, // type
+    false, // is_reportable
+    "CurrentMaxDemandDelivered", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_RECEIVED, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    false, // is_reportable
+    "CurrentMaxDemandReceived", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_POWER_FACTOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    false, // is_reportable
+    "PowerFactor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_READING_SNAP_SHOT_TIME, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UTC, // type
+    false, // is_reportable
+    "ReadingSnapShotTime", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_DELIVERED_TIME, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UTC, // type
+    false, // is_reportable
+    "CurrentMaxDemandDeliveredTime", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_MAX_DEMAND_RECEIVED_TIME, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UTC, // type
+    false, // is_reportable
+    "CurrentMaxDemandReceivedTime", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_DEFAULT_UPDATE_PERIOD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "DefaultUpdatePeriod", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_SUPPLY_STATUS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "SupplyStatus", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_INLET_ENERGY_CARRIER_SUMMATION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT64, // type
+    false, // is_reportable
+    "CurrentInletEnergyCarrierSummation", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT64, // type
+    false, // is_reportable
+    "CurrentOutletEnergyCarrierSummation", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_INLET_TEMPERATURE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT24, // type
+    false, // is_reportable
+    "InletTemperature", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_OUTLET_TEMPERATURE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT24, // type
+    false, // is_reportable
+    "OutletTemperature", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_UNITOF_MEASURE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "UnitofMeasure", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT24, // type
+    false, // is_reportable
+    "Multiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT24, // type
+    false, // is_reportable
+    "Divisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_SUMMATION_FORMATTING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "SummationFormatting", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_DEMAND_FORMATTING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "DemandFormatting", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_HISTORICAL_CONSUMPTION_FORMATTING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "HistoricalConsumptionFormatting", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_METERING_DEVICE_TYPE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "MeteringDeviceType", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_UNIT_OF_MEASURE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "EnergyCarrierUnitOfMeasure", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_SUMMATION_FORMATTING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "EnergyCarrierSummationFormatting", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_ENERGY_CARRIER_DEMAND_FORMATTING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "EnergyCarrierDemandFormatting", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_TEMPERATURE_UNIT_OF_MEASURE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "TemperatureUnitOfMeasure", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+    ZIGPC_ZCL_CLUSTER_METERING_ATTR_TEMPERATURE_FORMATTING, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "TemperatureFormatting", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_METERING, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int metering_num_attributes =
+    sizeof(metering_attribute_list)/ sizeof(zcl_attribute_t);
+
+/**
+ * @brief ZCL Attribute list for ElectricalMeasurement cluster
+**/
+const zcl_attribute_t electrical_measurement_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASUREMENT_TYPE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP32, // type
+    false, // is_reportable
+    "MeasurementType", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "DCVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCVoltageMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCVoltageMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "DCCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCCurrentMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCCurrentMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "DCPower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCPowerMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCPowerMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "DCVoltageMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "DCVoltageDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "DCCurrentMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "DCCurrentDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "DCPowerMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_POWER_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "DCPowerDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACFrequency", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "ACFrequencyMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "ACFrequencyMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_NEUTRAL_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "NeutralCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_ACTIVE_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT32, // type
+    true, // is_reportable
+    "TotalActivePower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_REACTIVE_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT32, // type
+    true, // is_reportable
+    "TotalReactivePower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_TOTAL_APPARENT_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT32, // type
+    true, // is_reportable
+    "TotalApparentPower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED1ST_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "Measured1stHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED3RD_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "Measured3rdHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED5TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "Measured5thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED7TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "Measured7thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED9TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "Measured9thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED11TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "Measured11thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE1ST_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredPhase1stHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE3RD_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredPhase3rdHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE5TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredPhase5thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE7TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredPhase7thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE9TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredPhase9thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_MEASURED_PHASE11TH_HARMONIC_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "MeasuredPhase11thHarmonicCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACFrequencyMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_FREQUENCY_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACFrequencyDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT32, // type
+    true, // is_reportable
+    "PowerMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT32, // type
+    true, // is_reportable
+    "PowerDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_HARMONIC_CURRENT_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    true, // is_reportable
+    "HarmonicCurrentMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_PHASE_HARMONIC_CURRENT_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    true, // is_reportable
+    "PhaseHarmonicCurrentMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "LineCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ActiveCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ReactiveCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "RMSVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "RMSCurrent", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSCurrentMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSCurrentMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ActivePower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ActivePowerMin", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ActivePowerMax", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ReactivePower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ApparentPower", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    false, // is_reportable
+    "PowerFactor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSVoltageMeasurementPeriod", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSOverVoltageCounter", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSUnderVoltageCounter", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSExtremeOverVoltagePeriod", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSExtremeUnderVoltagePeriod", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageSagPeriod", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageSwellPeriod", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACVoltageMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACVoltageDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACCurrentMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACCurrentDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_POWER_MULTIPLIER, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACPowerMultiplier", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_POWER_DIVISOR, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ACPowerDivisor", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_OVERLOAD_ALARMS_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP8, // type
+    false, // is_reportable
+    "DCOverloadAlarmsMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_VOLTAGE_OVERLOAD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCVoltageOverload", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_DC_CURRENT_OVERLOAD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "DCCurrentOverload", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ALARMS_MASK, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP16, // type
+    false, // is_reportable
+    "ACAlarmsMask", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_VOLTAGE_OVERLOAD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ACVoltageOverload", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_CURRENT_OVERLOAD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ACCurrentOverload", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_ACTIVE_POWER_OVERLOAD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ACActivePowerOverload", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AC_REACTIVE_POWER_OVERLOAD, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ACReactivePowerOverload", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "AverageRMSOverVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "AverageRMSUnderVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "RMSExtremeOverVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "RMSExtremeUnderVoltage", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "RMSVoltageSag", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "RMSVoltageSwell", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "LineCurrentPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ActiveCurrentPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ReactiveCurrentPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "RMSVoltagePhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageMinPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageMaxPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "RMSCurrentPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSCurrentMinPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSCurrentMaxPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ActivePowerPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ActivePowerMinPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ActivePowerMaxPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ReactivePowerPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ApparentPowerPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    false, // is_reportable
+    "PowerFactorPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSVoltageMeasurementPeriodPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSOverVoltageCounterPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSUnderVoltageCounterPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSExtremeOverVoltagePeriodPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSExtremeUnderVoltagePeriodPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageSagPeriodPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHB, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageSwellPeriodPhB", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_LINE_CURRENT_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "LineCurrentPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_CURRENT_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ActiveCurrentPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_CURRENT_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ReactiveCurrentPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "RMSVoltagePhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MIN_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageMinPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_MAX_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageMaxPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "RMSCurrentPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MIN_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSCurrentMinPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_CURRENT_MAX_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSCurrentMaxPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ActivePowerPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MIN_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ActivePowerMinPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_ACTIVE_POWER_MAX_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    false, // is_reportable
+    "ActivePowerMaxPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_REACTIVE_POWER_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT16, // type
+    true, // is_reportable
+    "ReactivePowerPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_APPARENT_POWER_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    true, // is_reportable
+    "ApparentPowerPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_POWER_FACTOR_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_INT8, // type
+    false, // is_reportable
+    "PowerFactorPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSVoltageMeasurementPeriodPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSOverVoltageCounterPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "AverageRMSUnderVoltageCounterPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSExtremeOverVoltagePeriodPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSExtremeUnderVoltagePeriodPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SAG_PERIOD_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageSagPeriodPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+    ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT_ATTR_RMS_VOLTAGE_SWELL_PERIOD_PHC, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "RMSVoltageSwellPeriodPhC", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_ELECTRICAL_MEASUREMENT, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int electrical_measurement_num_attributes =
+    sizeof(electrical_measurement_attribute_list)/ sizeof(zcl_attribute_t);
+
 //Lists of zcl_profiles
+
+static const zcl_profile_t basic_profile = {
+    "Basic", //Cluster Name
+    0x0, //Cluser ID
+    basic_attribute_list,
+    basic_num_attributes //number of attributes
+};
+
+
+static const zcl_profile_t power_configuration_profile = {
+    "PowerConfiguration", //Cluster Name
+    0x1, //Cluser ID
+    power_configuration_attribute_list,
+    power_configuration_num_attributes //number of attributes
+};
+
 
 static const zcl_profile_t identify_profile = {
     "Identify", //Cluster Name
@@ -2035,6 +4499,14 @@ static const zcl_profile_t door_lock_profile = {
 };
 
 
+static const zcl_profile_t window_covering_profile = {
+    "WindowCovering", //Cluster Name
+    0x102, //Cluser ID
+    window_covering_attribute_list,
+    window_covering_num_attributes //number of attributes
+};
+
+
 static const zcl_profile_t thermostat_profile = {
     "Thermostat", //Cluster Name
     0x201, //Cluser ID
@@ -2048,6 +4520,14 @@ static const zcl_profile_t color_control_profile = {
     0x300, //Cluser ID
     color_control_attribute_list,
     color_control_num_attributes //number of attributes
+};
+
+
+static const zcl_profile_t temperature_measurement_profile = {
+    "TemperatureMeasurement", //Cluster Name
+    0x402, //Cluser ID
+    temperature_measurement_attribute_list,
+    temperature_measurement_num_attributes //number of attributes
 };
 
 
@@ -2075,11 +4555,29 @@ static const zcl_profile_t iaswd_profile = {
 };
 
 
+static const zcl_profile_t metering_profile = {
+    "Metering", //Cluster Name
+    0x702, //Cluser ID
+    metering_attribute_list,
+    metering_num_attributes //number of attributes
+};
+
+
+static const zcl_profile_t electrical_measurement_profile = {
+    "ElectricalMeasurement", //Cluster Name
+    0xB04, //Cluser ID
+    electrical_measurement_attribute_list,
+    electrical_measurement_num_attributes //number of attributes
+};
+
+
 //Add into the profile map from zcl_attribute_info.cpp
 sl_status_t zigpc_zcl_profiles_init()
 {
   std::list<zcl_profile_t> &profile_list = zigpc_zcl_profiles_get_profile_list();
 
+  profile_list.push_back(basic_profile);
+  profile_list.push_back(power_configuration_profile);
   profile_list.push_back(identify_profile);
   profile_list.push_back(groups_profile);
   profile_list.push_back(on_off_profile);
@@ -2087,11 +4585,15 @@ sl_status_t zigpc_zcl_profiles_init()
   profile_list.push_back(ota_upgrade_profile);
   profile_list.push_back(poll_control_profile);
   profile_list.push_back(door_lock_profile);
+  profile_list.push_back(window_covering_profile);
   profile_list.push_back(thermostat_profile);
   profile_list.push_back(color_control_profile);
+  profile_list.push_back(temperature_measurement_profile);
   profile_list.push_back(occupancy_sensing_profile);
   profile_list.push_back(ias_zone_profile);
   profile_list.push_back(iaswd_profile);
+  profile_list.push_back(metering_profile);
+  profile_list.push_back(electrical_measurement_profile);
 
   return SL_STATUS_OK;
 }

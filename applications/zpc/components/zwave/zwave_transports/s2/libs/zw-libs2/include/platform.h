@@ -1,15 +1,15 @@
 /* © 2017 Silicon Laboratories Inc.
  */
-/*************************************************************************** 
+/***************************************************************************
 *
-* Description: Some nice descriptive description. 
-* 
-* Author:   Jakob Buron 
-* 
-* Last Changed By:  $Author: jdo $ 
-* Revision:         $Revision: 1.38 $ 
-* Last Changed:     $Date: 2005/07/27 15:12:54 $ 
-* 
+* Description: Some nice descriptive description.
+*
+* Author:   Jakob Buron
+*
+* Last Changed By:  $Author: jdo $
+* Revision:         $Revision: 1.38 $
+* Last Changed:     $Date: 2005/07/27 15:12:54 $
+*
 ****************************************************************************/
 #ifndef PLATFORM_H_
 #define PLATFORM_H_
@@ -29,7 +29,6 @@
 
 void print16(uint8_t * pData);
 
-#define UNUSED(x) x = x /* Hack to silence warning C280 Unreferenced local variable */
 
 ///* No printf on 8051 target. Comment out. This breaks includes in various modules. Use only in .c files */
 //#define SLASH /

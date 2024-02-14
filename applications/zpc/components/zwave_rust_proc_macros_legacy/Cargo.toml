@@ -7,7 +7,7 @@ license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor
 description = "zwave proc macros used by legacy firmware update command class"
 
 [dependencies]
-once_cell="1.9.*"
+once_cell="1.13.*"
 convert_case="*"
 quote="*"
 syn="*"

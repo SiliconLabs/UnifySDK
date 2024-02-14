@@ -9,7 +9,7 @@ description = "rust command handlers"
 [dependencies]
 mockall_double = "0.1.0"
 serde = { version = "1.0", features = ["derive"] }
-once_cell="1.9.*"
+once_cell="1.13.*"
 rust_command_class_frame_types = { path = "../rust_command_class_frame_types" }
 zwave_rust_proc_macros = { path = "../zwave_rust_proc_macros" }
 zwave_rust_proc_macros_legacy = { path = "../zwave_rust_proc_macros_legacy" }

@@ -126,6 +126,8 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "AoXPositionEstimation";
   case DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_CLUSTER_ID:
     return "ProtocolController-NetworkManagement";
+  case DOTDOT_DESCRIPTOR_CLUSTER_ID:
+    return "Descriptor";
   default:
     return "Unknown";
   }
@@ -293,6 +295,9 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  }
  if (strcmp ("ProtocolController-NetworkManagement", cluster_name) == 0) {
    return DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_CLUSTER_ID;
+ }
+ if (strcmp ("Descriptor", cluster_name) == 0) {
+   return DOTDOT_DESCRIPTOR_CLUSTER_ID;
  }
 
   // Return an invalid ID if we did not get any match.

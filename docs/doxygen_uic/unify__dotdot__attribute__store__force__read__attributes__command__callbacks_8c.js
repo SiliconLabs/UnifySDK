@@ -13,6 +13,7 @@ var unify__dotdot__attribute__store__force__read__attributes__command__callbacks
     [ "uic_mqtt_dotdot_color_control_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a46a27ab9cca21a8c78e04dad0ac7fd6e", null ],
     [ "uic_mqtt_dotdot_configuration_parameters_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#ad75fe9ddd735a43a26568793acd13494", null ],
     [ "uic_mqtt_dotdot_dehumidification_control_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a5c0ee5fa0906df7d9753cb13ad9997f9", null ],
+    [ "uic_mqtt_dotdot_descriptor_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a4ffe39e5b79fe889bbe9bf66b1c73b89", null ],
     [ "uic_mqtt_dotdot_device_temperature_configuration_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#ac2062747ccad2b4685b6ade6f30e3936", null ],
     [ "uic_mqtt_dotdot_diagnostics_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#acb2b4a8b5ac7596a0844c38b11a9bce0", null ],
     [ "uic_mqtt_dotdot_door_lock_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a7edb553b7d912d87cf054440e712b4d1", null ],

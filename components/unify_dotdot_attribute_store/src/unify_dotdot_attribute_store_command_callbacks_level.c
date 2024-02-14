@@ -194,6 +194,33 @@ static void dotdot_set_level_current_level_and_on_off_transition_time(
   }
 }
 
+// Return true if mask_offset matches the option 
+bool is_option_active(uint8_t option, uint8_t mask_offset) {
+  return (option & (1 << mask_offset)) > 0;
+}
+
+
+
+ /**
+ * @brief Check if ExecuteIfOff option is set according to the ZCL specification (3.10.2.3.1.2).
+ *
+ * @param option_level      ZCL option attribute
+ * @param options_mask      Option mask
+ * @param options_override  Option override
+ * 
+ * The function checks ExecuteIfOffOn bit in option_level or in options_override if options_mask contains ExecuteIfOffOn bit.
+ * 
+ * @return bool  True if ExecuteIfOff option is activated, false otherwise
+ */
+bool has_execute_if_off_option(uint8_t option_level, uint8_t options_mask, uint8_t options_override) {
+  uint8_t temp_option = option_level;
+  // If option_mask bit for ExecuteIfOff is set we take the option_override value instead of the level_option
+  if (is_option_active(options_mask, LEVEL_OPTIONS_EXECUTE_IF_OFF_OFFSET))  {
+    temp_option = options_override;
+  }
+  return is_option_active( temp_option, LEVEL_OPTIONS_EXECUTE_IF_OFF_OFFSET);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Incoming command/control functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -218,12 +245,15 @@ sl_status_t level_cluster_mapper_move_to_level(
       return SL_STATUS_FAIL;
     }
   }
+  
+  uint8_t option_level = dotdot_get_level_options(unid, endpoint, DESIRED_OR_REPORTED_ATTRIBUTE);
+  bool execute_even_if_off_option = has_execute_if_off_option(option_level, options_mask, options_override);
 
-  // Command has no effect if OnOff::OnOff is Off.
-  if (false
-      == dotdot_get_on_off_on_off(unid,
+  // Command has no effect if OnOff::OnOff is Off and execute_even_if_off_option is not specified
+  if (!execute_even_if_off_option && 
+        dotdot_get_on_off_on_off(unid,
                                   endpoint,
-                                  DESIRED_OR_REPORTED_ATTRIBUTE)) {
+                                  DESIRED_OR_REPORTED_ATTRIBUTE) == false) {
     return SL_STATUS_OK;
   }
 
@@ -259,11 +289,14 @@ sl_status_t
     }
   }
 
-  // Command has no effect if OnOff::OnOff is Off.
-  if (false
-      == dotdot_get_on_off_on_off(unid,
-                                  endpoint,
-                                  DESIRED_OR_REPORTED_ATTRIBUTE)) {
+  uint8_t option_level = dotdot_get_level_options(unid, endpoint, DESIRED_OR_REPORTED_ATTRIBUTE);
+  bool execute_even_if_off_option = has_execute_if_off_option(option_level, options_mask, options_override);
+
+  // Command has no effect if OnOff::OnOff is Off and execute_even_if_off_option is not specified
+  if (!execute_even_if_off_option &&  
+      dotdot_get_on_off_on_off(unid,
+                               endpoint,
+                               DESIRED_OR_REPORTED_ATTRIBUTE) == false) {
     return SL_STATUS_OK;
   }
 

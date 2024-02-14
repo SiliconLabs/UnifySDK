@@ -11,7 +11,7 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
         super(props);
         this.storage = this.props.Storage.Get();
         this.state = {
-            Host: this.storage.Host || process.env.REACT_APP_MQTT_HOST ||'localhost',
+            Host: this.storage.Host || process.env.REACT_APP_MQTT_HOST || 'localhost',
             Port: this.storage.Port || 1883,
             Status: "No connection",
             IsError: false,
@@ -78,7 +78,7 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
         if (this.props.IsConnected === true) {
             this.props.SocketServer.send(JSON.stringify({ type: "disconnect", data: null }));
         }
-        else {
+        else if (this.props.IsConnected === false) {
             if (!this.state.Host || !this.state.Port || (this.state.TLS && (!this.state.CAName || !this.state.ClientKeyName || !this.state.ClientCertificateName))) {
                 this.setState({ IsError: true });
                 this.props.handleIsConnectedChange(false);
@@ -89,6 +89,7 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
             this.props.handleIsConnectedChange(null);
             this.props.SocketServer.send(JSON.stringify({ type: "connect", data: data }));
         }
+        //else if (this.props.IsConnected === null) - transition state, ignored
     }
 
     uploadFile(file: any, certName: string) {
@@ -152,15 +153,15 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
                             </div>
                         </div>
                         <div className="col-sm-12 flex">
-                                <div className="con-item col-sm-4">
-                                    <div className="item-title col-sm-3">TLS</div>
-                                    <div className="item-value col-sm-9">
-                                        <div className="check-container float-left" onMouseDown={(e: any) => e?.stopPropagation()}>
-                                            <Form.Check className='float-left' checked={this.state.TLS} name="TLS" disabled={this.props.IsConnected !== false} onChange={this.handleCheckboxChange} />
+                            <div className="con-item col-sm-4">
+                                <div className="item-title col-sm-3">TLS</div>
+                                <div className="item-value col-sm-9">
+                                    <div className="check-container float-left" onMouseDown={(e: any) => e?.stopPropagation()}>
+                                        <Form.Check className='float-left' checked={this.state.TLS} name="TLS" disabled={this.props.IsConnected !== false} onChange={this.handleCheckboxChange} />
                                         <div className='padding-l-15 tls-name'>TLS</div>
-                                        </div>
                                     </div>
                                 </div>
+                            </div>
                             <Form.Label column className="col-sm-4"></Form.Label>
                             <Form.Label column className="col-sm-4"></Form.Label>
                         </div>

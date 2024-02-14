@@ -1,68 +1,38 @@
-acl
-binfmt-support
-bison
-build-essential
-ca-certificates
-clang
-cm-super-minimal // For docs generation with Doxygen
-curl
-debhelper
-devscripts
-doxygen
-dpkg
-fakeroot
-fdisk
-flex
-g++
-gcc
-gdb-multiarch
-ghostscript // For docs generation with Doxygen
-git
-git-lfs
-gnupg2
-graphviz
-libarchive-dev
-libasound2
-libdrm2
-libgbm1
-libx11-xcb1
-libxcb-dri3-0
-libxml2-dev
-libxslt-dev
-lsb-release
-mscgen
-ninja-build
-nlohmann-json3-dev
-nodejs
-npm
-openjdk-11-jre
-parted
-pkg-config
-python3
-python3-dev
-python3-pip
-python3-setuptools
-python3-wheel
-qemu-user
-qemu-user-static
-rpm
-rsync
-ruby
-ruby-dev
-software-properties-common
-sudo
-texlive-extra-utils
-texlive-font-utils
-texlive-fonts-recommended
-texlive-latex-extra
-texlive-latex-recommended
-texlive-plain-generic
-udev
-unzip
-valgrind
-wget
-xauth
-xsltproc
-xvfb
-zip
-zlib1g-dev
+build-essential                 // contains a list of packages that are required to create a Debian package
+clang                           // provides a language front-end and tooling infrastructure for languages in the C language
+cm-super-minimal                // For docs generation with Doxygen
+curl                            // Dockerfile. Downloads
+doxygen                         // For docs generation with Doxygen
+dpkg                            // Dockerfile. a package manager for Debian-based systems
+ghostscript                     // For docs generation with Doxygen
+fdisk                           // For Make SD card in jenkinsfile in Release builds
+git                             // cmake. download gecko_skc and cpc-deamon
+git-lfs                         // cmake. download gecko_skc and cpc-deamon
+graphviz                        // For docs generation
+libasound2                      // ZAP generation
+libgbm1                         // ZAP generation
+ninja-build                     // Build system
+nlohmann-json3-dev              // ZigPC, ZPC, testframework, uic_dotdot_mqtt, uic_smartstart_management. Read JSON from a file.
+nodejs                          // DevGUI. JavaScript runtime built on Chrome`s
+npm                             // DevGUI. package manager for the JavaScript runtime environment Node.js
+openjdk-11-jre                  // For docs generation
+parted                          // For Make SD card in jenkinsfile in Release builds
+pkg-config                      // PortableRuntime, Nal, Gms. insert the compiler options on the command line
+python3-pip                     // Dockerfile. Install pip3 packages
+qemu-user-static                // For Make SD card in jenkinsfile in Release builds
+ruby                            // testframework, zwave_transtoport
+ruby-dev                        // testframework, zwave_transtoport
+sudo                            // Dockerfile. run commands with sudo permissions
+texlive-extra-utils             // For docs generation
+texlive-font-utils              // For docs generation
+texlive-fonts-recommended       // For docs generation
+texlive-latex-extra             // For docs generation
+texlive-latex-recommended       // For docs generation
+texlive-plain-generic           // For docs generation
+udev                            // For Make SD card in jenkinsfile in Release builds
+unzip                           // Dockerfile. Unzip files
+valgrind                        // Tests. instrumentation framework for building dynamic analysis tools
+wget                            // Dockerfile. Downloads
+xauth                           // ZAP generation
+xvfb                            // ZAP generation
+zip                             // Zwave_Transports, Doxygen

@@ -32,6 +32,8 @@
 extern "C" {
 #endif
 
+typedef uint32_t UTC;
+
 /**
  * @brief ZCL data types.
  */
@@ -40,11 +42,12 @@ typedef enum {
   {{asZigPCZclDataType name}} = {{asHex atomicId 2}},
 {{/zcl_atomics}}
   // Custom data type for structs
-  {{asZigPCZclDataType 'StructTransitionType'}}
+  {{asZigPCZclDataType 'StructTransitionType'}},
+  {{asZigPCZclDataType 'CredentialStructType'}}
 } {{component_zigpc_zcl_prefix}}_data_type_t;
 
 {{#zcl_enums}}
-{{#if (isEnumZclStatus label)}}
+{{#if (supportedEnums label)}}
 /**
  * @brief ZCL status types.
  */
@@ -141,7 +144,11 @@ typedef enum {
  */
 typedef struct {
 {{#zcl_struct_items}}
+{{#if (supportedEnums type)}}
+{{ident}}{{asZigPCZclEnumType type}} {{asSnakeCaseLower label}};
+{{else}}
 {{ident}}{{asUnderlyingType type}} {{asSnakeCaseLower label}};
+{{/if}}
 {{/zcl_struct_items}}
 } __attribute__((__packed__)) {{asZigPCZclStructType label}};
 {{/if}}

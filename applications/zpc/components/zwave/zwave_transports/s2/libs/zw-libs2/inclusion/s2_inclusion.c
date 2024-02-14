@@ -395,9 +395,8 @@ static bool process_s2_inclusion_event(s2_inclusion_event_t event, const s2_tran
   return false;
 }
 
-static void s2_default_evt_handler(zwave_event_t *evt)
+static void s2_default_evt_handler(__attribute__((unused)) zwave_event_t *evt)
 {
-  UNUSED(evt);
 }
 /** Member function for internal event handling.
  *  This function is intended to be called when the event type is known, that is when a frame is
@@ -431,13 +430,10 @@ void process_event(uint16_t evt)
  * and S2_ACCESS in index 2, LR_AUTH in 3 and LR_ACCESS in 4.
  * This defines the API between the S2 module and the glue layer around it.
  * */
-void s2_restore_keys(struct S2 *p_context, bool make_keys_persist_se)
+void s2_restore_keys(struct S2 *p_context, __attribute__((unused)) bool make_keys_persist_se)
 {
   uint8_t i;
   bool    ret_val;
-#ifndef ZWAVE_PSA_SECURE_VAULT  
-  UNUSED(make_keys_persist_se);
-#endif
   MP_CTX_DEF
 
   DPRINTF("Restore Keys\n");
@@ -908,11 +904,11 @@ static void s2_send_echo_kex_set(void)
   mp_context->inclusion_buf_length                           = SECURITY_2_KEX_SET_LENGTH;
 
   mp_context->inclusion_peer.class_id = TEMP_KEY_SECURE;
-  mp_context->inclusion_peer.tx_options = S2_TXOPTION_VERIFY_DELIVERY;
+    mp_context->inclusion_peer.tx_options = S2_TXOPTION_VERIFY_DELIVERY;
 
   // Return value is ignored as the retransmission of ECHO frames is based on callback from timer
   // due to unknown user repsonse time and lenghty ECDH calc on remote end.
-  S2_send_data(mp_context, &mp_context->inclusion_peer, mp_context->u.inclusion_buf, mp_context->inclusion_buf_length);
+    S2_send_data(mp_context, &mp_context->inclusion_peer, mp_context->u.inclusion_buf, mp_context->inclusion_buf_length);
 
   s2_inclusion_set_timeout(mp_context, TB5_TIMEOUT);
 }
@@ -999,7 +995,7 @@ static void s2_send_net_key_get(void)
   mp_context->inclusion_buf_length                                = SECURITY_2_NET_KEY_GET_LENGTH;
 
   mp_context->inclusion_peer.class_id = TEMP_KEY_SECURE;
-  mp_context->inclusion_peer.tx_options = S2_TXOPTION_VERIFY_DELIVERY;
+    mp_context->inclusion_peer.tx_options = S2_TXOPTION_VERIFY_DELIVERY;
 
   m_retry_counter = MAX_RETRY_COUNT;
   s2_inclusion_send_data();
@@ -1019,7 +1015,7 @@ static void s2_send_net_key_verify(void)
 
   if (received_key != mp_context->key_exchange)
   {
-    goto error_handling;
+        goto error_handling;
   }
 
   keystore_network_key_write(received_key, &mp_context->buf[SECURITY_2_NET_KEY_REP_KEY_POS]);
@@ -1030,7 +1026,7 @@ static void s2_send_net_key_verify(void)
   uint32_t net_key_id;
   net_key_id = convert_key_class_to_psa_key_id(received_key);
   network_key = (uint8_t *)&mp_context->buf[SECURITY_2_NET_KEY_REP_KEY_POS];
-  S2_network_key_update(mp_context, net_key_id, NETWORK_KEY_SECURE,
+    S2_network_key_update(mp_context, net_key_id, NETWORK_KEY_SECURE,
                         network_key, 0, false);
 #if !defined(ZW_CONTROLLER)
   /* Do not let key material linger around, clear them from memory */
@@ -1145,7 +1141,7 @@ static void s2_private_key_read(uint8_t *buf)
  * Read the correct public key depending on granted keys.
  *
  * We only use the persisted primary keypair if any of the authenticated/access keys
- * are among the requested. Otherwise we use the dynamic keypair. This ensures that the persisted 
+ * are among the requested. Otherwise we use the dynamic keypair. This ensures that the persisted
  * primary keypair will only ever be sent over the radio with two or more bytes zeroed out.
  * In CSA mode we also use the dynamic keypair because we (the joining side) then will send our full
  * public key without padding.

@@ -360,6 +360,13 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_locator_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init();
 
+/**
+ * @brief Initialize Descriptor dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_descriptor_init();
+
 
 
 // clang-format on
@@ -1952,14 +1959,14 @@ void uic_mqtt_dotdot_on_door_lock_get_log_record_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_setpin_code_callback_t> &get_uic_mqtt_dotdot_door_lock_setpin_code_callback();
+std::set<uic_mqtt_dotdot_door_lock_set_pin_code_callback_t> &get_uic_mqtt_dotdot_door_lock_set_pin_code_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/SetPINCode
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_setpin_code(
+void uic_mqtt_dotdot_on_door_lock_set_pin_code(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -1971,14 +1978,14 @@ void uic_mqtt_dotdot_on_door_lock_setpin_code(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_setpin_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_setpin_code_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_set_pin_code_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/SetPINCodeResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_setpin_code_response(
+void uic_mqtt_dotdot_on_door_lock_set_pin_code_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -1990,14 +1997,14 @@ void uic_mqtt_dotdot_on_door_lock_setpin_code_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_getpin_code_callback_t> &get_uic_mqtt_dotdot_door_lock_getpin_code_callback();
+std::set<uic_mqtt_dotdot_door_lock_get_pin_code_callback_t> &get_uic_mqtt_dotdot_door_lock_get_pin_code_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/GetPINCode
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_getpin_code(
+void uic_mqtt_dotdot_on_door_lock_get_pin_code(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2009,14 +2016,14 @@ void uic_mqtt_dotdot_on_door_lock_getpin_code(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_getpin_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_getpin_code_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_get_pin_code_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/GetPINCodeResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_getpin_code_response(
+void uic_mqtt_dotdot_on_door_lock_get_pin_code_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2028,14 +2035,14 @@ void uic_mqtt_dotdot_on_door_lock_getpin_code_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clearpin_code_callback_t> &get_uic_mqtt_dotdot_door_lock_clearpin_code_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_pin_code_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearPINCode
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clearpin_code(
+void uic_mqtt_dotdot_on_door_lock_clear_pin_code(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2047,14 +2054,14 @@ void uic_mqtt_dotdot_on_door_lock_clearpin_code(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clearpin_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clearpin_code_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearPINCodeResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clearpin_code_response(
+void uic_mqtt_dotdot_on_door_lock_clear_pin_code_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2066,14 +2073,14 @@ void uic_mqtt_dotdot_on_door_lock_clearpin_code_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_allpin_codes_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_all_pin_codes_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearAllPINCodes
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clear_allpin_codes(
+void uic_mqtt_dotdot_on_door_lock_clear_all_pin_codes(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2085,14 +2092,14 @@ void uic_mqtt_dotdot_on_door_lock_clear_allpin_codes(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_allpin_codes_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_all_pin_codes_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearAllPINCodesResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clear_allpin_codes_response(
+void uic_mqtt_dotdot_on_door_lock_clear_all_pin_codes_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2598,14 +2605,14 @@ void uic_mqtt_dotdot_on_door_lock_get_user_type_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_setrfid_code_callback_t> &get_uic_mqtt_dotdot_door_lock_setrfid_code_callback();
+std::set<uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t> &get_uic_mqtt_dotdot_door_lock_set_rfid_code_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/SetRFIDCode
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_setrfid_code(
+void uic_mqtt_dotdot_on_door_lock_set_rfid_code(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2617,14 +2624,14 @@ void uic_mqtt_dotdot_on_door_lock_setrfid_code(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_setrfid_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_setrfid_code_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/SetRFIDCodeResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_setrfid_code_response(
+void uic_mqtt_dotdot_on_door_lock_set_rfid_code_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2636,14 +2643,14 @@ void uic_mqtt_dotdot_on_door_lock_setrfid_code_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_getrfid_code_callback_t> &get_uic_mqtt_dotdot_door_lock_getrfid_code_callback();
+std::set<uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t> &get_uic_mqtt_dotdot_door_lock_get_rfid_code_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/GetRFIDCode
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_getrfid_code(
+void uic_mqtt_dotdot_on_door_lock_get_rfid_code(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2655,14 +2662,14 @@ void uic_mqtt_dotdot_on_door_lock_getrfid_code(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_getrfid_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_getrfid_code_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/GetRFIDCodeResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_getrfid_code_response(
+void uic_mqtt_dotdot_on_door_lock_get_rfid_code_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2674,14 +2681,14 @@ void uic_mqtt_dotdot_on_door_lock_getrfid_code_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clearrfid_code_callback_t> &get_uic_mqtt_dotdot_door_lock_clearrfid_code_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearRFIDCode
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clearrfid_code(
+void uic_mqtt_dotdot_on_door_lock_clear_rfid_code(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2693,14 +2700,14 @@ void uic_mqtt_dotdot_on_door_lock_clearrfid_code(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clearrfid_code_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearRFIDCodeResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clearrfid_code_response(
+void uic_mqtt_dotdot_on_door_lock_clear_rfid_code_response(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2712,14 +2719,14 @@ void uic_mqtt_dotdot_on_door_lock_clearrfid_code_response(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_allrfid_codes_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearAllRFIDCodes
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clear_allrfid_codes(
+void uic_mqtt_dotdot_on_door_lock_clear_all_rfid_codes(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2731,14 +2738,90 @@ void uic_mqtt_dotdot_on_door_lock_clear_allrfid_codes(
  *
  * @returns std::set of callbacks.
  */
-std::set<uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_allrfid_codes_response_callback();
+std::set<uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback();
 
 /**
  * @brief MQTT Subscribe handler for incoming publications on:
  * ucl/by-unid/+/+/DoorLock/Commands/ClearAllRFIDCodesResponse
  */
 // clang-format off
-void uic_mqtt_dotdot_on_door_lock_clear_allrfid_codes_response(
+void uic_mqtt_dotdot_on_door_lock_clear_all_rfid_codes_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/SetUser messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_set_user_callback_t> &get_uic_mqtt_dotdot_door_lock_set_user_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/SetUser
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_set_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/GetUser messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_get_user_callback_t> &get_uic_mqtt_dotdot_door_lock_get_user_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/GetUser
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_get_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/GetUserResponse messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_get_user_response_callback_t> &get_uic_mqtt_dotdot_door_lock_get_user_response_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/GetUserResponse
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_get_user_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/ClearUser messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_clear_user_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_user_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/ClearUser
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_clear_user(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -2777,6 +2860,120 @@ std::set<uic_mqtt_dotdot_door_lock_programming_event_notification_callback_t> &g
  */
 // clang-format off
 void uic_mqtt_dotdot_on_door_lock_programming_event_notification(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/SetCredential messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_set_credential_callback_t> &get_uic_mqtt_dotdot_door_lock_set_credential_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/SetCredential
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_set_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/SetCredentialResponse messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_set_credential_response_callback_t> &get_uic_mqtt_dotdot_door_lock_set_credential_response_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/SetCredentialResponse
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_set_credential_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/GetCredentialStatus messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_get_credential_status_callback_t> &get_uic_mqtt_dotdot_door_lock_get_credential_status_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/GetCredentialStatus
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_get_credential_status(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/GetCredentialStatusResponse messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t> &get_uic_mqtt_dotdot_door_lock_get_credential_status_response_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/GetCredentialStatusResponse
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_get_credential_status_response(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/ClearCredential messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_clear_credential_callback_t> &get_uic_mqtt_dotdot_door_lock_clear_credential_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/ClearCredential
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_clear_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid DoorLock/Commands/UnboltDoor messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_door_lock_unbolt_door_callback_t> &get_uic_mqtt_dotdot_door_lock_unbolt_door_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/DoorLock/Commands/UnboltDoor
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_door_lock_unbolt_door(
   const char *topic,
   const char *message,
   const size_t message_length);
@@ -4834,6 +5031,27 @@ void uic_mqtt_dotdot_on_protocol_controller_network_management_WriteAttributes(
   const size_t message_length);
 
 
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_descriptor_write_attributes_callback_t> & get_uic_mqtt_dotdot_descriptor_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/Descriptor/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_descriptor_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
 
 
 // All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
@@ -4990,6 +5208,16 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 };
 const dotdot_bitmap DoorLockAlarmMask("DoorLockAlarmMask", "map16", DoorLockAlarmMask_bitmap_data);
 
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DoorLockCredentialRulesSupport_bitmap_data {
+{ {"Single", "bool", "0x1", "0"}, {
+} },
+{ {"Dual", "bool", "0x2", "1"}, {
+} },
+{ {"Tri", "bool", "0x4", "2"}, {
+} }
+};
+const dotdot_bitmap DoorLockCredentialRulesSupport("DoorLockCredentialRulesSupport", "Unknown DoorLockCredentialRulesSupport", DoorLockCredentialRulesSupport_bitmap_data);
+
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DoorLockDefaultConfigurationRegister_bitmap_data {
 { {"DefaultEnableLocalProgrammingAttributeIsEnabled", "bool", "0x1", "0"}, {
 } },
@@ -5005,6 +5233,36 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap DoorLockDefaultConfigurationRegister("DoorLockDefaultConfigurationRegister", "map16", DoorLockDefaultConfigurationRegister_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DoorLockFeatureMap_bitmap_data {
+{ {"PINCredential", "bool", "0x1", "0"}, {
+} },
+{ {"RFIDCredential", "bool", "0x2", "1"}, {
+} },
+{ {"FingerCredentials", "bool", "0x4", "2"}, {
+} },
+{ {"Logging", "bool", "0x8", "3"}, {
+} },
+{ {"WeekDayAccessSchedules", "bool", "0x10", "4"}, {
+} },
+{ {"DoorPositionSensor", "bool", "0x20", "5"}, {
+} },
+{ {"FaceCredentials", "bool", "0x40", "6"}, {
+} },
+{ {"CredentialOverTheAirAccess", "bool", "0x80", "7"}, {
+} },
+{ {"User", "bool", "0x100", "8"}, {
+} },
+{ {"Notification", "bool", "0x200", "9"}, {
+} },
+{ {"YearDayAccessSchedules", "bool", "0x400", "10"}, {
+} },
+{ {"HolidaySchedules", "bool", "0x800", "11"}, {
+} },
+{ {"Unbolting", "bool", "0x1000", "12"}, {
+} }
+};
+const dotdot_bitmap DoorLockFeatureMap("DoorLockFeatureMap", "Unknown DoorLockFeatureMap", DoorLockFeatureMap_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DoorLockKeypadOperationEventMask_bitmap_data {
 { {"KeypadOpUnknownOrMS", "bool", "0x1", "0"}, {
@@ -5039,6 +5297,18 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap DoorLockKeypadProgrammingEventMask("DoorLockKeypadProgrammingEventMask", "map16", DoorLockKeypadProgrammingEventMask_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DoorLockLocalProgrammingFeatures_bitmap_data {
+{ {"AddUsersCredentialsSchedulesLocally", "bool", "0x1", "0"}, {
+} },
+{ {"ModifyUsersCredentialsSchedulesLocally", "bool", "0x2", "1"}, {
+} },
+{ {"ClearUsersCredentialsSchedulesLocally", "bool", "0x4", "2"}, {
+} },
+{ {"AdjustLockSettingsLocally", "bool", "0x8", "3"}, {
+} }
+};
+const dotdot_bitmap DoorLockLocalProgrammingFeatures("DoorLockLocalProgrammingFeatures", "Unknown DoorLockLocalProgrammingFeatures", DoorLockLocalProgrammingFeatures_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DoorLockManualOperationEventMask_bitmap_data {
 { {"ManualOpUnknownOrMS", "bool", "0x1", "0"}, {

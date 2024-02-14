@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.4.0</span>
+   &#160;<span id="projectnumber">1.5.0</span>
    </div>
   </td>
  </tr>
@@ -84,6 +84,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__switch__color_8
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">zwave_command_class_switch_color.c File Reference</div>  </div>
@@ -99,6 +100,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__switch__color_8
 <code>#include &quot;<a class="el" href="attribute__store__defined__attribute__types_8h_source.html">attribute_store_defined_attribute_types.h</a>&quot;</code><br />
 <code>#include &quot;ZW_classcmd.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__attribute__resolver_8h_source.html">zpc_attribute_resolver.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__command__classes__utils_8h_source.html">zwave_command_classes_utils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dotdot__mqtt_8h_source.html">dotdot_mqtt.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dotdot__mqtt__generated__commands_8h_source.html">dotdot_mqtt_generated_commands.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__helper_8h_source.html">attribute_store_helper.h</a>&quot;</code><br />
@@ -107,10 +109,19 @@ $(document).ready(function(){initNavTree('zwave__command__class__switch__color_8
 <code>#include &quot;<a class="el" href="attribute__timeouts_8h_source.html">attribute_timeouts.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a7ce0df38eb467e59f209470c8f5ac4e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__color_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">LOG_TAG</a>&#160;&#160;&#160;&quot;zwave_command_class_switch_color&quot;</td></tr>
+<tr class="separator:a7ce0df38eb467e59f209470c8f5ac4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a7f118ad6ee04056d064819ad0b9e1de3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__color_8c.html#a7f118ad6ee04056d064819ad0b9e1de3">set_duration</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> <a class="el" href="zwave__api__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>, uint32_t duration)</td></tr>
+<tr class="separator:a7f118ad6ee04056d064819ad0b9e1de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab19544751be9aec481d32cb005d29716"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__color_8c.html#ab19544751be9aec481d32cb005d29716">set_all_color_switch_durations</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, <a class="el" href="group__zwave__command__class__color__switch__types.html#gaee46621a47f5db7d5ba5b759439881d1">color_component_id_duration_t</a> duration)</td></tr>
 <tr class="separator:ab19544751be9aec481d32cb005d29716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d327a0fd6576449cb30fb40634849fb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__color_8c.html#a0d327a0fd6576449cb30fb40634849fb">switch_color_undefine_reported</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node)</td></tr>
+<tr class="separator:a0d327a0fd6576449cb30fb40634849fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9364b13e3ff694c5e8be7020587a8b36"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__color_8c.html#a9364b13e3ff694c5e8be7020587a8b36">on_color_switch_state_send_data_complete</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="attribute__resolver__rule_8h.html#a6ae323c64b845f108a676a0731e6d6ea">resolver_rule_type_t</a> rule_type, <a class="el" href="group__zpc__attribute__resolver.html#gaa29dd503ea70c04d5c12e49ab6f302f2">zpc_resolver_event_t</a> event)</td></tr>
 <tr class="separator:a9364b13e3ff694c5e8be7020587a8b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga534f4d27ae4f4ea88938a1127bd6ac17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__switch__color.html#ga534f4d27ae4f4ea88938a1127bd6ac17">zwave_command_class_switch_color_init</a> ()</td></tr>
@@ -123,6 +134,21 @@ Functions</h2></td></tr>
 <tr class="memdesc:gadcdae8a52c29575a3c60baef289828d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a functions for all chidren with a certain type for all color component IDs in the Color Switch Command Class.  <a href="group__zwave__command__class__switch__color.html#gadcdae8a52c29575a3c60baef289828d9">More...</a><br /></td></tr>
 <tr class="separator:gadcdae8a52c29575a3c60baef289828d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a7ce0df38eb467e59f209470c8f5ac4e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ce0df38eb467e59f209470c8f5ac4e6">&#9670;&nbsp;</a></span>LOG_TAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_TAG&#160;&#160;&#160;&quot;zwave_command_class_switch_color&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a9364b13e3ff694c5e8be7020587a8b36"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9364b13e3ff694c5e8be7020587a8b36">&#9670;&nbsp;</a></span>on_color_switch_state_send_data_complete()</h2>
@@ -208,13 +234,81 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7f118ad6ee04056d064819ad0b9e1de3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f118ad6ee04056d064819ad0b9e1de3">&#9670;&nbsp;</a></span>set_duration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void set_duration </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>state_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a>&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d327a0fd6576449cb30fb40634849fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d327a0fd6576449cb30fb40634849fb">&#9670;&nbsp;</a></span>switch_color_undefine_reported()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void switch_color_undefine_reported </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>state_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_a7413761325a0de7b31d33e30e75f050.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__class__switch__color_8c.html">zwave_command_class_switch_color.c</a></li>
-    <li class="footer">Generated on Wed Aug 9 2023 15:56:00 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Feb 14 2024 09:37:08 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

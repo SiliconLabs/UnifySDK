@@ -2685,10 +2685,10 @@ void uic_mqtt_dotdot_door_lock_publish_get_log_record_response_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setpin_code_command(
+void uic_mqtt_dotdot_door_lock_publish_set_pin_code_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields
   
 );
 
@@ -2704,9 +2704,9 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setpin_code_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_set_pin_code_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t *fields
   
 );
 /**
@@ -2724,10 +2724,10 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_set_pin_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t *fields
   
 );
 
@@ -2743,9 +2743,9 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setpin_code_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_set_pin_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_setpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t *fields
   
 );
 /**
@@ -2763,10 +2763,10 @@ void uic_mqtt_dotdot_door_lock_publish_setpin_code_response_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getpin_code_command(
+void uic_mqtt_dotdot_door_lock_publish_get_pin_code_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t *fields
   
 );
 
@@ -2782,9 +2782,9 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getpin_code_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_get_pin_code_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t *fields
   
 );
 /**
@@ -2802,10 +2802,10 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_get_pin_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 );
 
@@ -2821,9 +2821,9 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_get_pin_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_getpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t *fields
   
 );
 /**
@@ -2841,10 +2841,10 @@ void uic_mqtt_dotdot_door_lock_publish_getpin_code_response_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearpin_code_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_pin_code_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t *fields
   
 );
 
@@ -2860,9 +2860,9 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearpin_code_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_pin_code_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t *fields
   
 );
 /**
@@ -2880,10 +2880,10 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearpin_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_pin_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t *fields
   
 );
 
@@ -2899,9 +2899,9 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearpin_code_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_pin_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_clearpin_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t *fields
   
 );
 /**
@@ -2917,7 +2917,7 @@ void uic_mqtt_dotdot_door_lock_publish_clearpin_code_response_command_to_group(
  * 
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_pin_codes_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint
 );
@@ -2932,7 +2932,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command(
  * @param destination_group_id  The GroupID that should receive the command.
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_pin_codes_command_to_group(
   uint16_t destination_group_id
 );
 /**
@@ -2950,10 +2950,10 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_response_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_pin_codes_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t *fields
   
 );
 
@@ -2969,9 +2969,9 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allpin_codes_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_pin_codes_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_clear_allpin_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_pin_codes_response_fields_t *fields
   
 );
 /**
@@ -4003,10 +4003,10 @@ void uic_mqtt_dotdot_door_lock_publish_get_user_type_response_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setrfid_code_command(
+void uic_mqtt_dotdot_door_lock_publish_set_rfid_code_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t *fields
   
 );
 
@@ -4022,9 +4022,9 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setrfid_code_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_set_rfid_code_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t *fields
   
 );
 /**
@@ -4042,10 +4042,10 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setrfid_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_set_rfid_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t *fields
   
 );
 
@@ -4061,9 +4061,9 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_setrfid_code_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_set_rfid_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_setrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t *fields
   
 );
 /**
@@ -4081,10 +4081,10 @@ void uic_mqtt_dotdot_door_lock_publish_setrfid_code_response_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getrfid_code_command(
+void uic_mqtt_dotdot_door_lock_publish_get_rfid_code_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t *fields
   
 );
 
@@ -4100,9 +4100,9 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getrfid_code_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_get_rfid_code_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t *fields
   
 );
 /**
@@ -4120,10 +4120,10 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getrfid_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_get_rfid_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t *fields
   
 );
 
@@ -4139,9 +4139,9 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_getrfid_code_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_get_rfid_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_getrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t *fields
   
 );
 /**
@@ -4159,10 +4159,10 @@ void uic_mqtt_dotdot_door_lock_publish_getrfid_code_response_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_rfid_code_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t *fields
   
 );
 
@@ -4178,9 +4178,9 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_rfid_code_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t *fields
   
 );
 /**
@@ -4198,10 +4198,10 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_response_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_rfid_code_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t *fields
   
 );
 
@@ -4217,9 +4217,9 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_rfid_code_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_clearrfid_code_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t *fields
   
 );
 /**
@@ -4235,7 +4235,7 @@ void uic_mqtt_dotdot_door_lock_publish_clearrfid_code_response_command_to_group(
  * 
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_rfid_codes_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint
 );
@@ -4250,7 +4250,7 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_command(
  * @param destination_group_id  The GroupID that should receive the command.
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_rfid_codes_command_to_group(
   uint16_t destination_group_id
 );
 /**
@@ -4268,10 +4268,10 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_command_to_group(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_response_command(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_rfid_codes_response_command(
   const dotdot_unid_t destination_unid,
   const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t *fields
   
 );
 
@@ -4287,9 +4287,157 @@ void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_response_command(
  * @param fields                Struct pointer with the fields value of the command
  * 
  */
-void uic_mqtt_dotdot_door_lock_publish_clear_allrfid_codes_response_command_to_group(
+void uic_mqtt_dotdot_door_lock_publish_clear_all_rfid_codes_response_command_to_group(
   uint16_t destination_group_id,
-  const uic_mqtt_dotdot_door_lock_command_clear_allrfid_codes_response_fields_t *fields
+  const uic_mqtt_dotdot_door_lock_command_clear_all_rfid_codes_response_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a SetUser command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/SetUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_set_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_set_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a SetUser command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/SetUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_set_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_set_user_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a GetUser command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/GetUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_get_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a GetUser command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/GetUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_get_user_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a GetUserResponse command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/GetUserResponse
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_user_response_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a GetUserResponse command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/GetUserResponse
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_user_response_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a ClearUser command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/ClearUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_clear_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_clear_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a ClearUser command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/ClearUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_clear_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_clear_user_fields_t *fields
   
 );
 /**
@@ -4368,6 +4516,224 @@ void uic_mqtt_dotdot_door_lock_publish_programming_event_notification_command(
 void uic_mqtt_dotdot_door_lock_publish_programming_event_notification_command_to_group(
   uint16_t destination_group_id,
   const uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a SetCredential command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/SetCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_set_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_set_credential_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a SetCredential command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/SetCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_set_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_set_credential_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a SetCredentialResponse command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/SetCredentialResponse
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_set_credential_response_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a SetCredentialResponse command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/SetCredentialResponse
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_set_credential_response_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a GetCredentialStatus command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/GetCredentialStatus
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_credential_status_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a GetCredentialStatus command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/GetCredentialStatus
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_credential_status_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_get_credential_status_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a GetCredentialStatusResponse command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/GetCredentialStatusResponse
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_credential_status_response_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a GetCredentialStatusResponse command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/GetCredentialStatusResponse
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_get_credential_status_response_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a ClearCredential command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/ClearCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_clear_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a ClearCredential command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/ClearCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_clear_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_clear_credential_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a UnboltDoor command for
+ * the DoorLock cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/DoorLock/Commands/UnboltDoor
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_unbolt_door_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a UnboltDoor command for
+ * the DoorLock cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/DoorLock/Commands/UnboltDoor
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_door_lock_publish_unbolt_door_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t *fields
   
 );
 /**

@@ -242,7 +242,7 @@ var NAVTREEINDEX3 =
 "dotdot__mqtt__helpers_8h.html":[5,0,1,10,1,0,4],
 "dotdot__mqtt__helpers_8h_source.html":[5,0,1,10,1,0,4],
 "dotdot__mqtt__helpers_8hpp.html":[5,0,1,10,1,0,5],
-"dotdot__mqtt__helpers_8hpp.html#aaa0808eed4b1f488ce789570151c4bfb":[5,0,1,10,1,0,5,333],
+"dotdot__mqtt__helpers_8hpp.html#aaa0808eed4b1f488ce789570151c4bfb":[5,0,1,10,1,0,5,345],
 "dotdot__mqtt__helpers_8hpp_source.html":[5,0,1,10,1,0,5],
 "dotdot__mqtt__parsing__helpers_8hpp.html":[5,0,1,10,0,2],
 "dotdot__mqtt__parsing__helpers_8hpp.html#a1f08576cd02c02a0ff2516569120c290":[5,0,1,10,0,2,6],

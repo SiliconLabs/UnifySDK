@@ -62,7 +62,8 @@ sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
 {
   int ret = 0;
   /* Import the system configuration. */
-  sl_log_info(LOG_TAG, "# Unify build: %s\n", UIC_VERSION);
+  sl_log_info(LOG_TAG, "# Unify build version: %s\n", UIC_VERSION);
+  sl_log_info(LOG_TAG, "# Unify build SHA: %s\n", UIC_VERSION_SHA);
   ret = config_parse(argc, argv, version);
   if (ret) {
     if (ret == CONFIG_STATUS_INFO_MESSAGE) {

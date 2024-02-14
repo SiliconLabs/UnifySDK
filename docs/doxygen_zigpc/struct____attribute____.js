@@ -3,6 +3,8 @@ var struct____attribute____ =
     [ "attribute_identifier", "struct____attribute____.html#a8671a4a508085fb8a2a31257083ad7d1", null ],
     [ "attribute_type", "struct____attribute____.html#a5b65dc3cdb4827b969b66b605f9bbedf", null ],
     [ "cool_set_point", "struct____attribute____.html#aa69d51c561b879270a03c85062efa3a2", null ],
+    [ "credential_index", "struct____attribute____.html#a5782ddee43edb6c08f9e005cc815a33f", null ],
+    [ "credential_type", "struct____attribute____.html#a613fd4dda6931bafb4661dba0d665f78", null ],
     [ "direction", "struct____attribute____.html#a255907e60c2339bd2e64c281e9f4899c", null ],
     [ "dummy", "struct____attribute____.html#ae0b7746cd2a5ecc22d8875fa742406e7", null ],
     [ "endpoint_discovered_count", "struct____attribute____.html#a125987996db5dff05507bd41a5a71e66", null ],

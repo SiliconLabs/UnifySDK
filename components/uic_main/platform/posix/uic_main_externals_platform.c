@@ -111,6 +111,12 @@ void uic_main_ext_select(clock_time_t delay)
   int readable_fds = select(fd_max + 1, &fdrs, NULL, NULL, &tv);
 
   if (readable_fds < 0) {
+    /* If select failed due to some interrupt, we can ignore it and retry again later */
+    if (errno == EINTR) {
+      sl_log_debug(LOG_TAG, "Select interrupted! Try again later");
+      return;
+    }
+    
     /* We cannot really do anything about an error in a generic
      * sense.
      *

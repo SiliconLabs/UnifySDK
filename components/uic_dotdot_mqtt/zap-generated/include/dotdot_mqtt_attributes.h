@@ -1085,19 +1085,19 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint16_t number_of_total_users_supported
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t number_ofpin_users_supported
+  uint16_t number_of_pin_users_supported
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t number_ofrfid_users_supported
+  uint16_t number_of_rfid_users_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback_t)(
   dotdot_unid_t unid,
@@ -1120,33 +1120,47 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_sche
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint8_t number_of_holiday_schedules_supported
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t maxpin_code_length
+  uint8_t max_pin_code_length
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t minpin_code_length
+  uint8_t min_pin_code_length
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t maxrfid_code_length
+  uint8_t max_rfid_code_length
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t minrfid_code_length
+  uint8_t min_rfid_code_length
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t credential_rules_support
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t number_of_credentials_supported_per_user
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback_t)(
   dotdot_unid_t unid,
@@ -1232,6 +1246,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_bu
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   bool enable_privacy_mode_button
 );
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t local_programming_features
+);
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
@@ -1246,19 +1267,19 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_di
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint8_t user_code_temporary_disable_time
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  bool sendpin_over_the_air
+  bool send_pin_over_the_air
 );
-typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  bool requirepi_nforrf_operation
+  bool require_pi_nfor_rf_operation
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_security_level_callback_t)(
   dotdot_unid_t unid,
@@ -1266,6 +1287,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_security_level_callbac
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint8_t security_level
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t expiring_user_timeout
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -1322,6 +1350,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint16_t rfid_programming_event_mask
+);
+typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_feature_map_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t feature_map
 );
 // Callback types used by the window_covering cluster
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_window_covering_type_callback_t)(
@@ -3758,26 +3793,26 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_fac
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   int8_t power_factor
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_voltage_measurement_period
+  uint16_t average_rms_voltage_measurement_period
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_over_voltage_counter
+  uint16_t average_rms_over_voltage_counter
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_under_voltage_counter
+  uint16_t average_rms_under_voltage_counter
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback_t)(
   dotdot_unid_t unid,
@@ -3905,19 +3940,19 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_reacti
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   int16_t ac_reactive_power_overload
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t averagerms_over_voltage
+  int16_t average_rms_over_voltage
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t averagerms_under_voltage
+  int16_t average_rms_under_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_callback_t)(
   dotdot_unid_t unid,
@@ -4052,26 +4087,26 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_fac
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   int8_t power_factor_phb
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_voltage_measurement_period_phb
+  uint16_t average_rms_voltage_measurement_period_phb
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_over_voltage_counter_phb
+  uint16_t average_rms_over_voltage_counter_phb
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_under_voltage_counter_phb
+  uint16_t average_rms_under_voltage_counter_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback_t)(
   dotdot_unid_t unid,
@@ -4206,26 +4241,26 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_fac
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   int8_t power_factor_phc
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_voltage_measurement_period_phc
+  uint16_t average_rms_voltage_measurement_period_phc
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_over_voltage_counter_phc
+  uint16_t average_rms_over_voltage_counter_phc
 );
-typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagerms_under_voltage_counter_phc
+  uint16_t average_rms_under_voltage_counter_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback_t)(
   dotdot_unid_t unid,
@@ -4445,12 +4480,12 @@ typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callba
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint16_t relayed_ucast
 );
-typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t phy_tomac_queue_limit_reached
+  uint16_t phy_to_mac_queue_limit_reached
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_t)(
   dotdot_unid_t unid,
@@ -4459,12 +4494,12 @@ typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint16_t packet_validate_drop_count
 );
-typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint16_t averagemac_retry_peraps_message_sent
+  uint16_t average_mac_retry_per_aps_message_sent
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback_t)(
   dotdot_unid_t unid,
@@ -4778,13 +4813,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicati
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   bool application_connected
 );
-typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  size_t applicationmqtt_topics_count,
-  const char** applicationmqtt_topics
+  size_t application_mqtt_topics_count,
+  const char** application_mqtt_topics
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_uptime_minutes_callback_t)(
   dotdot_unid_t unid,
@@ -4884,40 +4919,40 @@ typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicati
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint32_t application_statistics_reporting_interval_seconds
 );
-typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  double applicationcpu_usage_percent
+  double application_cpu_usage_percent
 );
-typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  double applicationcpu_average_usage_percent
+  double application_cpu_average_usage_percent
 );
-typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  double applicationcpu_min_usage_percent
+  double application_cpu_min_usage_percent
 );
-typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  double applicationcpu_max_usage_percent
+  double application_cpu_max_usage_percent
 );
-typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback_t)(
+typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  double applicationram_usagemb
+  double application_ram_usagemb
 );
 // Callback types used by the name_and_location cluster
 typedef sl_status_t (*uic_mqtt_dotdot_name_and_location_attribute_name_callback_t)(
@@ -5089,6 +5124,15 @@ typedef sl_status_t (*uic_mqtt_dotdot_protocol_controller_network_management_att
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   NetworkManagementState network_management_state
+);
+// Callback types used by the descriptor cluster
+typedef sl_status_t (*uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  size_t device_type_list_count,
+  const DeviceTypeStruct* device_type_list
 );
 
 #ifdef __cplusplus
@@ -6082,16 +6126,16 @@ void uic_mqtt_dotdot_door_lock_attribute_number_of_log_records_supported_callbac
 void uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/number_ofpin_users_supported/# is received. Setting
+ * DoorLock/Attributes/number_of_pin_users_supported/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_ofpin_users_supported_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/number_ofrfid_users_supported/# is received. Setting
+ * DoorLock/Attributes/number_of_rfid_users_supported/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_ofrfid_users_supported_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_t callback);
 /**
  * Setup callback to be called when a
  * DoorLock/Attributes/number_of_week_day_schedules_supported_per_user/# is received. Setting
@@ -6112,28 +6156,40 @@ void uic_mqtt_dotdot_door_lock_attribute_number_of_year_day_schedules_supported_
 void uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/maxpin_code_length/# is received. Setting
+ * DoorLock/Attributes/max_pin_code_length/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_maxpin_code_length_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/minpin_code_length/# is received. Setting
+ * DoorLock/Attributes/min_pin_code_length/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_minpin_code_length_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/maxrfid_code_length/# is received. Setting
+ * DoorLock/Attributes/max_rfid_code_length/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_maxrfid_code_length_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/minrfid_code_length/# is received. Setting
+ * DoorLock/Attributes/min_rfid_code_length/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_minrfid_code_length_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_set(const uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * DoorLock/Attributes/credential_rules_support/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_set(const uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * DoorLock/Attributes/number_of_credentials_supported_per_user/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback_set(const uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_supported_per_user_callback_t callback);
 /**
  * Setup callback to be called when a
  * DoorLock/Attributes/enable_logging/# is received. Setting
@@ -6208,6 +6264,12 @@ void uic_mqtt_dotdot_door_lock_attribute_enable_inside_statusled_callback_set(co
 void uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_button_callback_set(const uic_mqtt_dotdot_door_lock_attribute_enable_privacy_mode_button_callback_t callback);
 /**
  * Setup callback to be called when a
+ * DoorLock/Attributes/local_programming_features/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback_set(const uic_mqtt_dotdot_door_lock_attribute_local_programming_features_callback_t callback);
+/**
+ * Setup callback to be called when a
  * DoorLock/Attributes/wrong_code_entry_limit/# is received. Setting
  * this callback will overwrite the previous set callback
  */
@@ -6220,22 +6282,28 @@ void uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit_callback_set(con
 void uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callback_set(const uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/sendpin_over_the_air/# is received. Setting
+ * DoorLock/Attributes/send_pin_over_the_air/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback_set(const uic_mqtt_dotdot_door_lock_attribute_sendpin_over_the_air_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_set(const uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_t callback);
 /**
  * Setup callback to be called when a
- * DoorLock/Attributes/requirepi_nforrf_operation/# is received. Setting
+ * DoorLock/Attributes/require_pi_nfor_rf_operation/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback_set(const uic_mqtt_dotdot_door_lock_attribute_requirepi_nforrf_operation_callback_t callback);
+void uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback_set(const uic_mqtt_dotdot_door_lock_attribute_require_pi_nfor_rf_operation_callback_t callback);
 /**
  * Setup callback to be called when a
  * DoorLock/Attributes/security_level/# is received. Setting
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_door_lock_attribute_security_level_callback_set(const uic_mqtt_dotdot_door_lock_attribute_security_level_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * DoorLock/Attributes/expiring_user_timeout/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback_set(const uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_callback_t callback);
 /**
  * Setup callback to be called when a
  * DoorLock/Attributes/alarm_mask/# is received. Setting
@@ -6284,6 +6352,12 @@ void uic_mqtt_dotdot_door_lock_attribute_rf_programming_event_mask_callback_set(
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback_set(const uic_mqtt_dotdot_door_lock_attribute_rfid_programming_event_mask_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * DoorLock/Attributes/feature_map/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_door_lock_attribute_feature_map_callback_set(const uic_mqtt_dotdot_door_lock_attribute_feature_map_callback_t callback);
 
 
 /**
@@ -8566,22 +8640,22 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_callback_se
 void uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_voltage_measurement_period/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_voltage_measurement_period/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_over_voltage_counter/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_over_voltage_counter/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_under_voltage_counter/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_under_voltage_counter/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_t callback);
 /**
  * Setup callback to be called when a
  * ElectricalMeasurement/Attributes/rms_extreme_over_voltage_period/# is received. Setting
@@ -8692,16 +8766,16 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_ac_active_power_overload_c
 void uic_mqtt_dotdot_electrical_measurement_attribute_ac_reactive_power_overload_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_ac_reactive_power_overload_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_over_voltage/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_over_voltage/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_under_voltage/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_under_voltage/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_callback_t callback);
 /**
  * Setup callback to be called when a
  * ElectricalMeasurement/Attributes/rms_extreme_over_voltage/# is received. Setting
@@ -8818,22 +8892,22 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_phb_callbac
 void uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_voltage_measurement_period_phb/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_voltage_measurement_period_phb/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phb_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phb_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_over_voltage_counter_phb/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_over_voltage_counter_phb/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phb_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_under_voltage_counter_phb/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_under_voltage_counter_phb/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phb_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_t callback);
 /**
  * Setup callback to be called when a
  * ElectricalMeasurement/Attributes/rms_extreme_over_voltage_period_phb/# is received. Setting
@@ -8950,22 +9024,22 @@ void uic_mqtt_dotdot_electrical_measurement_attribute_apparent_power_phc_callbac
 void uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_voltage_measurement_period_phc/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_voltage_measurement_period_phc/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_voltage_measurement_period_phc_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_voltage_measurement_period_phc_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_over_voltage_counter_phc/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_over_voltage_counter_phc/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_over_voltage_counter_phc_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_t callback);
 /**
  * Setup callback to be called when a
- * ElectricalMeasurement/Attributes/averagerms_under_voltage_counter_phc/# is received. Setting
+ * ElectricalMeasurement/Attributes/average_rms_under_voltage_counter_phc/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_averagerms_under_voltage_counter_phc_callback_t callback);
+void uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_set(const uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_t callback);
 /**
  * Setup callback to be called when a
  * ElectricalMeasurement/Attributes/rms_extreme_over_voltage_period_phc/# is received. Setting
@@ -9162,10 +9236,10 @@ void uic_mqtt_dotdot_diagnostics_attribute_packet_buffer_allocate_failures_callb
 void uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback_t callback);
 /**
  * Setup callback to be called when a
- * Diagnostics/Attributes/phy_tomac_queue_limit_reached/# is received. Setting
+ * Diagnostics/Attributes/phy_to_mac_queue_limit_reached/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callback_t callback);
+void uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_t callback);
 /**
  * Setup callback to be called when a
  * Diagnostics/Attributes/packet_validate_drop_count/# is received. Setting
@@ -9174,10 +9248,10 @@ void uic_mqtt_dotdot_diagnostics_attribute_phy_tomac_queue_limit_reached_callbac
 void uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_t callback);
 /**
  * Setup callback to be called when a
- * Diagnostics/Attributes/averagemac_retry_peraps_message_sent/# is received. Setting
+ * Diagnostics/Attributes/average_mac_retry_per_aps_message_sent/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_averagemac_retry_peraps_message_sent_callback_t callback);
+void uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_set(const uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_t callback);
 /**
  * Setup callback to be called when a
  * Diagnostics/Attributes/last_messagelqi/# is received. Setting
@@ -9472,10 +9546,10 @@ void uic_mqtt_dotdot_application_monitoring_attribute_application_version_callba
 void uic_mqtt_dotdot_application_monitoring_attribute_application_connected_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_connected_callback_t callback);
 /**
  * Setup callback to be called when a
- * ApplicationMonitoring/Attributes/applicationmqtt_topics/# is received. Setting
+ * ApplicationMonitoring/Attributes/application_mqtt_topics/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationmqtt_topics_callback_t callback);
+void uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_mqtt_topics_callback_t callback);
 /**
  * Setup callback to be called when a
  * ApplicationMonitoring/Attributes/uptime_minutes/# is received. Setting
@@ -9562,34 +9636,34 @@ void uic_mqtt_dotdot_application_monitoring_attribute_mqtt_max_delivery_time_sec
 void uic_mqtt_dotdot_application_monitoring_attribute_application_statistics_reporting_interval_seconds_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_statistics_reporting_interval_seconds_callback_t callback);
 /**
  * Setup callback to be called when a
- * ApplicationMonitoring/Attributes/applicationcpu_usage_percent/# is received. Setting
+ * ApplicationMonitoring/Attributes/application_cpu_usage_percent/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_usage_percent_callback_t callback);
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_t callback);
 /**
  * Setup callback to be called when a
- * ApplicationMonitoring/Attributes/applicationcpu_average_usage_percent/# is received. Setting
+ * ApplicationMonitoring/Attributes/application_cpu_average_usage_percent/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_average_usage_percent_callback_t callback);
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_average_usage_percent_callback_t callback);
 /**
  * Setup callback to be called when a
- * ApplicationMonitoring/Attributes/applicationcpu_min_usage_percent/# is received. Setting
+ * ApplicationMonitoring/Attributes/application_cpu_min_usage_percent/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_min_usage_percent_callback_t callback);
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_min_usage_percent_callback_t callback);
 /**
  * Setup callback to be called when a
- * ApplicationMonitoring/Attributes/applicationcpu_max_usage_percent/# is received. Setting
+ * ApplicationMonitoring/Attributes/application_cpu_max_usage_percent/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationcpu_max_usage_percent_callback_t callback);
+void uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_max_usage_percent_callback_t callback);
 /**
  * Setup callback to be called when a
- * ApplicationMonitoring/Attributes/applicationram_usagemb/# is received. Setting
+ * ApplicationMonitoring/Attributes/application_ram_usagemb/# is received. Setting
  * this callback will overwrite the previous set callback
  */
-void uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_applicationram_usagemb_callback_t callback);
+void uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback_set(const uic_mqtt_dotdot_application_monitoring_attribute_application_ram_usagemb_callback_t callback);
 
 
 /**
@@ -9768,6 +9842,20 @@ sl_status_t uic_mqtt_dotdot_protocol_controller_network_management_attributes_in
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_protocol_controller_network_management_attribute_network_management_state_callback_set(const uic_mqtt_dotdot_protocol_controller_network_management_attribute_network_management_state_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the Descriptor cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_descriptor_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * Descriptor/Attributes/device_type_list/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_set(const uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_t callback);
 
 
 #ifdef __cplusplus
