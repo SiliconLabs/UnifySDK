@@ -2,7 +2,7 @@
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
     Basic: {
@@ -8795,7 +8795,11 @@ export let ClusterTypeAttrs: any = {
 								{ name: "HeatSecondStageOn", mask: 8, type: "boolean", offset: 3 },
 								{ name: "CoolSecondStageOn", mask: 16, type: "boolean", offset: 4 },
 								{ name: "FanSecondStageOn", mask: 32, type: "boolean", offset: 5 },
-								{ name: "FanThirdStageOn", mask: 64, type: "boolean", offset: 6 }
+								{ name: "FanThirdStageOn", mask: 64, type: "boolean", offset: 6 },
+								{ name: "PendingHeat", mask: 128, type: "boolean", offset: 7 },
+								{ name: "PendingCool", mask: 256, type: "boolean", offset: 8 },
+								{ name: "Vent/Economizer", mask: 512, type: "boolean", offset: 9 },
+								{ name: "AuxHeating", mask: 1024, type: "boolean", offset: 10 }
               ]
             },
             {                

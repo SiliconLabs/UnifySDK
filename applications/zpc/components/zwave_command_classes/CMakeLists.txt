@@ -46,6 +46,7 @@ add_library(
   src/zwave_command_class_switch_multilevel.c
   src/zwave_command_class_thermostat_mode.c
   src/zwave_command_class_thermostat_setpoint.c
+  src/zwave_command_class_thermostat_operating_state.c
   src/zwave_command_class_time.c
   src/zwave_command_class_user_code.c
   src/zwave_command_class_version.c

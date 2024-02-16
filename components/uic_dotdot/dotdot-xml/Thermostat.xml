@@ -212,6 +212,11 @@ applicable to this document can be found in the LICENSE.md file.
           <element name="CoolSecondStageOn" type="bool" mask="10" shiftRight="4" />
           <element name="FanSecondStageOn" type="bool" mask="20" shiftRight="5" />
           <element name="FanThirdStageOn" type="bool" mask="40" shiftRight="6" />
+          <!-- Z-Wave specific -->
+          <element name="PendingHeat" type="bool" mask="80" shiftRight="7" />
+          <element name="PendingCool" type="bool" mask="100" shiftRight="8" />
+          <element name="Vent/Economizer" type="bool" mask="200" shiftRight="9"/>
+          <element name="AuxHeating" type="bool" mask="400" shiftRight="10"/>
         </bitmap>
       </attribute>
 
