@@ -128,6 +128,8 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "ProtocolController-NetworkManagement";
   case DOTDOT_DESCRIPTOR_CLUSTER_ID:
     return "Descriptor";
+  case DOTDOT_Z_WAVE_HUMIDITY_CONTROL_CLUSTER_ID:
+    return "ZWaveHumidityControl";
   default:
     return "Unknown";
   }
@@ -298,6 +300,9 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  }
  if (strcmp ("Descriptor", cluster_name) == 0) {
    return DOTDOT_DESCRIPTOR_CLUSTER_ID;
+ }
+ if (strcmp ("ZWaveHumidityControl", cluster_name) == 0) {
+   return DOTDOT_Z_WAVE_HUMIDITY_CONTROL_CLUSTER_ID;
  }
 
   // Return an invalid ID if we did not get any match.

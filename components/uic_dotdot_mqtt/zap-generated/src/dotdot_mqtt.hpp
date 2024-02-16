@@ -367,6 +367,13 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_descriptor_init();
 
+/**
+ * @brief Initialize ZWaveHumidityControl dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_z_wave_humidity_control_init();
+
 
 
 // clang-format on
@@ -5052,6 +5059,65 @@ void uic_mqtt_dotdot_on_descriptor_WriteAttributes(
   const size_t message_length);
 
 
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid ZWaveHumidityControl/Commands/ModeSet messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_t> &get_uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/ZWaveHumidityControl/Commands/ModeSet
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_z_wave_humidity_control_mode_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid ZWaveHumidityControl/Commands/SetpointSet messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_t> &get_uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/ZWaveHumidityControl/Commands/SetpointSet
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_z_wave_humidity_control_setpoint_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_z_wave_humidity_control_write_attributes_callback_t> & get_uic_mqtt_dotdot_z_wave_humidity_control_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/ZWaveHumidityControl/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_z_wave_humidity_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
 
 
 // All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
@@ -5920,6 +5986,26 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap WindowCoveringMode("WindowCoveringMode", "map8", WindowCoveringMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> ZWaveHumidityControlSupportedReportingMode_bitmap_data {
+{ {"Humidify", "bool", "0x1", "0"}, {
+} },
+{ {"Dehumidify", "bool", "0x2", "1"}, {
+} },
+{ {"Auto", "bool", "0x4", "2"}, {
+} }
+};
+const dotdot_bitmap ZWaveHumidityControlSupportedReportingMode("ZWaveHumidityControlSupportedReportingMode", "Unknown ZWaveHumidityControlSupportedReportingMode", ZWaveHumidityControlSupportedReportingMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> ZWaveHumidityControlSupportedSetPoints_bitmap_data {
+{ {"Humidifier", "bool", "0x1", "0"}, {
+} },
+{ {"Dehumidifier", "bool", "0x2", "1"}, {
+} },
+{ {"Auto", "bool", "0x4", "2"}, {
+} }
+};
+const dotdot_bitmap ZWaveHumidityControlSupportedSetPoints("ZWaveHumidityControlSupportedSetPoints", "Unknown ZWaveHumidityControlSupportedSetPoints", ZWaveHumidityControlSupportedSetPoints_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> map16_bitmap_data {
 };

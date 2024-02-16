@@ -40444,6 +40444,853 @@ void uic_mqtt_dotdot_descriptor_publish_supported_commands(
 void uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the z_wave_humidity_control cluster
+typedef sl_status_t (*uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    ModeType mode
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    SetpointType type,
+
+    uint8_t precision,
+
+    uint8_t scale,
+
+    int32_t value
+
+);
+
+typedef struct {
+  uint8_t reporting_mode;
+  uint8_t supported_reporting_mode;
+  uint8_t current_state;
+  uint8_t supported_set_points;
+  int32_t humidifier_setpoint_min;
+  int32_t humidifier_setpoint_max;
+  int32_t humidifier_setpoint;
+  uint8_t humidifier_setpoint_scale;
+  uint8_t humidifier_setpoint_precision;
+  int32_t dehumidifier_setpoint_min;
+  int32_t dehumidifier_setpoint_max;
+  int32_t dehumidifier_setpoint;
+  uint8_t dehumidifier_setpoint_scale;
+  uint8_t dehumidifier_setpoint_precision;
+  int32_t auto_setpoint_min;
+  int32_t auto_setpoint_max;
+  int32_t auto_setpoint;
+  uint8_t auto_setpoint_scale;
+  uint8_t auto_setpoint_precision;
+} uic_mqtt_dotdot_z_wave_humidity_control_state_t;
+
+typedef struct {
+  bool reporting_mode;
+  bool supported_reporting_mode;
+  bool current_state;
+  bool supported_set_points;
+  bool humidifier_setpoint_min;
+  bool humidifier_setpoint_max;
+  bool humidifier_setpoint;
+  bool humidifier_setpoint_scale;
+  bool humidifier_setpoint_precision;
+  bool dehumidifier_setpoint_min;
+  bool dehumidifier_setpoint_max;
+  bool dehumidifier_setpoint;
+  bool dehumidifier_setpoint_scale;
+  bool dehumidifier_setpoint_precision;
+  bool auto_setpoint_min;
+  bool auto_setpoint_max;
+  bool auto_setpoint;
+  bool auto_setpoint_scale;
+  bool auto_setpoint_precision;
+} uic_mqtt_dotdot_z_wave_humidity_control_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_z_wave_humidity_control_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_z_wave_humidity_control_state_t,
+    uic_mqtt_dotdot_z_wave_humidity_control_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_z_wave_humidity_control_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_z_wave_humidity_control_updated_state_t
+);
+
+
+/**
+ * @brief Command fields for ZWaveHumidityControl/ModeSet
+ */
+typedef struct {
+  ModeType mode;
+} uic_mqtt_dotdot_z_wave_humidity_control_command_mode_set_fields_t;
+
+/**
+ * @brief Command fields for ZWaveHumidityControl/SetpointSet
+ */
+typedef struct {
+  SetpointType type;
+
+  uint8_t precision;
+
+  uint8_t scale;
+
+  int32_t value;
+} uic_mqtt_dotdot_z_wave_humidity_control_command_setpoint_set_fields_t;
+
+
+/**
+ * @brief Setup callback to be called when a
+ * ZWaveHumidityControl/Commands/mode_set is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_set(const uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * ZWaveHumidityControl/Commands/mode_set is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_unset(const uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * ZWaveHumidityControl/Commands/mode_set is received.
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/ZWaveHumidityControl/GeneratedCommands/mode_set is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_generated_mode_set_callback_set(const uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/ZWaveHumidityControl/GeneratedCommands/mode_set is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_generated_mode_set_callback_unset(const uic_mqtt_dotdot_z_wave_humidity_control_mode_set_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/ZWaveHumidityControl/GeneratedCommands/mode_set is received.
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_generated_mode_set_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * ZWaveHumidityControl/Commands/setpoint_set is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_set(const uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * ZWaveHumidityControl/Commands/setpoint_set is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_unset(const uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * ZWaveHumidityControl/Commands/setpoint_set is received.
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/ZWaveHumidityControl/GeneratedCommands/setpoint_set is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_generated_setpoint_set_callback_set(const uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/ZWaveHumidityControl/GeneratedCommands/setpoint_set is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_generated_setpoint_set_callback_unset(const uic_mqtt_dotdot_z_wave_humidity_control_setpoint_set_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/ZWaveHumidityControl/GeneratedCommands/setpoint_set is received.
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_generated_setpoint_set_callback_clear();
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/z_wave_humidity_control/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_z_wave_humidity_control_write_attributes_callback(
+  const uic_mqtt_dotdot_z_wave_humidity_control_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/z_wave_humidity_control/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_z_wave_humidity_control_write_attributes_callback(
+  const uic_mqtt_dotdot_z_wave_humidity_control_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/z_wave_humidity_control/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_z_wave_humidity_control_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/z_wave_humidity_control/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_z_wave_humidity_control_force_read_attributes_callback(
+  const uic_mqtt_dotdot_z_wave_humidity_control_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/z_wave_humidity_control/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_z_wave_humidity_control_force_read_attributes_callback(
+  const uic_mqtt_dotdot_z_wave_humidity_control_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/z_wave_humidity_control/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_z_wave_humidity_control_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/ReportingMode
+ *
+ * @param base_topic    topic prefix to publish, /reporting_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_reporting_mode_publish(
+  const char *base_topic,
+  ModeType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/ReportingMode
+ *
+ * @param base_topic    topic prefix to publish, /reporting_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_reporting_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/SupportedReportingMode
+ *
+ * @param base_topic    topic prefix to publish, /supported_reporting_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_supported_reporting_mode_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/SupportedReportingMode
+ *
+ * @param base_topic    topic prefix to publish, /supported_reporting_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_supported_reporting_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/CurrentState
+ *
+ * @param base_topic    topic prefix to publish, /current_state
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_current_state_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/CurrentState
+ *
+ * @param base_topic    topic prefix to publish, /current_state
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_current_state_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/SupportedSetPoints
+ *
+ * @param base_topic    topic prefix to publish, /supported_set_points
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_supported_set_points_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/SupportedSetPoints
+ *
+ * @param base_topic    topic prefix to publish, /supported_set_points
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_supported_set_points_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointMin
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_min
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_min_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointMin
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_min
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_min_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointMax
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_max
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_max_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointMax
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_max
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_max_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/HumidifierSetpoint
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/HumidifierSetpoint
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointScale
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_scale
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_scale_publish(
+  const char *base_topic,
+  ScaleType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointScale
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_scale
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_scale_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_precision
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_precision_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision
+ *
+ * @param base_topic    topic prefix to publish, /humidifier_setpoint_precision
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_humidifier_setpoint_precision_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointMin
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_min
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_min_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointMin
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_min
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_min_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointMax
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_max
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_max_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointMax
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_max
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_max_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpoint
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpoint
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointScale
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_scale
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_scale_publish(
+  const char *base_topic,
+  ScaleType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointScale
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_scale
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_scale_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_precision
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_precision_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision
+ *
+ * @param base_topic    topic prefix to publish, /dehumidifier_setpoint_precision
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_dehumidifier_setpoint_precision_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/AutoSetpointMin
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_min
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_min_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/AutoSetpointMin
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_min
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_min_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/AutoSetpointMax
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_max
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_max_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/AutoSetpointMax
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_max
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_max_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/AutoSetpoint
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/AutoSetpoint
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/AutoSetpointScale
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_scale
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_scale_publish(
+  const char *base_topic,
+  ScaleType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/AutoSetpointScale
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_scale
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_scale_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; ZWaveHumidityControl/Attributes/AutoSetpointPrecision
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_precision
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_precision_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; ZWaveHumidityControl/Attributes/AutoSetpointPrecision
+ *
+ * @param base_topic    topic prefix to publish, /auto_setpoint_precision
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_auto_setpoint_precision_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the ZWaveHumidityControl/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /ZWaveHumidityControl/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to ZWaveHumidityControl/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /ZWaveHumidityControl/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the ZWaveHumidityControl Cluster
+ *
+ * This function will iterate over all Commands in the ZWaveHumidityControl Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the ZWaveHumidityControl Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 
 /**
  * @brief Publish the SupportedCommands for UNID/EndPoint
