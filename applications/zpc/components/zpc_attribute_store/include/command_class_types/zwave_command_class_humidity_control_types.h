@@ -41,6 +41,22 @@ typedef uint8_t humidity_control_supported_modes_t;
 ///> Humidity Control Operating State. uint8_t
 typedef uint8_t humidity_control_operating_state_t;
 
+//>> Humidity Control Setpoint CC
+///> Humidity Control Setpoint Supported Types Bitmask. uint8_t
+typedef uint8_t humidity_control_setpoint_supported_types_t;
+///> Humidity Control Setpoint Supported Scale Bitmask. uint8_t
+typedef uint8_t humidity_control_setpoint_supported_scales_t;
+///> Humidity Control Setpoint Type. uint8_t
+typedef uint8_t humidity_control_setpoint_type_t;
+///> Humidity Control Setpoint Value. int32_t
+typedef int32_t humidity_control_setpoint_value_t;
+///> Humidity Control Setpoint Scale. uint8_t
+typedef uint8_t humidity_control_setpoint_scale_t;
+///> Humidity Control Setpoint Precision. uint8_t
+typedef uint8_t humidity_control_setpoint_precision_t;
+///> Humidity Control Setpoint Size. uint8_t
+typedef uint8_t humidity_control_setpoint_size_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
