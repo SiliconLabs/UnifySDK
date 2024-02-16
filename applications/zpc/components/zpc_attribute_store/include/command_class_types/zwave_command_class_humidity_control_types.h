@@ -37,6 +37,10 @@ typedef uint8_t humidity_control_mode_t;
 ///> Humidity Control Suppoted Mode Bitmask. uint8_t
 typedef uint8_t humidity_control_supported_modes_t;
 
+//>> Humidity Control Operating State CC
+///> Humidity Control Operating State. uint8_t
+typedef uint8_t humidity_control_operating_state_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

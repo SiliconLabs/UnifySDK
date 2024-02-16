@@ -545,6 +545,17 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_CURRENT_MODE,
                  ((COMMAND_CLASS_HUMIDITY_CONTROL_MODE << 8) | 0x03))
 
 /////////////////////////////////////////////////
+// Humidity Control Operating State Command Class
+///< This represents the version of the Humidity Control Mode Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_OPERATING_STATE_VERSION,
+                ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_HUMIDITY_CONTROL_OPERATING_STATE))
+
+// Current state
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_OPERATING_STATE_CURRENT_STATE,
+                 ((COMMAND_CLASS_HUMIDITY_CONTROL_OPERATING_STATE << 8) | 0x02))
+
+/////////////////////////////////////////////////
 // Inclusion Controller Command Class
 ///< This represents the version of the Inclusion Controller Command class.
 /// zwave_cc_version_t
