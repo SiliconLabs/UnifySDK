@@ -23343,6 +23343,50 @@ ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/ACCapacityFormat/Reported { "value"
 
 <br><br>
 
+\subsection thermostat_attr_supported_system_mode Thermostat/SupportedSystemMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/Thermostat/Attributes/SupportedSystemMode/Reported
+[PREFIX]/Thermostat/Attributes/SupportedSystemMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Thermostat Cluster SupportedSystemMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ThermostatSupportedSystemMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedSystemMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Thermostat/Attributes/SupportedSystemMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SupportedSystemMode/Desired { "value": <DESIRED_SUPPORTED_SYSTEM_MODE>}
+ucl/by-unid/<UNID>/ep0/Thermostat/Attributes/SupportedSystemMode/Reported { "value": <REPORTED_SUPPORTED_SYSTEM_MODE>}
+
+```
+
+<br><br>
+
 
 \subsection thermostat_attr_cluster_revision Thermostat/ClusterRevision Attribute
 
@@ -23911,7 +23955,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetRelayS
     },
     "ACCapacityFormat": {
       "type": "ThermostatACCapacityFormat"
-    }
+    },
   },
   "required": [
     "value"
@@ -23924,7 +23968,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/GeneratedCommands/GetRelayS
 To update all Thermostat attributes under the by-unid topic space:
 
 ```console
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/WriteAttributes' -m  '{ "HVACSystemTypeConfiguration": <HVAC_SYSTEM_TYPE_CONFIGURATION_VALUE> ,"LocalTemperatureCalibration": <LOCAL_TEMPERATURE_CALIBRATION_VALUE> ,"OccupiedCoolingSetpoint": <OCCUPIED_COOLING_SETPOINT_VALUE> ,"OccupiedHeatingSetpoint": <OCCUPIED_HEATING_SETPOINT_VALUE> ,"UnoccupiedCoolingSetpoint": <UNOCCUPIED_COOLING_SETPOINT_VALUE> ,"UnoccupiedHeatingSetpoint": <UNOCCUPIED_HEATING_SETPOINT_VALUE> ,"MinHeatSetpointLimit": <MIN_HEAT_SETPOINT_LIMIT_VALUE> ,"MaxHeatSetpointLimit": <MAX_HEAT_SETPOINT_LIMIT_VALUE> ,"MinCoolSetpointLimit": <MIN_COOL_SETPOINT_LIMIT_VALUE> ,"MaxCoolSetpointLimit": <MAX_COOL_SETPOINT_LIMIT_VALUE> ,"MinSetpointDeadBand": <MIN_SETPOINT_DEAD_BAND_VALUE> ,"RemoteSensing": <REMOTE_SENSING_VALUE> ,"ControlSequenceOfOperation": <CONTROL_SEQUENCE_OF_OPERATION_VALUE> ,"SystemMode": <SYSTEM_MODE_VALUE> ,"TemperatureSetpointHold": <TEMPERATURE_SETPOINT_HOLD_VALUE> ,"TemperatureSetpointHoldDuration": <TEMPERATURE_SETPOINT_HOLD_DURATION_VALUE> ,"ThermostatProgrammingOperationMode": <THERMOSTAT_PROGRAMMING_OPERATION_MODE_VALUE> ,"OccupiedSetback": <OCCUPIED_SETBACK_VALUE> ,"UnoccupiedSetback": <UNOCCUPIED_SETBACK_VALUE> ,"EmergencyHeatDelta": <EMERGENCY_HEAT_DELTA_VALUE> ,"ACType": <AC_TYPE_VALUE> ,"ACCapacity": <AC_CAPACITY_VALUE> ,"ACRefrigerantType": <AC_REFRIGERANT_TYPE_VALUE> ,"ACCompressorType": <AC_COMPRESSOR_TYPE_VALUE> ,"ACErrorCode": <AC_ERROR_CODE_VALUE> ,"ACLouverPosition": <AC_LOUVER_POSITION_VALUE> ,"ACCapacityFormat": <AC_CAPACITY_FORMAT_VALUE>  }'
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/WriteAttributes' -m  '{ "HVACSystemTypeConfiguration": <HVAC_SYSTEM_TYPE_CONFIGURATION_VALUE> ,"LocalTemperatureCalibration": <LOCAL_TEMPERATURE_CALIBRATION_VALUE> ,"OccupiedCoolingSetpoint": <OCCUPIED_COOLING_SETPOINT_VALUE> ,"OccupiedHeatingSetpoint": <OCCUPIED_HEATING_SETPOINT_VALUE> ,"UnoccupiedCoolingSetpoint": <UNOCCUPIED_COOLING_SETPOINT_VALUE> ,"UnoccupiedHeatingSetpoint": <UNOCCUPIED_HEATING_SETPOINT_VALUE> ,"MinHeatSetpointLimit": <MIN_HEAT_SETPOINT_LIMIT_VALUE> ,"MaxHeatSetpointLimit": <MAX_HEAT_SETPOINT_LIMIT_VALUE> ,"MinCoolSetpointLimit": <MIN_COOL_SETPOINT_LIMIT_VALUE> ,"MaxCoolSetpointLimit": <MAX_COOL_SETPOINT_LIMIT_VALUE> ,"MinSetpointDeadBand": <MIN_SETPOINT_DEAD_BAND_VALUE> ,"RemoteSensing": <REMOTE_SENSING_VALUE> ,"ControlSequenceOfOperation": <CONTROL_SEQUENCE_OF_OPERATION_VALUE> ,"SystemMode": <SYSTEM_MODE_VALUE> ,"TemperatureSetpointHold": <TEMPERATURE_SETPOINT_HOLD_VALUE> ,"TemperatureSetpointHoldDuration": <TEMPERATURE_SETPOINT_HOLD_DURATION_VALUE> ,"ThermostatProgrammingOperationMode": <THERMOSTAT_PROGRAMMING_OPERATION_MODE_VALUE> ,"OccupiedSetback": <OCCUPIED_SETBACK_VALUE> ,"UnoccupiedSetback": <UNOCCUPIED_SETBACK_VALUE> ,"EmergencyHeatDelta": <EMERGENCY_HEAT_DELTA_VALUE> ,"ACType": <AC_TYPE_VALUE> ,"ACCapacity": <AC_CAPACITY_VALUE> ,"ACRefrigerantType": <AC_REFRIGERANT_TYPE_VALUE> ,"ACCompressorType": <AC_COMPRESSOR_TYPE_VALUE> ,"ACErrorCode": <AC_ERROR_CODE_VALUE> ,"ACLouverPosition": <AC_LOUVER_POSITION_VALUE> ,"ACCapacityFormat": <AC_CAPACITY_FORMAT_VALUE> , }'
 ```
 
 > NOTE: Specify only the list of attributes to write in this command.
@@ -24002,7 +24046,8 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Thermostat/Commands/WriteAttributes' -
           "ACErrorCode",
           "ACLouverPosition",
           "ACCoilTemperature",
-          "ACCapacityFormat"
+          "ACCapacityFormat",
+          "SupportedSystemMode"
         ]
       }
     }
@@ -57338,7 +57383,17 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
     "Precooling",
     "FanOnly",
     "Dry",
-    "Sleep"
+    "Sleep",
+    "AuxiliaryHeat",
+    "Resume",
+    "Furnace",
+    "MoistAir",
+    "AutoChangeover",
+    "EnergySaveHeat",
+    "EnergySaveCool",
+    "Away",
+    "FullPower",
+    "ManufacturerSpecific"
   ]
 }
 ```
@@ -59766,6 +59821,75 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Bitmap ThermostatRemoteSensing Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap ThermostatSupportedSystemMode Section -->
+<!-- -->
+\section enum_thermostat_supported_system_mode ThermostatSupportedSystemMode Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ThermostatSupportedSystemMode Enum Properties",
+  "type": "object",
+  "properties": {
+    "Off": {
+        "type": "boolean"
+    },
+    "Heat": {
+        "type": "boolean"
+    },
+    "Cool": {
+        "type": "boolean"
+    },
+    "Auto": {
+        "type": "boolean"
+    },
+    "AuxiliaryHeat": {
+        "type": "boolean"
+    },
+    "Resume": {
+        "type": "boolean"
+    },
+    "FanOnly": {
+        "type": "boolean"
+    },
+    "Furnace": {
+        "type": "boolean"
+    },
+    "DryAir": {
+        "type": "boolean"
+    },
+    "MoistAir": {
+        "type": "boolean"
+    },
+    "AutoChangeover": {
+        "type": "boolean"
+    },
+    "EnergySaveHeat": {
+        "type": "boolean"
+    },
+    "EnergySaveCool": {
+        "type": "boolean"
+    },
+    "Away": {
+        "type": "boolean"
+    },
+    "FullPower": {
+        "type": "boolean"
+    },
+    "ManufacturerSpecific": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap ThermostatSupportedSystemMode Section -->
 <!-- -->
 
 <br><br>

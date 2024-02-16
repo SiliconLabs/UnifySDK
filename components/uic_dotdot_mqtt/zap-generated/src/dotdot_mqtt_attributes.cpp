@@ -21122,6 +21122,7 @@ static uic_mqtt_dotdot_thermostat_attribute_ac_error_code_callback_t uic_mqtt_do
 static uic_mqtt_dotdot_thermostat_attribute_ac_louver_position_callback_t uic_mqtt_dotdot_thermostat_attribute_ac_louver_position_callback = nullptr;
 static uic_mqtt_dotdot_thermostat_attribute_ac_coil_temperature_callback_t uic_mqtt_dotdot_thermostat_attribute_ac_coil_temperature_callback = nullptr;
 static uic_mqtt_dotdot_thermostat_attribute_ac_capacity_format_callback_t uic_mqtt_dotdot_thermostat_attribute_ac_capacity_format_callback = nullptr;
+static uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback_t uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update handlers for Thermostat
@@ -25014,6 +25015,82 @@ static void uic_mqtt_dotdot_on_thermostat_ac_capacity_format_attribute_update(
   );
 
 }
+static void uic_mqtt_dotdot_on_thermostat_supported_system_mode_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t supported_system_mode = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "Thermostat::SupportedSystemMode: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      supported_system_mode = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, ThermostatSupportedSystemMode);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    supported_system_mode
+  );
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute init functions for Thermostat
@@ -25223,6 +25300,10 @@ sl_status_t uic_mqtt_dotdot_thermostat_attributes_init()
     subscription_topic = base_topic + "Thermostat/Attributes/ACCapacityFormat/#";
     uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_thermostat_ac_capacity_format_attribute_update);
   }
+  if(uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback) {
+    subscription_topic = base_topic + "Thermostat/Attributes/SupportedSystemMode/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_thermostat_supported_system_mode_attribute_update);
+  }
 
   return SL_STATUS_OK;
 }
@@ -25430,6 +25511,10 @@ void uic_mqtt_dotdot_thermostat_attribute_ac_coil_temperature_callback_set(const
 void uic_mqtt_dotdot_thermostat_attribute_ac_capacity_format_callback_set(const uic_mqtt_dotdot_thermostat_attribute_ac_capacity_format_callback_t callback)
 {
   uic_mqtt_dotdot_thermostat_attribute_ac_capacity_format_callback = callback;
+}
+void uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback_set(const uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback_t callback)
+{
+  uic_mqtt_dotdot_thermostat_attribute_supported_system_mode_callback = callback;
 }
 
 // End of supported cluster.

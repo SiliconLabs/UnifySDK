@@ -393,6 +393,7 @@ typedef enum {
 #define DOTDOT_THERMOSTAT_AC_LOUVER_POSITION_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x45)
 #define DOTDOT_THERMOSTAT_AC_COIL_TEMPERATURE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x46)
 #define DOTDOT_THERMOSTAT_AC_CAPACITY_FORMAT_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x47)
+#define DOTDOT_THERMOSTAT_SUPPORTED_SYSTEM_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x11C)
 // Definitions for cluster: FanControl
 #define DOTDOT_FAN_CONTROL_FAN_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_FAN_CONTROL_FAN_MODE_SEQUENCE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)

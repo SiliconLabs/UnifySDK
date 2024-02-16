@@ -1,7 +1,7 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
@@ -8657,7 +8657,17 @@ export let ClusterTypeAttrs: any = {
 																{ name: "Precooling", value: 6},
 																{ name: "FanOnly", value: 7},
 																{ name: "Dry", value: 8},
-																{ name: "Sleep", value: 9}
+																{ name: "Sleep", value: 9},
+																{ name: "AuxiliaryHeat", value: 10},
+																{ name: "Resume", value: 11},
+																{ name: "Furnace", value: 12},
+																{ name: "MoistAir", value: 13},
+																{ name: "AutoChangeover", value: 14},
+																{ name: "EnergySaveHeat", value: 15},
+																{ name: "EnergySaveCool", value: 16},
+																{ name: "Away", value: 17},
+																{ name: "FullPower", value: 18},
+																{ name: "ManufacturerSpecific", value: 19}
               ],
             },
             {                

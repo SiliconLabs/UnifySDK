@@ -8837,6 +8837,13 @@ static void thermostat_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
+          if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SUPPORTED_SYSTEM_MODE) {
+          uic_mqtt_dotdot_thermostat_supported_system_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
       } catch (std::exception &ex) {
     sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
   }
@@ -9298,6 +9305,14 @@ static void thermostat_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_thermostat_ac_capacity_format_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
+     case DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SUPPORTED_SYSTEM_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining Thermostat::SupportedSystemMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_thermostat_supported_system_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
     default:
     break;
     }
@@ -9662,6 +9677,13 @@ static void thermostat_cluster_publish_reported_value_callback(
           uic_mqtt_dotdot_thermostat_ac_capacity_format_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SUPPORTED_SYSTEM_MODE) {
+          uic_mqtt_dotdot_thermostat_supported_system_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -29697,6 +29719,20 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       thermostat_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY_FORMAT);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      thermostat_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SUPPORTED_SYSTEM_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      thermostat_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SUPPORTED_SYSTEM_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      thermostat_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SUPPORTED_SYSTEM_MODE);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       fan_control_cluster_publish_desired_value_callback,
