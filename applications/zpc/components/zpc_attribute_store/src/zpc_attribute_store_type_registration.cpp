@@ -202,6 +202,12 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   {ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_CURRENT_MODE,   "Humidity Control Mode Current Mode",   ATTRIBUTE_INDICATOR_INDICATOR_ID,   U8_STORAGE_TYPE},
 
   /////////////////////////////////////////////////////////////////////
+  // Humidity Control Operating State Command Class attributes
+  /////////////////////////////////////////////////////////////////////
+  {ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_OPERATING_STATE_VERSION,   "Humidity Control Operating State Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_OPERATING_STATE_CURRENT_STATE,   "Humidity Control Operating State Current State",   ATTRIBUTE_INDICATOR_INDICATOR_ID,   U8_STORAGE_TYPE},
+
+  /////////////////////////////////////////////////////////////////////
   //         Meter Command Class attributes
   /////////////////////////////////////////////////////////////////////
   {ATTRIBUTE_COMMAND_CLASS_METER_VERSION,   "Meter Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
