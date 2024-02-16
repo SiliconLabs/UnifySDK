@@ -7127,6 +7127,84 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_write_comman
 void uic_mqtt_dotdot_protocol_controller_network_management_publish_write_command_to_group(
   uint16_t destination_group_id
 );
+/**
+ * @brief Sends/Publishes a ModeSet command for
+ * the ZWaveHumidityControl cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/ZWaveHumidityControl/Commands/ModeSet
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_mode_set_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_z_wave_humidity_control_command_mode_set_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a ModeSet command for
+ * the ZWaveHumidityControl cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/ZWaveHumidityControl/Commands/ModeSet
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_mode_set_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_z_wave_humidity_control_command_mode_set_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a SetpointSet command for
+ * the ZWaveHumidityControl cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/ZWaveHumidityControl/Commands/SetpointSet
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_setpoint_set_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_z_wave_humidity_control_command_setpoint_set_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a SetpointSet command for
+ * the ZWaveHumidityControl cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/ZWaveHumidityControl/Commands/SetpointSet
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_z_wave_humidity_control_publish_setpoint_set_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_z_wave_humidity_control_command_setpoint_set_fields_t *fields
+  
+);
 
 
 #ifdef __cplusplus

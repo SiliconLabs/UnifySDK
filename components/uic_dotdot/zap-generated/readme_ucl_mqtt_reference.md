@@ -53949,6 +53949,1185 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <!-- END OF Descriptor Commands Section -->
 <!-- -->
 
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page z_wave_humidity_control ZWaveHumidityControl Cluster
+The following commands and attributes are accepted as JSON payloads for the
+ZWaveHumidityControl cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF ZWaveHumidityControl Attributes Section -->
+<!-- -->
+\section z_wave_humidity_control_attrs ZWaveHumidityControl Attributes
+The following attribute topics are used to retrieve the ZWaveHumidityControl cluster state.
+
+<br>
+
+\subsection z_wave_humidity_control_attr_reporting_mode ZWaveHumidityControl/ReportingMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/ReportingMode/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/ReportingMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster ReportingMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ModeType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ReportingMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/ReportingMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/ReportingMode/Desired { "value": <DESIRED_REPORTING_MODE>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/ReportingMode/Reported { "value": <REPORTED_REPORTING_MODE>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_supported_reporting_mode ZWaveHumidityControl/SupportedReportingMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/SupportedReportingMode/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/SupportedReportingMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster SupportedReportingMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ZWaveHumidityControlSupportedReportingMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedReportingMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/SupportedReportingMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/SupportedReportingMode/Desired { "value": <DESIRED_SUPPORTED_REPORTING_MODE>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/SupportedReportingMode/Reported { "value": <REPORTED_SUPPORTED_REPORTING_MODE>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_current_state ZWaveHumidityControl/CurrentState Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/CurrentState/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/CurrentState/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster CurrentState Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ZWaveHumidityControlCurrentState"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for CurrentState attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/CurrentState/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/CurrentState/Desired { "value": <DESIRED_CURRENT_STATE>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/CurrentState/Reported { "value": <REPORTED_CURRENT_STATE>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_supported_set_points ZWaveHumidityControl/SupportedSetPoints Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/SupportedSetPoints/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/SupportedSetPoints/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster SupportedSetPoints Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ZWaveHumidityControlSupportedSetPoints"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedSetPoints attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/SupportedSetPoints/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/SupportedSetPoints/Desired { "value": <DESIRED_SUPPORTED_SET_POINTS>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/SupportedSetPoints/Reported { "value": <REPORTED_SUPPORTED_SET_POINTS>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_humidifier_setpoint_min ZWaveHumidityControl/HumidifierSetpointMin Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointMin/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointMin/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster HumidifierSetpointMin Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointMin attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/HumidifierSetpointMin/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointMin/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_MIN>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointMin/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_MIN>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_humidifier_setpoint_max ZWaveHumidityControl/HumidifierSetpointMax Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointMax/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointMax/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster HumidifierSetpointMax Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointMax attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/HumidifierSetpointMax/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointMax/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_MAX>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointMax/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_MAX>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_humidifier_setpoint ZWaveHumidityControl/HumidifierSetpoint Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpoint/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpoint/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster HumidifierSetpoint Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpoint attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/HumidifierSetpoint/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpoint/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpoint/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_humidifier_setpoint_scale ZWaveHumidityControl/HumidifierSetpointScale Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointScale/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointScale/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster HumidifierSetpointScale Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ScaleType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointScale attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/HumidifierSetpointScale/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointScale/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_SCALE>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointScale/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_SCALE>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_humidifier_setpoint_precision ZWaveHumidityControl/HumidifierSetpointPrecision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster HumidifierSetpointPrecision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointPrecision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_PRECISION>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/HumidifierSetpointPrecision/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_PRECISION>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_dehumidifier_setpoint_min ZWaveHumidityControl/DehumidifierSetpointMin Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointMin/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointMin/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster DehumidifierSetpointMin Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointMin attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/DehumidifierSetpointMin/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointMin/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_MIN>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointMin/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_MIN>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_dehumidifier_setpoint_max ZWaveHumidityControl/DehumidifierSetpointMax Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointMax/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointMax/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster DehumidifierSetpointMax Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointMax attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/DehumidifierSetpointMax/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointMax/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_MAX>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointMax/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_MAX>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_dehumidifier_setpoint ZWaveHumidityControl/DehumidifierSetpoint Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpoint/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpoint/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster DehumidifierSetpoint Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpoint attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/DehumidifierSetpoint/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpoint/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpoint/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_dehumidifier_setpoint_scale ZWaveHumidityControl/DehumidifierSetpointScale Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointScale/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointScale/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster DehumidifierSetpointScale Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ScaleType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointScale attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/DehumidifierSetpointScale/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointScale/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_SCALE>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointScale/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_SCALE>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_dehumidifier_setpoint_precision ZWaveHumidityControl/DehumidifierSetpointPrecision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster DehumidifierSetpointPrecision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointPrecision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_PRECISION>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/DehumidifierSetpointPrecision/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_PRECISION>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_auto_setpoint_min ZWaveHumidityControl/AutoSetpointMin Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointMin/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointMin/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster AutoSetpointMin Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointMin attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/AutoSetpointMin/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointMin/Desired { "value": <DESIRED_AUTO_SETPOINT_MIN>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointMin/Reported { "value": <REPORTED_AUTO_SETPOINT_MIN>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_auto_setpoint_max ZWaveHumidityControl/AutoSetpointMax Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointMax/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointMax/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster AutoSetpointMax Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointMax attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/AutoSetpointMax/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointMax/Desired { "value": <DESIRED_AUTO_SETPOINT_MAX>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointMax/Reported { "value": <REPORTED_AUTO_SETPOINT_MAX>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_auto_setpoint ZWaveHumidityControl/AutoSetpoint Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpoint/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpoint/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster AutoSetpoint Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpoint attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/AutoSetpoint/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpoint/Desired { "value": <DESIRED_AUTO_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpoint/Reported { "value": <REPORTED_AUTO_SETPOINT>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_auto_setpoint_scale ZWaveHumidityControl/AutoSetpointScale Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointScale/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointScale/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster AutoSetpointScale Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ScaleType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointScale attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/AutoSetpointScale/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointScale/Desired { "value": <DESIRED_AUTO_SETPOINT_SCALE>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointScale/Reported { "value": <REPORTED_AUTO_SETPOINT_SCALE>}
+
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_attr_auto_setpoint_precision ZWaveHumidityControl/AutoSetpointPrecision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointPrecision/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/AutoSetpointPrecision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster AutoSetpointPrecision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointPrecision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/ZWaveHumidityControl/Attributes/AutoSetpointPrecision/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointPrecision/Desired { "value": <DESIRED_AUTO_SETPOINT_PRECISION>}
+ucl/by-unid/<UNID>/ep0/ZWaveHumidityControl/Attributes/AutoSetpointPrecision/Reported { "value": <REPORTED_AUTO_SETPOINT_PRECISION>}
+
+```
+
+<br><br>
+
+
+\subsection z_wave_humidity_control_attr_cluster_revision ZWaveHumidityControl/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Attributes/ClusterRevision/Reported
+[PREFIX]/ZWaveHumidityControl/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF ZWaveHumidityControl Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF ZWaveHumidityControl Supported Commands Section -->
+<!-- -->
+\section z_wave_humidity_control_recv_cmd_support ZWaveHumidityControl Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/SupportedCommands
+[PREFIX]/ZWaveHumidityControl/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+              "ModeSet",
+              "SetpointSet",
+              "WriteAttributes",
+              "ForceReadAttributes"
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for ZWaveHumidityControl cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/SupportedCommands { "value": ["ModeSet","SetpointSet","WriteAttributes", "ForceReadAttributes"] }
+```
+
+To see supported generated commands for ZWaveHumidityControl cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF ZWaveHumidityControl Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF ZWaveHumidityControl Commands Section -->
+<!-- -->
+\section z_wave_humidity_control_cmds ZWaveHumidityControl Commands
+
+<br><br>
+
+\subsection z_wave_humidity_control_mode_set_cmd ZWaveHumidityControl/ModeSet Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Commands/ModeSet
+[PREFIX]/ZWaveHumidityControl/GeneratedCommands/ModeSet
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster ModeSet Command Properties",
+  "type": "object",
+  "properties": {
+    "Mode": {
+      "type": "ModeType"
+    }
+  },
+  "required": [
+    "Mode"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a ZWaveHumidityControl/ModeSet command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Commands/ModeSet' -m  '{ "Mode": <MODE_VALUE> }'
+```
+
+To receive a ZWaveHumidityControl/ModeSet generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/GeneratedCommands/ModeSet'
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_setpoint_set_cmd ZWaveHumidityControl/SetpointSet Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Commands/SetpointSet
+[PREFIX]/ZWaveHumidityControl/GeneratedCommands/SetpointSet
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster SetpointSet Command Properties",
+  "type": "object",
+  "properties": {
+    "Type": {
+      "type": "SetpointType"
+    },
+    "Precision": {
+      "type": "integer"
+    },
+    "Scale": {
+      "type": "integer"
+    },
+    "Value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "Type",
+    "Precision",
+    "Scale",
+    "Value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a ZWaveHumidityControl/SetpointSet command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Commands/SetpointSet' -m  '{ "Type": <TYPE_VALUE>,"Precision": <PRECISION_VALUE>,"Scale": <SCALE_VALUE>,"Value": <VALUE_VALUE> }'
+```
+
+To receive a ZWaveHumidityControl/SetpointSet generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/GeneratedCommands/SetpointSet'
+```
+
+<br><br>
+
+\subsection z_wave_humidity_control_write_attr_cmd ZWaveHumidityControl/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "ReportingMode": {
+      "type": "ModeType"
+    },
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all ZWaveHumidityControl attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Commands/WriteAttributes' -m  '{ "ReportingMode": <REPORTING_MODE_VALUE> , }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection z_wave_humidity_control_force_read_attr_cmd ZWaveHumidityControl/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/ZWaveHumidityControl/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControl Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "ReportingMode",
+          "SupportedReportingMode",
+          "CurrentState",
+          "SupportedSetPoints",
+          "HumidifierSetpointMin",
+          "HumidifierSetpointMax",
+          "HumidifierSetpoint",
+          "HumidifierSetpointScale",
+          "HumidifierSetpointPrecision",
+          "DehumidifierSetpointMin",
+          "DehumidifierSetpointMax",
+          "DehumidifierSetpoint",
+          "DehumidifierSetpointScale",
+          "DehumidifierSetpointPrecision",
+          "AutoSetpointMin",
+          "AutoSetpointMax",
+          "AutoSetpoint",
+          "AutoSetpointScale",
+          "AutoSetpointPrecision"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all ZWaveHumidityControl attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the ZWaveHumidityControl attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ZWaveHumidityControl/Commands/ForceReadAttributes' -m  '{ "value": ["ReportingMode"] }'
+```
+
+<!-- -->
+<!-- END OF ZWaveHumidityControl Commands Section -->
+<!-- -->
+
 
 <br><br><br>
 
@@ -56479,6 +57658,31 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
+<!-- START OF Enum ModeType Section -->
+<!-- -->
+\section enum_mode_type ModeType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ModeType Enum Properties",
+  "type": "string",
+  "enum": [
+    "Off",
+    "Humidify",
+    "Dehumidify",
+    "Auto"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ModeType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
 <!-- START OF Enum MoveStepMode Section -->
 <!-- -->
 \section enum_move_step_mode MoveStepMode Enum
@@ -56976,6 +58180,29 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
+<!-- START OF Enum ScaleType Section -->
+<!-- -->
+\section enum_scale_type ScaleType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ScaleType Enum Properties",
+  "type": "string",
+  "enum": [
+    "Percentage",
+    "Absolute"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ScaleType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
 <!-- START OF Enum SetpointRaiseOrLowerMode Section -->
 <!-- -->
 \section enum_setpoint_raise_or_lower_mode SetpointRaiseOrLowerMode Enum
@@ -56995,6 +58222,30 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum SetpointRaiseOrLowerMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum SetpointType Section -->
+<!-- -->
+\section enum_setpoint_type SetpointType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SetpointType Enum Properties",
+  "type": "string",
+  "enum": [
+    "Humidifier",
+    "Dehumidifier",
+    "Auto"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum SetpointType Section -->
 <!-- -->
 
 <br><br>
@@ -57572,6 +58823,30 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum WindowCoveringWindowCoveringType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum ZWaveHumidityControlCurrentState Section -->
+<!-- -->
+\section enum_z_wave_humidity_control_current_state ZWaveHumidityControlCurrentState Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControlCurrentState Enum Properties",
+  "type": "string",
+  "enum": [
+    "Idle",
+    "Humidifying",
+    "Dehumidifying"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ZWaveHumidityControlCurrentState Section -->
 <!-- -->
 
 <br><br>
@@ -60018,6 +61293,66 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Bitmap WindowCoveringMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap ZWaveHumidityControlSupportedReportingMode Section -->
+<!-- -->
+\section enum_z_wave_humidity_control_supported_reporting_mode ZWaveHumidityControlSupportedReportingMode Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControlSupportedReportingMode Enum Properties",
+  "type": "object",
+  "properties": {
+    "Humidify": {
+        "type": "boolean"
+    },
+    "Dehumidify": {
+        "type": "boolean"
+    },
+    "Auto": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap ZWaveHumidityControlSupportedReportingMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap ZWaveHumidityControlSupportedSetPoints Section -->
+<!-- -->
+\section enum_z_wave_humidity_control_supported_set_points ZWaveHumidityControlSupportedSetPoints Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveHumidityControlSupportedSetPoints Enum Properties",
+  "type": "object",
+  "properties": {
+    "Humidifier": {
+        "type": "boolean"
+    },
+    "Dehumidifier": {
+        "type": "boolean"
+    },
+    "Auto": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap ZWaveHumidityControlSupportedSetPoints Section -->
 <!-- -->
 
 <br><br>

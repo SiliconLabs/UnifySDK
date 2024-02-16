@@ -6071,6 +6071,80 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
 );
 
 
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a ZWaveHumidityControl ModeSet command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_z_wave_humidity_control_mode_set_command(
+  
+  const uic_mqtt_dotdot_z_wave_humidity_control_command_mode_set_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for ZWaveHumidityControl ModeSet command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_z_wave_humidity_control_mode_set(
+  nlohmann::json &jsn,
+  ModeType &mode
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a ZWaveHumidityControl SetpointSet command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_z_wave_humidity_control_setpoint_set_command(
+  
+  const uic_mqtt_dotdot_z_wave_humidity_control_command_setpoint_set_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for ZWaveHumidityControl SetpointSet command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_z_wave_humidity_control_setpoint_set(
+  nlohmann::json &jsn,
+  SetpointType &type,
+
+  uint8_t &precision,
+
+  uint8_t &scale,
+
+  int32_t &value
+
+);
+
+
+
+/**
+ * @brief JSON parser for ZWaveHumidityControl WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_z_wave_humidity_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_z_wave_humidity_control_state_t &new_state,
+  uic_mqtt_dotdot_z_wave_humidity_control_updated_state_t &new_updated_state
+);
+
+
 
 #endif  //DOTDOT_MQTT_COMMAND_HELPERS_HPP
 /** @} end dotdot_mqtt_command_helpers */

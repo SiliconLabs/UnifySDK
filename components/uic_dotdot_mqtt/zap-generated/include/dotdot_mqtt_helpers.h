@@ -517,6 +517,13 @@ char *metering_unitof_measure_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get metering_unitof_measure enum representation from string. */
 uint32_t metering_unitof_measure_get_enum_value_number_c(const char *str);
+#define MODE_TYPE_ENUM_NAME_AVAILABLE 1
+
+/** Get mode_type string representation from enum. */
+char *mode_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get mode_type enum representation from string. */
+uint32_t mode_type_get_enum_value_number_c(const char *str);
 #define MOVE_STEP_MODE_ENUM_NAME_AVAILABLE 1
 
 /** Get move_step_mode string representation from enum. */
@@ -650,6 +657,13 @@ char *shdcfg_direction_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get shdcfg_direction enum representation from string. */
 uint32_t shdcfg_direction_get_enum_value_number_c(const char *str);
+#define SCALE_TYPE_ENUM_NAME_AVAILABLE 1
+
+/** Get scale_type string representation from enum. */
+char *scale_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get scale_type enum representation from string. */
+uint32_t scale_type_get_enum_value_number_c(const char *str);
 #define SETPOINT_RAISE_OR_LOWER_MODE_ENUM_NAME_AVAILABLE 1
 
 /** Get setpoint_raise_or_lower_mode string representation from enum. */
@@ -657,6 +671,13 @@ char *setpoint_raise_or_lower_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get setpoint_raise_or_lower_mode enum representation from string. */
 uint32_t setpoint_raise_or_lower_mode_get_enum_value_number_c(const char *str);
+#define SETPOINT_TYPE_ENUM_NAME_AVAILABLE 1
+
+/** Get setpoint_type string representation from enum. */
+char *setpoint_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get setpoint_type enum representation from string. */
+uint32_t setpoint_type_get_enum_value_number_c(const char *str);
 #define SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE 1
 
 /** Get shade_configuration_mode string representation from enum. */
@@ -818,6 +839,13 @@ char *window_covering_window_covering_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get window_covering_window_covering_type enum representation from string. */
 uint32_t window_covering_window_covering_type_get_enum_value_number_c(const char *str);
+#define Z_WAVE_HUMIDITY_CONTROL_CURRENT_STATE_ENUM_NAME_AVAILABLE 1
+
+/** Get z_wave_humidity_control_current_state string representation from enum. */
+char *z_wave_humidity_control_current_state_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get z_wave_humidity_control_current_state enum representation from string. */
+uint32_t z_wave_humidity_control_current_state_get_enum_value_number_c(const char *str);
 #define ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_ENUM_NAME_AVAILABLE 1
 
 /** Get zone_enroll_response_enroll_response_code string representation from enum. */

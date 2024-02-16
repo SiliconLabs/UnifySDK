@@ -4499,6 +4499,126 @@ static sl_status_t uic_mqtt_dotdot_descriptor_force_read_attributes_callback (
   }
   return SL_STATUS_OK;
 }
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster ZWaveHumidityControl
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t uic_mqtt_dotdot_z_wave_humidity_control_force_read_attributes_callback (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_z_wave_humidity_control_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_z_wave_humidity_control_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  if (true == attribute_list.reporting_mode) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_reporting_mode_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::ReportingMode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.supported_reporting_mode) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_supported_reporting_mode_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::SupportedReportingMode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.current_state) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_current_state_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::CurrentState under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.supported_set_points) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_supported_set_points_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::SupportedSetPoints under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.humidifier_setpoint_min) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_humidifier_setpoint_min_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::HumidifierSetpointMin under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.humidifier_setpoint_max) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_humidifier_setpoint_max_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::HumidifierSetpointMax under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.humidifier_setpoint) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_humidifier_setpoint_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::HumidifierSetpoint under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.humidifier_setpoint_scale) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_humidifier_setpoint_scale_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::HumidifierSetpointScale under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.humidifier_setpoint_precision) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_humidifier_setpoint_precision_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::HumidifierSetpointPrecision under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.dehumidifier_setpoint_min) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_dehumidifier_setpoint_min_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::DehumidifierSetpointMin under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.dehumidifier_setpoint_max) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_dehumidifier_setpoint_max_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::DehumidifierSetpointMax under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.dehumidifier_setpoint) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_dehumidifier_setpoint_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::DehumidifierSetpoint under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.dehumidifier_setpoint_scale) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_dehumidifier_setpoint_scale_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::DehumidifierSetpointScale under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.dehumidifier_setpoint_precision) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_dehumidifier_setpoint_precision_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::DehumidifierSetpointPrecision under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.auto_setpoint_min) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_auto_setpoint_min_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::AutoSetpointMin under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.auto_setpoint_max) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_auto_setpoint_max_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::AutoSetpointMax under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.auto_setpoint) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_auto_setpoint_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::AutoSetpoint under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.auto_setpoint_scale) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_auto_setpoint_scale_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::AutoSetpointScale under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.auto_setpoint_precision) {
+    if (SL_STATUS_OK == dotdot_z_wave_humidity_control_auto_setpoint_precision_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of ZWaveHumidityControl::AutoSetpointPrecision under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  return SL_STATUS_OK;
+}
 // clang-format on
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -4608,6 +4728,8 @@ sl_status_t
   
 
   uic_mqtt_dotdot_set_descriptor_force_read_attributes_callback(&uic_mqtt_dotdot_descriptor_force_read_attributes_callback);
+  
+  uic_mqtt_dotdot_set_z_wave_humidity_control_force_read_attributes_callback(&uic_mqtt_dotdot_z_wave_humidity_control_force_read_attributes_callback);
   
   // clang-format on
 
