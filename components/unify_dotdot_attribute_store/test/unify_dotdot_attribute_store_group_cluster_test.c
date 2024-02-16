@@ -53,7 +53,7 @@ static void test_group_dispatch(uint16_t group_id,
   TEST_ASSERT_EQUAL_STRING("{\"GroupId\": 6, \"GroupName\":\"TestGroup\"}",
                            message);
   TEST_ASSERT_EQUAL(39, message_length);
-  TEST_ASSERT_EQUAL(callback, by_unid_command_dispatch);
+  TEST_ASSERT_EQUAL_PTR(callback, by_unid_command_dispatch);
 }
 
 // Test functions used for the configuration the Unify Dotdot Attribute Store Component.
