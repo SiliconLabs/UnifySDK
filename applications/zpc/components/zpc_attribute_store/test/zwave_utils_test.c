@@ -1024,3 +1024,124 @@ void test_is_command_in_array()
   TEST_ASSERT_TRUE(
     is_command_in_array(0x9F, 0x12, command_list_4, sizeof(command_list_4)));
 }
+
+
+void zwave_node_supports_command_class_mock_helper() {
+    attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
+    test_unid,
+    test_endpoint_id,
+    test_endpoint_node);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_endpoint_node,
+    ATTRIBUTE_ZWAVE_NIF,
+    0,
+    test_non_secure_nif_node);
+
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_non_secure_nif_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  attribute_store_get_node_attribute_value_ReturnMemThruPtr_value(
+    test_nif,
+    (uint8_t)sizeof(test_nif));
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &test_nif_length);
+  is_command_class_in_supported_list_ExpectAndReturn(COMMAND_CLASS_SUPERVISION,
+                                                     test_nif,
+                                                     test_nif_length,
+                                                     1);
+}
+
+void test_zwave_node_want_supervision_frame_no_defined_flag_happy_case() {
+  // Set mock support of COMMAND_CLASS_SUPERVISION
+  zwave_node_supports_command_class_mock_helper();
+
+  attribute_store_network_helper_get_endpoint_node_IgnoreAndReturn(0);
+  // Set child reported to SL_STATUS_FAIL so we can simulate no flag
+  attribute_store_get_child_reported_IgnoreAndReturn(SL_STATUS_FAIL);
+  TEST_ASSERT_TRUE(
+    zwave_node_want_supervision_frame(test_node_id, test_endpoint_id));
+}
+
+void test_zwave_node_want_supervision_frame_flag_happy_case() {
+  // Set mock support of COMMAND_CLASS_SUPERVISION
+  zwave_node_supports_command_class_mock_helper();
+
+  // Simulate flag == 1
+  attribute_store_node_t endpoint_node = 12;
+  uint8_t supervision_flag = 1;
+  attribute_store_network_helper_get_endpoint_node_IgnoreAndReturn(endpoint_node);
+  attribute_store_get_child_reported_ExpectAndReturn(
+    endpoint_node,
+    ATTRIBUTE_COMMAND_CLASS_SUPERVISION_ENABLED,
+    NULL,
+    sizeof(supervision_flag),
+    SL_STATUS_OK);
+  attribute_store_get_child_reported_IgnoreArg_value();
+  attribute_store_get_child_reported_ReturnThruPtr_value(&supervision_flag);
+
+  TEST_ASSERT_TRUE(
+    zwave_node_want_supervision_frame(test_node_id, test_endpoint_id));
+}
+
+void test_zwave_node_want_supervision_frame_flag_false_happy_case() {
+  // Set mock support of COMMAND_CLASS_SUPERVISION
+  zwave_node_supports_command_class_mock_helper();
+
+  // Simulate flag == 0
+  attribute_store_node_t endpoint_node = 12;
+  uint8_t supervision_flag = 0;
+  attribute_store_network_helper_get_endpoint_node_IgnoreAndReturn(endpoint_node);
+  attribute_store_get_child_reported_ExpectAndReturn(
+    endpoint_node,
+    ATTRIBUTE_COMMAND_CLASS_SUPERVISION_ENABLED,
+    NULL,
+    sizeof(supervision_flag),
+    SL_STATUS_OK);
+  attribute_store_get_child_reported_IgnoreArg_value();
+  attribute_store_get_child_reported_ReturnThruPtr_value(&supervision_flag);
+
+  TEST_ASSERT_FALSE(
+    zwave_node_want_supervision_frame(test_node_id, test_endpoint_id));
+}
+
+void test_zwave_node_want_supervision_no_supervision_cc_in_nif_happy_case() {
+    attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
+    test_unid,
+    test_endpoint_id,
+    test_endpoint_node);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_endpoint_node,
+    ATTRIBUTE_ZWAVE_NIF,
+    0,
+    test_non_secure_nif_node);
+
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_non_secure_nif_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  attribute_store_get_node_attribute_value_ReturnMemThruPtr_value(
+    test_nif,
+    (uint8_t)sizeof(test_nif));
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &test_nif_length);
+  is_command_class_in_supported_list_ExpectAndReturn(COMMAND_CLASS_SUPERVISION,
+                                                     test_nif,
+                                                     test_nif_length,
+                                                     false);
+  attribute_store_get_node_child_by_type_IgnoreAndReturn(ATTRIBUTE_STORE_INVALID_NODE); 
+
+
+  TEST_ASSERT_FALSE(
+    zwave_node_want_supervision_frame(test_node_id, test_endpoint_id));
+}

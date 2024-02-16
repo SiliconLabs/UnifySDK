@@ -123,6 +123,20 @@ bool zwave_node_supports_command_class(zwave_command_class_t command_class,
                                        zwave_endpoint_id_t endpoint_id);
 
 /**
+ * @brief Verify whether a node/endpoint supports Supervision CC 
+ * AND wants to use it.
+ *
+ * @param node_id       The NodeID to verify for support.
+ * @param endpoint_id   The Endpoint to verify for support.
+
+ * @returns
+ * - true if the node/endpoint supports the Supervision CC + has the enabled supervision flag (or if the flag is not defined)
+ * - false otherwise
+ */
+bool zwave_node_want_supervision_frame(zwave_node_id_t node_id,
+                                       zwave_endpoint_id_t endpoint_id);
+
+/**
  * @brief Return the version of a Command Class implemented by a node.
  *
  * @param command_class The Command Class identifier for which the version

@@ -201,8 +201,7 @@ static sl_status_t assign_multicast_pool(attribute_store_node_t node)
   }
 
   bool use_supervision
-    = zwave_node_supports_command_class(COMMAND_CLASS_SUPERVISION,
-                                        node_id,
+    = zwave_node_want_supervision_frame(node_id,
                                         endpoint_id);
 
   // Node details validation. can this node be part of a multicast?
