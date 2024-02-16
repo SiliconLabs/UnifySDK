@@ -138,6 +138,10 @@ void test_window_covering_go_to_lift_value_command();
 void test_window_covering_go_to_lift_percentage_command();
 void test_window_covering_go_to_tilt_value_command();
 void test_window_covering_go_to_tilt_percentage_command();
+void test_zwave_fan_control_no_get_endpoint_function_registered();
+void test_zwave_fan_control_set_fan_mode_command_support();
+void test_zwave_fan_control_set_fan_mode_command_update_desired();
+void test_zwave_fan_control_set_fan_mode_command_clear_reported();
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()

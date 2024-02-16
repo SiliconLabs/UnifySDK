@@ -363,6 +363,13 @@ char *fan_control_fan_mode_sequence_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get fan_control_fan_mode_sequence enum representation from string. */
 uint32_t fan_control_fan_mode_sequence_get_enum_value_number_c(const char *str);
+#define FAN_CONTROLZ_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE 1
+
+/** Get fan_controlz_wave_fan_state string representation from enum. */
+char *fan_controlz_wave_fan_state_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get fan_controlz_wave_fan_state enum representation from string. */
+uint32_t fan_controlz_wave_fan_state_get_enum_value_number_c(const char *str);
 #define GET_LOG_RECORD_RESPONSE_EVENT_TYPE_ENUM_NAME_AVAILABLE 1
 
 /** Get get_log_record_response_event_type string representation from enum. */
@@ -846,6 +853,13 @@ char *zcl_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get zcl_type enum representation from string. */
 uint32_t zcl_type_get_enum_value_number_c(const char *str);
+#define ZWAVE_CLUSTER_FAN_MODE_ENUM_NAME_AVAILABLE 1
+
+/** Get zwave_cluster_fan_mode string representation from enum. */
+char *zwave_cluster_fan_mode_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get zwave_cluster_fan_mode enum representation from string. */
+uint32_t zwave_cluster_fan_mode_get_enum_value_number_c(const char *str);
 
 /**
  * @brief Get UNID from MQTT topic.

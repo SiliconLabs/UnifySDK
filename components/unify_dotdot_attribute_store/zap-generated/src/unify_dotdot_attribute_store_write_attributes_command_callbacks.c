@@ -1159,6 +1159,10 @@ static sl_status_t fan_control_cluster_write_attributes_callback(
      sl_log_debug(LOG_TAG, "Updating desired value for FanModeSequence attribute");
     dotdot_set_fan_control_fan_mode_sequence(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.fan_mode_sequence);
   }
+  if (true == updated_attributes.z_wave_fan_mode) {
+     sl_log_debug(LOG_TAG, "Updating desired value for ZWaveFanMode attribute");
+    dotdot_set_fan_control_z_wave_fan_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.z_wave_fan_mode);
+  }
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////

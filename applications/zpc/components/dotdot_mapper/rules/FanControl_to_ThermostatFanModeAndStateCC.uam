@@ -1,0 +1,39 @@
+def zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE 0x4402
+def zwTHERMOSTAT_FAN_MODE_SUPPORTED_FAN_MODE 0x4403
+
+def zwTHERMOSTAT_FAN_STATE 0x4502
+
+def zbZWAVE_FAN_MODE 0x02020002
+def zbZWAVE_SUPPORTED_FAN_MODE 0x02020003
+def zbZWAVE_FAN_STATE 0x02020004
+
+def zwave_no_thermostat_fan_mode (e'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE == 0)
+
+scope 25 chain_reaction(0) {
+  // Linking attributes zwave -> zigbee
+  r'zbZWAVE_FAN_MODE =
+    if (zwave_no_thermostat_fan_mode) undefined
+     r'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE
+  d'zbZWAVE_FAN_MODE =
+    if (zwave_no_thermostat_fan_mode) undefined
+     d'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE
+  
+
+  // Linking attributes zigbee -> zwave
+  r'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE = 
+    if (zwave_no_thermostat_fan_mode) undefined
+    r'zbZWAVE_FAN_MODE
+  d'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE = 
+    if (zwave_no_thermostat_fan_mode) undefined
+    d'zbZWAVE_FAN_MODE
+
+  // Supported fan mode (read only)
+  r'zbZWAVE_SUPPORTED_FAN_MODE = 
+      if (zwave_no_thermostat_fan_mode) undefined
+      r'zwTHERMOSTAT_FAN_MODE_SUPPORTED_FAN_MODE
+
+  // Supported state(read only)
+  r'zbZWAVE_FAN_STATE = 
+      if (zwave_no_thermostat_fan_mode) undefined
+      r'zwTHERMOSTAT_FAN_STATE
+}

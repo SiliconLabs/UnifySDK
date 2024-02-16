@@ -2105,6 +2105,27 @@ typedef sl_status_t (*uic_mqtt_dotdot_fan_control_attribute_fan_mode_sequence_ca
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint8_t fan_mode_sequence
 );
+typedef sl_status_t (*uic_mqtt_dotdot_fan_control_attribute_z_wave_fan_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t z_wave_fan_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_fan_control_attribute_z_wave_supported_fan_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t z_wave_supported_fan_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_fan_control_attribute_z_wave_fan_state_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t z_wave_fan_state
+);
 // Callback types used by the dehumidification_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_relative_humidity_callback_t)(
   dotdot_unid_t unid,
@@ -7034,6 +7055,24 @@ void uic_mqtt_dotdot_fan_control_attribute_fan_mode_callback_set(const uic_mqtt_
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_fan_control_attribute_fan_mode_sequence_callback_set(const uic_mqtt_dotdot_fan_control_attribute_fan_mode_sequence_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * FanControl/Attributes/z_wave_fan_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_fan_control_attribute_z_wave_fan_mode_callback_set(const uic_mqtt_dotdot_fan_control_attribute_z_wave_fan_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * FanControl/Attributes/z_wave_supported_fan_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_fan_control_attribute_z_wave_supported_fan_mode_callback_set(const uic_mqtt_dotdot_fan_control_attribute_z_wave_supported_fan_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * FanControl/Attributes/z_wave_fan_state/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_fan_control_attribute_z_wave_fan_state_callback_set(const uic_mqtt_dotdot_fan_control_attribute_z_wave_fan_state_callback_t callback);
 
 
 /**

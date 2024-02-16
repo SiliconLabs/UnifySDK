@@ -19469,15 +19469,33 @@ void uic_mqtt_dotdot_thermostat_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
 // Callback types used by the fan_control cluster
+typedef sl_status_t (*uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    zwave_cluster_fan_mode fan_mode
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_fan_control_turn_off_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
 
 typedef struct {
   uint8_t fan_mode;
   uint8_t fan_mode_sequence;
+  uint8_t z_wave_fan_mode;
+  uint16_t z_wave_supported_fan_mode;
+  uint8_t z_wave_fan_state;
 } uic_mqtt_dotdot_fan_control_state_t;
 
 typedef struct {
   bool fan_mode;
   bool fan_mode_sequence;
+  bool z_wave_fan_mode;
+  bool z_wave_supported_fan_mode;
+  bool z_wave_fan_state;
 } uic_mqtt_dotdot_fan_control_updated_state_t;
 
 typedef sl_status_t (*uic_mqtt_dotdot_fan_control_write_attributes_callback_t)(
@@ -19496,7 +19514,94 @@ typedef sl_status_t (*uic_mqtt_dotdot_fan_control_force_read_attributes_callback
 );
 
 
+/**
+ * @brief Command fields for FanControl/SetFanMode
+ */
+typedef struct {
+  zwave_cluster_fan_mode fan_mode;
+} uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t;
 
+
+/**
+ * @brief Setup callback to be called when a
+ * FanControl/Commands/set_fan_mode is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_set_fan_mode_callback_set(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * FanControl/Commands/set_fan_mode is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_set_fan_mode_callback_unset(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * FanControl/Commands/set_fan_mode is received.
+ */
+void uic_mqtt_dotdot_fan_control_set_fan_mode_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/FanControl/GeneratedCommands/set_fan_mode is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback_set(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/FanControl/GeneratedCommands/set_fan_mode is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback_unset(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/FanControl/GeneratedCommands/set_fan_mode is received.
+ */
+void uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * FanControl/Commands/turn_off is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_turn_off_callback_set(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * FanControl/Commands/turn_off is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_turn_off_callback_unset(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * FanControl/Commands/turn_off is received.
+ */
+void uic_mqtt_dotdot_fan_control_turn_off_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/FanControl/GeneratedCommands/turn_off is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_generated_turn_off_callback_set(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/FanControl/GeneratedCommands/turn_off is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_fan_control_generated_turn_off_callback_unset(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/FanControl/GeneratedCommands/turn_off is received.
+ */
+void uic_mqtt_dotdot_fan_control_generated_turn_off_callback_clear();
 
 /**
  * @brief Setup a callback for WriteAttribute to be called when a
@@ -19603,6 +19708,96 @@ sl_status_t uic_mqtt_dotdot_fan_control_fan_mode_sequence_publish(
  * @returns SL_STATUS_OK on success
  */
 sl_status_t uic_mqtt_dotdot_fan_control_fan_mode_sequence_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; FanControl/Attributes/ZWaveFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_mode_publish(
+  const char *base_topic,
+  zwave_cluster_fan_mode value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; FanControl/Attributes/ZWaveFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; FanControl/Attributes/ZWaveSupportedFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_supported_fan_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; FanControl/Attributes/ZWaveSupportedFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_supported_fan_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; FanControl/Attributes/ZWaveFanState
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_state
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_state_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; FanControl/Attributes/ZWaveFanState
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_state
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_state_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );

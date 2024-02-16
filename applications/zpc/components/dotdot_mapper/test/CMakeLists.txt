@@ -27,6 +27,7 @@ target_add_unittest(
   uic_dotdot_mqtt_mock
   zwave_network_management_mock)
 
+
 # Binding Cluster Mapper Helper test
 target_add_unittest(
   dotdot_mapper_binding_cluster_helper

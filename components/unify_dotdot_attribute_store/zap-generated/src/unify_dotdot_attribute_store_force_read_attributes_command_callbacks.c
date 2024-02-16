@@ -1937,6 +1937,21 @@ static sl_status_t uic_mqtt_dotdot_fan_control_force_read_attributes_callback (
       sl_log_debug(LOG_TAG, "Undefined Reported value of FanControl::FanModeSequence under %s - Endpoint %d", unid, endpoint_id);
     }
   }
+  if (true == attribute_list.z_wave_fan_mode) {
+    if (SL_STATUS_OK == dotdot_fan_control_z_wave_fan_mode_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of FanControl::ZWaveFanMode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.z_wave_supported_fan_mode) {
+    if (SL_STATUS_OK == dotdot_fan_control_z_wave_supported_fan_mode_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of FanControl::ZWaveSupportedFanMode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.z_wave_fan_state) {
+    if (SL_STATUS_OK == dotdot_fan_control_z_wave_fan_state_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of FanControl::ZWaveFanState under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////

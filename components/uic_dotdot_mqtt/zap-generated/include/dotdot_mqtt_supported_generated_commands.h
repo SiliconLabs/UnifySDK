@@ -654,6 +654,8 @@ void uic_mqtt_dotdot_thermostat_publish_supported_generated_commands(
  * @brief Struct containing the list of commands for FanControl
  */
 typedef struct _uic_mqtt_dotdot_fan_control_supported_commands_ {
+  bool set_fan_mode;
+  bool turn_off;
   bool write_attributes;
 } uic_mqtt_dotdot_fan_control_supported_commands_t;
 

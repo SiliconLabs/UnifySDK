@@ -234,6 +234,7 @@ bool is_actuator_command_class(zwave_command_class_t command_class)
     case COMMAND_CLASS_SOUND_SWITCH:
     case COMMAND_CLASS_THERMOSTAT_SETPOINT:
     case COMMAND_CLASS_THERMOSTAT_MODE:
+    case COMMAND_CLASS_THERMOSTAT_FAN_MODE:
     case COMMAND_CLASS_WINDOW_COVERING:
       return true;
     default:

@@ -18,6 +18,7 @@
 #include "zcl_scenes_cluster_server.h"
 #include "zcl_OTA_cluster_server.hpp"
 #include "user_code_cluster_server.h"
+#include "fan_control_cluster_server.h"
 
 //Includes from other components
 #include "attribute_store.h"
@@ -40,6 +41,8 @@ sl_status_t zcl_cluster_servers_init()
   init_status |= binding_cluster_server_init();
   init_status |= zcl_scenes_cluster_server_init();
   init_status |= user_code_cluster_server_init();
+  init_status |= fan_control_cluster_server_init();
+
   return init_status;
 }
 
