@@ -10207,6 +10207,146 @@ void uic_mqtt_dotdot_thermostat_publish_get_relay_status_log_command_to_group(
 }
 
 /**
+ * @brief Sends/Publishes a SetFanMode command for
+ * the FanControl cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/FanControl/Commands/SetFanMode
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_set_fan_mode_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "FanControl/Commands/SetFanMode";
+
+
+  std::string payload =
+    get_json_payload_for_fan_control_set_fan_mode_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a SetFanMode command for
+ * the FanControl cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/FanControl/Commands/SetFanMode
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_set_fan_mode_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/FanControl/Commands/SetFanMode";
+
+  std::string payload =
+    get_json_payload_for_fan_control_set_fan_mode_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a TurnOff command for
+ * the FanControl cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/FanControl/Commands/TurnOff
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_turn_off_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "FanControl/Commands/TurnOff";
+
+
+  std::string payload =
+    get_json_payload_for_fan_control_turn_off_command(
+    );
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a TurnOff command for
+ * the FanControl cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/FanControl/Commands/TurnOff
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_turn_off_command_to_group(
+  uint16_t destination_group_id
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/FanControl/Commands/TurnOff";
+
+  std::string payload =
+    get_json_payload_for_fan_control_turn_off_command(
+    );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
  * @brief Sends/Publishes a MoveToHue command for
  * the ColorControl cluster to a destination.
  *

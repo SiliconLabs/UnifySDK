@@ -34091,6 +34091,339 @@ sl_status_t dotdot_create_fan_control_fan_mode_sequence(
 
   return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
+bool dotdot_is_supported_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+  return attribute_store_node_exists(node);
+}
+
+zwave_cluster_fan_mode dotdot_get_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+
+  zwave_cluster_fan_mode result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  zwave_cluster_fan_mode new_z_wave_fan_mode
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_z_wave_fan_mode,
+                                                  sizeof(zwave_cluster_fan_mode));
+  }
+
+sl_status_t dotdot_fan_control_z_wave_fan_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_fan_control_z_wave_fan_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_fan_control_z_wave_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_fan_control_z_wave_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+  return attribute_store_node_exists(node);
+}
+
+uint16_t dotdot_get_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+
+  uint16_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_z_wave_supported_fan_mode
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_z_wave_supported_fan_mode,
+                                                  sizeof(uint16_t));
+  }
+
+sl_status_t dotdot_fan_control_z_wave_supported_fan_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_fan_control_z_wave_supported_fan_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_fan_control_z_wave_supported_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_fan_control_z_wave_supported_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_z_wave_fan_state
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_z_wave_fan_state,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_fan_control_z_wave_fan_state_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_fan_control_z_wave_fan_state_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_fan_control_z_wave_fan_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_fan_control_z_wave_fan_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
 
 bool dotdot_is_any_fan_control_attribute_supported(
   const dotdot_unid_t unid,
@@ -34100,6 +34433,15 @@ bool dotdot_is_any_fan_control_attribute_supported(
     return true;
   }
   if (true == dotdot_is_supported_fan_control_fan_mode_sequence(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_fan_control_z_wave_fan_mode(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_fan_control_z_wave_supported_fan_mode(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_fan_control_z_wave_fan_state(unid, endpoint_id)) {
     return true;
   }
 
@@ -34114,6 +34456,9 @@ bool dotdot_is_any_fan_control_writable_attribute_supported(
     return true;
   }
   if (true == dotdot_is_supported_fan_control_fan_mode_sequence(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_fan_control_z_wave_fan_mode(unid, endpoint_id)) {
     return true;
   }
 

@@ -7112,6 +7112,78 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
+    // zwave_cluster_fan_mode // zwave_cluster_fan_mode // zwave_cluster_fan_mode
+    std::string attribute_type_string           = "zwave_cluster_fan_mode";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL FanControl ZWaveFanMode, "
+                     "type:  zwave_cluster_fan_mode // zwave_cluster_fan_mode");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE,
+      "ZCL FanControl ZWaveFanMode",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map16 // map16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL FanControl ZWaveSupportedFanMode, "
+                     "type:  map16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE,
+      "ZCL FanControl ZWaveSupportedFanMode",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // enum8 // enum8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL FanControl ZWaveFanState, "
+                     "type:  enum8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE,
+      "ZCL FanControl ZWaveFanState",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
     // uint8 // uint8 // uint8_t
     std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;

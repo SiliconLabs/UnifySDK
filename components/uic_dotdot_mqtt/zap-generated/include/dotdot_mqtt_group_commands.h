@@ -2546,6 +2546,37 @@ void uic_mqtt_dotdot_by_group_thermostat_write_attributes_callback_set(
 
 
 
+/**
+ * @brief Callback signature for by-group FanControl::SetFanMode command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_fan_control_set_fan_mode_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/FanControl/set_fan_mode is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_fan_control_set_fan_mode_callback_set(const uic_mqtt_dotdot_by_group_fan_control_set_fan_mode_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group FanControl::TurnOff command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_fan_control_turn_off_callback_t)(
+    const dotdot_group_id_t group_id
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/FanControl/turn_off is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_fan_control_turn_off_callback_set(const uic_mqtt_dotdot_by_group_fan_control_turn_off_callback_t callback);
+
 typedef void (*uic_mqtt_dotdot_by_group_fan_control_write_attributes_callback_t)(
     const dotdot_group_id_t group_id,
     uic_mqtt_dotdot_fan_control_state_t,

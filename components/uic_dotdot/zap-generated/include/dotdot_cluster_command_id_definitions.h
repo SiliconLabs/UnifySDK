@@ -225,6 +225,8 @@
 #define DOTDOT_THERMOSTAT_GET_RELAY_STATUS_LOG_COMMAND_ID (0x4)
 
 // Commands for cluster: FanControl
+#define DOTDOT_FAN_CONTROL_SET_FAN_MODE_COMMAND_ID (0x0)
+#define DOTDOT_FAN_CONTROL_TURN_OFF_COMMAND_ID (0x1)
 
 // Commands for cluster: DehumidificationControl
 

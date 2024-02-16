@@ -855,6 +855,12 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "FanMode";
         case DOTDOT_FAN_CONTROL_FAN_MODE_SEQUENCE_ATTRIBUTE_ID:
           return "FanModeSequence";
+        case DOTDOT_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID:
+          return "ZWaveFanMode";
+        case DOTDOT_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID:
+          return "ZWaveSupportedFanMode";
+        case DOTDOT_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID:
+          return "ZWaveFanState";
           // clang-format on
         default:
           return "Unknown";
@@ -3063,6 +3069,15 @@ dotdot_attribute_id_t
       if (strcmp ("FanModeSequence", attribute_name) == 0) {
         return DOTDOT_FAN_CONTROL_FAN_MODE_SEQUENCE_ATTRIBUTE_ID;
       }
+      if (strcmp ("ZWaveFanMode", attribute_name) == 0) {
+        return DOTDOT_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveSupportedFanMode", attribute_name) == 0) {
+        return DOTDOT_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveFanState", attribute_name) == 0) {
+        return DOTDOT_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID;
+      }
     break;
     case DOTDOT_DEHUMIDIFICATION_CONTROL_CLUSTER_ID:
       if (strcmp ("RelativeHumidity", attribute_name) == 0) {
@@ -5256,6 +5271,12 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_FAN_CONTROL_FAN_MODE_SEQUENCE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
+                case DOTDOT_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
                   // clang-format on
         default:
           return JSON_TYPE_UNKNOWN;
@@ -6584,6 +6605,12 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
       return true;
     }
     if (1 == attribute_id) {
+      return true;
+    }
+    if (2 == attribute_id) {
+      return true;
+    }
+    if (4 == attribute_id) {
       return true;
     }
   }

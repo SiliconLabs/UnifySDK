@@ -24141,6 +24141,138 @@ ucl/by-unid/<UNID>/ep0/FanControl/Attributes/FanModeSequence/Reported { "value":
 
 <br><br>
 
+\subsection fan_control_attr_z_wave_fan_mode FanControl/ZWaveFanMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/FanControl/Attributes/ZWaveFanMode/Reported
+[PREFIX]/FanControl/Attributes/ZWaveFanMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControl Cluster ZWaveFanMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "zwave_cluster_fan_mode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveFanMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FanControl/Attributes/ZWaveFanMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/ZWaveFanMode/Desired { "value": <DESIRED_Z_WAVE_FAN_MODE>}
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/ZWaveFanMode/Reported { "value": <REPORTED_Z_WAVE_FAN_MODE>}
+
+```
+
+<br><br>
+
+\subsection fan_control_attr_z_wave_supported_fan_mode FanControl/ZWaveSupportedFanMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/FanControl/Attributes/ZWaveSupportedFanMode/Reported
+[PREFIX]/FanControl/Attributes/ZWaveSupportedFanMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControl Cluster ZWaveSupportedFanMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "FanControlZWaveSupportedFanMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveSupportedFanMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FanControl/Attributes/ZWaveSupportedFanMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/ZWaveSupportedFanMode/Desired { "value": <DESIRED_Z_WAVE_SUPPORTED_FAN_MODE>}
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/ZWaveSupportedFanMode/Reported { "value": <REPORTED_Z_WAVE_SUPPORTED_FAN_MODE>}
+
+```
+
+<br><br>
+
+\subsection fan_control_attr_z_wave_fan_state FanControl/ZWaveFanState Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/FanControl/Attributes/ZWaveFanState/Reported
+[PREFIX]/FanControl/Attributes/ZWaveFanState/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControl Cluster ZWaveFanState Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "FanControlZWaveFanState"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveFanState attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/FanControl/Attributes/ZWaveFanState/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/ZWaveFanState/Desired { "value": <DESIRED_Z_WAVE_FAN_STATE>}
+ucl/by-unid/<UNID>/ep0/FanControl/Attributes/ZWaveFanState/Reported { "value": <REPORTED_Z_WAVE_FAN_STATE>}
+
+```
+
+<br><br>
+
 
 \subsection fan_control_attr_cluster_revision FanControl/ClusterRevision Attribute
 
@@ -24211,6 +24343,10 @@ ucl/by-unid/<UNID>/<EP>/FanControl/Attributes/ClusterRevision/Reported { "value"
           "items" : {
             "type": "string",
             "enum": [
+              "SetFanMode",
+              "TurnOff",
+              "WriteAttributes",
+              "ForceReadAttributes"
             ]
           }
         }
@@ -24229,7 +24365,7 @@ To see supported commands for FanControl cluster under the by-unid topic space:
 ```console
 mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/SupportedCommands'
 # Example output
-ucl/by-unid/<UNID>/<EP>/FanControl/SupportedCommands { "value": [] }
+ucl/by-unid/<UNID>/<EP>/FanControl/SupportedCommands { "value": ["SetFanMode","TurnOff","WriteAttributes", "ForceReadAttributes"] }
 ```
 
 To see supported generated commands for FanControl cluster under the by-unid topic space:
@@ -24250,6 +24386,88 @@ ucl/by-unid/<UNID>/<EP>/FanControl/SupportedGeneratedCommands { "value": [] }
 <!-- START OF FanControl Commands Section -->
 <!-- -->
 \section fan_control_cmds FanControl Commands
+
+<br><br>
+
+\subsection fan_control_set_fan_mode_cmd FanControl/SetFanMode Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/FanControl/Commands/SetFanMode
+[PREFIX]/FanControl/GeneratedCommands/SetFanMode
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControl Cluster SetFanMode Command Properties",
+  "type": "object",
+  "properties": {
+    "FanMode": {
+      "type": "zwave_cluster_fan_mode"
+    }
+  },
+  "required": [
+    "FanMode"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a FanControl/SetFanMode command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/SetFanMode' -m  '{ "FanMode": <FAN_MODE_VALUE> }'
+```
+
+To receive a FanControl/SetFanMode generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/GeneratedCommands/SetFanMode'
+```
+
+<br><br>
+
+\subsection fan_control_turn_off_cmd FanControl/TurnOff Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/FanControl/Commands/TurnOff
+[PREFIX]/FanControl/GeneratedCommands/TurnOff
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControl Cluster TurnOff Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a FanControl/TurnOff command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/TurnOff' -m  '{  }'
+```
+
+To receive a FanControl/TurnOff generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/GeneratedCommands/TurnOff'
+```
 
 <br><br>
 
@@ -24274,7 +24492,10 @@ ucl/by-unid/<UNID>/<EP>/FanControl/SupportedGeneratedCommands { "value": [] }
     },
     "FanModeSequence": {
       "type": "FanControlFanModeSequence"
-    }
+    },
+    "ZWaveFanMode": {
+      "type": "zwave_cluster_fan_mode"
+    },
   },
   "required": [
     "value"
@@ -24287,7 +24508,7 @@ ucl/by-unid/<UNID>/<EP>/FanControl/SupportedGeneratedCommands { "value": [] }
 To update all FanControl attributes under the by-unid topic space:
 
 ```console
-mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/WriteAttributes' -m  '{ "FanMode": <FAN_MODE_VALUE> ,"FanModeSequence": <FAN_MODE_SEQUENCE_VALUE>  }'
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/WriteAttributes' -m  '{ "FanMode": <FAN_MODE_VALUE> ,"FanModeSequence": <FAN_MODE_SEQUENCE_VALUE> ,"ZWaveFanMode": <Z_WAVE_FAN_MODE_VALUE> , }'
 ```
 
 > NOTE: Specify only the list of attributes to write in this command.
@@ -24317,7 +24538,10 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/FanControl/Commands/WriteAttributes' -
         "type": "string",
         "enum": [
           "FanMode",
-          "FanModeSequence"
+          "FanModeSequence",
+          "ZWaveFanMode",
+          "ZWaveSupportedFanMode",
+          "ZWaveFanState"
         ]
       }
     }
@@ -55894,6 +56118,36 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
+<!-- START OF Enum FanControlZWaveFanState Section -->
+<!-- -->
+\section enum_fan_controlz_wave_fan_state FanControlZWaveFanState Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControlZWaveFanState Enum Properties",
+  "type": "string",
+  "enum": [
+    "Idle",
+    "Running",
+    "RunningHigh",
+    "RunningMedium",
+    "Circulation",
+    "HumidityCirculation",
+    "RightLeftCirculation",
+    "UpDownCirculation",
+    "QuietCirculation"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum FanControlZWaveFanState Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
 <!-- START OF Enum GetLogRecordResponseEventType Section -->
 <!-- -->
 \section enum_get_log_record_response_event_type GetLogRecordResponseEventType Enum
@@ -57758,6 +58012,39 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <br><br>
 
+<!-- -->
+<!-- START OF Enum zwave_cluster_fan_mode Section -->
+<!-- -->
+\section enum_zwave_cluster_fan_mode zwave_cluster_fan_mode Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "zwave_cluster_fan_mode Enum Properties",
+  "type": "string",
+  "enum": [
+    "Auto",
+    "Low",
+    "AutoHigh",
+    "High",
+    "AutoMedium",
+    "Medium",
+    "Circulation",
+    "HumidityCirculation",
+    "LeftRight",
+    "UpDown",
+    "Quiet",
+    "ExternalCirculation"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum zwave_cluster_fan_mode Section -->
+<!-- -->
+
+<br><br>
+
 
 <br><br><br>
 
@@ -58863,6 +59150,63 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Bitmap ElectricalMeasurementMeasurementType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap FanControlZWaveSupportedFanMode Section -->
+<!-- -->
+\section enum_fan_controlz_wave_supported_fan_mode FanControlZWaveSupportedFanMode Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FanControlZWaveSupportedFanMode Enum Properties",
+  "type": "object",
+  "properties": {
+    "Auto": {
+        "type": "boolean"
+    },
+    "Low": {
+        "type": "boolean"
+    },
+    "AutoHigh": {
+        "type": "boolean"
+    },
+    "High": {
+        "type": "boolean"
+    },
+    "AutoMedium": {
+        "type": "boolean"
+    },
+    "Medium": {
+        "type": "boolean"
+    },
+    "Circulation": {
+        "type": "boolean"
+    },
+    "HumidityCirculation": {
+        "type": "boolean"
+    },
+    "LeftRight": {
+        "type": "boolean"
+    },
+    "UpDown": {
+        "type": "boolean"
+    },
+    "Quiet": {
+        "type": "boolean"
+    },
+    "ExternalCirculation": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap FanControlZWaveSupportedFanMode Section -->
 <!-- -->
 
 <br><br>

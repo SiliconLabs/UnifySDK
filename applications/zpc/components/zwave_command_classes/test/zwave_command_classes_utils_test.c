@@ -80,6 +80,7 @@ void test_zwave_command_classes_utils_is_actuator_command_class()
     is_actuator_command_class(COMMAND_CLASS_THERMOSTAT_SETPOINT));
   TEST_ASSERT_TRUE(is_actuator_command_class(COMMAND_CLASS_THERMOSTAT_MODE));
   TEST_ASSERT_TRUE(is_actuator_command_class(COMMAND_CLASS_WINDOW_COVERING));
+  TEST_ASSERT_TRUE(is_actuator_command_class(COMMAND_CLASS_THERMOSTAT_FAN_MODE));
 
   TEST_ASSERT_FALSE(is_actuator_command_class(0x01));
   TEST_ASSERT_FALSE(is_actuator_command_class(COMMAND_CLASS_SECURITY_2));

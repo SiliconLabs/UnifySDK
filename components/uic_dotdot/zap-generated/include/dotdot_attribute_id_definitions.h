@@ -396,6 +396,9 @@ typedef enum {
 // Definitions for cluster: FanControl
 #define DOTDOT_FAN_CONTROL_FAN_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_FAN_CONTROL_FAN_MODE_SEQUENCE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
+#define DOTDOT_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x4)
 // Definitions for cluster: DehumidificationControl
 #define DOTDOT_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)

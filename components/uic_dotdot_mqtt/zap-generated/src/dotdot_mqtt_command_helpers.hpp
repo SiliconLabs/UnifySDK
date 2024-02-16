@@ -4155,6 +4155,47 @@ void uic_mqtt_dotdot_parse_thermostat_write_attributes(
 
 
 /**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a FanControl SetFanMode command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_fan_control_set_fan_mode_command(
+  
+  const uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for FanControl SetFanMode command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_fan_control_set_fan_mode(
+  nlohmann::json &jsn,
+  zwave_cluster_fan_mode &fan_mode
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a FanControl TurnOff command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_fan_control_turn_off_command(
+  
+);
+
+
+
+
+/**
  * @brief JSON parser for FanControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.

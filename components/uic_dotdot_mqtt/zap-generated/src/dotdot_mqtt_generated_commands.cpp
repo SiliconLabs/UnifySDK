@@ -7202,6 +7202,74 @@ void uic_mqtt_dotdot_thermostat_publish_generated_write_attributes_command(
                    false);
 }
 
+/**
+ * @brief Publishes an incoming/generated SetFanMode command for
+ * the FanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/FanControl/GeneratedCommands/SetFanMode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_generated_set_fan_mode_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "FanControl/GeneratedCommands/SetFanMode";
+
+  std::string payload =
+    get_json_payload_for_fan_control_set_fan_mode_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated TurnOff command for
+ * the FanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/FanControl/GeneratedCommands/TurnOff
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_generated_turn_off_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "FanControl/GeneratedCommands/TurnOff";
+
+  std::string payload =
+    get_json_payload_for_fan_control_turn_off_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
 
 
 /**
@@ -7254,6 +7322,20 @@ void uic_mqtt_dotdot_fan_control_publish_generated_write_attributes_command(
   json_object["FanModeSequence"] = fan_control_fan_mode_sequence_get_enum_value_name((uint32_t)attribute_values.fan_mode_sequence);
   #else
   json_object["FanModeSequence"] = static_cast<FanControlFanModeSequence>(attribute_values.fan_mode_sequence);
+  #endif
+
+
+  }
+
+
+  if (attribute_list.z_wave_fan_mode == true) {
+
+  // This is a single value
+
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+  json_object["ZWaveFanMode"] = fan_control_z_wave_fan_mode_get_enum_value_name((uint32_t)attribute_values.z_wave_fan_mode);
+  #else
+  json_object["ZWaveFanMode"] = static_cast<zwave_cluster_fan_mode>(attribute_values.z_wave_fan_mode);
   #endif
 
 

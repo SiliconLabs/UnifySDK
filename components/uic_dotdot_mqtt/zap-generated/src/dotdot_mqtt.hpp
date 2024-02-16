@@ -3389,6 +3389,44 @@ void uic_mqtt_dotdot_on_thermostat_WriteAttributes(
 // clang-format on
 
 /**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid FanControl/Commands/SetFanMode messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t> &get_uic_mqtt_dotdot_fan_control_set_fan_mode_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/FanControl/Commands/SetFanMode
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_fan_control_set_fan_mode(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid FanControl/Commands/TurnOff messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_fan_control_turn_off_callback_t> &get_uic_mqtt_dotdot_fan_control_turn_off_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/FanControl/Commands/TurnOff
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_fan_control_turn_off(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
  * @brief Retrieves the container with callback pointers for by-unid
  * /Commands/WriteAttributes messages
  *
@@ -5485,6 +5523,34 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap ElectricalMeasurementMeasurementType("ElectricalMeasurementMeasurementType", "map32", ElectricalMeasurementMeasurementType_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> FanControlZWaveSupportedFanMode_bitmap_data {
+{ {"Auto", "bool", "0x1", "0"}, {
+} },
+{ {"Low", "bool", "0x2", "1"}, {
+} },
+{ {"AutoHigh", "bool", "0x4", "2"}, {
+} },
+{ {"High", "bool", "0x8", "3"}, {
+} },
+{ {"AutoMedium", "bool", "0x10", "4"}, {
+} },
+{ {"Medium", "bool", "0x20", "5"}, {
+} },
+{ {"Circulation", "bool", "0x40", "6"}, {
+} },
+{ {"HumidityCirculation", "bool", "0x80", "7"}, {
+} },
+{ {"LeftRight", "bool", "0x100", "8"}, {
+} },
+{ {"UpDown", "bool", "0x200", "9"}, {
+} },
+{ {"Quiet", "bool", "0x400", "10"}, {
+} },
+{ {"ExternalCirculation", "bool", "0x800", "11"}, {
+} }
+};
+const dotdot_bitmap FanControlZWaveSupportedFanMode("FanControlZWaveSupportedFanMode", "Unknown FanControlZWaveSupportedFanMode", FanControlZWaveSupportedFanMode_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> GroupsNameSupport_bitmap_data {
 { {"Supported", "bool", "0x80", "7"}, {

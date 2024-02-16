@@ -9794,6 +9794,27 @@ static void fan_control_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
+          if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE) {
+          uic_mqtt_dotdot_fan_control_z_wave_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<zwave_cluster_fan_mode>(attr.desired_or_reported<zwave_cluster_fan_mode>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE) {
+          uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE) {
+          uic_mqtt_dotdot_fan_control_z_wave_fan_state_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
       } catch (std::exception &ex) {
     sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
   }
@@ -9871,6 +9892,30 @@ static void fan_control_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_fan_control_fan_mode_sequence_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
+     case DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining FanControl::ZWaveFanMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_fan_control_z_wave_fan_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining FanControl::ZWaveSupportedFanMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining FanControl::ZWaveFanState under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_fan_control_z_wave_fan_state_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
     default:
     break;
     }
@@ -9897,6 +9942,27 @@ static void fan_control_cluster_publish_reported_value_callback(
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE_SEQUENCE) {
           uic_mqtt_dotdot_fan_control_fan_mode_sequence_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE) {
+          uic_mqtt_dotdot_fan_control_z_wave_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<zwave_cluster_fan_mode>(attr.reported<zwave_cluster_fan_mode>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE) {
+          uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE) {
+          uic_mqtt_dotdot_fan_control_z_wave_fan_state_publish(
             base_topic.c_str(),
             static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
@@ -29725,6 +29791,48 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       fan_control_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_FAN_MODE_SEQUENCE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      fan_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      fan_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      fan_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      fan_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      fan_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      fan_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      fan_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      fan_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      fan_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_FAN_CONTROL_Z_WAVE_FAN_STATE);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       dehumidification_control_cluster_publish_desired_value_callback,

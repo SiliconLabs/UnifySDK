@@ -846,6 +846,23 @@ std::string fan_control_fan_mode_sequence_get_enum_value_name(
  */
 uint32_t fan_control_fan_mode_sequence_get_enum_value_number(const std::string &str);
 
+#define FAN_CONTROLZ_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the FanControlZWaveFanState enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string fan_controlz_wave_fan_state_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the FanControlZWaveFanState enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t fan_controlz_wave_fan_state_get_enum_value_number(const std::string &str);
+
 #define GET_LOG_RECORD_RESPONSE_EVENT_TYPE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -2018,6 +2035,23 @@ std::string zcl_type_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t zcl_type_get_enum_value_number(const std::string &str);
+
+#define ZWAVE_CLUSTER_FAN_MODE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the zwave_cluster_fan_mode enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string zwave_cluster_fan_mode_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the zwave_cluster_fan_mode enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t zwave_cluster_fan_mode_get_enum_value_number(const std::string &str);
 
 
 /**

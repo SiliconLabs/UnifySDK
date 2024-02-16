@@ -1201,6 +1201,12 @@ void uic_mqtt_dotdot_fan_control_publish_supported_generated_commands(
 
   // Assemble of vector of strings for the Supported Commands:
   std::vector<std::string> command_vector;
+  if (command_list->set_fan_mode == true) {
+    command_vector.emplace_back("SetFanMode");
+  }
+  if (command_list->turn_off == true) {
+    command_vector.emplace_back("TurnOff");
+  }
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
   }

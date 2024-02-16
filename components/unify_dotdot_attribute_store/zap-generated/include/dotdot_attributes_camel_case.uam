@@ -367,6 +367,9 @@ def zb_ACCapacityFormat 0x02010047
 // This represents short CamelCase labels the attributes in the DotDot FanControl cluster
 def zb_FanMode 0x02020000
 def zb_FanModeSequence 0x02020001
+def zb_ZWaveFanMode 0x02020002
+def zb_ZWaveSupportedFanMode 0x02020003
+def zb_ZWaveFanState 0x02020004
 
 // This represents short CamelCase labels the attributes in the DotDot DehumidificationControl cluster
 def zb_RelativeHumidity 0x02030000

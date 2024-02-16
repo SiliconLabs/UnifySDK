@@ -48173,10 +48173,80 @@ sl_status_t uic_mqtt_dotdot_thermostat_init()
 }
 
 // Callbacks pointers
+static std::set<uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t> uic_mqtt_dotdot_fan_control_set_fan_mode_callback;
+static std::set<uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t> uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback;
+static std::set<uic_mqtt_dotdot_fan_control_turn_off_callback_t> uic_mqtt_dotdot_fan_control_turn_off_callback;
+static std::set<uic_mqtt_dotdot_fan_control_turn_off_callback_t> uic_mqtt_dotdot_fan_control_generated_turn_off_callback;
 static std::set<uic_mqtt_dotdot_fan_control_write_attributes_callback_t> uic_mqtt_dotdot_fan_control_write_attributes_callback;
 static std::set<uic_mqtt_dotdot_fan_control_force_read_attributes_callback_t> uic_mqtt_dotdot_fan_control_force_read_attributes_callback;
 
 // Callbacks setters
+void uic_mqtt_dotdot_fan_control_set_fan_mode_callback_set(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_fan_control_set_fan_mode_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_fan_control_set_fan_mode_callback_unset(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback)
+{
+  uic_mqtt_dotdot_fan_control_set_fan_mode_callback.erase(callback);
+}
+void uic_mqtt_dotdot_fan_control_set_fan_mode_callback_clear()
+{
+  uic_mqtt_dotdot_fan_control_set_fan_mode_callback.clear();
+}
+std::set<uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t>& get_uic_mqtt_dotdot_fan_control_set_fan_mode_callback()
+{
+  return uic_mqtt_dotdot_fan_control_set_fan_mode_callback;
+}
+
+void uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback_set(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback_unset(const uic_mqtt_dotdot_fan_control_set_fan_mode_callback_t callback)
+{
+  uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback.erase(callback);
+}
+void uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback_clear()
+{
+  uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback.clear();
+}
+void uic_mqtt_dotdot_fan_control_turn_off_callback_set(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_fan_control_turn_off_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_fan_control_turn_off_callback_unset(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback)
+{
+  uic_mqtt_dotdot_fan_control_turn_off_callback.erase(callback);
+}
+void uic_mqtt_dotdot_fan_control_turn_off_callback_clear()
+{
+  uic_mqtt_dotdot_fan_control_turn_off_callback.clear();
+}
+std::set<uic_mqtt_dotdot_fan_control_turn_off_callback_t>& get_uic_mqtt_dotdot_fan_control_turn_off_callback()
+{
+  return uic_mqtt_dotdot_fan_control_turn_off_callback;
+}
+
+void uic_mqtt_dotdot_fan_control_generated_turn_off_callback_set(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_fan_control_generated_turn_off_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_fan_control_generated_turn_off_callback_unset(const uic_mqtt_dotdot_fan_control_turn_off_callback_t callback)
+{
+  uic_mqtt_dotdot_fan_control_generated_turn_off_callback.erase(callback);
+}
+void uic_mqtt_dotdot_fan_control_generated_turn_off_callback_clear()
+{
+  uic_mqtt_dotdot_fan_control_generated_turn_off_callback.clear();
+}
 
 void uic_mqtt_dotdot_set_fan_control_write_attributes_callback(
   const uic_mqtt_dotdot_fan_control_write_attributes_callback_t callback)
@@ -48214,6 +48284,228 @@ void uic_mqtt_dotdot_unset_fan_control_force_read_attributes_callback(
 void uic_mqtt_dotdot_clear_fan_control_force_read_attributes_callbacks()
 {
   uic_mqtt_dotdot_fan_control_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/FanControl/Commands/SetFanMode
+void uic_mqtt_dotdot_on_fan_control_set_fan_mode(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_fan_control_set_fan_mode_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  zwave_cluster_fan_mode fan_mode = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_fan_control_set_fan_mode(
+      jsn,
+      fan_mode
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "FanControl", "SetFanMode");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "SetFanMode", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "SetFanMode", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_fan_control_set_fan_mode_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      fan_mode
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/FanControl/GeneratedCommands/SetFanMode
+static void uic_mqtt_dotdot_on_generated_fan_control_set_fan_mode(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  zwave_cluster_fan_mode fan_mode = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_fan_control_set_fan_mode(
+      jsn,
+      fan_mode
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "FanControl", "SetFanMode");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "SetFanMode", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "SetFanMode", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      fan_mode
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/FanControl/Commands/TurnOff
+void uic_mqtt_dotdot_on_fan_control_turn_off(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_fan_control_turn_off_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "FanControl", "TurnOff");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "TurnOff", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "TurnOff", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_fan_control_turn_off_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/FanControl/GeneratedCommands/TurnOff
+static void uic_mqtt_dotdot_on_generated_fan_control_turn_off(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_fan_control_generated_turn_off_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "FanControl", "TurnOff");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "TurnOff", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl", "TurnOff", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_fan_control_generated_turn_off_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
 }
 
 
@@ -48308,11 +48600,17 @@ static void uic_mqtt_dotdot_on_fan_control_force_read_attributes(
     if (attributes.size() == 0) {
       force_update.fan_mode = true;
       force_update.fan_mode_sequence = true;
+      force_update.z_wave_fan_mode = true;
+      force_update.z_wave_supported_fan_mode = true;
+      force_update.z_wave_fan_state = true;
       trigger_handler = true;
     } else {
       std::unordered_map<std::string, bool *> supported_attrs = {
         {"FanMode", &force_update.fan_mode },
         {"FanModeSequence", &force_update.fan_mode_sequence },
+        {"ZWaveFanMode", &force_update.z_wave_fan_mode },
+        {"ZWaveSupportedFanMode", &force_update.z_wave_supported_fan_mode },
+        {"ZWaveFanState", &force_update.z_wave_fan_state },
       };
 
       for (auto& attribute : attributes) {
@@ -48486,6 +48784,221 @@ sl_status_t uic_mqtt_dotdot_fan_control_fan_mode_sequence_unretain(
 }
 // clang-format off
 
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_mode_publish(
+  const char *base_topic,
+  zwave_cluster_fan_mode value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+  jsn["value"] = fan_control_z_wave_fan_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ZWAVE_CLUSTER_FAN_MODE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = zwave_cluster_fan_mode_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for FAN_CONTROL_Z_WAVE_FAN_MODE. Using number instead.");
+  jsn["value"] = static_cast<zwave_cluster_fan_mode>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl/Attributes/ZWaveFanMode", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/FanControl/Attributes/ZWaveFanMode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/FanControl/Attributes/ZWaveFanMode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = FanControlZWaveSupportedFanMode.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl/Attributes/ZWaveSupportedFanMode", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/FanControl/Attributes/ZWaveSupportedFanMode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_supported_fan_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/FanControl/Attributes/ZWaveSupportedFanMode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_state_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+  jsn["value"] = fan_control_z_wave_fan_state_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for FAN_CONTROL_Z_WAVE_FAN_STATE. Using number instead.");
+  jsn["value"] = static_cast<FanControlZWaveFanState>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "FanControl/Attributes/ZWaveFanState", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/FanControl/Attributes/ZWaveFanState";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_fan_control_z_wave_fan_state_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/FanControl/Attributes/ZWaveFanState";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
 
 sl_status_t uic_mqtt_dotdot_fan_control_init()
 {
@@ -48500,6 +49013,22 @@ sl_status_t uic_mqtt_dotdot_fan_control_init()
   if(!uic_mqtt_dotdot_fan_control_force_read_attributes_callback.empty()) {
     subscription_topic = base_topic + "FanControl/Commands/ForceReadAttributes";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_fan_control_force_read_attributes);
+  }
+  if (!uic_mqtt_dotdot_fan_control_set_fan_mode_callback.empty()) {
+    subscription_topic = base_topic + "FanControl/Commands/SetFanMode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_fan_control_set_fan_mode);
+  }
+  if (!uic_mqtt_dotdot_fan_control_generated_set_fan_mode_callback.empty()) {
+    subscription_topic = base_topic + "FanControl/GeneratedCommands/SetFanMode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_fan_control_set_fan_mode);
+  }
+  if (!uic_mqtt_dotdot_fan_control_turn_off_callback.empty()) {
+    subscription_topic = base_topic + "FanControl/Commands/TurnOff";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_fan_control_turn_off);
+  }
+  if (!uic_mqtt_dotdot_fan_control_generated_turn_off_callback.empty()) {
+    subscription_topic = base_topic + "FanControl/GeneratedCommands/TurnOff";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_fan_control_turn_off);
   }
 
   // Init the attributes for that cluster
@@ -101703,6 +102232,38 @@ void uic_mqtt_dotdot_fan_control_unretain_cluster_revision(const char* base_topi
   // clang-format off
 }
 
+static inline bool uic_mqtt_dotdot_fan_control_set_fan_mode_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    zwave_cluster_fan_mode fan_mode_value;
+    memset(&fan_mode_value, 0x00, sizeof(fan_mode_value));
+    for (const auto& callback: uic_mqtt_dotdot_fan_control_set_fan_mode_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        fan_mode_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_fan_control_turn_off_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_fan_control_turn_off_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 static inline bool uic_mqtt_dotdot_fan_control_write_attributes_is_supported(
   const dotdot_unid_t unid,
@@ -101753,6 +102314,20 @@ void uic_mqtt_dotdot_fan_control_publish_supported_commands(
   ss.str("");
 
   // check if there is callback for each command
+  if (uic_mqtt_dotdot_fan_control_set_fan_mode_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("SetFanMode")";
+  }
+  if (uic_mqtt_dotdot_fan_control_turn_off_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("TurnOff")";
+  }
 
   // Check for a WriteAttributes Callback
   if(uic_mqtt_dotdot_fan_control_write_attributes_is_supported(unid, endpoint_id)) {
@@ -113477,6 +114052,74 @@ void uic_mqtt_dotdot_thermostat_publish_generated_get_relay_status_log_command(
 
   std::string payload =
     get_json_payload_for_thermostat_get_relay_status_log_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetFanMode command for
+ * the FanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/FanControl/GeneratedCommands/SetFanMode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_generated_set_fan_mode_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_fan_control_command_set_fan_mode_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "FanControl/GeneratedCommands/SetFanMode";
+
+  std::string payload =
+    get_json_payload_for_fan_control_set_fan_mode_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated TurnOff command for
+ * the FanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/FanControl/GeneratedCommands/TurnOff
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_fan_control_publish_generated_turn_off_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "FanControl/GeneratedCommands/TurnOff";
+
+  std::string payload =
+    get_json_payload_for_fan_control_turn_off_command(
     );
 
   // Publish our command

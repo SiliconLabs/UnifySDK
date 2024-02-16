@@ -2336,6 +2336,57 @@ uint32_t fan_control_fan_mode_sequence_get_enum_value_number(const std::string &
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for FanControlZWaveFanState
+const std::map<uint32_t, std::string> fan_controlz_wave_fan_state_enum_id_to_string_map {
+  { 0, "Idle" },
+  { 1, "Running" },
+  { 2, "RunningHigh" },
+  { 3, "RunningMedium" },
+  { 4, "Circulation" },
+  { 5, "HumidityCirculation" },
+  { 6, "RightLeftCirculation" },
+  { 7, "UpDownCirculation" },
+  { 8, "QuietCirculation" },
+};
+
+// String to enum map for FanControlZWaveFanState
+const std::map<std::string, uint32_t> fan_controlz_wave_fan_state_enum_string_to_id_map {
+  { "Idle", 0 },
+  { "Running", 1 },
+  { "RunningHigh", 2 },
+  { "RunningMedium", 3 },
+  { "Circulation", 4 },
+  { "HumidityCirculation", 5 },
+  { "RightLeftCirculation", 6 },
+  { "UpDownCirculation", 7 },
+  { "QuietCirculation", 8 },
+};
+
+std::string fan_controlz_wave_fan_state_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = fan_controlz_wave_fan_state_enum_id_to_string_map.find(value);
+  if (it != fan_controlz_wave_fan_state_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t fan_controlz_wave_fan_state_get_enum_value_number(const std::string &str)
+{
+  auto it = fan_controlz_wave_fan_state_enum_string_to_id_map.find(str);
+  if (it != fan_controlz_wave_fan_state_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for GetLogRecordResponseEventType
 const std::map<uint32_t, std::string> get_log_record_response_event_type_enum_id_to_string_map {
   { 0, "Operation" },
@@ -5445,6 +5496,63 @@ uint32_t zcl_type_get_enum_value_number(const std::string &str)
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for zwave_cluster_fan_mode
+const std::map<uint32_t, std::string> zwave_cluster_fan_mode_enum_id_to_string_map {
+  { 0, "Auto" },
+  { 1, "Low" },
+  { 2, "AutoHigh" },
+  { 3, "High" },
+  { 4, "AutoMedium" },
+  { 5, "Medium" },
+  { 6, "Circulation" },
+  { 7, "HumidityCirculation" },
+  { 8, "LeftRight" },
+  { 9, "UpDown" },
+  { 10, "Quiet" },
+  { 11, "ExternalCirculation" },
+};
+
+// String to enum map for zwave_cluster_fan_mode
+const std::map<std::string, uint32_t> zwave_cluster_fan_mode_enum_string_to_id_map {
+  { "Auto", 0 },
+  { "Low", 1 },
+  { "AutoHigh", 2 },
+  { "High", 3 },
+  { "AutoMedium", 4 },
+  { "Medium", 5 },
+  { "Circulation", 6 },
+  { "HumidityCirculation", 7 },
+  { "LeftRight", 8 },
+  { "UpDown", 9 },
+  { "Quiet", 10 },
+  { "ExternalCirculation", 11 },
+};
+
+std::string zwave_cluster_fan_mode_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = zwave_cluster_fan_mode_enum_id_to_string_map.find(value);
+  if (it != zwave_cluster_fan_mode_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t zwave_cluster_fan_mode_get_enum_value_number(const std::string &str)
+{
+  auto it = zwave_cluster_fan_mode_enum_string_to_id_map.find(str);
+  if (it != zwave_cluster_fan_mode_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 std::string get_enum_value_name(
   dotdot_cluster_id_t cluster_id,
   dotdot_attribute_id_t attribute_id,
@@ -7252,6 +7360,24 @@ std::string get_enum_value_name(
     if (1 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlfan_mode_sequence instead of this: fan_control_fan_mode_sequence
       return fan_control_fan_mode_sequence_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlz_wave_fan_mode instead of this: fan_control_z_wave_fan_mode
+      return fan_control_z_wave_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlz_wave_supported_fan_mode instead of this: fan_control_z_wave_supported_fan_mode
+      return fan_control_z_wave_supported_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlz_wave_fan_state instead of this: fan_control_z_wave_fan_state
+      return fan_control_z_wave_fan_state_get_enum_value_name(value);
     }
   #endif
   }
@@ -11722,6 +11848,24 @@ uint32_t get_enum_name_value(
       return fan_control_fan_mode_sequence_get_enum_value_number(name);
     }
   #endif
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlz_wave_fan_mode instead of this: fan_control_z_wave_fan_mode
+      return fan_control_z_wave_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlz_wave_supported_fan_mode instead of this: fan_control_z_wave_supported_fan_mode
+      return fan_control_z_wave_supported_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: fan_controlz_wave_fan_state instead of this: fan_control_z_wave_fan_state
+      return fan_control_z_wave_fan_state_get_enum_value_number(name);
+    }
+  #endif
   }
 
   if (515 == cluster_id) {
@@ -14912,6 +15056,17 @@ uint32_t fan_control_fan_mode_sequence_get_enum_value_number_c(const char *str)
 {
   return fan_control_fan_mode_sequence_get_enum_value_number(std::string(str));
 }
+char *fan_controlz_wave_fan_state_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", fan_controlz_wave_fan_state_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t fan_controlz_wave_fan_state_get_enum_value_number_c(const char *str)
+{
+  return fan_controlz_wave_fan_state_get_enum_value_number(std::string(str));
+}
 char *get_log_record_response_event_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -15670,6 +15825,17 @@ char *zcl_type_get_enum_value_name_c(
 uint32_t zcl_type_get_enum_value_number_c(const char *str)
 {
   return zcl_type_get_enum_value_number(std::string(str));
+}
+char *zwave_cluster_fan_mode_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", zwave_cluster_fan_mode_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t zwave_cluster_fan_mode_get_enum_value_number_c(const char *str)
+{
+  return zwave_cluster_fan_mode_get_enum_value_number(std::string(str));
 }
 
 const char * unid_from_mqtt_topic_c(const char *topic, char *result, size_t max_result_size) {
