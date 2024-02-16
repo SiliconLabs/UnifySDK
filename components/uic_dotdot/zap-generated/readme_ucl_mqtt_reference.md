@@ -59831,6 +59831,18 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
     },
     "FanThirdStageOn": {
         "type": "boolean"
+    },
+    "PendingHeat": {
+        "type": "boolean"
+    },
+    "PendingCool": {
+        "type": "boolean"
+    },
+    "Vent/Economizer": {
+        "type": "boolean"
+    },
+    "AuxHeating": {
+        "type": "boolean"
     }
   }
 }

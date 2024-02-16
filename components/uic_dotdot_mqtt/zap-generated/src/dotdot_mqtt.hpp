@@ -5847,6 +5847,14 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 { {"FanSecondStageOn", "bool", "0x20", "5"}, {
 } },
 { {"FanThirdStageOn", "bool", "0x40", "6"}, {
+} },
+{ {"PendingHeat", "bool", "0x80", "7"}, {
+} },
+{ {"PendingCool", "bool", "0x100", "8"}, {
+} },
+{ {"Vent/Economizer", "bool", "0x200", "9"}, {
+} },
+{ {"AuxHeating", "bool", "0x400", "10"}, {
 } }
 };
 const dotdot_bitmap ThermostatThermostatRunningState("ThermostatThermostatRunningState", "map16", ThermostatThermostatRunningState_bitmap_data);
