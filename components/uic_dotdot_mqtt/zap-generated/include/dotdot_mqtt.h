@@ -17459,6 +17459,7 @@ typedef struct {
   uint8_t ac_louver_position;
   int16_t ac_coil_temperature;
   uint8_t ac_capacity_format;
+  uint16_t supported_system_mode;
 } uic_mqtt_dotdot_thermostat_state_t;
 
 typedef struct {
@@ -17512,6 +17513,7 @@ typedef struct {
   bool ac_louver_position;
   bool ac_coil_temperature;
   bool ac_capacity_format;
+  bool supported_system_mode;
 } uic_mqtt_dotdot_thermostat_updated_state_t;
 
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_write_attributes_callback_t)(
@@ -19420,6 +19422,36 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_capacity_format_publish(
  * @returns SL_STATUS_OK on success
  */
 sl_status_t uic_mqtt_dotdot_thermostat_ac_capacity_format_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; Thermostat/Attributes/SupportedSystemMode
+ *
+ * @param base_topic    topic prefix to publish, /supported_system_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_thermostat_supported_system_mode_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; Thermostat/Attributes/SupportedSystemMode
+ *
+ * @param base_topic    topic prefix to publish, /supported_system_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_thermostat_supported_system_mode_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );

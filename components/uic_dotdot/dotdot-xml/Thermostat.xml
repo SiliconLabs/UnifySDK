@@ -151,7 +151,39 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="07" name="FanOnly" />
           <type:enumeration value="08" name="Dry" />
           <type:enumeration value="09" name="Sleep" />
+          <!-- Z-Wave specific -->
+          <type:enumeration value="0A" name="AuxiliaryHeat" />
+          <type:enumeration value="0B" name="Resume" />
+          <type:enumeration value="0C" name="Furnace" />
+          <type:enumeration value="0D" name="MoistAir" />
+          <type:enumeration value="0E" name="AutoChangeover" />
+          <type:enumeration value="0F" name="EnergySaveHeat" />
+          <type:enumeration value="10" name="EnergySaveCool" />
+          <type:enumeration value="11" name="Away" />
+          <type:enumeration value="12" name="FullPower" />
+          <type:enumeration value="13" name="ManufacturerSpecific" />
         </restriction>
+      </attribute>
+      <!-- Z-Wave specific -->
+      <attribute id="011C" name="SupportedSystemMode" type="map16" writable="false" required="false" default="0">
+       <bitmap>
+          <element name="Off" type="bool" mask="01" />
+          <element name="Heat" type="bool" mask="02" shiftRight="1" />
+          <element name="Cool" type="bool" mask="04" shiftRight="2" />
+          <element name="Auto" type="bool" mask="08" shiftRight="3" />
+          <element name="AuxiliaryHeat" type="bool" mask="10" shiftRight="4" />
+          <element name="Resume" type="bool" mask="20" shiftRight="5" />
+          <element name="FanOnly" type="bool" mask="40" shiftRight="6" />
+          <element name="Furnace" type="bool" mask="80" shiftRight="7" />
+          <element name="DryAir" type="bool" mask="100" shiftRight="8" />
+          <element name="MoistAir" type="bool" mask="200" shiftRight="9"/>
+          <element name="AutoChangeover" type="bool" mask="400" shiftRight="10"/>
+          <element name="EnergySaveHeat" type="bool" mask="800" shiftRight="10"/>
+          <element name="EnergySaveCool" type="bool" mask="1000" shiftRight="11"/>
+          <element name="Away" type="bool" mask="2000" shiftRight="12"/>
+          <element name="FullPower" type="bool" mask="4000" shiftRight="13"/>
+          <element name="ManufacturerSpecific" type="bool" mask="8000" shiftRight="14"/>
+        </bitmap>
       </attribute>
       <attribute id="001D" name="AlarmMask" type="map8" default="0">
       	<bitmap>

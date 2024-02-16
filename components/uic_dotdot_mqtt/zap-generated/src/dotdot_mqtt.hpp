@@ -5821,6 +5821,42 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 };
 const dotdot_bitmap ThermostatRemoteSensing("ThermostatRemoteSensing", "map8", ThermostatRemoteSensing_bitmap_data);
 
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> ThermostatSupportedSystemMode_bitmap_data {
+{ {"Off", "bool", "0x1", "0"}, {
+} },
+{ {"Heat", "bool", "0x2", "1"}, {
+} },
+{ {"Cool", "bool", "0x4", "2"}, {
+} },
+{ {"Auto", "bool", "0x8", "3"}, {
+} },
+{ {"AuxiliaryHeat", "bool", "0x10", "4"}, {
+} },
+{ {"Resume", "bool", "0x20", "5"}, {
+} },
+{ {"FanOnly", "bool", "0x40", "6"}, {
+} },
+{ {"Furnace", "bool", "0x80", "7"}, {
+} },
+{ {"DryAir", "bool", "0x100", "8"}, {
+} },
+{ {"MoistAir", "bool", "0x200", "9"}, {
+} },
+{ {"AutoChangeover", "bool", "0x400", "10"}, {
+} },
+{ {"EnergySaveHeat", "bool", "0x800", "11"}, {
+} },
+{ {"EnergySaveCool", "bool", "0x1000", "12"}, {
+} },
+{ {"Away", "bool", "0x2000", "13"}, {
+} },
+{ {"FullPower", "bool", "0x4000", "14"}, {
+} },
+{ {"ManufacturerSpecific", "bool", "0x8000", "15"}, {
+} }
+};
+const dotdot_bitmap ThermostatSupportedSystemMode("ThermostatSupportedSystemMode", "Unknown ThermostatSupportedSystemMode", ThermostatSupportedSystemMode_bitmap_data);
+
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> ThermostatThermostatProgrammingOperationMode_bitmap_data {
 { {"ProgrammingMode", "enum8", "0x1", "0"}, {
 {"SimpleOrSetpoint", "0"},

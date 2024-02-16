@@ -1902,6 +1902,11 @@ static sl_status_t uic_mqtt_dotdot_thermostat_force_read_attributes_callback (
       sl_log_debug(LOG_TAG, "Undefined Reported value of Thermostat::ACCapacityFormat under %s - Endpoint %d", unid, endpoint_id);
     }
   }
+  if (true == attribute_list.supported_system_mode) {
+    if (SL_STATUS_OK == dotdot_thermostat_supported_system_mode_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of Thermostat::SupportedSystemMode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////

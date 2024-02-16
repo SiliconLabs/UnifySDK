@@ -842,6 +842,8 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "ACCoilTemperature";
         case DOTDOT_THERMOSTAT_AC_CAPACITY_FORMAT_ATTRIBUTE_ID:
           return "ACCapacityFormat";
+        case DOTDOT_THERMOSTAT_SUPPORTED_SYSTEM_MODE_ATTRIBUTE_ID:
+          return "SupportedSystemMode";
           // clang-format on
         default:
           return "Unknown";
@@ -3055,6 +3057,9 @@ dotdot_attribute_id_t
       if (strcmp ("ACCapacityFormat", attribute_name) == 0) {
         return DOTDOT_THERMOSTAT_AC_CAPACITY_FORMAT_ATTRIBUTE_ID;
       }
+      if (strcmp ("SupportedSystemMode", attribute_name) == 0) {
+        return DOTDOT_THERMOSTAT_SUPPORTED_SYSTEM_MODE_ATTRIBUTE_ID;
+      }
     break;
     case DOTDOT_FAN_CONTROL_CLUSTER_ID:
       if (strcmp ("FanMode", attribute_name) == 0) {
@@ -5242,6 +5247,8 @@ dotdot_attribute_json_type_t
                 case DOTDOT_THERMOSTAT_AC_COIL_TEMPERATURE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                 case DOTDOT_THERMOSTAT_AC_CAPACITY_FORMAT_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_THERMOSTAT_SUPPORTED_SYSTEM_MODE_ATTRIBUTE_ID:
           return JSON_TYPE_NUMBER;
                   // clang-format on
         default:

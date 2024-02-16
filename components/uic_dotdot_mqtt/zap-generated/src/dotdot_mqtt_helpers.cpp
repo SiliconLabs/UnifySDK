@@ -4704,6 +4704,16 @@ const std::map<uint32_t, std::string> thermostat_system_mode_enum_id_to_string_m
   { 7, "FanOnly" },
   { 8, "Dry" },
   { 9, "Sleep" },
+  { 10, "AuxiliaryHeat" },
+  { 11, "Resume" },
+  { 12, "Furnace" },
+  { 13, "MoistAir" },
+  { 14, "AutoChangeover" },
+  { 15, "EnergySaveHeat" },
+  { 16, "EnergySaveCool" },
+  { 17, "Away" },
+  { 18, "FullPower" },
+  { 19, "ManufacturerSpecific" },
 };
 
 // String to enum map for ThermostatSystemMode
@@ -4717,6 +4727,16 @@ const std::map<std::string, uint32_t> thermostat_system_mode_enum_string_to_id_m
   { "FanOnly", 7 },
   { "Dry", 8 },
   { "Sleep", 9 },
+  { "AuxiliaryHeat", 10 },
+  { "Resume", 11 },
+  { "Furnace", 12 },
+  { "MoistAir", 13 },
+  { "AutoChangeover", 14 },
+  { "EnergySaveHeat", 15 },
+  { "EnergySaveCool", 16 },
+  { "Away", 17 },
+  { "FullPower", 18 },
+  { "ManufacturerSpecific", 19 },
 };
 
 std::string thermostat_system_mode_get_enum_value_name(
@@ -7237,6 +7257,12 @@ std::string get_enum_value_name(
     if (71 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_capacity_format instead of this: thermostat_ac_capacity_format
       return thermostat_ac_capacity_format_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef THERMOSTAT_SUPPORTED_SYSTEM_MODE_ENUM_NAME_AVAILABLE
+    if (284 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsupported_system_mode instead of this: thermostat_supported_system_mode
+      return thermostat_supported_system_mode_get_enum_value_name(value);
     }
   #endif
   }
@@ -11705,6 +11731,12 @@ uint32_t get_enum_name_value(
     if (71 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatac_capacity_format instead of this: thermostat_ac_capacity_format
       return thermostat_ac_capacity_format_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef THERMOSTAT_SUPPORTED_SYSTEM_MODE_ENUM_NAME_AVAILABLE
+    if (284 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: thermostatsupported_system_mode instead of this: thermostat_supported_system_mode
+      return thermostat_supported_system_mode_get_enum_value_number(name);
     }
   #endif
   }

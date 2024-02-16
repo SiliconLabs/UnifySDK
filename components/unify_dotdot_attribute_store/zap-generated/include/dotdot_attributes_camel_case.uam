@@ -363,6 +363,7 @@ def zb_ACErrorCode 0x02010044
 def zb_ACLouverPosition 0x02010045
 def zb_ACCoilTemperature 0x02010046
 def zb_ACCapacityFormat 0x02010047
+def zb_SupportedSystemMode 0x0201011c
 
 // This represents short CamelCase labels the attributes in the DotDot FanControl cluster
 def zb_FanMode 0x02020000

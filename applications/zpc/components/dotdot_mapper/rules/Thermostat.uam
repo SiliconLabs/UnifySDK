@@ -37,6 +37,7 @@ def zb_MinSetpointDeadBand                  0x02010019
 def zb_RemoteSensing                        0x0201001a
 def zb_ControlSequenceOfOperation           0x0201001b
 def zb_SystemMode                           0x0201001c
+def zb_SupportedSystemMode                  0x0201011c
 def zb_TemperatureSetpointHold              0x02010023
 def zb_TemperatureSetpointHoldDuration      0x02010024
 def zb_ThermostatProgrammingOperationMode   0x02010025
@@ -131,22 +132,43 @@ scope 0 {
 
 
   r'zb_SystemMode =
-    if (r'zwTHERMOSTAT_MODE == 0) 0
-    if (r'zwTHERMOSTAT_MODE == 1) 4
-    if (r'zwTHERMOSTAT_MODE == 2) 3
-    if (r'zwTHERMOSTAT_MODE == 3) 1
-    if (r'zwTHERMOSTAT_MODE == 6) 7
-    if (r'zwTHERMOSTAT_MODE == 8) 8
+    if (r'zwTHERMOSTAT_MODE == 0x00) 0x00
+    if (r'zwTHERMOSTAT_MODE == 0x01) 0x04
+    if (r'zwTHERMOSTAT_MODE == 0x02) 0x03
+    if (r'zwTHERMOSTAT_MODE == 0x03) 0x01
+    if (r'zwTHERMOSTAT_MODE == 0x04) 0x0A
+    if (r'zwTHERMOSTAT_MODE == 0x05) 0x0B
+    if (r'zwTHERMOSTAT_MODE == 0x06) 0x07 
+    if (r'zwTHERMOSTAT_MODE == 0x07) 0x0C
+    if (r'zwTHERMOSTAT_MODE == 0x08) 0x08
+    if (r'zwTHERMOSTAT_MODE == 0x09) 0x0D
+    if (r'zwTHERMOSTAT_MODE == 0x0A) 0x0E
+    if (r'zwTHERMOSTAT_MODE == 0x0B) 0x0F
+    if (r'zwTHERMOSTAT_MODE == 0x0C) 0x10
+    if (r'zwTHERMOSTAT_MODE == 0x0D) 0x11
+    if (r'zwTHERMOSTAT_MODE == 0x0F) 0x12
+    if (r'zwTHERMOSTAT_MODE == 0x1F) 0x13
     undefined
 
-  d'zwTHERMOSTAT_MODE =
-    if ( d'zb_SystemMode == 0) 0
-    if ( d'zb_SystemMode == 4) 1
-    if ( d'zb_SystemMode == 3) 2
-    if ( d'zb_SystemMode == 1) 3
-    if ( d'zb_SystemMode == 7) 6
-    if ( d'zb_SystemMode == 8) 8
+  r'zwTHERMOSTAT_MODE = 
+    if (r'zb_SystemMode == 0x00) 0x00
+    if (r'zb_SystemMode == 0x04) 0x01
+    if (r'zb_SystemMode == 0x03) 0x02
+    if (r'zb_SystemMode == 0x01) 0x03
+    if (r'zb_SystemMode == 0x0A) 0x04
+    if (r'zb_SystemMode == 0x0B) 0x05
+    if (r'zb_SystemMode == 0x07) 0x06
+    if (r'zb_SystemMode == 0x0C) 0x07
+    if (r'zb_SystemMode == 0x08) 0x08
+    if (r'zb_SystemMode == 0x0D) 0x09
+    if (r'zb_SystemMode == 0x0E) 0x0A
+    if (r'zb_SystemMode == 0x0F) 0x0B
+    if (r'zb_SystemMode == 0x10) 0x0C
+    if (r'zb_SystemMode == 0x11) 0x0D
+    if (r'zb_SystemMode == 0x12) 0x0F
+    if (r'zb_SystemMode == 0x13) 0x1F
     undefined
+
 
   r'zb_ControlSequenceOfOperation =
     if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x06) 0x04
@@ -252,4 +274,7 @@ scope 0 chain_reaction(0) {
   d'zb_ACCapacityFormat =
     if (r'zb_ACCapacityFormat != d'zb_ACCapacityFormat) r'zb_ACCapacityFormat
     undefined
+
+
+  r'zb_SupportedSystemMode = r'zwTHERMOSTAT_SUPPORTED_MODES
 }
