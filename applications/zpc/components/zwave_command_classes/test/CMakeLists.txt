@@ -726,3 +726,21 @@ target_add_unittest(
   uic_attribute_resolver_mock
   zpc_attribute_resolver_mock
   )
+  
+# Humidity Control Mode test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_humidity_control_mode_test
+  SOURCES
+  zwave_command_class_humidity_control_mode_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
+
+  

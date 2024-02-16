@@ -193,6 +193,14 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   {ATTRIBUTE_INDICATOR_INDICATOR_VALUE,   "Value",   ATTRIBUTE_INDICATOR_PROPERTY_ID,   U32_STORAGE_TYPE},
   {ATTRIBUTE_INDICATOR_SUPPORTED_PROPERTY_SUPPORTED_BIT_MASK,   "Supported Properties bitmask",   ATTRIBUTE_INDICATOR_INDICATOR_ID,   BYTE_ARRAY_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_INDICATOR_TIMEOUT,   "Indicator timeout",   ATTRIBUTE_INDICATOR_INDICATOR_ID,   U32_STORAGE_TYPE},
+
+  /////////////////////////////////////////////////////////////////////
+  // Humidity Control Mode Command Class attributes
+  /////////////////////////////////////////////////////////////////////
+  {ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_VERSION,   "Humidity Control Mode Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_SUPPORTED_MODES,   "Humidity Control Mode Supported Modes",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_CURRENT_MODE,   "Humidity Control Mode Current Mode",   ATTRIBUTE_INDICATOR_INDICATOR_ID,   U8_STORAGE_TYPE},
+
   /////////////////////////////////////////////////////////////////////
   //         Meter Command Class attributes
   /////////////////////////////////////////////////////////////////////

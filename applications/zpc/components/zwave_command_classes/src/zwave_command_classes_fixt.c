@@ -53,6 +53,8 @@
 #include "zwave_command_class_transport_service.h"
 #include "zwave_command_class_indicator_control.h"
 #include "zwave_command_class_manufacturer_specific_control.h"
+#include "zwave_command_class_humidity_control_mode.h"
+
 // Generic includes
 #include <stdbool.h>
 
@@ -88,6 +90,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_central_scene_init();
   status |= zwave_command_class_configuration_init();
   status |= zwave_command_class_device_reset_locally_init();
+  status |= zwave_command_class_humidity_control_mode_init();
   status |= zwave_command_class_inclusion_controller_init();
   status |= zwave_command_class_indicator_init();
   status |= zwave_command_class_manufacturer_specific_init();
