@@ -160,6 +160,41 @@ sl_status_t zwave_get_node_granted_keys(zwave_node_id_t node_id,
                                       sizeof(zwave_keyset_t));
 }
 
+bool zwave_node_want_supervision_frame(zwave_node_id_t node_id,
+                                       zwave_endpoint_id_t endpoint_id)
+{
+  // First we check if node supports supervision
+  if (!zwave_node_supports_command_class(COMMAND_CLASS_SUPERVISION,
+                                         node_id,
+                                         endpoint_id)) {
+    return false;
+  }
+
+  // If it is, we check if the supervision flag is set
+
+  // Find out the UNID of the node
+  unid_t unid;
+  zwave_unid_from_node_id(node_id, unid);
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_network_helper_get_endpoint_node(unid, endpoint_id);
+
+  uint8_t supervision_flag;
+  sl_status_t result = attribute_store_get_child_reported(
+    endpoint_node,
+    ATTRIBUTE_COMMAND_CLASS_SUPERVISION_ENABLED,
+    &supervision_flag,
+    sizeof(supervision_flag));
+
+  // If enabled attribute is not defined we send a supervision frame anyway
+  // This behavior can be changed in future release, but for now we try to enable supervision frame by default to maintain compatibility with previous versions
+  if (result != SL_STATUS_OK) {
+    return true;
+  }
+
+  return (supervision_flag == 1);
+}
+
 bool zwave_node_supports_command_class(zwave_command_class_t command_class,
                                        zwave_node_id_t node_id,
                                        zwave_endpoint_id_t endpoint_id)

@@ -175,6 +175,9 @@ void setUp()
   // Handler registration
   zwave_command_handler_register_handler_Stub(
     &zwave_command_handler_register_handler_stub);
+
+  attribute_store_register_callback_by_type_IgnoreAndReturn(SL_STATUS_OK);
+
   zwave_command_class_supervision_init();
   // get through the init event and get a non-zero clock
   contiki_test_helper_run(10);

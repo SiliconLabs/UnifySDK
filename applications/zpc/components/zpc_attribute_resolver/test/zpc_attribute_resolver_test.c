@@ -352,8 +352,7 @@ void test_zpc_attribute_resolver_send_send_status_fail_with_supervision()
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_2);
 
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_2,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_2,
                                                     zwave_endpoint_id_2,
                                                     true);
 
@@ -426,8 +425,7 @@ void test_zpc_attribute_resolver_send_set_no_supervision_happy_case()
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
 
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     false);
 
@@ -508,8 +506,7 @@ void test_zpc_attribute_resolver_send_set_supervision_working_happy_case()
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
 
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     true);
 
@@ -617,11 +614,9 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_get_node_type_ExpectAndReturn(test_node_2, test_node_2_type);
   attribute_resolver_set_function_ExpectAndReturn(test_node_2_type,
                                                   &rule_function_stub);
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_2,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_2,
                                                     zwave_endpoint_id_1,
                                                     true);
-
   // assigning test_node_1 in a multicast pool
   is_node_or_parent_paused_ExpectAndReturn(test_node_1, false);
   attribute_store_is_value_defined_ExpectAndReturn(test_node_1,
@@ -647,8 +642,7 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_get_node_type_ExpectAndReturn(test_node_1, test_node_1_type);
   attribute_resolver_set_function_ExpectAndReturn(test_node_1_type,
                                                   &rule_function_stub);
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     true);
 
@@ -857,8 +851,7 @@ void test_zpc_attribute_resolver_group_unknown_protocol()
   attribute_store_get_node_type_ExpectAndReturn(test_node_1, test_node_1_type);
   attribute_resolver_set_function_ExpectAndReturn(test_node_1_type,
                                                   &rule_function_stub);
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     true);
 
@@ -889,9 +882,7 @@ void test_zpc_attribute_resolver_group_unknown_protocol()
     NULL);
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
-
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     false);
 
@@ -988,8 +979,7 @@ void test_zpc_attribute_resolver_group_no_reported_value()
   attribute_store_get_node_type_ExpectAndReturn(test_node_1, test_node_1_type);
   attribute_resolver_set_function_ExpectAndReturn(test_node_1_type,
                                                   &rule_function_stub);
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     true);
 
@@ -1021,8 +1011,7 @@ void test_zpc_attribute_resolver_group_no_reported_value()
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
 
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     false);
 
@@ -1105,8 +1094,7 @@ void test_zpc_attribute_resolver_register_custom_handler()
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
 
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     false);
 
@@ -1196,8 +1184,7 @@ void test_zpc_attribute_resolver_send_set_abort_pending()
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
 
-  zwave_node_supports_command_class_ExpectAndReturn(0x6C,
-                                                    zwave_node_id_1,
+  zwave_node_want_supervision_frame_ExpectAndReturn(zwave_node_id_1,
                                                     zwave_endpoint_id_1,
                                                     true);
 

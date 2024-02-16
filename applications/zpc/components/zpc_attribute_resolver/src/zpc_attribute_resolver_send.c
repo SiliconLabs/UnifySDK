@@ -83,8 +83,7 @@ sl_status_t attribute_resolver_send(attribute_store_node_t node,
   zwave_tx_session_id_t tx_session_id = NULL;
   if (is_set == true
       && true
-           == zwave_node_supports_command_class(COMMAND_CLASS_SUPERVISION,
-                                                node_id,
+           == zwave_node_want_supervision_frame(node_id,
                                                 endpoint_id)) {
     // Send with Supervision
     send_status = zwave_command_class_supervision_send_data(
