@@ -96,6 +96,206 @@ static sl_status_t zwave_command_handler_register_handler_stub(
   return SL_STATUS_OK;
 }
 
+////////////////////////////////////////////////////////////////////////////
+// UTILS
+////////////////////////////////////////////////////////////////////////////
+// Set version and thus initialize the attribute tree
+void set_version(zwave_cc_version_t version)
+{
+  attribute_store_node_t version_node
+    = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
+
+  attribute_store_set_reported(version_node, &version, sizeof(version));
+}
+
+// Test if all the types in setpoint_mode_expected_types are present in the attribute tree
+void helper_setpoint_type_validator(const uint8_t* setpoint_mode_expected_types,
+                                    uint8_t setpoint_mode_excepted_length)
+{
+  size_t attribute_count
+    = attribute_store_get_node_child_count_by_type(endpoint_id_node,
+                                                   ATTRIBUTE(TYPE));
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    setpoint_mode_excepted_length,
+    attribute_count,
+    "Incorrect supported thermostat setpoint mode NODE count");
+
+  for (int i = 0; i < setpoint_mode_excepted_length; i++) {
+    attribute_store_node_t fan_mode_supported_node
+      = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                               ATTRIBUTE(TYPE),
+                                               i);
+
+    uint8_t reported_type;
+    attribute_store_get_reported(fan_mode_supported_node,
+                                 &reported_type,
+                                 sizeof(reported_type));
+
+    TEST_ASSERT_EQUAL_MESSAGE(
+      setpoint_mode_expected_types[i],
+      reported_type,
+      "Incorrect reported thermostat setpoint type supported");
+  }
+}
+
+// happy_case : if true only accepted bit are sent
+//              if false fill all unused bit with 1 to see if they are ignored correctly
+void helper_thermostat_setpoint_mode_supported_report(
+  zwave_cc_version_t version, bool happy_case, bool use_b_interpretation)
+{
+  set_version(version);
+
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+
+  TEST_ASSERT_NOT_NULL(thermostat_handler.control_handler);
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    thermostat_handler.control_handler(&info, NULL, 0));
+
+  uint8_t supported_bit1          = 0b00000000;
+  uint8_t supported_bit2          = 0b00000000;
+  size_t setpoint_mode_excepted_length = 0;
+  uint8_t setpoint_mode_expected_types[16];
+
+  uint8_t use_b_interpretation_value = use_b_interpretation;
+
+  attribute_store_node_t thermostat_setpoint_bitmask_node
+    = attribute_store_get_node_child_by_type(
+      endpoint_id_node,
+      ATTRIBUTE(SUPPORTED_SETPOINT_TYPES),
+      0);
+
+  sl_status_t result
+    = attribute_store_set_child_reported(thermostat_setpoint_bitmask_node,
+                                         ATTRIBUTE(USE_B_INTERPRETATION),
+                                         &use_b_interpretation_value,
+                                         sizeof(use_b_interpretation_value));
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            result,
+                            "Can't set b interpretation flag");
+
+  switch (version) {
+    case 1:
+      if (use_b_interpretation) {
+        supported_bit1 = happy_case ? 0b10000110 : 0b11111111;
+        supported_bit2 = happy_case ? 0b00000111 : 0b11111111;
+      } else {
+        supported_bit1 = happy_case ? 0b01111110 : 0b11111111;
+        supported_bit2 = happy_case ? 0b00000000 : 0b11111111;
+      }
+      setpoint_mode_excepted_length = 6;
+      setpoint_mode_expected_types[0]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_HEATING_1;
+      setpoint_mode_expected_types[1]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1;
+      setpoint_mode_expected_types[2]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_FURNACE_V3;
+      setpoint_mode_expected_types[3]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_DRY_AIR_V3;
+      setpoint_mode_expected_types[4]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_MOIST_AIR_V3;
+      setpoint_mode_expected_types[5]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AUTO_CHANGEOVER_V3;
+      break;
+
+    case 2:
+      if (use_b_interpretation) {
+        supported_bit1 = happy_case ? 0b10000110 : 0b11111111;
+        supported_bit2 = happy_case ? 0b00111111 : 0b11111111;
+      } else {
+        supported_bit1 = happy_case ? 0b11111110 : 0b11111111;
+        supported_bit2 = happy_case ? 0b00000011 : 0b11111111;
+      }
+      setpoint_mode_excepted_length = 9;
+      setpoint_mode_expected_types[0]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_HEATING_1_V2;
+      setpoint_mode_expected_types[1]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1_V2;
+      setpoint_mode_expected_types[2]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_FURNACE_V2;
+      setpoint_mode_expected_types[3]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_DRY_AIR_V2;
+      setpoint_mode_expected_types[4]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_MOIST_AIR_V2;
+      setpoint_mode_expected_types[5]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AUTO_CHANGEOVER_V2;
+      setpoint_mode_expected_types[6]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_ENERGY_SAVE_HEATING_V2;
+      setpoint_mode_expected_types[7]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_ENERGY_SAVE_COOLING_V2;
+      setpoint_mode_expected_types[8]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AWAY_HEATING_V2;
+      break;
+    case 3:
+      if (use_b_interpretation) {
+        supported_bit1 = happy_case ? 0b10000110 : 0b11111111;
+        supported_bit2 = happy_case ? 0b11111111 : 0b11111111;
+      } else {
+        supported_bit1 = happy_case ? 0b11111110 : 0b11111111;
+        supported_bit2 = happy_case ? 0b00001111 : 0b11111111;
+      }
+      setpoint_mode_excepted_length = 11;
+      setpoint_mode_expected_types[0]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_HEATING_1_V3;
+      setpoint_mode_expected_types[1]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1_V3;
+      setpoint_mode_expected_types[2]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_FURNACE_V3;
+      setpoint_mode_expected_types[3]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_DRY_AIR_V3;
+      setpoint_mode_expected_types[4]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_MOIST_AIR_V3;
+      setpoint_mode_expected_types[5]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AUTO_CHANGEOVER_V3;
+      setpoint_mode_expected_types[6]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_ENERGY_SAVE_HEATING_V3;
+      setpoint_mode_expected_types[7]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_ENERGY_SAVE_COOLING_V3;
+      setpoint_mode_expected_types[8]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AWAY_HEATING_V3;
+      setpoint_mode_expected_types[9]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AWAY_COOLING_V3;
+      setpoint_mode_expected_types[10]
+        = THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_FULL_POWER_V3;
+      break;
+  }
+
+  const uint8_t frame[] = {COMMAND_CLASS_THERMOSTAT_SETPOINT,
+                           THERMOSTAT_SETPOINT_SUPPORTED_REPORT,
+                           supported_bit1,
+                           supported_bit2};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    thermostat_handler.control_handler(&info, frame, sizeof(frame)));
+
+
+
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
+                        thermostat_setpoint_bitmask_node);
+
+  uint32_t reported_bitmask = 0;
+  attribute_store_get_reported(thermostat_setpoint_bitmask_node,
+                               &reported_bitmask,
+                               sizeof(reported_bitmask));
+  uint32_t expected_bitmask = (supported_bit2 << 8) | supported_bit1;
+  TEST_ASSERT_EQUAL_MESSAGE(
+    expected_bitmask,
+    reported_bitmask,
+    "Incorrect supported thermostat setpoint mode bitmask");
+
+  helper_setpoint_type_validator(setpoint_mode_expected_types,
+                                 setpoint_mode_excepted_length);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// Setup
+////////////////////////////////////////////////////////////////////////////
+
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
@@ -282,4 +482,211 @@ void test_zwave_command_class_thermostat_setpoint_set_v3_clip_upper_bound()
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
                                 sizeof(expected_frame));
+}
+
+void test_thermostat_setpoint_mode_supported_report_v1_happy_case()
+{
+  helper_thermostat_setpoint_mode_supported_report(THERMOSTAT_SETPOINT_VERSION,
+                                                   true,
+                                                   false);
+}
+void test_thermostat_setpoint_mode_supported_report_v2_happy_case()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V2,
+    true,
+    false);
+}
+void test_thermostat_setpoint_mode_supported_report_v3_happy_case()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V3,
+    true,
+    false);
+}
+
+void test_thermostat_setpoint_mode_supported_report_v1_b_interpretation_happy_case()
+{
+  helper_thermostat_setpoint_mode_supported_report(THERMOSTAT_SETPOINT_VERSION,
+                                                   true,
+                                                   true);
+}
+void test_thermostat_setpoint_mode_supported_report_v2_b_interpretation_happy_case()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V2,
+    true,
+    true);
+}
+void test_thermostat_setpoint_mode_supported_report_v3_b_interpretation_happy_case()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V3,
+    true,
+    true);
+}
+
+void test_thermostat_setpoint_mode_supported_report_v1_bit_mismatch()
+{
+  helper_thermostat_setpoint_mode_supported_report(THERMOSTAT_SETPOINT_VERSION,
+                                                   false,
+                                                   false);
+}
+void test_thermostat_setpoint_mode_supported_report_v2_bit_mismatch()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V2,
+    false,
+    false);
+}
+void test_thermostat_setpoint_mode_supported_report_v3_bit_mismatch()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V3,
+    false,
+    false);
+}
+
+void test_thermostat_setpoint_mode_supported_report_v1_b_interpretation_bit_mismatch()
+{
+  helper_thermostat_setpoint_mode_supported_report(THERMOSTAT_SETPOINT_VERSION,
+                                                   false,
+                                                   true);
+}
+void test_thermostat_setpoint_mode_supported_report_v2_b_interpretation_bit_mismatch()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V2,
+    false,
+    true);
+}
+
+void test_thermostat_setpoint_mode_supported_report_v3_b_interpretation_bit_mismatch()
+{
+  helper_thermostat_setpoint_mode_supported_report(
+    THERMOSTAT_SETPOINT_VERSION_V3,
+    false,
+    true);
+}
+
+void test_thermostat_setpoint_mode_change_interpretation()
+{
+  set_version(2);
+
+  attribute_store_node_t supported_setpoint_types_node
+    = attribute_store_get_first_child_by_type(
+      endpoint_id_node,
+      ATTRIBUTE(SUPPORTED_SETPOINT_TYPES));
+  attribute_store_node_t b_interpretation_node
+    = attribute_store_get_first_child_by_type(supported_setpoint_types_node,
+                                              ATTRIBUTE(USE_B_INTERPRETATION));
+
+  uint32_t setpoint_bitmask = 0b11111110;
+  sl_status_t status = attribute_store_set_reported(supported_setpoint_types_node,
+                               &setpoint_bitmask,
+                               sizeof(setpoint_bitmask));
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, status, "Should be able to set supported setpoint types");
+
+  
+  // Check with B interpretation (flag = on)
+  uint8_t flag = 1;
+  // This should make the attribute store to update based on the new interpretation 
+  status = attribute_store_set_reported(b_interpretation_node,
+                               &flag,
+                               sizeof(flag));
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, status, "Should be able to set b interpretation flag to 1");
+
+  const uint8_t b_interpretation_expected_types[] = {
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_HEATING_1,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_FURNACE_V2
+  };
+  helper_setpoint_type_validator(b_interpretation_expected_types,
+                                 sizeof(b_interpretation_expected_types));
+
+  // Check with A interpretation (flag = off)
+  flag = 0;
+  // This should make the attribute store to update based on the new interpretation 
+  status = attribute_store_set_reported(b_interpretation_node,
+                               &flag,
+                               sizeof(flag));
+
+  const uint8_t a_interpretation_expected_types[] = {
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_HEATING_1,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_FURNACE_V3,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_DRY_AIR_V3,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_MOIST_AIR_V3,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_AUTO_CHANGEOVER_V3,
+    THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_ENERGY_SAVE_HEATING_V3
+  };
+  helper_setpoint_type_validator(a_interpretation_expected_types,
+                                 sizeof(a_interpretation_expected_types));
+
+}
+
+void test_thermostat_setpoint_mode_attribute_creation() {
+  attribute_store_node_t supported_setpoint_types_node =
+    attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE(SUPPORTED_SETPOINT_TYPES));
+  
+  attribute_store_node_t b_interpretation_node
+    = attribute_store_get_first_child_by_type(supported_setpoint_types_node,
+                                              ATTRIBUTE(USE_B_INTERPRETATION));
+
+  TEST_ASSERT_EQUAL_MESSAGE(ATTRIBUTE_STORE_INVALID_NODE,
+                       b_interpretation_node,
+                       "USE_B_INTERPRETATION attribute should not exist yet");
+  TEST_ASSERT_EQUAL_MESSAGE(ATTRIBUTE_STORE_INVALID_NODE,
+                       supported_setpoint_types_node,
+                       "SUPPORTED_SETPOINT_TYPES attribute should not exist yet");
+
+  // Trigger creation version attributes
+  set_version(1);
+
+  supported_setpoint_types_node =
+    attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE(SUPPORTED_SETPOINT_TYPES));
+  
+  b_interpretation_node
+    = attribute_store_get_first_child_by_type(supported_setpoint_types_node,
+                                              ATTRIBUTE(USE_B_INTERPRETATION));
+
+  TEST_ASSERT_NOT_EQUAL_MESSAGE(ATTRIBUTE_STORE_INVALID_NODE,
+                       b_interpretation_node,
+                       "USE_B_INTERPRETATION attribute should exist by now");
+  
+  TEST_ASSERT_NOT_EQUAL_MESSAGE(ATTRIBUTE_STORE_INVALID_NODE,
+                       supported_setpoint_types_node,
+                       "SUPPORTED_SETPOINT_TYPES attribute should exist by now");
+
+
+  uint8_t b_interpretation_value = 1;
+  attribute_store_get_reported(b_interpretation_node,
+                               &b_interpretation_value,
+                               sizeof(b_interpretation_value));
+  TEST_ASSERT_EQUAL_MESSAGE(0,
+                       b_interpretation_value,
+                       "Default value of USE_B_INTERPRETATION should be 0");                      
+
+  b_interpretation_value = 1;
+  sl_status_t status
+    = attribute_store_set_reported(b_interpretation_node,
+                                   &b_interpretation_value,
+                                   sizeof(b_interpretation_value));
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                       status,
+                       "Should be able to modify b interpretation_node to 1");
+
+  // Trigger version change to see if flag value is not reset back to 0
+  set_version(2);
+
+  attribute_store_get_reported(b_interpretation_node,
+                               &b_interpretation_value,
+                               sizeof(b_interpretation_value));
+  TEST_ASSERT_EQUAL_MESSAGE(1,
+                       b_interpretation_value,
+                       "Current value of USE_B_INTERPRETATION should be 1");  
 }
