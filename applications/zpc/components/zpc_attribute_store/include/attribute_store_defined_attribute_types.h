@@ -530,6 +530,21 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DEVICE_RESET_LOCALLY_VERSION,
                  ((COMMAND_CLASS_DEVICE_RESET_LOCALLY << 8) | 0x01))
 
 /////////////////////////////////////////////////
+// Humidity Control Mode Command Class
+///< This represents the version of the Humidity Control Mode Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_VERSION,
+                ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_HUMIDITY_CONTROL_MODE))
+
+// Supported mode
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_SUPPORTED_MODES,
+                 ((COMMAND_CLASS_HUMIDITY_CONTROL_MODE << 8) | 0x02))
+
+// Current mode
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_HUMIDITY_CONTROL_MODE_CURRENT_MODE,
+                 ((COMMAND_CLASS_HUMIDITY_CONTROL_MODE << 8) | 0x03))
+
+/////////////////////////////////////////////////
 // Inclusion Controller Command Class
 ///< This represents the version of the Inclusion Controller Command class.
 /// zwave_cc_version_t
