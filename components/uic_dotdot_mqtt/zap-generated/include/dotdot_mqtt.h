@@ -9905,7 +9905,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_callback_t)(
 
     uint32_t user_uniqueid,
 
-    DrlkUserStatus user_status,
+    DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
@@ -9981,7 +9981,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_credential_callback_t)(
 
     uint16_t user_index,
 
-    DrlkUserStatus user_status,
+    DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type
 
@@ -10606,7 +10606,7 @@ typedef struct {
 
   uint32_t user_uniqueid;
 
-  DrlkUserStatus user_status;
+  DrlkSettableUserStatus user_status;
 
   DrlkUserType user_type;
 
@@ -10677,7 +10677,7 @@ typedef struct {
 
   uint16_t user_index;
 
-  DrlkUserStatus user_status;
+  DrlkSettableUserStatus user_status;
 
   DrlkUserType user_type;
 } uic_mqtt_dotdot_door_lock_command_set_credential_fields_t;
@@ -23036,7 +23036,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
   const char *base_topic,
-  CCColorLoopDirection value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 

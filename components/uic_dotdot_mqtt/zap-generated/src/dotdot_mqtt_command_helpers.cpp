@@ -7570,9 +7570,9 @@ std::string get_json_payload_for_door_lock_set_user_command(
   json_payload["UserStatus"] =
     set_user_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
-  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
-    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -7627,7 +7627,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
   
   uint32_t &user_uniqueid,
   
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
   
   DrlkUserType &user_type,
   
@@ -7641,10 +7641,10 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
     OperationType_enum_val = data_operation_type_enum_get_enum_value_number(jsn.at("OperationType").get<std::string>());
     #endif
   }
-  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkUserStatus>("UserStatus", jsn);
-  if (UserStatus_enum_val == std::numeric_limits<DrlkUserStatus>::max()) {
-    #ifdef DRLK_USER_STATUS_ENUM_NAME_AVAILABLE
-    UserStatus_enum_val = drlk_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
+  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkSettableUserStatus>("UserStatus", jsn);
+  if (UserStatus_enum_val == std::numeric_limits<DrlkSettableUserStatus>::max()) {
+    #ifdef DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE
+    UserStatus_enum_val = drlk_settable_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
     #endif
   }
   uint32_t UserType_enum_val = get_enum_decimal_value<DrlkUserType>("UserType", jsn);
@@ -7686,7 +7686,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
-  user_status = static_cast<DrlkUserStatus>(UserStatus_enum_val);
+  user_status = static_cast<DrlkSettableUserStatus>(UserStatus_enum_val);
   if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -8155,9 +8155,9 @@ std::string get_json_payload_for_door_lock_set_credential_command(
   json_payload["UserStatus"] =
     set_credential_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
-  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
-    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -8197,7 +8197,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
   
   uint16_t &user_index,
   
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
   
   DrlkUserType &user_type
   
@@ -8209,10 +8209,10 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
     OperationType_enum_val = data_operation_type_enum_get_enum_value_number(jsn.at("OperationType").get<std::string>());
     #endif
   }
-  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkUserStatus>("UserStatus", jsn);
-  if (UserStatus_enum_val == std::numeric_limits<DrlkUserStatus>::max()) {
-    #ifdef DRLK_USER_STATUS_ENUM_NAME_AVAILABLE
-    UserStatus_enum_val = drlk_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
+  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkSettableUserStatus>("UserStatus", jsn);
+  if (UserStatus_enum_val == std::numeric_limits<DrlkSettableUserStatus>::max()) {
+    #ifdef DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE
+    UserStatus_enum_val = drlk_settable_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
     #endif
   }
   uint32_t UserType_enum_val = get_enum_decimal_value<DrlkUserType>("UserType", jsn);
@@ -8248,7 +8248,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
-  user_status = static_cast<DrlkUserStatus>(UserStatus_enum_val);
+  user_status = static_cast<DrlkSettableUserStatus>(UserStatus_enum_val);
   if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;

@@ -8408,8 +8408,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // CCColorLoopDirection // CCColorLoopDirection // CCColorLoopDirection
-    std::string attribute_type_string           = "CCColorLoopDirection";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8418,7 +8418,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopDirection, "
-                     "type:  CCColorLoopDirection // CCColorLoopDirection");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(

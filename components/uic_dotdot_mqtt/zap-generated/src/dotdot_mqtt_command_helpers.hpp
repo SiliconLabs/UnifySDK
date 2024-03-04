@@ -3403,7 +3403,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
 
   uint32_t &user_uniqueid,
 
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
 
   DrlkUserType &user_type,
 
@@ -3592,7 +3592,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
 
   uint16_t &user_index,
 
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
 
   DrlkUserType &user_type
 

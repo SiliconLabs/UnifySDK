@@ -10950,7 +10950,7 @@ static void color_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION) {
           uic_mqtt_dotdot_color_control_color_loop_direction_publish(
             base_topic.c_str(),
-            static_cast<CCColorLoopDirection>(attr.desired_or_reported<CCColorLoopDirection>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -11809,7 +11809,7 @@ static void color_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION) {
           uic_mqtt_dotdot_color_control_color_loop_direction_publish(
             base_topic.c_str(),
-            static_cast<CCColorLoopDirection>(attr.reported<CCColorLoopDirection>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }

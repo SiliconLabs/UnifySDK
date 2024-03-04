@@ -31576,7 +31576,7 @@ void uic_mqtt_dotdot_on_door_lock_set_user(
   uint16_t user_index = {};
   std::string user_name;
   uint32_t user_uniqueid = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   CredentialRuleEnum credential_rule = {};
 
@@ -31665,7 +31665,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user(
   uint16_t user_index = {};
   std::string user_name;
   uint32_t user_uniqueid = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   CredentialRuleEnum credential_rule = {};
 
@@ -32454,7 +32454,7 @@ void uic_mqtt_dotdot_on_door_lock_set_credential(
   CredentialStruct credential = {};
   std::string credential_data;
   uint16_t user_index = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
 
 
@@ -32538,7 +32538,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_credential(
   CredentialStruct credential = {};
   std::string credential_data;
   uint16_t user_index = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
 
 
@@ -56626,7 +56626,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
   const char *base_topic,
-  CCColorLoopDirection value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56634,14 +56634,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
 
   // This is a single value
 
-  #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
-  jsn["value"] = color_control_color_loop_direction_get_enum_value_name((uint32_t)value);
-  #elif defined(CC_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE)
-  jsn["value"] = cc_color_loop_direction_get_enum_value_name((uint32_t)value);
-  #else
-  sl_log_warning(LOG_TAG,"Warning: Enum name not available for COLOR_CONTROL_COLOR_LOOP_DIRECTION. Using number instead.");
-  jsn["value"] = static_cast<CCColorLoopDirection>(value);
-  #endif
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16387,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16387,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -99807,7 +99804,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_is_supported(
     memset(&user_name_value, 0x00, sizeof(user_name_value));
     uint32_t user_uniqueid_value;
     memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-    DrlkUserStatus user_status_value;
+    DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -99983,7 +99980,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_credential_is_supported(
     memset(&credential_data_value, 0x00, sizeof(credential_data_value));
     uint16_t user_index_value;
     memset(&user_index_value, 0x00, sizeof(user_index_value));
-    DrlkUserStatus user_status_value;
+    DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));

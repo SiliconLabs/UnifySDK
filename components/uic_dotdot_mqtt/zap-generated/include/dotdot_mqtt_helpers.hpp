@@ -336,6 +336,23 @@ std::string color_control_color_loop_active_get_enum_value_name(
  */
 uint32_t color_control_color_loop_active_get_enum_value_number(const std::string &str);
 
+#define COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ColorControlColorLoopDirection enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string color_control_color_loop_direction_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ColorControlColorLoopDirection enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t color_control_color_loop_direction_get_enum_value_number(const std::string &str);
+
 #define COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE 1
 
 /**

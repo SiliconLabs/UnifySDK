@@ -16831,7 +16831,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllRFI
       "type": "integer"
     },
     "UserStatus": {
-      "type": "DrlkUserStatus"
+      "type": "DrlkSettableUserStatus"
     },
     "UserType": {
       "type": "DrlkUserType"
@@ -17157,7 +17157,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/Programming
       "type": "integer"
     },
     "UserStatus": {
-      "type": "DrlkUserStatus"
+      "type": "DrlkSettableUserStatus"
     },
     "UserType": {
       "type": "DrlkUserType"
@@ -27238,7 +27238,7 @@ ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopActive/Reported { "value
   "type": "object",
   "properties": {
     "value": {
-      "type": "CCColorLoopDirection"
+      "type": "integer"
     }
   },
   "required": [
@@ -55008,8 +55008,8 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
   "title": "CCColorLoopDirection Enum Properties",
   "type": "string",
   "enum": [
-    "DecrementEnhancedCurrentHue",
-    "IncrementEnhancedCurrentHue"
+    "ColorLoopHueDecrement",
+    "ColorLoopHueIncrement"
   ]
 }
 ```
@@ -55111,6 +55111,29 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum ColorControlColorLoopActive Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum ColorControlColorLoopDirection Section -->
+<!-- -->
+\section enum_color_control_color_loop_direction ColorControlColorLoopDirection Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ColorControlColorLoopDirection Enum Properties",
+  "type": "string",
+  "enum": [
+    "DecrementEnhancedCurrentHue",
+    "IncrementEnhancedCurrentHue"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ColorControlColorLoopDirection Section -->
 <!-- -->
 
 <br><br>

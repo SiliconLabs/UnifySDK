@@ -50,7 +50,7 @@ applicable to this document can be found in the LICENSE.md file.
     </restriction>
   </type:type>
 
-  <type:type short="DrlkUserStatus" name="DrlkUserStatus" id="20" inheritsFrom="uint8">
+  <type:type short="DrlkUserStatus" name="DrlkUserStatus" id="20" inheritsFrom="enum8">
     <restriction>
       <type:enumeration value="00" name="Available" />
       <type:enumeration value="01" name="OccupiedEnabled" />
@@ -60,7 +60,7 @@ applicable to this document can be found in the LICENSE.md file.
     </restriction>
   </type:type>
 
-  <type:type short="DrlkSettableUserStatus" name="DrlkSettableUserStatus" id="20" inheritsFrom="uint8">
+  <type:type short="DrlkSettableUserStatus" name="DrlkSettableUserStatus" id="20" inheritsFrom="enum8">
     <restriction>
       <type:enumeration value="01" name="OccupiedEnabled" />
       <!--  02 is not defined. -->
@@ -641,7 +641,7 @@ applicable to this document can be found in the LICENSE.md file.
           <field name="UserIndex" type="uint16" />
           <field name="UserName" type="string" />
           <field name="UserUniqueID" type="uint32"  />
-          <field name="UserStatus" type="DrlkUserStatus"  />
+          <field name="UserStatus" type="DrlkSettableUserStatus"  />
           <field name="UserType" type="DrlkUserType"  />
           <field name="CredentialRule" type="CredentialRuleEnum"  />
         </fields>
@@ -662,7 +662,7 @@ applicable to this document can be found in the LICENSE.md file.
           <field name="Credential" type="CredentialStruct" />
           <field name="CredentialData" type="octstr" />
           <field name="UserIndex" type="uint16"  />
-          <field name="UserStatus" type="DrlkUserStatus"  />
+          <field name="UserStatus" type="DrlkSettableUserStatus"  />
           <field name="UserType" type="DrlkUserType"  />
         </fields>
       </command>

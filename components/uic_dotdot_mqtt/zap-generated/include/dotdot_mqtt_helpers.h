@@ -153,6 +153,13 @@ char *color_control_color_loop_active_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get color_control_color_loop_active enum representation from string. */
 uint32_t color_control_color_loop_active_get_enum_value_number_c(const char *str);
+#define COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE 1
+
+/** Get color_control_color_loop_direction string representation from enum. */
+char *color_control_color_loop_direction_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get color_control_color_loop_direction enum representation from string. */
+uint32_t color_control_color_loop_direction_get_enum_value_number_c(const char *str);
 #define COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE 1
 
 /** Get color_control_color_mode string representation from enum. */

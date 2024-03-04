@@ -30079,7 +30079,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_direction_attribute_upda
   }
 
 
-  CCColorLoopDirection color_loop_direction = {};
+  uint8_t color_loop_direction = {};
 
   nlohmann::json json_payload;
   try {
@@ -30092,16 +30092,8 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_direction_attribute_upda
         return;
       }
 // Start parsing value
-      uint32_t tmp = get_enum_decimal_value<CCColorLoopDirection>("value", json_payload);
-      if (tmp == numeric_limits<CCColorLoopDirection>::max()) {
-      #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
-        tmp = color_control_color_loop_direction_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE)
-        tmp = color_loop_direction_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      color_loop_direction = static_cast<CCColorLoopDirection>(tmp);
-
+      color_loop_direction = json_payload.at("value").get<uint8_t>();
+    
     // End parsing value
     }
 

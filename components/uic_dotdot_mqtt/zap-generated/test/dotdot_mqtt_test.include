@@ -1733,7 +1733,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_user_callback_func(
 
     uint32_t user_uniqueid,
 
-    DrlkUserStatus user_status,
+    DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
@@ -1845,7 +1845,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_credential_callback_func(
 
     uint16_t user_index,
 
-    DrlkUserStatus user_status,
+    DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type
 

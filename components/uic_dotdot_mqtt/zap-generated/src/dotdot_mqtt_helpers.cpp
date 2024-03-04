@@ -861,14 +861,14 @@ uint32_t bypass_response_zone_id_bypass_result_get_enum_value_number(const std::
 
 // Enum to string map for CCColorLoopDirection
 const std::map<uint32_t, std::string> cc_color_loop_direction_enum_id_to_string_map {
-  { 0, "DecrementEnhancedCurrentHue" },
-  { 1, "IncrementEnhancedCurrentHue" },
+  { 0, "ColorLoopHueDecrement" },
+  { 1, "ColorLoopHueIncrement" },
 };
 
 // String to enum map for CCColorLoopDirection
 const std::map<std::string, uint32_t> cc_color_loop_direction_enum_string_to_id_map {
-  { "DecrementEnhancedCurrentHue", 0 },
-  { "IncrementEnhancedCurrentHue", 1 },
+  { "ColorLoopHueDecrement", 0 },
+  { "ColorLoopHueIncrement", 1 },
 };
 
 std::string cc_color_loop_direction_get_enum_value_name(
@@ -1042,6 +1042,43 @@ uint32_t color_control_color_loop_active_get_enum_value_number(const std::string
 {
   auto it = color_control_color_loop_active_enum_string_to_id_map.find(str);
   if (it != color_control_color_loop_active_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for ColorControlColorLoopDirection
+const std::map<uint32_t, std::string> color_control_color_loop_direction_enum_id_to_string_map {
+  { 0, "DecrementEnhancedCurrentHue" },
+  { 1, "IncrementEnhancedCurrentHue" },
+};
+
+// String to enum map for ColorControlColorLoopDirection
+const std::map<std::string, uint32_t> color_control_color_loop_direction_enum_string_to_id_map {
+  { "DecrementEnhancedCurrentHue", 0 },
+  { "IncrementEnhancedCurrentHue", 1 },
+};
+
+std::string color_control_color_loop_direction_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = color_control_color_loop_direction_enum_id_to_string_map.find(value);
+  if (it != color_control_color_loop_direction_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t color_control_color_loop_direction_get_enum_value_number(const std::string &str)
+{
+  auto it = color_control_color_loop_direction_enum_string_to_id_map.find(str);
+  if (it != color_control_color_loop_direction_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -14581,6 +14618,17 @@ char *color_control_color_loop_active_get_enum_value_name_c(
 uint32_t color_control_color_loop_active_get_enum_value_number_c(const char *str)
 {
   return color_control_color_loop_active_get_enum_value_number(std::string(str));
+}
+char *color_control_color_loop_direction_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", color_control_color_loop_direction_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t color_control_color_loop_direction_get_enum_value_number_c(const char *str)
+{
+  return color_control_color_loop_direction_get_enum_value_number(std::string(str));
 }
 char *color_control_color_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

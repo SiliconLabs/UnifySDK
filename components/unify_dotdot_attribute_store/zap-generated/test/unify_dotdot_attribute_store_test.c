@@ -6288,7 +6288,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&user_name_value, 0x00, sizeof(user_name_value));
       uint32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -6422,7 +6422,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
       uint16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9415,7 +9415,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&user_name_value, 0x00, sizeof(user_name_value));
       uint32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9549,7 +9549,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
       uint16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));

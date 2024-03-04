@@ -37353,7 +37353,7 @@ bool dotdot_is_supported_color_control_color_loop_direction (
  *
  * @returns ColorLoopDirection attribute
  */
-CCColorLoopDirection dotdot_get_color_control_color_loop_direction(
+uint8_t dotdot_get_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37373,7 +37373,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  CCColorLoopDirection new_color_loop_direction
+  uint8_t new_color_loop_direction
   );
 
 /**

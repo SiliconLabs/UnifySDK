@@ -40226,7 +40226,7 @@ bool dotdot_is_supported_color_control_color_loop_direction(
   return attribute_store_node_exists(node);
 }
 
-CCColorLoopDirection dotdot_get_color_control_color_loop_direction(
+uint8_t dotdot_get_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40237,7 +40237,7 @@ CCColorLoopDirection dotdot_get_color_control_color_loop_direction(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION);
 
-  CCColorLoopDirection result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40249,7 +40249,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  CCColorLoopDirection new_color_loop_direction
+  uint8_t new_color_loop_direction
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40262,7 +40262,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_loop_direction,
-                                                  sizeof(CCColorLoopDirection));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_color_control_color_loop_direction_undefine_reported(
