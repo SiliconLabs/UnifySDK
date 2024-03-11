@@ -956,6 +956,94 @@ ucl/by-unid/<UNID>/ep0/Basic/Attributes/SWBuildID/Reported { "value": <REPORTED_
 
 <br><br>
 
+\subsection basic_attr_z_wave_generic_device_class Basic/ZWaveGenericDeviceClass Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/Basic/Attributes/ZWaveGenericDeviceClass/Reported
+[PREFIX]/Basic/Attributes/ZWaveGenericDeviceClass/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Basic Cluster ZWaveGenericDeviceClass Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveGenericDeviceClass attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ZWaveGenericDeviceClass/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ZWaveGenericDeviceClass/Desired { "value": <DESIRED_Z_WAVE_GENERIC_DEVICE_CLASS>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ZWaveGenericDeviceClass/Reported { "value": <REPORTED_Z_WAVE_GENERIC_DEVICE_CLASS>}
+
+```
+
+<br><br>
+
+\subsection basic_attr_z_wave_specific_device_class Basic/ZWaveSpecificDeviceClass Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/Basic/Attributes/ZWaveSpecificDeviceClass/Reported
+[PREFIX]/Basic/Attributes/ZWaveSpecificDeviceClass/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Basic Cluster ZWaveSpecificDeviceClass Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveSpecificDeviceClass attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/Basic/Attributes/ZWaveSpecificDeviceClass/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ZWaveSpecificDeviceClass/Desired { "value": <DESIRED_Z_WAVE_SPECIFIC_DEVICE_CLASS>}
+ucl/by-unid/<UNID>/ep0/Basic/Attributes/ZWaveSpecificDeviceClass/Reported { "value": <REPORTED_Z_WAVE_SPECIFIC_DEVICE_CLASS>}
+
+```
+
+<br><br>
+
 
 \subsection basic_attr_cluster_revision Basic/ClusterRevision Attribute
 
@@ -1202,7 +1290,9 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Basic/Commands/WriteAttributes' -m  '{
           "DeviceEnabled",
           "AlarmMask",
           "DisableLocalConfig",
-          "SWBuildID"
+          "SWBuildID",
+          "ZWaveGenericDeviceClass",
+          "ZWaveSpecificDeviceClass"
         ]
       }
     }

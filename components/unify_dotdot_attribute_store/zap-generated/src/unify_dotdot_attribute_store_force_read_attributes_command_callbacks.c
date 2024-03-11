@@ -157,6 +157,16 @@ static sl_status_t uic_mqtt_dotdot_basic_force_read_attributes_callback (
       sl_log_debug(LOG_TAG, "Undefined Reported value of Basic::SWBuildID under %s - Endpoint %d", unid, endpoint_id);
     }
   }
+  if (true == attribute_list.z_wave_generic_device_class) {
+    if (SL_STATUS_OK == dotdot_basic_z_wave_generic_device_class_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of Basic::ZWaveGenericDeviceClass under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.z_wave_specific_device_class) {
+    if (SL_STATUS_OK == dotdot_basic_z_wave_specific_device_class_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of Basic::ZWaveSpecificDeviceClass under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////

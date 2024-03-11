@@ -132,6 +132,8 @@ typedef struct {
   uint8_t alarm_mask;
   uint8_t disable_local_config;
   const char* sw_buildid;
+  uint8_t z_wave_generic_device_class;
+  uint8_t z_wave_specific_device_class;
 } uic_mqtt_dotdot_basic_state_t;
 
 typedef struct {
@@ -156,6 +158,8 @@ typedef struct {
   bool alarm_mask;
   bool disable_local_config;
   bool sw_buildid;
+  bool z_wave_generic_device_class;
+  bool z_wave_specific_device_class;
 } uic_mqtt_dotdot_basic_updated_state_t;
 
 typedef sl_status_t (*uic_mqtt_dotdot_basic_write_attributes_callback_t)(
@@ -891,6 +895,66 @@ sl_status_t uic_mqtt_dotdot_basic_sw_buildid_publish(
  * @returns SL_STATUS_OK on success
  */
 sl_status_t uic_mqtt_dotdot_basic_sw_buildid_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; Basic/Attributes/ZWaveGenericDeviceClass
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_generic_device_class
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_basic_z_wave_generic_device_class_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; Basic/Attributes/ZWaveGenericDeviceClass
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_generic_device_class
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_basic_z_wave_generic_device_class_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; Basic/Attributes/ZWaveSpecificDeviceClass
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_specific_device_class
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_basic_z_wave_specific_device_class_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; Basic/Attributes/ZWaveSpecificDeviceClass
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_specific_device_class
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_basic_z_wave_specific_device_class_unretain(
   const char *base_topic,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );

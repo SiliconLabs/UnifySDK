@@ -357,6 +357,18 @@ sl_status_t zigpc_command_mapper_basic_force_read_attributes_handler(
         ZIGPC_ZCL_CLUSTER_BASIC_ATTR_SW_BUILDID
       );
     }
+    if (attributes_to_read.z_wave_generic_device_class == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_Z_WAVE_GENERIC_DEVICE_CLASS
+      );
+    }
+    if (attributes_to_read.z_wave_specific_device_class == true) {
+      zigpc_command_mapper_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        ZIGPC_ZCL_CLUSTER_BASIC_ATTR_Z_WAVE_SPECIFIC_DEVICE_CLASS
+      );
+    }
 
     if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
       zigpc_command_mapper_send_unicast(
