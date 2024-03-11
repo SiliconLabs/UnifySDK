@@ -190,6 +190,20 @@ typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_sw_buildid_callback_t)(
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   const char* sw_buildid
 );
+typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_z_wave_generic_device_class_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t z_wave_generic_device_class
+);
+typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_z_wave_specific_device_class_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t z_wave_specific_device_class
+);
 // Callback types used by the power_configuration cluster
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_voltage_callback_t)(
   dotdot_unid_t unid,
@@ -5272,6 +5286,18 @@ void uic_mqtt_dotdot_basic_attribute_disable_local_config_callback_set(const uic
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_basic_attribute_sw_buildid_callback_set(const uic_mqtt_dotdot_basic_attribute_sw_buildid_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * Basic/Attributes/z_wave_generic_device_class/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_basic_attribute_z_wave_generic_device_class_callback_set(const uic_mqtt_dotdot_basic_attribute_z_wave_generic_device_class_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * Basic/Attributes/z_wave_specific_device_class/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_basic_attribute_z_wave_specific_device_class_callback_set(const uic_mqtt_dotdot_basic_attribute_z_wave_specific_device_class_callback_t callback);
 
 
 /**

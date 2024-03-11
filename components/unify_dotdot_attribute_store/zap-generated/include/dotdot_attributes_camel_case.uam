@@ -21,6 +21,8 @@ def zb_DeviceEnabled 0xba5c0012
 def zb_AlarmMask 0xba5c0013
 def zb_DisableLocalConfig 0xba5c0014
 def zb_SWBuildID 0xba5c4000
+def zb_ZWaveGenericDeviceClass 0xba5cff01
+def zb_ZWaveSpecificDeviceClass 0xba5cff02
 
 // This represents short CamelCase labels the attributes in the DotDot PowerConfiguration cluster
 def zb_MainsVoltage 0x00010000

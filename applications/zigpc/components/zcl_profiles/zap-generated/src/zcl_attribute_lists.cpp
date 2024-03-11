@@ -217,6 +217,24 @@ const zcl_attribute_t basic_attribute_list[] = {
     "", // desired_payload
     "", // reported_payload
   },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_Z_WAVE_GENERIC_DEVICE_CLASS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "ZWaveGenericDeviceClass", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
+    ZIGPC_ZCL_CLUSTER_BASIC_ATTR_Z_WAVE_SPECIFIC_DEVICE_CLASS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "ZWaveSpecificDeviceClass", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
     {
         ZIGPC_ZCL_CLUSTER_BASIC, // cluster_id
         ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
