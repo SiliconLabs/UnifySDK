@@ -229,14 +229,14 @@ static attribute_store_node_t
 // Attribute resolution functions
 ///////////////////////////////////////////////////////////////////////////////
 sl_status_t zwave_command_class_thermostat_setpoint_supported_get(
-  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
+  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
   // Check that we have the right type of attribute.
   assert(ATTRIBUTE(SUPPORTED_SETPOINT_TYPES)
          == attribute_store_get_node_type(node));
 
   // Default frame length in case of error
-  *frame_len = 0;
+  *frame_length = 0;
 
   // Supported Get is the same for all versions.
   ZW_THERMOSTAT_SETPOINT_SUPPORTED_GET_V3_FRAME *supported_get_frame
@@ -245,18 +245,18 @@ sl_status_t zwave_command_class_thermostat_setpoint_supported_get(
   supported_get_frame->cmdClass = COMMAND_CLASS_THERMOSTAT_SETPOINT_V3;
   supported_get_frame->cmd      = THERMOSTAT_SETPOINT_SUPPORTED_GET_V3;
 
-  *frame_len = sizeof(ZW_THERMOSTAT_SETPOINT_SUPPORTED_GET_V3_FRAME);
+  *frame_length = sizeof(ZW_THERMOSTAT_SETPOINT_SUPPORTED_GET_V3_FRAME);
   return SL_STATUS_OK;
 }
 
 // FIXME: This will be failing CL:0043.01.21.02.1
 sl_status_t zwave_command_class_thermostat_setpoint_capabilities_get(
-  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
+  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
   // Check that we have the right type of attribute.
   assert(ATTRIBUTE(MIN_VALUE) == attribute_store_get_node_type(node));
   // Default frame length in case of error
-  *frame_len = 0;
+  *frame_length = 0;
 
   attribute_store_node_t type_node = attribute_store_get_node_parent(node);
   attribute_store_node_t endpoint_node
@@ -297,20 +297,20 @@ sl_status_t zwave_command_class_thermostat_setpoint_capabilities_get(
                                &capabilities_get_frame->properties1,
                                sizeof(capabilities_get_frame->properties1));
 
-    *frame_len = sizeof(ZW_THERMOSTAT_SETPOINT_CAPABILITIES_GET_V3_FRAME);
+    *frame_length = sizeof(ZW_THERMOSTAT_SETPOINT_CAPABILITIES_GET_V3_FRAME);
     return SL_STATUS_OK;
   }
 }
 
 sl_status_t zwave_command_class_thermostat_setpoint_get(
-  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
+  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
   // Check that we have the right type of attribute.
   assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE
          == attribute_store_get_node_type(node));
 
   // Default frame length in case of error
-  *frame_len = 0;
+  *frame_length = 0;
 
   attribute_store_node_t type_node = attribute_store_get_node_parent(node);
 
@@ -325,57 +325,94 @@ sl_status_t zwave_command_class_thermostat_setpoint_get(
                              &get_frame->level,
                              sizeof(get_frame->level));
 
-  *frame_len = sizeof(ZW_THERMOSTAT_SETPOINT_GET_V3_FRAME);
+  *frame_length = sizeof(ZW_THERMOSTAT_SETPOINT_GET_V3_FRAME);
   return SL_STATUS_OK;
 }
 
 sl_status_t zwave_command_class_thermostat_setpoint_set(
-  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
+  attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
   // Check that we have the right type of attribute.
   assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE
          == attribute_store_get_node_type(node));
 
   // Default frame length in case of error
-  *frame_len = 0;
+  *frame_length = 0;
 
-  attribute_store_node_t type_node  = attribute_store_get_node_parent(node);
-  attribute_store_node_t scale_node = attribute_store_get_first_child_by_type(
-    type_node,
-    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE);
+  attribute_store_node_t type_node = attribute_store_get_node_parent(node);
 
-  // We will just always use 4 bytes, precision 2.
-  ZW_THERMOSTAT_SETPOINT_SET_4BYTE_V3_FRAME *set_frame
-    = (ZW_THERMOSTAT_SETPOINT_SET_4BYTE_V3_FRAME *)frame;
-
-  set_frame->cmdClass = COMMAND_CLASS_THERMOSTAT_SETPOINT_V3;
-  set_frame->cmd      = THERMOSTAT_SETPOINT_SET_V3;
-  // set_frame->level ? This is 4 bits reserved / 4 bits setpoint type.
-  set_frame->level = 0;
+  // Get setpoint type
+  uint8_t setpoint_type = 0;
   attribute_store_get_reported(type_node,
-                               &set_frame->level,
-                               sizeof(set_frame->level));
+                               &setpoint_type,
+                               sizeof(setpoint_type));
 
-  // set_frame->level2 ? This is Precision (3 bits) / Scale (2 bits) / size (3 bits)
-  uint32_t setpoint_value_scale = 0;
   // Reuse the same scale as current value.
-  attribute_store_get_reported(scale_node,
-                               &setpoint_value_scale,
-                               sizeof(setpoint_value_scale));
+  uint32_t setpoint_value_scale = 0;
+  attribute_store_get_child_reported(
+    type_node,
+    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE,
+    &setpoint_value_scale,
+    sizeof(setpoint_value_scale));
 
-  set_frame->level2 = SET_DEFAULT_PRECISION;
-  set_frame->level2 |= SET_DEFAULT_SIZE;
-  set_frame->level2 |= ((setpoint_value_scale << 3) & SCALE_MASK);
+  // Reuse the same precision as current value.
+  uint8_t setpoint_value_precision = 0;
+  attribute_store_get_child_reported(
+    type_node,
+    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_PRECISION,
+    &setpoint_value_precision,
+    sizeof(setpoint_value_precision));
 
+  uint8_t level2_properties_field
+    = (setpoint_value_precision << 5) | (setpoint_value_scale << 3);
   int32_t setpoint_value_integer
     = thermostat_setpoint_get_valid_desired_setpoint_value(node);
 
-  set_frame->value1 = (setpoint_value_integer & 0xFF000000) >> 24;  // MSB
-  set_frame->value2 = (setpoint_value_integer & 0x00FF0000) >> 16;
-  set_frame->value3 = (setpoint_value_integer & 0x0000FF00) >> 8;
-  set_frame->value4 = (setpoint_value_integer & 0x000000FF);  // LSB
+  if (setpoint_value_integer >= INT8_MIN
+      && setpoint_value_integer <= INT8_MAX) {
+    ZW_THERMOSTAT_SETPOINT_SET_1BYTE_V3_FRAME *set_frame
+      = (ZW_THERMOSTAT_SETPOINT_SET_1BYTE_V3_FRAME *)frame;
+    *frame_length = sizeof(ZW_THERMOSTAT_SETPOINT_SET_1BYTE_V3_FRAME);
 
-  *frame_len = sizeof(ZW_THERMOSTAT_SETPOINT_SET_4BYTE_V3_FRAME);
+    set_frame->cmdClass = COMMAND_CLASS_THERMOSTAT_SETPOINT_V3;
+    set_frame->cmd      = THERMOSTAT_SETPOINT_SET_V3;
+    set_frame->level    = setpoint_type;
+    set_frame->level2   = level2_properties_field | 1;
+    set_frame->value1   = (uint8_t)(setpoint_value_integer & 0x000000FF);
+  } else if (setpoint_value_integer >= INT16_MIN
+             && setpoint_value_integer <= INT16_MAX) {
+    ZW_THERMOSTAT_SETPOINT_SET_2BYTE_V3_FRAME *set_frame
+      = (ZW_THERMOSTAT_SETPOINT_SET_2BYTE_V3_FRAME *)frame;
+    *frame_length = sizeof(ZW_THERMOSTAT_SETPOINT_SET_2BYTE_V3_FRAME);
+
+    set_frame->cmdClass = COMMAND_CLASS_THERMOSTAT_SETPOINT_V3;
+    set_frame->cmd      = THERMOSTAT_SETPOINT_SET_V3;
+    set_frame->level    = setpoint_type;
+    set_frame->level2   = level2_properties_field | 2;
+
+    set_frame->value1 = (setpoint_value_integer & 0x0000FF00) >> 8;  // MSB
+    set_frame->value2 = (setpoint_value_integer & 0x000000FF);       // LSB
+
+  } else if (setpoint_value_integer >= INT32_MIN
+             && setpoint_value_integer <= INT32_MAX) {
+    ZW_THERMOSTAT_SETPOINT_SET_4BYTE_V3_FRAME *set_frame
+      = (ZW_THERMOSTAT_SETPOINT_SET_4BYTE_V3_FRAME *)frame;
+    *frame_length = sizeof(ZW_THERMOSTAT_SETPOINT_SET_4BYTE_V3_FRAME);
+
+    set_frame->cmdClass = COMMAND_CLASS_THERMOSTAT_SETPOINT_V3;
+    set_frame->cmd      = THERMOSTAT_SETPOINT_SET_V3;
+    set_frame->level    = setpoint_type;
+    set_frame->level2   = level2_properties_field | 4;
+
+    set_frame->value1 = (setpoint_value_integer & 0xFF000000) >> 24;  // MSB
+    set_frame->value2 = (setpoint_value_integer & 0x00FF0000) >> 16;
+    set_frame->value3 = (setpoint_value_integer & 0x0000FF00) >> 8;
+    set_frame->value4 = (setpoint_value_integer & 0x000000FF);  // LSB
+  } else {
+    sl_log_error(LOG_TAG, "Invalid desired value size");
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
   return SL_STATUS_OK;
 }
 
@@ -389,7 +426,7 @@ static sl_status_t zwave_command_class_thermostat_setpoint_handle_report(
 {
   // We expect to have at least 1 byte of value
   if (frame_length <= REPORT_VALUE_INDEX) {
-    return SL_STATUS_FAIL;
+    return SL_STATUS_NOT_SUPPORTED;
   }
 
   attribute_store_node_t endpoint_node
@@ -406,6 +443,12 @@ static sl_status_t zwave_command_class_thermostat_setpoint_handle_report(
     sizeof(uint8_t),
     0);
 
+  // Add guard in case we don't find it
+  if (type_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    sl_log_warning(LOG_TAG, "Can't find setpoint type %d", received_type);
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
   uint8_t size = frame_data[REPORT_PRECISION_SCALE_SIZE_INDEX] & SIZE_MASK;
   int32_t scale
     = (frame_data[REPORT_PRECISION_SCALE_SIZE_INDEX] & SCALE_MASK) >> 3;
@@ -419,8 +462,14 @@ static sl_status_t zwave_command_class_thermostat_setpoint_handle_report(
   attribute_store_node_t scale_node = attribute_store_get_first_child_by_type(
     type_node,
     ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE);
-
   attribute_store_set_reported(scale_node, &scale, sizeof(scale));
+
+  // Save precision
+  attribute_store_set_child_reported(
+    type_node,
+    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_PRECISION,
+    &precision,
+    sizeof(precision));
 
   int32_t setpoint_value
     = command_class_get_int32_value(size,
@@ -688,9 +737,7 @@ sl_status_t zwave_command_class_thermostat_setpoint_init()
   handler.command_class_name         = "Thermostat Setpoint";
   handler.comments                   = "Partial Control: <br>"
                                        "1. No discovery of ambiguous types in v1-v2 <br>"
-                                       "2. Only a few setpoints can be configured. <br>"
-                                       "3. Precision/size fields in the set are determined <br>"
-                                       "automatically by the controller. ";
+                                       "2. Only a few setpoints can be configured. <br>";
 
   zwave_command_handler_register_handler(handler);
 

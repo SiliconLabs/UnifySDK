@@ -31,7 +31,6 @@
 #define SCALE_MASK     0x18
 #define PRECISION_MASK 0xE0
 
-#define SET_DEFAULT_PRECISION (3 << 5)
 #define SET_DEFAULT_SIZE      4
 
 #define REPORT_SETPOINT_TYPE_INDEX 2

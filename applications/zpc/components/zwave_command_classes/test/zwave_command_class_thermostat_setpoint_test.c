@@ -160,12 +160,25 @@ void test_zwave_command_class_thermostat_setpoint_set_v1()
                               &type,
                               sizeof(type));
 
+
   int32_t desired_value = 123456;
   attribute_store_node_t value_node
     = attribute_store_add_node(ATTRIBUTE(VALUE), setpoint_type_node);
   attribute_store_set_desired(value_node,
                               &desired_value,
                               sizeof(desired_value));
+
+  // Set precision
+  uint8_t precision = 0b111;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_PRECISION),
+                                     &precision,
+                                     sizeof(precision));
+  int32_t scale = 0b11;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_SCALE),
+                                     &scale,
+                                     sizeof(scale));
 
   TEST_ASSERT_NOT_NULL(thermostat_setpoint_set);
   TEST_ASSERT_EQUAL(
@@ -175,10 +188,62 @@ void test_zwave_command_class_thermostat_setpoint_set_v1()
   const uint8_t expected_frame[] = {COMMAND_CLASS_THERMOSTAT_SETPOINT_V3,
                                     THERMOSTAT_SETPOINT_SET_V3,
                                     type,
-                                    SET_DEFAULT_PRECISION | SET_DEFAULT_SIZE,
+                                    (precision << 5)  | (scale << 3) | 4,
                                     (desired_value & 0xFF000000) >> 24,  // MSB
                                     (desired_value & 0x00FF0000) >> 16,
                                     (desired_value & 0x0000FF00) >> 8,
+                                    (desired_value & 0x000000FF)};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
+                                received_frame,
+                                sizeof(expected_frame));
+}
+void test_zwave_command_class_thermostat_setpoint_set_v2()
+{
+  TEST_ASSERT_NOT_NULL(thermostat_setpoint_set);
+
+  // Version 2 node
+  const zwave_cc_version_t version = 2;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+  const uint8_t type = 1;
+  attribute_store_node_t setpoint_type_node
+    = attribute_store_emplace(endpoint_id_node,
+                              ATTRIBUTE(TYPE),
+                              &type,
+                              sizeof(type));
+
+
+  int32_t desired_value = 12;
+  attribute_store_node_t value_node
+    = attribute_store_add_node(ATTRIBUTE(VALUE), setpoint_type_node);
+  attribute_store_set_desired(value_node,
+                              &desired_value,
+                              sizeof(desired_value));
+
+  // Set precision
+  uint8_t precision = 0b101;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_PRECISION),
+                                     &precision,
+                                     sizeof(precision));
+  int32_t scale = 0b1;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_SCALE),
+                                     &scale,
+                                     sizeof(scale));
+
+  TEST_ASSERT_NOT_NULL(thermostat_setpoint_set);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    thermostat_setpoint_set(value_node, received_frame, &received_frame_size));
+
+  const uint8_t expected_frame[] = {COMMAND_CLASS_THERMOSTAT_SETPOINT_V3,
+                                    THERMOSTAT_SETPOINT_SET_V3,
+                                    type,
+                                    (precision << 5)  | (scale << 3) | 1,
                                     (desired_value & 0x000000FF)};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
@@ -210,6 +275,18 @@ void test_zwave_command_class_thermostat_setpoint_set_v3_clip_lower_bound()
                               &desired_value,
                               sizeof(desired_value));
 
+  // Set precision
+  uint8_t precision = 0b010;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_PRECISION),
+                                     &precision,
+                                     sizeof(precision));
+  int32_t scale = 0b10;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_SCALE),
+                                     &scale,
+                                     sizeof(scale));
+
   const int32_t min_value = DEFAULT_MIN_VALUE;
   attribute_store_set_child_reported(setpoint_type_node,
                                      ATTRIBUTE(MIN_VALUE),
@@ -224,9 +301,7 @@ void test_zwave_command_class_thermostat_setpoint_set_v3_clip_lower_bound()
   const uint8_t expected_frame[] = {COMMAND_CLASS_THERMOSTAT_SETPOINT_V3,
                                     THERMOSTAT_SETPOINT_SET_V3,
                                     type,
-                                    SET_DEFAULT_PRECISION | SET_DEFAULT_SIZE,
-                                    (min_value & 0xFF000000) >> 24,  // MSB
-                                    (min_value & 0x00FF0000) >> 16,
+                                    (precision << 5)  | (scale << 3) | 2,
                                     (min_value & 0x0000FF00) >> 8,
                                     (min_value & 0x000000FF)};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
@@ -259,6 +334,18 @@ void test_zwave_command_class_thermostat_setpoint_set_v3_clip_upper_bound()
                               &desired_value,
                               sizeof(desired_value));
 
+  // Set precision
+  uint8_t precision = 0b001;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_PRECISION),
+                                     &precision,
+                                     sizeof(precision));
+  int32_t scale = 0b00;
+  attribute_store_set_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_SCALE),
+                                     &scale,
+                                     sizeof(scale));
+
   const int32_t max_value = DEFAULT_MAX_VALUE;
   attribute_store_set_child_reported(setpoint_type_node,
                                      ATTRIBUTE(MAX_VALUE),
@@ -273,7 +360,7 @@ void test_zwave_command_class_thermostat_setpoint_set_v3_clip_upper_bound()
   const uint8_t expected_frame[] = {COMMAND_CLASS_THERMOSTAT_SETPOINT_V3,
                                     THERMOSTAT_SETPOINT_SET_V3,
                                     type,
-                                    SET_DEFAULT_PRECISION | SET_DEFAULT_SIZE,
+                                    (precision << 5)  | (scale << 3) | 4,
                                     (max_value & 0xFF000000) >> 24,  // MSB
                                     (max_value & 0x00FF0000) >> 16,
                                     (max_value & 0x0000FF00) >> 8,
@@ -282,4 +369,71 @@ void test_zwave_command_class_thermostat_setpoint_set_v3_clip_upper_bound()
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
                                 sizeof(expected_frame));
+}
+
+void test_zwave_command_class_thermostat_setpoint_report_happy_case() {
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+
+  uint8_t setpoint_type = 1;
+  uint8_t precision = 0b010;
+  uint8_t scale = 0b00;
+  uint8_t size = 2;
+  int32_t value = 1212;
+
+  uint8_t report_frame[] = {COMMAND_CLASS_THERMOSTAT_SETPOINT,
+                            THERMOSTAT_SETPOINT_REPORT,
+                            setpoint_type,
+                            (precision << 5) | (scale << 3) | size,
+                            (value & 0x0000FF00) >> 8,
+                            (value & 0x000000FF)};
+
+  // Report should fail since the setpoint_type doesn't exists
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    thermostat_handler.control_handler(&info, report_frame, sizeof(report_frame)));
+
+  // Create setpoint_type
+  attribute_store_node_t setpoint_type_node
+    = attribute_store_emplace(endpoint_id_node,
+                              ATTRIBUTE(TYPE),
+                              &setpoint_type,
+                              sizeof(setpoint_type));
+
+  // Need to create an empty value node first since it isn't created automaticaly
+  attribute_store_add_node(ATTRIBUTE(VALUE), setpoint_type_node);
+
+  // Now we can do it
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    thermostat_handler.control_handler(&info, report_frame, sizeof(report_frame)));
+
+    int32_t reported_scale = 0;
+    attribute_store_get_child_reported(setpoint_type_node,
+                                       ATTRIBUTE(VALUE_SCALE),
+                                       &reported_scale,
+                                       sizeof(reported_scale));
+    TEST_ASSERT_EQUAL_MESSAGE(scale,
+                              reported_scale,
+                              "Scale value should match");
+
+    uint8_t reported_precision = 0;
+    attribute_store_get_child_reported(setpoint_type_node,
+                                       ATTRIBUTE(VALUE_PRECISION),
+                                       &reported_precision,
+                                       sizeof(reported_precision));
+    TEST_ASSERT_EQUAL_MESSAGE(precision,
+                              reported_precision,
+                              "Precision value should match");
+
+    int32_t reported_value;
+    attribute_store_get_child_reported(setpoint_type_node,
+                                       ATTRIBUTE(VALUE),
+                                       &reported_value,
+                                       sizeof(reported_value));
+    TEST_ASSERT_EQUAL_MESSAGE(value * 10, // Precision offset
+                              reported_value,
+                              "Value should match");
 }
