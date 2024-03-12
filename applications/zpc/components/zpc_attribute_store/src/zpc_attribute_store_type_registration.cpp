@@ -249,6 +249,8 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   {ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_ENDPOINTS,   "Aggregated Endpoints",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_ALL_INDIVIDUAL_ENDPOINTS_FOUND,   "All Endpoints discovered",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_MEMBERS,   "Aggregated endpoint members bitmask",   ATTRIBUTE_ENDPOINT_ID,   BYTE_ARRAY_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_FLAG_SEND_TARGETED_DEVICE_CLASS, "If set will send the endpoint Generic/Specific device class in ZW_MULTI_CHANNEL_END_POINT_FIND",  ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+
   /////////////////////////////////////////////////////////////////////
   //         Notification Command Class attributes
   /////////////////////////////////////////////////////////////////////

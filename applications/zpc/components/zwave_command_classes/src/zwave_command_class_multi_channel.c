@@ -558,32 +558,46 @@ sl_status_t zwave_command_class_multi_channel_capability_get(
 static sl_status_t zwave_command_class_multi_channel_endpoint_find(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
 {
-  uint8_t generic_device_class = 0;
-  uint8_t specific_device_class = 0;
+  uint8_t generic_device_class = 0xFF;
+  uint8_t specific_device_class = 0xFF;
 
   attribute_store_node_t endpoint_node
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
 
-  sl_status_t result = attribute_store_get_child_reported(
+  uint8_t endpoint_find_legacy = 0;
+  sl_status_t status           = attribute_store_get_child_reported(
     endpoint_node,
-    ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS,
-    &generic_device_class,
-    sizeof(generic_device_class));
+    ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_FLAG_SEND_TARGETED_DEVICE_CLASS,
+    &endpoint_find_legacy,
+    sizeof(endpoint_find_legacy));
 
-  if (result != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG, "Can't find generic device class. Setting to default 0xff");
-    generic_device_class = 0xFF; 
-  }
+  // By default we use 0xFF to discover all endpoint supported by the device.
+  // Some legacy device doesn't support 0xFF and needs to send the device Generic/Specific class instead
+  // So we use a flag to control that behavior
+  if (status == SL_STATUS_OK && endpoint_find_legacy) {
+    sl_status_t result
+      = attribute_store_get_child_reported(endpoint_node,
+                                           ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS,
+                                           &generic_device_class,
+                                           sizeof(generic_device_class));
 
- result = attribute_store_get_child_reported(
-    endpoint_node,
-    ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS,
-    &specific_device_class,
-    sizeof(specific_device_class));
+    if (result != SL_STATUS_OK) {
+      sl_log_warning(
+        LOG_TAG,
+        "Can't find generic device class. Setting to default 0xff");
+    }
 
-  if (result != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG, "Can't find specific device class. Setting to default 0xff");
-    specific_device_class = 0xFF; 
+    result = attribute_store_get_child_reported(
+      endpoint_node,
+      ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS,
+      &specific_device_class,
+      sizeof(specific_device_class));
+
+    if (result != SL_STATUS_OK) {
+      sl_log_warning(
+        LOG_TAG,
+        "Can't find specific device class. Setting to default 0xff");
+    }
   }
 
   // Create a frame for the attribute resolver
