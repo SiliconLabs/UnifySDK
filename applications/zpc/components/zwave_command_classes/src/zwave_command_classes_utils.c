@@ -32,6 +32,7 @@
 
 // Generic includes
 #include <assert.h>
+#include <math.h>
 
 #define LOG_TAG "zwave_command_class_utils"
 
@@ -290,7 +291,8 @@ int32_t command_class_get_int32_value(uint8_t size,
   return extracted_value;
 }
 
-int32_t get_signed_value_from_frame_and_size(const uint8_t *frame, uint8_t size)
+int32_t
+  get_signed_value_from_frame_and_size(const uint8_t *frame, uint8_t size)
 {
   int32_t extracted_value = get_unsigned_value_from_frame_and_size(frame, size);
 
@@ -311,6 +313,50 @@ uint32_t get_unsigned_value_from_frame_and_size(const uint8_t *frame,
   }
 
   return extracted_value;
+}
+
+// ZCL use precision of 2
+int16_t zwave_temperature_to_ucl_temperature(int32_t value,
+                                             uint8_t precision,
+                                             uint8_t scale)
+{
+  // First convert value with precision of 2
+  double coeff = pow(10, (2-precision));
+  int32_t ucl_value = value * coeff;
+
+  while (ucl_value > INT16_MAX || ucl_value < INT16_MIN ) {
+      ucl_value /= 10;
+      sl_log_warning(LOG_TAG, "Reducing precision of temperature value");
+  }
+
+  // Need to convert to C°
+  if (scale == 1) {
+    double real_value = ucl_value / 100.0;
+    double f_value = FAHRENHEIT_TO_DEGREES(real_value);
+    ucl_value = f_value * 100;
+  }
+
+  return ucl_value;
+}
+
+// ZCL use precision of 2
+int32_t ucl_temperature_to_zwave_temperature(int16_t value,
+                                             uint8_t precision,
+                                             uint8_t scale)
+{
+  int32_t zwave_value = value;
+  // First Need to convert to C°
+  if (scale == 1) {
+    double real_value = value / 100.0;
+    double f_value = DEGREES_TO_FAHRENHEIT(real_value);
+    zwave_value = f_value * 100;
+  }
+
+  // Then convert back to our  precision
+  double coeff = pow(10, (precision-2));
+  zwave_value *= coeff;
+
+  return zwave_value;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
