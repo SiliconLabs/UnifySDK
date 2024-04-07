@@ -280,6 +280,13 @@ void test_on_nif_attribute_update()
                   NULL);
   // Stop the stub, expect rule registrations for each Command Class.
   attribute_resolver_register_rule_Stub(NULL);
+
+  attribute_resolver_register_rule_ExpectAndReturn(
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_VERSION),
+    NULL,
+    version_cc_get,
+    SL_STATUS_OK);
+
   for (size_t i = 0; i < supported_cc_list_length; i++) {
     if (supported_cc_list[i] >= COMMAND_CLASS_FIRST_APPLICATION_CC) {
       attribute_resolver_register_rule_ExpectAndReturn(
@@ -328,6 +335,13 @@ void test_on_nif_attribute_update()
                   &supported_secure_cc_list_length,
                   NULL,
                   NULL);
+
+  attribute_resolver_register_rule_ExpectAndReturn(
+    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_VERSION),
+    NULL,
+    version_cc_get,
+    SL_STATUS_OK);
+
   for (size_t i = 0; i < supported_cc_list_length; i++) {
     if (supported_cc_list[i] >= COMMAND_CLASS_FIRST_APPLICATION_CC) {
       attribute_resolver_register_rule_ExpectAndReturn(
