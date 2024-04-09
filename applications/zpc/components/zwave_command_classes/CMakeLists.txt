@@ -54,6 +54,7 @@ add_library(
   src/zwave_command_class_thermostat_operating_state.c
   src/zwave_command_class_time.c
   src/zwave_command_class_user_code.c
+  src/zwave_command_class_user_credential.cpp
   src/zwave_command_class_version.c
   src/zwave_command_class_wake_up.c
   src/zwave_command_class_zwave_plus_info.c
