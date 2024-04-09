@@ -41,7 +41,6 @@ extern "C" {
 #include "zwave_rx.h"
 #include "attribute_store.h"
 
-
 // Following defines are created using the notification.py
 #define NOTIFICATION_SMOKE_ALARM              (0x1)
 #define NOTIFICATION_CO_ALARM                 (0x2)
@@ -179,6 +178,43 @@ extern "C" {
 #define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_COLLECTIVE_DISORDER_STATUS \
   (0xd)
 #define NOTIFICATION_STATE_HOME_MONITORING_HOME_OCCUPANCY_STATUS (0x0)
+
+/**
+ * @brief Typedef for the notification event callback function.
+ *
+ * This typedef defines the function signature for the notification event callback.
+ * The callback function is called when a notification event occurs.
+ *
+ * @param endpoint_node The endpoint node that received the notification event.
+ * @param notification_type Notification type.
+ * @param event_code Event code associated with the notification type.
+ * @param event_parameters Raw event parameters data.
+ * @param event_parameters_length The length of the event parameters data.
+ */
+typedef void (*notification_event_callback_t)(attribute_store_node_t endpoint_node,
+                                              uint8_t notification_type,
+                                              uint8_t event_code,
+                                              const uint8_t *event_parameters,
+                                              uint8_t event_parameters_length);
+
+/**
+ * @brief Register a callback function to be called when a notification event is received
+ *
+ * Any command class might call this function to be notified when a notification event is received.
+ * The callback function will be called with the notification type, event code and the event parameters.
+ * The event parameters are the raw data received in the notification event.
+ * 
+ * The callback will only be called if the event/state is supported for given notification type.
+ * 
+ * @note This callback also send the raw state received by a Notification Report.
+ * @note The events are not store in the attribute store since there is no point to make them persistent.
+ * 
+ * 
+ * @param endpoint_node The endpoint node to register the callback
+ * @param callback The callback function to be called when a notification event is received
+ */
+void zwave_command_class_notification_register_event_callback(
+  attribute_store_node_t endpoint_node, notification_event_callback_t callback);
 
 /**
  * @brief Intitialize the Notification command class control APIs

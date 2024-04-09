@@ -1196,3 +1196,247 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
                                                     (const uint8_t *)&frame,
                                                     sizeof(frame)));
 }
+
+static bool callback_triggered = false;
+void triggered_callback(attribute_store_node_t endpoint_node,
+                        uint8_t notification_type,
+                        uint8_t event_code,
+                        const uint8_t *event_parameters,
+                        uint8_t event_parameters_length)
+{
+  callback_triggered = true;
+
+  TEST_ASSERT_EQUAL(0x17, endpoint_node);
+  TEST_ASSERT_EQUAL(0x06, notification_type);
+  TEST_ASSERT_EQUAL(0x27, event_code);
+  TEST_ASSERT_EQUAL(0x01, event_parameters[0]);
+  TEST_ASSERT_EQUAL(0x02, event_parameters[1]);
+  TEST_ASSERT_EQUAL(2, event_parameters_length);
+}
+
+void not_triggered_callback(attribute_store_node_t endpoint_node,
+                            uint8_t notification_type,
+                            uint8_t event_code,
+                            const uint8_t *event_parameters,
+                            uint8_t event_parameters_length)
+{
+  TEST_FAIL_MESSAGE("Callback should not be triggered");
+}
+
+void test_zwave_command_class_test_event_callback_happy_case()
+{
+  // Test a report for Home Security notification type
+  uint8_t test_frame_data_2[]
+    = {0x71, 0x05, 0x00, 0x00, 0x00, 0x00, 0x06, 0x27, 0x02, 0x01, 0x02, 0x00};
+  int32_t notification_event_value = 0x27;
+  int32_t notification_event_param_value
+    = 0x01;  //0x00: Door/Window open in regular position
+  unid_t test_unid                                     = "zw000001";
+  attribute_store_node_t endpoint_node                 = 0x017;
+  attribute_store_node_t notification_status_node      = 0x012;
+  attribute_store_node_t notification_state_node       = 0x013;
+  attribute_store_node_t notification_event_node       = 0x014;
+  attribute_store_node_t notification_event_param_node = 0x015;
+  attribute_store_node_t supported_states_node         = 0x021;
+
+  uint8_t supported_events[] = {0x27, 0x05};
+
+  // Register event callbacks
+  callback_triggered = false;
+  zwave_command_class_notification_register_event_callback(endpoint_node,
+                                                           triggered_callback);
+  zwave_command_class_notification_register_event_callback(
+    0,
+    not_triggered_callback);
+
+  zwave_unid_from_node_id_Expect(test_connection_info.remote.node_id, NULL);
+  zwave_unid_from_node_id_IgnoreArg_unid();
+  zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));
+
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
+    test_unid,
+    test_connection_info.remote.endpoint_id,
+    endpoint_node);
+
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
+    endpoint_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
+    REPORTED_ATTRIBUTE,
+    &test_frame_data_2[6],
+    sizeof(uint8_t),
+    0,
+    notification_status_node);
+
+  uint8_t state = NOTIFICATION_STATE_LAST_EVENT;
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
+    notification_status_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_STATE,
+    REPORTED_ATTRIBUTE,
+    &state,
+    sizeof(state),
+    0,
+    notification_state_node);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    notification_state_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT,
+    0,
+    notification_event_node);
+
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    notification_event_node,
+    REPORTED_ATTRIBUTE,
+    (uint8_t *)&notification_event_value,
+    sizeof(int32_t),
+    SL_STATUS_OK);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    notification_event_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT_PARAMETERS,
+    0,
+    notification_event_param_node);
+
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    notification_event_param_node,
+    REPORTED_ATTRIBUTE,
+    (uint8_t *)&notification_event_param_value,
+    sizeof(int32_t),
+    SL_STATUS_OK);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    notification_status_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS,
+    0,
+    supported_states_node);
+
+  uint8_t size = 2;
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    supported_states_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  attribute_store_get_node_attribute_value_ReturnMemThruPtr_value(
+    supported_events,
+    (uint8_t)sizeof(supported_events));
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(&size);
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    command_handler.control_handler(&test_connection_info,
+                                                    test_frame_data_2,
+                                                    sizeof(test_frame_data_2)));
+
+  TEST_ASSERT_TRUE_MESSAGE(callback_triggered,
+                           "Event callback should be triggered");
+}
+
+void test_zwave_command_class_test_event_callback_event_not_supported()
+{
+  // Test a report for Home Security notification type
+  uint8_t test_frame_data_2[]
+    = {0x71, 0x05, 0x00, 0x00, 0x00, 0x00, 0x06, 0x27, 0x02, 0x01, 0x02, 0x00};
+  int32_t notification_event_value = 0x27;
+  int32_t notification_event_param_value
+    = 0x01;  //0x00: Door/Window open in regular position
+  unid_t test_unid                                     = "zw000001";
+  attribute_store_node_t endpoint_node                 = 0x017;
+  attribute_store_node_t notification_status_node      = 0x012;
+  attribute_store_node_t notification_state_node       = 0x013;
+  attribute_store_node_t notification_event_node       = 0x014;
+  attribute_store_node_t notification_event_param_node = 0x015;
+  attribute_store_node_t supported_states_node         = 0x021;
+
+  uint8_t supported_events[] = {0x12, 0x05};
+
+  // Register event callbacks
+  callback_triggered = false;
+  zwave_command_class_notification_register_event_callback(endpoint_node,
+                                                           triggered_callback);
+  zwave_command_class_notification_register_event_callback(
+    0,
+    not_triggered_callback);
+
+  zwave_unid_from_node_id_Expect(test_connection_info.remote.node_id, NULL);
+  zwave_unid_from_node_id_IgnoreArg_unid();
+  zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));
+
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
+    test_unid,
+    test_connection_info.remote.endpoint_id,
+    endpoint_node);
+
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
+    endpoint_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
+    REPORTED_ATTRIBUTE,
+    &test_frame_data_2[6],
+    sizeof(uint8_t),
+    0,
+    notification_status_node);
+
+  uint8_t state = NOTIFICATION_STATE_LAST_EVENT;
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
+    notification_status_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_STATE,
+    REPORTED_ATTRIBUTE,
+    &state,
+    sizeof(state),
+    0,
+    notification_state_node);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    notification_state_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT,
+    0,
+    notification_event_node);
+
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    notification_event_node,
+    REPORTED_ATTRIBUTE,
+    (uint8_t *)&notification_event_value,
+    sizeof(int32_t),
+    SL_STATUS_OK);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    notification_event_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT_PARAMETERS,
+    0,
+    notification_event_param_node);
+
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    notification_event_param_node,
+    REPORTED_ATTRIBUTE,
+    (uint8_t *)&notification_event_param_value,
+    sizeof(int32_t),
+    SL_STATUS_OK);
+
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    notification_status_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS,
+    0,
+    supported_states_node);
+
+  uint8_t size = 2;
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    supported_states_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  attribute_store_get_node_attribute_value_ReturnMemThruPtr_value(
+    supported_events,
+    (uint8_t)sizeof(supported_events));
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(&size);
+
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    command_handler.control_handler(&test_connection_info,
+                                                    test_frame_data_2,
+                                                    sizeof(test_frame_data_2)));
+
+  TEST_ASSERT_FALSE_MESSAGE(callback_triggered,
+                            "Event callback should not triggered");
+}
