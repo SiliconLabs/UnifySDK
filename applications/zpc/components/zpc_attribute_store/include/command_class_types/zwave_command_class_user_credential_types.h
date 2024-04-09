@@ -40,19 +40,36 @@ typedef uint8_t user_credential_user_modifier_type_t;
 ///> User Modifier Node ID. uint16_t
 typedef uint16_t user_credential_user_modifier_node_id_t;
 ///> User Type. uint8_t
+#define USER_CREDENTIAL_USER_TYPE_GENERAL_USER 0x00
+#define USER_CREDENTIAL_USER_TYPE_PROGRAMMING_USER 0x03
+#define USER_CREDENTIAL_USER_TYPE_NON_ACCESS_USER 0x04
+#define USER_CREDENTIAL_USER_TYPE_DURESS_USER 0x05
+#define USER_CREDENTIAL_USER_TYPE_DISPOSABLE_USER 0x06
+#define USER_CREDENTIAL_USER_TYPE_EXPIRING_USER 0x07
+#define USER_CREDENTIAL_USER_TYPE_REMOTE_ONLY_USER 0x09
 typedef uint8_t user_credential_user_type_t;
+///> User active state (0 or 1). uint8_t
+typedef uint8_t user_credential_user_active_state_t;
+///> User name encoding. uint8_t
+typedef uint8_t user_credential_user_name_encoding_t;
 
 ///> Credential type. uint8_t
 typedef uint8_t user_credential_type_t;
+
+///> Credential rule. uint8_t
+typedef uint8_t user_credential_rule_t;
 
 ///> Credential slot. uint16_t
 typedef uint16_t user_credential_slot_t;
 
 ///> Operation type. uint8_t
+#define USER_CREDENTIAL_OPERATION_TYPE_ADD 0x00
+#define USER_CREDENTIAL_OPERATION_TYPE_MODIFY 0x01
+#define USER_CREDENTIAL_OPERATION_TYPE_DELETE 0x02
 typedef uint8_t user_credential_operation_type_t;
 
-///> Operation type. uint8_t
-typedef uint8_t user_credential_operation_type_t;
+///> Expiring Timeout for User (Minutes). uint16_t
+typedef uint16_t user_credential_expiring_timeout_minutes_t;
 
 #ifdef __cplusplus
 extern "C" {

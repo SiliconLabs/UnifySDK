@@ -77,6 +77,7 @@ static std::map<uint8_t, attribute_resolver_function_t> resolver_functions;
 static uint8_t received_frame[255]  = {};
 static uint16_t received_frame_size = 0;
 
+const uint8_t MAX_CHAR_SIZE = 64;
 /////////////////////////////////////////////////////
 // C++ HELPERS
 /////////////////////////////////////////////////////
@@ -297,7 +298,23 @@ void helper_test_set_get_with_args(
         }
 
       } break;
+      case C_STRING_STORAGE_TYPE: {
+        char reported_c_str[MAX_CHAR_SIZE];
 
+        status                       = attribute_store_get_reported_string(node,
+                                                     reported_c_str,
+                                                     MAX_CHAR_SIZE);
+        std::string reported_cpp_str = reported_c_str;
+        if (reported_cpp_str.empty()) {
+          TEST_FAIL_MESSAGE("Can't get string value");
+        }
+
+        expected_frame.push_back(reported_cpp_str.length());
+        for (const char &c: reported_cpp_str) {
+          expected_frame.push_back(c);
+        }
+
+      } break;
       default:
         TEST_FAIL_MESSAGE(
           "Unkown storage type in helper_test_set_get_with_args_happy_case");
@@ -331,7 +348,6 @@ void helper_test_string_value(
   }
 
   for (auto &attr: attribute_map_values) {
-    constexpr uint8_t MAX_CHAR_SIZE = 64;
     char reported_c_str[MAX_CHAR_SIZE];
 
     auto str_node = attribute_store_get_first_child_by_type(parent, attr.first);
@@ -769,8 +785,121 @@ void test_user_credential_all_users_checksum_report_happy_case()
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// User Get/Report
+// User Set/Get/Report
 ////////////////////////////////////////////////////////////////////////////
+void test_user_credential_user_set_add_or_modify_happy_case()
+{
+  user_credential_user_unique_id_t user_id                    = 12121;
+  user_credential_operation_type_t operation_type             = USER_SET_OPERATION_TYPE_ADD;
+  user_credential_type_t user_type                            = 5;
+  user_credential_rule_t credential_rule                      = 2;
+  user_credential_user_active_state_t user_active_state       = 1;
+  user_credential_expiring_timeout_minutes_t expiring_timeout = 55;
+  user_credential_user_name_encoding_t user_name_encoding     = 0;
+  std::string user_name                                       = "DoUzE";
+
+  auto user_id_node = attribute_store_emplace(endpoint_id_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID),
+                                              &user_id,
+                                              sizeof(user_id));
+
+  auto operation_type_node
+    = attribute_store_emplace_desired(user_id_node,
+                                      ATTRIBUTE(USER_OPERATION_TYPE),
+                                      &operation_type,
+                                      sizeof(operation_type));
+  auto user_type_node = attribute_store_emplace_desired(user_id_node,
+                                                        ATTRIBUTE(USER_TYPE),
+                                                        &user_type,
+                                                        sizeof(user_type));
+  auto user_active_state_node
+    = attribute_store_emplace(user_id_node,
+                              ATTRIBUTE(USER_ACTIVE_STATE),
+                              &user_active_state,
+                              sizeof(user_active_state));
+  auto credential_rule_node
+    = attribute_store_emplace_desired(user_id_node,
+                                      ATTRIBUTE(CREDENTIAL_RULE),
+                                      &credential_rule,
+                                      sizeof(credential_rule));
+  auto expiring_timeout_node
+    = attribute_store_emplace(user_id_node,
+                              ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES),
+                              &expiring_timeout,
+                              sizeof(expiring_timeout));
+  auto user_name_encoding_node
+    = attribute_store_emplace_desired(user_id_node,
+                                      ATTRIBUTE(USER_NAME_ENCODING),
+                                      &user_name_encoding,
+                                      sizeof(user_name_encoding));
+  auto user_name_node
+    = attribute_store_add_node(ATTRIBUTE(USER_NAME), user_id_node);
+
+  sl_status_t status
+    = attribute_store_set_reported_string(user_name_node, user_name.c_str());
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, status, "Can't set username");
+
+  printf("Send with USER_SET_OPERATION_TYPE_MODIFY\n");
+  helper_test_set_get_with_args(
+    USER_SET,
+    operation_type_node,
+    {{operation_type_node, DESIRED_ATTRIBUTE},
+     {user_id_node, REPORTED_ATTRIBUTE},
+     {user_type_node, DESIRED_ATTRIBUTE},
+     {user_active_state_node, REPORTED_ATTRIBUTE},
+     {credential_rule_node, DESIRED_ATTRIBUTE},
+     {expiring_timeout_node, REPORTED_ATTRIBUTE},
+     {user_name_encoding_node, DESIRED_ATTRIBUTE},
+     {user_name_node, REPORTED_ATTRIBUTE}});
+
+
+  printf("Send with USER_SET_OPERATION_TYPE_MODIFY\n");
+
+  operation_type = USER_SET_OPERATION_TYPE_ADD;
+  attribute_store_set_desired(operation_type_node,
+                              &operation_type,
+                              sizeof(operation_type));
+  helper_test_set_get_with_args(
+    USER_SET,
+    operation_type_node,
+    {{operation_type_node, DESIRED_ATTRIBUTE},
+     {user_id_node, REPORTED_ATTRIBUTE},
+     {user_type_node, DESIRED_ATTRIBUTE},
+     {user_active_state_node, REPORTED_ATTRIBUTE},
+     {credential_rule_node, DESIRED_ATTRIBUTE},
+     {expiring_timeout_node, REPORTED_ATTRIBUTE},
+     {user_name_encoding_node, DESIRED_ATTRIBUTE},
+     {user_name_node, REPORTED_ATTRIBUTE}});            
+}
+
+void test_user_credential_user_delete_remove_happy_case()
+{
+  user_credential_user_unique_id_t user_id                    = 12121;
+  user_credential_operation_type_t operation_type             = USER_SET_OPERATION_TYPE_DELETE;
+
+  auto user_id_node = attribute_store_emplace(endpoint_id_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID),
+                                              &user_id,
+                                              sizeof(user_id));
+
+  auto operation_type_node
+    = attribute_store_emplace_desired(user_id_node,
+                                      ATTRIBUTE(USER_OPERATION_TYPE),
+                                      &operation_type,
+                                      sizeof(operation_type));
+
+  helper_test_set_get_with_args(USER_SET,
+                                operation_type_node,
+                                {{operation_type_node, DESIRED_ATTRIBUTE},
+                                 {user_id_node, REPORTED_ATTRIBUTE}});
+}
+
+void test_user_credential_user_set_invalid_node()
+{
+  helper_test_set_get_with_args(USER_SET, ATTRIBUTE_STORE_INVALID_NODE);
+}
+
+
 void test_user_credential_user_get_happy_case()
 {
   user_credential_user_unique_id_t user_id = 12;
@@ -795,7 +924,7 @@ std::vector<uint8_t> helper_create_user_report_frame(
   user_credential_user_modifier_node_id_t user_modifier_node_id,
   user_credential_user_unique_id_t user_id,
   user_credential_user_type_t user_type,
-  uint8_t user_active_state,
+  user_credential_user_active_state_t user_active_state,
   user_credential_supported_credential_rules_t credential_rule,
   user_credential_expiring_timeout_minutes_t expiring_timeout_minutes,
   user_credential_user_name_encoding_t user_name_encoding,

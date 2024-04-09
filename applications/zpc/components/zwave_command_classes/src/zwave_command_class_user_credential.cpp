@@ -149,14 +149,15 @@ bool get_user_id_node(attribute_store_node_t endpoint_node,
                       attribute_store_node_value_state_t state,
                       attribute_store_node_t &user_id_node)
 {
-  user_id_node = attribute_store_get_node_child_by_value(endpoint_node,
-                                                 ATTRIBUTE(USER_UNIQUE_ID),
-                                                 state,
-                                                 (uint8_t *)&user_id,
-                                                 sizeof(user_id),
-                                                 0);
+  user_id_node
+    = attribute_store_get_node_child_by_value(endpoint_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID),
+                                              state,
+                                              (uint8_t *)&user_id,
+                                              sizeof(user_id),
+                                              0);
 
-   return attribute_store_node_exists(user_id_node);
+  return attribute_store_node_exists(user_id_node);
 }
 
 /**
@@ -333,11 +334,12 @@ sl_status_t
  * 
  * @return sl_status_t SL_STATUS_OK if everything was fine
  */
-sl_status_t create_command_frame(uint8_t command,
-                             std::vector<attribute_command_data> command_data,
-                             attribute_store_node_t base_node,
-                             uint8_t *frame,
-                             uint16_t *frame_length)
+sl_status_t
+  create_command_frame(uint8_t command,
+                       std::vector<attribute_command_data> command_data,
+                       attribute_store_node_t base_node,
+                       uint8_t *frame,
+                       uint16_t *frame_length)
 {
   frame[0] = COMMAND_CLASS_USER_CREDENTIAL;
   frame[1] = command;
@@ -392,11 +394,10 @@ sl_status_t create_command_frame(uint8_t command,
         auto credential_length_node = attribute_store_get_node_parent(node);
 
         uint8_t credential_data_length = 0;
-        status = attribute_store_read_value(
-          credential_length_node,
-          attribute_info.attribute_state,
-          &credential_data_length,
-          sizeof(credential_data_length));
+        status = attribute_store_read_value(credential_length_node,
+                                            attribute_info.attribute_state,
+                                            &credential_data_length,
+                                            sizeof(credential_data_length));
 
         if (status != SL_STATUS_OK) {
           sl_log_error(
@@ -444,7 +445,8 @@ sl_status_t create_command_frame(uint8_t command,
             break;
         }
 
-        std::string user_name = c_user_name;
+        std::string user_name  = c_user_name;
+        frame[current_index++] = user_name.length();
         for (const char &c: user_name) {
           frame[current_index++] = c;
         }
@@ -536,7 +538,7 @@ sl_status_t zwave_command_class_user_credential_user_capabilities_handle_report(
   if (frame_length < INDEX_BITMASK_LENGTH) {
     return SL_STATUS_NOT_SUPPORTED;
   }
- 
+
   sl_log_debug(LOG_TAG, "User Capabilities Report");
 
   attribute_store_node_t endpoint_node
@@ -650,7 +652,7 @@ sl_status_t
   if (frame_length < 5) {
     return SL_STATUS_NOT_SUPPORTED;
   }
-  
+
   sl_log_debug(LOG_TAG, "Credential Capabilities Report");
 
   attribute_store_node_t endpoint_node
@@ -671,10 +673,10 @@ sl_status_t
   // Remove all previous known CREDENTIAL_TYPE
   attribute_store_node_t type_node;
   do {
-    type_node
-      = attribute_store_get_node_child_by_type(endpoint_node,
-                                               ATTRIBUTE(SUPPORTED_CREDENTIAL_TYPE),
-                                               0);
+    type_node = attribute_store_get_node_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(SUPPORTED_CREDENTIAL_TYPE),
+      0);
     attribute_store_delete_node(type_node);
   } while (type_node != ATTRIBUTE_STORE_INVALID_NODE);
 
@@ -763,9 +765,8 @@ sl_status_t zwave_command_class_user_credential_all_user_checksum_handle_report(
   if (frame_length != 4) {
     return SL_STATUS_NOT_SUPPORTED;
   }
-  
-  sl_log_debug(LOG_TAG, "All User Checksum Report");
 
+  sl_log_debug(LOG_TAG, "All User Checksum Report");
 
   attribute_store_node_t endpoint_node
     = zwave_command_class_get_endpoint_node(connection_info);
@@ -787,13 +788,14 @@ sl_status_t zwave_command_class_user_credential_all_user_checksum_handle_report(
 
 // Start credential interview process by starting with 0,0
 void trigger_get_credential(attribute_store_node_t user_unique_id_node,
-                         user_credential_type_t credential_type,
-                         user_credential_slot_t credential_slot)
+                            user_credential_type_t credential_type,
+                            user_credential_slot_t credential_slot)
 {
   sl_log_debug(LOG_TAG,
                "Trigger GET credential for user %d : "
                "Credential type %d, credential slot %d",
-               static_cast<uint16_t>(attribute_store_get_reported_number(user_unique_id_node)),
+               static_cast<uint16_t>(
+                 attribute_store_get_reported_number(user_unique_id_node)),
                credential_type,
                credential_slot);
 
@@ -1192,8 +1194,8 @@ sl_status_t zwave_command_class_user_credential_credential_handle_report(
 
   if (next_credential_type != 0 && next_credential_slot != 0) {
     trigger_get_credential(user_unique_id_node,
-                        next_credential_type,
-                        next_credential_slot);
+                           next_credential_type,
+                           next_credential_slot);
     sl_log_debug(LOG_TAG,
                  "Next credential type and slot: %d, %d",
                  next_credential_type,
@@ -1206,12 +1208,12 @@ sl_status_t zwave_command_class_user_credential_credential_handle_report(
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// User Get/Report
+// User Set/Get/Report
 /////////////////////////////////////////////////////////////////////////////
 
 // Start user interview process by starting a user get with ID 0
 void trigger_get_user(attribute_store_node_t endpoint_node,
-                   user_credential_user_unique_id_t user_id)
+                      user_credential_user_unique_id_t user_id)
 {
   // If we are not in the special case of user ID 0 we need to check if user is already here
   if (user_id != 0) {
@@ -1224,11 +1226,14 @@ void trigger_get_user(attribute_store_node_t endpoint_node,
                                                 0);
     // If it exists we interview it again
     if (attribute_store_node_exists(user_node)) {
-      sl_log_debug(LOG_TAG, "User Unique ID %d found. Undefine its reported value to update it.", user_id);
+      sl_log_debug(
+        LOG_TAG,
+        "User Unique ID %d found. Undefine its reported value to update it.",
+        user_id);
       attribute_store_set_desired(user_node, &user_id, sizeof(user_id));
       attribute_store_undefine_reported(user_node);
       return;
-    } 
+    }
   }
 
   // If user id is 0 or not existant we create it
@@ -1237,6 +1242,73 @@ void trigger_get_user(attribute_store_node_t endpoint_node,
                                   ATTRIBUTE(USER_UNIQUE_ID),
                                   &user_id,
                                   sizeof(user_id));
+}
+
+static sl_status_t zwave_command_class_user_credential_user_set(
+  attribute_store_node_t user_operation_type_node,
+  uint8_t *frame,
+  uint16_t *frame_length)
+{
+  // Get user unique id node
+  attribute_store_node_t user_unique_id_node
+    = attribute_store_get_first_parent_with_type(user_operation_type_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID));
+
+  user_credential_user_unique_id_t user_id = 0;
+  attribute_store_get_desired_else_reported(user_unique_id_node,
+                                            &user_id,
+                                            sizeof(user_id));
+
+  sl_log_debug(LOG_TAG, "User SET for user %d", user_id);
+
+  // If we can't get the user unique id we can't continue
+  if (!attribute_store_node_exists(user_unique_id_node)) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  user_credential_operation_type_t user_operation_type = 0;
+  sl_status_t status = attribute_store_get_desired(user_operation_type_node,
+                              &user_operation_type,
+                              sizeof(user_operation_type));
+
+  if (status != SL_STATUS_OK) { 
+    sl_log_error(LOG_TAG,
+                 "Can't get user operation type value. Not sending USER_SET.");
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  std::vector<attribute_command_data> set_data = {
+      {ATTRIBUTE(USER_OPERATION_TYPE), DESIRED_ATTRIBUTE},
+      {ATTRIBUTE(USER_UNIQUE_ID), DESIRED_OR_REPORTED_ATTRIBUTE, user_unique_id_node}
+  };
+
+  // If we are not deleting the user we need more data
+  if (user_operation_type != USER_SET_OPERATION_TYPE_DELETE) {
+    std::vector<attribute_command_data> extra_set_data = {
+      {ATTRIBUTE(USER_TYPE), DESIRED_OR_REPORTED_ATTRIBUTE},
+      {ATTRIBUTE(USER_ACTIVE_STATE), DESIRED_OR_REPORTED_ATTRIBUTE},
+      {ATTRIBUTE(CREDENTIAL_RULE), DESIRED_OR_REPORTED_ATTRIBUTE},
+      {ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES), DESIRED_OR_REPORTED_ATTRIBUTE},
+      {ATTRIBUTE(USER_NAME_ENCODING), DESIRED_OR_REPORTED_ATTRIBUTE},
+      {ATTRIBUTE(USER_NAME), DESIRED_OR_REPORTED_ATTRIBUTE},
+    };
+    std::copy(extra_set_data.begin(),
+              extra_set_data.end(),
+              std::back_inserter(set_data));
+  }
+
+  status = create_command_frame(USER_SET,
+                                set_data,
+                                user_unique_id_node,
+                                frame,
+                                frame_length);
+
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, "Can't create User SET frame");
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  return SL_STATUS_OK;
 }
 
 static sl_status_t zwave_command_class_user_credential_user_get(
@@ -1307,7 +1379,9 @@ sl_status_t zwave_command_class_user_credential_user_handle_report(
     sl_log_info(LOG_TAG,
                 "User report with ID 0 received. This probably means that no "
                 "user is defined on the device.");
-    sl_log_debug(LOG_TAG, "Attempt to delete User Node ID with value %d", user_id);
+    sl_log_debug(LOG_TAG,
+                 "Attempt to delete User Node ID with value %d",
+                 user_id);
     sl_status_t deletion_status = remove_node_0_if_exists();
     sl_log_debug(LOG_TAG, "Deletion returned status : %d", deletion_status);
     return SL_STATUS_OK;
@@ -1376,8 +1450,8 @@ sl_status_t zwave_command_class_user_credential_user_handle_report(
         INDEX_USER_NAME_ENCODING,
         USER_REPORT_PROPERTIES2_USER_NAME_ENCODING_MASK},
        {ATTRIBUTE(CREDENTIAL_RULE), INDEX_CREDENTIAL_RULE},
-       {ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES), INDEX_USER_NAME_EXPIRING_TIMEOUT_MINUTES}
-      };
+       {ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES),
+        INDEX_USER_NAME_EXPIRING_TIMEOUT_MINUTES}};
 
   sl_status_t set_status
     = set_reported_attributes(user_unique_id_node, frame_data, user_data);
@@ -1392,10 +1466,12 @@ sl_status_t zwave_command_class_user_credential_user_handle_report(
     = get_string_value(frame_data, INDEX_USER_NAME, user_name_length);
 
   // Prevent duplicate
-  auto user_name_node = attribute_store_get_first_child_by_type(
-    user_unique_id_node, ATTRIBUTE(USER_NAME));
+  auto user_name_node
+    = attribute_store_get_first_child_by_type(user_unique_id_node,
+                                              ATTRIBUTE(USER_NAME));
   if (!attribute_store_node_exists(user_name_node)) {
-    user_name_node = attribute_store_add_node(ATTRIBUTE(USER_NAME), user_unique_id_node);
+    user_name_node
+      = attribute_store_add_node(ATTRIBUTE(USER_NAME), user_unique_id_node);
   }
   attribute_store_set_reported_string(user_name_node, user_name.c_str());
 
@@ -1422,8 +1498,8 @@ void zwave_network_status_changed(attribute_store_node_t updated_node,
                                   attribute_store_change_t change)
 {
   attribute_store_node_t node_id_node
-      = attribute_store_get_first_parent_with_type(updated_node,
-                                                  ATTRIBUTE_NODE_ID);
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_NODE_ID);
 
   zwave_node_id_t node_id;
   attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
@@ -1441,16 +1517,15 @@ void zwave_network_status_changed(attribute_store_node_t updated_node,
 
   // If the endpoint report is marked as ONLINE_FUNCTIONAL
   if (reported_value_status == SL_STATUS_OK
-      && network_status == ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL)
-  {
-      sl_log_debug(LOG_TAG,
-               "Node %d is now ONLINE_FUNCTIONAL : start the delayed "
-               "interview process",
-               node_id);
+      && network_status == ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL) {
+    sl_log_debug(LOG_TAG,
+                 "Node %d is now ONLINE_FUNCTIONAL : start the delayed "
+                 "interview process",
+                 node_id);
     // Perform action on each endpoint that supports User Credential Command class
     uint8_t endpoint_count
       = attribute_store_get_node_child_count_by_type(node_id_node,
-                                             ATTRIBUTE_ENDPOINT_ID);
+                                                     ATTRIBUTE_ENDPOINT_ID);
 
     sl_log_debug(LOG_TAG, "Checking endpoints (total : %d)...", endpoint_count);
 
@@ -1460,7 +1535,6 @@ void zwave_network_status_changed(attribute_store_node_t updated_node,
         = attribute_store_get_node_child_by_type(node_id_node,
                                                  ATTRIBUTE_ENDPOINT_ID,
                                                  i);
-
 
       zwave_endpoint_id_t endpoint_id;
       attribute_store_get_reported(endpoint_node,
@@ -1540,8 +1614,6 @@ sl_status_t zwave_command_class_user_credential_control_handler(
   }
 }
 
-
-
 // Entry point
 sl_status_t zwave_command_class_user_credential_init()
 {
@@ -1568,6 +1640,11 @@ sl_status_t zwave_command_class_user_credential_init()
     ATTRIBUTE(USER_UNIQUE_ID),
     NULL,
     &zwave_command_class_user_credential_user_get);
+
+  attribute_resolver_register_rule(
+    ATTRIBUTE(USER_OPERATION_TYPE),
+    &zwave_command_class_user_credential_user_set,
+    NULL);
 
   attribute_resolver_register_rule(
     ATTRIBUTE(CREDENTIAL_SLOT),
