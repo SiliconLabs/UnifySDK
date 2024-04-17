@@ -51,6 +51,9 @@ typedef uint16_t user_credential_slot_t;
 ///> Operation type. uint8_t
 typedef uint8_t user_credential_operation_type_t;
 
+///> Operation type. uint8_t
+typedef uint8_t user_credential_operation_type_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

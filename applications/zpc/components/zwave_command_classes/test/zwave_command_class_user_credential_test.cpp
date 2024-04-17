@@ -58,13 +58,14 @@ struct bound_functions {
   uint8_t get_func_id;
   uint8_t set_func_id;
 };
-static std::map<attribute_store_type_t, bound_functions> attributes_binding = {
-  {ATTRIBUTE(NUMBER_OF_USERS), {USER_CAPABILITIES_GET, 0}},
-  {ATTRIBUTE(SUPPORT_CREDENTIAL_CHECKSUM), {CREDENTIAL_CAPABILITIES_GET, 0}},
-  {ATTRIBUTE(ALL_USERS_CHECKSUM), {ALL_USERS_CHECKSUM_GET, 0}},
-  {ATTRIBUTE(USER_UNIQUE_ID), {USER_GET, 0}},
-  {ATTRIBUTE(CREDENTIAL_SLOT), {CREDENTIAL_GET, 0}},
-};
+static std::map<attribute_store_type_t, bound_functions> attributes_binding
+  = {{ATTRIBUTE(NUMBER_OF_USERS), {USER_CAPABILITIES_GET, 0}},
+     {ATTRIBUTE(SUPPORT_CREDENTIAL_CHECKSUM), {CREDENTIAL_CAPABILITIES_GET, 0}},
+     {ATTRIBUTE(ALL_USERS_CHECKSUM), {ALL_USERS_CHECKSUM_GET, 0}},
+     {ATTRIBUTE(USER_UNIQUE_ID), {USER_GET, 0}},
+     {ATTRIBUTE(USER_OPERATION_TYPE), {0, USER_SET}},
+     {ATTRIBUTE(CREDENTIAL_SLOT), {CREDENTIAL_GET, 0}},
+     {ATTRIBUTE(CREDENTIAL_OPERATION_TYPE), {0, CREDENTIAL_SET}}};
 
 // Filed with resolver function for given ID in attribute_resolver_register_rule_stub based on
 // attributes_binding map.
@@ -140,11 +141,11 @@ struct credential_structure_nodes {
  * @param value_state If DESIRED_ATTRIBUTE : credential_type/credential_slot will have their desired value setup, reported otherwise
  * @return credential_structure_nodes 
  */
-credential_structure_nodes
-  helper_create_credential_structure(user_credential_user_unique_id_t user_id,
-                                     user_credential_type_t credential_type,
-                                     user_credential_slot_t credential_slot,
-                                     attribute_store_node_value_state_t value_state = DESIRED_ATTRIBUTE)
+credential_structure_nodes helper_create_credential_structure(
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t credential_type,
+  user_credential_slot_t credential_slot,
+  attribute_store_node_value_state_t value_state = DESIRED_ATTRIBUTE)
 {
   credential_structure_nodes nodes;
   nodes.user_id_node = attribute_store_emplace(endpoint_id_node,
@@ -198,29 +199,35 @@ void helper_test_get_no_args_happy_case(uint8_t get_command_id)
                                         "Get frame contents mismatch");
 }
 
-/// @brief Test given GET function with args
-/// Can also test if GET command return SL_STATUS_NOT_SUPPORTED if node == INVALID_STORAGE_TYPE
-/// @param get_command_id  Get command that should be in resolver_functions
-/// @param base_node       Base node on which the GET function will be called. If INVALID_STORAGE_TYPE expect the GET function to return SL_STATUS_NOT_SUPPORTED and return.
-/// @param nodes           Node data that will be used to check and construct the GET frame (order matter since the first one will be the first argument, etc..)
-void helper_test_get_with_args(
-  uint8_t get_command_id,
+/**
+ * @brief Test given SET or GET function with args
+ * 
+ * > Can also test if SET or GET command return SL_STATUS_NOT_SUPPORTED if node == INVALID_STORAGE_TYPE
+ * 
+ * @param command_id  Command that should be in resolver_functions
+ * @param base_node   Base node on which the GET function will be called. If INVALID_STORAGE_TYPE expect the SET or GET function to return SL_STATUS_NOT_SUPPORTED and return.
+ * @param nodes       Node data that will be used to check and construct the SET or GET frame (order matter since the first one will be the first argument, etc..)
+ * @param extra_bytes Extra bytes that will be added to the frame
+ */
+void helper_test_set_get_with_args(
+  uint8_t command_id,
   attribute_store_node_t base_node,
   std::vector<
     std::pair<attribute_store_node_t, attribute_store_node_value_state_t>> nodes
-  = {})
+  = {},
+  std::vector<uint8_t> extra_bytes = {})
 {
-  auto &get_func = resolver_functions[get_command_id];
+  auto &command_func = resolver_functions[command_id];
 
   // Ask for a Get Command, should always be the same
   TEST_ASSERT_NOT_NULL_MESSAGE(
-    get_func,
-    "Couldn't find get function in resolver_functions.");
+    command_func,
+    "Couldn't find command function in resolver_functions.");
 
   if (base_node == ATTRIBUTE_STORE_INVALID_NODE) {
     TEST_ASSERT_EQUAL_MESSAGE(
       SL_STATUS_NOT_SUPPORTED,
-      get_func(base_node, received_frame, &received_frame_size),
+      command_func(base_node, received_frame, &received_frame_size),
       "Command function should have returned SL_STATUS_NOT_SUPPORTED since no "
       "node "
       "was provided");
@@ -229,11 +236,11 @@ void helper_test_get_with_args(
 
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_OK,
-    get_func(base_node, received_frame, &received_frame_size),
-    "Get function should have returned OK");
+    command_func(base_node, received_frame, &received_frame_size),
+    "Command function should have returned SL_STATUS_OK");
 
   std::vector<uint8_t> expected_frame
-    = {COMMAND_CLASS_USER_CREDENTIAL, get_command_id};
+    = {COMMAND_CLASS_USER_CREDENTIAL, command_id};
 
   for (auto &node_data: nodes) {
     auto node             = node_data.first;
@@ -293,7 +300,7 @@ void helper_test_get_with_args(
 
       default:
         TEST_FAIL_MESSAGE(
-          "Unkown storage type in helper_test_get_with_args_happy_case");
+          "Unkown storage type in helper_test_set_get_with_args_happy_case");
     }
 
     std::string message
@@ -302,13 +309,17 @@ void helper_test_get_with_args(
     TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, status, message.c_str());
   }
 
+  for(auto &byte : extra_bytes) {
+    expected_frame.push_back(byte);
+  }
+
   TEST_ASSERT_EQUAL_MESSAGE(expected_frame.size(),
                             received_frame_size,
-                            "Get frame size is incorrect");
+                            "Command frame size is incorrect");
   TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(expected_frame.data(),
                                         received_frame,
                                         received_frame_size,
-                                        "Get frame contents mismatch");
+                                        "Command frame contents mismatch");
 }
 
 void helper_test_string_value(
@@ -353,20 +364,35 @@ static sl_status_t
                                         attribute_resolver_function_t get_func,
                                         int cmock_num_calls)
 {
+  std::string message;
+  std::string node_name = attribute_store_get_type_name(node_type);
+
   if (attributes_binding.find(node_type) != attributes_binding.end()) {
     const auto func = attributes_binding[node_type];
 
     if (func.get_func_id == 0) {
-      TEST_ASSERT_NULL(get_func);
+      message
+        = "GET function should not be defined for " + node_name
+          + ". Did you forget to add it to the attributes_binding variable ?";
+      TEST_ASSERT_NULL_MESSAGE(get_func, message.c_str());
     } else {
-      TEST_ASSERT_NOT_NULL(get_func);
+      message = "SET function should be defined for " + node_name
+                + ". Did you forget to remove it to the attributes_binding "
+                  "variable ?";
+      TEST_ASSERT_NOT_NULL_MESSAGE(get_func, message.c_str());
       resolver_functions[func.get_func_id] = get_func;
     }
 
     if (func.set_func_id == 0) {
-      TEST_ASSERT_NULL(set_func);
+      message
+        = "SET function should not be defined for " + node_name
+          + ". Did you forget to add it to the attributes_binding variable ?";
+      TEST_ASSERT_NULL_MESSAGE(set_func, message.c_str());
     } else {
-      TEST_ASSERT_NOT_NULL(set_func);
+      message = "SET function should be defined for " + node_name
+                + ". Did you forget to remove it to the attributes_binding "
+                  "variable ?";
+      TEST_ASSERT_NOT_NULL_MESSAGE(set_func, message.c_str());
       resolver_functions[func.set_func_id] = set_func;
     }
   }
@@ -760,7 +786,7 @@ void test_user_credential_user_get_happy_case()
 
 void test_user_credential_user_get_not_found()
 {
-  helper_test_get_with_args(USER_GET, ATTRIBUTE_STORE_INVALID_NODE);
+  helper_test_set_get_with_args(USER_GET, ATTRIBUTE_STORE_INVALID_NODE);
 }
 
 std::vector<uint8_t> helper_create_user_report_frame(
@@ -1126,30 +1152,157 @@ void test_user_credential_user_report_user_deleted()
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// Credential Get/Report
+// Credential Set/Get/Report
 ////////////////////////////////////////////////////////////////////////////
+
+//>> Set
+void test_user_credential_credential_set_1byte_happy_case()
+{
+  user_credential_type_t credential_type          = 2;
+  user_credential_slot_t credential_slot          = 1212;
+  user_credential_operation_type_t operation_type = USER_CREDENTIAL_OPERATION_TYPE_ADD;
+  std::vector<uint8_t> credential_data            = {12};
+
+  // Create the node with reported attribute
+  auto nodes                = helper_create_credential_structure(12,
+                                                  credential_type,
+                                                  credential_slot,
+                                                  REPORTED_ATTRIBUTE);
+  auto user_node            = nodes.user_id_node;
+  auto credential_type_node = nodes.credential_type_node;
+  auto credential_slot_node = nodes.credential_slot_node;
+
+  // Operation type
+  auto operation_type_node
+    = attribute_store_emplace_desired(credential_slot_node,
+                              ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                              &operation_type,
+                              sizeof(operation_type));
+  // CREDENTIAL_DATA
+  uint8_t credential_data_length = credential_data.size();
+  auto credential_data_length_node
+    = attribute_store_emplace_desired(credential_slot_node,
+                                      ATTRIBUTE(CREDENTIAL_DATA_LENGTH),
+                                      &credential_data_length,
+                                      sizeof(uint8_t));
+
+  auto credential_data_node
+    = attribute_store_emplace_desired(credential_data_length_node,
+                                      ATTRIBUTE(CREDENTIAL_DATA),
+                                      credential_data.data(),
+                                      credential_data.size());
+
+  helper_test_set_get_with_args(CREDENTIAL_SET,
+                                operation_type_node,
+                                {
+                                  {user_node, REPORTED_ATTRIBUTE},
+                                  {credential_type_node, REPORTED_ATTRIBUTE},
+                                  {credential_slot_node, REPORTED_ATTRIBUTE},
+                                  {operation_type_node, DESIRED_ATTRIBUTE},
+                                  {credential_data_node, DESIRED_ATTRIBUTE},
+                                });
+}
+
+void test_user_credential_credential_set_12byte_happy_case()
+{
+  user_credential_type_t credential_type          = 2;
+  user_credential_slot_t credential_slot          = 1212;
+  user_credential_operation_type_t operation_type = USER_CREDENTIAL_OPERATION_TYPE_MODIFY;
+  std::vector<uint8_t> credential_data
+    = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
+  // Create the node with reported attribute
+  auto nodes                = helper_create_credential_structure(12,
+                                                  credential_type,
+                                                  credential_slot,
+                                                  REPORTED_ATTRIBUTE);
+  auto user_node            = nodes.user_id_node;
+  auto credential_type_node = nodes.credential_type_node;
+  auto credential_slot_node = nodes.credential_slot_node;
+
+  // Operation type
+  auto operation_type_node
+    = attribute_store_emplace_desired(credential_slot_node,
+                              ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                              &operation_type,
+                              sizeof(operation_type));
+  // CREDENTIAL_DATA
+  uint8_t credential_data_length = credential_data.size();
+  auto credential_data_length_node
+    = attribute_store_emplace(credential_slot_node,
+                              ATTRIBUTE(CREDENTIAL_DATA_LENGTH),
+                              &credential_data_length,
+                              sizeof(uint8_t));
+
+  auto credential_data_node
+    = attribute_store_emplace(credential_data_length_node,
+                              ATTRIBUTE(CREDENTIAL_DATA),
+                              credential_data.data(),
+                              credential_data.size());
+
+  helper_test_set_get_with_args(CREDENTIAL_SET,
+                                operation_type_node,
+                                {
+                                  {user_node, REPORTED_ATTRIBUTE},
+                                  {credential_type_node, REPORTED_ATTRIBUTE},
+                                  {credential_slot_node, REPORTED_ATTRIBUTE},
+                                  {operation_type_node, DESIRED_ATTRIBUTE},
+                                  {credential_data_node, REPORTED_ATTRIBUTE},
+                                });
+}
+
+void test_user_credential_credential_set_invalid_node()
+{
+  helper_test_set_get_with_args(CREDENTIAL_SET, ATTRIBUTE_STORE_INVALID_NODE);
+}
+
+void test_user_credential_credential_set_delete_happy_case()
+{
+  user_credential_type_t credential_type          = 2;
+  user_credential_slot_t credential_slot          = 1212;
+  user_credential_operation_type_t operation_type = USER_CREDENTIAL_OPERATION_TYPE_DELETE;
+
+  // Create the node with reported attribute
+  auto nodes                = helper_create_credential_structure(12,
+                                                  credential_type,
+                                                  credential_slot,
+                                                  REPORTED_ATTRIBUTE);
+  auto user_node            = nodes.user_id_node;
+  auto credential_type_node = nodes.credential_type_node;
+  auto credential_slot_node = nodes.credential_slot_node;
+
+  // Operation type
+  auto operation_type_node
+    = attribute_store_emplace_desired(credential_slot_node,
+                              ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                              &operation_type,
+                              sizeof(operation_type));
+
+  helper_test_set_get_with_args(CREDENTIAL_SET,
+                                operation_type_node,
+                                {
+                                  {user_node, REPORTED_ATTRIBUTE},
+                                  {credential_type_node, REPORTED_ATTRIBUTE},
+                                  {credential_slot_node, REPORTED_ATTRIBUTE},
+                                  {operation_type_node, DESIRED_ATTRIBUTE},
+                                },
+                                {0x00} // Credential data length
+                                );
+}
+
+
+//>> Get
 
 void test_user_credential_credential_get_happy_case()
 {
-  user_credential_user_unique_id_t user_id = 12;
-  auto user_node = attribute_store_emplace(endpoint_id_node,
-                                           ATTRIBUTE(USER_UNIQUE_ID),
-                                           &user_id,
-                                           sizeof(user_id));
-
   user_credential_type_t credential_type = 2;
-  auto credential_type_node
-    = attribute_store_emplace_desired(user_node,
-                                      ATTRIBUTE(CREDENTIAL_TYPE),
-                                      &credential_type,
-                                      sizeof(credential_type));
-
   user_credential_slot_t credential_slot = 1212;
-  auto credential_slot_node
-    = attribute_store_emplace_desired(credential_type_node,
-                                      ATTRIBUTE(CREDENTIAL_SLOT),
-                                      &credential_slot,
-                                      sizeof(credential_slot));
+
+  auto nodes
+    = helper_create_credential_structure(12, credential_type, credential_slot);
+  auto user_node            = nodes.user_id_node;
+  auto credential_type_node = nodes.credential_type_node;
+  auto credential_slot_node = nodes.credential_slot_node;
 
   // Get should make both credential_type_node and credential_slot_node reported value as the desired values
   helper_test_set_get_with_args(CREDENTIAL_GET,
@@ -1163,7 +1316,7 @@ void test_user_credential_credential_get_happy_case()
 
 void test_user_credential_credential_get_no_credential_type()
 {
-  helper_test_get_with_args(CREDENTIAL_GET, ATTRIBUTE_STORE_INVALID_NODE);
+  helper_test_set_get_with_args(CREDENTIAL_GET, ATTRIBUTE_STORE_INVALID_NODE);
 }
 
 std::vector<uint8_t> helper_create_credential_report_frame(
@@ -1576,7 +1729,7 @@ void test_user_credential_credential_report_happy_case()
   credential_modifier_node_id = 12;
   next_credential_type        = 0;
   next_credential_slot        = 0;
-  // TODO : check if we need helper_check_reported_but_no_desired_attribute
+
   report_frame
     = helper_create_credential_report_frame(user_id,
                                             credential_type,
