@@ -623,7 +623,7 @@ user_credential_user_unique_id_t get_user_id(const uint8_t *event_parameters)
   return get_uint16_value(event_parameters, INDEX_USER_UNIQUE_ID);
 }
 
-user_credential_user_modifier_type_t
+user_credential_modifier_type_t
   get_user_modifier_type(const uint8_t *event_parameters)
 {
   return event_parameters[INDEX_USER_MODIFIER_TYPE];
@@ -910,7 +910,7 @@ void on_notification_event(attribute_store_node_t endpoint_node,
       }
 
       // If user doesn't exists in the device we try to remove it also from our side
-      user_credential_user_modifier_type_t modifier_type
+      user_credential_modifier_type_t modifier_type
         = notification_handler::user::get_user_modifier_type(event_parameters);
       if (modifier_type == USER_REPORT_DNE) {
         attribute_store_delete_node(user_id_node);

@@ -926,8 +926,8 @@ void test_user_credential_user_get_not_found()
 
 std::vector<uint8_t> helper_create_user_report_frame(
   user_credential_user_unique_id_t next_user_id,
-  user_credential_user_modifier_type_t user_modifier_type,
-  user_credential_user_modifier_node_id_t user_modifier_node_id,
+  user_credential_modifier_type_t user_modifier_type,
+  user_credential_modifier_node_id_t user_modifier_node_id,
   user_credential_user_unique_id_t user_id,
   user_credential_user_type_t user_type,
   user_credential_user_active_state_t user_active_state,
@@ -970,8 +970,8 @@ std::vector<uint8_t> helper_create_user_report_frame(
 };
 
 std::vector<uint8_t> helper_create_user_notification_report(
-  user_credential_user_modifier_type_t user_modifier_type,
-  user_credential_user_modifier_node_id_t user_modifier_node_id,
+  user_credential_modifier_type_t user_modifier_type,
+  user_credential_modifier_node_id_t user_modifier_node_id,
   user_credential_user_unique_id_t user_id,
   user_credential_user_type_t user_type,
   user_credential_user_active_state_t user_active_state,
@@ -1057,8 +1057,8 @@ void test_user_credential_user_report_happy_case()
   constexpr user_credential_user_unique_id_t EXPECTED_SECOND_USER_ID = 1212;
 
   user_credential_user_unique_id_t next_user_id = EXPECTED_SECOND_USER_ID;
-  user_credential_user_modifier_type_t user_modifier_type       = 2;
-  user_credential_user_modifier_node_id_t user_modifier_node_id = 1313;
+  user_credential_modifier_type_t user_modifier_type       = 2;
+  user_credential_modifier_node_id_t user_modifier_node_id = 1313;
   user_credential_user_unique_id_t user_id = EXPECTED_FIRST_USER_ID;
   user_credential_user_type_t user_type    = 3;
   user_credential_user_active_state_t user_active_state               = 1;
@@ -1536,8 +1536,8 @@ std::vector<uint8_t> helper_create_credential_report_frame(
   user_credential_slot_t credential_slot,
   uint8_t crb,
   std::vector<uint8_t> credential_data,
-  user_credential_user_modifier_type_t credential_modifier_type,
-  user_credential_user_modifier_node_id_t credential_modifier_node_id,
+  user_credential_modifier_type_t credential_modifier_type,
+  user_credential_modifier_node_id_t credential_modifier_node_id,
   user_credential_type_t next_credential_type,
   user_credential_slot_t next_credential_slot)
 {
@@ -1703,8 +1703,8 @@ void test_user_credential_credential_report_happy_case()
   user_credential_slot_t credential_slot   = 1212;
   uint8_t crb                              = 1;
   std::vector<uint8_t> credential_data     = {12, 13, 14, 15, 16};
-  user_credential_user_modifier_type_t credential_modifier_type       = 13;
-  user_credential_user_modifier_node_id_t credential_modifier_node_id = 1312;
+  user_credential_modifier_type_t credential_modifier_type       = 13;
+  user_credential_modifier_node_id_t credential_modifier_node_id = 1312;
   user_credential_type_t next_credential_type                         = 12;
   user_credential_slot_t next_credential_slot                         = 1;
 
@@ -2190,8 +2190,8 @@ void test_user_credential_user_notification_add_modify_delete_happy_case()
                            "An user node should exist");
 
   // Create notification report frame
-  user_credential_user_modifier_type_t user_modifier_type       = 2;
-  user_credential_user_modifier_node_id_t user_modifier_node_id = 1212;
+  user_credential_modifier_type_t user_modifier_type       = 2;
+  user_credential_modifier_node_id_t user_modifier_node_id = 1212;
 
   auto user_notification_report_frame
     = helper_create_user_notification_report(user_modifier_type,

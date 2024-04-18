@@ -389,8 +389,8 @@ attribute_store_node_t helper_add_complete_user(
 
   // Reported attributes by the end device
   // Need those to test MQTT topics
-  user_credential_user_modifier_node_id_t modifier_node_id = 1212;
-  user_credential_user_modifier_type_t modifier_type = ZCL_USER_MODIFIER_TYPE_LOCALLY;
+  user_credential_modifier_node_id_t modifier_node_id = 1212;
+  user_credential_modifier_type_t modifier_type = ZCL_USER_MODIFIER_TYPE_LOCALLY;
   mock_expected_user_mqtt_topic(user_id,
                                 "UserModifierNodeId",
                                 static_cast<uint32_t>(modifier_node_id));

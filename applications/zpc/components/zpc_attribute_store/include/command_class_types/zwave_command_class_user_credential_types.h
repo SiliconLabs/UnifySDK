@@ -36,9 +36,11 @@ typedef uint16_t user_credential_all_users_checksum_t;
 ///> User Unique ID. uint16_t
 typedef uint16_t user_credential_user_unique_id_t;
 ///> User Modifier Type. uint8_t
-typedef uint8_t user_credential_user_modifier_type_t;
+typedef uint8_t user_credential_modifier_type_t;
 ///> User Modifier Node ID. uint16_t
-typedef uint16_t user_credential_user_modifier_node_id_t;
+typedef uint16_t user_credential_modifier_node_id_t;
+
+
 ///> User Type. uint8_t
 #define USER_CREDENTIAL_USER_TYPE_GENERAL_USER 0x00
 #define USER_CREDENTIAL_USER_TYPE_PROGRAMMING_USER 0x03
@@ -67,11 +69,6 @@ typedef uint16_t user_credential_slot_t;
 #define USER_CREDENTIAL_OPERATION_TYPE_MODIFY 0x01
 #define USER_CREDENTIAL_OPERATION_TYPE_DELETE 0x02
 typedef uint8_t user_credential_operation_type_t;
-
-///> Credential Modifier Type. uint8_t
-typedef uint8_t user_credential_modifier_type_t;
-///> Credential Modifier Node ID. uint16_t
-typedef uint16_t user_credential_modifier_node_id_t;
 
 ///> Expiring Timeout for User (Minutes). uint16_t
 typedef uint16_t user_credential_expiring_timeout_minutes_t;
