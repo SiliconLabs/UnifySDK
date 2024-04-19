@@ -137,6 +137,100 @@ struct credential_structure_nodes {
   attribute_store_node_t credential_slot_node;
 };
 
+void helper_simulate_user_capabilites_report(
+  uint16_t number_of_users,
+  user_credential_supported_credential_rules_t cred_rule_bitmask,
+  uint8_t username_max_length,
+  uint8_t support_user_schedule,
+  uint8_t support_all_users_checksum,
+  uint8_t support_user_checksum,
+  uint8_t supported_user_types_bitmask_length,
+  user_credential_supported_user_type_bitmask_t supported_user_types_bitmask)
+{
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+
+  std::vector<uint8_t> report_frame = {
+    COMMAND_CLASS_USER_CREDENTIAL,
+    USER_CAPABILITIES_REPORT,
+    (uint8_t)((number_of_users & 0xFF00) >> 8),  // MSB
+    (uint8_t)(number_of_users & 0x00FF),         // LSB
+    cred_rule_bitmask,
+    username_max_length,
+    (uint8_t)((support_user_schedule << 7) | (support_all_users_checksum << 6)
+              | (support_user_checksum << 5)),
+    supported_user_types_bitmask_length};
+
+  // Add bitmask value
+  for (uint8_t i = 0; i < supported_user_types_bitmask_length; i++) {
+    uint8_t offset   = i;
+    uint8_t shift    = 8 * offset;
+    uint32_t bitmask = 0xFF << shift;
+
+    uint8_t value_8bit = (supported_user_types_bitmask & bitmask) >> shift;
+    report_frame.push_back(value_8bit);
+  }
+
+  // Do the report
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    handler.control_handler(&info, report_frame.data(), report_frame.size()));
+}
+
+void helper_simulate_credential_capabilites_report(
+  uint8_t credential_checksum_support,
+  std::vector<user_credential_type_t> credential_type,
+  std::vector<uint8_t> cl_support,
+  std::vector<uint16_t> supported_credential_slots,
+  std::vector<uint16_t> min_length,
+  std::vector<uint16_t> max_length)
+{
+  if (credential_type.size() != cl_support.size()
+      || credential_type.size() != supported_credential_slots.size()
+      || credential_type.size() != min_length.size()
+      || credential_type.size() != max_length.size()) {
+    TEST_FAIL_MESSAGE("Size of credential_type, cl_support, "
+                      "supported_credential_slots, min_length and max_length "
+                      "should be the same.");
+  }
+
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+
+  std::vector<uint8_t> report_frame
+    = {COMMAND_CLASS_USER_CREDENTIAL,
+       CREDENTIAL_CAPABILITIES_REPORT,
+       (uint8_t)(credential_checksum_support << 7),
+       (uint8_t)credential_type.size()};
+
+  auto push_uint16 = [&](std::vector<uint16_t> vector) {
+    for (auto &v: vector) {
+      report_frame.push_back((uint8_t)((v & 0xFF00) >> 8));
+      report_frame.push_back((uint8_t)(v & 0x00FF));
+    }
+  };
+
+  for (auto &c: credential_type) {
+    report_frame.push_back(c);
+  }
+
+  for (auto &cl: cl_support) {
+    report_frame.push_back((uint8_t)(cl << 7));
+  }
+
+  push_uint16(supported_credential_slots);
+  push_uint16(min_length);
+  push_uint16(max_length);
+
+  // Do the report
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    handler.control_handler(&info, report_frame.data(), report_frame.size()));
+};
 /**
  * @brief Create credential structure and return associated nodes
  * 
@@ -514,39 +608,17 @@ void test_user_credential_user_capabilities_report_happy_case()
   uint8_t supported_user_types_bitmask_length;
   user_credential_supported_user_type_bitmask_t supported_user_types_bitmask;
 
-  zwave_controller_connection_info_t info = {};
-  info.remote.node_id                     = node_id;
-  info.remote.endpoint_id                 = endpoint_id;
-  info.local.is_multicast                 = false;
-
   // Test reported values based on the variables in this function
   auto test_reported_values = [&]() {
     // Create frame object
-    std::vector<uint8_t> report_frame = {
-      COMMAND_CLASS_USER_CREDENTIAL,
-      USER_CAPABILITIES_REPORT,
-      (uint8_t)((number_of_users & 0xFF00) >> 8),  // MSB
-      (uint8_t)(number_of_users & 0x00FF),         // LSB
-      cred_rule_bitmask,
-      username_max_length,
-      (uint8_t)((support_user_schedule << 7) | (support_all_users_checksum << 6)
-                | (support_user_checksum << 5)),
-      supported_user_types_bitmask_length};
-
-    // Add bitmask value
-    for (uint8_t i = 0; i < supported_user_types_bitmask_length; i++) {
-      uint8_t offset   = i;
-      uint8_t shift    = 8 * offset;
-      uint32_t bitmask = 0xFF << shift;
-
-      uint8_t value_8bit = (supported_user_types_bitmask & bitmask) >> shift;
-      report_frame.push_back(value_8bit);
-    }
-
-    // Do the report
-    TEST_ASSERT_EQUAL(
-      SL_STATUS_OK,
-      handler.control_handler(&info, report_frame.data(), report_frame.size()));
+    helper_simulate_user_capabilites_report(number_of_users,
+                                            cred_rule_bitmask,
+                                            username_max_length,
+                                            support_user_schedule,
+                                            support_all_users_checksum,
+                                            support_user_checksum,
+                                            supported_user_types_bitmask_length,
+                                            supported_user_types_bitmask);
 
     // Define data structures
     std::map<attribute_store_type_t, uint8_t> uint8_attribute_map = {
@@ -624,46 +696,6 @@ void test_user_credential_credential_capabilities_get_happy_case()
 
 void test_user_credential_credential_capabilities_report_happy_case()
 {
-  zwave_controller_connection_info_t info = {};
-  info.remote.node_id                     = node_id;
-  info.remote.endpoint_id                 = endpoint_id;
-  info.local.is_multicast                 = false;
-
-  auto create_report_frame
-    = [&](uint8_t credential_checksum_support,
-          std::vector<user_credential_type_t> credential_type,
-          std::vector<uint8_t> cl_support,
-          std::vector<uint16_t> supported_credential_slots,
-          std::vector<uint16_t> min_length,
-          std::vector<uint16_t> max_length) {
-        std::vector<uint8_t> report_frame
-          = {COMMAND_CLASS_USER_CREDENTIAL,
-             CREDENTIAL_CAPABILITIES_REPORT,
-             (uint8_t)(credential_checksum_support << 7),
-             (uint8_t)credential_type.size()};
-
-        auto push_uint16 = [&](std::vector<uint16_t> vector) {
-          for (auto &v: vector) {
-            report_frame.push_back((uint8_t)((v & 0xFF00) >> 8));
-            report_frame.push_back((uint8_t)(v & 0x00FF));
-          }
-        };
-
-        for (auto &c: credential_type) {
-          report_frame.push_back(c);
-        }
-
-        for (auto &cl: cl_support) {
-          report_frame.push_back((uint8_t)(cl << 7));
-        }
-
-        push_uint16(supported_credential_slots);
-        push_uint16(min_length);
-        push_uint16(max_length);
-
-        return report_frame;
-      };
-
   uint8_t credential_checksum_support                 = 1;
   std::vector<user_credential_type_t> credential_type = {1, 3, 4, 5};
   std::vector<uint8_t> cl_support                     = {1, 0, 0, 1};
@@ -717,16 +749,12 @@ void test_user_credential_credential_capabilities_report_happy_case()
   };
 
   printf("Test with first set of data\n");
-  auto report_frame = create_report_frame(credential_checksum_support,
-                                          credential_type,
-                                          cl_support,
-                                          supported_credential_slots,
-                                          min_length,
-                                          max_length);
-
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_OK,
-    handler.control_handler(&info, report_frame.data(), report_frame.size()));
+  helper_simulate_credential_capabilites_report(credential_checksum_support,
+                                                credential_type,
+                                                cl_support,
+                                                supported_credential_slots,
+                                                min_length,
+                                                max_length);
 
   test_report_values();
 
@@ -737,17 +765,14 @@ void test_user_credential_credential_capabilities_report_happy_case()
   supported_credential_slots  = {15, 1565, 153};
   min_length                  = {155, 15, 5};
   max_length                  = {1111, 111, 11};
-  report_frame                = create_report_frame(credential_checksum_support,
-                                     credential_type,
-                                     cl_support,
-                                     supported_credential_slots,
-                                     min_length,
-                                     max_length);
   expected_credential_type_mask = 0b11100000;
 
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_OK,
-    handler.control_handler(&info, report_frame.data(), report_frame.size()));
+  helper_simulate_credential_capabilites_report(credential_checksum_support,
+                                                credential_type,
+                                                cl_support,
+                                                supported_credential_slots,
+                                                min_length,
+                                                max_length);
 
   test_report_values();
 }
@@ -1056,8 +1081,8 @@ void test_user_credential_user_report_happy_case()
   constexpr user_credential_user_unique_id_t EXPECTED_FIRST_USER_ID  = 12;
   constexpr user_credential_user_unique_id_t EXPECTED_SECOND_USER_ID = 1212;
 
-  user_credential_user_unique_id_t next_user_id = EXPECTED_SECOND_USER_ID;
-  user_credential_modifier_type_t user_modifier_type       = 2;
+  user_credential_user_unique_id_t next_user_id      = EXPECTED_SECOND_USER_ID;
+  user_credential_modifier_type_t user_modifier_type = 2;
   user_credential_modifier_node_id_t user_modifier_node_id = 1313;
   user_credential_user_unique_id_t user_id = EXPECTED_FIRST_USER_ID;
   user_credential_user_type_t user_type    = 3;
@@ -1705,8 +1730,8 @@ void test_user_credential_credential_report_happy_case()
   std::vector<uint8_t> credential_data     = {12, 13, 14, 15, 16};
   user_credential_modifier_type_t credential_modifier_type       = 13;
   user_credential_modifier_node_id_t credential_modifier_node_id = 1312;
-  user_credential_type_t next_credential_type                         = 12;
-  user_credential_slot_t next_credential_slot                         = 1;
+  user_credential_type_t next_credential_type                    = 12;
+  user_credential_slot_t next_credential_slot                    = 1;
 
   auto test_user_values = [&](attribute_store_node_t credential_type_node,
                               attribute_store_node_t credential_slot_node) {
@@ -2158,6 +2183,25 @@ void test_user_credential_user_notification_add_modify_delete_happy_case()
   TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
                                "Notification callback should be defined");
 
+  // Those functions are exposed and checks user values, so we need to setup the capabilities
+  uint16_t number_of_users                                       = 12;
+  user_credential_supported_credential_rules_t cred_rule_bitmask = 0x0F;
+  uint8_t username_max_length                                    = 112;
+  uint8_t support_user_schedule                                  = 0;
+  uint8_t support_all_users_checksum                             = 0;
+  uint8_t support_user_checksum                                  = 0;
+  uint8_t supported_user_types_bitmask_length                    = 2;
+  user_credential_supported_user_type_bitmask_t supported_user_types_bitmask
+    = 0xFF;
+  helper_simulate_user_capabilites_report(number_of_users,
+                                          cred_rule_bitmask,
+                                          username_max_length,
+                                          support_user_schedule,
+                                          support_all_users_checksum,
+                                          support_user_checksum,
+                                          supported_user_types_bitmask_length,
+                                          supported_user_types_bitmask);
+
   // Setup user
   user_credential_user_unique_id_t user_id                    = 12;
   user_credential_type_t user_type                            = 2;
@@ -2325,6 +2369,21 @@ void test_user_credential_credential_notification_add_modify_delete_happy_case()
                                               &user_id,
                                               sizeof(user_id));
 
+  // Se capabilities
+  uint8_t supported_credential_checksum = 1;
+  std::vector<user_credential_type_t> supported_credential_type
+    = {ZCL_CRED_TYPE_PIN_CODE};
+  std::vector<uint8_t> supported_cl                = {1};
+  std::vector<uint16_t> supported_credential_slots = {1};
+  std::vector<uint16_t> supported_cred_min_length  = {2};
+  std::vector<uint16_t> supported_cred_max_length  = {6};
+  helper_simulate_credential_capabilites_report(supported_credential_checksum,
+                                                supported_credential_type,
+                                                supported_cl,
+                                                supported_credential_slots,
+                                                supported_cred_min_length,
+                                                supported_cred_max_length);
+  
   // Add credential
   sl_status_t status = zwave_command_class_user_credential_add_new_credential(
     endpoint_id_node,
@@ -2395,7 +2454,6 @@ void test_user_credential_credential_notification_add_modify_delete_happy_case()
   test_attribute_store_values();
 
   crb = false;
-  ;
   credential_data             = "121212";
   credential_modifier_type    = 3;
   credential_modifier_node_id = 15;
@@ -2433,4 +2491,481 @@ void test_user_credential_credential_notification_add_modify_delete_happy_case()
                            "User ID node should still exist");
 }
 
+void test_user_credential_user_add_capabilites_failure_cases()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  // Those functions are exposed and checks user values, so we need to setup the capabilities
+  uint16_t number_of_users                                       = 1;
+  user_credential_supported_credential_rules_t cred_rule_bitmask = 2;
+  uint8_t username_max_length                                    = 1;
+  uint8_t support_user_schedule                                  = 0;
+  uint8_t support_all_users_checksum                             = 0;
+  uint8_t support_user_checksum                                  = 0;
+  uint8_t supported_user_types_bitmask_length                    = 1;
+  user_credential_supported_user_type_bitmask_t supported_user_types_bitmask
+    = 1;
+  helper_simulate_user_capabilites_report(number_of_users,
+                                          cred_rule_bitmask,
+                                          username_max_length,
+                                          support_user_schedule,
+                                          support_all_users_checksum,
+                                          support_user_checksum,
+                                          supported_user_types_bitmask_length,
+                                          supported_user_types_bitmask);
+
+  // User ID not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_user(endpoint_id_node,
+                                                     12,  // User ID
+                                                     0,   // User Type
+                                                     1,   // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "G"),
+    "User ID is not valid");
+
+  // User Type not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     1,  // User Type
+                                                     1,  // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "G"),
+    "User Type is not valid");
+
+  // Credential rule not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     0,  // User Type
+                                                     2,  // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "G"),
+    "Credential rule is not valid");
+
+  // Username too long
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     0,  // User Type
+                                                     1,  // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "GERARD TURBO"),
+    "User name is not valid");
+}
+
+void test_user_credential_user_add_capabilites_happy_cred_rule_cases()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  uint16_t number_of_users                    = 1;
+  uint8_t username_max_length                 = 1;
+  uint8_t support_user_schedule               = 0;
+  uint8_t support_all_users_checksum          = 0;
+  uint8_t support_user_checksum               = 0;
+  uint8_t supported_user_types_bitmask_length = 1;
+  user_credential_supported_user_type_bitmask_t supported_user_types_bitmask
+    = 1;
+
+  std::map<user_credential_supported_credential_rules_t, uint8_t> cred_rule_map
+    = {
+      {0x02, 1},
+      {0x04, 2},
+      {0x08, 3},
+      {0x06, 1},
+      {0x06, 2},
+      {0x0F, 3},
+      {0x0F, 2},
+      {0x0F, 1},
+    };
+
+  for (auto &cred_rule: cred_rule_map) {
+    helper_simulate_user_capabilites_report(number_of_users,
+                                            cred_rule.first,
+                                            username_max_length,
+                                            support_user_schedule,
+                                            support_all_users_checksum,
+                                            support_user_checksum,
+                                            supported_user_types_bitmask_length,
+                                            supported_user_types_bitmask);
+
+    printf("Testing bitmask %d with value %d\n",
+           cred_rule.first,
+           cred_rule.second);
+    TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                              zwave_command_class_user_credential_add_new_user(
+                                endpoint_id_node,
+                                1,                 // User ID
+                                0,                 // User Type
+                                cred_rule.second,  // Credential rule
+                                1,
+                                0,
+                                0,
+                                "G"),
+                              "Should be able to add user");
+  }
+}
+
+void test_user_credential_user_add_capabilites_happy_user_type_rule_cases()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  uint16_t number_of_users                               = 1;
+  uint8_t username_max_length                            = 1;
+  uint8_t support_user_schedule                          = 0;
+  uint8_t support_all_users_checksum                     = 0;
+  uint8_t support_user_checksum                          = 0;
+  uint8_t supported_user_types_bitmask_length            = 1;
+  user_credential_supported_credential_rules_t cred_rule = 0x02;
+
+  std::map<user_credential_supported_user_type_bitmask_t, uint8_t> type_rule_map
+    = {
+      {0x01, 0},
+      {0x02, 1},
+      {0x04, 2},
+      {0x08, 3},
+      {0x06, 1},
+      {0x06, 2},
+      {0x0F, 3},
+      {0x0F, 2},
+      {0x0F, 1},
+    };
+
+  for (auto &type_rule: type_rule_map) {
+    helper_simulate_user_capabilites_report(number_of_users,
+                                            cred_rule,
+                                            username_max_length,
+                                            support_user_schedule,
+                                            support_all_users_checksum,
+                                            support_user_checksum,
+                                            supported_user_types_bitmask_length,
+                                            type_rule.first);
+
+    printf("Testing bitmask %d with value %d\n",
+           type_rule.first,
+           type_rule.second);
+    TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                              zwave_command_class_user_credential_add_new_user(
+                                endpoint_id_node,
+                                1,                 // User ID
+                                type_rule.second,  // User Type
+                                1,                 // Credential rule
+                                1,
+                                0,
+                                0,
+                                "G"),
+                              "Should be able to add user");
+  }
+}
+
+void test_user_credential_user_modify_capabilites_failure_cases()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  // Those functions are exposed and checks user values, so we need to setup the capabilities
+  uint16_t number_of_users                                       = 1;
+  user_credential_supported_credential_rules_t cred_rule_bitmask = 2;
+  uint8_t username_max_length                                    = 1;
+  uint8_t support_user_schedule                                  = 0;
+  uint8_t support_all_users_checksum                             = 0;
+  uint8_t support_user_checksum                                  = 0;
+  uint8_t supported_user_types_bitmask_length                    = 1;
+  user_credential_supported_user_type_bitmask_t supported_user_types_bitmask
+    = 1;
+  helper_simulate_user_capabilites_report(number_of_users,
+                                          cred_rule_bitmask,
+                                          username_max_length,
+                                          support_user_schedule,
+                                          support_all_users_checksum,
+                                          support_user_checksum,
+                                          supported_user_types_bitmask_length,
+                                          supported_user_types_bitmask);
+
+  // User ID not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    zwave_command_class_user_credential_add_new_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     0,   // User Type
+                                                     1,   // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "G"),
+    "Should be able to add user");
+
+  // User Type not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_modify_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     1,  // User Type
+                                                     1,  // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "G"),
+    "User Type is not valid");
+
+  // Credential rule not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_modify_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     0,  // User Type
+                                                     2,  // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "G"),
+    "Credential rule is not valid");
+
+  // Username too long
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_modify_user(endpoint_id_node,
+                                                     1,  // User ID
+                                                     0,  // User Type
+                                                     1,  // Credential rule
+                                                     1,
+                                                     0,
+                                                     0,
+                                                     "GERARD TURBO"),
+    "User name is not valid");
+}
+
+
+void test_user_credential_credential_add_capabilites_failure_cases()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  user_credential_user_unique_id_t user_id = 12;
+
+  // Simulate user
+  attribute_store_emplace(endpoint_id_node,
+                          ATTRIBUTE(USER_UNIQUE_ID),
+                          &user_id,
+                          sizeof(user_id));
+
+  // Se capabilities
+  uint8_t supported_credential_checksum = 1;
+  std::vector<user_credential_type_t> supported_credential_type
+    = {ZCL_CRED_TYPE_HAND_BIOMETRIC};
+  std::vector<uint8_t> supported_cl                = {1};
+  std::vector<uint16_t> supported_credential_slots = {1};
+  std::vector<uint16_t> supported_cred_min_length  = {2};
+  std::vector<uint16_t> supported_cred_max_length  = {6};
+  helper_simulate_credential_capabilites_report(supported_credential_checksum,
+                                                supported_credential_type,
+                                                supported_cl,
+                                                supported_credential_slots,
+                                                supported_cred_min_length,
+                                                supported_cred_max_length);
+
+  // Credential type not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_PIN_CODE,  // Credential type
+                                                           1,  // Credential slot
+                                                           "12"),
+    "Credential type shouldn't be valid");
+
+  // Credential slot not valid
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           2,  // Credential slot
+                                                           "12"),
+    "Credential slot shouldn't be valid");
+
+
+  // Credential data too short
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           1,  
+                                                           "1"),
+    "Credential data should be too short");
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           1,  
+                                                           "TURBO TROP LONG VROUM"),
+    "Credential data should be too long");
+}
+
+void test_user_credential_credential_add_capabilites_happy_case()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  user_credential_user_unique_id_t user_id = 12;
+
+  // Simulate user
+  attribute_store_emplace(endpoint_id_node,
+                          ATTRIBUTE(USER_UNIQUE_ID),
+                          &user_id,
+                          sizeof(user_id));
+
+  // Se capabilities
+  uint8_t supported_credential_checksum = 1;
+  std::vector<user_credential_type_t> supported_credential_type
+    = {ZCL_CRED_TYPE_HAND_BIOMETRIC, ZCL_CRED_TYPE_PIN_CODE};
+  std::vector<uint8_t> supported_cl                = {1, 0};
+  std::vector<uint16_t> supported_credential_slots = {1, 5};
+  std::vector<uint16_t> supported_cred_min_length  = {2, 4};
+  std::vector<uint16_t> supported_cred_max_length  = {6, 8};
+  helper_simulate_credential_capabilites_report(supported_credential_checksum,
+                                                supported_credential_type,
+                                                supported_cl,
+                                                supported_credential_slots,
+                                                supported_cred_min_length,
+                                                supported_cred_max_length);
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           1,  
+                                                           "TURBO"),
+    "Credential #1 should be valid");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_PIN_CODE,
+                                                           4,  
+                                                           "121212"),
+    "Credential #2 should be valid");
+}
+   
+
+void test_user_credential_credential_modify_capabilites_failure_cases()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  user_credential_user_unique_id_t user_id = 12;
+
+  // Simulate user
+  attribute_store_emplace(endpoint_id_node,
+                          ATTRIBUTE(USER_UNIQUE_ID),
+                          &user_id,
+                          sizeof(user_id));
+
+  // Se capabilities
+  uint8_t supported_credential_checksum = 1;
+  std::vector<user_credential_type_t> supported_credential_type
+    = {ZCL_CRED_TYPE_HAND_BIOMETRIC};
+  std::vector<uint8_t> supported_cl                = {1};
+  std::vector<uint16_t> supported_credential_slots = {1};
+  std::vector<uint16_t> supported_cred_min_length  = {2};
+  std::vector<uint16_t> supported_cred_max_length  = {7};
+  helper_simulate_credential_capabilites_report(supported_credential_checksum,
+                                                supported_credential_type,
+                                                supported_cl,
+                                                supported_credential_slots,
+                                                supported_cred_min_length,
+                                                supported_cred_max_length);
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           1,  
+                                                           "VOITURE"),
+    "Should be able to add credential");
+
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_modify_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           1,  
+                                                           "V"),
+   "Should not be able to modify credential data : it's too short");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_modify_credential(endpoint_id_node,
+                                                           user_id,
+                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
+                                                           1,  
+                                                           "MAX SPEEEEEEEEEEEEED TURBO"),
+    "Should not be able to modify credential data : it's too long");
+}
+
+  // Credential
 }  // extern "C"

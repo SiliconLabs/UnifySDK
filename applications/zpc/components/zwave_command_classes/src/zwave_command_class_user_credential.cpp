@@ -96,6 +96,301 @@ struct attribute_command_data {
 };
 
 /////////////////////////////////////////////////////////////////////////////
+// Capabilites Data Structs
+/////////////////////////////////////////////////////////////////////////////
+// User capabilities
+struct user_capabilities {
+  // Maximum number of users that can be stored in the device
+  uint16_t max_user_count = 0;
+  // Credential rules supported
+  uint8_t supported_credential_rules_bitmask = 0;
+  // User types supported
+  uint32_t supported_user_types_bitmask = 0;
+  // Max length for the user names
+  uint8_t max_user_name_length = 0;
+  // Device support for scheduling users
+  uint8_t support_user_schedule = 0;
+  // Device support for getting the checksum of all users
+  uint8_t support_all_user_checksum = 0;
+  // Device support for getting the checksum of a specific user
+  uint8_t support_by_user_checksum = 0 ;
+
+  // True if the data is valid inside this struct
+  bool is_data_valid = false;
+
+  /**
+   * @brief Check if the user proprieties are valid
+   * 
+   * @note Will return false if is_data_valid is false
+   * 
+   * @param user_id          User ID
+   * @param user_type        User type
+   * @param credential_rule  Credential rule
+   * @param user_name        User name
+   * 
+   * @return true  User is valid
+   * @return false User is not valid
+  */
+  bool is_user_valid(user_credential_user_unique_id_t user_id,
+                     user_credential_type_t user_type,
+                     user_credential_rule_t credential_rule,
+                     const char *user_name)
+  {
+    if (!is_data_valid) {
+      sl_log_error(
+        LOG_TAG,
+        "User capabilities are not valid. Try restarting the device.");
+      return false;
+    }
+
+    if (!is_user_id_valid(user_id)) {
+      sl_log_error(LOG_TAG, "User ID is not valid.");
+      return false;
+    }
+
+    if (!is_user_type_supported(user_type)) {
+      sl_log_error(LOG_TAG, "User type is not supported.");
+      return false;
+    }
+
+    if (!is_credential_rule_supported(credential_rule)) {
+      sl_log_error(LOG_TAG, "Credential rule is not supported.");
+      return false;
+    }
+
+    if (!is_user_name_valid(user_name)) {
+      sl_log_error(LOG_TAG, "User name is not valid.");
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * @brief Checks if the given user name is valid.
+   * @param user_name The user name to be validated.
+   * @return true User name is valid
+   * @return false User name is not valid
+   */
+  bool is_user_name_valid(const char* user_name) const
+  {
+    std::string str_user_name(user_name);
+    return str_user_name.length() <= max_user_name_length;
+  }
+
+  /**
+   * @brief Check if a user id is valid
+   * @param user_id User ID to check
+   * @return true User ID is valid
+   * @return false User ID is not valid
+  */
+  bool is_user_id_valid(user_credential_user_unique_id_t user_id)
+  {
+    return user_id <= max_user_count;
+  }
+  /** 
+   * @brief Check if a user type is supported
+   * @param user_type User type to check
+   * @return true User type is supported
+   * @return false User type is not supported
+  */
+  bool is_user_type_supported(user_credential_type_t user_type) const
+  {
+    return (supported_user_types_bitmask & (1 << user_type));
+  }
+
+  /**
+   * @brief Check if a credential rule is supported
+   * @param credential_rule Credential rule to check
+   * @return true Credential rule is supported
+   * @return false Credential rule is not supported
+  */
+  bool is_credential_rule_supported(user_credential_rule_t credential_rule) const
+  {
+    return (supported_credential_rules_bitmask & (1 << credential_rule));
+  }
+};
+
+
+// Associated with a Credential type
+struct credential_capabilities {
+  user_credential_type_t credential_type = 0;
+  uint16_t max_slot_count = 0;
+  uint8_t support_crb = 0;
+  uint16_t min_credential_length = 0;
+  uint16_t max_credential_length = 0;
+  bool is_data_valid = false;
+
+  bool is_credential_valid(user_credential_type_t credential_type,
+                           user_credential_slot_t credential_slot,
+                           const std::vector<uint8_t> &credential_data)
+  {
+
+    if (!is_data_valid) {
+      sl_log_error(
+        LOG_TAG,
+        "Credential capabilities are not valid. Try restarting the device.");
+      return false;
+    }
+
+    if (credential_type != this->credential_type) {
+      sl_log_error(LOG_TAG, "Credential type mismatch.");
+      return false;
+    }
+
+    if (!is_slot_valid(credential_slot)) {
+      sl_log_error(
+        LOG_TAG,
+        "Slot ID is not valid. Given : %d, Max Supported Slot count : %d",
+        credential_slot,
+        max_slot_count);
+      return false;
+    }
+
+    if (!is_credential_data_valid(credential_data)) {
+      sl_log_error(LOG_TAG, "Credential data size is not valid. Should be between %d and %d, given : %d",
+                   min_credential_length,
+                   max_credential_length,
+                   credential_data.size());
+      return false;
+    }
+
+    return true;
+  }
+
+  bool is_slot_valid(user_credential_slot_t credential_slot) const
+  {
+    return credential_slot <= max_slot_count;
+  }
+
+  bool is_credential_data_valid(const std::vector<uint8_t> &credential_data) const
+  {
+    return (credential_data.size() >= min_credential_length
+            && credential_data.size() <= max_credential_length);
+  }
+};
+
+/////////////////////////////////////////////////////////////////////////////
+// Capabilites Helpers
+/////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Get the attributes of a node
+ * 
+ * @param parent_node Parent node of the attributes
+ * @param attributes  Fill the attribute_store_type_t with the corresponding value inside the pointer
+ * 
+ * @return sl_status_t SL_STATUS_OK if everything was fine ; otherwise an error code
+*/
+sl_status_t get_attributes(attribute_store_node_t parent_node,
+                           std::map<attribute_store_type_t, void *> attributes)
+{
+  sl_status_t status = SL_STATUS_OK;
+  for (auto &attribute: attributes) {
+    size_t attribute_size = 0;
+    switch (attribute_store_get_storage_type(attribute.first)) {
+      case U8_STORAGE_TYPE:
+        attribute_size = sizeof(uint8_t);
+        break;
+      case U16_STORAGE_TYPE:
+        attribute_size = sizeof(uint16_t);
+        break;
+      case U32_STORAGE_TYPE:
+        attribute_size = sizeof(uint32_t);
+        break;
+      default:
+        sl_log_error(
+          LOG_TAG,
+          "Unsupported storage type for attribute %d. Can't get capabilities.",
+          attribute.first);
+        return SL_STATUS_FAIL;
+    }
+
+    sl_status_t current_status
+      = attribute_store_get_child_reported(parent_node,
+                                           attribute.first,
+                                           attribute.second,
+                                           attribute_size);
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Can't get value for attribute %s",
+                    attribute_store_get_type_name(attribute.first));
+    }
+
+    status |= current_status;
+  }
+  return status;
+}
+
+/**
+ * @brief Get the user capabilities of a node
+ * 
+ * @param endpoint_node Endpoint node
+ * 
+ * @return user_capabilities User capabilities. is_data_valid will be false if an error occurred
+*/
+user_capabilities get_user_capabilities(attribute_store_node_t endpoint_node)
+{
+  user_capabilities capabilities;
+
+  std::map<attribute_store_type_t, void*> attributes = {
+    {ATTRIBUTE(NUMBER_OF_USERS), &capabilities.max_user_count},
+    {ATTRIBUTE(SUPPORTED_CREDENTIAL_RULES), &capabilities.supported_credential_rules_bitmask},
+    {ATTRIBUTE(SUPPORTED_USER_TYPES), &capabilities.supported_user_types_bitmask},
+    {ATTRIBUTE(MAX_USERNAME_LENGTH), &capabilities.max_user_name_length},
+    {ATTRIBUTE(SUPPORT_USER_SCHEDULE), &capabilities.support_user_schedule},
+    {ATTRIBUTE(SUPPORT_ALL_USERS_CHECKSUM), &capabilities.support_all_user_checksum},
+    {ATTRIBUTE(SUPPORT_USER_CHECKSUM), &capabilities.support_by_user_checksum}
+  };
+
+  sl_status_t status = get_attributes(endpoint_node, attributes);
+  
+  capabilities.is_data_valid = (status == SL_STATUS_OK);
+
+  return capabilities;
+}
+
+/**
+ * @brief Get the credential capabilities of a node for given credential type
+ * 
+ * @param endpoint_node   Endpoint node
+ * @param credential_type Credential type
+ * 
+ * @return credential_capabilities Credential capabilities. is_data_valid will be false if an error occurred
+*/
+credential_capabilities
+  get_credential_capabilities(attribute_store_node_t endpoint_node,
+                              user_credential_type_t credential_type)
+{
+  credential_capabilities capabilities;
+
+  attribute_store_node_t supported_credential_type_node
+    = attribute_store_get_node_child_by_value(
+      endpoint_node,
+      ATTRIBUTE(SUPPORTED_CREDENTIAL_TYPE),
+      REPORTED_ATTRIBUTE,
+      (uint8_t *)&credential_type,
+      sizeof(credential_type),
+      0);
+
+  if (!attribute_store_node_exists(supported_credential_type_node)) {
+    sl_log_error(LOG_TAG, "Credential type %d not supported. Can't get capabilities", credential_type);
+    return capabilities;
+  }
+
+  std::map<attribute_store_type_t, void*> attributes = {
+    {ATTRIBUTE(CREDENTIAL_SUPPORTED_SLOT_COUNT), &capabilities.max_slot_count},
+    {ATTRIBUTE(CREDENTIAL_LEARN_READ_BACK_SUPPORT), &capabilities.support_crb},
+    {ATTRIBUTE(CREDENTIAL_MIN_LENGTH), &capabilities.min_credential_length},
+    {ATTRIBUTE(CREDENTIAL_MAX_LENGTH), &capabilities.max_credential_length}
+  };
+  
+  sl_status_t status = get_attributes(supported_credential_type_node, attributes);
+  capabilities.credential_type = credential_type;
+  capabilities.is_data_valid = (status == SL_STATUS_OK);
+
+  return capabilities;
+}
+
+/////////////////////////////////////////////////////////////////////////////
 // Type Helpers
 /////////////////////////////////////////////////////////////////////////////
 uint16_t get_uint16_value(const uint8_t *frame, uint16_t start_index)
@@ -2319,6 +2614,13 @@ sl_status_t zwave_command_class_user_credential_add_new_user(
   sl_log_debug(LOG_TAG, "\tuser_name_encoding : %d", user_name_encoding);
   sl_log_debug(LOG_TAG, "\tuser_name : %s", user_name);
 
+  // Check capabilites
+  user_capabilities capabilites = get_user_capabilities(endpoint_node);
+  if (!capabilites.is_user_valid(user_id, user_type, credential_rule, user_name)) {
+    sl_log_error(LOG_TAG, "User capabilities are not valid. Not adding user.");
+    return SL_STATUS_FAIL;
+  }
+
   // Create the user node
   user_id_node = attribute_store_emplace_desired(endpoint_node,
                                                  ATTRIBUTE(USER_UNIQUE_ID),
@@ -2434,6 +2736,13 @@ sl_status_t zwave_command_class_user_credential_modify_user(
   sl_log_debug(LOG_TAG, "\texpiring_timeout : %d", expiring_timeout);
   sl_log_debug(LOG_TAG, "\tuser_name_encoding : %d", user_name_encoding);
   sl_log_debug(LOG_TAG, "\tuser_name : %s", user_name);
+
+  // Check capabilites
+  user_capabilities capabilites = get_user_capabilities(endpoint_node);
+  if (!capabilites.is_user_valid(user_id, user_type, credential_rule, user_name)) {
+    sl_log_error(LOG_TAG, "User capabilities are not valid. Not adding user.");
+    return SL_STATUS_FAIL;
+  }
 
   std::map<attribute_store_type_t, std::pair<const void *, uint8_t>> values = {
     {ATTRIBUTE(USER_TYPE), {&user_type, sizeof(user_type)}},
@@ -2557,7 +2866,7 @@ sl_status_t zwave_command_class_user_credential_add_new_credential(
                              REPORTED_ATTRIBUTE,
                              credential_slot_node);
 
-    // If a Credential Slot already exists we can't add a new one
+    // If a Credential Slot already exists we can't add a ne  w one
     if (attribute_store_node_exists(credential_slot_node)) {
       sl_log_error(LOG_TAG,
                    "Credential slot %d for Credential Type %d already exists. "
@@ -2585,13 +2894,6 @@ sl_status_t zwave_command_class_user_credential_add_new_credential(
   sl_log_debug(LOG_TAG, "\tcredential_slot : %d", credential_slot);
   sl_log_debug(LOG_TAG, "\tcredential_data : %s", credential_data);
 
-  // Create credential slot
-  credential_slot_node
-    = attribute_store_emplace_desired(credential_type_node,
-                                      ATTRIBUTE(CREDENTIAL_SLOT),
-                                      &credential_slot,
-                                      sizeof(credential_slot));
-
   // Process credential data
   std::vector<uint8_t> credential_data_vector;
   sl_status_t credential_data_conversion_status
@@ -2600,9 +2902,30 @@ sl_status_t zwave_command_class_user_credential_add_new_credential(
                           credential_data_vector);
   // Something went wrong, we need to delete the slot
   if (credential_data_conversion_status == SL_STATUS_FAIL) {
-    attribute_store_delete_node(credential_slot_node);
     return SL_STATUS_FAIL;
   }
+
+  
+  auto capabilities
+    = get_credential_capabilities(endpoint_node, credential_type);
+
+  if (!capabilities.is_credential_valid(credential_type,
+                                        credential_slot,
+                                        credential_data_vector)) {
+    sl_log_error(
+      LOG_TAG,
+      "Credential capabilities are not valid. Not adding credential.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Create credential slot
+  credential_slot_node
+    = attribute_store_emplace_desired(credential_type_node,
+                                      ATTRIBUTE(CREDENTIAL_SLOT),
+                                      &credential_slot,
+                                      sizeof(credential_slot));
+
+
 
   // Add data
   uint8_t data_size = credential_data_vector.size();
@@ -2685,6 +3008,18 @@ sl_status_t zwave_command_class_user_credential_modify_credential(
     sl_log_error(LOG_TAG,
                  "Something went wrong while processing credential data. Not "
                  "modifying credentials.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Verify credential validity
+  auto capabilities
+    = get_credential_capabilities(endpoint_node, credential_type);
+  if (!capabilities.is_credential_valid(credential_type,
+                                        credential_slot,
+                                        credential_data_vector)) {
+    sl_log_error(
+      LOG_TAG,
+      "Credential capabilities are not valid. Not adding credential.");
     return SL_STATUS_FAIL;
   }
 
