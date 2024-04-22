@@ -5904,6 +5904,226 @@ void uic_mqtt_dotdot_parse_configuration_parameters_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
+ * fields of a UserCredential AddUser command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_user_credential_add_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UserCredential AddUser command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_add_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+
+  UserTypeEnum &user_type,
+
+  bool &user_active_state,
+
+  CredRule &credential_rule,
+
+  std::string &user_name,
+
+  uint16_t &expiring_timeout_minutes,
+
+  UserNameEncodingType &user_name_encoding
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UserCredential ModifyUser command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_user_credential_modify_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UserCredential ModifyUser command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_modify_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+
+  UserTypeEnum &user_type,
+
+  bool &user_active_state,
+
+  CredRule &credential_rule,
+
+  std::string &user_name,
+
+  uint16_t &expiring_timeout_minutes,
+
+  UserNameEncodingType &user_name_encoding
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UserCredential DeleteUser command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_user_credential_delete_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UserCredential DeleteUser command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_delete_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UserCredential AddCredential command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_user_credential_add_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UserCredential AddCredential command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_add_credential(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+
+  CredType &credential_type,
+
+  uint16_t &credential_slot,
+
+  std::string &credential_data
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UserCredential ModifyCredential command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_user_credential_modify_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UserCredential ModifyCredential command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_modify_credential(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+
+  CredType &credential_type,
+
+  uint16_t &credential_slot,
+
+  std::string &credential_data
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UserCredential DeleteCredential command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_user_credential_delete_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UserCredential DeleteCredential command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_delete_credential(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+
+  CredType &credential_type,
+
+  uint16_t &credential_slot
+
+);
+
+
+
+/**
+ * @brief JSON parser for UserCredential WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_user_credential_state_t &new_state,
+  uic_mqtt_dotdot_user_credential_updated_state_t &new_updated_state
+);
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
  * fields of a AoXLocator IQReport command
  * 
  * @param fields       Struct pointer with the list of fields for the command

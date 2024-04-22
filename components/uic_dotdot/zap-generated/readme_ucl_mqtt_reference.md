@@ -51848,6 +51848,751 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/ConfigurationParameters/Commands/Force
 <!-- NEW Page Cluster Support -->
 <!-- -->
 <!-- -->
+\page user_credential UserCredential Cluster
+The following commands and attributes are accepted as JSON payloads for the
+UserCredential cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF UserCredential Attributes Section -->
+<!-- -->
+\section user_credential_attrs UserCredential Attributes
+The following attribute topics are used to retrieve the UserCredential cluster state.
+
+<br>
+
+\subsection user_credential_attr_supported_user_unique_identifiers UserCredential/SupportedUserUniqueIdentifiers Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Attributes/SupportedUserUniqueIdentifiers/Reported
+[PREFIX]/UserCredential/Attributes/SupportedUserUniqueIdentifiers/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster SupportedUserUniqueIdentifiers Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedUserUniqueIdentifiers attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UserCredential/Attributes/SupportedUserUniqueIdentifiers/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedUserUniqueIdentifiers/Desired { "value": <DESIRED_SUPPORTED_USER_UNIQUE_IDENTIFIERS>}
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedUserUniqueIdentifiers/Reported { "value": <REPORTED_SUPPORTED_USER_UNIQUE_IDENTIFIERS>}
+
+```
+
+<br><br>
+
+\subsection user_credential_attr_supported_credential_rules UserCredential/SupportedCredentialRules Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Attributes/SupportedCredentialRules/Reported
+[PREFIX]/UserCredential/Attributes/SupportedCredentialRules/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster SupportedCredentialRules Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UserCredentialSupportedCredentialRules"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedCredentialRules attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UserCredential/Attributes/SupportedCredentialRules/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedCredentialRules/Desired { "value": <DESIRED_SUPPORTED_CREDENTIAL_RULES>}
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedCredentialRules/Reported { "value": <REPORTED_SUPPORTED_CREDENTIAL_RULES>}
+
+```
+
+<br><br>
+
+\subsection user_credential_attr_supported_credential_types UserCredential/SupportedCredentialTypes Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Attributes/SupportedCredentialTypes/Reported
+[PREFIX]/UserCredential/Attributes/SupportedCredentialTypes/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster SupportedCredentialTypes Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UserCredentialSupportedCredentialTypes"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedCredentialTypes attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UserCredential/Attributes/SupportedCredentialTypes/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedCredentialTypes/Desired { "value": <DESIRED_SUPPORTED_CREDENTIAL_TYPES>}
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedCredentialTypes/Reported { "value": <REPORTED_SUPPORTED_CREDENTIAL_TYPES>}
+
+```
+
+<br><br>
+
+\subsection user_credential_attr_supported_user_types UserCredential/SupportedUserTypes Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Attributes/SupportedUserTypes/Reported
+[PREFIX]/UserCredential/Attributes/SupportedUserTypes/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster SupportedUserTypes Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UserCredentialSupportedUserTypes"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedUserTypes attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UserCredential/Attributes/SupportedUserTypes/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedUserTypes/Desired { "value": <DESIRED_SUPPORTED_USER_TYPES>}
+ucl/by-unid/<UNID>/ep0/UserCredential/Attributes/SupportedUserTypes/Reported { "value": <REPORTED_SUPPORTED_USER_TYPES>}
+
+```
+
+<br><br>
+
+
+\subsection user_credential_attr_cluster_revision UserCredential/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Attributes/ClusterRevision/Reported
+[PREFIX]/UserCredential/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UserCredential/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/UserCredential/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF UserCredential Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UserCredential Supported Commands Section -->
+<!-- -->
+\section user_credential_recv_cmd_support UserCredential Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/SupportedCommands
+[PREFIX]/UserCredential/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+              "AddUser",
+              "ModifyUser",
+              "DeleteUser",
+              "AddCredential",
+              "ModifyCredential",
+              "DeleteCredential",
+              "WriteAttributes",
+              "ForceReadAttributes"
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for UserCredential cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UserCredential/SupportedCommands { "value": ["AddUser","ModifyUser","DeleteUser","AddCredential","ModifyCredential","DeleteCredential","WriteAttributes", "ForceReadAttributes"] }
+```
+
+To see supported generated commands for UserCredential cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UserCredential/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF UserCredential Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UserCredential Commands Section -->
+<!-- -->
+\section user_credential_cmds UserCredential Commands
+
+<br><br>
+
+\subsection user_credential_add_user_cmd UserCredential/AddUser Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/AddUser
+[PREFIX]/UserCredential/GeneratedCommands/AddUser
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster AddUser Command Properties",
+  "type": "object",
+  "properties": {
+    "UserUniqueID": {
+      "type": "integer"
+    },
+    "UserType": {
+      "type": "UserTypeEnum"
+    },
+    "UserActiveState": {
+      "type": "boolean"
+    },
+    "CredentialRule": {
+      "type": "CredRule"
+    },
+    "UserName": {
+      "type": "string"
+    },
+    "ExpiringTimeoutMinutes": {
+      "type": "integer"
+    },
+    "UserNameEncoding": {
+      "type": "UserNameEncodingType"
+    }
+  },
+  "required": [
+    "UserUniqueID",
+    "UserType",
+    "UserActiveState",
+    "CredentialRule",
+    "UserName",
+    "ExpiringTimeoutMinutes",
+    "UserNameEncoding"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UserCredential/AddUser command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/AddUser' -m  '{ "UserUniqueID": <USER_UNIQUEID_VALUE>,"UserType": <USER_TYPE_VALUE>,"UserActiveState": <USER_ACTIVE_STATE_VALUE>,"CredentialRule": <CREDENTIAL_RULE_VALUE>,"UserName": <USER_NAME_VALUE>,"ExpiringTimeoutMinutes": <EXPIRING_TIMEOUT_MINUTES_VALUE>,"UserNameEncoding": <USER_NAME_ENCODING_VALUE> }'
+```
+
+To receive a UserCredential/AddUser generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/GeneratedCommands/AddUser'
+```
+
+<br><br>
+
+\subsection user_credential_modify_user_cmd UserCredential/ModifyUser Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/ModifyUser
+[PREFIX]/UserCredential/GeneratedCommands/ModifyUser
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster ModifyUser Command Properties",
+  "type": "object",
+  "properties": {
+    "UserUniqueID": {
+      "type": "integer"
+    },
+    "UserType": {
+      "type": "UserTypeEnum"
+    },
+    "UserActiveState": {
+      "type": "boolean"
+    },
+    "CredentialRule": {
+      "type": "CredRule"
+    },
+    "UserName": {
+      "type": "string"
+    },
+    "ExpiringTimeoutMinutes": {
+      "type": "integer"
+    },
+    "UserNameEncoding": {
+      "type": "UserNameEncodingType"
+    }
+  },
+  "required": [
+    "UserUniqueID",
+    "UserType",
+    "UserActiveState",
+    "CredentialRule",
+    "UserName",
+    "ExpiringTimeoutMinutes",
+    "UserNameEncoding"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UserCredential/ModifyUser command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/ModifyUser' -m  '{ "UserUniqueID": <USER_UNIQUEID_VALUE>,"UserType": <USER_TYPE_VALUE>,"UserActiveState": <USER_ACTIVE_STATE_VALUE>,"CredentialRule": <CREDENTIAL_RULE_VALUE>,"UserName": <USER_NAME_VALUE>,"ExpiringTimeoutMinutes": <EXPIRING_TIMEOUT_MINUTES_VALUE>,"UserNameEncoding": <USER_NAME_ENCODING_VALUE> }'
+```
+
+To receive a UserCredential/ModifyUser generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/GeneratedCommands/ModifyUser'
+```
+
+<br><br>
+
+\subsection user_credential_delete_user_cmd UserCredential/DeleteUser Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/DeleteUser
+[PREFIX]/UserCredential/GeneratedCommands/DeleteUser
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster DeleteUser Command Properties",
+  "type": "object",
+  "properties": {
+    "UserUniqueID": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "UserUniqueID"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UserCredential/DeleteUser command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/DeleteUser' -m  '{ "UserUniqueID": <USER_UNIQUEID_VALUE> }'
+```
+
+To receive a UserCredential/DeleteUser generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/GeneratedCommands/DeleteUser'
+```
+
+<br><br>
+
+\subsection user_credential_add_credential_cmd UserCredential/AddCredential Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/AddCredential
+[PREFIX]/UserCredential/GeneratedCommands/AddCredential
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster AddCredential Command Properties",
+  "type": "object",
+  "properties": {
+    "UserUniqueID": {
+      "type": "integer"
+    },
+    "CredentialType": {
+      "type": "CredType"
+    },
+    "CredentialSlot": {
+      "type": "integer"
+    },
+    "CredentialData": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "UserUniqueID",
+    "CredentialType",
+    "CredentialSlot",
+    "CredentialData"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UserCredential/AddCredential command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/AddCredential' -m  '{ "UserUniqueID": <USER_UNIQUEID_VALUE>,"CredentialType": <CREDENTIAL_TYPE_VALUE>,"CredentialSlot": <CREDENTIAL_SLOT_VALUE>,"CredentialData": <CREDENTIAL_DATA_VALUE> }'
+```
+
+To receive a UserCredential/AddCredential generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/GeneratedCommands/AddCredential'
+```
+
+<br><br>
+
+\subsection user_credential_modify_credential_cmd UserCredential/ModifyCredential Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/ModifyCredential
+[PREFIX]/UserCredential/GeneratedCommands/ModifyCredential
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster ModifyCredential Command Properties",
+  "type": "object",
+  "properties": {
+    "UserUniqueID": {
+      "type": "integer"
+    },
+    "CredentialType": {
+      "type": "CredType"
+    },
+    "CredentialSlot": {
+      "type": "integer"
+    },
+    "CredentialData": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "UserUniqueID",
+    "CredentialType",
+    "CredentialSlot",
+    "CredentialData"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UserCredential/ModifyCredential command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/ModifyCredential' -m  '{ "UserUniqueID": <USER_UNIQUEID_VALUE>,"CredentialType": <CREDENTIAL_TYPE_VALUE>,"CredentialSlot": <CREDENTIAL_SLOT_VALUE>,"CredentialData": <CREDENTIAL_DATA_VALUE> }'
+```
+
+To receive a UserCredential/ModifyCredential generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/GeneratedCommands/ModifyCredential'
+```
+
+<br><br>
+
+\subsection user_credential_delete_credential_cmd UserCredential/DeleteCredential Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/DeleteCredential
+[PREFIX]/UserCredential/GeneratedCommands/DeleteCredential
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster DeleteCredential Command Properties",
+  "type": "object",
+  "properties": {
+    "UserUniqueID": {
+      "type": "integer"
+    },
+    "CredentialType": {
+      "type": "CredType"
+    },
+    "CredentialSlot": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "UserUniqueID",
+    "CredentialType",
+    "CredentialSlot"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UserCredential/DeleteCredential command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/DeleteCredential' -m  '{ "UserUniqueID": <USER_UNIQUEID_VALUE>,"CredentialType": <CREDENTIAL_TYPE_VALUE>,"CredentialSlot": <CREDENTIAL_SLOT_VALUE> }'
+```
+
+To receive a UserCredential/DeleteCredential generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/GeneratedCommands/DeleteCredential'
+```
+
+<br><br>
+
+\subsection user_credential_write_attr_cmd UserCredential/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all UserCredential attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection user_credential_force_read_attr_cmd UserCredential/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UserCredential/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredential Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "SupportedUserUniqueIdentifiers",
+          "SupportedCredentialRules",
+          "SupportedCredentialTypes",
+          "SupportedUserTypes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all UserCredential attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the UserCredential attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UserCredential/Commands/ForceReadAttributes' -m  '{ "value": ["SupportedUserUniqueIdentifiers"] }'
+```
+
+<!-- -->
+<!-- END OF UserCredential Commands Section -->
+<!-- -->
+
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
 \page aox_locator AoXLocator Cluster
 The following commands and attributes are accepted as JSON payloads for the
 AoXLocator cluster.
@@ -54120,33 +54865,6 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
-<!-- START OF Struct CredentialStruct Section -->
-<!-- -->
-\section struct_credential_struct CredentialStruct Struct
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CredentialStruct Struct Properties",
-  "type": "object",
-  "properties": {
-    "CredentialType": {
-      "type": "CredentialTypeEnum"
-    }
-    "CredentialIndex": {
-      "type": "integer"
-    }
-  }
-}
-```
-
-<!-- -->
-<!-- END OF Struct CredentialStruct Section -->
-<!-- -->
-
-<br><br>
-
-<!-- -->
 <!-- START OF Struct DeviceTypeStruct Section -->
 <!-- -->
 \section struct_device_type_struct DeviceTypeStruct Struct
@@ -55325,6 +56043,62 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum CommissioningStartupControl Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum CredRule Section -->
+<!-- -->
+\section enum_cred_rule CredRule Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CredRule Enum Properties",
+  "type": "string",
+  "enum": [
+    "Single",
+    "Dual",
+    "Triple"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum CredRule Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum CredType Section -->
+<!-- -->
+\section enum_cred_type CredType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CredType Enum Properties",
+  "type": "string",
+  "enum": [
+    "PINCode",
+    "Password",
+    "RFIDCode",
+    "BLE",
+    "NFC",
+    "UWB",
+    "EyeBiometric",
+    "FaceBiometric",
+    "FingerBiometric",
+    "HandBiometric",
+    "UnspecifiedBiometric"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum CredType Section -->
 <!-- -->
 
 <br><br>
@@ -57564,6 +58338,84 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum TxReportTransmissionSpeed Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum UserModifierType Section -->
+<!-- -->
+\section enum_user_modifier_type UserModifierType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserModifierType Enum Properties",
+  "type": "string",
+  "enum": [
+    "DNE",
+    "Unknown",
+    "Z-Wave",
+    "Locally",
+    "MobileAppOrOtherIoT"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UserModifierType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum UserNameEncodingType Section -->
+<!-- -->
+\section enum_user_name_encoding_type UserNameEncodingType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserNameEncodingType Enum Properties",
+  "type": "string",
+  "enum": [
+    "ASCII",
+    "OEMExtendedASCII",
+    "UTF-16"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UserNameEncodingType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum UserTypeEnum Section -->
+<!-- -->
+\section enum_user_type_enum UserTypeEnum Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserTypeEnum Enum Properties",
+  "type": "string",
+  "enum": [
+    "GeneralUser",
+    "ProgrammingUser",
+    "NonAccessUser",
+    "DuressUser",
+    "DisposableUser",
+    "ExpiringUser",
+    "RemoteOnlyUser"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UserTypeEnum Section -->
 <!-- -->
 
 <br><br>
@@ -59966,6 +60818,132 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Bitmap TstatScheduleMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UserCredentialSupportedCredentialRules Section -->
+<!-- -->
+\section enum_user_credential_supported_credential_rules UserCredentialSupportedCredentialRules Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredentialSupportedCredentialRules Enum Properties",
+  "type": "object",
+  "properties": {
+    "Single": {
+        "type": "boolean"
+    },
+    "Dual": {
+        "type": "boolean"
+    },
+    "Triple": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UserCredentialSupportedCredentialRules Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UserCredentialSupportedCredentialTypes Section -->
+<!-- -->
+\section enum_user_credential_supported_credential_types UserCredentialSupportedCredentialTypes Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredentialSupportedCredentialTypes Enum Properties",
+  "type": "object",
+  "properties": {
+    "PINCode": {
+        "type": "boolean"
+    },
+    "Password": {
+        "type": "boolean"
+    },
+    "RFIDCode": {
+        "type": "boolean"
+    },
+    "BLE": {
+        "type": "boolean"
+    },
+    "NFC": {
+        "type": "boolean"
+    },
+    "UWB": {
+        "type": "boolean"
+    },
+    "EyeBiometric": {
+        "type": "boolean"
+    },
+    "FaceBiometric": {
+        "type": "boolean"
+    },
+    "FingerBiometric": {
+        "type": "boolean"
+    },
+    "HandBiometric": {
+        "type": "boolean"
+    },
+    "UnspecifiedBiometric": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UserCredentialSupportedCredentialTypes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UserCredentialSupportedUserTypes Section -->
+<!-- -->
+\section enum_user_credential_supported_user_types UserCredentialSupportedUserTypes Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserCredentialSupportedUserTypes Enum Properties",
+  "type": "object",
+  "properties": {
+    "GeneralUser": {
+        "type": "boolean"
+    },
+    "ProgrammingUser": {
+        "type": "boolean"
+    },
+    "NonAccessUser": {
+        "type": "boolean"
+    },
+    "DuressUser": {
+        "type": "boolean"
+    },
+    "DisposableUser": {
+        "type": "boolean"
+    },
+    "ExpiringUser": {
+        "type": "boolean"
+    },
+    "RemoteOnlyUser": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UserCredentialSupportedUserTypes Section -->
 <!-- -->
 
 <br><br>

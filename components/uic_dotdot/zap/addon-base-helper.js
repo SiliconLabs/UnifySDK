@@ -98,6 +98,10 @@ zcl_type_map = (function() {
         CredentialTypeEnum: 'enum8',
         DataOperationTypeEnum: 'enum8',
         CredentialRuleEnum: 'enum8',
+        CredRule: 'enum8',
+        UserTypeEnum: 'enum8',
+        CredType: 'enum8',
+        UserNameEncodingType: 'enum8',
         // zclType: 'uint8',
 
         BarrierControlSafetyStatus: 'map16',

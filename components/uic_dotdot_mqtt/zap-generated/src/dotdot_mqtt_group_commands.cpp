@@ -354,6 +354,15 @@ static uic_mqtt_dotdot_by_group_configuration_parameters_discover_parameter_rang
 static uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback_t uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback = nullptr;
 
 
+static uic_mqtt_dotdot_by_group_user_credential_add_user_callback_t uic_mqtt_dotdot_by_group_user_credential_add_user_callback = nullptr;
+static uic_mqtt_dotdot_by_group_user_credential_modify_user_callback_t uic_mqtt_dotdot_by_group_user_credential_modify_user_callback = nullptr;
+static uic_mqtt_dotdot_by_group_user_credential_delete_user_callback_t uic_mqtt_dotdot_by_group_user_credential_delete_user_callback = nullptr;
+static uic_mqtt_dotdot_by_group_user_credential_add_credential_callback_t uic_mqtt_dotdot_by_group_user_credential_add_credential_callback = nullptr;
+static uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback_t uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback = nullptr;
+static uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback_t uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback = nullptr;
+static uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback_t uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback = nullptr;
+
+
 static uic_mqtt_dotdot_by_group_aox_locator_iq_report_callback_t uic_mqtt_dotdot_by_group_aox_locator_iq_report_callback = nullptr;
 static uic_mqtt_dotdot_by_group_aox_locator_angle_report_callback_t uic_mqtt_dotdot_by_group_aox_locator_angle_report_callback = nullptr;
 static uic_mqtt_dotdot_by_group_aox_locator_angle_correction_callback_t uic_mqtt_dotdot_by_group_aox_locator_angle_correction_callback = nullptr;
@@ -1827,6 +1836,51 @@ void uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback
   const uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_by_group_user_credential_add_user_callback_set(const uic_mqtt_dotdot_by_group_user_credential_add_user_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_add_user_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_user_credential_modify_user_callback_set(const uic_mqtt_dotdot_by_group_user_credential_modify_user_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_modify_user_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_user_credential_delete_user_callback_set(const uic_mqtt_dotdot_by_group_user_credential_delete_user_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_delete_user_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_user_credential_add_credential_callback_set(const uic_mqtt_dotdot_by_group_user_credential_add_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_add_credential_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback_set(const uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback_set(const uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback = callback;
+}
+
+void uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback = callback;
 }
 
 
@@ -22889,6 +22943,753 @@ sl_status_t uic_mqtt_dotdot_by_group_configuration_parameters_init()
 
 
 
+// Callback function for incoming publications on ucl/by-group/+/UserCredential/Commands/AddUser
+static void uic_mqtt_dotdot_on_by_group_user_credential_add_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_add_user_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_user_credential_add_user_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_user_credential_command_add_user_fields_t fields;
+      std::string user_name;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_user_credential_add_user(
+          jsn,
+          fields.user_uniqueid,
+              
+          fields.user_type,
+              
+          fields.user_active_state,
+              
+          fields.credential_rule,
+              
+          user_name,
+      
+          fields.expiring_timeout_minutes,
+              
+          fields.user_name_encoding
+              );
+
+      // Populate list fields from vector or string types
+              fields.user_name = user_name.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddUser");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_user_credential_add_user_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_add_user_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+      if (jsn.find("UserType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: UserType\n");
+        return;
+      }
+      if (jsn.find("UserActiveState") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: UserActiveState\n");
+        return;
+      }
+      if (jsn.find("CredentialRule") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: CredentialRule\n");
+        return;
+      }
+      if (jsn.find("UserName") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: UserName\n");
+        return;
+      }
+      if (jsn.find("ExpiringTimeoutMinutes") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: ExpiringTimeoutMinutes\n");
+        return;
+      }
+      if (jsn.find("UserNameEncoding") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddUser: Missing command-argument: UserNameEncoding\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UserCredential",
+        "AddUser",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_user_credential_add_user);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "AddUser: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UserCredential/Commands/ModifyUser
+static void uic_mqtt_dotdot_on_by_group_user_credential_modify_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_modify_user_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_user_credential_modify_user_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_user_credential_command_modify_user_fields_t fields;
+      std::string user_name;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_user_credential_modify_user(
+          jsn,
+          fields.user_uniqueid,
+              
+          fields.user_type,
+              
+          fields.user_active_state,
+              
+          fields.credential_rule,
+              
+          user_name,
+      
+          fields.expiring_timeout_minutes,
+              
+          fields.user_name_encoding
+              );
+
+      // Populate list fields from vector or string types
+              fields.user_name = user_name.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyUser");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_user_credential_modify_user_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_modify_user_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+      if (jsn.find("UserType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: UserType\n");
+        return;
+      }
+      if (jsn.find("UserActiveState") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: UserActiveState\n");
+        return;
+      }
+      if (jsn.find("CredentialRule") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: CredentialRule\n");
+        return;
+      }
+      if (jsn.find("UserName") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: UserName\n");
+        return;
+      }
+      if (jsn.find("ExpiringTimeoutMinutes") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: ExpiringTimeoutMinutes\n");
+        return;
+      }
+      if (jsn.find("UserNameEncoding") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyUser: Missing command-argument: UserNameEncoding\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UserCredential",
+        "ModifyUser",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_user_credential_modify_user);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "ModifyUser: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UserCredential/Commands/DeleteUser
+static void uic_mqtt_dotdot_on_by_group_user_credential_delete_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_delete_user_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_user_credential_delete_user_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_user_credential_command_delete_user_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_user_credential_delete_user(
+          jsn,
+          fields.user_uniqueid
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteUser");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_user_credential_delete_user_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_delete_user_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::DeleteUser: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UserCredential",
+        "DeleteUser",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_user_credential_delete_user);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "DeleteUser: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UserCredential/Commands/AddCredential
+static void uic_mqtt_dotdot_on_by_group_user_credential_add_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_add_credential_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_user_credential_add_credential_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_user_credential_command_add_credential_fields_t fields;
+      std::string credential_data;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_user_credential_add_credential(
+          jsn,
+          fields.user_uniqueid,
+              
+          fields.credential_type,
+              
+          fields.credential_slot,
+              
+          credential_data
+      );
+
+      // Populate list fields from vector or string types
+              fields.credential_data = credential_data.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddCredential");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_user_credential_add_credential_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_add_credential_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddCredential: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+      if (jsn.find("CredentialType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddCredential: Missing command-argument: CredentialType\n");
+        return;
+      }
+      if (jsn.find("CredentialSlot") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddCredential: Missing command-argument: CredentialSlot\n");
+        return;
+      }
+      if (jsn.find("CredentialData") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::AddCredential: Missing command-argument: CredentialData\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UserCredential",
+        "AddCredential",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_user_credential_add_credential);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "AddCredential: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UserCredential/Commands/ModifyCredential
+static void uic_mqtt_dotdot_on_by_group_user_credential_modify_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t fields;
+      std::string credential_data;
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_user_credential_modify_credential(
+          jsn,
+          fields.user_uniqueid,
+              
+          fields.credential_type,
+              
+          fields.credential_slot,
+              
+          credential_data
+      );
+
+      // Populate list fields from vector or string types
+              fields.credential_data = credential_data.c_str();
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyCredential");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_modify_credential_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyCredential: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+      if (jsn.find("CredentialType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyCredential: Missing command-argument: CredentialType\n");
+        return;
+      }
+      if (jsn.find("CredentialSlot") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyCredential: Missing command-argument: CredentialSlot\n");
+        return;
+      }
+      if (jsn.find("CredentialData") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::ModifyCredential: Missing command-argument: CredentialData\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UserCredential",
+        "ModifyCredential",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_user_credential_modify_credential);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "ModifyCredential: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UserCredential/Commands/DeleteCredential
+static void uic_mqtt_dotdot_on_by_group_user_credential_delete_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_user_credential_delete_credential(
+          jsn,
+          fields.user_uniqueid,
+              
+          fields.credential_type,
+              
+          fields.credential_slot
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteCredential");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_delete_credential_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("UserUniqueID") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::DeleteCredential: Missing command-argument: UserUniqueID\n");
+        return;
+      }
+      if (jsn.find("CredentialType") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::DeleteCredential: Missing command-argument: CredentialType\n");
+        return;
+      }
+      if (jsn.find("CredentialSlot") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::DeleteCredential: Missing command-argument: CredentialSlot\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UserCredential",
+        "DeleteCredential",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_user_credential_delete_credential);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "DeleteCredential: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_by_group_user_credential_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_user_credential_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "UserCredential",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_user_credential_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "UserCredential: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_user_credential_state_t new_state = {};
+    uic_mqtt_dotdot_user_credential_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_user_credential_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_user_credential_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_WriteAttributes);
+  }
+  if (uic_mqtt_dotdot_by_group_user_credential_add_user_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/AddUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_add_user);
+  }
+  if (uic_mqtt_dotdot_by_group_user_credential_modify_user_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/ModifyUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_modify_user);
+  }
+  if (uic_mqtt_dotdot_by_group_user_credential_delete_user_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/DeleteUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_delete_user);
+  }
+  if (uic_mqtt_dotdot_by_group_user_credential_add_credential_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/AddCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_add_credential);
+  }
+  if (uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/ModifyCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_modify_credential);
+  }
+  if (uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback) {
+    subscription_topic = topic_bygroup + "UserCredential/Commands/DeleteCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_user_credential_delete_credential);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
+
 // Callback function for incoming publications on ucl/by-group/+/AoXLocator/Commands/IQReport
 static void uic_mqtt_dotdot_on_by_group_aox_locator_iq_report(
   const char *topic,
@@ -23763,6 +24564,14 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/DefaultResetAllParameters", uic_mqtt_dotdot_on_by_group_configuration_parameters_default_reset_all_parameters);
     uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/SetParameter", uic_mqtt_dotdot_on_by_group_configuration_parameters_set_parameter);
     uic_mqtt_subscribe("ucl/by-group/+/ConfigurationParameters/Commands/DiscoverParameterRange", uic_mqtt_dotdot_on_by_group_configuration_parameters_discover_parameter_range);
+
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_user_credential_WriteAttributes);
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/AddUser", uic_mqtt_dotdot_on_by_group_user_credential_add_user);
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/ModifyUser", uic_mqtt_dotdot_on_by_group_user_credential_modify_user);
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/DeleteUser", uic_mqtt_dotdot_on_by_group_user_credential_delete_user);
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/AddCredential", uic_mqtt_dotdot_on_by_group_user_credential_add_credential);
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/ModifyCredential", uic_mqtt_dotdot_on_by_group_user_credential_modify_credential);
+    uic_mqtt_subscribe("ucl/by-group/+/UserCredential/Commands/DeleteCredential", uic_mqtt_dotdot_on_by_group_user_credential_delete_credential);
 
     uic_mqtt_subscribe("ucl/by-group/+/AoXLocator/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_aox_locator_WriteAttributes);
     uic_mqtt_subscribe("ucl/by-group/+/AoXLocator/Commands/IQReport", uic_mqtt_dotdot_on_by_group_aox_locator_iq_report);
