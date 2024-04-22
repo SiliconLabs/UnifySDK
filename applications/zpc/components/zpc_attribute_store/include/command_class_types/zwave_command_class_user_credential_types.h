@@ -68,6 +68,11 @@ typedef uint16_t user_credential_slot_t;
 #define USER_CREDENTIAL_OPERATION_TYPE_DELETE 0x02
 typedef uint8_t user_credential_operation_type_t;
 
+///> Credential Modifier Type. uint8_t
+typedef uint8_t user_credential_modifier_type_t;
+///> Credential Modifier Node ID. uint16_t
+typedef uint16_t user_credential_modifier_node_id_t;
+
 ///> Expiring Timeout for User (Minutes). uint16_t
 typedef uint16_t user_credential_expiring_timeout_minutes_t;
 

@@ -46,6 +46,7 @@ extern "C" {
 #include "zwave_command_handler_mock.h"
 #include "dotdot_mqtt_mock.h"
 #include "dotdot_mqtt_generated_commands_mock.h"
+#include "zwave_command_class_notification_mock.h"
 // Used for delayed interview
 #include "zwave_network_management_mock.h"
 
@@ -72,6 +73,9 @@ static std::map<attribute_store_type_t, bound_functions> attributes_binding
 //
 // e.g : resolver_functions[USER_CAPABILITIES_GET] = user_capabilities_get_func()
 static std::map<uint8_t, attribute_resolver_function_t> resolver_functions;
+
+// Notification callback
+static notification_event_callback_t notification_callback;
 
 // Buffer for frame
 static uint8_t received_frame[255]  = {};
@@ -326,7 +330,7 @@ void helper_test_set_get_with_args(
     TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, status, message.c_str());
   }
 
-  for(auto &byte : extra_bytes) {
+  for (auto &byte: extra_bytes) {
     expected_frame.push_back(byte);
   }
 
@@ -416,6 +420,14 @@ static sl_status_t
   return SL_STATUS_OK;
 }
 
+static void zwave_command_class_notification_register_event_callback_stub(
+  attribute_store_node_t endpoint_node,
+  notification_event_callback_t callback,
+  int cmock_num_calls)
+{
+  notification_callback = callback;
+}
+
 static sl_status_t zwave_command_handler_register_handler_stub(
   zwave_command_handler_t new_command_class_handler, int cmock_num_calls)
 {
@@ -460,6 +472,8 @@ void setUp()
     r.second = NULL;
   }
 
+  notification_callback = NULL;
+
   memset(received_frame, 0, sizeof(received_frame));
   received_frame_size = 0;
   // Unset previous definition of handler
@@ -471,6 +485,9 @@ void setUp()
   // Handler registration
   zwave_command_handler_register_handler_Stub(
     &zwave_command_handler_register_handler_stub);
+
+  zwave_command_class_notification_register_event_callback_Stub(
+    &zwave_command_class_notification_register_event_callback_stub);
   // Call init
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_command_class_user_credential_init());
 }
@@ -652,27 +669,18 @@ void test_user_credential_credential_capabilities_report_happy_case()
   std::vector<uint8_t> cl_support                     = {1, 0, 0, 1};
   std::vector<uint16_t> supported_credential_slots = {1233, 11233, 21233, 33};
   std::vector<uint16_t> min_length                 = {2, 2362, 255, 1255};
-  std::vector<uint16_t> max_length = {5632, 15632, 25632, 32568};
+  std::vector<uint16_t> max_length       = {5632, 15632, 25632, 32568};
+  uint16_t expected_credential_type_mask = 0b11101;
 
   auto test_report_values = [&]() {
-    uint8_t reported_credential_checksum_support;
-    attribute_store_node_t support_node
-      = attribute_store_get_first_child_by_type(
-        endpoint_id_node,
-        ATTRIBUTE(SUPPORT_CREDENTIAL_CHECKSUM));
+    std::map<attribute_store_type_t, uint8_t> uint8_attribute_map
+      = {{ATTRIBUTE(SUPPORT_CREDENTIAL_CHECKSUM), credential_checksum_support}};
+    std::map<attribute_store_type_t, uint16_t> uint16_attribute_map
+      = {{DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES,
+          expected_credential_type_mask}};
 
-    TEST_ASSERT_NOT_EQUAL_MESSAGE(
-      ATTRIBUTE_STORE_INVALID_NODE,
-      support_node,
-      "credential checksum support node should be defined");
-
-    attribute_store_get_reported(support_node,
-                                 &reported_credential_checksum_support,
-                                 sizeof(reported_credential_checksum_support));
-
-    TEST_ASSERT_EQUAL_MESSAGE(credential_checksum_support,
-                              reported_credential_checksum_support,
-                              "Incorrect reported credential checksum support");
+    helper_test_attribute_store_values(uint8_attribute_map, endpoint_id_node);
+    helper_test_attribute_store_values(uint16_attribute_map, endpoint_id_node);
 
     for (uint8_t i = 0; i < credential_type.size(); i++) {
       printf("Testing credential batch %d\n", i);
@@ -694,11 +702,10 @@ void test_user_credential_credential_capabilities_report_happy_case()
                                 reported_credential,
                                 "Incorrect credential type");
 
-      std::map<attribute_store_type_t, uint8_t> uint8_attribute_map = {
+      uint8_attribute_map = {
         {ATTRIBUTE(CREDENTIAL_LEARN_READ_BACK_SUPPORT), cl_support[i]},
       };
-
-      std::map<attribute_store_type_t, uint16_t> uint16_attribute_map = {
+      uint16_attribute_map = {
         {ATTRIBUTE(CREDENTIAL_SUPPORTED_SLOT_COUNT),
          supported_credential_slots[i]},
         {ATTRIBUTE(CREDENTIAL_MIN_LENGTH), min_length[i]},
@@ -736,6 +743,8 @@ void test_user_credential_credential_capabilities_report_happy_case()
                                      supported_credential_slots,
                                      min_length,
                                      max_length);
+  expected_credential_type_mask = 0b11100000;
+
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     handler.control_handler(&info, report_frame.data(), report_frame.size()));
@@ -789,10 +798,10 @@ void test_user_credential_all_users_checksum_report_happy_case()
 ////////////////////////////////////////////////////////////////////////////
 void test_user_credential_user_set_add_or_modify_happy_case()
 {
-  user_credential_user_unique_id_t user_id                    = 12121;
-  user_credential_operation_type_t operation_type             = USER_SET_OPERATION_TYPE_ADD;
-  user_credential_type_t user_type                            = 5;
-  user_credential_rule_t credential_rule                      = 2;
+  user_credential_user_unique_id_t user_id        = 12121;
+  user_credential_operation_type_t operation_type = USER_SET_OPERATION_TYPE_ADD;
+  user_credential_type_t user_type                = 5;
+  user_credential_rule_t credential_rule          = 2;
   user_credential_user_active_state_t user_active_state       = 1;
   user_credential_expiring_timeout_minutes_t expiring_timeout = 55;
   user_credential_user_name_encoding_t user_name_encoding     = 0;
@@ -840,18 +849,16 @@ void test_user_credential_user_set_add_or_modify_happy_case()
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, status, "Can't set username");
 
   printf("Send with USER_SET_OPERATION_TYPE_MODIFY\n");
-  helper_test_set_get_with_args(
-    USER_SET,
-    operation_type_node,
-    {{operation_type_node, DESIRED_ATTRIBUTE},
-     {user_id_node, REPORTED_ATTRIBUTE},
-     {user_type_node, DESIRED_ATTRIBUTE},
-     {user_active_state_node, REPORTED_ATTRIBUTE},
-     {credential_rule_node, DESIRED_ATTRIBUTE},
-     {expiring_timeout_node, REPORTED_ATTRIBUTE},
-     {user_name_encoding_node, DESIRED_ATTRIBUTE},
-     {user_name_node, REPORTED_ATTRIBUTE}});
-
+  helper_test_set_get_with_args(USER_SET,
+                                operation_type_node,
+                                {{operation_type_node, DESIRED_ATTRIBUTE},
+                                 {user_id_node, REPORTED_ATTRIBUTE},
+                                 {user_type_node, DESIRED_ATTRIBUTE},
+                                 {user_active_state_node, REPORTED_ATTRIBUTE},
+                                 {credential_rule_node, DESIRED_ATTRIBUTE},
+                                 {expiring_timeout_node, REPORTED_ATTRIBUTE},
+                                 {user_name_encoding_node, DESIRED_ATTRIBUTE},
+                                 {user_name_node, REPORTED_ATTRIBUTE}});
 
   printf("Send with USER_SET_OPERATION_TYPE_MODIFY\n");
 
@@ -859,23 +866,23 @@ void test_user_credential_user_set_add_or_modify_happy_case()
   attribute_store_set_desired(operation_type_node,
                               &operation_type,
                               sizeof(operation_type));
-  helper_test_set_get_with_args(
-    USER_SET,
-    operation_type_node,
-    {{operation_type_node, DESIRED_ATTRIBUTE},
-     {user_id_node, REPORTED_ATTRIBUTE},
-     {user_type_node, DESIRED_ATTRIBUTE},
-     {user_active_state_node, REPORTED_ATTRIBUTE},
-     {credential_rule_node, DESIRED_ATTRIBUTE},
-     {expiring_timeout_node, REPORTED_ATTRIBUTE},
-     {user_name_encoding_node, DESIRED_ATTRIBUTE},
-     {user_name_node, REPORTED_ATTRIBUTE}});            
+  helper_test_set_get_with_args(USER_SET,
+                                operation_type_node,
+                                {{operation_type_node, DESIRED_ATTRIBUTE},
+                                 {user_id_node, REPORTED_ATTRIBUTE},
+                                 {user_type_node, DESIRED_ATTRIBUTE},
+                                 {user_active_state_node, REPORTED_ATTRIBUTE},
+                                 {credential_rule_node, DESIRED_ATTRIBUTE},
+                                 {expiring_timeout_node, REPORTED_ATTRIBUTE},
+                                 {user_name_encoding_node, DESIRED_ATTRIBUTE},
+                                 {user_name_node, REPORTED_ATTRIBUTE}});
 }
 
 void test_user_credential_user_delete_remove_happy_case()
 {
-  user_credential_user_unique_id_t user_id                    = 12121;
-  user_credential_operation_type_t operation_type             = USER_SET_OPERATION_TYPE_DELETE;
+  user_credential_user_unique_id_t user_id = 12121;
+  user_credential_operation_type_t operation_type
+    = USER_SET_OPERATION_TYPE_DELETE;
 
   auto user_id_node = attribute_store_emplace(endpoint_id_node,
                                               ATTRIBUTE(USER_UNIQUE_ID),
@@ -898,7 +905,6 @@ void test_user_credential_user_set_invalid_node()
 {
   helper_test_set_get_with_args(USER_SET, ATTRIBUTE_STORE_INVALID_NODE);
 }
-
 
 void test_user_credential_user_get_happy_case()
 {
@@ -960,6 +966,80 @@ std::vector<uint8_t> helper_create_user_report_frame(
   for (char c: user_name) {
     report_frame.push_back(c);
   }
+  return report_frame;
+};
+
+std::vector<uint8_t> helper_create_user_notification_report(
+  user_credential_user_modifier_type_t user_modifier_type,
+  user_credential_user_modifier_node_id_t user_modifier_node_id,
+  user_credential_user_unique_id_t user_id,
+  user_credential_user_type_t user_type,
+  user_credential_user_active_state_t user_active_state,
+  user_credential_supported_credential_rules_t credential_rule,
+  user_credential_expiring_timeout_minutes_t expiring_timeout_minutes)
+{
+  // FIXME: This will be changed
+  // https://github.com/Z-Wave-Alliance/z-wave-stack/issues/409
+  std::vector<uint8_t> report_frame
+    = {COMMAND_CLASS_USER_CREDENTIAL, USER_NOTIFICATION_REPORT};
+
+  report_frame.push_back(user_modifier_type);
+
+  auto exploded_user_modifier_node_id = explode_uint16(user_modifier_node_id);
+  report_frame.push_back(exploded_user_modifier_node_id.msb);
+  report_frame.push_back(exploded_user_modifier_node_id.lsb);
+
+  auto exploded_user_id = explode_uint16(user_id);
+  report_frame.push_back(exploded_user_id.msb);
+  report_frame.push_back(exploded_user_id.lsb);
+
+  report_frame.push_back(user_type);
+  report_frame.push_back(user_active_state);
+  report_frame.push_back(credential_rule);
+
+  auto exploded_time = explode_uint16(expiring_timeout_minutes);
+  report_frame.push_back(exploded_time.msb);
+  report_frame.push_back(exploded_time.lsb);
+
+  return report_frame;
+};
+
+// FIXME: Will be changed
+// https://github.com/Z-Wave-Alliance/AWG/issues/168
+std::vector<uint8_t> helper_create_credential_notification_report(
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t credential_type,
+  user_credential_slot_t credential_slot,
+  bool crb,
+  const std::string &credential_data,
+  user_credential_modifier_type_t modifier_type,
+  user_credential_modifier_node_id_t modifier_node_id)
+{
+  std::vector<uint8_t> report_frame;
+
+  auto exploded_user_id = explode_uint16(user_id);
+  report_frame.push_back(exploded_user_id.msb);
+  report_frame.push_back(exploded_user_id.lsb);
+
+  report_frame.push_back(credential_type);
+
+  auto exploded_credential_slot = explode_uint16(credential_slot);
+  report_frame.push_back(exploded_credential_slot.msb);
+  report_frame.push_back(exploded_credential_slot.lsb);
+
+  report_frame.push_back(crb ? 1 : 0);
+  report_frame.push_back(credential_data.size());
+
+  for (auto &c: credential_data) {
+    report_frame.push_back(c);
+  }
+
+  report_frame.push_back(modifier_type);
+
+  auto exploded_modifier_node_id = explode_uint16(modifier_node_id);
+  report_frame.push_back(exploded_modifier_node_id.msb);
+  report_frame.push_back(exploded_modifier_node_id.lsb);
+
   return report_frame;
 };
 
@@ -1287,10 +1367,11 @@ void test_user_credential_user_report_user_deleted()
 //>> Set
 void test_user_credential_credential_set_1byte_happy_case()
 {
-  user_credential_type_t credential_type          = 2;
-  user_credential_slot_t credential_slot          = 1212;
-  user_credential_operation_type_t operation_type = USER_CREDENTIAL_OPERATION_TYPE_ADD;
-  std::vector<uint8_t> credential_data            = {12};
+  user_credential_type_t credential_type = 2;
+  user_credential_slot_t credential_slot = 1212;
+  user_credential_operation_type_t operation_type
+    = USER_CREDENTIAL_OPERATION_TYPE_ADD;
+  std::vector<uint8_t> credential_data = {12};
 
   // Create the node with reported attribute
   auto nodes                = helper_create_credential_structure(12,
@@ -1304,9 +1385,9 @@ void test_user_credential_credential_set_1byte_happy_case()
   // Operation type
   auto operation_type_node
     = attribute_store_emplace_desired(credential_slot_node,
-                              ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
-                              &operation_type,
-                              sizeof(operation_type));
+                                      ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                                      &operation_type,
+                                      sizeof(operation_type));
   // CREDENTIAL_DATA
   uint8_t credential_data_length = credential_data.size();
   auto credential_data_length_node
@@ -1334,9 +1415,10 @@ void test_user_credential_credential_set_1byte_happy_case()
 
 void test_user_credential_credential_set_12byte_happy_case()
 {
-  user_credential_type_t credential_type          = 2;
-  user_credential_slot_t credential_slot          = 1212;
-  user_credential_operation_type_t operation_type = USER_CREDENTIAL_OPERATION_TYPE_MODIFY;
+  user_credential_type_t credential_type = 2;
+  user_credential_slot_t credential_slot = 1212;
+  user_credential_operation_type_t operation_type
+    = USER_CREDENTIAL_OPERATION_TYPE_MODIFY;
   std::vector<uint8_t> credential_data
     = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
@@ -1352,9 +1434,9 @@ void test_user_credential_credential_set_12byte_happy_case()
   // Operation type
   auto operation_type_node
     = attribute_store_emplace_desired(credential_slot_node,
-                              ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
-                              &operation_type,
-                              sizeof(operation_type));
+                                      ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                                      &operation_type,
+                                      sizeof(operation_type));
   // CREDENTIAL_DATA
   uint8_t credential_data_length = credential_data.size();
   auto credential_data_length_node
@@ -1387,9 +1469,10 @@ void test_user_credential_credential_set_invalid_node()
 
 void test_user_credential_credential_set_delete_happy_case()
 {
-  user_credential_type_t credential_type          = 2;
-  user_credential_slot_t credential_slot          = 1212;
-  user_credential_operation_type_t operation_type = USER_CREDENTIAL_OPERATION_TYPE_DELETE;
+  user_credential_type_t credential_type = 2;
+  user_credential_slot_t credential_slot = 1212;
+  user_credential_operation_type_t operation_type
+    = USER_CREDENTIAL_OPERATION_TYPE_DELETE;
 
   // Create the node with reported attribute
   auto nodes                = helper_create_credential_structure(12,
@@ -1403,9 +1486,9 @@ void test_user_credential_credential_set_delete_happy_case()
   // Operation type
   auto operation_type_node
     = attribute_store_emplace_desired(credential_slot_node,
-                              ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
-                              &operation_type,
-                              sizeof(operation_type));
+                                      ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                                      &operation_type,
+                                      sizeof(operation_type));
 
   helper_test_set_get_with_args(CREDENTIAL_SET,
                                 operation_type_node,
@@ -1415,10 +1498,9 @@ void test_user_credential_credential_set_delete_happy_case()
                                   {credential_slot_node, REPORTED_ATTRIBUTE},
                                   {operation_type_node, DESIRED_ATTRIBUTE},
                                 },
-                                {0x00} // Credential data length
-                                );
+                                {0x00}  // Credential data length
+  );
 }
-
 
 //>> Get
 
@@ -2022,6 +2104,333 @@ void test_post_interview_discovery()
                                 "User id node should exists");
   TEST_ASSERT_EQUAL_MESSAGE(0, user_id, "User ID desired value should be 0");
   count_user_node(1);
+}
+
+void test_user_credential_notification_empty_parameters()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+  std::vector<uint8_t> empty_event_parameters = {};
+  // Test all available notification types
+  // No error should occurs even if parameters are not well defined
+  std::vector<uint8_t> notification_access_control_event_types = {0x23,
+                                                                  0x24,
+                                                                  0x25,
+                                                                  0x26,
+                                                                  0x27,
+                                                                  0x28,
+                                                                  0x29,
+                                                                  0x2A,
+                                                                  0x2B,
+                                                                  0x2C,
+                                                                  0x2D,
+                                                                  0x2E,
+                                                                  0x2F,
+                                                                  0x30,
+                                                                  0x31,
+                                                                  0x32,
+                                                                  0x33};
+  for (auto event_type: notification_access_control_event_types) {
+    notification_callback(endpoint_id_node,
+                          NOTIFICATION_ACCESS_CONTROL,
+                          event_type,
+                          empty_event_parameters.data(),
+                          empty_event_parameters.size());
+  }
+}
+
+void test_user_credential_user_notification_add_modify_delete_happy_case()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  // Setup user
+  user_credential_user_unique_id_t user_id                    = 12;
+  user_credential_type_t user_type                            = 2;
+  user_credential_rule_t credential_rule                      = 1;
+  user_credential_user_active_state_t user_active_state       = 1;
+  user_credential_expiring_timeout_minutes_t expiring_timeout = 0;
+  user_credential_user_name_encoding_t user_name_encoding     = 0;
+  std::string user_name                                       = "MICHEL VNR";
+
+  // Add user
+  sl_status_t status
+    = zwave_command_class_user_credential_add_new_user(endpoint_id_node,
+                                                       user_id,
+                                                       user_type,
+                                                       credential_rule,
+                                                       user_active_state,
+                                                       expiring_timeout,
+                                                       user_name_encoding,
+                                                       user_name.c_str());
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            status,
+                            "User add should have returned SL_STATUS_OK");
+  // Get user node
+  auto user_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID));
+
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(user_node),
+                           "An user node should exist");
+
+  // Create notification report frame
+  user_credential_user_modifier_type_t user_modifier_type       = 2;
+  user_credential_user_modifier_node_id_t user_modifier_node_id = 1212;
+
+  auto user_notification_report_frame
+    = helper_create_user_notification_report(user_modifier_type,
+                                             user_modifier_node_id,
+                                             user_id,
+                                             user_type,
+                                             user_active_state,
+                                             credential_rule,
+                                             expiring_timeout);
+
+  // Endpoint send User Add notification
+  notification_callback(endpoint_id_node,
+                        NOTIFICATION_ACCESS_CONTROL,
+                        0x27,  // User added
+                        user_notification_report_frame.data(),
+                        user_notification_report_frame.size());
+
+  // Check values
+  auto test_attribute_store_values = [&]() {
+    std::map<attribute_store_type_t, uint8_t> uint8_attribute_map
+      = {{ATTRIBUTE(USER_MODIFIER_TYPE), user_modifier_type},
+         {ATTRIBUTE(USER_TYPE), user_type},
+         {ATTRIBUTE(USER_ACTIVE_STATE), user_active_state},
+         {ATTRIBUTE(CREDENTIAL_RULE), credential_rule}};
+    helper_test_attribute_store_values(uint8_attribute_map, user_node);
+
+    std::map<attribute_store_type_t, uint16_t> uint16_attribute_map
+      = {{ATTRIBUTE(USER_MODIFIER_NODE_ID), user_modifier_node_id},
+         {ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES), expiring_timeout}};
+    helper_test_attribute_store_values(uint16_attribute_map, user_node);
+
+    helper_test_string_value({{ATTRIBUTE(USER_NAME), user_name}}, user_node);
+  };
+  test_attribute_store_values();
+
+  // Now let's modify this user
+  user_type          = 7;
+  credential_rule    = 2;
+  user_active_state  = 0;
+  expiring_timeout   = 10;
+  user_name_encoding = 2;
+  user_name          = "JACKIE CAMION TURBO PLUS";
+
+  status = zwave_command_class_user_credential_modify_user(endpoint_id_node,
+                                                           user_id,
+                                                           user_type,
+                                                           credential_rule,
+                                                           user_active_state,
+                                                           expiring_timeout,
+                                                           user_name_encoding,
+                                                           user_name.c_str());
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            status,
+                            "User modify should have returned SL_STATUS_OK");
+
+  // Create notification report frame
+  user_modifier_type    = 5;
+  user_modifier_node_id = 12122;
+
+  user_notification_report_frame
+    = helper_create_user_notification_report(user_modifier_type,
+                                             user_modifier_node_id,
+                                             user_id,
+                                             user_type,
+                                             user_active_state,
+                                             credential_rule,
+                                             expiring_timeout);
+
+  // Endpoint send User Modify notification
+  notification_callback(endpoint_id_node,
+                        NOTIFICATION_ACCESS_CONTROL,
+                        0x28,  // User modified
+                        user_notification_report_frame.data(),
+                        user_notification_report_frame.size());
+
+  // Check values
+  test_attribute_store_values();
+
+  // Now let's delete this user
+  status = zwave_command_class_user_credential_delete_user(endpoint_id_node,
+                                                           user_id);
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            status,
+                            "User delete should have returned SL_STATUS_OK");
+
+  // Should be the same as existing user
+  user_notification_report_frame
+    = helper_create_user_notification_report(user_modifier_type,
+                                             user_modifier_node_id,
+                                             user_id,
+                                             user_type,
+                                             user_active_state,
+                                             credential_rule,
+                                             expiring_timeout);
+
+  // Endpoint send User Modify notification
+  notification_callback(endpoint_id_node,
+                        NOTIFICATION_ACCESS_CONTROL,
+                        0x29,  // User deleted
+                        user_notification_report_frame.data(),
+                        user_notification_report_frame.size());
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(user_node),
+                            "User node should be deleted");
+}
+
+void test_user_credential_credential_notification_add_modify_delete_happy_case()
+{
+  // Initialize the notification callback
+  const zwave_cc_version_t version = 1;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+
+  TEST_ASSERT_NOT_NULL_MESSAGE(notification_callback,
+                               "Notification callback should be defined");
+
+  user_credential_user_unique_id_t user_id = 12;
+  user_credential_type_t credential_type   = ZCL_CRED_TYPE_PIN_CODE;
+  user_credential_slot_t credential_slot   = 1;
+  bool crb                                 = true;
+  std::string credential_data              = "12";
+  user_credential_modifier_type_t credential_modifier_type       = 2;
+  user_credential_modifier_node_id_t credential_modifier_node_id = 1212;
+
+  // Simulate user
+  auto user_id_node = attribute_store_emplace(endpoint_id_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID),
+                                              &user_id,
+                                              sizeof(user_id));
+
+  // Add credential
+  sl_status_t status = zwave_command_class_user_credential_add_new_credential(
+    endpoint_id_node,
+    user_id,
+    credential_type,
+    credential_slot,
+    credential_data.c_str());
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            status,
+                            "Credential add should have returned SL_STATUS_OK");
+
+  // Get credential type
+  auto credential_type_node
+    = attribute_store_get_first_child_by_type(user_id_node,
+                                              ATTRIBUTE(CREDENTIAL_TYPE));
+
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(credential_type_node),
+                           "Credential type node should exist");
+
+  // Get credential slot
+  auto credential_slot_node
+    = attribute_store_get_first_child_by_type(credential_type_node,
+                                              ATTRIBUTE(CREDENTIAL_SLOT));
+
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(credential_slot_node),
+                           "Credential slot node should exist");
+
+  // Create notification report frame
+  auto credential_notification_report
+    = helper_create_credential_notification_report(user_id,
+                                                   credential_type,
+                                                   credential_slot,
+                                                   crb,
+                                                   credential_data,
+                                                   credential_modifier_type,
+                                                   credential_modifier_node_id);
+
+  // Endpoint send User Add notification
+  notification_callback(endpoint_id_node,
+                        NOTIFICATION_ACCESS_CONTROL,
+                        0x2B,  // Credential added
+                        credential_notification_report.data(),
+                        credential_notification_report.size());
+
+  // Check values
+  auto test_attribute_store_values = [&]() {
+    std::map<attribute_store_type_t, uint8_t> uint8_attribute_map
+      = {{ATTRIBUTE(CREDENTIAL_TYPE), credential_type}};
+    helper_test_attribute_store_values(uint8_attribute_map, user_id_node);
+
+    std::map<attribute_store_type_t, uint16_t> uint16_attribute_map
+      = {{ATTRIBUTE(CREDENTIAL_SLOT), credential_slot}};
+    helper_test_attribute_store_values(uint16_attribute_map,
+                                       credential_type_node);
+
+    uint8_attribute_map
+      = {{ATTRIBUTE(CREDENTIAL_MODIFIER_TYPE), credential_modifier_type},
+         {ATTRIBUTE(CREDENTIAL_DATA_LENGTH), credential_data.size()}};
+    helper_test_attribute_store_values(uint8_attribute_map,
+                                       credential_slot_node);
+
+    uint16_attribute_map
+      = {{ATTRIBUTE(CREDENTIAL_MODIFIER_NODE_ID), credential_modifier_node_id}};
+    helper_test_attribute_store_values(uint16_attribute_map,
+                                       credential_slot_node);
+  };
+  test_attribute_store_values();
+
+  crb = false;
+  ;
+  credential_data             = "121212";
+  credential_modifier_type    = 3;
+  credential_modifier_node_id = 15;
+
+  // Modify credential
+  credential_notification_report
+    = helper_create_credential_notification_report(user_id,
+                                                   credential_type,
+                                                   credential_slot,
+                                                   crb,
+                                                   credential_data,
+                                                   credential_modifier_type,
+                                                   credential_modifier_node_id);
+
+  notification_callback(endpoint_id_node,
+                        NOTIFICATION_ACCESS_CONTROL,
+                        0x2C,  // Credential modified
+                        credential_notification_report.data(),
+                        credential_notification_report.size());
+
+  test_attribute_store_values();
+
+  // Delete credential
+  notification_callback(endpoint_id_node,
+                        NOTIFICATION_ACCESS_CONTROL,
+                        0x2D,  // Credential deleted
+                        credential_notification_report.data(),
+                        credential_notification_report.size());
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(credential_slot_node),
+                            "Credential slot node should be deleted");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(credential_type_node),
+                           "Credential type node should still exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(user_id_node),
+                           "User ID node should still exist");
 }
 
 }  // extern "C"
