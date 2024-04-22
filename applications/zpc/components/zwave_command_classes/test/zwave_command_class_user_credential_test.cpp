@@ -2100,18 +2100,6 @@ void test_post_interview_discovery()
   // Display current store log for debug purpose
   attribute_store_log();
 
-  // Set two random user id to see if discovery remove it
-  user_credential_user_unique_id_t user_id = 12;
-  attribute_store_emplace(endpoint_id_node,
-                          ATTRIBUTE(USER_UNIQUE_ID),
-                          &user_id,
-                          sizeof(user_id));
-  user_id = 1222;
-  attribute_store_emplace(endpoint_id_node,
-                          ATTRIBUTE(USER_UNIQUE_ID),
-                          &user_id,
-                          sizeof(user_id));
-
   // Set the network status to online
   network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
   attribute_store_set_reported(network_status_node,
@@ -2122,13 +2110,41 @@ void test_post_interview_discovery()
   auto user_id_node
     = attribute_store_get_first_child_by_type(endpoint_id_node,
                                               ATTRIBUTE(USER_UNIQUE_ID));
-
+  user_credential_user_unique_id_t user_id = 0;
   attribute_store_get_desired(user_id_node, &user_id, sizeof(user_id));
   TEST_ASSERT_NOT_EQUAL_MESSAGE(ATTRIBUTE_STORE_INVALID_NODE,
                                 user_id_node,
                                 "User id node should exists");
   TEST_ASSERT_EQUAL_MESSAGE(0, user_id, "User ID desired value should be 0");
   count_user_node(1);
+
+  // Simulate user found
+  user_id = 12;
+  attribute_store_set_reported(user_id_node, &user_id, sizeof(user_id));
+
+  // Go back to Interview state
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING;
+  attribute_store_set_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
+  // Then back in Online Functional
+  network_status = ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL;
+  attribute_store_set_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+  // User should still be there
+  count_user_node(1);
+  // With right value
+  user_credential_user_unique_id_t reported_user_id = 0;
+  user_id_node = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                                         ATTRIBUTE(USER_UNIQUE_ID));
+  attribute_store_get_reported(user_id_node,
+                               &reported_user_id,
+                               sizeof(reported_user_id));
+  TEST_ASSERT_EQUAL_MESSAGE(user_id,
+                            reported_user_id,
+                            "User ID reported value should be 12.");
 }
 
 void test_user_credential_notification_empty_parameters()

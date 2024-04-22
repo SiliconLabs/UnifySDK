@@ -2317,9 +2317,29 @@ static sl_status_t zwave_command_class_user_credential_user_get(
   sl_status_t status
     = attribute_store_get_desired(node, &user_id, sizeof(user_id));
 
+  // If we enter this state it means that something went badly wrong or 
+  // user initiate the interview process again. 
+  // In both cases we want to invalidate the user database so that the device
+  // can send us the correct user database.
   if (status != SL_STATUS_OK) {
-    sl_log_error(LOG_TAG,
-                 "Can't get user unique id value. Not sending USER_GET.");
+    sl_log_warning(LOG_TAG,
+                 "Can't get user unique id value. Reset user database.");
+    attribute_store_node_t endpoint_node
+      = attribute_store_get_node_parent(node);
+    // Get User node count 
+    auto user_count = attribute_store_get_node_child_count_by_type(
+          endpoint_node,
+          ATTRIBUTE(USER_UNIQUE_ID));
+
+    for (size_t j = 0; j < user_count; j++) {
+      // Delete the first attribute we find until we have no more left
+      attribute_store_node_t user_node
+        = attribute_store_get_node_child_by_type(endpoint_node,
+                                                  ATTRIBUTE(USER_UNIQUE_ID),
+                                                  0);
+      attribute_store_delete_node(user_node);
+    }
+    // NOTE : In the case of user re-interviewing the device, it will be interviewed again when the node goes ONLINE.
     return SL_STATUS_NOT_SUPPORTED;
   }
 
@@ -2549,23 +2569,14 @@ void zwave_network_status_changed(attribute_store_node_t updated_node,
         auto user_count = attribute_store_get_node_child_count_by_type(
           endpoint_node,
           ATTRIBUTE(USER_UNIQUE_ID));
-        sl_log_debug(LOG_TAG,
-                     "Endpoint %d supports User Credential. Removing all "
-                     "existing user nodes (%d)...",
-                     i,
-                     user_count);
-        for (size_t j = 0; j < user_count; j++) {
-          // Delete the first attribute we find until we have no more left
-          attribute_store_node_t user_node
-            = attribute_store_get_node_child_by_type(endpoint_node,
-                                                     ATTRIBUTE(USER_UNIQUE_ID),
-                                                     0);
-          attribute_store_delete_node(user_node);
+        sl_log_debug(LOG_TAG, "Endpoint %d supports User Credential.", endpoint_id);
+        if (user_count == 0) {
+          sl_log_debug(LOG_TAG, "No user found. Starting User and Credential interview");
+          // Start the interview process with user ID = 0
+          trigger_get_user(endpoint_node, 0);
+        } else {
+          sl_log_debug(LOG_TAG, "Users already discovered. No actions needed.");
         }
-
-        sl_log_debug(LOG_TAG, "Starting User and Credential interview");
-        // Start the interview process with user ID = 0
-        trigger_get_user(endpoint_node, 0);
       }
     }
   }
