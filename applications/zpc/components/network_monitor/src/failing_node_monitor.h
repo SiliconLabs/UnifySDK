@@ -50,7 +50,7 @@
 #define FL_NODE_PING_TIME_FACTOR 4
 
 // Maximum time we settle on between ping intervals:
-#define MAX_PING_TIME_INTERVAL (24 * 60 * CLOCK_SECOND)
+#define MAX_PING_TIME_INTERVAL (24 * 60 * 60 * CLOCK_SECOND) // 24 hours
 
 #ifdef __cplusplus
 extern "C" {

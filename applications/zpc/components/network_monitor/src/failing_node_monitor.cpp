@@ -136,6 +136,10 @@ static void
     ping_interval = MAX_PING_TIME_INTERVAL;
   }
 
+  sl_log_debug(LOG_TAG,
+               "Scheduling NOP command in %lu ms for NodeID: %d.",
+               ping_interval,
+               node_id);
   attribute_store_set_reported(ping_interval_node,
                                &ping_interval,
                                sizeof(ping_interval));
