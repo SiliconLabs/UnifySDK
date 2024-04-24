@@ -155,6 +155,9 @@ static void
     zwave_command_class_version_command_class_version_get);
   attribute_resolver_set_attribute_depth(version_attribute[0], 0);
 
+  sl_log_debug(LOG_TAG, "Create CC 0x%02x version attribute for Endpoint ID %d\n",
+                        command_class, endpoint_node);
+
   // Add it into the attribute store.
   attribute_store_add_if_missing(endpoint_node,
                                  version_attribute,
@@ -213,6 +216,26 @@ static void zwave_command_class_version_create_cc_version_attributes(
 
   uint8_t nif[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH];
   uint8_t nif_length = 0;
+
+  // First time we use COMMAND_CLASS_VERSION, query its own version supported.
+  add_command_class_version_attributes(COMMAND_CLASS_VERSION, endpoint_node);
+
+  // Prioritize COMMAND_CLASS_MANUFACTURER_SPECIFIC before others
+  // UAM rules can match unique device model, so we could override
+  // supported command class version attributes for matching device model.
+  if (SL_STATUS_OK == attribute_store_read_value(endpoint_node,
+                                                 REPORTED_ATTRIBUTE,
+                                                 &endpoint_id,
+                                                 sizeof(endpoint_id))
+      && endpoint_id == 0) {
+
+    if(zwave_node_supports_command_class(COMMAND_CLASS_MANUFACTURER_SPECIFIC,
+                                         node_id,
+                                         endpoint_id)) {
+      add_command_class_version_attributes(COMMAND_CLASS_MANUFACTURER_SPECIFIC,
+                                           endpoint_node);
+    }
+  }
 
   if ((non_secure_nif_node != ATTRIBUTE_STORE_INVALID_NODE)
       && (SL_STATUS_OK
