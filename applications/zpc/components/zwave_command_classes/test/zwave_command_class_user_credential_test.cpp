@@ -188,6 +188,55 @@ void helper_simulate_user_set_error_report(
     handler.control_handler(&info, report_frame.data(), report_frame.size()));
 }
 
+void helper_simulate_credential_set_error_report(
+  uint8_t credential_set_error_type,
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t credential_type,
+  user_credential_slot_t credential_slot,
+  uint8_t crb,
+  std::string credential_data,
+  user_credential_modifier_type_t modifier_type,
+  user_credential_modifier_node_id_t modifier_node_id)
+{
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+
+  std::vector<uint8_t> report_frame
+    = {COMMAND_CLASS_USER_CREDENTIAL, CREDENTIAL_SET_ERROR_REPORT};
+
+  report_frame.push_back(credential_set_error_type);
+
+  auto exploded_user_id = explode_uint16(user_id);
+  report_frame.push_back(exploded_user_id.msb);
+  report_frame.push_back(exploded_user_id.lsb);
+
+  report_frame.push_back(credential_type);
+
+  auto exploded_credential_slot = explode_uint16(credential_slot);
+  report_frame.push_back(exploded_credential_slot.msb);
+  report_frame.push_back(exploded_credential_slot.lsb);
+
+  report_frame.push_back(crb << 7);
+
+  report_frame.push_back((uint8_t)credential_data.size());
+  for (const char &c: credential_data) {
+    report_frame.push_back(c);
+  }
+
+  report_frame.push_back(modifier_type);
+
+  auto exploded_modifier_node_id = explode_uint16(modifier_node_id);
+  report_frame.push_back(exploded_modifier_node_id.msb);
+  report_frame.push_back(exploded_modifier_node_id.lsb);
+
+  // Do the report
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    handler.control_handler(&info, report_frame.data(), report_frame.size()));
+}
+
 void helper_simulate_user_capabilites_report(
   uint16_t number_of_users,
   user_credential_supported_credential_rules_t cred_rule_bitmask,
@@ -3120,6 +3169,255 @@ void test_user_credential_user_set_error_report_user_modify_happy_case()
 
   TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_user_node),
                             "Invalid User node should not exist");
+}
+
+void test_user_credential_credential_set_error_report_cred_add_happy_case()
+{
+  user_credential_user_unique_id_t user_id = 12;
+  user_credential_type_t credential_type   = 1;
+  user_credential_slot_t credential_slot   = 1;
+
+  auto valid_user_node = attribute_store_emplace(endpoint_id_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID),
+                                                 &user_id,
+                                                 sizeof(user_id));
+
+  auto valid_cred_type_node
+    = attribute_store_emplace(valid_user_node,
+                              ATTRIBUTE(CREDENTIAL_TYPE),
+                              &credential_type,
+                              sizeof(credential_type));
+  auto invalid_cred_slot_node
+    = attribute_store_emplace_desired(valid_cred_type_node,
+                                      ATTRIBUTE(CREDENTIAL_SLOT),
+                                      &credential_slot,
+                                      sizeof(credential_slot));
+
+  helper_simulate_credential_set_error_report(
+    CREDENTIAL_SET_ERROR_REPORT_CREDENTIALADDREJECTEDLOCATIONOCCUPIED,
+    user_id,
+    credential_type,
+    credential_slot,
+    1,
+    "1212",
+    1,
+    2);
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node should not exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+}
+
+void test_user_credential_credential_set_error_report_cred_modify_happy_case()
+{
+  user_credential_user_unique_id_t user_id = 12;
+  user_credential_type_t credential_type   = 1;
+  user_credential_slot_t credential_slot   = 1;
+
+  auto valid_user_node = attribute_store_emplace(endpoint_id_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID),
+                                                 &user_id,
+                                                 sizeof(user_id));
+  auto valid_cred_type_node
+    = attribute_store_emplace(valid_user_node,
+                              ATTRIBUTE(CREDENTIAL_TYPE),
+                              &credential_type,
+                              sizeof(credential_type));
+  auto invalid_cred_slot_node
+    = attribute_store_emplace_desired(valid_cred_type_node,
+                                      ATTRIBUTE(CREDENTIAL_SLOT),
+                                      &credential_slot,
+                                      sizeof(credential_slot));
+
+  helper_simulate_credential_set_error_report(
+    CREDENTIAL_SET_ERROR_REPORT_CREDENTIALMODIFYREJECTEDLOCATIONEMPTY,
+    user_id,
+    credential_type,
+    credential_slot,
+    1,
+    "1212",
+    1,
+    2);
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node should not exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+
+  invalid_cred_slot_node
+    = attribute_store_emplace(valid_cred_type_node,
+                              ATTRIBUTE(CREDENTIAL_SLOT),
+                              &credential_slot,
+                              sizeof(credential_slot));
+
+  helper_simulate_credential_set_error_report(
+    CREDENTIAL_SET_ERROR_REPORT_CREDENTIALMODIFYREJECTEDLOCATIONEMPTY,
+    user_id,
+    credential_type,
+    credential_slot,
+    1,
+    "1212",
+    1,
+    2);
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node should not exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+}
+
+
+void test_user_credential_credential_set_error_report_cred_duplicate_happy_case() {
+  user_credential_user_unique_id_t user_id = 12;
+  user_credential_type_t credential_type   = 1;
+  user_credential_slot_t credential_slot   = 1;
+
+  auto valid_user_node = attribute_store_emplace(endpoint_id_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID),
+                                                 &user_id,
+                                                 sizeof(user_id));
+  auto valid_cred_type_node
+    = attribute_store_emplace(valid_user_node,
+                              ATTRIBUTE(CREDENTIAL_TYPE),
+                              &credential_type,
+                              sizeof(credential_type));
+  auto invalid_cred_slot_node
+    = attribute_store_emplace_desired(valid_cred_type_node,
+                                      ATTRIBUTE(CREDENTIAL_SLOT),
+                                      &credential_slot,
+                                      sizeof(credential_slot));
+
+  helper_simulate_credential_set_error_report(
+    CREDENTIAL_SET_ERROR_REPORT_DUPLICATECREDENTIAL,
+    user_id,
+    credential_type,
+    credential_slot,
+    1,
+    "1212",
+    1,
+    2);
+
+  // Here the Credential Report command should remove this not this report
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node SHOULD exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+
+
+  // Now actually send the report
+  std::vector<uint8_t> cred_data = {1,2,3,4};
+  auto credential_report_frame
+    = helper_create_credential_report_frame(user_id,
+                                            credential_type,
+                                            credential_slot,
+                                            1,
+                                            cred_data,
+                                            CREDENTIAL_REPORT_DNE,
+                                            2,
+                                            0,
+                                            0);
+
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+  // Do the report
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    handler.control_handler(&info, credential_report_frame.data(), credential_report_frame.size()));
+
+
+  // Now it should not exists
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node should NOT exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+
+}
+
+// Note : same as test_user_credential_credential_set_error_report_cred_duplicate_happy_case
+// but with CREDENTIAL_SET_ERROR_REPORT_MANUFACTURERSECURITYRULES in the report
+void test_user_credential_credential_set_error_report_cred_security_rule_happy_case() {
+  user_credential_user_unique_id_t user_id = 12;
+  user_credential_type_t credential_type   = 1;
+  user_credential_slot_t credential_slot   = 1;
+
+  auto valid_user_node = attribute_store_emplace(endpoint_id_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID),
+                                                 &user_id,
+                                                 sizeof(user_id));
+  auto valid_cred_type_node
+    = attribute_store_emplace(valid_user_node,
+                              ATTRIBUTE(CREDENTIAL_TYPE),
+                              &credential_type,
+                              sizeof(credential_type));
+  auto invalid_cred_slot_node
+    = attribute_store_emplace_desired(valid_cred_type_node,
+                                      ATTRIBUTE(CREDENTIAL_SLOT),
+                                      &credential_slot,
+                                      sizeof(credential_slot));
+
+  helper_simulate_credential_set_error_report(
+    CREDENTIAL_SET_ERROR_REPORT_MANUFACTURERSECURITYRULES,
+    user_id,
+    credential_type,
+    credential_slot,
+    1,
+    "1212",
+    1,
+    2);
+
+  // Here the Credential Report command should remove this not this report
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node SHOULD exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+
+
+  // Now actually send the report
+  std::vector<uint8_t> cred_data = {1,2,3,4};
+  auto credential_report_frame
+    = helper_create_credential_report_frame(user_id,
+                                            credential_type,
+                                            credential_slot,
+                                            1,
+                                            cred_data,
+                                            CREDENTIAL_REPORT_DNE,
+                                            2,
+                                            0,
+                                            0);
+
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+  // Do the report
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    handler.control_handler(&info, credential_report_frame.data(), credential_report_frame.size()));
+
+
+  // Now it should not exists
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_cred_slot_node),
+                            "Invalid Credential Slot node should NOT exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_cred_type_node),
+                           "Valid User node should exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid Credential type node should exist");
+
 }
 
 }  // extern "C"
