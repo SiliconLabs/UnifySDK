@@ -8408,8 +8408,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // CCColorLoopDirection // CCColorLoopDirection // CCColorLoopDirection
-    std::string attribute_type_string           = "CCColorLoopDirection";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8418,7 +8418,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopDirection, "
-                     "type:  CCColorLoopDirection // CCColorLoopDirection");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -16800,6 +16800,102 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS,
       "ZCL ConfigurationParameters ConfigurationParameters",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UserCredential SupportedUserUniqueIdentifiers, "
+                     "type:  uint16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS,
+      "ZCL UserCredential SupportedUserUniqueIdentifiers",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map8 // map8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UserCredential SupportedCredentialRules, "
+                     "type:  map8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES,
+      "ZCL UserCredential SupportedCredentialRules",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map16 // map16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UserCredential SupportedCredentialTypes, "
+                     "type:  map16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES,
+      "ZCL UserCredential SupportedCredentialTypes",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map16 // map16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UserCredential SupportedUserTypes, "
+                     "type:  map16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES,
+      "ZCL UserCredential SupportedUserTypes",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }

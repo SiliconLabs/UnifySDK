@@ -861,14 +861,14 @@ uint32_t bypass_response_zone_id_bypass_result_get_enum_value_number(const std::
 
 // Enum to string map for CCColorLoopDirection
 const std::map<uint32_t, std::string> cc_color_loop_direction_enum_id_to_string_map {
-  { 0, "DecrementEnhancedCurrentHue" },
-  { 1, "IncrementEnhancedCurrentHue" },
+  { 0, "ColorLoopHueDecrement" },
+  { 1, "ColorLoopHueIncrement" },
 };
 
 // String to enum map for CCColorLoopDirection
 const std::map<std::string, uint32_t> cc_color_loop_direction_enum_string_to_id_map {
-  { "DecrementEnhancedCurrentHue", 0 },
-  { "IncrementEnhancedCurrentHue", 1 },
+  { "ColorLoopHueDecrement", 0 },
+  { "ColorLoopHueIncrement", 1 },
 };
 
 std::string cc_color_loop_direction_get_enum_value_name(
@@ -1042,6 +1042,43 @@ uint32_t color_control_color_loop_active_get_enum_value_number(const std::string
 {
   auto it = color_control_color_loop_active_enum_string_to_id_map.find(str);
   if (it != color_control_color_loop_active_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for ColorControlColorLoopDirection
+const std::map<uint32_t, std::string> color_control_color_loop_direction_enum_id_to_string_map {
+  { 0, "DecrementEnhancedCurrentHue" },
+  { 1, "IncrementEnhancedCurrentHue" },
+};
+
+// String to enum map for ColorControlColorLoopDirection
+const std::map<std::string, uint32_t> color_control_color_loop_direction_enum_string_to_id_map {
+  { "DecrementEnhancedCurrentHue", 0 },
+  { "IncrementEnhancedCurrentHue", 1 },
+};
+
+std::string color_control_color_loop_direction_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = color_control_color_loop_direction_enum_id_to_string_map.find(value);
+  if (it != color_control_color_loop_direction_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t color_control_color_loop_direction_get_enum_value_number(const std::string &str)
+{
+  auto it = color_control_color_loop_direction_enum_string_to_id_map.find(str);
+  if (it != color_control_color_loop_direction_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -1352,6 +1389,100 @@ uint32_t commissioning_startup_control_get_enum_value_number(const std::string &
 {
   auto it = commissioning_startup_control_enum_string_to_id_map.find(str);
   if (it != commissioning_startup_control_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for CredRule
+const std::map<uint32_t, std::string> cred_rule_enum_id_to_string_map {
+  { 1, "Single" },
+  { 2, "Dual" },
+  { 3, "Triple" },
+};
+
+// String to enum map for CredRule
+const std::map<std::string, uint32_t> cred_rule_enum_string_to_id_map {
+  { "Single", 1 },
+  { "Dual", 2 },
+  { "Triple", 3 },
+};
+
+std::string cred_rule_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = cred_rule_enum_id_to_string_map.find(value);
+  if (it != cred_rule_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t cred_rule_get_enum_value_number(const std::string &str)
+{
+  auto it = cred_rule_enum_string_to_id_map.find(str);
+  if (it != cred_rule_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for CredType
+const std::map<uint32_t, std::string> cred_type_enum_id_to_string_map {
+  { 1, "PINCode" },
+  { 2, "Password" },
+  { 3, "RFIDCode" },
+  { 4, "BLE" },
+  { 5, "NFC" },
+  { 6, "UWB" },
+  { 7, "EyeBiometric" },
+  { 8, "FaceBiometric" },
+  { 9, "FingerBiometric" },
+  { 10, "HandBiometric" },
+  { 11, "UnspecifiedBiometric" },
+};
+
+// String to enum map for CredType
+const std::map<std::string, uint32_t> cred_type_enum_string_to_id_map {
+  { "PINCode", 1 },
+  { "Password", 2 },
+  { "RFIDCode", 3 },
+  { "BLE", 4 },
+  { "NFC", 5 },
+  { "UWB", 6 },
+  { "EyeBiometric", 7 },
+  { "FaceBiometric", 8 },
+  { "FingerBiometric", 9 },
+  { "HandBiometric", 10 },
+  { "UnspecifiedBiometric", 11 },
+};
+
+std::string cred_type_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = cred_type_enum_id_to_string_map.find(value);
+  if (it != cred_type_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t cred_type_get_enum_value_number(const std::string &str)
+{
+  auto it = cred_type_enum_string_to_id_map.find(str);
+  if (it != cred_type_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -5056,6 +5187,135 @@ uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &s
 {
   auto it = tx_report_transmission_speed_enum_string_to_id_map.find(str);
   if (it != tx_report_transmission_speed_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for UserModifierType
+const std::map<uint32_t, std::string> user_modifier_type_enum_id_to_string_map {
+  { 0, "DNE" },
+  { 1, "Unknown" },
+  { 2, "Z-Wave" },
+  { 3, "Locally" },
+  { 4, "MobileAppOrOtherIoT" },
+};
+
+// String to enum map for UserModifierType
+const std::map<std::string, uint32_t> user_modifier_type_enum_string_to_id_map {
+  { "DNE", 0 },
+  { "Unknown", 1 },
+  { "Z-Wave", 2 },
+  { "Locally", 3 },
+  { "MobileAppOrOtherIoT", 4 },
+};
+
+std::string user_modifier_type_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = user_modifier_type_enum_id_to_string_map.find(value);
+  if (it != user_modifier_type_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t user_modifier_type_get_enum_value_number(const std::string &str)
+{
+  auto it = user_modifier_type_enum_string_to_id_map.find(str);
+  if (it != user_modifier_type_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for UserNameEncodingType
+const std::map<uint32_t, std::string> user_name_encoding_type_enum_id_to_string_map {
+  { 0, "ASCII" },
+  { 1, "OEMExtendedASCII" },
+  { 2, "UTF-16" },
+};
+
+// String to enum map for UserNameEncodingType
+const std::map<std::string, uint32_t> user_name_encoding_type_enum_string_to_id_map {
+  { "ASCII", 0 },
+  { "OEMExtendedASCII", 1 },
+  { "UTF-16", 2 },
+};
+
+std::string user_name_encoding_type_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = user_name_encoding_type_enum_id_to_string_map.find(value);
+  if (it != user_name_encoding_type_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t user_name_encoding_type_get_enum_value_number(const std::string &str)
+{
+  auto it = user_name_encoding_type_enum_string_to_id_map.find(str);
+  if (it != user_name_encoding_type_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for UserTypeEnum
+const std::map<uint32_t, std::string> user_type_enum_enum_id_to_string_map {
+  { 0, "GeneralUser" },
+  { 3, "ProgrammingUser" },
+  { 4, "NonAccessUser" },
+  { 5, "DuressUser" },
+  { 6, "DisposableUser" },
+  { 7, "ExpiringUser" },
+  { 9, "RemoteOnlyUser" },
+};
+
+// String to enum map for UserTypeEnum
+const std::map<std::string, uint32_t> user_type_enum_enum_string_to_id_map {
+  { "GeneralUser", 0 },
+  { "ProgrammingUser", 3 },
+  { "NonAccessUser", 4 },
+  { "DuressUser", 5 },
+  { "DisposableUser", 6 },
+  { "ExpiringUser", 7 },
+  { "RemoteOnlyUser", 9 },
+};
+
+std::string user_type_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = user_type_enum_enum_id_to_string_map.find(value);
+  if (it != user_type_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t user_type_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = user_type_enum_enum_string_to_id_map.find(str);
+  if (it != user_type_enum_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -9770,6 +10030,33 @@ std::string get_enum_value_name(
   #endif
   }
 
+  if (64776 == cluster_id) {
+  #ifdef USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_user_unique_identifiers instead of this: user_credential_supported_user_unique_identifiers
+      return user_credential_supported_user_unique_identifiers_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_credential_rules instead of this: user_credential_supported_credential_rules
+      return user_credential_supported_credential_rules_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_credential_types instead of this: user_credential_supported_credential_types
+      return user_credential_supported_credential_types_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef USER_CREDENTIAL_SUPPORTED_USER_TYPES_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_user_types instead of this: user_credential_supported_user_types
+      return user_credential_supported_user_types_get_enum_value_name(value);
+    }
+  #endif
+  }
+
   if (64784 == cluster_id) {
   #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
     if (1 == attribute_id) {
@@ -14238,6 +14525,33 @@ uint32_t get_enum_name_value(
   #endif
   }
 
+  if (64776 == cluster_id) {
+  #ifdef USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_user_unique_identifiers instead of this: user_credential_supported_user_unique_identifiers
+      return user_credential_supported_user_unique_identifiers_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_credential_rules instead of this: user_credential_supported_credential_rules
+      return user_credential_supported_credential_rules_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_credential_types instead of this: user_credential_supported_credential_types
+      return user_credential_supported_credential_types_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef USER_CREDENTIAL_SUPPORTED_USER_TYPES_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: user_credentialsupported_user_types instead of this: user_credential_supported_user_types
+      return user_credential_supported_user_types_get_enum_value_number(name);
+    }
+  #endif
+  }
+
   if (64784 == cluster_id) {
   #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
     if (1 == attribute_id) {
@@ -14582,6 +14896,17 @@ uint32_t color_control_color_loop_active_get_enum_value_number_c(const char *str
 {
   return color_control_color_loop_active_get_enum_value_number(std::string(str));
 }
+char *color_control_color_loop_direction_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", color_control_color_loop_direction_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t color_control_color_loop_direction_get_enum_value_number_c(const char *str)
+{
+  return color_control_color_loop_direction_get_enum_value_number(std::string(str));
+}
 char *color_control_color_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -14669,6 +14994,28 @@ char *commissioning_startup_control_get_enum_value_name_c(
 uint32_t commissioning_startup_control_get_enum_value_number_c(const char *str)
 {
   return commissioning_startup_control_get_enum_value_number(std::string(str));
+}
+char *cred_rule_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", cred_rule_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t cred_rule_get_enum_value_number_c(const char *str)
+{
+  return cred_rule_get_enum_value_number(std::string(str));
+}
+char *cred_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", cred_type_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t cred_type_get_enum_value_number_c(const char *str)
+{
+  return cred_type_get_enum_value_number(std::string(str));
 }
 char *credential_rule_enum_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
@@ -15615,6 +15962,39 @@ char *tx_report_transmission_speed_get_enum_value_name_c(
 uint32_t tx_report_transmission_speed_get_enum_value_number_c(const char *str)
 {
   return tx_report_transmission_speed_get_enum_value_number(std::string(str));
+}
+char *user_modifier_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", user_modifier_type_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t user_modifier_type_get_enum_value_number_c(const char *str)
+{
+  return user_modifier_type_get_enum_value_number(std::string(str));
+}
+char *user_name_encoding_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", user_name_encoding_type_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t user_name_encoding_type_get_enum_value_number_c(const char *str)
+{
+  return user_name_encoding_type_get_enum_value_number(std::string(str));
+}
+char *user_type_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", user_type_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t user_type_enum_get_enum_value_number_c(const char *str)
+{
+  return user_type_enum_get_enum_value_number(std::string(str));
 }
 char *window_covering_window_covering_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

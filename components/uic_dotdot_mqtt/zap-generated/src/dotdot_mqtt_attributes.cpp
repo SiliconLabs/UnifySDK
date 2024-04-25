@@ -30079,7 +30079,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_direction_attribute_upda
   }
 
 
-  CCColorLoopDirection color_loop_direction = {};
+  uint8_t color_loop_direction = {};
 
   nlohmann::json json_payload;
   try {
@@ -30092,16 +30092,8 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_direction_attribute_upda
         return;
       }
 // Start parsing value
-      uint32_t tmp = get_enum_decimal_value<CCColorLoopDirection>("value", json_payload);
-      if (tmp == numeric_limits<CCColorLoopDirection>::max()) {
-      #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
-        tmp = color_control_color_loop_direction_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE)
-        tmp = color_loop_direction_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      color_loop_direction = static_cast<CCColorLoopDirection>(tmp);
-
+      color_loop_direction = json_payload.at("value").get<uint8_t>();
+    
     // End parsing value
     }
 
@@ -61129,6 +61121,373 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_attributes_init()
 void uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_set(const uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_t callback)
 {
   uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback = callback;
+}
+
+// End of supported cluster.
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for UserCredential
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback_t uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback = nullptr;
+static uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_t uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback = nullptr;
+static uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback_t uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback = nullptr;
+static uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback_t uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for UserCredential
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_user_credential_supported_user_unique_identifiers_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t supported_user_unique_identifiers = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::SupportedUserUniqueIdentifiers: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      supported_user_unique_identifiers = json_payload.at("value").get<uint16_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    supported_user_unique_identifiers
+  );
+
+}
+static void uic_mqtt_dotdot_on_user_credential_supported_credential_rules_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t supported_credential_rules = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::SupportedCredentialRules: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      supported_credential_rules = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, UserCredentialSupportedCredentialRules);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    supported_credential_rules
+  );
+
+}
+static void uic_mqtt_dotdot_on_user_credential_supported_credential_types_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t supported_credential_types = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::SupportedCredentialTypes: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      supported_credential_types = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, UserCredentialSupportedCredentialTypes);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    supported_credential_types
+  );
+
+}
+static void uic_mqtt_dotdot_on_user_credential_supported_user_types_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint16_t supported_user_types = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UserCredential::SupportedUserTypes: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      supported_user_types = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, UserCredentialSupportedUserTypes);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    supported_user_types
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for UserCredential
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_user_credential_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback) {
+    subscription_topic = base_topic + "UserCredential/Attributes/SupportedUserUniqueIdentifiers/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_user_credential_supported_user_unique_identifiers_attribute_update);
+  }
+  if(uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback) {
+    subscription_topic = base_topic + "UserCredential/Attributes/SupportedCredentialRules/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_user_credential_supported_credential_rules_attribute_update);
+  }
+  if(uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback) {
+    subscription_topic = base_topic + "UserCredential/Attributes/SupportedCredentialTypes/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_user_credential_supported_credential_types_attribute_update);
+  }
+  if(uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback) {
+    subscription_topic = base_topic + "UserCredential/Attributes/SupportedUserTypes/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_user_credential_supported_user_types_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for UserCredential
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback = callback;
 }
 
 // End of supported cluster.

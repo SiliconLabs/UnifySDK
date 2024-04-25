@@ -39,10 +39,6 @@
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_METER_##type
 
-// ZW_classcmd does not know about v6.
-#define COMMAND_CLASS_METER_V6 COMMAND_CLASS_METER_V5
-#define METER_VERSION_V6       6
-
 // How many bytes will we parse from the supported scales bitmask:
 #define SCALE_BITMASK_MAX_LENTGH 4
 

@@ -53,6 +53,7 @@
 #include "zwave_command_class_transport_service.h"
 #include "zwave_command_class_indicator_control.h"
 #include "zwave_command_class_manufacturer_specific_control.h"
+#include "zwave_command_class_user_credential.h"
 // Generic includes
 #include <stdbool.h>
 
@@ -112,6 +113,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_time_init();
   status |= zwave_command_class_transport_service_init();
   status |= zwave_command_class_user_code_init();
+  status |= zwave_command_class_user_credential_init();
   status |= zwave_command_class_version_init();
   status |= zwave_command_class_wake_up_init();
   status |= zwave_command_class_zwave_plus_info_init();

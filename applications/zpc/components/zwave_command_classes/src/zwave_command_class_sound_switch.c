@@ -39,17 +39,6 @@
 // Specification says that payload data should not exceeded 64 bytes.
 #define MAX_CHAR_SIZE 64
 
-// Until ZW_classcmd.h is updated we need those defintions
-#define SOUND_SWITCH_VERSION_V2 0x02
-typedef struct _ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   toneIdentifier;               /**/
-    uint8_t   playCommandToneVolume;        /**/
-} ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME;
-
-
 /**
  * @brief Full state of a sound Switch supporting node.
  */

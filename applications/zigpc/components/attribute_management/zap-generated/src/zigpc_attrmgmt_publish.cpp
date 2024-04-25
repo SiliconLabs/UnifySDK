@@ -2189,8 +2189,8 @@ sl_status_t zigpc_attrmgmt_color_control_publish(const char* unid_ep_topic, cons
       break;
     case ZIGPC_ZCL_CLUSTER_COLOR_CONTROL_ATTR_COLOR_LOOP_DIRECTION:
       {
-        CCColorLoopDirection value;
-        memcpy(&value, attr_value, sizeof(CCColorLoopDirection));
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
         status = uic_mqtt_dotdot_color_control_color_loop_direction_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;

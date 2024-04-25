@@ -3611,6 +3611,119 @@ void uic_mqtt_dotdot_by_group_configuration_parameters_write_attributes_callback
 
 
 /**
+ * @brief Callback signature for by-group UserCredential::AddUser command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_add_user_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UserCredential/add_user is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_user_credential_add_user_callback_set(const uic_mqtt_dotdot_by_group_user_credential_add_user_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UserCredential::ModifyUser command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_modify_user_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UserCredential/modify_user is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_user_credential_modify_user_callback_set(const uic_mqtt_dotdot_by_group_user_credential_modify_user_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UserCredential::DeleteUser command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_delete_user_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UserCredential/delete_user is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_user_credential_delete_user_callback_set(const uic_mqtt_dotdot_by_group_user_credential_delete_user_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UserCredential::AddCredential command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_add_credential_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UserCredential/add_credential is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_user_credential_add_credential_callback_set(const uic_mqtt_dotdot_by_group_user_credential_add_credential_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UserCredential::ModifyCredential command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UserCredential/modify_credential is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback_set(const uic_mqtt_dotdot_by_group_user_credential_modify_credential_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UserCredential::DeleteCredential command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UserCredential/delete_credential is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback_set(const uic_mqtt_dotdot_by_group_user_credential_delete_credential_callback_t callback);
+
+typedef void (*uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_user_credential_state_t,
+    uic_mqtt_dotdot_user_credential_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/user_credential/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_user_credential_write_attributes_callback_t callback
+);
+
+
+
+/**
  * @brief Callback signature for by-group AoXLocator::IQReport command.
  */
 typedef void (*uic_mqtt_dotdot_by_group_aox_locator_iq_report_callback_t)(

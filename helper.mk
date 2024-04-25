@@ -25,6 +25,7 @@ packages+=nlohmann-json3-dev
 # TODO: remove for offline build
 packages+=curl wget python3-pip
 packages+=time
+packages+=npm
 
 rust_url?=https://sh.rustup.rs
 RUST_VERSION?=1.65.0
@@ -36,7 +37,7 @@ exes+=${zpc_exe}
 zpc_cmake_options?=\
 	-DBUILD_AOXPC=OFF \
 	-DBUILD_CPCD=OFF \
-	-DBUILD_DEV_GUI=OFF \
+	-DBUILD_DEV_GUI=ON \
 	-DBUILD_EMD=OFF \
 	-DBUILD_EPC=OFF \
 	-DBUILD_GMS=OFF \
@@ -79,9 +80,11 @@ setup/rust:
 	@echo "$@: TODO: Support stable version from https://releases.rs/ or older"
 
 setup/python:
+	python3 --version
 	@echo "$@: TODO: https://github.com/wbond/pybars3/issues/82"
 	pip3 --version || echo "warning: Please install pip"
-	pip3 install pybars3
+	pip3 install "pybars3" \
+		|| pip3 install --break-system-packages "pybars3"
 
 cmake_url?=https://github.com/Kitware/CMake/releases/download/v3.21.6/cmake-3.21.6-Linux-x86_64.sh
 cmake_filename?=$(shell basename -- "${cmake_url}")

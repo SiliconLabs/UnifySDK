@@ -1256,6 +1256,40 @@ static uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callbac
 uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_t get_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback(){
   return test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback;
 }
+static uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_user_credential_write_attributes_callback_t test_uic_mqtt_dotdot_user_credential_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t get_uic_mqtt_dotdot_user_credential_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_user_credential_write_attributes_callback_t get_uic_mqtt_dotdot_user_credential_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_user_credential_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_user_credential_add_user_callback_t test_uic_mqtt_dotdot_user_credential_add_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_add_user_callback_t get_uic_mqtt_dotdot_user_credential_add_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_add_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_modify_user_callback_t test_uic_mqtt_dotdot_user_credential_modify_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_modify_user_callback_t get_uic_mqtt_dotdot_user_credential_modify_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_modify_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_user_callback_t test_uic_mqtt_dotdot_user_credential_delete_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_user_callback_t get_uic_mqtt_dotdot_user_credential_delete_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_add_credential_callback_t test_uic_mqtt_dotdot_user_credential_add_credential_callback = NULL;
+uic_mqtt_dotdot_user_credential_add_credential_callback_t get_uic_mqtt_dotdot_user_credential_add_credential_callback(){
+  return test_uic_mqtt_dotdot_user_credential_add_credential_callback;
+}
+static uic_mqtt_dotdot_user_credential_modify_credential_callback_t test_uic_mqtt_dotdot_user_credential_modify_credential_callback = NULL;
+uic_mqtt_dotdot_user_credential_modify_credential_callback_t get_uic_mqtt_dotdot_user_credential_modify_credential_callback(){
+  return test_uic_mqtt_dotdot_user_credential_modify_credential_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_credential_callback_t test_uic_mqtt_dotdot_user_credential_delete_credential_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_credential_callback_t get_uic_mqtt_dotdot_user_credential_delete_credential_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_credential_callback;
+}
 static uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t test_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_aox_locator_write_attributes_callback_t test_uic_mqtt_dotdot_aox_locator_write_attributes_callback = NULL;
 
@@ -2818,6 +2852,46 @@ void uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_
 {
   test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback = callback;
 }
+void set_uic_mqtt_dotdot_user_credential_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_user_credential_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_write_attributes_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_add_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_add_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_add_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_modify_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_add_credential_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_modify_credential_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_credential_callback = callback;
+}
 void set_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t callback, int cmock_num_calls)
 {
@@ -3762,6 +3836,30 @@ void setUp()
   test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback = NULL;
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_Stub(
     &uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_user_credential_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_user_credential_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_user_credential_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_user_credential_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_user_credential_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_user_credential_add_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_add_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_add_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_modify_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_modify_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_modify_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_add_credential_callback = NULL;
+  uic_mqtt_dotdot_user_credential_add_credential_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_add_credential_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_modify_credential_callback = NULL;
+  uic_mqtt_dotdot_user_credential_modify_credential_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_modify_credential_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_credential_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_credential_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_credential_callback_set_stub);
   test_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_aox_locator_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_stub);
@@ -4539,6 +4637,10 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_name_and_location_name(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_name_and_location_location(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_configuration_parameters_configuration_parameters(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_user_unique_identifiers(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_credential_rules(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_credential_types(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_user_types(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_reporting_mode(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_position_and_orientation_valid(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_position_and_orientation(expected_unid,expected_endpoint_id) );
@@ -6288,7 +6390,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&user_name_value, 0x00, sizeof(user_name_value));
       uint32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -6422,7 +6524,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
       uint16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -7614,6 +7716,152 @@ void test_automatic_deduction_of_supported_commands()
         first_parameter_id_value,
       
         last_parameter_id_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_user_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      uint16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_add_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_user_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      uint16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_modify_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_user_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_credential_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      uint16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_add_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_credential_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      uint16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_modify_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_credential_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      uint16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value
       
       ));
   }
@@ -9415,7 +9663,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&user_name_value, 0x00, sizeof(user_name_value));
       uint32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9549,7 +9797,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
       uint16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -10741,6 +10989,152 @@ void test_automatic_deduction_of_supported_commands()
         first_parameter_id_value,
       
         last_parameter_id_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_user_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      uint16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_add_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_user_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      uint16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_modify_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_user_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_credential_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      uint16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_add_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_credential_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      uint16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_modify_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_credential_callback) {
+    // Dummy command parameters
+      uint16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      uint16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value
       
       ));
   }

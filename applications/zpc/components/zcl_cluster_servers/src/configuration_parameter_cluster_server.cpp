@@ -521,7 +521,7 @@ static void
   clear_configuration_parameters_vector(configuration);
 
   // Do it again for the Reported value
-  get_configuration_parameters(endpoint_id_node,
+  get_configuration_parameters(endpoint_id_node, 
                                configuration,
                                REPORTED_ATTRIBUTE);
   uic_mqtt_dotdot_configuration_parameters_configuration_parameters_publish(

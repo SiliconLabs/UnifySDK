@@ -347,6 +347,13 @@ sl_status_t uic_mqtt_dotdot_by_group_name_and_location_init();
 sl_status_t uic_mqtt_dotdot_by_group_configuration_parameters_init();
 
 /**
+ * @brief Initialize UserCredential dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_user_credential_init();
+
+/**
  * @brief Initialize AoXLocator dotdot bygroup command handlers
  *
  * @returns SL_STATUS_OK on success, error otherwise.
@@ -4896,6 +4903,141 @@ void uic_mqtt_dotdot_on_configuration_parameters_WriteAttributes(
 
 /**
  * @brief Retrieves the container with callbacks pointer for
+ * by-unid UserCredential/Commands/AddUser messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t> &get_uic_mqtt_dotdot_user_credential_add_user_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/AddUser
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_add_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UserCredential/Commands/ModifyUser messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t> &get_uic_mqtt_dotdot_user_credential_modify_user_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/ModifyUser
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_modify_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UserCredential/Commands/DeleteUser messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t> &get_uic_mqtt_dotdot_user_credential_delete_user_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/DeleteUser
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_delete_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UserCredential/Commands/AddCredential messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t> &get_uic_mqtt_dotdot_user_credential_add_credential_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/AddCredential
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_add_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UserCredential/Commands/ModifyCredential messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t> &get_uic_mqtt_dotdot_user_credential_modify_credential_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/ModifyCredential
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_modify_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UserCredential/Commands/DeleteCredential messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t> &get_uic_mqtt_dotdot_user_credential_delete_credential_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/DeleteCredential
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_delete_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_user_credential_write_attributes_callback_t> & get_uic_mqtt_dotdot_user_credential_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UserCredential/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_user_credential_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
  * by-unid AoXLocator/Commands/IQReport messages
  *
  * @returns std::set of callbacks.
@@ -5890,6 +6032,60 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap TstatScheduleMode("TstatScheduleMode", "map8", TstatScheduleMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UserCredentialSupportedCredentialRules_bitmap_data {
+{ {"Single", "bool", "0x2", "1"}, {
+} },
+{ {"Dual", "bool", "0x4", "2"}, {
+} },
+{ {"Triple", "bool", "0x8", "3"}, {
+} }
+};
+const dotdot_bitmap UserCredentialSupportedCredentialRules("UserCredentialSupportedCredentialRules", "Unknown UserCredentialSupportedCredentialRules", UserCredentialSupportedCredentialRules_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UserCredentialSupportedCredentialTypes_bitmap_data {
+{ {"PINCode", "bool", "0x1", "0"}, {
+} },
+{ {"Password", "bool", "0x2", "1"}, {
+} },
+{ {"RFIDCode", "bool", "0x4", "2"}, {
+} },
+{ {"BLE", "bool", "0x8", "3"}, {
+} },
+{ {"NFC", "bool", "0x10", "4"}, {
+} },
+{ {"UWB", "bool", "0x20", "5"}, {
+} },
+{ {"EyeBiometric", "bool", "0x40", "6"}, {
+} },
+{ {"FaceBiometric", "bool", "0x80", "7"}, {
+} },
+{ {"FingerBiometric", "bool", "0x100", "8"}, {
+} },
+{ {"HandBiometric", "bool", "0x200", "9"}, {
+} },
+{ {"UnspecifiedBiometric", "bool", "0x400", "10"}, {
+} }
+};
+const dotdot_bitmap UserCredentialSupportedCredentialTypes("UserCredentialSupportedCredentialTypes", "Unknown UserCredentialSupportedCredentialTypes", UserCredentialSupportedCredentialTypes_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UserCredentialSupportedUserTypes_bitmap_data {
+{ {"GeneralUser", "bool", "0x1", "0"}, {
+} },
+{ {"ProgrammingUser", "bool", "0x8", "3"}, {
+} },
+{ {"NonAccessUser", "bool", "0x10", "4"}, {
+} },
+{ {"DuressUser", "bool", "0x20", "5"}, {
+} },
+{ {"DisposableUser", "bool", "0x40", "6"}, {
+} },
+{ {"ExpiringUser", "bool", "0x80", "7"}, {
+} },
+{ {"RemoteOnlyUser", "bool", "0x200", "9"}, {
+} }
+};
+const dotdot_bitmap UserCredentialSupportedUserTypes("UserCredentialSupportedUserTypes", "Unknown UserCredentialSupportedUserTypes", UserCredentialSupportedUserTypes_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> WindowCoveringConfigOrStatus_bitmap_data {
 { {"Operational", "bool", "0x1", "0"}, {

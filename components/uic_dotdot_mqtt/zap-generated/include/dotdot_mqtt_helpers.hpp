@@ -336,6 +336,23 @@ std::string color_control_color_loop_active_get_enum_value_name(
  */
 uint32_t color_control_color_loop_active_get_enum_value_number(const std::string &str);
 
+#define COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ColorControlColorLoopDirection enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string color_control_color_loop_direction_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ColorControlColorLoopDirection enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t color_control_color_loop_direction_get_enum_value_number(const std::string &str);
+
 #define COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -471,6 +488,40 @@ std::string commissioning_startup_control_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t commissioning_startup_control_get_enum_value_number(const std::string &str);
+
+#define CRED_RULE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the CredRule enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string cred_rule_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the CredRule enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t cred_rule_get_enum_value_number(const std::string &str);
+
+#define CRED_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the CredType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string cred_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the CredType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t cred_type_get_enum_value_number(const std::string &str);
 
 #define CREDENTIAL_RULE_ENUM_ENUM_NAME_AVAILABLE 1
 
@@ -1933,6 +1984,57 @@ std::string tx_report_transmission_speed_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &str);
+
+#define USER_MODIFIER_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UserModifierType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string user_modifier_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UserModifierType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t user_modifier_type_get_enum_value_number(const std::string &str);
+
+#define USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UserNameEncodingType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string user_name_encoding_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UserNameEncodingType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t user_name_encoding_type_get_enum_value_number(const std::string &str);
+
+#define USER_TYPE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UserTypeEnum enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string user_type_enum_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UserTypeEnum enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t user_type_enum_get_enum_value_number(const std::string &str);
 
 #define WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE 1
 
