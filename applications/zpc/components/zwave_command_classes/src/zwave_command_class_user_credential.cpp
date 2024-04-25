@@ -2203,7 +2203,7 @@ sl_status_t zwave_command_class_user_credential_credential_handle_report(
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// User Set/Get/Report
+// User Set/Get/Report/Set Error Report
 /////////////////////////////////////////////////////////////////////////////
 
 // Start user interview process by starting a user get with ID 0
@@ -2513,6 +2513,68 @@ sl_status_t zwave_command_class_user_credential_user_handle_report(
   return SL_STATUS_OK;
 }
 
+sl_status_t zwave_command_class_user_credential_user_set_error_handle_report(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame_data,
+  uint16_t frame_length)
+{
+  if (frame_length < 14) {
+    sl_log_warning(LOG_TAG, "USER_SET_ERROR_REPORT frame length is not valid");
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+  attribute_store_node_t endpoint_node
+    = zwave_command_class_get_endpoint_node(connection_info);
+
+  // We don't need the rest of the frame, we just ensure that the attribute store is in a valid state
+  uint8_t error_code                       = frame_data[2];
+  user_credential_user_unique_id_t user_id = get_uint16_value(frame_data, 6);
+
+  auto remove_user_node_if_possible =
+    [&](attribute_store_node_t user_unique_id_node) {
+      if (attribute_store_node_exists(user_unique_id_node)) {
+        sl_log_debug(LOG_TAG, "Remove faulty user state", user_id);
+        attribute_store_delete_node(user_unique_id_node);
+      } else {
+        sl_log_debug(
+          LOG_TAG,
+          "Didn't find an user with id %d in desired state. Not doing anything",
+          user_id);
+      }
+    };
+
+  // This case should not happens often since we are doing preemptive checks
+  switch (error_code) {
+    // USER_ADD_REJECTED_LOCATION_OCCUPIED : 0x00
+    //A user add operation is rejected due to the User Unique Identifier already being occupied
+    case USER_SET_ERROR_REPORT_USERADDREJECTEDLOCATIONOCCUPIED: {
+      sl_log_error(LOG_TAG,
+                   "Error when setting user : user ID %d is not available. Try "
+                   "to modify it instead.",
+                   user_id);
+      // It should be in desired state since we are using ADD operation
+      attribute_store_node_t user_unique_id_node
+        = get_desired_user_id_node(endpoint_node, user_id);
+      remove_user_node_if_possible(user_unique_id_node);
+    } break;
+    // USER_MODIFY_REJECTED_LOCATION_EMPTY : 0x01
+    // A user modify operation is rejected due to the User Unique Identifier location being empty
+    case USER_SET_ERROR_REPORT_USERMODIFYREJECTEDLOCATIONEMPTY: {
+      sl_log_error(LOG_TAG,
+                   "Error when modifying user : user ID %d does not exists.",
+                   user_id);
+      // Hunt down the invalid user ID and remove it
+      attribute_store_node_t user_unique_id_node
+        = get_desired_user_id_node(endpoint_node, user_id);
+      // Check for reported value if it doesn't exists
+      if (!attribute_store_node_exists(user_unique_id_node)) {
+        user_unique_id_node = get_reported_user_id_node(endpoint_node, user_id);
+      }
+      remove_user_node_if_possible(user_unique_id_node);
+    } break;
+  }
+
+  return SL_STATUS_OK;
+}
 /////////////////////////////////////////////////////////////////////////////
 // Post interview actions
 /////////////////////////////////////////////////////////////////////////////
@@ -3145,6 +3207,11 @@ sl_status_t zwave_command_class_user_credential_control_handler(
   }
 
   switch (frame_data[COMMAND_INDEX]) {
+    case USER_SET_ERROR_REPORT:
+      return zwave_command_class_user_credential_user_set_error_handle_report(
+        connection_info,
+        frame_data,
+        frame_length);
     case USER_CAPABILITIES_REPORT:
       return zwave_command_class_user_credential_user_capabilities_handle_report(
         connection_info,

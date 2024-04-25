@@ -137,6 +137,57 @@ struct credential_structure_nodes {
   attribute_store_node_t credential_slot_node;
 };
 
+void helper_simulate_user_set_error_report(
+  uint8_t user_set_error_type,
+  user_credential_modifier_type_t user_modifier_type,
+  user_credential_modifier_node_id_t user_modifier_node_id,
+  user_credential_user_unique_id_t user_id,
+  user_credential_user_type_t user_type,
+  user_credential_user_active_state_t user_active_state,
+  user_credential_supported_credential_rules_t credential_rule,
+  user_credential_expiring_timeout_minutes_t expiring_timeout_minutes,
+  user_credential_user_name_encoding_t user_name_encoding,
+  std::string user_name)
+{
+  zwave_controller_connection_info_t info = {};
+  info.remote.node_id                     = node_id;
+  info.remote.endpoint_id                 = endpoint_id;
+  info.local.is_multicast                 = false;
+
+  std::vector<uint8_t> report_frame
+    = {COMMAND_CLASS_USER_CREDENTIAL, USER_SET_ERROR_REPORT};
+
+  report_frame.push_back(user_set_error_type);
+  report_frame.push_back(user_modifier_type);
+
+  auto exploded_user_modifier_node_id = explode_uint16(user_modifier_node_id);
+  report_frame.push_back(exploded_user_modifier_node_id.msb);
+  report_frame.push_back(exploded_user_modifier_node_id.lsb);
+
+  auto exploded_user_id = explode_uint16(user_id);
+  report_frame.push_back(exploded_user_id.msb);
+  report_frame.push_back(exploded_user_id.lsb);
+
+  report_frame.push_back(user_type);
+  report_frame.push_back(user_active_state);
+  report_frame.push_back(credential_rule);
+
+  auto exploded_expiring_timeout_minutes
+    = explode_uint16(expiring_timeout_minutes);
+  report_frame.push_back(exploded_expiring_timeout_minutes.msb);
+  report_frame.push_back(exploded_expiring_timeout_minutes.lsb);
+
+  report_frame.push_back((uint8_t)user_name.size());
+  for (const char &c: user_name) {
+    report_frame.push_back(c);
+  }
+
+  // Do the report
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    handler.control_handler(&info, report_frame.data(), report_frame.size()));
+}
+
 void helper_simulate_user_capabilites_report(
   uint16_t number_of_users,
   user_credential_supported_credential_rules_t cred_rule_bitmask,
@@ -759,12 +810,12 @@ void test_user_credential_credential_capabilities_report_happy_case()
   test_report_values();
 
   printf("Test with second set of data\n");
-  credential_checksum_support = 0;
-  credential_type             = {6, 7, 8};
-  cl_support                  = {0, 1, 1};
-  supported_credential_slots  = {15, 1565, 153};
-  min_length                  = {155, 15, 5};
-  max_length                  = {1111, 111, 11};
+  credential_checksum_support   = 0;
+  credential_type               = {6, 7, 8};
+  cl_support                    = {0, 1, 1};
+  supported_credential_slots    = {15, 1565, 153};
+  min_length                    = {155, 15, 5};
+  max_length                    = {1111, 111, 11};
   expected_credential_type_mask = 0b11100000;
 
   helper_simulate_credential_capabilites_report(credential_checksum_support,
@@ -2137,8 +2188,9 @@ void test_post_interview_discovery()
   count_user_node(1);
   // With right value
   user_credential_user_unique_id_t reported_user_id = 0;
-  user_id_node = attribute_store_get_first_child_by_type(endpoint_id_node,
-                                                         ATTRIBUTE(USER_UNIQUE_ID));
+  user_id_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID));
   attribute_store_get_reported(user_id_node,
                                &reported_user_id,
                                sizeof(reported_user_id));
@@ -2399,7 +2451,7 @@ void test_user_credential_credential_notification_add_modify_delete_happy_case()
                                                 supported_credential_slots,
                                                 supported_cred_min_length,
                                                 supported_cred_max_length);
-  
+
   // Add credential
   sl_status_t status = zwave_command_class_user_credential_add_new_credential(
     endpoint_id_node,
@@ -2469,7 +2521,7 @@ void test_user_credential_credential_notification_add_modify_delete_happy_case()
   };
   test_attribute_store_values();
 
-  crb = false;
+  crb                         = false;
   credential_data             = "121212";
   credential_modifier_type    = 3;
   credential_modifier_node_id = 15;
@@ -2741,8 +2793,8 @@ void test_user_credential_user_modify_capabilites_failure_cases()
     SL_STATUS_OK,
     zwave_command_class_user_credential_add_new_user(endpoint_id_node,
                                                      1,  // User ID
-                                                     0,   // User Type
-                                                     1,   // Credential rule
+                                                     0,  // User Type
+                                                     1,  // Credential rule
                                                      1,
                                                      0,
                                                      0,
@@ -2753,42 +2805,41 @@ void test_user_credential_user_modify_capabilites_failure_cases()
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
     zwave_command_class_user_credential_modify_user(endpoint_id_node,
-                                                     1,  // User ID
-                                                     1,  // User Type
-                                                     1,  // Credential rule
-                                                     1,
-                                                     0,
-                                                     0,
-                                                     "G"),
+                                                    1,  // User ID
+                                                    1,  // User Type
+                                                    1,  // Credential rule
+                                                    1,
+                                                    0,
+                                                    0,
+                                                    "G"),
     "User Type is not valid");
 
   // Credential rule not valid
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
     zwave_command_class_user_credential_modify_user(endpoint_id_node,
-                                                     1,  // User ID
-                                                     0,  // User Type
-                                                     2,  // Credential rule
-                                                     1,
-                                                     0,
-                                                     0,
-                                                     "G"),
+                                                    1,  // User ID
+                                                    0,  // User Type
+                                                    2,  // Credential rule
+                                                    1,
+                                                    0,
+                                                    0,
+                                                    "G"),
     "Credential rule is not valid");
 
   // Username too long
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
     zwave_command_class_user_credential_modify_user(endpoint_id_node,
-                                                     1,  // User ID
-                                                     0,  // User Type
-                                                     1,  // Credential rule
-                                                     1,
-                                                     0,
-                                                     0,
-                                                     "GERARD TURBO"),
+                                                    1,  // User ID
+                                                    0,  // User Type
+                                                    1,  // Credential rule
+                                                    1,
+                                                    0,
+                                                    0,
+                                                    "GERARD TURBO"),
     "User name is not valid");
 }
-
 
 void test_user_credential_credential_add_capabilites_failure_cases()
 {
@@ -2828,40 +2879,43 @@ void test_user_credential_credential_add_capabilites_failure_cases()
   // Credential type not valid
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_PIN_CODE,  // Credential type
-                                                           1,  // Credential slot
-                                                           "12"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_PIN_CODE,  // Credential type
+      1,                       // Credential slot
+      "12"),
     "Credential type shouldn't be valid");
 
   // Credential slot not valid
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           2,  // Credential slot
-                                                           "12"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      2,  // Credential slot
+      "12"),
     "Credential slot shouldn't be valid");
-
 
   // Credential data too short
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           1,  
-                                                           "1"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      1,
+      "1"),
     "Credential data should be too short");
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           1,  
-                                                           "TURBO TROP LONG VROUM"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      1,
+      "TURBO TROP LONG VROUM"),
     "Credential data should be too long");
 }
 
@@ -2902,23 +2956,24 @@ void test_user_credential_credential_add_capabilites_happy_case()
 
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_OK,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           1,  
-                                                           "TURBO"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      1,
+      "TURBO"),
     "Credential #1 should be valid");
 
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_OK,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_PIN_CODE,
-                                                           4,  
-                                                           "121212"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_PIN_CODE,
+      4,
+      "121212"),
     "Credential #2 should be valid");
 }
-   
 
 void test_user_credential_credential_modify_capabilites_failure_cases()
 {
@@ -2956,32 +3011,115 @@ void test_user_credential_credential_modify_capabilites_failure_cases()
                                                 supported_cred_max_length);
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_OK,
-    zwave_command_class_user_credential_add_new_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           1,  
-                                                           "VOITURE"),
+    zwave_command_class_user_credential_add_new_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      1,
+      "VOITURE"),
     "Should be able to add credential");
 
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    zwave_command_class_user_credential_modify_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      1,
+      "V"),
+    "Should not be able to modify credential data : it's too short");
 
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_FAIL,
-    zwave_command_class_user_credential_modify_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           1,  
-                                                           "V"),
-   "Should not be able to modify credential data : it's too short");
-
-  TEST_ASSERT_EQUAL_MESSAGE(
-    SL_STATUS_FAIL,
-    zwave_command_class_user_credential_modify_credential(endpoint_id_node,
-                                                           user_id,
-                                                           ZCL_CRED_TYPE_HAND_BIOMETRIC,
-                                                           1,  
-                                                           "MAX SPEEEEEEEEEEEEED TURBO"),
+    zwave_command_class_user_credential_modify_credential(
+      endpoint_id_node,
+      user_id,
+      ZCL_CRED_TYPE_HAND_BIOMETRIC,
+      1,
+      "MAX SPEEEEEEEEEEEEED TURBO"),
     "Should not be able to modify credential data : it's too long");
 }
 
-  // Credential
+void test_user_credential_user_set_error_report_user_add_happy_case()
+{
+  user_credential_user_unique_id_t user_id = 12;
+
+  // Simulate invalid user
+  auto invalid_user_node
+    = attribute_store_emplace_desired(endpoint_id_node,
+                                      ATTRIBUTE(USER_UNIQUE_ID),
+                                      &user_id,
+                                      sizeof(user_id));
+
+  auto valid_user_node = attribute_store_emplace(endpoint_id_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID),
+                                                 &user_id,
+                                                 sizeof(user_id));
+
+  helper_simulate_user_set_error_report(
+    USER_SET_ERROR_REPORT_USERADDREJECTEDLOCATIONOCCUPIED,
+    1,
+    2,
+    user_id,
+    1,
+    0,
+    1,
+    0,
+    0,
+    "TAJINE AUX EPICES");
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_user_node),
+                            "Invalid User node should not exist");
+  TEST_ASSERT_TRUE_MESSAGE(attribute_store_node_exists(valid_user_node),
+                           "Valid User node should exist");
+}
+
+void test_user_credential_user_set_error_report_user_modify_happy_case()
+{
+  user_credential_user_unique_id_t user_id = 12;
+
+  // Simulate invalid user (desired)
+  auto invalid_user_node
+    = attribute_store_emplace_desired(endpoint_id_node,
+                                      ATTRIBUTE(USER_UNIQUE_ID),
+                                      &user_id,
+                                      sizeof(user_id));
+
+  helper_simulate_user_set_error_report(
+    USER_SET_ERROR_REPORT_USERMODIFYREJECTEDLOCATIONEMPTY,
+    1,
+    2,
+    user_id,
+    1,
+    0,
+    1,
+    0,
+    0,
+    "SAUCISSE FUMEE");
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_user_node),
+                            "Invalid User node should not exist");
+
+  // Simulate invalid user (reported)
+  invalid_user_node = attribute_store_emplace(endpoint_id_node,
+                                              ATTRIBUTE(USER_UNIQUE_ID),
+                                              &user_id,
+                                              sizeof(user_id));
+
+  helper_simulate_user_set_error_report(
+    USER_SET_ERROR_REPORT_USERMODIFYREJECTEDLOCATIONEMPTY,
+    1,
+    2,
+    user_id,
+    1,
+    0,
+    1,
+    0,
+    0,
+    "TURBO BARBEUC");
+
+  TEST_ASSERT_FALSE_MESSAGE(attribute_store_node_exists(invalid_user_node),
+                            "Invalid User node should not exist");
+}
+
 }  // extern "C"
