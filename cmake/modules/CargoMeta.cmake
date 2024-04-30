@@ -41,6 +41,10 @@ function(get_target_triple CARGO_TARGET_TRIPLE)
     set(CARGO_TARGET_TRIPLE
         "armv7-unknown-linux-gnueabihf"
         PARENT_SCOPE)
+  elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "armv7")
+    set(CARGO_TARGET_TRIPLE
+        "armv7-unknown-linux-gnueabi"
+        PARENT_SCOPE)
   elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
     set(CARGO_TARGET_TRIPLE
         "aarch64-unknown-linux-gnu"
