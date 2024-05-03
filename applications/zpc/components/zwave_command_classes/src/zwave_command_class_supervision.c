@@ -21,6 +21,10 @@
 // Interface includes
 #include "zwave_command_class_wake_up_types.h"
 
+// Attribute store helpers
+#include "attribute_store_defined_attribute_types.h"
+#include "attribute_store_helper.h"
+
 // Includes from other components
 #include "sl_log.h"
 #include "attribute_store.h"
@@ -349,6 +353,36 @@ void zwave_command_class_supervision_on_send_data_complete(
   memcpy(&ongoing_session->tx_info, tx_info, sizeof(zwapi_tx_report_t));
 }
 
+static void zwave_command_class_supervision_on_version_attribute_update(
+  attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_DELETED) {
+    return;
+  }
+
+  zwave_cc_version_t version = 0;
+  attribute_store_get_reported(updated_node, &version, sizeof(version));
+
+  if (version == 0) {
+    return;
+  }
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_ENDPOINT_ID);
+
+  attribute_store_node_t supervision_version_node
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_SUPERVISION_ENABLED,
+                               endpoint_node);
+ 
+  // By default the supervision is enabled
+  // This can be changed in the future, we enable it by default to keep compatibility with previous versions
+  uint8_t supervision_enabled_flag = 1;
+  attribute_store_set_reported(supervision_version_node,
+                               &supervision_enabled_flag,
+                               sizeof(supervision_enabled_flag));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Init function
 ///////////////////////////////////////////////////////////////////////////////
@@ -359,6 +393,10 @@ sl_status_t zwave_command_class_supervision_init()
 
   // Clean up our "Wake on demand" list
   memset(wake_on_demand_list, 0, sizeof(zwave_nodemask_t));
+
+  attribute_store_register_callback_by_type(
+    &zwave_command_class_supervision_on_version_attribute_update,
+    ATTRIBUTE_COMMAND_CLASS_SUPERVISION_VERSION);
 
   // Register Supervision CC handler to the Z-Wave CC framework
   zwave_command_handler_t handler = {};

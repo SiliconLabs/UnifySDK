@@ -306,6 +306,8 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   //         Supervision Command Class attributes
   /////////////////////////////////////////////////////////////////////
   {ATTRIBUTE_COMMAND_CLASS_SUPERVISION_VERSION,   "Supervision Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_SUPERVISION_ENABLED,   "Supervision Enabled flag",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  
   /////////////////////////////////////////////////////////////////////
   //         Wake Up Command Class attributes
   /////////////////////////////////////////////////////////////////////
