@@ -405,6 +405,26 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               default: 0,
+            },
+            {                
+              id: 65281,
+              name: "ZWaveGenericDeviceClass",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 65282,
+              name: "ZWaveSpecificDeviceClass",
+              type: "number",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
             }
         ],
         commands: [

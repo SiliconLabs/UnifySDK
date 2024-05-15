@@ -214,6 +214,20 @@ sl_status_t zigpc_attrmgmt_basic_publish(const char* unid_ep_topic, const zcl_at
         status = uic_mqtt_dotdot_basic_sw_buildid_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
       }
       break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_Z_WAVE_GENERIC_DEVICE_CLASS:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_z_wave_generic_device_class_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
+    case ZIGPC_ZCL_CLUSTER_BASIC_ATTR_Z_WAVE_SPECIFIC_DEVICE_CLASS:
+      {
+        uint8_t value;
+        memcpy(&value, attr_value, sizeof(uint8_t));
+        status = uic_mqtt_dotdot_basic_z_wave_specific_device_class_publish(unid_ep_topic, value, UCL_MQTT_PUBLISH_TYPE_REPORTED);
+      }
+      break;
     case ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION:
       {
         uint16_t value;

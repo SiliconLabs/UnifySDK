@@ -608,6 +608,54 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL Basic ZWaveGenericDeviceClass, "
+                     "type:  uint8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS,
+      "ZCL Basic ZWaveGenericDeviceClass",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL Basic ZWaveSpecificDeviceClass, "
+                     "type:  uint8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS,
+      "ZCL Basic ZWaveSpecificDeviceClass",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
     // uint16 // uint16 // uint16_t
     std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;

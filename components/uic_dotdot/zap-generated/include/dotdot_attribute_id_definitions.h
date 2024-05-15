@@ -69,6 +69,8 @@ typedef enum {
 #define DOTDOT_BASIC_ALARM_MASK_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x13)
 #define DOTDOT_BASIC_DISABLE_LOCAL_CONFIG_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x14)
 #define DOTDOT_BASIC_SW_BUILDID_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x4000)
+#define DOTDOT_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS_ATTRIBUTE_ID ((dotdot_attribute_id_t)0xFF01)
+#define DOTDOT_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS_ATTRIBUTE_ID ((dotdot_attribute_id_t)0xFF02)
 // Definitions for cluster: PowerConfiguration
 #define DOTDOT_POWER_CONFIGURATION_MAINS_VOLTAGE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
 #define DOTDOT_POWER_CONFIGURATION_MAINS_FREQUENCY_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)

@@ -252,6 +252,20 @@ static void basic_cluster_publish_desired_value_callback(
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
+          if (type == DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS) {
+          uic_mqtt_dotdot_basic_z_wave_generic_device_class_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS) {
+          uic_mqtt_dotdot_basic_z_wave_specific_device_class_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
       } catch (std::exception &ex) {
     sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
   }
@@ -481,6 +495,22 @@ static void basic_cluster_publish_reported_value_callback(
         // clang-format off
       uic_mqtt_dotdot_basic_sw_buildid_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
       break;
+     case DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining Basic::ZWaveGenericDeviceClass under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_basic_z_wave_generic_device_class_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining Basic::ZWaveSpecificDeviceClass under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_basic_z_wave_specific_device_class_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
     default:
     break;
     }
@@ -652,6 +682,20 @@ static void basic_cluster_publish_reported_value_callback(
           uic_mqtt_dotdot_basic_sw_buildid_publish(
             base_topic.c_str(),
             static_cast<const char*>( str_desired.data() ),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS) {
+          uic_mqtt_dotdot_basic_z_wave_generic_device_class_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS) {
+          uic_mqtt_dotdot_basic_z_wave_specific_device_class_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -25931,6 +25975,34 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       basic_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_BASIC_SW_BUILDID);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      basic_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      basic_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      basic_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      basic_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      basic_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      basic_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       power_configuration_cluster_publish_desired_value_callback,
