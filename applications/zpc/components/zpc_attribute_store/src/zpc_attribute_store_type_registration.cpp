@@ -302,6 +302,17 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE_SCALE,   "Min Value Scale",   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE,   U32_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE,   "Max Value",   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE,   I32_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE_SCALE,   "Max Value Scale",   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE,   U32_STORAGE_TYPE},
+
+
+  /////////////////////////////////////////////////////////////////////
+  //         Thermostat Fan Mode Command Class attributes
+  /////////////////////////////////////////////////////////////////////
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_MODE_VERSION,   "Thermostat Fan Mode Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_MODE_CURRENT_MODE,   "Thermostat Current Fan Mode",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  // We use u32 since it store some 8bit mask. This should be resilient to future version of Thermostat Fan Mode
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_MODE_SUPPORTED_MODES,  "Thermostat Supported Fan Mode Bitmask",   ATTRIBUTE_ENDPOINT_ID,   U32_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_MODE_OFF_FLAG, "Thermostat Fan Off Flag",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE },
+
   /////////////////////////////////////////////////////////////////////
   //         Supervision Command Class attributes
   /////////////////////////////////////////////////////////////////////

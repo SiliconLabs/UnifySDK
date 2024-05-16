@@ -40,6 +40,7 @@
 #include "zwave_command_class_switch_color.h"
 #include "zwave_command_class_switch_multilevel.h"
 #include "zwave_command_class_thermostat_mode.h"
+#include "zwave_command_class_thermostat_fan_mode.h"
 #include "zwave_command_class_thermostat_setpoint.h"
 #include "zwave_command_class_version.h"
 #include "zwave_command_class_wake_up.h"
@@ -108,6 +109,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_switch_color_init();
   status |= zwave_command_class_switch_multilevel_init();
   status |= zwave_command_class_thermostat_mode_init();
+  status |= zwave_command_class_thermostat_fan_mode_init();
   status |= zwave_command_class_thermostat_setpoint_init();
   status |= zwave_command_class_time_init();
   status |= zwave_command_class_transport_service_init();
