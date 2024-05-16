@@ -14799,3 +14799,107 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
 
 }
 
+
+std::string get_json_payload_for_unify_fan_control_set_fan_mode_command(
+  
+  const uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetFanMode / FanMode
+  #ifdef SET_FAN_MODE_FAN_MODE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["FanMode"] =
+    set_fan_mode_fan_mode_get_enum_value_name(
+      (uint32_t)fields->fan_mode);
+  #elif defined(Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["FanMode"] =
+    z_wave_fan_mode_enum_get_enum_value_name((uint32_t)fields->fan_mode);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["FanMode"] = fields->fan_mode;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_fan_control_set_fan_mode(
+  nlohmann::json &jsn,
+  ZWaveFanModeEnum &fan_mode
+  
+) {
+
+  uint32_t FanMode_enum_val = get_enum_decimal_value<ZWaveFanModeEnum>("FanMode", jsn);
+  if (FanMode_enum_val == std::numeric_limits<ZWaveFanModeEnum>::max()) {
+    #ifdef Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE
+    FanMode_enum_val = z_wave_fan_mode_enum_get_enum_value_number(jsn.at("FanMode").get<std::string>());
+    #endif
+  }
+  if (jsn.at("FanMode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  fan_mode = static_cast<ZWaveFanModeEnum>(FanMode_enum_val);
+}
+
+
+std::string get_json_payload_for_unify_fan_control_turn_off_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_fan_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_fan_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_fan_control_updated_state_t &new_updated_state
+) {
+
+
+  if (jsn.find("ZWaveFanMode") != jsn.end()) {
+
+    uint32_t tmp = get_enum_decimal_value<ZWaveFanModeEnum>("ZWaveFanMode", jsn);
+    if (tmp == std::numeric_limits<ZWaveFanModeEnum>::max()) {
+      #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+      tmp = unify_fan_control_z_wave_fan_mode_get_enum_value_number(jsn.at("ZWaveFanMode").get<std::string>());
+      #elif defined(Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE)
+      tmp = z_wave_fan_mode_get_enum_value_number(jsn.at("ZWaveFanMode").get<std::string>());
+      #endif
+    }
+    new_state.z_wave_fan_mode = tmp;
+  
+    new_updated_state.z_wave_fan_mode = true;
+  }
+
+
+}
+

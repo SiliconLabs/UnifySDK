@@ -17311,6 +17311,78 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format off
   // clang-format on
 
+  {
+    // ZWaveFanModeEnum // ZWaveFanModeEnum // ZWaveFanModeEnum
+    std::string attribute_type_string           = "ZWaveFanModeEnum";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyFanControl ZWaveFanMode, "
+                     "type:  ZWaveFanModeEnum // ZWaveFanModeEnum");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE,
+      "ZCL UnifyFanControl ZWaveFanMode",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map16 // map16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyFanControl ZWaveSupportedFanMode, "
+                     "type:  map16 // uint16_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE,
+      "ZCL UnifyFanControl ZWaveSupportedFanMode",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // ZWaveFanStateEnum // ZWaveFanStateEnum // ZWaveFanStateEnum
+    std::string attribute_type_string           = "ZWaveFanStateEnum";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyFanControl ZWaveFanState, "
+                     "type:  ZWaveFanStateEnum // ZWaveFanStateEnum");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE,
+      "ZCL UnifyFanControl ZWaveFanState",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
   // Additional attributes:
   for (auto const &a: zcl_additional_attribute_schema) {
     status |= attribute_store_register_type(a.type,

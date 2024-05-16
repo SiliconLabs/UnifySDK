@@ -11396,3 +11396,125 @@ void uic_mqtt_dotdot_descriptor_publish_generated_write_attributes_command(
                    false);
 }
 
+/**
+ * @brief Publishes an incoming/generated SetFanMode command for
+ * the UnifyFanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyFanControl/GeneratedCommands/SetFanMode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_generated_set_fan_mode_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UnifyFanControl/GeneratedCommands/SetFanMode";
+
+  std::string payload =
+    get_json_payload_for_unify_fan_control_set_fan_mode_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated TurnOff command for
+ * the UnifyFanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyFanControl/GeneratedCommands/TurnOff
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_generated_turn_off_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UnifyFanControl/GeneratedCommands/TurnOff";
+
+  std::string payload =
+    get_json_payload_for_unify_fan_control_turn_off_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the UnifyFanControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyFanControl/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_unify_fan_control_state_t attribute_values,
+  uic_mqtt_dotdot_unify_fan_control_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UnifyFanControl/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  if (attribute_list.z_wave_fan_mode == true) {
+
+  // This is a single value
+
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+  json_object["ZWaveFanMode"] = unify_fan_control_z_wave_fan_mode_get_enum_value_name((uint32_t)attribute_values.z_wave_fan_mode);
+  #else
+  json_object["ZWaveFanMode"] = static_cast<ZWaveFanModeEnum>(attribute_values.z_wave_fan_mode);
+  #endif
+
+
+  }
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+

@@ -367,6 +367,13 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_descriptor_init();
 
+/**
+ * @brief Initialize UnifyFanControl dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_unify_fan_control_init();
+
 
 
 // clang-format on
@@ -5052,6 +5059,65 @@ void uic_mqtt_dotdot_on_descriptor_WriteAttributes(
   const size_t message_length);
 
 
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UnifyFanControl/Commands/SetFanMode messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t> &get_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyFanControl/Commands/SetFanMode
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_fan_control_set_fan_mode(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UnifyFanControl/Commands/TurnOff messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t> &get_uic_mqtt_dotdot_unify_fan_control_turn_off_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyFanControl/Commands/TurnOff
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_fan_control_turn_off(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t> & get_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyFanControl/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_fan_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
 
 
 // All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
@@ -5890,6 +5956,34 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap TstatScheduleMode("TstatScheduleMode", "map8", TstatScheduleMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UnifyFanControlZWaveSupportedFanMode_bitmap_data {
+{ {"Auto", "bool", "0x1", "0"}, {
+} },
+{ {"Low", "bool", "0x2", "1"}, {
+} },
+{ {"AutoHigh", "bool", "0x4", "2"}, {
+} },
+{ {"High", "bool", "0x8", "3"}, {
+} },
+{ {"AutoMedium", "bool", "0x10", "4"}, {
+} },
+{ {"Medium", "bool", "0x20", "5"}, {
+} },
+{ {"Circulation", "bool", "0x40", "6"}, {
+} },
+{ {"HumidityCirculation", "bool", "0x80", "7"}, {
+} },
+{ {"LeftRight", "bool", "0x100", "8"}, {
+} },
+{ {"UpDown", "bool", "0x200", "9"}, {
+} },
+{ {"Quiet", "bool", "0x400", "10"}, {
+} },
+{ {"ExternalCirculation", "bool", "0x800", "11"}, {
+} }
+};
+const dotdot_bitmap UnifyFanControlZWaveSupportedFanMode("UnifyFanControlZWaveSupportedFanMode", "Unknown UnifyFanControlZWaveSupportedFanMode", UnifyFanControlZWaveSupportedFanMode_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> WindowCoveringConfigOrStatus_bitmap_data {
 { {"Operational", "bool", "0x1", "0"}, {

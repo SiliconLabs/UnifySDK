@@ -818,6 +818,20 @@ char *window_covering_window_covering_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get window_covering_window_covering_type enum representation from string. */
 uint32_t window_covering_window_covering_type_get_enum_value_number_c(const char *str);
+#define Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/** Get z_wave_fan_mode_enum string representation from enum. */
+char *z_wave_fan_mode_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get z_wave_fan_mode_enum enum representation from string. */
+uint32_t z_wave_fan_mode_enum_get_enum_value_number_c(const char *str);
+#define Z_WAVE_FAN_STATE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/** Get z_wave_fan_state_enum string representation from enum. */
+char *z_wave_fan_state_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get z_wave_fan_state_enum enum representation from string. */
+uint32_t z_wave_fan_state_enum_get_enum_value_number_c(const char *str);
 #define ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_ENUM_NAME_AVAILABLE 1
 
 /** Get zone_enroll_response_enroll_response_code string representation from enum. */

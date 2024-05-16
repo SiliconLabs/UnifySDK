@@ -6071,6 +6071,59 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
 );
 
 
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifyFanControl SetFanMode command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_fan_control_set_fan_mode_command(
+  
+  const uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UnifyFanControl SetFanMode command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_fan_control_set_fan_mode(
+  nlohmann::json &jsn,
+  ZWaveFanModeEnum &fan_mode
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifyFanControl TurnOff command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_fan_control_turn_off_command(
+  
+);
+
+
+
+
+/**
+ * @brief JSON parser for UnifyFanControl WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_fan_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_fan_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_fan_control_updated_state_t &new_updated_state
+);
+
+
 
 #endif  //DOTDOT_MQTT_COMMAND_HELPERS_HPP
 /** @} end dotdot_mqtt_command_helpers */

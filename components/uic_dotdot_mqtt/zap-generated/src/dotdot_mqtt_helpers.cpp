@@ -5117,6 +5117,114 @@ uint32_t window_covering_window_covering_type_get_enum_value_number(const std::s
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for ZWaveFanModeEnum
+const std::map<uint32_t, std::string> z_wave_fan_mode_enum_enum_id_to_string_map {
+  { 0, "Auto" },
+  { 1, "Low" },
+  { 2, "AutoHigh" },
+  { 3, "High" },
+  { 4, "AutoMedium" },
+  { 5, "Medium" },
+  { 6, "Circulation" },
+  { 7, "HumidityCirculation" },
+  { 8, "LeftRight" },
+  { 9, "UpDown" },
+  { 10, "Quiet" },
+  { 11, "ExternalCirculation" },
+};
+
+// String to enum map for ZWaveFanModeEnum
+const std::map<std::string, uint32_t> z_wave_fan_mode_enum_enum_string_to_id_map {
+  { "Auto", 0 },
+  { "Low", 1 },
+  { "AutoHigh", 2 },
+  { "High", 3 },
+  { "AutoMedium", 4 },
+  { "Medium", 5 },
+  { "Circulation", 6 },
+  { "HumidityCirculation", 7 },
+  { "LeftRight", 8 },
+  { "UpDown", 9 },
+  { "Quiet", 10 },
+  { "ExternalCirculation", 11 },
+};
+
+std::string z_wave_fan_mode_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = z_wave_fan_mode_enum_enum_id_to_string_map.find(value);
+  if (it != z_wave_fan_mode_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t z_wave_fan_mode_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = z_wave_fan_mode_enum_enum_string_to_id_map.find(str);
+  if (it != z_wave_fan_mode_enum_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for ZWaveFanStateEnum
+const std::map<uint32_t, std::string> z_wave_fan_state_enum_enum_id_to_string_map {
+  { 0, "Idle" },
+  { 1, "Running" },
+  { 2, "RunningHigh" },
+  { 3, "RunningMedium" },
+  { 4, "Circulation" },
+  { 5, "HumidityCirculation" },
+  { 6, "RightLeftCirculation" },
+  { 7, "UpDownCirculation" },
+  { 8, "QuietCirculation" },
+};
+
+// String to enum map for ZWaveFanStateEnum
+const std::map<std::string, uint32_t> z_wave_fan_state_enum_enum_string_to_id_map {
+  { "Idle", 0 },
+  { "Running", 1 },
+  { "RunningHigh", 2 },
+  { "RunningMedium", 3 },
+  { "Circulation", 4 },
+  { "HumidityCirculation", 5 },
+  { "RightLeftCirculation", 6 },
+  { "UpDownCirculation", 7 },
+  { "QuietCirculation", 8 },
+};
+
+std::string z_wave_fan_state_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = z_wave_fan_state_enum_enum_id_to_string_map.find(value);
+  if (it != z_wave_fan_state_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t z_wave_fan_state_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = z_wave_fan_state_enum_enum_string_to_id_map.find(str);
+  if (it != z_wave_fan_state_enum_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for ZoneEnrollResponseEnrollResponseCode
 const std::map<uint32_t, std::string> zone_enroll_response_enroll_response_code_enum_id_to_string_map {
   { 0, "Success" },
@@ -9908,6 +10016,27 @@ std::string get_enum_value_name(
   #endif
   }
 
+  if (64788 == cluster_id) {
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_mode instead of this: unify_fan_control_z_wave_fan_mode
+      return unify_fan_control_z_wave_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_supported_fan_mode instead of this: unify_fan_control_z_wave_supported_fan_mode
+      return unify_fan_control_z_wave_supported_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_state instead of this: unify_fan_control_z_wave_fan_state
+      return unify_fan_control_z_wave_fan_state_get_enum_value_name(value);
+    }
+  #endif
+  }
+
 
   std::string value_name;
   return value_name;
@@ -14376,6 +14505,27 @@ uint32_t get_enum_name_value(
   #endif
   }
 
+  if (64788 == cluster_id) {
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_mode instead of this: unify_fan_control_z_wave_fan_mode
+      return unify_fan_control_z_wave_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_supported_fan_mode instead of this: unify_fan_control_z_wave_supported_fan_mode
+      return unify_fan_control_z_wave_supported_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_state instead of this: unify_fan_control_z_wave_fan_state
+      return unify_fan_control_z_wave_fan_state_get_enum_value_number(name);
+    }
+  #endif
+  }
+
 
   // No known numeric value is set for this string.
   // Return UINT32_MAX to indicate an error.
@@ -15626,6 +15776,28 @@ char *window_covering_window_covering_type_get_enum_value_name_c(
 uint32_t window_covering_window_covering_type_get_enum_value_number_c(const char *str)
 {
   return window_covering_window_covering_type_get_enum_value_number(std::string(str));
+}
+char *z_wave_fan_mode_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", z_wave_fan_mode_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t z_wave_fan_mode_enum_get_enum_value_number_c(const char *str)
+{
+  return z_wave_fan_mode_enum_get_enum_value_number(std::string(str));
+}
+char *z_wave_fan_state_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", z_wave_fan_state_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t z_wave_fan_state_enum_get_enum_value_number_c(const char *str)
+{
+  return z_wave_fan_state_enum_get_enum_value_number(std::string(str));
 }
 char *zone_enroll_response_enroll_response_code_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

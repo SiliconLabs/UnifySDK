@@ -254,6 +254,10 @@
 #define DOTDOT_DESCRIPTOR_CLUSTER_ID ((dotdot_cluster_id_t)0xFD13)
 
 
+// Definitions for cluster: UnifyFanControl
+#define DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID ((dotdot_cluster_id_t)0xFD14)
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif

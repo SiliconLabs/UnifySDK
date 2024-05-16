@@ -2025,6 +2025,21 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "Unknown";
       }
       // clang-format off
+    case DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID:
+          return "ZWaveFanMode";
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID:
+          return "ZWaveSupportedFanMode";
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID:
+          return "ZWaveFanState";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
       // clang-format on
     default:
       return "Unknown";
@@ -4409,6 +4424,17 @@ dotdot_attribute_id_t
         return DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID;
       }
     break;
+    case DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID:
+      if (strcmp ("ZWaveFanMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveSupportedFanMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveFanState", attribute_name) == 0) {
+        return DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID;
+      }
+    break;
     default:
     return DOTDOT_INVALID_ATTRIBUTE_ID;
   }
@@ -6426,6 +6452,21 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_UNKNOWN;
       }
       // clang-format off
+    case DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
       // clang-format on
     default:
       return JSON_TYPE_UNKNOWN;
@@ -6772,6 +6813,15 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   }
 
   if (64787 == cluster_id) {
+  }
+
+  if (64788 == cluster_id) {
+    if (1 == attribute_id) {
+      return true;
+    }
+    if (3 == attribute_id) {
+      return true;
+    }
   }
 
   return false;

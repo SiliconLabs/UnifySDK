@@ -1664,6 +1664,36 @@ void uic_mqtt_dotdot_descriptor_publish_supported_generated_commands(
 );
 
 
+/**
+ * @brief Struct containing the list of commands for UnifyFanControl
+ */
+typedef struct _uic_mqtt_dotdot_unify_fan_control_supported_commands_ {
+  bool set_fan_mode;
+  bool turn_off;
+  bool write_attributes;
+} uic_mqtt_dotdot_unify_fan_control_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the UnifyFanControl cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyFanControl/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_fan_control_supported_commands_t *command_list
+);
+
+
 
 #ifdef __cplusplus
 }
