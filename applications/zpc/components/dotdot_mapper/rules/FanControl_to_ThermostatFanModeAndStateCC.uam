@@ -1,0 +1,94 @@
+def zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE 0x4402
+def zwTHERMOSTAT_FAN_MODE_SUPPORTED_FAN_MODE 0x4403
+
+def zwTHERMOSTAT_FAN_STATE 0x4502
+def zwTHERMOSTAT_FAN_OFF_FLAG 0x4504
+
+def zbZWAVE_FAN_MODE 0xFD140001
+def zbZWAVE_SUPPORTED_FAN_MODE 0xFD140002
+def zbZWAVE_FAN_STATE 0xFD140003
+
+def zbFAN_MODE 0x02020000
+
+def zwave_no_thermostat_fan_mode (e'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE == 0)
+
+// Unify Fan mode (ZWave) <-> FanMode cluster
+scope 20 chain_reaction(0) {
+  r'zbZWAVE_FAN_MODE =
+    if (zwave_no_thermostat_fan_mode) undefined
+    if (r'zbFAN_MODE == 5) 0
+    if (r'zbFAN_MODE == 1) 1
+    if (r'zbFAN_MODE == 2) 5
+    undefined
+  d'zbZWAVE_FAN_MODE =
+    if (zwave_no_thermostat_fan_mode) undefined
+    if (d'zbFAN_MODE == 5) 0
+    if (d'zbFAN_MODE == 1) 1
+    if (d'zbFAN_MODE == 2) 5
+    undefined
+
+   r'zwTHERMOSTAT_FAN_OFF_FLAG =
+      if (zwave_no_thermostat_fan_mode) undefined
+      if (r'zbFAN_MODE == 0) 1
+      0
+   d'zwTHERMOSTAT_FAN_OFF_FLAG =
+      if (zwave_no_thermostat_fan_mode) undefined
+      if (d'zbFAN_MODE == 0) 1
+      0
+
+  // Linking attributes zigbee -> zwave
+  r'zbFAN_MODE = 
+    if (zwave_no_thermostat_fan_mode) undefined
+    if (r'zbZWAVE_FAN_MODE == 0) 5
+    if (r'zbZWAVE_FAN_MODE == 1) 1
+    if (r'zbZWAVE_FAN_MODE == 2) 3
+    if (r'zbZWAVE_FAN_MODE == 3) 3
+    if (r'zbZWAVE_FAN_MODE == 4) 2
+    if (r'zbZWAVE_FAN_MODE == 5) 2
+    if (r'zwTHERMOSTAT_FAN_OFF_FLAG == 1) 4
+    if (r'zwTHERMOSTAT_FAN_OFF_FLAG == 0) 0
+    undefined
+
+  // Linking attributes zigbee -> zwave
+  d'zbFAN_MODE = 
+    if (zwave_no_thermostat_fan_mode) undefined
+    if (d'zbZWAVE_FAN_MODE == 0) 5
+    if (d'zbZWAVE_FAN_MODE == 1) 1
+    if (d'zbZWAVE_FAN_MODE == 2) 3
+    if (d'zbZWAVE_FAN_MODE == 3) 3
+    if (d'zbZWAVE_FAN_MODE == 4) 2
+    if (d'zbZWAVE_FAN_MODE == 5) 2
+    if (d'zwTHERMOSTAT_FAN_OFF_FLAG == 1) 4
+    if (d'zwTHERMOSTAT_FAN_OFF_FLAG == 0) 0
+    undefined
+}
+
+// Unify Fan mode (ZWave) <-> Attribute Store
+scope 25 chain_reaction(0) {
+  // Linking attributes zwave -> zigbee
+  r'zbZWAVE_FAN_MODE =
+    if (zwave_no_thermostat_fan_mode) undefined
+     r'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE
+  d'zbZWAVE_FAN_MODE =
+    if (zwave_no_thermostat_fan_mode) undefined
+     d'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE
+  
+
+  // Linking attributes zigbee -> zwave
+  r'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE = 
+    if (zwave_no_thermostat_fan_mode) undefined
+    r'zbZWAVE_FAN_MODE
+  d'zwTHERMOSTAT_FAN_MODE_CURRENT_FAN_MODE = 
+    if (zwave_no_thermostat_fan_mode) undefined
+    d'zbZWAVE_FAN_MODE
+
+  // Supported fan mode (read only)
+  r'zbZWAVE_SUPPORTED_FAN_MODE = 
+      if (zwave_no_thermostat_fan_mode) undefined
+      r'zwTHERMOSTAT_FAN_MODE_SUPPORTED_FAN_MODE
+
+  // Supported state(read only)
+  r'zbZWAVE_FAN_STATE = 
+      if (zwave_no_thermostat_fan_mode) undefined
+      r'zwTHERMOSTAT_FAN_STATE
+}
