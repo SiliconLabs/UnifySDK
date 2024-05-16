@@ -100,6 +100,8 @@ zcl_type_map = (function() {
         CredentialTypeEnum: 'enum8',
         DataOperationTypeEnum: 'enum8',
         CredentialRuleEnum: 'enum8',
+        ZWaveFanModeEnum: 'enum8',
+        ZWaveFanStateEnum: 'enum8',
         // zclType: 'uint8',
 
         BarrierControlSafetyStatus: 'map16',

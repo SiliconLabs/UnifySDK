@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!-- 
+Custom Fan Cluster for Unify to support ZWave Fan Control
+May be extended in the future to support other fan control protocols
+-->
+<zcl:cluster xmlns:zcl="http://zigbee.org/zcl/clusters"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:type="http://zigbee.org/zcl/types"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+  id="FD14" revision="1" name="UnifyFanControl">
+  <classification role="application" picsCode="FAN" primaryTransaction="1" />
+
+  <type:type short="ZWaveFanModeEnum" name="ZWaveFanModeEnum" id="1000" inheritsFrom="enum8">
+    <restriction>
+          <type:enumeration value="00" name="Auto" />
+          <type:enumeration value="01" name="Low" />
+          <type:enumeration value="02" name="AutoHigh" />
+          <type:enumeration value="03" name="High" />
+          <type:enumeration value="04" name="AutoMedium" />
+          <type:enumeration value="05" name="Medium" />
+          <type:enumeration value="06" name="Circulation" />
+          <type:enumeration value="07" name="HumidityCirculation" />
+          <type:enumeration value="08" name="LeftRight" />
+          <type:enumeration value="09" name="UpDown" />
+          <type:enumeration value="0A" name="Quiet" />
+          <type:enumeration value="0B" name="ExternalCirculation"/>
+    </restriction>
+  </type:type>
+  <type:type short="ZWaveFanStateEnum" name="ZWaveFanStateEnum" id="1001" inheritsFrom="enum8">
+      <restriction>
+            <type:enumeration value="00" name="Idle" />
+            <type:enumeration value="01" name="Running" />
+            <type:enumeration value="02" name="RunningHigh" />
+            <type:enumeration value="03" name="RunningMedium" />
+            <type:enumeration value="04" name="Circulation" />
+            <type:enumeration value="05" name="HumidityCirculation" />
+            <type:enumeration value="06" name="RightLeftCirculation" />
+            <type:enumeration value="07" name="UpDownCirculation" />
+            <type:enumeration value="08" name="QuietCirculation" />
+      </restriction>
+  </type:type>
+  <server>
+    <attributes>
+      <attribute id="0001" name="ZWaveFanMode" type="ZWaveFanModeEnum" writable="true" required="false" default="0"/>
+      <attribute id="0002" name="ZWaveSupportedFanMode" type="map16" default="0">
+        <bitmap>
+          <element name="Auto" type="bool" mask="01" />
+          <element name="Low" type="bool" mask="02" shiftRight="1" />
+          <element name="AutoHigh" type="bool" mask="04" shiftRight="2" />
+          <element name="High" type="bool" mask="08" shiftRight="3" />
+          <element name="AutoMedium" type="bool" mask="10" shiftRight="4" />
+          <element name="Medium" type="bool" mask="20" shiftRight="5" />
+          <element name="Circulation" type="bool" mask="40" shiftRight="6" />
+          <element name="HumidityCirculation" type="bool" mask="80" shiftRight="7" />
+          <element name="LeftRight" type="bool" mask="100" shiftRight="8" />
+          <element name="UpDown" type="bool" mask="200" shiftRight="9"/>
+          <element name="Quiet" type="bool" mask="400" shiftRight="10"/>
+          <element name="ExternalCirculation" type="bool" mask="800" shiftRight="11"/>
+        </bitmap>
+      </attribute>
+      <attribute id="0003" name="ZWaveFanState" type="ZWaveFanStateEnum" default="0"/>
+    </attributes>
+    <commands>
+      <command id="00" name="SetFanMode">
+        <fields>
+          <field name="FanMode" type="ZWaveFanModeEnum"/>
+        </fields>
+      </command>
+      <command id="01" name="TurnOff"/>
+    </commands>
+  </server>
+</zcl:cluster>
