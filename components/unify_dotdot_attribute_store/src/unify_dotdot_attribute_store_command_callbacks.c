@@ -20,6 +20,7 @@
 #include "unify_dotdot_attribute_store_command_callbacks_poll_control.h"
 #include "unify_dotdot_attribute_store_command_callbacks_thermostat.h"
 #include "unify_dotdot_attribute_store_command_callbacks_window_covering.h"
+#include "unify_dotdot_attribute_store_command_callbacks_zwave_fan_control.h"
 #include "unify_dotdot_attribute_store_configuration.h"
 #include "unify_dotdot_attribute_store_helpers.h"
 #include "unify_dotdot_defined_attribute_types.h"
@@ -44,6 +45,8 @@ sl_status_t unify_dotdot_attribute_store_command_callbacks_init()
   poll_control_cluster_mapper_init();
   thermostat_cluster_mapper_init();
   window_covering_cluster_mapper_init();
+
+  zwave_fan_control_cluster_mapper_init();
 
   return SL_STATUS_OK;
 }
