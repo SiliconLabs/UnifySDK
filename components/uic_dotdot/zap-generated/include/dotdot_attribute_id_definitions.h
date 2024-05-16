@@ -856,6 +856,10 @@ typedef enum {
 #define DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
 // Definitions for cluster: Descriptor
 #define DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+// Definitions for cluster: UnifyFanControl
+#define DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
 
 // clang-format on
 

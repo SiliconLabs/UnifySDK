@@ -77649,6 +77649,352 @@ bool dotdot_is_any_descriptor_writable_attribute_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id);
 
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyFanControl
+////////////////////////////////////////////////////////////////////////////////
+// UnifyFanControl ZWaveFanMode
+/**
+ * @brief Verifies if the DotDot UnifyFanControl - ZWaveFanMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ZWaveFanMode is supported
+ * @returns false if ZWaveFanMode is not supported
+ */
+bool dotdot_is_supported_unify_fan_control_z_wave_fan_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyFanControl - ZWaveFanMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ZWaveFanMode attribute
+ */
+ZWaveFanModeEnum dotdot_get_unify_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_z_wave_fan_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ZWaveFanModeEnum new_z_wave_fan_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyFanControl - ZWaveFanMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyFanControl ZWaveSupportedFanMode
+/**
+ * @brief Verifies if the DotDot UnifyFanControl - ZWaveSupportedFanMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ZWaveSupportedFanMode is supported
+ * @returns false if ZWaveSupportedFanMode is not supported
+ */
+bool dotdot_is_supported_unify_fan_control_z_wave_supported_fan_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyFanControl - ZWaveSupportedFanMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ZWaveSupportedFanMode attribute
+ */
+uint16_t dotdot_get_unify_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_z_wave_supported_fan_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_z_wave_supported_fan_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyFanControl - ZWaveSupportedFanMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_supported_fan_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_supported_fan_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_supported_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_supported_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyFanControl ZWaveFanState
+/**
+ * @brief Verifies if the DotDot UnifyFanControl - ZWaveFanState is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ZWaveFanState is supported
+ * @returns false if ZWaveFanState is not supported
+ */
+bool dotdot_is_supported_unify_fan_control_z_wave_fan_state (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyFanControl - ZWaveFanState attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ZWaveFanState attribute
+ */
+ZWaveFanStateEnum dotdot_get_unify_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyFanControl - ZWaveFanState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_z_wave_fan_state new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ZWaveFanStateEnum new_z_wave_fan_state
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyFanControl - ZWaveFanState
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_state_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyFanControl - ZWaveFanState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_state_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyFanControl - ZWaveFanState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any attribute for the UnifyFanControl
+ * Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_fan_control_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any writable attribute for the
+ * UnifyFanControl Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 writable attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_fan_control_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

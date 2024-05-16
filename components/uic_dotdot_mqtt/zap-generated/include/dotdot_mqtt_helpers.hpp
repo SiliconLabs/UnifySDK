@@ -1951,6 +1951,40 @@ std::string window_covering_window_covering_type_get_enum_value_name(
  */
 uint32_t window_covering_window_covering_type_get_enum_value_number(const std::string &str);
 
+#define Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ZWaveFanModeEnum enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string z_wave_fan_mode_enum_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ZWaveFanModeEnum enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t z_wave_fan_mode_enum_get_enum_value_number(const std::string &str);
+
+#define Z_WAVE_FAN_STATE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ZWaveFanStateEnum enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string z_wave_fan_state_enum_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ZWaveFanStateEnum enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t z_wave_fan_state_enum_get_enum_value_number(const std::string &str);
+
 #define ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_ENUM_NAME_AVAILABLE 1
 
 /**

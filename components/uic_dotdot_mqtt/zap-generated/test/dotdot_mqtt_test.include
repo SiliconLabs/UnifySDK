@@ -3020,6 +3020,30 @@ static sl_status_t uic_mqtt_dotdot_protocol_controller_network_management_write_
   return SL_STATUS_OK;
 }
 
+static unsigned int uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_count;
+static sl_status_t uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    ZWaveFanModeEnum fan_mode
+
+) {
+  uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_unify_fan_control_turn_off_callback_count;
+static sl_status_t uic_mqtt_dotdot_unify_fan_control_turn_off_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_unify_fan_control_turn_off_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
 static unsigned int set_all_callbacks()
 {
   unsigned int num_callbacks = 0;
@@ -3402,6 +3426,10 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_protocol_controller_network_management_write_callback_set(&uic_mqtt_dotdot_protocol_controller_network_management_write_callback_func);
   num_callbacks++;
+  uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_set(&uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_unify_fan_control_turn_off_callback_set(&uic_mqtt_dotdot_unify_fan_control_turn_off_callback_func);
+  num_callbacks++;
   return num_callbacks;
 }
 
@@ -3649,6 +3677,9 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_protocol_controller_network_management_write_callback_clear();
   uic_mqtt_dotdot_clear_protocol_controller_network_management_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_descriptor_write_attributes_callbacks();
+  uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_clear();
+  uic_mqtt_dotdot_unify_fan_control_turn_off_callback_clear();
+  uic_mqtt_dotdot_clear_unify_fan_control_write_attributes_callbacks();
 }
 
 static void reset_callback_counters()
@@ -3843,4 +3874,6 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_aox_locator_angle_report_callback_count = 0;
   uic_mqtt_dotdot_aox_locator_angle_correction_callback_count = 0;
   uic_mqtt_dotdot_protocol_controller_network_management_write_callback_count = 0;
+  uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_count = 0;
+  uic_mqtt_dotdot_unify_fan_control_turn_off_callback_count = 0;
 }

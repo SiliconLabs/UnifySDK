@@ -366,6 +366,11 @@ static uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callbac
 static uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback = nullptr;
 
 
+static uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback_t uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback = nullptr;
+static uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback_t uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback = nullptr;
+static uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback_t uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback = nullptr;
+
+
 
 // Callbacks setters
 
@@ -1872,6 +1877,27 @@ void uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback_set(const uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback_set(const uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback = callback;
+}
+
+void uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback = callback;
 }
 
 
@@ -23492,6 +23518,258 @@ sl_status_t uic_mqtt_dotdot_by_group_descriptor_init()
 
 
 
+
+// Callback function for incoming publications on ucl/by-group/+/UnifyFanControl/Commands/SetFanMode
+static void uic_mqtt_dotdot_on_by_group_unify_fan_control_set_fan_mode(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_unify_fan_control_set_fan_mode(
+          jsn,
+          fields.fan_mode
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyFanControl", "SetFanMode");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyFanControl", "SetFanMode", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyFanControl", "SetFanMode", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("FanMode") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifyFanControl::SetFanMode: Missing command-argument: FanMode\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UnifyFanControl",
+        "SetFanMode",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_unify_fan_control_set_fan_mode);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SetFanMode: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UnifyFanControl/Commands/TurnOff
+static void uic_mqtt_dotdot_on_by_group_unify_fan_control_turn_off(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback != nullptr) {
+
+    
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyFanControl", "TurnOff");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyFanControl", "TurnOff", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyFanControl", "TurnOff", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback(
+        group_id
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_fan_control_turn_off_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+
+      group_dispatch_callback(
+        group_id,
+        "UnifyFanControl",
+        "TurnOff",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_unify_fan_control_turn_off);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "TurnOff: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_by_group_unify_fan_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "UnifyFanControl",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_unify_fan_control_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "UnifyFanControl: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_unify_fan_control_state_t new_state = {};
+    uic_mqtt_dotdot_unify_fan_control_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_unify_fan_control_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyFanControl", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyFanControl", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyFanControl", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_unify_fan_control_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_unify_fan_control_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "UnifyFanControl/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_fan_control_WriteAttributes);
+  }
+  if (uic_mqtt_dotdot_by_group_unify_fan_control_set_fan_mode_callback) {
+    subscription_topic = topic_bygroup + "UnifyFanControl/Commands/SetFanMode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_fan_control_set_fan_mode);
+  }
+  if (uic_mqtt_dotdot_by_group_unify_fan_control_turn_off_callback) {
+    subscription_topic = topic_bygroup + "UnifyFanControl/Commands/TurnOff";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_fan_control_turn_off);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
 void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
 {
   // Check for uninitialized value in order to subscribe with on_group handlers
@@ -23772,6 +24050,10 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/AoXPositionEstimation/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_aox_position_estimation_WriteAttributes);
 
     uic_mqtt_subscribe("ucl/by-group/+/Descriptor/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_descriptor_WriteAttributes);
+
+    uic_mqtt_subscribe("ucl/by-group/+/UnifyFanControl/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_unify_fan_control_WriteAttributes);
+    uic_mqtt_subscribe("ucl/by-group/+/UnifyFanControl/Commands/SetFanMode", uic_mqtt_dotdot_on_by_group_unify_fan_control_set_fan_mode);
+    uic_mqtt_subscribe("ucl/by-group/+/UnifyFanControl/Commands/TurnOff", uic_mqtt_dotdot_on_by_group_unify_fan_control_turn_off);
 
   }
 

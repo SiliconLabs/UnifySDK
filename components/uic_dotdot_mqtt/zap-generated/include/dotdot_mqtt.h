@@ -40444,6 +40444,320 @@ void uic_mqtt_dotdot_descriptor_publish_supported_commands(
 void uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the unify_fan_control cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    ZWaveFanModeEnum fan_mode
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+
+typedef struct {
+  uint8_t z_wave_fan_mode;
+  uint16_t z_wave_supported_fan_mode;
+  uint8_t z_wave_fan_state;
+} uic_mqtt_dotdot_unify_fan_control_state_t;
+
+typedef struct {
+  bool z_wave_fan_mode;
+  bool z_wave_supported_fan_mode;
+  bool z_wave_fan_state;
+} uic_mqtt_dotdot_unify_fan_control_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_unify_fan_control_state_t,
+    uic_mqtt_dotdot_unify_fan_control_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_unify_fan_control_updated_state_t
+);
+
+
+/**
+ * @brief Command fields for UnifyFanControl/SetFanMode
+ */
+typedef struct {
+  ZWaveFanModeEnum fan_mode;
+} uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t;
+
+
+/**
+ * @brief Setup callback to be called when a
+ * UnifyFanControl/Commands/set_fan_mode is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_set(const uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UnifyFanControl/Commands/set_fan_mode is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_unset(const uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UnifyFanControl/Commands/set_fan_mode is received.
+ */
+void uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UnifyFanControl/GeneratedCommands/set_fan_mode is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_generated_set_fan_mode_callback_set(const uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UnifyFanControl/GeneratedCommands/set_fan_mode is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_generated_set_fan_mode_callback_unset(const uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UnifyFanControl/GeneratedCommands/set_fan_mode is received.
+ */
+void uic_mqtt_dotdot_unify_fan_control_generated_set_fan_mode_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UnifyFanControl/Commands/turn_off is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_turn_off_callback_set(const uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UnifyFanControl/Commands/turn_off is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_turn_off_callback_unset(const uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UnifyFanControl/Commands/turn_off is received.
+ */
+void uic_mqtt_dotdot_unify_fan_control_turn_off_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UnifyFanControl/GeneratedCommands/turn_off is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_generated_turn_off_callback_set(const uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UnifyFanControl/GeneratedCommands/turn_off is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_fan_control_generated_turn_off_callback_unset(const uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UnifyFanControl/GeneratedCommands/turn_off is received.
+ */
+void uic_mqtt_dotdot_unify_fan_control_generated_turn_off_callback_clear();
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/unify_fan_control/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_unify_fan_control_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/unify_fan_control/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_unify_fan_control_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/unify_fan_control/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_unify_fan_control_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/unify_fan_control/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_unify_fan_control_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/unify_fan_control/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_unify_fan_control_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/unify_fan_control/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_unify_fan_control_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; UnifyFanControl/Attributes/ZWaveFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_z_wave_fan_mode_publish(
+  const char *base_topic,
+  ZWaveFanModeEnum value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifyFanControl/Attributes/ZWaveFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_z_wave_fan_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifyFanControl/Attributes/ZWaveSupportedFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_supported_fan_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_z_wave_supported_fan_mode_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifyFanControl/Attributes/ZWaveSupportedFanMode
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_supported_fan_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_z_wave_supported_fan_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifyFanControl/Attributes/ZWaveFanState
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_state
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_z_wave_fan_state_publish(
+  const char *base_topic,
+  ZWaveFanStateEnum value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifyFanControl/Attributes/ZWaveFanState
+ *
+ * @param base_topic    topic prefix to publish, /z_wave_fan_state
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_z_wave_fan_state_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the UnifyFanControl/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UnifyFanControl/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to UnifyFanControl/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UnifyFanControl/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_unify_fan_control_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the UnifyFanControl Cluster
+ *
+ * This function will iterate over all Commands in the UnifyFanControl Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the UnifyFanControl Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_unify_fan_control_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 
 /**
  * @brief Publish the SupportedCommands for UNID/EndPoint

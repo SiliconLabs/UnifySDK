@@ -23,6 +23,7 @@ target_add_unittest(
   unify_dotdot_attribute_store_command_mapper_poll_control_test.c
   unify_dotdot_attribute_store_command_mapper_thermostat_test.c
   unify_dotdot_attribute_store_command_mapper_window_covering_test.c
+  unify_dotdot_attribute_store_command_mapper_zwave_fan_control_test.c
 
   DEPENDS
   uic_dotdot_mqtt_mock
