@@ -314,6 +314,12 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_MODE_OFF_FLAG, "Thermostat Fan Off Flag",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE },
 
   /////////////////////////////////////////////////////////////////////
+  //         Thermostat Fan State Command Class attributes
+  /////////////////////////////////////////////////////////////////////
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_STATE_VERSION,   "Thermostat Fan State Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_FAN_STATE_FAN_OPERATING_STATE,   "Thermostat Fan Operating State",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
+
+  /////////////////////////////////////////////////////////////////////
   //         Supervision Command Class attributes
   /////////////////////////////////////////////////////////////////////
   {ATTRIBUTE_COMMAND_CLASS_SUPERVISION_VERSION,   "Supervision Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
