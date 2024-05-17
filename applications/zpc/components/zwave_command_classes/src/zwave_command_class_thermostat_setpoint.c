@@ -34,7 +34,79 @@
 // Log define
 #define LOG_TAG "zwave_command_class_thermostat_setpoint"
 
+// Max values in Thermostat Setpoint Supported Report values
+#define MAX_SUPPORTED_SETPOINT_MODES 16
+
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_##type
+
+static bool is_thermostat_setpoint_mode_compatible_with_version(
+  uint8_t supported_setpoint_mode_type, zwave_cc_version_t current_version)
+{
+  bool compatibility = false;
+
+  switch (current_version) {
+    case 1:
+      compatibility = (supported_setpoint_mode_type <= 0x0A);
+      break;
+    case 2:
+      compatibility = (supported_setpoint_mode_type <= 0x0D);
+      break;
+    case 3:
+      compatibility = (supported_setpoint_mode_type <= 0x0F);
+      break;
+    default:
+      compatibility = false;
+  }
+
+  if (!compatibility) {
+    sl_log_warning(LOG_TAG,
+                   "Thermostat SetPoint mode %#04x is not compatible with "
+                   "Thermostat SetPoint Version %d",
+                   supported_setpoint_mode_type,
+                   current_version);
+  }
+
+  return compatibility;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute creation functions
+///////////////////////////////////////////////////////////////////////////////
+static attribute_store_node_t
+  zwave_command_class_thermostat_setpoint_create_type(
+    attribute_store_node_t endpoint_node, uint8_t type)
+{
+  zwave_cc_version_t current_version;
+  attribute_store_get_child_reported(endpoint_node,
+                                     ATTRIBUTE(VERSION),
+                                     &current_version,
+                                     sizeof(current_version));
+
+  // Check compatibility
+  if (!is_thermostat_setpoint_mode_compatible_with_version(type,
+                                                           current_version)) {
+    return ATTRIBUTE_STORE_INVALID_NODE;
+  }
+
+  // Do we already have the node ?
+  attribute_store_node_t type_node = attribute_store_emplace(endpoint_node,
+                                                             ATTRIBUTE(TYPE),
+                                                             &type,
+                                                             sizeof(type));
+
+  // Add the six other nodes under the type.
+  const attribute_store_type_t additional_nodes[]
+    = {ATTRIBUTE(VALUE),
+       ATTRIBUTE(VALUE_SCALE),
+       ATTRIBUTE(MIN_VALUE),
+       ATTRIBUTE(MIN_VALUE_SCALE),
+       ATTRIBUTE(MAX_VALUE),
+       ATTRIBUTE(MAX_VALUE_SCALE)};
+  attribute_store_add_if_missing(type_node,
+                                 additional_nodes,
+                                 COUNT_OF(additional_nodes));
+  return type_node;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
@@ -154,9 +226,136 @@ static int32_t thermostat_setpoint_get_valid_desired_setpoint_value(
   return value_to_set;
 }
 
+bool use_b_interpretation(attribute_store_node_t supported_setpoint_types_node)
+{
+  uint8_t use_b_interpretation = 0;
+  attribute_store_get_child_reported(supported_setpoint_types_node,
+                                     ATTRIBUTE(USE_B_INTERPRETATION),
+                                     &use_b_interpretation,
+                                     sizeof(use_b_interpretation));
+
+  return use_b_interpretation > 0;
+}
+
+// Remove all ATTRIBUTE(TYPE) from attribute store
+void remove_all_thermostat_setpoint_type_attributes(
+  attribute_store_node_t endpoint_node)
+{
+  attribute_store_node_t type_node;
+  do {
+    type_node = attribute_store_get_node_child_by_type(endpoint_node,
+                                                       ATTRIBUTE(TYPE),
+                                                       0);
+    attribute_store_delete_node(type_node);
+  } while (type_node != ATTRIBUTE_STORE_INVALID_NODE);
+}
+
+// Create ATTRIBUTE(TYPE) based on bitmask in supported_types
+// This function will also check version
+void create_all_supported_humidity_setpoint_type(
+  attribute_store_node_t endpoint_node,
+  uint32_t supported_types,
+  bool using_b_interpretation)
+{
+  // Contains current bit tested
+  uint32_t setpoint_mode_current_bit = 0x0;
+  // Start with 1 since bit 0 is N/A
+  for (uint8_t i = 1; i < MAX_SUPPORTED_SETPOINT_MODES; i++) {
+    setpoint_mode_current_bit = 1 << i;
+    setpoint_mode_current_bit &= supported_types;
+    uint8_t current_type;
+
+    // This bit is marked as not supported so we continue
+    if (setpoint_mode_current_bit == 0) {
+      continue;
+      // THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1 && THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_HEATING_1
+      // are the same interpretation.
+    } else if (i <= THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_COOLING_1
+               || using_b_interpretation) {
+      current_type = i;
+    } else {  // Shift 4 for standard interpretation for all values after 0x02
+      current_type = i + 4;
+    }
+
+    // Those values are undefined so we ignore them
+    if (current_type >= THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_NOT_SUPPORTED1
+        && current_type
+             <= THERMOSTAT_SETPOINT_REPORT_SETPOINT_TYPE_NOT_SUPPORTED4) {
+      continue;
+    }
+
+    // If we are here that means we want to create a setpoint type
+    zwave_command_class_thermostat_setpoint_create_type(endpoint_node,
+                                                        current_type);
+  }
+}
+
+sl_status_t
+  create_setpoint_type_attributes(attribute_store_node_t endpoint_node)
+{
+  attribute_store_node_t supported_setpoint_types_node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(SUPPORTED_SETPOINT_TYPES));
+
+  // We might not be ready yet, no worries
+  if (supported_setpoint_types_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    return SL_STATUS_IS_WAITING;
+  }
+
+  // Reported bitmask
+  uint32_t supported_setpoint_mode_bitmask;
+  sl_status_t status
+    = attribute_store_get_reported(supported_setpoint_types_node,
+                                   &supported_setpoint_mode_bitmask,
+                                   sizeof(supported_setpoint_mode_bitmask));
+
+  // We might not be ready yet, no worries
+  if (status != SL_STATUS_OK) {
+    return SL_STATUS_IS_WAITING;
+  }
+
+  // First remove all existing type node
+  // This is done to easily update the bitmask or bitmask interpretation so
+  // we don't have any leftovers.
+  remove_all_thermostat_setpoint_type_attributes(endpoint_node);
+
+  // Check if we need to use B Interpretation
+  const bool using_b_interpretation
+    = use_b_interpretation(supported_setpoint_types_node);
+  // Then create attributed based on supported types
+  create_all_supported_humidity_setpoint_type(endpoint_node,
+                                              supported_setpoint_mode_bitmask,
+                                              using_b_interpretation);
+  return SL_STATUS_OK;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute Callback functions
 ///////////////////////////////////////////////////////////////////////////////
+static void
+  zwave_command_class_thermostat_setpoint_on_b_interpretation_attribute_update(
+    attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_ENDPOINT_ID);
+
+  if (endpoint_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    sl_log_warning(LOG_TAG,
+                   "Can't get endpoint node associated with b interpretation "
+                   "flag. Aborting generation.");
+    return;
+  }
+
+  // Might fail if some attribute are not ready yet and it's ok, we'll try that later
+  create_setpoint_type_attributes(endpoint_node);
+}
+
 static void zwave_command_class_thermostat_setpoint_on_version_attribute_update(
   attribute_store_node_t updated_node, attribute_store_change_t change)
 {
@@ -193,36 +392,32 @@ static void zwave_command_class_thermostat_setpoint_on_version_attribute_update(
   // Let the rest of the command class perform the job.
   attribute_store_type_t supported_sensor_types[]
     = {ATTRIBUTE(SUPPORTED_SETPOINT_TYPES)};
+
   attribute_store_add_if_missing(endpoint_node,
                                  supported_sensor_types,
                                  COUNT_OF(supported_sensor_types));
-}
 
-///////////////////////////////////////////////////////////////////////////////
-// Attribute creation functions
-///////////////////////////////////////////////////////////////////////////////
-static attribute_store_node_t
-  zwave_command_class_thermostat_setpoint_create_type(
-    attribute_store_node_t endpoint_node, uint8_t type)
-{
-  // Do we already have the node ?
-  attribute_store_node_t type_node = attribute_store_emplace(endpoint_node,
-                                                             ATTRIBUTE(TYPE),
-                                                             &type,
-                                                             sizeof(type));
+  // Create B interpretation flag and set default value
+  // It is located underneath ATTRIBUTE(SUPPORTED_SETPOINT_TYPES)
+  attribute_store_type_t supported_node
+    = attribute_store_get_node_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(SUPPORTED_SETPOINT_TYPES),
+      0);
 
-  // Add the six other nodes under the type.
-  const attribute_store_type_t additional_nodes[]
-    = {ATTRIBUTE(VALUE),
-       ATTRIBUTE(VALUE_SCALE),
-       ATTRIBUTE(MIN_VALUE),
-       ATTRIBUTE(MIN_VALUE_SCALE),
-       ATTRIBUTE(MAX_VALUE),
-       ATTRIBUTE(MAX_VALUE_SCALE)};
-  attribute_store_add_if_missing(type_node,
-                                 additional_nodes,
-                                 COUNT_OF(additional_nodes));
-  return type_node;
+  // Create the attribute and set default value if not already there
+  if (attribute_store_get_node_child_by_type(supported_node,
+                                             ATTRIBUTE(USE_B_INTERPRETATION),
+                                             0)
+      == ATTRIBUTE_STORE_INVALID_NODE) {
+    // Default value for b interpretation (off)
+    uint8_t default_b_interpretation_value = 0;
+    // Will create the node if not existant
+    attribute_store_set_child_reported(supported_node,
+                                       ATTRIBUTE(USE_B_INTERPRETATION),
+                                       &default_b_interpretation_value,
+                                       sizeof(default_b_interpretation_value));
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -468,29 +663,27 @@ static sl_status_t
       endpoint_node,
       ATTRIBUTE(SUPPORTED_SETPOINT_TYPES));
 
-  attribute_store_set_reported(supported_bitmask_node,
-                               &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
-                               frame_length - SUPPORTED_REPORT_BITMASK_INDEX);
+  uint32_t supported_setpoint_mode_bits = 0x0000;
+  uint8_t bitmask_length                = frame_length - 2;
 
-  // Now create a type attribute for each supported type
-  for (uint8_t byte = 0; byte < frame_length - SUPPORTED_REPORT_BITMASK_INDEX;
-       byte++) {
-    for (uint8_t bit = 0; bit < 8; bit++) {
-      if (frame_data[SUPPORTED_REPORT_BITMASK_INDEX + byte] & (1 << bit)) {
-        // This type is supported.
-        uint8_t type = byte * 8 + bit;
-        if (type > 2) {
-          // Use Bit Interpretation A see Thermostat Setpoint Command Class in
-          // Z-Wave Application Command Class Specification
-          type += 4;
-        }
-        zwave_command_class_thermostat_setpoint_create_type(endpoint_node,
-                                                            type);
-      }
-    }
+  // Since we are using uint32_t we can't have more that 4 bit mask
+  if (bitmask_length > 4) {
+    sl_log_error(
+      LOG_TAG,
+      "Supported Thermostat SetPoint type Bit Mask length is not supported\n");
+    return SL_STATUS_FAIL;
   }
 
-  return SL_STATUS_OK;
+  for (int i = bitmask_length; i > 0; i--) {
+    supported_setpoint_mode_bits
+      = (supported_setpoint_mode_bits << 8) | frame_data[1 + i];
+  }
+
+  attribute_store_set_reported(supported_bitmask_node,
+                               &supported_setpoint_mode_bits,
+                               sizeof(supported_setpoint_mode_bits));
+
+  return create_setpoint_type_attributes(endpoint_node);
 }
 
 static sl_status_t
@@ -521,8 +714,9 @@ static sl_status_t
   if (type_node == ATTRIBUTE_STORE_INVALID_NODE) {
     // Hmm it seems that it's a type that we don't know of.
     // Let's be nice and create it.
-    zwave_command_class_thermostat_setpoint_create_type(endpoint_node,
-                                                        received_setpoint_type);
+    zwave_command_class_thermostat_setpoint_create_type(
+      endpoint_node,
+      received_setpoint_type);  // Force version 3 to have max compatibility
   }
 
   // Save the Min value
@@ -674,8 +868,11 @@ sl_status_t zwave_command_class_thermostat_setpoint_init()
 
   // Listening for supporting nodes
   attribute_store_register_callback_by_type(
-    zwave_command_class_thermostat_setpoint_on_version_attribute_update,
+    &zwave_command_class_thermostat_setpoint_on_version_attribute_update,
     ATTRIBUTE(VERSION));
+  attribute_store_register_callback_by_type(
+    &zwave_command_class_thermostat_setpoint_on_b_interpretation_attribute_update,
+    ATTRIBUTE(USE_B_INTERPRETATION));
 
   // Register Thermostat Setpoint CC handler to the Z-Wave CC framework
   zwave_command_handler_t handler = {};
@@ -687,9 +884,8 @@ sl_status_t zwave_command_class_thermostat_setpoint_init()
   handler.manual_security_validation = false;
   handler.command_class_name         = "Thermostat Setpoint";
   handler.comments                   = "Partial Control: <br>"
-                                       "1. No discovery of ambiguous types in v1-v2 <br>"
-                                       "2. Only a few setpoints can be configured. <br>"
-                                       "3. Precision/size fields in the set are determined <br>"
+                                       "1. Only a few setpoints can be configured. <br>"
+                                       "2. Precision/size fields in the set are determined <br>"
                                        "automatically by the controller. ";
 
   zwave_command_handler_register_handler(handler);
