@@ -3649,6 +3649,7 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_protocol_controller_network_management_write_callback_clear();
   uic_mqtt_dotdot_clear_protocol_controller_network_management_write_attributes_callbacks();
   uic_mqtt_dotdot_clear_descriptor_write_attributes_callbacks();
+  uic_mqtt_dotdot_clear_unify_thermostat_write_attributes_callbacks();
 }
 
 static void reset_callback_counters()

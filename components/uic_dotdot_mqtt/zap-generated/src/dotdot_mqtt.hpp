@@ -367,6 +367,13 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_descriptor_init();
 
+/**
+ * @brief Initialize UnifyThermostat dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_unify_thermostat_init();
+
 
 
 // clang-format on
@@ -5052,6 +5059,27 @@ void uic_mqtt_dotdot_on_descriptor_WriteAttributes(
   const size_t message_length);
 
 
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t> & get_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyThermostat/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_thermostat_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
 
 
 // All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
@@ -5890,6 +5918,42 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap TstatScheduleMode("TstatScheduleMode", "map8", TstatScheduleMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UnifyThermostatSupportedThermostatMode_bitmap_data {
+{ {"Off", "bool", "0x1", "0"}, {
+} },
+{ {"Heat", "bool", "0x2", "1"}, {
+} },
+{ {"Cool", "bool", "0x4", "2"}, {
+} },
+{ {"Auto", "bool", "0x8", "3"}, {
+} },
+{ {"Auxiliary", "bool", "0x10", "4"}, {
+} },
+{ {"Resume", "bool", "0x20", "5"}, {
+} },
+{ {"Fan", "bool", "0x40", "6"}, {
+} },
+{ {"Furnace", "bool", "0x80", "7"}, {
+} },
+{ {"Dry", "bool", "0x100", "8"}, {
+} },
+{ {"Moist", "bool", "0x200", "9"}, {
+} },
+{ {"AutoChangeover", "bool", "0x400", "10"}, {
+} },
+{ {"EnergyHeat", "bool", "0x800", "11"}, {
+} },
+{ {"EnergyCool", "bool", "0x1000", "12"}, {
+} },
+{ {"Away", "bool", "0x2000", "13"}, {
+} },
+{ {"FullPower", "bool", "0x4000", "14"}, {
+} },
+{ {"ManufacturerSpecific", "bool", "0x8000", "15"}, {
+} }
+};
+const dotdot_bitmap UnifyThermostatSupportedThermostatMode("UnifyThermostatSupportedThermostatMode", "Unknown UnifyThermostatSupportedThermostatMode", UnifyThermostatSupportedThermostatMode_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> WindowCoveringConfigOrStatus_bitmap_data {
 { {"Operational", "bool", "0x1", "0"}, {
