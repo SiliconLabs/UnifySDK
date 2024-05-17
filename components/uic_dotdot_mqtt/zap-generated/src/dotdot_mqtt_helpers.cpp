@@ -5064,6 +5064,71 @@ uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &s
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for UnifyThermostatThermostatMode
+const std::map<uint32_t, std::string> unify_thermostat_thermostat_mode_enum_id_to_string_map {
+  { 0, "Off" },
+  { 1, "Heat" },
+  { 2, "Cool" },
+  { 3, "Auto" },
+  { 4, "Auxiliary" },
+  { 5, "Resume" },
+  { 6, "Fan" },
+  { 7, "Furnace" },
+  { 8, "Dry" },
+  { 9, "Moist" },
+  { 10, "AutoChangeover" },
+  { 11, "EnergyHeat" },
+  { 12, "EnergyCool" },
+  { 13, "Away" },
+  { 15, "FullPower" },
+  { 31, "ManufacturerSpecific" },
+};
+
+// String to enum map for UnifyThermostatThermostatMode
+const std::map<std::string, uint32_t> unify_thermostat_thermostat_mode_enum_string_to_id_map {
+  { "Off", 0 },
+  { "Heat", 1 },
+  { "Cool", 2 },
+  { "Auto", 3 },
+  { "Auxiliary", 4 },
+  { "Resume", 5 },
+  { "Fan", 6 },
+  { "Furnace", 7 },
+  { "Dry", 8 },
+  { "Moist", 9 },
+  { "AutoChangeover", 10 },
+  { "EnergyHeat", 11 },
+  { "EnergyCool", 12 },
+  { "Away", 13 },
+  { "FullPower", 15 },
+  { "ManufacturerSpecific", 31 },
+};
+
+std::string unify_thermostat_thermostat_mode_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = unify_thermostat_thermostat_mode_enum_id_to_string_map.find(value);
+  if (it != unify_thermostat_thermostat_mode_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t unify_thermostat_thermostat_mode_get_enum_value_number(const std::string &str)
+{
+  auto it = unify_thermostat_thermostat_mode_enum_string_to_id_map.find(str);
+  if (it != unify_thermostat_thermostat_mode_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for WindowCoveringWindowCoveringType
 const std::map<uint32_t, std::string> window_covering_window_covering_type_enum_id_to_string_map {
   { 0, "Rollershade" },
@@ -9908,6 +9973,21 @@ std::string get_enum_value_name(
   #endif
   }
 
+  if (64789 == cluster_id) {
+  #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatthermostat_mode instead of this: unify_thermostat_thermostat_mode
+      return unify_thermostat_thermostat_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatsupported_thermostat_mode instead of this: unify_thermostat_supported_thermostat_mode
+      return unify_thermostat_supported_thermostat_mode_get_enum_value_name(value);
+    }
+  #endif
+  }
+
 
   std::string value_name;
   return value_name;
@@ -14376,6 +14456,21 @@ uint32_t get_enum_name_value(
   #endif
   }
 
+  if (64789 == cluster_id) {
+  #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatthermostat_mode instead of this: unify_thermostat_thermostat_mode
+      return unify_thermostat_thermostat_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatsupported_thermostat_mode instead of this: unify_thermostat_supported_thermostat_mode
+      return unify_thermostat_supported_thermostat_mode_get_enum_value_number(name);
+    }
+  #endif
+  }
+
 
   // No known numeric value is set for this string.
   // Return UINT32_MAX to indicate an error.
@@ -15615,6 +15710,17 @@ char *tx_report_transmission_speed_get_enum_value_name_c(
 uint32_t tx_report_transmission_speed_get_enum_value_number_c(const char *str)
 {
   return tx_report_transmission_speed_get_enum_value_number(std::string(str));
+}
+char *unify_thermostat_thermostat_mode_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", unify_thermostat_thermostat_mode_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t unify_thermostat_thermostat_mode_get_enum_value_number_c(const char *str)
+{
+  return unify_thermostat_thermostat_mode_get_enum_value_number(std::string(str));
 }
 char *window_covering_window_covering_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

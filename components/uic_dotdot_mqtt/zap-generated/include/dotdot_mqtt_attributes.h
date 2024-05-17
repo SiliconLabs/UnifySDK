@@ -5134,6 +5134,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_descriptor_attribute_device_type_list_call
   size_t device_type_list_count,
   const DeviceTypeStruct* device_type_list
 );
+// Callback types used by the unify_thermostat cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_attribute_thermostat_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t thermostat_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_attribute_supported_thermostat_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t supported_thermostat_mode
+);
 
 #ifdef __cplusplus
 extern "C" {
@@ -9856,6 +9871,26 @@ sl_status_t uic_mqtt_dotdot_descriptor_attributes_init();
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_set(const uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the UnifyThermostat cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_unify_thermostat_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * UnifyThermostat/Attributes/thermostat_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_thermostat_attribute_thermostat_mode_callback_set(const uic_mqtt_dotdot_unify_thermostat_attribute_thermostat_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyThermostat/Attributes/supported_thermostat_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_thermostat_attribute_supported_thermostat_mode_callback_set(const uic_mqtt_dotdot_unify_thermostat_attribute_supported_thermostat_mode_callback_t callback);
 
 
 #ifdef __cplusplus

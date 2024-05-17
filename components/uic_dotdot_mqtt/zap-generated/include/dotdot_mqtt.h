@@ -40444,6 +40444,189 @@ void uic_mqtt_dotdot_descriptor_publish_supported_commands(
 void uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the unify_thermostat cluster
+
+typedef struct {
+  uint8_t thermostat_mode;
+  uint16_t supported_thermostat_mode;
+} uic_mqtt_dotdot_unify_thermostat_state_t;
+
+typedef struct {
+  bool thermostat_mode;
+  bool supported_thermostat_mode;
+} uic_mqtt_dotdot_unify_thermostat_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_unify_thermostat_state_t,
+    uic_mqtt_dotdot_unify_thermostat_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_unify_thermostat_updated_state_t
+);
+
+
+
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/unify_thermostat/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_unify_thermostat_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/unify_thermostat/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_unify_thermostat_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/unify_thermostat/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_unify_thermostat_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/unify_thermostat/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_unify_thermostat_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/unify_thermostat/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_unify_thermostat_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/unify_thermostat/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_unify_thermostat_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; UnifyThermostat/Attributes/ThermostatMode
+ *
+ * @param base_topic    topic prefix to publish, /thermostat_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_thermostat_thermostat_mode_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifyThermostat/Attributes/ThermostatMode
+ *
+ * @param base_topic    topic prefix to publish, /thermostat_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_thermostat_thermostat_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifyThermostat/Attributes/SupportedThermostatMode
+ *
+ * @param base_topic    topic prefix to publish, /supported_thermostat_mode
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifyThermostat/Attributes/SupportedThermostatMode
+ *
+ * @param base_topic    topic prefix to publish, /supported_thermostat_mode
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the UnifyThermostat/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UnifyThermostat/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_unify_thermostat_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to UnifyThermostat/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UnifyThermostat/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_unify_thermostat_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the UnifyThermostat Cluster
+ *
+ * This function will iterate over all Commands in the UnifyThermostat Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_unify_thermostat_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the UnifyThermostat Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_unify_thermostat_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 
 /**
  * @brief Publish the SupportedCommands for UNID/EndPoint

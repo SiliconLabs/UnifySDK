@@ -94739,6 +94739,340 @@ sl_status_t uic_mqtt_dotdot_descriptor_init()
   return SL_STATUS_OK;
 }
 
+// Callbacks pointers
+static std::set<uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t> uic_mqtt_dotdot_unify_thermostat_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t> uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback;
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_set_unify_thermostat_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_thermostat_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_unify_thermostat_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_thermostat_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_unify_thermostat_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_unify_thermostat_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t>& get_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_unify_thermostat_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_unify_thermostat_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_unify_thermostat_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_unify_thermostat_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UnifyThermostat/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_unify_thermostat_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_unify_thermostat_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_thermostat_state_t new_state = {};
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_unify_thermostat_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyThermostat", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyThermostat", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyThermostat", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_unify_thermostat_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_unify_thermostat_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_unify_thermostat_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.thermostat_mode = true;
+      force_update.supported_thermostat_mode = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"ThermostatMode", &force_update.thermostat_mode },
+        {"SupportedThermostatMode", &force_update.supported_thermostat_mode },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "UnifyThermostat/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_unify_thermostat_thermostat_mode_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+  jsn["value"] = unify_thermostat_thermostat_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for UNIFY_THERMOSTAT_THERMOSTAT_MODE. Using number instead.");
+  jsn["value"] = static_cast<UnifyThermostatThermostatMode>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyThermostat/Attributes/ThermostatMode", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyThermostat/Attributes/ThermostatMode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_thermostat_thermostat_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyThermostat/Attributes/ThermostatMode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UnifyThermostatSupportedThermostatMode.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyThermostat/Attributes/SupportedThermostatMode", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UnifyThermostat/Attributes/SupportedThermostatMode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyThermostat/Attributes/SupportedThermostatMode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_unify_thermostat_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_unify_thermostat_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UnifyThermostat/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_unify_thermostat_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UnifyThermostat/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_unify_thermostat_force_read_attributes);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_unify_thermostat_attributes_init();
+
+  uic_mqtt_dotdot_by_group_unify_thermostat_init();
+
+  return SL_STATUS_OK;
+}
+
 
 sl_status_t uic_mqtt_dotdot_init() {
 
@@ -94952,6 +95286,10 @@ sl_status_t uic_mqtt_dotdot_init() {
     status_flag = uic_mqtt_dotdot_descriptor_init();
   }
 
+  if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_unify_thermostat_init();
+  }
+
 
   return status_flag;
 }
@@ -95013,6 +95351,7 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_descriptor_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_unify_thermostat_publish_supported_commands(unid, endpoint_id);
 }
 
 void uic_mqtt_dotdot_publish_empty_supported_commands(
@@ -95071,6 +95410,7 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_unify_thermostat_publish_empty_supported_commands(unid, endpoint_id);
 }
 
 // Publishing Cluster Revision for Basic Cluster
@@ -108524,6 +108864,154 @@ void uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(
   std::string topic = "ucl/by-unid/" + std::string(unid);
   topic +=  "/ep"+ std::to_string(endpoint_id);
   topic +=  "/Descriptor/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
+// Publishing Cluster Revision for UnifyThermostat Cluster
+void uic_mqtt_dotdot_unify_thermostat_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/UnifyThermostat/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for UnifyThermostat Cluster
+void uic_mqtt_dotdot_unify_thermostat_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/UnifyThermostat/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+
+static inline bool uic_mqtt_dotdot_unify_thermostat_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_unify_thermostat_write_attributes_callback) {
+    uic_mqtt_dotdot_unify_thermostat_state_t unify_thermostat_new_state = {};
+    uic_mqtt_dotdot_unify_thermostat_updated_state_t unify_thermostat_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          unify_thermostat_new_state,
+          unify_thermostat_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_unify_thermostat_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback) {
+    uic_mqtt_dotdot_unify_thermostat_updated_state_t unify_thermostat_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          unify_thermostat_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for UnifyThermostat Cluster
+void uic_mqtt_dotdot_unify_thermostat_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_unify_thermostat_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_unify_thermostat_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UnifyThermostat/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/UnifyThermostat/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for UnifyThermostat Cluster
+void uic_mqtt_dotdot_unify_thermostat_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UnifyThermostat/SupportedCommands";
 
   if (uic_mqtt_count_topics(topic.c_str()) > 0) {
     uic_mqtt_publish(topic.c_str(),

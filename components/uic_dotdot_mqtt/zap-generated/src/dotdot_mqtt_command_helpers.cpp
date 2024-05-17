@@ -14799,3 +14799,34 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
 
 }
 
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_thermostat_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_thermostat_state_t &new_state,
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t &new_updated_state
+) {
+
+
+  if (jsn.find("ThermostatMode") != jsn.end()) {
+
+    uint32_t tmp = get_enum_decimal_value<UnifyThermostatThermostatMode>("ThermostatMode", jsn);
+    if (tmp == std::numeric_limits<UnifyThermostatThermostatMode>::max()) {
+      #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+      tmp = unify_thermostat_thermostat_mode_get_enum_value_number(jsn.at("ThermostatMode").get<std::string>());
+      #elif defined(THERMOSTAT_MODE_ENUM_NAME_AVAILABLE)
+      tmp = thermostat_mode_get_enum_value_number(jsn.at("ThermostatMode").get<std::string>());
+      #endif
+    }
+    new_state.thermostat_mode = tmp;
+  
+    new_updated_state.thermostat_mode = true;
+  }
+
+
+}
+

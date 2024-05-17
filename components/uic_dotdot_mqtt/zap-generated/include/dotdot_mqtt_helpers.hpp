@@ -1934,6 +1934,23 @@ std::string tx_report_transmission_speed_get_enum_value_name(
  */
 uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &str);
 
+#define UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UnifyThermostatThermostatMode enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string unify_thermostat_thermostat_mode_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UnifyThermostatThermostatMode enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t unify_thermostat_thermostat_mode_get_enum_value_number(const std::string &str);
+
 #define WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE 1
 
 /**

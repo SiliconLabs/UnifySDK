@@ -856,6 +856,9 @@ typedef enum {
 #define DOTDOT_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMENT_STATE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
 // Definitions for cluster: Descriptor
 #define DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+// Definitions for cluster: UnifyThermostat
+#define DOTDOT_UNIFY_THERMOSTAT_THERMOSTAT_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
 
 // clang-format on
 
