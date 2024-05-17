@@ -289,7 +289,7 @@ static const std::vector<attribute_schema_t> attribute_schema = {
   /////////////////////////////////////////////////////////////////////
   {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE_VERSION,   "Thermostat Mode Version",   ATTRIBUTE_ENDPOINT_ID,   U8_STORAGE_TYPE},
   {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE,   "Thermostat Mode",   ATTRIBUTE_ENDPOINT_ID,   I32_STORAGE_TYPE},
-  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES,   "Thermostat Supported Modes",   ATTRIBUTE_ENDPOINT_ID,   BYTE_ARRAY_STORAGE_TYPE},
+  {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES,   "Thermostat Supported Modes",   ATTRIBUTE_ENDPOINT_ID,   U32_STORAGE_TYPE},
   /////////////////////////////////////////////////////////////////////
   //         Thermostat Setpoint Command Class attributes
   /////////////////////////////////////////////////////////////////////
