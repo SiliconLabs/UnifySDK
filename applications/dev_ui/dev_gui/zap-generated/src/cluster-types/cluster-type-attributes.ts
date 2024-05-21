@@ -15863,5 +15863,5 @@ export let ClusterTypeAttrs: any = {
         commands: [
         ] 
       }
-    }
+    },
 }

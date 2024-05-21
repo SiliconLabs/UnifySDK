@@ -3709,6 +3709,55 @@ void uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_set(
 
 
 
+/**
+ * @brief Callback signature for by-group UnifyHumidityControl::ModeSet command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UnifyHumidityControl/mode_set is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback_set(const uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UnifyHumidityControl::SetpointSet command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UnifyHumidityControl/setpoint_set is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_set(const uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_t callback);
+
+typedef void (*uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_unify_humidity_control_state_t,
+    uic_mqtt_dotdot_unify_humidity_control_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/unify_humidity_control/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_t callback
+);
+
+
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

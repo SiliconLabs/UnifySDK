@@ -14799,3 +14799,178 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
 
 }
 
+
+std::string get_json_payload_for_unify_humidity_control_mode_set_command(
+  
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModeSet / Mode
+  #ifdef MODE_SET_MODE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["Mode"] =
+    mode_set_mode_get_enum_value_name(
+      (uint32_t)fields->mode);
+  #elif defined(MODE_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["Mode"] =
+    mode_type_get_enum_value_name((uint32_t)fields->mode);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["Mode"] = fields->mode;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_humidity_control_mode_set(
+  nlohmann::json &jsn,
+  ModeType &mode
+  
+) {
+
+  uint32_t Mode_enum_val = get_enum_decimal_value<ModeType>("Mode", jsn);
+  if (Mode_enum_val == std::numeric_limits<ModeType>::max()) {
+    #ifdef MODE_TYPE_ENUM_NAME_AVAILABLE
+    Mode_enum_val = mode_type_get_enum_value_number(jsn.at("Mode").get<std::string>());
+    #endif
+  }
+  if (jsn.at("Mode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  mode = static_cast<ModeType>(Mode_enum_val);
+}
+
+
+std::string get_json_payload_for_unify_humidity_control_setpoint_set_command(
+  
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetpointSet / Type
+  #ifdef SETPOINT_SET_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["Type"] =
+    setpoint_set_type_get_enum_value_name(
+      (uint32_t)fields->type);
+  #elif defined(SETPOINT_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["Type"] =
+    setpoint_type_get_enum_value_name((uint32_t)fields->type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["Type"] = fields->type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Precision"] = nlohmann::json(fields->precision);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Scale"] = nlohmann::json(fields->scale);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Value"] = nlohmann::json(fields->value);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
+  nlohmann::json &jsn,
+  SetpointType &type,
+  
+  uint8_t &precision,
+  
+  uint8_t &scale,
+  
+  int32_t &value
+  
+) {
+
+  uint32_t Type_enum_val = get_enum_decimal_value<SetpointType>("Type", jsn);
+  if (Type_enum_val == std::numeric_limits<SetpointType>::max()) {
+    #ifdef SETPOINT_TYPE_ENUM_NAME_AVAILABLE
+    Type_enum_val = setpoint_type_get_enum_value_number(jsn.at("Type").get<std::string>());
+    #endif
+  }
+  if (jsn.at("Type").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  type = static_cast<SetpointType>(Type_enum_val);
+  if (jsn.at("Precision").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  precision = jsn.at("Precision").get< uint8_t >();
+      if (jsn.at("Scale").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  scale = jsn.at("Scale").get< uint8_t >();
+      if (jsn.at("Value").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  value = jsn.at("Value").get< int32_t >();
+    }
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_humidity_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_humidity_control_updated_state_t &new_updated_state
+) {
+
+
+  if (jsn.find("ReportingMode") != jsn.end()) {
+
+    uint32_t tmp = get_enum_decimal_value<ModeType>("ReportingMode", jsn);
+    if (tmp == std::numeric_limits<ModeType>::max()) {
+      #ifdef UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ENUM_NAME_AVAILABLE
+      tmp = unify_humidity_control_reporting_mode_get_enum_value_number(jsn.at("ReportingMode").get<std::string>());
+      #elif defined(REPORTING_MODE_ENUM_NAME_AVAILABLE)
+      tmp = reporting_mode_get_enum_value_number(jsn.at("ReportingMode").get<std::string>());
+      #endif
+    }
+    new_state.reporting_mode = tmp;
+  
+    new_updated_state.reporting_mode = true;
+  }
+
+
+}
+

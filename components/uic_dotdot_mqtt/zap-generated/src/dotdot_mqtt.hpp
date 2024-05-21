@@ -367,6 +367,13 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_descriptor_init();
 
+/**
+ * @brief Initialize UnifyHumidityControl dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_unify_humidity_control_init();
+
 
 
 // clang-format on
@@ -5052,6 +5059,65 @@ void uic_mqtt_dotdot_on_descriptor_WriteAttributes(
   const size_t message_length);
 
 
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UnifyHumidityControl/Commands/ModeSet messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t> &get_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyHumidityControl/Commands/ModeSet
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_humidity_control_mode_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UnifyHumidityControl/Commands/SetpointSet messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t> &get_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyHumidityControl/Commands/SetpointSet
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_humidity_control_setpoint_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t> & get_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyHumidityControl/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_humidity_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
 
 
 // All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
@@ -5890,6 +5956,26 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }
 };
 const dotdot_bitmap TstatScheduleMode("TstatScheduleMode", "map8", TstatScheduleMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UnifyHumidityControlSupportedReportingMode_bitmap_data {
+{ {"Humidify", "bool", "0x1", "0"}, {
+} },
+{ {"Dehumidify", "bool", "0x2", "1"}, {
+} },
+{ {"Auto", "bool", "0x4", "2"}, {
+} }
+};
+const dotdot_bitmap UnifyHumidityControlSupportedReportingMode("UnifyHumidityControlSupportedReportingMode", "Unknown UnifyHumidityControlSupportedReportingMode", UnifyHumidityControlSupportedReportingMode_bitmap_data);
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> UnifyHumidityControlSupportedSetPoints_bitmap_data {
+{ {"Humidifier", "bool", "0x1", "0"}, {
+} },
+{ {"Dehumidifier", "bool", "0x2", "1"}, {
+} },
+{ {"Auto", "bool", "0x4", "2"}, {
+} }
+};
+const dotdot_bitmap UnifyHumidityControlSupportedSetPoints("UnifyHumidityControlSupportedSetPoints", "Unknown UnifyHumidityControlSupportedSetPoints", UnifyHumidityControlSupportedSetPoints_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> WindowCoveringConfigOrStatus_bitmap_data {
 { {"Operational", "bool", "0x1", "0"}, {

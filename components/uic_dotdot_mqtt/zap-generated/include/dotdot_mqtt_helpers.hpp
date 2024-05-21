@@ -1220,6 +1220,23 @@ std::string metering_unitof_measure_get_enum_value_name(
  */
 uint32_t metering_unitof_measure_get_enum_value_number(const std::string &str);
 
+#define MODE_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ModeType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string mode_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ModeType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t mode_type_get_enum_value_number(const std::string &str);
+
 #define MOVE_STEP_MODE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -1543,6 +1560,23 @@ std::string shdcfg_direction_get_enum_value_name(
  */
 uint32_t shdcfg_direction_get_enum_value_number(const std::string &str);
 
+#define SCALE_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ScaleType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string scale_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ScaleType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t scale_type_get_enum_value_number(const std::string &str);
+
 #define SETPOINT_RAISE_OR_LOWER_MODE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -1559,6 +1593,23 @@ std::string setpoint_raise_or_lower_mode_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t setpoint_raise_or_lower_mode_get_enum_value_number(const std::string &str);
+
+#define SETPOINT_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the SetpointType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string setpoint_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the SetpointType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t setpoint_type_get_enum_value_number(const std::string &str);
 
 #define SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE 1
 
@@ -1933,6 +1984,23 @@ std::string tx_report_transmission_speed_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &str);
+
+#define UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UnifyHumidityControlCurrentState enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string unify_humidity_control_current_state_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UnifyHumidityControlCurrentState enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t unify_humidity_control_current_state_get_enum_value_number(const std::string &str);
 
 #define WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE 1
 

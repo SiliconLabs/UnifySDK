@@ -1664,6 +1664,36 @@ void uic_mqtt_dotdot_descriptor_publish_supported_generated_commands(
 );
 
 
+/**
+ * @brief Struct containing the list of commands for UnifyHumidityControl
+ */
+typedef struct _uic_mqtt_dotdot_unify_humidity_control_supported_commands_ {
+  bool mode_set;
+  bool setpoint_set;
+  bool write_attributes;
+} uic_mqtt_dotdot_unify_humidity_control_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the UnifyHumidityControl cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_supported_commands_t *command_list
+);
+
+
 
 #ifdef __cplusplus
 }

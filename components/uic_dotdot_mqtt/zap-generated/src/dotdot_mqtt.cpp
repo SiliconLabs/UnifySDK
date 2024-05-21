@@ -94739,6 +94739,1929 @@ sl_status_t uic_mqtt_dotdot_descriptor_init()
   return SL_STATUS_OK;
 }
 
+// Callbacks pointers
+static std::set<uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t> uic_mqtt_dotdot_unify_humidity_control_mode_set_callback;
+static std::set<uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t> uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback;
+static std::set<uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t> uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback;
+static std::set<uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t> uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback;
+static std::set<uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t> uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_t> uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback;
+
+// Callbacks setters
+void uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_set(const uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_humidity_control_mode_set_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_unset(const uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_humidity_control_mode_set_callback.erase(callback);
+}
+void uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_clear()
+{
+  uic_mqtt_dotdot_unify_humidity_control_mode_set_callback.clear();
+}
+std::set<uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t>& get_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback()
+{
+  return uic_mqtt_dotdot_unify_humidity_control_mode_set_callback;
+}
+
+void uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback_set(const uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback_unset(const uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback.erase(callback);
+}
+void uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback_clear()
+{
+  uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback.clear();
+}
+void uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set(const uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_unset(const uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback.erase(callback);
+}
+void uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_clear()
+{
+  uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback.clear();
+}
+std::set<uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t>& get_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback()
+{
+  return uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback;
+}
+
+void uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback_set(const uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback_unset(const uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback.erase(callback);
+}
+void uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback_clear()
+{
+  uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback.clear();
+}
+
+void uic_mqtt_dotdot_set_unify_humidity_control_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_unify_humidity_control_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_unify_humidity_control_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t>& get_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_unify_humidity_control_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_unify_humidity_control_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_unify_humidity_control_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UnifyHumidityControl/Commands/ModeSet
+void uic_mqtt_dotdot_on_unify_humidity_control_mode_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_unify_humidity_control_mode_set_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  ModeType mode = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_unify_humidity_control_mode_set(
+      jsn,
+      mode
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "ModeSet");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "ModeSet", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "ModeSet", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_mode_set_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      mode
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UnifyHumidityControl/GeneratedCommands/ModeSet
+static void uic_mqtt_dotdot_on_generated_unify_humidity_control_mode_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  ModeType mode = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_unify_humidity_control_mode_set(
+      jsn,
+      mode
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "ModeSet");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "ModeSet", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "ModeSet", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      mode
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UnifyHumidityControl/Commands/SetpointSet
+void uic_mqtt_dotdot_on_unify_humidity_control_setpoint_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  SetpointType type = {};
+  uint8_t precision = {};
+  uint8_t scale = {};
+  int32_t value = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
+      jsn,
+      type,
+
+      precision,
+
+      scale,
+
+      value
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "SetpointSet");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "SetpointSet", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "SetpointSet", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      type,
+  
+      precision,
+  
+      scale,
+  
+      value
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UnifyHumidityControl/GeneratedCommands/SetpointSet
+static void uic_mqtt_dotdot_on_generated_unify_humidity_control_setpoint_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  SetpointType type = {};
+  uint8_t precision = {};
+  uint8_t scale = {};
+  int32_t value = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
+      jsn,
+      type,
+
+      precision,
+
+      scale,
+
+      value
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "SetpointSet");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "SetpointSet", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "SetpointSet", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      type,
+  
+      precision,
+  
+      scale,
+  
+      value
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UnifyHumidityControl/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_unify_humidity_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_humidity_control_state_t new_state = {};
+  uic_mqtt_dotdot_unify_humidity_control_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_unify_humidity_control_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_unify_humidity_control_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.reporting_mode = true;
+      force_update.supported_reporting_mode = true;
+      force_update.current_state = true;
+      force_update.supported_set_points = true;
+      force_update.humidifier_setpoint_min = true;
+      force_update.humidifier_setpoint_max = true;
+      force_update.humidifier_setpoint = true;
+      force_update.humidifier_setpoint_scale = true;
+      force_update.humidifier_setpoint_precision = true;
+      force_update.dehumidifier_setpoint_min = true;
+      force_update.dehumidifier_setpoint_max = true;
+      force_update.dehumidifier_setpoint = true;
+      force_update.dehumidifier_setpoint_scale = true;
+      force_update.dehumidifier_setpoint_precision = true;
+      force_update.auto_setpoint_min = true;
+      force_update.auto_setpoint_max = true;
+      force_update.auto_setpoint = true;
+      force_update.auto_setpoint_scale = true;
+      force_update.auto_setpoint_precision = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"ReportingMode", &force_update.reporting_mode },
+        {"SupportedReportingMode", &force_update.supported_reporting_mode },
+        {"CurrentState", &force_update.current_state },
+        {"SupportedSetPoints", &force_update.supported_set_points },
+        {"HumidifierSetpointMin", &force_update.humidifier_setpoint_min },
+        {"HumidifierSetpointMax", &force_update.humidifier_setpoint_max },
+        {"HumidifierSetpoint", &force_update.humidifier_setpoint },
+        {"HumidifierSetpointScale", &force_update.humidifier_setpoint_scale },
+        {"HumidifierSetpointPrecision", &force_update.humidifier_setpoint_precision },
+        {"DehumidifierSetpointMin", &force_update.dehumidifier_setpoint_min },
+        {"DehumidifierSetpointMax", &force_update.dehumidifier_setpoint_max },
+        {"DehumidifierSetpoint", &force_update.dehumidifier_setpoint },
+        {"DehumidifierSetpointScale", &force_update.dehumidifier_setpoint_scale },
+        {"DehumidifierSetpointPrecision", &force_update.dehumidifier_setpoint_precision },
+        {"AutoSetpointMin", &force_update.auto_setpoint_min },
+        {"AutoSetpointMax", &force_update.auto_setpoint_max },
+        {"AutoSetpoint", &force_update.auto_setpoint },
+        {"AutoSetpointScale", &force_update.auto_setpoint_scale },
+        {"AutoSetpointPrecision", &force_update.auto_setpoint_precision },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "UnifyHumidityControl/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_reporting_mode_publish(
+  const char *base_topic,
+  ModeType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ENUM_NAME_AVAILABLE
+  jsn["value"] = unify_humidity_control_reporting_mode_get_enum_value_name((uint32_t)value);
+  #elif defined(MODE_TYPE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = mode_type_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for UNIFY_HUMIDITY_CONTROL_REPORTING_MODE. Using number instead.");
+  jsn["value"] = static_cast<ModeType>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/ReportingMode", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/ReportingMode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_reporting_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/ReportingMode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_supported_reporting_mode_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UnifyHumidityControlSupportedReportingMode.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/SupportedReportingMode", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/SupportedReportingMode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_supported_reporting_mode_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/SupportedReportingMode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_current_state_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ENUM_NAME_AVAILABLE
+  jsn["value"] = unify_humidity_control_current_state_get_enum_value_name((uint32_t)value);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for UNIFY_HUMIDITY_CONTROL_CURRENT_STATE. Using number instead.");
+  jsn["value"] = static_cast<UnifyHumidityControlCurrentState>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/CurrentState", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/CurrentState";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_current_state_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/CurrentState";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_supported_set_points_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UnifyHumidityControlSupportedSetPoints.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/SupportedSetPoints", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/SupportedSetPoints";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_supported_set_points_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/SupportedSetPoints";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_min_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,5,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/HumidifierSetpointMin", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/HumidifierSetpointMin";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_min_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/HumidifierSetpointMin";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_max_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,6,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/HumidifierSetpointMax", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/HumidifierSetpointMax";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_max_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/HumidifierSetpointMax";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,7,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,7,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/HumidifierSetpoint", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/HumidifierSetpoint";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/HumidifierSetpoint";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_publish(
+  const char *base_topic,
+  ScaleType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+  jsn["value"] = unify_humidity_control_humidifier_setpoint_scale_get_enum_value_name((uint32_t)value);
+  #elif defined(SCALE_TYPE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = scale_type_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE. Using number instead.");
+  jsn["value"] = static_cast<ScaleType>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/HumidifierSetpointScale", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/HumidifierSetpointScale";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/HumidifierSetpointScale";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,9,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,9,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/HumidifierSetpointPrecision", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_min_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,10,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,10,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/DehumidifierSetpointMin", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/DehumidifierSetpointMin";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_min_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/DehumidifierSetpointMin";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_max_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,11,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,11,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/DehumidifierSetpointMax", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/DehumidifierSetpointMax";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_max_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/DehumidifierSetpointMax";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,12,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,12,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/DehumidifierSetpoint", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/DehumidifierSetpoint";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/DehumidifierSetpoint";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_publish(
+  const char *base_topic,
+  ScaleType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+  jsn["value"] = unify_humidity_control_dehumidifier_setpoint_scale_get_enum_value_name((uint32_t)value);
+  #elif defined(SCALE_TYPE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = scale_type_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE. Using number instead.");
+  jsn["value"] = static_cast<ScaleType>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/DehumidifierSetpointScale", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/DehumidifierSetpointScale";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/DehumidifierSetpointScale";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,14,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,14,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_min_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,15,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,15,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/AutoSetpointMin", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/AutoSetpointMin";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_min_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/AutoSetpointMin";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_max_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,16,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,16,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/AutoSetpointMax", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/AutoSetpointMax";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_max_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/AutoSetpointMax";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_publish(
+  const char *base_topic,
+  int32_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,17,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,17,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/AutoSetpoint", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/AutoSetpoint";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/AutoSetpoint";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_publish(
+  const char *base_topic,
+  ScaleType value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+  jsn["value"] = unify_humidity_control_auto_setpoint_scale_get_enum_value_name((uint32_t)value);
+  #elif defined(SCALE_TYPE_ENUM_NAME_AVAILABLE)
+  jsn["value"] = scale_type_get_enum_value_name((uint32_t)value);
+  #else
+  sl_log_warning(LOG_TAG,"Warning: Enum name not available for UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE. Using number instead.");
+  jsn["value"] = static_cast<ScaleType>(value);
+  #endif
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/AutoSetpointScale", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/AutoSetpointScale";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/AutoSetpointScale";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64928,19,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64928,19,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl/Attributes/AutoSetpointPrecision", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/AutoSetpointPrecision";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/AutoSetpointPrecision";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UnifyHumidityControl/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_unify_humidity_control_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UnifyHumidityControl/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_unify_humidity_control_force_read_attributes);
+  }
+  if (!uic_mqtt_dotdot_unify_humidity_control_mode_set_callback.empty()) {
+    subscription_topic = base_topic + "UnifyHumidityControl/Commands/ModeSet";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_unify_humidity_control_mode_set);
+  }
+  if (!uic_mqtt_dotdot_unify_humidity_control_generated_mode_set_callback.empty()) {
+    subscription_topic = base_topic + "UnifyHumidityControl/GeneratedCommands/ModeSet";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_unify_humidity_control_mode_set);
+  }
+  if (!uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback.empty()) {
+    subscription_topic = base_topic + "UnifyHumidityControl/Commands/SetpointSet";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_unify_humidity_control_setpoint_set);
+  }
+  if (!uic_mqtt_dotdot_unify_humidity_control_generated_setpoint_set_callback.empty()) {
+    subscription_topic = base_topic + "UnifyHumidityControl/GeneratedCommands/SetpointSet";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_unify_humidity_control_setpoint_set);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_unify_humidity_control_attributes_init();
+
+  uic_mqtt_dotdot_by_group_unify_humidity_control_init();
+
+  return SL_STATUS_OK;
+}
+
 
 sl_status_t uic_mqtt_dotdot_init() {
 
@@ -94952,6 +96875,10 @@ sl_status_t uic_mqtt_dotdot_init() {
     status_flag = uic_mqtt_dotdot_descriptor_init();
   }
 
+  if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_unify_humidity_control_init();
+  }
+
 
   return status_flag;
 }
@@ -95013,6 +96940,7 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_descriptor_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_unify_humidity_control_publish_supported_commands(unid, endpoint_id);
 }
 
 void uic_mqtt_dotdot_publish_empty_supported_commands(
@@ -95071,6 +96999,7 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_unify_humidity_control_publish_empty_supported_commands(unid, endpoint_id);
 }
 
 // Publishing Cluster Revision for Basic Cluster
@@ -108533,6 +110462,216 @@ void uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(
   }
 }
 
+// Publishing Cluster Revision for UnifyHumidityControl Cluster
+void uic_mqtt_dotdot_unify_humidity_control_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/UnifyHumidityControl/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for UnifyHumidityControl Cluster
+void uic_mqtt_dotdot_unify_humidity_control_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/UnifyHumidityControl/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+static inline bool uic_mqtt_dotdot_unify_humidity_control_mode_set_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    ModeType mode_value;
+    memset(&mode_value, 0x00, sizeof(mode_value));
+    for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_mode_set_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        mode_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_unify_humidity_control_setpoint_set_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    SetpointType type_value;
+    memset(&type_value, 0x00, sizeof(type_value));
+    uint8_t precision_value;
+    memset(&precision_value, 0x00, sizeof(precision_value));
+    uint8_t scale_value;
+    memset(&scale_value, 0x00, sizeof(scale_value));
+    int32_t value_value;
+    memset(&value_value, 0x00, sizeof(value_value));
+    for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        type_value,
+    
+        precision_value,
+    
+        scale_value,
+    
+        value_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_unify_humidity_control_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback) {
+    uic_mqtt_dotdot_unify_humidity_control_state_t unify_humidity_control_new_state = {};
+    uic_mqtt_dotdot_unify_humidity_control_updated_state_t unify_humidity_control_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          unify_humidity_control_new_state,
+          unify_humidity_control_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback) {
+    uic_mqtt_dotdot_unify_humidity_control_updated_state_t unify_humidity_control_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          unify_humidity_control_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for UnifyHumidityControl Cluster
+void uic_mqtt_dotdot_unify_humidity_control_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+  if (uic_mqtt_dotdot_unify_humidity_control_mode_set_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ModeSet")";
+  }
+  if (uic_mqtt_dotdot_unify_humidity_control_setpoint_set_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("SetpointSet")";
+  }
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_unify_humidity_control_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UnifyHumidityControl/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/UnifyHumidityControl/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for UnifyHumidityControl Cluster
+void uic_mqtt_dotdot_unify_humidity_control_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UnifyHumidityControl/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Generated Commands publications functions
@@ -115174,6 +117313,78 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_generated_wr
   std::string payload =
     get_json_payload_for_protocol_controller_network_management_write_command(
     );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModeSet command for
+ * the UnifyHumidityControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/GeneratedCommands/ModeSet
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_generated_mode_set_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UnifyHumidityControl/GeneratedCommands/ModeSet";
+
+  std::string payload =
+    get_json_payload_for_unify_humidity_control_mode_set_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetpointSet command for
+ * the UnifyHumidityControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/GeneratedCommands/SetpointSet
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_generated_setpoint_set_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UnifyHumidityControl/GeneratedCommands/SetpointSet";
+
+  std::string payload =
+    get_json_payload_for_unify_humidity_control_setpoint_set_command(
+    fields);
 
   // Publish our command
   uic_mqtt_publish(topic.c_str(),

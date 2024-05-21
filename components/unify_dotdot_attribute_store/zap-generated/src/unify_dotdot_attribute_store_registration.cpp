@@ -17311,6 +17311,462 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format off
   // clang-format on
 
+  {
+    // ModeType // ModeType // ModeType
+    std::string attribute_type_string           = "ModeType";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl ReportingMode, "
+                     "type:  ModeType // ModeType");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE,
+      "ZCL UnifyHumidityControl ReportingMode",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map8 // map8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl SupportedReportingMode, "
+                     "type:  map8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE,
+      "ZCL UnifyHumidityControl SupportedReportingMode",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // enum8 // enum8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl CurrentState, "
+                     "type:  enum8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE,
+      "ZCL UnifyHumidityControl CurrentState",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // map8 // map8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl SupportedSetPoints, "
+                     "type:  map8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS,
+      "ZCL UnifyHumidityControl SupportedSetPoints",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl HumidifierSetpointMin, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN,
+      "ZCL UnifyHumidityControl HumidifierSetpointMin",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl HumidifierSetpointMax, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX,
+      "ZCL UnifyHumidityControl HumidifierSetpointMax",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl HumidifierSetpoint, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT,
+      "ZCL UnifyHumidityControl HumidifierSetpoint",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // ScaleType // ScaleType // ScaleType
+    std::string attribute_type_string           = "ScaleType";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl HumidifierSetpointScale, "
+                     "type:  ScaleType // ScaleType");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE,
+      "ZCL UnifyHumidityControl HumidifierSetpointScale",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl HumidifierSetpointPrecision, "
+                     "type:  uint8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION,
+      "ZCL UnifyHumidityControl HumidifierSetpointPrecision",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl DehumidifierSetpointMin, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN,
+      "ZCL UnifyHumidityControl DehumidifierSetpointMin",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl DehumidifierSetpointMax, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX,
+      "ZCL UnifyHumidityControl DehumidifierSetpointMax",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl DehumidifierSetpoint, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT,
+      "ZCL UnifyHumidityControl DehumidifierSetpoint",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // ScaleType // ScaleType // ScaleType
+    std::string attribute_type_string           = "ScaleType";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl DehumidifierSetpointScale, "
+                     "type:  ScaleType // ScaleType");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE,
+      "ZCL UnifyHumidityControl DehumidifierSetpointScale",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl DehumidifierSetpointPrecision, "
+                     "type:  uint8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION,
+      "ZCL UnifyHumidityControl DehumidifierSetpointPrecision",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl AutoSetpointMin, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN,
+      "ZCL UnifyHumidityControl AutoSetpointMin",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl AutoSetpointMax, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX,
+      "ZCL UnifyHumidityControl AutoSetpointMax",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // int32 // int32 // int32_t
+    std::string attribute_type_string           = "int32_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl AutoSetpoint, "
+                     "type:  int32 // int32_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT,
+      "ZCL UnifyHumidityControl AutoSetpoint",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // ScaleType // ScaleType // ScaleType
+    std::string attribute_type_string           = "ScaleType";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl AutoSetpointScale, "
+                     "type:  ScaleType // ScaleType");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE,
+      "ZCL UnifyHumidityControl AutoSetpointScale",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
+  {
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
+    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
+
+    // clang-format off
+    storage_type = attribute_storage_type_conversion(attribute_type_string);
+
+    if (storage_type == UNKNOWN_STORAGE_TYPE) {
+      sl_log_warning(LOG_TAG,
+                     "Unkown storage type for ZCL UnifyHumidityControl AutoSetpointPrecision, "
+                     "type:  uint8 // uint8_t");
+    }
+
+    status |= attribute_store_register_type(
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION,
+      "ZCL UnifyHumidityControl AutoSetpointPrecision",
+      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+      storage_type);
+  }
+
+  // clang-format off
+  // clang-format on
+
   // Additional attributes:
   for (auto const &a: zcl_additional_attribute_schema) {
     status |= attribute_store_register_type(a.type,
