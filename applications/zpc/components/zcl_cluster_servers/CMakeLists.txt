@@ -14,7 +14,9 @@ add_library(
   src/zcl_cluster_servers_helpers.cpp
   src/zcl_OTA_cluster_server.cpp
   src/zcl_rf_telemetry_cluster_server.c
-  src/zcl_scenes_cluster_server.cpp)
+  src/zcl_scenes_cluster_server.cpp
+  src/humidity_control_cluster_server.c
+  )
 
 target_include_directories(
   zcl_cluster_servers
