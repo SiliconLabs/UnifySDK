@@ -83595,3 +83595,2188 @@ bool dotdot_is_any_descriptor_writable_attribute_supported(
 
   return false;
 }
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyHumidityControl
+////////////////////////////////////////////////////////////////////////////////
+bool dotdot_is_supported_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+  return attribute_store_node_exists(node);
+}
+
+ModeType dotdot_get_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+
+  ModeType result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ModeType new_reporting_mode
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_reporting_mode,
+                                                  sizeof(ModeType));
+  }
+
+sl_status_t dotdot_unify_humidity_control_reporting_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_reporting_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_reporting_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_reporting_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_supported_reporting_mode
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_supported_reporting_mode,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_supported_reporting_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_supported_reporting_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_supported_reporting_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_supported_reporting_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_current_state(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_unify_humidity_control_current_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_current_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_current_state
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_current_state,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_current_state_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_current_state_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_current_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_current_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_current_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_supported_set_points
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_supported_set_points,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_supported_set_points_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_supported_set_points_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_supported_set_points_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_supported_set_points_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_humidifier_setpoint_min
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_humidifier_setpoint_min,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_min_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_min_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_humidifier_setpoint_max
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_humidifier_setpoint_max,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_max_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_max_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_humidifier_setpoint
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_humidifier_setpoint,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+  return attribute_store_node_exists(node);
+}
+
+ScaleType dotdot_get_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+
+  ScaleType result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ScaleType new_humidifier_setpoint_scale
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_humidifier_setpoint_scale,
+                                                  sizeof(ScaleType));
+  }
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_scale_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_scale_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_humidifier_setpoint_precision
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_humidifier_setpoint_precision,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_precision_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_precision_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_precision_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_humidifier_setpoint_precision_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_dehumidifier_setpoint_min
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_dehumidifier_setpoint_min,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_min_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_min_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_dehumidifier_setpoint_max
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_dehumidifier_setpoint_max,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_max_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_max_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_dehumidifier_setpoint
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_dehumidifier_setpoint,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+  return attribute_store_node_exists(node);
+}
+
+ScaleType dotdot_get_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+
+  ScaleType result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ScaleType new_dehumidifier_setpoint_scale
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_dehumidifier_setpoint_scale,
+                                                  sizeof(ScaleType));
+  }
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_scale_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_scale_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_dehumidifier_setpoint_precision
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_dehumidifier_setpoint_precision,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_precision_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_precision_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_precision_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_precision_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_auto_setpoint_min
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_auto_setpoint_min,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_min_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_min_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_auto_setpoint_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_auto_setpoint_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_auto_setpoint_max
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_auto_setpoint_max,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_max_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_max_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_auto_setpoint_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_auto_setpoint_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+  return attribute_store_node_exists(node);
+}
+
+int32_t dotdot_get_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+
+  int32_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_auto_setpoint
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_auto_setpoint,
+                                                  sizeof(int32_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_auto_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_auto_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+  return attribute_store_node_exists(node);
+}
+
+ScaleType dotdot_get_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+
+  ScaleType result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ScaleType new_auto_setpoint_scale
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_auto_setpoint_scale,
+                                                  sizeof(ScaleType));
+  }
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_scale_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_scale_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_auto_setpoint_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_auto_setpoint_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_auto_setpoint_precision
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_auto_setpoint_precision,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_precision_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_precision_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_unify_humidity_control_auto_setpoint_precision_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_unify_humidity_control_auto_setpoint_precision_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+bool dotdot_is_any_unify_humidity_control_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  if (true == dotdot_is_supported_unify_humidity_control_reporting_mode(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_supported_reporting_mode(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_current_state(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_supported_set_points(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_humidifier_setpoint_min(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_humidifier_setpoint_max(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_humidifier_setpoint(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_humidifier_setpoint_scale(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_humidifier_setpoint_precision(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_min(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_max(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_scale(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_precision(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_auto_setpoint_min(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_auto_setpoint_max(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_auto_setpoint(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_auto_setpoint_scale(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_unify_humidity_control_auto_setpoint_precision(unid, endpoint_id)) {
+    return true;
+  }
+
+  return false;
+}
+
+bool dotdot_is_any_unify_humidity_control_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+
+  return false;
+}

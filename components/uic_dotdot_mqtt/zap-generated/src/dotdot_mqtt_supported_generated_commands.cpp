@@ -2812,3 +2812,52 @@ void uic_mqtt_dotdot_descriptor_publish_supported_generated_commands(
 
 }
 
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the UnifyHumidityControl cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint);
+  topic +=  "/UnifyHumidityControl/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
+  if (command_list->mode_set == true) {
+    command_vector.emplace_back("ModeSet");
+  }
+  if (command_list->setpoint_set == true) {
+    command_vector.emplace_back("SetpointSet");
+  }
+  if (command_list->write_attributes == true) {
+    command_vector.emplace_back("WriteAttributes");
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+

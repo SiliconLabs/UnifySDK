@@ -366,6 +366,11 @@ static uic_mqtt_dotdot_by_group_aox_position_estimation_write_attributes_callbac
 static uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback = nullptr;
 
 
+static uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback_t uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback = nullptr;
+static uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_t uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback = nullptr;
+static uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_t uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback = nullptr;
+
+
 
 // Callbacks setters
 
@@ -1872,6 +1877,27 @@ void uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_set(
   const uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_descriptor_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback_set(const uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_set(const uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback = callback;
+}
+
+void uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback = callback;
 }
 
 
@@ -23492,6 +23518,287 @@ sl_status_t uic_mqtt_dotdot_by_group_descriptor_init()
 
 
 
+
+// Callback function for incoming publications on ucl/by-group/+/UnifyHumidityControl/Commands/ModeSet
+static void uic_mqtt_dotdot_on_by_group_unify_humidity_control_mode_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_unify_humidity_control_mode_set(
+          jsn,
+          fields.mode
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "ModeSet");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "ModeSet", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "ModeSet", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("Mode") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifyHumidityControl::ModeSet: Missing command-argument: Mode\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UnifyHumidityControl",
+        "ModeSet",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_unify_humidity_control_mode_set);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "ModeSet: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UnifyHumidityControl/Commands/SetpointSet
+static void uic_mqtt_dotdot_on_by_group_unify_humidity_control_setpoint_set(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
+          jsn,
+          fields.type,
+              
+          fields.precision,
+              
+          fields.scale,
+              
+          fields.value
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "SetpointSet");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "SetpointSet", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "SetpointSet", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("Type") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifyHumidityControl::SetpointSet: Missing command-argument: Type\n");
+        return;
+      }
+      if (jsn.find("Precision") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifyHumidityControl::SetpointSet: Missing command-argument: Precision\n");
+        return;
+      }
+      if (jsn.find("Scale") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifyHumidityControl::SetpointSet: Missing command-argument: Scale\n");
+        return;
+      }
+      if (jsn.find("Value") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifyHumidityControl::SetpointSet: Missing command-argument: Value\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UnifyHumidityControl",
+        "SetpointSet",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_unify_humidity_control_setpoint_set);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SetpointSet: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_by_group_unify_humidity_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "UnifyHumidityControl",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_unify_humidity_control_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "UnifyHumidityControl: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_unify_humidity_control_state_t new_state = {};
+    uic_mqtt_dotdot_unify_humidity_control_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifyHumidityControl", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifyHumidityControl", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_unify_humidity_control_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "UnifyHumidityControl/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_humidity_control_WriteAttributes);
+  }
+  if (uic_mqtt_dotdot_by_group_unify_humidity_control_mode_set_callback) {
+    subscription_topic = topic_bygroup + "UnifyHumidityControl/Commands/ModeSet";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_humidity_control_mode_set);
+  }
+  if (uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback) {
+    subscription_topic = topic_bygroup + "UnifyHumidityControl/Commands/SetpointSet";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_humidity_control_setpoint_set);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
 void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
 {
   // Check for uninitialized value in order to subscribe with on_group handlers
@@ -23772,6 +24079,10 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/AoXPositionEstimation/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_aox_position_estimation_WriteAttributes);
 
     uic_mqtt_subscribe("ucl/by-group/+/Descriptor/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_descriptor_WriteAttributes);
+
+    uic_mqtt_subscribe("ucl/by-group/+/UnifyHumidityControl/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_unify_humidity_control_WriteAttributes);
+    uic_mqtt_subscribe("ucl/by-group/+/UnifyHumidityControl/Commands/ModeSet", uic_mqtt_dotdot_on_by_group_unify_humidity_control_mode_set);
+    uic_mqtt_subscribe("ucl/by-group/+/UnifyHumidityControl/Commands/SetpointSet", uic_mqtt_dotdot_on_by_group_unify_humidity_control_setpoint_set);
 
   }
 
