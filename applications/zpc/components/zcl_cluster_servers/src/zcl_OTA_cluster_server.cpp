@@ -120,9 +120,9 @@ static sl_status_t get_target_info(attribute fw_target,
       = zw_node.child_by_type_and_value<uint8_t>(ATTRIBUTE_ENDPOINT_ID, 0);
     attribute manufacturer_id
       = ep0_node.child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_MANUFACTURER_ID);
-    attribute product_id
-      = ep0_node.child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_TYPE_ID);
     attribute product_type_id
+      = ep0_node.child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_TYPE_ID);
+    attribute product_id
       = ep0_node.child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_ID);
     attribute version_report_node
       = ep0_node.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA);
