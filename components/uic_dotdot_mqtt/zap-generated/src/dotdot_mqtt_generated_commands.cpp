@@ -11396,3 +11396,43 @@ void uic_mqtt_dotdot_descriptor_publish_generated_write_attributes_command(
                    false);
 }
 
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the UnifyThermostat cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyThermostat/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_unify_thermostat_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_unify_thermostat_state_t attribute_values,
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UnifyThermostat/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+

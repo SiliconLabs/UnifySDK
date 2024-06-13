@@ -1312,6 +1312,16 @@ uic_mqtt_dotdot_descriptor_write_attributes_callback_t get_uic_mqtt_dotdot_descr
   return test_uic_mqtt_dotdot_descriptor_write_attributes_callback;
 }
 
+static uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t get_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t get_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback;
+}
+
 // clang-format on
 
 #define TEST_UNID "test-unid-123"
@@ -2878,6 +2888,16 @@ void set_uic_mqtt_dotdot_descriptor_write_attributes_callback_stub(
 {
   test_uic_mqtt_dotdot_descriptor_write_attributes_callback = callback;
 }
+void set_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback = callback;
+}
 // clang-format on
 
 // Test functions
@@ -3798,6 +3818,12 @@ void setUp()
   test_uic_mqtt_dotdot_descriptor_write_attributes_callback = NULL;
   uic_mqtt_dotdot_set_descriptor_write_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_descriptor_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_thermostat_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_thermostat_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_stub);
   // clang-format on
 
   group_command_dispatch = NULL;
@@ -4560,6 +4586,7 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_position_estimation_position(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_protocol_controller_network_management_network_management_state(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_descriptor_device_type_list(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_thermostat_operating_state(expected_unid,expected_endpoint_id) );
 
   // clang-format on
   // ColorControl checks the value in the bitmask:

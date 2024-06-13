@@ -863,3 +863,6 @@ def DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_NETWORK_MANAGEMENT_NETWORK_MANAGEMEN
 // This represents the attributes in the DotDot Descriptor cluster
 def DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST 0xfd130000
 
+// This represents the attributes in the DotDot UnifyThermostat cluster
+def DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE 0xfd150003
+

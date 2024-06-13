@@ -367,6 +367,13 @@ sl_status_t uic_mqtt_dotdot_by_group_aox_position_estimation_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_descriptor_init();
 
+/**
+ * @brief Initialize UnifyThermostat dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_unify_thermostat_init();
+
 
 
 // clang-format on
@@ -5047,6 +5054,27 @@ std::set<uic_mqtt_dotdot_descriptor_write_attributes_callback_t> & get_uic_mqtt_
  */
 // clang-format off
 void uic_mqtt_dotdot_on_descriptor_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t> & get_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifyThermostat/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_thermostat_WriteAttributes(
   const char *topic,
   const char *message,
   const size_t message_length);

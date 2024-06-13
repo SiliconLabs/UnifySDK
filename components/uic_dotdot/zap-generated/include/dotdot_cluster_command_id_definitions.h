@@ -364,6 +364,8 @@
 
 // Commands for cluster: Descriptor
 
+// Commands for cluster: UnifyThermostat
+
 #ifdef __cplusplus
 extern "C" {
 #endif
