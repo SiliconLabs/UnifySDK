@@ -13727,3 +13727,151 @@ void uic_mqtt_dotdot_protocol_controller_network_management_publish_write_comman
                    payload.size(),
                    false);
 }
+
+/**
+ * @brief Sends/Publishes a ModeSet command for
+ * the UnifyHumidityControl cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/Commands/ModeSet
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_mode_set_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UnifyHumidityControl/Commands/ModeSet";
+
+
+  std::string payload =
+    get_json_payload_for_unify_humidity_control_mode_set_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a ModeSet command for
+ * the UnifyHumidityControl cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UnifyHumidityControl/Commands/ModeSet
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_mode_set_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UnifyHumidityControl/Commands/ModeSet";
+
+  std::string payload =
+    get_json_payload_for_unify_humidity_control_mode_set_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a SetpointSet command for
+ * the UnifyHumidityControl cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/Commands/SetpointSet
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_setpoint_set_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UnifyHumidityControl/Commands/SetpointSet";
+
+
+  std::string payload =
+    get_json_payload_for_unify_humidity_control_setpoint_set_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a SetpointSet command for
+ * the UnifyHumidityControl cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UnifyHumidityControl/Commands/SetpointSet
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_setpoint_set_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UnifyHumidityControl/Commands/SetpointSet";
+
+  std::string payload =
+    get_json_payload_for_unify_humidity_control_setpoint_set_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}

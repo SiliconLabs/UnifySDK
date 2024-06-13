@@ -21,6 +21,9 @@ add_library(
   src/zwave_command_class_device_reset_locally.cpp
   src/zwave_command_class_door_lock_control.cpp
   src/zwave_command_class_firmware_update.c
+  src/zwave_command_class_humidity_control_mode.c
+  src/zwave_command_class_humidity_control_operating_state.c
+  src/zwave_command_class_humidity_control_setpoint.c
   src/zwave_command_class_indicator.c
   src/zwave_command_class_indicator_control.cpp
   src/zwave_command_class_manufacturer_specific.c

@@ -4986,6 +4986,70 @@ void uic_mqtt_dotdot_descriptor_publish_generated_write_attributes_command(
   uic_mqtt_dotdot_descriptor_updated_state_t attribute_list
 );
 
+/**
+ * @brief Publishes an incoming/generated ModeSet command for
+ * the UnifyHumidityControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/GeneratedCommands/ModeSet
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_generated_mode_set_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated SetpointSet command for
+ * the UnifyHumidityControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/GeneratedCommands/SetpointSet
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_generated_setpoint_set_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+);
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the UnifyHumidityControl cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifyHumidityControl/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_unify_humidity_control_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_unify_humidity_control_state_t attribute_values,
+  uic_mqtt_dotdot_unify_humidity_control_updated_state_t attribute_list
+);
+
 
 #ifdef __cplusplus
 }

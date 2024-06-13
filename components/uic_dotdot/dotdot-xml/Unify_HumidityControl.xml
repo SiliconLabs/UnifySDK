@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!--
+Location
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FDA0" revision="1" name="UnifyHumidityControl">
+  <classification role="application" picsCode="HMDCTRL"/>
+  
+   <type:type short="ModeType" name="ModeType" id="01" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration name="Off" value="00" />
+      <type:enumeration name="Humidify" value="01" />
+      <type:enumeration name="Dehumidify" value="02" />
+      <type:enumeration name="Auto" value="03" />
+    </restriction>
+  </type:type>
+
+   <type:type short="SetpointType" name="SetpointType" id="03" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration name="Humidifier" value="01" />
+      <type:enumeration name="Dehumidifier" value="02" />
+      <type:enumeration name="Auto" value="03"/>
+    </restriction>
+  </type:type>
+
+   <type:type short="ScaleType" name="ScaleType" id="03" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration name="Percentage" value="00" />
+      <type:enumeration name="Absolute" value="01" />
+    </restriction>
+  </type:type>
+
+  <server>
+    <attributes>
+    <!-- Humidity Control Mode  -->
+      <attribute id="0001" name="ReportingMode" type="ModeType" writable="false" default="0"/>
+      <attribute id="0002" name="SupportedReportingMode" type="map8" writable="false" default="0">
+        <bitmap>
+            <element name="Humidify" type="bool" mask="01" />
+            <element name="Dehumidify" type="bool" mask="02" shiftRight="1" />
+            <element name="Auto" type="bool" mask="04" shiftRight="2" />
+        </bitmap>
+      </attribute>
+
+    <!-- Humidity Control Operating State  -->
+      <attribute id="0003" name="CurrentState" type="enum8" writable="false" default="0">
+        <restriction>
+            <type:enumeration name="Idle" value="00" />
+            <type:enumeration name="Humidifying" value="01" />
+            <type:enumeration name="Dehumidifying" value="02" />
+        </restriction>
+      </attribute>
+
+    <!-- Humidity Control Set Point  -->
+      <attribute id="0004" name="SupportedSetPoints" type="map8" writable="false" default="0">
+        <bitmap>
+            <element name="Humidifier" type="bool" mask="01" />
+            <element name="Dehumidifier" type="bool" mask="02" shiftRight="1" />
+            <element name="Auto" type="bool" mask="04" shiftRight="2" />
+        </bitmap>
+      </attribute>
+
+      <attribute id="0005" name="HumidifierSetpointMin" type="int32" writable="false"/>
+      <attribute id="0006" name="HumidifierSetpointMax" type="int32" writable="false"/>
+      <attribute id="0007" name="HumidifierSetpoint" type="int32" writable="false">
+        <restriction>
+          <type:minInclusiveRef ref="HumidifierSetpointMin" />
+          <type:maxInclusiveRef ref="HumidifierSetpointMax" />
+        </restriction>
+      </attribute>
+      <attribute id="0008" name="HumidifierSetpointScale" type="ScaleType" writable="false"/>
+      <attribute id="0009" name="HumidifierSetpointPrecision" type="uint8" writable="false"/>
+
+
+      <attribute id="000A" name="DehumidifierSetpointMin" type="int32" writable="false"/>
+      <attribute id="000B" name="DehumidifierSetpointMax" type="int32" writable="false"/>
+      <attribute id="000C" name="DehumidifierSetpoint" type="int32" writable="false">
+        <restriction>
+          <type:minInclusiveRef ref="DehumidifierSetpointMin" />
+          <type:maxInclusiveRef ref="DehumidifierSetpointMax" />
+        </restriction>
+      </attribute>
+      <attribute id="000D" name="DehumidifierSetpointScale" type="ScaleType" writable="false"/>
+      <attribute id="000E" name="DehumidifierSetpointPrecision" type="uint8" writable="false"/>
+
+      <attribute id="000F" name="AutoSetpointMin" type="int32" writable="false"/>
+      <attribute id="0010" name="AutoSetpointMax" type="int32" writable="false"/>
+      <attribute id="0011" name="AutoSetpoint" type="int32" writable="false">
+        <restriction>
+          <type:minInclusiveRef ref="AutoSetpointMin" />
+          <type:maxInclusiveRef ref="AutoSetpointMax" />
+        </restriction>
+      </attribute>
+      <attribute id="0012" name="AutoSetpointScale" type="ScaleType" writable="false"/>
+      <attribute id="0013" name="AutoSetpointPrecision" type="uint8" writable="false"/>
+    </attributes>
+
+    <commands>
+      <command id="01" name="ModeSet">
+        <fields>
+          <field name="Mode" type="ModeType" />
+        </fields>
+      </command>
+      <command id="01" name="SetpointSet">
+        <fields>
+          <field name="Type" type="SetpointType" />
+          <field name="Precision" type="uint8" />
+          <field name="Scale" type="uint8" />
+          <field name="Value" type="int32" />
+        </fields>
+      </command>
+    </commands>
+  </server>
+</zcl:cluster>
