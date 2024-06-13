@@ -6071,6 +6071,18 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
 );
 
 
+/**
+ * @brief JSON parser for UnifyThermostat WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_thermostat_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_thermostat_state_t &new_state,
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t &new_updated_state
+);
+
+
 
 #endif  //DOTDOT_MQTT_COMMAND_HELPERS_HPP
 /** @} end dotdot_mqtt_command_helpers */

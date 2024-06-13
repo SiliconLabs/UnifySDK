@@ -811,6 +811,13 @@ char *tx_report_transmission_speed_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get tx_report_transmission_speed enum representation from string. */
 uint32_t tx_report_transmission_speed_get_enum_value_number_c(const char *str);
+#define UNIFY_THERMOSTAT_OPERATING_STATE_ENUM_NAME_AVAILABLE 1
+
+/** Get unify_thermostat_operating_state string representation from enum. */
+char *unify_thermostat_operating_state_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get unify_thermostat_operating_state enum representation from string. */
+uint32_t unify_thermostat_operating_state_get_enum_value_number_c(const char *str);
 #define WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE 1
 
 /** Get window_covering_window_covering_type string representation from enum. */

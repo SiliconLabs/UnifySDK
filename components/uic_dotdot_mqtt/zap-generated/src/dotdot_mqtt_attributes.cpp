@@ -63117,3 +63117,123 @@ void uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_set(const ui
 
 // End of supported cluster.
 
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for UnifyThermostat
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback_t uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for UnifyThermostat
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_unify_thermostat_operating_state_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t operating_state = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifyThermostat::OperatingState: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      uint32_t tmp = get_enum_decimal_value<UnifyThermostatOperatingState>("value", json_payload);
+      if (tmp == numeric_limits<UnifyThermostatOperatingState>::max()) {
+      #ifdef UNIFY_THERMOSTAT_OPERATING_STATE_ENUM_NAME_AVAILABLE
+        tmp = unify_thermostat_operating_state_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #elif defined(OPERATING_STATE_ENUM_NAME_AVAILABLE)
+        tmp = operating_state_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #endif
+      }
+      operating_state = static_cast<uint8_t>(tmp);
+
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    operating_state
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for UnifyThermostat
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_unify_thermostat_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback) {
+    subscription_topic = base_topic + "UnifyThermostat/Attributes/OperatingState/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_thermostat_operating_state_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for UnifyThermostat
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback_set(const uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback = callback;
+}
+
+// End of supported cluster.
+

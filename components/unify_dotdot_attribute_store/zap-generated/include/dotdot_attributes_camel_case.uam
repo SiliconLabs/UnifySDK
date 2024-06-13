@@ -863,3 +863,6 @@ def zb_NetworkManagementState 0xfd120001
 // This represents short CamelCase labels the attributes in the DotDot Descriptor cluster
 def zb_DeviceTypeList 0xfd130000
 
+// This represents short CamelCase labels the attributes in the DotDot UnifyThermostat cluster
+def zb_OperatingState 0xfd150003
+

@@ -53949,6 +53949,270 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <!-- END OF Descriptor Commands Section -->
 <!-- -->
 
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page unify_thermostat UnifyThermostat Cluster
+The following commands and attributes are accepted as JSON payloads for the
+UnifyThermostat cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF UnifyThermostat Attributes Section -->
+<!-- -->
+\section unify_thermostat_attrs UnifyThermostat Attributes
+The following attribute topics are used to retrieve the UnifyThermostat cluster state.
+
+<br>
+
+\subsection unify_thermostat_attr_operating_state UnifyThermostat/OperatingState Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Attributes/OperatingState/Reported
+[PREFIX]/UnifyThermostat/Attributes/OperatingState/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster OperatingState Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyThermostatOperatingState"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for OperatingState attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyThermostat/Attributes/OperatingState/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/OperatingState/Desired { "value": <DESIRED_OPERATING_STATE>}
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/OperatingState/Reported { "value": <REPORTED_OPERATING_STATE>}
+
+```
+
+<br><br>
+
+
+\subsection unify_thermostat_attr_cluster_revision UnifyThermostat/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Attributes/ClusterRevision/Reported
+[PREFIX]/UnifyThermostat/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF UnifyThermostat Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyThermostat Supported Commands Section -->
+<!-- -->
+\section unify_thermostat_recv_cmd_support UnifyThermostat Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/SupportedCommands
+[PREFIX]/UnifyThermostat/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for UnifyThermostat cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedCommands { "value": [] }
+```
+
+To see supported generated commands for UnifyThermostat cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF UnifyThermostat Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyThermostat Commands Section -->
+<!-- -->
+\section unify_thermostat_cmds UnifyThermostat Commands
+
+<br><br>
+
+\subsection unify_thermostat_write_attr_cmd UnifyThermostat/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all UnifyThermostat attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection unify_thermostat_force_read_attr_cmd UnifyThermostat/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "OperatingState"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all UnifyThermostat attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the UnifyThermostat attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Commands/ForceReadAttributes' -m  '{ "value": ["OperatingState"] }'
+```
+
+<!-- -->
+<!-- END OF UnifyThermostat Commands Section -->
+<!-- -->
+
 
 <br><br><br>
 
@@ -57541,6 +57805,39 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum TxReportTransmissionSpeed Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum UnifyThermostatOperatingState Section -->
+<!-- -->
+\section enum_unify_thermostat_operating_state UnifyThermostatOperatingState Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostatOperatingState Enum Properties",
+  "type": "string",
+  "enum": [
+    "Off",
+    "Heating",
+    "Cooling",
+    "FanOnly",
+    "PendingHeat",
+    "PendingCool",
+    "Vent/Economizer",
+    "AuxHeating",
+    "2ndStageHeating",
+    "2ndStageCooling",
+    "2ndStageAuxHeat",
+    "3rdStageAuxHeat"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UnifyThermostatOperatingState Section -->
 <!-- -->
 
 <br><br>

@@ -21,6 +21,9 @@ def zwTHERMOSTAT_MODE_VERSION     0x4001
 def zwTHERMOSTAT_MODE             0x4002
 def zwTHERMOSTAT_SUPPORTED_MODES  0x4003
 
+//Thermostat Operating State CC
+def zwTHERMOSTAT_OPERATING_STATE_MODE 0x4202
+
 // Thermostat Cluster
 def zb_LocalTemperature                     0x02010000
 def zb_HVACSystemTypeConfiguration          0x02010009
@@ -40,6 +43,7 @@ def zb_SystemMode                           0x0201001c
 def zb_TemperatureSetpointHold              0x02010023
 def zb_TemperatureSetpointHoldDuration      0x02010024
 def zb_ThermostatProgrammingOperationMode   0x02010025
+def zb_ThermostatRunningState               0x02010029
 def zb_OccupiedSetback                      0x02010034
 def zb_OccupiedSetbackMin                   0x02010035
 def zb_OccupiedSetbackMax                   0x02010036
@@ -54,7 +58,11 @@ def zb_ACLouverPosition                     0x02010045
 def zb_ACCoilTemperature                    0x02010046
 def zb_ACCapacityFormat                     0x02010047
 
+// Unify thermostat cluster
+def zb_OperatingState     0xfd150003
+
 def thermostat_setpoint_supported (e'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE | e'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE)
+def no_thermostat_operating_state (e'zwTHERMOSTAT_OPERATING_STATE_MODE == 0)
 
 scope 0 {
   // We map Setpoint setpoint_type 0x01 (HEATING) and 0x02 (COOLING)
@@ -252,4 +260,21 @@ scope 0 chain_reaction(0) {
   d'zb_ACCapacityFormat =
     if (r'zb_ACCapacityFormat != d'zb_ACCapacityFormat) r'zb_ACCapacityFormat
     undefined
+
+  // Thermostat Operating State
+  // UCL bindings
+  r'zb_ThermostatRunningState =
+    if (no_thermostat_operating_state) undefined
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x00) 0x00
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x01) 0x01
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x02) 0x02
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x03) 0x04
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x08) 0x08
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x09) 0x10
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x0A) 0x20
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == 0x0B) 0x40
+    undefined // Default state
+
+  // Custom cluster binding
+  r'zb_OperatingState = r'zwTHERMOSTAT_OPERATING_STATE_MODE
 }
