@@ -29,6 +29,10 @@ target_link_libraries(
           zigpc_datastore
           unify)
 
+target_compile_definitions(
+  zigpc_gateway 
+  PRIVATE __STATIC_INLINE=static\ inline)
+
 if(BUILD_TESTING)
   # create mocks
   add_mock(zigpc_gateway_mock include/zigpc_gateway.h

@@ -10,7 +10,7 @@
 **Prerequisites**:
 
 1. [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
-2. [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG12/EFR32xG22 running  for Zigbee NCP or RCP
+2. [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP
 3. [Bluetooth module](https://www.silabs.com/wireless/bluetooth) EFR32xG22 running NCP Firmware for AoXPC
 4. x86-64/amd64 CPU architecture. (Windows, MacOS or Linux)
 5. Docker version > 20.10.12 installed.
@@ -220,6 +220,16 @@ docker> chip-tool onoff toggle 1 2
 
 More detailed information about chip-tool can be found in this [link](https://project-chip.github.io/connectedhomeip-doc/guides/chip_tool_guide.html)
 
+### Emulated End Device (**Experimental**)
+Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
+<br>```Note: EED currently emulates a end device that only supports OnOff cluster, so for UMB to process EED as a valid device atleast enable NAL service along with EED.```
+<br>The Emulated End Device(EED) can be configured to be run using `-a` option. This option cannot be used without a protocol selection configuration.
+<br>The option takes a predefined string "EED" representing Emulated End Device as shown below.
+
+```console
+unify_portable_cli -a "EED,UMB" -m "NAL"
+```
+
 ### Z-Wave options
 #### Z-Wave RF Region
 
@@ -418,7 +428,7 @@ unify_portable_cli -s 440262176 flash-app -u zwave_soc_switch_on_off-brd2603a-us
 Specifying the serial number is not required - in that case you will be asked to
 select the device that you want to flash.
 
-If the RF region is not defined by the `--zwave-rf` argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.
+If the RF region is not defined by the `--zwave-rf` argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, EU_LR, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.
 ```console
 unify_portable_cli --zwave-rf US_LR -s 440262138 flash-app -n switch-on-off
 ```

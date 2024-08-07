@@ -5134,6 +5134,184 @@ typedef sl_status_t (*uic_mqtt_dotdot_descriptor_attribute_device_type_list_call
   size_t device_type_list_count,
   const DeviceTypeStruct* device_type_list
 );
+// Callback types used by the unify_fan_control cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_fan_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t z_wave_fan_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_supported_fan_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t z_wave_supported_fan_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_fan_state_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t z_wave_fan_state
+);
+// Callback types used by the unify_thermostat cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_attribute_thermostat_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t thermostat_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_attribute_supported_thermostat_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t supported_thermostat_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t operating_state
+);
+// Callback types used by the unify_humidity_control cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_reporting_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t reporting_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_supported_reporting_mode_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t supported_reporting_mode
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_current_state_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t current_state
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_supported_set_points_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t supported_set_points
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_min_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t humidifier_setpoint_min
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_max_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t humidifier_setpoint_max
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t humidifier_setpoint
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_scale_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t humidifier_setpoint_scale
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_precision_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t humidifier_setpoint_precision
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_min_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t dehumidifier_setpoint_min
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_max_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t dehumidifier_setpoint_max
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t dehumidifier_setpoint
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_scale_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t dehumidifier_setpoint_scale
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_precision_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t dehumidifier_setpoint_precision
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_min_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t auto_setpoint_min
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_max_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t auto_setpoint_max
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  int32_t auto_setpoint
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_scale_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t auto_setpoint_scale
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_precision_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t auto_setpoint_precision
+);
 
 #ifdef __cplusplus
 extern "C" {
@@ -9856,6 +10034,180 @@ sl_status_t uic_mqtt_dotdot_descriptor_attributes_init();
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_set(const uic_mqtt_dotdot_descriptor_attribute_device_type_list_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the UnifyFanControl cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_unify_fan_control_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * UnifyFanControl/Attributes/z_wave_fan_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_fan_mode_callback_set(const uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_fan_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyFanControl/Attributes/z_wave_supported_fan_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_supported_fan_mode_callback_set(const uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_supported_fan_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyFanControl/Attributes/z_wave_fan_state/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_fan_state_callback_set(const uic_mqtt_dotdot_unify_fan_control_attribute_z_wave_fan_state_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the UnifyThermostat cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_unify_thermostat_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * UnifyThermostat/Attributes/thermostat_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_thermostat_attribute_thermostat_mode_callback_set(const uic_mqtt_dotdot_unify_thermostat_attribute_thermostat_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyThermostat/Attributes/supported_thermostat_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_thermostat_attribute_supported_thermostat_mode_callback_set(const uic_mqtt_dotdot_unify_thermostat_attribute_supported_thermostat_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyThermostat/Attributes/operating_state/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback_set(const uic_mqtt_dotdot_unify_thermostat_attribute_operating_state_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the UnifyHumidityControl cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_unify_humidity_control_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/reporting_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_reporting_mode_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_reporting_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/supported_reporting_mode/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_supported_reporting_mode_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_supported_reporting_mode_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/current_state/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_current_state_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_current_state_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/supported_set_points/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_supported_set_points_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_supported_set_points_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/humidifier_setpoint_min/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_min_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_min_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/humidifier_setpoint_max/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_max_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_max_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/humidifier_setpoint/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/humidifier_setpoint_scale/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_scale_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_scale_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/humidifier_setpoint_precision/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_precision_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_humidifier_setpoint_precision_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/dehumidifier_setpoint_min/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_min_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_min_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/dehumidifier_setpoint_max/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_max_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_max_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/dehumidifier_setpoint/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/dehumidifier_setpoint_scale/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_scale_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_scale_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/dehumidifier_setpoint_precision/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_precision_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_precision_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/auto_setpoint_min/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_min_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_min_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/auto_setpoint_max/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_max_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_max_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/auto_setpoint/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/auto_setpoint_scale/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_scale_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_scale_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifyHumidityControl/Attributes/auto_setpoint_precision/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_precision_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_precision_callback_t callback);
 
 
 #ifdef __cplusplus

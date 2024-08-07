@@ -18,10 +18,10 @@
 
 // <h>Zigbee Scan Dispatch configuration
 
-// <o EMBER_AF_PLUGIN_SCAN_DISPATCH_SCAN_QUEUE_SIZE> Scan queue size <1-254>
+// <o SL_ZIGBEE_AF_PLUGIN_SCAN_DISPATCH_SCAN_QUEUE_SIZE> Scan queue size <1-254>
 // <i> Default: 10
 // <i> The size of the queue of consumers.
-#define EMBER_AF_PLUGIN_SCAN_DISPATCH_SCAN_QUEUE_SIZE   10
+#define SL_ZIGBEE_AF_PLUGIN_SCAN_DISPATCH_SCAN_QUEUE_SIZE   10
 
 // </h>
 

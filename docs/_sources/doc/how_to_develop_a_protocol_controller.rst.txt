@@ -316,7 +316,7 @@ and a desired (future/wished value).
 
 An example of a Z-Wave Attribute Store is shown below:
 
-.. figure:: assets/img/attribute_store_representation.png
+.. figure:: assets/img/attribute_store_example_representation.png
   :width: 95%
   :alt: Z-Wave Attribute Store representation
   :align: center

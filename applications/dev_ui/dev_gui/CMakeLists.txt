@@ -1,5 +1,5 @@
 # Developer GUI install
-find_program(NPM_EXECUTABLE "npm" REQUIRED)
+find_program(YARN_EXECUTABLE "yarn" REQUIRED)
 
 if(APPLE)
   set(NPM_TARGET macos-x64)
@@ -25,22 +25,22 @@ add_custom_command(
           ${ZAP_CURRENT_OUTPUT_DIR}/src/cluster-types/supported-clusters.js
   COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/. .
   COMMAND cp -r ${ZAP_CURRENT_OUTPUT_DIR}/. .
-  COMMAND ${NPM_EXECUTABLE} version --allow-same-version
+  COMMAND ${YARN_EXECUTABLE} version --no-git-tag-version --new-version
           ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}
-  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps --allow-same-version # With yarn 38s with npm 69s change
-  COMMAND ${NPM_EXECUTABLE} run build
+  COMMAND ${YARN_EXECUTABLE} install --allow-same-version
+  COMMAND ${YARN_EXECUTABLE} run build
   USES_TERMINAL)
 
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/dev-gui-client
   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/package-lock.json
-  COMMAND TARGET=${NPM_TARGET} ${NPM_EXECUTABLE} run dev-gui-client-build
+  COMMAND TARGET=${NPM_TARGET} ${YARN_EXECUTABLE} run dev-gui-client-build
   USES_TERMINAL)
 
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/dev-gui-api
   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/dev-gui-client
-  COMMAND TARGET=${NPM_TARGET} ${NPM_EXECUTABLE} run dev-gui-api-build
+  COMMAND TARGET=${NPM_TARGET} ${YARN_EXECUTABLE} run dev-gui-api-build
   USES_TERMINAL)
 
 separate_arguments(ZAP_GENERATE_CMD_ARGS NATIVE_COMMAND ${ZAP_GENERATE_CMD_STR})

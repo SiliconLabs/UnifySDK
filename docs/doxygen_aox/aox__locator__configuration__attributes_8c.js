@@ -6,7 +6,7 @@ var aox__locator__configuration__attributes_8c =
     [ "aox_locator_clear_allocated_allow_list", "aox__locator__configuration__attributes_8c.html#a000825ceea42183b3a84f59e7c4c3d01", null ],
     [ "aox_locator_clear_allocated_azimuth_mask", "aox__locator__configuration__attributes_8c.html#aa0e61943e5b473d10e6aa5f111e43bd8", null ],
     [ "aox_locator_clear_allocated_elevation_mask", "aox__locator__configuration__attributes_8c.html#ad7dc1a1d69481e3b34e3d3a6402f07f6", null ],
-    [ "aox_locator_configuration_get_configuration", "group__aox__locator__configuration.html#ga34ab46ee1a41b118bd42559dd4dfc863", null ],
+    [ "aox_locator_configuration_get_configuration", "group__aox__locator__configuration.html#ga19acd5163178754ab5ffda3de9445f0f", null ],
     [ "aox_locator_load_attributes_from_attribute_store", "group__aox__locator__configuration__attributes.html#ga3d071561275f22e2a848056bc680e715", null ],
     [ "aox_locator_reset_configuration", "group__aox__locator__configuration__internal.html#ga31f5a146a0274d8bc42cfae1907fe36d", null ],
     [ "aox_locator_set_allow_list_attribute", "group__aox__locator__configuration__attributes.html#ga79f5cd65754dfd78ae8900c6acd3e4e3", null ],

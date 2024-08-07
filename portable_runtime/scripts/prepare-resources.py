@@ -98,8 +98,8 @@ platform_tools = {
 common_resources = [
     {
         'download_name'   : 'Application Firmware',
-        'download_url'    : 'https://github.com/SiliconLabs/gecko_sdk/releases/download/v4.3.0/demo-applications.zip',
-        'download_sha256' : '2f481a464022c5281844a2bf45a4ce545db46375026dff0539528d4ffc487215',
+        'download_url'    : 'https://github.com/SiliconLabs/simplicity_sdk/releases/download/v2024.6.0/demo-applications.zip',
+        'download_sha256' : '0f8d7b614aaee962a7e7b9e34dd9d322bdd41fed5ffa658e5cb4e902bf4985fe',
         'extract_details' : [
             {
                 'extract_src' : 'protocol/z-wave/demos/zwave_soc_switch_on_off/zwave_soc_switch_on_off-brd2603a-eu.hex',
@@ -136,6 +136,21 @@ common_resources = [
             },
             {
                 'extract_src' : 'bridge_binaries/chip-tool',
+                'extract_dst' : 'docker-files/',
+            }
+        ],
+    },
+    {
+        'download_name'   : 'EMD Binaries',
+        'download_url'    : '',
+        'download_sha256' : '',
+        'extract_details' : [
+            {
+                'extract_src' : 'emd/emd_attribute_mapper',
+                'extract_dst' : 'docker-files/emd_attribute_mapper',
+            },
+            {
+                'extract_src' : 'emd/emd',
                 'extract_dst' : 'docker-files/',
             }
         ],
@@ -274,6 +289,8 @@ if __name__ == "__main__":
                 shutil.copy(args.unify_path, copy_dst + "/" + extract["extract_dst"])
         elif resource['download_name'] == 'Matter Bridge Binaries' and args.resource_path is not None:
             get_local_resources(resource, copy_dst, args.resource_path + "/bridge_binaries.zip")
+        elif resource['download_name'] == 'EMD Binaries' and args.resource_path is not None:
+            get_local_resources(resource, copy_dst, args.resource_path + "/emd.zip")
         else:
             get_resources(resource, copy_dst)
         print()

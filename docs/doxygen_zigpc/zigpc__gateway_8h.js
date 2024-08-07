@@ -10,7 +10,7 @@ var zigpc__gateway_8h =
     [ "zigpc_gateway_discover_device", "group__zigpc__gateway.html#ga0b2701e06efe2dfdf5588f57ccc58432", null ],
     [ "zigpc_gateway_discover_endpoint", "group__zigpc__gateway.html#ga0323e61986f3a2d924232d61095648ca", null ],
     [ "zigpc_gateway_get_counters_capacity", "group__zigpc__gateway.html#ga61f67214bb773f5143b70dfbce6e80d8", null ],
-    [ "zigpc_gateway_get_counters_entry_label", "group__zigpc__gateway.html#ga1f07c2900fac9697f0f7a42fb50c9eeb", null ],
+    [ "zigpc_gateway_get_counters_entry_label", "group__zigpc__gateway.html#gaebf4345d8f63cb77db35946a1879a031", null ],
     [ "zigpc_gateway_get_counters_list", "group__zigpc__gateway.html#ga8a6257cf6118529b61387a4afd814367", null ],
     [ "zigpc_gateway_get_neighbor_count", "group__zigpc__gateway.html#ga529184f2974f1ddeea2f6bccd093464d", null ],
     [ "zigpc_gateway_get_neighbor_eui64", "group__zigpc__gateway.html#gad41ed1def7d3d4de20d450478e081018", null ],

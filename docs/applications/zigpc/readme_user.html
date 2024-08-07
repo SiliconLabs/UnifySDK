@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -51,7 +51,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a></li>
@@ -78,7 +78,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/matter/matter_mpc.html">Matter (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
 </ul>
 </li>
@@ -136,7 +136,7 @@ device where EZSP is used as the serial protocol to communicate with the NCP.</p
 <p>Running Unify with ZigPC requires the following equipment:</p>
 <section id="gateway-host-device-raspberry-pi">
 <h3>Gateway Host Device: Raspberry Pi<a class="headerlink" href="#gateway-host-device-raspberry-pi" title="Permalink to this heading"></a></h3>
-<p>ZigPC is officially supported on a Raspberry Pi 4 running Debian Bullseye (A.K.A.
+<p>ZigPC is officially supported on a Raspberry Pi 4 running Debian Bookworm (A.K.A.
 Raspberry Pi OS).</p>
 <p>For installation and setup, follow steps outlined in:
 <a class="reference external" href="https://www.raspberrypi.org/documentation/">https://www.raspberrypi.org/documentation/</a></p>
@@ -145,7 +145,7 @@ Raspberry Pi OS).</p>
 </section>
 <section id="gateway-ncp-device">
 <h3>Gateway NCP Device<a class="headerlink" href="#gateway-ncp-device" title="Permalink to this heading"></a></h3>
-<p>Supported radios: EFR32MG1X or EFR32MG2X
+<p>Supported radios: EFR32MG2X
 Supported EZSP protocol: UART (SPI not officially supported)</p>
 </section>
 <section id="pan-zigbee-device">
@@ -167,7 +167,7 @@ should be installed before running the ZigPC. Running Unify with ZigPC requires
 using an MQTT Broker. Unify currently supports using Mosquitto MQTT
 (<a class="reference external" href="https://mosquitto.org/">https://mosquitto.org/</a>).</p>
 <p>For installing please refer to the general installation method in
-<a class="reference internal" href="../../doc/getting_started.html"><span class="doc std std-doc">Getting started</span></a>.</p>
+<a class="reference internal" href="../../doc/getting_started_unify.html"><span class="doc std std-doc">Getting started</span></a>.</p>
 <section id="description-of-installed-components">
 <h3>Description of Installed Components<a class="headerlink" href="#description-of-installed-components" title="Permalink to this heading"></a></h3>
 <p>After the packages are installed, the following services and libraries are
@@ -496,7 +496,7 @@ The OTA mechanism is based off the existing GSDK, OTA-Server plugin.
 For more information, see <a class="reference external" href="https://www.silabs.com/documents/public/application-notes/an728-ota-client-server-setup.pdf">Silicon Labs’ OTA Server-Client Application
 Note</a>.</p>
 <p>NOTE: It is expected that a device will have a bootloader to properly support OTA updates. See
-[Silicon Labs’ Bootloader User Guide](<a class="reference external" href="https://www.silabs.com/documents/public/user-guides">https://www.silabs.com/documents/public/user-guides</a> ug103-06-fundamentals-bootloading.pdf)
+<a class="reference external" href="https://www.silabs.com/documents/public/user-guides/ug103-06-fundamentals-bootloading.pdf">Silicon Labs’ Bootloader User Guide</a>
 for more details.</p>
 </section>
 <section id="zigbee-sleepy-end-device-support">

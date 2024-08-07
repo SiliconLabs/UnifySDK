@@ -17,55 +17,55 @@
 
 #include "zigbee_host.h"
 
-EmberStatus zigbeeHostAddAddressTableEntry(const EmberEUI64 eui64,
-                                           const EmberNodeId nodeId)
+sl_status_t zigbeeHostAddAddressTableEntry(const sl_802154_long_addr_t eui64,
+                                           const sl_802154_short_addr_t nodeId)
 {
-  EmberStatus status = EMBER_SUCCESS;
+  sl_status_t status = SL_STATUS_OK;
 
   if (eui64 == NULL) {
-    status = EMBER_BAD_ARGUMENT;
+    status = SL_STATUS_INVALID_PARAMETER;
   } else {
-    EmberEUI64 eui64Dup;
-    memcpy(eui64Dup, eui64, sizeof(EmberEUI64));
+    sl_802154_long_addr_t eui64Dup;
+    memcpy(eui64Dup, eui64, sizeof(sl_802154_long_addr_t));
 
     // NOTE: EUI64 passed in must be non-const
-    uint8_t storedIndex = emberAfAddAddressTableEntry(eui64Dup, nodeId);
-    if (storedIndex == EMBER_NULL_ADDRESS_TABLE_INDEX) {
-      status = EMBER_INVALID_CALL;
+    uint8_t storedIndex = sl_zigbee_af_add_address_table_entry(eui64Dup, nodeId);
+    if (storedIndex == SL_ZIGBEE_NULL_ADDRESS_TABLE_INDEX ) {
+      status = SL_STATUS_INVALID_STATE;
     }
   }
 
   return status;
 }
 
-EmberStatus zigbeeHostGetAddressTableEntry(const EmberEUI64 eui64,
-                                           EmberNodeId *const nodeId)
+sl_status_t zigbeeHostGetAddressTableEntry(const sl_802154_long_addr_t eui64,
+                                           sl_802154_short_addr_t *const nodeId)
 {
-  EmberStatus status = EMBER_SUCCESS;
-  uint8_t loadIndex  = EMBER_NULL_ADDRESS_TABLE_INDEX;
+  sl_status_t status = SL_STATUS_OK;
+  uint8_t loadIndex  = SL_ZIGBEE_NULL_ADDRESS_TABLE_INDEX ;
 
   if ((eui64 == NULL) || (nodeId == NULL)) {
-    status = EMBER_BAD_ARGUMENT;
+    status = SL_STATUS_INVALID_PARAMETER;
   } else {
-    EmberEUI64 eui64Dup;
-    memcpy(eui64Dup, eui64, sizeof(EmberEUI64));
+    sl_802154_long_addr_t eui64Dup;
+    memcpy(eui64Dup, eui64, sizeof(sl_802154_long_addr_t));
 
     // NOTE: EUI64 passed in must be non-const
-    loadIndex = emberAfPluginAddressTableLookupByEui64(eui64Dup);
-    if (loadIndex == EMBER_NULL_ADDRESS_TABLE_INDEX) {
-      status = EMBER_INVALID_CALL;
+    loadIndex = sl_zigbee_af_address_table_lookup_by_eui64(eui64Dup);
+    if (loadIndex == SL_ZIGBEE_NULL_ADDRESS_TABLE_INDEX ) {
+      status = SL_STATUS_INVALID_STATE; 
     }
   }
 
-  if (status == EMBER_SUCCESS) {
-    // NOTE: nodeId will be set to EMBER_NULL_NODE_ID if this lookup fails
-    *nodeId = emberAfPluginAddressTableLookupNodeIdByIndex(loadIndex);
-    if (*nodeId == EMBER_NULL_NODE_ID) {
-      *nodeId = EMBER_UNKNOWN_NODE_ID;
+  if (status == SL_STATUS_OK) {
+    // NOTE: nodeId will be set to SL_ZIGBEE_NULL_NODE_ID if this lookup fails
+    *nodeId = sl_zigbee_af_address_table_lookup_node_id_by_index(loadIndex);
+    if (*nodeId == SL_ZIGBEE_NULL_NODE_ID ) {
+      *nodeId = SL_ZIGBEE_UNKNOWN_NODE_ID;
     }
   } else if (nodeId != NULL) {
     // All non-success results mean the lookup failed, nodeId set as invalid
-    *nodeId = EMBER_UNKNOWN_NODE_ID;
+    *nodeId = SL_ZIGBEE_UNKNOWN_NODE_ID;
   }
 
   return status;

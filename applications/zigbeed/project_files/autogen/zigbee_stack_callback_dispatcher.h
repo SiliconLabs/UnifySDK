@@ -9,175 +9,94 @@
 
 #include PLATFORM_HEADER
 #ifdef EZSP_HOST
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 #else
-#include "stack/include/ember.h"
+#include "stack/include/sl_zigbee.h"
 #endif // EZSP_HOST
 
 
 
-#if defined(EMBER_AF_NCP) && defined(SL_CATALOG_ZIGBEE_AF_SUPPORT_PRESENT)
+#if defined(SL_ZIGBEE_AF_NCP) && defined(SL_CATALOG_ZIGBEE_AF_SUPPORT_PRESENT)
 // Incoming Message
 bool sli_zb_af_support_incoming_message(
       // The aps Frame
-      EmberApsFrame *apsFrame);
-#endif // defined(EMBER_AF_NCP) && defined(SL_CATALOG_ZIGBEE_AF_SUPPORT_PRESENT)
+      sl_zigbee_aps_frame_t *apsFrame);
+#endif // defined(SL_ZIGBEE_AF_NCP) && defined(SL_CATALOG_ZIGBEE_AF_SUPPORT_PRESENT)
 
 
 // Incoming Message
-#ifdef EZSP_HOST
 void sli_zb_af_incoming_message(
       // Incoming message type
-      EmberIncomingMessageType type,
+      sl_zigbee_incoming_message_type_t type,
       // The aps Frame
-      EmberApsFrame *apsFrame,
-      // The link quality
-      uint8_t lastHopLqi,
-      // The energy level
-      int8_t lastHopRssi,
-      // The sender of the message.
-      EmberNodeId sender,
-      // The index of a binding that matches the message
-      // matching binding.
-      uint8_t bindingIndex,
-      // The index of the entry in the address table
-      uint8_t addressIndex,
-      // The message length
+      sl_zigbee_aps_frame_t *apsFrame,
+      // Received packet information
+      sl_zigbee_rx_packet_info_t *packetInfo,
+      // Message length
       uint8_t messageLength,
-      // message
-      uint8_t *messageContents)
+      // Message pointer
+      uint8_t *message)
 ;
 void sli_zigbee_af_incoming_message_callback(
       // Incoming message type
-      EmberIncomingMessageType type,
+      sl_zigbee_incoming_message_type_t type,
       // The aps Frame
-      EmberApsFrame *apsFrame,
-      // The link quality
-      uint8_t lastHopLqi,
-      // The energy level
-      int8_t lastHopRssi,
-      // The sender of the message.
-      EmberNodeId sender,
-      // The index of a binding that matches the message
-      // matching binding.
-      uint8_t bindingIndex,
-      // The index of the entry in the address table
-      uint8_t addressIndex,
-      // The message length
+      sl_zigbee_aps_frame_t *apsFrame,
+      // Received packet information
+      sl_zigbee_rx_packet_info_t *packetInfo,
+      // Message length
       uint8_t messageLength,
-      // message
-      uint8_t *messageContents)
+      // Message pointer
+      uint8_t *message)
 ;
-#else // !EZSP_HOST
-void sli_zb_af_incoming_message(
-      // Incoming message type
-      EmberIncomingMessageType type,
-      // The aps Frame
-      EmberApsFrame *apsFrame,
-      // message
-      EmberMessageBuffer message)
-;
-void sli_zigbee_af_incoming_message_callback(
-      // Incoming message type
-      EmberIncomingMessageType type,
-      // The aps Frame
-      EmberApsFrame *apsFrame,
-      // message
-      EmberMessageBuffer message)
-;
-#endif // EZSP_HOST
-
 
 // Message Sent
-#ifdef EZSP_HOST
 void sli_zigbee_af_message_sent(
+      // Message delivery status
+      sl_status_t status,
       // Outgoing message type
-      EmberOutgoingMessageType type,
+      sl_zigbee_outgoing_message_type_t type,
       // Index or destination of the message
       uint16_t indexOrDestination,
       // The aps Frame
-      EmberApsFrame *apsFrame,
+      sl_zigbee_aps_frame_t *apsFrame,
       // Message tag
-      uint8_t messageTag,
-      // Message delivery status
-      EmberStatus status,
-      // The length of the messageContents
+      uint16_t messageTag,
+      // The length of the message
       uint8_t messageLength,
       // Message data
-      uint8_t *messageContents)
+      uint8_t *message)
 ;
 void sli_zigbee_af_message_sent_callback(
+      // Message delivery status
+      sl_status_t status,
       // Outgoing message type
-      EmberOutgoingMessageType type,
+      sl_zigbee_outgoing_message_type_t type,
       // Index or destination of the message
       uint16_t indexOrDestination,
       // The aps Frame
-      EmberApsFrame *apsFrame,
+      sl_zigbee_aps_frame_t *apsFrame,
       // Message tag
-      uint8_t messageTag,
-      // Message delivery status
-      EmberStatus status,
-      // The length of the messageContents
+      uint16_t messageTag,
+      // The length of the message
       uint8_t messageLength,
       // Message data
-      uint8_t *messageContents)
+      uint8_t *message)
 ;
-#else // !EZSP_HOST
-void sli_zigbee_af_message_sent(
-      // Outgoing message type
-      EmberOutgoingMessageType type,
-      // Index or destination of the message
-      uint16_t indexOrDestination,
-      // The aps Frame
-      EmberApsFrame *apsFrame,
-      // message
-      EmberMessageBuffer message,
-      // Message delivery status
-      EmberStatus status)
-;
-void sli_zigbee_af_message_sent_callback(
-      // Outgoing message type
-      EmberOutgoingMessageType type,
-      // Index or destination of the message
-      uint16_t indexOrDestination,
-      // The aps Frame
-      EmberApsFrame *apsFrame,
-      // message
-      EmberMessageBuffer message,
-      // Message delivery status
-      EmberStatus status)
-;
-#endif // EZSP_HOST
 
-
-
-// Trust Center Join
-#ifdef EZSP_HOST
-void sli_zigbee_af_trust_center_join(
+// Trust Center post-join handler
+void sli_zigbee_af_trust_center_post_join(
       // Joining node's id
-      EmberNodeId newNodeId,
+      sl_802154_short_addr_t newNodeId,
       // Joining node's Eui64
-      EmberEUI64 newNodeEui64,
+      sl_802154_long_addr_t newNodeEui64,
       // Status
-      EmberDeviceUpdate status,
+      sl_zigbee_device_update_t status,
       // Policy Decision
-      EmberJoinDecision policyDecision,
+      sl_zigbee_join_decision_t policyDecision,
       // Parent Id of the joining node
-      EmberNodeId parentOfNewNode)
+      sl_802154_short_addr_t parentOfNewNode)
 ;
-#else // !EZSP_HOST
-void sli_zigbee_af_trust_center_join(
-      // Joining node's id
-      EmberNodeId newNodeId,
-      // Joining node's Eui64
-      EmberEUI64 newNodeEui64,
-      // Status
-      EmberDeviceUpdate status,
-      // Parent Id of the joining node
-      EmberNodeId parentOfNewNode)
-;
-#endif // EZSP_HOST
-
 
 // Mark Buffers
 void sli_zigbee_af_mark_buffers(void)
@@ -187,8 +106,8 @@ void sli_zigbee_af_mark_buffers_callback(void)
 
 // Packet Handoff Incoming
 void sli_zigbee_af_packet_handoff_incoming(
-      EmberZigbeePacketType packetType,
-      EmberMessageBuffer packetBuffer,
+      sl_zigbee_zigbee_packet_type_t packetType,
+      sli_buffer_manager_buffer_t packetBuffer,
       uint8_t index,
       // Return: 
       void *data)
@@ -196,8 +115,8 @@ void sli_zigbee_af_packet_handoff_incoming(
 
 // Packet Handoff Outgoing
 void sli_zigbee_af_packet_handoff_outgoing(
-      EmberZigbeePacketType packetType,
-      EmberMessageBuffer packetBuffer,
+      sl_zigbee_zigbee_packet_type_t packetType,
+      sli_buffer_manager_buffer_t packetBuffer,
       uint8_t index,
       // Return: 
       void *data)
@@ -213,20 +132,16 @@ void sli_zigbee_af_incoming_mfg_test_message(
 
 // Override Incoming Route Record
 void sli_zigbee_af_override_incoming_route_record(
-      EmberNodeId source,
-      EmberEUI64 sourceEui,
-      uint8_t relayCount,
-      EmberMessageBuffer header,
-      uint8_t relayListIndex,
+  sl_zigbee_rx_packet_info_t *packetInfo,
+  uint8_t relayCount,
+  uint8_t *relayList,
       // Return: 
       bool *consumed)
 ;
 void sli_zigbee_af_override_incoming_route_record_callback(
-      EmberNodeId source,
-      EmberEUI64 sourceEui,
-      uint8_t relayCount,
-      EmberMessageBuffer header,
-      uint8_t relayListIndex,
+      sl_zigbee_rx_packet_info_t *packetInfo,
+  uint8_t relayCount,
+  uint8_t *relayList,
       // Return: 
       bool *consumed)
 ;
@@ -234,21 +149,21 @@ void sli_zigbee_af_override_incoming_route_record_callback(
 // Override Append Source Route
 // Return: Added bytes
 void sli_zigbee_af_override_append_source_route(
-      EmberNodeId destination,
+      sl_802154_short_addr_t destination,
       // Return: 
-      EmberMessageBuffer *header,
+      sli_buffer_manager_buffer_t *header,
       // Return: 
       bool *consumed)
 ;
 
 // Override Furthur Index For Source Route Add Entry
 void sli_zigbee_af_override_furthur_index_for_source_route_add_entry(
-      EmberNodeId id,
+      sl_802154_short_addr_t id,
       // Return: 
       uint8_t *furtherIndex)
 ;
 void sli_zigbee_af_override_furthur_index_for_source_route_add_entry_callback(
-      EmberNodeId id,
+      sl_802154_short_addr_t id,
       // Return: 
       uint8_t *furtherIndex)
 ;
@@ -256,19 +171,21 @@ void sli_zigbee_af_override_furthur_index_for_source_route_add_entry_callback(
 // Stack Status
 void sli_zigbee_af_stack_status(
       // Stack status
-      EmberStatus status)
+      sl_status_t status)
 ;
 void sli_zigbee_af_stack_status_callback(
       // Stack status
-      EmberStatus status)
+      sl_status_t status)
 ;
 
 // Redirect Outgoing Message
 void sli_zigbee_af_redirect_outgoing_message(
       // The mac index used to redirect messages
       uint8_t mac_index,
-      // Packet buffer header
-      EmberMessageBuffer header,
+      // Packet length
+      uint8_t packet_length,
+      // Packet contents
+      uint8_t* packet_contents,
       // Transmit priority
       uint8_t priority)
 ;
@@ -290,7 +207,7 @@ void sli_zigbee_af_energy_scan_result_callback(
 // Network Found
 void sli_zigbee_af_network_found(
       // The parameters associated with the network found.
-      EmberZigbeeNetwork *networkFound,
+      sl_zigbee_zigbee_network_t *networkFound,
       // The link quality indication of the network found.
       uint8_t lqi,
       // The received signal strength indication of the network found.
@@ -298,7 +215,7 @@ void sli_zigbee_af_network_found(
 ;
 void sli_zigbee_af_network_found_callback(
       // The parameters associated with the network found.
-      EmberZigbeeNetwork *networkFound,
+      sl_zigbee_zigbee_network_t *networkFound,
       // The link quality indication of the network found.
       uint8_t lqi,
       // The received signal strength indication of the network found.
@@ -308,94 +225,76 @@ void sli_zigbee_af_network_found_callback(
 // Scan Complete
 void sli_zigbee_af_scan_complete(
       // The channel on which the current error occurred. Undefined for the case
-      // of EMBER_SUCCESS.
+      // of SL_STATUS_OK.
       uint8_t channel,
       // The error condition that occurred on the current channel. Value will be
-      // EMBER_SUCCESS when the scan has completed.
-      EmberStatus status)
+      // SL_STATUS_OK when the scan has completed.
+      sl_status_t status)
 ;
 void sli_zigbee_af_scan_complete_callback(
       // The channel on which the current error occurred. Undefined for the case
-      // of EMBER_SUCCESS.
+      // of SL_STATUS_OK.
       uint8_t channel,
       // The error condition that occurred on the current channel. Value will be
-      // EMBER_SUCCESS when the scan has completed.
-      EmberStatus status)
+      // SL_STATUS_OK when the scan has completed.
+      sl_status_t status)
 ;
 
 // Unused Pan Id Found
 void sli_zigbee_af_unused_pan_id_found(
       // The unused panID which has been found.
-      EmberPanId panId,
+      sl_802154_pan_id_t panId,
       // The channel that the unused panID was found on.
       uint8_t channel)
 ;
 void sli_zigbee_af_unused_pan_id_found_callback(
       // The unused panID which has been found.
-      EmberPanId panId,
+      sl_802154_pan_id_t panId,
       // The channel that the unused panID was found on.
       uint8_t channel)
 ;
 
 // Child Join
-#ifdef EZSP_HOST
 void sli_zigbee_af_child_join(
       // The index of the child of interest.
       uint8_t index,
       // True if the child is joining. False the child is leaving.
       bool joining,
       // The node ID of the child.
-      EmberNodeId childId,
+      sl_802154_short_addr_t childId,
       // The EUI64 of the child.
-      EmberEUI64 childEui64,
+      sl_802154_long_addr_t childEui64,
       // The node type of the child.
-      EmberNodeType childType)
+      sl_zigbee_node_type_t childType)
 ;
-void sli_zigbee_af_child_joinCallback(
+void sli_zigbee_af_child_join_cb(
       // The index of the child of interest.
       uint8_t index,
       // True if the child is joining. False the child is leaving.
       bool joining,
       // The node ID of the child.
-      EmberNodeId childId,
+      sl_802154_short_addr_t childId,
       // The EUI64 of the child.
-      EmberEUI64 childEui64,
+      sl_802154_long_addr_t childEui64,
       // The node type of the child.
-      EmberNodeType childType)
+      sl_zigbee_node_type_t childType)
 ;
-#else // !EZSP_HOST
-void sli_zigbee_af_child_join(
-      // The index of the child of interest.
-      uint8_t index,
-      // True if the child is joining. False the child is leaving.
-      bool joining)
-;
-void sli_zigbee_af_child_joinCallback(
-      // The index of the child of interest.
-      uint8_t index,
-      // True if the child is joining. False the child is leaving.
-      bool joining)
-;
-#endif // EZSP_HOST
-
-
 
 // Duty Cycle
-#ifdef EZSP_HOST
 void sli_zigbee_af_duty_cycle(
       // The channel page whose duty cycle state has changed.
       uint8_t channelPage,
       // The channel number whose duty cycle state has changed.
       uint8_t channel,
       // The current duty cycle state.
-      EmberDutyCycleState state,
+      sl_zigbee_duty_cycle_state_t state,
       // The total number of connected end devices that are being monitored for
       // duty cycle.
       uint8_t totalDevices,
       // Consumed duty cycles of end devices that are being monitored. The first
       // entry always be the local stack's nodeId, and thus the total aggregate
       // duty cycle for the device.
-      EmberPerDeviceDutyCycle *arrayOfDeviceDutyCycles)
+      sl_zigbee_per_device_duty_cycle_t *arrayOfDeviceDutyCycles)
 ;
 void sli_zigbee_af_duty_cycle_callback(
       // The channel page whose duty cycle state has changed.
@@ -403,83 +302,64 @@ void sli_zigbee_af_duty_cycle_callback(
       // The channel number whose duty cycle state has changed.
       uint8_t channel,
       // The current duty cycle state.
-      EmberDutyCycleState state,
+      sl_zigbee_duty_cycle_state_t state,
       // The total number of connected end devices that are being monitored for
       // duty cycle.
       uint8_t totalDevices,
       // Consumed duty cycles of end devices that are being monitored. The first
       // entry always be the local stack's nodeId, and thus the total aggregate
       // duty cycle for the device.
-      EmberPerDeviceDutyCycle *arrayOfDeviceDutyCycles)
+      sl_zigbee_per_device_duty_cycle_t *arrayOfDeviceDutyCycles)
 ;
-#else // !EZSP_HOST
-void sli_zigbee_af_duty_cycle(
-      // The channel page whose duty cycle state has changed.
-      uint8_t channelPage,
-      // The channel number whose duty cycle state has changed.
-      uint8_t channel,
-      // The current duty cycle state.
-      EmberDutyCycleState state)
-;
-void sli_zigbee_af_duty_cycle_callback(
-      // The channel page whose duty cycle state has changed.
-      uint8_t channelPage,
-      // The channel number whose duty cycle state has changed.
-      uint8_t channel,
-      // The current duty cycle state.
-      EmberDutyCycleState state)
-;
-#endif // EZSP_HOST
-
-
 
 // Remote Set Binding
-// Return: ZDO response status.
 void sli_zigbee_af_remote_set_binding(
-      // Return: The contents of the binding entry.
-      EmberBindingTableEntry *entry)
+      // The contents of the binding entry.
+      sl_zigbee_binding_table_entry_t *entry,
+      // ZDO response status.
+      sl_zigbee_zdo_status_t status)
 ;
 
 // Remote Delete Binding
-// Return: ZDO response status
 void sli_zigbee_af_remote_delete_binding(
       // The index of the binding whose deletion was requested.
-      uint8_t index)
+      uint8_t index,
+      // ZDO response status
+      sl_zigbee_zdo_status_t status)
 ;
 
 // Poll Complete
 void sli_zigbee_af_poll_complete(
-      // An EmberStatus value: EMBER_SUCCESS - Data was received in response to
-      // the poll. EMBER_MAC_NO_DATA - No data was pending.
-      // EMBER_DELIVERY_FAILED - The poll message could not be sent.
-      // EMBER_MAC_NO_ACK_RECEIVED - The poll message was sent but not
+      // An sl_status_t value: SL_STATUS_OK - Data was received in response to
+      // the poll. SL_STATUS_MAC_NO_DATA - No data was pending.
+      // SL_STATUS_ZIGBEE_DELIVERY_FAILED - The poll message could not be sent.
+      // SL_STATUS_MAC_NO_ACK_RECEIVED - The poll message was sent but not
       // acknowledged by the parent.
-      EmberStatus status)
+      sl_status_t status)
 ;
 void sli_zigbee_af_poll_complete_callback(
-      // An EmberStatus value: EMBER_SUCCESS - Data was received in response to
-      // the poll. EMBER_MAC_NO_DATA - No data was pending.
-      // EMBER_DELIVERY_FAILED - The poll message could not be sent.
-      // EMBER_MAC_NO_ACK_RECEIVED - The poll message was sent but not
+      // An sl_status_t value: SL_STATUS_OK - Data was received in response to
+      // the poll. SL_STATUS_MAC_NO_DATA - No data was pending.
+      // SL_STATUS_ZIGBEE_DELIVERY_FAILED - The poll message could not be sent.
+      // SL_STATUS_MAC_NO_ACK_RECEIVED - The poll message was sent but not
       // acknowledged by the parent.
-      EmberStatus status)
+      sl_status_t status)
 ;
 
 // Poll
 void sli_zigbee_af_poll(
       // The node ID of the child that is requesting data.
-      EmberNodeId childId,
+      sl_802154_short_addr_t childId,
       // True if transmit expected, false otherwise.
       bool transmitExpected)
 ;
 void sli_zigbee_af_poll_callback(
       // The node ID of the child that is requesting data.
-      EmberNodeId childId,
+      sl_802154_short_addr_t childId,
       // True if transmit expected, false otherwise.
       bool transmitExpected)
 ;
 
-#ifdef EZSP_HOST
 // Debug
 void sli_zigbee_af_debug(
       // debug message length
@@ -487,32 +367,23 @@ void sli_zigbee_af_debug(
       // debug message
       uint8_t *messageContents)
 ;
-#else // !EZSP_HOST
-// Debug
-void sli_zigbee_af_debug(
-      // debug message
-      EmberMessageBuffer message)
-;
-#endif // EZSP_HOST
-
-
 
 // Incoming Many To One Route Request
 void sli_zigbee_af_incoming_many_to_one_route_request(
       // The short id of the concentrator.
-      EmberNodeId source,
+      sl_802154_short_addr_t source,
       // The EUI64 of the concentrator.
-      EmberEUI64 longId,
+      sl_802154_long_addr_t longId,
       // The path cost to the concentrator. The cost may decrease as additional
       // route request packets for this discovery arrive, but the callback is
       // made only once.
       uint8_t cost)
 ;
-void sli_zigbee_af_incoming_many_to_one_route_requestCallback(
+void sli_zigbee_af_incoming_many_to_one_route_request_cb(
       // The short id of the concentrator.
-      EmberNodeId source,
+      sl_802154_short_addr_t source,
       // The EUI64 of the concentrator.
-      EmberEUI64 longId,
+      sl_802154_long_addr_t longId,
       // The path cost to the concentrator. The cost may decrease as additional
       // route request packets for this discovery arrive, but the callback is
       // made only once.
@@ -521,16 +392,16 @@ void sli_zigbee_af_incoming_many_to_one_route_requestCallback(
 
 // Incoming Route Error
 void sli_zigbee_af_incoming_route_error(
-      // EMBER_SOURCE_ROUTE_FAILURE or EMBER_MANY_TO_ONE_ROUTE_FAILURE.
-      EmberStatus status,
+      // SL_STATUS_ZIGBEE_SOURCE_ROUTE_FAILURE or SL_STATUS_ZIGBEE_MANY_TO_ONE_ROUTE_FAILURE.
+      sl_status_t status,
       // The short id of the remote node.
-      EmberNodeId target)
+      sl_802154_short_addr_t target)
 ;
 void sli_zigbee_af_incoming_route_error_callback(
-      // EMBER_SOURCE_ROUTE_FAILURE or EMBER_MANY_TO_ONE_ROUTE_FAILURE.
-      EmberStatus status,
+      // SL_STATUS_ZIGBEE_SOURCE_ROUTE_FAILURE or SL_STATUS_ZIGBEE_MANY_TO_ONE_ROUTE_FAILURE.
+      sl_status_t status,
       // The short id of the remote node.
-      EmberNodeId target)
+      sl_802154_short_addr_t target)
 ;
 
 // Incoming Network Status
@@ -538,60 +409,43 @@ void sli_zigbee_af_incoming_network_status(
       // One byte over-the-air error code from network status message
       uint8_t errorCode,
       // The short ID of the remote node
-      EmberNodeId target)
+      sl_802154_short_addr_t target)
 ;
 void sli_zigbee_af_incoming_network_status_callback(
       // One byte over-the-air error code from network status message
       uint8_t errorCode,
       // The short ID of the remote node
-      EmberNodeId target)
+      sl_802154_short_addr_t target)
 ;
 
 // Incoming Route Record
 void sli_zigbee_af_incoming_route_record(
-      // The source of the route record.
-      EmberNodeId source,
-      // The EUI64 of the source.
-      EmberEUI64 sourceEui,
-      // The number of relays in relayList.
-      uint8_t relayCount,
-      // Header.
-      EmberMessageBuffer header,
-      // The relay List Index.
-      uint8_t relayListIndex)
+  sl_zigbee_rx_packet_info_t *packetInfo,
+  uint8_t relayCount,
+  uint8_t *relayList)
 ;
 void sli_zigbee_af_incoming_route_record_callback(
-      // The source of the route record.
-      EmberNodeId source,
-      // The EUI64 of the source.
-      EmberEUI64 sourceEui,
-      // The number of relays in relayList.
-      uint8_t relayCount,
-      // Header.
-      EmberMessageBuffer header,
-      // The relay List Index.
-      uint8_t relayListIndex)
+  sl_zigbee_rx_packet_info_t *packetInfo,
+  uint8_t relayCount,
+  uint8_t *relayList)
 ;
 
 // Id Conflict
 void sli_zigbee_af_id_conflict(
       // The short id for which a conflict was detected
-      EmberNodeId conflictingId)
+      sl_802154_short_addr_t conflictingId)
 ;
 void sli_zigbee_af_id_conflict_callback(
       // The short id for which a conflict was detected
-      EmberNodeId conflictingId)
+      sl_802154_short_addr_t conflictingId)
 ;
 
-#ifdef EZSP_HOST
 // Mac Passthrough Message
 void sli_zigbee_af_mac_passthrough_message(
       // The type of MAC passthrough message received.
-      EmberMacPassthroughType messageType,
-      // last hop lqi.
-      uint8_t lastHopLqi,
-      // last hop rssi.
-      int8_t lastHopRssi,
+      sl_zigbee_mac_passthrough_type_t messageType,
+      // RX packet info.
+      sl_zigbee_rx_packet_info_t *packetInfo,
       // message length.
       uint8_t messageLength,
       // The raw message that was received.
@@ -599,33 +453,14 @@ void sli_zigbee_af_mac_passthrough_message(
 ;
 void sli_zigbee_af_mac_passthrough_message_callback(
       // The type of MAC passthrough message received.
-      EmberMacPassthroughType messageType,
-      // last hop lqi.
-      uint8_t lastHopLqi,
-      // last hop rssi.
-      int8_t lastHopRssi,
+      sl_zigbee_mac_passthrough_type_t messageType,
+      // RX packet info.
+      sl_zigbee_rx_packet_info_t *packetInfo,
       // message length.
       uint8_t messageLength,
       // The raw message that was received.
       uint8_t *messageContents)
 ;
-#else // !EZSP_HOST
-// Mac Passthrough Message
-void sli_zigbee_af_mac_passthrough_message(
-      // The type of MAC passthrough message received.
-      EmberMacPassthroughType messageType,
-      // The raw message that was received.
-      EmberMessageBuffer message)
-;
-void sli_zigbee_af_mac_passthrough_message_callback(
-      // The type of MAC passthrough message received.
-      EmberMacPassthroughType messageType,
-      // The raw message that was received.
-      EmberMessageBuffer message)
-;
-#endif // EZSP_HOST
-
-
 
 // Stack Token Changed
 void sli_zigbee_af_stack_token_changed(
@@ -644,29 +479,31 @@ void sli_zigbee_af_timer(
 ;
 
 // Counter Rollover
-void sli_zigbee_af_counterRollover(
+void sli_zigbee_af_counter_rollover(
       // Type of Counter
-      EmberCounterType type)
+      sl_zigbee_counter_type_t type)
 ;
 void sli_zigbee_af_counter_rollover_callback(
       // Type of Counter
-      EmberCounterType type)
+      sl_zigbee_counter_type_t type)
 ;
 
 // Raw Transmit Complete
 void sli_zigbee_af_raw_transmit_complete(
       // message
-      EmberMessageBuffer message,
-      // EMBER_SUCCESS if the transmission was successful, or
-      // EMBER_DELIVERY_FAILED if not
-      EmberStatus status)
+      uint8_t  messageLength,
+      uint8_t* messageContents,
+      // SL_STATUS_OK if the transmission was successful, or
+      // SL_STATUS_ZIGBEE_DELIVERY_FAILED if not
+      sl_status_t status)
 ;
 void sli_zigbee_af_raw_transmit_complete_callback(
       // message
-      EmberMessageBuffer message,
-      // EMBER_SUCCESS if the transmission was successful, or
-      // EMBER_DELIVERY_FAILED if not
-      EmberStatus status)
+      uint8_t  messageLength,
+      uint8_t* messageContents,
+      // SL_STATUS_OK if the transmission was successful, or
+      // SL_STATUS_ZIGBEE_DELIVERY_FAILED if not
+      sl_status_t status)
 ;
 
 // Switch Network Key
@@ -683,77 +520,61 @@ void sli_zigbee_af_switch_network_key_callback(
 void sli_zigbee_af_zigbee_key_establishment(
       // This is the IEEE address of the partner that the device successfully
       // established a key with. This value is all zeros on a failure.
-      EmberEUI64 partner,
+      sl_802154_long_addr_t partner,
       // This is the status indicating what was established or why the key
       // establishment failed.
-      EmberKeyStatus status)
+      sl_zigbee_key_status_t status)
 ;
 void sli_zigbee_af_zigbee_key_establishment_callback(
       // This is the IEEE address of the partner that the device successfully
       // established a key with. This value is all zeros on a failure.
-      EmberEUI64 partner,
+      sl_802154_long_addr_t partner,
       // This is the status indicating what was established or why the key
       // establishment failed.
-      EmberKeyStatus status)
+      sl_zigbee_key_status_t status)
 ;
 
 // Generate Cbke Keys
 void sli_zigbee_af_generate_cbke_keys(
       // The result of the CBKE operation.
-      EmberStatus status,
+      sl_status_t status,
       // Return: The generated ephemeral public key.
-      EmberPublicKeyData *ephemeralPublicKey)
+      sl_zigbee_public_key_data_t *ephemeralPublicKey)
 ;
 
 // Calculate Smacs
 void sli_zigbee_af_calculate_smacs(
       // The Result of the CBKE operation.
-      EmberStatus status,
+      sl_status_t status,
       // Return: The calculated value of the initiator's SMAC
-      EmberSmacData *initiatorSmac,
+      sl_zigbee_smac_data_t *initiatorSmac,
       // Return: The calculated value of the responder's SMAC
-      EmberSmacData *responderSmac)
+      sl_zigbee_smac_data_t *responderSmac)
 ;
 
-#ifdef EZSP_HOST
 // Dsa Sign
 void sli_zigbee_af_dsa_sign(
       // The result of the DSA signing operation.
-      EmberStatus status,
+      sl_status_t status,
       // Message length
       uint8_t messageLength,
       // The message that includes the original message and the
       // appended signature.
       uint8_t *message)
 ;
-#else // !EZSP_HOST
-// Dsa Sign
-void sli_zigbee_af_dsa_sign(
-      // The result of the DSA signing operation.
-      EmberStatus status,
-      // The message and attached which includes the original message and the
-      // appended signature.
-      EmberMessageBuffer signedMessage)
-;
-#endif // EZSP_HOST
-
-
 
 // Dsa Verify
 void sli_zigbee_af_dsa_verify(
       // The result of the DSA verification operation.
-      EmberStatus status)
+      sl_status_t status)
 ;
 
-#ifdef EZSP_HOST
 // Incoming Bootload Message
 void sli_zigbee_af_incoming_bootload_message(
       // The EUI64 of the sending node.
-      EmberEUI64 longId,
-      // last hop lqi.
-      uint8_t lastHopLqi,
-      // last hop rssi.
-      int8_t lastHopRssi,
+      sl_802154_long_addr_t longId,
+      // RX packet info.
+      sl_zigbee_rx_packet_info_t *packetInfo,
       // message length.
       uint8_t messageLength,
       // The bootload message that was sent.
@@ -761,181 +582,99 @@ void sli_zigbee_af_incoming_bootload_message(
 ;
 void sli_zigbee_af_incoming_bootload_message_callback(
       // The EUI64 of the sending node.
-      EmberEUI64 longId,
-      // last hop lqi.
-      uint8_t lastHopLqi,
-      // last hop rssi.
-      int8_t lastHopRssi,
+      sl_802154_long_addr_t longId,
+      // RX packet info.
+      sl_zigbee_rx_packet_info_t *packetInfo,
       // message length.
       uint8_t messageLength,
       // The bootload message that was sent.
       uint8_t *messageContents)
 ;
-#else // !EZSP_HOST
-// Incoming Bootload Message
-void sli_zigbee_af_incoming_bootload_message(
-      // The EUI64 of the sending node.
-      EmberEUI64 longId,
-      // The bootload message that was sent.
-      EmberMessageBuffer message)
-;
-void sli_zigbee_af_incoming_bootload_message_callback(
-      // The EUI64 of the sending node.
-      EmberEUI64 longId,
-      // The bootload message that was sent.
-      EmberMessageBuffer message)
-;
-#endif // EZSP_HOST
 
-
-
-#ifdef EZSP_HOST
 // Bootload Transmit Complete
 void sli_zigbee_af_bootload_transmit_complete(
-      // An EmberStatus value of EMBER_SUCCESS if an ACK was received from the
-      // destination or EMBER_DELIVERY_FAILED if no ACK was received.
-      EmberStatus status,
+      // An sl_status_t value of SL_STATUS_OK if an ACK was received from the
+      // destination or SL_STATUS_ZIGBEE_DELIVERY_FAILED if no ACK was received.
+      sl_status_t status,
       // message length.
       uint8_t messageLength,
       // The bootload message that was sent.
       uint8_t *messageContents)
 ;
 void sli_zigbee_af_bootload_transmit_complete_callback(
-      // An EmberStatus value of EMBER_SUCCESS if an ACK was received from the
-      // destination or EMBER_DELIVERY_FAILED if no ACK was received.
-      EmberStatus status,
+      // An sl_status_t value of SL_STATUS_OK if an ACK was received from the
+      // destination or SL_STATUS_ZIGBEE_DELIVERY_FAILED if no ACK was received.
+      sl_status_t status,
       // message length.
       uint8_t messageLength,
       // The bootload message that was sent.
       uint8_t *messageContents)
 ;
-#else // !EZSP_HOST
-// Bootload Transmit Complete
-void sli_zigbee_af_bootload_transmit_complete(
-      // The bootload message that was sent.
-      EmberMessageBuffer message,
-      // An EmberStatus value of EMBER_SUCCESS if an ACK was received from the
-      // destination or EMBER_DELIVERY_FAILED if no ACK was received.
-      EmberStatus status)
-;
-void sli_zigbee_af_bootload_transmit_complete_callback(
-      // The bootload message that was sent.
-      EmberMessageBuffer message,
-      // An EmberStatus value of EMBER_SUCCESS if an ACK was received from the
-      // destination or EMBER_DELIVERY_FAILED if no ACK was received.
-      EmberStatus status)
-;
-#endif // EZSP_HOST
 
-
-
-#ifdef EZSP_HOST
 // Zll Network Found
-void sli_zigbee_af_zll_networkFound(
+void sli_zigbee_af_zll_network_found(
       // Information about the network.
-      EmberZllNetwork *networkInfo,
+      sl_zigbee_zll_network_t *networkInfo,
       // Used to interpret deviceInfo field.
       bool isDeviceInfoNull,
       // Device specific information.
-      EmberZllDeviceInfoRecord *deviceInfo,
-      // The link quality from the node that last relayed the message.
-      uint8_t lastHopLqi,
-      // The energy level (in units of dBm) observed during reception.
-      int8_t lastHopRssi)
+      sl_zigbee_zll_device_info_record_t *deviceInfo,
+      // RX packet info.
+      sl_zigbee_rx_packet_info_t *packetInfo)
 ;
 void sli_zigbee_af_zll_network_found_callback(
       // Information about the network.
-      EmberZllNetwork *networkInfo,
+      sl_zigbee_zll_network_t *networkInfo,
       // Used to interpret deviceInfo field.
       bool isDeviceInfoNull,
       // Device specific information.
-      EmberZllDeviceInfoRecord *deviceInfo,
-      // The link quality from the node that last relayed the message.
-      uint8_t lastHopLqi,
-      // The energy level (in units of dBm) observed during reception.
-      int8_t lastHopRssi)
+      sl_zigbee_zll_device_info_record_t *deviceInfo,
+      // RX packet info.
+      sl_zigbee_rx_packet_info_t *packetInfo)
 ;
-#else // !EZSP_HOST
-// Zll Network Found
-void sli_zigbee_af_zll_networkFound(
-      // Return: Information about the network.
-      const EmberZllNetwork *networkInfo,
-      // Return: Device specific information.
-      const EmberZllDeviceInfoRecord *deviceInfo)
-;
-void sli_zigbee_af_zll_network_found_callback(
-      // Return: Information about the network.
-      const EmberZllNetwork *networkInfo,
-      // Return: Device specific information.
-      const EmberZllDeviceInfoRecord *deviceInfo)
-;
-#endif // EZSP_HOST
-
-
 
 // Zll Scan Complete
 void sli_zigbee_af_zll_scan_complete(
       // Status of the operation.
-      EmberStatus status)
+      sl_status_t status)
 ;
 void sli_zigbee_af_zll_scan_complete_callback(
       // Status of the operation.
-      EmberStatus status)
+      sl_status_t status)
 ;
 
-#ifdef EZSP_HOST
 // Zll Address Assignment
-void sli_zb_af_zll_address_assignment(
+void sli_zigbee_af_zll_address_assignment(
       // Address assignment information.
-      EmberZllAddressAssignment *addressInfo,
-      // The link quality from the node that last relayed the message.
-      uint8_t lastHopLqi,
-      // The energy level (in units of dBm) observed during reception.
-      int8_t lastHopRssi)
+      sl_zigbee_zll_address_assignment_t *addressInfo,
+      // Information about incoming packet.
+      sl_zigbee_rx_packet_info_t *packetInfo)
 ;
 void sli_zigbee_af_zll_address_assignment_callback(
       // Address assignment information.
-      EmberZllAddressAssignment *addressInfo,
-      // The link quality from the node that last relayed the message.
-      uint8_t lastHopLqi,
-      // The energy level (in units of dBm) observed during reception.
-      int8_t lastHopRssi)
+      sl_zigbee_zll_address_assignment_t *addressInfo,
+      // Information about incoming packet.
+      sl_zigbee_rx_packet_info_t *packetInfo)
 ;
-#else // !EZSP_HOST
-// Zll Address Assignment
-void sli_zb_af_zll_address_assignment(
-      // Return: Address assignment information.
-      const EmberZllAddressAssignment *addressInfo)
-;
-void sli_zigbee_af_zll_address_assignment_callback(
-      // Return: Address assignment information.
-      const EmberZllAddressAssignment *addressInfo)
-;
-#endif // EZSP_HOST
-
-
 
 // Zll Touch Link Target
 void sli_zigbee_af_zll_touch_link_target(
       // Return: Information about the network.
-      const EmberZllNetwork *networkInfo)
+      const sl_zigbee_zll_network_t *networkInfo)
 ;
 void sli_zigbee_af_zll_touch_link_target_callback(
       // Return: Information about the network.
-      const EmberZllNetwork *networkInfo)
+      const sl_zigbee_zll_network_t *networkInfo)
 ;
 
-#ifdef EZSP_HOST
 // Mac Filter Match Message
 void sli_zigbee_af_mac_filter_match_message(
       // filter index match.
       uint8_t filterIndexMatch,
       // message type.
-      EmberMacPassthroughType messageType,
-      // last hop lqi.
-      uint8_t lastHopLqi,
-      // last hop rssi.
-      int8_t lastHopRssi,
+      sl_zigbee_mac_passthrough_type_t messageType,
+      // RX packet info
+      sl_zigbee_rx_packet_info_t *packetInfo,
       // message length.
       uint8_t messageLength,
       // message contents.
@@ -945,46 +684,31 @@ void sli_zigbee_af_mac_filter_match_message_callback(
       // filter index match.
       uint8_t filterIndexMatch,
       // message type.
-      EmberMacPassthroughType messageType,
-      // last hop lqi.
-      uint8_t lastHopLqi,
-      // last hop rssi.
-      int8_t lastHopRssi,
+      sl_zigbee_mac_passthrough_type_t messageType,
+      // RX packet info
+      sl_zigbee_rx_packet_info_t *packetInfo,
       // message length.
       uint8_t messageLength,
       // message contents.
       uint8_t *messageContents)
 ;
-#else // !EZSP_HOST
-// Mac Filter Match Message
-void sli_zigbee_af_mac_filter_match_message(
-      // Return: macFilterMatchStruct.
-      const EmberMacFilterMatchStruct *macFilterMatchStruct)
-;
-void sli_zigbee_af_mac_filter_match_message_callback(
-      // Return: macFilterMatchStruct.
-      const EmberMacFilterMatchStruct *macFilterMatchStruct)
-;
-#endif // EZSP_HOST
-
-
 
 // D Gp Sent
 void sli_zigbee_af_d_gp_sent(
-      // An EmberStatus value indicating success or the reason for failure.
-      EmberStatus status,
+      // An sl_status_t value indicating success or the reason for failure.
+      sl_status_t status,
       // The handle of the GPDF.
       uint8_t gpepHandle)
 ;
 void sli_zigbee_af_d_gp_sent_callback(
-      // An EmberStatus value indicating success or the reason for failure.
-      EmberStatus status,
+      // An sl_status_t value indicating success or the reason for failure.
+      sl_status_t status,
       // The handle of the GPDF.
       uint8_t gpepHandle)
 ;
 
 // Pan Id Conflict
-// Return: An EmberStatus value indicating success or the reason for failure.
+// Return: An sl_status_t value indicating success or the reason for failure.
 void sli_zigbee_af_pan_id_conflict(
       // Number of conflict reports
       int8_t conflictCount)
@@ -993,21 +717,7 @@ void sli_zigbee_af_pan_id_conflict(
 // Orphan Notification
 void sli_zigbee_af_orphan_notification(
       // The 8 byte EUI64 of the sender.
-      EmberEUI64 longId)
-;
-
-// Counter
-void sli_zigbee_af_counter(
-      // Type of Counter
-      EmberCounterType type,
-      // Counter Info and value
-      EmberCounterInfo Info)
-;
-void sli_zigbee_af_counter_callback(
-      // Type of Counter
-      EmberCounterType type,
-      // Counter Info and value
-      EmberCounterInfo Info)
+      sl_802154_long_addr_t longId)
 ;
 
 // Mac Passthrough Filter
@@ -1020,35 +730,35 @@ void sli_zigbee_af_mac_passthrough_filter(
 // Generate Cbke Keys Handler283k1
 void sli_zigbee_af_generate_cbke_keys_handler283k1(
       // The result of the CBKE operation.
-      EmberStatus status,
+      sl_status_t status,
       // Return: The generated ephemeral public key.
-      EmberPublicKey283k1Data *ephemeralPublicKey)
+      sl_zigbee_public_key_283k1_data_t *ephemeralPublicKey)
 ;
 
 // Calculate Smacs Handler283k1
-void sli_zigbee_af_calculate_smacsHandler283k1(
+void sli_zigbee_af_calculate_smacs_283k1_handler(
       // The Result of the CBKE operation.
-      EmberStatus status,
+      sl_status_t status,
       // Return: The calculated value of the initiator's SMAC
-      EmberSmacData *initiatorSmac,
+      sl_zigbee_smac_data_t *initiatorSmac,
       // Return: The calculated value of the responder's SMAC
-      EmberSmacData *responderSmac)
+      sl_zigbee_smac_data_t *responderSmac)
 ;
 
 // Gpep Incoming Message
 void sli_zigbee_af_gpep_incoming_message(
       // The status of the GPDF receive.
-      EmberStatus status,
+      sl_zigbee_gp_status_t status,
       // The gpdLink value of the received GPDF.
       uint8_t gpdLink,
       // The GPDF sequence number.
       uint8_t sequenceNumber,
       // The address of the source GPD.
-      EmberGpAddress *addr,
+      sl_zigbee_gp_address_t *addr,
       // The security level of the received GPDF.
-      EmberGpSecurityLevel gpdfSecurityLevel,
+      sl_zigbee_gp_security_level_t gpdfSecurityLevel,
       // The securityKeyType used to decrypt/authenticate the incoming GPDF.
-      EmberGpKeyType gpdfSecurityKeyType,
+      sl_zigbee_gp_key_type_t gpdfSecurityKeyType,
       // Whether the incoming GPDF had the auto-commissioning bit set.
       bool autoCommissioning,
       // Bidirectional information represented in bitfields, where bit0 holds
@@ -1071,17 +781,17 @@ void sli_zigbee_af_gpep_incoming_message(
 ;
 void sli_zigbee_af_gpep_incoming_message_callback(
       // The status of the GPDF receive.
-      EmberStatus status,
+      sl_zigbee_gp_status_t status,
       // The gpdLink value of the received GPDF.
       uint8_t gpdLink,
       // The GPDF sequence number.
       uint8_t sequenceNumber,
       // The address of the source GPD.
-      EmberGpAddress *addr,
+      sl_zigbee_gp_address_t *addr,
       // The security level of the received GPDF.
-      EmberGpSecurityLevel gpdfSecurityLevel,
+      sl_zigbee_gp_security_level_t gpdfSecurityLevel,
       // The securityKeyType used to decrypt/authenticate the incoming GPDF.
-      EmberGpKeyType gpdfSecurityKeyType,
+      sl_zigbee_gp_key_type_t gpdfSecurityKeyType,
       // Whether the incoming GPDF had the auto-commissioning bit set.
       bool autoCommissioning,
       // Bidirectional information represented in bitfields, where bit0 holds
@@ -1111,7 +821,7 @@ void sli_zigbee_af_rtos_idle(
 ;
 
 // Rtos Stack Wakeup Isr
-void sli_zb_af_rtos_stack_wakeup_isr(void)
+void sli_zigbee_common_wakeup_isr(void)
 ;
 
 // Radio Needs Calibrating
@@ -1121,5 +831,5 @@ void sli_zigbee_af_radio_needs_calibrating(void)
 // Scan Error
 void sli_zigbee_af_scan_error(
       // The error status of a scan
-      EmberStatus status)
+      sl_status_t status)
 ;

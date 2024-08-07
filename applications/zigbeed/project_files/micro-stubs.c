@@ -16,7 +16,7 @@
  ******************************************************************************/
 
 #include <setjmp.h>
-#include "stack/include/ember.h"
+#include "stack/include/sl_zigbee.h"
 #include "em2xx-reset-defs.h"
 
 extern jmp_buf gResetJump;
@@ -28,17 +28,10 @@ void halStackProcessBootCount(void)
   // sample applications.
 
 #if defined(CREATOR_STACK_BOOT_COUNTER)
-#ifndef EMBER_SCRIPTED_TEST
+#ifndef SL_ZIGBEE_SCRIPTED_TEST
   halCommonIncrementCounterToken(TOKEN_STACK_BOOT_COUNTER);
 #endif
 #endif
-}
-
-// Referenced from serialOkToBootload in ash-ncp.c
-bool halInternalUartTxIsIdle(uint8_t port)
-{
-  (void)port;
-  return true;
 }
 
 // Referenced from processEzspCommand in command-handlers.c
@@ -48,9 +41,9 @@ uint16_t halGetStandaloneBootloaderVersion(void)
 }
 
 // Referenced from checkBootloaderLaunch in ncp-common.c
-EmberStatus halLaunchStandaloneBootloader(uint8_t mode)
+sl_status_t halLaunchStandaloneBootloader(uint8_t mode)
 {
-  return EMBER_ERR_FATAL;
+  return SL_STATUS_FAIL;
 }
 
 // Removed platform/base/hal/micro/unix/host/micro.c so placing stubs here
@@ -70,7 +63,7 @@ void halReboot(void)
   assert(false); //Should never reach here
 }
 
-// Referenced from emberStopScan in zigbee-scan.c
+// Referenced from sli_zigbee_stack_stop_scan in zigbee-scan.c
 // Stub in platform/radio/rail_lib/chip/simulation/simulation_stub.c
 void halStackSymbolDelayAIsr(void)
 {
@@ -85,9 +78,9 @@ void halStackIndicateActivity(bool turnOn)
 // Needed by zigbee-stack.c but not needed by legacy_host/src/token.c
 // so it can be left empty. If there is a failure during token
 // initialization, unix/host/token.c will raise an assert
-EmberStatus halStackInitTokens()
+sl_status_t halStackInitTokens()
 {
-  return EMBER_SUCCESS;
+  return SL_STATUS_OK;
 }
 
 void halResetWatchdog(void)

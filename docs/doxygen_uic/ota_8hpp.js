@@ -1,6 +1,6 @@
 var ota_8hpp =
 [
-    [ "meta_t", "structuic__ota_1_1meta__t.html", "structuic__ota_1_1meta__t" ],
+    [ "uic_ota::meta_t", "structuic__ota_1_1meta__t.html", "structuic__ota_1_1meta__t" ],
     [ "image_available_func_t", "ota_8hpp.html#ae6ebb5b487964684aa56019a2730acfc", null ],
     [ "image_ready_funct_t", "ota_8hpp.html#adc5ba0ea65ca5b359fd4d8e585a042fb", null ],
     [ "image_ready_result_t", "ota_8hpp.html#a51531aaaf7c3f22f4b9683843de618ee", [

@@ -18,10 +18,10 @@
 
 // <h>Zigbee OTA Bootload Cluster Storage Common Code configuration
 
-// <o EMBER_AF_PLUGIN_OTA_STORAGE_COMMON_MAX_TAGS_IN_OTA_FILE> Max Tags In OTA File <1-16>
+// <o SL_ZIGBEE_AF_PLUGIN_OTA_STORAGE_COMMON_MAX_TAGS_IN_OTA_FILE> Max Tags In OTA File <1-16>
 // <i> Default: 6
 // <i> Maximum amount of tags embedded within an OTA file. Most images will include an Upgrade Image tag, a certificate tag and a signature tag. The default max should be more than enough.
-#define EMBER_AF_PLUGIN_OTA_STORAGE_COMMON_MAX_TAGS_IN_OTA_FILE   6
+#define SL_ZIGBEE_AF_PLUGIN_OTA_STORAGE_COMMON_MAX_TAGS_IN_OTA_FILE   6
 
 // </h>
 

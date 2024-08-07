@@ -16,11 +16,11 @@
  ******************************************************************************/
 
 #include PLATFORM_HEADER
-#include EMBER_AF_API_EMBER_TYPES
-#include EMBER_AF_API_HAL
+#include SL_ZIGBEE_AF_API_EMBER_TYPES
+#include SL_ZIGBEE_AF_API_HAL
 
 #include "app/ncp/plugin/xncp/xncp.h"
-#include "event_queue/event-queue.h"
+#include "app/framework/common/zigbee_app_framework_event.h"
 
 /* This sample application demostrates Zigbeed using a custom protocol to
  * communicate with the host. As an example protocol, the Zigbeed has defined
@@ -59,34 +59,25 @@ enum {
   // three enum values above.
   CUSTOM_PROTOCOL_COMMAND_GET_CUSTOM    = 0x03,
 };
-typedef uint8_t LedProtocolCommand;
+typedef uint8_t sli_zigbee_led_protocol_command_t;
 
 static uint8_t customState;
 static uint32_t customEventHandlerDelayMS = MILLISECOND_TICKS_PER_SECOND;
 
 // -----------------------------------------------------------------------------
 // Custom event
-extern EmberEventQueue sli_zigbee_af_app_event_queue;
-void customEventHandler(EmberEvent *event);
-static EmberEvent customEvent = {
-  {
-    &sli_zigbee_af_app_event_queue,
-    customEventHandler,
-    NULL,
-    "Custom Event"
-  },
-  NULL
-};
+static void customEventHandler(sl_zigbee_af_event_t *event);
+static sl_zigbee_af_event_t customEvent;
 
 // Custom event handler.
-void customEventHandler(EmberEvent *event)
+static void customEventHandler(sl_zigbee_af_event_t *event)
 {
   switch (customState) {
     default:
       ;
   }
 
-  emberEventSetDelayMs(&customEvent, customEventHandlerDelayMS);
+  sl_zigbee_af_event_set_delay_ms(&customEvent, customEventHandlerDelayMS);
 }
 
 // -----------------------------------------------------------------------------
@@ -97,9 +88,10 @@ void customEventHandler(EmberEvent *event)
  * This function is calcustom when the application starts and can be used to
  * perform any additional initialization required at system startup.
  */
-void emberAfMainInitCallback(void)
+void sl_zigbee_af_main_init_cb(void)
 {
-  emberEventSetActive(&customEvent);
+  sl_zigbee_af_event_init(&customEvent, customEventHandler);
+  sl_zigbee_af_event_set_active(&customEvent);
 }
 
 /** @brief Incoming Custom EZSP Message Callback
@@ -108,7 +100,7 @@ void emberAfMainInitCallback(void)
  * HOST.  The message length and payload is passed to the callback in the first
  * two arguments.  The implementation can then fill in the replyPayload and set
  * the replayPayloadLength to the number of bytes in the replyPayload.
- * See documentation for the function ezspCustomFrame on sending these messages
+ * See documentation for the function sl_zigbee_ezsp_custom_frame on sending these messages
  * from the HOST.
  *
  * @param messageLength The length of the messagePayload.
@@ -120,18 +112,18 @@ void emberAfMainInitCallback(void)
  * @param replyPayload The custom message to send back to the HOST in respose
  * to the custom message. Ver.: always
  *
- * @return An ::EmberStatus indicating the result of the custom message
+ * @return An ::sl_status_t indicating the result of the custom message
  * handling.  This returned status is always the first byte of the EZSP
  * response.
  */
-EmberStatus emberAfPluginXncpIncomingCustomFrameCallback(uint8_t messageLength,
-                                                         uint8_t *messagePayload,
-                                                         uint8_t *replyPayloadLength,
-                                                         uint8_t *replyPayload)
+sl_status_t sl_zigbee_af_xncp_incoming_custom_frame_cb(uint8_t messageLength,
+                                                       uint8_t *messagePayload,
+                                                       uint8_t *replyPayloadLength,
+                                                       uint8_t *replyPayload)
 {
   // First byte is the command ID.
   uint8_t commandId = messagePayload[CUSTOM_PROTOCOL_COMMAND_INDEX];
-  EmberStatus status = EMBER_SUCCESS;
+  sl_status_t status = SL_STATUS_OK;
   *replyPayloadLength = 0;
 
   switch (commandId) {
@@ -149,7 +141,7 @@ EmberStatus emberAfPluginXncpIncomingCustomFrameCallback(uint8_t messageLength,
       *replyPayloadLength += sizeof(customState);
       break;
     default:
-      status = EMBER_INVALID_CALL;
+      status = SL_STATUS_INVALID_STATE;
   }
 
   return status;
@@ -166,8 +158,8 @@ EmberStatus emberAfPluginXncpIncomingCustomFrameCallback(uint8_t messageLength,
  * @param versionNumber The version number of the Zigbeed application.
  * @param manufacturerId The manufacturer ID of the Zigbeed application.
  */
-void emberAfPluginXncpGetXncpInformation(uint16_t *manufacturerId,
-                                         uint16_t *versionNumber)
+void sl_zigbee_af_xncp_get_xncp_information(uint16_t *manufacturerId,
+                                            uint16_t *versionNumber)
 {
   *versionNumber = ZIGBEED_VERSION_NUMBER;
   *manufacturerId = ZIGBEED_MANUFACTURER_ID;

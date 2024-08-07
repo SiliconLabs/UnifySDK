@@ -14,5 +14,5 @@ code {
 
 .content {
   max-height: 390px;
-  overflow: auto;
+  overflow: visible;
 }

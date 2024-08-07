@@ -2,7 +2,7 @@ var classzigpc_1_1gateway_1_1BindingRequestRequest =
 [
     [ "BindingRequestRequest", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a548901097a5e9f1da0a36103f58825fb", null ],
     [ "~BindingRequestRequest", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a8217e5dfe40e19be8f90151419c6e263", null ],
-    [ "invoke", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a34e91c18a3eed679c89087b7ecb56aa9", null ],
+    [ "invoke", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a1f791c91778e3dd4bd0ac2146fb0f7ee", null ],
     [ "cluster_id", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a31ed2d90e86a0cc28f67b738b28b6c5a", null ],
     [ "dest_endpoint_id", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a5cb28ebc6490e040c86087436ca23e57", null ],
     [ "dest_eui64", "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a8870ff1d32552c1b2e3e04652cd2d1ca", null ],

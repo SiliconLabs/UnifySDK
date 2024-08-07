@@ -17,7 +17,7 @@ Next, make sure you've successfully started and connected CPCd to the RCP
 as described on the [Multiprotocol Setup page](../../doc/getting_started_multiprotocol_cpc.md).
 
 If you followed the
-[Unify Host SDK installation instructions](../../doc/getting_started.md),
+[Unify Host SDK installation instructions](../../doc/getting_started_unify.md),
 the BlueZ Bluetooth stack should already be installed on your Raspberry Pi.
 If not, BlueZ can be installed using `sudo apt install bluez`, or can be downloaded and compiled from source from the [offical BlueZ repository](https://git.kernel.org/pub/scm/bluetooth/bluez.git/about/).
 

@@ -30,9 +30,9 @@ static inline void zigpc_gateway_ncp_set_ezsp_policies(void)
 {
   const zigpc_config_t *conf = zigpc_get_config();
   if ((conf != nullptr) && (conf->tc_use_well_known_key == false)) {
-    EzspStatus status = zigbeeHostSetEzspPolicy(
-      EZSP_TRUST_CENTER_POLICY,
-      (EZSP_DECISION_ALLOW_JOINS | EZSP_DECISION_JOINS_USE_INSTALL_CODE_KEY),
+    sl_zigbee_ezsp_status_t status = zigbeeHostSetEzspPolicy(
+      SL_ZIGBEE_EZSP_TRUST_CENTER_POLICY,
+      (SL_ZIGBEE_EZSP_DECISION_ALLOW_JOINS | SL_ZIGBEE_EZSP_DECISION_JOINS_USE_INSTALL_CODE_KEY),
       "Trust Center Policy",
       "Joins using install code only");
 
@@ -43,18 +43,16 @@ static inline void zigpc_gateway_ncp_set_ezsp_policies(void)
   }
 }
 
-void zigpc_gateway_on_ncp_pre_reset(EzspStatus resetStatus)
+void zigpc_gateway_on_ncp_pre_reset(sl_zigbee_ezsp_status_t resetStatus)
 {
   sl_log_warning(LOG_TAG,
                  "NCP Resetting due to EZSP error detected: 0x%X",
                  resetStatus);
   zigpc::gateway::RequestQueue::getInstance().stopDispatching();
 }
-void zigpc_gateway_on_ncp_post_reset(bool ncpMemConfigureStage)
+void zigpc_gateway_on_ncp_post_reset()
 {
-  if (ncpMemConfigureStage == false) {
     zigpc_gateway_ncp_set_ezsp_policies();
 
     zigpc::gateway::RequestQueue::getInstance().startDispatching();
-  }
 }

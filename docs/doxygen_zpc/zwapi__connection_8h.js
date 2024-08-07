@@ -17,6 +17,6 @@ var zwapi__connection_8h =
     [ "zwapi_connection_refresh", "zwapi__connection_8h.html#a1e45c6c9695b5e7b415adfad40080720", null ],
     [ "zwapi_connection_restart", "zwapi__connection_8h.html#a13b6e6b6c56844f4344fabe490bc5eac", null ],
     [ "zwapi_connection_shutdown", "zwapi__connection_8h.html#ad89586e01dc2af5757f767f0bbe6e889", null ],
-    [ "zwapi_connection_status_to_string", "zwapi__connection_8h.html#a27ac7b9072b55b5aaeb3d2e21bb4e241", null ],
+    [ "zwapi_connection_status_to_string", "zwapi__connection_8h.html#a86b069d152a5c2f8ac95774a688dff48", null ],
     [ "zwapi_connection_tx", "zwapi__connection_8h.html#af47f8cbd93974d5c91d659fdeb7a870b", null ]
 ];

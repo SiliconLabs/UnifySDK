@@ -1312,6 +1312,52 @@ uic_mqtt_dotdot_descriptor_write_attributes_callback_t get_uic_mqtt_dotdot_descr
   return test_uic_mqtt_dotdot_descriptor_write_attributes_callback;
 }
 
+static uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_t test_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t test_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_t get_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t get_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback = NULL;
+uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t get_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback(){
+  return test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback;
+}
+static uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback = NULL;
+uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t get_uic_mqtt_dotdot_unify_fan_control_turn_off_callback(){
+  return test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback;
+}
+static uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t get_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t get_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_t test_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t test_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_t get_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t get_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback = NULL;
+uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t get_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback(){
+  return test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback;
+}
+static uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback = NULL;
+uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t get_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback(){
+  return test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback;
+}
 // clang-format on
 
 #define TEST_UNID "test-unid-123"
@@ -1394,6 +1440,10 @@ void test_window_covering_go_to_lift_value_command();
 void test_window_covering_go_to_lift_percentage_command();
 void test_window_covering_go_to_tilt_value_command();
 void test_window_covering_go_to_tilt_percentage_command();
+void test_zwave_fan_control_no_get_endpoint_function_registered();
+void test_zwave_fan_control_set_fan_mode_command_support();
+void test_zwave_fan_control_set_fan_mode_command_update_desired();
+void test_zwave_fan_control_set_fan_mode_command_clear_reported();
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -2878,6 +2928,56 @@ void set_uic_mqtt_dotdot_descriptor_write_attributes_callback_stub(
 {
   test_uic_mqtt_dotdot_descriptor_write_attributes_callback = callback;
 }
+void set_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback = callback;
+}
+void uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_set_stub(
+  const uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback = callback;
+}
+void uic_mqtt_dotdot_unify_fan_control_turn_off_callback_set_stub(
+  const uic_mqtt_dotdot_unify_fan_control_turn_off_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback = callback;
+}
+void uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_set_stub(
+  const uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback = callback;
+}
+void uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set_stub(
+  const uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback = callback;
+}
 // clang-format on
 
 // Test functions
@@ -3798,6 +3898,36 @@ void setUp()
   test_uic_mqtt_dotdot_descriptor_write_attributes_callback = NULL;
   uic_mqtt_dotdot_set_descriptor_write_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_descriptor_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_fan_control_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_fan_control_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_fan_control_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback = NULL;
+  uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_set_Stub(
+    &uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback_set_stub);
+  test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback = NULL;
+  uic_mqtt_dotdot_unify_fan_control_turn_off_callback_set_Stub(
+    &uic_mqtt_dotdot_unify_fan_control_turn_off_callback_set_stub);
+  test_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_thermostat_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_thermostat_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_thermostat_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_humidity_control_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_humidity_control_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback = NULL;
+  uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_set_Stub(
+    &uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_set_stub);
+  test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback = NULL;
+  uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set_Stub(
+    &uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set_stub);
   // clang-format on
 
   group_command_dispatch = NULL;
@@ -4560,6 +4690,31 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_position_estimation_position(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_protocol_controller_network_management_network_management_state(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_descriptor_device_type_list(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_fan_control_z_wave_fan_mode(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_fan_control_z_wave_supported_fan_mode(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_fan_control_z_wave_fan_state(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_thermostat_thermostat_mode(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_thermostat_supported_thermostat_mode(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_thermostat_operating_state(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_reporting_mode(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_supported_reporting_mode(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_current_state(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_supported_set_points(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_humidifier_setpoint_min(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_humidifier_setpoint_max(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_humidifier_setpoint(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_humidifier_setpoint_scale(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_humidifier_setpoint_precision(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_dehumidifier_setpoint_min(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_dehumidifier_setpoint_max(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_dehumidifier_setpoint(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_dehumidifier_setpoint_scale(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_dehumidifier_setpoint_precision(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint_min(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint_max(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint_scale(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint_precision(expected_unid,expected_endpoint_id) );
 
   // clang-format on
   // ColorControl checks the value in the bitmask:
@@ -6288,7 +6443,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&user_name_value, 0x00, sizeof(user_name_value));
       uint32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -6422,7 +6577,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
       uint16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -7692,6 +7847,58 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_protocol_controller_network_management_write_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback) {
+    // Dummy command parameters
+      ZWaveFanModeEnum fan_mode_value;
+      memset(&fan_mode_value, 0x00, sizeof(fan_mode_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        fan_mode_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback) {
+    // Dummy command parameters
+      ModeType mode_value;
+      memset(&mode_value, 0x00, sizeof(mode_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        mode_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback) {
+    // Dummy command parameters
+      SetpointType type_value;
+      memset(&type_value, 0x00, sizeof(type_value));
+      uint8_t precision_value;
+      memset(&precision_value, 0x00, sizeof(precision_value));
+      uint8_t scale_value;
+      memset(&scale_value, 0x00, sizeof(scale_value));
+      int32_t value_value;
+      memset(&value_value, 0x00, sizeof(value_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        type_value,
+      
+        precision_value,
+      
+        scale_value,
+      
+        value_value
       
       ));
   }
@@ -9415,7 +9622,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&user_name_value, 0x00, sizeof(user_name_value));
       uint32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9549,7 +9756,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
       uint16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
-      DrlkUserStatus user_status_value;
+      DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -10819,6 +11026,58 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_protocol_controller_network_management_write_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback) {
+    // Dummy command parameters
+      ZWaveFanModeEnum fan_mode_value;
+      memset(&fan_mode_value, 0x00, sizeof(fan_mode_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_unify_fan_control_set_fan_mode_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        fan_mode_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_unify_fan_control_turn_off_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback) {
+    // Dummy command parameters
+      ModeType mode_value;
+      memset(&mode_value, 0x00, sizeof(mode_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_unify_humidity_control_mode_set_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        mode_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback) {
+    // Dummy command parameters
+      SetpointType type_value;
+      memset(&type_value, 0x00, sizeof(type_value));
+      uint8_t precision_value;
+      memset(&precision_value, 0x00, sizeof(precision_value));
+      uint8_t scale_value;
+      memset(&scale_value, 0x00, sizeof(scale_value));
+      int32_t value_value;
+      memset(&value_value, 0x00, sizeof(value_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        type_value,
+      
+        precision_value,
+      
+        scale_value,
+      
+        value_value
       
       ));
   }

@@ -1,6 +1,6 @@
 var modules =
 [
-    [ "Mapper path match evaluation", "group__Attribute.html", null ],
+    [ "Mapper path match evaluation", "group__Attribute.html", "group__Attribute" ],
     [ "Scope settings helpers", "group__attribute__mapper__scope__settings.html", "group__attribute__mapper__scope__settings" ],
     [ "Unify Attribute Definitions", "group__uic__attribute__definitions.html", null ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],

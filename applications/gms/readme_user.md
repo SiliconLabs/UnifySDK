@@ -20,7 +20,7 @@ functionality.
 ## Installation
 
 For installing please refer to the general installation method in
-[Getting started](../../doc/getting_started.md).
+[Getting started](../../doc/getting_started_unify.md).
 
 ## Running the GMS
 

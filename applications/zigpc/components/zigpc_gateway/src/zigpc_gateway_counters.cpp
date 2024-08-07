@@ -22,16 +22,16 @@
 #include <unordered_map>
 
 /**
- * @brief Raw strings exported from EmberAf in stack/include/ember-types.h
+ * @brief Raw strings exported from EmberAf in stack/include/sl_zigbee_types.h
  *
  */
-const std::vector<const char*> COUNTER_LABELS_RAW = {EMBER_COUNTER_STRINGS};
+const std::vector<const char*> COUNTER_LABELS_RAW = {SL_ZIGBEE_COUNTER_STRINGS};
 
-const static std::array<std::string, EMBER_COUNTER_TYPE_COUNT> COUNTER_LABELS_WO_SPACES = [](){
+const static std::array<std::string, SL_ZIGBEE_COUNTER_TYPE_COUNT > COUNTER_LABELS_WO_SPACES = [](){
     // Transform raw counter labels to remove included spaces
     // i.e. "Mac Rx Bcast" -> "MacRxBcast"
-    std::array<std::string, EMBER_COUNTER_TYPE_COUNT> tmp;
-    for(size_t i = 0U; i < EMBER_COUNTER_TYPE_COUNT; ++i)
+    std::array<std::string, SL_ZIGBEE_COUNTER_TYPE_COUNT > tmp;
+    for(size_t i = 0U; i < SL_ZIGBEE_COUNTER_TYPE_COUNT ; ++i)
     {
       std::string tmpStr = std::string(COUNTER_LABELS_RAW[i]);
       tmpStr.erase( std::remove_if(tmpStr.begin(),
@@ -46,7 +46,7 @@ const static std::array<std::string, EMBER_COUNTER_TYPE_COUNT> COUNTER_LABELS_WO
 
 const char *zigpc_gateway_get_counters_entry_label(size_t offset)
 {
-  if (offset < EMBER_COUNTER_TYPE_COUNT) {
+  if (offset < SL_ZIGBEE_COUNTER_TYPE_COUNT ) {
     return COUNTER_LABELS_WO_SPACES[offset].c_str();
   } else {
     return nullptr;
@@ -58,7 +58,7 @@ sl_status_t zigpc_gateway_get_counters_list(uint16_t *list, size_t count)
   sl_status_t status = SL_STATUS_OK;
   if (list == nullptr) {
     status = SL_STATUS_NULL_POINTER;
-  } else if (count > EMBER_COUNTER_TYPE_COUNT) {
+  } else if (count > SL_ZIGBEE_COUNTER_TYPE_COUNT ) {
     status = SL_STATUS_WOULD_OVERFLOW;
   } else if (count == 0U) {
     status = SL_STATUS_EMPTY;
@@ -75,5 +75,5 @@ void zigpc_gateway_clear_counters()
 
 size_t zigpc_gateway_get_counters_capacity()
 {
-  return EMBER_COUNTER_TYPE_COUNT;
+  return SL_ZIGBEE_COUNTER_TYPE_COUNT ;
 }

@@ -14,6 +14,21 @@ all: debug
 
 # Values set by the initial generation
 PROJECTNAME = libzigbee_host
+POST_BUILD_EXE_WIN = 
+POST_BUILD_EXE_OSX = 
+POST_BUILD_EXE_LINUX = 
+
+# Pre-defined definitions in this file
+ifeq ($(OS),Windows_NT)
+  POST_BUILD_EXE ?= $(POST_BUILD_EXE_WIN)
+else
+  UNAME_S := $(shell uname -s)
+  ifeq ($(UNAME_S),Darwin)
+    POST_BUILD_EXE ?= $(POST_BUILD_EXE_OSX)
+  else
+    POST_BUILD_EXE ?= $(POST_BUILD_EXE_LINUX)
+  endif
+endif
 
 ####################################################################
 # Definitions of toolchain.                                        #
@@ -119,12 +134,12 @@ override ASMFLAGS = $(ASM_FLAGS) $(ASM_DEFS) $(INCLUDES) $(DEPFLAGS)
 debug: C_FLAGS += $(C_FLAGS_DEBUG) 
 debug: CXX_FLAGS += $(CXX_FLAGS_DEBUG)
 debug: ASM_FLAGS += $(ASM_FLAGS_DEBUG)
-debug: $(OUTPUT_DIR)/$(PROJECTNAME).out
+debug: | pre-build $(OUTPUT_DIR)/$(PROJECTNAME).out post-build
 
 release: C_FLAGS += $(C_FLAGS_RELEASE) 
 release: CXX_FLAGS += $(CXX_FLAGS_RELEASE)
 release: ASM_FLAGS += $(ASM_FLAGS_RELEASE)
-release: $(OUTPUT_DIR)/$(PROJECTNAME).out
+release: | pre-build $(OUTPUT_DIR)/$(PROJECTNAME).out post-build
 
 # include auto-generated dependency files (explicit rules)
 ifneq (clean,$(findstring clean, $(MAKECMDGOALS)))
@@ -136,7 +151,12 @@ endif
 
 $(OUTPUT_DIR)/$(PROJECTNAME).out: $(OBJS) $(LIB_FILES)
 	@echo 'Linking $(OUTPUT_DIR)/$(PROJECTNAME)'
-	$(ECHO)$(LD) $(LD_FLAGS) $(OBJS) $(LIBS) -o $(OUTPUT_DIR)/$(PROJECTNAME)
+ifeq ($(UNAME_S),Darwin)
+	@echo $(OBJS) > $(OUTPUT_DIR)/linker_objs
+else
+	$(file > $(OUTPUT_DIR)/linker_objs,$(OBJS))
+endif
+	$(ECHO)$(LD) $(LD_FLAGS) @$(OUTPUT_DIR)/linker_objs $(LIBS) -o $(OUTPUT_DIR)/$(PROJECTNAME)
 	@echo 'Done.'
 
 $(OBJS):

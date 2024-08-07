@@ -1,9 +1,9 @@
-# Multiprotocol Setup
+# Getting Started with the Multiprotocol Setup
 
 ## Prerequisites
 
 Follow the directions in the
-[Unify Host SDK getting started guide](getting_started.md)
+[Unify Host SDK getting started guide](getting_started_unify.md)
 to set up your Raspberry Pi 4 and install the Unify Host SDK Debian packages.
 
 By default, the `uic-zigpc` service is configured to operate with the

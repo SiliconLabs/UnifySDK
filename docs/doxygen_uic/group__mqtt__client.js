@@ -28,7 +28,7 @@ var group__mqtt__client =
     [ "mqtt_client_disconnect", "group__mqtt__client.html#gae75b3650877693af325efe7b982305bc", null ],
     [ "mqtt_client_event", "group__mqtt__client.html#gafd7973822a31bbebce224087872d7751", null ],
     [ "mqtt_client_file_descriptor", "group__mqtt__client.html#ga77ea1cfbb5857376a517faa6a811d39e", null ],
-    [ "mqtt_client_get_client_id", "group__mqtt__client.html#ga1a76c27e33f51e7209c44ea8355d9ab2", null ],
+    [ "mqtt_client_get_client_id", "group__mqtt__client.html#gaf3f3146b0be78b6a1485c48e39acead2", null ],
     [ "mqtt_client_is_connected_to_broker", "group__mqtt__client.html#gadb4d2de00135d6d008431f6bef7968f1", null ],
     [ "mqtt_client_new", "group__mqtt__client.html#gaae35a351b95bd45f1fb79ad6174defed", null ],
     [ "mqtt_client_on_connect_callback_set", "group__mqtt__client.html#ga71775d5415765126fb0e4002307676b1", null ],

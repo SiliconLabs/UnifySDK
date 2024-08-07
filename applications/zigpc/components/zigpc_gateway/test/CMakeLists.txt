@@ -33,6 +33,9 @@ target_add_unittest(
   zigbee_host_mock
   zigpc_datastore_mock
   uic_datastore_mock)
+  target_compile_definitions(
+    zigpc_gateway_datastore_test 
+    PRIVATE __STATIC_INLINE=static\ inline)
 
 target_add_unittest(
   zigpc_gateway
@@ -42,6 +45,9 @@ target_add_unittest(
   zigpc_gateway_counters_test.cpp
   DEPENDS
   zigbee_host_mock)
+  target_compile_definitions(
+    zigpc_gateway_counters_test 
+    PRIVATE __STATIC_INLINE=static\ inline)
 
   target_add_unittest(
     zigpc_gateway
@@ -52,3 +58,6 @@ target_add_unittest(
     DEPENDS
     zigbee_host_mock
   )
+  target_compile_definitions(
+    zigpc_gateway_neighbor_table_test 
+    PRIVATE __STATIC_INLINE=static\ inline)

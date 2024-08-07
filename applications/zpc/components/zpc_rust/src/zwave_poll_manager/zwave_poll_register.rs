@@ -37,9 +37,13 @@ const ATTRIBUTE_ZWAVEPLUS_INFO_Z_WAVE_VERSION: AttributeTypeId = (0x5E << 8) | 0
 const ATTRIBUTE_HOME_ID: AttributeTypeId = 0x2;
 const ATTRIBUTE_ENDPOINT_ID: AttributeTypeId = 0x4;
 
-//< This represents the Network Status of a node. NodeStateNetworkStatus
-const DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS: AttributeTypeId = 0x000D;
-const ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL: u8 = 1;
+/// DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS is taken from generated file here : components/unify_dotdot_attribute_store/zap-generated/include/unify_dotdot_defined_attribute_types.h
+/// 0xfd02 is the cluster ID of Unify_State.xml 0001 is the attribute ID of NetworkStatus
+/// Ideally ZAP should generate the .rs file for attributes ID.
+const DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS: AttributeTypeId = 0xfd020001;
+/// This is taken from Unify_State.xml : NodeStateNetworkStatus type
+/// Even if this value is an enum8 in the cluster file, it is represented as u32 in the attribute store.
+const ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL: u32 = 0;
 
 struct PollRegister {
     poll_map: Option<AttributePollMap>,
@@ -83,7 +87,7 @@ impl PollRegister {
         event.attribute.type_of() == DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS
             && event.event_type == AttributeEventType::ATTRIBUTE_UPDATED
             && event.value_state == AttributeValueState::REPORTED_ATTRIBUTE
-            && event.attribute.get_reported::<u8>() == Ok(ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL)
+            && event.attribute.get_reported::<u32>() == Ok(ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL)
             && is_in_home_id
     }
 

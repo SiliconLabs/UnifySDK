@@ -2,10 +2,8 @@ var zwave__command__class__meter__control_8c =
 [
     [ "meter_reset_v6_frame", "structmeter__reset__v6__frame.html", "structmeter__reset__v6__frame" ],
     [ "ATTRIBUTE", "zwave__command__class__meter__control_8c.html#a3a48b9a3a4b2d94c644107976c45bc72", null ],
-    [ "COMMAND_CLASS_METER_V6", "zwave__command__class__meter__control_8c.html#a52cb16c2b1f4ca7e80b57f3ca4250c06", null ],
     [ "LOG_TAG", "zwave__command__class__meter__control_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "METER_REPORT_VALUE_INDEX", "zwave__command__class__meter__control_8c.html#ab89216972a147de22c482d1429ce8875", null ],
-    [ "METER_VERSION_V6", "zwave__command__class__meter__control_8c.html#af4da163f1d06bfaef40e566d1de0a939", null ],
     [ "SCALE_BITMASK_MAX_LENTGH", "zwave__command__class__meter__control_8c.html#ac3893fa1f19efb84828b87ab6aeaf27f", null ],
     [ "meter_reset_v6_frame_t", "zwave__command__class__meter__control_8c.html#ab4653da92435ebfb56af7e3c4300b96b", null ],
     [ "on_meter_reset_send_data_complete", "zwave__command__class__meter__control_8c.html#abf90ddea9ffd7e35e4122d90bb7280ca", null ],

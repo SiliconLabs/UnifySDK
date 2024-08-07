@@ -1452,6 +1452,65 @@ var NAVTREE =
         [ "Descriptor/ForceReadAttributes Command", "descriptor.html#descriptor_force_read_attr_cmd", null ]
       ] ]
     ] ],
+    [ "UnifyFanControl Cluster", "unify_fan_control.html", [
+      [ "UnifyFanControl Attributes", "unify_fan_control.html#unify_fan_control_attrs", [
+        [ "UnifyFanControl/ZWaveFanMode Attribute", "unify_fan_control.html#unify_fan_control_attr_z_wave_fan_mode", null ],
+        [ "UnifyFanControl/ZWaveSupportedFanMode Attribute", "unify_fan_control.html#unify_fan_control_attr_z_wave_supported_fan_mode", null ],
+        [ "UnifyFanControl/ZWaveFanState Attribute", "unify_fan_control.html#unify_fan_control_attr_z_wave_fan_state", null ],
+        [ "UnifyFanControl/ClusterRevision Attribute", "unify_fan_control.html#unify_fan_control_attr_cluster_revision", null ]
+      ] ],
+      [ "UnifyFanControl Command Support", "unify_fan_control.html#unify_fan_control_recv_cmd_support", null ],
+      [ "UnifyFanControl Commands", "unify_fan_control.html#unify_fan_control_cmds", [
+        [ "UnifyFanControl/SetFanMode Command", "unify_fan_control.html#unify_fan_control_set_fan_mode_cmd", null ],
+        [ "UnifyFanControl/TurnOff Command", "unify_fan_control.html#unify_fan_control_turn_off_cmd", null ],
+        [ "UnifyFanControl/WriteAttributes Command", "unify_fan_control.html#unify_fan_control_write_attr_cmd", null ],
+        [ "UnifyFanControl/ForceReadAttributes Command", "unify_fan_control.html#unify_fan_control_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
+    [ "UnifyThermostat Cluster", "unify_thermostat.html", [
+      [ "UnifyThermostat Attributes", "unify_thermostat.html#unify_thermostat_attrs", [
+        [ "UnifyThermostat/ThermostatMode Attribute", "unify_thermostat.html#unify_thermostat_attr_thermostat_mode", null ],
+        [ "UnifyThermostat/SupportedThermostatMode Attribute", "unify_thermostat.html#unify_thermostat_attr_supported_thermostat_mode", null ],
+        [ "UnifyThermostat/OperatingState Attribute", "unify_thermostat.html#unify_thermostat_attr_operating_state", null ],
+        [ "UnifyThermostat/ClusterRevision Attribute", "unify_thermostat.html#unify_thermostat_attr_cluster_revision", null ]
+      ] ],
+      [ "UnifyThermostat Command Support", "unify_thermostat.html#unify_thermostat_recv_cmd_support", null ],
+      [ "UnifyThermostat Commands", "unify_thermostat.html#unify_thermostat_cmds", [
+        [ "UnifyThermostat/WriteAttributes Command", "unify_thermostat.html#unify_thermostat_write_attr_cmd", null ],
+        [ "UnifyThermostat/ForceReadAttributes Command", "unify_thermostat.html#unify_thermostat_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
+    [ "UnifyHumidityControl Cluster", "unify_humidity_control.html", [
+      [ "UnifyHumidityControl Attributes", "unify_humidity_control.html#unify_humidity_control_attrs", [
+        [ "UnifyHumidityControl/ReportingMode Attribute", "unify_humidity_control.html#unify_humidity_control_attr_reporting_mode", null ],
+        [ "UnifyHumidityControl/SupportedReportingMode Attribute", "unify_humidity_control.html#unify_humidity_control_attr_supported_reporting_mode", null ],
+        [ "UnifyHumidityControl/CurrentState Attribute", "unify_humidity_control.html#unify_humidity_control_attr_current_state", null ],
+        [ "UnifyHumidityControl/SupportedSetPoints Attribute", "unify_humidity_control.html#unify_humidity_control_attr_supported_set_points", null ],
+        [ "UnifyHumidityControl/HumidifierSetpointMin Attribute", "unify_humidity_control.html#unify_humidity_control_attr_humidifier_setpoint_min", null ],
+        [ "UnifyHumidityControl/HumidifierSetpointMax Attribute", "unify_humidity_control.html#unify_humidity_control_attr_humidifier_setpoint_max", null ],
+        [ "UnifyHumidityControl/HumidifierSetpoint Attribute", "unify_humidity_control.html#unify_humidity_control_attr_humidifier_setpoint", null ],
+        [ "UnifyHumidityControl/HumidifierSetpointScale Attribute", "unify_humidity_control.html#unify_humidity_control_attr_humidifier_setpoint_scale", null ],
+        [ "UnifyHumidityControl/HumidifierSetpointPrecision Attribute", "unify_humidity_control.html#unify_humidity_control_attr_humidifier_setpoint_precision", null ],
+        [ "UnifyHumidityControl/DehumidifierSetpointMin Attribute", "unify_humidity_control.html#unify_humidity_control_attr_dehumidifier_setpoint_min", null ],
+        [ "UnifyHumidityControl/DehumidifierSetpointMax Attribute", "unify_humidity_control.html#unify_humidity_control_attr_dehumidifier_setpoint_max", null ],
+        [ "UnifyHumidityControl/DehumidifierSetpoint Attribute", "unify_humidity_control.html#unify_humidity_control_attr_dehumidifier_setpoint", null ],
+        [ "UnifyHumidityControl/DehumidifierSetpointScale Attribute", "unify_humidity_control.html#unify_humidity_control_attr_dehumidifier_setpoint_scale", null ],
+        [ "UnifyHumidityControl/DehumidifierSetpointPrecision Attribute", "unify_humidity_control.html#unify_humidity_control_attr_dehumidifier_setpoint_precision", null ],
+        [ "UnifyHumidityControl/AutoSetpointMin Attribute", "unify_humidity_control.html#unify_humidity_control_attr_auto_setpoint_min", null ],
+        [ "UnifyHumidityControl/AutoSetpointMax Attribute", "unify_humidity_control.html#unify_humidity_control_attr_auto_setpoint_max", null ],
+        [ "UnifyHumidityControl/AutoSetpoint Attribute", "unify_humidity_control.html#unify_humidity_control_attr_auto_setpoint", null ],
+        [ "UnifyHumidityControl/AutoSetpointScale Attribute", "unify_humidity_control.html#unify_humidity_control_attr_auto_setpoint_scale", null ],
+        [ "UnifyHumidityControl/AutoSetpointPrecision Attribute", "unify_humidity_control.html#unify_humidity_control_attr_auto_setpoint_precision", null ],
+        [ "UnifyHumidityControl/ClusterRevision Attribute", "unify_humidity_control.html#unify_humidity_control_attr_cluster_revision", null ]
+      ] ],
+      [ "UnifyHumidityControl Command Support", "unify_humidity_control.html#unify_humidity_control_recv_cmd_support", null ],
+      [ "UnifyHumidityControl Commands", "unify_humidity_control.html#unify_humidity_control_cmds", [
+        [ "UnifyHumidityControl/ModeSet Command", "unify_humidity_control.html#unify_humidity_control_mode_set_cmd", null ],
+        [ "UnifyHumidityControl/SetpointSet Command", "unify_humidity_control.html#unify_humidity_control_setpoint_set_cmd", null ],
+        [ "UnifyHumidityControl/WriteAttributes Command", "unify_humidity_control.html#unify_humidity_control_write_attr_cmd", null ],
+        [ "UnifyHumidityControl/ForceReadAttributes Command", "unify_humidity_control.html#unify_humidity_control_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
     [ "UCL Structs", "ucl_structs.html", [
       [ "NetworkManagementState Struct", "ucl_structs.html#struct_network_management_state", null ],
       [ "BindingObject Struct", "ucl_structs.html#struct_binding_object", null ],
@@ -1489,6 +1548,7 @@ var NAVTREE =
       [ "CCMoveMode Enum", "ucl_enums.html#enum_cc_move_mode", null ],
       [ "CCStepMode Enum", "ucl_enums.html#enum_cc_step_mode", null ],
       [ "ColorControlColorLoopActive Enum", "ucl_enums.html#enum_color_control_color_loop_active", null ],
+      [ "ColorControlColorLoopDirection Enum", "ucl_enums.html#enum_color_control_color_loop_direction", null ],
       [ "ColorControlColorMode Enum", "ucl_enums.html#enum_color_control_color_mode", null ],
       [ "ColorControlDriftCompensation Enum", "ucl_enums.html#enum_color_control_drift_compensation", null ],
       [ "ColorControlEnhancedColorMode Enum", "ucl_enums.html#enum_color_control_enhanced_color_mode", null ],
@@ -1541,6 +1601,7 @@ var NAVTREE =
       [ "MeteringSupplyStatus Enum", "ucl_enums.html#enum_metering_supply_status", null ],
       [ "MeteringTemperatureUnitOfMeasure Enum", "ucl_enums.html#enum_metering_temperature_unit_of_measure", null ],
       [ "MeteringUnitofMeasure Enum", "ucl_enums.html#enum_metering_unitof_measure", null ],
+      [ "ModeType Enum", "ucl_enums.html#enum_mode_type", null ],
       [ "MoveStepMode Enum", "ucl_enums.html#enum_move_step_mode", null ],
       [ "NM_State Enum", "ucl_enums.html#enum_nm_state", null ],
       [ "NodeStateNetworkStatus Enum", "ucl_enums.html#enum_node_state_network_status", null ],
@@ -1560,7 +1621,9 @@ var NAVTREE =
       [ "PumpControlMode Enum", "ucl_enums.html#enum_pump_control_mode", null ],
       [ "PumpOperationMode Enum", "ucl_enums.html#enum_pump_operation_mode", null ],
       [ "SHDCFGDirection Enum", "ucl_enums.html#enum_shdcfg_direction", null ],
+      [ "ScaleType Enum", "ucl_enums.html#enum_scale_type", null ],
       [ "SetpointRaiseOrLowerMode Enum", "ucl_enums.html#enum_setpoint_raise_or_lower_mode", null ],
+      [ "SetpointType Enum", "ucl_enums.html#enum_setpoint_type", null ],
       [ "ShadeConfigurationMode Enum", "ucl_enums.html#enum_shade_configuration_mode", null ],
       [ "SirenConfigurationStrobe Enum", "ucl_enums.html#enum_siren_configuration_strobe", null ],
       [ "SirenConfigurationWarningMode Enum", "ucl_enums.html#enum_siren_configuration_warning_mode", null ],
@@ -1583,7 +1646,12 @@ var NAVTREE =
       [ "TriggerEffectEffectIdentifier Enum", "ucl_enums.html#enum_trigger_effect_effect_identifier", null ],
       [ "TriggerEffectEffectVariant Enum", "ucl_enums.html#enum_trigger_effect_effect_variant", null ],
       [ "TxReportTransmissionSpeed Enum", "ucl_enums.html#enum_tx_report_transmission_speed", null ],
+      [ "UnifyHumidityControlCurrentState Enum", "ucl_enums.html#enum_unify_humidity_control_current_state", null ],
+      [ "UnifyThermostatOperatingState Enum", "ucl_enums.html#enum_unify_thermostat_operating_state", null ],
+      [ "UnifyThermostatThermostatMode Enum", "ucl_enums.html#enum_unify_thermostat_thermostat_mode", null ],
       [ "WindowCoveringWindowCoveringType Enum", "ucl_enums.html#enum_window_covering_window_covering_type", null ],
+      [ "ZWaveFanModeEnum Enum", "ucl_enums.html#enum_z_wave_fan_mode_enum", null ],
+      [ "ZWaveFanStateEnum Enum", "ucl_enums.html#enum_z_wave_fan_state_enum", null ],
       [ "ZoneEnrollResponseEnrollResponseCode Enum", "ucl_enums.html#enum_zone_enroll_response_enroll_response_code", null ],
       [ "attributeReportingStatus Enum", "ucl_enums.html#enum_attribute_reporting_status", null ],
       [ "zclStatus Enum", "ucl_enums.html#enum_zcl_status", null ],
@@ -1654,6 +1722,10 @@ var NAVTREE =
       [ "TimeTimeStatus Bitmap", "ucl_bitmaps.html#enum_time_time_status", null ],
       [ "TstatScheduleDOW Bitmap", "ucl_bitmaps.html#enum_tstat_scheduledow", null ],
       [ "TstatScheduleMode Bitmap", "ucl_bitmaps.html#enum_tstat_schedule_mode", null ],
+      [ "UnifyFanControlZWaveSupportedFanMode Bitmap", "ucl_bitmaps.html#enum_unify_fan_controlz_wave_supported_fan_mode", null ],
+      [ "UnifyHumidityControlSupportedReportingMode Bitmap", "ucl_bitmaps.html#enum_unify_humidity_control_supported_reporting_mode", null ],
+      [ "UnifyHumidityControlSupportedSetPoints Bitmap", "ucl_bitmaps.html#enum_unify_humidity_control_supported_set_points", null ],
+      [ "UnifyThermostatSupportedThermostatMode Bitmap", "ucl_bitmaps.html#enum_unify_thermostat_supported_thermostat_mode", null ],
       [ "WindowCoveringConfigOrStatus Bitmap", "ucl_bitmaps.html#enum_window_covering_config_or_status", null ],
       [ "WindowCoveringMode Bitmap", "ucl_bitmaps.html#enum_window_covering_mode", null ],
       [ "map16 Bitmap", "ucl_bitmaps.html#enum_map16", null ],
@@ -1676,7 +1748,8 @@ var NAVTREEINDEX =
 "electrical_measurement.html#electrical_measurement_attr_ac_voltage_divisor",
 "level.html#level_move_with_on_off_cmd",
 "pump_configuration_and_control.html#pump_configuration_and_control_attr_power",
-"ucl_bitmaps.html#enum_door_lock_rf_operation_event_mask"
+"ucl_bitmaps.html#enum_door_lock_rf_operation_event_mask",
+"unify_thermostat.html#unify_thermostat_recv_cmd_support"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

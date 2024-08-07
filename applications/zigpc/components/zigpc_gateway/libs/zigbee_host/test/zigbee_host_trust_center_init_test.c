@@ -23,7 +23,7 @@
 struct zigbeeHostState z3gwState;
 
 /* Prototypes used for callback tests */
-bool emberAfStackStatusCallback(EmberStatus status);
+bool sl_zigbee_af_stack_status_cb(sl_status_t status);
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are called)
@@ -67,13 +67,13 @@ void tearDown() {}
  */
 void test_trust_center_init_should_create_network_on_network_absence()
 {
-  EmberStatus status;
+  sl_status_t status;
 
-  emberAfNetworkState_ExpectAndReturn(EMBER_NO_NETWORK);
-  emberAfPluginNetworkCreatorStart_ExpectAndReturn(true, EMBER_SUCCESS);
+  sl_zigbee_af_network_state_ExpectAndReturn(SL_ZIGBEE_NO_NETWORK);
+  sl_zigbee_af_network_creator_start_ExpectAndReturn(true, SL_STATUS_OK );
   status = zigbeeHostTrustCenterInit();
 
-  TEST_ASSERT_EQUAL(status, EMBER_SUCCESS);
+  TEST_ASSERT_EQUAL(status, SL_STATUS_OK );
 }
 
 /**
@@ -83,13 +83,13 @@ void test_trust_center_init_should_create_network_on_network_absence()
  */
 void test_trust_center_init_should_return_network_info_on_network_joined()
 {
-  EmberStatus status;
+  sl_status_t status;
 
-  emberAfNetworkState_ExpectAndReturn(EMBER_JOINED_NETWORK);
-  emberAfGetNetworkParameters_IgnoreAndReturn(EMBER_SUCCESS);
+  sl_zigbee_af_network_state_ExpectAndReturn(SL_ZIGBEE_JOINED_NETWORK);
+  sl_zigbee_af_get_network_parameters_IgnoreAndReturn(SL_STATUS_OK );
 
   status = zigbeeHostTrustCenterInit();
-  TEST_ASSERT_EQUAL(status, EMBER_SUCCESS);
+  TEST_ASSERT_EQUAL(status, SL_STATUS_OK );
 }
 
 /**
@@ -100,17 +100,17 @@ void test_trust_center_init_should_return_network_info_on_network_joined()
 void test_trust_center_init_callback_should_be_called_by_network_creator_complete()
 {
   // ARRANGE
-  EmberNetworkParameters network = {.panId = 0x1234};
+  sl_zigbee_network_parameters_t network = {.panId = 0x1234};
 
-  emberAfGetNetworkParameters_ExpectAndReturn(NULL, NULL, EMBER_SUCCESS);
-  emberAfGetNetworkParameters_IgnoreArg_nodeType();
-  emberAfGetNetworkParameters_IgnoreArg_parameters();
-  emberAfGetNetworkParameters_ReturnThruPtr_parameters(&network);
+  sl_zigbee_af_get_network_parameters_ExpectAndReturn(NULL, NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_network_parameters_IgnoreArg_nodeType();
+  sl_zigbee_af_get_network_parameters_IgnoreArg_parameters();
+  sl_zigbee_af_get_network_parameters_ReturnThruPtr_parameters(&network);
 
   callback_onNetworkInitialized_ExpectWithArray(&network, 1);
 
   // ACT
-  emberAfStackStatusCallback(EMBER_NETWORK_UP);
+  sl_zigbee_af_stack_status_cb(SL_STATUS_NETWORK_UP);
 
   // ASSERT (Handled by CMock)
 }

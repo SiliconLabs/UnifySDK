@@ -5,7 +5,7 @@ add_component_to_uic(
   uic-cpcd # Package Name
   "Universal IOT controller - CPCd"
   "${CMAKE_PROJECT_NAME}-cpcd" # Package Debian filename
-  "libmbedtls12, libmbedx509-0" # Package Depends on
+  "libmbedtls14, libmbedx509-1" # Package Depends on
   ""  # Package replaces
   "${CMAKE_BINARY_DIR}/applications/cpcd/debconf/config;\
     ${CMAKE_BINARY_DIR}/applications/cpcd/debconf/templates;\
@@ -31,6 +31,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/services/uic-cpcd.service.in
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/services/uic-cpcd-bind.service.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/services/uic-cpcd-bind.service)
 
+set(BUILD_SHARED_LIBS ON)
 set(DEFAULT_CPCD_SERVICE_PATH /lib/systemd/system/)
 if(NOT CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CPCD_SERVICE_PATH ${CMAKE_INSTALL_PREFIX}/${DEFAULT_CPCD_SERVICE_PATH})
@@ -94,4 +95,5 @@ else()
   # Install configuration file
   install(FILES "${cpcd_SOURCE_DIR}/cpcd.conf" DESTINATION "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}" COMPONENT uic-cpcd)
 endif()
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
 

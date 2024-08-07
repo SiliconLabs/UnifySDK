@@ -1,6 +1,10 @@
 var dir_a0d683a24e7dff25c3602744bd1f23f9 =
 [
     [ "configuration_parameter_cluster_server.h", "configuration__parameter__cluster__server_8h.html", "configuration__parameter__cluster__server_8h" ],
+    [ "fan_control_cluster_server.c", "fan__control__cluster__server_8c.html", "fan__control__cluster__server_8c" ],
+    [ "fan_control_cluster_server.h", "fan__control__cluster__server_8h.html", "fan__control__cluster__server_8h" ],
+    [ "humidity_control_cluster_server.c", "humidity__control__cluster__server_8c.html", "humidity__control__cluster__server_8c" ],
+    [ "humidity_control_cluster_server.h", "humidity__control__cluster__server_8h.html", "humidity__control__cluster__server_8h" ],
     [ "user_code_cluster_server.h", "user__code__cluster__server_8h.html", "user__code__cluster__server_8h" ],
     [ "zcl_binding_cluster_server.h", "zcl__binding__cluster__server_8h.html", "zcl__binding__cluster__server_8h" ],
     [ "zcl_cluster_servers_helpers.hpp", "zcl__cluster__servers__helpers_8hpp.html", "zcl__cluster__servers__helpers_8hpp" ],

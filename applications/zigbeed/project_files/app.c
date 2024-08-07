@@ -63,10 +63,10 @@
 #include "common/logging.hpp"
 #include "lib/platform/exit_code.h"
 #include "openthread/openthread-system.h"
-#include "ember-types.h"
+#include "sl_zigbee_types.h"
 #include "serial_adapter.h"
 
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 #ifndef OPENTHREAD_ENABLE_COVERAGE
 #define OPENTHREAD_ENABLE_COVERAGE 0
@@ -290,9 +290,9 @@ void app_process_args(int argc, char *argv[])
   syslog(LOG_INFO, "Zigbeed started");
   syslog(LOG_INFO, "RCP version: %s", otPlatRadioGetVersionString(instance));
   syslog(LOG_INFO, "Zigbeed Version: GSDK %d.%d.%d - %s - %s",
-         emberVersion.major,
-         emberVersion.minor,
-         emberVersion.patch,
-         emberStackBuildDateTime.date,
-         emberStackBuildDateTime.time);
+         sl_zigbee_version.major,
+         sl_zigbee_version.minor,
+         sl_zigbee_version.patch,
+         sl_zigbee_stack_build_date_time.date,
+         sl_zigbee_stack_build_date_time.time);
 }

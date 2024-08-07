@@ -5,7 +5,7 @@
 #include "sl_cli.h"
 #include "sl_string.h"
 #include <string.h>
-#if defined(SL_CATALOG_KERNEL_PRESENT)
+#if defined(SL_CATALOG_KERNEL_PRESENT) && SL_CLI_TICK_ENABLE
 #include "cmsis_os2.h"
 #include "sl_cmsis_os2_common.h"
 #endif // defined(SL_CATALOG_KERNEL_PRESENT)
@@ -33,7 +33,7 @@ extern sl_cli_command_group_t *SL_CLI_INST0_COMMAND_GROUP;
 
 
 // Instance variables for inst0
-#if defined(SL_CATALOG_KERNEL_PRESENT)
+#if defined(SL_CATALOG_KERNEL_PRESENT) && SL_CLI_TICK_ENABLE
 __ALIGNED(8) static uint8_t inst0_task_stack[(SL_CLI_INST0_TASK_STACK_SIZE * sizeof(void *)) & 0xFFFFFFF8u];
 __ALIGNED(4) static uint8_t inst0_thread_cb[osThreadCbSize];
 static osThreadId_t inst0_thread_id;
@@ -75,7 +75,7 @@ void sl_cli_instances_init(void)
   sl_cli_default_command_group  = SL_CLI_INST0_COMMAND_GROUP;
 #endif
   instance_parameters.default_command_group = sl_cli_default_command_group;
-#if defined(SL_CATALOG_KERNEL_PRESENT)
+#if defined(SL_CATALOG_KERNEL_PRESENT) && SL_CLI_TICK_ENABLE
   instance_parameters.thread_id = &inst0_thread_id;
   instance_parameters.thread_cb = inst0_thread_cb;
   instance_parameters.stack = inst0_task_stack;
@@ -103,6 +103,7 @@ bool sl_cli_instances_is_ok_to_sleep(void)
 
 void sl_cli_instances_tick(void)
 {
+#if SL_CLI_TICK_ENABLE
 sl_iostream_t *previous = sl_iostream_get_default();
 
   // Handle inst0
@@ -110,5 +111,6 @@ sl_iostream_t *previous = sl_iostream_get_default();
   sl_cli_tick_instance(sl_cli_inst0_handle);
   
   sl_iostream_set_default(previous);
+#endif // SL_CLI_TICK_ENABLE
 }
 #endif

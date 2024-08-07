@@ -58,45 +58,45 @@ void tearDown(void) {}
 void test_fill_zcl_frame_should_handle_invalid_argument()
 {
   // ARRANGE
-  EmberStatus status;
+  sl_status_t status;
 
   // ACT
   status = zigbeeHostFillZclFrame(NULL, 0, 0);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_BAD_ARGUMENT, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER, status);
 }
 
 void test_fill_zcl_frame_should_handle_insufficient_size()
 {
   // ARRANGE
-  EmberStatus status;
+  sl_status_t status;
   uint8_t buffer = 0;
 
   // ACT
-  status = zigbeeHostFillZclFrame(&buffer, EMBER_AF_ZCL_OVERHEAD - 1, 0);
+  status = zigbeeHostFillZclFrame(&buffer, SL_ZIGBEE_AF_ZCL_OVERHEAD - 1, 0);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_INDEX_OUT_OF_RANGE, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_INDEX , status);
 }
 
 void test_fill_zcl_frame_should_handle_buffer_overflow()
 {
   // ARRANGE
-  EmberStatus status;
+  sl_status_t status;
   uint8_t buffer = 0;
 
   // ACT
   status = zigbeeHostFillZclFrame(&buffer, ZCL_BUFFER_SIZE + 1, 0);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_INDEX_OUT_OF_RANGE, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_INDEX , status);
 }
 
 void test_fill_zcl_frame_should_copy_buffer()
 {
   // ARRANGE
-  EmberStatus status;
+  sl_status_t status;
   size_t bufferSequenceIdIndex     = 10;
   const uint8_t SEQUENCE_ID_RETURN = 0xDF;
   uint8_t buffer[ZCL_BUFFER_SIZE];
@@ -105,7 +105,7 @@ void test_fill_zcl_frame_should_copy_buffer()
     buffer[i] = i;
   }
 
-  emberAfNextSequence_ExpectAndReturn(SEQUENCE_ID_RETURN);
+  sl_zigbee_af_next_sequence_ExpectAndReturn(SEQUENCE_ID_RETURN);
 
   // ACT
   status
@@ -113,7 +113,7 @@ void test_fill_zcl_frame_should_copy_buffer()
 
   // ASSERT
   buffer[bufferSequenceIdIndex] = SEQUENCE_ID_RETURN;
-  TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK , status);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(buffer, zclMessageBuffer, ZCL_BUFFER_SIZE);
 }
 
@@ -124,9 +124,9 @@ void test_fill_zcl_frame_should_copy_buffer()
 void test_send_zcl_frame_unicast_should_handle_invalid_argument()
 {
   // ARRANGE
-  EmberStatus status_null_eui64;
-  EmberStatus status_null_cluster;
-  EmberEUI64 eui64;
+  sl_status_t status_null_eui64;
+  sl_status_t status_null_cluster;
+  sl_802154_long_addr_t eui64;
 
   // ACT
   status_null_eui64 = zigbeeHostSendZclFrameUnicast(NULL, 1, 0);
@@ -134,54 +134,54 @@ void test_send_zcl_frame_unicast_should_handle_invalid_argument()
   status_null_cluster = zigbeeHostSendZclFrameUnicast(eui64, 1, 0xFFFF);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_BAD_ARGUMENT, status_null_eui64);
-  TEST_ASSERT_EQUAL(EMBER_BAD_ARGUMENT, status_null_cluster);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER, status_null_eui64);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER, status_null_cluster);
 }
 
 void test_send_zcl_frame_unicast_should_handle_unknown_device()
 {
   // ARRANGE
-  EmberStatus status;
-  EmberEUI64 eui64        = "\x12\x03\xA7\xBB\x3D\x02\x00\x42";
+  sl_status_t status;
+  sl_802154_long_addr_t eui64        = "\x12\x03\xA7\xBB\x3D\x02\x00\x42";
   uint8_t gatewayEndpoint = 1;
 
-  emberAfPrimaryEndpointForCurrentNetworkIndex_ExpectAndReturn(gatewayEndpoint);
+  sl_zigbee_af_primary_endpoint_for_current_network_index_ExpectAndReturn(gatewayEndpoint);
 
-  emberAfSendUnicastToEui64_ExpectAndReturn(eui64,
+  sl_zigbee_af_send_unicast_to_eui64_ExpectAndReturn(eui64,
                                             NULL,
                                             zclMessageBufferLen,
                                             zclMessageBuffer,
-                                            EMBER_INVALID_CALL);
-  emberAfSendUnicastToEui64_IgnoreArg_apsFrame();
+                                            SL_STATUS_INVALID_STATE );
+  sl_zigbee_af_send_unicast_to_eui64_IgnoreArg_apsFrame();
 
   // ACT
   status = zigbeeHostSendZclFrameUnicast(eui64, 1, 0x0001);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_NOT_FOUND, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_FOUND , status);
 }
 
 void test_send_zcl_frame_unicast_should_handle_happy_path()
 {
   // ARRANGE
-  EmberStatus status;
-  EmberEUI64 eui64        = "\x02\x03\xA7\xBB\x8D\x02\x00\x42";
+  sl_status_t status;
+  sl_802154_long_addr_t eui64        = "\x02\x03\xA7\xBB\x8D\x02\x00\x42";
   uint8_t gatewayEndpoint = 4;
 
-  emberAfPrimaryEndpointForCurrentNetworkIndex_ExpectAndReturn(gatewayEndpoint);
+  sl_zigbee_af_primary_endpoint_for_current_network_index_ExpectAndReturn(gatewayEndpoint);
 
-  emberAfSendUnicastToEui64_ExpectAndReturn(eui64,
+  sl_zigbee_af_send_unicast_to_eui64_ExpectAndReturn(eui64,
                                             NULL,
                                             zclMessageBufferLen,
                                             zclMessageBuffer,
-                                            EMBER_SUCCESS);
-  emberAfSendUnicastToEui64_IgnoreArg_apsFrame();
+                                            SL_STATUS_OK );
+  sl_zigbee_af_send_unicast_to_eui64_IgnoreArg_apsFrame();
 
   // ACT
   status = zigbeeHostSendZclFrameUnicast(eui64, 1, 0x0001);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK , status);
 }
 
 /************************************************************
@@ -191,35 +191,39 @@ void test_send_zcl_frame_unicast_should_handle_happy_path()
 void test_send_zcl_frame_multicast_should_handle_invalid_argument()
 {
   // ARRANGE
-  EmberStatus status;
+  sl_status_t status;
 
   // ACT
   // 0xFFFF is the NULL Cluster ID
   status = zigbeeHostSendZclFrameMulticast(0x1, 0xFFFF);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_BAD_ARGUMENT, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER, status);
 }
 
 void test_send_zcl_frame_multicast_should_handle_happy_path()
 {
   // ARRANGE
-  EmberStatus status;
-  EmberMulticastId multicastId = 0x1234;
+  sl_status_t status;
+  sl_zigbee_multicast_id_t multicastId = 0x1234;
+  sl_802154_short_addr_t alias = SL_ZIGBEE_NULL_NODE_ID;
+  uint8_t nwkSeq = 0;
   uint8_t gatewayEndpoint      = 2;
 
-  emberAfPrimaryEndpointForCurrentNetworkIndex_ExpectAndReturn(gatewayEndpoint);
+  sl_zigbee_af_primary_endpoint_for_current_network_index_ExpectAndReturn(gatewayEndpoint);
 
-  emberAfSendMulticast_ExpectAndReturn(multicastId,
+  sl_zigbee_af_send_multicast_ExpectAndReturn(multicastId,
+                                       alias,
+                                       nwkSeq, 
                                        NULL,
                                        zclMessageBufferLen,
                                        zclMessageBuffer,
-                                       EMBER_SUCCESS);
-  emberAfSendMulticast_IgnoreArg_apsFrame();
+                                       SL_STATUS_OK );
+  sl_zigbee_af_send_multicast_IgnoreArg_apsFrame();
 
   // ACT
   status = zigbeeHostSendZclFrameMulticast(multicastId, 0x0001);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK , status);
 }

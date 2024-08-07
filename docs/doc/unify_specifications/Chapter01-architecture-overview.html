@@ -41,7 +41,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -53,7 +53,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
@@ -579,14 +579,12 @@ functionality on any and all Door Locks in the network.</p>
 </div>
 <p>The &lt;DEVICETYPE&gt; MUST adequately describe the Device Types (i.e.,
 the practical functions) of all the device types found in all PANs
-supported by Silicon Labs. The
-<a class="reference external" href="https://zigbeealliance.org/solution/dotdot/">dotdot Device Library specification</a>
-has a good list of device types.</p>
+supported by Silicon Labs.</p>
 <p>The &lt;HOMEASSISTANT_TYPE&gt; MUST be a strict superset of the
 <a class="reference external" href="https://www.home-assistant.io/docs/mqtt/discovery/">MQTT discovery types defined in the HomeAssistant open-source project</a>.</p>
 <p>The subscribers to the ucl/_well_known topic/+ MUST receive a
 <a class="reference external" href="https://www.w3schools.com/js/js_json_datatypes.asp">JSON-encoded</a>
-<a class="reference external" href="(https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/">Retained Message</a>
+<a class="reference external" href="https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/">Retained Message</a>
 with at least the following contents:</p>
 <p><strong>The JSON-encoded well-known payload:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -874,7 +872,7 @@ be achieved through OS access control mechanisms.</p>
 <p>To interact with the Unify GW and the PAN nodes behind it, the IP address of the
 broker must be discovered. The mechanism of discovery is not yet defined, but
 the most likely candidate is
-<a class="reference external" href="(https://en.wikipedia.org/wiki/Multicast_DNS">Multicast DNS (mDNS)</a>. Once
+<a class="reference external" href="https://en.wikipedia.org/wiki/Multicast_DNS">Multicast DNS (mDNS)</a>. Once
 connected, Resource Discovery MUST be used to discover the nodes and
 capabilities of the PAN nodes.</p>
 </section>

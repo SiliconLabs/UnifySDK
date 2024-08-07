@@ -16,8 +16,8 @@
  ******************************************************************************/
 
 #include PLATFORM_HEADER
-#include "stack/include/ember.h"
-#include "zigbee_app_framework_common.h"
+#include "stack/include/sl_zigbee.h"
+#include "sl_zigbee_system_common.h"
 #include "zigbee_common_callback_dispatcher.h"
 
 void sli_zigbee_af_event_init(void)
@@ -28,7 +28,7 @@ void sli_zigbee_af_local_data_init(void)
 {
 }
 
-void sli_zigbee_af_initDone(void)
+void sli_zigbee_af_init_done(void)
 {
 }
 

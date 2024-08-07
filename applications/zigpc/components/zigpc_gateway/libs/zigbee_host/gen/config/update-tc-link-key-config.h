@@ -18,10 +18,10 @@
 
 // <h>Zigbee Update TC Link Key configuration
 
-// <o EMBER_AF_PLUGIN_UPDATE_TC_LINK_KEY_MAX_ATTEMPTS> Max Attempts <1-255>
+// <o SL_ZIGBEE_AF_PLUGIN_UPDATE_TC_LINK_KEY_MAX_ATTEMPTS> Max Attempts <1-255>
 // <i> Default: 3
 // <i> The maximum number of attempts the node should make when sending or retrying the Node Descriptor, Request Key, or Verify Key messages. This field corresponds to the bdbTcLinkKeyExchangeAttemptsMax attribute in the Base Device Behavior specification.
-#define EMBER_AF_PLUGIN_UPDATE_TC_LINK_KEY_MAX_ATTEMPTS   3
+#define SL_ZIGBEE_AF_PLUGIN_UPDATE_TC_LINK_KEY_MAX_ATTEMPTS   3
 
 // </h>
 

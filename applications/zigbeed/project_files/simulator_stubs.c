@@ -1,4 +1,4 @@
-#include "stack/include/ember.h"
+#include "stack/include/sl_zigbee.h"
 #include "hal.h"
 #include <stdio.h>
 
@@ -7,11 +7,11 @@
 
 // debugPrintTextAndHex, vSimPrint, simPrint, scriptTestCheckpoint and
 // debugSimPrint are from child-main.c. However, they are referenced
-// from many other zigbee stack source files. Once EMBER_TEST is removed,
-// ember-stack.h will define an empty macro to allow compilation.
-// sendLogEvent will go away after EMBER_TEST is removed
-#ifdef EMBER_TEST
+// from many other zigbee stack source files. Once SL_ZIGBEE_TEST is removed,
+// sl_zigbee_stack.h will define an empty macro to allow compilation.
+// sendLogEvent will go away after SL_ZIGBEE_TEST is removed
 
+#ifdef SL_ZIGBEE_TEST
 uint16_t simulatorId;
 uint16_t rebootCount = 0;
 bool quiet = true;
@@ -69,9 +69,9 @@ void sendLogEvent(char *types, char *data)
 {
 }
 
-#endif // EMBER_TEST
+#endif // SL_ZIGBEE_TEST
 
-#ifdef EMBER_TEST
+#ifdef SL_ZIGBEE_TEST
 
 void simulatedTimePasses(void)
 {
@@ -83,26 +83,21 @@ void simulatedTimePasses(void)
 #include "sl_iostream.h"
 
 // Referenced from sli_zigbee_source_route_update_event_handler in source-route-update.c
-EmberStatus emberSerialPrintfLine(uint8_t port, PGM_P formatString, ...)
+sl_status_t sli_legacy_serial_printf_line(uint8_t port, const char *formatString, ...)
 {
   return 0;
 }
 
-void emberSetOrGetEzspTokenCommandHandler(bool isSet)
+void sl_zigbee_set_or_get_ezsp_token_command_handler(bool isSet)
 {
 }
-
-void emberAfCounterHandler(EmberCounterType type, EmberCounterInfo info)
-{
-}
-
 // Referenced from stream_putchar in iostream_printf.o
 //   from putchar in iostream_printf.o
 WEAK(sl_status_t sl_iostream_putchar(sl_iostream_t *stream, char c))
 {
-  //EmberStatus status = emberSerialWriteByte(APP_SERIAL, c);
-  EmberStatus status = EMBER_SUCCESS;
-  if (status == EMBER_SUCCESS) {
+  //sl_status_t status = sli_legacy_serial_write_byte(APP_SERIAL, c);
+  sl_status_t status = SL_STATUS_OK;
+  if (status == SL_STATUS_OK) {
     return SL_STATUS_OK;
   } else {
     return SL_STATUS_FAIL;

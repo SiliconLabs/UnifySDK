@@ -17,7 +17,7 @@ export CMAKE_GENERATOR
 build_dir?=build
 sudo?=sudo
 
-debian_codename?=bullseye
+debian_codename?=bookworm
 
 packages?=cmake ninja-build build-essential python3-full ruby clang
 packages+=git-lfs unp time file
@@ -79,9 +79,11 @@ setup/rust:
 	@echo "$@: TODO: Support stable version from https://releases.rs/ or older"
 
 setup/python:
+	python3 --version
 	@echo "$@: TODO: https://github.com/wbond/pybars3/issues/82"
 	pip3 --version || echo "warning: Please install pip"
-	pip3 install pybars3
+	pip3 install "pybars3" \
+		|| pip3 install --break-system-packages "pybars3"
 
 cmake_url?=https://github.com/Kitware/CMake/releases/download/v3.21.6/cmake-3.21.6-Linux-x86_64.sh
 cmake_filename?=$(shell basename -- "${cmake_url}")
@@ -109,12 +111,17 @@ setup/debian/bookworm: setup/debian setup/rust setup/python
 setup: setup/debian/${debian_codename}
 	date -u
 
-git: .git/lfs
+git/lfs/prepare: .git/lfs
 	git lfs version || echo "$@: warning: Please install git-lfs"
 	git lfs status --porcelain || git lfs install
 	time git lfs pull
 	git lfs update || git lfs update --force
 	git lfs status --porcelain
+
+git/modules/prepare:
+	[ ! -r .git/modules ] || git submodule update --init --recursive
+
+git/prepare: git/modules/prepare git/lfs/prepare
 
 configure: ${build_dir}/CMakeCache.txt
 	file -E $<
@@ -145,7 +152,7 @@ check: test
 distclean:
 	rm -rf ${build_dir}
 
-prepare: git
+prepare: git/prepare
 
 all/default: configure build test
 	@date -u

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Code &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/zpc/doc/command_classes/user_code.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/js/charenc.js"></script>
+        <script src="../../../../_static/js/crypt.js"></script>
+        <script src="../../../../_static/js/sha1.js"></script>
+        <script src="../../../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Zigbee (ZigPC)" href="../../../../doc/protocol/zigbee/zigpc_introduction.html" />
+    <link rel="prev" title="Thermostat Setpoint" href="thermostat_setpoint.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started_unify.html">Getting Started with Unify</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../doc/protocol_controllers.html">Protocol Controllers</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../doc/protocol/zwave/zpc_introduction.html">Z-Wave (ZPC)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../readme_user.html">ZPC User’s Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../readme_certification.html">ZPC - Z-Wave (certification) Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../doc/readme_debug.html">ZPC Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how_to_implement_zwave_command_classes.html">Guideline for implementing Command Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how_to_write_uam_files_for_the_zpc.html">UAM maps for the ZPC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how_to_interact_with_clusters.html">How to interact with clusters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../supported_command_classes.html">Supported Z-Wave Command Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alarm_sensor.html">Alarm Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="barrier_operator.html">Barrier Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="binary_switch.html">Binary Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="door_lock.html">Door Lock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="humidity_control_mode.html">Humidity Control Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="humidity_control_operating_state.html">Humidity Control Operating State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="humidity_control_setpoint.html">Humidity Control Setpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meter.html">Meter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multilevel_sensor.html">Multilevel Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multilevel_switch.html">Multilevel Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sound_switch.html">Sound Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_fan_mode.html">Thermostat Fan Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_fan_state.html">Thermostat Fan State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_mode.html">Thermostat Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_operating_state.html">Thermostat Operating State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_setpoint.html">Thermostat Setpoint</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">User Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/protocol/zigbee/zigpc_introduction.html">Zigbee (ZigPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-code">
+<h1>User Code<a class="headerlink" href="#user-code" title="Permalink to this heading"></a></h1>
+<p>Version supported : 2</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#interview-process" id="id8">Interview process</a></p></li>
+<li><p><a class="reference internal" href="#command-class-commands" id="id9">Command Class Commands</a></p>
+<ul>
+<li><p><a class="reference internal" href="#user-code-set" id="id10">User Code Set</a></p></li>
+<li><p><a class="reference internal" href="#user-code-get" id="id11">User Code Get</a></p></li>
+<li><p><a class="reference internal" href="#user-code-report" id="id12">User Code Report</a></p></li>
+<li><p><a class="reference internal" href="#users-number-get" id="id13">Users Number Get</a></p></li>
+<li><p><a class="reference internal" href="#users-number-report" id="id14">Users Number Report</a></p></li>
+<li><p><a class="reference internal" href="#user-code-capabilities-get" id="id15">User Code Capabilities Get</a></p></li>
+<li><p><a class="reference internal" href="#user-code-capabilities-report" id="id16">User Code Capabilities Report</a></p></li>
+<li><p><a class="reference internal" href="#user-code-keypad-mode-set" id="id17">User Code Keypad Mode Set</a></p></li>
+<li><p><a class="reference internal" href="#user-code-keypad-mode-get" id="id18">User Code Keypad Mode Get</a></p></li>
+<li><p><a class="reference internal" href="#user-code-keypad-mode-report" id="id19">User Code Keypad Mode Report</a></p></li>
+<li><p><a class="reference internal" href="#admin-code-set" id="id20">Admin Code Set</a></p></li>
+<li><p><a class="reference internal" href="#admin-code-get" id="id21">Admin Code Get</a></p></li>
+<li><p><a class="reference internal" href="#admin-code-report" id="id22">Admin Code Report</a></p></li>
+<li><p><a class="reference internal" href="#user-code-checksum-get" id="id23">User Code Checksum Get</a></p></li>
+<li><p><a class="reference internal" href="#user-code-checksum-report" id="id24">User Code Checksum Report</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#unify-clusters" id="id25">Unify Clusters</a></p>
+<ul>
+<li><p><a class="reference internal" href="#uam-files" id="id26">UAM files</a></p></li>
+<li><p><a class="reference internal" href="#bindings" id="id27">Bindings</a></p></li>
+<li><p><a class="reference internal" href="#command-actions" id="id28">Command actions</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="interview-process">
+<h2>Interview process<a class="headerlink" href="#interview-process" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#users-number-get"><span class="std std-ref">Users Number Get</span></a></p></li>
+<li><p>For each User Identifier: <a class="reference internal" href="#users-code-get"><span class="std std-ref">User Code Get</span></a></p></li>
+<li><p><a class="reference internal" href="#user-code-capabilities-get"><span class="std std-ref">User Code Capabilities Get</span></a></p></li>
+<li><p><a class="reference internal" href="#admin-code-get"><span class="std std-ref">Admin Code Get</span></a></p></li>
+<li><p><a class="reference internal" href="#user-code-checksum-get"><span class="std std-ref">User Code Checksum Get</span></a></p></li>
+<li><p><a class="reference internal" href="#user-code-keypad-mode-get"><span class="std std-ref">User Code Keypad Mode Get</span></a></p></li>
+</ol>
+</section>
+<section id="command-class-commands">
+<h2>Command Class Commands<a class="headerlink" href="#command-class-commands" title="Permalink to this heading"></a></h2>
+<section id="user-code-set">
+<h3>User Code Set<a class="headerlink" href="#user-code-set" title="Permalink to this heading"></a></h3>
+<p>Trigger on new <strong>desired</strong> value of <code class="docutils literal notranslate"><span class="pre">CODE</span></code></p>
+<p>Mapping between attribute store and Set command :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Attribute Store</p></th>
+<th class="head"><p>Attribute State</p></th>
+<th class="head"><p>Z-Wave Set Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+<td><p>Desired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Identifier</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">USER_ID_STATUS</span></code></p></td>
+<td><p>Desired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">ID</span> <span class="pre">Status</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CODE</span></code></p></td>
+<td><p>Desired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Code</span>&#160; <span class="pre">1-N</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="user-code-get">
+<span id="users-code-get"></span><h3>User Code Get<a class="headerlink" href="#user-code-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">CODE</span></code></p>
+<p>Mapping between attribute store and Get command :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Attribute Store</p></th>
+<th class="head"><p>Attribute State</p></th>
+<th class="head"><p>Z-Wave Set Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+<td><p>Reported</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Identifier</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="user-code-report">
+<h3>User Code Report<a class="headerlink" href="#user-code-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Identifier</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">ID</span> <span class="pre">Status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">USER_ID_STATUS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Code</span> <span class="pre">1-N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CODE</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="users-number-get">
+<span id="id1"></span><h3>Users Number Get<a class="headerlink" href="#users-number-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">NUMBER_OF_USERS</span></code></p>
+</section>
+<section id="users-number-report">
+<h3>Users Number Report<a class="headerlink" href="#users-number-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Supported</span> <span class="pre">Users</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NUMBER_OF_USERS</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Extended</span> <span class="pre">Supported</span> <span class="pre">Users</span> <span class="pre">1</span> <span class="pre">(MSB)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NUMBER_OF_USERS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Extended</span> <span class="pre">Supported</span> <span class="pre">Users</span> <span class="pre">2</span> <span class="pre">(LSB)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NUMBER_OF_USERS</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="user-code-capabilities-get">
+<span id="id2"></span><h3>User Code Capabilities Get<a class="headerlink" href="#user-code-capabilities-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p>
+</section>
+<section id="user-code-capabilities-report">
+<h3>User Code Capabilities Report<a class="headerlink" href="#user-code-capabilities-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AC</span> <span class="pre">Support</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ACD</span> <span class="pre">Support</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Res</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UCC</span> <span class="pre">Support</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MUCR</span> <span class="pre">Support</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MUCS</span> <span class="pre">Support</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_FLAGS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Supported</span> <span class="pre">User</span> <span class="pre">ID</span> <span class="pre">Status</span> <span class="pre">Bit</span> <span class="pre">Mask</span> <span class="pre">1-N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_USER_ID_STATUS</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Supported</span> <span class="pre">Keypad</span> <span class="pre">Modes</span> <span class="pre">Bit</span> <span class="pre">Mask</span> <span class="pre">1-M</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_KEYPAD_MODES</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Supported</span> <span class="pre">Keys</span> <span class="pre">Bit</span> <span class="pre">Mask</span> <span class="pre">1-L</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SUPPORTED_KEYS</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="user-code-keypad-mode-set">
+<h3>User Code Keypad Mode Set<a class="headerlink" href="#user-code-keypad-mode-set" title="Permalink to this heading"></a></h3>
+<p>Trigger on new <strong>desired</strong> value of <code class="docutils literal notranslate"><span class="pre">KEYPAD_MODE</span></code></p>
+<p>Mapping between attribute store and Set command :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Attribute Store</p></th>
+<th class="head"><p>Attribute State</p></th>
+<th class="head"><p>Z-Wave Set Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KEYPAD_MODE</span></code></p></td>
+<td><p>Desired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Keypad</span> <span class="pre">Mode</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="user-code-keypad-mode-get">
+<span id="id3"></span><h3>User Code Keypad Mode Get<a class="headerlink" href="#user-code-keypad-mode-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">KEYPAD_MODE</span></code></p>
+</section>
+<section id="user-code-keypad-mode-report">
+<h3>User Code Keypad Mode Report<a class="headerlink" href="#user-code-keypad-mode-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Keypad</span> <span class="pre">Mode</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">KEYPAD_MODE</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="admin-code-set">
+<h3>Admin Code Set<a class="headerlink" href="#admin-code-set" title="Permalink to this heading"></a></h3>
+<p>Trigger on new <strong>desired</strong> value of <code class="docutils literal notranslate"><span class="pre">ADMIN_CODE</span></code></p>
+<p>Mapping between attribute store and Set command :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Attribute Store</p></th>
+<th class="head"><p>Attribute State</p></th>
+<th class="head"><p>Z-Wave Set Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">of</span> <span class="pre">ADMIN_CODE</span></code></p></td>
+<td><p>Desired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Admin</span> <span class="pre">Code</span> <span class="pre">Length</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ADMIN_CODE</span></code></p></td>
+<td><p>Desired</p></td>
+<td><p><a href="#id4"><span class="problematic" id="id5">``</span></a>Admin Code 1-N`</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="admin-code-get">
+<span id="id6"></span><h3>Admin Code Get<a class="headerlink" href="#admin-code-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">ADMIN_CODE</span></code></p>
+</section>
+<section id="admin-code-report">
+<h3>Admin Code Report<a class="headerlink" href="#admin-code-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Admin</span> <span class="pre">Code</span> <span class="pre">1-N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ADMIN_CODE</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="user-code-checksum-get">
+<span id="id7"></span><h3>User Code Checksum Get<a class="headerlink" href="#user-code-checksum-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">CHECKSUM</span></code></p>
+</section>
+<section id="user-code-checksum-report">
+<h3>User Code Checksum Report<a class="headerlink" href="#user-code-checksum-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Code</span> <span class="pre">Checksum</span> <span class="pre">1</span> <span class="pre">(MSB)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHECKSUM</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Code</span> <span class="pre">Checksum</span> <span class="pre">2</span> <span class="pre">(LSB)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHECKSUM</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The structure of the attribute store is :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>|__DATA
+   |__ NUMBER_OF_USERS
+   |__ DELETE_ALL_REQUESTED
+   |__ USER_ID
+   |   |__ CODE
+   |   |__ USER_ID_STATUS
+   |__ ADMIN_CODE
+   |__ CAPABILITIES
+   |   |__ SUPPORTED_FLAGS
+   |   |__ SUPPORTED_USER_ID_STATUS
+   |   |__ SUPPORTED_KEYPAD_MODES
+   |   |__ SUPPORTED_KEYS
+   |__ CHECKSUM
+   |__ KEYPAD_MODE
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="unify-clusters">
+<h2>Unify Clusters<a class="headerlink" href="#unify-clusters" title="Permalink to this heading"></a></h2>
+<section id="uam-files">
+<h3>UAM files<a class="headerlink" href="#uam-files" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No UAM files are used by this command class</p>
+</div>
+</section>
+<section id="bindings">
+<h3>Bindings<a class="headerlink" href="#bindings" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No direct bindings are used for this command class. See next section to see how to interact with it.</p>
+</div>
+</section>
+<section id="command-actions">
+<h3>Command actions<a class="headerlink" href="#command-actions" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 50%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Set PIN Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/SetPINCode</span> <span class="pre">{&quot;UserID&quot;:</span> <span class="pre">&lt;USERID_VALUE&gt;,&quot;UserStatus&quot;:</span> <span class="pre">&lt;USER_STATUS_VALUE&gt;,&quot;UserType&quot;:</span> <span class="pre">0,&quot;PIN&quot;:</span> <span class="pre">&lt;PIN_VALUE&gt;}</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">UserType</span></code> = 0 will set PIN Code for normal User</p></td>
+</tr>
+<tr class="row-odd"><td><p>Set Admin PIN Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/SetPINCode</span> <span class="pre">{&quot;UserID&quot;:</span> <span class="pre">&lt;USERID_VALUE&gt;,&quot;UserStatus&quot;:</span> <span class="pre">&lt;USER_STATUS_VALUE&gt;,&quot;UserType&quot;:</span> <span class="pre">3,&quot;PIN&quot;:</span> <span class="pre">&lt;PIN_VALUE&gt;}</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">UserType</span></code> = 3 will set PIN Code for Admin. <code class="docutils literal notranslate"><span class="pre">UserID</span></code> and <code class="docutils literal notranslate"><span class="pre">UserStatus</span></code> can take any number</p></td>
+</tr>
+<tr class="row-even"><td><p>Get PIN Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/GetPINCode</span> <span class="pre">{</span> <span class="pre">&quot;UserID&quot;:</span> <span class="pre">&lt;USERID_VALUE&gt;</span> <span class="pre">}</span></code></p></td>
+<td><p>Will get <code class="docutils literal notranslate"><span class="pre">USER_ID_STATUS</span></code> for corresponding <code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Clear PIN Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/ClearPINCode</span> <span class="pre">{</span> <span class="pre">&quot;UserID&quot;:</span> <span class="pre">&lt;USERID_VALUE&gt;</span> <span class="pre">}</span></code></p></td>
+<td><p>Will clear PIN Code for corresponding <code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Clear All PIN Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/ClearAllPINCodes'</span> <span class="pre">{</span>&#160; <span class="pre">}</span></code></p></td>
+<td><p>Will clear PIN Code of all <code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Set User Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/SetUserStatus'</span> <span class="pre">{</span> <span class="pre">&quot;UserID&quot;:</span> <span class="pre">&lt;USERID_VALUE&gt;,&quot;UserStatus&quot;:</span> <span class="pre">&lt;USER_STATUS_VALUE&gt;</span> <span class="pre">}</span></code></p></td>
+<td><p>Will set <code class="docutils literal notranslate"><span class="pre">USER_ID_STATUS</span></code> for corresponding <code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Get User Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/DoorLock/Commands/GetUserStatus'</span> <span class="pre">{</span> <span class="pre">&quot;UserID&quot;:</span> <span class="pre">&lt;USERID_VALUE&gt;</span> <span class="pre">}</span></code></p></td>
+<td><p>Will get <code class="docutils literal notranslate"><span class="pre">CODE</span></code> for corresponding <code class="docutils literal notranslate"><span class="pre">USER_ID</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -26,7 +26,9 @@
 
 // zigbee stack includes
 #include <app/util/ezsp/ezsp-enum.h>
-#include <stack/include/ember-types.h>
+#include <stack/include/sl_zigbee_types.h>
+#include <stack/include/zigbee-device-stack.h>
+#include <stack/include/zigbee-security-manager.h>
 #include <app/framework/include/af-types.h>
 
 // slc autogen includes
@@ -51,7 +53,7 @@ struct zigbeeHostCallbacks {
    *
    * @param resetStatus   EZSP error status received from the NCP.
    */
-  void (*onEmberAfNcpPreReset)(EzspStatus resetStatus);
+  void (*onEmberAfNcpPreReset)(sl_zigbee_ezsp_status_t resetStatus);
 
   /**
    * @brief This callback is invoked to configure the NCP after it is reset.
@@ -65,7 +67,7 @@ struct zigbeeHostCallbacks {
    * configurable EZSP commands are accepted by the NCP, FALSE if only
    * non-memory configurable EZSP commands can be sent to the NCP.
    */
-  void (*onEmberAfNcpPostReset)(bool ncpMemConfigureStage);
+  void (*onEmberAfNcpPostReset)(void);
 
   /**
    * @brief This callback is invoked when the network has initialized on the
@@ -84,7 +86,7 @@ struct zigbeeHostCallbacks {
    * @param network   Current network parameters
    *
    */
-  void (*onNetworkInitialized)(const EmberNetworkParameters *network);
+  void (*onNetworkInitialized)(const sl_zigbee_network_parameters_t *network);
 
   /**
    * @brief This callback is invoked when a device has started joining the
@@ -96,7 +98,7 @@ struct zigbeeHostCallbacks {
    * @param eui64     EUI of joining device
    *
    */
-  void (*onNetworkDeviceJoin)(const EmberEUI64 eui64);
+  void (*onNetworkDeviceJoin)(const sl_802154_long_addr_t eui64);
 
   /**
    * @brief This callback is invoked when a device has completed joining the
@@ -112,7 +114,7 @@ struct zigbeeHostCallbacks {
    * @param eui64     EUI of joined device
    *
    */
-  void (*onTrustCenterDeviceJoinComplete)(const EmberEUI64 eui64);
+  void (*onTrustCenterDeviceJoinComplete)(const sl_802154_long_addr_t eui64);
 
   /**
    * @brief This callback is invoked when the Gateway has successfully removed
@@ -126,7 +128,7 @@ struct zigbeeHostCallbacks {
    *
    * @param eui64         EUI of discovered device in little-endian
    */
-  void (*onNetworkDeviceLeaveResponse)(const EmberEUI64 eui64);
+  void (*onNetworkDeviceLeaveResponse)(const sl_802154_long_addr_t eui64);
 
   /**
    * @brief This callback is invoked when the Gateway has received a ZDO Active
@@ -144,7 +146,7 @@ struct zigbeeHostCallbacks {
    * @param endpointCount Total number of active endpoints discovered.
    * @param endpointCount Endpoint Identifier list.
    */
-  void (*onZdoActiveEndpointsResponse)(const EmberEUI64 eui64,
+  void (*onZdoActiveEndpointsResponse)(const sl_802154_long_addr_t eui64,
                                        uint8_t endpointCount,
                                        const uint8_t *endpointList);
 
@@ -163,8 +165,8 @@ struct zigbeeHostCallbacks {
    * @param eui64         Device identifier.
    * @param endpointInfo  Discovered endpoint information.
    */
-  void (*onZdoSimpleDescriptorResponse)(const EmberEUI64 eui64,
-                                        const EmberAfClusterList *endpointInfo);
+  void (*onZdoSimpleDescriptorResponse)(const sl_802154_long_addr_t eui64,
+                                        const sl_zigbee_af_cluster_list_t *endpointInfo);
 
   /**
    * @brief This callback is invoked when the Gateway receives a ZCL global
@@ -179,7 +181,7 @@ struct zigbeeHostCallbacks {
    * @param attribute_report_records      Buffer of attribute report records.
    * @param attribute_report_records_size Size of report records buffer.
    */
-  void (*onReportedAttributeChange)(const EmberEUI64 eui64,
+  void (*onReportedAttributeChange)(const sl_802154_long_addr_t eui64,
                                     uint8_t endpoint,
                                     uint16_t clusterId,
                                     uint8_t *attribute_report_records,
@@ -197,11 +199,11 @@ struct zigbeeHostCallbacks {
    * @param clusterId                     ZCL Cluster ID of attributes.
    * @param attribute_status_records      Buffer of attribute status records.
    * @param attribute_status_records_size Size of status records buffer.
-   * @return EmberStatus                  EMBER_SUCCESS if frame is being
-   * handled by a supported cluster, EMBER_NOT_FOUND if the command frame
+   * @return sl_status_t                  SL_STATUS_OK if frame is being
+   * handled by a supported cluster, SL_STATUS_NOT_FOUND  if the command frame
    * parsing is not supported.
    */
-  void (*onReadAttributesResponse)(const EmberEUI64 eui64,
+  void (*onReadAttributesResponse)(const sl_802154_long_addr_t eui64,
                                    uint8_t endpoint,
                                    uint16_t clusterId,
                                    uint8_t *attribute_status_records,
@@ -220,11 +222,11 @@ struct zigbeeHostCallbacks {
    * @param configure_status_records      Buffer of configure status records.
    * @param configure_status_records_size Size of status records buffer.
    *
-   * @return EmberStatus                  EMBER_SUCCESS if frame is being
-   * handled by a supported cluster, EMBER_NOT_FOUND if the command frame
+   * @return sl_status_t                  SL_STATUS_OK if frame is being
+   * handled by a supported cluster, SL_STATUS_NOT_FOUND  if the command frame
    * parsing is not supported.
    */
-  void (*onConfigureReportingResponse)(const EmberEUI64 eui64,
+  void (*onConfigureReportingResponse)(const sl_802154_long_addr_t eui64,
                                        uint8_t endpoint,
                                        uint16_t clusterId,
                                        uint8_t *configure_status_records,
@@ -243,12 +245,12 @@ struct zigbeeHostCallbacks {
    * @param buffer                  Buffer containing command frame.
    * @param bufferLength            Buffer containing command frame.
    * @param bufferPayloadStartIndex Index indicating start of command payload.
-   * @return EmberAfStatus          Status of the command processing.
-   * EMBER_ZCL_STATUS_SUCCESS if the command was handled properly,
-   * EMBER_ZCL_STATUS_UNSUP_COMMAND if the command is not supported,
-   * EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER if the cluster is not supported.
+   * @return sl_zigbee_af_status_t          Status of the command processing.
+   * SL_ZIGBEE_ZCL_STATUS_SUCCESS if the command was handled properly,
+   * SL_ZIGBEE_ZCL_STATUS_UNSUP_COMMAND  if the command is not supported,
+   * SL_ZIGBEE_ZCL_STATUS_UNSUPPORTED_CLUSTER if the cluster is not supported.
    */
-  EmberAfStatus (*onClusterCommandReceived)(const EmberEUI64 eui64,
+  sl_zigbee_af_status_t (*onClusterCommandReceived)(const sl_802154_long_addr_t eui64,
                                             uint8_t endpoint,
                                             uint16_t clusterId,
                                             uint8_t commandId,
@@ -273,7 +275,7 @@ struct zigbeeHostCallbacks {
    * @param imageTypeId     OTA Image type.
    * @param firmwareVersion OTA Image FW version.
    */
-  void (*onOtaUpdateStarted)(const EmberEUI64 eui64,
+  void (*onOtaUpdateStarted)(const sl_802154_long_addr_t eui64,
                              uint16_t manufacturerId,
                              uint16_t imageTypeId,
                              uint32_t firmwareVersion);
@@ -283,7 +285,7 @@ struct zigbeeHostCallbacks {
    *
    * NOTE: This callback is also invoked when a OTA client requests an image
    * block and the server does not have an image available. The ZCL status
-   * EMBER_ZCL_STATUS_NO_IMAGE_AVAILABLE is sent in this case.
+   * SL_ZIGBEE_ZCL_STATUS_NO_IMAGE_AVAILABLE is sent in this case.
    *
    *
    * @param eui64           Target Device.
@@ -291,20 +293,20 @@ struct zigbeeHostCallbacks {
    * @param imageTypeId     OTA Image type.
    * @param firmwareVersion OTA Image FW version.
    * @param status          Status of the OTA update:
-   * EMBER_ZCL_STATUS_SUCCESS if the update is performed successfully.
-   * EMBER_ZCL_STATUS_NO_IMAGE_AVAILABLE if there is not image available for the
+   * SL_ZIGBEE_ZCL_STATUS_SUCCESS if the update is performed successfully.
+   * SL_ZIGBEE_ZCL_STATUS_NO_IMAGE_AVAILABLE if there is not image available for the
    * device requesting information.
    */
-  void (*onOtaUpdateCompleted)(const EmberEUI64 eui64,
+  void (*onOtaUpdateCompleted)(const sl_802154_long_addr_t eui64,
                                uint16_t manufacturerId,
                                uint16_t imageTypeId,
                                uint32_t firmwareVersion,
-                               EmberAfStatus status);
+                               sl_zigbee_af_status_t status);
 
-  void (*onBindUnbindResponse)( const EmberEUI64 sourceEui64,
+  void (*onBindUnbindResponse)( const sl_802154_long_addr_t sourceEui64,
                                 uint8_t sourceEndpoint,
                                 uint16_t clusterId,
-                                const EmberEUI64 destEui64,
+                                const sl_802154_long_addr_t destEui64,
                                 uint8_t destEndpoint,
                                 bool isBindResponse,
                                 uint8_t zdoStatus);

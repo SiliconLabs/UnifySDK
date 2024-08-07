@@ -46,6 +46,9 @@ var unify__dotdot__attribute__store__force__read__attributes__command__callbacks
     [ "uic_mqtt_dotdot_thermostat_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a09a563f0c7d50c6c1f35f9a338cba2c7", null ],
     [ "uic_mqtt_dotdot_thermostat_user_interface_configuration_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#ae1e6a3eb433899a4bd7a167397c8bd76", null ],
     [ "uic_mqtt_dotdot_time_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a743a5b8a8ec36cca5b154038ae65307f", null ],
+    [ "uic_mqtt_dotdot_unify_fan_control_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#af68c144252328ed9566d4141b6a01968", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a3ac9481229b2ba6ddd452a91441c55fe", null ],
+    [ "uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#abeccefb88f805e470f873084b6f1e3a7", null ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a4d6d9f6b6400db597a2fe57195c1b4e1", null ],
     [ "uic_mqtt_dotdot_window_covering_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a0f2fc38bcf3d031688df0accface6c66", null ],
     [ "unify_dotdot_attribute_store_force_read_attributes_command_callbacks_init", "group__unify__dotdot__attribute__store__force__read__attributes__command__callbacks.html#ga66d82d0c93127e664243afb6cff51d5c", null ]

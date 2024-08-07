@@ -12,14 +12,14 @@ set(DIR_OF_TARGET_ADD_UNIT_TEST
 function(generate_unity_runner test_runner test_file)
   if(EXISTS ${UNIFY-TESTFRAMEWORK_LOCATION})
     set(ZWAVE_UNITY_CONFIG
-        ${UNIFY-TESTFRAMEWORK_LOCATION}/zwave_cmock_config.yml)
+        ${UNIFY-TESTFRAMEWORK_LOCATION}/unify_cmock_config.yml)
   else()
     set(ZWAVE_UNITY_CONFIG
-        ${DIR_OF_TARGET_ADD_UNIT_TEST}/zwave_cmock_config.yml)
+        ${DIR_OF_TARGET_ADD_UNIT_TEST}/unify_cmock_config.yml)
   endif()
   if(NOT EXISTS ${ZWAVE_UNITY_CONFIG})
     message(
-      FATAL_ERROR "Did not find zwave_cmock_config.yml at ${ZWAVE_UNITY_CONFIG}"
+      FATAL_ERROR "Did not find unify_cmock_config.yml at ${ZWAVE_UNITY_CONFIG}"
     )
   endif()
   if(EXISTS ${THS-UNITY_LOCATION})

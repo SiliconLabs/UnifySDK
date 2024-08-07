@@ -1,5 +1,5 @@
 # UIC CPCd Release Notes
 
-## Gecko Platform [4.1.3.0] - Aug 2022
+## CPC daemon [4.5.0] - Aug 2024
 
-[Release notes](https://www.silabs.com/documents/public/release-notes/gecko-platform-release-notes-4.1.3.0.pdf)
+[Release notes](https://github.com/SiliconLabs/cpc-daemon/releases/tag/v4.5.0)

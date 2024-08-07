@@ -5570,7 +5570,7 @@ sl_status_t zigpc_command_mapper_door_lock_clear_all_rfid_codes_handler(
 
  * @param user_uniqueid  Command argument of type uint32_t
 
- * @param user_status  Command argument of type DrlkUserStatus
+ * @param user_status  Command argument of type DrlkSettableUserStatus
 
  * @param user_type  Command argument of type DrlkUserType
 
@@ -5591,7 +5591,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_user_handler(
 
     uint32_t user_uniqueid,
 
-    DrlkUserStatus user_status,
+    DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
@@ -5750,7 +5750,7 @@ sl_status_t zigpc_command_mapper_door_lock_clear_user_handler(
 
  * @param user_index  Command argument of type uint16_t
 
- * @param user_status  Command argument of type DrlkUserStatus
+ * @param user_status  Command argument of type DrlkSettableUserStatus
 
  * @param user_type  Command argument of type DrlkUserType
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
@@ -5769,7 +5769,7 @@ sl_status_t zigpc_command_mapper_door_lock_set_credential_handler(
 
     uint16_t user_index,
 
-    DrlkUserStatus user_status,
+    DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type
 

@@ -1,8 +1,8 @@
-# Running Unify on Raspberry Pi
+# Setting up Raspberry Pi for Unify
 
 ## Introduction
 
-Here we explain how to get up and running quickly to test out Unify on the Raspberry Pi reference platform. Depending on the protocol(s) used this setup may vary so there are several sections that go into more detail for each protocol controller. This page contains the steps to install Unify on the Raspberry Pi regardless of the protocol(s) used.
+Here we explain how to set up and running quickly to test out Unify on the Raspberry Pi reference platform. Depending on the protocol(s) used this setup may vary so there are several sections that go into more detail for each protocol controller. This page contains the steps to install Unify on the Raspberry Pi regardless of the protocol(s) used.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ Here we explain how to get up and running quickly to test out Unify on the Raspb
   - [Filezilla](https://filezilla-project.org)
   - [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
   - [Putty](https://www.putty.org)
-  - [Raspberry Pi Bullseye OS 64 bit image](https://www.raspberrypi.com/software/operating-systems/)
+  - [Raspberry Pi Bookworm OS 64 bit image](https://www.raspberrypi.com/software/operating-systems/)
 
 ## Set up Raspberry Pi
 
@@ -86,34 +86,6 @@ hidden:
 protocol/zigbee/running_zigpc.md
 ```
 
-[Matter](protocol/matter/matter_links.md)
+[Matter Protocol Controller](protocol/matter/matter_mpc.md)
 
-```{toctree}
----
-maxdepth: 1
-titlesonly:
-hidden:
----
-protocol/matter/matter_links.md
-```
 [Multiprotocol](getting_started_multiprotocol_cpc.md)
-
-```{toctree}
----
-maxdepth: 1
-titlesonly:
-hidden:
----
-getting_started_multiprotocol_cpc.md
-```
-
-## Portable Runtime
-
-Unify targets our reference platform, a Raspberry Pi 4 (RPi4).
-It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
-If you instead want a quick demo of a Z-Wave only Unify IoT gateway running on
-your Windows, MacOS or Linux desktop, please try our experimental
-[Portable Runtime environment User guide](../portable_runtime/readme_user.md).
-
-
-

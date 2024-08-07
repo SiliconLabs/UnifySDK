@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Multiprotocol Setup &mdash; Unify Host SDK</title>
+  <title>Getting Started with the Multiprotocol Setup &mdash; Unify Host SDK</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Unify Framework" href="UnifySDK.html" />
-    <link rel="prev" title="Zigbee (ZigPC)" href="protocol/zigbee/running_zigpc.html" /> 
+    <link rel="prev" title="Unify Framework Getting Started" href="getting_started_unify_sdk.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -51,10 +51,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="protocol/zwave/running_zpc.html">Z-Wave (ZPC)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol/zigbee/running_zigpc.html">Zigbee (ZigPC)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Multiprotocol Setup</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="portable_runtime/readme_user.html">Getting Started with Unify using Portable runtime</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="getting_started.html">Running Unify on Raspberry Pi</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify Host SDK User guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_unify_sdk.html">Getting Started with the Unify Framework</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Getting Started with the Multiprotocol Setup</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -93,12 +97,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="multiprotocol-setup">
-<h1>Multiprotocol Setup<a class="headerlink" href="#multiprotocol-setup" title="Permalink to this heading"></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-the-multiprotocol-setup">
+<h1>Getting Started with the Multiprotocol Setup<a class="headerlink" href="#getting-started-with-the-multiprotocol-setup" title="Permalink to this heading"></a></h1>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
 <p>Follow the directions in the
-<a class="reference internal" href="getting_started.html"><span class="doc std std-doc">Unify Host SDK getting started guide</span></a>
+<a class="reference internal" href="getting_started_unify.html"><span class="doc std std-doc">Unify Host SDK getting started guide</span></a>
 to set up your Raspberry Pi 4 and install the Unify Host SDK Debian packages.</p>
 <p>By default, the <code class="docutils literal notranslate"><span class="pre">uic-zigpc</span></code> service is configured to operate with the
 single-protocol Zigbee NCP. This service runs the Unify Framework Zigbee Protocol

@@ -555,7 +555,7 @@ void test_dotdot_mqtt_bitmaps_commands()
         "UpdateStartHue": false
     },
     "Action": "ActivateColorLoopFromColorLoopStartEnhancedHue",
-    "Direction": "IncrementEnhancedCurrentHue",
+    "Direction": "ColorLoopHueIncrement",
     "Time": 1,
     "StartHue": 0,
     "OptionsMask": "0",
@@ -577,7 +577,7 @@ void test_dotdot_mqtt_bitmaps_commands()
   TEST_ASSERT_EQUAL(
     ZCL_COLOR_LOOP_SET_ACTION_ACTIVATE_COLOR_LOOP_FROM_COLOR_LOOP_START_ENHANCED_HUE,
     action_status);
-  TEST_ASSERT_EQUAL(ZCL_CC_COLOR_LOOP_DIRECTION_INCREMENT_ENHANCED_CURRENT_HUE,
+  TEST_ASSERT_EQUAL(ZCL_CC_COLOR_LOOP_DIRECTION_COLOR_LOOP_HUE_INCREMENT,
                     direction_status);
   TEST_ASSERT_EQUAL(time_payload_state, time_state);
   TEST_ASSERT_EQUAL(start_hue_payload_state, start_hue_state);

@@ -3403,7 +3403,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
 
   uint32_t &user_uniqueid,
 
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
 
   DrlkUserType &user_type,
 
@@ -3592,7 +3592,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
 
   uint16_t &user_index,
 
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
 
   DrlkUserType &user_type
 
@@ -6068,6 +6068,145 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_descriptor_state_t &new_state,
   uic_mqtt_dotdot_descriptor_updated_state_t &new_updated_state
+);
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifyFanControl SetFanMode command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_fan_control_set_fan_mode_command(
+  
+  const uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UnifyFanControl SetFanMode command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_fan_control_set_fan_mode(
+  nlohmann::json &jsn,
+  ZWaveFanModeEnum &fan_mode
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifyFanControl TurnOff command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_fan_control_turn_off_command(
+  
+);
+
+
+
+
+/**
+ * @brief JSON parser for UnifyFanControl WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_fan_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_fan_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_fan_control_updated_state_t &new_updated_state
+);
+
+
+/**
+ * @brief JSON parser for UnifyThermostat WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_thermostat_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_thermostat_state_t &new_state,
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t &new_updated_state
+);
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifyHumidityControl ModeSet command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_humidity_control_mode_set_command(
+  
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UnifyHumidityControl ModeSet command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_humidity_control_mode_set(
+  nlohmann::json &jsn,
+  ModeType &mode
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifyHumidityControl SetpointSet command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_humidity_control_setpoint_set_command(
+  
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UnifyHumidityControl SetpointSet command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
+  nlohmann::json &jsn,
+  SetpointType &type,
+
+  uint8_t &precision,
+
+  uint8_t &scale,
+
+  int32_t &value
+
+);
+
+
+
+/**
+ * @brief JSON parser for UnifyHumidityControl WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_humidity_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_humidity_control_updated_state_t &new_updated_state
 );
 
 

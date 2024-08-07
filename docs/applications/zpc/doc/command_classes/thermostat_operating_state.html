@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thermostat Operating State &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/zpc/doc/command_classes/thermostat_operating_state.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/js/charenc.js"></script>
+        <script src="../../../../_static/js/crypt.js"></script>
+        <script src="../../../../_static/js/sha1.js"></script>
+        <script src="../../../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Thermostat Setpoint" href="thermostat_setpoint.html" />
+    <link rel="prev" title="Thermostat Mode" href="thermostat_mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started_unify.html">Getting Started with Unify</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../doc/protocol_controllers.html">Protocol Controllers</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../doc/protocol/zwave/zpc_introduction.html">Z-Wave (ZPC)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../readme_user.html">ZPC User’s Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../readme_certification.html">ZPC - Z-Wave (certification) Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../doc/readme_debug.html">ZPC Debugging Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how_to_implement_zwave_command_classes.html">Guideline for implementing Command Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how_to_write_uam_files_for_the_zpc.html">UAM maps for the ZPC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../how_to_interact_with_clusters.html">How to interact with clusters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../supported_command_classes.html">Supported Z-Wave Command Classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="alarm_sensor.html">Alarm Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="barrier_operator.html">Barrier Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="binary_switch.html">Binary Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="door_lock.html">Door Lock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="humidity_control_mode.html">Humidity Control Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="humidity_control_operating_state.html">Humidity Control Operating State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="humidity_control_setpoint.html">Humidity Control Setpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="meter.html">Meter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multilevel_sensor.html">Multilevel Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multilevel_switch.html">Multilevel Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sound_switch.html">Sound Switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_fan_mode.html">Thermostat Fan Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_fan_state.html">Thermostat Fan State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_mode.html">Thermostat Mode</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Thermostat Operating State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thermostat_setpoint.html">Thermostat Setpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_code.html">User Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/protocol/zigbee/zigpc_introduction.html">Zigbee (ZigPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../doc/protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thermostat-operating-state">
+<h1>Thermostat Operating State<a class="headerlink" href="#thermostat-operating-state" title="Permalink to this heading"></a></h1>
+<p>Version supported : 1 (2 partially supported see note bellow)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Log commands in version 2 are supported in ZPC but not exposed to MQTT yet.</p>
+</div>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#interview-process" id="id4">Interview process</a></p></li>
+<li><p><a class="reference internal" href="#command-class-commands" id="id5">Command Class Commands</a></p>
+<ul>
+<li><p><a class="reference internal" href="#thermostat-operating-state-get" id="id6">Thermostat Operating State Get</a></p></li>
+<li><p><a class="reference internal" href="#thermostat-operating-state-report" id="id7">Thermostat Operating State Report</a></p></li>
+<li><p><a class="reference internal" href="#thermostat-operating-state-logging-supported-get" id="id8">Thermostat Operating State Logging Supported Get</a></p></li>
+<li><p><a class="reference internal" href="#thermostat-operating-state-logging-supported-report" id="id9">Thermostat Operating State Logging Supported Report</a></p></li>
+<li><p><a class="reference internal" href="#thermostat-operating-state-logging-get" id="id10">Thermostat Operating State Logging Get</a></p></li>
+<li><p><a class="reference internal" href="#thermostat-operating-state-logging-report" id="id11">Thermostat Operating State Logging Report</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#unify-clusters" id="id12">Unify Clusters</a></p>
+<ul>
+<li><p><a class="reference internal" href="#uam-files" id="id13">UAM files</a></p></li>
+<li><p><a class="reference internal" href="#bindings" id="id14">Bindings</a></p></li>
+<li><p><a class="reference internal" href="#command-actions" id="id15">Command actions</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="interview-process">
+<h2>Interview process<a class="headerlink" href="#interview-process" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#thermostat-operating-state-get"><span class="std std-ref">Thermostat Operating State Get</span></a></p></li>
+<li><p>(v2 only, zpc only) <a class="reference internal" href="#thermostat-operating-state-logging-supported-get"><span class="std std-ref">Thermostat Operating State Logging Supported Get</span></a></p></li>
+<li><p>(v2 only, zpc only) <a class="reference internal" href="#thermostat-operating-state-logging-get"><span class="std std-ref">Thermostat Operating State Logging Get</span></a></p></li>
+</ol>
+</section>
+<section id="command-class-commands">
+<h2>Command Class Commands<a class="headerlink" href="#command-class-commands" title="Permalink to this heading"></a></h2>
+<section id="thermostat-operating-state-get">
+<span id="id1"></span><h3>Thermostat Operating State Get<a class="headerlink" href="#thermostat-operating-state-get" title="Permalink to this heading"></a></h3>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">CURRENT_STATE</span></code></p>
+</section>
+<section id="thermostat-operating-state-report">
+<h3>Thermostat Operating State Report<a class="headerlink" href="#thermostat-operating-state-report" title="Permalink to this heading"></a></h3>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Operating</span> <span class="pre">State</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CURRENT_STATE</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="thermostat-operating-state-logging-supported-get">
+<span id="id2"></span><h3>Thermostat Operating State Logging Supported Get<a class="headerlink" href="#thermostat-operating-state-logging-supported-get" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Not yet exposed to MQTT</p>
+</div>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">LOG_SUPPORTED_BITMASK</span></code></p>
+</section>
+<section id="thermostat-operating-state-logging-supported-report">
+<h3>Thermostat Operating State Logging Supported Report<a class="headerlink" href="#thermostat-operating-state-logging-supported-report" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Not yet exposed to MQTT</p>
+</div>
+<p>Mapping between Report command and attribute store :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Bitmask</span> <span class="pre">1-N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LOG_SUPPORTED_BITMASK</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bit Mask 1-N will be merged in <code class="docutils literal notranslate"><span class="pre">SUPPORTED_MODES</span></code>. Max bitmask length currently supported is N=4.
+You can increase this value by changing the underlying type of <code class="docutils literal notranslate"><span class="pre">SUPPORTED_MODES</span></code> (e.g. uint32_t -&gt; uint64_t).</p>
+</div>
+<p>This command will also create :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>An attribute <code class="docutils literal notranslate"><span class="pre">STATE_LOG_SUPPORTED</span></code> for each supported log state supported.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">LOG_BITMASK</span></code> desired value to <code class="docutils literal notranslate"><span class="pre">LOG_SUPPORTED_BITMASK</span></code> to get all the logs.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="thermostat-operating-state-logging-get">
+<span id="id3"></span><h3>Thermostat Operating State Logging Get<a class="headerlink" href="#thermostat-operating-state-logging-get" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Not yet exposed to MQTT</p>
+</div>
+<p>Trigger on undefined <strong>reported</strong> value of <code class="docutils literal notranslate"><span class="pre">LOG_BITMASK</span></code></p>
+</section>
+<section id="thermostat-operating-state-logging-report">
+<h3>Thermostat Operating State Logging Report<a class="headerlink" href="#thermostat-operating-state-logging-report" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Not yet exposed to MQTT</p>
+</div>
+<p>For each <code class="docutils literal notranslate"><span class="pre">Reports</span> <span class="pre">to</span> <span class="pre">Follow</span></code> create an associated <code class="docutils literal notranslate"><span class="pre">Operating</span> <span class="pre">State</span> <span class="pre">Log</span> <span class="pre">Type</span></code> with its children :</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Command Attribute</p></th>
+<th class="head"><p>Z-Wave Attribute Store</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Operating</span> <span class="pre">State</span> <span class="pre">Log</span> <span class="pre">Type</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LOG_STATE</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Usage</span> <span class="pre">Today</span> <span class="pre">(Hours)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">USAGE_TODAY_HOURS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Usage</span> <span class="pre">Today</span> <span class="pre">(Minutes)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">USAGE_TODAY_MIN</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Usage</span> <span class="pre">Yesterday</span>&#160; <span class="pre">(Hours)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">USAGE_YESTERDAY_HOURS</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Usage</span> <span class="pre">Yesterday</span>&#160; <span class="pre">(Minutes)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">USAGE_YESTERDAY_MIN</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The structure of the attribute store is :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>|__ LOG_SUPPORTED_BITMASK
+|__ LOG_BITMASK
+    |__ LOG_STATE
+        |__ USAGE_TODAY_HOURS
+        |__ USAGE_TODAY_MIN
+        |__ USAGE_YESTERDAY_HOURS
+        |__ USAGE_YESTERDAY_MIN
+    |__ LOG_STATE
+        |__ USAGE_TODAY_HOURS
+        |__ USAGE_TODAY_MIN
+        |__ USAGE_YESTERDAY_HOURS
+        |__ USAGE_YESTERDAY_MIN
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="unify-clusters">
+<h2>Unify Clusters<a class="headerlink" href="#unify-clusters" title="Permalink to this heading"></a></h2>
+<section id="uam-files">
+<h3>UAM files<a class="headerlink" href="#uam-files" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UAM File</p></th>
+<th class="head"><p>Cluster</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Thermostat.uam</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Thermostat.xml</span></code></p></td>
+<td><p>Map some attributes to the ones in the <strong>native</strong> Thermostat cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Thermostat.uam</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Unify_Thermostat.xml</span></code></p></td>
+<td><p>Used to map all the Z-Wave attributes to a custom cluster</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bindings">
+<h3>Bindings<a class="headerlink" href="#bindings" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Z-Wave Attribute Store</p></th>
+<th class="head"><p>Cluster attribute</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CURRENT_STATE</span></code></p></td>
+<td><p>Thermostat ThermostatRunningState</p></td>
+<td><p>Most of the values are mapped (but not all). Z-Wave -&gt; Cluster (Read only).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CURRENT_STATE</span></code></p></td>
+<td><p>Thermostat OperatingState</p></td>
+<td><p>Z-Wave -&gt; Cluster (Read only). 1:1 mapping.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="command-actions">
+<h3>Command actions<a class="headerlink" href="#command-actions" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>MQTT Topic</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Get thermostat state (native)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/Thermostat/Attributes/ThermostatRunningState/Reported</span></code></p></td>
+<td><p>Most of the values are mapped (but not all). Use uint and not enums.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Turn on the fan (Z-Wave)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/UnifyThermostat/Attributes/OperatingState/Reported</span></code></p></td>
+<td><p>Enum values are available in <code class="docutils literal notranslate"><span class="pre">Unify_Thermostat.xml</span></code> (<code class="docutils literal notranslate"><span class="pre">OperatingState</span></code>). 1:1 mapping.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

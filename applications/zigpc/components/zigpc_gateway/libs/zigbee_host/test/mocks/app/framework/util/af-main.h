@@ -16,12 +16,12 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 /*  Refer to <GSDK>/protocol/zigbee/app/framework/util/af-main.h
     for more details.
 */
 
-EmberStatus emberAfPermitJoin(uint8_t duration, bool broadcastMgmtPermitJoin);
+sl_status_t sl_zigbee_af_permit_join(uint8_t duration, bool broadcastMgmtPermitJoin);
 
 #endif  // SILABS_AF_MAIN_H

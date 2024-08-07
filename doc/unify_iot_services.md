@@ -17,6 +17,6 @@ basic Unify concepts, such as device provisioning and control. The user
 interface is provided strictly for test and demonstration purposes only and is
 not suitable for production.
 
-- [Matter Bridge (UMB)](https://siliconlabs.github.io/matter/latest/unify/readme_user.html)
+- [Matter Bridge (UMB)](https://siliconlabs.github.io/matter/latest/unify/matter-bridge/index.html)
 
 The Unify Matter Bridge is a Unify IoT Service that enables interaction with Unify devices from a Matter fabric.

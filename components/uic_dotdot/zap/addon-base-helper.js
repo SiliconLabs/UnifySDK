@@ -68,9 +68,7 @@ function asUnderlyingType(arg) {
  * - bitmap types
  */
 zcl_type_map = (function() {
-    /* FIXME: Type-workarounds where ZAP fails to properly create our required
-     * types.
-     */
+    /* FIXME: Type-workarounds where ZAP fails to properly create our required types.  */
     const _map = {
         CCMinMiredsField: 'uint16',
         CCMaxMiredsField: 'uint16',
@@ -100,6 +98,8 @@ zcl_type_map = (function() {
         CredentialTypeEnum: 'enum8',
         DataOperationTypeEnum: 'enum8',
         CredentialRuleEnum: 'enum8',
+        ZWaveFanModeEnum: 'enum8',
+        ZWaveFanStateEnum: 'enum8',
         // zclType: 'uint8',
 
         BarrierControlSafetyStatus: 'map16',

@@ -220,6 +220,22 @@ services:
     volumes:
       - unify_matter_bridge:/var/lib
 
+  unify-emd:
+    image: unify-runtime
+    container_name: unify-emd
+    restart: on-failure
+    depends_on:
+      - unify-base
+      - mqtt-broker
+    networks:
+      - mqtt-network
+    environment:
+      - EMD_CLUSTER_ARG
+      - EMD_DEVICE_TYPE_ARG
+    entrypoint: "/unify/run_emd.sh --mqtt.host mqtt-broker --mqtt.client_id emd-portable_runtime ${EMD_CLUSTER_ARG} ${EMD_DEVICE_TYPE_ARG}"
+    volumes:
+      - unify_emd:/var/lib
+
 volumes:
   unify_gms:
   unify_upvl:
@@ -232,6 +248,7 @@ volumes:
   unify_aoxpc:
   unify_multiprotocol:
   unify_matter_bridge:
+  unify_emd:
 
 networks:
   mqtt-network:

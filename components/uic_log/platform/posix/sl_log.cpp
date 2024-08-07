@@ -147,6 +147,11 @@ void sl_log_set_level(sl_log_level_t level)
                log_level_long.at(level).c_str());
 }
 
+sl_log_level_t sl_log_get_level()
+{
+  return log_level;
+}
+
 void sl_log_set_tag_level(const char *tag, sl_log_level_t level)
 {
   log_levels[tag] = level;

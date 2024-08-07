@@ -274,7 +274,9 @@ void aoa_db_on_tag_added(aoa_db_entry_t *tag)
     return;
   }
 
-  ec = aoa_init_rtl((aoa_state_t *)tag->user_data, locator_unid);
+  ec = aoa_init_rtl((aoa_state_t *)tag->user_data,
+                    locator_unid,
+                    sl_log_get_level() == SL_LOG_DEBUG);
   if (ec != SL_RTL_ERROR_SUCCESS) {
     sl_log_critical(LOG_TAG, "aoa_init_rtl failed: %d", ec);
     panic();

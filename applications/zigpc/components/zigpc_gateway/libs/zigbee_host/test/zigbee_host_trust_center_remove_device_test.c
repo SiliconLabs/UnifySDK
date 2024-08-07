@@ -69,13 +69,13 @@ void tearDown() {}
 void test_trust_center_remove_device_should_handle_invalid_argument()
 {
   // ARRANGE
-  EmberStatus status;
+  sl_status_t status;
 
   // ACT
   status = zigbeeHostNetworkDeviceLeaveRequest(NULL);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_BAD_ARGUMENT, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER, status);
 }
 
 /**
@@ -85,49 +85,49 @@ void test_trust_center_remove_device_should_handle_invalid_argument()
 void test_trust_center_remove_device_should_use_device_leave_api()
 {
   // ARRANGE
-  EmberEUI64 eui64    = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
-  EmberNodeId node_id = 0x1234;
+  sl_802154_long_addr_t eui64    = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
+  sl_802154_short_addr_t node_id = 0x1234;
 
   // ARRANGE
 
-  emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(eui64, 0);
-  emberAfPluginAddressTableLookupNodeIdByIndex_ExpectAndReturn(0, node_id);
+  sl_zigbee_af_lookup_address_table_entry_by_eui64_ExpectAndReturn(eui64, 0);
+  sl_zigbee_af_address_table_lookup_node_id_by_index_ExpectAndReturn(0, node_id);
 
-  emberLeaveRequest_ExpectAndReturn(
+  sl_zigbee_leave_request_ExpectAndReturn(
     node_id,
     eui64,
     0x00,
-    (EMBER_APS_OPTION_RETRY | EMBER_APS_OPTION_ENABLE_ROUTE_DISCOVERY
-     | EMBER_APS_OPTION_ENABLE_ADDRESS_DISCOVERY),
-    EMBER_SUCCESS);
+    (SL_ZIGBEE_APS_OPTION_RETRY | SL_ZIGBEE_APS_OPTION_ENABLE_ROUTE_DISCOVERY
+     | SL_ZIGBEE_APS_OPTION_ENABLE_ADDRESS_DISCOVERY),
+    SL_STATUS_OK );
 
   // ACT
-  EmberStatus status = zigbeeHostNetworkDeviceLeaveRequest(eui64);
+  sl_status_t status = zigbeeHostNetworkDeviceLeaveRequest(eui64);
 
   // ASSERT
-  TEST_ASSERT_EQUAL_HEX8(status, EMBER_SUCCESS);
+  TEST_ASSERT_EQUAL_HEX8(status, SL_STATUS_OK );
 }
 
 void test_trust_center_remove_device_should_return_on_device_not_found()
 {
   // ARRANGE
-  EmberEUI64 eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
+  sl_802154_long_addr_t eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
 
-  emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(
+  sl_zigbee_af_lookup_address_table_entry_by_eui64_ExpectAndReturn(
     eui64,
-    EMBER_NULL_ADDRESS_TABLE_INDEX);
+    SL_ZIGBEE_NULL_ADDRESS_TABLE_INDEX);
 
   // ACT
-  EmberStatus status = zigbeeHostNetworkDeviceLeaveRequest(eui64);
+  sl_status_t status = zigbeeHostNetworkDeviceLeaveRequest(eui64);
 
   // ASSERT
-  TEST_ASSERT_EQUAL_HEX8(status, EMBER_INVALID_CALL);
+  TEST_ASSERT_EQUAL_HEX8(status, SL_STATUS_INVALID_STATE );
 }
 
 void test_device_left_callback_should_invoke_device_removed_callback(void)
 {
   // ARRANGE
-  EmberEUI64 eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
+  sl_802154_long_addr_t eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
   callback_onNetworkDeviceLeaveResponse_Expect(eui64);
 
   // ACT

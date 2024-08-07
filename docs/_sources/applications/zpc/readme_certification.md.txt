@@ -1110,7 +1110,7 @@ The ZPC can operate as a Z-Wave Long Range controller, operating both on
 Z-Wave and Z-Wave Long Range PHY/MAC.
 
 Nodes can be included using Z-Wave Long Range, if the ZPC runs with the
-US_LR RF region.
+EU_LR or US_LR RF region.
 
 Go to the SmartStart list and add an entry, then click the heart icon to select
 the preferred protocol for inclusion.

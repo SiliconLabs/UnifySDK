@@ -1,6 +1,57 @@
 # ZPC Release Notes
 
-## [1.5.0] - Feb 2023
+## [1.6.0] - Aug 2024
+
+**BREAKING** : ZPC database version bumped from 2 to 3.
+
+This change allows us to align the different implementations of command classes. It should be easier to maintain and to address issues.
+
+A new tool have been deployed in the zpc debian package that is automatically called when you are installing it. It will look for the default database location (default db : `/var/lib/uic/zpc.db`) of your config file (default config path : `/etc/uic/uic.cfg`)
+
+You can also call the tool manually after installing the zpc package :
+
+`/usr/bin/zpc_database_upgrade_tool --target_version 3 --zpc.datastore_file $YOUR_ZPC_DB_PATH`
+
+### Added (1.6.0)
+
+* New command classes support :
+  * Thermostat Operating State
+  * Thermostat Fan State
+  * Thermostat Fan Control Mode
+  * Humidity Control Setpoint
+  * Humidity Control Operating State
+  * Humidity Control Mode
+
+### Changes (1.6.0)
+
+* Thermostat Setpoint update
+  * Should be more consistent and easier to use.
+  * Supports bitmask B implementation
+  * Can support all Z-Wave precision & scale (°C & °F)
+  * Always expose the temperature in °C with precision of 2 (as per cluster definition)
+* New documentation of how to interact with most of the command classes.
+* Updated dev documentation of Cluster implementation for Z-Wave
+* Updated dev documentation of Implementing of Command Classes
+* Reference platform updated to Bookworm 64-bit based Raspberry Pi OS
+* Migrated to Simplicity SDK version to v2024.6.0
+
+### Fixed (1.6.0)
+
+* [Fix ZPC Polling mechanism](https://github.com/SiliconLabs/UnifySDK/pull/45)
+* [Send 0xFF by default for endpoint_find](https://github.com/SiliconLabs/UnifySDK/pull/37)
+  * Revert regression introduced in 1.4.0
+  * A flag allows you to send specific value instead
+* [MAX_PING_TIME_INTERVAL should be 24 hours, 24 not minutes](https://github.com/SiliconLabs/UnifySDK/pull/40)
+* [Fix infinite loop on invalid next configuration parameter.](https://github.com/SiliconLabs/UnifySDK/pull/27)
+* [Prioritize command classes for interview](https://github.com/SiliconLabs/UnifySDK/pull/39)
+
+### Known issues (1.6.0)
+
+* **UIC-3335** : In some cases Z-Wave TX queue can lock itself.
+  * No workaround for now. If you encounter this issue yourself, please fill a Saleforce ticket or a github issue.
+  * A fix should be published on github before next release.
+
+## [1.5.0] - Feb 2024
 
 ### Added (1.5.0)
 

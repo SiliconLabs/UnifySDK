@@ -20,25 +20,25 @@
 /* external includes */
 #include "zigbee_host.h"
 
-EmberStatus zigbeeHostGetCountersList(uint16_t *const list, size_t count)
+sl_status_t zigbeeHostGetCountersList(uint16_t *const list, size_t count)
 {
-  if ((list == NULL) || (count == 0U) || (count > EMBER_COUNTER_TYPE_COUNT)) {
-    return EMBER_BAD_ARGUMENT;
+  if ((list == NULL) || (count == 0U) || (count > SL_ZIGBEE_COUNTER_TYPE_COUNT )) {
+    return SL_STATUS_INVALID_PARAMETER;
   }
 
-  ezspReadCounters(emberCounters);
+  sl_zigbee_ezsp_read_counters(sl_zigbee_counters);
 
   /*
-   * NOTE: emberCounters is populated by EZSP handlers. It is safe to assume
+   * NOTE: sli_zigbee_counters is populated by EZSP handlers. It is safe to assume
    * that this buffer is accessed synchonously due to the EmberAf Tick
    * mechanism.
    */
-  memcpy(list, emberCounters, sizeof(uint16_t) * count);
+  memcpy(list, sl_zigbee_counters, sizeof(uint16_t) * count);
 
-  return EMBER_SUCCESS;
+  return SL_STATUS_OK;
 }
 
 void zigbeeHostClearCounters(void)
 {
-  emberAfPluginCountersClear();
+  sl_zigbee_af_counters_clear();
 }

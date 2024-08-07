@@ -29,8 +29,8 @@ var zwapi__init_8h =
       [ "ZWAVE_LONG_RANGE_CHANNEL_B", "group__ZWAPI__INIT.html#ggad267e6ca53583e5a4dddb08f56633e44a360d7eb283656088029d000a82dd1436", null ]
     ] ],
     [ "zwapi_destroy", "group__ZWAPI__INIT.html#ga87ccde341e5cf630064d51222bf56fb9", null ],
-    [ "zwapi_generate_nvm_id_from_sdk_version", "group__ZWAPI__INIT.html#gabc833b1c49a5bd9332868c7f6ed9b0fb", null ],
-    [ "zwapi_generate_sdk_version_from_protocol_version", "group__ZWAPI__INIT.html#ga0d64e939eee44f18c29803d6314b9477", null ],
+    [ "zwapi_generate_nvm_id_from_sdk_version", "group__ZWAPI__INIT.html#gadf4bc07009fbbb5f197d9186d65b4f83", null ],
+    [ "zwapi_generate_sdk_version_from_protocol_version", "group__ZWAPI__INIT.html#ga053eeb64225b7ea15b06c2016bb7750e", null ],
     [ "zwapi_get_app_version", "group__ZWAPI__INIT.html#gad82597a6e2fbd2ec943527dbcbc7ba4a", null ],
     [ "zwapi_get_chip_data", "group__ZWAPI__INIT.html#gaa293025465f2d864624cc3f5e853be56", null ],
     [ "zwapi_get_chip_type_version", "group__ZWAPI__INIT.html#gaeb0651d0effa49459616b58cc026e80b", null ],
@@ -49,5 +49,5 @@ var zwapi__init_8h =
     [ "zwapi_set_zwave_lr_channel", "group__ZWAPI__INIT.html#ga4b9748e3273a22a02d08e545f8c39d14", null ],
     [ "zwapi_support_command_func", "group__ZWAPI__INIT.html#ga0a823074baec69913d0e8590b46e4e33", null ],
     [ "zwapi_support_setup_func", "group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12", null ],
-    [ "zwave_api_get_callbacks", "group__ZWAPI__INIT.html#ga1f464f2f17aea6c240c99b18b86731a2", null ]
+    [ "zwave_api_get_callbacks", "group__ZWAPI__INIT.html#ga438a74c9752197d20d377874d5a61694", null ]
 ];

@@ -37,3 +37,16 @@ std::vector<attribute> endpoint_id_list()
   }
   return endpoint_list;
 }
+
+std::vector<attribute> get_attribute_list(attribute_store_type_t attribute_type) {
+  std::vector<attribute> attribute_list;
+
+  auto endpoint_list = endpoint_id_list();
+
+  for(auto endpoint: endpoint_list) {
+    auto attributes = endpoint.children(attribute_type);
+    attribute_list.insert(attribute_list.end(), attributes.begin(), attributes.end());
+  }
+
+  return attribute_list;
+}

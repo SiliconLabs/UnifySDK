@@ -1,5 +1,5 @@
-ARG FROM="debian:bullseye"
-FROM openjdk:11.0.15-slim-buster as builder
+ARG FROM="debian:bookworm"
+FROM openjdk:17-slim-buster as builder
 RUN apt-get update && \
     apt-get install --no-install-recommends -y -qq curl openssl ca-certificates
 
@@ -58,17 +58,9 @@ RUN readarray -d ' ' -t TARGET_DEPS < <(cat /tmp/target_dependencies.apt | awk -
   $(for arch in ${ARCH} ; do echo crossbuild-essential-${arch} ; done)\
   && rm -rf /var/lib/apt/lists/*
 
-# Install cmake 3.21.6
-RUN curl -L https://github.com/Kitware/CMake/releases/download/v3.21.6/cmake-3.21.6-Linux-x86_64.sh --output /tmp/cmake-3.21.6-Linux-x86_64.sh \
-  && cd /tmp \
-  && echo d460a33c42f248388a8f2249659ad2f5eab6854bebaf4f57c1df49ded404e593  cmake-3.21.6-Linux-x86_64.sh > /tmp/cmake-3.21.6-Linux-x86_64.sh.sha256 \
-  && sha256sum -c cmake-3.21.6-Linux-x86_64.sh.sha256 \
-  && chmod +x /tmp/cmake*.sh \
-  && /tmp/cmake*.sh --prefix=/usr/local --skip-license \
-  && rm /tmp/cmake*
-
 # Install pip3 packages
-RUN pip3 install gcovr==5.0 \
+# --break-system-packages : https://stackoverflow.com/a/75722775/7231626 needed since bookworm update
+RUN pip3 install --break-system-packages gcovr==5.0 \
   pybars3==0.9.7 PyMeta3==0.5.1 xmltodict==0.12.0 \
   sphinx==5.1.0 breathe==4.34.0 myst-parser==0.18.0 linkify-it-py==2.0.0 sphinxcontrib-plantuml==0.24 sphinx-markdown-tables==0.0.17 sphinx-rtd-theme==1.0.0
 
@@ -143,15 +135,17 @@ RUN if [ "$CLANG" = true ] ; then \
   /tmp/llvm.sh 12; \
   fi
 
+# Install yarn
+RUN npm install yarn -g
 
 RUN getent group ${GROUP_ID} || addgroup --gid ${GROUP_ID} ${user}
 RUN useradd -m -l -u $USER_ID -d /home/$user -g $GROUP_ID -G sudo -p $(openssl passwd -1 ${user}) -o -s /bin/bash ${user}
 RUN echo "$user   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 COPY --from=builder /usr/local/share/ca-certificates/*.crt /usr/local/share/ca-certificates/
-COPY --from=builder /usr/local/openjdk-11/lib/security/cacerts $JAVA_HOME/lib/security/cacerts
+COPY --from=builder /usr/local/openjdk-17/lib/security/cacerts $JAVA_HOME/lib/security/cacerts
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}

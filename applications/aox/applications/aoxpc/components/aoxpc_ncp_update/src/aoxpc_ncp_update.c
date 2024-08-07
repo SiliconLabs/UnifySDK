@@ -29,24 +29,17 @@ static void update_progress(size_t uploaded_size, size_t total_size)
   printf("\r%zu/%zu (%d%%)", uploaded_size, total_size, percentage);
 }
 
-static sl_status_t system_reset(uint8_t boot_mode) {
+static sl_status_t system_reset(bool dfu) {
   sl_status_t sc;
   sl_bt_msg_t evt;
   uint32_t expected_event, received_event;
 
-  switch (boot_mode) {
-    case sl_bt_system_boot_mode_normal:
-      expected_event = sl_bt_evt_system_boot_id;
-      sl_bt_system_reset(boot_mode);
-      break;
-    case sl_bt_system_boot_mode_uart_dfu:
-      expected_event = sl_bt_evt_dfu_boot_id;
-      sl_bt_user_reset_to_dfu();
-      break;
-    default:
-      // Unsupported boot mode
-      return SL_STATUS_INVALID_PARAMETER;
-      break;
+  if (dfu) {
+    expected_event = sl_bt_evt_dfu_boot_id;
+    sl_bt_user_reset_to_dfu();
+  } else {
+    expected_event = sl_bt_evt_system_boot_id;
+    sl_bt_system_reboot();
   }
 
   sc = sl_bt_wait_event(&evt);
@@ -90,10 +83,10 @@ sl_status_t aoxpc_ncp_update_fixt_setup()
 
   if (do_ncp_update || ncp_version) {
     // Just print the firmware version
-    (void)system_reset(sl_bt_system_boot_mode_normal);
+    (void)system_reset(false);
 
     if (do_ncp_update) {
-      if (system_reset(sl_bt_system_boot_mode_uart_dfu) != SL_STATUS_OK) {
+      if (system_reset(true) != SL_STATUS_OK) {
         return SL_STATUS_FAIL;
       }
       sl_log_info(LOG_TAG, "Pressing Crtl+C aborts the update process.");
@@ -105,7 +98,7 @@ sl_status_t aoxpc_ncp_update_fixt_setup()
 
       if (sc == SL_STATUS_OK) {
         sl_log_info(LOG_TAG, "DFU finished successfully. Resetting the device.");
-        if (system_reset(sl_bt_system_boot_mode_normal) != SL_STATUS_OK) {
+        if (system_reset(false) != SL_STATUS_OK) {
           return SL_STATUS_FAIL;
         }
       } else {

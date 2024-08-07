@@ -2,9 +2,9 @@ var classsmartstart_1_1Management =
 [
     [ "Management", "classsmartstart_1_1Management.html#a15d3fce4640b85caa2305b6b2f627723", null ],
     [ "Management", "classsmartstart_1_1Management.html#a0497b0af49b8669edbfeddc16751913d", null ],
-    [ "get_cache", "classsmartstart_1_1Management.html#a89a7f76e8f0852b4e63a7a574458284a", null ],
-    [ "get_cache_entries", "classsmartstart_1_1Management.html#af24f9fed27c394813c2c4a8e2a80e6dd", null ],
-    [ "get_instance", "classsmartstart_1_1Management.html#a5d57faaefdb46e5c7fc99bfada0fb321", null ],
+    [ "get_cache", "classsmartstart_1_1Management.html#ac9a6b53ada0568702a02a99a3a2a5ffa", null ],
+    [ "get_cache_entries", "classsmartstart_1_1Management.html#a9ad9cfd9eae98b84420193c352a47f9d", null ],
+    [ "get_instance", "classsmartstart_1_1Management.html#a353ad03834dcd67ac1543421417798c1", null ],
     [ "has_entries_awaiting_inclusion", "classsmartstart_1_1Management.html#a28e4ef8458b1c4d3c833b897594f69d0", null ],
     [ "init", "classsmartstart_1_1Management.html#a5a0e0cc93f982f62780a77051e895b4b", null ],
     [ "notify_node_added", "classsmartstart_1_1Management.html#a8ac886bc2b36ce4b5a2edb0cf7dfb07b", null ],

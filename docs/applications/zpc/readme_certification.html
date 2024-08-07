@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="ZPC Debugging Guide" href="../../doc/readme_debug.html" />
-    <link rel="prev" title="UAM maps for the ZPC" href="how_to_write_uam_files_for_the_zpc.html" /> 
+    <link rel="prev" title="How to interact with clusters" href="how_to_interact_with_clusters.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -51,7 +51,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a></li>
@@ -76,11 +76,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../doc/readme_debug.html">ZPC Debugging Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="how_to_implement_zwave_command_classes.html">Guideline for implementing Command Classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="how_to_write_uam_files_for_the_zpc.html">UAM maps for the ZPC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_interact_with_clusters.html">How to interact with clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc/supported_command_classes.html">Supported Z-Wave Command Classes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/zigbee/zigpc_introduction.html">Zigbee (ZigPC)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/matter/matter_mpc.html">Matter (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
 </ul>
 </li>
@@ -1548,7 +1550,7 @@ reset to default or excluded.</p>
 <p>The ZPC can operate as a Z-Wave Long Range controller, operating both on
 Z-Wave and Z-Wave Long Range PHY/MAC.</p>
 <p>Nodes can be included using Z-Wave Long Range, if the ZPC runs with the
-US_LR RF region.</p>
+EU_LR or US_LR RF region.</p>
 <p>Go to the SmartStart list and add an entry, then click the heart icon to select
 the preferred protocol for inclusion.</p>
 <p><img alt="Dev GUI SmartStart preferred protocol" src="../../_images/dev_gui_smart_start_preferred_protocol.png" /></p>

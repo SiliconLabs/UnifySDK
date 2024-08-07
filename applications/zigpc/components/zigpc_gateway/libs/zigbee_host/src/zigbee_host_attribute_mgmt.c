@@ -31,17 +31,17 @@
 extern struct zigbeeHostState z3gwState;
 
 typedef struct {
-    EmberEUI64 sourceEui64;
+    sl_802154_long_addr_t sourceEui64;
     uint8_t sourceEndpoint;
     uint16_t clusterId;
-    EmberEUI64 destEui64;
+    sl_802154_long_addr_t destEui64;
     uint8_t destEndpoint;
     bool isBindResponse;
 } binding_entry_t;
 
 static binding_entry_t binding_buffer[MAX_BUFFER_SIZE];
 
-bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
+bool emberAfReportAttributesCallback(sl_zigbee_af_cluster_id_t clusterId,
                                      uint8_t *buffer,
                                      uint16_t bufLen)
 {
@@ -49,31 +49,31 @@ bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
     return false;
   }
 
-  EmberStatus status = EMBER_SUCCESS;
-  EmberEUI64 sourceEui64 = {0};
+  sl_status_t status = SL_STATUS_OK;
+  sl_802154_long_addr_t sourceEui64 = {0};
   uint8_t sourceEndpoint = 0;
 
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                    onReportedAttributeChange)) {
     appDebugPrint(LOG_FMTSTR_UNREGISTERED_CALLBACK,
                   "Attribute Reporting Response");
-    status = EMBER_NOT_FOUND;
+    status = SL_STATUS_NOT_FOUND;
   }
 
-  if (status == EMBER_SUCCESS) {
-    status = emberAfGetCurrentSenderEui64(sourceEui64);
-    if (status != EMBER_SUCCESS) {
-      status = EMBER_NOT_FOUND;
+  if (status == SL_STATUS_OK) {
+    status = sl_zigbee_af_get_current_sender_eui64(sourceEui64);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_FOUND;
       appDebugPrint(LOG_FMTSTR_SOURCE_EUI64_RES_FAIL,
                     "Attribute Reporting Response");
     }
   }
 
-  if (status == EMBER_SUCCESS) {
-    sourceEndpoint = emberAfCurrentCommand()->apsFrame->sourceEndpoint;
+  if (status == SL_STATUS_OK) {
+    sourceEndpoint = sl_zigbee_af_current_command()->apsFrame->sourceEndpoint;
   }
 
-  if (status == EMBER_SUCCESS) {
+  if (status == SL_STATUS_OK) {
     appDebugPrint("Attribute report for cluster: %04X buffer: [", clusterId);
     appDebugPrintBuffer(buffer, bufLen, true);
     appDebugPrint("]\n");
@@ -85,11 +85,11 @@ bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
                                                    bufLen);
   }
 
-  bool success = (status == EMBER_SUCCESS);
+  bool success = (status == SL_STATUS_OK);
   return success;
 }
 
-bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
+bool emberAfReadAttributesResponseCallback(sl_zigbee_af_cluster_id_t clusterId,
                                            uint8_t *buffer,
                                            uint16_t bufLen)
 {
@@ -97,33 +97,33 @@ bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
     return false;
   }
 
-  EmberStatus status = EMBER_SUCCESS;
-  EmberEUI64 sourceEui64 = {0};
+  sl_status_t status = SL_STATUS_OK;
+  sl_802154_long_addr_t sourceEui64 = {0};
   uint8_t sourceEndpoint = 0;
   uint8_t sourceCommandId = 0;
 
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                    onReadAttributesResponse)) {
     appDebugPrint(LOG_FMTSTR_UNREGISTERED_CALLBACK, "Read Attribute Response");
-    status = EMBER_NOT_FOUND;
+    status = SL_STATUS_NOT_FOUND;
   }
 
-  if (status == EMBER_SUCCESS) {
-    status = emberAfGetCurrentSenderEui64(sourceEui64);
-    if (status != EMBER_SUCCESS) {
-      status = EMBER_NOT_FOUND;
+  if (status == SL_STATUS_OK) {
+    status = sl_zigbee_af_get_current_sender_eui64(sourceEui64);
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_FOUND;
       appDebugPrint(LOG_FMTSTR_SOURCE_EUI64_RES_FAIL,
                     "Read Attribute Response");
     }
   }
 
-  if (status == EMBER_SUCCESS) {
-    const EmberAfClusterCommand *cmd = emberAfCurrentCommand();
+  if (status == SL_STATUS_OK) {
+    const sl_zigbee_af_cluster_command_t *cmd = sl_zigbee_af_current_command();
     sourceCommandId                  = cmd->commandId;
     sourceEndpoint                   = cmd->apsFrame->sourceEndpoint;
   }
 
-  if ((status == EMBER_SUCCESS)
+  if ((status == SL_STATUS_OK)
       && (sourceCommandId == ZCL_READ_ATTRIBUTES_RESPONSE_COMMAND_ID)) {
     appDebugPrint("Read attributes respond for cluster: %04X buffer: [",
                   clusterId);
@@ -141,7 +141,7 @@ bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
   return false;
 }
 
-bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
+bool emberAfConfigureReportingResponseCallback(sl_zigbee_af_cluster_id_t clusterId,
                                                uint8_t *buffer,
                                                uint16_t bufLen)
 {
@@ -149,8 +149,8 @@ bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
     return false;
   }
 
-  EmberStatus status = EMBER_SUCCESS;
-  EmberEUI64 sourceEui64 = {0};
+  sl_status_t status = SL_STATUS_OK;
+  sl_802154_long_addr_t sourceEui64 = {0};
   uint8_t sourceEndpoint = 0;
   uint8_t sourceCommandId = 0;
 
@@ -158,25 +158,25 @@ bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
                                    onConfigureReportingResponse)) {
     appDebugPrint(LOG_FMTSTR_UNREGISTERED_CALLBACK,
                   "Configure Reporting Response");
-    status = EMBER_NOT_FOUND;
+    status = SL_STATUS_NOT_FOUND;
   }
 
-  if (status == EMBER_SUCCESS) {
-    status = emberAfGetCurrentSenderEui64(sourceEui64);
+  if (status == SL_STATUS_OK) {
+    status = sl_zigbee_af_get_current_sender_eui64(sourceEui64);
 
-    if (status != EMBER_SUCCESS) {
+    if (status != SL_STATUS_OK) {
       appDebugPrint(LOG_FMTSTR_SOURCE_EUI64_RES_FAIL,
                     "Configure Reporting Response");
     }
   }
 
-  if (status == EMBER_SUCCESS) {
-    const EmberAfClusterCommand *cmd = emberAfCurrentCommand();
+  if (status == SL_STATUS_OK) {
+    const sl_zigbee_af_cluster_command_t *cmd = sl_zigbee_af_current_command();
     sourceCommandId                  = cmd->commandId;
     sourceEndpoint                   = cmd->apsFrame->sourceEndpoint;
   }
 
-  if ((status == EMBER_SUCCESS)
+  if ((status == SL_STATUS_OK)
       && (sourceCommandId == ZCL_CONFIGURE_REPORTING_RESPONSE_COMMAND_ID)) {
     appDebugPrint("Configure attributes response for cluster: %04X buffer: [",
                   clusterId);
@@ -194,14 +194,14 @@ bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
   return false;
 }
 
-EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
+sl_status_t zigbeeHostInitReporting(const sl_802154_long_addr_t eui64,
                                     uint8_t endpoint,
                                     uint16_t clusterId,
                                     const uint8_t *reportRecord,
                                     size_t recordSize)
 {
   if ((eui64 == NULL) || (reportRecord == NULL)) {
-    return EMBER_BAD_ARGUMENT;
+    return SL_STATUS_INVALID_PARAMETER;
   }
 
   appDebugPrint("Sending Configure Report Frame: [");
@@ -209,7 +209,7 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
   appDebugPrint("]\n");
 
   // Assemble "ConfigureReporting" Command
-  emberAfFillExternalBuffer(
+  sl_zigbee_af_fill_external_buffer(
     (ZCL_GLOBAL_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER),
     clusterId,
     ZCL_CONFIGURE_REPORTING_COMMAND_ID,
@@ -218,13 +218,13 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
     recordSize);
 
   uint8_t gatewayEndpoint = zigbeeHostGetPrimaryEndpointId();
-  emberAfSetCommandEndpoints(gatewayEndpoint, endpoint);
+  sl_zigbee_af_set_command_endpoints(gatewayEndpoint, endpoint);
 
-  EmberEUI64 eui64Dup;
-  memcpy(eui64Dup, eui64, sizeof(EmberEUI64));
+  sl_802154_long_addr_t eui64Dup;
+  memcpy(eui64Dup, eui64, sizeof(sl_802154_long_addr_t));
 
   // Send command via unicast
-  EmberStatus status = emberAfSendCommandUnicastToEui64(eui64Dup);
+  sl_status_t status = sl_zigbee_af_send_command_unicast_to_eui64(eui64Dup);
 
   return status;
 }
@@ -233,30 +233,30 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
  * END OF Globals defined in CLI-related functions needed by ZigbeeHost
  */
 
-EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
+sl_status_t zigbeeHostInitBinding(const sl_802154_long_addr_t sourceEui64,
                                   uint8_t sourceEndpoint,
                                   uint16_t clusterId,
                                   uint16_t group_id,
-                                  EmberEUI64 destEui64,
+                                  sl_802154_long_addr_t destEui64,
                                   uint8_t destEndpoint,
                                   bool isBindRequest)
 {
   if ((sourceEui64 == NULL) || (destEui64 == NULL)) {
-    return EMBER_BAD_ARGUMENT;
+    return SL_STATUS_INVALID_PARAMETER;
   }
   
-  EmberNodeId targetNodeId = 0;
+  sl_802154_short_addr_t targetNodeId = 0;
 
   // Get target NodeId
-  EmberStatus status = zigbeeHostGetAddressTableEntry(sourceEui64, &targetNodeId);
-  if (status != EMBER_SUCCESS) {
-    status = EMBER_NOT_FOUND;
+  sl_status_t status = zigbeeHostGetAddressTableEntry(sourceEui64, &targetNodeId);
+  if (status != SL_STATUS_OK) {
+    status = SL_STATUS_NOT_FOUND;
     appDebugPrint(LOG_FMTSTR_EUI64_NODEID_RES_FAIL,
                   "EUI64 to NodeId",
                   "Bind Request Send\n");
   } else {
     //Bind
-    EmberApsOption options = EMBER_AF_DEFAULT_APS_OPTIONS;
+    sl_zigbee_aps_option_t options = SL_ZIGBEE_AF_DEFAULT_APS_OPTIONS ;
     uint8_t type           = 0;
 
     if (group_id == 0) {
@@ -268,7 +268,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
     if(isBindRequest)
     {
         appDebugPrint("Sending zdo bind command\n");
-        status = emberBindRequest(targetNodeId,
+        status = sl_zigbee_bind_request(targetNodeId,
                      (uint8_t *)sourceEui64,
                      sourceEndpoint,
                      clusterId,
@@ -281,7 +281,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
     else
     {
         appDebugPrint("Sending zdo unbind command\n");
-        status = emberUnbindRequest(targetNodeId,
+        status = sl_zigbee_unbind_request(targetNodeId,
                      (uint8_t *)sourceEui64,
                      sourceEndpoint,
                      clusterId,
@@ -297,10 +297,10 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
     //Therefore, need to keep track of transaction sequence
     
     //use the sequence number as the index in the buffer
-    uint8_t index = emberGetLastAppZigDevRequestSequence(); 
+    uint8_t index = sl_zigbee_get_last_zig_dev_request_sequence(); 
 
-    memcpy(binding_buffer[index].sourceEui64, sourceEui64, sizeof(EmberEUI64));
-    memcpy(binding_buffer[index].destEui64, destEui64, sizeof(EmberEUI64));
+    memcpy(binding_buffer[index].sourceEui64, sourceEui64, sizeof(sl_802154_long_addr_t));
+    memcpy(binding_buffer[index].destEui64, destEui64, sizeof(sl_802154_long_addr_t));
     binding_buffer[index].sourceEndpoint = sourceEndpoint;
     binding_buffer[index].clusterId = clusterId;
     binding_buffer[index].destEndpoint = destEndpoint;
@@ -312,7 +312,7 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
   return status;
  }
 
-void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* apsFrame, uint8_t* message, uint16_t length)
+void emAfZDOHandleBindingResponseCallback(sl_802154_short_addr_t sender, sl_zigbee_aps_frame_t* apsFrame, uint8_t* message, uint16_t length)
 {
   (void)sender;
   (void)length;
@@ -323,7 +323,7 @@ void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* aps
   if( BIND_RESPONSE == clusterId || UNBIND_RESPONSE == clusterId)
   {
     appDebugPrint("Received bind/unbind response\n");
-    uint8_t index = emberGetLastAppZigDevRequestSequence();
+    uint8_t index = sl_zigbee_get_last_zig_dev_request_sequence();
     uint8_t status = message[1];
  
 // TODO, may be reworked in GCC 13+
@@ -339,11 +339,11 @@ void emAfZDOHandleBindingResponseCallback(EmberNodeId sender, EmberApsFrame* aps
     
         appDebugPrint("Pushing bind/unbind response to zigpc_gateway\n");
 
-        EmberEUI64 sourceEui64;
-        EmberEUI64 destEui64;
+        sl_802154_long_addr_t sourceEui64;
+        sl_802154_long_addr_t destEui64;
 
-        memcpy(sourceEui64, binding_buffer[index].sourceEui64, sizeof(EmberEUI64));
-        memcpy(destEui64, binding_buffer[index].destEui64, sizeof(EmberEUI64));
+        memcpy(sourceEui64, binding_buffer[index].sourceEui64, sizeof(sl_802154_long_addr_t));
+        memcpy(destEui64, binding_buffer[index].destEui64, sizeof(sl_802154_long_addr_t));
     
         z3gwState.callbacks->onBindUnbindResponse(
                 sourceEui64,

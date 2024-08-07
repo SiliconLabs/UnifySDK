@@ -1,6 +1,6 @@
 #include "sl_event_handler.h"
 
-#include "zigbee_app_framework_common.h"
+#include "sl_zigbee_system_common.h"
 
 void sl_platform_init(void)
 {
@@ -18,7 +18,6 @@ void sl_stack_init(void)
 {
   sli_zigbee_stack_init_callback();
   sli_zigbee_app_framework_init_callback();
-  sli_zigbee_app_framework_sleep_init();
   sli_zigbee_ncp_init_callback();
 }
 

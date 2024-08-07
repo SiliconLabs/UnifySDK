@@ -13,7 +13,7 @@ option(UIC_OTBR_NETWORK_MANAGER "include network manager service" 0)
 # Set OTBR runtime and service options
 set(OTBR_SYSTEMD_UNIT_DIR "/lib/systemd/system" CACHE STRING "Destination path for otbr systemd service files")
 set(OTBR_INFRA_IF_NAME "eth0" CACHE STRING "The infrastructure interface name")
-set(OTBR_RADIO_URL "spinel+cpc://cpcd_0?iid=2" CACHE STRING "URL")
+set(OTBR_RADIO_URL "spinel+cpc://cpcd_0?iid=2&iid-list=0" CACHE STRING "URL")
 set(OTBR_MDNS "avahi" CACHE STRING "mDNS publisher provider")
 set(OTBR_NAT64_SERVICE "openthread" CACHE STRING "nat64 service name")
 

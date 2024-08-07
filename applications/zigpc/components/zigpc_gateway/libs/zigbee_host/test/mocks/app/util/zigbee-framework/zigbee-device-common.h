@@ -16,36 +16,36 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 /*  Refer to protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.h
     for more details.
 */
 
-EmberStatus emberLeaveRequest(EmberNodeId target,
-                              EmberEUI64 deviceAddress,
+sl_status_t sl_zigbee_leave_request(sl_802154_short_addr_t target,
+                              sl_802154_long_addr_t deviceAddress,
                               uint8_t leaveRequestFlags,
-                              EmberApsOption options);
+                              sl_zigbee_aps_option_t options);
 
-EmberStatus emberBindRequest(EmberNodeId target,
-                             EmberEUI64 source,
+sl_status_t sl_zigbee_bind_request(sl_802154_short_addr_t target,
+                             sl_802154_long_addr_t source,
                              uint8_t sourceEndpoint,
                              uint16_t clusterId,
                              uint8_t type,
-                             EmberEUI64 destination,
-                             EmberMulticastId groupAddress,
+                             sl_802154_long_addr_t destination,
+                             sl_zigbee_multicast_id_t groupAddress,
                              uint8_t destinationEndpoint,
-                             EmberApsOption options);
+                             sl_zigbee_aps_option_t options);
 
-EmberStatus emberUnbindRequest(EmberNodeId target,
-                             EmberEUI64 source,
+sl_status_t sl_zigbee_unbind_request(sl_802154_short_addr_t target,
+                             sl_802154_long_addr_t source,
                              uint8_t sourceEndpoint,
                              uint16_t clusterId,
                              uint8_t type,
-                             EmberEUI64 destination,
-                             EmberMulticastId groupAddress,
+                             sl_802154_long_addr_t destination,
+                             sl_zigbee_multicast_id_t groupAddress,
                              uint8_t destinationEndpoint,
-                             EmberApsOption options);
+                             sl_zigbee_aps_option_t options);
 
-uint8_t emberGetLastAppZigDevRequestSequence();
+uint8_t sl_zigbee_get_last_zig_dev_request_sequence();
 #endif  // SILABS_ZIGBEE_DEVICE_COMMON_H

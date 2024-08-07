@@ -3,7 +3,7 @@
 # ##############################################################################
 
 include(ExternalProject)
-find_package(GeckoSDK 4.3.0 EXACT REQUIRED)
+find_package(GeckoSDK 2024.6.0 EXACT REQUIRED)
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
 set(LIB_NAME libzigbee_host)
@@ -58,20 +58,22 @@ set(ZIGBEE_HOST_STACK_INCLUDES
     ${GeckoSDK_ROOT_DIR}/platform/emlib/host/inc
     ${GeckoSDK_ROOT_DIR}/platform/radio/mac
     ${GeckoSDK_ROOT_DIR}/platform/service/legacy_hal/inc
-    ${GeckoSDK_ROOT_DIR}/util/silicon_labs/silabs_core)
+    ${GeckoSDK_ROOT_DIR}/util/silicon_labs/silabs_core
+    ${GeckoSDK_ROOT_DIR}/platform/common/inc)
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 find_package(Threads REQUIRED)
 
 add_library(zigbee_host INTERFACE include/zigbee_host.h
             include/zigbee_host_callbacks.h)
+
 add_dependencies(zigbee_host libzigbee_host)
 
 target_link_libraries(zigbee_host INTERFACE ${LIB_PATH} ${CMAKE_THREAD_LIBS_INIT})
 target_include_directories(zigbee_host INTERFACE include gen/autogen gen/config
                                                  ${ZIGBEE_HOST_STACK_INCLUDES})
 target_compile_definitions(
-  zigbee_host INTERFACE UC_BUILD=1 PLATFORM_HEADER="platform-header.h")
+  zigbee_host INTERFACE EZSP_HOST=1 UC_BUILD=1 PLATFORM_HEADER="platform-header.h")
 
 if(BUILD_TESTING)
   # Add mocks
@@ -80,7 +82,7 @@ if(BUILD_TESTING)
   target_include_directories(
     zigbee_host_mock PRIVATE gen/autogen gen/config ${ZIGBEE_HOST_STACK_INCLUDES})
   target_compile_definitions(zigbee_host_mock
-                            PUBLIC UC_BUILD=1 PLATFORM_HEADER="platform-header.h")
+                            PUBLIC EZSP_HOST=1 UC_BUILD=1 PLATFORM_HEADER="platform-header.h")
   target_compile_options(zigbee_host_mock
                          PUBLIC
                          -Wno-address-of-packed-member)

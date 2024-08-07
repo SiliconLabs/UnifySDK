@@ -40,7 +40,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_LATEX_OUTPUT latex)
   set(DOXYGEN_BATCHMODE YES)
   set(DOXYGEN_USE_PDFLATEX YES)
-  set(DOXYGEN_LATEX_CMD_NAME "\"pdflatex -interaction=nonstopmode\"")
+  # Latest Doxygen versions LATEX_CMD is being set from compile_latex script, no need to set here
 
   set(DOXYGEN_HIDE_UNDOC_RELATIONS NO)
   set(DOXYGEN_BUILTIN_STL_SUPPORT YES)

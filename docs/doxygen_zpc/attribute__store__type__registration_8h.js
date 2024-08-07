@@ -23,10 +23,10 @@ var attribute__store__type__registration_8h =
     [ "attribute_store_get_registered_parent_type", "group__attribute__store__type__registration.html#gae7b8c49372c2a9188fd888528b9bf5fd", null ],
     [ "attribute_store_get_storage_type", "group__attribute__store__type__registration.html#ga266379f047a7f1b9848fc7fdfcf48f9e", null ],
     [ "attribute_store_get_type_by_name", "group__attribute__store__type__registration.html#ga68fda0c3558a2167950919b8759663db", null ],
-    [ "attribute_store_get_type_name", "group__attribute__store__type__registration.html#ga6653ae6461c878940a9b152fda67bf56", null ],
+    [ "attribute_store_get_type_name", "group__attribute__store__type__registration.html#ga73259e94bd9d9b1d058377268e4db4cb", null ],
     [ "attribute_store_is_type_registered", "group__attribute__store__type__registration.html#ga247130dc4e4603fce2cced9954b53054", null ],
     [ "attribute_store_log_attribute_type_information", "group__attribute__store__type__registration.html#ga1cb01c0206fbee5d790f8e4bfc06403b", null ],
     [ "attribute_store_register_type", "group__attribute__store__type__registration.html#ga0b5fa56755b4c4f2ba1846e96a17d9ad", null ],
     [ "attribute_store_set_type_name", "group__attribute__store__type__registration.html#ga39c0adf14541fc11d2c00750bd02097b", null ],
-    [ "attribute_store_type_get_node_type_name", "group__attribute__store__type__registration.html#gae269ca204b2426c521a8eccd8dea61f3", null ]
+    [ "attribute_store_type_get_node_type_name", "group__attribute__store__type__registration.html#ga4b480c04b80fdc398a1440e78bf305d2", null ]
 ];

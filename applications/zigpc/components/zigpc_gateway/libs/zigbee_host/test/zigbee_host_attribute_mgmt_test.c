@@ -72,9 +72,9 @@ void tearDown(void) {}
 
 void test_send_bind_request_sanity(void)
 {
-  EmberEUI64 gatewayEui64 = "\x00\xF2\x23\x33\x71\x0D\xDD\x01";
-  EmberEUI64 eui64        = "\x23\x4F\x92\x7C\xDE\x12\x00\xFF";
-  EmberNodeId nodeId      = 0x2131;
+  sl_802154_long_addr_t gatewayEui64 = "\x00\xF2\x23\x33\x71\x0D\xDD\x01";
+  sl_802154_long_addr_t eui64        = "\x23\x4F\x92\x7C\xDE\x12\x00\xFF";
+  sl_802154_short_addr_t nodeId      = 0x2131;
   uint8_t gatewayEndpoint = 1;
   uint8_t endpoint        = 2;
   uint16_t clusterId      = 0x0005;
@@ -82,11 +82,11 @@ void test_send_bind_request_sanity(void)
 
   // ARRANGE
 
-  emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(eui64, 0);
-  emberAfPluginAddressTableLookupNodeIdByIndex_ExpectAndReturn(0, nodeId);
-  emberGetLastAppZigDevRequestSequence_IgnoreAndReturn(1);
+  sl_zigbee_af_lookup_address_table_entry_by_eui64_ExpectAndReturn(eui64, 0);
+  sl_zigbee_af_address_table_lookup_node_id_by_index_ExpectAndReturn(0, nodeId);
+  sl_zigbee_get_last_zig_dev_request_sequence_IgnoreAndReturn(1);
   
-  emberBindRequest_ExpectAndReturn(nodeId,
+  sl_zigbee_bind_request_ExpectAndReturn(nodeId,
                                    eui64,
                                    endpoint,
                                    clusterId,
@@ -95,20 +95,20 @@ void test_send_bind_request_sanity(void)
                                    group_id,
                                    gatewayEndpoint,
                                    0,
-                                   EMBER_SUCCESS);
-  emberBindRequest_IgnoreArg_options();
+                                   SL_STATUS_OK );
+  sl_zigbee_bind_request_IgnoreArg_options();
 
   // ACT
-  EmberStatus status
+  sl_status_t status
     = zigbeeHostInitBinding(eui64, endpoint, clusterId, group_id, gatewayEui64, 1, true);
 
   // ASSERT
-  TEST_ASSERT_EQUAL_HEX(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK , status);
 }
 
 void test_send_configure_reporting_request_sanity(void)
 {
-  EmberEUI64 eui64        = "\x52\x4F\x92\x32\xDE\x12\x00\xFF";
+  sl_802154_long_addr_t eui64        = "\x52\x4F\x92\x32\xDE\x12\x00\xFF";
   uint8_t endpoint        = 2;
   uint8_t gatewayEndpoint = 4;
   uint16_t clusterId      = 0x0005;
@@ -117,48 +117,48 @@ void test_send_configure_reporting_request_sanity(void)
   uint8_t reportBuffer[reportSize];
 
   // ARRANGE
-  emberAfPrimaryEndpointForCurrentNetworkIndex_ExpectAndReturn(gatewayEndpoint);
-  emberAfFillExternalBuffer_ExpectAndReturn(
+  sl_zigbee_af_primary_endpoint_for_current_network_index_ExpectAndReturn(gatewayEndpoint);
+  sl_zigbee_af_fill_external_buffer_ExpectAndReturn(
     (ZCL_GLOBAL_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER),
     clusterId,
     ZCL_CONFIGURE_REPORTING_COMMAND_ID,
     "b",
     6);
 
-  emberAfSetCommandEndpoints_Expect(gatewayEndpoint, endpoint);
+  sl_zigbee_af_set_command_endpoints_Expect(gatewayEndpoint, endpoint);
 
-  emberAfSendCommandUnicastToEui64_ExpectAndReturn(eui64, EMBER_SUCCESS);
+  sl_zigbee_af_send_command_unicast_to_eui64_ExpectAndReturn(eui64, SL_STATUS_OK );
 
   // ACT
-  EmberStatus status = zigbeeHostInitReporting(eui64,
+  sl_status_t status = zigbeeHostInitReporting(eui64,
                                                endpoint,
                                                clusterId,
                                                reportBuffer,
                                                reportSize);
 
   // ASSERT
-  TEST_ASSERT_EQUAL_HEX(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK , status);
 }
 
 void test_attribute_report_callback_sanity(void)
 {
-  EmberEUI64 eui64       = "\x03\x1F\x92\x32\xDE\x12\x00\xFF";
-  EmberApsFrame apsFrame = {
+  sl_802154_long_addr_t eui64       = "\x03\x1F\x92\x32\xDE\x12\x00\xFF";
+  sl_zigbee_aps_frame_t apsFrame = {
     .sourceEndpoint = 2,
     .clusterId      = 0x2334,
   };
-  EmberAfClusterCommand cmd = {
+  sl_zigbee_af_cluster_command_t cmd = {
     .apsFrame = &apsFrame,
   };
   size_t reportSize = 2;
   uint8_t reportBuffer[reportSize];
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(eui64);
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnThruPtr_address(eui64);
 
-  emberAfCurrentCommand_ExpectAndReturn(&cmd);
+  sl_zigbee_af_current_command_ExpectAndReturn(&cmd);
 
   callback_onReportedAttributeChange_Expect(eui64,
                                             apsFrame.sourceEndpoint,
@@ -174,12 +174,12 @@ void test_attribute_report_callback_sanity(void)
 
 void test_attribute_read_response_callback_sanity(void)
 {
-  EmberEUI64 eui64       = "\x03\x1F\x92\x32\xDE\x12\x00\xFF";
-  EmberApsFrame apsFrame = {
+  sl_802154_long_addr_t eui64       = "\x03\x1F\x92\x32\xDE\x12\x00\xFF";
+  sl_zigbee_aps_frame_t apsFrame = {
     .sourceEndpoint = 2,
     .clusterId      = 0x2334,
   };
-  EmberAfClusterCommand cmd = {
+  sl_zigbee_af_cluster_command_t cmd = {
     .apsFrame  = &apsFrame,
     .commandId = ZCL_READ_ATTRIBUTES_RESPONSE_COMMAND_ID,
   };
@@ -187,11 +187,11 @@ void test_attribute_read_response_callback_sanity(void)
   uint8_t readBuffer[readSize];
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(eui64);
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnThruPtr_address(eui64);
 
-  emberAfCurrentCommand_ExpectAndReturn(&cmd);
+  sl_zigbee_af_current_command_ExpectAndReturn(&cmd);
 
   callback_onReadAttributesResponse_Expect(eui64,
                                            apsFrame.sourceEndpoint,
@@ -207,17 +207,17 @@ void test_attribute_read_response_callback_sanity(void)
   // ASSERT (Handled by CMock)
 }
 
-bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
+bool emberAfConfigureReportingResponseCallback(sl_zigbee_af_cluster_id_t clusterId,
                                                uint8_t *buffer,
                                                uint16_t bufLen);
 void test_attribute_configure_report_response_callback_sanity(void)
 {
-  EmberEUI64 eui64       = "\x03\x1F\x92\x32\xDE\x12\x00\xFF";
-  EmberApsFrame apsFrame = {
+  sl_802154_long_addr_t eui64       = "\x03\x1F\x92\x32\xDE\x12\x00\xFF";
+  sl_zigbee_aps_frame_t apsFrame = {
     .sourceEndpoint = 2,
     .clusterId      = 0x2334,
   };
-  EmberAfClusterCommand cmd = {
+  sl_zigbee_af_cluster_command_t cmd = {
     .apsFrame  = &apsFrame,
     .commandId = ZCL_CONFIGURE_REPORTING_RESPONSE_COMMAND_ID,
   };
@@ -225,11 +225,11 @@ void test_attribute_configure_report_response_callback_sanity(void)
   uint8_t cfgResBuffer[cfgResSize];
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(eui64);
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnThruPtr_address(eui64);
 
-  emberAfCurrentCommand_ExpectAndReturn(&cmd);
+  sl_zigbee_af_current_command_ExpectAndReturn(&cmd);
 
   callback_onConfigureReportingResponse_Expect(eui64,
                                                apsFrame.sourceEndpoint,

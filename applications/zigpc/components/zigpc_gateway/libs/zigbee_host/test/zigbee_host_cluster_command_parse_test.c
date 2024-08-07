@@ -26,7 +26,7 @@
 #define INSTALL_CODE_SIZE (16 + 2)
 
 /* Function prototypes tested */
-EmberAfStatus
+sl_zigbee_af_status_t
   emberAfClusterServiceCallback(sl_service_opcode_t opcode,
                                 sl_service_function_context_t *context);
 struct zigbeeHostState z3gwState;
@@ -69,12 +69,12 @@ void tearDown(void) {}
 void test_zigbee_host_cluster_command_received_callback_processed(void)
 {
   uint8_t test_buffer[28]      = {0};
-  EmberEUI64 test_eui64        = {0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x0, 0x10};
-  EmberApsFrame test_aps_frame = {
+  sl_802154_long_addr_t test_eui64        = {0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x0, 0x10};
+  sl_zigbee_aps_frame_t test_aps_frame = {
     .sourceEndpoint = 2,
     .clusterId      = 0x0003,
   };
-  EmberAfClusterCommand input_command = {
+  sl_zigbee_af_cluster_command_t input_command = {
     .apsFrame          = &test_aps_frame,
     .source            = 0xFF10,
     .bufLen            = 28,
@@ -84,9 +84,9 @@ void test_zigbee_host_cluster_command_received_callback_processed(void)
     .payloadStartIndex = 10,
   };
 
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(test_eui64);
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnThruPtr_address(test_eui64);
 
   callback_onClusterCommandReceived_ExpectAndReturn(
     test_eui64,
@@ -97,26 +97,26 @@ void test_zigbee_host_cluster_command_received_callback_processed(void)
     test_buffer,
     input_command.bufLen,
     input_command.payloadStartIndex,
-    EMBER_ZCL_STATUS_SUCCESS);
+    SL_ZIGBEE_ZCL_STATUS_SUCCESS);
 
   // ACT
   sl_service_function_context_t context = {.data = &input_command};
-  EmberAfStatus status
+  sl_zigbee_af_status_t status
     = emberAfClusterServiceCallback(SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND,
                                     &context);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_ZCL_STATUS_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_ZIGBEE_ZCL_STATUS_SUCCESS, status);
 }
 
 void test_zigbee_host_cluster_command_received_callback_not_found(void)
 {
   uint8_t test_buffer[28]      = {0};
-  EmberApsFrame test_aps_frame = {
+  sl_zigbee_aps_frame_t test_aps_frame = {
     .sourceEndpoint = 2,
     .clusterId      = 0x0003,
   };
-  EmberAfClusterCommand input_command = {
+  sl_zigbee_af_cluster_command_t input_command = {
     .apsFrame          = &test_aps_frame,
     .source            = 0xFF10,
     .bufLen            = 28,
@@ -130,22 +130,22 @@ void test_zigbee_host_cluster_command_received_callback_not_found(void)
 
   // ACT
   sl_service_function_context_t context = {.data = &input_command};
-  EmberAfStatus status
+  sl_zigbee_af_status_t status
     = emberAfClusterServiceCallback(SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND,
                                     &context);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER, status);
+  TEST_ASSERT_EQUAL(SL_ZIGBEE_ZCL_STATUS_UNSUPPORTED_CLUSTER, status);
 }
 
 void test_zigbee_host_cluster_command_received_device_not_found(void)
 {
   uint8_t test_buffer[28]      = {0};
-  EmberApsFrame test_aps_frame = {
+  sl_zigbee_aps_frame_t test_aps_frame = {
     .sourceEndpoint = 2,
     .clusterId      = 0x0003,
   };
-  EmberAfClusterCommand input_command = {
+  sl_zigbee_af_cluster_command_t input_command = {
     .apsFrame          = &test_aps_frame,
     .source            = 0xFF10,
     .bufLen            = 28,
@@ -158,15 +158,15 @@ void test_zigbee_host_cluster_command_received_device_not_found(void)
   z3gwState.callbacks->onClusterCommandReceived
     = callback_onClusterCommandReceived;
 
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_INVALID_CALL);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_INVALID_STATE );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
 
   // ACT
   sl_service_function_context_t context = {.data = &input_command};
-  EmberAfStatus status
+  sl_zigbee_af_status_t status
     = emberAfClusterServiceCallback(SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND,
                                     &context);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_ZCL_STATUS_FAILURE, status);
+  TEST_ASSERT_EQUAL(SL_ZIGBEE_ZCL_STATUS_FAILURE, status);
 }

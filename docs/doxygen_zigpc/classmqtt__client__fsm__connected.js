@@ -5,6 +5,6 @@ var classmqtt__client__fsm__connected =
     [ "enter", "classmqtt__client__fsm__connected.html#a3ddcf61e8191ee582e936aad3c7c7171", null ],
     [ "event", "classmqtt__client__fsm__connected.html#a779d296c0fb8afd6fd76087490055826", null ],
     [ "exit", "classmqtt__client__fsm__connected.html#af37cb56c2e74ddff3af7e83b0a2e08c4", null ],
-    [ "get_instance", "classmqtt__client__fsm__connected.html#aab34f13871bce60d84e7933aa75b63ce", null ],
-    [ "operator=", "classmqtt__client__fsm__connected.html#ae57089a17d20cd06c13820588bf9b505", null ]
+    [ "get_instance", "classmqtt__client__fsm__connected.html#a6e037bffb22895113353985942dee17d", null ],
+    [ "operator=", "classmqtt__client__fsm__connected.html#a875f60e786a35086e8b11d41da8d9cb1", null ]
 ];

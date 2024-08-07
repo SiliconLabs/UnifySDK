@@ -31,7 +31,7 @@ extern struct zigbeeHostState z3gwState;
  * @param imageTypeId       Ver.: always
  * @param firmwareVersion   Ver.: always
  */
-void emberAfPluginOtaServerBlockSentCallback(uint8_t actualLength,
+void sl_zigbee_af_ota_server_block_sent_cb(uint8_t actualLength,
                                              uint16_t manufacturerId,
                                              uint16_t imageTypeId,
                                              uint32_t firmwareVersion)
@@ -58,8 +58,8 @@ void emberAfPluginOtaServerBlockSentCallback(uint8_t actualLength,
  * been returned.
  */
 uint8_t
-  emberAfPluginOtaServerPolicyGetClientDelayUnits(EmberNodeId clientNodeId,
-                                                  EmberEUI64 clientEui64)
+  sl_zigbee_af_ota_server_policy_get_client_delay_units(sl_802154_short_addr_t clientNodeId,
+                                                  sl_802154_long_addr_t clientEui64)
 {
   return OTA_SERVER_DISCOVER_CLIENT_DELAY_UNITS;
 }
@@ -74,7 +74,7 @@ uint8_t
  * @param maxDataSize      Ver.: always
  * @param offset           Ver.: always
  */
-void emberAfPluginOtaServerUpdateStartedCallback(uint16_t manufacturerId,
+void sl_zigbee_af_ota_server_update_started_cb(uint16_t manufacturerId,
                                                  uint16_t imageTypeId,
                                                  uint32_t firmwareVersion,
                                                  uint8_t maxDataSize,
@@ -84,10 +84,10 @@ void emberAfPluginOtaServerUpdateStartedCallback(uint16_t manufacturerId,
     appDebugPrint(LOG_FMTSTR_UNREGISTERED_CALLBACK, "OTA-Server Update Start");
 
   } else {
-    EmberEUI64 eui64;
+    sl_802154_long_addr_t eui64;
 
-    EmberStatus status = emberAfGetCurrentSenderEui64(eui64);
-    if (status != EMBER_SUCCESS) {
+    sl_status_t status = sl_zigbee_af_get_current_sender_eui64(eui64);
+    if (status != SL_STATUS_OK) {
       appDebugPrint(LOG_FMTSTR_SOURCE_EUI64_RES_FAIL,
                     "OTA-Server Update Start");
     } else {
@@ -109,10 +109,10 @@ void emberAfPluginOtaServerUpdateStartedCallback(uint16_t manufacturerId,
  * @param source  Source node id.
  * @param status  Status of update.
  */
-void emberAfPluginOtaServerUpdateCompleteCallback(uint16_t manufacturerId,
+void sl_zigbee_af_ota_server_update_complete_cb(uint16_t manufacturerId,
                                                   uint16_t imageTypeId,
                                                   uint32_t firmwareVersion,
-                                                  EmberNodeId source,
+                                                  sl_802154_short_addr_t source,
                                                   uint8_t status)
 {
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks, onOtaUpdateCompleted)) {
@@ -120,10 +120,10 @@ void emberAfPluginOtaServerUpdateCompleteCallback(uint16_t manufacturerId,
                   "OTA-Server Update Complete");
 
   } else {
-    EmberEUI64 eui64;
+    sl_802154_long_addr_t eui64;
 
-    EmberStatus emStatus = emberAfGetCurrentSenderEui64(eui64);
-    if (emStatus != EMBER_SUCCESS) {
+    sl_status_t emStatus = sl_zigbee_af_get_current_sender_eui64(eui64);
+    if (emStatus != SL_STATUS_OK) {
       appDebugPrint(LOG_FMTSTR_SOURCE_EUI64_RES_FAIL,
                     "OTA-Server Update Complete");
     } else {
@@ -136,14 +136,14 @@ void emberAfPluginOtaServerUpdateCompleteCallback(uint16_t manufacturerId,
   }
 }
 
-EmberStatus zigbeeHostAddOtaImage(const char *filename)
+sl_status_t zigbeeHostAddOtaImage(const char *filename)
 {
   if (filename == NULL) {
-    return EMBER_BAD_ARGUMENT;
+    return SL_STATUS_INVALID_PARAMETER;
   }
 
-  EmberAfOtaStorageStatus status = sli_zigbee_af_ota_storage_add_image_file(filename);
+  sl_zigbee_af_ota_storage_status_t status = sli_zigbee_af_ota_storage_add_image_file(filename);
 
-  return (status == EMBER_AF_OTA_STORAGE_SUCCESS) ? EMBER_SUCCESS
-                                                  : EMBER_ERR_FATAL;
+  return (status == SL_ZIGBEE_AF_OTA_STORAGE_SUCCESS) ? SL_STATUS_OK
+                                                  : SL_STATUS_FAIL;
 }

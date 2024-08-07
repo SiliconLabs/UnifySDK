@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started with the Unify Host SDK &mdash; Unify Host SDK</title>
+  <title>Running Unify on Raspberry Pi &mdash; Unify Host SDK</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
@@ -25,7 +25,9 @@
         <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unify Host SDK User guide" href="unify_readme_user.html" />
+    <link rel="prev" title="Getting Started with Unify using Portable runtime" href="portable_runtime/readme_user.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -37,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,9 +49,18 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="portable_runtime/readme_user.html">Getting Started with Unify using Portable runtime</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running Unify on Raspberry Pi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify Host SDK User guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_unify_sdk.html">Getting Started with the Unify Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Getting Started with the Multiprotocol Setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
@@ -86,34 +97,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-the-unify-host-sdk">
-<h1>Getting Started with the Unify Host SDK<a class="headerlink" href="#getting-started-with-the-unify-host-sdk" title="Permalink to this heading"></a></h1>
-<p>Before installing the Unify Host SDK components on our reference platform, a
-Raspberry Pi 4 (RPi4), the following prerequisites must be fulfilled:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="running-unify-on-raspberry-pi">
+<h1>Running Unify on Raspberry Pi<a class="headerlink" href="#running-unify-on-raspberry-pi" title="Permalink to this heading"></a></h1>
 <p>The Unify Host SDK targets our reference platform, a Raspberry Pi 4 (RPi4).
-It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
-If you instead want a quick demo of Unify IoT gateway running on
-your Windows, MacOS or Linux desktop, please try our
-<a class="reference internal" href="../portable_runtime/readme_user_cli.html"><span class="doc std std-doc">Portable Runtime environment User guide</span></a>.</p>
-<div class="toctree-wrapper compound">
-</div>
-<p>The rest of this guide focuses on how to set up all of the applications and
-services on a RPi4.</p>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
-<ul class="simple">
-<li><p>An RPi4 preinstalled with <a class="reference external" href="https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-09-26/">Raspberry Pi OS Linux Version 11, Bullseye 64-bit</a></p></li>
-<li><p>At least one of the following, supported wireless radios is connected to the RPi4 via USB:</p>
-<ul>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG12/EFR32xG22 running NCP for Zigbee or RCP for Multiprotocol</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
-</ul>
-</li>
-</ul>
+It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.</p>
 <p>For details on setting up a bare RPi4, follow the setup instructions in the
 <a class="reference external" href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up">Official Raspberry Pi User Guide</a>,
 and ensure a supported radio module is attached to your RPi4.</p>
+<p>For set up and running quickly to test out Unify on the Raspberry Pi refer <a class="reference internal" href="running_unify.html"><span class="doc std std-doc">Setting up Raspberry Pi for Unify</span></a></p>
+<p>The rest of this guide focuses on how to set up all of the applications and
+services on a RPi4.</p>
 <p>For running Unify Framework it is required to have a running MQTT broker to which the Unify Framework can connect.
 To get an MQTT broker installed on the RPi4:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
@@ -121,13 +114,12 @@ To get an MQTT broker installed on the RPi4:</p>
 </pre></div>
 </div>
 <p>For more information regarding logging and configuration of eg. the Mosquitto
-broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Framework User Guide</span></a>.</p>
+broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Host SDK User Guide</span></a>.</p>
 <div class="toctree-wrapper compound">
 </div>
-</section>
 <section id="how-to-install-packages">
 <span id="how-to-install"></span><h2>How to install packages<a class="headerlink" href="#how-to-install-packages" title="Permalink to this heading"></a></h2>
-<p>The Unify Host SDK distribution targets the reference platform Debian Bullseye
+<p>The Unify Host SDK distribution targets the reference platform Debian Bookworm
 platform. Binary Debian packages are provided with the SDK and they are
 available in a Zip file eg. unify_x.y.z_arm64.zip on
 <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>.</p>
@@ -200,7 +192,7 @@ the <a class="reference internal" href="getting_started_unify_sdk.html"><span cl
 <section id="multiprotocol-setup">
 <h2>Multiprotocol Setup<a class="headerlink" href="#multiprotocol-setup" title="Permalink to this heading"></a></h2>
 <p>If you are interested in setting up multiprotocol CPC-based applications
-see the <a class="reference internal" href="getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup page</span></a>.</p>
+see the <a class="reference internal" href="getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup</span></a> page.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>

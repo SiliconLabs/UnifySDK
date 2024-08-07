@@ -336,6 +336,23 @@ std::string color_control_color_loop_active_get_enum_value_name(
  */
 uint32_t color_control_color_loop_active_get_enum_value_number(const std::string &str);
 
+#define COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ColorControlColorLoopDirection enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string color_control_color_loop_direction_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ColorControlColorLoopDirection enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t color_control_color_loop_direction_get_enum_value_number(const std::string &str);
+
 #define COLOR_CONTROL_COLOR_MODE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -1220,6 +1237,23 @@ std::string metering_unitof_measure_get_enum_value_name(
  */
 uint32_t metering_unitof_measure_get_enum_value_number(const std::string &str);
 
+#define MODE_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ModeType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string mode_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ModeType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t mode_type_get_enum_value_number(const std::string &str);
+
 #define MOVE_STEP_MODE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -1543,6 +1577,23 @@ std::string shdcfg_direction_get_enum_value_name(
  */
 uint32_t shdcfg_direction_get_enum_value_number(const std::string &str);
 
+#define SCALE_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ScaleType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string scale_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ScaleType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t scale_type_get_enum_value_number(const std::string &str);
+
 #define SETPOINT_RAISE_OR_LOWER_MODE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -1559,6 +1610,23 @@ std::string setpoint_raise_or_lower_mode_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t setpoint_raise_or_lower_mode_get_enum_value_number(const std::string &str);
+
+#define SETPOINT_TYPE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the SetpointType enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string setpoint_type_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the SetpointType enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t setpoint_type_get_enum_value_number(const std::string &str);
 
 #define SHADE_CONFIGURATION_MODE_ENUM_NAME_AVAILABLE 1
 
@@ -1934,6 +2002,57 @@ std::string tx_report_transmission_speed_get_enum_value_name(
  */
 uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &str);
 
+#define UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UnifyHumidityControlCurrentState enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string unify_humidity_control_current_state_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UnifyHumidityControlCurrentState enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t unify_humidity_control_current_state_get_enum_value_number(const std::string &str);
+
+#define UNIFY_THERMOSTAT_OPERATING_STATE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UnifyThermostatOperatingState enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string unify_thermostat_operating_state_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UnifyThermostatOperatingState enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t unify_thermostat_operating_state_get_enum_value_number(const std::string &str);
+
+#define UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the UnifyThermostatThermostatMode enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string unify_thermostat_thermostat_mode_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the UnifyThermostatThermostatMode enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t unify_thermostat_thermostat_mode_get_enum_value_number(const std::string &str);
+
 #define WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE 1
 
 /**
@@ -1950,6 +2069,40 @@ std::string window_covering_window_covering_type_get_enum_value_name(
  * @returns A number enum value.
  */
 uint32_t window_covering_window_covering_type_get_enum_value_number(const std::string &str);
+
+#define Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ZWaveFanModeEnum enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string z_wave_fan_mode_enum_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ZWaveFanModeEnum enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t z_wave_fan_mode_enum_get_enum_value_number(const std::string &str);
+
+#define Z_WAVE_FAN_STATE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the ZWaveFanStateEnum enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string z_wave_fan_state_enum_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the ZWaveFanStateEnum enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t z_wave_fan_state_enum_get_enum_value_number(const std::string &str);
 
 #define ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_ENUM_NAME_AVAILABLE 1
 

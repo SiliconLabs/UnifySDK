@@ -1,5 +1,5 @@
 var state__logging_8h =
 [
-    [ "nm_event_name", "state__logging_8h.html#a4eea345dd631fd4860b7c73cb1c027a9", null ],
-    [ "nm_state_name", "state__logging_8h.html#a175d5757ed69ab1b49a06c0be44db167", null ]
+    [ "nm_event_name", "state__logging_8h.html#a8434d657b0d20a8bc9876aca76ac2b97", null ],
+    [ "nm_state_name", "state__logging_8h.html#a65f2777fdd62fb46abaeea71ec9e42d3", null ]
 ];

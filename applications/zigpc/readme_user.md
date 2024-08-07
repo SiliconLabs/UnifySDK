@@ -30,7 +30,7 @@ Running Unify with ZigPC requires the following equipment:
 
 ### Gateway Host Device: Raspberry Pi
 
-ZigPC is officially supported on a Raspberry Pi 4 running Debian Bullseye (A.K.A.
+ZigPC is officially supported on a Raspberry Pi 4 running Debian Bookworm (A.K.A.
 Raspberry Pi OS).
 
 For installation and setup, follow steps outlined in:
@@ -41,7 +41,7 @@ Find more information about Raspberry Pi OS here:
 
 ### Gateway NCP Device
 
-Supported radios: EFR32MG1X or EFR32MG2X
+Supported radios: EFR32MG2X
 Supported EZSP protocol: UART (SPI not officially supported)
 
 ### PAN Zigbee Device
@@ -64,7 +64,7 @@ using an MQTT Broker. Unify currently supports using Mosquitto MQTT
 (<https://mosquitto.org/>).
 
 For installing please refer to the general installation method in
-[Getting started](../../doc/getting_started.md).
+[Getting started](../../doc/getting_started_unify.md).
 
 ### Description of Installed Components
 
@@ -409,7 +409,7 @@ For more information, see [Silicon Labs' OTA Server-Client Application
 Note](https://www.silabs.com/documents/public/application-notes/an728-ota-client-server-setup.pdf).
 
 NOTE: It is expected that a device will have a bootloader to properly support OTA updates. See
-[Silicon Labs' Bootloader User Guide](<https://www.silabs.com/documents/public/user-guides> ug103-06-fundamentals-bootloading.pdf)
+[Silicon Labs' Bootloader User Guide](<https://www.silabs.com/documents/public/user-guides/ug103-06-fundamentals-bootloading.pdf>)
 for more details.
 
 ### Zigbee Sleepy End Device Support

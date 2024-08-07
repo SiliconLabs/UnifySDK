@@ -41,8 +41,8 @@ static const char LOG_TAG[] = "zigpc_gateway";
  *
  */
 typedef struct {
-  EmberEUI64 eui64;
-  EmberNodeId node_id;
+  sl_802154_long_addr_t eui64;
+  sl_802154_short_addr_t node_id;
 } __attribute__((__packed__)) zigpc_gateway_addr_entry_t;
 
 extern struct zigbeeHostCallbacks zigpc_gateway_zigbee_host_callbacks;
@@ -68,17 +68,13 @@ sl_status_t zigpc_gateway_reset_observers(void);
  *
  * @param resetStatus   The EZSP reset reason.
  */
-void zigpc_gateway_on_ncp_pre_reset(EzspStatus resetStatus);
+void zigpc_gateway_on_ncp_pre_reset(sl_zigbee_ezsp_status_t resetStatus);
 
 /**
  * @brief ZigbeeHost callback handler called after NCP resets and is going
  * through initialization.
- *
- * @param ncpMemConfigureStage  Flag to indicate NCP configuration stages. TRUE
- * if only memory-configure EZSP messages are accepted at this stage; FALSE if
- * only non-memory-configure EZSP messaged are accepted by the NCP.
  */
-void zigpc_gateway_on_ncp_post_reset(bool ncpMemConfigureStage);
+void zigpc_gateway_on_ncp_post_reset(void);
 
 /**
  * @brief Load EUI64 to NodeId device ID mappings.

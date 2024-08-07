@@ -1,5 +1,9 @@
 # Dev GUI Release Notes
 
+## [1.6.0] - Aug 2024
+
+* Uses yarn instead of npm in the CMake build to improve fetching js deps time
+
 ## [1.5.0] - Feb 2024
 
 * Removed QR-Code scanner when Dev GUI is connected through non-secure mode(eg http)

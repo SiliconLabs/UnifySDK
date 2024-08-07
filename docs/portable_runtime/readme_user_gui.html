@@ -37,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
@@ -99,7 +99,7 @@
 <p><strong>Prerequisites</strong>:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG12/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
 <li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
 <li><p>Docker version &gt; 20.10.12 installed.</p></li>
 <li><p>docker-compose version &gt; 2.5.1</p></li>
@@ -147,6 +147,13 @@ This should launch up the Unify Portable Runtime GUI.</p>
 </ul>
 <p>By default only Z-Wave (ZPC) is selected. Select other protocols as needed and
 click on <code class="docutils literal notranslate"><span class="pre">Next</span></code>.</p>
+<section id="emulated-end-device-experimental">
+<h5>Emulated End Device (<strong>Experimental</strong>):<a class="headerlink" href="#emulated-end-device-experimental" title="Permalink to this heading"></a></h5>
+<p>Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
+<br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">EED</span> <span class="pre">currently</span> <span class="pre">emulates</span> <span class="pre">a</span> <span class="pre">end</span> <span class="pre">device</span> <span class="pre">that</span> <span class="pre">only</span> <span class="pre">supports</span> <span class="pre">OnOff</span> <span class="pre">cluster,</span> <span class="pre">so</span> <span class="pre">for</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">enable</span> <span class="pre">atleast</span> <span class="pre">select</span> <span class="pre">NAL</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">framework</span> <span class="pre">service</span> <span class="pre">page</span> <span class="pre">that</span> <span class="pre">follows.</span></code></p>
+<p><br>The EED can be enable in protocol selection page of latest portable runtime GUI.
+<a class="reference internal" href="../_images/EED-GUI.png"><img alt="../_images/EED-GUI.png" src="../_images/EED-GUI.png" style="width: 200px; height: 250px;" /></a></p>
+</section>
 </section>
 <section id="framework-services-and-application-selection">
 <h4>Framework Services and Application Selection<a class="headerlink" href="#framework-services-and-application-selection" title="Permalink to this heading"></a></h4>

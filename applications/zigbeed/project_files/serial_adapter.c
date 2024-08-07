@@ -1,6 +1,6 @@
 /***************************************************************************//**
  * @file
- * @brief Adaptation of "emberSerial" API to posix target.
+ * @brief Adaptation of "sl_zigbee_serial" API to posix target.
  *
  * See @ref
  *******************************************************************************
@@ -26,10 +26,10 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "ember-types.h"
+#include "sl_zigbee_types.h"
 #include "serial_adapter.h"
 #include "openthread/openthread-system.h"
-#include "stack/include/ember.h"
+#include "stack/include/sl_zigbee.h"
 #include "app/em260/serial-interface.h"
 #include "app/framework/common/zigbee_app_framework_event.h"
 
@@ -84,7 +84,7 @@ static void writeFlush(void)
   }
 }
 
-static EmberStatus readAvailable(uint16_t *count)
+static sl_status_t readAvailable(uint16_t *count)
 {
   int16_t bytesRead;
   if (inBufRd == inBufWr) {
@@ -96,19 +96,19 @@ static EmberStatus readAvailable(uint16_t *count)
   }
   *count = inBufWr - inBufRd;
   if (inBufRd == inBufWr) {
-    return EMBER_SERIAL_RX_EMPTY;
+    return SL_STATUS_EMPTY;
   } else {
-    return EMBER_SUCCESS;
+    return SL_STATUS_OK;
   }
 }
 
 //------------------------------------------------------------------------------
-// emberSerial Functions
+// sl_zigbee_serial Functions
 
-EmberStatus emberSerialInit(uint8_t port,
-                            SerialBaudRate rate,
-                            SerialParity parity,
-                            uint8_t stopBits)
+sl_status_t sli_legacy_serial_init(uint8_t port,
+                                   SerialBaudRate rate,
+                                   SerialParity parity,
+                                   uint8_t stopBits)
 {
 #ifdef IO_LOG
   logFile = fopen(IO_LOG, "w");
@@ -140,7 +140,7 @@ EmberStatus emberSerialInit(uint8_t port,
     fprintf(stderr, "Use socat to create PTYs for zigbeed and the host app. Eg:\r\n");
     fprintf(stderr, "socat -x -v pty,link=/dev/ttyZigbeeNCP pty,link=/tmp/ttyZigbeeNCP\r\n");
     serialClose();
-    return EMBER_ERR_FATAL;
+    return SL_STATUS_FAIL;
   }
 
   tcflush(serialFd, TCIOFLUSH);       // flush all input and output data
@@ -158,19 +158,19 @@ EmberStatus emberSerialInit(uint8_t port,
 
   tcsetattr(serialFd, TCSAFLUSH, &tios);  // set EZSP serial port options
 
-  return EMBER_SUCCESS;
+  return SL_STATUS_OK;
 }
 
-EmberStatus emberSerialWriteByte(uint8_t port, uint8_t dataByte)
+sl_status_t sli_legacy_serial_write_byte(uint8_t port, uint8_t dataByte)
 {
   *outBufWr++ = dataByte;
   if (outBufWr >= &outBuffer[outBlockLen]) {
     writeFlush();
   }
-  return EMBER_SUCCESS;
+  return SL_STATUS_OK;
 }
 
-uint16_t emberSerialWriteAvailable(uint8_t port)
+uint16_t sli_legacy_serial_write_available(uint8_t port)
 {
   if ( (outBufWr < &outBuffer[outBlockLen]) && (outBufRd == outBuffer) ) {
     return 1;
@@ -180,13 +180,13 @@ uint16_t emberSerialWriteAvailable(uint8_t port)
   }
 }
 
-EmberStatus emberSerialReadByte(uint8_t port, uint8_t *dataByte)
+sl_status_t sli_legacy_serial_read_byte(uint8_t port, uint8_t *dataByte)
 {
-  EmberStatus status;
+  sl_status_t status;
   uint16_t count;
 
   status = readAvailable(&count);
-  if (status == EMBER_SUCCESS) {
+  if (status == SL_STATUS_OK) {
     *dataByte = *inBufRd++;
   }
   return status;
@@ -194,16 +194,16 @@ EmberStatus emberSerialReadByte(uint8_t port, uint8_t *dataByte)
 
 // from serial/serial.c
 // needed by sl_legacy_printf.c
-EmberStatus emberSerialWriteString(uint8_t port, PGM_P string)
+sl_status_t sli_legacy_serial_write_string(uint8_t port, const char *string)
 {
-  return EMBER_SUCCESS;
+  return SL_STATUS_OK;
 }
 
 void sli_serial_adapter_tick_callback(void)
 {
   otSysMainloopContext mainloop;
-  uint32_t timeoutMs = emberMsToNextStackEvent();
-  uint32_t appMs = sli_zigbee_ms_to_next_app_framework_event();
+  uint32_t timeoutMs = sl_zigbee_ms_to_next_stack_event();
+  uint32_t appMs = sli_zigbee_af_ms_to_next_event();
   timeoutMs = (timeoutMs < appMs ? timeoutMs : appMs);
 
   // Clear mainloop FDs

@@ -1,0 +1,27 @@
+:cmock:
+  :mock_prefix: ''
+  :mock_suffix: '_mock'
+
+  :array_as_byte: true
+  :when_ptr: :smart
+  :array_size_type: ['uint8_t','uint16_t']
+  :treat_as_array:
+    zwapi_nodemask_t: 'uint8_t'
+    network_key_t: 'uint8_t'
+    zwave_dsk_t: 'uint8_t'
+    zwave_nodemask_t: 'uint8_t'
+    unid_t: 'char'
+    datastore_key_t: 'const char'
+    EmberEUI64: 'uint8_t'
+    sl_802154_long_addr_t: 'uint8_t'
+    zigbee_eui64_t: 'uint8_t'
+    zigbee_install_code_t: 'uint8_t'
+    zigbee_ext_panid_t: 'uint8_t'
+    aoa_id_t: 'char'
+  :plugins:
+    - :ignore_arg
+    - :ignore
+    - :callback
+    - :array
+    - :return_thru_ptr
+

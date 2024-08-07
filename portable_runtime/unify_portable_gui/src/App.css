@@ -183,6 +183,32 @@ input[type='checkbox'] {
     line-height: 37px;
 
 }
+.tool-tip{
+  transition: opacity 0.2s;
+}
+
+.info-icon {
+  color: #62a1fe;
+  position: relative;
+  top: -4px;
+}
+
+.multi-select {
+  flex: 0 0 67%;
+}
+
+.eed-config-toggle{
+  padding-left: 35px;
+  margin-top: 7px;
+}
+
+.note {
+    display: flex;
+    justify-content: end;
+    max-width: 75%;
+    margin-top: -10px;
+    font-size: 14px;
+}
 
 .config-device select,
 .config-device input[type='text'] {

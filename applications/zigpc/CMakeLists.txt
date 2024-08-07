@@ -1,4 +1,4 @@
-find_package(GeckoSDK 4.3.0 REQUIRED)
+find_package(GeckoSDK 2024.6.0 REQUIRED)
 
 add_subdirectory(components)
 

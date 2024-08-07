@@ -25,7 +25,8 @@ set(GECKO_SDK_MOCK_HEADERS
     mocks/app/framework/plugin/network-creator/network-creator.h
     mocks/app/framework/plugin/network-creator-security/network-creator-security.h
     mocks/app/framework/plugin/ota-storage-common/ota-storage.h
-    mocks/app/framework/plugin/address-table/address-table.h)
+    mocks/app/framework/plugin/address-table/address-table.h
+    mocks/stack/include/zigbee-security-manager.h)
 
 # Use simplified headers of GSDK functionality
 add_mock(geckosdk_mock ${GECKO_SDK_MOCK_HEADERS})
@@ -159,5 +160,5 @@ target_add_unittest(
   geckosdk_mock)
 target_compile_definitions(
   zigbee_host_poll_checkin_test
-  PRIVATE EMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32)
+  PRIVATE SL_ZIGBEE_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32)
 

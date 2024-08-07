@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!-- 
+Used to expose Protocol (ZWave) specific attributes to Unify.
+-->
+<zcl:cluster xmlns:zcl="http://zigbee.org/zcl/clusters"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:type="http://zigbee.org/zcl/types"
+    xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd" id="FD15" revision="1" name="UnifyThermostat">
+    <classification role="application" picsCode="TSTAT" primaryTransaction="2" />
+    <server>
+        <attributes>
+            <attribute id="0001" name="ThermostatMode" type="enum8" writable="true" required="true" default="0">
+                <restriction>
+                    <type:enumeration value="00" name="Off" />
+                    <type:enumeration value="01" name="Heat" />
+                    <type:enumeration value="02" name="Cool" />
+                    <type:enumeration value="03" name="Auto" />
+                    <type:enumeration value="04" name="Auxiliary" />
+                    <type:enumeration value="05" name="Resume" />
+                    <type:enumeration value="06" name="Fan" />
+                    <type:enumeration value="07" name="Furnace" />
+                    <type:enumeration value="08" name="Dry" />
+                    <type:enumeration value="09" name="Moist" />
+                    <type:enumeration value="0A" name="AutoChangeover" />
+                    <type:enumeration value="0B" name="EnergyHeat" />
+                    <type:enumeration value="0C" name="EnergyCool" />
+                    <type:enumeration value="0D" name="Away" />
+                    <!-- <type:enumeration value="0E" name="Reserved" /> -->
+                    <type:enumeration value="0F" name="FullPower" />
+                    <type:enumeration value="1F" name="ManufacturerSpecific" />
+                </restriction>
+            </attribute>
+            <attribute id="0002" name="SupportedThermostatMode" type="map16" writable="false" required="false" default="0">
+                <bitmap>
+                    <element name="Off" type="bool" mask="01" />
+                    <element name="Heat" type="bool" mask="02" shiftRight="1" />
+                    <element name="Cool" type="bool" mask="04" shiftRight="2" />
+                    <element name="Auto" type="bool" mask="08" shiftRight="3" />
+                    <element name="Auxiliary" type="bool" mask="10" shiftRight="4" />
+                    <element name="Resume" type="bool" mask="20" shiftRight="5" />
+                    <element name="Fan" type="bool" mask="40" shiftRight="6" />
+                    <element name="Furnace" type="bool" mask="80" shiftRight="7" />
+                    <element name="Dry" type="bool" mask="100" shiftRight="8" />
+                    <element name="Moist" type="bool" mask="200" shiftRight="9"/>
+                    <element name="AutoChangeover" type="bool" mask="400" shiftRight="10"/>
+                    <element name="EnergyHeat" type="bool" mask="800" shiftRight="10"/>
+                    <element name="EnergyCool" type="bool" mask="1000" shiftRight="11"/>
+                    <element name="Away" type="bool" mask="2000" shiftRight="12"/>
+                    <element name="FullPower" type="bool" mask="4000" shiftRight="13"/>
+                    <element name="ManufacturerSpecific" type="bool" mask="8000" shiftRight="14"/>
+                </bitmap>
+            </attribute>
+            <attribute id="0003" name="OperatingState" type="enum8" default="0">
+                <restriction>
+                    <type:enumeration value="00" name="Off" />
+                    <type:enumeration value="01" name="Heating" />
+                    <type:enumeration value="02" name="Cooling" />
+                    <type:enumeration value="03" name="FanOnly" />
+                    <type:enumeration value="04" name="PendingHeat" />
+                    <type:enumeration value="05" name="PendingCool" />
+                    <type:enumeration value="06" name="Vent/Economizer" />
+                    <type:enumeration value="07" name="AuxHeating" />
+                    <type:enumeration value="08" name="2ndStageHeating" />
+                    <type:enumeration value="09" name="2ndStageCooling" />
+                    <type:enumeration value="0A" name="2ndStageAuxHeat" />
+                    <type:enumeration value="0B" name="3rdStageAuxHeat" />
+                </restriction>
+            </attribute>
+        </attributes>
+    </server>
+</zcl:cluster>

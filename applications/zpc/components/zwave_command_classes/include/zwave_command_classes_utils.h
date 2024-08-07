@@ -56,8 +56,8 @@ typedef struct zwave_minimum_frame {
 } zwave_minimum_frame_t;
 
 // Helper macros
-#define FAHRENHEIT_TO_DEGREES(value) ((value - 32.0F) * 5 / 9);
-#define DEGREES_TO_FAHRENHEIT(value) (value * 9 / 5.0F) + 32;
+#define FAHRENHEIT_TO_DEGREES(value) ((value - 32.0) * 5 / 9);
+#define DEGREES_TO_FAHRENHEIT(value) (value * 9 / 5.0) + 32;
 
 // Constants
 /// Additional delay in ms to wait before issuing a Get Command
@@ -214,7 +214,33 @@ int32_t get_signed_value_from_frame_and_size(const uint8_t *frame,
  */
 uint32_t get_unsigned_value_from_frame_and_size(const uint8_t *frame,
                                                 uint8_t size);
+
 /**
+ * @brief Convert a value from the Z-Wave world (precision = [0..7] and C° + F) into a UCL (Zigbee) world (precision = 2 and C°)
+ * 
+ * @param zwave_value     Current Z-Wave value
+ * @param zwave_precision Reported Z-Wave precision
+ * @param zwave_scale     Reported Z-Wave scale (0 : C°, 1 : F)
+ * 
+ * @return int16_t UCL temperature. Rounded down if Z-Wave precision is too high.
+ */
+int16_t zwave_temperature_to_ucl_temperature(int32_t zwave_value,
+                                             uint8_t zwave_precision,
+                                             uint8_t zwave_scale);
+
+/**
+ * @brief Convert a value from the UCL world (Zigbee) (precision = 2 and C°) to the ZWave world (precision = [0..7] and C° + F)
+ * 
+ * @param ucl_value       Current UCL value
+ * @param zwave_precision Expected Z-Wave precision
+ * @param zwave_scale     Expected Z-Wave scale (0 : C°, 1 : F)
+ * 
+ * @return int32_t Z-Wave temperature with given precision and scale.
+ */
+int32_t ucl_temperature_to_zwave_temperature(int16_t ucl_value,
+                                             uint8_t zwave_precision,
+                                             uint8_t zwave_scale);
+  /**
  * @brief Converts a clock_time_t duration to a Z-Wave Command Class duration
  * byte
  *
@@ -224,7 +250,7 @@ uint32_t get_unsigned_value_from_frame_and_size(const uint8_t *frame,
  * @param time            The system time duration
  * @returns uint8_t       The corresponding Z-Wave duration encoding.
  */
-uint8_t time_to_zwave_duration(clock_time_t time);
+  uint8_t time_to_zwave_duration(clock_time_t time);
 
 /**
  * @brief Converts a duration byte encoded for a Z-Wave command class and returns

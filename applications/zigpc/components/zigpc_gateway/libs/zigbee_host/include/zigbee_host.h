@@ -76,7 +76,7 @@ void zigbeeHostShutdown(void);
  *
  * @param eui64 Reference to EUI64 to populate
  */
-void zigbeeHostGetEui64(EmberEUI64 eui64);
+void zigbeeHostGetEui64(sl_802154_long_addr_t eui64);
 
 /**
  * @brief Retrieve the primary endpointID used by the gateway.
@@ -105,9 +105,9 @@ void zigbeeHostSendSlCliCommand(char* array);
  *
  * @param list          Destination list to copy counters data to.
  * @param count         Length of destination list provided.
- * @return EmberStatus  Always returns EMBER_SUCCESS.
+ * @return sl_status_t  Always returns SL_STATUS_OK.
  */
-EmberStatus zigbeeHostGetCountersList(uint16_t *const list, size_t count);
+sl_status_t zigbeeHostGetCountersList(uint16_t *const list, size_t count);
 
 /**
  * @brief Clears the counters of counter plugin
@@ -127,18 +127,18 @@ uint8_t zigbeeHostGetNeighborCount();
  *
  * @param index index of the neighbor
  * @param eui64 Destination eui64 to copy data to
- * @return EmberStatus
+ * @return sl_status_t
  */
-EmberStatus zigbeeHostGetNeighborEUI64(uint8_t index,EmberEUI64 eui64);
+sl_status_t zigbeeHostGetNeighborEUI64(uint8_t index,sl_802154_long_addr_t eui64);
 
 /**
  * @brief Initialize the Trust Center network
  *
- * @return EmberStatus EMBER_SUCCESS or error
+ * @return sl_status_t SL_STATUS_OK or error
  */
-EmberStatus zigbeeHostTrustCenterInit(void);
+sl_status_t zigbeeHostTrustCenterInit(void);
 
-EmberStatus zigbeeHostTrustCenterInitWithArgs(
+sl_status_t zigbeeHostTrustCenterInitWithArgs(
         uint16_t pan_id,
         int8_t radio_tx_power,
         uint8_t channel);
@@ -152,12 +152,12 @@ EmberStatus zigbeeHostTrustCenterInitWithArgs(
  *
  * @param eui64         Device identifier
  * @param nodeId        Device network-based identifier
- * @return EmberStatus EMBER_SUCCESS on successfully adding mapping,
- * EMBER_BAD_ARGUMENT on any invalid arguments provided,
- * EMBER_INVALID_CALL if the EUI64 is not tracked by the address-table plugin.
+ * @return sl_status_t SL_STATUS_OK on successfully adding mapping,
+ * SL_STATUS_INVALID_PARAMETER on any invalid arguments provided,
+ * SL_STATUS_INVALID_STATE if the EUI64 is not tracked by the address-table plugin.
  */
-EmberStatus zigbeeHostAddAddressTableEntry(const EmberEUI64 eui64,
-                                           const EmberNodeId nodeId);
+sl_status_t zigbeeHostAddAddressTableEntry(const sl_802154_long_addr_t eui64,
+                                           const sl_802154_short_addr_t nodeId);
 
 /**
  * @brief Retrieve the NodeId for the EUI64 provided from the address-table
@@ -165,37 +165,37 @@ EmberStatus zigbeeHostAddAddressTableEntry(const EmberEUI64 eui64,
  *
  * @param eui64         Device identifier to lookup.
  * @param nodeId        Reference to network-based identifier to populate,
- *                      EMBER_UNKNOWN_NODE_ID populated if not found.
- * @return EmberStatus  EMBER_SUCCESS on successfully retrieving NodeId,
- * EMBER_BAD_ARGUMENT on any invalid arguments provided,
- * EMBER_INVALID_CALL if the EUI64 is not tracked by the address-table plugin.
+ *                      SL_ZIGBEE_UNKNOWN_NODE_ID populated if not found.
+ * @return sl_status_t  SL_STATUS_OK on successfully retrieving NodeId,
+ * SL_STATUS_INVALID_PARAMETER on any invalid arguments provided,
+ * SL_STATUS_INVALID_STATE if the EUI64 is not tracked by the address-table plugin.
  */
-EmberStatus zigbeeHostGetAddressTableEntry(const EmberEUI64 eui64,
-                                           EmberNodeId *const nodeId);
+sl_status_t zigbeeHostGetAddressTableEntry(const sl_802154_long_addr_t eui64,
+                                           sl_802154_short_addr_t *const nodeId);
 
 /**
  * @brief Allow devices to join the gateway network
  *
  * @param openForever  Indicate whether to open the network indefinitely.
- * @return EmberStatus  EMBER_SUCCESS on opening the network.
- *                      EMBER_NETWORK_DOWN if the network is not initialized.
+ * @return sl_status_t  SL_STATUS_OK on opening the network.
+ *                      SL_STATUS_NETWORK_DOWN if the network is not initialized.
  */
-EmberStatus zigbeeHostTrustCenterJoinOpen(bool openForever);
+sl_status_t zigbeeHostTrustCenterJoinOpen(bool openForever);
 
 /**
  * @brief Stop devices from joining the gateway network
  *
- * @return EmberStatus  EMBER_SUCCESS on successfully closing the network.
- *                      EMBER_NETWORK_DOWN if the network is not initialized.
+ * @return sl_status_t  SL_STATUS_OK on successfully closing the network.
+ *                      SL_STATUS_NETWORK_DOWN if the network is not initialized.
  */
-EmberStatus zigbeeHostTrustCenterJoinClose(void);
+sl_status_t zigbeeHostTrustCenterJoinClose(void);
 
 /**
  * @brief Retrieve the Trust Center well-known link key.
  *
- * @return EmberKeyData
+ * @return sl_zigbee_key_data_t
  */
-EmberKeyData zigbeeHostGetTrustCenterWellKownKey(void);
+sl_zigbee_key_data_t zigbeeHostGetTrustCenterWellKownKey(void);
 
 /**
  * @brief Add link key to either to the regular or transient key table.
@@ -203,11 +203,11 @@ EmberKeyData zigbeeHostGetTrustCenterWellKownKey(void);
  * @param eui64             Device that will be using the key (or wildcard).
  * @param key               Link key data
  * @param inTransientTable  Store key in either the regular or transient table.
- * @return EmberStatus      EMBER_SUCCESS on success, or EZSP-related error
+ * @return sl_status_t      SL_STATUS_OK on success, or EZSP-related error
  * occured when requesting key to be added.
  */
-EmberStatus zigbeeHostTrustCenterAddLinkKey(const EmberEUI64 eui64,
-                                            const EmberKeyData *key,
+sl_status_t zigbeeHostTrustCenterAddLinkKey(const sl_802154_long_addr_t eui64,
+                                            const sl_zigbee_key_data_t *key,
                                             bool inTransientTable);
 
 /**
@@ -228,21 +228,21 @@ bool zigbeeHostTrustCenterInstallCodeValid(const uint8_t *installCode,
  * @param eui64               Identifier of an end device
  * @param installCode         Install code from the end device
  * @param installCodeLength   Length of the passed install code
- * @return EmberStatus  EMBER_SUCCESS or error
+ * @return sl_status_t  SL_STATUS_OK or error
  */
-EmberStatus zigbeeHostTrustCenterAddDeviceInstallCode(
-  const EmberEUI64 eui64, uint8_t *installCode, uint8_t installCodeLength);
+sl_status_t zigbeeHostTrustCenterAddDeviceInstallCode(
+  const sl_802154_long_addr_t eui64, uint8_t *installCode, uint8_t installCodeLength);
 
 /**
  * @brief Remove a device that already exists on the network. This call uses
  * the EmberAf network leave request API. if the device is not
- * currently tracked by the address-table, EMBER_NOT_FOUND will be returned.
+ * currently tracked by the address-table, SL_STATUS_NOT_FOUND  will be returned.
  *
  * @param eui64         End device identifier
- * @return EmberStatus  EMBER_SUCCESS when the Leave Request is sent successfully,
- * EMBER_NOT_FOUND if the device is not found via the address-table plugin.
+ * @return sl_status_t  SL_STATUS_OK when the Leave Request is sent successfully,
+ * SL_STATUS_NOT_FOUND  if the device is not found via the address-table plugin.
  */
-EmberStatus zigbeeHostNetworkDeviceLeaveRequest(const EmberEUI64 eui64);
+sl_status_t zigbeeHostNetworkDeviceLeaveRequest(const sl_802154_long_addr_t eui64);
 
 /**
  * @brief Send ZDO Active Endpoints Descriptor request to device on the network.
@@ -251,10 +251,10 @@ EmberStatus zigbeeHostNetworkDeviceLeaveRequest(const EmberEUI64 eui64);
  * to this request.
  *
  * @param eui64         Device identifier to probe.
- * @return EmberStatus  EMBER_SUCCESS on successfully sending request, error
+ * @return sl_status_t  SL_STATUS_OK on successfully sending request, error
  * otherwise.
  */
-EmberStatus zigbeeHostZdoActiveEndpointsRequest(const EmberEUI64 eui64);
+sl_status_t zigbeeHostZdoActiveEndpointsRequest(const sl_802154_long_addr_t eui64);
 
 /**
  * @brief Send ZDO Simple Descriptor request to device on the network.
@@ -264,10 +264,10 @@ EmberStatus zigbeeHostZdoActiveEndpointsRequest(const EmberEUI64 eui64);
  *
  * @param eui64         Device identifier to probe.
  * @param endpointId    Endpoint identifier to probe.
- * @return EmberStatus  EMBER_SUCCESS on successfully sending request, error
+ * @return sl_status_t  SL_STATUS_OK on successfully sending request, error
  * otherwise.
  */
-EmberStatus zigbeeHostZdoSimpleDescriptorRequest(const EmberEUI64 eui64,
+sl_status_t zigbeeHostZdoSimpleDescriptorRequest(const sl_802154_long_addr_t eui64,
                                                  uint8_t endpointId);
 
 /**
@@ -280,12 +280,12 @@ EmberStatus zigbeeHostZdoSimpleDescriptorRequest(const EmberEUI64 eui64,
  * @param bufferSize          Size of the ZCL frame buffer.
  * @param bufferSequenceIndex Offset of sequence ID in the frame buffer to be filled.
  *
- * @return the status of the operation: EMBER_SUCCESS if ZCL Frame is populated
- * successfully, EMBER_BAD_ARGUMENT if any inputs are invalid,
- * EMBER_INDEX_OUT_OF_RANGE if the buffer size does not meet the maximum
+ * @return the status of the operation: SL_STATUS_OK if ZCL Frame is populated
+ * successfully, SL_STATUS_INVALID_PARAMETER if any inputs are invalid,
+ * SL_STATUS_INVALID_INDEX  if the buffer size does not meet the maximum
  * and minimum limits.
 **/
-EmberStatus zigbeeHostFillZclFrame(const uint8_t *buffer,
+sl_status_t zigbeeHostFillZclFrame(const uint8_t *buffer,
                                    size_t bufferSize,
                                    size_t bufferSequenceIndex);
 
@@ -302,11 +302,11 @@ EmberStatus zigbeeHostFillZclFrame(const uint8_t *buffer,
  * @param clusterId Identifier corresponding to the ZCL cluster
  *                  (ex. 0x0006 <--> OnOff).
  *
- * @return the status of the operation: EMBER_SUCCESS if message is sent
- * successfully, EMBER_BAD_ARGUMENT if any inputs are invalid,
- * or EMBER_NOT_FOUND if the end device EUI64 is not found.
+ * @return the status of the operation: SL_STATUS_OK if message is sent
+ * successfully, SL_STATUS_INVALID_PARAMETER if any inputs are invalid,
+ * or SL_STATUS_NOT_FOUND  if the end device EUI64 is not found.
 **/
-EmberStatus zigbeeHostSendZclFrameUnicast(const EmberEUI64 eui64,
+sl_status_t zigbeeHostSendZclFrameUnicast(const sl_802154_long_addr_t eui64,
                                           uint8_t endpoint,
                                           uint16_t clusterId);
 
@@ -321,10 +321,10 @@ EmberStatus zigbeeHostSendZclFrameUnicast(const EmberEUI64 eui64,
  * @param clusterId   Identifier corresponding to the ZCL cluster
  *                    (ex. 0x0006 <--> OnOff).
  *
- * @return the status of the operation: EMBER_SUCCESS if message is sent
- * successfully, EMBER_BAD_ARGUMENT if any inputs are invalid.
+ * @return the status of the operation: SL_STATUS_OK if message is sent
+ * successfully, SL_STATUS_INVALID_PARAMETER if any inputs are invalid.
 **/
-EmberStatus zigbeeHostSendZclFrameMulticast(EmberMulticastId multicastId,
+sl_status_t zigbeeHostSendZclFrameMulticast(sl_zigbee_multicast_id_t multicastId,
                                             uint16_t clusterId);
 /**
  * @brief Send a ZCL Configure Reporting Message to an end device on the
@@ -337,10 +337,10 @@ EmberStatus zigbeeHostSendZclFrameMulticast(EmberMulticastId multicastId,
  * @param clusterId           Identifier corresponding to the ZCL cluster.
  * @param reportRecord        ZCL Configure Reporting Record buffer.
  * @param recordSize          Size of the ZCL Configure Reporting Record.
- * @return EmberStatus        EMBER_SUCCESS if message is sent successfully,
- * EMBER_NOT_FOUND if the end device EUI64 is not found.
+ * @return sl_status_t        SL_STATUS_OK if message is sent successfully,
+ * SL_STATUS_NOT_FOUND  if the end device EUI64 is not found.
  */
-EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
+sl_status_t zigbeeHostInitReporting(const sl_802154_long_addr_t eui64,
                                     uint8_t endpoint,
                                     uint16_t clusterId,
                                     const uint8_t *reportRecord,
@@ -357,14 +357,14 @@ EmberStatus zigbeeHostInitReporting(const EmberEUI64 eui64,
  * @param destEui64           Destination address for the binding
  * @param destEndpoint        Destination endpoint for the binding
  * @param isBindRequest       True if a binding request, otherwise an unbinding request
- * @return EmberStatus        EMBER_SUCCESS if message is sent successfully,
- * EMBER_NOT_FOUND if the end device EUI64 is not found.
+ * @return sl_status_t        SL_STATUS_OK if message is sent successfully,
+ * SL_STATUS_NOT_FOUND  if the end device EUI64 is not found.
  */
-EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
+sl_status_t zigbeeHostInitBinding(const sl_802154_long_addr_t sourceEui64,
                                   uint8_t sourceEndpoint,
                                   uint16_t clusterId,
                                   uint16_t groupId,
-                                  EmberEUI64 destEui64,
+                                  sl_802154_long_addr_t destEui64,
                                   uint8_t destEndpoint,
                                   bool isBindRequest);
 
@@ -373,9 +373,9 @@ EmberStatus zigbeeHostInitBinding(const EmberEUI64 sourceEui64,
  * Send a CheckInResponse to a given poll control server
  * By default, sets it to fast poll with the default timeout
  *
- * @return EMBER_SUCCESS if the response was sent
+ * @return SL_STATUS_OK if the response was sent
 **/
-EmberStatus zigbeeHostSendPollingCheckInResponse(bool startFastPolling);
+sl_status_t zigbeeHostSendPollingCheckInResponse(bool startFastPolling);
 
 /**
  * @brief zigbeeHostAddOtaImage
@@ -383,20 +383,20 @@ EmberStatus zigbeeHostSendPollingCheckInResponse(bool startFastPolling);
  *
  * @param filename - the filename of the OTA Image
  *
- * @return EMBER_SUCCESS if Image was added successfully.
+ * @return SL_STATUS_OK if Image was added successfully.
  * Fails if the ota-storage plugin was unable to parse
- * the filename correctly with EMBER_ERR_FATAL
+ * the filename correctly with SL_STATUS_FAIL
 **/
-EmberStatus zigbeeHostAddOtaImage(const char *filename);
+sl_status_t zigbeeHostAddOtaImage(const char *filename);
 
 /**
  * @brief Populate Ember key data specified by the type.
  *
  * @param type          Ember key type to get.
  * @param key           reference where data will be populated.
- * @return EmberStatus  EMBER_SUCCESS on success, or error otherwise.
+ * @return sl_status_t  SL_STATUS_OK on success, or error otherwise.
  */
-EmberStatus zigbeeHostGetEmberKey(EmberKeyType type, EmberKeyStruct *const key);
+sl_status_t zigbeeHostGetEmberKey(sl_zigbee_key_type_t type, sl_zigbee_key_struct_t *const key);
 
 /**
  * @brief Set EZSP policy on the ZigPC NCP.
@@ -405,15 +405,15 @@ EmberStatus zigbeeHostGetEmberKey(EmberKeyType type, EmberKeyStruct *const key);
  * @param decisionId    Policy variant to apply.
  * @param policyName    Descriptive name of policy.
  * @param decisionName  Descruptive label of decision to be set.
- * @return EzspStatus   EMBER_SUCCESS on success, or EZSP-related error
+ * @return sl_zigbee_ezsp_status_t   SL_STATUS_OK on success, or EZSP-related error
  * otherwise.
  */
-EzspStatus zigbeeHostSetEzspPolicy(EzspPolicyId policyId,
-                                   EzspDecisionId decisionId,
+sl_zigbee_ezsp_status_t zigbeeHostSetEzspPolicy(sl_zigbee_ezsp_policy_id_t policyId,
+                                   sl_zigbee_ezsp_decision_id_t decisionId,
                                    const char *policyName,
                                    const char *decisionName);
 
-EmberStatus zigbeeHostLaunchBootloader();
+sl_status_t zigbeeHostLaunchBootloader();
 #ifdef __cplusplus
 }
 #endif

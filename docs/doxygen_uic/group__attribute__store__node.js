@@ -3,8 +3,8 @@ var group__attribute__store__node =
     [ "attribute_store_node", "classattribute__store__node.html", [
       [ "attribute_store_node", "classattribute__store__node.html#a0dbb7b25a8155ea85979fb1d7228c626", null ],
       [ "~attribute_store_node", "classattribute__store__node.html#af0b10493212a063403a7e19372b071c6", null ],
-      [ "add_child", "classattribute__store__node.html#a0a29269be3a5e9e9f4961bbb04c88ac5", null ],
-      [ "find_id", "classattribute__store__node.html#a0062a3c0fd146de0e4d75eedfac481db", null ],
+      [ "add_child", "classattribute__store__node.html#ad82542620b37766c0feb19bf5e5c0098", null ],
+      [ "find_id", "classattribute__store__node.html#a89bf0a49d5fca6ff1e56bcf3cb88d994", null ],
       [ "log", "classattribute__store__node.html#a6b65c2d8203f228adfae958eb06ab1ed", null ],
       [ "log", "classattribute__store__node.html#a7966bfedb2e19ce2bff3f2a7b1a4de74", null ],
       [ "log_children", "classattribute__store__node.html#afcadf2c2e42b34928cdac4e8679cdc1b", null ],

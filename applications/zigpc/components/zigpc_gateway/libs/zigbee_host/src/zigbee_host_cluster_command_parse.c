@@ -26,37 +26,37 @@ extern struct zigbeeHostState z3gwState;
  * @param opcode          Service callback operation code.
  * @param context         Context that is passed to service function.
  *                        Depends on actual op code which actual part is used.
- * @return EmberAfStatus  EMBER_ZCL_STATUS_SUCCESS if the command was handled
- * with a response already, EMBER_ZCL_STATUS_UNSUP_COMMAND if the command is not
- * supported by the gateway, EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER if the
+ * @return sl_zigbee_af_status_t  SL_ZIGBEE_ZCL_STATUS_SUCCESS if the command was handled
+ * with a response already, SL_ZIGBEE_ZCL_STATUS_UNSUP_COMMAND if the command is not
+ * supported by the gateway, SL_ZIGBEE_ZCL_STATUS_UNSUPPORTED_CLUSTER if the
  * cluster is not supported by the gateway.
  */
-EmberAfStatus
+sl_zigbee_af_status_t
   emberAfClusterServiceCallback(sl_service_opcode_t opcode,
                                 sl_service_function_context_t *context)
 {
   if (opcode != SL_SERVICE_FUNCTION_TYPE_ZCL_COMMAND) {
-    return EMBER_ZCL_STATUS_FAILURE;
+    return SL_ZIGBEE_ZCL_STATUS_FAILURE;
   }
 
   if (!ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                    onClusterCommandReceived)) {
     appDebugPrint(LOG_FMTSTR_UNREGISTERED_CALLBACK,
                   "Cluster-specific Command Receive");
-    return EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER;
+    return SL_ZIGBEE_ZCL_STATUS_UNSUPPORTED_CLUSTER;
   }
 
-  EmberEUI64 sourceEui64;
-  EmberStatus status = emberAfGetCurrentSenderEui64(sourceEui64);
-  if (status != EMBER_SUCCESS) {
+  sl_802154_long_addr_t sourceEui64;
+  sl_status_t status = sl_zigbee_af_get_current_sender_eui64(sourceEui64);
+  if (status != SL_STATUS_OK) {
     appDebugPrint(LOG_FMTSTR_SOURCE_EUI64_RES_FAIL,
                   "Cluster-specific Command Receive");
-    return EMBER_ZCL_STATUS_FAILURE;
+    return SL_ZIGBEE_ZCL_STATUS_FAILURE;
   }
 
-  EmberAfClusterCommand *cmd = (EmberAfClusterCommand *)context->data;
+  sl_zigbee_af_cluster_command_t *cmd = (sl_zigbee_af_cluster_command_t *)context->data;
   uint8_t sourceEndpoint     = cmd->apsFrame->sourceEndpoint;
-  EmberAfClusterId clusterId = cmd->apsFrame->clusterId;
+  sl_zigbee_af_cluster_id_t clusterId = cmd->apsFrame->clusterId;
   uint8_t commandId          = cmd->commandId;
   bool commandFromServerToClient
     = (cmd->direction == (uint8_t)ZCL_DIRECTION_SERVER_TO_CLIENT);

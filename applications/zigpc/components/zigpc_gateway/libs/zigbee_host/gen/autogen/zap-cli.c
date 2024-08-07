@@ -15,7 +15,9 @@
  *
  ******************************************************************************/
 
+#ifdef SL_COMPONENT_CATALOG_PRESENT
 #include "sl_component_catalog.h"
+#endif
 
 #ifdef SL_CATALOG_ZIGBEE_ZCL_CLI_PRESENT
 
@@ -23,12 +25,13 @@
 #include "sl_cli_config.h"
 #include "sl_cli_command.h"
 #include "sl_cli.h"
+#include "zcl-cli.h"
 #ifdef SL_CATALOG_ZIGBEE_DEBUG_PRINT_PRESENT
 #include "sl_zigbee_debug_print.h"
 #endif // SL_CATALOG_ZIGBEE_DEBUG_PRINT_PRESENT
 #include "zap-type.h"
 #include "zap-id.h"
-#include "af.h"
+#include "app/framework/include/af.h"
 #include "zap-config.h"
 
 extern void sli_zigbee_zcl_simple_command(uint8_t frameControl,
@@ -64,6 +67,7 @@ extern "C" {
 // Provide function declarations
 void sli_zigbee_cli_zcl_groups_add_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_groups_add_if_id_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_chg_supply_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_clear_all_rfids_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_clear_holiday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_clear_pin_command(sl_cli_command_arg_t *arguments);
@@ -72,7 +76,12 @@ void sli_zigbee_cli_zcl_door_lock_clear_weekday_schedule_command(sl_cli_command_
 void sli_zigbee_cli_zcl_thermostat_cws_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_clear_yearday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_loop_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_cfg_mirror_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_cfg_nft_flags_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_cfg_nft_scheme_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_identify_ez_mode_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_power_profile_energy_phases_schedule_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_power_profile_energy_phases_schedule_states_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_emovehue_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_emovetohue_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_emovetohueandsat_command(sl_cli_command_arg_t *arguments);
@@ -81,16 +90,22 @@ void sli_zigbee_cli_zcl_poll_control_stop_command(sl_cli_command_arg_t *argument
 void sli_zigbee_cli_zcl_groups_get_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_holiday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_log_record_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_get_ntfy_msg_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_pin_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_get_profile_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_thermostat_grs_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_rfid_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_get_sampled_data_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_get_snapshot_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_user_type_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_weekday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_thermostat_gws_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_get_yearday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_identify_id_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_identify_query_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_local_chg_supply_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_lock_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_mirror_removed_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_level_control_move_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_movecolor_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_movecolortemp_command(sl_cli_command_arg_t *arguments);
@@ -109,19 +124,33 @@ void sli_zigbee_cli_zcl_on_off_offeffect_command(sl_cli_command_arg_t *arguments
 void sli_zigbee_cli_zcl_on_off_on_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_on_off_onrecall_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_on_off_ontimedoff_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_power_profile_profile_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_power_profile_schedule_constraints_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_power_profile_state_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_pub_ss_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_groups_rmall_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_groups_remove_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_remove_mirror_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_req_fast_poll_mode_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_request_mirror_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_rst_load_limit_ctr_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_basic_rtfd_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_sch_snapshot_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_sch_snapshot_resp_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_set_holiday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_poll_control_long_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_set_pin_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_set_rfid_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_poll_control_short_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_set_supply_status_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_set_uncntrl_flow_threshold_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_set_user_type_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_set_weekday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_thermostat_sws_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_set_yearday_schedule_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_thermostat_set_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_start_sampling_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_start_samp_rsp_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_level_control_step_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_stepcolor_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_stepcolortemp_command(sl_cli_command_arg_t *arguments);
@@ -131,6 +160,9 @@ void sli_zigbee_cli_zcl_level_control_o_step_command(sl_cli_command_arg_t *argum
 void sli_zigbee_cli_zcl_level_control_stop_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_color_control_stopmovestep_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_level_control_o_stop_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_sup_stat_rsp_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_take_snapshot_command(sl_cli_command_arg_t *arguments);
+void sli_zigbee_cli_zcl_simple_metering_take_snapshot_resp_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_door_lock_toggle_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_on_off_toggle_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_cli_zcl_identify_trigger_command(sl_cli_command_arg_t *arguments);
@@ -156,6 +188,20 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_groups_add_if_id_command,
             {
                 SL_CLI_ARG_UINT16,
                 SL_CLI_ARG_STRING,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_change_supply = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_chg_supply_command,
+            "This command is sent from the Head-end or ESI to the Metering Device to instruct it to change the status of the valve or load switch, i.e. the supply.",
+            "provider id" SL_CLI_UNIT_SEPARATOR "issuer event id" SL_CLI_UNIT_SEPARATOR "request date time" SL_CLI_UNIT_SEPARATOR "implementation date time" SL_CLI_UNIT_SEPARATOR "proposed supply status" SL_CLI_UNIT_SEPARATOR "supply control bits" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
                 SL_CLI_ARG_END,
             });
 
@@ -237,10 +283,68 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_color_control_loop_command,
                 SL_CLI_ARG_END,
             });
 
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_configure_mirror = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_cfg_mirror_command,
+            "ConfigureMirror is sent to the mirror once the mirror has been created. The command deals with the operational configuration of the Mirror.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "reporting interval" SL_CLI_UNIT_SEPARATOR "mirror notification reporting" SL_CLI_UNIT_SEPARATOR "notification scheme" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_configure_notification_flags = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_cfg_nft_flags_command,
+            "The ConfigureNotificationFlags command is used to set the commands relating to the bit value for each NotificationFlags attribute that the scheme is proposing to use.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "notification scheme" SL_CLI_UNIT_SEPARATOR "notification flag attribute id" SL_CLI_UNIT_SEPARATOR "cluster id" SL_CLI_UNIT_SEPARATOR "manufacturer code" SL_CLI_UNIT_SEPARATOR "number of commands" SL_CLI_UNIT_SEPARATOR "command ids" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8OPT,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_configure_notification_scheme = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_cfg_nft_scheme_command,
+            "The ConfigureNotificationScheme is sent to the mirror once the mirror has been created. The command deals with the operational configuration of the Mirror and the device that reports to the mirror. No default schemes are allowed to be overwritten.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "notification scheme" SL_CLI_UNIT_SEPARATOR "notification flag order" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_END,
+            });
+
 static const sl_cli_command_info_t cli_cmd_zcl_identify_cluster_ez_mode_invoke = \
 SL_CLI_COMMAND(sli_zigbee_cli_zcl_identify_ez_mode_command,
             "Invoke EZMode on an Identify Server",
             "action" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_power_profile_cluster_energy_phases_schedule_notification = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_power_profile_energy_phases_schedule_command,
+            "The EnergyPhasesScheduleNotification Command is generated by a device supporting the client side of the Power Profile cluster in order to schedule the start of the selected Power Profile and its phases.",
+            "power profile id" SL_CLI_UNIT_SEPARATOR "num of scheduled phases" SL_CLI_UNIT_SEPARATOR "scheduled phases" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_HEXOPT,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_power_profile_cluster_energy_phases_schedule_state_request = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_power_profile_energy_phases_schedule_states_command,
+            "The EnergyPhasesScheduleStateRequest  Command is generated by a device supporting the client side of the Power Profile cluster to check the states of the scheduling of a power profile, which is supported in the device implementing the server side of Power Profile cluster.",
+            "power profile id" SL_CLI_UNIT_SEPARATOR ,
             {
                 SL_CLI_ARG_UINT8,
                 SL_CLI_ARG_END,
@@ -333,12 +437,34 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_door_lock_get_log_record_command,
                 SL_CLI_ARG_END,
             });
 
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_get_notified_message = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_get_ntfy_msg_command,
+            "The GetNotifiedMessage command is used only when a BOMD is being mirrored. This command provides a method for the BOMD to notify the Mirror message queue that it wants to receive commands that the Mirror has queued. The Notification flags set within the command shall inform the mirror of the commands that the BOMD is requesting.",
+            "notification scheme" SL_CLI_UNIT_SEPARATOR "notification flag attribute id" SL_CLI_UNIT_SEPARATOR "notification flagsn" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_END,
+            });
+
 static const sl_cli_command_info_t cli_cmd_zcl_door_lock_cluster_get_pin = \
 SL_CLI_COMMAND(sli_zigbee_cli_zcl_door_lock_get_pin_command,
             "Retrieve PIN information for a user with a specific user ID.",
             "user id" SL_CLI_UNIT_SEPARATOR ,
             {
                 SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_get_profile = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_get_profile_command,
+            "The GetProfile command is generated when a client device wishes to retrieve a list of captured Energy, Gas or water consumption for profiling purposes.",
+            "interval channel" SL_CLI_UNIT_SEPARATOR "end time" SL_CLI_UNIT_SEPARATOR "number of periods" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
                 SL_CLI_ARG_END,
             });
 
@@ -356,6 +482,30 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_door_lock_get_rfid_command,
             "user id" SL_CLI_UNIT_SEPARATOR ,
             {
                 SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_get_sampled_data = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_get_sampled_data_command,
+            "This command is used to request sampled data from the server. Note that it is the responsibility of the client to ensure that it does not request more samples than can be held in a single command payload.",
+            "sample id" SL_CLI_UNIT_SEPARATOR "earliest sample time" SL_CLI_UNIT_SEPARATOR "sample type" SL_CLI_UNIT_SEPARATOR "number of samples" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_get_snapshot = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_get_snapshot_command,
+            "This command is used to request snapshot data from the cluster server.",
+            "earliest start time" SL_CLI_UNIT_SEPARATOR "latest end time" SL_CLI_UNIT_SEPARATOR "snapshot offset" SL_CLI_UNIT_SEPARATOR "snapshot cause" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT32,
                 SL_CLI_ARG_END,
             });
 
@@ -415,12 +565,30 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_identify_query_command,
                 SL_CLI_ARG_END,
             });
 
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_local_change_supply = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_local_chg_supply_command,
+            "This command is a simplified version of the ChangeSupply command, intended to be sent from an IHD to a meter as the consequence of a user action on the IHD. Its purpose is to provide a local disconnection/reconnection button on the IHD in addition to the one on the meter.",
+            "proposed supply status" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
 static const sl_cli_command_info_t cli_cmd_zcl_door_lock_cluster_lock_door = \
 SL_CLI_COMMAND(sli_zigbee_cli_zcl_door_lock_lock_command,
             "Locks the door",
             "pin" SL_CLI_UNIT_SEPARATOR ,
             {
                 SL_CLI_ARG_STRING,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_mirror_removed = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_mirror_removed_command,
+            "The Mirror Removed Command allows the ESI to inform a sleepy Metering Device mirroring support has been removed or halted.",
+            "endpoint id" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT16,
                 SL_CLI_ARG_END,
             });
 
@@ -626,6 +794,48 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_on_off_ontimedoff_command,
                 SL_CLI_ARG_END,
             });
 
+static const sl_cli_command_info_t cli_cmd_zcl_power_profile_cluster_power_profile_request = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_power_profile_profile_command,
+            "The PowerProfileRequest Command is generated by a device supporting the client side of the Power Profile cluster in order to request the Power Profile of a server device.",
+            "power profile id" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_power_profile_cluster_power_profile_schedule_constraints_request = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_power_profile_schedule_constraints_command,
+            "The PowerProfileScheduleConstraintsRequest Command is generated by a device supporting the client side of the Power Profile cluster in order to request the constraints -if set- of Power Profile of a client device, in order to set the proper boundaries for the scheduling when calculating the schedules.",
+            "power profile id" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_power_profile_cluster_power_profile_state_request = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_power_profile_state_command,
+            "The PowerProfileStateRequest Command is generated in order to retrieve the identifiers of current Power Profiles.",
+            "",
+            {
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_publish_snapshot = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_pub_ss_command,
+            "This command is generated in response to a GetSnapshot command. It is used to return a single snapshot to the client.",
+            "snapshot id" SL_CLI_UNIT_SEPARATOR "snapshot time" SL_CLI_UNIT_SEPARATOR "total snapshots found" SL_CLI_UNIT_SEPARATOR "command index" SL_CLI_UNIT_SEPARATOR "total commands" SL_CLI_UNIT_SEPARATOR "snapshot cause" SL_CLI_UNIT_SEPARATOR "snapshot payload type" SL_CLI_UNIT_SEPARATOR "snapshot payload" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8OPT,
+                SL_CLI_ARG_END,
+            });
+
 static const sl_cli_command_info_t cli_cmd_zcl_groups_cluster_remove_all_groups = \
 SL_CLI_COMMAND(sli_zigbee_cli_zcl_groups_rmall_command,
             "Command description for RemoveAllGroups",
@@ -643,11 +853,69 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_groups_remove_command,
                 SL_CLI_ARG_END,
             });
 
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_remove_mirror = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_remove_mirror_command,
+            "This command is used to request the ESI to remove its mirror of Metering Device data.",
+            "",
+            {
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_request_fast_poll_mode = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_req_fast_poll_mode_command,
+            "The Request Fast Poll Mode command is generated when the metering client wishes to receive near real-time updates of InstantaneousDemand.",
+            "fast poll update period" SL_CLI_UNIT_SEPARATOR "duration" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_request_mirror = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_request_mirror_command,
+            "This command is used to request the ESI to mirror Metering Device data.",
+            "",
+            {
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_reset_load_limit_counter = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_rst_load_limit_ctr_command,
+            "The ResetLoadLimitCounter command shall cause the LoadLimitCounter attribute to be reset.",
+            "provider id" SL_CLI_UNIT_SEPARATOR "issuer event id" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_END,
+            });
+
 static const sl_cli_command_info_t cli_cmd_zcl_basic_cluster_reset_to_factory_defaults = \
 SL_CLI_COMMAND(sli_zigbee_cli_zcl_basic_rtfd_command,
             "Command that resets all attribute values to factory default.",
             "",
             {
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_schedule_snapshot = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_sch_snapshot_command,
+            "This command is used to set up a schedule of when the device shall create snapshot data.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "command index" SL_CLI_UNIT_SEPARATOR "command count" SL_CLI_UNIT_SEPARATOR "snapshot schedule payload" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_HEXOPT,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_schedule_snapshot_response = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_sch_snapshot_resp_command,
+            "This command is generated in response to a ScheduleSnapshot command, and is sent to confirm whether the requested snapshot schedule has been set up.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "snapshot response payload" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_HEXOPT,
                 SL_CLI_ARG_END,
             });
 
@@ -701,6 +969,35 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_poll_control_short_command,
             "The Set Short Poll Interval command is used to set the read only Short Poll Interval Attribute.",
             "new short poll interval" SL_CLI_UNIT_SEPARATOR ,
             {
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_set_supply_status = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_set_supply_status_command,
+            "This command is used to specify the required status of the supply following the occurance of certain events on the meter.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "supply tamper state" SL_CLI_UNIT_SEPARATOR "supply depletion state" SL_CLI_UNIT_SEPARATOR "supply uncontrolled flow state" SL_CLI_UNIT_SEPARATOR "load limit supply state" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_set_uncontrolled_flow_threshold = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_set_uncntrl_flow_threshold_command,
+            "This command is used to update the 'Uncontrolled Flow Rate' configuration data used by flow meters.",
+            "provider id" SL_CLI_UNIT_SEPARATOR "issuer event id" SL_CLI_UNIT_SEPARATOR "uncontrolled flow threshold" SL_CLI_UNIT_SEPARATOR "unit of measure" SL_CLI_UNIT_SEPARATOR "multiplier" SL_CLI_UNIT_SEPARATOR "divisor" SL_CLI_UNIT_SEPARATOR "stabilisation period" SL_CLI_UNIT_SEPARATOR "measurement period" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT8,
                 SL_CLI_ARG_UINT16,
                 SL_CLI_ARG_END,
             });
@@ -761,6 +1058,28 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_thermostat_set_command,
             {
                 SL_CLI_ARG_UINT8,
                 SL_CLI_ARG_INT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_start_sampling = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_start_sampling_command,
+            "The sampling mechanism allows a set of samples of the specified type of data to be taken, commencing at the stipulated start time. This mechanism may run concurrently with the capturing of profile data, and may refer the same parameters, albeit possibly at a different sampling rate.",
+            "issuer event id" SL_CLI_UNIT_SEPARATOR "start sampling time" SL_CLI_UNIT_SEPARATOR "sample type" SL_CLI_UNIT_SEPARATOR "sample request interval" SL_CLI_UNIT_SEPARATOR "max number of samples" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_UINT16,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_start_sampling_response = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_start_samp_rsp_command,
+            "This command is transmitted by a Metering Device in response to a StartSampling command.",
+            "sample id" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT16,
                 SL_CLI_ARG_END,
             });
 
@@ -867,6 +1186,37 @@ SL_CLI_COMMAND(sli_zigbee_cli_zcl_level_control_o_stop_command,
             "Command description for StopWithOnOff",
             "",
             {
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_supply_status_response = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_sup_stat_rsp_command,
+            "This command is transmitted by a Metering Device in response to a ChangeSupply command.",
+            "provider id" SL_CLI_UNIT_SEPARATOR "issuer event id" SL_CLI_UNIT_SEPARATOR "implementation date time" SL_CLI_UNIT_SEPARATOR "supply status" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_take_snapshot = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_take_snapshot_command,
+            "This command is used to instruct the cluster server to take a single snapshot.",
+            "snapshot cause" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_END,
+            });
+
+static const sl_cli_command_info_t cli_cmd_zcl_simple_metering_cluster_take_snapshot_response = \
+SL_CLI_COMMAND(sli_zigbee_cli_zcl_simple_metering_take_snapshot_resp_command,
+            "This command is generated in response to a TakeSnapshot command, and is sent to confirm whether the requested snapshot has been accepted and successfully taken.",
+            "snapshot id" SL_CLI_UNIT_SEPARATOR "snapshot confirmation" SL_CLI_UNIT_SEPARATOR ,
+            {
+                SL_CLI_ARG_UINT32,
+                SL_CLI_ARG_UINT8,
                 SL_CLI_ARG_END,
             });
 
@@ -1025,6 +1375,41 @@ static const sl_cli_command_entry_t zcl_poll_control_cluster_command_table[] = {
     { "short", &cli_cmd_zcl_poll_control_cluster_set_short_poll_interval, false },
     { NULL, NULL, false },
 };
+static const sl_cli_command_entry_t zcl_power_profile_cluster_command_table[] = {
+    { "profile", &cli_cmd_zcl_power_profile_cluster_power_profile_request, false },
+    { "state", &cli_cmd_zcl_power_profile_cluster_power_profile_state_request, false },
+    { "energy-phases-schedule", &cli_cmd_zcl_power_profile_cluster_energy_phases_schedule_notification, false },
+    { "schedule-constraints", &cli_cmd_zcl_power_profile_cluster_power_profile_schedule_constraints_request, false },
+    { "energy-phases-schedule-states", &cli_cmd_zcl_power_profile_cluster_energy_phases_schedule_state_request, false },
+    { NULL, NULL, false },
+};
+static const sl_cli_command_entry_t zcl_simple_metering_cluster_command_table[] = {
+    { "request-mirror", &cli_cmd_zcl_simple_metering_cluster_request_mirror, false },
+    { "remove-mirror", &cli_cmd_zcl_simple_metering_cluster_remove_mirror, false },
+    { "sch-snapshot-resp", &cli_cmd_zcl_simple_metering_cluster_schedule_snapshot_response, false },
+    { "take-snapshot-resp", &cli_cmd_zcl_simple_metering_cluster_take_snapshot_response, false },
+    { "pub-ss", &cli_cmd_zcl_simple_metering_cluster_publish_snapshot, false },
+    { "cfg-mirror", &cli_cmd_zcl_simple_metering_cluster_configure_mirror, false },
+    { "cfg-nft-scheme", &cli_cmd_zcl_simple_metering_cluster_configure_notification_scheme, false },
+    { "cfg-nft-flags", &cli_cmd_zcl_simple_metering_cluster_configure_notification_flags, false },
+    { "get-ntfy-msg", &cli_cmd_zcl_simple_metering_cluster_get_notified_message, false },
+    { "sup-stat-rsp", &cli_cmd_zcl_simple_metering_cluster_supply_status_response, false },
+    { "start-samp-rsp", &cli_cmd_zcl_simple_metering_cluster_start_sampling_response, false },
+    { "get-profile", &cli_cmd_zcl_simple_metering_cluster_get_profile, false },
+    { "mirror-removed", &cli_cmd_zcl_simple_metering_cluster_mirror_removed, false },
+    { "req-fast-poll-mode", &cli_cmd_zcl_simple_metering_cluster_request_fast_poll_mode, false },
+    { "sch-snapshot", &cli_cmd_zcl_simple_metering_cluster_schedule_snapshot, false },
+    { "take-snapshot", &cli_cmd_zcl_simple_metering_cluster_take_snapshot, false },
+    { "get-snapshot", &cli_cmd_zcl_simple_metering_cluster_get_snapshot, false },
+    { "start-sampling", &cli_cmd_zcl_simple_metering_cluster_start_sampling, false },
+    { "get-sampled-data", &cli_cmd_zcl_simple_metering_cluster_get_sampled_data, false },
+    { "rst-load-limit-ctr", &cli_cmd_zcl_simple_metering_cluster_reset_load_limit_counter, false },
+    { "chg-supply", &cli_cmd_zcl_simple_metering_cluster_change_supply, false },
+    { "local-chg-supply", &cli_cmd_zcl_simple_metering_cluster_local_change_supply, false },
+    { "set-supply-status", &cli_cmd_zcl_simple_metering_cluster_set_supply_status, false },
+    { "set-uncntrl-flow-threshold", &cli_cmd_zcl_simple_metering_cluster_set_uncontrolled_flow_threshold, false },
+    { NULL, NULL, false },
+};
 static const sl_cli_command_entry_t zcl_thermostat_cluster_command_table[] = {
     { "set", &cli_cmd_zcl_thermostat_cluster_setpoint_raise_lower, false },
     { "sws", &cli_cmd_zcl_thermostat_cluster_set_weekly_schedule, false },
@@ -1051,6 +1436,10 @@ static const sl_cli_command_info_t cli_cmd_on_off_group = \
   SL_CLI_COMMAND_GROUP(zcl_on_off_cluster_command_table, "ZCL on_off cluster commands");
 static const sl_cli_command_info_t cli_cmd_poll_control_group = \
   SL_CLI_COMMAND_GROUP(zcl_poll_control_cluster_command_table, "ZCL poll_control cluster commands");
+static const sl_cli_command_info_t cli_cmd_power_profile_group = \
+  SL_CLI_COMMAND_GROUP(zcl_power_profile_cluster_command_table, "ZCL power_profile cluster commands");
+static const sl_cli_command_info_t cli_cmd_simple_metering_group = \
+  SL_CLI_COMMAND_GROUP(zcl_simple_metering_cluster_command_table, "ZCL simple_metering cluster commands");
 static const sl_cli_command_info_t cli_cmd_thermostat_group = \
   SL_CLI_COMMAND_GROUP(zcl_thermostat_cluster_command_table, "ZCL thermostat cluster commands");
 
@@ -1063,6 +1452,8 @@ static const sl_cli_command_entry_t zcl_group_table[] = {
   { "level-control", &cli_cmd_level_control_group, false },
   { "on-off", &cli_cmd_on_off_group, false },
   { "poll-control", &cli_cmd_poll_control_group, false },
+  { "power-profile", &cli_cmd_power_profile_group, false },
+  { "simple-metering", &cli_cmd_simple_metering_group, false },
   { "thermostat", &cli_cmd_thermostat_group, false },
   { "global", &cli_cmd_zcl_global_group, false },
   { "mfg-code", &cli_cmd_zcl_mfg_code_command, false},
@@ -1093,8 +1484,8 @@ sl_cli_command_group_t sl_cli_zcl_command_group =
 
 WEAK(void sli_zigbee_cli_zcl_groups_add_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1106,13 +1497,30 @@ WEAK(void sli_zigbee_cli_zcl_groups_add_command(sl_cli_command_arg_t *arguments)
 
 WEAK(void sli_zigbee_cli_zcl_groups_add_if_id_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
     ZCL_GROUPS_CLUSTER_ID,                                                       \
     5, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_chg_supply_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[6] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    11, \
     arguments, \
     argumentTypes);
 }
@@ -1128,7 +1536,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_clear_all_rfids_command(sl_cli_command_ar
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_clear_holiday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1140,7 +1548,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_clear_holiday_schedule_command(sl_cli_com
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_clear_pin_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1152,7 +1560,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_clear_pin_command(sl_cli_command_arg_t *a
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_clear_rfid_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1164,8 +1572,8 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_clear_rfid_command(sl_cli_command_arg_t *
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_clear_weekday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1186,8 +1594,8 @@ WEAK(void sli_zigbee_cli_zcl_thermostat_cws_command(sl_cli_command_arg_t *argume
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_clear_yearday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1199,13 +1607,13 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_clear_yearday_schedule_command(sl_cli_com
 
 WEAK(void sli_zigbee_cli_zcl_color_control_loop_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[7] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1215,9 +1623,56 @@ WEAK(void sli_zigbee_cli_zcl_color_control_loop_command(sl_cli_command_arg_t *ar
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_cfg_mirror_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[4] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT24,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    8, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_cfg_nft_flags_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[7] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    10, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_cfg_nft_scheme_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[3] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT32
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    9, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_identify_ez_mode_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1227,12 +1682,38 @@ WEAK(void sli_zigbee_cli_zcl_identify_ez_mode_command(sl_cli_command_arg_t *argu
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_power_profile_energy_phases_schedule_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[3] =  { 
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_HEXOPT
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_POWER_PROFILE_CLUSTER_ID,                                                       \
+    4, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_power_profile_energy_phases_schedule_states_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_POWER_PROFILE_CLUSTER_ID,                                                       \
+    7, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_color_control_emovehue_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1244,11 +1725,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_emovehue_command(sl_cli_command_arg_t
 
 WEAK(void sli_zigbee_cli_zcl_color_control_emovetohue_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1260,11 +1741,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_emovetohue_command(sl_cli_command_arg
 
 WEAK(void sli_zigbee_cli_zcl_color_control_emovetohueandsat_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1276,11 +1757,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_emovetohueandsat_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_color_control_estephue_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1301,8 +1782,8 @@ WEAK(void sli_zigbee_cli_zcl_poll_control_stop_command(sl_cli_command_arg_t *arg
 
 WEAK(void sli_zigbee_cli_zcl_groups_get_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16OPT
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1314,7 +1795,7 @@ WEAK(void sli_zigbee_cli_zcl_groups_get_command(sl_cli_command_arg_t *arguments)
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_holiday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1326,7 +1807,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_get_holiday_schedule_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_log_record_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1336,14 +1817,42 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_get_log_record_command(sl_cli_command_arg
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_get_ntfy_msg_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[3] =  { 
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT32
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    11, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_pin_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
     ZCL_DOOR_LOCK_CLUSTER_ID,                                                       \
     6, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_get_profile_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[3] =  { 
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    0, \
     arguments, \
     argumentTypes);
 }
@@ -1359,7 +1868,7 @@ WEAK(void sli_zigbee_cli_zcl_thermostat_grs_command(sl_cli_command_arg_t *argume
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_rfid_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1369,9 +1878,39 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_get_rfid_command(sl_cli_command_arg_t *ar
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_get_sampled_data_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[4] =  { 
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    8, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_get_snapshot_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[4] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT32
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    6, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_user_type_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1383,8 +1922,8 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_get_user_type_command(sl_cli_command_arg_
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_weekday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1396,8 +1935,8 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_get_weekday_schedule_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_thermostat_gws_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1409,8 +1948,8 @@ WEAK(void sli_zigbee_cli_zcl_thermostat_gws_command(sl_cli_command_arg_t *argume
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_get_yearday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1422,7 +1961,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_get_yearday_schedule_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_identify_id_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1441,9 +1980,21 @@ WEAK(void sli_zigbee_cli_zcl_identify_query_command(sl_cli_command_arg_t *argume
     NULL);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_local_chg_supply_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    12, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_door_lock_lock_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1453,12 +2004,24 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_lock_command(sl_cli_command_arg_t *argume
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_mirror_removed_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT16
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    2, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_level_control_move_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1470,10 +2033,10 @@ WEAK(void sli_zigbee_cli_zcl_level_control_move_command(sl_cli_command_arg_t *ar
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movecolor_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_INT16,
-    SL_CLI_ARG_INT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_INT16,
+    SL_ZCL_CLI_ARG_INT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1485,12 +2048,12 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movecolor_command(sl_cli_command_arg_
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movecolortemp_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[6] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1502,10 +2065,10 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movecolortemp_command(sl_cli_command_
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movehue_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1517,10 +2080,10 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movehue_command(sl_cli_command_arg_t 
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movesat_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1532,11 +2095,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movesat_command(sl_cli_command_arg_t 
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movetocolor_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1548,10 +2111,10 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movetocolor_command(sl_cli_command_ar
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movetocolortemp_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1563,11 +2126,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movetocolortemp_command(sl_cli_comman
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movetohue_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1579,11 +2142,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movetohue_command(sl_cli_command_arg_
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movetohueandsat_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1595,10 +2158,10 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movetohueandsat_command(sl_cli_comman
 
 WEAK(void sli_zigbee_cli_zcl_level_control_mv_to_level_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1610,8 +2173,8 @@ WEAK(void sli_zigbee_cli_zcl_level_control_mv_to_level_command(sl_cli_command_ar
 
 WEAK(void sli_zigbee_cli_zcl_level_control_o_mv_to_level_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1623,10 +2186,10 @@ WEAK(void sli_zigbee_cli_zcl_level_control_o_mv_to_level_command(sl_cli_command_
 
 WEAK(void sli_zigbee_cli_zcl_color_control_movetosat_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1638,8 +2201,8 @@ WEAK(void sli_zigbee_cli_zcl_color_control_movetosat_command(sl_cli_command_arg_
 
 WEAK(void sli_zigbee_cli_zcl_level_control_o_move_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1660,8 +2223,8 @@ WEAK(void sli_zigbee_cli_zcl_on_off_off_command(sl_cli_command_arg_t *arguments)
 
 WEAK(void sli_zigbee_cli_zcl_on_off_offeffect_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1691,14 +2254,66 @@ WEAK(void sli_zigbee_cli_zcl_on_off_onrecall_command(sl_cli_command_arg_t *argum
 
 WEAK(void sli_zigbee_cli_zcl_on_off_ontimedoff_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[3] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
     ZCL_ON_OFF_CLUSTER_ID,                                                       \
     66, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_power_profile_profile_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_POWER_PROFILE_CLUSTER_ID,                                                       \
+    0, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_power_profile_schedule_constraints_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_POWER_PROFILE_CLUSTER_ID,                                                       \
+    6, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_power_profile_state_command(sl_cli_command_arg_t *arguments)) {
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_POWER_PROFILE_CLUSTER_ID,                                                       \
+    1, \
+    arguments, \
+    NULL);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_pub_ss_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[8] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    6, \
     arguments, \
     argumentTypes);
 }
@@ -1714,12 +2329,56 @@ WEAK(void sli_zigbee_cli_zcl_groups_rmall_command(sl_cli_command_arg_t *argument
 
 WEAK(void sli_zigbee_cli_zcl_groups_remove_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
     ZCL_GROUPS_CLUSTER_ID,                                                       \
     3, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_remove_mirror_command(sl_cli_command_arg_t *arguments)) {
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    2, \
+    arguments, \
+    NULL);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_req_fast_poll_mode_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[2] =  { 
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    3, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_request_mirror_command(sl_cli_command_arg_t *arguments)) {
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    1, \
+    arguments, \
+    NULL);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_rst_load_limit_ctr_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[2] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    10, \
     arguments, \
     argumentTypes);
 }
@@ -1733,12 +2392,40 @@ WEAK(void sli_zigbee_cli_zcl_basic_rtfd_command(sl_cli_command_arg_t *arguments)
     NULL);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_sch_snapshot_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[4] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_HEXOPT
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    4, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_sch_snapshot_resp_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[2] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_HEXOPT
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    4, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_door_lock_set_holiday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT32,
-    SL_CLI_ARG_UINT32,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1750,7 +2437,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_set_holiday_schedule_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_poll_control_long_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT32
+    SL_ZCL_CLI_ARG_UINT32
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1762,10 +2449,10 @@ WEAK(void sli_zigbee_cli_zcl_poll_control_long_command(sl_cli_command_arg_t *arg
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_set_pin_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1777,10 +2464,10 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_set_pin_command(sl_cli_command_arg_t *arg
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_set_rfid_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1792,7 +2479,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_set_rfid_command(sl_cli_command_arg_t *ar
 
 WEAK(void sli_zigbee_cli_zcl_poll_control_short_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1802,10 +2489,45 @@ WEAK(void sli_zigbee_cli_zcl_poll_control_short_command(sl_cli_command_arg_t *ar
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_set_supply_status_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[5] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    13, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_set_uncntrl_flow_threshold_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[8] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    14, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_door_lock_set_user_type_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1817,13 +2539,13 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_set_user_type_command(sl_cli_command_arg_
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_set_weekday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[7] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1835,10 +2557,10 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_set_weekday_schedule_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_thermostat_sws_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8OPT
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1850,10 +2572,10 @@ WEAK(void sli_zigbee_cli_zcl_thermostat_sws_command(sl_cli_command_arg_t *argume
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_set_yearday_schedule_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[4] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT32,
-    SL_CLI_ARG_UINT32
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1865,8 +2587,8 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_set_yearday_schedule_command(sl_cli_comma
 
 WEAK(void sli_zigbee_cli_zcl_thermostat_set_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_INT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_INT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1876,13 +2598,41 @@ WEAK(void sli_zigbee_cli_zcl_thermostat_set_command(sl_cli_command_arg_t *argume
     argumentTypes);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_start_sampling_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[5] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    7, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_start_samp_rsp_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT16
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    13, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_level_control_step_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1894,11 +2644,11 @@ WEAK(void sli_zigbee_cli_zcl_level_control_step_command(sl_cli_command_arg_t *ar
 
 WEAK(void sli_zigbee_cli_zcl_color_control_stepcolor_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_INT16,
-    SL_CLI_ARG_INT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_INT16,
+    SL_ZCL_CLI_ARG_INT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1910,13 +2660,13 @@ WEAK(void sli_zigbee_cli_zcl_color_control_stepcolor_command(sl_cli_command_arg_
 
 WEAK(void sli_zigbee_cli_zcl_color_control_stepcolortemp_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[7] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1928,11 +2678,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_stepcolortemp_command(sl_cli_command_
 
 WEAK(void sli_zigbee_cli_zcl_color_control_stephue_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1944,11 +2694,11 @@ WEAK(void sli_zigbee_cli_zcl_color_control_stephue_command(sl_cli_command_arg_t 
 
 WEAK(void sli_zigbee_cli_zcl_color_control_stepsat_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[5] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1960,9 +2710,9 @@ WEAK(void sli_zigbee_cli_zcl_color_control_stepsat_command(sl_cli_command_arg_t 
 
 WEAK(void sli_zigbee_cli_zcl_level_control_o_step_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[3] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1974,8 +2724,8 @@ WEAK(void sli_zigbee_cli_zcl_level_control_o_step_command(sl_cli_command_arg_t *
 
 WEAK(void sli_zigbee_cli_zcl_level_control_stop_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -1987,8 +2737,8 @@ WEAK(void sli_zigbee_cli_zcl_level_control_stop_command(sl_cli_command_arg_t *ar
 
 WEAK(void sli_zigbee_cli_zcl_color_control_stopmovestep_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8OPT,
+    SL_ZCL_CLI_ARG_UINT8OPT
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -2007,9 +2757,49 @@ WEAK(void sli_zigbee_cli_zcl_level_control_o_stop_command(sl_cli_command_arg_t *
     NULL);
 }
 
+WEAK(void sli_zigbee_cli_zcl_simple_metering_sup_stat_rsp_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[4] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    12, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_take_snapshot_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[1] =  { 
+    SL_ZCL_CLI_ARG_UINT32
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    5, \
+    arguments, \
+    argumentTypes);
+}
+
+WEAK(void sli_zigbee_cli_zcl_simple_metering_take_snapshot_resp_command(sl_cli_command_arg_t *arguments)) {
+  uint8_t argumentTypes[2] =  { 
+    SL_ZCL_CLI_ARG_UINT32,
+    SL_ZCL_CLI_ARG_UINT8
+  }; 
+  sli_zigbee_zcl_simple_command(
+    ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_SERVER_TO_CLIENT,  \
+    ZCL_SIMPLE_METERING_CLUSTER_ID,                                                       \
+    5, \
+    arguments, \
+    argumentTypes);
+}
+
 WEAK(void sli_zigbee_cli_zcl_door_lock_toggle_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -2030,8 +2820,8 @@ WEAK(void sli_zigbee_cli_zcl_on_off_toggle_command(sl_cli_command_arg_t *argumen
 
 WEAK(void sli_zigbee_cli_zcl_identify_trigger_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT8,
-    SL_CLI_ARG_UINT8
+    SL_ZCL_CLI_ARG_UINT8,
+    SL_ZCL_CLI_ARG_UINT8
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -2043,7 +2833,7 @@ WEAK(void sli_zigbee_cli_zcl_identify_trigger_command(sl_cli_command_arg_t *argu
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_unlock_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -2055,8 +2845,8 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_unlock_command(sl_cli_command_arg_t *argu
 
 WEAK(void sli_zigbee_cli_zcl_door_lock_unlock_with_timeout_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[2] =  { 
-    SL_CLI_ARG_UINT16,
-    SL_CLI_ARG_STRING
+    SL_ZCL_CLI_ARG_UINT16,
+    SL_ZCL_CLI_ARG_STRING
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \
@@ -2068,7 +2858,7 @@ WEAK(void sli_zigbee_cli_zcl_door_lock_unlock_with_timeout_command(sl_cli_comman
 
 WEAK(void sli_zigbee_cli_zcl_groups_view_command(sl_cli_command_arg_t *arguments)) {
   uint8_t argumentTypes[1] =  { 
-    SL_CLI_ARG_UINT16
+    SL_ZCL_CLI_ARG_UINT16
   }; 
   sli_zigbee_zcl_simple_command(
     ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER,  \

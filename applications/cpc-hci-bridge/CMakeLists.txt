@@ -1,5 +1,5 @@
-find_package(GeckoSDK 4.3.0 REQUIRED)
-find_package(CPCD 4.3.0 REQUIRED)
+find_package(GeckoSDK 2024.6.0 REQUIRED)
+find_package(CPCD 4.5.0 REQUIRED)
 
 set(CPC_HCI_BRIDGE_SOURCE_FILES
   ${GeckoSDK_ROOT_DIR}/app/bluetooth/example_host/bt_host_cpc_hci_bridge/main.c

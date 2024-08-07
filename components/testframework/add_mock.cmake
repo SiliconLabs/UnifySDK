@@ -41,12 +41,12 @@ function(ADD_MOCK TARGET)
     set(UNIFY-TESTFRAMEWORK_LOCATION ${DIR_OF_ADD_MOCK_CMAKE})
   endif()
 
-  set(ZWAVE_UNITY_CONFIG ${UNIFY-TESTFRAMEWORK_LOCATION}/zwave_cmock_config.yml)
+  set(ZWAVE_UNITY_CONFIG ${UNIFY-TESTFRAMEWORK_LOCATION}/unify_cmock_config.yml)
 
   if(NOT EXISTS ${ZWAVE_UNITY_CONFIG})
     message(
       FATAL_ERROR
-        "Did not find zwave_cmock_config.yml at ${ZWAVE_UNITY_CONFIG}")
+        "Did not find unify_cmock_config.yml at ${ZWAVE_UNITY_CONFIG}")
   endif()
 
   if((EXISTS ${THS-CMOCK_LOCATION}) AND (EXISTS ${THS-UNITY_LOCATION}))    
@@ -66,7 +66,7 @@ function(ADD_MOCK TARGET)
       OUTPUT ${MOCK_SOURCE_FILES}
       DEPENDS ${MOCK_HEADER_FILES}
       COMMAND ${CMOCK_RUBY_EXECUTABLE} ${CMOCK_DIR}/libs/cmock/lib/cmock.rb
-              -o${CMOCK_DIR}/zwave_cmock_config.yml ${MOCK_HEADER_FILES})
+              -o${CMOCK_DIR}/unify_cmock_config.yml ${MOCK_HEADER_FILES})
   endif()
 
   add_library(${TARGET} ${MOCK_SOURCE_FILES})
@@ -89,7 +89,7 @@ function(target_add_mock)
   foreach(dir ${incl_dirs})
     # strip out any includes that wrapped in BUILD_INTERFACE expressions if present
     string(REGEX
-           REPLACE "\\s*(:?\\\$<BUILD_INTERFACE:)?([A-Za-z0-9_/\\\${}-]+)>?"
+           REPLACE "\\s*(:?\\\$<BUILD_INTERFACE:)?([A-Za-z0-9_\\./\\\${}-]+)>?"
                    "\\2" dir "${dir}")
     file(GLOB files ${dir}/*.h)
     list(APPEND headers "${files}")

@@ -18,10 +18,10 @@
 
 // <h>Zigbee Unix Library configuration
 
-// <q EMBER_AF_PLUGIN_UNIX_LIBRARY_TOKEN_SUPPORT> Token support (experimental)
+// <q SL_ZIGBEE_AF_PLUGIN_UNIX_LIBRARY_TOKEN_SUPPORT> Token support (experimental)
 // <i> Default: CONF.ISAPIPROVIDED("MFGLIB-CLI")
 // <i> Indicates whether the application will include experimental support for a file-based token system.
-#define EMBER_AF_PLUGIN_UNIX_LIBRARY_TOKEN_SUPPORT   0
+#define SL_ZIGBEE_AF_PLUGIN_UNIX_LIBRARY_TOKEN_SUPPORT   0
 
 // </h>
 

@@ -16,33 +16,37 @@
  ******************************************************************************/
 
 
-#ifdef UC_BUILD
+#ifdef SL_COMPONENT_CATALOG_PRESENT
 #include "sl_component_catalog.h"
+#endif
 
 #ifdef SL_CATALOG_ZIGBEE_ZCL_FRAMEWORK_CORE_PRESENT
-#include "af.h"
+#include "app/framework/include/af.h"
 
-#define EMBER_AF_GENERATED_UC_EVENTS_DEF \
-sl_zigbee_event_t emberAfIdentifyClusterServerTickCallbackEvent1; \
-sl_zigbee_event_t emberAfOnOffClusterServerTickCallbackEvent1; \
-sl_zigbee_event_t emberAfOtaBootloadClusterServerTickCallbackEvent1; \
+#define SL_ZIGBEE_AF_GENERATED_UC_EVENTS_DEF 
+/*sl_zigbee_af_event_t sl_zigbee_af_identify_cluster_server_tick_cbEvent1; \
+sl_zigbee_af_event_t sl_zigbee_af_on_off_cluster_server_tick_cbEvent1; \
+sl_zigbee_af_event_t sl_zigbee_af_time_cluster_server_tick_cbEvent1; \
+sl_zigbee_af_event_t sl_zigbee_af_ota_bootload_cluster_server_tick_cbEvent1; \
+*/
 
-
-#define EMBER_AF_GENERATED_UC_EVENTS_INIT \
-extern void emberAfIdentifyClusterServerTickCallback(uint8_t endpoint); \
-extern void emberAfOnOffClusterServerTickCallback(uint8_t endpoint); \
-extern void emberAfOtaBootloadClusterServerTickCallback(uint8_t endpoint); \
-sl_zigbee_endpoint_event_init(&emberAfIdentifyClusterServerTickCallbackEvent1, (void *)emberAfIdentifyClusterServerTickCallback, 1); \
-sl_zigbee_endpoint_event_init(&emberAfOnOffClusterServerTickCallbackEvent1, (void *)emberAfOnOffClusterServerTickCallback, 1); \
-sl_zigbee_endpoint_event_init(&emberAfOtaBootloadClusterServerTickCallbackEvent1, (void *)emberAfOtaBootloadClusterServerTickCallback, 1); \
-
+#define SL_ZIGBEE_AF_GENERATED_UC_EVENTS_INIT 
+/*extern void sl_zigbee_af_identify_cluster_server_tick_cb(uint8_t endpoint); \
+extern void sl_zigbee_af_on_off_cluster_server_tick_cb(uint8_t endpoint); \
+extern void sl_zigbee_af_time_cluster_server_tick_cb(uint8_t endpoint); \
+extern void sl_zigbee_af_ota_bootload_cluster_server_tick_cb(uint8_t endpoint); \
+sl_zigbee_af_endpoint_event_init(&sl_zigbee_af_identify_cluster_server_tick_cbEvent1, (void *)sl_zigbee_af_identify_cluster_server_tick_cb, 1); \
+sl_zigbee_af_endpoint_event_init(&sl_zigbee_af_on_off_cluster_server_tick_cbEvent1, (void *)sl_zigbee_af_on_off_cluster_server_tick_cb, 1); \
+sl_zigbee_af_endpoint_event_init(&sl_zigbee_af_time_cluster_server_tick_cbEvent1, (void *)sl_zigbee_af_time_cluster_server_tick_cb, 1); \
+sl_zigbee_af_endpoint_event_init(&sl_zigbee_af_ota_bootload_cluster_server_tick_cbEvent1, (void *)sl_zigbee_af_ota_bootload_cluster_server_tick_cb, 1); \
+*/
 // sl_zigbee_event_context_t structs used to populate the sli_zigbee_app_event_context table
-#define EMBER_AF_GENERATED_UC_EVENT_CONTEXT \
-{ 1, 0x3, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfIdentifyClusterServerTickCallbackEvent1 },     \
-{ 1, 0x6, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfOnOffClusterServerTickCallbackEvent1 },     \
-{ 1, 0x19, false, EMBER_AF_LONG_POLL, EMBER_AF_OK_TO_SLEEP, &emberAfOtaBootloadClusterServerTickCallbackEvent1 },     \
-
-#define EMBER_AF_GENERATED_UC_EVENT_CONTEXT_COUNT 3
+#define SL_ZIGBEE_AF_GENERATED_UC_EVENT_CONTEXT 
+/*{ 1, 0x3, false, SL_ZIGBEE_AF_LONG_POLL, SL_ZIGBEE_AF_OK_TO_SLEEP, &sl_zigbee_af_identify_cluster_server_tick_cbEvent1 },     \
+{ 1, 0x6, false, SL_ZIGBEE_AF_LONG_POLL, SL_ZIGBEE_AF_OK_TO_SLEEP, &sl_zigbee_af_on_off_cluster_server_tick_cbEvent1 },     \
+{ 1, 0xA, false, SL_ZIGBEE_AF_LONG_POLL, SL_ZIGBEE_AF_OK_TO_SLEEP, &sl_zigbee_af_time_cluster_server_tick_cbEvent1 },     \
+{ 1, 0x19, false, SL_ZIGBEE_AF_LONG_POLL, SL_ZIGBEE_AF_OK_TO_SLEEP, &sl_zigbee_af_ota_bootload_cluster_server_tick_cbEvent1 },     \
+*/
+#define SL_ZIGBEE_AF_GENERATED_UC_EVENT_CONTEXT_COUNT 4
 
 #endif // SL_CATALOG_ZIGBEE_ZCL_FRAMEWORK_CORE_PRESENT
-#endif // UC_BUILD

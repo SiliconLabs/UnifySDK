@@ -154,9 +154,9 @@ class RequestQueue
    * @brief Invoke/execute the ZigbeeHost call using the infomation stored in
    * the object.
    *
-   * @return EmberStatus
+   * @return sl_status_t
    */
-    virtual EmberStatus invoke(void) = 0;
+    virtual sl_status_t invoke(void) = 0;
   };
 
   RequestQueue();
@@ -198,7 +198,7 @@ class RequestQueue
    * This dispatch routine is responsible for sending calls to the
    * EmberAf/ZigbeeHost API.
    *
-   * NOTE: If dispatching a EmberAf/ZigbeeHost call returns EMBER_MAX_MESSAGE_LIMIT_REACHED,
+   * NOTE: If dispatching a EmberAf/ZigbeeHost call returns SL_STATUS_ZIGBEE_MAX_MESSAGE_LIMIT_REACHED ,
    * the call data is assumed to have failed since there are too many messages
    * in-flight on the Zigbee network. To rectify this, the call is not dequeued and
    * and call-defer-cycle counter is increased to defer making any calls for that
@@ -229,7 +229,7 @@ class NetworkInitRequest : public RequestQueue::Entry
   explicit NetworkInitRequest(void);
   ~NetworkInitRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -245,7 +245,7 @@ class DiscoverDeviceRequest : public RequestQueue::Entry
   explicit DiscoverDeviceRequest(const zigbee_eui64_t eui64);
   ~DiscoverDeviceRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -263,7 +263,7 @@ class DiscoverEndpointRequest : public RequestQueue::Entry
                                    zigbee_endpoint_id_t endpoint_id);
   ~DiscoverEndpointRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -279,7 +279,7 @@ class DeviceRemoveRequest : public RequestQueue::Entry
   explicit DeviceRemoveRequest(const zigbee_eui64_t eui64);
   ~DeviceRemoveRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -305,7 +305,7 @@ class BindingRequestRequest : public RequestQueue::Entry
                                  bool is_binding_req);
   ~BindingRequestRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -328,7 +328,7 @@ class ZCLConfigureReportingRequest : public RequestQueue::Entry
                                         unsigned int record_size);
   ~ZCLConfigureReportingRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -350,7 +350,7 @@ class ZCLFrameUnicastRequest : public RequestQueue::Entry
                                   const zcl_frame_t &frame);
   ~ZCLFrameUnicastRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -370,7 +370,7 @@ class ZCLFrameMulticastRequest : public RequestQueue::Entry
                                     const zcl_frame_t &frame);
   ~ZCLFrameMulticastRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 /**
@@ -386,7 +386,7 @@ class AddOTAImageRequest : public RequestQueue::Entry
   explicit AddOTAImageRequest(std::string &filename);
   ~AddOTAImageRequest() override = default;
 
-  EmberStatus invoke(void) override;
+  sl_status_t invoke(void) override;
 };
 
 }  // namespace zigpc::gateway

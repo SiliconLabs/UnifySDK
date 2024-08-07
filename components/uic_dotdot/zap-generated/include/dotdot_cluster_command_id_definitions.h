@@ -364,6 +364,16 @@
 
 // Commands for cluster: Descriptor
 
+// Commands for cluster: UnifyFanControl
+#define DOTDOT_UNIFY_FAN_CONTROL_SET_FAN_MODE_COMMAND_ID (0x0)
+#define DOTDOT_UNIFY_FAN_CONTROL_TURN_OFF_COMMAND_ID (0x1)
+
+// Commands for cluster: UnifyThermostat
+
+// Commands for cluster: UnifyHumidityControl
+#define DOTDOT_UNIFY_HUMIDITY_CONTROL_MODE_SET_COMMAND_ID (0x1)
+#define DOTDOT_UNIFY_HUMIDITY_CONTROL_SETPOINT_SET_COMMAND_ID (0x1)
+
 #ifdef __cplusplus
 extern "C" {
 #endif

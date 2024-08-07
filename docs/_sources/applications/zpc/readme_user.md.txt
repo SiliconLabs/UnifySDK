@@ -496,7 +496,7 @@ The Z-Wave attribute lists configuration file example:
 Attribute types can be provided either as their name like above, or with their
 type id, like _attribute_type:0x002502_
 
-When the ZPC is installed on the Debian Bullseye platform the sample configuration
+When the ZPC is installed on the Debian Bookworm platform the sample configuration
 (i.e., the sample contains the recommended attribute types that may require periodic
 polling based on the device type) file will be located in:
 
@@ -913,7 +913,8 @@ documentation, when using the Unify SDK.
 maxdepth: 0
 titlesonly:
 ---
-how_to_implement_new_zwave_command_classes.md
+how_to_implement_zwave_command_classes.rst
+how_to_interact_with_clusters.rst
 ```
 
 ## Troubleshooting

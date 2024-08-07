@@ -3,7 +3,7 @@ var modules =
     [ "ZigPC Config Fixture", "group__zigpc__datastore__fixture.html", "group__zigpc__datastore__fixture" ],
     [ "Zcl Profiles Internal", "group__zcl__profile__list__int.html", "group__zcl__profile__list__int" ],
     [ "ZigPC components", "group__zigpc__components.html", "group__zigpc__components" ],
-    [ "Mapper path match evaluation", "group__Attribute.html", null ],
+    [ "Mapper path match evaluation", "group__Attribute.html", "group__Attribute" ],
     [ "Scope settings helpers", "group__attribute__mapper__scope__settings.html", "group__attribute__mapper__scope__settings" ],
     [ "Unify Attribute Definitions", "group__uic__attribute__definitions.html", null ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],

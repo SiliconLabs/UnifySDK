@@ -49,6 +49,7 @@ void test_log_level()
 
   sl_log_set_tag_level("mytag", SL_LOG_DEBUG);
   sl_log_debug("mytag", "this should be logged 6");
+  TEST_ASSERT_EQUAL(SL_LOG_DEBUG, sl_log_get_level());
 
   sl_log_set_level(SL_LOG_ERROR);
   sl_log_warning("mytag", "this should be logged 7");

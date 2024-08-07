@@ -10,8 +10,8 @@ sed -i 's/cpcd:\n  serial:.*/cpcd:\n  serial: \/dev\/ttyMULTIPROTOCOL/' /etc/uic
 (socat tcp-connect:${MULTIPROTOCOL_DEVICE_IP}:${MULTIPROTOCOL_PORT} pty,raw,echo=0,link=/var/ttyMULTIPROTOCOL &) || \
 ln -sf ${MULTIPROTOCOL_DEVICE_TTY} /var/ttyMULTIPROTOCOL && \
 sleep 2 && \
-/usr/bin/cpcd --bind ecdh --key /var/lib/uic/cpcd-binding-key && \
-(/usr/bin/cpcd --key /var/lib/uic/cpcd-binding-key &) && \
+/usr/bin/cpcd --bind ecdh --key /var/lib/uic/cpcd-binding-key --conf /usr/etc/cpcd.conf && \
+(/usr/bin/cpcd --key /var/lib/uic/cpcd-binding-key --conf /usr/etc/cpcd.conf &) && \
 
 if [ "$MULTIPROTOCOL_SELECTIONS" == "Zigbee" ]; then
 

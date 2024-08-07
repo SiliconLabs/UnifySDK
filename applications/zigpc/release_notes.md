@@ -1,5 +1,13 @@
 # ZigPC Release Notes
 
+## [1.6.0] - Aug 2024
+
+### Changed (1.6.0)
+
+* ZigPC migrated to Simplicity SDK v2024.6.0 with alpha quality.
+* Reference platform updated to Bookworm 64-bit based Raspberry Pi OS.
+* Migrated to Zigbee EmberZNet SDK v8.0.0.0
+
 ## [1.5.0] - Feb 2024
 
 ### Added (1.5.0)

@@ -1,5 +1,7 @@
 build-essential                 // contains a list of packages that are required to create a Debian package
 clang                           // provides a language front-end and tooling infrastructure for languages in the C language
+cmake                           // Build system
+cmake-curses-gui                // CCmake
 cm-super-minimal                // For docs generation with Doxygen
 curl                            // Dockerfile. Downloads
 doxygen                         // For docs generation with Doxygen
@@ -9,15 +11,17 @@ fdisk                           // For Make SD card in jenkinsfile in Release bu
 git                             // cmake. download gecko_skc and cpc-deamon
 git-lfs                         // cmake. download gecko_skc and cpc-deamon
 graphviz                        // For docs generation
+lcov							// code coverage report (for local code coverage report)
 libasound2                      // ZAP generation
 libgbm1                         // ZAP generation
 ninja-build                     // Build system
 nlohmann-json3-dev              // ZigPC, ZPC, testframework, uic_dotdot_mqtt, uic_smartstart_management. Read JSON from a file.
 nodejs                          // DevGUI. JavaScript runtime built on Chrome`s
 npm                             // DevGUI. package manager for the JavaScript runtime environment Node.js
-openjdk-11-jre                  // For docs generation
+openjdk-17-jre                  // For docs generation
 parted                          // For Make SD card in jenkinsfile in Release builds
 pkg-config                      // PortableRuntime, Nal, Gms. insert the compiler options on the command line
+protobuf-compiler               // Compiler for protocol buffer definition files
 python3-pip                     // Dockerfile. Install pip3 packages
 qemu-user-static                // For Make SD card in jenkinsfile in Release builds
 ruby                            // testframework, zwave_transtoport

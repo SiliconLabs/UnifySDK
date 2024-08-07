@@ -255,7 +255,7 @@ list(
 # complete, and not responsive to changing dependencies that might happen in the
 # future.
 set(UNIFY_NONE_EXHAUSTIVE_LIST "libboost-program-options-dev (>= 1.67.0),\
-libedit2,libsqlite3-0,libmosquitto1,libyaml-cpp0.6,libboost-log-dev (>= 1.67.0)")
+libedit2,libsqlite3-0,libmosquitto1,libyaml-cpp0.7,libboost-log-dev (>= 1.67.0)")
 # END OF REFACTOR ME SECTION
 
 list(JOIN UNIFY_EXTERNAL_LIBS " -l" PC_LIBS)

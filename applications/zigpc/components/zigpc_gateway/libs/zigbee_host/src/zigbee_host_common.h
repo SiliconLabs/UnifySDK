@@ -66,13 +66,13 @@ extern struct zigbeeHostState z3gwState;
   * that source.  If the discovery was unicast to a specific device, then
   * the callback will only be fired once with either MATCH_FOUND or COMPLETE
   * (no matches found).  If the discovery is broadcast then multiple callbacks
-  * may be fired with ::EMBER_AF_BROADCAST_SERVICE_DISCOVERY_RESPONSE_RECEIVED.
+  * may be fired with ::SL_ZIGBEE_AF_BROADCAST_SERVICE_DISCOVERY_RESPONSE_RECEIVED.
   * After a couple seconds the callback will then be fired with
-  * ::EMBER_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE or
-  * ::EMBER_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_EMPTY_RESPONSE as the result.
+  * ::SL_ZIGBEE_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE or
+  * ::SL_ZIGBEE_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_EMPTY_RESPONSE as the result.
   */
 void zigbeeHostZdoActiveEndpointsResponseCallback(
-  const EmberAfServiceDiscoveryResult *result);
+  const sl_zigbee_af_service_discovery_result_t *result);
 
 /**
   * @brief Endpoint discovery handler for a device requested.
@@ -80,13 +80,13 @@ void zigbeeHostZdoActiveEndpointsResponseCallback(
   * that source.  If the discovery was unicast to a specific device, then
   * the callback will only be fired once with either MATCH_FOUND or COMPLETE
   * (no matches found).  If the discovery is broadcast then multiple callbacks
-  * may be fired with ::EMBER_AF_BROADCAST_SERVICE_DISCOVERY_RESPONSE_RECEIVED.
+  * may be fired with ::SL_ZIGBEE_AF_BROADCAST_SERVICE_DISCOVERY_RESPONSE_RECEIVED.
   * After a couple seconds the callback will then be fired with
-  * ::EMBER_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE or
-  * ::EMBER_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_EMPTY_RESPONSE as the result.
+  * ::SL_ZIGBEE_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE or
+  * ::SL_ZIGBEE_AF_BROADCAST_SERVICE_DISCOVERY_COMPLETE_WITH_EMPTY_RESPONSE as the result.
   */
 void zigbeeHostZdoSimpleDescriptorResponseCallback(
-  const EmberAfServiceDiscoveryResult *result);
+  const sl_zigbee_af_service_discovery_result_t *result);
 
 /** @brief emAfPluginGatewayInterfaceTrustCenterJoinHandler
  *
@@ -98,7 +98,7 @@ void zigbeeHostZdoSimpleDescriptorResponseCallback(
  * @param decision Ver.: Always
  */
 void emAfPluginGatewayInterfaceTrustCenterJoinHandler(
-  const EmberEUI64 eui64, EmberNodeId nodeId, EmberJoinDecision decision);
+  const sl_802154_long_addr_t eui64, sl_802154_short_addr_t nodeId, sl_zigbee_join_decision_t decision);
 
 /**
  * @brief Device Table plugin callback when a device has completed leaving
@@ -106,9 +106,9 @@ void emAfPluginGatewayInterfaceTrustCenterJoinHandler(
  *
  *@param eui64:  EUI64 of the device that left.
  */
-void emAfPluginGatewayInterfaceTrustCenterLeaveHandler(const EmberEUI64 eui64);
+void emAfPluginGatewayInterfaceTrustCenterLeaveHandler(const sl_802154_long_addr_t eui64);
 
-EmberAfStatus
+sl_zigbee_af_status_t 
   emberAfClusterServiceCallback(sl_service_opcode_t opcode,
                                 sl_service_function_context_t *context);
 /**
@@ -117,10 +117,10 @@ EmberAfStatus
  * @param cluster_list: the list of supported clusters as an array of ID's
  * @param cluster_list_size: the size of the supported cluster list
  *
- * @return EMBER_SUCCESS if able to properly register the service callbacks for
+ * @return SL_STATUS_OK if able to properly register the service callbacks for
  * the given cluster
  */
-EmberStatus zigbeeHostRegisterClusters(
+sl_status_t zigbeeHostRegisterClusters(
               const uint16_t *cluster_list,
               unsigned int cluster_list_size );
 

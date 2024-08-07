@@ -12,7 +12,10 @@ description: |-
   SDK.
 
 component:
-  - id: "native"
+  - id: cli
+    instance:
+      - inst0
+  - id: "native_host"
   - id: "linux_arch_32"
   - id: "iostream_stdio"
   - id: "zigbee_address_table"
@@ -47,25 +50,25 @@ configuration:
     value: SLI_ZIGBEE_NETWORK_DEVICE_TYPE_COORDINATOR_OR_ROUTER
   - name: SLI_ZIGBEE_PRIMARY_NETWORK_SECURITY_TYPE
     value: SLI_ZIGBEE_NETWORK_SECURITY_TYPE_3_0
-  - name: EMBER_KEY_TABLE_SIZE
+  - name: SL_ZIGBEE_KEY_TABLE_SIZE
     value: 4
-  - name: EMBER_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED
+  - name: SL_ZIGBEE_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED
     value: 0
-  - name: EMBER_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
+  - name: SL_ZIGBEE_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
     value: 10
-  - name: EMBER_TRANSIENT_KEY_TIMEOUT_S
+  - name: SL_ZIGBEE_TRANSIENT_KEY_TIMEOUT_S
     value: 65535
-  - name: EMBER_AF_PLUGIN_NETWORK_CREATOR_SECURITY_NETWORK_OPEN_TIME_S
+  - name: SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_SECURITY_NETWORK_OPEN_TIME_S
     value: 65535
-  - name: EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE
+  - name: SL_ZIGBEE_AF_PLUGIN_ADDRESS_TABLE_SIZE
     value: 32
 
 define:
-  # FIXME: Workaround for EMBER_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
-  - name: EMBER_AF_PLUGIN_GATEWAY_SUPPORT_MAX_WAIT_FOR_EVENTS_TIMEOUT_MS
+  # FIXME: Workaround for SL_ZIGBEE_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
+  - name: SL_ZIGBEE_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
     value: 10
   # NOTE: zigbee_poll_control_client NOT USED. fast poll timeout provided as macro
-  - name: EMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT
+  - name: SL_ZIGBEE_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT
     value: 32
 
 include:
@@ -95,6 +98,10 @@ toolchain_settings:
   value: "-std=c11"
 - option: gcc_c++_compiler_option
   value: "-std=c++11"
+- option: gcc_c_compiler_option
+  value: "-fPIC"
+- option: gcc_c++_compiler_option
+  value: "-fPIC"
 
 template_contribution:
   - name: zigbee_af_callback

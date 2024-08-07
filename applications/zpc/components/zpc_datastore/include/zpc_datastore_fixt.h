@@ -46,6 +46,15 @@ typedef enum zpc_datastore_version {
    *   uint8_t instead of uint32_t
   */
   DATASTORE_VERSION_V2,
+    /**
+   * @brief Version 3 of datastore database.
+   * Changes from v2:
+   * - ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES & ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_SUPPORTED_SETPOINT_TYPES are now uint32_t instead of array to easier mapping to uam
+   * - THERMOSTAT_SETPOINT scales attributes are now uint8 instead of uint32_t
+   * - Added precision for THERMOSTAT_SETPOINT attributes and moving their id so that their value are always in the same order matching (+1 for scale and +2 for precision)
+   * - Set precision attribute to 3 by default to keep compatibility with previous versions
+  */
+  DATASTORE_VERSION_V3,
   /**
    * @brief Keep this value after the latest version to detect what is the latest
    */

@@ -18,12 +18,12 @@
 // public includes
 #include "zigbee_host.h"
 
-void zigbeeHostGetEui64(EmberEUI64 eui64)
+void zigbeeHostGetEui64(sl_802154_long_addr_t eui64)
 {
-  return emberAfGetEui64(eui64);
+  return sl_zigbee_af_get_eui64(eui64);
 }
 
 uint8_t zigbeeHostGetPrimaryEndpointId(void)
 {
-  return emberAfPrimaryEndpointForCurrentNetworkIndex();
+  return sl_zigbee_af_primary_endpoint_for_current_network_index();
 }

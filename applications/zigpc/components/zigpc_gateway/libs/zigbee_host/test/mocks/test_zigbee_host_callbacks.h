@@ -16,7 +16,7 @@
 
 #include <stdbool.h>
 
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 #include "zigbee_host.h"
 
@@ -25,23 +25,23 @@
  * in zigbee_host.h
  */
 
-void callback_onNetworkInitialized(const EmberNetworkParameters *network);
+void callback_onNetworkInitialized(const sl_zigbee_network_parameters_t *network);
 
-void callback_onNetworkDeviceJoin(const EmberEUI64 eui64);
+void callback_onNetworkDeviceJoin(const sl_802154_long_addr_t eui64);
 
-void callback_onTrustCenterDeviceJoinComplete(const EmberEUI64 eui64);
+void callback_onTrustCenterDeviceJoinComplete(const sl_802154_long_addr_t eui64);
 
-void callback_onDeviceEndpointsDiscovered(const EmberEUI64 eui64,
+void callback_onDeviceEndpointsDiscovered(const sl_802154_long_addr_t eui64,
                                           uint8_t endpointCount,
                                           const uint8_t *endpointList);
 
 void callback_onEndpointClustersDiscovered(
-  const EmberEUI64 eui64, const EmberAfClusterList *endpointInfo);
+  const sl_802154_long_addr_t eui64, const sl_zigbee_af_cluster_list_t  *endpointInfo);
 
-void callback_onNetworkDeviceLeaveResponse(const EmberEUI64 eui64);
+void callback_onNetworkDeviceLeaveResponse(const sl_802154_long_addr_t eui64);
 
-EmberAfStatus
-  callback_onClusterCommandReceived(const EmberEUI64 eui64,
+sl_zigbee_af_status_t
+  callback_onClusterCommandReceived(const sl_802154_long_addr_t eui64,
                                     uint8_t endpoint,
                                     uint16_t clusterId,
                                     uint8_t commandId,
@@ -50,34 +50,34 @@ EmberAfStatus
                                     uint16_t bufferLength,
                                     uint8_t bufferPayloadStartIndex);
 
-void callback_onReportedAttributeChange(const EmberEUI64 eui64,
+void callback_onReportedAttributeChange(const sl_802154_long_addr_t eui64,
                                         uint8_t endpoint,
                                         uint16_t clusterId,
                                         uint8_t *attribute_report_records,
                                         uint16_t attribute_report_records_size);
 
-void callback_onReadAttributesResponse(const EmberEUI64 eui64,
+void callback_onReadAttributesResponse(const sl_802154_long_addr_t eui64,
                                        uint8_t endpoint,
                                        uint16_t clusterId,
                                        uint8_t *attribute_status_records,
                                        uint16_t attribute_status_records_size);
 
 void callback_onConfigureReportingResponse(
-  const EmberEUI64 eui64,
+  const sl_802154_long_addr_t eui64,
   uint8_t endpoint,
   uint16_t clusterId,
   uint8_t *configure_status_records,
   uint16_t configure_status_records_size);
 
-void callback_onOtaUpdateStarted(const EmberEUI64 eui64,
+void callback_onOtaUpdateStarted(const sl_802154_long_addr_t eui64,
                                  uint16_t manufacturerId,
                                  uint16_t imageTypeId,
                                  uint32_t firmwareVersion);
 
-void callback_onOtaUpdateCompleted(const EmberEUI64 eui64,
+void callback_onOtaUpdateCompleted(const sl_802154_long_addr_t eui64,
                                    uint16_t manufacturerId,
                                    uint16_t imageTypeId,
                                    uint32_t firmwareVersion,
-                                   EmberAfStatus status);
+                                   sl_zigbee_af_status_t status);
 
 #endif  // TEST_ZIGBEE_HOST_CALLBACKS_H

@@ -863,3 +863,34 @@ def zb_NetworkManagementState 0xfd120001
 // This represents short CamelCase labels the attributes in the DotDot Descriptor cluster
 def zb_DeviceTypeList 0xfd130000
 
+// This represents short CamelCase labels the attributes in the DotDot UnifyFanControl cluster
+def zb_ZWaveFanMode 0xfd140001
+def zb_ZWaveSupportedFanMode 0xfd140002
+def zb_ZWaveFanState 0xfd140003
+
+// This represents short CamelCase labels the attributes in the DotDot UnifyThermostat cluster
+def zb_ThermostatMode 0xfd150001
+def zb_SupportedThermostatMode 0xfd150002
+def zb_OperatingState 0xfd150003
+
+// This represents short CamelCase labels the attributes in the DotDot UnifyHumidityControl cluster
+def zb_ReportingMode 0xfda00001
+def zb_SupportedReportingMode 0xfda00002
+def zb_CurrentState 0xfda00003
+def zb_SupportedSetPoints 0xfda00004
+def zb_HumidifierSetpointMin 0xfda00005
+def zb_HumidifierSetpointMax 0xfda00006
+def zb_HumidifierSetpoint 0xfda00007
+def zb_HumidifierSetpointScale 0xfda00008
+def zb_HumidifierSetpointPrecision 0xfda00009
+def zb_DehumidifierSetpointMin 0xfda0000a
+def zb_DehumidifierSetpointMax 0xfda0000b
+def zb_DehumidifierSetpoint 0xfda0000c
+def zb_DehumidifierSetpointScale 0xfda0000d
+def zb_DehumidifierSetpointPrecision 0xfda0000e
+def zb_AutoSetpointMin 0xfda0000f
+def zb_AutoSetpointMax 0xfda00010
+def zb_AutoSetpoint 0xfda00011
+def zb_AutoSetpointScale 0xfda00012
+def zb_AutoSetpointPrecision 0xfda00013
+

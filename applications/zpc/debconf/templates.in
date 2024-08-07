@@ -6,7 +6,7 @@ Description: The serial port where z-wave controller is connected.
 
 Template: uic-zpc/region
 Type: select
-Choices:EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR
+Choices:EU, EU_LR, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR
 Default: EU
 Description: Z-wave Frequency region to work on
  (default: EU)

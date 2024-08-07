@@ -1,5 +1,7 @@
 # UPTI CAP Release Notes
 
+## [1.6.0] - Aug 2024
+
 ## [1.5.0] - Feb 2024
 
 ## [1.4.0] - Aug 2023

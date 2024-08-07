@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 // Tool includes
-#include "zpc_database_helper.hpp"
+#include "zpc_database_updater.hpp"
 
 // Unify Includes
 #include "datastore.h"
@@ -29,8 +29,51 @@
 #include "zpc_datastore_fixt.h"
 #include "attribute_store_defined_attribute_types.h"
 
+// Cpp includes
+#include <string>
+#include <filesystem>
+
 using namespace attribute_store;
 constexpr const char *LOG_TAG = "zpc_database_upgrade_tool";
+
+///////////////////////////////////////////////////////////////////////////////
+// Backup functions
+///////////////////////////////////////////////////////////////////////////////
+static std::string backup_file;  // NOSONAR
+static sl_status_t create_backup(const std::string &datastore_file)
+{
+  try {
+    backup_file = std::string(datastore_file) + ".bak";
+    sl_log_info(LOG_TAG, "Creating database backup : %s", backup_file.c_str());
+
+    std::filesystem::copy(datastore_file,
+                          backup_file,
+                          std::filesystem::copy_options::overwrite_existing);
+  } catch (std::exception &e) {
+    sl_log_error(LOG_TAG,
+                 "Could not create a backup of the datastore file. "
+                 "Please verify your configuration. Error: %s",
+                 e.what());
+    return SL_STATUS_FAIL;
+  }
+  return SL_STATUS_OK;
+}
+
+static sl_status_t remove_backup()
+{
+  sl_log_info(LOG_TAG, "Removing database backup : %s", backup_file.c_str());
+  try {
+    std::filesystem::remove(backup_file);
+  } catch (std::exception &e) {
+    sl_log_error(LOG_TAG,
+                 "Could not create a backup of the datastore file. "
+                 "Please verify your configuration. Error: %s",
+                 e.what());
+    return SL_STATUS_FAIL;
+  }
+
+  return SL_STATUS_OK;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Init and teardown functions
@@ -72,6 +115,11 @@ static sl_status_t init(int argc, char *argv[], int *target_version)
     return SL_STATUS_FAIL;
   }
 
+  // Create backup
+  if (SL_STATUS_OK != create_backup(datastore_file)) {
+    return SL_STATUS_FAIL;
+  }
+
   if (SL_STATUS_OK != datastore_fixt_setup(datastore_file)) {
     sl_log_error(LOG_TAG,
                  "Could not initialize the datastore. "
@@ -95,112 +143,12 @@ static void teardown()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Conversion functions
-///////////////////////////////////////////////////////////////////////////////
-sl_status_t convert_v1_datastore_to_v2()
-{
-  // Association group ID change: uint32_t to uint8:
-  sl_log_info(LOG_TAG,
-              "Updating Association Group IDs from uint32_t to uint8_t.");
-
-  for (attribute endpoint_id: endpoint_id_list()) {
-    for (attribute group_id:
-         endpoint_id.children(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID)) {
-      sl_log_debug(LOG_TAG,
-                   "Updating Attribute ID %d from uint32_t to uint8_t",
-                   group_id);
-      uint32_t current_value = group_id.reported<uint32_t>();
-      if (current_value > 255) {
-        sl_log_warning(LOG_TAG,
-                       "Association Group ID found with value >255. "
-                       "This should not happen. Deleting data.");
-        group_id.delete_node();
-      } else {
-        uint8_t new_value = current_value;
-        group_id.set_reported<uint8_t>(new_value);
-      }
-    }
-  }
-
-  // Wake Up Command Class Setting representation change.
-  // clang-format off
-  sl_log_info(LOG_TAG, "Updating Wake Up Settings to new tree.");
-  for (attribute endpoint_id: endpoint_id_list()) {
-    attribute interval_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL);
-    attribute node_id_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_NODE_ID);
-
-    if (!interval_node.is_valid() || !node_id_node.is_valid()) {
-      continue;
-    }
-
-    sl_log_debug(LOG_TAG, "Converting Wake Up data for Endpoint node %d", endpoint_id);
-    // Do not set a setting value, we may ask the node again when it wakes up.
-    attribute setting = endpoint_id.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING);
-
-    attribute new_node_id_node = setting.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_NODE_ID);
-    attribute new_interval_node = setting.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL);
-
-    // Copy the values (Desired is never persisted)
-    new_node_id_node.set_reported<uint16_t>(node_id_node.reported<uint16_t>());
-    new_interval_node.set_reported<uint32_t>(interval_node.reported<uint32_t>());
-
-    // Remove the old nodes
-    interval_node.delete_node();
-    node_id_node.delete_node();
-
-    // Create capabilities for any supporting node from this version.
-    attribute capabilities = endpoint_id.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES);
-    // Capabilities sub-attributes
-    attribute new_min_interval_node = capabilities.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_MINIMUM_INTERVAL);
-    attribute new_max_interval_node = capabilities.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_MAXIMUM_INTERVAL);
-    attribute new_default_interval_node = capabilities.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_DEFAULT_INTERVAL);
-    attribute new_interval_step_node = capabilities.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL_STEP);
-    attribute new_bitmask_node = capabilities.emplace_node(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES_BITMASK);
-
-    // Check if previous capabilities are here:
-    attribute min_interval_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_MINIMUM_INTERVAL);
-    attribute max_interval_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_MAXIMUM_INTERVAL);
-    attribute default_interval_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_DEFAULT_INTERVAL);
-    attribute interval_step_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL_STEP);
-    attribute bitmask_node = endpoint_id.child_by_type(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES_BITMASK);
-
-    // If valid, copy and erase:
-    if (min_interval_node.is_valid()) {
-      new_min_interval_node.set_reported<uint32_t>(min_interval_node.reported<uint32_t>());
-      min_interval_node.delete_node();
-    }
-    if (max_interval_node.is_valid()) {
-      new_max_interval_node.set_reported<uint32_t>(max_interval_node.reported<uint32_t>());
-      max_interval_node.delete_node();
-    }
-    if (default_interval_node.is_valid()) {
-      new_default_interval_node.set_reported<uint32_t>(default_interval_node.reported<uint32_t>());
-      default_interval_node.delete_node();
-    }
-    if (interval_step_node.is_valid()) {
-      new_interval_step_node.set_reported<uint32_t>(interval_step_node.reported<uint32_t>());
-      interval_step_node.delete_node();
-    }
-
-    int8_t bitmask_value = 0;
-    if (bitmask_node.is_valid()) {
-      bitmask_value = static_cast<uint8_t>(bitmask_node.reported<uint32_t>());
-      bitmask_node.delete_node();
-    }
-    new_bitmask_node.set_reported<uint8_t>(bitmask_value);
-  }
-  // clang-format on
-
-  // Write down the new version of the database
-  sl_log_info(LOG_TAG, "Successfully converted from version 1 to version 2.\n");
-  return datastore_store_int("version", DATASTORE_VERSION_V2);
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // Main
 ///////////////////////////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
+  uint8_t return_status = EXIT_SUCCESS;
+
   int target_version      = 0;
   sl_status_t init_status = init(argc, argv, &target_version);
   if (init_status != SL_STATUS_OK) {
@@ -227,25 +175,25 @@ int main(int argc, char *argv[])
     sl_log_info(LOG_TAG,
                 "Datastore is already at version %d. No conversion is needed.",
                 datastore_version);
-  }
-  while (datastore_version < target_version) {
-    switch (datastore_version) {
-      case DATASTORE_VERSION_V1:
-        convert_v1_datastore_to_v2();
-        datastore_version++;
-        break;
-      default:
-        sl_log_warning(LOG_TAG,
-                       "We do not know how to upgrade version %d. "
-                       "Aborting ZPC datastore upgrade.",
-                       datastore_version);
-        teardown();
-        return 1;
-        break;
+  } else {
+    auto update_status
+      = zpc_database_updater::update_datastore(datastore_version,
+                                               target_version);
+
+    if (update_status != SL_STATUS_OK) {
+      return_status = EXIT_FAILURE;
     }
   }
 
   // Teardown when we are done.
   teardown();
-  return 0;
+
+  if (return_status == EXIT_SUCCESS) {
+    remove_backup();
+    sl_log_info(LOG_TAG, "Database upgrade completed successfully.");
+  } else {
+    sl_log_error(LOG_TAG, "Database upgrade failed.");
+  }
+
+  return return_status;
 }

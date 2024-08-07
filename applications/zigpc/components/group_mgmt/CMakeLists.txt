@@ -1,6 +1,8 @@
 add_library(zigpc_group_mgmt STATIC src/zigpc_group_map.cpp src/zigpc_group_mgmt.c
                                     src/zigpc_group_mgmt_mqtt.cpp)
 
+set_property(TARGET zigpc_group_mgmt PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 target_include_directories(
   zigpc_group_mgmt
   PUBLIC include

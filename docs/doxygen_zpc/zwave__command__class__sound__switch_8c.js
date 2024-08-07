@@ -1,12 +1,9 @@
 var zwave__command__class__sound__switch_8c =
 [
-    [ "_ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME_", "struct__ZW__SOUND__SWITCH__TONE__PLAY__SET__V2__FRAME__.html", "struct__ZW__SOUND__SWITCH__TONE__PLAY__SET__V2__FRAME__" ],
     [ "sound_switch_configuration", "structsound__switch__configuration.html", "structsound__switch__configuration" ],
     [ "LOG_TAG", "zwave__command__class__sound__switch_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "MAX_CHAR_SIZE", "zwave__command__class__sound__switch_8c.html#ab2da6ff528f8bf7e179e9fd7a6b6f5e8", null ],
-    [ "SOUND_SWITCH_VERSION_V2", "zwave__command__class__sound__switch_8c.html#a4fee72f93acf4c0ca5be7514d5c03828", null ],
     [ "sound_switch_configuration_t", "zwave__command__class__sound__switch_8c.html#a3affca3b74770a63c64b06027a847f88", null ],
-    [ "ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME", "zwave__command__class__sound__switch_8c.html#ae818c69281aa3465c8c97e5f6d857f34", null ],
     [ "get_configuration", "zwave__command__class__sound__switch_8c.html#ae889fba581f19a88b52770dbb27d6264", null ],
     [ "zwave_command_class_sound_switch_configuration_get", "zwave__command__class__sound__switch_8c.html#abaf3aa616aefe0be25f5fa558a4e8031", null ],
     [ "zwave_command_class_sound_switch_configuration_set", "zwave__command__class__sound__switch_8c.html#aeeca921de4d45f204c9e899bd8fcb101", null ],

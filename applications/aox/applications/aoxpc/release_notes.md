@@ -1,6 +1,10 @@
 # AoXPC Release Notes
 
-## [1.3.2] - Jun 2023
+
+## [1.6.0] - Aug 2024
+
+* Reference platform updated to Bookworm 64-bit based Raspberry Pi OS.
+* Migrated to [Bluetooth SDK](https://www.silabs.com/documents/public/release-notes/bt-software-release-notes-8.0.0.0.pdf) and [Bluetooth Location Services] (https://www.silabs.com/documents/public/release-notes/bt-rtl-library-release-notes-8.0.0.0.pdf)
 
 ## [1.3.1] - Mar 2023
 

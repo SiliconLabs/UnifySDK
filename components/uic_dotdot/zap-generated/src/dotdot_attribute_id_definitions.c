@@ -2025,6 +2025,83 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "Unknown";
       }
       // clang-format off
+    case DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID:
+          return "ZWaveFanMode";
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID:
+          return "ZWaveSupportedFanMode";
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID:
+          return "ZWaveFanState";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
+    case DOTDOT_UNIFY_THERMOSTAT_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_THERMOSTAT_THERMOSTAT_MODE_ATTRIBUTE_ID:
+          return "ThermostatMode";
+        case DOTDOT_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ATTRIBUTE_ID:
+          return "SupportedThermostatMode";
+        case DOTDOT_UNIFY_THERMOSTAT_OPERATING_STATE_ATTRIBUTE_ID:
+          return "OperatingState";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
+    case DOTDOT_UNIFY_HUMIDITY_CONTROL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ATTRIBUTE_ID:
+          return "ReportingMode";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_ATTRIBUTE_ID:
+          return "SupportedReportingMode";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ATTRIBUTE_ID:
+          return "CurrentState";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_ATTRIBUTE_ID:
+          return "SupportedSetPoints";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN_ATTRIBUTE_ID:
+          return "HumidifierSetpointMin";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX_ATTRIBUTE_ID:
+          return "HumidifierSetpointMax";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_ATTRIBUTE_ID:
+          return "HumidifierSetpoint";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE_ATTRIBUTE_ID:
+          return "HumidifierSetpointScale";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION_ATTRIBUTE_ID:
+          return "HumidifierSetpointPrecision";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN_ATTRIBUTE_ID:
+          return "DehumidifierSetpointMin";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX_ATTRIBUTE_ID:
+          return "DehumidifierSetpointMax";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_ATTRIBUTE_ID:
+          return "DehumidifierSetpoint";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE_ATTRIBUTE_ID:
+          return "DehumidifierSetpointScale";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION_ATTRIBUTE_ID:
+          return "DehumidifierSetpointPrecision";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN_ATTRIBUTE_ID:
+          return "AutoSetpointMin";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX_ATTRIBUTE_ID:
+          return "AutoSetpointMax";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_ATTRIBUTE_ID:
+          return "AutoSetpoint";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ATTRIBUTE_ID:
+          return "AutoSetpointScale";
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ATTRIBUTE_ID:
+          return "AutoSetpointPrecision";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
       // clang-format on
     default:
       return "Unknown";
@@ -4409,6 +4486,87 @@ dotdot_attribute_id_t
         return DOTDOT_DESCRIPTOR_DEVICE_TYPE_LIST_ATTRIBUTE_ID;
       }
     break;
+    case DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID:
+      if (strcmp ("ZWaveFanMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveSupportedFanMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveFanState", attribute_name) == 0) {
+        return DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID;
+      }
+    break;
+    case DOTDOT_UNIFY_THERMOSTAT_CLUSTER_ID:
+      if (strcmp ("ThermostatMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_THERMOSTAT_THERMOSTAT_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportedThermostatMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("OperatingState", attribute_name) == 0) {
+        return DOTDOT_UNIFY_THERMOSTAT_OPERATING_STATE_ATTRIBUTE_ID;
+      }
+    break;
+    case DOTDOT_UNIFY_HUMIDITY_CONTROL_CLUSTER_ID:
+      if (strcmp ("ReportingMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportedReportingMode", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("CurrentState", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportedSetPoints", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_ATTRIBUTE_ID;
+      }
+      if (strcmp ("HumidifierSetpointMin", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN_ATTRIBUTE_ID;
+      }
+      if (strcmp ("HumidifierSetpointMax", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX_ATTRIBUTE_ID;
+      }
+      if (strcmp ("HumidifierSetpoint", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_ATTRIBUTE_ID;
+      }
+      if (strcmp ("HumidifierSetpointScale", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("HumidifierSetpointPrecision", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION_ATTRIBUTE_ID;
+      }
+      if (strcmp ("DehumidifierSetpointMin", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN_ATTRIBUTE_ID;
+      }
+      if (strcmp ("DehumidifierSetpointMax", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX_ATTRIBUTE_ID;
+      }
+      if (strcmp ("DehumidifierSetpoint", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_ATTRIBUTE_ID;
+      }
+      if (strcmp ("DehumidifierSetpointScale", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("DehumidifierSetpointPrecision", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION_ATTRIBUTE_ID;
+      }
+      if (strcmp ("AutoSetpointMin", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN_ATTRIBUTE_ID;
+      }
+      if (strcmp ("AutoSetpointMax", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX_ATTRIBUTE_ID;
+      }
+      if (strcmp ("AutoSetpoint", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_ATTRIBUTE_ID;
+      }
+      if (strcmp ("AutoSetpointScale", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("AutoSetpointPrecision", attribute_name) == 0) {
+        return DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ATTRIBUTE_ID;
+      }
+    break;
     default:
     return DOTDOT_INVALID_ATTRIBUTE_ID;
   }
@@ -6426,6 +6584,83 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_UNKNOWN;
       }
       // clang-format off
+    case DOTDOT_UNIFY_FAN_CONTROL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
+    case DOTDOT_UNIFY_THERMOSTAT_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_THERMOSTAT_THERMOSTAT_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_THERMOSTAT_OPERATING_STATE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
+    case DOTDOT_UNIFY_HUMIDITY_CONTROL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
       // clang-format on
     default:
       return JSON_TYPE_UNKNOWN;
@@ -6622,9 +6857,6 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
     if (16385 == attribute_id) {
       return true;
     }
-    if (16387 == attribute_id) {
-      return true;
-    }
   }
 
   if (769 == cluster_id) {
@@ -6772,6 +7004,42 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   }
 
   if (64787 == cluster_id) {
+  }
+
+  if (64788 == cluster_id) {
+    if (1 == attribute_id) {
+      return true;
+    }
+    if (3 == attribute_id) {
+      return true;
+    }
+  }
+
+  if (64789 == cluster_id) {
+    if (1 == attribute_id) {
+      return true;
+    }
+    if (3 == attribute_id) {
+      return true;
+    }
+  }
+
+  if (64928 == cluster_id) {
+    if (1 == attribute_id) {
+      return true;
+    }
+    if (3 == attribute_id) {
+      return true;
+    }
+    if (8 == attribute_id) {
+      return true;
+    }
+    if (13 == attribute_id) {
+      return true;
+    }
+    if (18 == attribute_id) {
+      return true;
+    }
   }
 
   return false;

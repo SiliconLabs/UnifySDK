@@ -153,6 +153,17 @@ PROCESS_THREAD(uic_stdin_process, ev, data)
           sl_log_error(LOG_TAG, "Failed to create pipe");
           exit(1);
         }
+        
+        // Set the read end of the pipe to non-blocking
+        int flags = fcntl(fildes[0], F_GETFL);
+        if (flags == -1) {
+          sl_log_warning(LOG_TAG, "Pipe flag read failed\n");
+        } else {
+          if (fcntl(fildes[0], F_SETFL, flags | O_NONBLOCK) == -1) {
+            sl_log_warning(LOG_TAG, "Pipe set NONBLOCK flag failed\n");
+          }
+        }
+        
         uic_main_ext_register_rfd(fildes[0], 0, &uic_stdin_process);
 
         sl_log_info(LOG_TAG, "Registering stdin fileno %d\n", fildes[0]);

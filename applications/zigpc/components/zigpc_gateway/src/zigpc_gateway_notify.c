@@ -82,11 +82,11 @@ sl_status_t zigpc_gateway_reset_observers(void)
  * @param network     Network properties.
  */
 void zigpc_gateway_hdl_on_network_initialized(
-  const EmberNetworkParameters *network)
+  const sl_zigbee_network_parameters_t *network)
 {
   static struct zigpc_gateway_on_network_init network_init = {0};
 
-  EmberEUI64 eui64_le;
+  sl_802154_long_addr_t eui64_le;
   zigbeeHostGetEui64(eui64_le);
   zigbee_eui64_copy_switch_endian(network_init.zigpc_eui64, eui64_le);
 
@@ -114,7 +114,7 @@ void zigpc_gateway_hdl_on_network_initialized(
  *
  * @param eui64_le  Joining node identifier in little endian
  */
-void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)
+void zigpc_gateway_hdl_on_node_add_start(const sl_802154_long_addr_t eui64_le)
 {
   sl_status_t status;
   static struct zigpc_gateway_on_node_add node_add = {0};
@@ -140,7 +140,7 @@ void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)
  *
  * @param eui64_le  Joined node identifier in little endian
  */
-void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le)
+void zigpc_gateway_hdl_on_node_add_complete(const sl_802154_long_addr_t eui64_le)
 {
   sl_status_t status;
   static struct zigpc_gateway_on_node_add node_add = {0};
@@ -163,7 +163,7 @@ void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le)
  *
  * @param eui64_le      Device identifier
  */
-void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le)
+void zigpc_gateway_hdl_on_node_removed(const sl_802154_long_addr_t eui64_le)
 {
   sl_status_t status;
   static zigpc_gateway_on_node_removed_t node_removed = {0};
@@ -190,7 +190,7 @@ void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le)
  * @param endpointList  List of endpoints discovered.
  */
 void zigpc_gateway_hdl_on_device_endpoints_discovered(
-  const EmberEUI64 eui64_le, uint8_t endpointCount, const uint8_t *endpointList)
+  const sl_802154_long_addr_t eui64_le, uint8_t endpointCount, const uint8_t *endpointList)
 {
   if ((eui64_le == NULL) || ((endpointCount > 0U) && (endpointList == NULL))) {
     return;
@@ -244,7 +244,7 @@ void zigpc_gateway_hdl_on_device_endpoints_discovered(
  * @param endpointInfo  Discovered endpoint information
  */
 void zigpc_gateway_hdl_on_endpoint_clusters_discovered(
-  const EmberEUI64 eui64_le, const EmberAfClusterList *endpointInfo)
+  const sl_802154_long_addr_t eui64_le, const sl_zigbee_af_cluster_list_t *endpointInfo)
 {
   if ((eui64_le == NULL) || (endpointInfo == NULL)) {
     return;
@@ -320,7 +320,7 @@ void zigpc_gateway_hdl_on_endpoint_clusters_discovered(
 }
 
 void zigpc_gateway_hdl_on_reported_attribute(
-  const EmberEUI64 eui64_le,
+  const sl_802154_long_addr_t eui64_le,
   uint8_t endpoint,
   uint16_t clusterId,
   uint8_t *attribute_status_records,
@@ -366,7 +366,7 @@ void zigpc_gateway_hdl_on_reported_attribute(
 }
 
 void zigpc_gateway_hdl_on_read_attributes(
-  const EmberEUI64 eui64_le,
+  const sl_802154_long_addr_t eui64_le,
   uint8_t endpoint,
   uint16_t clusterId,
   uint8_t *attribute_status_records,
@@ -411,7 +411,7 @@ void zigpc_gateway_hdl_on_read_attributes(
 }
 
 void zigpc_gateway_hdl_on_configure_response(
-  const EmberEUI64 eui64_le,
+  const sl_802154_long_addr_t eui64_le,
   uint8_t endpoint,
   uint16_t clusterId,
   uint8_t *attribute_status_records,
@@ -457,7 +457,7 @@ void zigpc_gateway_hdl_on_configure_response(
   }
 }
 
-EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le,
+sl_zigbee_af_status_t zigpc_gateway_hdl_on_cmd_received(const sl_802154_long_addr_t eui64_le,
                                                 uint8_t endpoint,
                                                 uint16_t clusterId,
                                                 uint8_t commandId,
@@ -518,10 +518,10 @@ EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le,
     }
   }
 
-  return (EmberAfStatus)command_received.return_status;
+  return (sl_zigbee_af_status_t)command_received.return_status;
 }
 
-void zigpc_gateway_hdl_on_ota_update_started(const EmberEUI64 eui64,
+void zigpc_gateway_hdl_on_ota_update_started(const sl_802154_long_addr_t eui64,
                                              uint16_t manufacturerId,
                                              uint16_t imageTypeId,
                                              uint32_t firmwareVersion)
@@ -546,11 +546,11 @@ void zigpc_gateway_hdl_on_ota_update_started(const EmberEUI64 eui64,
   }
 }
   
-void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
+void zigpc_gateway_hdl_on_ota_update_completed(const sl_802154_long_addr_t eui64,
                                                uint16_t manufacturerId,
                                                uint16_t imageTypeId,
                                                uint32_t firmwareVersion,
-                                               EmberAfStatus otaStatus)
+                                               sl_zigbee_af_status_t otaStatus)
 {
   sl_status_t status;
   static zigpc_gateway_on_ota_completed_t ota_event;
@@ -574,10 +574,10 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
 }
 
 void zigpc_gateway_hdl_bind_unbind_response( 
-        const EmberEUI64 sourceEui64,
+        const sl_802154_long_addr_t sourceEui64,
         uint8_t sourceEndpoint,
         uint16_t clusterId,
-        const EmberEUI64 destEui64,
+        const sl_802154_long_addr_t destEui64,
         uint8_t destEndpoint,
         bool isBindResponse,
         uint8_t zdoStatus)

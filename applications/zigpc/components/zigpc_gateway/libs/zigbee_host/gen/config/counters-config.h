@@ -18,10 +18,10 @@
 
 // <h>Zigbee Counters configuration
 
-// <q EMBER_AF_PLUGIN_COUNTERS_OTA> Retrieve counters over the air
+// <q SL_ZIGBEE_AF_PLUGIN_COUNTERS_OTA> Retrieve counters over the air
 // <i> Default: FALSE
 // <i> This will provide the ability to retreive counters over the air
-#define EMBER_AF_PLUGIN_COUNTERS_OTA   0
+#define SL_ZIGBEE_AF_PLUGIN_COUNTERS_OTA   0
 
 // </h>
 

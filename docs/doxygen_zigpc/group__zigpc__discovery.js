@@ -1,10 +1,10 @@
 var group__zigpc__discovery =
 [
     [ "ZigPC Discovery Internal API", "group__zigpc__discovery__int.html", "group__zigpc__discovery__int" ],
-    [ "ZigPC Discovery Internal Callback Storage", "group__zigpc__discovery__callbacks.html", null ],
-    [ "ZigPC Discovery Internal Event Handlers", "group__zigpc__discovery__events.html", null ],
-    [ "ZigPC Discovery Internal Process Queue", "group__zigpc__discovery__process.html", null ],
-    [ "ZigPC Discovery Internal Timers", "group__zigpc__discovery__timers.html", null ],
+    [ "ZigPC Discovery Internal Callback Storage", "group__zigpc__discovery__callbacks.html", "group__zigpc__discovery__callbacks" ],
+    [ "ZigPC Discovery Internal Event Handlers", "group__zigpc__discovery__events.html", "group__zigpc__discovery__events" ],
+    [ "ZigPC Discovery Internal Process Queue", "group__zigpc__discovery__process.html", "group__zigpc__discovery__process" ],
+    [ "ZigPC Discovery Internal Timers", "group__zigpc__discovery__timers.html", "group__zigpc__discovery__timers" ],
     [ "zigpc_discovery_status_callback_t", "group__zigpc__discovery.html#ga6c34aaeae5ea48d94061b25cee9b1c10", null ],
     [ "zigpc_discovery_status_t", "group__zigpc__discovery.html#ga543d71d18dc98f5df14473697240f16d", null ],
     [ "zigpc_discovery_status", "group__zigpc__discovery.html#ga27e620a3df405a9a7866f934a0858c0c", [

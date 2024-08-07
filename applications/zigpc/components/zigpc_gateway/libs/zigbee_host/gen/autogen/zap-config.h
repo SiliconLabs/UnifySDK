@@ -11,166 +11,187 @@
 // binary blob. All attribute values with size greater than 2 bytes. Excluding 0
 // values and externally saved values. Separate block is generated for
 // big-endian and little-endian cases.
-#define GENERATED_DEFAULTS_COUNT (0)
-#if BIGENDIAN_CPU
-#define GENERATED_DEFAULTS { \
-}
-#else //!BIGENDIAN_CPU
-#define GENERATED_DEFAULTS { \
-}
-#endif
+
+#define ZCL_GENERATED_DEFAULTS_COUNT (0)
+#define ZCL_GENERATED_DEFAULTS { }
 
 
-// This is an array of EmberAfAttributeMinMaxValue structures.
-#define GENERATED_MIN_MAX_DEFAULT_COUNT (0)
-#define GENERATED_MIN_MAX_DEFAULTS { \
-}
+// This is an array of sl_zigbee_af_attribute_min_max_value_t structures.
 
-#define GENERATED_ATTRIBUTE_COUNT (18)
-// This is an array of EmberAfAttributeMetadata structures.
-#define GENERATED_ATTRIBUTES { \
+#define ZCL_GENERATED_MIN_MAX_DEFAULT_COUNT (0)
+	#define ZCL_GENERATED_MIN_MAX_DEFAULTS { }
+
+
+#define ZCL_GENERATED_ATTRIBUTE_COUNT (25)
+
+// This is an array of sl_zigbee_af_attribute_metadata_t structures.
+#define ZCL_GENERATED_ATTRIBUTES { \
   { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT| ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)3  } }, /* 0 Cluster: Basic, Attribute: cluster revision, Side: client*/ \
-	  { 0x0000, ZCL_INT8U_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)0x08  } }, /* 1 Cluster: Basic, Attribute: ZCL version, Side: server*/ \
-	  { 0x0007, ZCL_ENUM8_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)0x00  } }, /* 2 Cluster: Basic, Attribute: power source, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)3  } }, /* 3 Cluster: Basic, Attribute: cluster revision, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 4 Cluster: Identify, Attribute: cluster revision, Side: client*/ \
-	  { 0x0000, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_WRITABLE), { (uint8_t*)0x0000  } }, /* 5 Cluster: Identify, Attribute: identify time, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)2  } }, /* 6 Cluster: Identify, Attribute: cluster revision, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 7 Cluster: Groups, Attribute: cluster revision, Side: client*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 8 Cluster: On/off, Attribute: cluster revision, Side: client*/ \
-	  { 0x0000, ZCL_BOOLEAN_ATTRIBUTE_TYPE, 1, (0x00), { (uint8_t*)0x00  } }, /* 9 Cluster: On/off, Attribute: on/off, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)2  } }, /* 10 Cluster: On/off, Attribute: cluster revision, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 11 Cluster: Level Control, Attribute: cluster revision, Side: client*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)4  } }, /* 12 Cluster: Over the Air Bootloading, Attribute: cluster revision, Side: server*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 13 Cluster: Poll Control, Attribute: cluster revision, Side: client*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 14 Cluster: Door Lock, Attribute: cluster revision, Side: client*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 15 Cluster: Thermostat, Attribute: cluster revision, Side: client*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 16 Cluster: Color Control, Attribute: cluster revision, Side: client*/ \
-	  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } } /* 17 Cluster: Occupancy Sensing, Attribute: cluster revision, Side: client*/ \
-	}
+		  { 0x0000, ZCL_INT8U_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)0x08  } }, /* 1 Cluster: Basic, Attribute: ZCL version, Side: server*/ \
+		  { 0x0007, ZCL_ENUM8_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)0x00  } }, /* 2 Cluster: Basic, Attribute: power source, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)3  } }, /* 3 Cluster: Basic, Attribute: cluster revision, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 4 Cluster: Identify, Attribute: cluster revision, Side: client*/ \
+		  { 0x0000, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_WRITABLE), { (uint8_t*)0x0000  } }, /* 5 Cluster: Identify, Attribute: identify time, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)2  } }, /* 6 Cluster: Identify, Attribute: cluster revision, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 7 Cluster: Groups, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 8 Cluster: On/off, Attribute: cluster revision, Side: client*/ \
+		  { 0x0000, ZCL_BOOLEAN_ATTRIBUTE_TYPE, 1, (0x00), { (uint8_t*)0x00  } }, /* 9 Cluster: On/off, Attribute: on/off, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)2  } }, /* 10 Cluster: On/off, Attribute: cluster revision, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 11 Cluster: Level Control, Attribute: cluster revision, Side: client*/ \
+		  { 0x0000, ZCL_UTC_TIME_ATTRIBUTE_TYPE, 4, (ATTRIBUTE_MASK_WRITABLE| ATTRIBUTE_MASK_SINGLETON), { NULL } }, /* 12 Cluster: Time, Attribute: time, Side: server*/ \
+	  { 0x0001, ZCL_BITMAP8_ATTRIBUTE_TYPE, 1, (ATTRIBUTE_MASK_WRITABLE| ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)0x00  } }, /* 13 Cluster: Time, Attribute: time status, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_SINGLETON), { (uint8_t*)2  } }, /* 14 Cluster: Time, Attribute: cluster revision, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (0x00), { (uint8_t*)4  } }, /* 15 Cluster: Over the Air Bootloading, Attribute: cluster revision, Side: server*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)0x0001  } }, /* 16 Cluster: Power Profile, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 17 Cluster: Poll Control, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 18 Cluster: Door Lock, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 19 Cluster: Thermostat, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)3  } }, /* 20 Cluster: Color Control, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 21 Cluster: Occupancy Sensing, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 22 Cluster: Simple Metering, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)2  } }, /* 23 Cluster: Meter Identification, Attribute: cluster revision, Side: client*/ \
+		  { 0xFFFD, ZCL_INT16U_ATTRIBUTE_TYPE, 2, (ATTRIBUTE_MASK_CLIENT), { (uint8_t*)0x0001  } } /* 24 Cluster: Appliance Statistics, Attribute: cluster revision, Side: client*/ \
+		 }
 
-#define GENERATED_CLUSTER_COUNT (14)
-// This is an array of EmberAfCluster structures.
-#define GENERATED_CLUSTERS { \
-  { 0x0000, (EmberAfAttributeMetadata*)&(generatedAttributes[0]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 0, Endpoint Id: 1, Cluster: Basic, Side: client*/ \
-  { 0x0000, (EmberAfAttributeMetadata*)&(generatedAttributes[1]), 3, 4, CLUSTER_MASK_SERVER, NULL }, /* 1, Endpoint Id: 1, Cluster: Basic, Side: server*/ \
-  { 0x0003, (EmberAfAttributeMetadata*)&(generatedAttributes[4]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 2, Endpoint Id: 1, Cluster: Identify, Side: client*/ \
-  { 0x0003, (EmberAfAttributeMetadata*)&(generatedAttributes[5]), 2, 4, CLUSTER_MASK_SERVER, NULL }, /* 3, Endpoint Id: 1, Cluster: Identify, Side: server*/ \
-  { 0x0004, (EmberAfAttributeMetadata*)&(generatedAttributes[7]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 4, Endpoint Id: 1, Cluster: Groups, Side: client*/ \
-  { 0x0006, (EmberAfAttributeMetadata*)&(generatedAttributes[8]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 5, Endpoint Id: 1, Cluster: On/off, Side: client*/ \
-  { 0x0006, (EmberAfAttributeMetadata*)&(generatedAttributes[9]), 2, 3, CLUSTER_MASK_SERVER, NULL }, /* 6, Endpoint Id: 1, Cluster: On/off, Side: server*/ \
-  { 0x0008, (EmberAfAttributeMetadata*)&(generatedAttributes[11]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 7, Endpoint Id: 1, Cluster: Level Control, Side: client*/ \
-  { 0x0019, (EmberAfAttributeMetadata*)&(generatedAttributes[12]), 1, 2, CLUSTER_MASK_SERVER, NULL }, /* 8, Endpoint Id: 1, Cluster: Over the Air Bootloading, Side: server*/ \
-  { 0x0020, (EmberAfAttributeMetadata*)&(generatedAttributes[13]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 9, Endpoint Id: 1, Cluster: Poll Control, Side: client*/ \
-  { 0x0101, (EmberAfAttributeMetadata*)&(generatedAttributes[14]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 10, Endpoint Id: 1, Cluster: Door Lock, Side: client*/ \
-  { 0x0201, (EmberAfAttributeMetadata*)&(generatedAttributes[15]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 11, Endpoint Id: 1, Cluster: Thermostat, Side: client*/ \
-  { 0x0300, (EmberAfAttributeMetadata*)&(generatedAttributes[16]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 12, Endpoint Id: 1, Cluster: Color Control, Side: client*/ \
-  { 0x0406, (EmberAfAttributeMetadata*)&(generatedAttributes[17]), 1, 2, CLUSTER_MASK_CLIENT, NULL } /* 13, Endpoint Id: 1, Cluster: Occupancy Sensing, Side: client*/ \
-}
+ 
 
-#define GENERATED_ENDPOINT_TYPE_COUNT (1)
-// This is an array of EmberAfEndpointType structures.
-#define GENERATED_ENDPOINT_TYPES { \
-  { ((EmberAfCluster*)&(generatedClusters[0])), 14, 33 }, \
-}
+#define ZCL_GENERATED_CLUSTER_COUNT (19)
+	
+// This is an array of sl_zigbee_af_cluster_t structures.
+#define ZCL_GENERATED_CLUSTERS { \
+  { 0x0000, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[0]), 1, 0, CLUSTER_MASK_CLIENT, NULL }, /* 0, Endpoint Id: 1, Cluster: Basic, Side: client*/ \
+	  { 0x0000, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[1]), 3, 0, CLUSTER_MASK_SERVER, NULL }, /* 1, Endpoint Id: 1, Cluster: Basic, Side: server*/ \
+	  { 0x0003, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[4]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 2, Endpoint Id: 1, Cluster: Identify, Side: client*/ \
+	  { 0x0003, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[5]), 2, 4, CLUSTER_MASK_SERVER, NULL }, /* 3, Endpoint Id: 1, Cluster: Identify, Side: server*/ \
+	  { 0x0004, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[7]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 4, Endpoint Id: 1, Cluster: Groups, Side: client*/ \
+	  { 0x0006, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[8]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 5, Endpoint Id: 1, Cluster: On/off, Side: client*/ \
+	  { 0x0006, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[9]), 2, 3, CLUSTER_MASK_SERVER, NULL }, /* 6, Endpoint Id: 1, Cluster: On/off, Side: server*/ \
+	  { 0x0008, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[11]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 7, Endpoint Id: 1, Cluster: Level Control, Side: client*/ \
+	  { 0x000A, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[12]), 3, 0, CLUSTER_MASK_SERVER, NULL }, /* 8, Endpoint Id: 1, Cluster: Time, Side: server*/ \
+	  { 0x0019, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[15]), 1, 2, CLUSTER_MASK_SERVER, NULL }, /* 9, Endpoint Id: 1, Cluster: Over the Air Bootloading, Side: server*/ \
+	  { 0x001A, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[16]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 10, Endpoint Id: 1, Cluster: Power Profile, Side: client*/ \
+	  { 0x0020, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[17]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 11, Endpoint Id: 1, Cluster: Poll Control, Side: client*/ \
+	  { 0x0101, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[18]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 12, Endpoint Id: 1, Cluster: Door Lock, Side: client*/ \
+	  { 0x0201, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[19]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 13, Endpoint Id: 1, Cluster: Thermostat, Side: client*/ \
+	  { 0x0300, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[20]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 14, Endpoint Id: 1, Cluster: Color Control, Side: client*/ \
+	  { 0x0406, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[21]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 15, Endpoint Id: 1, Cluster: Occupancy Sensing, Side: client*/ \
+	  { 0x0702, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[22]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 16, Endpoint Id: 1, Cluster: Simple Metering, Side: client*/ \
+	  { 0x0B01, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[23]), 1, 2, CLUSTER_MASK_CLIENT, NULL }, /* 17, Endpoint Id: 1, Cluster: Meter Identification, Side: client*/ \
+	  { 0x0B03, (sl_zigbee_af_attribute_metadata_t*)&(generatedAttributes[24]), 1, 2, CLUSTER_MASK_CLIENT, NULL } /* 18, Endpoint Id: 1, Cluster: Appliance Statistics, Side: client*/ \
+	 }
 
+ 
+#define ZCL_GENERATED_ENDPOINT_TYPE_COUNT (1)
+
+// This is an array of sl_zigbee_af_endpoint_type_t structures.
+#define ZCL_GENERATED_ENDPOINT_TYPES { \
+  { ((sl_zigbee_af_cluster_t*)&(generatedClusters[0])), 19, 35 }, \
+	 } 
 // Largest attribute size is needed for various buffers
-#define ATTRIBUTE_LARGEST (2)
+#define ZCL_ATTRIBUTE_LARGEST (4)
 
 // Total size of singleton attributes
-#define ATTRIBUTE_SINGLETONS_SIZE (6)
+#define ZCL_ATTRIBUTE_SINGLETONS_SIZE (13)
 
 // Total size of attribute storage
-#define ATTRIBUTE_MAX_SIZE (33)
+#define ZCL_ATTRIBUTE_MAX_SIZE (35)
 
-// Number of fixed endpoints
-#define FIXED_ENDPOINT_COUNT (1)
+// Number of fixed endpoints	
+#define ZCL_FIXED_ENDPOINT_COUNT (1)
 
 // Array of endpoints that are supported, the data inside the array is the
 // endpoint number.
-#define FIXED_ENDPOINT_ARRAY { \
+#define ZCL_FIXED_ENDPOINT_ARRAY { \
   1 \
 }
 
 // Array of profile ids
-#define FIXED_PROFILE_IDS { \
+#define ZCL_FIXED_PROFILE_IDS { \
   260 \
 }
 
 // Array of device ids
-#define FIXED_DEVICE_IDS { \
+#define ZCL_FIXED_DEVICE_IDS { \
   80 \
 }
 
 // Array of device versions
-#define FIXED_DEVICE_VERSIONS { \
+#define ZCL_FIXED_DEVICE_VERSIONS { \
   1 \
 }
 
 // Array of endpoint types supported on each endpoint
-#define FIXED_ENDPOINT_TYPES { \
+#define ZCL_FIXED_ENDPOINT_TYPES { \
   0 \
 }
 
 // Array of networks supported on each endpoint
-#define FIXED_NETWORKS { \
+#define ZCL_FIXED_NETWORKS { \
   0 \
 }
 
 
 
-// This is an array of EmberAfManufacturerCodeEntry structures for clusters.
-#define GENERATED_CLUSTER_MANUFACTURER_CODE_COUNT (0)
-#define GENERATED_CLUSTER_MANUFACTURER_CODES { \
+// This is an array of sl_zigbee_af_manufacturer_code_entry_t structures for clusters.
+#define ZCL_GENERATED_CLUSTER_MANUFACTURER_CODE_COUNT (0)
+#define ZCL_GENERATED_CLUSTER_MANUFACTURER_CODES { \
   { 0x00, 0x00 }  \
-}
-
-// This is an array of EmberAfManufacturerCodeEntry structures for attributes.
-#define GENERATED_ATTRIBUTE_MANUFACTURER_CODE_COUNT (0)
-#define GENERATED_ATTRIBUTE_MANUFACTURER_CODES { \
+																			 } 
+// This is an array of sl_zigbee_af_manufacturer_code_entry_t structures for attributes.
+#define ZCL_GENERATED_ATTRIBUTE_MANUFACTURER_CODE_COUNT (0)
+#define ZCL_GENERATED_ATTRIBUTE_MANUFACTURER_CODES { \
   { 0x00, 0x00 } \
-}
+																									 } 
+// Array of sl_zigbee_af_plugin_reporting_entry_t structures.
+#define SL_ZIGBEE_ZCL_GENERATED_REPORTING_CONFIG_DEFAULTS_TABLE_SIZE (1)
+#define SL_ZIGBEE_ZCL_GENERATED_REPORTING_CONFIG_DEFAULTS { \
+  { SL_ZIGBEE_ZCL_REPORTING_DIRECTION_REPORTED, 0x0001, 0x0006, 0x0000, CLUSTER_MASK_SERVER, 0x0000, 1, 65534, 0 }, /* Endpoint Id: 1, Cluster: On/off, Attribute: on/off */ \
+	 } 
 
-// Array of EmberAfPluginReportingEntry structures.
-#define EMBER_AF_GENERATED_REPORTING_CONFIG_DEFAULTS_TABLE_SIZE (1)
-#define EMBER_AF_GENERATED_REPORTING_CONFIG_DEFAULTS { \
-  { EMBER_ZCL_REPORTING_DIRECTION_REPORTED, 0x0001, 0x0006, 0x0000, CLUSTER_MASK_SERVER, 0x0000, 1, 65534, 0 }, /* Endpoint Id: 1, Cluster: On/off, Attribute: on/off */ \
-}
-
-#define EMBER_AF_MANUFACTURER_CODE 0x1049
-#define EMBER_AF_DEFAULT_RESPONSE_POLICY_CONDITIONAL
+#define SL_ZIGBEE_ZCL_MANUFACTURER_CODE 0x1049
+#define SL_ZIGBEE_AF_DEFAULT_RESPONSE_POLICY_CONDITIONAL
 
 // All Enabled Clusters
 #define ZCL_USING_BASIC_CLUSTER_CLIENT
 #define ZCL_USING_BASIC_CLUSTER_SERVER
-#define ZCL_USING_COLOR_CONTROL_CLUSTER_CLIENT
-#define ZCL_USING_DOOR_LOCK_CLUSTER_CLIENT
-#define ZCL_USING_GROUPS_CLUSTER_CLIENT
 #define ZCL_USING_IDENTIFY_CLUSTER_CLIENT
 #define ZCL_USING_IDENTIFY_CLUSTER_SERVER
-#define ZCL_USING_LEVEL_CONTROL_CLUSTER_CLIENT
-#define ZCL_USING_OCCUPANCY_SENSING_CLUSTER_CLIENT
+#define ZCL_USING_GROUPS_CLUSTER_CLIENT
 #define ZCL_USING_ON_OFF_CLUSTER_CLIENT
 #define ZCL_USING_ON_OFF_CLUSTER_SERVER
+#define ZCL_USING_LEVEL_CONTROL_CLUSTER_CLIENT
+#define ZCL_USING_TIME_CLUSTER_SERVER
 #define ZCL_USING_OTA_BOOTLOAD_CLUSTER_SERVER
+#define ZCL_USING_POWER_PROFILE_CLUSTER_CLIENT
 #define ZCL_USING_POLL_CONTROL_CLUSTER_CLIENT
+#define ZCL_USING_DOOR_LOCK_CLUSTER_CLIENT
 #define ZCL_USING_THERMOSTAT_CLUSTER_CLIENT
+#define ZCL_USING_COLOR_CONTROL_CLUSTER_CLIENT
+#define ZCL_USING_OCCUPANCY_SENSING_CLUSTER_CLIENT
+#define ZCL_USING_SIMPLE_METERING_CLUSTER_CLIENT
+#define ZCL_USING_METER_IDENTIFICATION_CLUSTER_CLIENT
+#define ZCL_USING_APPLIANCE_STATISTICS_CLUSTER_CLIENT
 
 // Cluster Counts
-#define EMBER_AF_BASIC_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_BASIC_CLUSTER_SERVER_ENDPOINT_COUNT (1)
-#define EMBER_AF_COLOR_CONTROL_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_DOOR_LOCK_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_GROUPS_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_IDENTIFY_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_IDENTIFY_CLUSTER_SERVER_ENDPOINT_COUNT (1)
-#define EMBER_AF_LEVEL_CONTROL_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_OCCUPANCY_SENSING_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_ON_OFF_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_ON_OFF_CLUSTER_SERVER_ENDPOINT_COUNT (1)
-#define EMBER_AF_OTA_BOOTLOAD_CLUSTER_SERVER_ENDPOINT_COUNT (1)
-#define EMBER_AF_POLL_CONTROL_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
-#define EMBER_AF_THERMOSTAT_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_BASIC_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_BASIC_CLUSTER_SERVER_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_IDENTIFY_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_IDENTIFY_CLUSTER_SERVER_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_GROUPS_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_ON_OFF_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_ON_OFF_CLUSTER_SERVER_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_LEVEL_CONTROL_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_TIME_CLUSTER_SERVER_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_OTA_BOOTLOAD_CLUSTER_SERVER_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_POWER_PROFILE_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_POLL_CONTROL_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_DOOR_LOCK_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_THERMOSTAT_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_COLOR_CONTROL_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_OCCUPANCY_SENSING_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_SIMPLE_METERING_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_METER_IDENTIFICATION_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
+#define SL_ZIGBEE_ZCL_APPLIANCE_STATISTICS_CLUSTER_CLIENT_ENDPOINT_COUNT (1)
 
 // All Enabled Cluster Attributes
 #define ZCL_USING_BASIC_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
@@ -185,12 +206,19 @@
 #define ZCL_USING_ON_OFF_CLUSTER_ON_OFF_ATTRIBUTE
 #define ZCL_USING_ON_OFF_CLUSTER_CLUSTER_REVISION_SERVER_ATTRIBUTE
 #define ZCL_USING_LEVEL_CONTROL_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
+#define ZCL_USING_TIME_CLUSTER_TIME_ATTRIBUTE
+#define ZCL_USING_TIME_CLUSTER_TIME_STATUS_ATTRIBUTE
+#define ZCL_USING_TIME_CLUSTER_CLUSTER_REVISION_SERVER_ATTRIBUTE
 #define ZCL_USING_OTA_BOOTLOAD_CLUSTER_CLUSTER_REVISION_SERVER_ATTRIBUTE
+#define ZCL_USING_POWER_PROFILE_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
 #define ZCL_USING_POLL_CONTROL_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
 #define ZCL_USING_DOOR_LOCK_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
 #define ZCL_USING_THERMOSTAT_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
 #define ZCL_USING_COLOR_CONTROL_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
 #define ZCL_USING_OCCUPANCY_SENSING_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
+#define ZCL_USING_SIMPLE_METERING_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
+#define ZCL_USING_METER_IDENTIFICATION_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
+#define ZCL_USING_APPLIANCE_STATISTICS_CLUSTER_CLUSTER_REVISION_CLIENT_ATTRIBUTE
 
 
 

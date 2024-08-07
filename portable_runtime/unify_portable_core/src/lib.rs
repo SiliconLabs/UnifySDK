@@ -258,11 +258,38 @@ pub fn silink_inspect() -> Result<String, &'static str> {
     }
 }
 
+pub fn silink_list() -> Result<String, &'static str> {
+    _ = silink_prepare().expect("Failed to set execution permissions for Silink.");
+    match run_cmd!([SILINK_PATH.to_str().unwrap(), "-list"]).output() {
+        Ok(result) => {
+            Ok(String::from_utf8_lossy(&result.stdout).to_string())
+        }
+        Err(_) => Err("Failed to start Silink!")
+    }
+}
+
+pub fn commander_adapter_probe(serial_number: &str) -> Result<String, &'static str> {
+    let commander_path = commander_prepare().unwrap();
+    match run_cmd!([commander_path, "adapter", "probe", "-s", serial_number]).output() {
+        Ok(result) => {
+            Ok(String::from_utf8_lossy(&result.stdout).to_string())
+        }
+        Err(_) => Err("Failed to start commander!")
+    }
+}
+
 pub fn set_zpc_device(device_str: &str) {
     match IpAddr::from_str(device_str) {
         Ok(_)  => set_env_var("ZPC_DEVICE_IP", device_str),
         Err(_) => set_env_var("ZPC_DEVICE_TTY", device_str)
     }
+}
+pub fn set_emd_device_type_arg(arg_str: &str) {
+    set_env_var("EMD_DEVICE_TYPE_ARG", arg_str);
+}
+
+pub fn set_emd_cluster_arg(arg_str: &str) {
+    set_env_var("EMD_CLUSTER_ARG", arg_str);
 }
 
 pub fn set_zpc_config_args(arg_str: &str) {
@@ -307,6 +334,7 @@ lazy_static! {
             ("GMS", "unify-gms"),
             ("UPVL", "unify-upvl"),
             ("UMB","unify-matter-bridge"),
+            ("EED","unify-emd"),
         ])
     };
 }
@@ -316,7 +344,7 @@ lazy_static! {
 //  Ensure to sync it with keys from above HashMap
 pub static PROTCOL_MODULE_LIST:[&str; 4] = ["Z-Wave", "Zigbee-NCP", "AoX-Bluetooth", "MultiProtocol"];
 pub static HELPER_MODULE_LIST:[&str; 4] = ["NAL", "Image-Provider", "GMS", "UPVL"];
-pub static APPLICATIONS_LIST:[&str; 1] = ["UMB"];
+pub static APPLICATIONS_LIST:[&str; 2] = ["UMB", "EED"];
 
 // Update the below function to indicate conflicts in current configuration in return value
 //   Currently it is bool since only one PC is supported update needed when more gets added.
@@ -328,8 +356,9 @@ pub fn validate_configuration(service_list: &str) -> Vec<(&str, &str)> {
         let mut zigbee_ncp_or_multi_protocol_configured = false;
         let services = service_list.split(',');
         services.for_each( |x| match x {
-            "Z-Wave" | "AoX-Bluetooth" => {
+            "Z-Wave" | "AoX-Bluetooth" | "EED" => {
                 protocol_service_configured = true;
+                conflict_list.clear();
                 // Also check if device config conflicts that of other PCs/Services
             },
             "Zigbee-NCP" | "MultiProtocol" => {
@@ -422,6 +451,7 @@ lazy_static! {
             (7, "RU"),
             (8, "CN"),
             (9, "US_LR"),
+            (11, "EU_LR"),
             (32, "JP"),
             (33, "KR"),
         ])
@@ -538,9 +568,8 @@ fn read_freq(serial_number: &str, proccesor_type: Option<&str>) -> Option<String
 
 pub fn filtered_mapped_devices(silink_result_tmp: &str, mapped_devices: Vec<String>) -> Result<String, &'static str>{    
     let mut filtered_string = silink_result_tmp.to_string().clone();
-
-    let re_device = Regex::new(r#"(\{(.|\n)*?\})"#).unwrap();
-    let re_serial = Regex::new(r#"serialNumber=([0-9]{9})"#).unwrap();
+    let re_device = Regex::new(r#"(?m)^\d+: (\d+),"#).unwrap();
+    let re_serial = Regex::new(r#"([0-9]{9})"#).unwrap();
 
    for mapped_device in mapped_devices {
       let devices_to_remove: Vec<_> = re_device
@@ -567,10 +596,9 @@ pub fn filtered_mapped_devices(silink_result_tmp: &str, mapped_devices: Vec<Stri
 
 pub fn list_devices(silink_result_tmp: &str, print_output: bool) -> Vec<DeviceInfo> {
     let new_string = silink_result_tmp.to_string();
-
-    let re_device = Regex::new(r#"(\{(.|\n)*?\})"#).unwrap();
-    let re_serial = Regex::new(r#"serialNumber=([0-9]{9})"#).unwrap();
-    let re_board  = Regex::new(r#"boardSerial\[0\]=([0-9]{9})"#).unwrap();
+    let re_device = Regex::new(r#"(?m)^\d+: (\d+),"#).unwrap();
+    let re_serial = Regex::new(r#"([0-9]{9})"#).unwrap();
+    let re_board  = Regex::new(r#"Serial Number\s*:\s*([0-9]{9})"#).unwrap();
 
     if print_output {
         println!("{: >10} | {: <10} | {: <9} | {: <5} | {: <29}",
@@ -585,8 +613,8 @@ pub fn list_devices(silink_result_tmp: &str, print_output: bool) -> Vec<DeviceIn
             let device_string = device.as_str().to_owned();
             let serial_number = re_serial.captures(&device_string)
                 .unwrap()[1].to_owned();
-            let board_number = re_board.captures(&device_string)
-                .unwrap()[1].to_owned();
+            let board_string = commander_adapter_probe(&serial_number).unwrap();
+            let board_number = re_board.captures(&board_string).unwrap()[1].to_owned();
             let frequency = read_freq(&serial_number, None);
             if print_output {
                 print!("{: >10} | {: <10} | {: <9} | {: <5} | ",

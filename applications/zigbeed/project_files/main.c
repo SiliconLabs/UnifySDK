@@ -28,9 +28,9 @@
 #endif  // SL_CATALOG_KERNEL_PRESENT
 
 #include PLATFORM_HEADER
-#include "ember.h"
+#include "sl_zigbee.h"
 
-#ifdef EMBER_TEST
+#if defined(SL_ZIGBEE_TEST) || defined(ZIGBEE_STACK_ON_HOST)
 #include "serial/serial.h"
 #endif
 
@@ -41,6 +41,7 @@
 extern void app_process_args(int argc, char *argv[]);
 #ifdef __linux__
 #include <sys/prctl.h>
+#include <stdio.h>
 #endif
 
 jmp_buf gResetJump;
@@ -53,12 +54,12 @@ extern uint8_t simulatorEncryptionType;
 
 void app_init(void)
 {
-#if defined(EMBER_TEST)
+#if defined(SL_ZIGBEE_TEST) || defined(ZIGBEE_STACK_ON_HOST)
   // In simulation we still rely on the ember serial driver.
-  assert(emberSerialInit((uint8_t)APP_SERIAL,
-                         (SerialBaudRate)APP_BAUD_RATE,
-                         (SerialParity)PARITY_NONE,
-                         1) == EMBER_SUCCESS);
+  assert(sli_legacy_serial_init((uint8_t)APP_SERIAL,
+                                (SerialBaudRate)APP_BAUD_RATE,
+                                (SerialParity)PARITY_NONE,
+                                1) == SL_STATUS_OK);
 #endif
 
 #if defined(SL_CATALOG_POWER_MANAGER_PRESENT)
@@ -76,7 +77,7 @@ void app_process_action(void)
 
 #ifdef UNIX_HOST
 int main(int argc, char *argv[])
-#elif EMBER_TEST
+#elif SL_ZIGBEE_TEST
 int nodeMain(void)
 #else
 int main(void)

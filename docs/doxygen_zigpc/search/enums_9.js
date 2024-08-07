@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['last_5ferror_5ft_39022',['last_error_t',['../namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394',1,'uic_ota']]],
-  ['load_5ftype_39023',['load_type',['../classzigpc__cpu__load__metric.html#a9753497baede2d78b12ef4db0154721a',1,'zigpc_cpu_load_metric']]],
-  ['logginglevelenum_39024',['LoggingLevelEnum',['../group__zap.html#gab6dc0251aeb5dcaa1f83f77472f8c978',1,'zap-types.h']]]
+  ['last_5ferror_5ft_0',['last_error_t',['../namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394',1,'uic_ota']]],
+  ['load_5ftype_1',['load_type',['../classzigpc__cpu__load__metric.html#a9753497baede2d78b12ef4db0154721a',1,'zigpc_cpu_load_metric']]],
+  ['logginglevelenum_2',['LoggingLevelEnum',['../group__zap.html#gab6dc0251aeb5dcaa1f83f77472f8c978',1,'zap-types.h']]]
 ];

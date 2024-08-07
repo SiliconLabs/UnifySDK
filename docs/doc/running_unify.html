@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Running Unify on Raspberry Pi &mdash; Unify Host SDK</title>
+  <title>Setting up Raspberry Pi for Unify &mdash; Unify Host SDK</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
@@ -25,9 +25,7 @@
         <script src="../_static/js/qr_code_scanner.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Z-Wave (ZPC)" href="protocol/zwave/running_zpc.html" />
-    <link rel="prev" title="Unify Overview" href="introduction.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,14 +47,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Running Unify on Raspberry Pi</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="protocol/zwave/running_zpc.html">Z-Wave (ZPC)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol/zigbee/running_zigpc.html">Zigbee (ZigPC)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Multiprotocol Setup</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
@@ -93,11 +86,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="running-unify-on-raspberry-pi">
-<h1>Running Unify on Raspberry Pi<a class="headerlink" href="#running-unify-on-raspberry-pi" title="Permalink to this heading"></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="setting-up-raspberry-pi-for-unify">
+<h1>Setting up Raspberry Pi for Unify<a class="headerlink" href="#setting-up-raspberry-pi-for-unify" title="Permalink to this heading"></a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
-<p>Here we explain how to get up and running quickly to test out Unify on the Raspberry Pi reference platform. Depending on the protocol(s) used this setup may vary so there are several sections that go into more detail for each protocol controller. This page contains the steps to install Unify on the Raspberry Pi regardless of the protocol(s) used.</p>
+<p>Here we explain how to set up and running quickly to test out Unify on the Raspberry Pi reference platform. Depending on the protocol(s) used this setup may vary so there are several sections that go into more detail for each protocol controller. This page contains the steps to install Unify on the Raspberry Pi regardless of the protocol(s) used.</p>
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
@@ -115,7 +108,7 @@
 <li><p><a class="reference external" href="https://filezilla-project.org">Filezilla</a></p></li>
 <li><p><a class="reference external" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a></p></li>
 <li><p><a class="reference external" href="https://www.putty.org">Putty</a></p></li>
-<li><p><a class="reference external" href="https://www.raspberrypi.com/software/operating-systems/">Raspberry Pi Bullseye OS 64 bit image</a></p></li>
+<li><p><a class="reference external" href="https://www.raspberrypi.com/software/operating-systems/">Raspberry Pi Bookworm OS 64 bit image</a></p></li>
 </ul>
 </li>
 </ul>
@@ -189,20 +182,8 @@
 <p><a class="reference internal" href="protocol/zigbee/running_zigpc.html"><span class="doc std std-doc">Zigbee (ZigPC)</span></a></p>
 <div class="toctree-wrapper compound">
 </div>
-<p><span class="xref myst">Matter</span></p>
-<div class="toctree-wrapper compound">
-</div>
+<p><a class="reference internal" href="protocol/matter/matter_mpc.html"><span class="doc std std-doc">Matter Protocol Controller</span></a></p>
 <p><a class="reference internal" href="getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol</span></a></p>
-<div class="toctree-wrapper compound">
-</div>
-</section>
-<section id="portable-runtime">
-<h2>Portable Runtime<a class="headerlink" href="#portable-runtime" title="Permalink to this heading"></a></h2>
-<p>Unify targets our reference platform, a Raspberry Pi 4 (RPi4).
-It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
-If you instead want a quick demo of a Z-Wave only Unify IoT gateway running on
-your Windows, MacOS or Linux desktop, please try our experimental
-<span class="xref myst">Portable Runtime environment User guide</span>.</p>
 </section>
 </section>
 

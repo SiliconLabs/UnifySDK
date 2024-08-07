@@ -40,7 +40,10 @@
 #include "zwave_command_class_switch_color.h"
 #include "zwave_command_class_switch_multilevel.h"
 #include "zwave_command_class_thermostat_mode.h"
+#include "zwave_command_class_thermostat_fan_mode.h"
+#include "zwave_command_class_thermostat_fan_state.h"
 #include "zwave_command_class_thermostat_setpoint.h"
+#include "zwave_command_class_thermostat_operating_state.h"
 #include "zwave_command_class_version.h"
 #include "zwave_command_class_wake_up.h"
 #include "zwave_command_class_time.h"
@@ -53,6 +56,8 @@
 #include "zwave_command_class_transport_service.h"
 #include "zwave_command_class_indicator_control.h"
 #include "zwave_command_class_manufacturer_specific_control.h"
+#include "zwave_command_class_humidity_control_mode.h"
+
 // Generic includes
 #include <stdbool.h>
 
@@ -88,6 +93,7 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_central_scene_init();
   status |= zwave_command_class_configuration_init();
   status |= zwave_command_class_device_reset_locally_init();
+  status |= zwave_command_class_humidity_control_mode_init();
   status |= zwave_command_class_inclusion_controller_init();
   status |= zwave_command_class_indicator_init();
   status |= zwave_command_class_manufacturer_specific_init();
@@ -108,7 +114,10 @@ sl_status_t zwave_command_classes_init()
   status |= zwave_command_class_switch_color_init();
   status |= zwave_command_class_switch_multilevel_init();
   status |= zwave_command_class_thermostat_mode_init();
+  status |= zwave_command_class_thermostat_fan_mode_init();
+  status |= zwave_command_class_thermostat_fan_state_init();
   status |= zwave_command_class_thermostat_setpoint_init();
+  status |= zwave_command_class_thermostat_operating_state_init();
   status |= zwave_command_class_time_init();
   status |= zwave_command_class_transport_service_init();
   status |= zwave_command_class_user_code_init();

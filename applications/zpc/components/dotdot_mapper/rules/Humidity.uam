@@ -1,0 +1,130 @@
+// Humidity setpoint CC
+def zwHUMIDITY_CONTROL_SETPOINT_VERSION           0x6401
+def zwHUMIDITY_CONTROL_SUPPORTED_SETPOINT_SUPPORTED_TYPES   0x6402
+def zwHUMIDITY_CONTROL_SETPOINT_TYPE              0x6403
+def zwHUMIDITY_CONTROL_SETPOINT_VALUE             0x6405
+def zwHUMIDITY_CONTROL_SETPOINT_VALUE_SCALE       0x6406
+def zwHUMIDITY_CONTROL_SETPOINT_VALUE_PRECISION   0x6407
+def zwHUMIDITY_CONTROL_SETPOINT_MIN_VALUE             0x6408
+def zwHUMIDITY_CONTROL_SETPOINT_MIN_VALUE_SCALE       0x6409
+def zwHUMIDITY_CONTROL_SETPOINT_MIN_VALUE_PRECISION   0x640A
+def zwHUMIDITY_CONTROL_SETPOINT_MAX_VALUE             0x640B
+def zwHUMIDITY_CONTROL_SETPOINT_MAX_VALUE_SCALE       0x640C
+def zwHUMIDITY_CONTROL_SETPOINT_MAX_VALUE_PRECISION   0x640D
+
+// Humidity Mode CC
+def zwHUMIDITY_CONTROL_MODE_VERSION     0x6D01
+def zwHUMIDITY_CONTROL_SUPPORTED_MODES  0x6D02
+def zwHUMIDITY_CONTROL_MODE             0x6D03
+
+// Humidity Operating State CC
+def zwHUMIDITY_CONTROL_OPERATING_STATE_VERSION   0x6E01
+def zwHUMIDITY_CONTROL_OPERATING_STATE           0x6E02
+
+
+// Humidity Cluster
+def zb_ReportingMode 0xfda00001
+def zb_SupportedReportingMode 0xfda00002
+def zb_CurrentState 0xfda00003
+def zb_SupportedSetPoints 0xfda00004
+def zb_HumidifierSetpointMin 0xfda00005
+def zb_HumidifierSetpointMax 0xfda00006
+def zb_HumidifierSetpoint 0xfda00007
+def zb_HumidifierSetpointScale 0xfda00008
+def zb_HumidifierSetpointPrecision 0xfda00009
+def zb_DehumidifierSetpointMin 0xfda0000a
+def zb_DehumidifierSetpointMax 0xfda0000b
+def zb_DehumidifierSetpoint 0xfda0000c
+def zb_DehumidifierSetpointScale 0xfda0000d
+def zb_DehumidifierSetpointPrecision 0xfda0000e
+def zb_AutoSetpointMin 0xfda0000f
+def zb_AutoSetpointMax 0xfda00010
+def zb_AutoSetpoint 0xfda00011
+def zb_AutoSetpointScale 0xfda00012
+def zb_AutoSetpointPrecision 0xfda00013
+
+def humidity_control_setpoint_humidify_exists (e'zwHUMIDITY_CONTROL_SETPOINT_TYPE[1])
+def humidity_control_setpoint_dehumidify_exists (e'zwHUMIDITY_CONTROL_SETPOINT_TYPE[2])
+def humidity_control_setpoint_auto_exists (e'zwHUMIDITY_CONTROL_SETPOINT_TYPE[3])
+
+
+scope 0 chain_reaction(0) {
+  //// Setpoints
+
+  // Humidifier
+  r'zb_HumidifierSetpoint =
+    if (humidity_control_setpoint_humidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[1].zwHUMIDITY_CONTROL_SETPOINT_VALUE
+      undefined
+  r'zb_HumidifierSetpointMin =
+    if (humidity_control_setpoint_humidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[1].zwHUMIDITY_CONTROL_SETPOINT_MIN_VALUE
+      undefined
+  r'zb_HumidifierSetpointMax =
+    if (humidity_control_setpoint_humidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[1].zwHUMIDITY_CONTROL_SETPOINT_MAX_VALUE
+      undefined
+  r'zb_HumidifierSetpointScale =
+      if (humidity_control_setpoint_humidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[1].zwHUMIDITY_CONTROL_SETPOINT_VALUE_SCALE
+      undefined
+  r'zb_HumidifierSetpointPrecision =
+      if (humidity_control_setpoint_humidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[1].zwHUMIDITY_CONTROL_SETPOINT_VALUE_PRECISION
+      undefined
+
+  // Humidifier
+  r'zb_DehumidifierSetpoint =
+    if (humidity_control_setpoint_dehumidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[2].zwHUMIDITY_CONTROL_SETPOINT_VALUE
+      undefined
+  r'zb_DehumidifierSetpointMin =
+    if (humidity_control_setpoint_dehumidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[2].zwHUMIDITY_CONTROL_SETPOINT_MIN_VALUE
+      undefined
+  r'zb_DehumidifierSetpointMax =
+    if (humidity_control_setpoint_dehumidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[2].zwHUMIDITY_CONTROL_SETPOINT_MAX_VALUE
+      undefined
+  r'zb_DehumidifierSetpointScale =
+      if (humidity_control_setpoint_dehumidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[2].zwHUMIDITY_CONTROL_SETPOINT_VALUE_SCALE
+      undefined
+  r'zb_DehumidifierSetpointPrecision =
+      if (humidity_control_setpoint_dehumidify_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[2].zwHUMIDITY_CONTROL_SETPOINT_VALUE_PRECISION
+      undefined
+
+  // Humidifier
+  r'zb_AutoSetpoint =
+    if (humidity_control_setpoint_auto_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[3].zwHUMIDITY_CONTROL_SETPOINT_VALUE
+      undefined
+  r'zb_AutoSetpointMin =
+    if (humidity_control_setpoint_auto_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[3].zwHUMIDITY_CONTROL_SETPOINT_MIN_VALUE
+      undefined
+  r'zb_AutoSetpointMax =
+    if (humidity_control_setpoint_auto_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[3].zwHUMIDITY_CONTROL_SETPOINT_MAX_VALUE
+      undefined
+  r'zb_AutoSetpointScale =
+      if (humidity_control_setpoint_auto_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[3].zwHUMIDITY_CONTROL_SETPOINT_VALUE_SCALE
+      undefined
+  r'zb_AutoSetpointPrecision =
+      if (humidity_control_setpoint_auto_exists)
+      r'zwHUMIDITY_CONTROL_SETPOINT_TYPE[3].zwHUMIDITY_CONTROL_SETPOINT_VALUE_PRECISION
+      undefined
+
+  // Supported setpoints
+  r'zb_SupportedSetPoints = r'zwHUMIDITY_CONTROL_SUPPORTED_SETPOINT_SUPPORTED_TYPES
+
+  //// State
+  r'zb_CurrentState = r'zwHUMIDITY_CONTROL_OPERATING_STATE
+
+  //// Mode 
+  r'zb_ReportingMode = r'zwHUMIDITY_CONTROL_MODE
+  r'zb_SupportedReportingMode = r'zwHUMIDITY_CONTROL_SUPPORTED_MODES
+}
+

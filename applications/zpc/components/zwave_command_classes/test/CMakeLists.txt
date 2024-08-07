@@ -116,6 +116,21 @@ target_add_unittest(
   zwave_tx_groups
   ${MOCK_LIBS})
 
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_supervision_test_no_mock
+  SOURCES
+  zwave_command_class_supervision_test_no_mock.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock
+)
+
 # Wake Up Command Class
 target_add_unittest(
   zwave_command_classes
@@ -637,6 +652,51 @@ DEPENDS
   uic_dotdot_mqtt_mock
 )
 
+# Thermostat fan mode test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_thermostat_fan_mode_test
+  SOURCES
+  zwave_command_class_thermostat_fan_mode_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
+  # Thermostat fan state test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_thermostat_fan_state_test
+  SOURCES
+  zwave_command_class_thermostat_fan_state_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
+# Thermostat operating state test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_thermostat_operating_state_test
+  SOURCES
+  zwave_command_class_thermostat_operating_state_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
 # Tests for generated command classes
 set(GEN_TEST_INCLUDES
     "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include"
@@ -726,3 +786,50 @@ target_add_unittest(
   uic_attribute_resolver_mock
   zpc_attribute_resolver_mock
   )
+  
+# Humidity Control Mode test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_humidity_control_mode_test
+  SOURCES
+  zwave_command_class_humidity_control_mode_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
+  # Humidity Control Operating State test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_humidity_control_operating_state_test
+  SOURCES
+  zwave_command_class_humidity_control_operating_state_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
+
+  # Humidity Control SetPoint test
+  target_add_unittest(
+    zwave_command_classes
+    NAME
+    zwave_command_class_humidity_control_setpoint_test
+    SOURCES
+    zwave_command_class_humidity_control_setpoint_test.cpp
+    DEPENDS
+    zpc_attribute_store_test_helper
+    zwave_controller
+    zwave_command_handler_mock
+    uic_attribute_resolver_mock
+    zpc_attribute_resolver_mock
+    uic_dotdot_mqtt_mock)
+  
+  

@@ -32,7 +32,7 @@ if [ "0" != "$count" ] ; then
 fi
 
 # Build docker image
-docker_build_command="docker build -t ${tag} --build-arg ARCH=${arch} --build-arg USER_ID=`id -u` --build-arg GROUP_ID=`id -g` ${docker_args} `dirname $0`"
+docker_build_command="docker build --network host -t ${tag} --build-arg ARCH=${arch} --build-arg USER_ID=`id -u` --build-arg GROUP_ID=`id -g` ${docker_args} `dirname $0`"
 echo "=== Building Docker image:"
 echo $docker_build_command
 $docker_build_command

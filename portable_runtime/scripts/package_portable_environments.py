@@ -23,7 +23,7 @@ portable_runtime_configs = {
         'binary_path'    : 'x86_64-pc-windows-gnu/$build_type$/unify_portable_cli.exe',
         'resources_path' : 'x86_64-pc-windows-gnu/$build_type$/resources',
         'gui_binary_path': 'x86_64-pc-windows-gnu/$build_type$/unify_portable_gui.exe',
-        'gui_additional_files': ['x86_64-pc-windows-gnu/$build_type$/WebView2Loader.dll']
+        'gui_additional_files': ['x86_64-pc-windows-gnu/$build_type$/build']
     },
     'macos': {
         'binary_path'    : 'x86_64-apple-darwin/$build_type$/unify_portable_cli',
@@ -85,6 +85,14 @@ def tar_folder(directory: str):
     status = os.system(f"tar cjf {compressed_file} --remove-files -C {directory} .")
     assert status == 0, f"Failed compressing folder {directory}"
 
+def find_matching_folder(base_folder_path, prefix):
+    all_items = os.listdir(base_folder_path)
+    matching_folders = [item for item in all_items if os.path.isdir(os.path.join(base_folder_path, item)) and item.startswith(prefix)]
+    if matching_folders:
+        return matching_folders[0]
+    else:
+        return None
+
 def package_portable(platform_name, platform_details, package):
     package_path = f"{os.getcwd()}/portable_runtime_{platform_name}"
     shutil.rmtree(package_path, ignore_errors=True) # Remove existing directory to make sure we don't get any errors from existing files during download, extract etc.
@@ -100,8 +108,9 @@ def package_portable(platform_name, platform_details, package):
 
     if package in ["gui", "both"] and platform_details['gui_binary_path'] is not None:
         package_binary(f"{args.build_folder}/{platform_details['gui_binary_path']}".replace("$build_type$", args.build_type), package_path)
-        for additional_file in platform_details['gui_additional_files']:
-            package_binary(f"{args.build_folder}/{additional_file}".replace("$build_type$", args.build_type), package_path)
+        for additional_file_path in platform_details['gui_additional_files']:
+            additional_file_folder = find_matching_folder(f'{args.build_folder}/{additional_file_path}'.replace("$build_type$", args.build_type), 'webview2-com-sys')
+            package_binary(f"{args.build_folder}/{additional_file_path}/{additional_file_folder}/out/x64/WebView2Loader.dll".replace("$build_type$", args.build_type), package_path)
 
     base = os.path.basename(package_path)
     if platform_name == "windows":

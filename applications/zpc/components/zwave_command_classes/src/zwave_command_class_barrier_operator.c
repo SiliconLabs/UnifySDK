@@ -163,13 +163,13 @@ static sl_status_t zwave_command_class_barrier_operator_signal_set(
     return SL_STATUS_ALREADY_EXISTS;
   }
 
-  ZW_BARRIER_OPERATOR_SIGNAL_SET_FRAME *set_frame
-    = (ZW_BARRIER_OPERATOR_SIGNAL_SET_FRAME *)frame;
+  ZW_BARRIER_OPERATOR_EVENT_SIGNAL_SET_FRAME *set_frame
+    = (ZW_BARRIER_OPERATOR_EVENT_SIGNAL_SET_FRAME *)frame;
   set_frame->cmdClass       = COMMAND_CLASS_BARRIER_OPERATOR;
-  set_frame->cmd            = BARRIER_OPERATOR_SIGNAL_SET;
+  set_frame->cmd            = BARRIER_OPERATOR_EVENT_SIGNAL_SET;
   set_frame->subsystemType  = subsystem_type;
   set_frame->subsystemState = subsystem_state;
-  *frame_length             = sizeof(ZW_BARRIER_OPERATOR_SIGNAL_SET_FRAME);
+  *frame_length             = sizeof(ZW_BARRIER_OPERATOR_EVENT_SIGNAL_SET_FRAME);
   return SL_STATUS_OK;
 }
 
@@ -200,12 +200,12 @@ static sl_status_t zwave_command_class_barrier_operator_signal_get(
     return SL_STATUS_ALREADY_EXISTS;
   }
 
-  ZW_BARRIER_OPERATOR_SIGNAL_GET_FRAME *get_frame
-    = (ZW_BARRIER_OPERATOR_SIGNAL_GET_FRAME *)frame;
+  ZW_BARRIER_OPERATOR_EVENT_SIGNALING_GET_FRAME *get_frame
+    = (ZW_BARRIER_OPERATOR_EVENT_SIGNALING_GET_FRAME *)frame;
   get_frame->cmdClass      = COMMAND_CLASS_BARRIER_OPERATOR;
-  get_frame->cmd           = BARRIER_OPERATOR_SIGNAL_GET;
+  get_frame->cmd           = BARRIER_OPERATOR_EVENT_SIGNALING_GET;
   get_frame->subsystemType = type;
-  *frame_length            = sizeof(ZW_BARRIER_OPERATOR_SIGNAL_GET_FRAME);
+  *frame_length            = sizeof(ZW_BARRIER_OPERATOR_EVENT_SIGNALING_GET_FRAME);
   return SL_STATUS_OK;
 }
 
@@ -486,7 +486,7 @@ sl_status_t zwave_command_class_barrier_operator_control_handler(
       return zwave_command_class_barrier_operator_handle_report(connection_info,
                                                                 frame_data,
                                                                 frame_length);
-    case BARRIER_OPERATOR_SIGNAL_REPORT:
+    case BARRIER_OPERATOR_EVENT_SIGNALING_REPORT:
       return zwave_command_class_barrier_operator_handle_signal_report(
         connection_info,
         frame_data,

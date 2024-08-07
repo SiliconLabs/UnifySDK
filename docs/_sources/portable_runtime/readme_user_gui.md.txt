@@ -10,11 +10,11 @@
 **Prerequisites**:
 
 1. [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
-2. [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG12/EFR32xG22 running  for Zigbee NCP or RCP
+2. [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP
 3. [Bluetooth module](https://www.silabs.com/wireless/bluetooth) EFR32xG22 running NCP Firmware for AoXPC
-2. Docker version > 20.10.12 installed.
-3. docker-compose version > 2.5.1
-4. x86-64/amd64 CPU architecture.
+4. Docker version > 20.10.12 installed.
+5. docker-compose version > 2.5.1
+6. x86-64/amd64 CPU architecture.
 
 The Unify Portable Runtime Environment strives to get Unify running as fast as
 possible on your desktop. The portable runtime comes as a binary executable GUI,
@@ -61,6 +61,13 @@ After initial pre-requisites check, the GUI will render protocol selection page.
 
 By default only Z-Wave (ZPC) is selected. Select other protocols as needed and 
 click on `Next`.
+
+##### Emulated End Device (**Experimental**): 
+Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
+<br>```Note: EED currently emulates a end device that only supports OnOff cluster, so for UMB to process EED as a valid device enable atleast select NAL in the framework service page that follows.```
+
+<br>The EED can be enable in protocol selection page of latest portable runtime GUI.
+<img src="./EED-GUI.png" width="200" height="250" border="1px">
 
 #### Framework Services and Application Selection
 <img src="./framework_and_application.jpg" width="200" height="250" border="1px">

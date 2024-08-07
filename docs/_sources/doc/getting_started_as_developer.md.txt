@@ -35,10 +35,9 @@ See [How to write UAM files](how_to_write_uam_files.md)
 
 ## Extend UCL clusters
 
-See [How to write a new Cluster](how_to_write_new_cluster.md) 
+See [How to write a new Cluster](../applications/zpc/how_to_interact_with_clusters.rst)
 
 It might be needed for non-zigbee controllers if some description are missing.
-
 
 ## Overview of relations among Unify Applications
 
@@ -51,13 +50,13 @@ The following table presents the relationship amongst Unify Framework applicatio
 the Unify Protocol Controllers. If a given component is supported via a
 Protocol Controller, it will be marked as [x].
 
-|                                                                             | [ZPC](../applications/zpc/readme_user.md) | [ZigPC](../applications/zigpc/readme_user.md) | [AoXPC](../applications/aox/applications/aoxpc/readme_user.md) |
-| --------------------------------------------------------------------------- | :------------------------------------- | :----------------------------------------- | :---------------------------------------------------------- |
-| [UPVL](../applications/upvl/readme_user.md)                                    | [x]                                    | [x]                                        |                                                             |
-| [GMS](../applications/gms/readme_user.md)                                      | [x]                                    | [x]                                        |                                                             |
-| [NAL](../applications/nal/readme_user.md)                                      | [x]                                    | [x]                                        | [x]                                                         |
-| [OTA Image Provider](../applications/image_provider/readme_user.md)            | [x]                                    | [x]                                        |                                                             |
-| [Dev GUI](../applications/dev_ui/dev_gui/readme_user.md)                       | [x]                                    | [x]                                        | [x]                                                         |
-| [UPTICap](../applications/upti_cap/readme_user.md)                             | [x]                                    | [x]                                        |                                                             |
-| [UPTIWriter](../applications/upti_writer/readme_user.md)                       | [x]                                    | [x]                                        |                                                             |
-| [AoX Positioning](../applications/aox/applications/positioning/readme_user.md) |                                        |                                            | [x]                                                         |
+|                                                                                  | [ZPC](../applications/zpc/readme_user.html) | [ZigPC](../applications/zigpc/readme_user.html) | [AoXPC](../applications/aox/applications/aoxpc/readme_user.html) |
+| -------------------------------------------------------------------------------- | :------------------------------------------ | :---------------------------------------------- | :--------------------------------------------------------------- |
+| [UPVL](../applications/upvl/readme_user.html)                                    | [x]                                         | [x]                                             |                                                                  |
+| [GMS](../applications/gms/readme_user.html)                                      | [x]                                         | [x]                                             |                                                                  |
+| [NAL](../applications/nal/readme_user.html)                                      | [x]                                         | [x]                                             | [x]                                                              |
+| [OTA Image Provider](../applications/image_provider/readme_user.html)            | [x]                                         | [x]                                             |                                                                  |
+| [Dev GUI](../applications/dev_ui/dev_gui/readme_user.html)                       | [x]                                         | [x]                                             | [x]                                                              |
+| [UPTICap](../applications/upti_cap/readme_user.html)                             | [x]                                         | [x]                                             |                                                                  |
+| [UPTIWriter](../applications/upti_writer/readme_user.html)                       | [x]                                         | [x]                                             |                                                                  |
+| [AoX Positioning](../applications/aox/applications/positioning/readme_user.html) |                                             |                                                 | [x]                                                              |

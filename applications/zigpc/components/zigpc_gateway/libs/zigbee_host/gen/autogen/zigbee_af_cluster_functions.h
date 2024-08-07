@@ -21,7 +21,7 @@
 #include "af.h"
 
 
-void emberAfOtaBootloadClusterServerInitCallback (uint8_t endpoint);
+void sl_zigbee_af_ota_bootload_cluster_server_init_cb (uint8_t endpoint);
 
 // Array of cluster function (aka cluster action callbacks) structures.
 // Last entry is a dummy, otherwise an empty array would fail IAR builds.
@@ -29,11 +29,11 @@ void emberAfOtaBootloadClusterServerInitCallback (uint8_t endpoint);
   {\
     25u,\
     (CLUSTER_MASK_SERVER | CLUSTER_MASK_INIT_FUNCTION),\
-    (EmberAfGenericClusterFunction)emberAfOtaBootloadClusterServerInitCallback\
+    (sl_zigbee_af_generic_cluster_function_t)sl_zigbee_af_ota_bootload_cluster_server_init_cb\
   },\
   { 0x8000u,\
     0x00u,\
-    (EmberAfGenericClusterFunction)((void *)0)\
+    (sl_zigbee_af_generic_cluster_function_t)((void *)0)\
   }\
 }
 

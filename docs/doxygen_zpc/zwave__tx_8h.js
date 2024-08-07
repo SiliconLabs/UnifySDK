@@ -5,7 +5,7 @@ var zwave__tx_8h =
     [ "ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE", "zwave__tx_8h.html#a86ebfe9b659127cc3dca1ccc29e1d1a9", null ],
     [ "on_zwave_tx_send_data_complete_t", "group__zwave__tx.html#gabfbc700a89ba6dce9c1f38fa3ed41789", null ],
     [ "zwave_tx_abort_transmission", "group__zwave__tx.html#ga6f1b21f8eaea9acf202a08d92b80547a", null ],
-    [ "zwave_tx_get_frame", "group__zwave__tx.html#ga1815491d1149ccc8dc91aa4629bba835", null ],
+    [ "zwave_tx_get_frame", "group__zwave__tx.html#ga94986fad2993d4907968edec03f57d05", null ],
     [ "zwave_tx_get_frame_length", "group__zwave__tx.html#gaf669f3e5ba5a01c411842fae2c58637c", null ],
     [ "zwave_tx_get_number_of_responses", "group__zwave__tx.html#gaaf93d9d3d5b0961a55f7967fc7628092", null ],
     [ "zwave_tx_get_queue_size", "group__zwave__tx.html#ga7da9128a09b9d19b6914c73dff6279da", null ],

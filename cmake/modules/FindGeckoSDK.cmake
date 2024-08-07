@@ -24,7 +24,7 @@ elseif(DEFINED ENV{GSDK_LOCATION})
 else()
   if(NOT FETCH_GSDK_VERSION)
     # fetch from HEAD to retrieve latest GeckoSDK
-    set(FETCH_GSDK_VERSION "v4.3.0")
+    set(FETCH_GSDK_VERSION "v2024.6.0")
   endif()
   message(STATUS "Fetching GeckoSDK ${FETCH_GSDK_VERSION} from public repository")
 endif()
@@ -33,7 +33,7 @@ include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(
   gecko_sdk
-  GIT_REPOSITORY "https://github.com/SiliconLabs/gecko_sdk.git"
+  GIT_REPOSITORY "https://github.com/SiliconLabs/simplicity_sdk.git"
   GIT_SUBMODULES_RECURSE True
   GIT_SHALLOW True
   GIT_PROGRESS True
@@ -49,7 +49,7 @@ message(STATUS "GeckoSDK_ROOT_DIR is ${GeckoSDK_ROOT_DIR}")
 
 # Find the version of the Gecko SDK used based on SLC metafile
 file(
-  STRINGS "${gecko_sdk_SOURCE_DIR}/gecko_sdk.slcs" _ver_line
+  STRINGS "${gecko_sdk_SOURCE_DIR}/simplicity_sdk.slcs" _ver_line
   REGEX "sdk_version: +\"[0-9\.]+\""
   LIMIT_COUNT 1)
 string(REGEX MATCH "[0-9\.]+" GeckoSDK_VERSION "${_ver_line}")

@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -51,7 +51,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
@@ -76,7 +76,6 @@
 <li class="toctree-l3"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="how_to_write_new_cluster.html">How to implement a custom cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
@@ -218,7 +217,7 @@ which does this for you. Refer to <code class="docutils literal notranslate"><sp
 <li><p>Inside the main function of this <a class="reference external" href="http://build.rs">build.rs</a> file you print the library to link
 towards as followed:</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// these exports are only used when an exe is compiled. e.g.</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// these exports are only used when an exe is compiled. e.g.</span>
 <span class="n">integration</span><span class="w"> </span><span class="c1">// tests or final binaries!</span>
 <span class="fm">println!</span><span class="p">(</span><span class="s">&quot;cargo:rustc-link-lib=dylib=uic_log&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
 </pre></div>

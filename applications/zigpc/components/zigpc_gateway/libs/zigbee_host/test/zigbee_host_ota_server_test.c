@@ -70,13 +70,13 @@ void test_ota_image_add_sanity(void)
 
   // ARRANGE
   sli_zigbee_af_ota_storage_add_image_file_ExpectAndReturn(ota_path,
-                                             EMBER_AF_OTA_STORAGE_SUCCESS);
+                                             SL_ZIGBEE_AF_OTA_STORAGE_SUCCESS);
 
   // ACT
-  EmberStatus status = zigbeeHostAddOtaImage(ota_path);
+  sl_status_t status = zigbeeHostAddOtaImage(ota_path);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK , status);
 }
 
 void test_ota_image_add_error(void)
@@ -85,13 +85,13 @@ void test_ota_image_add_error(void)
 
   // ARRANGE
   sli_zigbee_af_ota_storage_add_image_file_ExpectAndReturn(ota_path,
-                                             EMBER_AF_OTA_STORAGE_ERROR);
+                                             SL_ZIGBEE_AF_OTA_STORAGE_ERROR);
 
   // ACT
-  EmberStatus status = zigbeeHostAddOtaImage(ota_path);
+  sl_status_t status = zigbeeHostAddOtaImage(ota_path);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_ERR_FATAL, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, status);
 }
 
 void test_ota_image_add_invalid_input(void)
@@ -99,21 +99,21 @@ void test_ota_image_add_invalid_input(void)
   // ARRANGE
 
   // ACT
-  EmberStatus status = zigbeeHostAddOtaImage(NULL);
+  sl_status_t status = zigbeeHostAddOtaImage(NULL);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_BAD_ARGUMENT, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER, status);
 }
 
 // prototype for update started callback used by ota-server
-void emberAfPluginOtaServerUpdateStartedCallback(uint16_t manufacturerId,
+void sl_zigbee_af_ota_server_update_started_cb(uint16_t manufacturerId,
                                                  uint16_t imageTypeId,
                                                  uint32_t firmwareVersion,
                                                  uint8_t maxDataSize,
                                                  uint32_t offset);
 void test_ota_update_started_callback_sanity(void)
 {
-  EmberEUI64 eui64         = "\x83\x02\xFF\x92\x00\x56\xBC\xD2";
+  sl_802154_long_addr_t eui64         = "\x83\x02\xFF\x92\x00\x56\xBC\xD2";
   uint16_t manufacturerId  = 0x2220;
   uint16_t imageTypeId     = 0x1000;
   uint32_t firmwareVersion = 0x00000020;
@@ -121,9 +121,9 @@ void test_ota_update_started_callback_sanity(void)
   uint32_t offset          = 0x00000020;
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(eui64);
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnThruPtr_address(eui64);
 
   callback_onOtaUpdateStarted_Expect(eui64,
                                      manufacturerId,
@@ -131,7 +131,7 @@ void test_ota_update_started_callback_sanity(void)
                                      firmwareVersion);
 
   // ACT
-  emberAfPluginOtaServerUpdateStartedCallback(manufacturerId,
+  sl_zigbee_af_ota_server_update_started_cb(manufacturerId,
                                               imageTypeId,
                                               firmwareVersion,
                                               maxDataSize,
@@ -149,11 +149,11 @@ void test_ota_update_started_callback_sender_not_found(void)
   uint32_t offset          = 0x00000020;
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_INVALID_CALL);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_INVALID_STATE );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
 
   // ACT
-  emberAfPluginOtaServerUpdateStartedCallback(manufacturerId,
+  sl_zigbee_af_ota_server_update_started_cb(manufacturerId,
                                               imageTypeId,
                                               firmwareVersion,
                                               maxDataSize,
@@ -163,24 +163,24 @@ void test_ota_update_started_callback_sender_not_found(void)
 }
 
 // prototype for update completed callback used by ota-server
-void emberAfPluginOtaServerUpdateCompleteCallback(uint16_t manufacturerId,
+void sl_zigbee_af_ota_server_update_complete_cb(uint16_t manufacturerId,
                                                   uint16_t imageTypeId,
                                                   uint32_t firmwareVersion,
-                                                  EmberNodeId source,
+                                                  sl_802154_short_addr_t source,
                                                   uint8_t status);
 void test_ota_update_completed_callback_sanity(void)
 {
-  EmberEUI64 eui64         = "\x83\x02\xFF\x92\x00\x56\xBC\xD2";
-  EmberNodeId nodeId       = 0x995A;
+  sl_802154_long_addr_t eui64         = "\x83\x02\xFF\x92\x00\x56\xBC\xD2";
+  sl_802154_short_addr_t nodeId       = 0x995A;
   uint16_t manufacturerId  = 0x2220;
   uint16_t imageTypeId     = 0x1000;
   uint32_t firmwareVersion = 0x00000020;
-  EmberAfStatus status     = EMBER_ZCL_STATUS_SUCCESS;
+  sl_zigbee_af_status_t status     = SL_ZIGBEE_ZCL_STATUS_SUCCESS;
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(eui64);
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnThruPtr_address(eui64);
 
   callback_onOtaUpdateCompleted_Expect(eui64,
                                        manufacturerId,
@@ -189,7 +189,7 @@ void test_ota_update_completed_callback_sanity(void)
                                        status);
 
   // ACT
-  emberAfPluginOtaServerUpdateCompleteCallback(manufacturerId,
+  sl_zigbee_af_ota_server_update_complete_cb(manufacturerId,
                                                imageTypeId,
                                                firmwareVersion,
                                                nodeId,
@@ -200,21 +200,21 @@ void test_ota_update_completed_callback_sanity(void)
 
 void test_ota_update_completed_callback_sender_not_found(void)
 {
-  EmberNodeId nodeId       = 0x97F2;
+  sl_802154_short_addr_t nodeId       = 0x97F2;
   uint16_t manufacturerId  = 0x2220;
   uint16_t imageTypeId     = 0x1000;
   uint32_t firmwareVersion = 0x00000020;
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_INVALID_CALL);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_INVALID_STATE );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
 
   // ACT
-  emberAfPluginOtaServerUpdateCompleteCallback(manufacturerId,
+  sl_zigbee_af_ota_server_update_complete_cb(manufacturerId,
                                                imageTypeId,
                                                firmwareVersion,
                                                nodeId,
-                                               EMBER_ZCL_STATUS_SUCCESS);
+                                               SL_ZIGBEE_ZCL_STATUS_SUCCESS);
 
   // ASSERT (Handled by CMock)
 }

@@ -296,7 +296,7 @@ void test_zwave_command_class_barrier_operator_signal_get_happy_case()
                                                 received_frame,
                                                 &received_frame_size));
   const uint8_t expected_frame[]
-    = {COMMAND_CLASS_BARRIER_OPERATOR, BARRIER_OPERATOR_SIGNAL_GET, type};
+    = {COMMAND_CLASS_BARRIER_OPERATOR, BARRIER_OPERATOR_EVENT_SIGNALING_GET, type};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
@@ -431,7 +431,7 @@ void test_zwave_command_class_barrier_operator_signal_report_happy_case()
                                  COUNT_OF(type_attribute));
 
   uint8_t incoming_frame[] = {COMMAND_CLASS_BARRIER_OPERATOR,
-                              BARRIER_OPERATOR_SIGNAL_REPORT,
+                              BARRIER_OPERATOR_EVENT_SIGNALING_REPORT,
                               subsystem_type & 0xFF,
                               subsystem_state & 0xFF};
 
@@ -513,7 +513,7 @@ void test_zwave_command_class_barrier_operator_signal_set_happy_case()
                                                 received_frame,
                                                 &received_frame_size));
   const uint8_t expected_frame[] = {COMMAND_CLASS_BARRIER_OPERATOR,
-                                    BARRIER_OPERATOR_SIGNAL_SET,
+                                    BARRIER_OPERATOR_EVENT_SIGNAL_SET,
                                     subsystem_type,
                                     subsystem_state};
   TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
@@ -622,7 +622,7 @@ void test_zwave_command_class_barrier_operator_signal_report_missing_smaller_fra
 
   uint8_t subsystem_type   = 0x10;
   uint8_t incoming_frame[] = {COMMAND_CLASS_BARRIER_OPERATOR,
-                              BARRIER_OPERATOR_SIGNAL_REPORT,
+                              BARRIER_OPERATOR_EVENT_SIGNALING_REPORT,
                               subsystem_type};
 
   TEST_ASSERT_NOT_NULL(barrier_operator_handler.control_handler);

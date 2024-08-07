@@ -18,11 +18,15 @@
 
 // <h>Zigbee ZCL Framework Core configuration
 
-// <q EMBER_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED> Enable Command Line for Legacy CLI
+// <q SL_ZIGBEE_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED> Enable Command Line for Legacy CLI
 // <i> Default: TRUE
 // <i> Enable the command line when using Legacy CLI generation. This does not do anything if Legacy CLI generation is unselected.
-#define EMBER_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED   0
+#define SL_ZIGBEE_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED   1
 
+// <q SL_ZIGBEE_AF_PLUGIN_ZCL_CLUSTER_ENABLE_DISABLE_RUN_TIME> Enable/disable clusters at runtime
+// <i> Default: FALSE
+// <i> Enable the feature that allows to enable/disable clusters at runtime.
+#define SL_ZIGBEE_AF_PLUGIN_ZCL_CLUSTER_ENABLE_DISABLE_RUN_TIME   0
 // </h>
 
 // <<< end of configuration section >>>

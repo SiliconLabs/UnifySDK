@@ -2585,6 +2585,104 @@ static sl_status_t descriptor_cluster_write_attributes_callback(
                endpoint_id);
   return SL_STATUS_OK;
 }
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyFanControl
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks unify_fan_control
+static sl_status_t unify_fan_control_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_unify_fan_control_state_t attributes,
+  uic_mqtt_dotdot_unify_fan_control_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_unify_fan_control_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "unify_fan_control: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  if (true == updated_attributes.z_wave_fan_mode) {
+     sl_log_debug(LOG_TAG, "Updating desired value for ZWaveFanMode attribute");
+    dotdot_set_unify_fan_control_z_wave_fan_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.z_wave_fan_mode);
+  }
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyThermostat
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks unify_thermostat
+static sl_status_t unify_thermostat_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_unify_thermostat_state_t attributes,
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_unify_thermostat_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "unify_thermostat: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  if (true == updated_attributes.thermostat_mode) {
+     sl_log_debug(LOG_TAG, "Updating desired value for ThermostatMode attribute");
+    dotdot_set_unify_thermostat_thermostat_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.thermostat_mode);
+  }
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyHumidityControl
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks unify_humidity_control
+static sl_status_t unify_humidity_control_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_unify_humidity_control_state_t attributes,
+  uic_mqtt_dotdot_unify_humidity_control_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_unify_humidity_control_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "unify_humidity_control: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  return SL_STATUS_OK;
+}
 // clang-format on
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -2751,6 +2849,15 @@ sl_status_t
   
   uic_mqtt_dotdot_set_descriptor_write_attributes_callback(
     &descriptor_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_unify_fan_control_write_attributes_callback(
+    &unify_fan_control_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_unify_thermostat_write_attributes_callback(
+    &unify_thermostat_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_unify_humidity_control_write_attributes_callback(
+    &unify_humidity_control_cluster_write_attributes_callback);
   
   // clang-format on
 

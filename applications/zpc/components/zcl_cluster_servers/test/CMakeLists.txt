@@ -36,6 +36,18 @@ target_include_directories(zcl_OTA_cluster_server_test PRIVATE ../src)
 #   zwave_api_mock
 #   zwave_api_transport_mock)
 
+# FanControl Cluster Mapper test
+target_add_unittest(
+  zcl_cluster_servers
+  NAME
+  fan_control_cluster_server_test
+  SOURCES
+  fan_control_cluster_server_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  uic_dotdot_mqtt_mock
+  unify_dotdot_attribute_store)
+
 # Configuration Parameter Cluster Server test
 target_add_unittest(
   zcl_cluster_servers
@@ -103,3 +115,15 @@ target_add_unittest(
   DEPENDS
   unify
   zpc_config_mock)
+
+  # Humidity Control Cluster Mapper test
+target_add_unittest(
+  zcl_cluster_servers
+  NAME
+  humidity_control_cluster_server_test
+  SOURCES
+  humidity_control_cluster_server_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  uic_dotdot_mqtt_mock
+  unify_dotdot_attribute_store)

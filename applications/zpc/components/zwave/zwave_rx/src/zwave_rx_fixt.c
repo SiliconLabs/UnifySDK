@@ -37,6 +37,8 @@ static uint8_t zwave_rx_zpc_config_to_rf_region(const char *region_string)
 {
   if (strcmp("EU", region_string) == 0) {
     return ZWAVE_RF_REGION_EU;
+  } else if (strcmp("EU_LR", region_string) == 0) {
+    return ZWAVE_RF_REGION_EU_LR;
   } else if (strcmp("US", region_string) == 0) {
     return ZWAVE_RF_REGION_US;
   } else if (strcmp("US_LR", region_string) == 0) {

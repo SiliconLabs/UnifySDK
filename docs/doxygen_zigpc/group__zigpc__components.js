@@ -8,7 +8,7 @@ var group__zigpc__components =
     [ "ZigPC Command Mapper", "group__command__mapper.html", "group__command__mapper" ],
     [ "Centralized Logic for ZigPC Actions", "group__zigpc__controller.html", "group__zigpc__controller" ],
     [ "ZigPC Data Storage API", "group__zigpc__datastore.html", "group__zigpc__datastore" ],
-    [ "ZigPC Datastore C++ API", "group__zigpc__datastore__hpp.html", null ],
+    [ "ZigPC Datastore C++ API", "group__zigpc__datastore__hpp.html", "group__zigpc__datastore__hpp" ],
     [ "ZigPC Device Discovery", "group__zigpc__discovery.html", "group__zigpc__discovery" ],
     [ "ZigPC Group Management Interface functions", "group__zigpc__group__mgmt.html", "group__zigpc__group__mgmt" ],
     [ "Capabilities for updating the NCP", "group__zigpc__ncp__updater.html", "group__zigpc__ncp__updater" ],

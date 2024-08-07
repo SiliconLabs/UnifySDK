@@ -17,6 +17,7 @@
 #include "af-main_mock.h"
 #include "af-security_mock.h"
 #include "ezsp_mock.h"
+#include "zigbee-security-manager_mock.h"
 
 #include "zigbee_host.h"
 #include "zigbee_host_common.h"
@@ -52,20 +53,20 @@ void tearDown() {}
  */
 void test_trust_center_add_device_install_code_should_handle_invalid_args()
 {
-  EmberEUI64 test_eui64                        = {0};
+  sl_802154_long_addr_t test_eui64                        = {0};
   uint8_t test_install_code[INSTALL_CODE_SIZE] = {0};
 
   TEST_ASSERT_EQUAL(zigbeeHostTrustCenterAddDeviceInstallCode(NULL, NULL, 0),
-                    EMBER_BAD_ARGUMENT);
+                    SL_STATUS_INVALID_PARAMETER);
   TEST_ASSERT_EQUAL(
     zigbeeHostTrustCenterAddDeviceInstallCode(test_eui64, NULL, 0),
-    EMBER_BAD_ARGUMENT);
+    SL_STATUS_INVALID_PARAMETER);
   TEST_ASSERT_EQUAL(
     zigbeeHostTrustCenterAddDeviceInstallCode(NULL, test_install_code, 0),
-    EMBER_BAD_ARGUMENT);
+    SL_STATUS_INVALID_PARAMETER);
   TEST_ASSERT_EQUAL(
     zigbeeHostTrustCenterAddDeviceInstallCode(test_eui64, test_install_code, 0),
-    EMBER_BAD_ARGUMENT);
+    SL_STATUS_INVALID_PARAMETER);
 }
 
 /**
@@ -75,47 +76,49 @@ void test_trust_center_add_device_install_code_should_handle_invalid_args()
 void test_trust_center_add_device_install_code_should_parse_link_key_and_call_join_network()
 {
   // ARRANGE
-  EmberStatus status;
-  EmberEUI64 test_eui64 = {0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA};
+  sl_status_t status;
+  sl_802154_long_addr_t test_eui64 = {0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA};
   uint8_t test_install_code[INSTALL_CODE_SIZE]
     = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55};
-  EmberKeyData test_link_key = {{0x55, 0x66, 0x77, 0x88, 0x99}};
+  sl_zigbee_key_data_t test_link_key = {{0x55, 0x66, 0x77, 0x88, 0x99}};
 
   sli_zigbee_af_install_code_to_key_ExpectAndReturn(test_install_code,
                                        10,
                                        NULL,
-                                       EMBER_SUCCESS);
+                                       SL_STATUS_OK );
   sli_zigbee_af_install_code_to_key_ReturnThruPtr_key(&test_link_key);
   sli_zigbee_af_install_code_to_key_IgnoreArg_key();
 
-  ezspAddTransientLinkKey_ExpectAndReturn(test_eui64,
-                                          &test_link_key,
-                                          EMBER_SUCCESS);
+  zb_sec_man_import_transient_key_ExpectAndReturn(test_eui64,
+                                          (sl_zigbee_sec_man_key_t *)&test_link_key,
+                                          ZB_SEC_MAN_FLAG_NONE,
+                                          SL_STATUS_OK );
 
   // ACT
   status = zigbeeHostTrustCenterAddDeviceInstallCode(test_eui64,
                                                      test_install_code,
                                                      10);
   // ASSERT
-  TEST_ASSERT_EQUAL(status, EMBER_SUCCESS);
+  TEST_ASSERT_EQUAL(status, SL_STATUS_OK);
 }
 void test_trust_center_add_device_install_code_should_return_on_join_network_error()
 {
-  EmberStatus status;
-  EmberEUI64 test_eui64                        = {0x77, 0x88};
+  sl_status_t status;
+  sl_802154_long_addr_t test_eui64                        = {0x77, 0x88};
   uint8_t test_install_code[INSTALL_CODE_SIZE] = {0x55, 0x66};
-  EmberKeyData test_link_key                   = {{0xFF, 0xEE, 0xDD}};
-  EmberStatus test_status                      = 0xCC;
+  sl_zigbee_key_data_t test_link_key                   = {{0xFF, 0xEE, 0xDD}};
+  sl_status_t test_status                      = 0xCC;
 
   sli_zigbee_af_install_code_to_key_ExpectAndReturn(test_install_code,
                                        10,
                                        NULL,
-                                       EMBER_SUCCESS);
+                                       SL_STATUS_OK );
   sli_zigbee_af_install_code_to_key_ReturnThruPtr_key(&test_link_key);
   sli_zigbee_af_install_code_to_key_IgnoreArg_key();
 
-  ezspAddTransientLinkKey_ExpectAndReturn(test_eui64,
-                                          &test_link_key,
+  zb_sec_man_import_transient_key_ExpectAndReturn(test_eui64,
+                                          (sl_zigbee_sec_man_key_t *)&test_link_key,
+                                          ZB_SEC_MAN_FLAG_NONE,
                                           test_status);
 
   status = zigbeeHostTrustCenterAddDeviceInstallCode(test_eui64,
@@ -126,10 +129,11 @@ void test_trust_center_add_device_install_code_should_return_on_join_network_err
 
 void test_trust_center_add_device_install_code_should_return_on_key_parse_error()
 {
-  EmberStatus status;
-  EmberEUI64 test_eui64                        = {0x12, 0x34};
+  sl_status_t status;
+  sl_802154_long_addr_t test_eui64                        = {0x12, 0x34};
   uint8_t test_install_code[INSTALL_CODE_SIZE] = {0xAA, 0xBB};
-  EmberStatus test_status                      = 0xFA;
+  sl_status_t test_status                      = 0xFA;
+  sl_status_t test_ret_status                  = SL_STATUS_FAIL;
 
   sli_zigbee_af_install_code_to_key_ExpectAndReturn(test_install_code,
                                        10,
@@ -140,42 +144,42 @@ void test_trust_center_add_device_install_code_should_return_on_key_parse_error(
   status = zigbeeHostTrustCenterAddDeviceInstallCode(test_eui64,
                                                      test_install_code,
                                                      10);
-  TEST_ASSERT_EQUAL(status, test_status);
+  TEST_ASSERT_EQUAL(status, test_ret_status);
 }
 
 void test_trust_center_join_callback_should_invoke_join_start_callback(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64    = {0x1, 0x2, 0x3, 0x4};
-  EmberNodeId test_node_id = 0x3523;
+  sl_802154_long_addr_t test_eui64    = {0x1, 0x2, 0x3, 0x4};
+  sl_802154_short_addr_t test_node_id = 0x3523;
   callback_onNetworkDeviceJoin_Expect(test_eui64);
 
-  emberAfAddAddressTableEntry_ExpectAndReturn(test_eui64,
+  sl_zigbee_af_add_address_table_entry_ExpectAndReturn(test_eui64,
                                               test_node_id,
-                                              EMBER_SUCCESS);
+                                              SL_STATUS_OK );
 
   // ACT
   emAfPluginGatewayInterfaceTrustCenterJoinHandler(test_eui64,
                                                    test_node_id,
-                                                   EMBER_USE_PRECONFIGURED_KEY);
+                                                   SL_ZIGBEE_USE_PRECONFIGURED_KEY);
 
   // ASSERT (Handled by CMock)
 }
 
 /* Function prototypes tested */
-void emberAfZigbeeKeyEstablishmentCallback(EmberEUI64 partner,
-                                           EmberKeyStatus status);
+void sl_zigbee_af_zigbee_key_establishment_cb(sl_802154_long_addr_t partner,
+                                           sl_zigbee_key_status_t status);
 
 void test_zigbee_key_establishment_callback_should_invoke_join_complete_callback(
   void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64 = {0x1, 0x2, 0x3, 0x4};
+  sl_802154_long_addr_t test_eui64 = {0x1, 0x2, 0x3, 0x4};
   callback_onTrustCenterDeviceJoinComplete_Expect(test_eui64);
 
   // ACT
-  emberAfZigbeeKeyEstablishmentCallback(test_eui64,
-                                        EMBER_TC_REQUESTER_VERIFY_KEY_SUCCESS);
+  sl_zigbee_af_zigbee_key_establishment_cb(test_eui64,
+                                        SL_ZIGBEE_TC_REQUESTER_VERIFY_KEY_SUCCESS);
 
   // ASSERT (Handled by CMock)
 }

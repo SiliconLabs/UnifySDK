@@ -115,7 +115,8 @@ exclude_patterns = ["_build",
                     "**build_**",
                     "unify-spec",
                     "scripts/ci",
-                    "**applications/uhab**"]
+                    "**applications/uhab**",
+                    "**cc_template.**"]
 
 source_suffix = {
     ".rst": "restructuredtext",

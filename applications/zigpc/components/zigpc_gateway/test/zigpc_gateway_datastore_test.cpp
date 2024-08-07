@@ -99,7 +99,7 @@ void test_zigpc_gateway_load_address_table_info_multiple(void)
   for (int64_t i = 0; i < dev_count; i++) {
     zigbeeHostAddAddressTableEntry_ExpectAndReturn(mappings[i].eui64,
                                                    mappings[i].node_id,
-                                                   EMBER_SUCCESS);
+                                                   SL_STATUS_OK );
   }
 
   // ACT
@@ -154,10 +154,10 @@ void test_zigpc_gateway_persist_address_table_info_multiple(void)
 
     zigbeeHostGetAddressTableEntry_ExpectAndReturn(mappings[i].eui64,
                                                    nullptr,
-                                                   EMBER_SUCCESS);
+                                                   SL_STATUS_OK );
     zigbeeHostGetAddressTableEntry_IgnoreArg_nodeId();
 
-    EmberNodeId node_id = 0;
+    sl_802154_short_addr_t node_id = 0;
     zigbeeHostGetAddressTableEntry_ReturnThruPtr_nodeId(&node_id);
     mappings[i].node_id = node_id;
   }

@@ -16,7 +16,7 @@
 
 #include <stdbool.h>
 
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 #include "app/framework/include/af-types.h"
 #include "app/framework/service-function/sl_service_function.h"
 
@@ -25,59 +25,60 @@
  * for more details.
  */
 
-#define EMBER_AF_ZCL_OVERHEAD 3
+#define SL_ZIGBEE_AF_ZCL_OVERHEAD 3
 
-#define ZCL_PROFILE_WIDE_COMMAND 0
+#define ZCL_PROFILE_WIDE_COMMAND 0u
 #define ZCL_GLOBAL_COMMAND       (ZCL_PROFILE_WIDE_COMMAND)
 
 #define ZCL_CLUSTER_SPECIFIC_COMMAND BIT(0)
 
-#define ZCL_FRAME_CONTROL_CLIENT_TO_SERVER 0
+#define ZCL_FRAME_CONTROL_CLIENT_TO_SERVER 0u
+#define ZCL_DISABLE_DEFAULT_RESPONSE_MASK     BIT(4)
 
 /**
  * @brief Use this macro to retrieve the current command. This
  * macro may only be used within the command parsing context. For instance
  * Any of the command handling callbacks may use this macro. If this macro
- * is used outside the command context, the returned EmberAfClusterCommand pointer
+ * is used outside the command context, the returned sl_zigbee_af_cluster_command_t pointer
  * will be null.
  */
-EmberAfClusterCommand *emberAfCurrentCommand();
+sl_zigbee_af_cluster_command_t *sl_zigbee_af_current_command();
 
 /**
  * @brief populates the passed EUI64 with the local EUI64 MAC address.
  */
-void emberAfGetEui64(EmberEUI64 returnEui64);
+void sl_zigbee_af_get_eui64(sl_802154_long_addr_t returnEui64);
 
 /**
  * @brief Returns the current network state.  This call caches the results
  *   on the host to prevent frequent EZSP transactions.
  */
-EmberNetworkStatus emberAfNetworkState(void);
+sl_zigbee_network_status_t sl_zigbee_af_network_state(void);
 
 /**
   * @brief Returns the current network parameters.
   */
-EmberStatus emberAfGetNetworkParameters(EmberNodeType *nodeType,
-                                        EmberNetworkParameters *parameters);
+sl_status_t sl_zigbee_af_get_network_parameters(sl_zigbee_node_type_t *nodeType,
+                                        sl_zigbee_network_parameters_t *parameters);
 
 /**
  * @brief Gets a Security Key based on the passed key type
  *
- * @param keyType See EmberKeyType
+ * @param keyType See sl_zigbee_key_type_t
  * @param keyStruct Struct pointer to populate key data
- * @return EmberStatus
+ * @return sl_status_t
  */
-EmberStatus emberGetKey(EmberKeyType keyType, EmberKeyStruct *keyStruct);
+sl_status_t emberGetKey(sl_zigbee_key_type_t keyType, sl_zigbee_key_struct_t *keyStruct);
 
 /** @brief Returns the primary endpoint of the current network index or 0xFF if
  * no endpoints belong to the current network.
  */
-uint8_t emberAfPrimaryEndpointForCurrentNetworkIndex(void);
+uint8_t sl_zigbee_af_primary_endpoint_for_current_network_index(void);
 
 /**
  * @brief Set the source and destination endpoints in the client API APS frame.
  */
-void emberAfSetCommandEndpoints(uint8_t sourceEndpoint,
+void sl_zigbee_af_set_command_endpoints(uint8_t sourceEndpoint,
                                 uint8_t destinationEndpoint);
 
 /**
@@ -91,23 +92,25 @@ void emberAfSetCommandEndpoints(uint8_t sourceEndpoint,
 *
 * @return The next ZCL sequence number.
 */
-uint8_t emberAfNextSequence(void);
+uint8_t sl_zigbee_af_next_sequence(void);
 
 /**
  * @brief Sends unicast.
  */
-EmberStatus emberAfSendUnicast(EmberOutgoingMessageType type,
+sl_status_t emberAfSendUnicast(sl_zigbee_outgoing_message_type_t type,
                                uint16_t indexOrDestination,
-                               EmberApsFrame *apsFrame,
+                               sl_zigbee_aps_frame_t *apsFrame,
                                uint16_t messageLength,
                                uint8_t *message);
 /**
  * @brief Sends multicast.
  */
-EmberStatus emberAfSendMulticast(EmberMulticastId multicastId,
-                                 EmberApsFrame *apsFrame,
-                                 uint16_t messageLength,
-                                 uint8_t *message);
+sl_status_t sl_zigbee_af_send_multicast(sl_zigbee_multicast_id_t multicastId,
+                                        sl_802154_short_addr_t alias,
+                                        uint8_t sequence,
+                                        sl_zigbee_aps_frame_t *apsFrame,
+                                        uint16_t messageLength,
+                                        uint8_t* message);
 
 /**
  * @brief Use this function to add an entry for a remote device to the address
@@ -121,13 +124,13 @@ EmberStatus emberAfSendMulticast(EmberMulticastId multicastId,
  * ::emberAfRemoveAddressTableEntry.
  *
  * @param longId The EUI64 of the remote device.
- * @param shortId The node id of the remote device or ::EMBER_UNKNOWN_NODE_ID
+ * @param shortId The node id of the remote device or ::SL_ZIGBEE_UNKNOWN_NODE_ID
  * if the node id is currently unknown.
  * @return The index of the address table entry for this remove device or
- * ::EMBER_NULL_ADDRESS_TABLE_INDEX if an error occurred (e.g., the address
+ * ::SL_ZIGBEE_NULL_ADDRESS_TABLE_INDEX if an error occurred (e.g., the address
  * table is full).
  */
-uint8_t emberAfAddAddressTableEntry(EmberEUI64 longId, EmberNodeId shortId);
+uint8_t sl_zigbee_af_add_address_table_entry(sl_802154_long_addr_t longId, sl_802154_short_addr_t shortId);
 
 /**
  * @brief Use this function to find all of the given in and out clusters
@@ -143,17 +146,17 @@ uint8_t emberAfAddAddressTableEntry(EmberEUI64 longId, EmberNodeId shortId);
  * @param callback Function pointer for the callback function triggered when
  *  the discovery is returned.
  */
-EmberStatus emberAfFindClustersByDeviceAndEndpoint(
-  EmberNodeId target,
+sl_status_t sl_zigbee_af_find_clusters_by_device_and_endpoint(
+  sl_802154_short_addr_t target,
   uint8_t targetEndpoint,
-  EmberAfServiceDiscoveryCallback *callback);
+  sl_zigbee_af_service_discovery_callback_t *callback);
 
 /**
   * @brief Initiate an Active Endpoint request ZDO message to the target node ID.
   */
-EmberStatus
-  emberAfFindActiveEndpoints(EmberNodeId target,
-                             EmberAfServiceDiscoveryCallback *callback);
+sl_status_t
+  sl_zigbee_af_find_active_endpoints(sl_802154_short_addr_t target,
+                             sl_zigbee_af_service_discovery_callback_t *callback);
 
 /**
  * @brief This function sends a ZCL response, based on the information
@@ -167,7 +170,7 @@ EmberStatus
  * NOTE:  This will overwrite the ZCL sequence number of the message
  * to use the LAST received sequence number.
  */
-EmberStatus emberAfSendResponse(void);
+sl_status_t sl_zigbee_af_send_response(void);
 
 /**
  * @brief Function that fills in the buffer with command.
@@ -182,8 +185,8 @@ EmberStatus emberAfSendResponse(void);
  * @param clusterId Cluster ID of message.
  * @param commandId Command ID of message.
  */
-uint16_t emberAfFillExternalBuffer(uint8_t frameControl,
-                                   EmberAfClusterId clusterId,
+uint16_t sl_zigbee_af_fill_external_buffer(uint8_t frameControl,
+                                   sl_zigbee_af_cluster_id_t clusterId,
                                    uint8_t commandId,
                                    const char *format,
                                    ...);

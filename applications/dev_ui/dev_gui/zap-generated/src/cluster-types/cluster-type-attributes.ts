@@ -1,8 +1,8 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
     Basic: {
@@ -7259,20 +7259,12 @@ export let ClusterTypeAttrs: any = {
                     isArray: false,
                     enum:[
                             {
-                              name: "Available",
-                              value: 0
-                            },
-                            {
                               name: "OccupiedEnabled",
                               value: 1
                             },
                             {
                               name: "OccupiedDisabled",
                               value: 3
-                            },
-                            {
-                              name: "NotSupported",
-                              value: 255
                             }
                     ],
                   },
@@ -7720,20 +7712,12 @@ export let ClusterTypeAttrs: any = {
                     isArray: false,
                     enum:[
                             {
-                              name: "Available",
-                              value: 0
-                            },
-                            {
                               name: "OccupiedEnabled",
                               value: 1
                             },
                             {
                               name: "OccupiedDisabled",
                               value: 3
-                            },
-                            {
-                              name: "NotSupported",
-                              value: 255
                             }
                     ],
                   },
@@ -9933,7 +9917,7 @@ export let ClusterTypeAttrs: any = {
             {                
               id: 16387,
               name: "ColorLoopDirection",
-              type: "enum",            
+              type: "number",            
               max: 255,
               required: false,
               reportRequired: false,
@@ -9941,10 +9925,6 @@ export let ClusterTypeAttrs: any = {
               writable: false,
               isArray: false,
               default: 0,
-              enum: [
-                { name: "DecrementEnhancedCurrentHue", value: 0},
-																{ name: "IncrementEnhancedCurrentHue", value: 1}
-              ],
             },
             {                
               id: 16388,
@@ -10906,11 +10886,11 @@ export let ClusterTypeAttrs: any = {
                     isArray: false,
                     enum:[
                             {
-                              name: "DecrementEnhancedCurrentHue",
+                              name: "ColorLoopHueDecrement",
                               value: 0
                             },
                             {
-                              name: "IncrementEnhancedCurrentHue",
+                              name: "ColorLoopHueIncrement",
                               value: 1
                             }
                     ],
@@ -15863,5 +15843,5 @@ export let ClusterTypeAttrs: any = {
         commands: [
         ] 
       }
-    }
+    },
 }

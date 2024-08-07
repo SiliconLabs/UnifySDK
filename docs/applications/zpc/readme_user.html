@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -51,7 +51,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a></li>
@@ -83,11 +83,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../doc/readme_debug.html">ZPC Debugging Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="how_to_implement_zwave_command_classes.html">Guideline for implementing Command Classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="how_to_write_uam_files_for_the_zpc.html">UAM maps for the ZPC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="how_to_interact_with_clusters.html">How to interact with clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doc/supported_command_classes.html">Supported Z-Wave Command Classes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/zigbee/zigpc_introduction.html">Zigbee (ZigPC)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/matter/matter_mpc.html">Matter (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../doc/protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
 </ul>
 </li>
@@ -596,7 +598,7 @@ registered.</p>
 </div>
 <p>Attribute types can be provided either as their name like above, or with their
 type id, like <em>attribute_type:0x002502</em></p>
-<p>When the ZPC is installed on the Debian Bullseye platform the sample configuration
+<p>When the ZPC is installed on the Debian Bookworm platform the sample configuration
 (i.e., the sample contains the recommended attribute types that may require periodic
 polling based on the device type) file will be located in:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/share/uic/zwave_poll_config.yaml
@@ -1046,6 +1048,10 @@ documentation, when using the Unify SDK.</p>
 <section id="developer-resources">
 <h2>Developer resources<a class="headerlink" href="#developer-resources" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how_to_implement_zwave_command_classes.html">Guideline for implementing Command Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_interact_with_clusters.html">How to interact with clusters</a></li>
+</ul>
 </div>
 </section>
 <section id="troubleshooting">

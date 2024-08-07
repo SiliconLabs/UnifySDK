@@ -143,6 +143,16 @@ case "$1" in
         ;;
 esac
 
+migrate_db() {
+  DATABASE_TARGET_VERSION=3
+  echo "Upgrade database to v3"
+  # Database path will be taken from the configuration file
+  # No need to be successful, as the database might not exist yet
+  set +e
+  ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/zpc_database_upgrade_tool --target_version $DATABASE_TARGET_VERSION || echo "[WARN] Database upgrade to v$DATABASE_TARGET_VERSION failed. You can run it manually."
+  set -e
+}
+
 # Reload AppArmor profile
 APP_PROFILE="/etc/apparmor.d/usr.sbin.uic"
 if [ -f "$APP_PROFILE" ] && aa-status --enabled 2>/dev/null; then
@@ -153,5 +163,6 @@ fi
 
 # Enable and start UIC_ZPC daemon
 enable_start_uic_zpc
+migrate_db
 
 exit 0

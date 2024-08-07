@@ -22,13 +22,13 @@
   "package": [
     {
       "pathRelativity": "relativeToZap",
-      "path": "../../../../../../opt/super/app/zcl/zcl-zap.json",
+      "path": "../../../../../../../../../externals/app/zcl/zcl-zap.json",
       "version": "Zigbee Silabs ZCL data",
       "type": "zcl-properties"
     },
     {
       "pathRelativity": "relativeToZap",
-      "path": "../../../../../../opt/super/protocol/zigbee/app/framework/gen-template/gen-templates.json",
+      "path": "../../../../../../../../../externals/protocol/zigbee/app/framework/gen-template/gen-templates.json",
       "version": "zigbee-v0",
       "type": "gen-templates-json"
     }
@@ -1242,7 +1242,7 @@
           "mfgCode": null,
           "define": "TIME_CLUSTER",
           "side": "server",
-          "enabled": 0,
+          "enabled": 1,
           "commands": [],
           "attributes": [
             {
@@ -2228,7 +2228,7 @@
           "mfgCode": null,
           "define": "POWER_PROFILE_CLUSTER",
           "side": "client",
-          "enabled": 0,
+          "enabled": 1,
           "commands": [
             {
               "name": "PowerProfileRequest",
@@ -6371,7 +6371,7 @@
           "mfgCode": null,
           "define": "SIMPLE_METERING_CLUSTER",
           "side": "client",
-          "enabled": 0,
+          "enabled": 1,
           "commands": [],
           "attributes": [
             {
@@ -6783,6 +6783,14 @@
               "source": "client",
               "incoming": 1,
               "outgoing": 1
+            },
+            {
+              "name": "TerminateKeyEstablishmentFromClient",
+              "code": 3,
+              "mfgCode": null,
+              "source": "client",
+              "incoming": 1,
+              "outgoing": 1
             }
           ],
           "attributes": [
@@ -6857,6 +6865,14 @@
               "code": 2,
               "mfgCode": null,
               "source": "server",
+              "incoming": 1,
+              "outgoing": 1
+            },
+            {
+              "name": "TerminateKeyEstablishmentFromServer",
+              "code": 3,
+              "mfgCode": null,
+              "source": "client",
               "incoming": 1,
               "outgoing": 1
             }
@@ -6967,7 +6983,7 @@
           "mfgCode": null,
           "define": "METER_IDENTIFICATION_CLUSTER",
           "side": "client",
-          "enabled": 0,
+          "enabled": 1,
           "commands": [],
           "attributes": [
             {
@@ -7195,7 +7211,7 @@
           "mfgCode": null,
           "define": "APPLIANCE_STATISTICS_CLUSTER",
           "side": "client",
-          "enabled": 0,
+          "enabled": 1,
           "commands": [
             {
               "name": "LogRequest",

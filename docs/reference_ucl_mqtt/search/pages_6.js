@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['groups_20cluster_80',['Groups Cluster',['../groups.html',1,'']]]
+  ['groups_20cluster_0',['Groups Cluster',['../groups.html',1,'']]]
 ];

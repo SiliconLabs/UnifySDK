@@ -13,7 +13,7 @@ var mqtt__wrapper_8h =
     [ "mqtt_wrapper_loop_read", "mqtt__wrapper_8h.html#af061db9248edc1782f85a99e24f7e5b2", null ],
     [ "mqtt_wrapper_loop_write", "mqtt__wrapper_8h.html#a2db8e1ce9f87013213c2818899af6849", null ],
     [ "mqtt_wrapper_message_callback_set", "mqtt__wrapper_8h.html#a012f2531ad3e5810a4984d0551e225eb", null ],
-    [ "mqtt_wrapper_new", "mqtt__wrapper_8h.html#a206aa0050b08f5b5fd0f70be6c4c666f", null ],
+    [ "mqtt_wrapper_new", "mqtt__wrapper_8h.html#a3786cf8c9fdce1eacff755b038a70646", null ],
     [ "mqtt_wrapper_publish", "mqtt__wrapper_8h.html#a0f0107a1e5d000907a850576e058921e", null ],
     [ "mqtt_wrapper_set_will_message", "mqtt__wrapper_8h.html#a57f11c4f088b6a390ee4732ebe209ab6", null ],
     [ "mqtt_wrapper_socket", "mqtt__wrapper_8h.html#a410cffe9afef42afad5a46a97ab8d1d1", null ],

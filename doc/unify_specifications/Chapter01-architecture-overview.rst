@@ -502,16 +502,14 @@ The topic tree looks like the following:
 
 The <DEVICETYPE> MUST adequately describe the Device Types (i.e.,
 the practical functions) of all the device types found in all PANs
-supported by Silicon Labs. The
-`dotdot Device Library specification <https://zigbeealliance.org/solution/dotdot/>`__
-has a good list of device types.
+supported by Silicon Labs.
 
 The <HOMEASSISTANT_TYPE> MUST be a strict superset of the
 `MQTT discovery types defined in the HomeAssistant open-source project <https://www.home-assistant.io/docs/mqtt/discovery/>`__.
 
 The subscribers to the ucl/_well_known topic/+ MUST receive a
 `JSON-encoded <https://www.w3schools.com/js/js_json_datatypes.asp>`__
-`Retained Message <(https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/>`__
+`Retained Message <https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/>`__
 with at least the following contents:
 
 **The JSON-encoded well-known payload:**
@@ -837,7 +835,7 @@ Broker Discovery
 To interact with the Unify GW and the PAN nodes behind it, the IP address of the
 broker must be discovered. The mechanism of discovery is not yet defined, but
 the most likely candidate is
-`Multicast DNS (mDNS) <(https://en.wikipedia.org/wiki/Multicast_DNS>`__. Once
+`Multicast DNS (mDNS) <https://en.wikipedia.org/wiki/Multicast_DNS>`__. Once
 connected, Resource Discovery MUST be used to discover the nodes and
 capabilities of the PAN nodes.
 

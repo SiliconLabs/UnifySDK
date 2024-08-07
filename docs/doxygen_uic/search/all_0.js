@@ -79,8 +79,11 @@ var searchData=
   ['_5fuic_5fmqtt_5fdotdot_5fthermostat_5fsupported_5fcommands_5f_76',['_uic_mqtt_dotdot_thermostat_supported_commands_',['../struct__uic__mqtt__dotdot__thermostat__supported__commands__.html',1,'']]],
   ['_5fuic_5fmqtt_5fdotdot_5fthermostat_5fuser_5finterface_5fconfiguration_5fsupported_5fcommands_5f_77',['_uic_mqtt_dotdot_thermostat_user_interface_configuration_supported_commands_',['../struct__uic__mqtt__dotdot__thermostat__user__interface__configuration__supported__commands__.html',1,'']]],
   ['_5fuic_5fmqtt_5fdotdot_5ftime_5fsupported_5fcommands_5f_78',['_uic_mqtt_dotdot_time_supported_commands_',['../struct__uic__mqtt__dotdot__time__supported__commands__.html',1,'']]],
-  ['_5fuic_5fmqtt_5fdotdot_5fwind_5fspeed_5fmeasurement_5fsupported_5fcommands_5f_79',['_uic_mqtt_dotdot_wind_speed_measurement_supported_commands_',['../struct__uic__mqtt__dotdot__wind__speed__measurement__supported__commands__.html',1,'']]],
-  ['_5fuic_5fmqtt_5fdotdot_5fwindow_5fcovering_5fsupported_5fcommands_5f_80',['_uic_mqtt_dotdot_window_covering_supported_commands_',['../struct__uic__mqtt__dotdot__window__covering__supported__commands__.html',1,'']]],
-  ['_5fwirelessnetworkinterfacedata_81',['_WirelessNetworkInterfaceData',['../struct__WirelessNetworkInterfaceData.html',1,'']]],
-  ['_5fxassert_82',['_xassert',['../assert_8c.html#ac75bf7f1a530ee529f990562a43c658a',1,'_xassert(const char *file, int lineno):&#160;assert.c'],['../assert_8h.html#ad5da3a373dcd4e6cb93e6825821f118c',1,'_xassert(const char *, int):&#160;assert.c']]]
+  ['_5fuic_5fmqtt_5fdotdot_5funify_5ffan_5fcontrol_5fsupported_5fcommands_5f_79',['_uic_mqtt_dotdot_unify_fan_control_supported_commands_',['../struct__uic__mqtt__dotdot__unify__fan__control__supported__commands__.html',1,'']]],
+  ['_5fuic_5fmqtt_5fdotdot_5funify_5fhumidity_5fcontrol_5fsupported_5fcommands_5f_80',['_uic_mqtt_dotdot_unify_humidity_control_supported_commands_',['../struct__uic__mqtt__dotdot__unify__humidity__control__supported__commands__.html',1,'']]],
+  ['_5fuic_5fmqtt_5fdotdot_5funify_5fthermostat_5fsupported_5fcommands_5f_81',['_uic_mqtt_dotdot_unify_thermostat_supported_commands_',['../struct__uic__mqtt__dotdot__unify__thermostat__supported__commands__.html',1,'']]],
+  ['_5fuic_5fmqtt_5fdotdot_5fwind_5fspeed_5fmeasurement_5fsupported_5fcommands_5f_82',['_uic_mqtt_dotdot_wind_speed_measurement_supported_commands_',['../struct__uic__mqtt__dotdot__wind__speed__measurement__supported__commands__.html',1,'']]],
+  ['_5fuic_5fmqtt_5fdotdot_5fwindow_5fcovering_5fsupported_5fcommands_5f_83',['_uic_mqtt_dotdot_window_covering_supported_commands_',['../struct__uic__mqtt__dotdot__window__covering__supported__commands__.html',1,'']]],
+  ['_5fwirelessnetworkinterfacedata_84',['_WirelessNetworkInterfaceData',['../struct__WirelessNetworkInterfaceData.html',1,'']]],
+  ['_5fxassert_85',['_xassert',['../assert_8c.html#ac75bf7f1a530ee529f990562a43c658a',1,'_xassert(const char *file, int lineno):&#160;assert.c'],['../assert_8h.html#ad5da3a373dcd4e6cb93e6825821f118c',1,'_xassert(const char *, int):&#160;assert.c']]]
 ];

@@ -69,6 +69,9 @@ var hierarchy =
     [ "_uic_mqtt_dotdot_thermostat_supported_commands_", "struct__uic__mqtt__dotdot__thermostat__supported__commands__.html", null ],
     [ "_uic_mqtt_dotdot_thermostat_user_interface_configuration_supported_commands_", "struct__uic__mqtt__dotdot__thermostat__user__interface__configuration__supported__commands__.html", null ],
     [ "_uic_mqtt_dotdot_time_supported_commands_", "struct__uic__mqtt__dotdot__time__supported__commands__.html", null ],
+    [ "_uic_mqtt_dotdot_unify_fan_control_supported_commands_", "struct__uic__mqtt__dotdot__unify__fan__control__supported__commands__.html", null ],
+    [ "_uic_mqtt_dotdot_unify_humidity_control_supported_commands_", "struct__uic__mqtt__dotdot__unify__humidity__control__supported__commands__.html", null ],
+    [ "_uic_mqtt_dotdot_unify_thermostat_supported_commands_", "struct__uic__mqtt__dotdot__unify__thermostat__supported__commands__.html", null ],
     [ "_uic_mqtt_dotdot_wind_speed_measurement_supported_commands_", "struct__uic__mqtt__dotdot__wind__speed__measurement__supported__commands__.html", null ],
     [ "_uic_mqtt_dotdot_window_covering_supported_commands_", "struct__uic__mqtt__dotdot__window__covering__supported__commands__.html", null ],
     [ "_WirelessNetworkInterfaceData", "struct__WirelessNetworkInterfaceData.html", null ],
@@ -165,9 +168,11 @@ var hierarchy =
     [ "StoreAccessor< uint8_t, zigpc_network_data_t >", "classStoreAccessor.html", [
       [ "NetworkAccessor", "classNetworkAccessor.html", null ]
     ] ],
+    [ "StoreAccessor< zcl_attribute_id_t, uint8_t >", "classStoreAccessor.html", null ],
     [ "StoreAccessor< zcl_cluster_id_t, zigpc_cluster_data_t >", "classStoreAccessor.html", [
       [ "ClusterAccessor", "classClusterAccessor.html", null ]
     ] ],
+    [ "StoreAccessor< zcl_command_id_t, uint8_t >", "classStoreAccessor.html", null ],
     [ "StoreAccessor< zigbee_endpoint_id_t, zigpc_endpoint_data_t >", "classStoreAccessor.html", [
       [ "EndpointAccessor", "classEndpointAccessor.html", null ]
     ] ],
@@ -448,6 +453,15 @@ var hierarchy =
     [ "uic_mqtt_dotdot_thermostat_user_interface_configuration_updated_state_t", "structuic__mqtt__dotdot__thermostat__user__interface__configuration__updated__state__t.html", null ],
     [ "uic_mqtt_dotdot_time_state_t", "structuic__mqtt__dotdot__time__state__t.html", null ],
     [ "uic_mqtt_dotdot_time_updated_state_t", "structuic__mqtt__dotdot__time__updated__state__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t", "structuic__mqtt__dotdot__unify__fan__control__command__set__fan__mode__fields__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_fan_control_state_t", "structuic__mqtt__dotdot__unify__fan__control__state__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_fan_control_updated_state_t", "structuic__mqtt__dotdot__unify__fan__control__updated__state__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t", "structuic__mqtt__dotdot__unify__humidity__control__command__mode__set__fields__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t", "structuic__mqtt__dotdot__unify__humidity__control__command__setpoint__set__fields__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_state_t", "structuic__mqtt__dotdot__unify__humidity__control__state__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_updated_state_t", "structuic__mqtt__dotdot__unify__humidity__control__updated__state__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_thermostat_state_t", "structuic__mqtt__dotdot__unify__thermostat__state__t.html", null ],
+    [ "uic_mqtt_dotdot_unify_thermostat_updated_state_t", "structuic__mqtt__dotdot__unify__thermostat__updated__state__t.html", null ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_state_t", "structuic__mqtt__dotdot__wind__speed__measurement__state__t.html", null ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_updated_state_t", "structuic__mqtt__dotdot__wind__speed__measurement__updated__state__t.html", null ],
     [ "uic_mqtt_dotdot_window_covering_command_go_to_lift_percentage_fields_t", "structuic__mqtt__dotdot__window__covering__command__go__to__lift__percentage__fields__t.html", null ],
@@ -552,5 +566,6 @@ var hierarchy =
     [ "zigpc_zclcmdparse_poll_control_set_long_poll_interval_t", "structzigpc__zclcmdparse__poll__control__set__long__poll__interval__t.html", null ],
     [ "zigpc_zclcmdparse_poll_control_set_short_poll_interval_t", "structzigpc__zclcmdparse__poll__control__set__short__poll__interval__t.html", null ],
     [ "zigpc_zclcmdparse_thermostat_get_relay_status_log_response_t", "structzigpc__zclcmdparse__thermostat__get__relay__status__log__response__t.html", null ],
-    [ "zigpc_zclcmdparse_thermostat_get_weekly_schedule_response_t", "structzigpc__zclcmdparse__thermostat__get__weekly__schedule__response__t.html", null ]
+    [ "zigpc_zclcmdparse_thermostat_get_weekly_schedule_response_t", "structzigpc__zclcmdparse__thermostat__get__weekly__schedule__response__t.html", null ],
+    [ "uint32_t", "classuint32__t.html", null ]
 ];

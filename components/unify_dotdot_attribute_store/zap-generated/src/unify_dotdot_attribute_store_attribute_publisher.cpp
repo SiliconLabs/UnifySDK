@@ -10950,7 +10950,7 @@ static void color_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION) {
           uic_mqtt_dotdot_color_control_color_loop_direction_publish(
             base_topic.c_str(),
-            static_cast<CCColorLoopDirection>(attr.desired_or_reported<CCColorLoopDirection>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -11809,7 +11809,7 @@ static void color_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION) {
           uic_mqtt_dotdot_color_control_color_loop_direction_publish(
             base_topic.c_str(),
-            static_cast<CCColorLoopDirection>(attr.reported<CCColorLoopDirection>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -25633,6 +25633,1135 @@ static void descriptor_cluster_cluster_revision_callback(
 }
 
 
+/**
+ * @brief Publishes the desired value of an updated attribute store node for
+ * the UnifyFanControl cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_fan_control_cluster_publish_desired_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE) {
+          uic_mqtt_dotdot_unify_fan_control_z_wave_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<ZWaveFanModeEnum>(attr.desired_or_reported<ZWaveFanModeEnum>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE) {
+          uic_mqtt_dotdot_unify_fan_control_z_wave_supported_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE) {
+          uic_mqtt_dotdot_unify_fan_control_z_wave_fan_state_publish(
+            base_topic.c_str(),
+            static_cast<ZWaveFanStateEnum>(attr.desired_or_reported<ZWaveFanStateEnum>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
+  }
+}
+
+/**
+ * @brief Publishes the reported value of an updated attribute store node for
+ * the UnifyFanControl cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_fan_control_cluster_publish_reported_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // Deletion case:
+  if (change == ATTRIBUTE_DELETED) {
+    // clang-format off
+    switch(type) {
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyFanControl::ZWaveFanMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_fan_control_z_wave_fan_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyFanControl::ZWaveSupportedFanMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_fan_control_z_wave_supported_fan_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyFanControl::ZWaveFanState under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_fan_control_z_wave_fan_state_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+    default:
+    break;
+    }
+    // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
+    return;
+  }
+
+  // Else we assume update case:
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE) {
+          uic_mqtt_dotdot_unify_fan_control_z_wave_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<ZWaveFanModeEnum>(attr.reported<ZWaveFanModeEnum>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE) {
+          uic_mqtt_dotdot_unify_fan_control_z_wave_supported_fan_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE) {
+          uic_mqtt_dotdot_unify_fan_control_z_wave_fan_state_publish(
+            base_topic.c_str(),
+            static_cast<ZWaveFanStateEnum>(attr.reported<ZWaveFanStateEnum>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
+  }
+}
+
+static void unify_fan_control_cluster_cluster_revision_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  // clang-format off
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+
+  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
+    // On attribute creation, make sure to publish the attribute revision for the first time
+    std::string cluster_revision_topic = base_topic + "/UnifyFanControl/Attributes/ClusterRevision";
+    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
+      uic_mqtt_dotdot_unify_fan_control_publish_cluster_revision(base_topic.c_str(), 1);
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // Check if we just erased the last attribute under a cluster, if yes, unretain
+    // the Cluster revision too.
+    if (false == dotdot_is_any_unify_fan_control_attribute_supported(unid, endpoint_id)) {
+      base_topic +=  "/UnifyFanControl";
+      sl_log_debug(LOG_TAG, "No more attributes supported for UnifyFanControl cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
+      uic_mqtt_unretain(base_topic.c_str());
+    }
+  }
+}
+
+
+/**
+ * @brief Publishes the desired value of an updated attribute store node for
+ * the UnifyThermostat cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_thermostat_cluster_publish_desired_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_THERMOSTAT_MODE) {
+          uic_mqtt_dotdot_unify_thermostat_thermostat_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE) {
+          uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE) {
+          uic_mqtt_dotdot_unify_thermostat_operating_state_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
+  }
+}
+
+/**
+ * @brief Publishes the reported value of an updated attribute store node for
+ * the UnifyThermostat cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_thermostat_cluster_publish_reported_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // Deletion case:
+  if (change == ATTRIBUTE_DELETED) {
+    // clang-format off
+    switch(type) {
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_THERMOSTAT_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyThermostat::ThermostatMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_thermostat_thermostat_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyThermostat::SupportedThermostatMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyThermostat::OperatingState under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_thermostat_operating_state_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+    default:
+    break;
+    }
+    // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
+    return;
+  }
+
+  // Else we assume update case:
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_THERMOSTAT_MODE) {
+          uic_mqtt_dotdot_unify_thermostat_thermostat_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE) {
+          uic_mqtt_dotdot_unify_thermostat_supported_thermostat_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE) {
+          uic_mqtt_dotdot_unify_thermostat_operating_state_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
+  }
+}
+
+static void unify_thermostat_cluster_cluster_revision_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  // clang-format off
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+
+  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
+    // On attribute creation, make sure to publish the attribute revision for the first time
+    std::string cluster_revision_topic = base_topic + "/UnifyThermostat/Attributes/ClusterRevision";
+    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
+      uic_mqtt_dotdot_unify_thermostat_publish_cluster_revision(base_topic.c_str(), 1);
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // Check if we just erased the last attribute under a cluster, if yes, unretain
+    // the Cluster revision too.
+    if (false == dotdot_is_any_unify_thermostat_attribute_supported(unid, endpoint_id)) {
+      base_topic +=  "/UnifyThermostat";
+      sl_log_debug(LOG_TAG, "No more attributes supported for UnifyThermostat cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
+      uic_mqtt_unretain(base_topic.c_str());
+    }
+  }
+}
+
+
+/**
+ * @brief Publishes the desired value of an updated attribute store node for
+ * the UnifyHumidityControl cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_humidity_control_cluster_publish_desired_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE) {
+          uic_mqtt_dotdot_unify_humidity_control_reporting_mode_publish(
+            base_topic.c_str(),
+            static_cast<ModeType>(attr.desired_or_reported<ModeType>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE) {
+          uic_mqtt_dotdot_unify_humidity_control_supported_reporting_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE) {
+          uic_mqtt_dotdot_unify_humidity_control_current_state_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS) {
+          uic_mqtt_dotdot_unify_humidity_control_supported_set_points_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_min_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_max_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_publish(
+            base_topic.c_str(),
+            static_cast<ScaleType>(attr.desired_or_reported<ScaleType>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_min_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_max_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_publish(
+            base_topic.c_str(),
+            static_cast<ScaleType>(attr.desired_or_reported<ScaleType>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_min_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_max_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_publish(
+            base_topic.c_str(),
+            static_cast<ScaleType>(attr.desired_or_reported<ScaleType>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
+  }
+}
+
+/**
+ * @brief Publishes the reported value of an updated attribute store node for
+ * the UnifyHumidityControl cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_humidity_control_cluster_publish_reported_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // Deletion case:
+  if (change == ATTRIBUTE_DELETED) {
+    // clang-format off
+    switch(type) {
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::ReportingMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_reporting_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::SupportedReportingMode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_supported_reporting_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::CurrentState under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_current_state_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::SupportedSetPoints under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_supported_set_points_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::HumidifierSetpointMin under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_min_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::HumidifierSetpointMax under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_max_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::HumidifierSetpoint under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::HumidifierSetpointScale under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::HumidifierSetpointPrecision under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::DehumidifierSetpointMin under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_min_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::DehumidifierSetpointMax under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_max_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::DehumidifierSetpoint under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::DehumidifierSetpointScale under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::DehumidifierSetpointPrecision under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::AutoSetpointMin under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_min_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::AutoSetpointMax under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_max_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::AutoSetpoint under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::AutoSetpointScale under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifyHumidityControl::AutoSetpointPrecision under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+    default:
+    break;
+    }
+    // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
+    return;
+  }
+
+  // Else we assume update case:
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE) {
+          uic_mqtt_dotdot_unify_humidity_control_reporting_mode_publish(
+            base_topic.c_str(),
+            static_cast<ModeType>(attr.reported<ModeType>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE) {
+          uic_mqtt_dotdot_unify_humidity_control_supported_reporting_mode_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE) {
+          uic_mqtt_dotdot_unify_humidity_control_current_state_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS) {
+          uic_mqtt_dotdot_unify_humidity_control_supported_set_points_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_min_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_max_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_publish(
+            base_topic.c_str(),
+            static_cast<ScaleType>(attr.reported<ScaleType>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION) {
+          uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_min_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_max_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_publish(
+            base_topic.c_str(),
+            static_cast<ScaleType>(attr.reported<ScaleType>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION) {
+          uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_min_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_max_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_publish(
+            base_topic.c_str(),
+            static_cast<int32_t>(attr.reported<int32_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_publish(
+            base_topic.c_str(),
+            static_cast<ScaleType>(attr.reported<ScaleType>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION) {
+          uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
+  }
+}
+
+static void unify_humidity_control_cluster_cluster_revision_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  // clang-format off
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+
+  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
+    // On attribute creation, make sure to publish the attribute revision for the first time
+    std::string cluster_revision_topic = base_topic + "/UnifyHumidityControl/Attributes/ClusterRevision";
+    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
+      uic_mqtt_dotdot_unify_humidity_control_publish_cluster_revision(base_topic.c_str(), 1);
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // Check if we just erased the last attribute under a cluster, if yes, unretain
+    // the Cluster revision too.
+    if (false == dotdot_is_any_unify_humidity_control_attribute_supported(unid, endpoint_id)) {
+      base_topic +=  "/UnifyHumidityControl";
+      sl_log_debug(LOG_TAG, "No more attributes supported for UnifyHumidityControl cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
+      uic_mqtt_unretain(base_topic.c_str());
+    }
+  }
+}
+
+
 
 // Initialization of the component.
 sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
@@ -35675,6 +36804,356 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       descriptor_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_fan_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_fan_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_fan_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_fan_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_fan_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_fan_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_fan_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_fan_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_fan_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_thermostat_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_THERMOSTAT_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_thermostat_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_THERMOSTAT_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_thermostat_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_THERMOSTAT_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_thermostat_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_thermostat_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_thermostat_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_thermostat_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_thermostat_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_thermostat_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_THERMOSTAT_OPERATING_STATE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_REPORTING_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_humidity_control_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_humidity_control_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
 
   return SL_STATUS_OK;
 }

@@ -15,24 +15,25 @@
  *
  ******************************************************************************/
 
-
-#ifdef UC_BUILD
 #include "zap-event.h"
 
 #ifdef SL_CATALOG_ZIGBEE_ZCL_FRAMEWORK_CORE_PRESENT
 
-WEAK(void emberAfIdentifyClusterServerTickCallback(uint8_t endpoint))
+/*WEAK(void sl_zigbee_af_identify_cluster_server_tick_cb(uint8_t endpoint))
 {
 }
 
-WEAK(void emberAfOnOffClusterServerTickCallback(uint8_t endpoint))
+WEAK(void sl_zigbee_af_on_off_cluster_server_tick_cb(uint8_t endpoint))
 {
 }
 
-WEAK(void emberAfOtaBootloadClusterServerTickCallback(uint8_t endpoint))
+WEAK(void sl_zigbee_af_time_cluster_server_tick_cb(uint8_t endpoint))
 {
 }
+
+WEAK(void sl_zigbee_af_ota_bootload_cluster_server_tick_cb(uint8_t endpoint))
+{
+}*/
 
 
 #endif // SL_CATALOG_ZIGBEE_ZCL_FRAMEWORK_CORE_PRESENT
-#endif // UC_BUILD

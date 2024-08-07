@@ -1,17 +1,18 @@
-// Generated on: 12-Apr-19 11:10:54 AM
-/**
+// This file is auto generated. Do not edit it manually!
+// Generated on: 1/31/2024 2:45:56 PM
+ /**
  * @file
- * @version 2.3.2
+ * @version 2.13.0
  * Device and command class types and definitions.
  * 
- * @copyright 2019 Silicon Laboratories Inc.
+ * @copyright 2024 Silicon Laboratories Inc.
  */
 #ifndef _ZW_CLASSCMD_H_
 #define _ZW_CLASSCMD_H_
 
-/****************************************************************************/
-/*                              INCLUDE FILES                               */
-/****************************************************************************/
+ /****************************************************************************/
+ /*                              INCLUDE FILES                               */
+ /****************************************************************************/
 #include <stdint.h>
 
 /****************************************************************************
@@ -138,6 +139,23 @@
   ZW_EVENT_SUPPORTED_REPORT_2BYTE_V8_FRAME                     ZW_EventSupportedReport2byteV8Frame;\
   ZW_EVENT_SUPPORTED_REPORT_3BYTE_V8_FRAME                     ZW_EventSupportedReport3byteV8Frame;\
   ZW_EVENT_SUPPORTED_REPORT_4BYTE_V8_FRAME                     ZW_EventSupportedReport4byteV8Frame;\
+/* Command class Notification V9 */\
+  ZW_NOTIFICATION_GET_V9_FRAME                                 ZW_NotificationGetV9Frame;\
+  ZW_NOTIFICATION_REPORT_1BYTE_V9_FRAME                        ZW_NotificationReport1byteV9Frame;\
+  ZW_NOTIFICATION_REPORT_2BYTE_V9_FRAME                        ZW_NotificationReport2byteV9Frame;\
+  ZW_NOTIFICATION_REPORT_3BYTE_V9_FRAME                        ZW_NotificationReport3byteV9Frame;\
+  ZW_NOTIFICATION_REPORT_4BYTE_V9_FRAME                        ZW_NotificationReport4byteV9Frame;\
+  ZW_NOTIFICATION_SET_V9_FRAME                                 ZW_NotificationSetV9Frame;\
+  ZW_NOTIFICATION_SUPPORTED_GET_V9_FRAME                       ZW_NotificationSupportedGetV9Frame;\
+  ZW_NOTIFICATION_SUPPORTED_REPORT_1BYTE_V9_FRAME              ZW_NotificationSupportedReport1byteV9Frame;\
+  ZW_NOTIFICATION_SUPPORTED_REPORT_2BYTE_V9_FRAME              ZW_NotificationSupportedReport2byteV9Frame;\
+  ZW_NOTIFICATION_SUPPORTED_REPORT_3BYTE_V9_FRAME              ZW_NotificationSupportedReport3byteV9Frame;\
+  ZW_NOTIFICATION_SUPPORTED_REPORT_4BYTE_V9_FRAME              ZW_NotificationSupportedReport4byteV9Frame;\
+  ZW_EVENT_SUPPORTED_GET_V9_FRAME                              ZW_EventSupportedGetV9Frame;\
+  ZW_EVENT_SUPPORTED_REPORT_1BYTE_V9_FRAME                     ZW_EventSupportedReport1byteV9Frame;\
+  ZW_EVENT_SUPPORTED_REPORT_2BYTE_V9_FRAME                     ZW_EventSupportedReport2byteV9Frame;\
+  ZW_EVENT_SUPPORTED_REPORT_3BYTE_V9_FRAME                     ZW_EventSupportedReport3byteV9Frame;\
+  ZW_EVENT_SUPPORTED_REPORT_4BYTE_V9_FRAME                     ZW_EventSupportedReport4byteV9Frame;\
 /* Command class Application Status */\
   ZW_APPLICATION_BUSY_FRAME                                    ZW_ApplicationBusyFrame;\
   ZW_APPLICATION_REJECTED_REQUEST_FRAME                        ZW_ApplicationRejectedRequestFrame;\
@@ -187,6 +205,42 @@
   ZW_ASSOCIATION_SET_4BYTE_V2_FRAME                            ZW_AssociationSet4byteV2Frame;\
   ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V2_FRAME                   ZW_AssociationSpecificGroupGetV2Frame;\
   ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V2_FRAME                ZW_AssociationSpecificGroupReportV2Frame;\
+/* Command class Association V3 */\
+  ZW_ASSOCIATION_GET_V3_FRAME                                  ZW_AssociationGetV3Frame;\
+  ZW_ASSOCIATION_GROUPINGS_GET_V3_FRAME                        ZW_AssociationGroupingsGetV3Frame;\
+  ZW_ASSOCIATION_GROUPINGS_REPORT_V3_FRAME                     ZW_AssociationGroupingsReportV3Frame;\
+  ZW_ASSOCIATION_REMOVE_1BYTE_V3_FRAME                         ZW_AssociationRemove1byteV3Frame;\
+  ZW_ASSOCIATION_REMOVE_2BYTE_V3_FRAME                         ZW_AssociationRemove2byteV3Frame;\
+  ZW_ASSOCIATION_REMOVE_3BYTE_V3_FRAME                         ZW_AssociationRemove3byteV3Frame;\
+  ZW_ASSOCIATION_REMOVE_4BYTE_V3_FRAME                         ZW_AssociationRemove4byteV3Frame;\
+  ZW_ASSOCIATION_REPORT_1BYTE_V3_FRAME                         ZW_AssociationReport1byteV3Frame;\
+  ZW_ASSOCIATION_REPORT_2BYTE_V3_FRAME                         ZW_AssociationReport2byteV3Frame;\
+  ZW_ASSOCIATION_REPORT_3BYTE_V3_FRAME                         ZW_AssociationReport3byteV3Frame;\
+  ZW_ASSOCIATION_REPORT_4BYTE_V3_FRAME                         ZW_AssociationReport4byteV3Frame;\
+  ZW_ASSOCIATION_SET_1BYTE_V3_FRAME                            ZW_AssociationSet1byteV3Frame;\
+  ZW_ASSOCIATION_SET_2BYTE_V3_FRAME                            ZW_AssociationSet2byteV3Frame;\
+  ZW_ASSOCIATION_SET_3BYTE_V3_FRAME                            ZW_AssociationSet3byteV3Frame;\
+  ZW_ASSOCIATION_SET_4BYTE_V3_FRAME                            ZW_AssociationSet4byteV3Frame;\
+  ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V3_FRAME                   ZW_AssociationSpecificGroupGetV3Frame;\
+  ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V3_FRAME                ZW_AssociationSpecificGroupReportV3Frame;\
+/* Command class Association V4 */\
+  ZW_ASSOCIATION_GET_V4_FRAME                                  ZW_AssociationGetV4Frame;\
+  ZW_ASSOCIATION_GROUPINGS_GET_V4_FRAME                        ZW_AssociationGroupingsGetV4Frame;\
+  ZW_ASSOCIATION_GROUPINGS_REPORT_V4_FRAME                     ZW_AssociationGroupingsReportV4Frame;\
+  ZW_ASSOCIATION_REMOVE_1BYTE_V4_FRAME                         ZW_AssociationRemove1byteV4Frame;\
+  ZW_ASSOCIATION_REMOVE_2BYTE_V4_FRAME                         ZW_AssociationRemove2byteV4Frame;\
+  ZW_ASSOCIATION_REMOVE_3BYTE_V4_FRAME                         ZW_AssociationRemove3byteV4Frame;\
+  ZW_ASSOCIATION_REMOVE_4BYTE_V4_FRAME                         ZW_AssociationRemove4byteV4Frame;\
+  ZW_ASSOCIATION_REPORT_1BYTE_V4_FRAME                         ZW_AssociationReport1byteV4Frame;\
+  ZW_ASSOCIATION_REPORT_2BYTE_V4_FRAME                         ZW_AssociationReport2byteV4Frame;\
+  ZW_ASSOCIATION_REPORT_3BYTE_V4_FRAME                         ZW_AssociationReport3byteV4Frame;\
+  ZW_ASSOCIATION_REPORT_4BYTE_V4_FRAME                         ZW_AssociationReport4byteV4Frame;\
+  ZW_ASSOCIATION_SET_1BYTE_V4_FRAME                            ZW_AssociationSet1byteV4Frame;\
+  ZW_ASSOCIATION_SET_2BYTE_V4_FRAME                            ZW_AssociationSet2byteV4Frame;\
+  ZW_ASSOCIATION_SET_3BYTE_V4_FRAME                            ZW_AssociationSet3byteV4Frame;\
+  ZW_ASSOCIATION_SET_4BYTE_V4_FRAME                            ZW_AssociationSet4byteV4Frame;\
+  ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V4_FRAME                   ZW_AssociationSpecificGroupGetV4Frame;\
+  ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V4_FRAME                ZW_AssociationSpecificGroupReportV4Frame;\
 /* Command class Av Content Directory Md */\
   ZW_AV_CONTENT_BROWSE_MD_BY_LETTER_GET_FRAME                  ZW_AvContentBrowseMdByLetterGetFrame;\
   ZW_AV_CONTENT_BROWSE_MD_BY_LETTER_REPORT_FRAME               ZW_AvContentBrowseMdByLetterReportFrame;\
@@ -222,6 +276,22 @@
 /* Command class Battery */\
   ZW_BATTERY_GET_FRAME                                         ZW_BatteryGetFrame;\
   ZW_BATTERY_REPORT_FRAME                                      ZW_BatteryReportFrame;\
+/* Command class Battery V2 */\
+  ZW_BATTERY_GET_V2_FRAME                                      ZW_BatteryGetV2Frame;\
+  ZW_BATTERY_REPORT_V2_FRAME                                   ZW_BatteryReportV2Frame;\
+  ZW_BATTERY_HEALTH_GET_V2_FRAME                               ZW_BatteryHealthGetV2Frame;\
+  ZW_BATTERY_HEALTH_REPORT_1BYTE_V2_FRAME                      ZW_BatteryHealthReport1byteV2Frame;\
+  ZW_BATTERY_HEALTH_REPORT_2BYTE_V2_FRAME                      ZW_BatteryHealthReport2byteV2Frame;\
+  ZW_BATTERY_HEALTH_REPORT_3BYTE_V2_FRAME                      ZW_BatteryHealthReport3byteV2Frame;\
+  ZW_BATTERY_HEALTH_REPORT_4BYTE_V2_FRAME                      ZW_BatteryHealthReport4byteV2Frame;\
+/* Command class Battery V3 */\
+  ZW_BATTERY_GET_V3_FRAME                                      ZW_BatteryGetV3Frame;\
+  ZW_BATTERY_REPORT_V3_FRAME                                   ZW_BatteryReportV3Frame;\
+  ZW_BATTERY_HEALTH_GET_V3_FRAME                               ZW_BatteryHealthGetV3Frame;\
+  ZW_BATTERY_HEALTH_REPORT_1BYTE_V3_FRAME                      ZW_BatteryHealthReport1byteV3Frame;\
+  ZW_BATTERY_HEALTH_REPORT_2BYTE_V3_FRAME                      ZW_BatteryHealthReport2byteV3Frame;\
+  ZW_BATTERY_HEALTH_REPORT_3BYTE_V3_FRAME                      ZW_BatteryHealthReport3byteV3Frame;\
+  ZW_BATTERY_HEALTH_REPORT_4BYTE_V3_FRAME                      ZW_BatteryHealthReport4byteV3Frame;\
 /* Command class Chimney Fan */\
   ZW_CHIMNEY_FAN_ALARM_LOG_GET_FRAME                           ZW_ChimneyFanAlarmLogGetFrame;\
   ZW_CHIMNEY_FAN_ALARM_LOG_REPORT_FRAME                        ZW_ChimneyFanAlarmLogReportFrame;\
@@ -352,6 +422,8 @@
   VG_CONFIGURATION_BULK_SET_1BYTE_V3_VG                        VG_ConfigurationBulkSet1byteV3VGroup;\
   VG_CONFIGURATION_BULK_SET_2BYTE_V3_VG                        VG_ConfigurationBulkSet2byteV3VGroup;\
   VG_CONFIGURATION_BULK_SET_3BYTE_V3_VG                        VG_ConfigurationBulkSet3byteV3VGroup;\
+
+#define ZW_FRAME_COLLECTION_MACRO1\
   VG_CONFIGURATION_BULK_SET_4BYTE_V3_VG                        VG_ConfigurationBulkSet4byteV3VGroup;\
   ZW_CONFIGURATION_BULK_SET_1BYTE_V3_FRAME                     ZW_ConfigurationBulkSet1byteV3Frame;\
   ZW_CONFIGURATION_BULK_SET_2BYTE_V3_FRAME                     ZW_ConfigurationBulkSet2byteV3Frame;\
@@ -421,8 +493,6 @@
   ZW_CONFIGURATION_PROPERTIES_GET_V4_FRAME                     ZW_ConfigurationPropertiesGetV4Frame;\
   ZW_CONFIGURATION_PROPERTIES_REPORT_1BYTE_V4_FRAME            ZW_ConfigurationPropertiesReport1byteV4Frame;\
   ZW_CONFIGURATION_PROPERTIES_REPORT_2BYTE_V4_FRAME            ZW_ConfigurationPropertiesReport2byteV4Frame;\
-
-#define ZW_FRAME_COLLECTION_MACRO1\
   ZW_CONFIGURATION_PROPERTIES_REPORT_3BYTE_V4_FRAME            ZW_ConfigurationPropertiesReport3byteV4Frame;\
   ZW_CONFIGURATION_PROPERTIES_REPORT_4BYTE_V4_FRAME            ZW_ConfigurationPropertiesReport4byteV4Frame;\
   ZW_CONFIGURATION_DEFAULT_RESET_V4_FRAME                      ZW_ConfigurationDefaultResetV4Frame;\
@@ -575,6 +645,63 @@
   ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V5_FRAME         ZW_FirmwareUpdateActivationStatusReportV5Frame;\
   ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V5_FRAME                   ZW_FirmwareUpdateMdPrepareGetV5Frame;\
   ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V5_FRAME                ZW_FirmwareUpdateMdPrepareReportV5Frame;\
+/* Command class Firmware Update Md V6 */\
+  ZW_FIRMWARE_MD_GET_V6_FRAME                                  ZW_FirmwareMdGetV6Frame;\
+  VG_FIRMWARE_MD_REPORT_V6_VG                                  VG_FirmwareMdReportV6VGroup;\
+  ZW_FIRMWARE_MD_REPORT_1BYTE_V6_FRAME                         ZW_FirmwareMdReport1byteV6Frame;\
+  ZW_FIRMWARE_MD_REPORT_2BYTE_V6_FRAME                         ZW_FirmwareMdReport2byteV6Frame;\
+  ZW_FIRMWARE_MD_REPORT_3BYTE_V6_FRAME                         ZW_FirmwareMdReport3byteV6Frame;\
+  ZW_FIRMWARE_MD_REPORT_4BYTE_V6_FRAME                         ZW_FirmwareMdReport4byteV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_GET_V6_FRAME                           ZW_FirmwareUpdateMdGetV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V6_FRAME                  ZW_FirmwareUpdateMdReport1byteV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V6_FRAME                  ZW_FirmwareUpdateMdReport2byteV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V6_FRAME                  ZW_FirmwareUpdateMdReport3byteV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V6_FRAME                  ZW_FirmwareUpdateMdReport4byteV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V6_FRAME                   ZW_FirmwareUpdateMdRequestGetV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V6_FRAME                ZW_FirmwareUpdateMdRequestReportV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V6_FRAME                 ZW_FirmwareUpdateMdStatusReportV6Frame;\
+  ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V6_FRAME                   ZW_FirmwareUpdateActivationSetV6Frame;\
+  ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V6_FRAME         ZW_FirmwareUpdateActivationStatusReportV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V6_FRAME                   ZW_FirmwareUpdateMdPrepareGetV6Frame;\
+  ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V6_FRAME                ZW_FirmwareUpdateMdPrepareReportV6Frame;\
+/* Command class Firmware Update Md V7 */\
+  ZW_FIRMWARE_MD_GET_V7_FRAME                                  ZW_FirmwareMdGetV7Frame;\
+  VG_FIRMWARE_MD_REPORT_V7_VG                                  VG_FirmwareMdReportV7VGroup;\
+  ZW_FIRMWARE_MD_REPORT_1BYTE_V7_FRAME                         ZW_FirmwareMdReport1byteV7Frame;\
+  ZW_FIRMWARE_MD_REPORT_2BYTE_V7_FRAME                         ZW_FirmwareMdReport2byteV7Frame;\
+  ZW_FIRMWARE_MD_REPORT_3BYTE_V7_FRAME                         ZW_FirmwareMdReport3byteV7Frame;\
+  ZW_FIRMWARE_MD_REPORT_4BYTE_V7_FRAME                         ZW_FirmwareMdReport4byteV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_GET_V7_FRAME                           ZW_FirmwareUpdateMdGetV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V7_FRAME                  ZW_FirmwareUpdateMdReport1byteV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V7_FRAME                  ZW_FirmwareUpdateMdReport2byteV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V7_FRAME                  ZW_FirmwareUpdateMdReport3byteV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V7_FRAME                  ZW_FirmwareUpdateMdReport4byteV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V7_FRAME                   ZW_FirmwareUpdateMdRequestGetV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V7_FRAME                ZW_FirmwareUpdateMdRequestReportV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V7_FRAME                 ZW_FirmwareUpdateMdStatusReportV7Frame;\
+  ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V7_FRAME                   ZW_FirmwareUpdateActivationSetV7Frame;\
+  ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V7_FRAME         ZW_FirmwareUpdateActivationStatusReportV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V7_FRAME                   ZW_FirmwareUpdateMdPrepareGetV7Frame;\
+  ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V7_FRAME                ZW_FirmwareUpdateMdPrepareReportV7Frame;\
+/* Command class Firmware Update Md V8 */\
+  ZW_FIRMWARE_MD_GET_V8_FRAME                                  ZW_FirmwareMdGetV8Frame;\
+  VG_FIRMWARE_MD_REPORT_V8_VG                                  VG_FirmwareMdReportV8VGroup;\
+  ZW_FIRMWARE_MD_REPORT_1BYTE_V8_FRAME                         ZW_FirmwareMdReport1byteV8Frame;\
+  ZW_FIRMWARE_MD_REPORT_2BYTE_V8_FRAME                         ZW_FirmwareMdReport2byteV8Frame;\
+  ZW_FIRMWARE_MD_REPORT_3BYTE_V8_FRAME                         ZW_FirmwareMdReport3byteV8Frame;\
+  ZW_FIRMWARE_MD_REPORT_4BYTE_V8_FRAME                         ZW_FirmwareMdReport4byteV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_GET_V8_FRAME                           ZW_FirmwareUpdateMdGetV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V8_FRAME                  ZW_FirmwareUpdateMdReport1byteV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V8_FRAME                  ZW_FirmwareUpdateMdReport2byteV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V8_FRAME                  ZW_FirmwareUpdateMdReport3byteV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V8_FRAME                  ZW_FirmwareUpdateMdReport4byteV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V8_FRAME                   ZW_FirmwareUpdateMdRequestGetV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V8_FRAME                ZW_FirmwareUpdateMdRequestReportV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V8_FRAME                 ZW_FirmwareUpdateMdStatusReportV8Frame;\
+  ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V8_FRAME                   ZW_FirmwareUpdateActivationSetV8Frame;\
+  ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V8_FRAME         ZW_FirmwareUpdateActivationStatusReportV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V8_FRAME                   ZW_FirmwareUpdateMdPrepareGetV8Frame;\
+  ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V8_FRAME                ZW_FirmwareUpdateMdPrepareReportV8Frame;\
 /* Command class Geographic Location */\
   ZW_GEOGRAPHIC_LOCATION_GET_FRAME                             ZW_GeographicLocationGetFrame;\
   ZW_GEOGRAPHIC_LOCATION_REPORT_FRAME                          ZW_GeographicLocationReportFrame;\
@@ -649,6 +776,28 @@
   ZW_INDICATOR_SUPPORTED_REPORT_2BYTE_V3_FRAME                 ZW_IndicatorSupportedReport2byteV3Frame;\
   ZW_INDICATOR_SUPPORTED_REPORT_3BYTE_V3_FRAME                 ZW_IndicatorSupportedReport3byteV3Frame;\
   ZW_INDICATOR_SUPPORTED_REPORT_4BYTE_V3_FRAME                 ZW_IndicatorSupportedReport4byteV3Frame;\
+/* Command class Indicator V4 */\
+  ZW_INDICATOR_GET_V4_FRAME                                    ZW_IndicatorGetV4Frame;\
+  VG_INDICATOR_REPORT_V4_VG                                    VG_IndicatorReportV4VGroup;\
+  ZW_INDICATOR_REPORT_1BYTE_V4_FRAME                           ZW_IndicatorReport1byteV4Frame;\
+  ZW_INDICATOR_REPORT_2BYTE_V4_FRAME                           ZW_IndicatorReport2byteV4Frame;\
+  ZW_INDICATOR_REPORT_3BYTE_V4_FRAME                           ZW_IndicatorReport3byteV4Frame;\
+  ZW_INDICATOR_REPORT_4BYTE_V4_FRAME                           ZW_IndicatorReport4byteV4Frame;\
+  VG_INDICATOR_SET_V4_VG                                       VG_IndicatorSetV4VGroup;\
+  ZW_INDICATOR_SET_1BYTE_V4_FRAME                              ZW_IndicatorSet1byteV4Frame;\
+  ZW_INDICATOR_SET_2BYTE_V4_FRAME                              ZW_IndicatorSet2byteV4Frame;\
+  ZW_INDICATOR_SET_3BYTE_V4_FRAME                              ZW_IndicatorSet3byteV4Frame;\
+  ZW_INDICATOR_SET_4BYTE_V4_FRAME                              ZW_IndicatorSet4byteV4Frame;\
+  ZW_INDICATOR_SUPPORTED_GET_V4_FRAME                          ZW_IndicatorSupportedGetV4Frame;\
+  ZW_INDICATOR_SUPPORTED_REPORT_1BYTE_V4_FRAME                 ZW_IndicatorSupportedReport1byteV4Frame;\
+  ZW_INDICATOR_SUPPORTED_REPORT_2BYTE_V4_FRAME                 ZW_IndicatorSupportedReport2byteV4Frame;\
+  ZW_INDICATOR_SUPPORTED_REPORT_3BYTE_V4_FRAME                 ZW_IndicatorSupportedReport3byteV4Frame;\
+  ZW_INDICATOR_SUPPORTED_REPORT_4BYTE_V4_FRAME                 ZW_IndicatorSupportedReport4byteV4Frame;\
+  ZW_INDICATOR_DESCRIPTION_GET_V4_FRAME                        ZW_IndicatorDescriptionGetV4Frame;\
+  ZW_INDICATOR_DESCRIPTION_REPORT_1BYTE_V4_FRAME               ZW_IndicatorDescriptionReport1byteV4Frame;\
+  ZW_INDICATOR_DESCRIPTION_REPORT_2BYTE_V4_FRAME               ZW_IndicatorDescriptionReport2byteV4Frame;\
+  ZW_INDICATOR_DESCRIPTION_REPORT_3BYTE_V4_FRAME               ZW_IndicatorDescriptionReport3byteV4Frame;\
+  ZW_INDICATOR_DESCRIPTION_REPORT_4BYTE_V4_FRAME               ZW_IndicatorDescriptionReport4byteV4Frame;\
 /* Command class Ip Configuration */\
   ZW_IP_CONFIGURATION_GET_FRAME                                ZW_IpConfigurationGetFrame;\
   ZW_IP_CONFIGURATION_RELEASE_FRAME                            ZW_IpConfigurationReleaseFrame;\
@@ -659,10 +808,6 @@
   ZW_LANGUAGE_GET_FRAME                                        ZW_LanguageGetFrame;\
   ZW_LANGUAGE_REPORT_FRAME                                     ZW_LanguageReportFrame;\
   ZW_LANGUAGE_SET_FRAME                                        ZW_LanguageSetFrame;\
-/* Command class Lock */\
-  ZW_LOCK_GET_FRAME                                            ZW_LockGetFrame;\
-  ZW_LOCK_REPORT_FRAME                                         ZW_LockReportFrame;\
-  ZW_LOCK_SET_FRAME                                            ZW_LockSetFrame;\
 /* Command class Manufacturer Specific */\
   ZW_MANUFACTURER_SPECIFIC_GET_FRAME                           ZW_ManufacturerSpecificGetFrame;\
   ZW_MANUFACTURER_SPECIFIC_REPORT_FRAME                        ZW_ManufacturerSpecificReportFrame;\
@@ -679,6 +824,8 @@
   ZW_METER_PULSE_REPORT_FRAME                                  ZW_MeterPulseReportFrame;\
 /* Command class Meter Tbl Config */\
   ZW_METER_TBL_TABLE_POINT_ADM_NO_SET_1BYTE_FRAME              ZW_MeterTblTablePointAdmNoSet1byteFrame;\
+
+#define ZW_FRAME_COLLECTION_MACRO2\
   ZW_METER_TBL_TABLE_POINT_ADM_NO_SET_2BYTE_FRAME              ZW_MeterTblTablePointAdmNoSet2byteFrame;\
   ZW_METER_TBL_TABLE_POINT_ADM_NO_SET_3BYTE_FRAME              ZW_MeterTblTablePointAdmNoSet3byteFrame;\
   ZW_METER_TBL_TABLE_POINT_ADM_NO_SET_4BYTE_FRAME              ZW_MeterTblTablePointAdmNoSet4byteFrame;\
@@ -704,7 +851,7 @@
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_2BYTE_FRAME              ZW_MeterTblHistoricalDataReport2byteFrame;\
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_3BYTE_FRAME              ZW_MeterTblHistoricalDataReport3byteFrame;\
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_FRAME              ZW_MeterTblHistoricalDataReport4byteFrame;\
-  ZW_METER_TBL_REPORT_FRAME                                    ZW_MeterTblReportFrame;\
+  ZW_METER_TBL_TABLE_CAPABILITY_REPORT_FRAME                   ZW_MeterTblTableCapabilityReportFrame;\
   ZW_METER_TBL_TABLE_CAPABILITY_GET_FRAME                      ZW_MeterTblTableCapabilityGetFrame;\
   ZW_METER_TBL_TABLE_ID_GET_FRAME                              ZW_MeterTblTableIdGetFrame;\
   ZW_METER_TBL_TABLE_ID_REPORT_1BYTE_FRAME                     ZW_MeterTblTableIdReport1byteFrame;\
@@ -738,7 +885,7 @@
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_2BYTE_V2_FRAME           ZW_MeterTblHistoricalDataReport2byteV2Frame;\
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_3BYTE_V2_FRAME           ZW_MeterTblHistoricalDataReport3byteV2Frame;\
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_V2_FRAME           ZW_MeterTblHistoricalDataReport4byteV2Frame;\
-  ZW_METER_TBL_REPORT_V2_FRAME                                 ZW_MeterTblReportV2Frame;\
+  ZW_METER_TBL_TABLE_CAPABILITY_REPORT_V2_FRAME                ZW_MeterTblTableCapabilityReportV2Frame;\
   ZW_METER_TBL_TABLE_CAPABILITY_GET_V2_FRAME                   ZW_MeterTblTableCapabilityGetV2Frame;\
   ZW_METER_TBL_TABLE_ID_GET_V2_FRAME                           ZW_MeterTblTableIdGetV2Frame;\
   ZW_METER_TBL_TABLE_ID_REPORT_1BYTE_V2_FRAME                  ZW_MeterTblTableIdReport1byteV2Frame;\
@@ -772,7 +919,7 @@
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_2BYTE_V3_FRAME           ZW_MeterTblHistoricalDataReport2byteV3Frame;\
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_3BYTE_V3_FRAME           ZW_MeterTblHistoricalDataReport3byteV3Frame;\
   ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_V3_FRAME           ZW_MeterTblHistoricalDataReport4byteV3Frame;\
-  ZW_METER_TBL_REPORT_V3_FRAME                                 ZW_MeterTblReportV3Frame;\
+  ZW_METER_TBL_TABLE_CAPABILITY_REPORT_V3_FRAME                ZW_MeterTblTableCapabilityReportV3Frame;\
   ZW_METER_TBL_TABLE_CAPABILITY_GET_V3_FRAME                   ZW_MeterTblTableCapabilityGetV3Frame;\
   ZW_METER_TBL_TABLE_ID_GET_V3_FRAME                           ZW_MeterTblTableIdGetV3Frame;\
   ZW_METER_TBL_TABLE_ID_REPORT_1BYTE_V3_FRAME                  ZW_MeterTblTableIdReport1byteV3Frame;\
@@ -823,8 +970,6 @@
   ZW_METER_SUPPORTED_REPORT_1BYTE_V4_FRAME                     ZW_MeterSupportedReport1byteV4Frame;\
   ZW_METER_SUPPORTED_REPORT_2BYTE_V4_FRAME                     ZW_MeterSupportedReport2byteV4Frame;\
   ZW_METER_SUPPORTED_REPORT_3BYTE_V4_FRAME                     ZW_MeterSupportedReport3byteV4Frame;\
-
-#define ZW_FRAME_COLLECTION_MACRO2\
   ZW_METER_SUPPORTED_REPORT_4BYTE_V4_FRAME                     ZW_MeterSupportedReport4byteV4Frame;\
 /* Command class Meter V5 */\
   ZW_METER_GET_V5_FRAME                                        ZW_MeterGetV5Frame;\
@@ -838,6 +983,21 @@
   ZW_METER_SUPPORTED_REPORT_2BYTE_V5_FRAME                     ZW_MeterSupportedReport2byteV5Frame;\
   ZW_METER_SUPPORTED_REPORT_3BYTE_V5_FRAME                     ZW_MeterSupportedReport3byteV5Frame;\
   ZW_METER_SUPPORTED_REPORT_4BYTE_V5_FRAME                     ZW_MeterSupportedReport4byteV5Frame;\
+/* Command class Meter V6 */\
+  ZW_METER_GET_V6_FRAME                                        ZW_MeterGetV6Frame;\
+  ZW_METER_REPORT_1BYTE_V6_FRAME                               ZW_MeterReport1byteV6Frame;\
+  ZW_METER_REPORT_2BYTE_V6_FRAME                               ZW_MeterReport2byteV6Frame;\
+  ZW_METER_REPORT_3BYTE_V6_FRAME                               ZW_MeterReport3byteV6Frame;\
+  ZW_METER_REPORT_4BYTE_V6_FRAME                               ZW_MeterReport4byteV6Frame;\
+  ZW_METER_RESET_1BYTE_V6_FRAME                                ZW_MeterReset1byteV6Frame;\
+  ZW_METER_RESET_2BYTE_V6_FRAME                                ZW_MeterReset2byteV6Frame;\
+  ZW_METER_RESET_3BYTE_V6_FRAME                                ZW_MeterReset3byteV6Frame;\
+  ZW_METER_RESET_4BYTE_V6_FRAME                                ZW_MeterReset4byteV6Frame;\
+  ZW_METER_SUPPORTED_GET_V6_FRAME                              ZW_MeterSupportedGetV6Frame;\
+  ZW_METER_SUPPORTED_REPORT_1BYTE_V6_FRAME                     ZW_MeterSupportedReport1byteV6Frame;\
+  ZW_METER_SUPPORTED_REPORT_2BYTE_V6_FRAME                     ZW_MeterSupportedReport2byteV6Frame;\
+  ZW_METER_SUPPORTED_REPORT_3BYTE_V6_FRAME                     ZW_MeterSupportedReport3byteV6Frame;\
+  ZW_METER_SUPPORTED_REPORT_4BYTE_V6_FRAME                     ZW_MeterSupportedReport4byteV6Frame;\
 /* Command class Mtp Window Covering */\
   ZW_MOVE_TO_POSITION_GET_FRAME                                ZW_MoveToPositionGetFrame;\
   ZW_MOVE_TO_POSITION_REPORT_FRAME                             ZW_MoveToPositionReportFrame;\
@@ -874,6 +1034,38 @@
   ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V3_FRAME              ZW_MultiChannelAssociationSet2byteV3Frame;\
   ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V3_FRAME              ZW_MultiChannelAssociationSet3byteV3Frame;\
   ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V3_FRAME              ZW_MultiChannelAssociationSet4byteV3Frame;\
+/* Command class Multi Channel Association V4 */\
+  ZW_MULTI_CHANNEL_ASSOCIATION_GET_V4_FRAME                    ZW_MultiChannelAssociationGetV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V4_FRAME          ZW_MultiChannelAssociationGroupingsGetV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V4_FRAME       ZW_MultiChannelAssociationGroupingsReportV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_1BYTE_V4_FRAME           ZW_MultiChannelAssociationRemove1byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_2BYTE_V4_FRAME           ZW_MultiChannelAssociationRemove2byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_3BYTE_V4_FRAME           ZW_MultiChannelAssociationRemove3byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_4BYTE_V4_FRAME           ZW_MultiChannelAssociationRemove4byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_1BYTE_V4_FRAME           ZW_MultiChannelAssociationReport1byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_2BYTE_V4_FRAME           ZW_MultiChannelAssociationReport2byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_3BYTE_V4_FRAME           ZW_MultiChannelAssociationReport3byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_4BYTE_V4_FRAME           ZW_MultiChannelAssociationReport4byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_1BYTE_V4_FRAME              ZW_MultiChannelAssociationSet1byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V4_FRAME              ZW_MultiChannelAssociationSet2byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V4_FRAME              ZW_MultiChannelAssociationSet3byteV4Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V4_FRAME              ZW_MultiChannelAssociationSet4byteV4Frame;\
+/* Command class Multi Channel Association V5 */\
+  ZW_MULTI_CHANNEL_ASSOCIATION_GET_V5_FRAME                    ZW_MultiChannelAssociationGetV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V5_FRAME          ZW_MultiChannelAssociationGroupingsGetV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V5_FRAME       ZW_MultiChannelAssociationGroupingsReportV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_1BYTE_V5_FRAME           ZW_MultiChannelAssociationRemove1byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_2BYTE_V5_FRAME           ZW_MultiChannelAssociationRemove2byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_3BYTE_V5_FRAME           ZW_MultiChannelAssociationRemove3byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_4BYTE_V5_FRAME           ZW_MultiChannelAssociationRemove4byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_1BYTE_V5_FRAME           ZW_MultiChannelAssociationReport1byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_2BYTE_V5_FRAME           ZW_MultiChannelAssociationReport2byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_3BYTE_V5_FRAME           ZW_MultiChannelAssociationReport3byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_4BYTE_V5_FRAME           ZW_MultiChannelAssociationReport4byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_1BYTE_V5_FRAME              ZW_MultiChannelAssociationSet1byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V5_FRAME              ZW_MultiChannelAssociationSet2byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V5_FRAME              ZW_MultiChannelAssociationSet3byteV5Frame;\
+  ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V5_FRAME              ZW_MultiChannelAssociationSet4byteV5Frame;\
 /* Command class Multi Channel V2 */\
   ZW_MULTI_CHANNEL_CAPABILITY_GET_V2_FRAME                     ZW_MultiChannelCapabilityGetV2Frame;\
   ZW_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V2_FRAME            ZW_MultiChannelCapabilityReport1byteV2Frame;\
@@ -981,6 +1173,63 @@
   ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V2_FRAME ZW_NmMultiChannelAggregatedMembersReport2byteV2Frame;\
   ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V2_FRAME ZW_NmMultiChannelAggregatedMembersReport3byteV2Frame;\
   ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V2_FRAME ZW_NmMultiChannelAggregatedMembersReport4byteV2Frame;\
+/* Command class Network Management Proxy V3 */\
+  ZW_NODE_INFO_CACHED_GET_V3_FRAME                             ZW_NodeInfoCachedGetV3Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_1BYTE_V3_FRAME                    ZW_NodeInfoCachedReport1byteV3Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_2BYTE_V3_FRAME                    ZW_NodeInfoCachedReport2byteV3Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_3BYTE_V3_FRAME                    ZW_NodeInfoCachedReport3byteV3Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_4BYTE_V3_FRAME                    ZW_NodeInfoCachedReport4byteV3Frame;\
+  ZW_NODE_LIST_GET_V3_FRAME                                    ZW_NodeListGetV3Frame;\
+  ZW_NODE_LIST_REPORT_1BYTE_V3_FRAME                           ZW_NodeListReport1byteV3Frame;\
+  ZW_NODE_LIST_REPORT_2BYTE_V3_FRAME                           ZW_NodeListReport2byteV3Frame;\
+  ZW_NODE_LIST_REPORT_3BYTE_V3_FRAME                           ZW_NodeListReport3byteV3Frame;\
+  ZW_NODE_LIST_REPORT_4BYTE_V3_FRAME                           ZW_NodeListReport4byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_END_POINT_GET_V3_FRAME                   ZW_NmMultiChannelEndPointGetV3Frame;\
+  ZW_NM_MULTI_CHANNEL_END_POINT_REPORT_V3_FRAME                ZW_NmMultiChannelEndPointReportV3Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_GET_V3_FRAME                  ZW_NmMultiChannelCapabilityGetV3Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V3_FRAME         ZW_NmMultiChannelCapabilityReport1byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_2BYTE_V3_FRAME         ZW_NmMultiChannelCapabilityReport2byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_3BYTE_V3_FRAME         ZW_NmMultiChannelCapabilityReport3byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_4BYTE_V3_FRAME         ZW_NmMultiChannelCapabilityReport4byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V3_FRAME          ZW_NmMultiChannelAggregatedMembersGetV3Frame;\
+  VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG          VG_NmMultiChannelAggregatedMembersReportV3VGroup;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_1BYTE_V3_FRAME ZW_NmMultiChannelAggregatedMembersReport1byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V3_FRAME ZW_NmMultiChannelAggregatedMembersReport2byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V3_FRAME ZW_NmMultiChannelAggregatedMembersReport3byteV3Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V3_FRAME ZW_NmMultiChannelAggregatedMembersReport4byteV3Frame;\
+  ZW_FAILED_NODE_LIST_GET_V3_FRAME                             ZW_FailedNodeListGetV3Frame;\
+  ZW_FAILED_NODE_LIST_REPORT_V3_FRAME                          ZW_FailedNodeListReportV3Frame;\
+/* Command class Network Management Proxy V4 */\
+  ZW_NODE_INFO_CACHED_GET_V4_FRAME                             ZW_NodeInfoCachedGetV4Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_1BYTE_V4_FRAME                    ZW_NodeInfoCachedReport1byteV4Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_2BYTE_V4_FRAME                    ZW_NodeInfoCachedReport2byteV4Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_3BYTE_V4_FRAME                    ZW_NodeInfoCachedReport3byteV4Frame;\
+  ZW_NODE_INFO_CACHED_REPORT_4BYTE_V4_FRAME                    ZW_NodeInfoCachedReport4byteV4Frame;\
+  ZW_NODE_LIST_GET_V4_FRAME                                    ZW_NodeListGetV4Frame;\
+  ZW_NODE_LIST_REPORT_1BYTE_V4_FRAME                           ZW_NodeListReport1byteV4Frame;\
+  ZW_NODE_LIST_REPORT_2BYTE_V4_FRAME                           ZW_NodeListReport2byteV4Frame;\
+  ZW_NODE_LIST_REPORT_3BYTE_V4_FRAME                           ZW_NodeListReport3byteV4Frame;\
+  ZW_NODE_LIST_REPORT_4BYTE_V4_FRAME                           ZW_NodeListReport4byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_END_POINT_GET_V4_FRAME                   ZW_NmMultiChannelEndPointGetV4Frame;\
+  ZW_NM_MULTI_CHANNEL_END_POINT_REPORT_V4_FRAME                ZW_NmMultiChannelEndPointReportV4Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_GET_V4_FRAME                  ZW_NmMultiChannelCapabilityGetV4Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V4_FRAME         ZW_NmMultiChannelCapabilityReport1byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_2BYTE_V4_FRAME         ZW_NmMultiChannelCapabilityReport2byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_3BYTE_V4_FRAME         ZW_NmMultiChannelCapabilityReport3byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_4BYTE_V4_FRAME         ZW_NmMultiChannelCapabilityReport4byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V4_FRAME          ZW_NmMultiChannelAggregatedMembersGetV4Frame;\
+  VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG          VG_NmMultiChannelAggregatedMembersReportV4VGroup;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_1BYTE_V4_FRAME ZW_NmMultiChannelAggregatedMembersReport1byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V4_FRAME ZW_NmMultiChannelAggregatedMembersReport2byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V4_FRAME ZW_NmMultiChannelAggregatedMembersReport3byteV4Frame;\
+  ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V4_FRAME ZW_NmMultiChannelAggregatedMembersReport4byteV4Frame;\
+  ZW_FAILED_NODE_LIST_GET_V4_FRAME                             ZW_FailedNodeListGetV4Frame;\
+  ZW_FAILED_NODE_LIST_REPORT_1BYTE_V4_FRAME                    ZW_FailedNodeListReport1byteV4Frame;\
+  ZW_FAILED_NODE_LIST_REPORT_2BYTE_V4_FRAME                    ZW_FailedNodeListReport2byteV4Frame;\
+
+#define ZW_FRAME_COLLECTION_MACRO3\
+  ZW_FAILED_NODE_LIST_REPORT_3BYTE_V4_FRAME                    ZW_FailedNodeListReport3byteV4Frame;\
+  ZW_FAILED_NODE_LIST_REPORT_4BYTE_V4_FRAME                    ZW_FailedNodeListReport4byteV4Frame;\
 /* Command class Network Management Basic */\
   ZW_LEARN_MODE_SET_FRAME                                      ZW_LearnModeSetFrame;\
   ZW_LEARN_MODE_SET_STATUS_FRAME                               ZW_LearnModeSetStatusFrame;\
@@ -1067,17 +1316,51 @@
   ZW_NODE_ADD_DSK_SET_2BYTE_V3_FRAME                           ZW_NodeAddDskSet2byteV3Frame;\
   ZW_NODE_ADD_DSK_SET_3BYTE_V3_FRAME                           ZW_NodeAddDskSet3byteV3Frame;\
   ZW_NODE_ADD_DSK_SET_4BYTE_V3_FRAME                           ZW_NodeAddDskSet4byteV3Frame;\
-  ZW_S2_ADVANCED_JOIN_MODE_GET_V3_FRAME                        ZW_S2AdvancedJoinModeGetV3Frame;\
   ZW_SMART_START_JOIN_STARTED_REPORT_1BYTE_V3_FRAME            ZW_SmartStartJoinStartedReport1byteV3Frame;\
   ZW_SMART_START_JOIN_STARTED_REPORT_2BYTE_V3_FRAME            ZW_SmartStartJoinStartedReport2byteV3Frame;\
   ZW_SMART_START_JOIN_STARTED_REPORT_3BYTE_V3_FRAME            ZW_SmartStartJoinStartedReport3byteV3Frame;\
   ZW_SMART_START_JOIN_STARTED_REPORT_4BYTE_V3_FRAME            ZW_SmartStartJoinStartedReport4byteV3Frame;\
-  ZW_S2_ADVANCED_JOIN_MODE_SET_V3_FRAME                        ZW_S2AdvancedJoinModeSetV3Frame;\
-  ZW_S2_ADVANCED_JOIN_MODE_REPORT_V3_FRAME                     ZW_S2AdvancedJoinModeReportV3Frame;\
   ZW_INCLUDED_NIF_REPORT_1BYTE_V3_FRAME                        ZW_IncludedNifReport1byteV3Frame;\
   ZW_INCLUDED_NIF_REPORT_2BYTE_V3_FRAME                        ZW_IncludedNifReport2byteV3Frame;\
   ZW_INCLUDED_NIF_REPORT_3BYTE_V3_FRAME                        ZW_IncludedNifReport3byteV3Frame;\
   ZW_INCLUDED_NIF_REPORT_4BYTE_V3_FRAME                        ZW_IncludedNifReport4byteV3Frame;\
+/* Command class Network Management Inclusion V4 */\
+  ZW_FAILED_NODE_REMOVE_V4_FRAME                               ZW_FailedNodeRemoveV4Frame;\
+  ZW_FAILED_NODE_REMOVE_STATUS_V4_FRAME                        ZW_FailedNodeRemoveStatusV4Frame;\
+  ZW_NODE_ADD_V4_FRAME                                         ZW_NodeAddV4Frame;\
+  ZW_NODE_ADD_STATUS_1BYTE_V4_FRAME                            ZW_NodeAddStatus1byteV4Frame;\
+  ZW_NODE_ADD_STATUS_2BYTE_V4_FRAME                            ZW_NodeAddStatus2byteV4Frame;\
+  ZW_NODE_ADD_STATUS_3BYTE_V4_FRAME                            ZW_NodeAddStatus3byteV4Frame;\
+  ZW_NODE_ADD_STATUS_4BYTE_V4_FRAME                            ZW_NodeAddStatus4byteV4Frame;\
+  ZW_NODE_REMOVE_V4_FRAME                                      ZW_NodeRemoveV4Frame;\
+  ZW_NODE_REMOVE_STATUS_V4_FRAME                               ZW_NodeRemoveStatusV4Frame;\
+  ZW_FAILED_NODE_REPLACE_V4_FRAME                              ZW_FailedNodeReplaceV4Frame;\
+  ZW_FAILED_NODE_REPLACE_STATUS_V4_FRAME                       ZW_FailedNodeReplaceStatusV4Frame;\
+  ZW_NODE_NEIGHBOR_UPDATE_REQUEST_V4_FRAME                     ZW_NodeNeighborUpdateRequestV4Frame;\
+  ZW_NODE_NEIGHBOR_UPDATE_STATUS_V4_FRAME                      ZW_NodeNeighborUpdateStatusV4Frame;\
+  ZW_RETURN_ROUTE_ASSIGN_V4_FRAME                              ZW_ReturnRouteAssignV4Frame;\
+  ZW_RETURN_ROUTE_ASSIGN_COMPLETE_V4_FRAME                     ZW_ReturnRouteAssignCompleteV4Frame;\
+  ZW_RETURN_ROUTE_DELETE_V4_FRAME                              ZW_ReturnRouteDeleteV4Frame;\
+  ZW_RETURN_ROUTE_DELETE_COMPLETE_V4_FRAME                     ZW_ReturnRouteDeleteCompleteV4Frame;\
+  ZW_NODE_ADD_KEYS_REPORT_V4_FRAME                             ZW_NodeAddKeysReportV4Frame;\
+  ZW_NODE_ADD_KEYS_SET_V4_FRAME                                ZW_NodeAddKeysSetV4Frame;\
+  ZW_NODE_ADD_DSK_REPORT_V4_FRAME                              ZW_NodeAddDskReportV4Frame;\
+  ZW_NODE_ADD_DSK_SET_1BYTE_V4_FRAME                           ZW_NodeAddDskSet1byteV4Frame;\
+  ZW_NODE_ADD_DSK_SET_2BYTE_V4_FRAME                           ZW_NodeAddDskSet2byteV4Frame;\
+  ZW_NODE_ADD_DSK_SET_3BYTE_V4_FRAME                           ZW_NodeAddDskSet3byteV4Frame;\
+  ZW_NODE_ADD_DSK_SET_4BYTE_V4_FRAME                           ZW_NodeAddDskSet4byteV4Frame;\
+  ZW_SMART_START_JOIN_STARTED_REPORT_1BYTE_V4_FRAME            ZW_SmartStartJoinStartedReport1byteV4Frame;\
+  ZW_SMART_START_JOIN_STARTED_REPORT_2BYTE_V4_FRAME            ZW_SmartStartJoinStartedReport2byteV4Frame;\
+  ZW_SMART_START_JOIN_STARTED_REPORT_3BYTE_V4_FRAME            ZW_SmartStartJoinStartedReport3byteV4Frame;\
+  ZW_SMART_START_JOIN_STARTED_REPORT_4BYTE_V4_FRAME            ZW_SmartStartJoinStartedReport4byteV4Frame;\
+  ZW_INCLUDED_NIF_REPORT_1BYTE_V4_FRAME                        ZW_IncludedNifReport1byteV4Frame;\
+  ZW_INCLUDED_NIF_REPORT_2BYTE_V4_FRAME                        ZW_IncludedNifReport2byteV4Frame;\
+  ZW_INCLUDED_NIF_REPORT_3BYTE_V4_FRAME                        ZW_IncludedNifReport3byteV4Frame;\
+  ZW_INCLUDED_NIF_REPORT_4BYTE_V4_FRAME                        ZW_IncludedNifReport4byteV4Frame;\
+  ZW_EXTENDED_NODE_ADD_STATUS_1BYTE_V4_FRAME                   ZW_ExtendedNodeAddStatus1byteV4Frame;\
+  ZW_EXTENDED_NODE_ADD_STATUS_2BYTE_V4_FRAME                   ZW_ExtendedNodeAddStatus2byteV4Frame;\
+  ZW_EXTENDED_NODE_ADD_STATUS_3BYTE_V4_FRAME                   ZW_ExtendedNodeAddStatus3byteV4Frame;\
+  ZW_EXTENDED_NODE_ADD_STATUS_4BYTE_V4_FRAME                   ZW_ExtendedNodeAddStatus4byteV4Frame;\
 /* Command class Node Naming */\
   ZW_NODE_NAMING_NODE_LOCATION_REPORT_FRAME                    ZW_NodeNamingNodeLocationReportFrame;\
   ZW_NODE_NAMING_NODE_LOCATION_SET_FRAME                       ZW_NodeNamingNodeLocationSetFrame;\
@@ -1220,13 +1503,22 @@
   ZW_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_GET_V3_FRAME          ZW_ScheduleEntryLockDailyRepeatingGetV3Frame;\
   ZW_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_REPORT_V3_FRAME       ZW_ScheduleEntryLockDailyRepeatingReportV3Frame;\
   ZW_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V3_FRAME          ZW_ScheduleEntryLockDailyRepeatingSetV3Frame;\
+/* Command class Schedule Entry Lock V4 */\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_V4_FRAME          ZW_ExtendedScheduleEntryLockEnableSetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_SET_V4_FRAME ZW_ExtendedScheduleEntryLockWeekDayScheduleSetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_GET_V4_FRAME ZW_ExtendedScheduleEntryLockWeekDayScheduleGetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_REPORT_V4_FRAME ZW_ExtendedScheduleEntryLockWeekDayScheduleReportV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_SET_V4_FRAME ZW_ExtendedScheduleEntryLockYearDayScheduleSetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_GET_V4_FRAME ZW_ExtendedScheduleEntryLockYearDayScheduleGetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_REPORT_V4_FRAME ZW_ExtendedScheduleEntryLockYearDayScheduleReportV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V4_FRAME ZW_ExtendedScheduleEntryLockDailyRepeatingSetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_GET_V4_FRAME ZW_ExtendedScheduleEntryLockDailyRepeatingGetV4Frame;\
+  ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_REPORT_V4_FRAME ZW_ExtendedScheduleEntryLockDailyRepeatingReportV4Frame;\
 /* Command class Screen Attributes */\
   ZW_SCREEN_ATTRIBUTES_GET_FRAME                               ZW_ScreenAttributesGetFrame;\
   ZW_SCREEN_ATTRIBUTES_REPORT_FRAME                            ZW_ScreenAttributesReportFrame;\
 /* Command class Screen Attributes V2 */\
   ZW_SCREEN_ATTRIBUTES_GET_V2_FRAME                            ZW_ScreenAttributesGetV2Frame;\
-
-#define ZW_FRAME_COLLECTION_MACRO3\
   ZW_SCREEN_ATTRIBUTES_REPORT_V2_FRAME                         ZW_ScreenAttributesReportV2Frame;\
   ZW_SCREEN_ATTRIBUTES_REPORT_LEGACY_V2_FRAME                  ZW_ScreenAttributesReportLegacyV2Frame;\
 /* Command class Screen Md */\
@@ -1336,6 +1628,8 @@
   ZW_SENSOR_MULTILEVEL_REPORT_2BYTE_FRAME                      ZW_SensorMultilevelReport2byteFrame;\
   ZW_SENSOR_MULTILEVEL_REPORT_3BYTE_FRAME                      ZW_SensorMultilevelReport3byteFrame;\
   ZW_SENSOR_MULTILEVEL_REPORT_4BYTE_FRAME                      ZW_SensorMultilevelReport4byteFrame;\
+
+#define ZW_FRAME_COLLECTION_MACRO4\
 /* Command class Sensor Multilevel V2 */\
   ZW_SENSOR_MULTILEVEL_GET_V2_FRAME                            ZW_SensorMultilevelGetV2Frame;\
   ZW_SENSOR_MULTILEVEL_REPORT_1BYTE_V2_FRAME                   ZW_SensorMultilevelReport1byteV2Frame;\
@@ -1463,6 +1757,45 @@
   ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_FRAME            ZW_SimpleAvControlSupportedReport2byteFrame;\
   ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_FRAME            ZW_SimpleAvControlSupportedReport3byteFrame;\
   ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_FRAME            ZW_SimpleAvControlSupportedReport4byteFrame;\
+/* Command class Simple Av Control V2 */\
+  ZW_SIMPLE_AV_CONTROL_GET_V2_FRAME                            ZW_SimpleAvControlGetV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_REPORT_V2_FRAME                         ZW_SimpleAvControlReportV2Frame;\
+  VG_SIMPLE_AV_CONTROL_SET_V2_VG                               VG_SimpleAvControlSetV2VGroup;\
+  ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V2_FRAME                      ZW_SimpleAvControlSet1byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V2_FRAME                      ZW_SimpleAvControlSet2byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V2_FRAME                      ZW_SimpleAvControlSet3byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V2_FRAME                      ZW_SimpleAvControlSet4byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V2_FRAME                  ZW_SimpleAvControlSupportedGetV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V2_FRAME         ZW_SimpleAvControlSupportedReport1byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V2_FRAME         ZW_SimpleAvControlSupportedReport2byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V2_FRAME         ZW_SimpleAvControlSupportedReport3byteV2Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V2_FRAME         ZW_SimpleAvControlSupportedReport4byteV2Frame;\
+/* Command class Simple Av Control V3 */\
+  ZW_SIMPLE_AV_CONTROL_GET_V3_FRAME                            ZW_SimpleAvControlGetV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_REPORT_V3_FRAME                         ZW_SimpleAvControlReportV3Frame;\
+  VG_SIMPLE_AV_CONTROL_SET_V3_VG                               VG_SimpleAvControlSetV3VGroup;\
+  ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V3_FRAME                      ZW_SimpleAvControlSet1byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V3_FRAME                      ZW_SimpleAvControlSet2byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V3_FRAME                      ZW_SimpleAvControlSet3byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V3_FRAME                      ZW_SimpleAvControlSet4byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V3_FRAME                  ZW_SimpleAvControlSupportedGetV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V3_FRAME         ZW_SimpleAvControlSupportedReport1byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V3_FRAME         ZW_SimpleAvControlSupportedReport2byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V3_FRAME         ZW_SimpleAvControlSupportedReport3byteV3Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V3_FRAME         ZW_SimpleAvControlSupportedReport4byteV3Frame;\
+/* Command class Simple Av Control V4 */\
+  ZW_SIMPLE_AV_CONTROL_GET_V4_FRAME                            ZW_SimpleAvControlGetV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_REPORT_V4_FRAME                         ZW_SimpleAvControlReportV4Frame;\
+  VG_SIMPLE_AV_CONTROL_SET_V4_VG                               VG_SimpleAvControlSetV4VGroup;\
+  ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V4_FRAME                      ZW_SimpleAvControlSet1byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V4_FRAME                      ZW_SimpleAvControlSet2byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V4_FRAME                      ZW_SimpleAvControlSet3byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V4_FRAME                      ZW_SimpleAvControlSet4byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V4_FRAME                  ZW_SimpleAvControlSupportedGetV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V4_FRAME         ZW_SimpleAvControlSupportedReport1byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V4_FRAME         ZW_SimpleAvControlSupportedReport2byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V4_FRAME         ZW_SimpleAvControlSupportedReport3byteV4Frame;\
+  ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V4_FRAME         ZW_SimpleAvControlSupportedReport4byteV4Frame;\
 /* Command class Switch All */\
   ZW_SWITCH_ALL_GET_FRAME                                      ZW_SwitchAllGetFrame;\
   ZW_SWITCH_ALL_OFF_FRAME                                      ZW_SwitchAllOffFrame;\
@@ -1571,6 +1904,15 @@
   ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_2BYTE_V4_FRAME       ZW_ThermostatFanModeSupportedReport2byteV4Frame;\
   ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_3BYTE_V4_FRAME       ZW_ThermostatFanModeSupportedReport3byteV4Frame;\
   ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_4BYTE_V4_FRAME       ZW_ThermostatFanModeSupportedReport4byteV4Frame;\
+/* Command class Thermostat Fan Mode V5 */\
+  ZW_THERMOSTAT_FAN_MODE_GET_V5_FRAME                          ZW_ThermostatFanModeGetV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_REPORT_V5_FRAME                       ZW_ThermostatFanModeReportV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_SET_V5_FRAME                          ZW_ThermostatFanModeSetV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_SUPPORTED_GET_V5_FRAME                ZW_ThermostatFanModeSupportedGetV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_1BYTE_V5_FRAME       ZW_ThermostatFanModeSupportedReport1byteV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_2BYTE_V5_FRAME       ZW_ThermostatFanModeSupportedReport2byteV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_3BYTE_V5_FRAME       ZW_ThermostatFanModeSupportedReport3byteV5Frame;\
+  ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_4BYTE_V5_FRAME       ZW_ThermostatFanModeSupportedReport4byteV5Frame;\
 /* Command class Thermostat Fan State */\
   ZW_THERMOSTAT_FAN_STATE_GET_FRAME                            ZW_ThermostatFanStateGetFrame;\
   ZW_THERMOSTAT_FAN_STATE_REPORT_FRAME                         ZW_ThermostatFanStateReportFrame;\
@@ -1627,8 +1969,6 @@
   ZW_THERMOSTAT_MODE_SUPPORTED_GET_V3_FRAME                    ZW_ThermostatModeSupportedGetV3Frame;\
   ZW_THERMOSTAT_MODE_SUPPORTED_REPORT_1BYTE_V3_FRAME           ZW_ThermostatModeSupportedReport1byteV3Frame;\
   ZW_THERMOSTAT_MODE_SUPPORTED_REPORT_2BYTE_V3_FRAME           ZW_ThermostatModeSupportedReport2byteV3Frame;\
-
-#define ZW_FRAME_COLLECTION_MACRO4\
   ZW_THERMOSTAT_MODE_SUPPORTED_REPORT_3BYTE_V3_FRAME           ZW_ThermostatModeSupportedReport3byteV3Frame;\
   ZW_THERMOSTAT_MODE_SUPPORTED_REPORT_4BYTE_V3_FRAME           ZW_ThermostatModeSupportedReport4byteV3Frame;\
 /* Command class Thermostat Operating State */\
@@ -1690,6 +2030,8 @@
   ZW_THERMOSTAT_SETPOINT_REPORT_1BYTE_V3_FRAME                 ZW_ThermostatSetpointReport1byteV3Frame;\
   ZW_THERMOSTAT_SETPOINT_REPORT_2BYTE_V3_FRAME                 ZW_ThermostatSetpointReport2byteV3Frame;\
   ZW_THERMOSTAT_SETPOINT_REPORT_3BYTE_V3_FRAME                 ZW_ThermostatSetpointReport3byteV3Frame;\
+
+#define ZW_FRAME_COLLECTION_MACRO5\
   ZW_THERMOSTAT_SETPOINT_REPORT_4BYTE_V3_FRAME                 ZW_ThermostatSetpointReport4byteV3Frame;\
   ZW_THERMOSTAT_SETPOINT_SET_1BYTE_V3_FRAME                    ZW_ThermostatSetpointSet1byteV3Frame;\
   ZW_THERMOSTAT_SETPOINT_SET_2BYTE_V3_FRAME                    ZW_ThermostatSetpointSet2byteV3Frame;\
@@ -1792,15 +2134,15 @@
   ZW_USER_CODE_KEYPAD_MODE_SET_V2_FRAME                        ZW_UserCodeKeypadModeSetV2Frame;\
   ZW_USER_CODE_KEYPAD_MODE_GET_V2_FRAME                        ZW_UserCodeKeypadModeGetV2Frame;\
   ZW_USER_CODE_KEYPAD_MODE_REPORT_V2_FRAME                     ZW_UserCodeKeypadModeReportV2Frame;\
-  ZW_MASTER_CODE_SET_1BYTE_V2_FRAME                            ZW_MasterCodeSet1byteV2Frame;\
-  ZW_MASTER_CODE_SET_2BYTE_V2_FRAME                            ZW_MasterCodeSet2byteV2Frame;\
-  ZW_MASTER_CODE_SET_3BYTE_V2_FRAME                            ZW_MasterCodeSet3byteV2Frame;\
-  ZW_MASTER_CODE_SET_4BYTE_V2_FRAME                            ZW_MasterCodeSet4byteV2Frame;\
-  ZW_MASTER_CODE_GET_V2_FRAME                                  ZW_MasterCodeGetV2Frame;\
-  ZW_MASTER_CODE_REPORT_1BYTE_V2_FRAME                         ZW_MasterCodeReport1byteV2Frame;\
-  ZW_MASTER_CODE_REPORT_2BYTE_V2_FRAME                         ZW_MasterCodeReport2byteV2Frame;\
-  ZW_MASTER_CODE_REPORT_3BYTE_V2_FRAME                         ZW_MasterCodeReport3byteV2Frame;\
-  ZW_MASTER_CODE_REPORT_4BYTE_V2_FRAME                         ZW_MasterCodeReport4byteV2Frame;\
+  ZW_ADMIN_CODE_SET_1BYTE_V2_FRAME                             ZW_AdminCodeSet1byteV2Frame;\
+  ZW_ADMIN_CODE_SET_2BYTE_V2_FRAME                             ZW_AdminCodeSet2byteV2Frame;\
+  ZW_ADMIN_CODE_SET_3BYTE_V2_FRAME                             ZW_AdminCodeSet3byteV2Frame;\
+  ZW_ADMIN_CODE_SET_4BYTE_V2_FRAME                             ZW_AdminCodeSet4byteV2Frame;\
+  ZW_ADMIN_CODE_GET_V2_FRAME                                   ZW_AdminCodeGetV2Frame;\
+  ZW_ADMIN_CODE_REPORT_1BYTE_V2_FRAME                          ZW_AdminCodeReport1byteV2Frame;\
+  ZW_ADMIN_CODE_REPORT_2BYTE_V2_FRAME                          ZW_AdminCodeReport2byteV2Frame;\
+  ZW_ADMIN_CODE_REPORT_3BYTE_V2_FRAME                          ZW_AdminCodeReport3byteV2Frame;\
+  ZW_ADMIN_CODE_REPORT_4BYTE_V2_FRAME                          ZW_AdminCodeReport4byteV2Frame;\
   ZW_USER_CODE_CHECKSUM_GET_V2_FRAME                           ZW_UserCodeChecksumGetV2Frame;\
   ZW_USER_CODE_CHECKSUM_REPORT_V2_FRAME                        ZW_UserCodeChecksumReportV2Frame;\
 /* Command class Version */\
@@ -1844,6 +2186,14 @@
   ZW_WAKE_UP_INTERVAL_SET_V2_FRAME                             ZW_WakeUpIntervalSetV2Frame;\
   ZW_WAKE_UP_NO_MORE_INFORMATION_V2_FRAME                      ZW_WakeUpNoMoreInformationV2Frame;\
   ZW_WAKE_UP_NOTIFICATION_V2_FRAME                             ZW_WakeUpNotificationV2Frame;\
+/* Command class Wake Up V3 */\
+  ZW_WAKE_UP_INTERVAL_CAPABILITIES_GET_V3_FRAME                ZW_WakeUpIntervalCapabilitiesGetV3Frame;\
+  ZW_WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V3_FRAME             ZW_WakeUpIntervalCapabilitiesReportV3Frame;\
+  ZW_WAKE_UP_INTERVAL_GET_V3_FRAME                             ZW_WakeUpIntervalGetV3Frame;\
+  ZW_WAKE_UP_INTERVAL_REPORT_V3_FRAME                          ZW_WakeUpIntervalReportV3Frame;\
+  ZW_WAKE_UP_INTERVAL_SET_V3_FRAME                             ZW_WakeUpIntervalSetV3Frame;\
+  ZW_WAKE_UP_NO_MORE_INFORMATION_V3_FRAME                      ZW_WakeUpNoMoreInformationV3Frame;\
+  ZW_WAKE_UP_NOTIFICATION_V3_FRAME                             ZW_WakeUpNotificationV3Frame;\
 /* Command class Zip 6lowpan */\
   ZW_LOWPAN_FIRST_FRAGMENT_1BYTE_FRAME                         ZW_LowpanFirstFragment1byteFrame;\
   ZW_LOWPAN_FIRST_FRAGMENT_2BYTE_FRAME                         ZW_LowpanFirstFragment2byteFrame;\
@@ -2029,8 +2379,6 @@
   VG_COMMAND_SCHEDULE_REPORT_3BYTE_V4_VG                       VG_CommandScheduleReport3byteV4VGroup;\
   VG_COMMAND_SCHEDULE_REPORT_4BYTE_V4_VG                       VG_CommandScheduleReport4byteV4VGroup;\
   ZW_COMMAND_SCHEDULE_REPORT_1BYTE_V4_FRAME                    ZW_CommandScheduleReport1byteV4Frame;\
-
-#define ZW_FRAME_COLLECTION_MACRO5\
   ZW_COMMAND_SCHEDULE_REPORT_2BYTE_V4_FRAME                    ZW_CommandScheduleReport2byteV4Frame;\
   ZW_COMMAND_SCHEDULE_REPORT_3BYTE_V4_FRAME                    ZW_CommandScheduleReport3byteV4Frame;\
   ZW_COMMAND_SCHEDULE_REPORT_4BYTE_V4_FRAME                    ZW_CommandScheduleReport4byteV4Frame;\
@@ -2061,6 +2409,10 @@
   ZW_ZIP_NODE_SOLICITATION_FRAME                               ZW_ZipNodeSolicitationFrame;\
   ZW_ZIP_INV_NODE_SOLICITATION_FRAME                           ZW_ZipInvNodeSolicitationFrame;\
   ZW_ZIP_NODE_ADVERTISEMENT_FRAME                              ZW_ZipNodeAdvertisementFrame;\
+/* Command class Zip Nd V2 */\
+  ZW_ZIP_NODE_SOLICITATION_V2_FRAME                            ZW_ZipNodeSolicitationV2Frame;\
+  ZW_ZIP_INV_NODE_SOLICITATION_V2_FRAME                        ZW_ZipInvNodeSolicitationV2Frame;\
+  ZW_ZIP_NODE_ADVERTISEMENT_V2_FRAME                           ZW_ZipNodeAdvertisementV2Frame;\
 /* Command class Association Grp Info */\
   ZW_ASSOCIATION_GROUP_NAME_GET_FRAME                          ZW_AssociationGroupNameGetFrame;\
   ZW_ASSOCIATION_GROUP_NAME_REPORT_1BYTE_FRAME                 ZW_AssociationGroupNameReport1byteFrame;\
@@ -2080,6 +2432,8 @@
   ZW_ASSOCIATION_GROUP_COMMAND_LIST_REPORT_4BYTE_FRAME         ZW_AssociationGroupCommandListReport4byteFrame;\
 /* Command class Association Grp Info V2 */\
   ZW_ASSOCIATION_GROUP_NAME_GET_V2_FRAME                       ZW_AssociationGroupNameGetV2Frame;\
+
+#define ZW_FRAME_COLLECTION_MACRO6\
   ZW_ASSOCIATION_GROUP_NAME_REPORT_1BYTE_V2_FRAME              ZW_AssociationGroupNameReport1byteV2Frame;\
   ZW_ASSOCIATION_GROUP_NAME_REPORT_2BYTE_V2_FRAME              ZW_AssociationGroupNameReport2byteV2Frame;\
   ZW_ASSOCIATION_GROUP_NAME_REPORT_3BYTE_V2_FRAME              ZW_AssociationGroupNameReport3byteV2Frame;\
@@ -2168,6 +2522,16 @@
   ZW_ANTITHEFT_REPORT_2BYTE_V2_FRAME                           ZW_AntitheftReport2byteV2Frame;\
   ZW_ANTITHEFT_REPORT_3BYTE_V2_FRAME                           ZW_AntitheftReport3byteV2Frame;\
   ZW_ANTITHEFT_REPORT_4BYTE_V2_FRAME                           ZW_AntitheftReport4byteV2Frame;\
+/* Command class Antitheft V3 */\
+  ZW_ANTITHEFT_SET_1BYTE_V3_FRAME                              ZW_AntitheftSet1byteV3Frame;\
+  ZW_ANTITHEFT_SET_2BYTE_V3_FRAME                              ZW_AntitheftSet2byteV3Frame;\
+  ZW_ANTITHEFT_SET_3BYTE_V3_FRAME                              ZW_AntitheftSet3byteV3Frame;\
+  ZW_ANTITHEFT_SET_4BYTE_V3_FRAME                              ZW_AntitheftSet4byteV3Frame;\
+  ZW_ANTITHEFT_GET_V3_FRAME                                    ZW_AntitheftGetV3Frame;\
+  ZW_ANTITHEFT_REPORT_1BYTE_V3_FRAME                           ZW_AntitheftReport1byteV3Frame;\
+  ZW_ANTITHEFT_REPORT_2BYTE_V3_FRAME                           ZW_AntitheftReport2byteV3Frame;\
+  ZW_ANTITHEFT_REPORT_3BYTE_V3_FRAME                           ZW_AntitheftReport3byteV3Frame;\
+  ZW_ANTITHEFT_REPORT_4BYTE_V3_FRAME                           ZW_AntitheftReport4byteV3Frame;\
 /* Command class Zwaveplus Info */\
   ZW_ZWAVEPLUS_INFO_GET_FRAME                                  ZW_ZwaveplusInfoGetFrame;\
   ZW_ZWAVEPLUS_INFO_REPORT_FRAME                               ZW_ZwaveplusInfoReportFrame;\
@@ -2205,6 +2569,7 @@
   ZW_GATEWAY_CONFIGURATION_STATUS_FRAME                        ZW_GatewayConfigurationStatusFrame;\
   ZW_GATEWAY_CONFIGURATION_GET_FRAME                           ZW_GatewayConfigurationGetFrame;\
   ZW_GATEWAY_CONFIGURATION_REPORT_FRAME                        ZW_GatewayConfigurationReportFrame;\
+  ZW_GATEWAY_UNREGISTER_FRAME                                  ZW_GatewayUnregisterFrame;\
 /* Command class Dmx */\
   ZW_DMX_ADDRESS_SET_FRAME                                     ZW_DmxAddressSetFrame;\
   ZW_DMX_ADDRESS_GET_FRAME                                     ZW_DmxAddressGetFrame;\
@@ -2224,9 +2589,9 @@
   ZW_BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT_2BYTE_FRAME      ZW_BarrierOperatorSignalSupportedReport2byteFrame;\
   ZW_BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT_3BYTE_FRAME      ZW_BarrierOperatorSignalSupportedReport3byteFrame;\
   ZW_BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT_4BYTE_FRAME      ZW_BarrierOperatorSignalSupportedReport4byteFrame;\
-  ZW_BARRIER_OPERATOR_SIGNAL_SET_FRAME                         ZW_BarrierOperatorSignalSetFrame;\
-  ZW_BARRIER_OPERATOR_SIGNAL_GET_FRAME                         ZW_BarrierOperatorSignalGetFrame;\
-  ZW_BARRIER_OPERATOR_SIGNAL_REPORT_FRAME                      ZW_BarrierOperatorSignalReportFrame;\
+  ZW_BARRIER_OPERATOR_EVENT_SIGNAL_SET_FRAME                   ZW_BarrierOperatorEventSignalSetFrame;\
+  ZW_BARRIER_OPERATOR_EVENT_SIGNALING_GET_FRAME                ZW_BarrierOperatorEventSignalingGetFrame;\
+  ZW_BARRIER_OPERATOR_EVENT_SIGNALING_REPORT_FRAME             ZW_BarrierOperatorEventSignalingReportFrame;\
 /* Command class Network Management Installation Maintenance */\
   ZW_PRIORITY_ROUTE_SET_FRAME                                  ZW_PriorityRouteSetFrame;\
   ZW_PRIORITY_ROUTE_GET_FRAME                                  ZW_PriorityRouteGetFrame;\
@@ -2257,6 +2622,61 @@
   ZW_STATISTICS_CLEAR_V2_FRAME                                 ZW_StatisticsClearV2Frame;\
   ZW_RSSI_GET_V2_FRAME                                         ZW_RssiGetV2Frame;\
   ZW_RSSI_REPORT_V2_FRAME                                      ZW_RssiReportV2Frame;\
+/* Command class Network Management Installation Maintenance V3 */\
+  ZW_PRIORITY_ROUTE_SET_V3_FRAME                               ZW_PriorityRouteSetV3Frame;\
+  ZW_PRIORITY_ROUTE_GET_V3_FRAME                               ZW_PriorityRouteGetV3Frame;\
+  ZW_PRIORITY_ROUTE_REPORT_V3_FRAME                            ZW_PriorityRouteReportV3Frame;\
+  ZW_STATISTICS_GET_V3_FRAME                                   ZW_StatisticsGetV3Frame;\
+  VG_STATISTICS_REPORT_1BYTE_V3_VG                             VG_StatisticsReport1byteV3VGroup;\
+  VG_STATISTICS_REPORT_2BYTE_V3_VG                             VG_StatisticsReport2byteV3VGroup;\
+  VG_STATISTICS_REPORT_3BYTE_V3_VG                             VG_StatisticsReport3byteV3VGroup;\
+  VG_STATISTICS_REPORT_4BYTE_V3_VG                             VG_StatisticsReport4byteV3VGroup;\
+  ZW_STATISTICS_REPORT_1BYTE_V3_FRAME                          ZW_StatisticsReport1byteV3Frame;\
+  ZW_STATISTICS_REPORT_2BYTE_V3_FRAME                          ZW_StatisticsReport2byteV3Frame;\
+  ZW_STATISTICS_REPORT_3BYTE_V3_FRAME                          ZW_StatisticsReport3byteV3Frame;\
+  ZW_STATISTICS_REPORT_4BYTE_V3_FRAME                          ZW_StatisticsReport4byteV3Frame;\
+  ZW_STATISTICS_CLEAR_V3_FRAME                                 ZW_StatisticsClearV3Frame;\
+  ZW_RSSI_GET_V3_FRAME                                         ZW_RssiGetV3Frame;\
+  ZW_RSSI_REPORT_V3_FRAME                                      ZW_RssiReportV3Frame;\
+  ZW_S2_RESYNCHRONIZATION_EVENT_V3_FRAME                       ZW_S2ResynchronizationEventV3Frame;\
+  ZW_EXTENDED_STATISTICS_GET_V3_FRAME                          ZW_ExtendedStatisticsGetV3Frame;\
+  VG_EXTENDED_STATISTICS_REPORT_1BYTE_V3_VG                    VG_ExtendedStatisticsReport1byteV3VGroup;\
+  VG_EXTENDED_STATISTICS_REPORT_2BYTE_V3_VG                    VG_ExtendedStatisticsReport2byteV3VGroup;\
+  VG_EXTENDED_STATISTICS_REPORT_3BYTE_V3_VG                    VG_ExtendedStatisticsReport3byteV3VGroup;\
+  VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG                    VG_ExtendedStatisticsReport4byteV3VGroup;\
+  ZW_EXTENDED_STATISTICS_REPORT_1BYTE_V3_FRAME                 ZW_ExtendedStatisticsReport1byteV3Frame;\
+  ZW_EXTENDED_STATISTICS_REPORT_2BYTE_V3_FRAME                 ZW_ExtendedStatisticsReport2byteV3Frame;\
+  ZW_EXTENDED_STATISTICS_REPORT_3BYTE_V3_FRAME                 ZW_ExtendedStatisticsReport3byteV3Frame;\
+  ZW_EXTENDED_STATISTICS_REPORT_4BYTE_V3_FRAME                 ZW_ExtendedStatisticsReport4byteV3Frame;\
+/* Command class Network Management Installation Maintenance V4 */\
+  ZW_PRIORITY_ROUTE_SET_V4_FRAME                               ZW_PriorityRouteSetV4Frame;\
+  ZW_PRIORITY_ROUTE_GET_V4_FRAME                               ZW_PriorityRouteGetV4Frame;\
+  ZW_PRIORITY_ROUTE_REPORT_V4_FRAME                            ZW_PriorityRouteReportV4Frame;\
+  ZW_STATISTICS_GET_V4_FRAME                                   ZW_StatisticsGetV4Frame;\
+  VG_STATISTICS_REPORT_1BYTE_V4_VG                             VG_StatisticsReport1byteV4VGroup;\
+  VG_STATISTICS_REPORT_2BYTE_V4_VG                             VG_StatisticsReport2byteV4VGroup;\
+  VG_STATISTICS_REPORT_3BYTE_V4_VG                             VG_StatisticsReport3byteV4VGroup;\
+  VG_STATISTICS_REPORT_4BYTE_V4_VG                             VG_StatisticsReport4byteV4VGroup;\
+  ZW_STATISTICS_REPORT_1BYTE_V4_FRAME                          ZW_StatisticsReport1byteV4Frame;\
+  ZW_STATISTICS_REPORT_2BYTE_V4_FRAME                          ZW_StatisticsReport2byteV4Frame;\
+  ZW_STATISTICS_REPORT_3BYTE_V4_FRAME                          ZW_StatisticsReport3byteV4Frame;\
+  ZW_STATISTICS_REPORT_4BYTE_V4_FRAME                          ZW_StatisticsReport4byteV4Frame;\
+  ZW_STATISTICS_CLEAR_V4_FRAME                                 ZW_StatisticsClearV4Frame;\
+  ZW_RSSI_GET_V4_FRAME                                         ZW_RssiGetV4Frame;\
+  ZW_RSSI_REPORT_V4_FRAME                                      ZW_RssiReportV4Frame;\
+  ZW_S2_RESYNCHRONIZATION_EVENT_V4_FRAME                       ZW_S2ResynchronizationEventV4Frame;\
+  ZW_EXTENDED_STATISTICS_GET_V4_FRAME                          ZW_ExtendedStatisticsGetV4Frame;\
+  VG_EXTENDED_STATISTICS_REPORT_1BYTE_V4_VG                    VG_ExtendedStatisticsReport1byteV4VGroup;\
+  VG_EXTENDED_STATISTICS_REPORT_2BYTE_V4_VG                    VG_ExtendedStatisticsReport2byteV4VGroup;\
+  VG_EXTENDED_STATISTICS_REPORT_3BYTE_V4_VG                    VG_ExtendedStatisticsReport3byteV4VGroup;\
+  VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG                    VG_ExtendedStatisticsReport4byteV4VGroup;\
+  ZW_EXTENDED_STATISTICS_REPORT_1BYTE_V4_FRAME                 ZW_ExtendedStatisticsReport1byteV4Frame;\
+  ZW_EXTENDED_STATISTICS_REPORT_2BYTE_V4_FRAME                 ZW_ExtendedStatisticsReport2byteV4Frame;\
+  ZW_EXTENDED_STATISTICS_REPORT_3BYTE_V4_FRAME                 ZW_ExtendedStatisticsReport3byteV4Frame;\
+  ZW_EXTENDED_STATISTICS_REPORT_4BYTE_V4_FRAME                 ZW_ExtendedStatisticsReport4byteV4Frame;\
+  ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_SET_V4_FRAME               ZW_ZwaveLrChannelConfigurationSetV4Frame;\
+  ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_GET_V4_FRAME               ZW_ZwaveLrChannelConfigurationGetV4Frame;\
+  ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_REPORT_V4_FRAME            ZW_ZwaveLrChannelConfigurationReportV4Frame;\
 /* Command class Zip Naming */\
   ZW_ZIP_NAMING_NAME_SET_1BYTE_FRAME                           ZW_ZipNamingNameSet1byteFrame;\
   ZW_ZIP_NAMING_NAME_SET_2BYTE_FRAME                           ZW_ZipNamingNameSet2byteFrame;\
@@ -2286,6 +2706,16 @@
   ZW_MAILBOX_QUEUE_4BYTE_FRAME                                 ZW_MailboxQueue4byteFrame;\
   ZW_MAILBOX_WAKEUP_NOTIFICATION_FRAME                         ZW_MailboxWakeupNotificationFrame;\
   ZW_MAILBOX_NODE_FAILING_FRAME                                ZW_MailboxNodeFailingFrame;\
+/* Command class Mailbox V2 */\
+  ZW_MAILBOX_CONFIGURATION_GET_V2_FRAME                        ZW_MailboxConfigurationGetV2Frame;\
+  ZW_MAILBOX_CONFIGURATION_SET_V2_FRAME                        ZW_MailboxConfigurationSetV2Frame;\
+  ZW_MAILBOX_CONFIGURATION_REPORT_V2_FRAME                     ZW_MailboxConfigurationReportV2Frame;\
+  ZW_MAILBOX_QUEUE_1BYTE_V2_FRAME                              ZW_MailboxQueue1byteV2Frame;\
+  ZW_MAILBOX_QUEUE_2BYTE_V2_FRAME                              ZW_MailboxQueue2byteV2Frame;\
+  ZW_MAILBOX_QUEUE_3BYTE_V2_FRAME                              ZW_MailboxQueue3byteV2Frame;\
+  ZW_MAILBOX_QUEUE_4BYTE_V2_FRAME                              ZW_MailboxQueue4byteV2Frame;\
+  ZW_MAILBOX_WAKEUP_NOTIFICATION_V2_FRAME                      ZW_MailboxWakeupNotificationV2Frame;\
+  ZW_MAILBOX_NODE_FAILING_V2_FRAME                             ZW_MailboxNodeFailingV2Frame;\
 /* Command class Window Covering */\
   ZW_WINDOW_COVERING_SUPPORTED_GET_FRAME                       ZW_WindowCoveringSupportedGetFrame;\
   ZW_WINDOW_COVERING_SUPPORTED_REPORT_1BYTE_FRAME              ZW_WindowCoveringSupportedReport1byteFrame;\
@@ -2329,6 +2759,39 @@
   ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_2BYTE_FRAME          ZW_Security2CommandsSupportedReport2byteFrame;\
   ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_3BYTE_FRAME          ZW_Security2CommandsSupportedReport3byteFrame;\
   ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_4BYTE_FRAME          ZW_Security2CommandsSupportedReport4byteFrame;\
+/* Command class Security 2 V2 */\
+  ZW_SECURITY_2_NONCE_GET_V2_FRAME                             ZW_Security2NonceGetV2Frame;\
+  ZW_SECURITY_2_NONCE_REPORT_V2_FRAME                          ZW_Security2NonceReportV2Frame;\
+  VG_SECURITY_2_MESSAGE_ENCAPSULATION_1BYTE_V2_VG              VG_Security2MessageEncapsulation1byteV2VGroup;\
+  VG_SECURITY_2_MESSAGE_ENCAPSULATION_2BYTE_V2_VG              VG_Security2MessageEncapsulation2byteV2VGroup;\
+  VG_SECURITY_2_MESSAGE_ENCAPSULATION_3BYTE_V2_VG              VG_Security2MessageEncapsulation3byteV2VGroup;\
+  VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG              VG_Security2MessageEncapsulation4byteV2VGroup;\
+  ZW_SECURITY_2_MESSAGE_ENCAPSULATION_1BYTE_V2_FRAME           ZW_Security2MessageEncapsulation1byteV2Frame;\
+  ZW_SECURITY_2_MESSAGE_ENCAPSULATION_2BYTE_V2_FRAME           ZW_Security2MessageEncapsulation2byteV2Frame;\
+  ZW_SECURITY_2_MESSAGE_ENCAPSULATION_3BYTE_V2_FRAME           ZW_Security2MessageEncapsulation3byteV2Frame;\
+  ZW_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_FRAME           ZW_Security2MessageEncapsulation4byteV2Frame;\
+  ZW_KEX_GET_V2_FRAME                                          ZW_KexGetV2Frame;\
+  ZW_KEX_REPORT_V2_FRAME                                       ZW_KexReportV2Frame;\
+  ZW_KEX_SET_V2_FRAME                                          ZW_KexSetV2Frame;\
+  ZW_KEX_FAIL_V2_FRAME                                         ZW_KexFailV2Frame;\
+  ZW_PUBLIC_KEY_REPORT_1BYTE_V2_FRAME                          ZW_PublicKeyReport1byteV2Frame;\
+  ZW_PUBLIC_KEY_REPORT_2BYTE_V2_FRAME                          ZW_PublicKeyReport2byteV2Frame;\
+  ZW_PUBLIC_KEY_REPORT_3BYTE_V2_FRAME                          ZW_PublicKeyReport3byteV2Frame;\
+  ZW_PUBLIC_KEY_REPORT_4BYTE_V2_FRAME                          ZW_PublicKeyReport4byteV2Frame;\
+  ZW_SECURITY_2_NETWORK_KEY_GET_V2_FRAME                       ZW_Security2NetworkKeyGetV2Frame;\
+  ZW_SECURITY_2_NETWORK_KEY_REPORT_V2_FRAME                    ZW_Security2NetworkKeyReportV2Frame;\
+  ZW_SECURITY_2_NETWORK_KEY_VERIFY_V2_FRAME                    ZW_Security2NetworkKeyVerifyV2Frame;\
+  ZW_SECURITY_2_TRANSFER_END_V2_FRAME                          ZW_Security2TransferEndV2Frame;\
+  ZW_SECURITY_2_COMMANDS_SUPPORTED_GET_V2_FRAME                ZW_Security2CommandsSupportedGetV2Frame;\
+  ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_1BYTE_V2_FRAME       ZW_Security2CommandsSupportedReport1byteV2Frame;\
+  ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_2BYTE_V2_FRAME       ZW_Security2CommandsSupportedReport2byteV2Frame;\
+  ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_3BYTE_V2_FRAME       ZW_Security2CommandsSupportedReport3byteV2Frame;\
+  ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_4BYTE_V2_FRAME       ZW_Security2CommandsSupportedReport4byteV2Frame;\
+  ZW_NLS_NODE_LIST_GET_V2_FRAME                                ZW_NlsNodeListGetV2Frame;\
+  ZW_NLS_NODE_LIST_REPORT_V2_FRAME                             ZW_NlsNodeListReportV2Frame;\
+  ZW_NLS_STATE_GET_V2_FRAME                                    ZW_NlsStateGetV2Frame;\
+  ZW_NLS_STATE_REPORT_V2_FRAME                                 ZW_NlsStateReportV2Frame;\
+  ZW_NLS_STATE_SET_V2_FRAME                                    ZW_NlsStateSetV2Frame;\
 /* Command class Irrigation */\
   ZW_IRRIGATION_SYSTEM_INFO_GET_FRAME                          ZW_IrrigationSystemInfoGetFrame;\
   ZW_IRRIGATION_SYSTEM_INFO_REPORT_FRAME                       ZW_IrrigationSystemInfoReportFrame;\
@@ -2371,12 +2834,17 @@
   ZW_IRRIGATION_VALVE_TABLE_REPORT_4BYTE_FRAME                 ZW_IrrigationValveTableReport4byteFrame;\
   ZW_IRRIGATION_VALVE_TABLE_RUN_1BYTE_FRAME                    ZW_IrrigationValveTableRun1byteFrame;\
   ZW_IRRIGATION_VALVE_TABLE_RUN_2BYTE_FRAME                    ZW_IrrigationValveTableRun2byteFrame;\
+
+#define ZW_FRAME_COLLECTION_MACRO7\
   ZW_IRRIGATION_VALVE_TABLE_RUN_3BYTE_FRAME                    ZW_IrrigationValveTableRun3byteFrame;\
   ZW_IRRIGATION_VALVE_TABLE_RUN_4BYTE_FRAME                    ZW_IrrigationValveTableRun4byteFrame;\
   ZW_IRRIGATION_SYSTEM_SHUTOFF_FRAME                           ZW_IrrigationSystemShutoffFrame;\
 /* Command class Supervision */\
   ZW_SUPERVISION_GET_FRAME                                     ZW_SupervisionGetFrame;\
   ZW_SUPERVISION_REPORT_FRAME                                  ZW_SupervisionReportFrame;\
+/* Command class Supervision V2 */\
+  ZW_SUPERVISION_GET_V2_FRAME                                  ZW_SupervisionGetV2Frame;\
+  ZW_SUPERVISION_REPORT_V2_FRAME                               ZW_SupervisionReportV2Frame;\
 /* Command class Humidity Control Setpoint */\
   ZW_HUMIDITY_CONTROL_SETPOINT_SET_1BYTE_FRAME                 ZW_HumidityControlSetpointSet1byteFrame;\
   ZW_HUMIDITY_CONTROL_SETPOINT_SET_2BYTE_FRAME                 ZW_HumidityControlSetpointSet2byteFrame;\
@@ -2431,8 +2899,6 @@
   ZW_HUMIDITY_CONTROL_OPERATING_STATE_GET_FRAME                ZW_HumidityControlOperatingStateGetFrame;\
   ZW_HUMIDITY_CONTROL_OPERATING_STATE_REPORT_FRAME             ZW_HumidityControlOperatingStateReportFrame;\
 /* Command class Entry Control */\
-
-#define ZW_FRAME_COLLECTION_MACRO6\
   ZW_ENTRY_CONTROL_NOTIFICATION_1BYTE_FRAME                    ZW_EntryControlNotification1byteFrame;\
   ZW_ENTRY_CONTROL_NOTIFICATION_2BYTE_FRAME                    ZW_EntryControlNotification2byteFrame;\
   ZW_ENTRY_CONTROL_NOTIFICATION_3BYTE_FRAME                    ZW_EntryControlNotification3byteFrame;\
@@ -2489,12 +2955,201 @@
   ZW_SOUND_SWITCH_TONE_PLAY_SET_FRAME                          ZW_SoundSwitchTonePlaySetFrame;\
   ZW_SOUND_SWITCH_TONE_PLAY_GET_FRAME                          ZW_SoundSwitchTonePlayGetFrame;\
   ZW_SOUND_SWITCH_TONE_PLAY_REPORT_FRAME                       ZW_SoundSwitchTonePlayReportFrame;\
+/* Command class Sound Switch V2 */\
+  ZW_SOUND_SWITCH_TONES_NUMBER_GET_V2_FRAME                    ZW_SoundSwitchTonesNumberGetV2Frame;\
+  ZW_SOUND_SWITCH_TONES_NUMBER_REPORT_V2_FRAME                 ZW_SoundSwitchTonesNumberReportV2Frame;\
+  ZW_SOUND_SWITCH_TONE_INFO_GET_V2_FRAME                       ZW_SoundSwitchToneInfoGetV2Frame;\
+  ZW_SOUND_SWITCH_TONE_INFO_REPORT_1BYTE_V2_FRAME              ZW_SoundSwitchToneInfoReport1byteV2Frame;\
+  ZW_SOUND_SWITCH_TONE_INFO_REPORT_2BYTE_V2_FRAME              ZW_SoundSwitchToneInfoReport2byteV2Frame;\
+  ZW_SOUND_SWITCH_TONE_INFO_REPORT_3BYTE_V2_FRAME              ZW_SoundSwitchToneInfoReport3byteV2Frame;\
+  ZW_SOUND_SWITCH_TONE_INFO_REPORT_4BYTE_V2_FRAME              ZW_SoundSwitchToneInfoReport4byteV2Frame;\
+  ZW_SOUND_SWITCH_CONFIGURATION_SET_V2_FRAME                   ZW_SoundSwitchConfigurationSetV2Frame;\
+  ZW_SOUND_SWITCH_CONFIGURATION_GET_V2_FRAME                   ZW_SoundSwitchConfigurationGetV2Frame;\
+  ZW_SOUND_SWITCH_CONFIGURATION_REPORT_V2_FRAME                ZW_SoundSwitchConfigurationReportV2Frame;\
+  ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME                       ZW_SoundSwitchTonePlaySetV2Frame;\
+  ZW_SOUND_SWITCH_TONE_PLAY_GET_V2_FRAME                       ZW_SoundSwitchTonePlayGetV2Frame;\
+  ZW_SOUND_SWITCH_TONE_PLAY_REPORT_V2_FRAME                    ZW_SoundSwitchTonePlayReportV2Frame;\
+/* Command class Ir Repeater */\
+  ZW_IR_REPEATER_CAPABILITIES_GET_FRAME                        ZW_IrRepeaterCapabilitiesGetFrame;\
+  ZW_IR_REPEATER_CAPABILITIES_REPORT_FRAME                     ZW_IrRepeaterCapabilitiesReportFrame;\
+  ZW_IR_REPEATER_IR_CODE_LEARNING_START_FRAME                  ZW_IrRepeaterIrCodeLearningStartFrame;\
+  ZW_IR_REPEATER_IR_CODE_LEARNING_STOP_FRAME                   ZW_IrRepeaterIrCodeLearningStopFrame;\
+  ZW_IR_REPEATER_IR_CODE_LEARNING_STATUS_FRAME                 ZW_IrRepeaterIrCodeLearningStatusFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_REMOVE_FRAME                   ZW_IrRepeaterLearntIrCodeRemoveFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_GET_FRAME                      ZW_IrRepeaterLearntIrCodeGetFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_1BYTE_FRAME             ZW_IrRepeaterLearntIrCodeReport1byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_2BYTE_FRAME             ZW_IrRepeaterLearntIrCodeReport2byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_3BYTE_FRAME             ZW_IrRepeaterLearntIrCodeReport3byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_4BYTE_FRAME             ZW_IrRepeaterLearntIrCodeReport4byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_GET_FRAME             ZW_IrRepeaterLearntIrCodeReadbackGetFrame;\
+  VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_1BYTE_VG       VG_IrRepeaterLearntIrCodeReadbackReport1byteVGroup;\
+  VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_2BYTE_VG       VG_IrRepeaterLearntIrCodeReadbackReport2byteVGroup;\
+  VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_3BYTE_VG       VG_IrRepeaterLearntIrCodeReadbackReport3byteVGroup;\
+  VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG       VG_IrRepeaterLearntIrCodeReadbackReport4byteVGroup;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_1BYTE_FRAME    ZW_IrRepeaterLearntIrCodeReadbackReport1byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_2BYTE_FRAME    ZW_IrRepeaterLearntIrCodeReadbackReport2byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_3BYTE_FRAME    ZW_IrRepeaterLearntIrCodeReadbackReport3byteFrame;\
+  ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_FRAME    ZW_IrRepeaterLearntIrCodeReadbackReport4byteFrame;\
+  VG_IR_REPEATER_CONFIGURATION_SET_1BYTE_VG                    VG_IrRepeaterConfigurationSet1byteVGroup;\
+  VG_IR_REPEATER_CONFIGURATION_SET_2BYTE_VG                    VG_IrRepeaterConfigurationSet2byteVGroup;\
+  VG_IR_REPEATER_CONFIGURATION_SET_3BYTE_VG                    VG_IrRepeaterConfigurationSet3byteVGroup;\
+  VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG                    VG_IrRepeaterConfigurationSet4byteVGroup;\
+  ZW_IR_REPEATER_CONFIGURATION_SET_1BYTE_FRAME                 ZW_IrRepeaterConfigurationSet1byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_SET_2BYTE_FRAME                 ZW_IrRepeaterConfigurationSet2byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_SET_3BYTE_FRAME                 ZW_IrRepeaterConfigurationSet3byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_SET_4BYTE_FRAME                 ZW_IrRepeaterConfigurationSet4byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_GET_FRAME                       ZW_IrRepeaterConfigurationGetFrame;\
+  VG_IR_REPEATER_CONFIGURATION_REPORT_1BYTE_VG                 VG_IrRepeaterConfigurationReport1byteVGroup;\
+  VG_IR_REPEATER_CONFIGURATION_REPORT_2BYTE_VG                 VG_IrRepeaterConfigurationReport2byteVGroup;\
+  VG_IR_REPEATER_CONFIGURATION_REPORT_3BYTE_VG                 VG_IrRepeaterConfigurationReport3byteVGroup;\
+  VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG                 VG_IrRepeaterConfigurationReport4byteVGroup;\
+  ZW_IR_REPEATER_CONFIGURATION_REPORT_1BYTE_FRAME              ZW_IrRepeaterConfigurationReport1byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_REPORT_2BYTE_FRAME              ZW_IrRepeaterConfigurationReport2byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_REPORT_3BYTE_FRAME              ZW_IrRepeaterConfigurationReport3byteFrame;\
+  ZW_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_FRAME              ZW_IrRepeaterConfigurationReport4byteFrame;\
+  ZW_IR_REPEATER_REPEAT_LEARNT_CODE_FRAME                      ZW_IrRepeaterRepeatLearntCodeFrame;\
+  VG_IR_REPEATER_REPEAT_1BYTE_VG                               VG_IrRepeaterRepeat1byteVGroup;\
+  VG_IR_REPEATER_REPEAT_2BYTE_VG                               VG_IrRepeaterRepeat2byteVGroup;\
+  VG_IR_REPEATER_REPEAT_3BYTE_VG                               VG_IrRepeaterRepeat3byteVGroup;\
+  VG_IR_REPEATER_REPEAT_4BYTE_VG                               VG_IrRepeaterRepeat4byteVGroup;\
+  ZW_IR_REPEATER_REPEAT_1BYTE_FRAME                            ZW_IrRepeaterRepeat1byteFrame;\
+  ZW_IR_REPEATER_REPEAT_2BYTE_FRAME                            ZW_IrRepeaterRepeat2byteFrame;\
+  ZW_IR_REPEATER_REPEAT_3BYTE_FRAME                            ZW_IrRepeaterRepeat3byteFrame;\
+  ZW_IR_REPEATER_REPEAT_4BYTE_FRAME                            ZW_IrRepeaterRepeat4byteFrame;\
+/* Command class Authentication */\
+  ZW_AUTHENTICATION_CAPABILITY_GET_FRAME                       ZW_AuthenticationCapabilityGetFrame;\
+  ZW_AUTHENTICATION_CAPABILITY_REPORT_1BYTE_FRAME              ZW_AuthenticationCapabilityReport1byteFrame;\
+  ZW_AUTHENTICATION_CAPABILITY_REPORT_2BYTE_FRAME              ZW_AuthenticationCapabilityReport2byteFrame;\
+  ZW_AUTHENTICATION_CAPABILITY_REPORT_3BYTE_FRAME              ZW_AuthenticationCapabilityReport3byteFrame;\
+  ZW_AUTHENTICATION_CAPABILITY_REPORT_4BYTE_FRAME              ZW_AuthenticationCapabilityReport4byteFrame;\
+  ZW_AUTHENTICATION_DATA_SET_1BYTE_FRAME                       ZW_AuthenticationDataSet1byteFrame;\
+  ZW_AUTHENTICATION_DATA_SET_2BYTE_FRAME                       ZW_AuthenticationDataSet2byteFrame;\
+  ZW_AUTHENTICATION_DATA_SET_3BYTE_FRAME                       ZW_AuthenticationDataSet3byteFrame;\
+  ZW_AUTHENTICATION_DATA_SET_4BYTE_FRAME                       ZW_AuthenticationDataSet4byteFrame;\
+  ZW_AUTHENTICATION_DATA_GET_FRAME                             ZW_AuthenticationDataGetFrame;\
+  VG_AUTHENTICATION_DATA_REPORT_1BYTE_VG                       VG_AuthenticationDataReport1byteVGroup;\
+  VG_AUTHENTICATION_DATA_REPORT_2BYTE_VG                       VG_AuthenticationDataReport2byteVGroup;\
+  VG_AUTHENTICATION_DATA_REPORT_3BYTE_VG                       VG_AuthenticationDataReport3byteVGroup;\
+  VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG                       VG_AuthenticationDataReport4byteVGroup;\
+  ZW_AUTHENTICATION_DATA_REPORT_1BYTE_FRAME                    ZW_AuthenticationDataReport1byteFrame;\
+  ZW_AUTHENTICATION_DATA_REPORT_2BYTE_FRAME                    ZW_AuthenticationDataReport2byteFrame;\
+  ZW_AUTHENTICATION_DATA_REPORT_3BYTE_FRAME                    ZW_AuthenticationDataReport3byteFrame;\
+  ZW_AUTHENTICATION_DATA_REPORT_4BYTE_FRAME                    ZW_AuthenticationDataReport4byteFrame;\
+  VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG            VG_AuthenticationTechnologiesCombinationSetVGroup;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_1BYTE_FRAME   ZW_AuthenticationTechnologiesCombinationSet1byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_2BYTE_FRAME   ZW_AuthenticationTechnologiesCombinationSet2byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_3BYTE_FRAME   ZW_AuthenticationTechnologiesCombinationSet3byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_4BYTE_FRAME   ZW_AuthenticationTechnologiesCombinationSet4byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET_FRAME         ZW_AuthenticationTechnologiesCombinationGetFrame;\
+  VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_1BYTE_VG   VG_AuthenticationTechnologiesCombinationReport1byteVGroup;\
+  VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_2BYTE_VG   VG_AuthenticationTechnologiesCombinationReport2byteVGroup;\
+  VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_3BYTE_VG   VG_AuthenticationTechnologiesCombinationReport3byteVGroup;\
+  VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG   VG_AuthenticationTechnologiesCombinationReport4byteVGroup;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_1BYTE_FRAME ZW_AuthenticationTechnologiesCombinationReport1byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_2BYTE_FRAME ZW_AuthenticationTechnologiesCombinationReport2byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_3BYTE_FRAME ZW_AuthenticationTechnologiesCombinationReport3byteFrame;\
+  ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_FRAME ZW_AuthenticationTechnologiesCombinationReport4byteFrame;\
+  ZW_AUTHENTICATION_CHECKSUM_GET_FRAME                         ZW_AuthenticationChecksumGetFrame;\
+  ZW_AUTHENTICATION_CHECKSUM_REPORT_FRAME                      ZW_AuthenticationChecksumReportFrame;\
+/* Command class Authentication Media Write */\
+  ZW_AUTHENTICATION_MEDIA_CAPABILITY_GET_FRAME                 ZW_AuthenticationMediaCapabilityGetFrame;\
+  ZW_AUTHENTICATION_MEDIA_CAPABILITY_REPORT_FRAME              ZW_AuthenticationMediaCapabilityReportFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_START_1BYTE_FRAME              ZW_AuthenticationMediaWriteStart1byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_START_2BYTE_FRAME              ZW_AuthenticationMediaWriteStart2byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_START_3BYTE_FRAME              ZW_AuthenticationMediaWriteStart3byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_START_4BYTE_FRAME              ZW_AuthenticationMediaWriteStart4byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_STOP_FRAME                     ZW_AuthenticationMediaWriteStopFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_1BYTE_FRAME             ZW_AuthenticationMediaWriteStatus1byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_2BYTE_FRAME             ZW_AuthenticationMediaWriteStatus2byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_3BYTE_FRAME             ZW_AuthenticationMediaWriteStatus3byteFrame;\
+  ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_4BYTE_FRAME             ZW_AuthenticationMediaWriteStatus4byteFrame;\
+/* Command class Generic Schedule */\
+  ZW_GENERIC_SCHEDULE_CAPABILITIES_GET_FRAME                   ZW_GenericScheduleCapabilitiesGetFrame;\
+  ZW_GENERIC_SCHEDULE_CAPABILITIES_REPORT_FRAME                ZW_GenericScheduleCapabilitiesReportFrame;\
+  ZW_GENERIC_SCHEDULE_TIME_RANGE_SET_FRAME                     ZW_GenericScheduleTimeRangeSetFrame;\
+  ZW_GENERIC_SCHEDULE_TIME_RANGE_GET_FRAME                     ZW_GenericScheduleTimeRangeGetFrame;\
+  ZW_GENERIC_SCHEDULE_TIME_RANGE_REPORT_FRAME                  ZW_GenericScheduleTimeRangeReportFrame;\
+  VG_GENERIC_SCHEDULE_SET_VG                                   VG_GenericScheduleSetVGroup;\
+  ZW_GENERIC_SCHEDULE_SET_1BYTE_FRAME                          ZW_GenericScheduleSet1byteFrame;\
+  ZW_GENERIC_SCHEDULE_SET_2BYTE_FRAME                          ZW_GenericScheduleSet2byteFrame;\
+  ZW_GENERIC_SCHEDULE_SET_3BYTE_FRAME                          ZW_GenericScheduleSet3byteFrame;\
+  ZW_GENERIC_SCHEDULE_SET_4BYTE_FRAME                          ZW_GenericScheduleSet4byteFrame;\
+  ZW_GENERIC_SCHEDULE_GET_FRAME                                ZW_GenericScheduleGetFrame;\
+  VG_GENERIC_SCHEDULE_REPORT_VG                                VG_GenericScheduleReportVGroup;\
+  ZW_GENERIC_SCHEDULE_REPORT_1BYTE_FRAME                       ZW_GenericScheduleReport1byteFrame;\
+  ZW_GENERIC_SCHEDULE_REPORT_2BYTE_FRAME                       ZW_GenericScheduleReport2byteFrame;\
+  ZW_GENERIC_SCHEDULE_REPORT_3BYTE_FRAME                       ZW_GenericScheduleReport3byteFrame;\
+  ZW_GENERIC_SCHEDULE_REPORT_4BYTE_FRAME                       ZW_GenericScheduleReport4byteFrame;\
+/* Command class Antitheft Unlock */\
+  ZW_ANTITHEFT_UNLOCK_STATE_GET_FRAME                          ZW_AntitheftUnlockStateGetFrame;\
+  ZW_ANTITHEFT_UNLOCK_STATE_REPORT_1BYTE_FRAME                 ZW_AntitheftUnlockStateReport1byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_STATE_REPORT_2BYTE_FRAME                 ZW_AntitheftUnlockStateReport2byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_STATE_REPORT_3BYTE_FRAME                 ZW_AntitheftUnlockStateReport3byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_STATE_REPORT_4BYTE_FRAME                 ZW_AntitheftUnlockStateReport4byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_SET_1BYTE_FRAME                          ZW_AntitheftUnlockSet1byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_SET_2BYTE_FRAME                          ZW_AntitheftUnlockSet2byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_SET_3BYTE_FRAME                          ZW_AntitheftUnlockSet3byteFrame;\
+  ZW_ANTITHEFT_UNLOCK_SET_4BYTE_FRAME                          ZW_AntitheftUnlockSet4byteFrame;\
+/* Command class User Credential */\
+  ZW_USER_CAPABILITIES_GET_FRAME                               ZW_UserCapabilitiesGetFrame;\
+  VG_USER_CAPABILITIES_REPORT_VG                               VG_UserCapabilitiesReportVGroup;\
+  ZW_USER_CAPABILITIES_REPORT_1BYTE_FRAME                      ZW_UserCapabilitiesReport1byteFrame;\
+  ZW_USER_CAPABILITIES_REPORT_2BYTE_FRAME                      ZW_UserCapabilitiesReport2byteFrame;\
+  ZW_USER_CAPABILITIES_REPORT_3BYTE_FRAME                      ZW_UserCapabilitiesReport3byteFrame;\
+  ZW_USER_CAPABILITIES_REPORT_4BYTE_FRAME                      ZW_UserCapabilitiesReport4byteFrame;\
+  ZW_CREDENTIAL_CAPABILITIES_GET_FRAME                         ZW_CredentialCapabilitiesGetFrame;\
+  ZW_CREDENTIAL_CAPABILITIES_REPORT_1BYTE_FRAME                ZW_CredentialCapabilitiesReport1byteFrame;\
+  ZW_CREDENTIAL_CAPABILITIES_REPORT_2BYTE_FRAME                ZW_CredentialCapabilitiesReport2byteFrame;\
+  ZW_CREDENTIAL_CAPABILITIES_REPORT_3BYTE_FRAME                ZW_CredentialCapabilitiesReport3byteFrame;\
+  ZW_CREDENTIAL_CAPABILITIES_REPORT_4BYTE_FRAME                ZW_CredentialCapabilitiesReport4byteFrame;\
+  ZW_USER_SET_1BYTE_FRAME                                      ZW_UserSet1byteFrame;\
+  ZW_USER_SET_2BYTE_FRAME                                      ZW_UserSet2byteFrame;\
+  ZW_USER_SET_3BYTE_FRAME                                      ZW_UserSet3byteFrame;\
+  ZW_USER_SET_4BYTE_FRAME                                      ZW_UserSet4byteFrame;\
+  ZW_USER_GET_FRAME                                            ZW_UserGetFrame;\
+  ZW_USER_REPORT_1BYTE_FRAME                                   ZW_UserReport1byteFrame;\
+  ZW_USER_REPORT_2BYTE_FRAME                                   ZW_UserReport2byteFrame;\
+  ZW_USER_REPORT_3BYTE_FRAME                                   ZW_UserReport3byteFrame;\
+  ZW_USER_REPORT_4BYTE_FRAME                                   ZW_UserReport4byteFrame;\
+  ZW_USER_SET_ERROR_REPORT_1BYTE_FRAME                         ZW_UserSetErrorReport1byteFrame;\
+  ZW_USER_SET_ERROR_REPORT_2BYTE_FRAME                         ZW_UserSetErrorReport2byteFrame;\
+  ZW_USER_SET_ERROR_REPORT_3BYTE_FRAME                         ZW_UserSetErrorReport3byteFrame;\
+  ZW_USER_SET_ERROR_REPORT_4BYTE_FRAME                         ZW_UserSetErrorReport4byteFrame;\
+  ZW_USER_NOTIFICATION_REPORT_FRAME                            ZW_UserNotificationReportFrame;\
+  ZW_CREDENTIAL_SET_1BYTE_FRAME                                ZW_CredentialSet1byteFrame;\
+  ZW_CREDENTIAL_SET_2BYTE_FRAME                                ZW_CredentialSet2byteFrame;\
+  ZW_CREDENTIAL_SET_3BYTE_FRAME                                ZW_CredentialSet3byteFrame;\
+  ZW_CREDENTIAL_SET_4BYTE_FRAME                                ZW_CredentialSet4byteFrame;\
+  ZW_CREDENTIAL_GET_FRAME                                      ZW_CredentialGetFrame;\
+  ZW_CREDENTIAL_REPORT_1BYTE_FRAME                             ZW_CredentialReport1byteFrame;\
+  ZW_CREDENTIAL_REPORT_2BYTE_FRAME                             ZW_CredentialReport2byteFrame;\
+  ZW_CREDENTIAL_REPORT_3BYTE_FRAME                             ZW_CredentialReport3byteFrame;\
+  ZW_CREDENTIAL_REPORT_4BYTE_FRAME                             ZW_CredentialReport4byteFrame;\
+  ZW_CREDENTIAL_SET_ERROR_REPORT_1BYTE_FRAME                   ZW_CredentialSetErrorReport1byteFrame;\
+  ZW_CREDENTIAL_SET_ERROR_REPORT_2BYTE_FRAME                   ZW_CredentialSetErrorReport2byteFrame;\
+  ZW_CREDENTIAL_SET_ERROR_REPORT_3BYTE_FRAME                   ZW_CredentialSetErrorReport3byteFrame;\
+  ZW_CREDENTIAL_SET_ERROR_REPORT_4BYTE_FRAME                   ZW_CredentialSetErrorReport4byteFrame;\
+  ZW_CREDENTIAL_NOTIFICATION_REPORT_1BYTE_FRAME                ZW_CredentialNotificationReport1byteFrame;\
+  ZW_CREDENTIAL_NOTIFICATION_REPORT_2BYTE_FRAME                ZW_CredentialNotificationReport2byteFrame;\
+  ZW_CREDENTIAL_NOTIFICATION_REPORT_3BYTE_FRAME                ZW_CredentialNotificationReport3byteFrame;\
+  ZW_CREDENTIAL_NOTIFICATION_REPORT_4BYTE_FRAME                ZW_CredentialNotificationReport4byteFrame;\
+  ZW_CREDENTIAL_LEARN_START_FRAME                              ZW_CredentialLearnStartFrame;\
+  ZW_CREDENTIAL_LEARN_CANCEL_FRAME                             ZW_CredentialLearnCancelFrame;\
+  ZW_CREDENTIAL_LEARN_REPORT_FRAME                             ZW_CredentialLearnReportFrame;\
+  ZW_USER_CREDENTIAL_ASSOCIATION_SET_FRAME                     ZW_UserCredentialAssociationSetFrame;\
+  ZW_USER_CREDENTIAL_ASSOCIATION_REPORT_FRAME                  ZW_UserCredentialAssociationReportFrame;\
+  ZW_ALL_USERS_CHECKSUM_GET_FRAME                              ZW_AllUsersChecksumGetFrame;\
+  ZW_ALL_USERS_CHECKSUM_REPORT_FRAME                           ZW_AllUsersChecksumReportFrame;\
+  ZW_USER_CHECKSUM_GET_FRAME                                   ZW_UserChecksumGetFrame;\
+  ZW_USER_CHECKSUM_REPORT_FRAME                                ZW_UserChecksumReportFrame;\
+  ZW_CREDENTIAL_CHECKSUM_GET_FRAME                             ZW_CredentialChecksumGetFrame;\
+  ZW_CREDENTIAL_CHECKSUM_REPORT_FRAME                          ZW_CredentialChecksumReportFrame;\
 
 
 /************ Basic Device Class identifiers **************/
 #define BASIC_TYPE_CONTROLLER                                                            0x01 /*Node is a portable controller*/
-#define BASIC_TYPE_ROUTING_END_NODE                                                      0x04 /*Node is an end node with routing capabilities*/
-#define BASIC_TYPE_END_NODE                                                              0x03 /*Node is an end node*/
+#define BASIC_TYPE_ROUTING_END_NODE                                                      0x04 /*Node is an End Node with routing capabilities*/
+#define BASIC_TYPE_END_NODE                                                              0x03 /*Node is an End Node*/
 #define BASIC_TYPE_STATIC_CONTROLLER                                                     0x02 /*Node is a static controller*/
 
 
@@ -2517,8 +3172,8 @@
 #define SPECIFIC_TYPE_NOT_USED                                                           0x00 /*Specific Device Class Not Used*/
 #define SPECIFIC_TYPE_DOOR_LOCK                                                          0x01 /*Door Lock*/
 #define SPECIFIC_TYPE_ADVANCED_DOOR_LOCK                                                 0x02 /*Advanced Door Lock*/
-#define SPECIFIC_TYPE_SECURE_KEYPAD_DOOR_LOCK                                            0x03 /*Door Lock (keypad –lever) Device Type*/
-#define SPECIFIC_TYPE_SECURE_KEYPAD_DOOR_LOCK_DEADBOLT                                   0x04 /*Door Lock (keypad – deadbolt) Device Type*/
+#define SPECIFIC_TYPE_SECURE_KEYPAD_DOOR_LOCK                                            0x03 /*Door Lock (keypad -lever) Device Type*/
+#define SPECIFIC_TYPE_SECURE_KEYPAD_DOOR_LOCK_DEADBOLT                                   0x04 /*Door Lock (keypad - deadbolt) Device Type*/
 #define SPECIFIC_TYPE_SECURE_DOOR                                                        0x05 /*Barrier Operator Specific Device Class*/
 #define SPECIFIC_TYPE_SECURE_GATE                                                        0x06 /*Barrier Operator Specific Device Class*/
 #define SPECIFIC_TYPE_SECURE_BARRIER_ADDON                                               0x07 /*Barrier Operator Specific Device Class*/
@@ -2556,6 +3211,7 @@
 #define SPECIFIC_TYPE_NOT_USED                                                           0x00 /*Specific Device Class Not Used*/
 #define SPECIFIC_TYPE_REPEATER_END_NODE                                                  0x01 /*Basic Repeater End Node*/
 #define SPECIFIC_TYPE_VIRTUAL_NODE                                                       0x02
+#define SPECIFIC_TYPE_IR_REPEATER                                                        0x03
 
 /* Device class Security Panel */
 #define GENERIC_TYPE_SECURITY_PANEL                                                      0x17
@@ -2696,11 +3352,11 @@
 #define ROLE_TYPE_CONTROLLER_SUB_STATIC                                                  0x01
 #define ROLE_TYPE_CONTROLLER_PORTABLE                                                    0x02
 #define ROLE_TYPE_CONTROLLER_PORTABLE_REPORTING                                          0x03
-#define ROLE_TYPE_END_NODE_PORTABLE                                                         0x04
-#define ROLE_TYPE_END_NODE_ALWAYS_ON                                                        0x05
-#define ROLE_TYPE_END_NODE_SLEEPING_REPORTING                                               0x06
-#define ROLE_TYPE_END_NODE_SLEEPING_LISTENING                                               0x07
-#define ROLE_TYPE_END_NODE_NETWORK_AWARE                                                    0x08
+#define ROLE_TYPE_SLAVE_PORTABLE                                                         0x04
+#define ROLE_TYPE_SLAVE_ALWAYS_ON                                                        0x05
+#define ROLE_TYPE_SLAVE_SLEEPING_REPORTING                                               0x06
+#define ROLE_TYPE_SLAVE_SLEEPING_LISTENING                                               0x07
+#define ROLE_TYPE_SLAVE_NETWORK_AWARE                                                    0x08
 
 
 /************* Z-Wave+ Icon Type identifiers **************/
@@ -3450,10 +4106,13 @@
 #define COMMAND_CLASS_NOTIFICATION_V6                                                    0x71 /*[DEPRECATED]*/
 #define COMMAND_CLASS_NOTIFICATION_V7                                                    0x71 /*[DEPRECATED]*/
 #define COMMAND_CLASS_NOTIFICATION_V8                                                    0x71
+#define COMMAND_CLASS_NOTIFICATION_V9                                                    0x71
 #define COMMAND_CLASS_APPLICATION_STATUS                                                 0x22
 #define COMMAND_CLASS_ASSOCIATION_COMMAND_CONFIGURATION                                  0x9B
-#define COMMAND_CLASS_ASSOCIATION                                                        0x85
+#define COMMAND_CLASS_ASSOCIATION                                                        0x85 /*[OBSOLETED]*/
 #define COMMAND_CLASS_ASSOCIATION_V2                                                     0x85
+#define COMMAND_CLASS_ASSOCIATION_V3                                                     0x85
+#define COMMAND_CLASS_ASSOCIATION_V4                                                     0x85
 #define COMMAND_CLASS_AV_CONTENT_DIRECTORY_MD                                            0x95
 #define COMMAND_CLASS_AV_CONTENT_SEARCH_MD                                               0x97
 #define COMMAND_CLASS_AV_RENDERER_STATUS                                                 0x96
@@ -3463,6 +4122,8 @@
 #define COMMAND_CLASS_BASIC                                                              0x20
 #define COMMAND_CLASS_BASIC_V2                                                           0x20
 #define COMMAND_CLASS_BATTERY                                                            0x80
+#define COMMAND_CLASS_BATTERY_V2                                                         0x80
+#define COMMAND_CLASS_BATTERY_V3                                                         0x80
 #define COMMAND_CLASS_CHIMNEY_FAN                                                        0x2A
 #define COMMAND_CLASS_CLIMATE_CONTROL_SCHEDULE                                           0x46 /*[DEPRECATED]*/
 #define COMMAND_CLASS_CLOCK                                                              0x81
@@ -3485,6 +4146,9 @@
 #define COMMAND_CLASS_FIRMWARE_UPDATE_MD_V3                                              0x7A
 #define COMMAND_CLASS_FIRMWARE_UPDATE_MD_V4                                              0x7A
 #define COMMAND_CLASS_FIRMWARE_UPDATE_MD_V5                                              0x7A
+#define COMMAND_CLASS_FIRMWARE_UPDATE_MD_V6                                              0x7A
+#define COMMAND_CLASS_FIRMWARE_UPDATE_MD_V7                                              0x7A
+#define COMMAND_CLASS_FIRMWARE_UPDATE_MD_V8                                              0x7A
 #define COMMAND_CLASS_GEOGRAPHIC_LOCATION                                                0x8C
 #define COMMAND_CLASS_GROUPING_NAME                                                      0x7B /*[DEPRECATED]*/
 #define COMMAND_CLASS_HAIL                                                               0x82 /*[OBSOLETED]*/
@@ -3493,9 +4157,9 @@
 #define COMMAND_CLASS_INDICATOR                                                          0x87
 #define COMMAND_CLASS_INDICATOR_V2                                                       0x87
 #define COMMAND_CLASS_INDICATOR_V3                                                       0x87
+#define COMMAND_CLASS_INDICATOR_V4                                                       0x87
 #define COMMAND_CLASS_IP_CONFIGURATION                                                   0x9A /*[OBSOLETED]*/
 #define COMMAND_CLASS_LANGUAGE                                                           0x89
-#define COMMAND_CLASS_LOCK                                                               0x76 /*[DEPRECATED]*/
 #define COMMAND_CLASS_MANUFACTURER_PROPRIETARY                                           0x91
 #define COMMAND_CLASS_MANUFACTURER_SPECIFIC                                              0x72
 #define COMMAND_CLASS_MANUFACTURER_SPECIFIC_V2                                           0x72
@@ -3511,29 +4175,35 @@
 #define COMMAND_CLASS_METER_V3                                                           0x32
 #define COMMAND_CLASS_METER_V4                                                           0x32
 #define COMMAND_CLASS_METER_V5                                                           0x32
+#define COMMAND_CLASS_METER_V6                                                           0x32
 #define COMMAND_CLASS_MTP_WINDOW_COVERING                                                0x51 /*[OBSOLETED]*/
-#define COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V2                                       0x8E
+#define COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V2                                       0x8E /*[OBSOLETED]*/
 #define COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V3                                       0x8E
+#define COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V4                                       0x8E
+#define COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V5                                       0x8E
 #define COMMAND_CLASS_MULTI_CHANNEL_V2                                                   0x60 /*[OBSOLETED]*/
-#define COMMAND_CLASS_MULTI_CHANNEL_V3                                                   0x60
+#define COMMAND_CLASS_MULTI_CHANNEL_V3                                                   0x60 /*[OBSOLETED]*/
 #define COMMAND_CLASS_MULTI_CHANNEL_V4                                                   0x60
 #define COMMAND_CLASS_MULTI_CMD                                                          0x8F
 #define COMMAND_CLASS_MULTI_INSTANCE_ASSOCIATION                                         0x8E /*[OBSOLETED]*/
 #define COMMAND_CLASS_MULTI_INSTANCE                                                     0x60 /*[OBSOLETED]*/
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_PROXY                                           0x52
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_PROXY_V2                                        0x52
+#define COMMAND_CLASS_NETWORK_MANAGEMENT_PROXY_V3                                        0x52
+#define COMMAND_CLASS_NETWORK_MANAGEMENT_PROXY_V4                                        0x52
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_BASIC                                           0x4D
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_BASIC_V2                                        0x4D
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_INCLUSION                                       0x34
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_INCLUSION_V2                                    0x34
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_INCLUSION_V3                                    0x34
+#define COMMAND_CLASS_NETWORK_MANAGEMENT_INCLUSION_V4                                    0x34
 #define COMMAND_CLASS_NO_OPERATION                                                       0x00
 #define COMMAND_CLASS_NODE_NAMING                                                        0x77
 #define COMMAND_CLASS_NON_INTEROPERABLE                                                  0xF0
 #define COMMAND_CLASS_POWERLEVEL                                                         0x73
 #define COMMAND_CLASS_PREPAYMENT_ENCAPSULATION                                           0x41
 #define COMMAND_CLASS_PREPAYMENT                                                         0x3F
-#define COMMAND_CLASS_PROPRIETARY                                                        0x88 /*[DEPRECATED]*/
+#define COMMAND_CLASS_PROPRIETARY                                                        0x88 /*[OBSOLETED]*/
 #define COMMAND_CLASS_PROTECTION                                                         0x75
 #define COMMAND_CLASS_PROTECTION_V2                                                      0x75
 #define COMMAND_CLASS_RATE_TBL_CONFIG                                                    0x48
@@ -3546,6 +4216,7 @@
 #define COMMAND_CLASS_SCHEDULE_ENTRY_LOCK                                                0x4E /*[DEPRECATED]*/
 #define COMMAND_CLASS_SCHEDULE_ENTRY_LOCK_V2                                             0x4E /*[DEPRECATED]*/
 #define COMMAND_CLASS_SCHEDULE_ENTRY_LOCK_V3                                             0x4E /*[DEPRECATED]*/
+#define COMMAND_CLASS_SCHEDULE_ENTRY_LOCK_V4                                             0x4E /*Never certified.*/
 #define COMMAND_CLASS_SCREEN_ATTRIBUTES                                                  0x93
 #define COMMAND_CLASS_SCREEN_ATTRIBUTES_V2                                               0x93
 #define COMMAND_CLASS_SCREEN_MD                                                          0x92
@@ -3571,6 +4242,9 @@
 #define COMMAND_CLASS_SENSOR_MULTILEVEL_V11                                              0x31
 #define COMMAND_CLASS_SILENCE_ALARM                                                      0x9D /*SDS10963-4 The Alarm Silence command class can be used to nuisance silence to temporarily disable the sounding*/
 #define COMMAND_CLASS_SIMPLE_AV_CONTROL                                                  0x94
+#define COMMAND_CLASS_SIMPLE_AV_CONTROL_V2                                               0x94
+#define COMMAND_CLASS_SIMPLE_AV_CONTROL_V3                                               0x94
+#define COMMAND_CLASS_SIMPLE_AV_CONTROL_V4                                               0x94
 #define COMMAND_CLASS_SWITCH_ALL                                                         0x27
 #define COMMAND_CLASS_SWITCH_BINARY                                                      0x25
 #define COMMAND_CLASS_SWITCH_BINARY_V2                                                   0x25
@@ -3586,6 +4260,7 @@
 #define COMMAND_CLASS_THERMOSTAT_FAN_MODE_V2                                             0x44
 #define COMMAND_CLASS_THERMOSTAT_FAN_MODE_V3                                             0x44
 #define COMMAND_CLASS_THERMOSTAT_FAN_MODE_V4                                             0x44
+#define COMMAND_CLASS_THERMOSTAT_FAN_MODE_V5                                             0x44
 #define COMMAND_CLASS_THERMOSTAT_FAN_STATE                                               0x45
 #define COMMAND_CLASS_THERMOSTAT_FAN_STATE_V2                                            0x45
 #define COMMAND_CLASS_THERMOSTAT_HEATING                                                 0x38
@@ -3605,11 +4280,12 @@
 #define COMMAND_CLASS_TRANSPORT_SERVICE                                                  0x55 /*[OBSOLETED]*/
 #define COMMAND_CLASS_USER_CODE                                                          0x63
 #define COMMAND_CLASS_USER_CODE_V2                                                       0x63
-#define COMMAND_CLASS_VERSION                                                            0x86
+#define COMMAND_CLASS_VERSION                                                            0x86 /*[OBSOLETED]*/
 #define COMMAND_CLASS_VERSION_V2                                                         0x86
 #define COMMAND_CLASS_VERSION_V3                                                         0x86
 #define COMMAND_CLASS_WAKE_UP                                                            0x84
 #define COMMAND_CLASS_WAKE_UP_V2                                                         0x84
+#define COMMAND_CLASS_WAKE_UP_V3                                                         0x84
 #define COMMAND_CLASS_ZIP_6LOWPAN                                                        0x4F
 #define COMMAND_CLASS_ZIP                                                                0x23 /*[OBSOLETED]*/
 #define COMMAND_CLASS_ZIP_V2                                                             0x23
@@ -3625,16 +4301,18 @@
 #define COMMAND_CLASS_SCHEDULE_V4                                                        0x53
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_PRIMARY                                         0x54
 #define COMMAND_CLASS_ZIP_ND                                                             0x58
+#define COMMAND_CLASS_ZIP_ND_V2                                                          0x58
 #define COMMAND_CLASS_ASSOCIATION_GRP_INFO                                               0x59
 #define COMMAND_CLASS_ASSOCIATION_GRP_INFO_V2                                            0x59
 #define COMMAND_CLASS_ASSOCIATION_GRP_INFO_V3                                            0x59
 #define COMMAND_CLASS_DEVICE_RESET_LOCALLY                                               0x5A
-#define COMMAND_CLASS_CENTRAL_SCENE                                                      0x5B
-#define COMMAND_CLASS_CENTRAL_SCENE_V2                                                   0x5B
+#define COMMAND_CLASS_CENTRAL_SCENE                                                      0x5B /*[OBSOLETED]*/
+#define COMMAND_CLASS_CENTRAL_SCENE_V2                                                   0x5B /*[OBSOLETED]*/
 #define COMMAND_CLASS_CENTRAL_SCENE_V3                                                   0x5B
 #define COMMAND_CLASS_IP_ASSOCIATION                                                     0x5C
 #define COMMAND_CLASS_ANTITHEFT                                                          0x5D /*[OBSOLETED]*/
-#define COMMAND_CLASS_ANTITHEFT_V2                                                       0x5D
+#define COMMAND_CLASS_ANTITHEFT_V2                                                       0x5D /*[DEPRECATED]*/
+#define COMMAND_CLASS_ANTITHEFT_V3                                                       0x5D /*[DEPRECATED]*/
 #define COMMAND_CLASS_ZWAVEPLUS_INFO                                                     0x5E /*[OBSOLETED]*/
 #define COMMAND_CLASS_ZWAVEPLUS_INFO_V2                                                  0x5E /*SDS11907-3*/
 #define COMMAND_CLASS_ZIP_GATEWAY                                                        0x5F
@@ -3643,12 +4321,17 @@
 #define COMMAND_CLASS_BARRIER_OPERATOR                                                   0x66
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE                        0x67
 #define COMMAND_CLASS_NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE_V2                     0x67
+#define COMMAND_CLASS_NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE_V3                     0x67
+#define COMMAND_CLASS_NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE_V4                     0x67
 #define COMMAND_CLASS_ZIP_NAMING                                                         0x68
 #define COMMAND_CLASS_MAILBOX                                                            0x69
+#define COMMAND_CLASS_MAILBOX_V2                                                         0x69
 #define COMMAND_CLASS_WINDOW_COVERING                                                    0x6A
 #define COMMAND_CLASS_SECURITY_2                                                         0x9F
+#define COMMAND_CLASS_SECURITY_2_V2                                                      0x9F
 #define COMMAND_CLASS_IRRIGATION                                                         0x6B
 #define COMMAND_CLASS_SUPERVISION                                                        0x6C
+#define COMMAND_CLASS_SUPERVISION_V2                                                     0x6C
 #define COMMAND_CLASS_HUMIDITY_CONTROL_SETPOINT                                          0x64
 #define COMMAND_CLASS_HUMIDITY_CONTROL_SETPOINT_V2                                       0x64
 #define COMMAND_CLASS_HUMIDITY_CONTROL_MODE                                              0x6D
@@ -3658,6 +4341,13 @@
 #define COMMAND_CLASS_INCLUSION_CONTROLLER                                               0x74
 #define COMMAND_CLASS_NODE_PROVISIONING                                                  0x78
 #define COMMAND_CLASS_SOUND_SWITCH                                                       0x79
+#define COMMAND_CLASS_SOUND_SWITCH_V2                                                    0x79
+#define COMMAND_CLASS_IR_REPEATER                                                        0xA0
+#define COMMAND_CLASS_AUTHENTICATION                                                     0xA1
+#define COMMAND_CLASS_AUTHENTICATION_MEDIA_WRITE                                         0xA2
+#define COMMAND_CLASS_GENERIC_SCHEDULE                                                   0xA3
+#define COMMAND_CLASS_ANTITHEFT_UNLOCK                                                   0x7E
+#define COMMAND_CLASS_USER_CREDENTIAL                                                    0x83
 
 /*************** command class extended identifiers ****************/
 #define COMMAND_CLASS_SECURITY_SCHEME0_MARK                                              0xF100
@@ -4432,6 +5122,159 @@
 #define EVENT_SUPPORTED_REPORT_PROPERTIES1_RESERVED_MASK_V8                              0xE0
 #define EVENT_SUPPORTED_REPORT_PROPERTIES1_RESERVED_SHIFT_V8                             0x05
 
+/* Notification command class commands */
+#define NOTIFICATION_VERSION_V9                                                          0x09
+#define NOTIFICATION_GET_V9                                                              0x04
+#define NOTIFICATION_REPORT_V9                                                           0x05
+#define NOTIFICATION_SET_V9                                                              0x06
+#define NOTIFICATION_SUPPORTED_GET_V9                                                    0x07
+#define NOTIFICATION_SUPPORTED_REPORT_V9                                                 0x08
+#define EVENT_SUPPORTED_GET_V9                                                           0x01
+#define EVENT_SUPPORTED_REPORT_V9                                                        0x02
+/* Values used for Notification Get command */
+#define NOTIFICATION_GET_RESERVED_V9                                                     0x00
+#define NOTIFICATION_GET_SMOKE_V9                                                        0x01
+#define NOTIFICATION_GET_CO_V9                                                           0x02
+#define NOTIFICATION_GET_CO2_V9                                                          0x03
+#define NOTIFICATION_GET_HEAT_V9                                                         0x04
+#define NOTIFICATION_GET_WATER_V9                                                        0x05
+#define NOTIFICATION_GET_ACCESS_CONTROL_V9                                               0x06
+#define NOTIFICATION_GET_HOME_SECURITY_V9                                                0x07
+#define NOTIFICATION_GET_POWER_MANAGEMENT_V9                                             0x08
+#define NOTIFICATION_GET_SYSTEM_V9                                                       0x09
+#define NOTIFICATION_GET_EMERGENCY_V9                                                    0x0A
+#define NOTIFICATION_GET_CLOCK_V9                                                        0x0B
+#define NOTIFICATION_GET_APPLIANCE_V9                                                    0x0C
+#define NOTIFICATION_GET_HOME_HEALTH_V9                                                  0x0D
+#define NOTIFICATION_GET_SIREN_V9                                                        0x0E
+#define NOTIFICATION_GET_WATER_VALVE_V9                                                  0x0F
+#define NOTIFICATION_GET_WEATHER_ALARM_V9                                                0x10
+#define NOTIFICATION_GET_IRRIGATION_V9                                                   0x11
+#define NOTIFICATION_GET_GAS_ALARM_V9                                                    0x12
+#define NOTIFICATION_GET_PEST_CONTROL_V9                                                 0x13
+#define NOTIFICATION_GET_LIGHT_SENSOR_V9                                                 0x14
+#define NOTIFICATION_GET_WATER_QUALITY_MONITORING_V9                                     0x15
+#define NOTIFICATION_GET_HOME_MONITORING_V9                                              0x16
+#define NOTIFICATION_GET_FIRST_V9                                                        0xFF
+/* Values used for Notification Report command */
+#define NOTIFICATION_REPORT_OFF_V9                                                       0x00
+#define NOTIFICATION_REPORT_NO_PENDING_NOTIFICATIONS_V9                                  0xFE
+#define NOTIFICATION_REPORT_ON_V9                                                        0xFF
+#define NOTIFICATION_REPORT_RESERVED_V9                                                  0x00
+#define NOTIFICATION_REPORT_SMOKE_V9                                                     0x01
+#define NOTIFICATION_REPORT_CO_V9                                                        0x02
+#define NOTIFICATION_REPORT_CO2_V9                                                       0x03
+#define NOTIFICATION_REPORT_HEAT_V9                                                      0x04
+#define NOTIFICATION_REPORT_WATER_V9                                                     0x05
+#define NOTIFICATION_REPORT_ACCESS_CONTROL_V9                                            0x06
+#define NOTIFICATION_REPORT_HOME_SECURITY_V9                                             0x07
+#define NOTIFICATION_REPORT_POWER_MANAGEMENT_V9                                          0x08
+#define NOTIFICATION_REPORT_SYSTEM_V9                                                    0x09
+#define NOTIFICATION_REPORT_EMERGENCY_V9                                                 0x0A
+#define NOTIFICATION_REPORT_CLOCK_V9                                                     0x0B
+#define NOTIFICATION_REPORT_APPLIANCE_V9                                                 0x0C
+#define NOTIFICATION_REPORT_HOME_HEALTH_V9                                               0x0D
+#define NOTIFICATION_REPORT_SIREN_V9                                                     0x0E
+#define NOTIFICATION_REPORT_WATER_VALVE_V9                                               0x0F
+#define NOTIFICATION_REPORT_WEATHER_ALARM_V9                                             0x10
+#define NOTIFICATION_REPORT_IRRIGATION_V9                                                0x11
+#define NOTIFICATION_REPORT_GAS_ALARM_V9                                                 0x12
+#define NOTIFICATION_REPORT_PEST_CONTROL_V9                                              0x13
+#define NOTIFICATION_REPORT_LIGHT_SENSOR_V9                                              0x14
+#define NOTIFICATION_REPORT_WATER_QUALITY_MONITORING_V9                                  0x15
+#define NOTIFICATION_REPORT_HOME_MONITORING_V9                                           0x16
+#define NOTIFICATION_REPORT_FIRST_V9                                                     0xFF
+#define NOTIFICATION_REPORT_PROPERTIES1_EVENT_PARAMETERS_LENGTH_MASK_V9                  0x1F
+#define NOTIFICATION_REPORT_PROPERTIES1_RESERVED2_MASK_V9                                0x60
+#define NOTIFICATION_REPORT_PROPERTIES1_RESERVED2_SHIFT_V9                               0x05
+#define NOTIFICATION_REPORT_PROPERTIES1_SEQUENCE_BIT_MASK_V9                             0x80
+/* Values used for Notification Set command */
+#define NOTIFICATION_SET_RESERVED_V9                                                     0x00
+#define NOTIFICATION_SET_SMOKE_V9                                                        0x01
+#define NOTIFICATION_SET_CO_V9                                                           0x02
+#define NOTIFICATION_SET_CO2_V9                                                          0x03
+#define NOTIFICATION_SET_HEAT_V9                                                         0x04
+#define NOTIFICATION_SET_WATER_V9                                                        0x05
+#define NOTIFICATION_SET_ACCESS_CONTROL_V9                                               0x06
+#define NOTIFICATION_SET_HOME_SECURITY_V9                                                0x07
+#define NOTIFICATION_SET_POWER_MANAGEMENT_V9                                             0x08
+#define NOTIFICATION_SET_SYSTEM_V9                                                       0x09
+#define NOTIFICATION_SET_EMERGENCY_V9                                                    0x0A
+#define NOTIFICATION_SET_CLOCK_V9                                                        0x0B
+#define NOTIFICATION_SET_APPLIANCE_V9                                                    0x0C
+#define NOTIFICATION_SET_HOME_HEALTH_V9                                                  0x0D
+#define NOTIFICATION_SET_SIREN_V9                                                        0x0E
+#define NOTIFICATION_SET_WATER_VALVE_V9                                                  0x0F
+#define NOTIFICATION_SET_WEATHER_ALARM_V9                                                0x10
+#define NOTIFICATION_SET_IRRIGATION_V9                                                   0x11
+#define NOTIFICATION_SET_GAS_ALARM_V9                                                    0x12
+#define NOTIFICATION_SET_PEST_CONTROL_V9                                                 0x13
+#define NOTIFICATION_SET_LIGHT_SENSOR_V9                                                 0x14
+#define NOTIFICATION_SET_WATER_QUALITY_MONITORING_V9                                     0x15
+#define NOTIFICATION_SET_HOME_MONITORING_V9                                              0x16
+#define NOTIFICATION_SET_FIRST_V9                                                        0xFF
+#define NOTIFICATION_SET_OFF_V9                                                          0x00
+#define NOTIFICATION_SET_NO_PENDING_NOTIFICATIONS_V9                                     0xFE
+#define NOTIFICATION_SET_ON_V9                                                           0xFF
+/* Values used for Notification Supported Report command */
+#define NOTIFICATION_SUPPORTED_REPORT_PROPERTIES1_NUMBER_OF_BIT_MASKS_MASK_V9            0x1F
+#define NOTIFICATION_SUPPORTED_REPORT_PROPERTIES1_RESERVED_MASK_V9                       0x60
+#define NOTIFICATION_SUPPORTED_REPORT_PROPERTIES1_RESERVED_SHIFT_V9                      0x05
+#define NOTIFICATION_SUPPORTED_REPORT_PROPERTIES1_V1_ALARM_BIT_MASK_V9                   0x80
+/* Values used for Event Supported Get command */
+#define EVENT_SUPPORTED_GET_RESERVED_V9                                                  0x00
+#define EVENT_SUPPORTED_GET_SMOKE_V9                                                     0x01
+#define EVENT_SUPPORTED_GET_CO_V9                                                        0x02
+#define EVENT_SUPPORTED_GET_CO2_V9                                                       0x03
+#define EVENT_SUPPORTED_GET_HEAT_V9                                                      0x04
+#define EVENT_SUPPORTED_GET_WATER_V9                                                     0x05
+#define EVENT_SUPPORTED_GET_ACCESS_CONTROL_V9                                            0x06
+#define EVENT_SUPPORTED_GET_HOME_SECURITY_V9                                             0x07
+#define EVENT_SUPPORTED_GET_POWER_MANAGEMENT_V9                                          0x08
+#define EVENT_SUPPORTED_GET_SYSTEM_V9                                                    0x09
+#define EVENT_SUPPORTED_GET_EMERGENCY_V9                                                 0x0A
+#define EVENT_SUPPORTED_GET_CLOCK_V9                                                     0x0B
+#define EVENT_SUPPORTED_GET_APPLIANCE_V9                                                 0x0C
+#define EVENT_SUPPORTED_GET_HOME_HEALTH_V9                                               0x0D
+#define EVENT_SUPPORTED_GET_SIREN_V9                                                     0x0E
+#define EVENT_SUPPORTED_GET_WATER_VALVE_V9                                               0x0F
+#define EVENT_SUPPORTED_GET_WEATHER_ALARM_V9                                             0x10
+#define EVENT_SUPPORTED_GET_IRRIGATION_V9                                                0x11
+#define EVENT_SUPPORTED_GET_GAS_ALARM_V9                                                 0x12
+#define EVENT_SUPPORTED_GET_PEST_CONTROL_V9                                              0x13
+#define EVENT_SUPPORTED_GET_LIGHT_SENSOR_V9                                              0x14
+#define EVENT_SUPPORTED_GET_WATER_QUALITY_MONITORING_V9                                  0x15
+#define EVENT_SUPPORTED_GET_HOME_MONITORING_V9                                           0x16
+#define EVENT_SUPPORTED_GET_FIRST_V9                                                     0xFF
+/* Values used for Event Supported Report command */
+#define EVENT_SUPPORTED_REPORT_RESERVED_V9                                               0x00
+#define EVENT_SUPPORTED_REPORT_SMOKE_V9                                                  0x01
+#define EVENT_SUPPORTED_REPORT_CO_V9                                                     0x02
+#define EVENT_SUPPORTED_REPORT_CO2_V9                                                    0x03
+#define EVENT_SUPPORTED_REPORT_HEAT_V9                                                   0x04
+#define EVENT_SUPPORTED_REPORT_WATER_V9                                                  0x05
+#define EVENT_SUPPORTED_REPORT_ACCESS_CONTROL_V9                                         0x06
+#define EVENT_SUPPORTED_REPORT_HOME_SECURITY_V9                                          0x07
+#define EVENT_SUPPORTED_REPORT_POWER_MANAGEMENT_V9                                       0x08
+#define EVENT_SUPPORTED_REPORT_SYSTEM_V9                                                 0x09
+#define EVENT_SUPPORTED_REPORT_EMERGENCY_V9                                              0x0A
+#define EVENT_SUPPORTED_REPORT_CLOCK_V9                                                  0x0B
+#define EVENT_SUPPORTED_REPORT_APPLIANCE_V9                                              0x0C
+#define EVENT_SUPPORTED_REPORT_HOME_HEALTH_V9                                            0x0D
+#define EVENT_SUPPORTED_REPORT_SIREN_V9                                                  0x0E
+#define EVENT_SUPPORTED_REPORT_WATER_VALVE_V9                                            0x0F
+#define EVENT_SUPPORTED_REPORT_WEATHER_ALARM_V9                                          0x10
+#define EVENT_SUPPORTED_REPORT_IRRIGATION_V9                                             0x11
+#define EVENT_SUPPORTED_REPORT_GAS_ALARM_V9                                              0x12
+#define EVENT_SUPPORTED_REPORT_PEST_CONTROL_V9                                           0x13
+#define EVENT_SUPPORTED_REPORT_LIGHT_SENSOR_V9                                           0x14
+#define EVENT_SUPPORTED_REPORT_WATER_QUALITY_MONITORING_V9                               0x15
+#define EVENT_SUPPORTED_REPORT_HOME_MONITORING_V9                                        0x16
+#define EVENT_SUPPORTED_REPORT_FIRST_V9                                                  0xFF
+#define EVENT_SUPPORTED_REPORT_PROPERTIES1_NUMBER_OF_BIT_MASKS_MASK_V9                   0x1F
+#define EVENT_SUPPORTED_REPORT_PROPERTIES1_RESERVED_MASK_V9                              0xE0
+#define EVENT_SUPPORTED_REPORT_PROPERTIES1_RESERVED_SHIFT_V9                             0x05
+
 /* Application Status command class commands */
 #define APPLICATION_STATUS_VERSION                                                       0x01
 #define APPLICATION_BUSY                                                                 0x01
@@ -4478,6 +5321,28 @@
 #define ASSOCIATION_SET_V2                                                               0x01
 #define ASSOCIATION_SPECIFIC_GROUP_GET_V2                                                0x0B
 #define ASSOCIATION_SPECIFIC_GROUP_REPORT_V2                                             0x0C
+
+/* Association command class commands */
+#define ASSOCIATION_VERSION_V3                                                           0x03
+#define ASSOCIATION_GET_V3                                                               0x02
+#define ASSOCIATION_GROUPINGS_GET_V3                                                     0x05
+#define ASSOCIATION_GROUPINGS_REPORT_V3                                                  0x06
+#define ASSOCIATION_REMOVE_V3                                                            0x04
+#define ASSOCIATION_REPORT_V3                                                            0x03
+#define ASSOCIATION_SET_V3                                                               0x01
+#define ASSOCIATION_SPECIFIC_GROUP_GET_V3                                                0x0B
+#define ASSOCIATION_SPECIFIC_GROUP_REPORT_V3                                             0x0C
+
+/* Association command class commands */
+#define ASSOCIATION_VERSION_V4                                                           0x04
+#define ASSOCIATION_GET_V4                                                               0x02
+#define ASSOCIATION_GROUPINGS_GET_V4                                                     0x05
+#define ASSOCIATION_GROUPINGS_REPORT_V4                                                  0x06
+#define ASSOCIATION_REMOVE_V4                                                            0x04
+#define ASSOCIATION_REPORT_V4                                                            0x03
+#define ASSOCIATION_SET_V4                                                               0x01
+#define ASSOCIATION_SPECIFIC_GROUP_GET_V4                                                0x0B
+#define ASSOCIATION_SPECIFIC_GROUP_REPORT_V4                                             0x0C
 
 /* Av Content Directory Md command class commands */
 #define AV_CONTENT_DIRECTORY_MD_VERSION                                                  0x01
@@ -4546,6 +5411,61 @@
 #define BATTERY_VERSION                                                                  0x01
 #define BATTERY_GET                                                                      0x02
 #define BATTERY_REPORT                                                                   0x03
+
+/* Battery command class commands */
+#define BATTERY_VERSION_V2                                                               0x02
+#define BATTERY_GET_V2                                                                   0x02
+#define BATTERY_REPORT_V2                                                                0x03
+#define BATTERY_HEALTH_GET_V2                                                            0x04
+#define BATTERY_HEALTH_REPORT_V2                                                         0x05
+/* Values used for Battery Report command */
+#define BATTERY_REPORT_PROPERTIES1_REPLACE_RECHARGE_MASK_V2                              0x03
+#define BATTERY_REPORT_PROPERTIES1_LOW_FLUID_BIT_MASK_V2                                 0x04
+#define BATTERY_REPORT_PROPERTIES1_OVERHEATING_BIT_MASK_V2                               0x08
+#define BATTERY_REPORT_PROPERTIES1_BACKUP_BATTERY_BIT_MASK_V2                            0x10
+#define BATTERY_REPORT_PROPERTIES1_RECHARGEABLE_BIT_MASK_V2                              0x20
+#define BATTERY_REPORT_PROPERTIES1_CHARGING_STATUS_MASK_V2                               0xC0
+#define BATTERY_REPORT_PROPERTIES1_CHARGING_STATUS_SHIFT_V2                              0x06
+#define BATTERY_REPORT_CHARGING_STATUS_DISCHARGING_V2                                    0x00
+#define BATTERY_REPORT_CHARGING_STATUS_CHARGING_V2                                       0x01
+#define BATTERY_REPORT_CHARGING_STATUS_MAINTAINING_V2                                    0x02
+#define BATTERY_REPORT_PROPERTIES2_DISCONNECTED_BIT_MASK_V2                              0x01
+#define BATTERY_REPORT_PROPERTIES2_RESERVED1_MASK_V2                                     0xFE
+#define BATTERY_REPORT_PROPERTIES2_RESERVED1_SHIFT_V2                                    0x01
+/* Values used for Battery Health Report command */
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_SIZE_MASK_V2                                   0x07
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_SCALE_MASK_V2                                  0x18
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_SCALE_SHIFT_V2                                 0x03
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_PRECISION_MASK_V2                              0xE0
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_PRECISION_SHIFT_V2                             0x05
+
+/* Battery command class commands */
+#define BATTERY_VERSION_V3                                                               0x03
+#define BATTERY_GET_V3                                                                   0x02
+#define BATTERY_REPORT_V3                                                                0x03
+#define BATTERY_HEALTH_GET_V3                                                            0x04
+#define BATTERY_HEALTH_REPORT_V3                                                         0x05
+/* Values used for Battery Report command */
+#define BATTERY_REPORT_PROPERTIES1_REPLACE_RECHARGE_MASK_V3                              0x03
+#define BATTERY_REPORT_PROPERTIES1_LOW_FLUID_BIT_MASK_V3                                 0x04
+#define BATTERY_REPORT_PROPERTIES1_OVERHEATING_BIT_MASK_V3                               0x08
+#define BATTERY_REPORT_PROPERTIES1_BACKUP_BATTERY_BIT_MASK_V3                            0x10
+#define BATTERY_REPORT_PROPERTIES1_RECHARGEABLE_BIT_MASK_V3                              0x20
+#define BATTERY_REPORT_PROPERTIES1_CHARGING_STATUS_MASK_V3                               0xC0
+#define BATTERY_REPORT_PROPERTIES1_CHARGING_STATUS_SHIFT_V3                              0x06
+#define BATTERY_REPORT_CHARGING_STATUS_DISCHARGING_V3                                    0x00
+#define BATTERY_REPORT_CHARGING_STATUS_CHARGING_V3                                       0x01
+#define BATTERY_REPORT_CHARGING_STATUS_MAINTAINING_V3                                    0x02
+#define BATTERY_REPORT_PROPERTIES2_DISCONNECTED_BIT_MASK_V3                              0x01
+#define BATTERY_REPORT_PROPERTIES2_LOW_TEMPERATURE_STATUS_BIT_MASK_V3                    0x02
+#define BATTERY_REPORT_PROPERTIES2_RESERVED1_MASK_V3                                     0xFC
+#define BATTERY_REPORT_PROPERTIES2_RESERVED1_SHIFT_V3                                    0x02
+/* Values used for Battery Health Report command */
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_SIZE_MASK_V3                                   0x07
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_SCALE_MASK_V3                                  0x18
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_SCALE_SHIFT_V3                                 0x03
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_PRECISION_MASK_V3                              0xE0
+#define BATTERY_HEALTH_REPORT_PROPERTIES1_PRECISION_SHIFT_V3                             0x05
 
 /* Chimney Fan command class commands */
 #define CHIMNEY_FAN_VERSION                                                              0x01
@@ -4776,20 +5696,26 @@
 #define SCHEDULE_GET_PROPERTIES1_RESERVED_SHIFT                                          0x03
 /* Values used for Schedule Override Report command */
 #define SCHEDULE_OVERRIDE_REPORT_PROPERTIES1_OVERRIDE_TYPE_MASK                          0x03
+#define SCHEDULE_OVERRIDE_REPORT_OVERRIDE_TYPE_NO_OVERRIDE                               0x00
+#define SCHEDULE_OVERRIDE_REPORT_OVERRIDE_TYPE_TEMPORARY_OVERRIDE                        0x01
+#define SCHEDULE_OVERRIDE_REPORT_OVERRIDE_TYPE_PERMANENT_OVERRIDE                        0x02
+#define SCHEDULE_OVERRIDE_REPORT_OVERRIDE_TYPE_RESERVED                                  0x03
 #define SCHEDULE_OVERRIDE_REPORT_PROPERTIES1_RESERVED_MASK                               0xFC
 #define SCHEDULE_OVERRIDE_REPORT_PROPERTIES1_RESERVED_SHIFT                              0x02
-#define SCHEDULE_OVERRIDE_REPORT_NO_OVERRIDE                                             0x00
-#define SCHEDULE_OVERRIDE_REPORT_TEMPORARY_OVERRIDE                                      0x01
-#define SCHEDULE_OVERRIDE_REPORT_PERMANENT_OVERRIDE                                      0x02
-#define SCHEDULE_OVERRIDE_REPORT_RESERVED                                                0x03
+#define SCHEDULE_OVERRIDE_REPORT_FROST_PROTECTION                                        0x79
+#define SCHEDULE_OVERRIDE_REPORT_ENERGY_SAVING_MODE                                      0x7A
+#define SCHEDULE_OVERRIDE_REPORT_UNUSED_STATE                                            0x7F
 /* Values used for Schedule Override Set command */
 #define SCHEDULE_OVERRIDE_SET_PROPERTIES1_OVERRIDE_TYPE_MASK                             0x03
+#define SCHEDULE_OVERRIDE_SET_OVERRIDE_TYPE_NO_OVERRIDE                                  0x00
+#define SCHEDULE_OVERRIDE_SET_OVERRIDE_TYPE_TEMPORARY_OVERRIDE                           0x01
+#define SCHEDULE_OVERRIDE_SET_OVERRIDE_TYPE_PERMANENT_OVERRIDE                           0x02
+#define SCHEDULE_OVERRIDE_SET_OVERRIDE_TYPE_RESERVED                                     0x03
 #define SCHEDULE_OVERRIDE_SET_PROPERTIES1_RESERVED_MASK                                  0xFC
 #define SCHEDULE_OVERRIDE_SET_PROPERTIES1_RESERVED_SHIFT                                 0x02
-#define SCHEDULE_OVERRIDE_SET_NO_OVERRIDE                                                0x00
-#define SCHEDULE_OVERRIDE_SET_TEMPORARY_OVERRIDE                                         0x01
-#define SCHEDULE_OVERRIDE_SET_PERMANENT_OVERRIDE                                         0x02
-#define SCHEDULE_OVERRIDE_SET_RESERVED                                                   0x03
+#define SCHEDULE_OVERRIDE_SET_FROST_PROTECTION                                           0x79
+#define SCHEDULE_OVERRIDE_SET_ENERGY_SAVING_MODE                                         0x7A
+#define SCHEDULE_OVERRIDE_SET_UNUSED_STATE                                               0x7F
 /* Values used for Schedule Report command */
 #define SCHEDULE_REPORT_PROPERTIES1_WEEKDAY_MASK                                         0x07
 #define SCHEDULE_REPORT_PROPERTIES1_RESERVED_MASK                                        0xF8
@@ -4808,10 +5734,24 @@
 #define CLOCK_REPORT_LEVEL_HOUR_MASK                                                     0x1F
 #define CLOCK_REPORT_LEVEL_WEEKDAY_MASK                                                  0xE0
 #define CLOCK_REPORT_LEVEL_WEEKDAY_SHIFT                                                 0x05
+#define CLOCK_REPORT_WEEKDAY_MONDAY                                                      0x01
+#define CLOCK_REPORT_WEEKDAY_TUESDAY                                                     0x02
+#define CLOCK_REPORT_WEEKDAY_WEDNESDAY                                                   0x03
+#define CLOCK_REPORT_WEEKDAY_THURSDAY                                                    0x04
+#define CLOCK_REPORT_WEEKDAY_FRIDAY                                                      0x05
+#define CLOCK_REPORT_WEEKDAY_SATURDAY                                                    0x06
+#define CLOCK_REPORT_WEEKDAY_SUNDAY                                                      0x07
 /* Values used for Clock Set command */
 #define CLOCK_SET_LEVEL_HOUR_MASK                                                        0x1F
 #define CLOCK_SET_LEVEL_WEEKDAY_MASK                                                     0xE0
 #define CLOCK_SET_LEVEL_WEEKDAY_SHIFT                                                    0x05
+#define CLOCK_SET_WEEKDAY_MONDAY                                                         0x01
+#define CLOCK_SET_WEEKDAY_TUESDAY                                                        0x02
+#define CLOCK_SET_WEEKDAY_WEDNESDAY                                                      0x03
+#define CLOCK_SET_WEEKDAY_THURSDAY                                                       0x04
+#define CLOCK_SET_WEEKDAY_FRIDAY                                                         0x05
+#define CLOCK_SET_WEEKDAY_SATURDAY                                                       0x06
+#define CLOCK_SET_WEEKDAY_SUNDAY                                                         0x07
 
 /* Configuration command class commands */
 #define CONFIGURATION_VERSION                                                            0x01
@@ -5010,15 +5950,15 @@
 /* Values used for Door Lock Configuration Report command */
 #define DOOR_LOCK_CONFIGURATION_REPORT_CONSTANT_OPERATION                                0x01
 #define DOOR_LOCK_CONFIGURATION_REPORT_TIMED_OPERATION                                   0x02
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK        0x0F
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK       0xF0
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT      0x04
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK      0x0F
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK     0xF0
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT    0x04
 /* Values used for Door Lock Configuration Set command */
 #define DOOR_LOCK_CONFIGURATION_SET_CONSTANT_OPERATION                                   0x01
 #define DOOR_LOCK_CONFIGURATION_SET_TIMED_OPERATION                                      0x02
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK           0x0F
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK          0xF0
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT         0x04
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK         0x0F
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK        0xF0
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT       0x04
 /* Values used for Door Lock Operation Report command */
 #define DOOR_LOCK_OPERATION_REPORT_DOOR_UNSECURED                                        0x00
 #define DOOR_LOCK_OPERATION_REPORT_DOOR_UNSECURED_WITH_TIMEOUT                           0x01
@@ -5050,15 +5990,15 @@
 /* Values used for Door Lock Configuration Report command */
 #define DOOR_LOCK_CONFIGURATION_REPORT_CONSTANT_OPERATION_V2                             0x01
 #define DOOR_LOCK_CONFIGURATION_REPORT_TIMED_OPERATION_V2                                0x02
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK_V2     0x0F
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK_V2    0xF0
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT_V2   0x04
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK_V2   0x0F
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK_V2  0xF0
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT_V2 0x04
 /* Values used for Door Lock Configuration Set command */
 #define DOOR_LOCK_CONFIGURATION_SET_CONSTANT_OPERATION_V2                                0x01
 #define DOOR_LOCK_CONFIGURATION_SET_TIMED_OPERATION_V2                                   0x02
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK_V2        0x0F
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK_V2       0xF0
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT_V2      0x04
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK_V2      0x0F
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK_V2     0xF0
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT_V2    0x04
 /* Values used for Door Lock Operation Report command */
 #define DOOR_LOCK_OPERATION_REPORT_DOOR_UNSECURED_V2                                     0x00
 #define DOOR_LOCK_OPERATION_REPORT_DOOR_UNSECURED_WITH_TIMEOUT_V2                        0x01
@@ -5092,15 +6032,15 @@
 /* Values used for Door Lock Configuration Report command */
 #define DOOR_LOCK_CONFIGURATION_REPORT_CONSTANT_OPERATION_V3                             0x01
 #define DOOR_LOCK_CONFIGURATION_REPORT_TIMED_OPERATION_V3                                0x02
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK_V3     0x0F
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK_V3    0xF0
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT_V3   0x04
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK_V3   0x0F
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK_V3  0xF0
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT_V3 0x04
 /* Values used for Door Lock Configuration Set command */
 #define DOOR_LOCK_CONFIGURATION_SET_CONSTANT_OPERATION_V3                                0x01
 #define DOOR_LOCK_CONFIGURATION_SET_TIMED_OPERATION_V3                                   0x02
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK_V3        0x0F
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK_V3       0xF0
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT_V3      0x04
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK_V3      0x0F
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK_V3     0xF0
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT_V3    0x04
 /* Values used for Door Lock Operation Report command */
 #define DOOR_LOCK_OPERATION_REPORT_DOOR_UNSECURED_V3                                     0x00
 #define DOOR_LOCK_OPERATION_REPORT_DOOR_UNSECURED_WITH_TIMEOUT_V3                        0x01
@@ -5147,9 +6087,9 @@
 /* Values used for Door Lock Configuration Report command */
 #define DOOR_LOCK_CONFIGURATION_REPORT_CONSTANT_OPERATION_V4                             0x01
 #define DOOR_LOCK_CONFIGURATION_REPORT_TIMED_OPERATION_V4                                0x02
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK_V4     0x0F
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK_V4    0xF0
-#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT_V4   0x04
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK_V4   0x0F
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK_V4  0xF0
+#define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT_V4 0x04
 #define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES2_TA_BIT_MASK_V4                        0x01
 #define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES2_BTB_BIT_MASK_V4                       0x02
 #define DOOR_LOCK_CONFIGURATION_REPORT_PROPERTIES2_RESERVED1_MASK_V4                     0xFC
@@ -5157,9 +6097,9 @@
 /* Values used for Door Lock Configuration Set command */
 #define DOOR_LOCK_CONFIGURATION_SET_CONSTANT_OPERATION_V4                                0x01
 #define DOOR_LOCK_CONFIGURATION_SET_TIMED_OPERATION_V4                                   0x02
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_STATE_MASK_V4        0x0F
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_MASK_V4       0xF0
-#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_STATE_SHIFT_V4      0x04
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_INSIDE_DOOR_HANDLES_ENABLED_MASK_V4      0x0F
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_MASK_V4     0xF0
+#define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES1_OUTSIDE_DOOR_HANDLES_ENABLED_SHIFT_V4    0x04
 #define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES2_TA_BIT_MASK_V4                           0x01
 #define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES2_BTB_BIT_MASK_V4                          0x02
 #define DOOR_LOCK_CONFIGURATION_SET_PROPERTIES2_RESERVED1_MASK_V4                        0xFC
@@ -5403,6 +6343,200 @@
 #define FIRMWARE_UPDATE_MD_PREPARE_REPORT_NOT_DOWNLOADABLE_V5                            0x03
 #define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_HARDWARE_VERSION_V5                    0x04
 #define FIRMWARE_UPDATE_MD_PREPARE_REPORT_VALID_COMBINATION_V5                           0xFF
+
+/* Firmware Update Md command class commands */
+#define FIRMWARE_UPDATE_MD_VERSION_V6                                                    0x06
+#define FIRMWARE_MD_GET_V6                                                               0x01
+#define FIRMWARE_MD_REPORT_V6                                                            0x02
+#define FIRMWARE_UPDATE_MD_GET_V6                                                        0x05
+#define FIRMWARE_UPDATE_MD_REPORT_V6                                                     0x06
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_V6                                                0x03
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_V6                                             0x04
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_V6                                              0x07
+#define FIRMWARE_UPDATE_ACTIVATION_SET_V6                                                0x08
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V6                                      0x09
+#define FIRMWARE_UPDATE_MD_PREPARE_GET_V6                                                0x0A
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_V6                                             0x0B
+/* Values used for Firmware Md Report command */
+#define FIRMWARE_MD_REPORT_PROPERTIES1_CC_BIT_MASK_V6                                    0x01
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESERVED1_MASK_V6                                 0xFE
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESERVED1_SHIFT_V6                                0x01
+/* Values used for Firmware Update Md Get command */
+#define FIRMWARE_UPDATE_MD_GET_PROPERTIES1_REPORT_NUMBER_1_MASK_V6                       0x7F
+#define FIRMWARE_UPDATE_MD_GET_PROPERTIES1_ZERO_BIT_MASK_V6                              0x80
+/* Values used for Firmware Update Md Report command */
+#define FIRMWARE_UPDATE_MD_REPORT_PROPERTIES1_REPORT_NUMBER_1_MASK_V6                    0x7F
+#define FIRMWARE_UPDATE_MD_REPORT_PROPERTIES1_LAST_BIT_MASK_V6                           0x80
+/* Values used for Firmware Update Md Request Get command */
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_ACTIVATION_BIT_MASK_V6                0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESERVED_MASK_V6                      0xFE
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESERVED_SHIFT_V6                     0x01
+/* Values used for Firmware Update Md Request Report command */
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_COMBINATION_V6                         0x00
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_REQUIRES_AUTHENTICATION_V6                     0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_FRAGMENT_SIZE_V6                       0x02
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_NOT_UPGRADABLE_V6                              0x03
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_HARDWARE_VERSION_V6                    0x04
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_ANOTHER_FIRMWARE_IMAGE_V6                      0x05
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INSUFFICIENT_BATTERY_LEVEL_V6                  0x06
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_VALID_COMBINATION_V6                           0xFF
+/* Values used for Firmware Update Md Status Report command */
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_UNABLE_TO_RECEIVE_WITHOUT_CHECKSUM_ERROR_V6     0x00
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_UNABLE_TO_RECEIVE_V6                            0x01
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_MANUFACTURER_ID_V6           0x02
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_FIRMWARE_ID_V6               0x03
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_FIRMWARE_TARGET_V6           0x04
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INVALID_FILE_HEADER_INFORMATION_V6              0x05
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INVALID_FILE_HEADER_FORMAT_V6                   0x06
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INSUFFICIENT_MEMORY_V6                          0x07
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_HARDWARE_VERSION_V6          0x08
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_WAITING_FOR_ACTIVATION_V6          0xFD
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_STORED_V6                          0xFE
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_V6                                 0xFF
+/* Values used for Firmware Update Activation Status Report command */
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_INVALID_COMBINATION_V6                  0x00
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_ERROR_ACTIVATING_THE_FIRMWARE_V6        0x01
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_FIRMWARE_UPDATE_COMPLETED_SUCCESSFULLY_V6 0xFF
+/* Values used for Firmware Update Md Prepare Report command */
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_COMBINATION_V6                         0x00
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_REQUIRES_AUTHENTICATION_V6                     0x01
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_FRAGMENT_SIZE_V6                       0x02
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_NOT_DOWNLOADABLE_V6                            0x03
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_HARDWARE_VERSION_V6                    0x04
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_VALID_COMBINATION_V6                           0xFF
+
+/* Firmware Update Md command class commands */
+#define FIRMWARE_UPDATE_MD_VERSION_V7                                                    0x07
+#define FIRMWARE_MD_GET_V7                                                               0x01
+#define FIRMWARE_MD_REPORT_V7                                                            0x02
+#define FIRMWARE_UPDATE_MD_GET_V7                                                        0x05
+#define FIRMWARE_UPDATE_MD_REPORT_V7                                                     0x06
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_V7                                                0x03
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_V7                                             0x04
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_V7                                              0x07
+#define FIRMWARE_UPDATE_ACTIVATION_SET_V7                                                0x08
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V7                                      0x09
+#define FIRMWARE_UPDATE_MD_PREPARE_GET_V7                                                0x0A
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_V7                                             0x0B
+/* Values used for Firmware Md Report command */
+#define FIRMWARE_MD_REPORT_PROPERTIES1_CC_BIT_MASK_V7                                    0x01
+#define FIRMWARE_MD_REPORT_PROPERTIES1_ACTIVATION_BIT_MASK_V7                            0x02
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESERVED1_MASK_V7                                 0xFC
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESERVED1_SHIFT_V7                                0x02
+/* Values used for Firmware Update Md Get command */
+#define FIRMWARE_UPDATE_MD_GET_PROPERTIES1_REPORT_NUMBER_1_MASK_V7                       0x7F
+#define FIRMWARE_UPDATE_MD_GET_PROPERTIES1_ZERO_BIT_MASK_V7                              0x80
+/* Values used for Firmware Update Md Report command */
+#define FIRMWARE_UPDATE_MD_REPORT_PROPERTIES1_REPORT_NUMBER_1_MASK_V7                    0x7F
+#define FIRMWARE_UPDATE_MD_REPORT_PROPERTIES1_LAST_BIT_MASK_V7                           0x80
+/* Values used for Firmware Update Md Request Get command */
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_ACTIVATION_BIT_MASK_V7                0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESERVED_MASK_V7                      0xFE
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESERVED_SHIFT_V7                     0x01
+/* Values used for Firmware Update Md Request Report command */
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_COMBINATION_V7                         0x00
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_REQUIRES_AUTHENTICATION_V7                     0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_FRAGMENT_SIZE_V7                       0x02
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_NOT_UPGRADABLE_V7                              0x03
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_HARDWARE_VERSION_V7                    0x04
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_ANOTHER_FIRMWARE_IMAGE_V7                      0x05
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INSUFFICIENT_BATTERY_LEVEL_V7                  0x06
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_VALID_COMBINATION_V7                           0xFF
+/* Values used for Firmware Update Md Status Report command */
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_UNABLE_TO_RECEIVE_WITHOUT_CHECKSUM_ERROR_V7     0x00
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_UNABLE_TO_RECEIVE_V7                            0x01
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_MANUFACTURER_ID_V7           0x02
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_FIRMWARE_ID_V7               0x03
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_FIRMWARE_TARGET_V7           0x04
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INVALID_FILE_HEADER_INFORMATION_V7              0x05
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INVALID_FILE_HEADER_FORMAT_V7                   0x06
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INSUFFICIENT_MEMORY_V7                          0x07
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_HARDWARE_VERSION_V7          0x08
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_WAITING_FOR_ACTIVATION_V7          0xFD
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_STORED_V7                          0xFE
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_V7                                 0xFF
+/* Values used for Firmware Update Activation Status Report command */
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_INVALID_COMBINATION_V7                  0x00
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_ERROR_ACTIVATING_THE_FIRMWARE_V7        0x01
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_FIRMWARE_UPDATE_COMPLETED_SUCCESSFULLY_V7 0xFF
+/* Values used for Firmware Update Md Prepare Report command */
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_COMBINATION_V7                         0x00
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_REQUIRES_AUTHENTICATION_V7                     0x01
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_FRAGMENT_SIZE_V7                       0x02
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_NOT_DOWNLOADABLE_V7                            0x03
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_HARDWARE_VERSION_V7                    0x04
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_VALID_COMBINATION_V7                           0xFF
+
+/* Firmware Update Md command class commands */
+#define FIRMWARE_UPDATE_MD_VERSION_V8                                                    0x08
+#define FIRMWARE_MD_GET_V8                                                               0x01
+#define FIRMWARE_MD_REPORT_V8                                                            0x02
+#define FIRMWARE_UPDATE_MD_GET_V8                                                        0x05
+#define FIRMWARE_UPDATE_MD_REPORT_V8                                                     0x06
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_V8                                                0x03
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_V8                                             0x04
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_V8                                              0x07
+#define FIRMWARE_UPDATE_ACTIVATION_SET_V8                                                0x08
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V8                                      0x09
+#define FIRMWARE_UPDATE_MD_PREPARE_GET_V8                                                0x0A
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_V8                                             0x0B
+/* Values used for Firmware Md Report command */
+#define FIRMWARE_MD_REPORT_PROPERTIES1_CC_BIT_MASK_V8                                    0x01
+#define FIRMWARE_MD_REPORT_PROPERTIES1_ACTIVATION_BIT_MASK_V8                            0x02
+#define FIRMWARE_MD_REPORT_PROPERTIES1_NON_SECURE_BIT_MASK_V8                            0x04
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESUME_BIT_MASK_V8                                0x08
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESERVED1_MASK_V8                                 0xF0
+#define FIRMWARE_MD_REPORT_PROPERTIES1_RESERVED1_SHIFT_V8                                0x04
+/* Values used for Firmware Update Md Get command */
+#define FIRMWARE_UPDATE_MD_GET_PROPERTIES1_REPORT_NUMBER_1_MASK_V8                       0x7F
+#define FIRMWARE_UPDATE_MD_GET_PROPERTIES1_RES_BIT_MASK_V8                               0x80
+/* Values used for Firmware Update Md Report command */
+#define FIRMWARE_UPDATE_MD_REPORT_PROPERTIES1_REPORT_NUMBER_1_MASK_V8                    0x7F
+#define FIRMWARE_UPDATE_MD_REPORT_PROPERTIES1_LAST_BIT_MASK_V8                           0x80
+/* Values used for Firmware Update Md Request Get command */
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_ACTIVATION_BIT_MASK_V8                0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_NON_SECURE_BIT_MASK_V8                0x02
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESUME_BIT_MASK_V8                    0x04
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESERVED_MASK_V8                      0xF8
+#define FIRMWARE_UPDATE_MD_REQUEST_GET_PROPERTIES1_RESERVED_SHIFT_V8                     0x03
+/* Values used for Firmware Update Md Request Report command */
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_COMBINATION_V8                         0x00
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_REQUIRES_AUTHENTICATION_V8                     0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_FRAGMENT_SIZE_V8                       0x02
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_NOT_UPGRADABLE_V8                              0x03
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INVALID_HARDWARE_VERSION_V8                    0x04
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_ANOTHER_FIRMWARE_IMAGE_V8                      0x05
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_INSUFFICIENT_BATTERY_LEVEL_V8                  0x06
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_VALID_COMBINATION_V8                           0xFF
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_PROPERTIES1_RESERVED_BIT_MASK_V8               0x01
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_PROPERTIES1_NON_SECURE_BIT_MASK_V8             0x02
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_PROPERTIES1_RESUME_BIT_MASK_V8                 0x04
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_PROPERTIES1_RESERVED1_MASK_V8                  0xF8
+#define FIRMWARE_UPDATE_MD_REQUEST_REPORT_PROPERTIES1_RESERVED1_SHIFT_V8                 0x03
+/* Values used for Firmware Update Md Status Report command */
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_UNABLE_TO_RECEIVE_WITHOUT_CHECKSUM_ERROR_V8     0x00
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_UNABLE_TO_RECEIVE_V8                            0x01
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_MANUFACTURER_ID_V8           0x02
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_FIRMWARE_ID_V8               0x03
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_FIRMWARE_TARGET_V8           0x04
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INVALID_FILE_HEADER_INFORMATION_V8              0x05
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INVALID_FILE_HEADER_FORMAT_V8                   0x06
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_INSUFFICIENT_MEMORY_V8                          0x07
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_DOES_NOT_MATCH_THE_HARDWARE_VERSION_V8          0x08
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_WAITING_FOR_ACTIVATION_V8          0xFD
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_STORED_V8                          0xFE
+#define FIRMWARE_UPDATE_MD_STATUS_REPORT_SUCCESSFULLY_V8                                 0xFF
+/* Values used for Firmware Update Activation Status Report command */
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_INVALID_COMBINATION_V8                  0x00
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_ERROR_ACTIVATING_THE_FIRMWARE_V8        0x01
+#define FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_FIRMWARE_UPDATE_COMPLETED_SUCCESSFULLY_V8 0xFF
+/* Values used for Firmware Update Md Prepare Report command */
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_COMBINATION_V8                         0x00
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_REQUIRES_AUTHENTICATION_V8                     0x01
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_FRAGMENT_SIZE_V8                       0x02
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_NOT_DOWNLOADABLE_V8                            0x03
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_INVALID_HARDWARE_VERSION_V8                    0x04
+#define FIRMWARE_UPDATE_MD_PREPARE_REPORT_VALID_COMBINATION_V8                           0xFF
 
 /* Geographic Location command class commands */
 #define GEOGRAPHIC_LOCATION_VERSION                                                      0x01
@@ -5760,6 +6894,15 @@
 #define INDICATOR_GET_ENTER_PIN_V3                                                       0x07
 #define INDICATOR_GET_OK_V3                                                              0x08
 #define INDICATOR_GET_NOT_OK_V3                                                          0x09
+#define INDICATOR_GET_ARMED_STAY_V3                                                      0x0A
+#define INDICATOR_GET_ARMED_AWAY_V3                                                      0x0B
+#define INDICATOR_GET_ALARMING_V3                                                        0x0C
+#define INDICATOR_GET_ALARMING_BURGLAR_V3                                                0x0D
+#define INDICATOR_GET_ALARMING_SMOKE_FIRE_V3                                             0x0E
+#define INDICATOR_GET_ALARMING_CARBON_MONOXIDE_V3                                        0x0F
+#define INDICATOR_GET_BYPASS_CHALLENGE_V3                                                0x10
+#define INDICATOR_GET_ENTRY_DELAY_V3                                                     0x11
+#define INDICATOR_GET_EXIT_DELAY_V3                                                      0x12
 #define INDICATOR_GET_ZONE1_ARMED_V3                                                     0x20
 #define INDICATOR_GET_ZONE2_ARMED_V3                                                     0x21
 #define INDICATOR_GET_ZONE3_ARMED_V3                                                     0x22
@@ -5782,8 +6925,8 @@
 #define INDICATOR_GET_BUTTON10_INDICATION_V3                                             0x4C
 #define INDICATOR_GET_BUTTON11_INDICATION_V3                                             0x4D
 #define INDICATOR_GET_BUTTON12_INDICATION_V3                                             0x4E
-#define INDICATOR_GET_BUZZER_V3                                                          0xF0
 #define INDICATOR_GET_NODE_IDENTIFY_V3                                                   0x50
+#define INDICATOR_GET_BUZZER_V3                                                          0xF0
 /* Values used for Indicator Report command */
 #define INDICATOR_REPORT_PROPERTIES1_INDICATOR_OBJECT_COUNT_MASK_V3                      0x1F
 #define INDICATOR_REPORT_PROPERTIES1_RESERVED_MASK_V3                                    0xE0
@@ -5798,6 +6941,15 @@
 #define INDICATOR_REPORT_ENTER_PIN_V3                                                    0x07
 #define INDICATOR_REPORT_OK_V3                                                           0x08
 #define INDICATOR_REPORT_NOT_OK_V3                                                       0x09
+#define INDICATOR_REPORT_ARMED_STAY_V3                                                   0x0A
+#define INDICATOR_REPORT_ARMED_AWAY_V3                                                   0x0B
+#define INDICATOR_REPORT_ALARMING_V3                                                     0x0C
+#define INDICATOR_REPORT_ALARMING_BURGLAR_V3                                             0x0D
+#define INDICATOR_REPORT_ALARMING_SMOKE_FIRE_V3                                          0x0E
+#define INDICATOR_REPORT_ALARMING_CARBON_MONOXIDE_V3                                     0x0F
+#define INDICATOR_REPORT_BYPASS_CHALLENGE_V3                                             0x10
+#define INDICATOR_REPORT_ENTRY_DELAY_V3                                                  0x11
+#define INDICATOR_REPORT_EXIT_DELAY_V3                                                   0x12
 #define INDICATOR_REPORT_ZONE1_ARMED_V3                                                  0x20
 #define INDICATOR_REPORT_ZONE2_ARMED_V3                                                  0x21
 #define INDICATOR_REPORT_ZONE3_ARMED_V3                                                  0x22
@@ -5820,14 +6972,18 @@
 #define INDICATOR_REPORT_BUTTON10_INDICATION_V3                                          0x4C
 #define INDICATOR_REPORT_BUTTON11_INDICATION_V3                                          0x4D
 #define INDICATOR_REPORT_BUTTON12_INDICATION_V3                                          0x4E
-#define INDICATOR_REPORT_BUZZER_V3                                                       0xF0
 #define INDICATOR_REPORT_NODE_IDENTIFY_V3                                                0x50
+#define INDICATOR_REPORT_BUZZER_V3                                                       0xF0
 #define INDICATOR_REPORT_MULTILEVEL_V3                                                   0x01
 #define INDICATOR_REPORT_BINARY_V3                                                       0x02
 #define INDICATOR_REPORT_ON_OFF_PERIOD_V3                                                0x03
 #define INDICATOR_REPORT_ON_OFF_CYCLES_V3                                                0x04
-#define INDICATOR_REPORT_LOW_POWER_V3                                                    0x10
 #define INDICATOR_REPORT_ONE_TIME_ON_OFF_PERIOD_V3                                       0x05
+#define INDICATOR_REPORT_TIMEOUT_MINUTES_V3                                              0x06
+#define INDICATOR_REPORT_TIMEOUT_SECONDS_V3                                              0x07
+#define INDICATOR_REPORT_TIMEOUT_1_100_SECONDS_V3                                        0x08
+#define INDICATOR_REPORT_SPECIFIC_VOLUME_V3                                              0x09
+#define INDICATOR_REPORT_LOW_POWER_V3                                                    0x10
 /* Values used for Indicator Set command */
 #define INDICATOR_SET_PROPERTIES1_INDICATOR_OBJECT_COUNT_MASK_V3                         0x1F
 #define INDICATOR_SET_PROPERTIES1_RESERVED_MASK_V3                                       0xE0
@@ -5842,6 +6998,15 @@
 #define INDICATOR_SET_ENTER_PIN_V3                                                       0x07
 #define INDICATOR_SET_OK_V3                                                              0x08
 #define INDICATOR_SET_NOT_OK_V3                                                          0x09
+#define INDICATOR_SET_ARMED_STAY_V3                                                      0x0A
+#define INDICATOR_SET_ARMED_AWAY_V3                                                      0x0B
+#define INDICATOR_SET_ALARMING_V3                                                        0x0C
+#define INDICATOR_SET_ALARMING_BURGLAR_V3                                                0x0D
+#define INDICATOR_SET_ALARMING_SMOKE_FIRE_V3                                             0x0E
+#define INDICATOR_SET_ALARMING_CARBON_MONOXIDE_V3                                        0x0F
+#define INDICATOR_SET_BYPASS_CHALLENGE_V3                                                0x10
+#define INDICATOR_SET_ENTRY_DELAY_V3                                                     0x11
+#define INDICATOR_SET_EXIT_DELAY_V3                                                      0x12
 #define INDICATOR_SET_ZONE1_ARMED_V3                                                     0x20
 #define INDICATOR_SET_ZONE2_ARMED_V3                                                     0x21
 #define INDICATOR_SET_ZONE3_ARMED_V3                                                     0x22
@@ -5864,14 +7029,18 @@
 #define INDICATOR_SET_BUTTON10_INDICATION_V3                                             0x4C
 #define INDICATOR_SET_BUTTON11_INDICATION_V3                                             0x4D
 #define INDICATOR_SET_BUTTON12_INDICATION_V3                                             0x4E
-#define INDICATOR_SET_BUZZER_V3                                                          0xF0
 #define INDICATOR_SET_NODE_IDENTIFY_V3                                                   0x50
+#define INDICATOR_SET_BUZZER_V3                                                          0xF0
 #define INDICATOR_SET_MULTILEVEL_V3                                                      0x01
 #define INDICATOR_SET_BINARY_V3                                                          0x02
 #define INDICATOR_SET_ON_OFF_PERIOD_V3                                                   0x03
 #define INDICATOR_SET_ON_OFF_CYCLES_V3                                                   0x04
-#define INDICATOR_SET_LOW_POWER_V3                                                       0x10
 #define INDICATOR_SET_ONE_TIME_ON_OFF_PERIOD_V3                                          0x05
+#define INDICATOR_SET_TIMEOUT_MINUTES_V3                                                 0x06
+#define INDICATOR_SET_TIMEOUT_SECONDS_V3                                                 0x07
+#define INDICATOR_SET_TIMEOUT_1_100_SECONDS_V3                                           0x08
+#define INDICATOR_SET_SPECIFIC_VOLUME_V3                                                 0x09
+#define INDICATOR_SET_LOW_POWER_V3                                                       0x10
 /* Values used for Indicator Supported Get command */
 #define INDICATOR_SUPPORTED_GET_NA_V3                                                    0x00
 #define INDICATOR_SUPPORTED_GET_ARMED_V3                                                 0x01
@@ -5883,6 +7052,15 @@
 #define INDICATOR_SUPPORTED_GET_ENTER_PIN_V3                                             0x07
 #define INDICATOR_SUPPORTED_GET_OK_V3                                                    0x08
 #define INDICATOR_SUPPORTED_GET_NOT_OK_V3                                                0x09
+#define INDICATOR_SUPPORTED_GET_ARMED_STAY_V3                                            0x0A
+#define INDICATOR_SUPPORTED_GET_ARMED_AWAY_V3                                            0x0B
+#define INDICATOR_SUPPORTED_GET_ALARMING_V3                                              0x0C
+#define INDICATOR_SUPPORTED_GET_ALARMING_BURGLAR_V3                                      0x0D
+#define INDICATOR_SUPPORTED_GET_ALARMING_SMOKE_FIRE_V3                                   0x0E
+#define INDICATOR_SUPPORTED_GET_ALARMING_CARBON_MONOXIDE_V3                              0x0F
+#define INDICATOR_SUPPORTED_GET_BYPASS_CHALLENGE_V3                                      0x10
+#define INDICATOR_SUPPORTED_GET_ENTRY_DELAY_V3                                           0x11
+#define INDICATOR_SUPPORTED_GET_EXIT_DELAY_V3                                            0x12
 #define INDICATOR_SUPPORTED_GET_ZONE1_ARMED_V3                                           0x20
 #define INDICATOR_SUPPORTED_GET_ZONE2_ARMED_V3                                           0x21
 #define INDICATOR_SUPPORTED_GET_ZONE3_ARMED_V3                                           0x22
@@ -5905,8 +7083,8 @@
 #define INDICATOR_SUPPORTED_GET_BUTTON10_INDICATION_V3                                   0x4C
 #define INDICATOR_SUPPORTED_GET_BUTTON11_INDICATION_V3                                   0x4D
 #define INDICATOR_SUPPORTED_GET_BUTTON12_INDICATION_V3                                   0x4E
-#define INDICATOR_SUPPORTED_GET_BUZZER_V3                                                0xF0
 #define INDICATOR_SUPPORTED_GET_NODE_IDENTIFY_V3                                         0x50
+#define INDICATOR_SUPPORTED_GET_BUZZER_V3                                                0xF0
 /* Values used for Indicator Supported Report command */
 #define INDICATOR_SUPPORTED_REPORT_NA_V3                                                 0x00
 #define INDICATOR_SUPPORTED_REPORT_ARMED_V3                                              0x01
@@ -5918,6 +7096,15 @@
 #define INDICATOR_SUPPORTED_REPORT_ENTER_PIN_V3                                          0x07
 #define INDICATOR_SUPPORTED_REPORT_OK_V3                                                 0x08
 #define INDICATOR_SUPPORTED_REPORT_NOT_OK_V3                                             0x09
+#define INDICATOR_SUPPORTED_REPORT_ARMED_STAY_V3                                         0x0A
+#define INDICATOR_SUPPORTED_REPORT_ARMED_AWAY_V3                                         0x0B
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_V3                                           0x0C
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_BURGLAR_V3                                   0x0D
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_SMOKE_FIRE_V3                                0x0E
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_CARBON_MONOXIDE_V3                           0x0F
+#define INDICATOR_SUPPORTED_REPORT_BYPASS_CHALLENGE_V3                                   0x10
+#define INDICATOR_SUPPORTED_REPORT_ENTRY_DELAY_V3                                        0x11
+#define INDICATOR_SUPPORTED_REPORT_EXIT_DELAY_V3                                         0x12
 #define INDICATOR_SUPPORTED_REPORT_ZONE1_ARMED_V3                                        0x20
 #define INDICATOR_SUPPORTED_REPORT_ZONE2_ARMED_V3                                        0x21
 #define INDICATOR_SUPPORTED_REPORT_ZONE3_ARMED_V3                                        0x22
@@ -5940,8 +7127,8 @@
 #define INDICATOR_SUPPORTED_REPORT_BUTTON10_INDICATION_V3                                0x4C
 #define INDICATOR_SUPPORTED_REPORT_BUTTON11_INDICATION_V3                                0x4D
 #define INDICATOR_SUPPORTED_REPORT_BUTTON12_INDICATION_V3                                0x4E
-#define INDICATOR_SUPPORTED_REPORT_BUZZER_V3                                             0xF0
 #define INDICATOR_SUPPORTED_REPORT_NODE_IDENTIFY_V3                                      0x50
+#define INDICATOR_SUPPORTED_REPORT_BUZZER_V3                                             0xF0
 #define INDICATOR_SUPPORTED_REPORT_NA_V3                                                 0x00
 #define INDICATOR_SUPPORTED_REPORT_ARMED_V3                                              0x01
 #define INDICATOR_SUPPORTED_REPORT_NOT_ARMED_V3                                          0x02
@@ -5952,6 +7139,15 @@
 #define INDICATOR_SUPPORTED_REPORT_ENTER_PIN_V3                                          0x07
 #define INDICATOR_SUPPORTED_REPORT_OK_V3                                                 0x08
 #define INDICATOR_SUPPORTED_REPORT_NOT_OK_V3                                             0x09
+#define INDICATOR_SUPPORTED_REPORT_ARMED_STAY_V3                                         0x0A
+#define INDICATOR_SUPPORTED_REPORT_ARMED_AWAY_V3                                         0x0B
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_V3                                           0x0C
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_BURGLAR_V3                                   0x0D
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_SMOKE_FIRE_V3                                0x0E
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_CARBON_MONOXIDE_V3                           0x0F
+#define INDICATOR_SUPPORTED_REPORT_BYPASS_CHALLENGE_V3                                   0x10
+#define INDICATOR_SUPPORTED_REPORT_ENTRY_DELAY_V3                                        0x11
+#define INDICATOR_SUPPORTED_REPORT_EXIT_DELAY_V3                                         0x12
 #define INDICATOR_SUPPORTED_REPORT_ZONE1_ARMED_V3                                        0x20
 #define INDICATOR_SUPPORTED_REPORT_ZONE2_ARMED_V3                                        0x21
 #define INDICATOR_SUPPORTED_REPORT_ZONE3_ARMED_V3                                        0x22
@@ -5974,11 +7170,313 @@
 #define INDICATOR_SUPPORTED_REPORT_BUTTON10_INDICATION_V3                                0x4C
 #define INDICATOR_SUPPORTED_REPORT_BUTTON11_INDICATION_V3                                0x4D
 #define INDICATOR_SUPPORTED_REPORT_BUTTON12_INDICATION_V3                                0x4E
-#define INDICATOR_SUPPORTED_REPORT_BUZZER_V3                                             0xF0
 #define INDICATOR_SUPPORTED_REPORT_NODE_IDENTIFY_V3                                      0x50
+#define INDICATOR_SUPPORTED_REPORT_BUZZER_V3                                             0xF0
 #define INDICATOR_SUPPORTED_REPORT_PROPERTIES1_PROPERTY_SUPPORTED_BIT_MASK_LENGTH_MASK_V3 0x1F
 #define INDICATOR_SUPPORTED_REPORT_PROPERTIES1_RESERVED_MASK_V3                          0xE0
 #define INDICATOR_SUPPORTED_REPORT_PROPERTIES1_RESERVED_SHIFT_V3                         0x05
+
+/* Indicator command class commands */
+#define INDICATOR_VERSION_V4                                                             0x04
+#define INDICATOR_GET_V4                                                                 0x02
+#define INDICATOR_REPORT_V4                                                              0x03
+#define INDICATOR_SET_V4                                                                 0x01
+#define INDICATOR_SUPPORTED_GET_V4                                                       0x04
+#define INDICATOR_SUPPORTED_REPORT_V4                                                    0x05
+#define INDICATOR_DESCRIPTION_GET_V4                                                     0x06
+#define INDICATOR_DESCRIPTION_REPORT_V4                                                  0x07
+/* Values used for Indicator Get command */
+#define INDICATOR_GET_NA_V4                                                              0x00
+#define INDICATOR_GET_ARMED_V4                                                           0x01
+#define INDICATOR_GET_NOT_ARMED_V4                                                       0x02
+#define INDICATOR_GET_READY_V4                                                           0x03
+#define INDICATOR_GET_FAULT_V4                                                           0x04
+#define INDICATOR_GET_BUSY_V4                                                            0x05
+#define INDICATOR_GET_ENTER_ID_V4                                                        0x06
+#define INDICATOR_GET_ENTER_PIN_V4                                                       0x07
+#define INDICATOR_GET_OK_V4                                                              0x08
+#define INDICATOR_GET_NOT_OK_V4                                                          0x09
+#define INDICATOR_GET_ARMED_STAY_V4                                                      0x0A
+#define INDICATOR_GET_ARMED_AWAY_V4                                                      0x0B
+#define INDICATOR_GET_ALARMING_V4                                                        0x0C
+#define INDICATOR_GET_ALARMING_BURGLAR_V4                                                0x0D
+#define INDICATOR_GET_ALARMING_SMOKE_FIRE_V4                                             0x0E
+#define INDICATOR_GET_ALARMING_CARBON_MONOXIDE_V4                                        0x0F
+#define INDICATOR_GET_BYPASS_CHALLENGE_V4                                                0x10
+#define INDICATOR_GET_ENTRY_DELAY_V4                                                     0x11
+#define INDICATOR_GET_EXIT_DELAY_V4                                                      0x12
+#define INDICATOR_GET_ZONE1_ARMED_V4                                                     0x20
+#define INDICATOR_GET_ZONE2_ARMED_V4                                                     0x21
+#define INDICATOR_GET_ZONE3_ARMED_V4                                                     0x22
+#define INDICATOR_GET_ZONE4_ARMED_V4                                                     0x23
+#define INDICATOR_GET_ZONE5_ARMED_V4                                                     0x24
+#define INDICATOR_GET_ZONE6_ARMED_V4                                                     0x25
+#define INDICATOR_GET_LCD_BACKLIGHT_V4                                                   0x30
+#define INDICATOR_GET_BUTTON_BACKLIGHT_LETTERS_V4                                        0x40
+#define INDICATOR_GET_BUTTON_BACKLIGHT_DIGITS_V4                                         0x41
+#define INDICATOR_GET_BUTTON_BACKLIGHT_COMMAND_V4                                        0x42
+#define INDICATOR_GET_BUTTON1_INDICATION_V4                                              0x43
+#define INDICATOR_GET_BUTTON2_INDICATION_V4                                              0x44
+#define INDICATOR_GET_BUTTON3_INDICATION_V4                                              0x45
+#define INDICATOR_GET_BUTTON4_INDICATION_V4                                              0x46
+#define INDICATOR_GET_BUTTON5_INDICATION_V4                                              0x47
+#define INDICATOR_GET_BUTTON6_INDICATION_V4                                              0x48
+#define INDICATOR_GET_BUTTON7_INDICATION_V4                                              0x49
+#define INDICATOR_GET_BUTTON8_INDICATION_V4                                              0x4A
+#define INDICATOR_GET_BUTTON9_INDICATION_V4                                              0x4B
+#define INDICATOR_GET_BUTTON10_INDICATION_V4                                             0x4C
+#define INDICATOR_GET_BUTTON11_INDICATION_V4                                             0x4D
+#define INDICATOR_GET_BUTTON12_INDICATION_V4                                             0x4E
+#define INDICATOR_GET_NODE_IDENTIFY_V4                                                   0x50
+#define INDICATOR_GET_BUZZER_V4                                                          0xF0
+/* Values used for Indicator Report command */
+#define INDICATOR_REPORT_PROPERTIES1_INDICATOR_OBJECT_COUNT_MASK_V4                      0x1F
+#define INDICATOR_REPORT_PROPERTIES1_RESERVED_MASK_V4                                    0xE0
+#define INDICATOR_REPORT_PROPERTIES1_RESERVED_SHIFT_V4                                   0x05
+#define INDICATOR_REPORT_NA_V4                                                           0x00
+#define INDICATOR_REPORT_ARMED_V4                                                        0x01
+#define INDICATOR_REPORT_NOT_ARMED_V4                                                    0x02
+#define INDICATOR_REPORT_READY_V4                                                        0x03
+#define INDICATOR_REPORT_FAULT_V4                                                        0x04
+#define INDICATOR_REPORT_BUSY_V4                                                         0x05
+#define INDICATOR_REPORT_ENTER_ID_V4                                                     0x06
+#define INDICATOR_REPORT_ENTER_PIN_V4                                                    0x07
+#define INDICATOR_REPORT_OK_V4                                                           0x08
+#define INDICATOR_REPORT_NOT_OK_V4                                                       0x09
+#define INDICATOR_REPORT_ARMED_STAY_V4                                                   0x0A
+#define INDICATOR_REPORT_ARMED_AWAY_V4                                                   0x0B
+#define INDICATOR_REPORT_ALARMING_V4                                                     0x0C
+#define INDICATOR_REPORT_ALARMING_BURGLAR_V4                                             0x0D
+#define INDICATOR_REPORT_ALARMING_SMOKE_FIRE_V4                                          0x0E
+#define INDICATOR_REPORT_ALARMING_CARBON_MONOXIDE_V4                                     0x0F
+#define INDICATOR_REPORT_BYPASS_CHALLENGE_V4                                             0x10
+#define INDICATOR_REPORT_ENTRY_DELAY_V4                                                  0x11
+#define INDICATOR_REPORT_EXIT_DELAY_V4                                                   0x12
+#define INDICATOR_REPORT_ZONE1_ARMED_V4                                                  0x20
+#define INDICATOR_REPORT_ZONE2_ARMED_V4                                                  0x21
+#define INDICATOR_REPORT_ZONE3_ARMED_V4                                                  0x22
+#define INDICATOR_REPORT_ZONE4_ARMED_V4                                                  0x23
+#define INDICATOR_REPORT_ZONE5_ARMED_V4                                                  0x24
+#define INDICATOR_REPORT_ZONE6_ARMED_V4                                                  0x25
+#define INDICATOR_REPORT_LCD_BACKLIGHT_V4                                                0x30
+#define INDICATOR_REPORT_BUTTON_BACKLIGHT_LETTERS_V4                                     0x40
+#define INDICATOR_REPORT_BUTTON_BACKLIGHT_DIGITS_V4                                      0x41
+#define INDICATOR_REPORT_BUTTON_BACKLIGHT_COMMAND_V4                                     0x42
+#define INDICATOR_REPORT_BUTTON1_INDICATION_V4                                           0x43
+#define INDICATOR_REPORT_BUTTON2_INDICATION_V4                                           0x44
+#define INDICATOR_REPORT_BUTTON3_INDICATION_V4                                           0x45
+#define INDICATOR_REPORT_BUTTON4_INDICATION_V4                                           0x46
+#define INDICATOR_REPORT_BUTTON5_INDICATION_V4                                           0x47
+#define INDICATOR_REPORT_BUTTON6_INDICATION_V4                                           0x48
+#define INDICATOR_REPORT_BUTTON7_INDICATION_V4                                           0x49
+#define INDICATOR_REPORT_BUTTON8_INDICATION_V4                                           0x4A
+#define INDICATOR_REPORT_BUTTON9_INDICATION_V4                                           0x4B
+#define INDICATOR_REPORT_BUTTON10_INDICATION_V4                                          0x4C
+#define INDICATOR_REPORT_BUTTON11_INDICATION_V4                                          0x4D
+#define INDICATOR_REPORT_BUTTON12_INDICATION_V4                                          0x4E
+#define INDICATOR_REPORT_NODE_IDENTIFY_V4                                                0x50
+#define INDICATOR_REPORT_BUZZER_V4                                                       0xF0
+#define INDICATOR_REPORT_MULTILEVEL_V4                                                   0x01
+#define INDICATOR_REPORT_BINARY_V4                                                       0x02
+#define INDICATOR_REPORT_ON_OFF_PERIOD_V4                                                0x03
+#define INDICATOR_REPORT_ON_OFF_CYCLES_V4                                                0x04
+#define INDICATOR_REPORT_ONE_TIME_ON_OFF_PERIOD_V4                                       0x05
+#define INDICATOR_REPORT_TIMEOUT_MINUTES_V4                                              0x06
+#define INDICATOR_REPORT_TIMEOUT_SECONDS_V4                                              0x07
+#define INDICATOR_REPORT_TIMEOUT_1_100_SECONDS_V4                                        0x08
+#define INDICATOR_REPORT_SPECIFIC_VOLUME_V4                                              0x09
+#define INDICATOR_REPORT_LOW_POWER_V4                                                    0x10
+/* Values used for Indicator Set command */
+#define INDICATOR_SET_PROPERTIES1_INDICATOR_OBJECT_COUNT_MASK_V4                         0x1F
+#define INDICATOR_SET_PROPERTIES1_RESERVED_MASK_V4                                       0xE0
+#define INDICATOR_SET_PROPERTIES1_RESERVED_SHIFT_V4                                      0x05
+#define INDICATOR_SET_NA_V4                                                              0x00
+#define INDICATOR_SET_ARMED_V4                                                           0x01
+#define INDICATOR_SET_NOT_ARMED_V4                                                       0x02
+#define INDICATOR_SET_READY_V4                                                           0x03
+#define INDICATOR_SET_FAULT_V4                                                           0x04
+#define INDICATOR_SET_BUSY_V4                                                            0x05
+#define INDICATOR_SET_ENTER_ID_V4                                                        0x06
+#define INDICATOR_SET_ENTER_PIN_V4                                                       0x07
+#define INDICATOR_SET_OK_V4                                                              0x08
+#define INDICATOR_SET_NOT_OK_V4                                                          0x09
+#define INDICATOR_SET_ARMED_STAY_V4                                                      0x0A
+#define INDICATOR_SET_ARMED_AWAY_V4                                                      0x0B
+#define INDICATOR_SET_ALARMING_V4                                                        0x0C
+#define INDICATOR_SET_ALARMING_BURGLAR_V4                                                0x0D
+#define INDICATOR_SET_ALARMING_SMOKE_FIRE_V4                                             0x0E
+#define INDICATOR_SET_ALARMING_CARBON_MONOXIDE_V4                                        0x0F
+#define INDICATOR_SET_BYPASS_CHALLENGE_V4                                                0x10
+#define INDICATOR_SET_ENTRY_DELAY_V4                                                     0x11
+#define INDICATOR_SET_EXIT_DELAY_V4                                                      0x12
+#define INDICATOR_SET_ZONE1_ARMED_V4                                                     0x20
+#define INDICATOR_SET_ZONE2_ARMED_V4                                                     0x21
+#define INDICATOR_SET_ZONE3_ARMED_V4                                                     0x22
+#define INDICATOR_SET_ZONE4_ARMED_V4                                                     0x23
+#define INDICATOR_SET_ZONE5_ARMED_V4                                                     0x24
+#define INDICATOR_SET_ZONE6_ARMED_V4                                                     0x25
+#define INDICATOR_SET_LCD_BACKLIGHT_V4                                                   0x30
+#define INDICATOR_SET_BUTTON_BACKLIGHT_LETTERS_V4                                        0x40
+#define INDICATOR_SET_BUTTON_BACKLIGHT_DIGITS_V4                                         0x41
+#define INDICATOR_SET_BUTTON_BACKLIGHT_COMMAND_V4                                        0x42
+#define INDICATOR_SET_BUTTON1_INDICATION_V4                                              0x43
+#define INDICATOR_SET_BUTTON2_INDICATION_V4                                              0x44
+#define INDICATOR_SET_BUTTON3_INDICATION_V4                                              0x45
+#define INDICATOR_SET_BUTTON4_INDICATION_V4                                              0x46
+#define INDICATOR_SET_BUTTON5_INDICATION_V4                                              0x47
+#define INDICATOR_SET_BUTTON6_INDICATION_V4                                              0x48
+#define INDICATOR_SET_BUTTON7_INDICATION_V4                                              0x49
+#define INDICATOR_SET_BUTTON8_INDICATION_V4                                              0x4A
+#define INDICATOR_SET_BUTTON9_INDICATION_V4                                              0x4B
+#define INDICATOR_SET_BUTTON10_INDICATION_V4                                             0x4C
+#define INDICATOR_SET_BUTTON11_INDICATION_V4                                             0x4D
+#define INDICATOR_SET_BUTTON12_INDICATION_V4                                             0x4E
+#define INDICATOR_SET_NODE_IDENTIFY_V4                                                   0x50
+#define INDICATOR_SET_BUZZER_V4                                                          0xF0
+#define INDICATOR_SET_MULTILEVEL_V4                                                      0x01
+#define INDICATOR_SET_BINARY_V4                                                          0x02
+#define INDICATOR_SET_ON_OFF_PERIOD_V4                                                   0x03
+#define INDICATOR_SET_ON_OFF_CYCLES_V4                                                   0x04
+#define INDICATOR_SET_ONE_TIME_ON_OFF_PERIOD_V4                                          0x05
+#define INDICATOR_SET_TIMEOUT_MINUTES_V4                                                 0x06
+#define INDICATOR_SET_TIMEOUT_SECONDS_V4                                                 0x07
+#define INDICATOR_SET_TIMEOUT_1_100_SECONDS_V4                                           0x08
+#define INDICATOR_SET_SPECIFIC_VOLUME_V4                                                 0x09
+#define INDICATOR_SET_LOW_POWER_V4                                                       0x10
+/* Values used for Indicator Supported Get command */
+#define INDICATOR_SUPPORTED_GET_NA_V4                                                    0x00
+#define INDICATOR_SUPPORTED_GET_ARMED_V4                                                 0x01
+#define INDICATOR_SUPPORTED_GET_NOT_ARMED_V4                                             0x02
+#define INDICATOR_SUPPORTED_GET_READY_V4                                                 0x03
+#define INDICATOR_SUPPORTED_GET_FAULT_V4                                                 0x04
+#define INDICATOR_SUPPORTED_GET_BUSY_V4                                                  0x05
+#define INDICATOR_SUPPORTED_GET_ENTER_ID_V4                                              0x06
+#define INDICATOR_SUPPORTED_GET_ENTER_PIN_V4                                             0x07
+#define INDICATOR_SUPPORTED_GET_OK_V4                                                    0x08
+#define INDICATOR_SUPPORTED_GET_NOT_OK_V4                                                0x09
+#define INDICATOR_SUPPORTED_GET_ARMED_STAY_V4                                            0x0A
+#define INDICATOR_SUPPORTED_GET_ARMED_AWAY_V4                                            0x0B
+#define INDICATOR_SUPPORTED_GET_ALARMING_V4                                              0x0C
+#define INDICATOR_SUPPORTED_GET_ALARMING_BURGLAR_V4                                      0x0D
+#define INDICATOR_SUPPORTED_GET_ALARMING_SMOKE_FIRE_V4                                   0x0E
+#define INDICATOR_SUPPORTED_GET_ALARMING_CARBON_MONOXIDE_V4                              0x0F
+#define INDICATOR_SUPPORTED_GET_BYPASS_CHALLENGE_V4                                      0x10
+#define INDICATOR_SUPPORTED_GET_ENTRY_DELAY_V4                                           0x11
+#define INDICATOR_SUPPORTED_GET_EXIT_DELAY_V4                                            0x12
+#define INDICATOR_SUPPORTED_GET_ZONE1_ARMED_V4                                           0x20
+#define INDICATOR_SUPPORTED_GET_ZONE2_ARMED_V4                                           0x21
+#define INDICATOR_SUPPORTED_GET_ZONE3_ARMED_V4                                           0x22
+#define INDICATOR_SUPPORTED_GET_ZONE4_ARMED_V4                                           0x23
+#define INDICATOR_SUPPORTED_GET_ZONE5_ARMED_V4                                           0x24
+#define INDICATOR_SUPPORTED_GET_ZONE6_ARMED_V4                                           0x25
+#define INDICATOR_SUPPORTED_GET_LCD_BACKLIGHT_V4                                         0x30
+#define INDICATOR_SUPPORTED_GET_BUTTON_BACKLIGHT_LETTERS_V4                              0x40
+#define INDICATOR_SUPPORTED_GET_BUTTON_BACKLIGHT_DIGITS_V4                               0x41
+#define INDICATOR_SUPPORTED_GET_BUTTON_BACKLIGHT_COMMAND_V4                              0x42
+#define INDICATOR_SUPPORTED_GET_BUTTON1_INDICATION_V4                                    0x43
+#define INDICATOR_SUPPORTED_GET_BUTTON2_INDICATION_V4                                    0x44
+#define INDICATOR_SUPPORTED_GET_BUTTON3_INDICATION_V4                                    0x45
+#define INDICATOR_SUPPORTED_GET_BUTTON4_INDICATION_V4                                    0x46
+#define INDICATOR_SUPPORTED_GET_BUTTON5_INDICATION_V4                                    0x47
+#define INDICATOR_SUPPORTED_GET_BUTTON6_INDICATION_V4                                    0x48
+#define INDICATOR_SUPPORTED_GET_BUTTON7_INDICATION_V4                                    0x49
+#define INDICATOR_SUPPORTED_GET_BUTTON8_INDICATION_V4                                    0x4A
+#define INDICATOR_SUPPORTED_GET_BUTTON9_INDICATION_V4                                    0x4B
+#define INDICATOR_SUPPORTED_GET_BUTTON10_INDICATION_V4                                   0x4C
+#define INDICATOR_SUPPORTED_GET_BUTTON11_INDICATION_V4                                   0x4D
+#define INDICATOR_SUPPORTED_GET_BUTTON12_INDICATION_V4                                   0x4E
+#define INDICATOR_SUPPORTED_GET_NODE_IDENTIFY_V4                                         0x50
+#define INDICATOR_SUPPORTED_GET_BUZZER_V4                                                0xF0
+/* Values used for Indicator Supported Report command */
+#define INDICATOR_SUPPORTED_REPORT_NA_V4                                                 0x00
+#define INDICATOR_SUPPORTED_REPORT_ARMED_V4                                              0x01
+#define INDICATOR_SUPPORTED_REPORT_NOT_ARMED_V4                                          0x02
+#define INDICATOR_SUPPORTED_REPORT_READY_V4                                              0x03
+#define INDICATOR_SUPPORTED_REPORT_FAULT_V4                                              0x04
+#define INDICATOR_SUPPORTED_REPORT_BUSY_V4                                               0x05
+#define INDICATOR_SUPPORTED_REPORT_ENTER_ID_V4                                           0x06
+#define INDICATOR_SUPPORTED_REPORT_ENTER_PIN_V4                                          0x07
+#define INDICATOR_SUPPORTED_REPORT_OK_V4                                                 0x08
+#define INDICATOR_SUPPORTED_REPORT_NOT_OK_V4                                             0x09
+#define INDICATOR_SUPPORTED_REPORT_ARMED_STAY_V4                                         0x0A
+#define INDICATOR_SUPPORTED_REPORT_ARMED_AWAY_V4                                         0x0B
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_V4                                           0x0C
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_BURGLAR_V4                                   0x0D
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_SMOKE_FIRE_V4                                0x0E
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_CARBON_MONOXIDE_V4                           0x0F
+#define INDICATOR_SUPPORTED_REPORT_BYPASS_CHALLENGE_V4                                   0x10
+#define INDICATOR_SUPPORTED_REPORT_ENTRY_DELAY_V4                                        0x11
+#define INDICATOR_SUPPORTED_REPORT_EXIT_DELAY_V4                                         0x12
+#define INDICATOR_SUPPORTED_REPORT_ZONE1_ARMED_V4                                        0x20
+#define INDICATOR_SUPPORTED_REPORT_ZONE2_ARMED_V4                                        0x21
+#define INDICATOR_SUPPORTED_REPORT_ZONE3_ARMED_V4                                        0x22
+#define INDICATOR_SUPPORTED_REPORT_ZONE4_ARMED_V4                                        0x23
+#define INDICATOR_SUPPORTED_REPORT_ZONE5_ARMED_V4                                        0x24
+#define INDICATOR_SUPPORTED_REPORT_ZONE6_ARMED_V4                                        0x25
+#define INDICATOR_SUPPORTED_REPORT_LCD_BACKLIGHT_V4                                      0x30
+#define INDICATOR_SUPPORTED_REPORT_BUTTON_BACKLIGHT_LETTERS_V4                           0x40
+#define INDICATOR_SUPPORTED_REPORT_BUTTON_BACKLIGHT_DIGITS_V4                            0x41
+#define INDICATOR_SUPPORTED_REPORT_BUTTON_BACKLIGHT_COMMAND_V4                           0x42
+#define INDICATOR_SUPPORTED_REPORT_BUTTON1_INDICATION_V4                                 0x43
+#define INDICATOR_SUPPORTED_REPORT_BUTTON2_INDICATION_V4                                 0x44
+#define INDICATOR_SUPPORTED_REPORT_BUTTON3_INDICATION_V4                                 0x45
+#define INDICATOR_SUPPORTED_REPORT_BUTTON4_INDICATION_V4                                 0x46
+#define INDICATOR_SUPPORTED_REPORT_BUTTON5_INDICATION_V4                                 0x47
+#define INDICATOR_SUPPORTED_REPORT_BUTTON6_INDICATION_V4                                 0x48
+#define INDICATOR_SUPPORTED_REPORT_BUTTON7_INDICATION_V4                                 0x49
+#define INDICATOR_SUPPORTED_REPORT_BUTTON8_INDICATION_V4                                 0x4A
+#define INDICATOR_SUPPORTED_REPORT_BUTTON9_INDICATION_V4                                 0x4B
+#define INDICATOR_SUPPORTED_REPORT_BUTTON10_INDICATION_V4                                0x4C
+#define INDICATOR_SUPPORTED_REPORT_BUTTON11_INDICATION_V4                                0x4D
+#define INDICATOR_SUPPORTED_REPORT_BUTTON12_INDICATION_V4                                0x4E
+#define INDICATOR_SUPPORTED_REPORT_NODE_IDENTIFY_V4                                      0x50
+#define INDICATOR_SUPPORTED_REPORT_BUZZER_V4                                             0xF0
+#define INDICATOR_SUPPORTED_REPORT_NA_V4                                                 0x00
+#define INDICATOR_SUPPORTED_REPORT_ARMED_V4                                              0x01
+#define INDICATOR_SUPPORTED_REPORT_NOT_ARMED_V4                                          0x02
+#define INDICATOR_SUPPORTED_REPORT_READY_V4                                              0x03
+#define INDICATOR_SUPPORTED_REPORT_FAULT_V4                                              0x04
+#define INDICATOR_SUPPORTED_REPORT_BUSY_V4                                               0x05
+#define INDICATOR_SUPPORTED_REPORT_ENTER_ID_V4                                           0x06
+#define INDICATOR_SUPPORTED_REPORT_ENTER_PIN_V4                                          0x07
+#define INDICATOR_SUPPORTED_REPORT_OK_V4                                                 0x08
+#define INDICATOR_SUPPORTED_REPORT_NOT_OK_V4                                             0x09
+#define INDICATOR_SUPPORTED_REPORT_ARMED_STAY_V4                                         0x0A
+#define INDICATOR_SUPPORTED_REPORT_ARMED_AWAY_V4                                         0x0B
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_V4                                           0x0C
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_BURGLAR_V4                                   0x0D
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_SMOKE_FIRE_V4                                0x0E
+#define INDICATOR_SUPPORTED_REPORT_ALARMING_CARBON_MONOXIDE_V4                           0x0F
+#define INDICATOR_SUPPORTED_REPORT_BYPASS_CHALLENGE_V4                                   0x10
+#define INDICATOR_SUPPORTED_REPORT_ENTRY_DELAY_V4                                        0x11
+#define INDICATOR_SUPPORTED_REPORT_EXIT_DELAY_V4                                         0x12
+#define INDICATOR_SUPPORTED_REPORT_ZONE1_ARMED_V4                                        0x20
+#define INDICATOR_SUPPORTED_REPORT_ZONE2_ARMED_V4                                        0x21
+#define INDICATOR_SUPPORTED_REPORT_ZONE3_ARMED_V4                                        0x22
+#define INDICATOR_SUPPORTED_REPORT_ZONE4_ARMED_V4                                        0x23
+#define INDICATOR_SUPPORTED_REPORT_ZONE5_ARMED_V4                                        0x24
+#define INDICATOR_SUPPORTED_REPORT_ZONE6_ARMED_V4                                        0x25
+#define INDICATOR_SUPPORTED_REPORT_LCD_BACKLIGHT_V4                                      0x30
+#define INDICATOR_SUPPORTED_REPORT_BUTTON_BACKLIGHT_LETTERS_V4                           0x40
+#define INDICATOR_SUPPORTED_REPORT_BUTTON_BACKLIGHT_DIGITS_V4                            0x41
+#define INDICATOR_SUPPORTED_REPORT_BUTTON_BACKLIGHT_COMMAND_V4                           0x42
+#define INDICATOR_SUPPORTED_REPORT_BUTTON1_INDICATION_V4                                 0x43
+#define INDICATOR_SUPPORTED_REPORT_BUTTON2_INDICATION_V4                                 0x44
+#define INDICATOR_SUPPORTED_REPORT_BUTTON3_INDICATION_V4                                 0x45
+#define INDICATOR_SUPPORTED_REPORT_BUTTON4_INDICATION_V4                                 0x46
+#define INDICATOR_SUPPORTED_REPORT_BUTTON5_INDICATION_V4                                 0x47
+#define INDICATOR_SUPPORTED_REPORT_BUTTON6_INDICATION_V4                                 0x48
+#define INDICATOR_SUPPORTED_REPORT_BUTTON7_INDICATION_V4                                 0x49
+#define INDICATOR_SUPPORTED_REPORT_BUTTON8_INDICATION_V4                                 0x4A
+#define INDICATOR_SUPPORTED_REPORT_BUTTON9_INDICATION_V4                                 0x4B
+#define INDICATOR_SUPPORTED_REPORT_BUTTON10_INDICATION_V4                                0x4C
+#define INDICATOR_SUPPORTED_REPORT_BUTTON11_INDICATION_V4                                0x4D
+#define INDICATOR_SUPPORTED_REPORT_BUTTON12_INDICATION_V4                                0x4E
+#define INDICATOR_SUPPORTED_REPORT_NODE_IDENTIFY_V4                                      0x50
+#define INDICATOR_SUPPORTED_REPORT_BUZZER_V4                                             0xF0
+#define INDICATOR_SUPPORTED_REPORT_PROPERTIES1_PROPERTY_SUPPORTED_BIT_MASK_LENGTH_MASK_V4 0x1F
+#define INDICATOR_SUPPORTED_REPORT_PROPERTIES1_RESERVED_MASK_V4                          0xE0
+#define INDICATOR_SUPPORTED_REPORT_PROPERTIES1_RESERVED_SHIFT_V4                         0x05
 
 /* Ip Configuration command class commands */
 #define IP_CONFIGURATION_VERSION                                                         0x01
@@ -6003,12 +7501,6 @@
 #define LANGUAGE_GET                                                                     0x02
 #define LANGUAGE_REPORT                                                                  0x03
 #define LANGUAGE_SET                                                                     0x01
-
-/* Lock command class commands */
-#define LOCK_VERSION                                                                     0x01
-#define LOCK_GET                                                                         0x02
-#define LOCK_REPORT                                                                      0x03
-#define LOCK_SET                                                                         0x01
 
 /* Manufacturer Proprietary command class commands */
 #define MANUFACTURER_PROPRIETARY_VERSION                                                 0x01
@@ -6069,7 +7561,7 @@
 #define METER_TBL_CURRENT_DATA_REPORT                                                    0x0D
 #define METER_TBL_HISTORICAL_DATA_GET                                                    0x0E
 #define METER_TBL_HISTORICAL_DATA_REPORT                                                 0x0F
-#define METER_TBL_REPORT                                                                 0x06
+#define METER_TBL_TABLE_CAPABILITY_REPORT                                                0x06
 #define METER_TBL_TABLE_CAPABILITY_GET                                                   0x05
 #define METER_TBL_TABLE_ID_GET                                                           0x03
 #define METER_TBL_TABLE_ID_REPORT                                                        0x04
@@ -6083,17 +7575,17 @@
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RATE_TYPE_MASK                      0x03
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RESERVED_MASK                       0xFC
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RESERVED_SHIFT                      0x02
-/* Values used for Meter Tbl Report command */
-#define METER_TBL_REPORT_PROPERTIES1_METER_TYPE_MASK                                     0x3F
-#define METER_TBL_REPORT_PROPERTIES1_RATE_TYPE_MASK                                      0xC0
-#define METER_TBL_REPORT_PROPERTIES1_RATE_TYPE_SHIFT                                     0x06
-#define METER_TBL_REPORT_PROPERTIES2_PAY_METER_MASK                                      0x0F
-#define METER_TBL_REPORT_PAY_METER_RESERVED                                              0x00
-#define METER_TBL_REPORT_PAY_METER_CREDITMETER                                           0x01
-#define METER_TBL_REPORT_PAY_METER_PREPAYMENT_METER                                      0x02
-#define METER_TBL_REPORT_PAY_METER_PREPAYMENT_METER_DEBT                                 0x03
-#define METER_TBL_REPORT_PROPERTIES2_RESERVED_MASK                                       0xF0
-#define METER_TBL_REPORT_PROPERTIES2_RESERVED_SHIFT                                      0x04
+/* Values used for Meter Tbl Table Capability Report command */
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_METER_TYPE_MASK                    0x3F
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_RATE_TYPE_MASK                     0xC0
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_RATE_TYPE_SHIFT                    0x06
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_PAY_METER_MASK                     0x0F
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_RESERVED                             0x00
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_CREDITMETER                          0x01
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_PREPAYMENT_METER                     0x02
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_PREPAYMENT_METER_DEBT                0x03
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_RESERVED_MASK                      0xF0
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_RESERVED_SHIFT                     0x04
 /* Values used for Meter Tbl Table Id Report command */
 #define METER_TBL_TABLE_ID_REPORT_PROPERTIES1_NUMBER_OF_CHARACTERS_MASK                  0x1F
 #define METER_TBL_TABLE_ID_REPORT_PROPERTIES1_RESERVED_MASK                              0xE0
@@ -6114,7 +7606,7 @@
 #define METER_TBL_CURRENT_DATA_REPORT_V2                                                 0x0D
 #define METER_TBL_HISTORICAL_DATA_GET_V2                                                 0x0E
 #define METER_TBL_HISTORICAL_DATA_REPORT_V2                                              0x0F
-#define METER_TBL_REPORT_V2                                                              0x06
+#define METER_TBL_TABLE_CAPABILITY_REPORT_V2                                             0x06
 #define METER_TBL_TABLE_CAPABILITY_GET_V2                                                0x05
 #define METER_TBL_TABLE_ID_GET_V2                                                        0x03
 #define METER_TBL_TABLE_ID_REPORT_V2                                                     0x04
@@ -6130,17 +7622,17 @@
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RESERVED_MASK_V2                    0x7C
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                   0x02
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_OPERATING_STATUS_INDICATION_BIT_MASK_V2 0x80
-/* Values used for Meter Tbl Report command */
-#define METER_TBL_REPORT_PROPERTIES1_METER_TYPE_MASK_V2                                  0x3F
-#define METER_TBL_REPORT_PROPERTIES1_RATE_TYPE_MASK_V2                                   0xC0
-#define METER_TBL_REPORT_PROPERTIES1_RATE_TYPE_SHIFT_V2                                  0x06
-#define METER_TBL_REPORT_PROPERTIES2_PAY_METER_MASK_V2                                   0x0F
-#define METER_TBL_REPORT_PAY_METER_RESERVED_V2                                           0x00
-#define METER_TBL_REPORT_PAY_METER_CREDITMETER_V2                                        0x01
-#define METER_TBL_REPORT_PAY_METER_PREPAYMENT_METER_V2                                   0x02
-#define METER_TBL_REPORT_PAY_METER_PREPAYMENT_METER_DEBT_V2                              0x03
-#define METER_TBL_REPORT_PROPERTIES2_RESERVED_MASK_V2                                    0xF0
-#define METER_TBL_REPORT_PROPERTIES2_RESERVED_SHIFT_V2                                   0x04
+/* Values used for Meter Tbl Table Capability Report command */
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_METER_TYPE_MASK_V2                 0x3F
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_RATE_TYPE_MASK_V2                  0xC0
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_RATE_TYPE_SHIFT_V2                 0x06
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_PAY_METER_MASK_V2                  0x0F
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_RESERVED_V2                          0x00
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_CREDITMETER_V2                       0x01
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_PREPAYMENT_METER_V2                  0x02
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_PREPAYMENT_METER_DEBT_V2             0x03
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_RESERVED_MASK_V2                   0xF0
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_RESERVED_SHIFT_V2                  0x04
 /* Values used for Meter Tbl Table Id Report command */
 #define METER_TBL_TABLE_ID_REPORT_PROPERTIES1_NUMBER_OF_CHARACTERS_MASK_V2               0x1F
 #define METER_TBL_TABLE_ID_REPORT_PROPERTIES1_RESERVED_MASK_V2                           0xE0
@@ -6161,7 +7653,7 @@
 #define METER_TBL_CURRENT_DATA_REPORT_V3                                                 0x0D
 #define METER_TBL_HISTORICAL_DATA_GET_V3                                                 0x0E
 #define METER_TBL_HISTORICAL_DATA_REPORT_V3                                              0x0F
-#define METER_TBL_REPORT_V3                                                              0x06
+#define METER_TBL_TABLE_CAPABILITY_REPORT_V3                                             0x06
 #define METER_TBL_TABLE_CAPABILITY_GET_V3                                                0x05
 #define METER_TBL_TABLE_ID_GET_V3                                                        0x03
 #define METER_TBL_TABLE_ID_REPORT_V3                                                     0x04
@@ -6177,17 +7669,17 @@
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RESERVED_MASK_V3                    0x7C
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_RESERVED_SHIFT_V3                   0x02
 #define METER_TBL_HISTORICAL_DATA_REPORT_PROPERTIES1_OPERATING_STATUS_INDICATION_BIT_MASK_V3 0x80
-/* Values used for Meter Tbl Report command */
-#define METER_TBL_REPORT_PROPERTIES1_METER_TYPE_MASK_V3                                  0x3F
-#define METER_TBL_REPORT_PROPERTIES1_RATE_TYPE_MASK_V3                                   0xC0
-#define METER_TBL_REPORT_PROPERTIES1_RATE_TYPE_SHIFT_V3                                  0x06
-#define METER_TBL_REPORT_PROPERTIES2_PAY_METER_MASK_V3                                   0x0F
-#define METER_TBL_REPORT_PAY_METER_RESERVED_V3                                           0x00
-#define METER_TBL_REPORT_PAY_METER_CREDITMETER_V3                                        0x01
-#define METER_TBL_REPORT_PAY_METER_PREPAYMENT_METER_V3                                   0x02
-#define METER_TBL_REPORT_PAY_METER_PREPAYMENT_METER_DEBT_V3                              0x03
-#define METER_TBL_REPORT_PROPERTIES2_RESERVED_MASK_V3                                    0xF0
-#define METER_TBL_REPORT_PROPERTIES2_RESERVED_SHIFT_V3                                   0x04
+/* Values used for Meter Tbl Table Capability Report command */
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_METER_TYPE_MASK_V3                 0x3F
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_RATE_TYPE_MASK_V3                  0xC0
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES1_RATE_TYPE_SHIFT_V3                 0x06
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_PAY_METER_MASK_V3                  0x0F
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_RESERVED_V3                          0x00
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_CREDITMETER_V3                       0x01
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_PREPAYMENT_METER_V3                  0x02
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PAY_METER_PREPAYMENT_METER_DEBT_V3             0x03
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_RESERVED_MASK_V3                   0xF0
+#define METER_TBL_TABLE_CAPABILITY_REPORT_PROPERTIES2_RESERVED_SHIFT_V3                  0x04
 /* Values used for Meter Tbl Table Id Report command */
 #define METER_TBL_TABLE_ID_REPORT_PROPERTIES1_NUMBER_OF_CHARACTERS_MASK_V3               0x1F
 #define METER_TBL_TABLE_ID_REPORT_PROPERTIES1_RESERVED_MASK_V3                           0xE0
@@ -6394,6 +7886,77 @@
 #define METER_SUPPORTED_REPORT_PROPERTIES2_SCALE_SUPPORTED_0_MASK_V5                     0x7F
 #define METER_SUPPORTED_REPORT_PROPERTIES2_M_S_T_BIT_MASK_V5                             0x80
 
+/* Meter command class commands */
+#define METER_VERSION_V6                                                                 0x06
+#define METER_GET_V6                                                                     0x01
+#define METER_REPORT_V6                                                                  0x02
+#define METER_RESET_V6                                                                   0x05
+#define METER_SUPPORTED_GET_V6                                                           0x03
+#define METER_SUPPORTED_REPORT_V6                                                        0x04
+/* Values used for Meter Get command */
+#define METER_GET_PROPERTIES1_RESERVED_MASK_V6                                           0x07
+#define METER_GET_PROPERTIES1_SCALE_MASK_V6                                              0x38
+#define METER_GET_PROPERTIES1_SCALE_SHIFT_V6                                             0x03
+#define METER_GET_PROPERTIES1_RATE_TYPE_MASK_V6                                          0xC0
+#define METER_GET_PROPERTIES1_RATE_TYPE_SHIFT_V6                                         0x06
+#define METER_GET_RATE_TYPE_RESERVED_V6                                                  0x00
+#define METER_GET_RATE_TYPE_IMPORT_V6                                                    0x01
+#define METER_GET_RATE_TYPE_EXPORT_V6                                                    0x02
+#define METER_GET_RATE_TYPE_NOT_TO_BE_USED_V6                                            0x03
+/* Values used for Meter Report command */
+#define METER_REPORT_PROPERTIES1_METER_TYPE_MASK_V6                                      0x1F
+#define METER_REPORT_METER_TYPE_RESERVED_V6                                              0x00
+#define METER_REPORT_METER_TYPE_ELECTRIC_METER_V6                                        0x01
+#define METER_REPORT_METER_TYPE_GAS_METER_V6                                             0x02
+#define METER_REPORT_METER_TYPE_WATER_METER_V6                                           0x03
+#define METER_REPORT_METER_TYPE_HEATING_METER_V6                                         0x04
+#define METER_REPORT_METER_TYPE_COOLING_METER_V6                                         0x05
+#define METER_REPORT_PROPERTIES1_RATE_TYPE_MASK_V6                                       0x60
+#define METER_REPORT_PROPERTIES1_RATE_TYPE_SHIFT_V6                                      0x05
+#define METER_REPORT_RATE_TYPE_RESERVED_V6                                               0x00
+#define METER_REPORT_RATE_TYPE_IMPORT_V6                                                 0x01
+#define METER_REPORT_RATE_TYPE_EXPORT_V6                                                 0x02
+#define METER_REPORT_RATE_TYPE_NOT_TO_BE_USED_V6                                         0x03
+#define METER_REPORT_PROPERTIES1_SCALE_BIT_2_BIT_MASK_V6                                 0x80
+#define METER_REPORT_PROPERTIES2_SIZE_MASK_V6                                            0x07
+#define METER_REPORT_PROPERTIES2_SCALE_BITS_10_MASK_V6                                   0x18
+#define METER_REPORT_PROPERTIES2_SCALE_BITS_10_SHIFT_V6                                  0x03
+#define METER_REPORT_PROPERTIES2_PRECISION_MASK_V6                                       0xE0
+#define METER_REPORT_PROPERTIES2_PRECISION_SHIFT_V6                                      0x05
+/* Values used for Meter Reset command */
+#define METER_RESET_PROPERTIES1_METER_TYPE_MASK_V6                                       0x1F
+#define METER_RESET_METER_TYPE_RESERVED_V6                                               0x00
+#define METER_RESET_METER_TYPE_ELECTRIC_METER_V6                                         0x01
+#define METER_RESET_METER_TYPE_GAS_METER_V6                                              0x02
+#define METER_RESET_METER_TYPE_WATER_METER_V6                                            0x03
+#define METER_RESET_METER_TYPE_HEATING_METER_V6                                          0x04
+#define METER_RESET_METER_TYPE_COOLING_METER_V6                                          0x05
+#define METER_RESET_PROPERTIES1_RATE_TYPE_MASK_V6                                        0x60
+#define METER_RESET_PROPERTIES1_RATE_TYPE_SHIFT_V6                                       0x05
+#define METER_RESET_PROPERTIES1_SCALE_BIT_2_BIT_MASK_V6                                  0x80
+#define METER_RESET_PROPERTIES2_SIZE_MASK_V6                                             0x07
+#define METER_RESET_PROPERTIES2_SCALE_BITS_10_MASK_V6                                    0x18
+#define METER_RESET_PROPERTIES2_SCALE_BITS_10_SHIFT_V6                                   0x03
+#define METER_RESET_PROPERTIES2_PRECISION_MASK_V6                                        0xE0
+#define METER_RESET_PROPERTIES2_PRECISION_SHIFT_V6                                       0x05
+/* Values used for Meter Supported Report command */
+#define METER_SUPPORTED_REPORT_PROPERTIES1_METER_TYPE_MASK_V6                            0x1F
+#define METER_SUPPORTED_REPORT_METER_TYPE_RESERVED_V6                                    0x00
+#define METER_SUPPORTED_REPORT_METER_TYPE_ELECTRIC_METER_V6                              0x01
+#define METER_SUPPORTED_REPORT_METER_TYPE_GAS_METER_V6                                   0x02
+#define METER_SUPPORTED_REPORT_METER_TYPE_WATER_METER_V6                                 0x03
+#define METER_SUPPORTED_REPORT_METER_TYPE_HEATING_METER_V6                               0x04
+#define METER_SUPPORTED_REPORT_METER_TYPE_COOLING_METER_V6                               0x05
+#define METER_SUPPORTED_REPORT_PROPERTIES1_RATE_TYPE_MASK_V6                             0x60
+#define METER_SUPPORTED_REPORT_PROPERTIES1_RATE_TYPE_SHIFT_V6                            0x05
+#define METER_SUPPORTED_REPORT_RATE_TYPE_RESERVED_V6                                     0x00
+#define METER_SUPPORTED_REPORT_RATE_TYPE_IMPORT_ONLY_V6                                  0x01
+#define METER_SUPPORTED_REPORT_RATE_TYPE_EXPORT_ONLY_V6                                  0x02
+#define METER_SUPPORTED_REPORT_RATE_TYPE_IMPORT_AND_EXPORT_V6                            0x03
+#define METER_SUPPORTED_REPORT_PROPERTIES1_METER_RESET_BIT_MASK_V6                       0x80
+#define METER_SUPPORTED_REPORT_PROPERTIES2_SCALE_SUPPORTED_0_MASK_V6                     0x7F
+#define METER_SUPPORTED_REPORT_PROPERTIES2_M_S_T_BIT_MASK_V6                             0x80
+
 /* Mtp Window Covering command class commands */
 #define MTP_WINDOW_COVERING_VERSION                                                      0x01
 #define MOVE_TO_POSITION_GET                                                             0x02
@@ -6429,6 +7992,36 @@
 #define MULTI_CHANNEL_ASSOCIATION_REPORT_MARKER_V3                                       0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
 /* Values used for Multi Channel Association Set command */
 #define MULTI_CHANNEL_ASSOCIATION_SET_MARKER_V3                                          0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+
+/* Multi Channel Association command class commands */
+#define MULTI_CHANNEL_ASSOCIATION_VERSION_V4                                             0x04
+#define MULTI_CHANNEL_ASSOCIATION_GET_V4                                                 0x02
+#define MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V4                                       0x05
+#define MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V4                                    0x06
+#define MULTI_CHANNEL_ASSOCIATION_REMOVE_V4                                              0x04
+#define MULTI_CHANNEL_ASSOCIATION_REPORT_V4                                              0x03
+#define MULTI_CHANNEL_ASSOCIATION_SET_V4                                                 0x01
+/* Values used for Multi Channel Association Remove command */
+#define MULTI_CHANNEL_ASSOCIATION_REMOVE_MARKER_V4                                       0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+/* Values used for Multi Channel Association Report command */
+#define MULTI_CHANNEL_ASSOCIATION_REPORT_MARKER_V4                                       0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+/* Values used for Multi Channel Association Set command */
+#define MULTI_CHANNEL_ASSOCIATION_SET_MARKER_V4                                          0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+
+/* Multi Channel Association command class commands */
+#define MULTI_CHANNEL_ASSOCIATION_VERSION_V5                                             0x05
+#define MULTI_CHANNEL_ASSOCIATION_GET_V5                                                 0x02
+#define MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V5                                       0x05
+#define MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V5                                    0x06
+#define MULTI_CHANNEL_ASSOCIATION_REMOVE_V5                                              0x04
+#define MULTI_CHANNEL_ASSOCIATION_REPORT_V5                                              0x03
+#define MULTI_CHANNEL_ASSOCIATION_SET_V5                                                 0x01
+/* Values used for Multi Channel Association Remove command */
+#define MULTI_CHANNEL_ASSOCIATION_REMOVE_MARKER_V5                                       0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+/* Values used for Multi Channel Association Report command */
+#define MULTI_CHANNEL_ASSOCIATION_REPORT_MARKER_V5                                       0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+/* Values used for Multi Channel Association Set command */
+#define MULTI_CHANNEL_ASSOCIATION_SET_MARKER_V5                                          0x00 /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
 
 /* Multi Channel command class commands */
 #define MULTI_CHANNEL_VERSION_V2                                                         0x02
@@ -6640,6 +8233,100 @@
 #define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_PROPERTIES1_AGGREGATED_END_POINT_MASK_V2 0x7F
 #define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_PROPERTIES1_RES1_BIT_MASK_V2          0x80
 
+/* Network Management Proxy command class commands */
+#define NETWORK_MANAGEMENT_PROXY_VERSION_V3                                              0x03
+#define NODE_INFO_CACHED_GET_V3                                                          0x03
+#define NODE_INFO_CACHED_REPORT_V3                                                       0x04
+#define NODE_LIST_GET_V3                                                                 0x01
+#define NODE_LIST_REPORT_V3                                                              0x02
+#define NM_MULTI_CHANNEL_END_POINT_GET_V3                                                0x05
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_V3                                             0x06
+#define NM_MULTI_CHANNEL_CAPABILITY_GET_V3                                               0x07
+#define NM_MULTI_CHANNEL_CAPABILITY_REPORT_V3                                            0x08
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V3                                       0x09
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3                                    0x0A
+#define FAILED_NODE_LIST_GET_V3                                                          0x0B
+#define FAILED_NODE_LIST_REPORT_V3                                                       0x0C
+/* Values used for Node Info Cached Get command */
+#define NODE_INFO_CACHED_GET_PROPERTIES1_MAX_AGE_MASK_V3                                 0x0F
+#define NODE_INFO_CACHED_GET_PROPERTIES1_RESERVED_MASK_V3                                0xF0
+#define NODE_INFO_CACHED_GET_PROPERTIES1_RESERVED_SHIFT_V3                               0x04
+/* Values used for Node Info Cached Report command */
+#define NODE_INFO_CACHED_REPORT_PROPERTIES1_AGE_MASK_V3                                  0x0F
+#define NODE_INFO_CACHED_REPORT_PROPERTIES1_STATUS_MASK_V3                               0xF0
+#define NODE_INFO_CACHED_REPORT_PROPERTIES1_STATUS_SHIFT_V3                              0x04
+#define NODE_INFO_CACHED_REPORT_STATUS_STATUS_OK_V3                                      0x00
+#define NODE_INFO_CACHED_REPORT_STATUS_STATUS_NOT_RESPONDING_V3                          0x01
+#define NODE_INFO_CACHED_REPORT_STATUS_STATUS_UNKNOWN_V3                                 0x02
+#define NODE_INFO_CACHED_REPORT_PROPERTIES2_Z_WAVE_PROTOCOL_SPECIFIC_PART_1_MASK_V3      0x7F
+#define NODE_INFO_CACHED_REPORT_PROPERTIES2_LISTENING_BIT_MASK_V3                        0x80
+#define NODE_INFO_CACHED_REPORT_PROPERTIES3_Z_WAVE_PROTOCOL_SPECIFIC_PART_2_MASK_V3      0x7F
+#define NODE_INFO_CACHED_REPORT_PROPERTIES3_OPT_BIT_MASK_V3                              0x80
+/* Values used for Nm Multi Channel End Point Report command */
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES1_INDIVIDUAL_END_POINTS_MASK_V3      0x7F
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES1_RES1_BIT_MASK_V3                   0x80
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES2_AGGREGATED_END_POINTS_MASK_V3      0x7F
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES2_RES2_BIT_MASK_V3                   0x80
+/* Values used for Nm Multi Channel Capability Get command */
+#define NM_MULTI_CHANNEL_CAPABILITY_GET_PROPERTIES1_END_POINT_MASK_V3                    0x7F
+#define NM_MULTI_CHANNEL_CAPABILITY_GET_PROPERTIES1_RES1_BIT_MASK_V3                     0x80
+/* Values used for Nm Multi Channel Capability Report command */
+#define NM_MULTI_CHANNEL_CAPABILITY_REPORT_PROPERTIES1_END_POINT_MASK_V3                 0x7F
+#define NM_MULTI_CHANNEL_CAPABILITY_REPORT_PROPERTIES1_RES1_BIT_MASK_V3                  0x80
+/* Values used for Nm Multi Channel Aggregated Members Get command */
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_PROPERTIES1_AGGREGATED_END_POINT_MASK_V3 0x7F
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_PROPERTIES1_RES1_BIT_MASK_V3             0x80
+/* Values used for Nm Multi Channel Aggregated Members Report command */
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_PROPERTIES1_AGGREGATED_END_POINT_MASK_V3 0x7F
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_PROPERTIES1_RES1_BIT_MASK_V3          0x80
+
+/* Network Management Proxy command class commands */
+#define NETWORK_MANAGEMENT_PROXY_VERSION_V4                                              0x04
+#define NODE_INFO_CACHED_GET_V4                                                          0x03
+#define NODE_INFO_CACHED_REPORT_V4                                                       0x04
+#define NODE_LIST_GET_V4                                                                 0x01
+#define NODE_LIST_REPORT_V4                                                              0x02
+#define NM_MULTI_CHANNEL_END_POINT_GET_V4                                                0x05
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_V4                                             0x06
+#define NM_MULTI_CHANNEL_CAPABILITY_GET_V4                                               0x07
+#define NM_MULTI_CHANNEL_CAPABILITY_REPORT_V4                                            0x08
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V4                                       0x09
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4                                    0x0A
+#define FAILED_NODE_LIST_GET_V4                                                          0x0B
+#define FAILED_NODE_LIST_REPORT_V4                                                       0x0C
+/* Values used for Node Info Cached Get command */
+#define NODE_INFO_CACHED_GET_PROPERTIES1_MAX_AGE_MASK_V4                                 0x0F
+#define NODE_INFO_CACHED_GET_PROPERTIES1_RESERVED_MASK_V4                                0xF0
+#define NODE_INFO_CACHED_GET_PROPERTIES1_RESERVED_SHIFT_V4                               0x04
+/* Values used for Node Info Cached Report command */
+#define NODE_INFO_CACHED_REPORT_PROPERTIES1_AGE_MASK_V4                                  0x0F
+#define NODE_INFO_CACHED_REPORT_PROPERTIES1_STATUS_MASK_V4                               0xF0
+#define NODE_INFO_CACHED_REPORT_PROPERTIES1_STATUS_SHIFT_V4                              0x04
+#define NODE_INFO_CACHED_REPORT_STATUS_STATUS_OK_V4                                      0x00
+#define NODE_INFO_CACHED_REPORT_STATUS_STATUS_NOT_RESPONDING_V4                          0x01
+#define NODE_INFO_CACHED_REPORT_STATUS_STATUS_UNKNOWN_V4                                 0x02
+#define NODE_INFO_CACHED_REPORT_PROPERTIES2_Z_WAVE_PROTOCOL_SPECIFIC_PART_1_MASK_V4      0x7F
+#define NODE_INFO_CACHED_REPORT_PROPERTIES2_LISTENING_BIT_MASK_V4                        0x80
+#define NODE_INFO_CACHED_REPORT_PROPERTIES3_Z_WAVE_PROTOCOL_SPECIFIC_PART_2_MASK_V4      0x7F
+#define NODE_INFO_CACHED_REPORT_PROPERTIES3_OPT_BIT_MASK_V4                              0x80
+/* Values used for Nm Multi Channel End Point Report command */
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES1_INDIVIDUAL_END_POINTS_MASK_V4      0x7F
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES1_RES1_BIT_MASK_V4                   0x80
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES2_AGGREGATED_END_POINTS_MASK_V4      0x7F
+#define NM_MULTI_CHANNEL_END_POINT_REPORT_PROPERTIES2_RES2_BIT_MASK_V4                   0x80
+/* Values used for Nm Multi Channel Capability Get command */
+#define NM_MULTI_CHANNEL_CAPABILITY_GET_PROPERTIES1_END_POINT_MASK_V4                    0x7F
+#define NM_MULTI_CHANNEL_CAPABILITY_GET_PROPERTIES1_RES1_BIT_MASK_V4                     0x80
+/* Values used for Nm Multi Channel Capability Report command */
+#define NM_MULTI_CHANNEL_CAPABILITY_REPORT_PROPERTIES1_END_POINT_MASK_V4                 0x7F
+#define NM_MULTI_CHANNEL_CAPABILITY_REPORT_PROPERTIES1_RES1_BIT_MASK_V4                  0x80
+/* Values used for Nm Multi Channel Aggregated Members Get command */
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_PROPERTIES1_AGGREGATED_END_POINT_MASK_V4 0x7F
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_PROPERTIES1_RES1_BIT_MASK_V4             0x80
+/* Values used for Nm Multi Channel Aggregated Members Report command */
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_PROPERTIES1_AGGREGATED_END_POINT_MASK_V4 0x7F
+#define NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_PROPERTIES1_RES1_BIT_MASK_V4          0x80
+
 /* Network Management Basic command class commands */
 #define NETWORK_MANAGEMENT_BASIC_VERSION                                                 0x01
 #define LEARN_MODE_SET                                                                   0x01
@@ -6760,10 +8447,7 @@
 #define NODE_ADD_KEYS_SET_V3                                                             0x12
 #define NODE_ADD_DSK_REPORT_V3                                                           0x13
 #define NODE_ADD_DSK_SET_V3                                                              0x14
-#define S2_ADVANCED_JOIN_MODE_GET_V3                                                     0x17
 #define SMART_START_JOIN_STARTED_REPORT_V3                                               0x15
-#define S2_ADVANCED_JOIN_MODE_SET_V3                                                     0x16
-#define S2_ADVANCED_JOIN_MODE_REPORT_V3                                                  0x18
 #define INCLUDED_NIF_REPORT_V3                                                           0x19
 /* Values used for Node Add Status command */
 #define NODE_ADD_STATUS_PROPERTIES1_Z_WAVE_PROTOCOL_SPECIFIC_PART_1_MASK_V3              0x7F
@@ -6799,6 +8483,69 @@
 #define INCLUDED_NIF_REPORT_PROPERTIES1_DSK_LENGTH_MASK_V3                               0x1F
 #define INCLUDED_NIF_REPORT_PROPERTIES1_RESERVED1_MASK_V3                                0xE0
 #define INCLUDED_NIF_REPORT_PROPERTIES1_RESERVED1_SHIFT_V3                               0x05
+
+/* Network Management Inclusion command class commands */
+#define NETWORK_MANAGEMENT_INCLUSION_VERSION_V4                                          0x04
+#define FAILED_NODE_REMOVE_V4                                                            0x07
+#define FAILED_NODE_REMOVE_STATUS_V4                                                     0x08
+#define NODE_ADD_V4                                                                      0x01
+#define NODE_ADD_STATUS_V4                                                               0x02
+#define NODE_REMOVE_V4                                                                   0x03
+#define NODE_REMOVE_STATUS_V4                                                            0x04
+#define FAILED_NODE_REPLACE_V4                                                           0x09
+#define FAILED_NODE_REPLACE_STATUS_V4                                                    0x0A
+#define NODE_NEIGHBOR_UPDATE_REQUEST_V4                                                  0x0B
+#define NODE_NEIGHBOR_UPDATE_STATUS_V4                                                   0x0C
+#define RETURN_ROUTE_ASSIGN_V4                                                           0x0D
+#define RETURN_ROUTE_ASSIGN_COMPLETE_V4                                                  0x0E
+#define RETURN_ROUTE_DELETE_V4                                                           0x0F
+#define RETURN_ROUTE_DELETE_COMPLETE_V4                                                  0x10
+#define NODE_ADD_KEYS_REPORT_V4                                                          0x11
+#define NODE_ADD_KEYS_SET_V4                                                             0x12
+#define NODE_ADD_DSK_REPORT_V4                                                           0x13
+#define NODE_ADD_DSK_SET_V4                                                              0x14
+#define SMART_START_JOIN_STARTED_REPORT_V4                                               0x15
+#define INCLUDED_NIF_REPORT_V4                                                           0x19
+#define EXTENDED_NODE_ADD_STATUS_V4                                                      0x16
+/* Values used for Node Add Status command */
+#define NODE_ADD_STATUS_PROPERTIES1_Z_WAVE_PROTOCOL_SPECIFIC_PART_1_MASK_V4              0x7F
+#define NODE_ADD_STATUS_PROPERTIES1_LISTENING_BIT_MASK_V4                                0x80
+#define NODE_ADD_STATUS_PROPERTIES2_Z_WAVE_PROTOCOL_SPECIFIC_PART_2_MASK_V4              0x7F
+#define NODE_ADD_STATUS_PROPERTIES2_OPT_BIT_MASK_V4                                      0x80
+#define NODE_ADD_STATUS_PROPERTIES3_DSK_LENGTH_MASK_V4                                   0x1F
+#define NODE_ADD_STATUS_PROPERTIES3_RESERVED2_MASK_V4                                    0xE0
+#define NODE_ADD_STATUS_PROPERTIES3_RESERVED2_SHIFT_V4                                   0x05
+/* Values used for Node Add Keys Report command */
+#define NODE_ADD_KEYS_REPORT_PROPERTIES1_REQUEST_CSA_BIT_MASK_V4                         0x01
+#define NODE_ADD_KEYS_REPORT_PROPERTIES1_RESERVED_MASK_V4                                0xFE
+#define NODE_ADD_KEYS_REPORT_PROPERTIES1_RESERVED_SHIFT_V4                               0x01
+/* Values used for Node Add Keys Set command */
+#define NODE_ADD_KEYS_SET_PROPERTIES1_ACCEPT_BIT_MASK_V4                                 0x01
+#define NODE_ADD_KEYS_SET_PROPERTIES1_GRANT_CSA_BIT_MASK_V4                              0x02
+#define NODE_ADD_KEYS_SET_PROPERTIES1_RESERVED_MASK_V4                                   0xFC
+#define NODE_ADD_KEYS_SET_PROPERTIES1_RESERVED_SHIFT_V4                                  0x02
+/* Values used for Node Add Dsk Report command */
+#define NODE_ADD_DSK_REPORT_PROPERTIES1_INPUT_DSK_LENGTH_MASK_V4                         0x0F
+#define NODE_ADD_DSK_REPORT_PROPERTIES1_RESERVED_MASK_V4                                 0xF0
+#define NODE_ADD_DSK_REPORT_PROPERTIES1_RESERVED_SHIFT_V4                                0x04
+/* Values used for Node Add Dsk Set command */
+#define NODE_ADD_DSK_SET_PROPERTIES1_INPUT_DSK_LENGTH_MASK_V4                            0x0F
+#define NODE_ADD_DSK_SET_PROPERTIES1_RESERVED_MASK_V4                                    0x70
+#define NODE_ADD_DSK_SET_PROPERTIES1_RESERVED_SHIFT_V4                                   0x04
+#define NODE_ADD_DSK_SET_PROPERTIES1_ACCEPT_BIT_MASK_V4                                  0x80
+/* Values used for Smart Start Join Started Report command */
+#define SMART_START_JOIN_STARTED_REPORT_PROPERTIES1_DSK_LENGTH_MASK_V4                   0x1F
+#define SMART_START_JOIN_STARTED_REPORT_PROPERTIES1_RESERVED1_MASK_V4                    0xE0
+#define SMART_START_JOIN_STARTED_REPORT_PROPERTIES1_RESERVED1_SHIFT_V4                   0x05
+/* Values used for Included Nif Report command */
+#define INCLUDED_NIF_REPORT_PROPERTIES1_DSK_LENGTH_MASK_V4                               0x1F
+#define INCLUDED_NIF_REPORT_PROPERTIES1_RESERVED1_MASK_V4                                0xE0
+#define INCLUDED_NIF_REPORT_PROPERTIES1_RESERVED1_SHIFT_V4                               0x05
+/* Values used for Extended Node Add Status command */
+#define EXTENDED_NODE_ADD_STATUS_PROPERTIES1_Z_WAVE_PROTOCOL_SPECIFIC_PART_1_MASK_V4     0x7F
+#define EXTENDED_NODE_ADD_STATUS_PROPERTIES1_LISTENING_BIT_MASK_V4                       0x80
+#define EXTENDED_NODE_ADD_STATUS_PROPERTIES2_Z_WAVE_PROTOCOL_SPECIFIC_PART_2_MASK_V4     0x7F
+#define EXTENDED_NODE_ADD_STATUS_PROPERTIES2_OPT_FUNC_BIT_MASK_V4                        0x80
 
 /* No Operation command class commands */
 #define NO_OPERATION_VERSION                                                             0x01
@@ -7105,6 +8852,23 @@
 #define SCHEDULE_ENTRY_LOCK_TIME_OFFSET_SET_LEVEL_SIGN_TZO_BIT_MASK_V3                   0x80
 #define SCHEDULE_ENTRY_LOCK_TIME_OFFSET_SET_LEVEL2_MINUTE_OFFSET_DST_MASK_V3             0x7F
 #define SCHEDULE_ENTRY_LOCK_TIME_OFFSET_SET_LEVEL2_SIGN_OFFSET_DST_BIT_MASK_V3           0x80
+
+/* Schedule Entry Lock command class commands */
+#define SCHEDULE_ENTRY_LOCK_VERSION_V4                                                   0x04
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_V4                                       0x11
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_SET_V4                            0x12
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_GET_V4                            0x13
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_REPORT_V4                         0x14
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_SET_V4                            0x15
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_GET_V4                            0x16
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_REPORT_V4                         0x17
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V4                              0x18
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_GET_V4                              0x19
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_REPORT_V4                           0x1A
+/* Values used for Extended Schedule Entry Lock Enable Set command */
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_PROPERTIES1_ENABLED_BIT_MASK_V4          0x01
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_PROPERTIES1_RESERVED_MASK_V4             0xFE
+#define EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_PROPERTIES1_RESERVED_SHIFT_V4            0x01
 
 /* Screen Attributes command class commands */
 #define SCREEN_ATTRIBUTES_VERSION                                                        0x01
@@ -9044,6 +10808,42 @@
 #define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_MASK                                  0xF8
 #define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_SHIFT                                 0x03
 
+/* Simple Av Control command class commands */
+#define SIMPLE_AV_CONTROL_VERSION_V2                                                     0x02
+#define SIMPLE_AV_CONTROL_GET_V2                                                         0x02
+#define SIMPLE_AV_CONTROL_REPORT_V2                                                      0x03
+#define SIMPLE_AV_CONTROL_SET_V2                                                         0x01
+#define SIMPLE_AV_CONTROL_SUPPORTED_GET_V2                                               0x04
+#define SIMPLE_AV_CONTROL_SUPPORTED_REPORT_V2                                            0x05
+/* Values used for Simple Av Control Set command */
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_KEY_ATTRIBUTES_MASK_V2                         0x07
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_MASK_V2                               0xF8
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_SHIFT_V2                              0x03
+
+/* Simple Av Control command class commands */
+#define SIMPLE_AV_CONTROL_VERSION_V3                                                     0x03
+#define SIMPLE_AV_CONTROL_GET_V3                                                         0x02
+#define SIMPLE_AV_CONTROL_REPORT_V3                                                      0x03
+#define SIMPLE_AV_CONTROL_SET_V3                                                         0x01
+#define SIMPLE_AV_CONTROL_SUPPORTED_GET_V3                                               0x04
+#define SIMPLE_AV_CONTROL_SUPPORTED_REPORT_V3                                            0x05
+/* Values used for Simple Av Control Set command */
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_KEY_ATTRIBUTES_MASK_V3                         0x07
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_MASK_V3                               0xF8
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_SHIFT_V3                              0x03
+
+/* Simple Av Control command class commands */
+#define SIMPLE_AV_CONTROL_VERSION_V4                                                     0x04
+#define SIMPLE_AV_CONTROL_GET_V4                                                         0x02
+#define SIMPLE_AV_CONTROL_REPORT_V4                                                      0x03
+#define SIMPLE_AV_CONTROL_SET_V4                                                         0x01
+#define SIMPLE_AV_CONTROL_SUPPORTED_GET_V4                                               0x04
+#define SIMPLE_AV_CONTROL_SUPPORTED_REPORT_V4                                            0x05
+/* Values used for Simple Av Control Set command */
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_KEY_ATTRIBUTES_MASK_V4                         0x07
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_MASK_V4                               0xF8
+#define SIMPLE_AV_CONTROL_SET_PROPERTIES1_RESERVED_SHIFT_V4                              0x03
+
 /* Switch All command class commands */
 #define SWITCH_ALL_VERSION                                                               0x01
 #define SWITCH_ALL_GET                                                                   0x02
@@ -9158,9 +10958,6 @@
 #define SWITCH_MULTILEVEL_REPORT_ALREADY_AT_THE_TARGET_VALUE_V4                          0x00
 #define SWITCH_MULTILEVEL_REPORT_UNKNOWN_DURATION_V4                                     0xFE
 #define SWITCH_MULTILEVEL_REPORT_RESERVED_V4                                             0xFF
-/* Values used for Switch Multilevel Set command */
-#define SWITCH_MULTILEVEL_SET_INSTANTLY_V4                                               0x00
-#define SWITCH_MULTILEVEL_SET_DEFAULT_V4                                                 0xFF
 /* Values used for Switch Multilevel Start Level Change command */
 #define SWITCH_MULTILEVEL_START_LEVEL_CHANGE_PROPERTIES1_RESERVED_MASK_V4                0x07
 #define SWITCH_MULTILEVEL_START_LEVEL_CHANGE_PROPERTIES1_INC_DEC_MASK_V4                 0x18
@@ -9388,6 +11185,56 @@
 #define THERMOSTAT_FAN_MODE_SET_PROPERTIES1_RESERVED_SHIFT_V4                            0x04
 #define THERMOSTAT_FAN_MODE_SET_PROPERTIES1_OFF_BIT_MASK_V4                              0x80
 
+/* Thermostat Fan Mode command class commands */
+#define THERMOSTAT_FAN_MODE_VERSION_V5                                                   0x05
+#define THERMOSTAT_FAN_MODE_GET_V5                                                       0x02
+#define THERMOSTAT_FAN_MODE_REPORT_V5                                                    0x03
+#define THERMOSTAT_FAN_MODE_SET_V5                                                       0x01
+#define THERMOSTAT_FAN_MODE_SUPPORTED_GET_V5                                             0x04
+#define THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_V5                                          0x05
+/* Values used for Thermostat Fan Mode Report command */
+#define THERMOSTAT_FAN_MODE_REPORT_PROPERTIES1_FAN_MODE_MASK_V5                          0x0F
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_AUTO_LOW_V5                                  0x00
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_LOW_V5                                       0x01
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_AUTO_HIGH_V5                                 0x02
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_HIGH_V5                                      0x03
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_AUTO_MEDIUM_V5                               0x04
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_MEDIUM_V5                                    0x05
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_CIRCULATION_V5                               0x06
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_HUMIDITY_V5                                  0x07
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_LEFT_RIGHT_V5                                0x08
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_UP_DOWN_V5                                   0x09
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_QUIET_V5                                     0x0A
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_EXTERNAL_CIRCULATION_V5                      0x0B
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_RESERVEDC_V5                                 0x0C
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_RESERVEDD_V5                                 0x0D
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_RESERVEDE_V5                                 0x0E
+#define THERMOSTAT_FAN_MODE_REPORT_FAN_MODE_RESERVEDF_V5                                 0x0F
+#define THERMOSTAT_FAN_MODE_REPORT_PROPERTIES1_RESERVED_MASK_V5                          0x70
+#define THERMOSTAT_FAN_MODE_REPORT_PROPERTIES1_RESERVED_SHIFT_V5                         0x04
+#define THERMOSTAT_FAN_MODE_REPORT_PROPERTIES1_OFF_BIT_MASK_V5                           0x80
+/* Values used for Thermostat Fan Mode Set command */
+#define THERMOSTAT_FAN_MODE_SET_PROPERTIES1_FAN_MODE_MASK_V5                             0x0F
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_AUTO_LOW_V5                                     0x00
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_LOW_V5                                          0x01
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_AUTO_HIGH_V5                                    0x02
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_HIGH_V5                                         0x03
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_AUTO_MEDIUM_V5                                  0x04
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_MEDIUM_V5                                       0x05
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_CIRCULATION_V5                                  0x06
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_HUMIDITY_V5                                     0x07
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_LEFT_RIGHT_V5                                   0x08
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_UP_DOWN_V5                                      0x09
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_QUIET_V5                                        0x0A
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_EXTERNAL_CIRCULATION_V5                         0x0B
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_RESERVEDC_V5                                    0x0C
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_RESERVEDD_V5                                    0x0D
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_RESERVEDE_V5                                    0x0E
+#define THERMOSTAT_FAN_MODE_SET_FAN_MODE_RESERVEDF_V5                                    0x0F
+#define THERMOSTAT_FAN_MODE_SET_PROPERTIES1_RESERVED_MASK_V5                             0x70
+#define THERMOSTAT_FAN_MODE_SET_PROPERTIES1_RESERVED_SHIFT_V5                            0x04
+#define THERMOSTAT_FAN_MODE_SET_PROPERTIES1_OFF_BIT_MASK_V5                              0x80
+
 /* Thermostat Fan State command class commands */
 #define THERMOSTAT_FAN_STATE_VERSION                                                     0x01
 #define THERMOSTAT_FAN_STATE_GET                                                         0x02
@@ -9396,6 +11243,7 @@
 #define THERMOSTAT_FAN_STATE_REPORT_LEVEL_FAN_OPERATING_STATE_MASK                       0x0F
 #define THERMOSTAT_FAN_STATE_REPORT_FAN_OPERATING_STATE_IDLE                             0x00
 #define THERMOSTAT_FAN_STATE_REPORT_FAN_OPERATING_STATE_RUNNING                          0x01
+#define THERMOSTAT_FAN_STATE_REPORT_FAN_OPERATING_STATE_RUNNING_HIGH                     0x02
 #define THERMOSTAT_FAN_STATE_REPORT_LEVEL_RESERVED_MASK                                  0xF0
 #define THERMOSTAT_FAN_STATE_REPORT_LEVEL_RESERVED_SHIFT                                 0x04
 
@@ -10093,9 +11941,9 @@
 #define USER_CODE_KEYPAD_MODE_SET_V2                                                     0x08
 #define USER_CODE_KEYPAD_MODE_GET_V2                                                     0x09
 #define USER_CODE_KEYPAD_MODE_REPORT_V2                                                  0x0A
-#define MASTER_CODE_SET_V2                                                               0x0E
-#define MASTER_CODE_GET_V2                                                               0x0F
-#define MASTER_CODE_REPORT_V2                                                            0x10
+#define ADMIN_CODE_SET_V2                                                                0x0E
+#define ADMIN_CODE_GET_V2                                                                0x0F
+#define ADMIN_CODE_REPORT_V2                                                             0x10
 #define USER_CODE_CHECKSUM_GET_V2                                                        0x11
 #define USER_CODE_CHECKSUM_REPORT_V2                                                     0x12
 /* Values used for User Code Report command */
@@ -10132,16 +11980,16 @@
 #define EXTENDED_USER_CODE_REPORT_STATUS_NOT_AVAILABLE_V2                                0xFE
 /* Values used for User Code Capabilities Report command */
 #define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_SUPPORTED_USER_ID_STATUS_BIT_MASK_LENGTH_MASK_V2 0x1F
-#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_RESERVED_BIT_MASK_V2                   0x20
-#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_MCD_SUPPORT_BIT_MASK_V2                0x40
-#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_MC_SUPPORT_BIT_MASK_V2                 0x80
+#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_RESERVED1_BIT_MASK_V2                  0x20
+#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_ACD_SUPPORT_BIT_MASK_V2                0x40
+#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES1_AC_SUPPORT_BIT_MASK_V2                 0x80
 #define USER_CODE_CAPABILITIES_REPORT_PROPERTIES2_SUPPORTED_KEYPAD_MODES_BIT_MASK_LENGTH_MASK_V2 0x1F
 #define USER_CODE_CAPABILITIES_REPORT_PROPERTIES2_MUCS_SUPPORT_BIT_MASK_V2               0x20
 #define USER_CODE_CAPABILITIES_REPORT_PROPERTIES2_MUCR_SUPPORT_BIT_MASK_V2               0x40
 #define USER_CODE_CAPABILITIES_REPORT_PROPERTIES2_UCC_SUPPORT_BIT_MASK_V2                0x80
-#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES3_SUPPORTED_KEYS_BIT_MASK_LENGTH_MASK_V2 0x0F
-#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES3_RESERVED_MASK_V2                       0xF0
-#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES3_RESERVED_SHIFT_V2                      0x04
+#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES3_SUPPORTED_KEYS_BIT_MASK_LENGTH_MASK_V2 0x1F
+#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES3_RESERVED2_MASK_V2                      0xE0
+#define USER_CODE_CAPABILITIES_REPORT_PROPERTIES3_RESERVED2_SHIFT_V2                     0x05
 /* Values used for User Code Keypad Mode Set command */
 #define USER_CODE_KEYPAD_MODE_SET_NORMAL_MODE_V2                                         0x00
 #define USER_CODE_KEYPAD_MODE_SET_VACATION_MODE_V2                                       0x01
@@ -10152,14 +12000,14 @@
 #define USER_CODE_KEYPAD_MODE_REPORT_VACATION_MODE_V2                                    0x01
 #define USER_CODE_KEYPAD_MODE_REPORT_PRIVACY_MODE_V2                                     0x02
 #define USER_CODE_KEYPAD_MODE_REPORT_LOCKED_OUT_MODE_V2                                  0x03
-/* Values used for Master Code Set command */
-#define MASTER_CODE_SET_PROPERTIES1_MASTER_CODE_LENGTH_MASK_V2                           0x0F
-#define MASTER_CODE_SET_PROPERTIES1_RESERVED_MASK_V2                                     0xF0
-#define MASTER_CODE_SET_PROPERTIES1_RESERVED_SHIFT_V2                                    0x04
-/* Values used for Master Code Report command */
-#define MASTER_CODE_REPORT_PROPERTIES1_MASTER_CODE_LENGTH_MASK_V2                        0x0F
-#define MASTER_CODE_REPORT_PROPERTIES1_RESERVED_MASK_V2                                  0xF0
-#define MASTER_CODE_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                                 0x04
+/* Values used for Admin Code Set command */
+#define ADMIN_CODE_SET_PROPERTIES1_ADMIN_CODE_LENGTH_MASK_V2                             0x0F
+#define ADMIN_CODE_SET_PROPERTIES1_RESERVED_MASK_V2                                      0xF0
+#define ADMIN_CODE_SET_PROPERTIES1_RESERVED_SHIFT_V2                                     0x04
+/* Values used for Admin Code Report command */
+#define ADMIN_CODE_REPORT_PROPERTIES1_ADMIN_CODE_LENGTH_MASK_V2                          0x0F
+#define ADMIN_CODE_REPORT_PROPERTIES1_RESERVED_MASK_V2                                   0xF0
+#define ADMIN_CODE_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                                  0x04
 
 /* Version command class commands */
 #define VERSION_VERSION                                                                  0x01
@@ -10209,6 +12057,20 @@
 #define WAKE_UP_INTERVAL_SET_V2                                                          0x04
 #define WAKE_UP_NO_MORE_INFORMATION_V2                                                   0x08
 #define WAKE_UP_NOTIFICATION_V2                                                          0x07
+
+/* Wake Up command class commands */
+#define WAKE_UP_VERSION_V3                                                               0x03
+#define WAKE_UP_INTERVAL_CAPABILITIES_GET_V3                                             0x09
+#define WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V3                                          0x0A
+#define WAKE_UP_INTERVAL_GET_V3                                                          0x05
+#define WAKE_UP_INTERVAL_REPORT_V3                                                       0x06
+#define WAKE_UP_INTERVAL_SET_V3                                                          0x04
+#define WAKE_UP_NO_MORE_INFORMATION_V3                                                   0x08
+#define WAKE_UP_NOTIFICATION_V3                                                          0x07
+/* Values used for Wake Up Interval Capabilities Report command */
+#define WAKE_UP_INTERVAL_CAPABILITIES_REPORT_PROPERTIES1_WAKE_UP_ON_DEMAND_BIT_MASK_V3   0x01
+#define WAKE_UP_INTERVAL_CAPABILITIES_REPORT_PROPERTIES1_RESERVED_MASK_V3                0xFE
+#define WAKE_UP_INTERVAL_CAPABILITIES_REPORT_PROPERTIES1_RESERVED_SHIFT_V3               0x01
 
 /* Zip 6lowpan command class commands */
 #define ZIP_6LOWPAN_VERSION                                                              0x01
@@ -10363,23 +12225,15 @@
 #define SWITCH_COLOR_SET_V3                                                              0x05
 #define SWITCH_COLOR_START_LEVEL_CHANGE_V3                                               0x06
 #define SWITCH_COLOR_STOP_LEVEL_CHANGE_V3                                                0x07
-/* Values used for Switch Color Report command */
-#define SWITCH_COLOR_REPORT_ALREADY_AT_THE_TARGET_VALUE_V3                               0x00
-#define SWITCH_COLOR_REPORT_UNKNOWN_DURATION_V3                                          0xFE
-#define SWITCH_COLOR_REPORT_RESERVED_V3                                                  0xFF
 /* Values used for Switch Color Set command */
 #define SWITCH_COLOR_SET_PROPERTIES1_COLOR_COMPONENT_COUNT_MASK_V3                       0x1F
 #define SWITCH_COLOR_SET_PROPERTIES1_RESERVED_MASK_V3                                    0xE0
 #define SWITCH_COLOR_SET_PROPERTIES1_RESERVED_SHIFT_V3                                   0x05
-#define SWITCH_COLOR_SET_INSTANTLY_V3                                                    0x00
-#define SWITCH_COLOR_SET_DEFAULT_V3                                                      0xFF
 /* Values used for Switch Color Start Level Change command */
 #define SWITCH_COLOR_START_LEVEL_CHANGE_PROPERTIES1_RES1_MASK_V3                         0x1F
 #define SWITCH_COLOR_START_LEVEL_CHANGE_PROPERTIES1_IGNORE_START_STATE_BIT_MASK_V3       0x20
 #define SWITCH_COLOR_START_LEVEL_CHANGE_PROPERTIES1_UP_DOWN_BIT_MASK_V3                  0x40
 #define SWITCH_COLOR_START_LEVEL_CHANGE_PROPERTIES1_RES2_BIT_MASK_V3                     0x80
-#define SWITCH_COLOR_START_LEVEL_CHANGE_INSTANTLY_V3                                     0x00
-#define SWITCH_COLOR_START_LEVEL_CHANGE_DEFAULT_V3                                       0xFF
 
 /* Schedule command class commands */
 #define SCHEDULE_VERSION                                                                 0x01
@@ -10645,6 +12499,25 @@
 #define ZIP_NODE_ADVERTISEMENT_PROPERTIES1_RESERVED_MASK                                 0xF8
 #define ZIP_NODE_ADVERTISEMENT_PROPERTIES1_RESERVED_SHIFT                                0x03
 
+/* Zip Nd command class commands */
+#define ZIP_ND_VERSION_V2                                                                0x02
+#define ZIP_NODE_SOLICITATION_V2                                                         0x03
+#define ZIP_INV_NODE_SOLICITATION_V2                                                     0x04
+#define ZIP_NODE_ADVERTISEMENT_V2                                                        0x01
+/* Values used for Zip Inv Node Solicitation command */
+#define ZIP_INV_NODE_SOLICITATION_PROPERTIES1_RESERVED1_MASK_V2                          0x03
+#define ZIP_INV_NODE_SOLICITATION_PROPERTIES1_LOCAL_BIT_MASK_V2                          0x04
+#define ZIP_INV_NODE_SOLICITATION_PROPERTIES1_RESERVED2_MASK_V2                          0xF8
+#define ZIP_INV_NODE_SOLICITATION_PROPERTIES1_RESERVED2_SHIFT_V2                         0x03
+/* Values used for Zip Node Advertisement command */
+#define ZIP_NODE_ADVERTISEMENT_PROPERTIES1_VALIDITY_MASK_V2                              0x03
+#define ZIP_NODE_ADVERTISEMENT_VALIDITY_INFORMATION_OK_V2                                0x00
+#define ZIP_NODE_ADVERTISEMENT_VALIDITY_INFORMATION_OBSOLETE_V2                          0x01
+#define ZIP_NODE_ADVERTISEMENT_VALIDITY_INFORMATION_NOT_FOUND_V2                         0x02
+#define ZIP_NODE_ADVERTISEMENT_PROPERTIES1_LOCAL_BIT_MASK_V2                             0x04
+#define ZIP_NODE_ADVERTISEMENT_PROPERTIES1_RESERVED_MASK_V2                              0xF8
+#define ZIP_NODE_ADVERTISEMENT_PROPERTIES1_RESERVED_SHIFT_V2                             0x03
+
 /* Association Grp Info command class commands */
 #define ASSOCIATION_GRP_INFO_VERSION                                                     0x01
 #define ASSOCIATION_GROUP_NAME_GET                                                       0x01
@@ -10661,44 +12534,66 @@
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_GROUP_COUNT_MASK                       0x3F
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_DYNAMIC_INFO_BIT_MASK                  0x40
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_LIST_MODE_BIT_MASK                     0x80
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL                                    0x00
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL                                    0x20
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_SENSOR                                     0x31
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION                               0x71
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_NA                                 0x00
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_LIFELINE                           0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY01                              0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY02                              0x02
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY03                              0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY04                              0x04
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY05                              0x05
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY06                              0x06
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY07                              0x07
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY08                              0x08
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY09                              0x09
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY10                              0x0A
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY11                              0x0B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY12                              0x0C
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY13                              0x0D
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY14                              0x0E
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY15                              0x0F
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY16                              0x10
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY17                              0x11
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY18                              0x12
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY19                              0x13
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY20                              0x14
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY21                              0x15
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY22                              0x16
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY23                              0x17
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY24                              0x18
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY25                              0x19
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY26                              0x1A
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY27                              0x1B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY28                              0x1C
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY29                              0x1D
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY30                              0x1E
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY31                              0x1F
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY32                              0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_GENERAL                                0x00
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_CONTROL                                0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_SENSOR                                 0x31
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_NOTIFICATION                           0x71
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_GENERAL_NA                                     0x00
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_GENERAL_LIFELINE                               0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY01                                  0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY02                                  0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY03                                  0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY04                                  0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY05                                  0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY06                                  0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY07                                  0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY08                                  0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY09                                  0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY10                                  0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY11                                  0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY12                                  0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY13                                  0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY14                                  0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY15                                  0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY16                                  0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY17                                  0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY18                                  0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY19                                  0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY20                                  0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY21                                  0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY22                                  0x16
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY23                                  0x17
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY24                                  0x18
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY25                                  0x19
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY26                                  0x1A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY27                                  0x1B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY28                                  0x1C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY29                                  0x1D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY30                                  0x1E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY31                                  0x1F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY32                                  0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SMOKE_ALARM                      0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_C0_ALARM                         0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_CO2_ALARM                        0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HEAT_ALARM                       0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_ALARM                      0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_ACCESS_CONTROL                   0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_SECURITY                    0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_POWER_MANAGEMENT                 0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SYSTEM                           0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_EMERGENCY_ALARM                  0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_CLOCK                            0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_APPLIANCE                        0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_HEALTH                      0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SIREN                            0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_VALVE                      0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WEATHER_ALARM                    0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_IRRIGATION                       0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_GAS_ALARM                        0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_PEST_CONTROL                     0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_LIGHT_SENSOR                     0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_QUALITY_MONITORING         0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_MONITORING                  0x16
 /* Values used for Association Group Command List Get command */
 #define ASSOCIATION_GROUP_COMMAND_LIST_GET_PROPERTIES1_RESERVED_MASK                     0x7F
 #define ASSOCIATION_GROUP_COMMAND_LIST_GET_PROPERTIES1_ALLOW_CACHE_BIT_MASK              0x80
@@ -10719,52 +12614,72 @@
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_GROUP_COUNT_MASK_V2                    0x3F
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_DYNAMIC_INFO_BIT_MASK_V2               0x40
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_LIST_MODE_BIT_MASK_V2                  0x80
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_V2                                 0x00
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_V2                                 0x20
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_SENSOR_V2                                  0x31
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION_V2                            0x71
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_V2                                   0x32
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_NA_V2                              0x00
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_LIFELINE_V2                        0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY01_V2                           0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY02_V2                           0x02
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY03_V2                           0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY04_V2                           0x04
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY05_V2                           0x05
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY06_V2                           0x06
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY07_V2                           0x07
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY08_V2                           0x08
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY09_V2                           0x09
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY10_V2                           0x0A
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY11_V2                           0x0B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY12_V2                           0x0C
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY13_V2                           0x0D
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY14_V2                           0x0E
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY15_V2                           0x0F
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY16_V2                           0x10
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY17_V2                           0x11
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY18_V2                           0x12
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY19_V2                           0x13
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY20_V2                           0x14
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY21_V2                           0x15
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY22_V2                           0x16
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY23_V2                           0x17
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY24_V2                           0x18
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY25_V2                           0x19
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY26_V2                           0x1A
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY27_V2                           0x1B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY28_V2                           0x1C
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY29_V2                           0x1D
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY30_V2                           0x1E
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY31_V2                           0x1F
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY32_V2                           0x20
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_MULTILEVEL_SENSOR_TYPE_TEMPERATURE_V2      0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_MULTILEVEL_SENSOR_TYPE_HUMIDITY_V2         0x05
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION_TYPE_SMOKE_V2                 0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION_TYPE_CO2_V2                   0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_TYPE_ELECTRIC_V2                     0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_TYPE_GAS_V2                          0x02
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_TYPE_WATER_V2                        0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_GENERAL_V2                             0x00
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_CONTROL_V2                             0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_SENSOR_V2                              0x31
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_NOTIFICATION_V2                        0x71
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_METER_V2                               0x32
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_GENERAL_NA_V2                                  0x00
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_GENERAL_LIFELINE_V2                            0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY01_V2                               0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY02_V2                               0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY03_V2                               0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY04_V2                               0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY05_V2                               0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY06_V2                               0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY07_V2                               0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY08_V2                               0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY09_V2                               0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY10_V2                               0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY11_V2                               0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY12_V2                               0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY13_V2                               0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY14_V2                               0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY15_V2                               0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY16_V2                               0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY17_V2                               0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY18_V2                               0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY19_V2                               0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY20_V2                               0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY21_V2                               0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY22_V2                               0x16
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY23_V2                               0x17
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY24_V2                               0x18
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY25_V2                               0x19
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY26_V2                               0x1A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY27_V2                               0x1B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY28_V2                               0x1C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY29_V2                               0x1D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY30_V2                               0x1E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY31_V2                               0x1F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY32_V2                               0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_MULTILEVEL_SENSOR_TYPE_TEMPERATURE_V2              0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_MULTILEVEL_SENSOR_TYPE_HUMIDITY_V2                 0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SMOKE_ALARM_V2                   0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_C0_ALARM_V2                      0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_CO2_ALARM_V2                     0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HEAT_ALARM_V2                    0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_ALARM_V2                   0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_ACCESS_CONTROL_V2                0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_SECURITY_V2                 0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_POWER_MANAGEMENT_V2              0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SYSTEM_V2                        0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_EMERGENCY_ALARM_V2               0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_CLOCK_V2                         0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_APPLIANCE_V2                     0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_HEALTH_V2                   0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SIREN_V2                         0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_VALVE_V2                   0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WEATHER_ALARM_V2                 0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_IRRIGATION_V2                    0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_GAS_ALARM_V2                     0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_PEST_CONTROL_V2                  0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_LIGHT_SENSOR_V2                  0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_QUALITY_MONITORING_V2      0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_MONITORING_V2               0x16
+#define ASSOCIATION_GROUP_INFO_REPORT_METER_TYPE_ELECTRIC_V2                             0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_METER_TYPE_GAS_V2                                  0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_METER_TYPE_WATER_V2                                0x03
 /* Values used for Association Group Command List Get command */
 #define ASSOCIATION_GROUP_COMMAND_LIST_GET_PROPERTIES1_RESERVED_MASK_V2                  0x7F
 #define ASSOCIATION_GROUP_COMMAND_LIST_GET_PROPERTIES1_ALLOW_CACHE_BIT_MASK_V2           0x80
@@ -10785,85 +12700,105 @@
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_GROUP_COUNT_MASK_V3                    0x3F
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_DYNAMIC_INFO_BIT_MASK_V3               0x40
 #define ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_LIST_MODE_BIT_MASK_V3                  0x80
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_V3                                 0x00
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_V3                                 0x20
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_SENSOR_V3                                  0x31
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION_V3                            0x71
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_V3                                   0x32
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_IRRIGATION_V3                              0x6B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_NA_V3                              0x00
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_GENERAL_LIFELINE_V3                        0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY01_V3                           0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY02_V3                           0x02
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY03_V3                           0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY04_V3                           0x04
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY05_V3                           0x05
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY06_V3                           0x06
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY07_V3                           0x07
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY08_V3                           0x08
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY09_V3                           0x09
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY10_V3                           0x0A
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY11_V3                           0x0B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY12_V3                           0x0C
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY13_V3                           0x0D
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY14_V3                           0x0E
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY15_V3                           0x0F
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY16_V3                           0x10
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY17_V3                           0x11
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY18_V3                           0x12
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY19_V3                           0x13
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY20_V3                           0x14
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY21_V3                           0x15
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY22_V3                           0x16
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY23_V3                           0x17
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY24_V3                           0x18
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY25_V3                           0x19
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY26_V3                           0x1A
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY27_V3                           0x1B
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY28_V3                           0x1C
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY29_V3                           0x1D
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY30_V3                           0x1E
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY31_V3                           0x1F
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_CONTROL_KEY32_V3                           0x20
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_MULTILEVEL_SENSOR_TYPE_TEMPERATURE_V3      0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_MULTILEVEL_SENSOR_TYPE_HUMIDITY_V3         0x05
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION_TYPE_SMOKE_V3                 0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_NOTIFICATION_TYPE_CO2_V3                   0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_TYPE_ELECTRIC_V3                     0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_TYPE_GAS_V3                          0x02
-#define ASSOCIATION_GROUP_INFO_REPORT_PROFILE_METER_TYPE_WATER_V3                        0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_01_V3                           0x01
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_02_V3                           0x02
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_03_V3                           0x03
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_04_V3                           0x04
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_05_V3                           0x05
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_06_V3                           0x06
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_07_V3                           0x07
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_08_V3                           0x08
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_09_V3                           0x09
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_10_V3                           0x0A
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_11_V3                           0x0B
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_12_V3                           0x0C
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_13_V3                           0x0D
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_14_V3                           0x0E
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_15_V3                           0x0F
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_16_V3                           0x10
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_17_V3                           0x11
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_18_V3                           0x12
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_19_V3                           0x13
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_20_V3                           0x14
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_21_V3                           0x15
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_22_V3                           0x16
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_23_V3                           0x17
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_24_V3                           0x18
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_25_V3                           0x19
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_26_V3                           0x1A
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_27_V3                           0x1B
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_28_V3                           0x1C
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_29_V3                           0x1D
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_30_V3                           0x1E
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_31_V3                           0x1F
-#define ASSOCIATION_GROUP_INFO_REPORT_IRRIGATION_CHANNEL_32_V3                           0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_GENERAL_V3                             0x00
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_CONTROL_V3                             0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_SENSOR_V3                              0x31
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_NOTIFICATION_V3                        0x71
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_METER_V3                               0x32
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_PROFILE_IRRIGATION_V3                          0x6B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_GENERAL_NA_V3                                  0x00
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_GENERAL_LIFELINE_V3                            0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY01_V3                               0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY02_V3                               0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY03_V3                               0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY04_V3                               0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY05_V3                               0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY06_V3                               0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY07_V3                               0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY08_V3                               0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY09_V3                               0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY10_V3                               0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY11_V3                               0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY12_V3                               0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY13_V3                               0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY14_V3                               0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY15_V3                               0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY16_V3                               0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY17_V3                               0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY18_V3                               0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY19_V3                               0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY20_V3                               0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY21_V3                               0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY22_V3                               0x16
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY23_V3                               0x17
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY24_V3                               0x18
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY25_V3                               0x19
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY26_V3                               0x1A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY27_V3                               0x1B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY28_V3                               0x1C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY29_V3                               0x1D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY30_V3                               0x1E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY31_V3                               0x1F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_CONTROL_KEY32_V3                               0x20
+#define ASSOCIATION_GROUP_INFO_REPORT_MULTILEVEL_SENSOR_TYPE_TEMPERATURE_V3              0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_MULTILEVEL_SENSOR_TYPE_HUMIDITY_V3                 0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SMOKE_ALARM_V3                   0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_C0_ALARM_V3                      0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_CO2_ALARM_V3                     0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HEAT_ALARM_V3                    0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_ALARM_V3                   0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_ACCESS_CONTROL_V3                0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_SECURITY_V3                 0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_POWER_MANAGEMENT_V3              0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SYSTEM_V3                        0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_EMERGENCY_ALARM_V3               0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_CLOCK_V3                         0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_APPLIANCE_V3                     0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_HEALTH_V3                   0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_SIREN_V3                         0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_VALVE_V3                   0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WEATHER_ALARM_V3                 0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_IRRIGATION_V3                    0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_GAS_ALARM_V3                     0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_PEST_CONTROL_V3                  0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_LIGHT_SENSOR_V3                  0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_WATER_QUALITY_MONITORING_V3      0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_NOTIFICATION_TYPE_HOME_MONITORING_V3               0x16
+#define ASSOCIATION_GROUP_INFO_REPORT_METER_TYPE_ELECTRIC_V3                             0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_METER_TYPE_GAS_V3                                  0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_METER_TYPE_WATER_V3                                0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_01_V3                       0x01
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_02_V3                       0x02
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_03_V3                       0x03
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_04_V3                       0x04
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_05_V3                       0x05
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_06_V3                       0x06
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_07_V3                       0x07
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_08_V3                       0x08
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_09_V3                       0x09
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_10_V3                       0x0A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_11_V3                       0x0B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_12_V3                       0x0C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_13_V3                       0x0D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_14_V3                       0x0E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_15_V3                       0x0F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_16_V3                       0x10
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_17_V3                       0x11
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_18_V3                       0x12
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_19_V3                       0x13
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_20_V3                       0x14
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_21_V3                       0x15
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_22_V3                       0x16
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_23_V3                       0x17
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_24_V3                       0x18
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_25_V3                       0x19
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_26_V3                       0x1A
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_27_V3                       0x1B
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_28_V3                       0x1C
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_29_V3                       0x1D
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_30_V3                       0x1E
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_31_V3                       0x1F
+#define ASSOCIATION_GROUP_INFO_REPORT_AGI_IRRIGATION_CHANNEL_32_V3                       0x20
 /* Values used for Association Group Command List Get command */
 #define ASSOCIATION_GROUP_COMMAND_LIST_GET_PROPERTIES1_RESERVED_MASK_V3                  0x7F
 #define ASSOCIATION_GROUP_COMMAND_LIST_GET_PROPERTIES1_ALLOW_CACHE_BIT_MASK_V3           0x80
@@ -10963,6 +12898,25 @@
 /* Values used for Antitheft Set command */
 #define ANTITHEFT_SET_PROPERTIES1_NUMBER_OF_MAGIC_CODE_BYTES_MASK_V2                     0x7F
 #define ANTITHEFT_SET_PROPERTIES1_ENABLE_BIT_MASK_V2                                     0x80
+/* Values used for Antitheft Report command */
+#define ANTITHEFT_REPORT_RESERVED_V2                                                     0x00
+#define ANTITHEFT_REPORT_DISABLED_V2                                                     0x01
+#define ANTITHEFT_REPORT_ENABLED_V2                                                      0x02
+#define ANTITHEFT_REPORT_NOT_FULLY_ENABLED_V2                                            0x03
+
+/* Antitheft command class commands */
+#define ANTITHEFT_VERSION_V3                                                             0x03
+#define ANTITHEFT_SET_V3                                                                 0x01
+#define ANTITHEFT_GET_V3                                                                 0x02
+#define ANTITHEFT_REPORT_V3                                                              0x03
+/* Values used for Antitheft Set command */
+#define ANTITHEFT_SET_PROPERTIES1_NUMBER_OF_MAGIC_CODE_BYTES_MASK_V3                     0x7F
+#define ANTITHEFT_SET_PROPERTIES1_ENABLE_BIT_MASK_V3                                     0x80
+/* Values used for Antitheft Report command */
+#define ANTITHEFT_REPORT_RESERVED_V3                                                     0x00
+#define ANTITHEFT_REPORT_DISABLED_V3                                                     0x01
+#define ANTITHEFT_REPORT_ENABLED_V3                                                      0x02
+#define ANTITHEFT_REPORT_NOT_FULLY_ENABLED_V3                                            0x03
 
 /* Zwaveplus Info command class commands */
 #define ZWAVEPLUS_INFO_VERSION                                                           0x01
@@ -11044,6 +12998,7 @@
 #define GATEWAY_CONFIGURATION_STATUS                                                     0x02
 #define GATEWAY_CONFIGURATION_GET                                                        0x03
 #define GATEWAY_CONFIGURATION_REPORT                                                     0x04
+#define GATEWAY_UNREGISTER                                                               0x05
 
 /* Dmx command class commands */
 #define DMX_VERSION                                                                      0x01
@@ -11075,9 +13030,9 @@
 #define BARRIER_OPERATOR_REPORT                                                          0x03
 #define BARRIER_OPERATOR_SIGNAL_SUPPORTED_GET                                            0x04
 #define BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT                                         0x05
-#define BARRIER_OPERATOR_SIGNAL_SET                                                      0x06
-#define BARRIER_OPERATOR_SIGNAL_GET                                                      0x07
-#define BARRIER_OPERATOR_SIGNAL_REPORT                                                   0x08
+#define BARRIER_OPERATOR_EVENT_SIGNAL_SET                                                0x06
+#define BARRIER_OPERATOR_EVENT_SIGNALING_GET                                             0x07
+#define BARRIER_OPERATOR_EVENT_SIGNALING_REPORT                                          0x08
 /* Values used for Barrier Operator Set command */
 #define BARRIER_OPERATOR_SET_CLOSE                                                       0x00
 #define BARRIER_OPERATOR_SET_OPEN                                                        0xFF
@@ -11087,12 +13042,12 @@
 #define BARRIER_OPERATOR_REPORT_STOPPED                                                  0xFD
 #define BARRIER_OPERATOR_REPORT_OPENING                                                  0xFE
 #define BARRIER_OPERATOR_REPORT_OPEN                                                     0xFF
-/* Values used for Barrier Operator Signal Set command */
-#define BARRIER_OPERATOR_SIGNAL_SET_OFF                                                  0x00
-#define BARRIER_OPERATOR_SIGNAL_SET_ON                                                   0xFF
-/* Values used for Barrier Operator Signal Report command */
-#define BARRIER_OPERATOR_SIGNAL_REPORT_OFF                                               0x00
-#define BARRIER_OPERATOR_SIGNAL_REPORT_ON                                                0xFF
+/* Values used for Barrier Operator Event Signal Set command */
+#define BARRIER_OPERATOR_EVENT_SIGNAL_SET_OFF                                            0x00
+#define BARRIER_OPERATOR_EVENT_SIGNAL_SET_ON                                             0xFF
+/* Values used for Barrier Operator Event Signaling Report command */
+#define BARRIER_OPERATOR_EVENT_SIGNALING_REPORT_OFF                                      0x00
+#define BARRIER_OPERATOR_EVENT_SIGNALING_REPORT_ON                                       0xFF
 
 /* Network Management Installation Maintenance command class commands */
 #define NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE_VERSION                              0x01
@@ -11152,6 +13107,79 @@
 #define STATISTICS_REPORT_SUM_OF_TRANSMISSION_TIMES_TS_V2                                0x04
 #define STATISTICS_REPORT_SUM_OF_TRANSMISSION_TIMES_SQURARED_TS2_V2                      0x05
 
+/* Network Management Installation Maintenance command class commands */
+#define NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE_VERSION_V3                           0x03
+#define PRIORITY_ROUTE_SET_V3                                                            0x01
+#define PRIORITY_ROUTE_GET_V3                                                            0x02
+#define PRIORITY_ROUTE_REPORT_V3                                                         0x03
+#define STATISTICS_GET_V3                                                                0x04
+#define STATISTICS_REPORT_V3                                                             0x05
+#define STATISTICS_CLEAR_V3                                                              0x06
+#define RSSI_GET_V3                                                                      0x07
+#define RSSI_REPORT_V3                                                                   0x08
+#define S2_RESYNCHRONIZATION_EVENT_V3                                                    0x09
+#define EXTENDED_STATISTICS_GET_V3                                                       0x0B
+#define EXTENDED_STATISTICS_REPORT_V3                                                    0x0C
+/* Values used for Priority Route Set command */
+#define PRIORITY_ROUTE_SET_9_6_KBIT_SEC_V3                                               0x01
+#define PRIORITY_ROUTE_SET_40_KBIT_SEC_V3                                                0x02
+#define PRIORITY_ROUTE_SET_100_KBIT_SEC_V3                                               0x03
+/* Values used for Priority Route Report command */
+#define PRIORITY_ROUTE_REPORT_NONE_V3                                                    0x00
+#define PRIORITY_ROUTE_REPORT_ZW_PRIORITY_ROUTE_ZW_LWR_V3                                0x01
+#define PRIORITY_ROUTE_REPORT_ZW_PRIORITY_ROUTE_ZW_NLWR_V3                               0x02
+#define PRIORITY_ROUTE_REPORT_ZW_PRIORITY_ROUTE_APP_PR_V3                                0x10
+#define PRIORITY_ROUTE_REPORT_9_6_KBIT_SEC_V3                                            0x01
+#define PRIORITY_ROUTE_REPORT_40_KBIT_SEC_V3                                             0x02
+#define PRIORITY_ROUTE_REPORT_100_KBIT_SEC_V3                                            0x03
+/* Values used for Statistics Report command */
+#define STATISTICS_REPORT_ROUTE_CHANGES_RC_V3                                            0x00
+#define STATISTICS_REPORT_TRANSMISSION_COUNT_TC_V3                                       0x01
+#define STATISTICS_REPORT_NEIGHBORS_NB_V3                                                0x02
+#define STATISTICS_REPORT_PACKET_ERROR_COUNT_PEC_V3                                      0x03
+#define STATISTICS_REPORT_SUM_OF_TRANSMISSION_TIMES_TS_V3                                0x04
+#define STATISTICS_REPORT_SUM_OF_TRANSMISSION_TIMES_SQURARED_TS2_V3                      0x05
+/* Values used for S2 Resynchronization Event command */
+#define S2_RESYNCHRONIZATION_EVENT_SOS_EVENT_REASON_UNANSWERED_V3                        0x00
+
+/* Network Management Installation Maintenance command class commands */
+#define NETWORK_MANAGEMENT_INSTALLATION_MAINTENANCE_VERSION_V4                           0x04
+#define PRIORITY_ROUTE_SET_V4                                                            0x01
+#define PRIORITY_ROUTE_GET_V4                                                            0x02
+#define PRIORITY_ROUTE_REPORT_V4                                                         0x03
+#define STATISTICS_GET_V4                                                                0x04
+#define STATISTICS_REPORT_V4                                                             0x05
+#define STATISTICS_CLEAR_V4                                                              0x06
+#define RSSI_GET_V4                                                                      0x07
+#define RSSI_REPORT_V4                                                                   0x08
+#define S2_RESYNCHRONIZATION_EVENT_V4                                                    0x09
+#define EXTENDED_STATISTICS_GET_V4                                                       0x0B
+#define EXTENDED_STATISTICS_REPORT_V4                                                    0x0C
+#define ZWAVE_LR_CHANNEL_CONFIGURATION_SET_V4                                            0x0A
+#define ZWAVE_LR_CHANNEL_CONFIGURATION_GET_V4                                            0x0D
+#define ZWAVE_LR_CHANNEL_CONFIGURATION_REPORT_V4                                         0x0E
+/* Values used for Priority Route Set command */
+#define PRIORITY_ROUTE_SET_9_6_KBIT_SEC_V4                                               0x01
+#define PRIORITY_ROUTE_SET_40_KBIT_SEC_V4                                                0x02
+#define PRIORITY_ROUTE_SET_100_KBIT_SEC_V4                                               0x03
+/* Values used for Priority Route Report command */
+#define PRIORITY_ROUTE_REPORT_NONE_V4                                                    0x00
+#define PRIORITY_ROUTE_REPORT_ZW_PRIORITY_ROUTE_ZW_LWR_V4                                0x01
+#define PRIORITY_ROUTE_REPORT_ZW_PRIORITY_ROUTE_ZW_NLWR_V4                               0x02
+#define PRIORITY_ROUTE_REPORT_ZW_PRIORITY_ROUTE_APP_PR_V4                                0x10
+#define PRIORITY_ROUTE_REPORT_9_6_KBIT_SEC_V4                                            0x01
+#define PRIORITY_ROUTE_REPORT_40_KBIT_SEC_V4                                             0x02
+#define PRIORITY_ROUTE_REPORT_100_KBIT_SEC_V4                                            0x03
+/* Values used for Statistics Report command */
+#define STATISTICS_REPORT_ROUTE_CHANGES_RC_V4                                            0x00
+#define STATISTICS_REPORT_TRANSMISSION_COUNT_TC_V4                                       0x01
+#define STATISTICS_REPORT_NEIGHBORS_NB_V4                                                0x02
+#define STATISTICS_REPORT_PACKET_ERROR_COUNT_PEC_V4                                      0x03
+#define STATISTICS_REPORT_SUM_OF_TRANSMISSION_TIMES_TS_V4                                0x04
+#define STATISTICS_REPORT_SUM_OF_TRANSMISSION_TIMES_SQURARED_TS2_V4                      0x05
+/* Values used for S2 Resynchronization Event command */
+#define S2_RESYNCHRONIZATION_EVENT_SOS_EVENT_REASON_UNANSWERED_V4                        0x00
+
 /* Zip Naming command class commands */
 #define ZIP_NAMING_VERSION                                                               0x01
 #define ZIP_NAMING_NAME_SET                                                              0x01
@@ -11188,17 +13216,56 @@
 #define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_RESERVED_MASK                           0xE0
 #define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_RESERVED_SHIFT                          0x05
 /* Values used for Mailbox Queue command */
-#define MAILBOX_QUEUE_PROPERTIES1_MODE_MASK                                              0x03
-#define MAILBOX_QUEUE_MODE_PUSH                                                          0x00
-#define MAILBOX_QUEUE_MODE_POP                                                           0x01
-#define MAILBOX_QUEUE_MODE_WAITING                                                       0x02
-#define MAILBOX_QUEUE_MODE_PING                                                          0x03
-#define MAILBOX_QUEUE_MODE_ACK                                                           0x04
-#define MAILBOX_QUEUE_MODE_NACK                                                          0x05
-#define MAILBOX_QUEUE_MODE_QUEUE_FULL                                                    0x06
-#define MAILBOX_QUEUE_PROPERTIES1_LAST_BIT_MASK                                          0x04
-#define MAILBOX_QUEUE_PROPERTIES1_RESERVED_MASK                                          0xF8
-#define MAILBOX_QUEUE_PROPERTIES1_RESERVED_SHIFT                                         0x03
+#define MAILBOX_QUEUE_PROPERTIES1_OPERATION_MASK                                         0x07
+#define MAILBOX_QUEUE_OPERATION_PUSH                                                     0x00
+#define MAILBOX_QUEUE_OPERATION_POP                                                      0x01
+#define MAILBOX_QUEUE_OPERATION_WAITING                                                  0x02
+#define MAILBOX_QUEUE_OPERATION_PING                                                     0x03
+#define MAILBOX_QUEUE_OPERATION_ACK                                                      0x04
+#define MAILBOX_QUEUE_OPERATION_NACK                                                     0x05
+#define MAILBOX_QUEUE_OPERATION_QUEUE_FULL                                               0x06
+#define MAILBOX_QUEUE_PROPERTIES1_LAST_BIT_MASK                                          0x08
+#define MAILBOX_QUEUE_PROPERTIES1_RESERVED_MASK                                          0xF0
+#define MAILBOX_QUEUE_PROPERTIES1_RESERVED_SHIFT                                         0x04
+
+/* Mailbox command class commands */
+#define MAILBOX_VERSION_V2                                                               0x02
+#define MAILBOX_CONFIGURATION_GET_V2                                                     0x01
+#define MAILBOX_CONFIGURATION_SET_V2                                                     0x02
+#define MAILBOX_CONFIGURATION_REPORT_V2                                                  0x03
+#define MAILBOX_QUEUE_V2                                                                 0x04
+#define MAILBOX_WAKEUP_NOTIFICATION_V2                                                   0x05
+#define MAILBOX_NODE_FAILING_V2                                                          0x06
+/* Values used for Mailbox Configuration Set command */
+#define MAILBOX_CONFIGURATION_SET_PROPERTIES1_MODE_MASK_V2                               0x07
+#define MAILBOX_CONFIGURATION_SET_MODE_DISABLE_V2                                        0x00
+#define MAILBOX_CONFIGURATION_SET_MODE_ENABLE_MAILBOX_SERVICE_V2                         0x01
+#define MAILBOX_CONFIGURATION_SET_MODE_ENABLE_MAILBOX_PROXY_V2                           0x02
+#define MAILBOX_CONFIGURATION_SET_PROPERTIES1_RESERVED_MASK_V2                           0xF8
+#define MAILBOX_CONFIGURATION_SET_PROPERTIES1_RESERVED_SHIFT_V2                          0x03
+/* Values used for Mailbox Configuration Report command */
+#define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_MODE_MASK_V2                            0x07
+#define MAILBOX_CONFIGURATION_REPORT_MODE_DISABLE_V2                                     0x00
+#define MAILBOX_CONFIGURATION_REPORT_MODE_ENABLE_MAILBOX_SERVICE_V2                      0x01
+#define MAILBOX_CONFIGURATION_REPORT_MODE_ENABLE_MAILBOX_PROXY_V2                        0x02
+#define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_SUPPORTED_MODES_MASK_V2                 0x18
+#define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_SUPPORTED_MODES_SHIFT_V2                0x03
+#define MAILBOX_CONFIGURATION_REPORT_SUPPORTED_MODES_MAILBOX_SERVICE_SUPPORTED_V2        0x00
+#define MAILBOX_CONFIGURATION_REPORT_SUPPORTED_MODES_MAILBOX_PROXY_SUPPORTED_V2          0x01
+#define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_RESERVED_MASK_V2                        0xE0
+#define MAILBOX_CONFIGURATION_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                       0x05
+/* Values used for Mailbox Queue command */
+#define MAILBOX_QUEUE_PROPERTIES1_OPERATION_MASK_V2                                      0x07
+#define MAILBOX_QUEUE_OPERATION_PUSH_V2                                                  0x00
+#define MAILBOX_QUEUE_OPERATION_POP_V2                                                   0x01
+#define MAILBOX_QUEUE_OPERATION_WAITING_V2                                               0x02
+#define MAILBOX_QUEUE_OPERATION_PING_V2                                                  0x03
+#define MAILBOX_QUEUE_OPERATION_ACK_V2                                                   0x04
+#define MAILBOX_QUEUE_OPERATION_NACK_V2                                                  0x05
+#define MAILBOX_QUEUE_OPERATION_QUEUE_FULL_V2                                            0x06
+#define MAILBOX_QUEUE_PROPERTIES1_LAST_BIT_MASK_V2                                       0x08
+#define MAILBOX_QUEUE_PROPERTIES1_RESERVED_MASK_V2                                       0xF0
+#define MAILBOX_QUEUE_PROPERTIES1_RESERVED_SHIFT_V2                                      0x04
 
 /* Window Covering command class commands */
 #define WINDOW_COVERING_VERSION                                                          0x01
@@ -11232,12 +13299,12 @@
 #define WINDOW_COVERING_GET_OUT_TOP_2                                                    0x0F
 #define WINDOW_COVERING_GET_IN_BOTTOM_1                                                  0x10
 #define WINDOW_COVERING_GET_IN_BOTTOM_2                                                  0x11
-#define WINDOW_COVERING_GET_IN_TOP_1                                                     0x0B
-#define WINDOW_COVERING_GET_IN_TOP_2                                                     0x12
-#define WINDOW_COVERING_GET_IN_TOP_BOTTOM_1                                              0x13
-#define WINDOW_COVERING_GET_IN_TOP_BOTTOM_2                                              0x14
-#define WINDOW_COVERING_GET_HORIZONTAL_SLATS_ANGLE_1                                     0x15
-#define WINDOW_COVERING_GET_HORIZONTAL_SLATS_ANGLE_2                                     0x16
+#define WINDOW_COVERING_GET_IN_TOP_1                                                     0x12
+#define WINDOW_COVERING_GET_IN_TOP_2                                                     0x13
+#define WINDOW_COVERING_GET_IN_TOP_BOTTOM_1                                              0x14
+#define WINDOW_COVERING_GET_IN_TOP_BOTTOM_2                                              0x15
+#define WINDOW_COVERING_GET_HORIZONTAL_SLATS_ANGLE_1                                     0x16
+#define WINDOW_COVERING_GET_HORIZONTAL_SLATS_ANGLE_2                                     0x17
 /* Values used for Window Covering Report command */
 #define WINDOW_COVERING_REPORT_OUT_LEFT_1                                                0x00
 #define WINDOW_COVERING_REPORT_OUT_LEFT_2                                                0x01
@@ -11257,12 +13324,12 @@
 #define WINDOW_COVERING_REPORT_OUT_TOP_2                                                 0x0F
 #define WINDOW_COVERING_REPORT_IN_BOTTOM_1                                               0x10
 #define WINDOW_COVERING_REPORT_IN_BOTTOM_2                                               0x11
-#define WINDOW_COVERING_REPORT_IN_TOP_1                                                  0x0B
-#define WINDOW_COVERING_REPORT_IN_TOP_2                                                  0x12
-#define WINDOW_COVERING_REPORT_IN_TOP_BOTTOM_1                                           0x13
-#define WINDOW_COVERING_REPORT_IN_TOP_BOTTOM_2                                           0x14
-#define WINDOW_COVERING_REPORT_HORIZONTAL_SLATS_ANGLE_1                                  0x15
-#define WINDOW_COVERING_REPORT_HORIZONTAL_SLATS_ANGLE_2                                  0x16
+#define WINDOW_COVERING_REPORT_IN_TOP_1                                                  0x12
+#define WINDOW_COVERING_REPORT_IN_TOP_2                                                  0x13
+#define WINDOW_COVERING_REPORT_IN_TOP_BOTTOM_1                                           0x14
+#define WINDOW_COVERING_REPORT_IN_TOP_BOTTOM_2                                           0x15
+#define WINDOW_COVERING_REPORT_HORIZONTAL_SLATS_ANGLE_1                                  0x16
+#define WINDOW_COVERING_REPORT_HORIZONTAL_SLATS_ANGLE_2                                  0x17
 /* Values used for Window Covering Set command */
 #define WINDOW_COVERING_SET_PROPERTIES1_PARAMETER_COUNT_MASK                             0x1F
 #define WINDOW_COVERING_SET_PROPERTIES1_RESERVED_MASK                                    0xE0
@@ -11285,12 +13352,12 @@
 #define WINDOW_COVERING_SET_OUT_TOP_2                                                    0x0F
 #define WINDOW_COVERING_SET_IN_BOTTOM_1                                                  0x10
 #define WINDOW_COVERING_SET_IN_BOTTOM_2                                                  0x11
-#define WINDOW_COVERING_SET_IN_TOP_1                                                     0x0B
-#define WINDOW_COVERING_SET_IN_TOP_2                                                     0x12
-#define WINDOW_COVERING_SET_IN_TOP_BOTTOM_1                                              0x13
-#define WINDOW_COVERING_SET_IN_TOP_BOTTOM_2                                              0x14
-#define WINDOW_COVERING_SET_HORIZONTAL_SLATS_ANGLE_1                                     0x15
-#define WINDOW_COVERING_SET_HORIZONTAL_SLATS_ANGLE_2                                     0x16
+#define WINDOW_COVERING_SET_IN_TOP_1                                                     0x12
+#define WINDOW_COVERING_SET_IN_TOP_2                                                     0x13
+#define WINDOW_COVERING_SET_IN_TOP_BOTTOM_1                                              0x14
+#define WINDOW_COVERING_SET_IN_TOP_BOTTOM_2                                              0x15
+#define WINDOW_COVERING_SET_HORIZONTAL_SLATS_ANGLE_1                                     0x16
+#define WINDOW_COVERING_SET_HORIZONTAL_SLATS_ANGLE_2                                     0x17
 /* Values used for Window Covering Start Level Change command */
 #define WINDOW_COVERING_START_LEVEL_CHANGE_PROPERTIES1_RES1_MASK                         0x3F
 #define WINDOW_COVERING_START_LEVEL_CHANGE_PROPERTIES1_UP_DOWN_BIT_MASK                  0x40
@@ -11313,12 +13380,12 @@
 #define WINDOW_COVERING_START_LEVEL_CHANGE_OUT_TOP_2                                     0x0F
 #define WINDOW_COVERING_START_LEVEL_CHANGE_IN_BOTTOM_1                                   0x10
 #define WINDOW_COVERING_START_LEVEL_CHANGE_IN_BOTTOM_2                                   0x11
-#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_1                                      0x0B
-#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_2                                      0x12
-#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_BOTTOM_1                               0x13
-#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_BOTTOM_2                               0x14
-#define WINDOW_COVERING_START_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_1                      0x15
-#define WINDOW_COVERING_START_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_2                      0x16
+#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_1                                      0x12
+#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_2                                      0x13
+#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_BOTTOM_1                               0x14
+#define WINDOW_COVERING_START_LEVEL_CHANGE_IN_TOP_BOTTOM_2                               0x15
+#define WINDOW_COVERING_START_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_1                      0x16
+#define WINDOW_COVERING_START_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_2                      0x17
 /* Values used for Window Covering Stop Level Change command */
 #define WINDOW_COVERING_STOP_LEVEL_CHANGE_OUT_LEFT_1                                     0x00
 #define WINDOW_COVERING_STOP_LEVEL_CHANGE_OUT_LEFT_2                                     0x01
@@ -11338,12 +13405,12 @@
 #define WINDOW_COVERING_STOP_LEVEL_CHANGE_OUT_TOP_2                                      0x0F
 #define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_BOTTOM_1                                    0x10
 #define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_BOTTOM_2                                    0x11
-#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_1                                       0x0B
-#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_2                                       0x12
-#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_BOTTOM_1                                0x13
-#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_BOTTOM_2                                0x14
-#define WINDOW_COVERING_STOP_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_1                       0x15
-#define WINDOW_COVERING_STOP_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_2                       0x16
+#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_1                                       0x12
+#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_2                                       0x13
+#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_BOTTOM_1                                0x14
+#define WINDOW_COVERING_STOP_LEVEL_CHANGE_IN_TOP_BOTTOM_2                                0x15
+#define WINDOW_COVERING_STOP_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_1                       0x16
+#define WINDOW_COVERING_STOP_LEVEL_CHANGE_HORIZONTAL_SLATS_ANGLE_2                       0x17
 
 /* Security 2 command class commands */
 #define SECURITY_2_VERSION                                                               0x01
@@ -11401,6 +13468,77 @@
 #define SECURITY_2_TRANSFER_END_PROPERTIES1_RESERVED_MASK                                0xFC
 #define SECURITY_2_TRANSFER_END_PROPERTIES1_RESERVED_SHIFT                               0x02
 
+/* Security 2 command class commands */
+#define SECURITY_2_VERSION_V2                                                            0x02
+#define SECURITY_2_NONCE_GET_V2                                                          0x01
+#define SECURITY_2_NONCE_REPORT_V2                                                       0x02
+#define SECURITY_2_MESSAGE_ENCAPSULATION_V2                                              0x03
+#define KEX_GET_V2                                                                       0x04
+#define KEX_REPORT_V2                                                                    0x05
+#define KEX_SET_V2                                                                       0x06
+#define KEX_FAIL_V2                                                                      0x07
+#define PUBLIC_KEY_REPORT_V2                                                             0x08
+#define SECURITY_2_NETWORK_KEY_GET_V2                                                    0x09
+#define SECURITY_2_NETWORK_KEY_REPORT_V2                                                 0x0A
+#define SECURITY_2_NETWORK_KEY_VERIFY_V2                                                 0x0B
+#define SECURITY_2_TRANSFER_END_V2                                                       0x0C
+#define SECURITY_2_COMMANDS_SUPPORTED_GET_V2                                             0x0D
+#define SECURITY_2_COMMANDS_SUPPORTED_REPORT_V2                                          0x0E
+#define NLS_NODE_LIST_GET_V2                                                             0x0F
+#define NLS_NODE_LIST_REPORT_V2                                                          0x10
+#define NLS_STATE_GET_V2                                                                 0x11
+#define NLS_STATE_REPORT_V2                                                              0x12
+#define NLS_STATE_SET_V2                                                                 0x13
+/* Values used for Security 2 Nonce Report command */
+#define SECURITY_2_NONCE_REPORT_PROPERTIES1_SOS_BIT_MASK_V2                              0x01
+#define SECURITY_2_NONCE_REPORT_PROPERTIES1_MOS_BIT_MASK_V2                              0x02
+#define SECURITY_2_NONCE_REPORT_PROPERTIES1_RESERVED_MASK_V2                             0xFC
+#define SECURITY_2_NONCE_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                            0x02
+/* Values used for Security 2 Message Encapsulation command */
+#define SECURITY_2_MESSAGE_ENCAPSULATION_PROPERTIES1_EXTENSION_BIT_MASK_V2               0x01
+#define SECURITY_2_MESSAGE_ENCAPSULATION_PROPERTIES1_ENCRYPTED_EXTENSION_BIT_MASK_V2     0x02
+#define SECURITY_2_MESSAGE_ENCAPSULATION_PROPERTIES1_RESERVED_MASK_V2                    0xFC
+#define SECURITY_2_MESSAGE_ENCAPSULATION_PROPERTIES1_RESERVED_SHIFT_V2                   0x02
+/* Values used for Kex Report command */
+#define KEX_REPORT_PROPERTIES1_ECHO_BIT_MASK_V2                                          0x01
+#define KEX_REPORT_PROPERTIES1_REQUEST_CSA_BIT_MASK_V2                                   0x02
+#define KEX_REPORT_PROPERTIES1_NLS_SUPPORT_BIT_MASK_V2                                   0x04
+#define KEX_REPORT_PROPERTIES1_RESERVED_MASK_V2                                          0xF8
+#define KEX_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                                         0x03
+/* Values used for Kex Set command */
+#define KEX_SET_PROPERTIES1_ECHO_BIT_MASK_V2                                             0x01
+#define KEX_SET_PROPERTIES1_REQUEST_CSA_BIT_MASK_V2                                      0x02
+#define KEX_SET_PROPERTIES1_RESERVED_MASK_V2                                             0xFC
+#define KEX_SET_PROPERTIES1_RESERVED_SHIFT_V2                                            0x02
+/* Values used for Kex Fail command */
+#define KEX_FAIL_KEX_KEY_V2                                                              0x01
+#define KEX_FAIL_KEX_SCHEME_V2                                                           0x02
+#define KEX_FAIL_KEX_CURVES_V2                                                           0x03
+#define KEX_FAIL_DECRYPT_V2                                                              0x05
+#define KEX_FAIL_CANCEL_V2                                                               0x06
+#define KEX_FAIL_AUTH_V2                                                                 0x07
+#define KEX_FAIL_KEY_GET_V2                                                              0x08
+#define KEX_FAIL_KEY_VERIFY_V2                                                           0x09
+#define KEX_FAIL_KEY_REPORT_V2                                                           0x0A
+/* Values used for Public Key Report command */
+#define PUBLIC_KEY_REPORT_PROPERTIES1_INCLUDING_NODE_BIT_MASK_V2                         0x01
+#define PUBLIC_KEY_REPORT_PROPERTIES1_RESERVED_MASK_V2                                   0xFE
+#define PUBLIC_KEY_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                                  0x01
+/* Values used for Security 2 Transfer End command */
+#define SECURITY_2_TRANSFER_END_PROPERTIES1_KEY_REQUEST_COMPLETE_BIT_MASK_V2             0x01
+#define SECURITY_2_TRANSFER_END_PROPERTIES1_KEY_VERIFIED_BIT_MASK_V2                     0x02
+#define SECURITY_2_TRANSFER_END_PROPERTIES1_RESERVED_MASK_V2                             0xFC
+#define SECURITY_2_TRANSFER_END_PROPERTIES1_RESERVED_SHIFT_V2                            0x02
+/* Values used for Nls Node List Report command */
+#define NLS_NODE_LIST_REPORT_PROPERTIES1_LAST_NODE_BIT_MASK_V2                           0x01
+#define NLS_NODE_LIST_REPORT_PROPERTIES1_RESERVED_MASK_V2                                0xFE
+#define NLS_NODE_LIST_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                               0x01
+/* Values used for Nls State Report command */
+#define NLS_STATE_REPORT_PROPERTIES1_CAPABILITY_BIT_MASK_V2                              0x01
+#define NLS_STATE_REPORT_PROPERTIES1_NLS_STATE_BIT_MASK_V2                               0x02
+#define NLS_STATE_REPORT_PROPERTIES1_RESERVED_MASK_V2                                    0xFC
+#define NLS_STATE_REPORT_PROPERTIES1_RESERVED_SHIFT_V2                                   0x02
+
 /* Irrigation command class commands */
 #define IRRIGATION_VERSION                                                               0x01
 #define IRRIGATION_SYSTEM_INFO_GET                                                       0x01
@@ -11422,7 +13560,7 @@
 #define IRRIGATION_VALVE_TABLE_RUN                                                       0x11
 #define IRRIGATION_SYSTEM_SHUTOFF                                                        0x12
 /* Values used for Irrigation System Info Report command */
-#define IRRIGATION_SYSTEM_INFO_REPORT_PROPERTIES1_MASTER_VALVE_BIT_MASK                  0x01
+#define IRRIGATION_SYSTEM_INFO_REPORT_PROPERTIES1_MAIN_VALVE_BIT_MASK                    0x01
 #define IRRIGATION_SYSTEM_INFO_REPORT_PROPERTIES1_RESERVED1_MASK                         0x06
 #define IRRIGATION_SYSTEM_INFO_REPORT_PROPERTIES1_RESERVED1_SHIFT                        0x01
 #define IRRIGATION_SYSTEM_INFO_REPORT_PROPERTIES1_RESERVED2_MASK                         0x18
@@ -11447,7 +13585,7 @@
 #define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES2_PRESSURE_SCALE_SHIFT                 0x03
 #define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES2_PRESSURE_PRECISION_MASK              0xE0
 #define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES2_PRESSURE_PRECISION_SHIFT             0x05
-#define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES3_MASTER_VALVE_BIT_MASK                0x01
+#define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES3_MAIN_VALVE_BIT_MASK                  0x01
 #define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES3_RESERVED_MASK                        0xFE
 #define IRRIGATION_SYSTEM_STATUS_REPORT_PROPERTIES3_RESERVED_SHIFT                       0x01
 /* Values used for Irrigation System Config Set command */
@@ -11473,16 +13611,16 @@
 #define IRRIGATION_SYSTEM_CONFIG_REPORT_PROPERTIES2_LOW_PRESSURE_THRESHOLD_PRECISION_MASK 0xE0
 #define IRRIGATION_SYSTEM_CONFIG_REPORT_PROPERTIES2_LOW_PRESSURE_THRESHOLD_PRECISION_SHIFT 0x05
 /* Values used for Irrigation Valve Info Get command */
-#define IRRIGATION_VALVE_INFO_GET_PROPERTIES1_MASTER_VALVE_BIT_MASK                      0x01
+#define IRRIGATION_VALVE_INFO_GET_PROPERTIES1_MAIN_VALVE_BIT_MASK                        0x01
 #define IRRIGATION_VALVE_INFO_GET_PROPERTIES1_RESERVED_MASK                              0xFE
 #define IRRIGATION_VALVE_INFO_GET_PROPERTIES1_RESERVED_SHIFT                             0x01
 /* Values used for Irrigation Valve Info Report command */
-#define IRRIGATION_VALVE_INFO_REPORT_PROPERTIES1_MASTER_BIT_MASK                         0x01
+#define IRRIGATION_VALVE_INFO_REPORT_PROPERTIES1_MAIN_BIT_MASK                           0x01
 #define IRRIGATION_VALVE_INFO_REPORT_PROPERTIES1_CONNECTED_BIT_MASK                      0x02
 #define IRRIGATION_VALVE_INFO_REPORT_PROPERTIES1_RESERVED_MASK                           0xFC
 #define IRRIGATION_VALVE_INFO_REPORT_PROPERTIES1_RESERVED_SHIFT                          0x02
 /* Values used for Irrigation Valve Config Set command */
-#define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES1_MASTER_VALVE_BIT_MASK                    0x01
+#define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES1_MAIN_VALVE_BIT_MASK                      0x01
 #define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES1_RESERVED_MASK                            0xFE
 #define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES1_RESERVED_SHIFT                           0x01
 #define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES2_MAXIMUM_FLOW_SIZE_MASK                   0x07
@@ -11501,11 +13639,11 @@
 #define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES4_FLOW_LOW_THRESHOLD_PRECISION_MASK        0xE0
 #define IRRIGATION_VALVE_CONFIG_SET_PROPERTIES4_FLOW_LOW_THRESHOLD_PRECISION_SHIFT       0x05
 /* Values used for Irrigation Valve Config Get command */
-#define IRRIGATION_VALVE_CONFIG_GET_PROPERTIES1_MASTER_VALVE_BIT_MASK                    0x01
+#define IRRIGATION_VALVE_CONFIG_GET_PROPERTIES1_MAIN_VALVE_BIT_MASK                      0x01
 #define IRRIGATION_VALVE_CONFIG_GET_PROPERTIES1_RESERVED_MASK                            0xFE
 #define IRRIGATION_VALVE_CONFIG_GET_PROPERTIES1_RESERVED_SHIFT                           0x01
 /* Values used for Irrigation Valve Config Report command */
-#define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES1_MASTER_VALVE_BIT_MASK                 0x01
+#define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES1_MAIN_VALVE_BIT_MASK                   0x01
 #define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES1_RESERVED_MASK                         0xFE
 #define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES1_RESERVED_SHIFT                        0x01
 #define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES2_MAXIMUM_FLOW_SIZE_MASK                0x07
@@ -11524,7 +13662,7 @@
 #define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES4_FLOW_LOW_THRESHOLD_PRECISION_MASK     0xE0
 #define IRRIGATION_VALVE_CONFIG_REPORT_PROPERTIES4_FLOW_LOW_THRESHOLD_PRECISION_SHIFT    0x05
 /* Values used for Irrigation Valve Run command */
-#define IRRIGATION_VALVE_RUN_PROPERTIES1_MASTER_VALVE_BIT_MASK                           0x01
+#define IRRIGATION_VALVE_RUN_PROPERTIES1_MAIN_VALVE_BIT_MASK                             0x01
 #define IRRIGATION_VALVE_RUN_PROPERTIES1_RESERVED_MASK                                   0xFE
 #define IRRIGATION_VALVE_RUN_PROPERTIES1_RESERVED_SHIFT                                  0x01
 
@@ -11545,6 +13683,24 @@
 #define SUPERVISION_REPORT_FAIL                                                          0x02
 #define SUPERVISION_REPORT_BUSY                                                          0x03
 #define SUPERVISION_REPORT_SUCCESS                                                       0xFF
+
+/* Supervision command class commands */
+#define SUPERVISION_VERSION_V2                                                           0x02
+#define SUPERVISION_GET_V2                                                               0x01
+#define SUPERVISION_REPORT_V2                                                            0x02
+/* Values used for Supervision Get command */
+#define SUPERVISION_GET_PROPERTIES1_SESSION_ID_MASK_V2                                   0x3F
+#define SUPERVISION_GET_PROPERTIES1_RESERVED_BIT_MASK_V2                                 0x40
+#define SUPERVISION_GET_PROPERTIES1_STATUS_UPDATES_BIT_MASK_V2                           0x80
+/* Values used for Supervision Report command */
+#define SUPERVISION_REPORT_PROPERTIES1_SESSION_ID_MASK_V2                                0x3F
+#define SUPERVISION_REPORT_PROPERTIES1_WAKE_UP_REQUEST_BIT_MASK_V2                       0x40
+#define SUPERVISION_REPORT_PROPERTIES1_MORE_STATUS_UPDATES_BIT_MASK_V2                   0x80
+#define SUPERVISION_REPORT_NO_SUPPORT_V2                                                 0x00
+#define SUPERVISION_REPORT_WORKING_V2                                                    0x01
+#define SUPERVISION_REPORT_FAIL_V2                                                       0x02
+#define SUPERVISION_REPORT_BUSY_V2                                                       0x03
+#define SUPERVISION_REPORT_SUCCESS_V2                                                    0xFF
 
 /* Humidity Control Setpoint command class commands */
 #define HUMIDITY_CONTROL_SETPOINT_VERSION                                                0x01
@@ -11885,13 +14041,647 @@
 #define SOUND_SWITCH_TONE_PLAY_GET                                                       0x09
 #define SOUND_SWITCH_TONE_PLAY_REPORT                                                    0x0A
 
+/* Sound Switch command class commands */
+#define SOUND_SWITCH_VERSION_V2                                                          0x02
+#define SOUND_SWITCH_TONES_NUMBER_GET_V2                                                 0x01
+#define SOUND_SWITCH_TONES_NUMBER_REPORT_V2                                              0x02
+#define SOUND_SWITCH_TONE_INFO_GET_V2                                                    0x03
+#define SOUND_SWITCH_TONE_INFO_REPORT_V2                                                 0x04
+#define SOUND_SWITCH_CONFIGURATION_SET_V2                                                0x05
+#define SOUND_SWITCH_CONFIGURATION_GET_V2                                                0x06
+#define SOUND_SWITCH_CONFIGURATION_REPORT_V2                                             0x07
+#define SOUND_SWITCH_TONE_PLAY_SET_V2                                                    0x08
+#define SOUND_SWITCH_TONE_PLAY_GET_V2                                                    0x09
+#define SOUND_SWITCH_TONE_PLAY_REPORT_V2                                                 0x0A
+
+/* Ir Repeater command class commands */
+#define IR_REPEATER_VERSION                                                              0x01
+#define IR_REPEATER_CAPABILITIES_GET                                                     0x01
+#define IR_REPEATER_CAPABILITIES_REPORT                                                  0x02
+#define IR_REPEATER_IR_CODE_LEARNING_START                                               0x03
+#define IR_REPEATER_IR_CODE_LEARNING_STOP                                                0x04
+#define IR_REPEATER_IR_CODE_LEARNING_STATUS                                              0x05
+#define IR_REPEATER_LEARNT_IR_CODE_REMOVE                                                0x06
+#define IR_REPEATER_LEARNT_IR_CODE_GET                                                   0x07
+#define IR_REPEATER_LEARNT_IR_CODE_REPORT                                                0x08
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_GET                                          0x09
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT                                       0x0A
+#define IR_REPEATER_CONFIGURATION_SET                                                    0x0B
+#define IR_REPEATER_CONFIGURATION_GET                                                    0x0C
+#define IR_REPEATER_CONFIGURATION_REPORT                                                 0x0D
+#define IR_REPEATER_REPEAT_LEARNT_CODE                                                   0x0E
+#define IR_REPEATER_REPEAT                                                               0x0F
+/* Values used for Ir Repeater Capabilities Report command */
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES1_DUTY_CYCLE_BITMASK_MASK              0x07
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES1_BES_BIT_MASK                         0x08
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES1_PES_BIT_MASK                         0x10
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES1_RLC_BIT_MASK                         0x20
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES1_LCR_BIT_MASK                         0x40
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES1_IRR_BIT_MASK                         0x80
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES2_MAXIMUM_PULSE_TIME_UNIT_MSB_MASK     0x0F
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES2_MINIMUM_PULSE_TIME_UNIT_LSB_MASK     0xF0
+#define IR_REPEATER_CAPABILITIES_REPORT_PROPERTIES2_MINIMUM_PULSE_TIME_UNIT_LSB_SHIFT    0x04
+/* Values used for Ir Repeater Ir Code Learning Start command */
+#define IR_REPEATER_IR_CODE_LEARNING_START_PROPERTIES1_PULSE_TIME_UNIT_MSB_MASK          0x0F
+#define IR_REPEATER_IR_CODE_LEARNING_START_PROPERTIES1_RESERVED1_MASK                    0xF0
+#define IR_REPEATER_IR_CODE_LEARNING_START_PROPERTIES1_RESERVED1_SHIFT                   0x04
+/* Values used for Ir Repeater Ir Code Learning Status command */
+#define IR_REPEATER_IR_CODE_LEARNING_STATUS_LEARNING_BUFFER_OVERFLOW                     0x00
+#define IR_REPEATER_IR_CODE_LEARNING_STATUS_FORCED_LEARNING_STOP                         0x01
+#define IR_REPEATER_IR_CODE_LEARNING_STATUS_TIMEOUT                                      0x02
+#define IR_REPEATER_IR_CODE_LEARNING_STATUS_SUCCESS                                      0xFF
+/* Values used for Ir Repeater Learnt Ir Code Report command */
+#define IR_REPEATER_LEARNT_IR_CODE_REPORT_PROPERTIES1_IR_CODE_IDENFIER_STATUS_LENGTH_MASK 0x1F
+#define IR_REPEATER_LEARNT_IR_CODE_REPORT_PROPERTIES1_RESERVED_MASK                      0xE0
+#define IR_REPEATER_LEARNT_IR_CODE_REPORT_PROPERTIES1_RESERVED_SHIFT                     0x05
+/* Values used for Ir Repeater Learnt Ir Code Readback Get command */
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_GET_PROPERTIES1_REPORT_NUMBER_MSB_MASK       0x7F
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_GET_PROPERTIES1_RESERVED1_BIT_MASK           0x80
+/* Values used for Ir Repeater Learnt Ir Code Readback Report command */
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES1_PULSE_TIME_UNIT_MSB_MASK  0x0F
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES1_DUTY_CYCLE_MASK           0x30
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES1_DUTY_CYCLE_SHIFT          0x04
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_DUTY_CYCLE_1_2_DUTY_CYCLE             0x00
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_DUTY_CYCLE_1_3_DUTY_CYCLE             0x01
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_DUTY_CYCLE_1_4_DUTY_CYCLE             0x02
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_DUTY_CYCLE_RESERVED                   0x03
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES1_RESERVED1_MASK            0xC0
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES1_RESERVED1_SHIFT           0x06
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES2_REPORT_NUMBER_MSB_MASK    0x7F
+#define IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_PROPERTIES2_LAST_BIT_MASK             0x80
+/* Values used for Ir Repeater Configuration Set command */
+#define IR_REPEATER_CONFIGURATION_SET_PROPERTIES1_PERIOD_LSB_MASK                        0x0F
+#define IR_REPEATER_CONFIGURATION_SET_PROPERTIES1_RESERVED1_MASK                         0xF0
+#define IR_REPEATER_CONFIGURATION_SET_PROPERTIES1_RESERVED1_SHIFT                        0x04
+/* Values used for Ir Repeater Configuration Report command */
+#define IR_REPEATER_CONFIGURATION_REPORT_PROPERTIES1_PERIOD_LSB_MASK                     0x0F
+#define IR_REPEATER_CONFIGURATION_REPORT_PROPERTIES1_RESERVED1_MASK                      0xF0
+#define IR_REPEATER_CONFIGURATION_REPORT_PROPERTIES1_RESERVED1_SHIFT                     0x04
+/* Values used for Ir Repeater Repeat command */
+#define IR_REPEATER_REPEAT_PROPERTIES1_PULSE_TIME_UNIT_MSB_MASK                          0x0F
+#define IR_REPEATER_REPEAT_PROPERTIES1_DUTY_CYCLE_MASK                                   0x30
+#define IR_REPEATER_REPEAT_PROPERTIES1_DUTY_CYCLE_SHIFT                                  0x04
+#define IR_REPEATER_REPEAT_DUTY_CYCLE_1_2_DUTY_CYCLE                                     0x00
+#define IR_REPEATER_REPEAT_DUTY_CYCLE_1_3_DUTY_CYCLE                                     0x01
+#define IR_REPEATER_REPEAT_DUTY_CYCLE_1_4_DUTY_CYCLE                                     0x02
+#define IR_REPEATER_REPEAT_DUTY_CYCLE_RESERVED                                           0x03
+#define IR_REPEATER_REPEAT_PROPERTIES1_RESERVED1_MASK                                    0xC0
+#define IR_REPEATER_REPEAT_PROPERTIES1_RESERVED1_SHIFT                                   0x06
+#define IR_REPEATER_REPEAT_PROPERTIES2_REPORT_NUMBER_MSB_MASK                            0x7F
+#define IR_REPEATER_REPEAT_PROPERTIES2_LAST_BIT_MASK                                     0x80
+
+/* Authentication command class commands */
+#define AUTHENTICATION_VERSION                                                           0x01
+#define AUTHENTICATION_CAPABILITY_GET                                                    0x01
+#define AUTHENTICATION_CAPABILITY_REPORT                                                 0x02
+#define AUTHENTICATION_DATA_SET                                                          0x03
+#define AUTHENTICATION_DATA_GET                                                          0x04
+#define AUTHENTICATION_DATA_REPORT                                                       0x05
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET                                      0x06
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET                                      0x07
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT                                   0x08
+#define AUTHENTICATION_CHECKSUM_GET                                                      0x09
+#define AUTHENTICATION_CHECKSUM_REPORT                                                   0x0A
+/* Values used for Authentication Capability Report command */
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES1_SUPPORTED_AUTHENTICATION_TECHNOLOGY_TYPE_BIT_MASK_LENGTH_MASK 0x0F
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES1_RESERVED1_BIT_MASK                  0x10
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES1_OR_BIT_MASK                         0x20
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES1_MADR_BIT_MASK                       0x40
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES1_MAR_BIT_MASK                        0x80
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES2_SUPPORTED_FALLBACK_STATUS_BIT_MASK_LENGTH_MASK 0x1F
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES2_RESERVED2_MASK                      0xE0
+#define AUTHENTICATION_CAPABILITY_REPORT_PROPERTIES2_RESERVED2_SHIFT                     0x05
+/* Values used for Authentication Data Set command */
+#define AUTHENTICATION_DATA_SET_PROPERTIES1_AUTHENTICATION_TECHNOLOGY_TYPE_MASK          0x0F
+#define AUTHENTICATION_DATA_SET_AUTHENTICATION_TECHNOLOGY_TYPE_RESERVED0                 0x00
+#define AUTHENTICATION_DATA_SET_AUTHENTICATION_TECHNOLOGY_TYPE_RFID_TAG                  0x01
+#define AUTHENTICATION_DATA_SET_AUTHENTICATION_TECHNOLOGY_TYPE_MAGNETIC_CARD             0x02
+#define AUTHENTICATION_DATA_SET_PROPERTIES1_RESERVED1_MASK                               0xF0
+#define AUTHENTICATION_DATA_SET_PROPERTIES1_RESERVED1_SHIFT                              0x04
+/* Values used for Authentication Data Get command */
+#define AUTHENTICATION_DATA_GET_PROPERTIES1_REPORT_MORE_BIT_MASK                         0x01
+#define AUTHENTICATION_DATA_GET_PROPERTIES1_RESERVED1_MASK                               0xFE
+#define AUTHENTICATION_DATA_GET_PROPERTIES1_RESERVED1_SHIFT                              0x01
+/* Values used for Authentication Technologies Combination Set command */
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_AVAILABLE                            0x00
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_ENABLED                              0x01
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_DISABLED                             0x02
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_MESSAGING                            0x03
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_PASSAGE_MODE                         0x04
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_PROPERTIES1_NUMBER_OF_AUTHENTICATION_DATA_IDS_MASK 0x7F
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_PROPERTIES1_OR_LOGIC_BIT_MASK        0x80
+/* Values used for Authentication Technologies Combination Get command */
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET_PROPERTIES1_REPORT_MORE_BIT_MASK     0x01
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET_PROPERTIES1_RESERVED1_MASK           0xFE
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET_PROPERTIES1_RESERVED1_SHIFT          0x01
+/* Values used for Authentication Technologies Combination Report command */
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_AVAILABLE                         0x00
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_ENABLED                           0x01
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_DISABLED                          0x02
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_MESSAGING                         0x03
+#define AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_PASSAGE_MODE                      0x04
+/* Values used for Authentication Checksum Get command */
+#define AUTHENTICATION_CHECKSUM_GET_PROPERTIES1_AUTHENTICATION_TECHNOLOGY_TYPE_MASK      0x0F
+#define AUTHENTICATION_CHECKSUM_GET_AUTHENTICATION_TECHNOLOGY_TYPE_RESERVED0             0x00
+#define AUTHENTICATION_CHECKSUM_GET_AUTHENTICATION_TECHNOLOGY_TYPE_RFID_TAG              0x01
+#define AUTHENTICATION_CHECKSUM_GET_AUTHENTICATION_TECHNOLOGY_TYPE_MAGNETIC_CARD         0x02
+#define AUTHENTICATION_CHECKSUM_GET_PROPERTIES1_CHECKSUM_TYPE_MASK                       0x70
+#define AUTHENTICATION_CHECKSUM_GET_PROPERTIES1_CHECKSUM_TYPE_SHIFT                      0x04
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_AUTHENTICATION_DATA                    0x00
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_COMBINATION_ENTRIES                    0x01
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_RESERVED2                              0x02
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_RESERVED3                              0x03
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_RESERVED4                              0x04
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_RESERVED5                              0x05
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_RESERVED6                              0x06
+#define AUTHENTICATION_CHECKSUM_GET_CHECKSUM_TYPE_RESERVED7                              0x07
+#define AUTHENTICATION_CHECKSUM_GET_PROPERTIES1_RESERVED1_BIT_MASK                       0x80
+/* Values used for Authentication Checksum Report command */
+#define AUTHENTICATION_CHECKSUM_REPORT_PROPERTIES1_AUTHENTICATION_TECHNOLOGY_TYPE_MASK   0x0F
+#define AUTHENTICATION_CHECKSUM_REPORT_AUTHENTICATION_TECHNOLOGY_TYPE_RESERVED0          0x00
+#define AUTHENTICATION_CHECKSUM_REPORT_AUTHENTICATION_TECHNOLOGY_TYPE_RFID_TAG           0x01
+#define AUTHENTICATION_CHECKSUM_REPORT_AUTHENTICATION_TECHNOLOGY_TYPE_MAGNETIC_CARD      0x02
+#define AUTHENTICATION_CHECKSUM_REPORT_PROPERTIES1_CHECKSUM_TYPE_MASK                    0x70
+#define AUTHENTICATION_CHECKSUM_REPORT_PROPERTIES1_CHECKSUM_TYPE_SHIFT                   0x04
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_AUTHENTICATION_DATA                 0x00
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_COMBINATION_ENTRIES                 0x01
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_RESERVED2                           0x02
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_RESERVED3                           0x03
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_RESERVED4                           0x04
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_RESERVED5                           0x05
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_RESERVED6                           0x06
+#define AUTHENTICATION_CHECKSUM_REPORT_CHECKSUM_TYPE_RESERVED7                           0x07
+#define AUTHENTICATION_CHECKSUM_REPORT_PROPERTIES1_RESERVED1_BIT_MASK                    0x80
+
+/* Authentication Media Write command class commands */
+#define AUTHENTICATION_MEDIA_WRITE_VERSION                                               0x01
+#define AUTHENTICATION_MEDIA_CAPABILITY_GET                                              0x01
+#define AUTHENTICATION_MEDIA_CAPABILITY_REPORT                                           0x02
+#define AUTHENTICATION_MEDIA_WRITE_START                                                 0x03
+#define AUTHENTICATION_MEDIA_WRITE_STOP                                                  0x04
+#define AUTHENTICATION_MEDIA_WRITE_STATUS                                                0x05
+/* Values used for Authentication Media Capability Report command */
+#define AUTHENTICATION_MEDIA_CAPABILITY_REPORT_PROPERTIES1_DGS_BIT_MASK                  0x01
+#define AUTHENTICATION_MEDIA_CAPABILITY_REPORT_PROPERTIES1_RESERVED1_MASK                0xFE
+#define AUTHENTICATION_MEDIA_CAPABILITY_REPORT_PROPERTIES1_RESERVED1_SHIFT               0x01
+/* Values used for Authentication Media Write Start command */
+#define AUTHENTICATION_MEDIA_WRITE_START_PROPERTIES1_RESERVED1_MASK                      0x7F
+#define AUTHENTICATION_MEDIA_WRITE_START_PROPERTIES1_GENERATE_DATA_BIT_MASK              0x80
+/* Values used for Authentication Media Write Status command */
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_WRITE_OPERATION_NOT_SUPPORTED                  0x00
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_FORCED_STOP                                    0x01
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_TIMEOUT                                        0x02
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_ANOTHER_OPERATION_IS_ONGOING                   0x03
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_ABORTED                                        0x04
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_PROPRIETARY_HEX_DATA_RESTRICTION               0x05
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_NON_RE_WRITABLE_TARGET                         0x06
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_COMPLETED_WITH_NO_STATUS                       0x07
+#define AUTHENTICATION_MEDIA_WRITE_STATUS_SUCCESS                                        0x08
+
+/* Generic Schedule command class commands */
+#define GENERIC_SCHEDULE_VERSION                                                         0x01
+#define GENERIC_SCHEDULE_CAPABILITIES_GET                                                0x01
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT                                             0x02
+#define GENERIC_SCHEDULE_TIME_RANGE_SET                                                  0x03
+#define GENERIC_SCHEDULE_TIME_RANGE_GET                                                  0x04
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT                                               0x05
+#define GENERIC_SCHEDULE_SET                                                             0x06
+#define GENERIC_SCHEDULE_GET                                                             0x07
+#define GENERIC_SCHEDULE_REPORT                                                          0x08
+/* Values used for Generic Schedule Capabilities Report command */
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES1_NUMBER_OF_SUPPORTED_TIME_RANGE_IDS_1_MASK 0x7F
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES1_RESERVED1_BIT_MASK              0x80
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES2_HOUR_MINUTE_BIT_MASK            0x01
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES2_DATE_BIT_MASK                   0x02
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES2_WEEKDAYS_BIT_MASK               0x04
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES2_RESERVED2_MASK                  0xF8
+#define GENERIC_SCHEDULE_CAPABILITIES_REPORT_PROPERTIES2_RESERVED2_SHIFT                 0x03
+/* Values used for Generic Schedule Time Range Set command */
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES1_TIME_RANGE_ID_1_MASK                 0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES1_RESERVED1_BIT_MASK                   0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES2_WEEKDAY_BITMASK_MASK                 0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES2_IN_USE_1_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES3_START_YEAR_1_MASK                    0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES3_IN_USE_2_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES4_STOP_YEAR_1_MASK                     0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES4_IN_USE_3_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES5_START_MONTH_MASK                     0x0F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES5_RESERVED2_MASK                       0x70
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES5_RESERVED2_SHIFT                      0x04
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES5_IN_USE_4_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES6_STOP_MONTH_MASK                      0x0F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES6_RESERVED3_MASK                       0x70
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES6_RESERVED3_SHIFT                      0x04
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES6_IN_USE_5_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES7_START_DAY_MASK                       0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES7_RESERVED4_MASK                       0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES7_RESERVED4_SHIFT                      0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES7_IN_USE_6_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES8_STOP_DAY_MASK                        0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES8_RESERVED5_MASK                       0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES8_RESERVED5_SHIFT                      0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES8_IN_USE_7_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES9_START_HOUR_MASK                      0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES9_RESERVED6_MASK                       0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES9_RESERVED6_SHIFT                      0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES9_IN_USE_8_BIT_MASK                    0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES10_STOP_HOUR_MASK                      0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES10_RESERVED7_MASK                      0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES10_RESERVED7_SHIFT                     0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES10_IN_USE_9_BIT_MASK                   0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES11_START_MINUTE_MASK                   0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES11_RESERVED8_BIT_MASK                  0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES11_IN_USE_10_BIT_MASK                  0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES12_STOP_MINUTE_MASK                    0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES12_RESERVED9_BIT_MASK                  0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES12_IN_USE_11_BIT_MASK                  0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES13_DAILY_START_HOUR_MASK               0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES13_RESERVED10_MASK                     0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES13_RESERVED10_SHIFT                    0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES13_IN_USE_12_BIT_MASK                  0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES14_DAILY_STOP_HOUR_MASK                0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES14_RESERVED11_MASK                     0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES14_RESERVED11_SHIFT                    0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES14_IN_USE_13_BIT_MASK                  0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES15_DAILY_START_MINUTE_MASK             0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES15_RESERVED12_BIT_MASK                 0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES15_IN_USE_14_BIT_MASK                  0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES16_DAILY_STOP_MINUTE_MASK              0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES16_RESERVED13_BIT_MASK                 0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_SET_PROPERTIES16_IN_USE_15_BIT_MASK                  0x80
+/* Values used for Generic Schedule Time Range Get command */
+#define GENERIC_SCHEDULE_TIME_RANGE_GET_PROPERTIES1_TIME_RANGE_ID_1_MASK                 0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_GET_PROPERTIES1_RESERVED1_BIT_MASK                   0x80
+/* Values used for Generic Schedule Time Range Report command */
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES1_TIME_RANGE_ID_1_MASK              0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES1_RESERVED1_BIT_MASK                0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES2_WEEKDAY_BITMASK_MASK              0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES2_IN_USE_1_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES3_START_YEAR_1_MASK                 0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES3_IN_USE_2_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES4_STOP_YEAR_1_MASK                  0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES4_IN_USE_3_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES5_START_MONTH_MASK                  0x0F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES5_RESERVED2_MASK                    0x70
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES5_RESERVED2_SHIFT                   0x04
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES5_IN_USE_4_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES6_STOP_MONTH_MASK                   0x0F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES6_RESERVED3_MASK                    0x70
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES6_RESERVED3_SHIFT                   0x04
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES6_IN_USE_5_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES7_START_DAY_MASK                    0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES7_RESERVED4_MASK                    0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES7_RESERVED4_SHIFT                   0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES7_IN_USE_6_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES8_STOP_DAY_MASK                     0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES8_RESERVED5_MASK                    0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES8_RESERVED5_SHIFT                   0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES8_IN_USE_7_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES9_START_HOUR_MASK                   0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES9_RESERVED6_MASK                    0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES9_RESERVED6_SHIFT                   0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES9_IN_USE_8_BIT_MASK                 0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES10_STOP_HOUR_MASK                   0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES10_RESERVED7_MASK                   0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES10_RESERVED7_SHIFT                  0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES10_IN_USE_9_BIT_MASK                0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES11_START_MINUTE_MASK                0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES11_RESERVED8_BIT_MASK               0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES11_IN_USE_10_BIT_MASK               0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES12_STOP_MINUTE_MASK                 0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES12_RESERVED9_BIT_MASK               0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES12_IN_USE_11_BIT_MASK               0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES13_DAILY_START_HOUR_MASK            0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES13_RESERVED10_MASK                  0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES13_RESERVED10_SHIFT                 0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES13_IN_USE_12_BIT_MASK               0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES14_DAILY_STOP_HOUR_MASK             0x1F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES14_RESERVED11_MASK                  0x60
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES14_RESERVED11_SHIFT                 0x05
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES14_IN_USE_13_BIT_MASK               0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES15_DAILY_START_MINUTE_MASK          0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES15_RESERVED12_BIT_MASK              0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES15_IN_USE_14_BIT_MASK               0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES16_DAILY_STOP_MINUTE_MASK           0x3F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES16_RESERVED13_BIT_MASK              0x40
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES16_IN_USE_15_BIT_MASK               0x80
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES17_NEXT_TIME_RANGE_ID_1_MASK        0x7F
+#define GENERIC_SCHEDULE_TIME_RANGE_REPORT_PROPERTIES17_RESERVED14_BIT_MASK              0x80
+
+/* Antitheft Unlock command class commands */
+#define ANTITHEFT_UNLOCK_VERSION                                                         0x01
+#define ANTITHEFT_UNLOCK_STATE_GET                                                       0x01
+#define ANTITHEFT_UNLOCK_STATE_REPORT                                                    0x02
+#define ANTITHEFT_UNLOCK_SET                                                             0x03
+/* Values used for Antitheft Unlock State Report command */
+#define ANTITHEFT_UNLOCK_STATE_REPORT_PROPERTIES1_STATE_BIT_MASK                         0x01
+#define ANTITHEFT_UNLOCK_STATE_REPORT_PROPERTIES1_RESTRICTED_BIT_MASK                    0x02
+#define ANTITHEFT_UNLOCK_STATE_REPORT_PROPERTIES1_ANTI_THEFT_HINT_LENGTH_MASK            0x3C
+#define ANTITHEFT_UNLOCK_STATE_REPORT_PROPERTIES1_ANTI_THEFT_HINT_LENGTH_SHIFT           0x02
+#define ANTITHEFT_UNLOCK_STATE_REPORT_PROPERTIES1_RESERVED_MASK                          0xC0
+#define ANTITHEFT_UNLOCK_STATE_REPORT_PROPERTIES1_RESERVED_SHIFT                         0x06
+/* Values used for Antitheft Unlock Set command */
+#define ANTITHEFT_UNLOCK_SET_PROPERTIES1_MAGIC_CODE_LENGTH_MASK                          0x0F
+#define ANTITHEFT_UNLOCK_SET_PROPERTIES1_RESERVED_MASK                                   0xF0
+#define ANTITHEFT_UNLOCK_SET_PROPERTIES1_RESERVED_SHIFT                                  0x04
+
+/* User Credential command class commands */
+#define USER_CREDENTIAL_VERSION                                                          0x01
+#define USER_CAPABILITIES_GET                                                            0x01
+#define USER_CAPABILITIES_REPORT                                                         0x02
+#define CREDENTIAL_CAPABILITIES_GET                                                      0x03
+#define CREDENTIAL_CAPABILITIES_REPORT                                                   0x04
+#define USER_SET                                                                         0x05
+#define USER_GET                                                                         0x06
+#define USER_REPORT                                                                      0x07
+#define USER_SET_ERROR_REPORT                                                            0x08
+#define USER_NOTIFICATION_REPORT                                                         0x09
+#define CREDENTIAL_SET                                                                   0x0A
+#define CREDENTIAL_GET                                                                   0x0B
+#define CREDENTIAL_REPORT                                                                0x0C
+#define CREDENTIAL_SET_ERROR_REPORT                                                      0x0D
+#define CREDENTIAL_NOTIFICATION_REPORT                                                   0x0E
+#define CREDENTIAL_LEARN_START                                                           0x0F
+#define CREDENTIAL_LEARN_CANCEL                                                          0x10
+#define CREDENTIAL_LEARN_REPORT                                                          0x11
+#define USER_CREDENTIAL_ASSOCIATION_SET                                                  0x12
+#define USER_CREDENTIAL_ASSOCIATION_REPORT                                               0x13
+#define ALL_USERS_CHECKSUM_GET                                                           0x14
+#define ALL_USERS_CHECKSUM_REPORT                                                        0x15
+#define USER_CHECKSUM_GET                                                                0x16
+#define USER_CHECKSUM_REPORT                                                             0x17
+#define CREDENTIAL_CHECKSUM_GET                                                          0x18
+#define CREDENTIAL_CHECKSUM_REPORT                                                       0x19
+/* Values used for User Capabilities Report command */
+#define USER_CAPABILITIES_REPORT_PROPERTIES1_RESERVED_MASK                               0x1F
+#define USER_CAPABILITIES_REPORT_PROPERTIES1_USER_CHECKSUM_SUPPORT_BIT_MASK              0x20
+#define USER_CAPABILITIES_REPORT_PROPERTIES1_ALL_USERS_CHECKSUM_SUPPORT_BIT_MASK         0x40
+#define USER_CAPABILITIES_REPORT_PROPERTIES1_USER_SCHEDULE_SUPPORT_BIT_MASK              0x80
+/* Values used for Credential Capabilities Report command */
+#define CREDENTIAL_CAPABILITIES_REPORT_PROPERTIES1_RESERVED_MASK                         0x7F
+#define CREDENTIAL_CAPABILITIES_REPORT_PROPERTIES1_CREDENTIAL_CHECKSUM_SUPPORT_BIT_MASK  0x80
+/* Values used for User Set command */
+#define USER_SET_PROPERTIES1_OPERATION_TYPE_MASK                                         0x03
+#define USER_SET_OPERATION_TYPE_ADD                                                      0x00
+#define USER_SET_OPERATION_TYPE_MODIFY                                                   0x01
+#define USER_SET_OPERATION_TYPE_DELETE                                                   0x02
+#define USER_SET_PROPERTIES1_RESERVED_MASK                                               0xFC
+#define USER_SET_PROPERTIES1_RESERVED_SHIFT                                              0x02
+#define USER_SET_PROPERTIES2_USER_ACTIVE_STATE_BIT_MASK                                  0x01
+#define USER_SET_PROPERTIES2_RESERVED_MASK                                               0xFE
+#define USER_SET_PROPERTIES2_RESERVED_SHIFT                                              0x01
+#define USER_SET_PROPERTIES3_USER_NAME_ENCODING_MASK                                     0x07
+#define USER_SET_USER_NAME_ENCODING_USING_STANDARD_ASCII_CODES                           0x00
+#define USER_SET_USER_NAME_ENCODING_USING_STANDARD_AND_OEM_EXTENDED_ASCII_CODES          0x01
+#define USER_SET_USER_NAME_ENCODING_UNICODE_UTF_16                                       0x02
+#define USER_SET_PROPERTIES3_RESERVED_MASK                                               0xF8
+#define USER_SET_PROPERTIES3_RESERVED_SHIFT                                              0x03
+/* Values used for User Report command */
+#define USER_REPORT_DNE                                                                  0x00
+#define USER_REPORT_UNKNOWN                                                              0x01
+#define USER_REPORT_Z_WAVE                                                               0x02
+#define USER_REPORT_LOCALLY                                                              0x03
+#define USER_REPORT_MOBILE_APP_OR_OTHER_IOT_TECHNOLOGY                                   0x04
+#define USER_REPORT_PROPERTIES1_USER_ACTIVE_STATE_BIT_MASK                               0x01
+#define USER_REPORT_PROPERTIES1_RESERVED_MASK                                            0xFE
+#define USER_REPORT_PROPERTIES1_RESERVED_SHIFT                                           0x01
+#define USER_REPORT_PROPERTIES2_USER_NAME_ENCODING_MASK                                  0x07
+#define USER_REPORT_USER_NAME_ENCODING_USING_STANDARD_ASCII_CODES                        0x00
+#define USER_REPORT_USER_NAME_ENCODING_USING_STANDARD_AND_OEM_EXTENDED_ASCII_CODES       0x01
+#define USER_REPORT_USER_NAME_ENCODING_UNICODE_UTF_16                                    0x02
+#define USER_REPORT_PROPERTIES2_RESERVED_MASK                                            0xF8
+#define USER_REPORT_PROPERTIES2_RESERVED_SHIFT                                           0x03
+/* Values used for User Set Error Report command */
+#define USER_SET_ERROR_REPORT_USERADDREJECTEDLOCATIONOCCUPIED                            0x00
+#define USER_SET_ERROR_REPORT_USERMODIFYREJECTEDLOCATIONEMPTY                            0x01
+#define USER_SET_ERROR_REPORT_DNE                                                        0x00
+#define USER_SET_ERROR_REPORT_UNKNOWN                                                    0x01
+#define USER_SET_ERROR_REPORT_Z_WAVE                                                     0x02
+#define USER_SET_ERROR_REPORT_LOCALLY                                                    0x03
+#define USER_SET_ERROR_REPORT_MOBILE_APP_OR_OTHER_IOT_TECHNOLOGY                         0x04
+#define USER_SET_ERROR_REPORT_PROPERTIES1_USER_ACTIVE_STATE_BIT_MASK                     0x01
+#define USER_SET_ERROR_REPORT_PROPERTIES1_RESERVED_MASK                                  0xFE
+#define USER_SET_ERROR_REPORT_PROPERTIES1_RESERVED_SHIFT                                 0x01
+#define USER_SET_ERROR_REPORT_PROPERTIES2_USER_NAME_ENCODING_MASK                        0x07
+#define USER_SET_ERROR_REPORT_USER_NAME_ENCODING_USING_STANDARD_ASCII_CODES              0x00
+#define USER_SET_ERROR_REPORT_USER_NAME_ENCODING_USING_STANDARD_AND_OEM_EXTENDED_ASCII_CODES 0x01
+#define USER_SET_ERROR_REPORT_USER_NAME_ENCODING_UNICODE_UTF_16                          0x02
+#define USER_SET_ERROR_REPORT_PROPERTIES2_RESERVED_MASK                                  0xF8
+#define USER_SET_ERROR_REPORT_PROPERTIES2_RESERVED_SHIFT                                 0x03
+/* Values used for User Notification Report command */
+#define USER_NOTIFICATION_REPORT_DNE                                                     0x00
+#define USER_NOTIFICATION_REPORT_UNKNOWN                                                 0x01
+#define USER_NOTIFICATION_REPORT_Z_WAVE                                                  0x02
+#define USER_NOTIFICATION_REPORT_LOCALLY                                                 0x03
+#define USER_NOTIFICATION_REPORT_MOBILE_APP_OR_OTHER_IOT_TECHNOLOGY                      0x04
+#define USER_NOTIFICATION_REPORT_PROPERTIES1_USER_ACTIVE_STATE_BIT_MASK                  0x01
+#define USER_NOTIFICATION_REPORT_PROPERTIES1_RESERVED_MASK                               0xFE
+#define USER_NOTIFICATION_REPORT_PROPERTIES1_RESERVED_SHIFT                              0x01
+/* Values used for Credential Set command */
+#define CREDENTIAL_SET_PIN_CODE                                                          0x01
+#define CREDENTIAL_SET_PASSWORD                                                          0x02
+#define CREDENTIAL_SET_RFID_CODE                                                         0x03
+#define CREDENTIAL_SET_BLE                                                               0x04
+#define CREDENTIAL_SET_NFC                                                               0x05
+#define CREDENTIAL_SET_UWB                                                               0x06
+#define CREDENTIAL_SET_EYE_BIOMETRIC                                                     0x07
+#define CREDENTIAL_SET_FACE_BIOMETRIC                                                    0x08
+#define CREDENTIAL_SET_FINGER_BIOMETRIC                                                  0x09
+#define CREDENTIAL_SET_HAND_BIOMETRIC                                                    0x0A
+#define CREDENTIAL_SET_UNSPECIFIED_BIOMETRIC                                             0x0B
+#define CREDENTIAL_SET_PROPERTIES1_OPERATION_TYPE_MASK                                   0x03
+#define CREDENTIAL_SET_OPERATION_TYPE_ADD                                                0x00
+#define CREDENTIAL_SET_OPERATION_TYPE_MODIFY                                             0x01
+#define CREDENTIAL_SET_OPERATION_TYPE_DELETE                                             0x02
+#define CREDENTIAL_SET_PROPERTIES1_RESERVED_MASK                                         0xFC
+#define CREDENTIAL_SET_PROPERTIES1_RESERVED_SHIFT                                        0x02
+/* Values used for Credential Get command */
+#define CREDENTIAL_GET_PIN_CODE                                                          0x01
+#define CREDENTIAL_GET_PASSWORD                                                          0x02
+#define CREDENTIAL_GET_RFID_CODE                                                         0x03
+#define CREDENTIAL_GET_BLE                                                               0x04
+#define CREDENTIAL_GET_NFC                                                               0x05
+#define CREDENTIAL_GET_UWB                                                               0x06
+#define CREDENTIAL_GET_EYE_BIOMETRIC                                                     0x07
+#define CREDENTIAL_GET_FACE_BIOMETRIC                                                    0x08
+#define CREDENTIAL_GET_FINGER_BIOMETRIC                                                  0x09
+#define CREDENTIAL_GET_HAND_BIOMETRIC                                                    0x0A
+#define CREDENTIAL_GET_UNSPECIFIED_BIOMETRIC                                             0x0B
+/* Values used for Credential Report command */
+#define CREDENTIAL_REPORT_PIN_CODE                                                       0x01
+#define CREDENTIAL_REPORT_PASSWORD                                                       0x02
+#define CREDENTIAL_REPORT_RFID_CODE                                                      0x03
+#define CREDENTIAL_REPORT_BLE                                                            0x04
+#define CREDENTIAL_REPORT_NFC                                                            0x05
+#define CREDENTIAL_REPORT_UWB                                                            0x06
+#define CREDENTIAL_REPORT_EYE_BIOMETRIC                                                  0x07
+#define CREDENTIAL_REPORT_FACE_BIOMETRIC                                                 0x08
+#define CREDENTIAL_REPORT_FINGER_BIOMETRIC                                               0x09
+#define CREDENTIAL_REPORT_HAND_BIOMETRIC                                                 0x0A
+#define CREDENTIAL_REPORT_UNSPECIFIED_BIOMETRIC                                          0x0B
+#define CREDENTIAL_REPORT_PROPERTIES1_RESERVED_MASK                                      0x7F
+#define CREDENTIAL_REPORT_PROPERTIES1_CRB_BIT_MASK                                       0x80
+#define CREDENTIAL_REPORT_DNE                                                            0x00
+#define CREDENTIAL_REPORT_UNKNOWN                                                        0x01
+#define CREDENTIAL_REPORT_Z_WAVE                                                         0x02
+#define CREDENTIAL_REPORT_LOCALLY                                                        0x03
+#define CREDENTIAL_REPORT_MOBILE_APP_OR_OTHER_IOT_TECHNOLOGY                             0x04
+#define CREDENTIAL_REPORT_PIN_CODE                                                       0x01
+#define CREDENTIAL_REPORT_PASSWORD                                                       0x02
+#define CREDENTIAL_REPORT_RFID_CODE                                                      0x03
+#define CREDENTIAL_REPORT_BLE                                                            0x04
+#define CREDENTIAL_REPORT_NFC                                                            0x05
+#define CREDENTIAL_REPORT_UWB                                                            0x06
+#define CREDENTIAL_REPORT_EYE_BIOMETRIC                                                  0x07
+#define CREDENTIAL_REPORT_FACE_BIOMETRIC                                                 0x08
+#define CREDENTIAL_REPORT_FINGER_BIOMETRIC                                               0x09
+#define CREDENTIAL_REPORT_HAND_BIOMETRIC                                                 0x0A
+#define CREDENTIAL_REPORT_UNSPECIFIED_BIOMETRIC                                          0x0B
+/* Values used for Credential Set Error Report command */
+#define CREDENTIAL_SET_ERROR_REPORT_CREDENTIALADDREJECTEDLOCATIONOCCUPIED                0x00
+#define CREDENTIAL_SET_ERROR_REPORT_CREDENTIALMODIFYREJECTEDLOCATIONEMPTY                0x01
+#define CREDENTIAL_SET_ERROR_REPORT_DUPLICATECREDENTIAL                                  0x02
+#define CREDENTIAL_SET_ERROR_REPORT_MANUFACTURERSECURITYRULES                            0x03
+#define CREDENTIAL_SET_ERROR_REPORT_PIN_CODE                                             0x01
+#define CREDENTIAL_SET_ERROR_REPORT_PASSWORD                                             0x02
+#define CREDENTIAL_SET_ERROR_REPORT_RFID_CODE                                            0x03
+#define CREDENTIAL_SET_ERROR_REPORT_BLE                                                  0x04
+#define CREDENTIAL_SET_ERROR_REPORT_NFC                                                  0x05
+#define CREDENTIAL_SET_ERROR_REPORT_UWB                                                  0x06
+#define CREDENTIAL_SET_ERROR_REPORT_EYE_BIOMETRIC                                        0x07
+#define CREDENTIAL_SET_ERROR_REPORT_FACE_BIOMETRIC                                       0x08
+#define CREDENTIAL_SET_ERROR_REPORT_FINGER_BIOMETRIC                                     0x09
+#define CREDENTIAL_SET_ERROR_REPORT_HAND_BIOMETRIC                                       0x0A
+#define CREDENTIAL_SET_ERROR_REPORT_UNSPECIFIED_BIOMETRIC                                0x0B
+#define CREDENTIAL_SET_ERROR_REPORT_PROPERTIES1_RESERVED_MASK                            0x7F
+#define CREDENTIAL_SET_ERROR_REPORT_PROPERTIES1_CRB_BIT_MASK                             0x80
+#define CREDENTIAL_SET_ERROR_REPORT_DNE                                                  0x00
+#define CREDENTIAL_SET_ERROR_REPORT_UNKNOWN                                              0x01
+#define CREDENTIAL_SET_ERROR_REPORT_Z_WAVE                                               0x02
+#define CREDENTIAL_SET_ERROR_REPORT_LOCALLY                                              0x03
+#define CREDENTIAL_SET_ERROR_REPORT_MOBILE_APP_OR_OTHER_IOT_TECHNOLOGY                   0x04
+/* Values used for Credential Notification Report command */
+#define CREDENTIAL_NOTIFICATION_REPORT_PIN_CODE                                          0x01
+#define CREDENTIAL_NOTIFICATION_REPORT_PASSWORD                                          0x02
+#define CREDENTIAL_NOTIFICATION_REPORT_RFID_CODE                                         0x03
+#define CREDENTIAL_NOTIFICATION_REPORT_BLE                                               0x04
+#define CREDENTIAL_NOTIFICATION_REPORT_NFC                                               0x05
+#define CREDENTIAL_NOTIFICATION_REPORT_UWB                                               0x06
+#define CREDENTIAL_NOTIFICATION_REPORT_EYE_BIOMETRIC                                     0x07
+#define CREDENTIAL_NOTIFICATION_REPORT_FACE_BIOMETRIC                                    0x08
+#define CREDENTIAL_NOTIFICATION_REPORT_FINGER_BIOMETRIC                                  0x09
+#define CREDENTIAL_NOTIFICATION_REPORT_HAND_BIOMETRIC                                    0x0A
+#define CREDENTIAL_NOTIFICATION_REPORT_UNSPECIFIED_BIOMETRIC                             0x0B
+#define CREDENTIAL_NOTIFICATION_REPORT_PROPERTIES1_RESERVED_MASK                         0x7F
+#define CREDENTIAL_NOTIFICATION_REPORT_PROPERTIES1_CRB_BIT_MASK                          0x80
+#define CREDENTIAL_NOTIFICATION_REPORT_DNE                                               0x00
+#define CREDENTIAL_NOTIFICATION_REPORT_UNKNOWN                                           0x01
+#define CREDENTIAL_NOTIFICATION_REPORT_Z_WAVE                                            0x02
+#define CREDENTIAL_NOTIFICATION_REPORT_LOCALLY                                           0x03
+#define CREDENTIAL_NOTIFICATION_REPORT_MOBILE_APP_OR_OTHER_IOT_TECHNOLOGY                0x04
+/* Values used for Credential Learn Start command */
+#define CREDENTIAL_LEARN_START_PIN_CODE                                                  0x01
+#define CREDENTIAL_LEARN_START_PASSWORD                                                  0x02
+#define CREDENTIAL_LEARN_START_RFID_CODE                                                 0x03
+#define CREDENTIAL_LEARN_START_BLE                                                       0x04
+#define CREDENTIAL_LEARN_START_NFC                                                       0x05
+#define CREDENTIAL_LEARN_START_UWB                                                       0x06
+#define CREDENTIAL_LEARN_START_EYE_BIOMETRIC                                             0x07
+#define CREDENTIAL_LEARN_START_FACE_BIOMETRIC                                            0x08
+#define CREDENTIAL_LEARN_START_FINGER_BIOMETRIC                                          0x09
+#define CREDENTIAL_LEARN_START_HAND_BIOMETRIC                                            0x0A
+#define CREDENTIAL_LEARN_START_UNSPECIFIED_BIOMETRIC                                     0x0B
+#define CREDENTIAL_LEARN_START_PROPERTIES1_OPERATION_TYPE_MASK                           0x03
+#define CREDENTIAL_LEARN_START_OPERATION_TYPE_CREDENTIALLEARNADD                         0x00
+#define CREDENTIAL_LEARN_START_OPERATION_TYPE_CREDENTIALLEARNMODIFY                      0x01
+#define CREDENTIAL_LEARN_START_PROPERTIES1_RESERVED_MASK                                 0xFC
+#define CREDENTIAL_LEARN_START_PROPERTIES1_RESERVED_SHIFT                                0x02
+/* Values used for Credential Learn Report command */
+#define CREDENTIAL_LEARN_REPORT_STARTED                                                  0x00
+#define CREDENTIAL_LEARN_REPORT_SUCCESS                                                  0x01
+#define CREDENTIAL_LEARN_REPORT_ALREADY_IN_PROGRESS                                      0x02
+#define CREDENTIAL_LEARN_REPORT_ENDED_NOT_DUE_TO_TIMEOUT                                 0x03
+#define CREDENTIAL_LEARN_REPORT_TIMEOUT                                                  0x04
+#define CREDENTIAL_LEARN_REPORT_CREDENTIAL_LEARN_STEP_RETRY                              0x05
+#define CREDENTIAL_LEARN_REPORT_INVALID_CREDENTIAL_LEARN_ADD_OPERATION_TYPE              0xFE
+#define CREDENTIAL_LEARN_REPORT_INVALID_CREDENTIAL_LEARN_MODIFY_OPERATION_TYPE           0xFF
+#define CREDENTIAL_LEARN_REPORT_PIN_CODE                                                 0x01
+#define CREDENTIAL_LEARN_REPORT_PASSWORD                                                 0x02
+#define CREDENTIAL_LEARN_REPORT_RFID_CODE                                                0x03
+#define CREDENTIAL_LEARN_REPORT_BLE                                                      0x04
+#define CREDENTIAL_LEARN_REPORT_NFC                                                      0x05
+#define CREDENTIAL_LEARN_REPORT_UWB                                                      0x06
+#define CREDENTIAL_LEARN_REPORT_EYE_BIOMETRIC                                            0x07
+#define CREDENTIAL_LEARN_REPORT_FACE_BIOMETRIC                                           0x08
+#define CREDENTIAL_LEARN_REPORT_FINGER_BIOMETRIC                                         0x09
+#define CREDENTIAL_LEARN_REPORT_HAND_BIOMETRIC                                           0x0A
+#define CREDENTIAL_LEARN_REPORT_UNSPECIFIED_BIOMETRIC                                    0x0B
+/* Values used for User Credential Association Set command */
+#define USER_CREDENTIAL_ASSOCIATION_SET_PIN_CODE                                         0x01
+#define USER_CREDENTIAL_ASSOCIATION_SET_PASSWORD                                         0x02
+#define USER_CREDENTIAL_ASSOCIATION_SET_RFID_CODE                                        0x03
+#define USER_CREDENTIAL_ASSOCIATION_SET_BLE                                              0x04
+#define USER_CREDENTIAL_ASSOCIATION_SET_NFC                                              0x05
+#define USER_CREDENTIAL_ASSOCIATION_SET_UWB                                              0x06
+#define USER_CREDENTIAL_ASSOCIATION_SET_EYE_BIOMETRIC                                    0x07
+#define USER_CREDENTIAL_ASSOCIATION_SET_FACE_BIOMETRIC                                   0x08
+#define USER_CREDENTIAL_ASSOCIATION_SET_FINGER_BIOMETRIC                                 0x09
+#define USER_CREDENTIAL_ASSOCIATION_SET_HAND_BIOMETRIC                                   0x0A
+#define USER_CREDENTIAL_ASSOCIATION_SET_UNSPECIFIED_BIOMETRIC                            0x0B
+/* Values used for User Credential Association Report command */
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_PIN_CODE                                      0x01
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_PASSWORD                                      0x02
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_RFID_CODE                                     0x03
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_BLE                                           0x04
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_NFC                                           0x05
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_UWB                                           0x06
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_EYE_BIOMETRIC                                 0x07
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_FACE_BIOMETRIC                                0x08
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_FINGER_BIOMETRIC                              0x09
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_HAND_BIOMETRIC                                0x0A
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_UNSPECIFIED_BIOMETRIC                         0x0B
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_SUCCESS                                       0x00
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_SOURCE_USER_UNIQUE_IDENTIFIER_INVALID         0x01
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_SOURCE_USER_UNIQUE_IDENTIFIER_NONEXISTENT     0x02
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_SOURCE_CREDENTIAL_TYPE_INVALID                0x03
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_SOURCE_CREDENTIAL_SLOT_INVALID                0x04
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_SOURCE_CREDENTIAL_SLOT_EMPTY                  0x05
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_DESTINATION_USER_UNIQUE_IDENTIFIER_INVALID    0x06
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_DESTINATION_USER_UNIQUE_IDENTIFIER_NONEXISTENT 0x07
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_DESTINATION_CREDENTIAL_SLOT_INVALID           0x08
+#define USER_CREDENTIAL_ASSOCIATION_REPORT_DESTINATION_CREDENTIAL_SLOT_OCCUPIED          0x09
+/* Values used for Credential Checksum Get command */
+#define CREDENTIAL_CHECKSUM_GET_PIN_CODE                                                 0x01
+#define CREDENTIAL_CHECKSUM_GET_PASSWORD                                                 0x02
+#define CREDENTIAL_CHECKSUM_GET_RFID_CODE                                                0x03
+#define CREDENTIAL_CHECKSUM_GET_BLE                                                      0x04
+#define CREDENTIAL_CHECKSUM_GET_NFC                                                      0x05
+#define CREDENTIAL_CHECKSUM_GET_UWB                                                      0x06
+#define CREDENTIAL_CHECKSUM_GET_EYE_BIOMETRIC                                            0x07
+#define CREDENTIAL_CHECKSUM_GET_FACE_BIOMETRIC                                           0x08
+#define CREDENTIAL_CHECKSUM_GET_FINGER_BIOMETRIC                                         0x09
+#define CREDENTIAL_CHECKSUM_GET_HAND_BIOMETRIC                                           0x0A
+#define CREDENTIAL_CHECKSUM_GET_UNSPECIFIED_BIOMETRIC                                    0x0B
+/* Values used for Credential Checksum Report command */
+#define CREDENTIAL_CHECKSUM_REPORT_PIN_CODE                                              0x01
+#define CREDENTIAL_CHECKSUM_REPORT_PASSWORD                                              0x02
+#define CREDENTIAL_CHECKSUM_REPORT_RFID_CODE                                             0x03
+#define CREDENTIAL_CHECKSUM_REPORT_BLE                                                   0x04
+#define CREDENTIAL_CHECKSUM_REPORT_NFC                                                   0x05
+#define CREDENTIAL_CHECKSUM_REPORT_UWB                                                   0x06
+#define CREDENTIAL_CHECKSUM_REPORT_EYE_BIOMETRIC                                         0x07
+#define CREDENTIAL_CHECKSUM_REPORT_FACE_BIOMETRIC                                        0x08
+#define CREDENTIAL_CHECKSUM_REPORT_FINGER_BIOMETRIC                                      0x09
+#define CREDENTIAL_CHECKSUM_REPORT_HAND_BIOMETRIC                                        0x0A
+#define CREDENTIAL_CHECKSUM_REPORT_UNSPECIFIED_BIOMETRIC                                 0x0B
 
 
 /* Max. frame size to allow routing over 4 hops */
 #define META_DATA_MAX_DATA_SIZE                      48
 
-// pack all structs with 1 byte alignment
-#pragma pack(push, 1)
+/* Max frame that can be transmitted */
+#define TX_DATA_MAX_DATA_SIZE                        170
+
 /************************************************************/
 /* Structs and unions that can be used by the application   */
 /* to construct the frames to be sent                       */
@@ -13427,6 +16217,230 @@ typedef struct _ZW_EVENT_SUPPORTED_REPORT_4BYTE_V8_FRAME_
 } ZW_EVENT_SUPPORTED_REPORT_4BYTE_V8_FRAME;
 
 /************************************************************/
+/* Notification Get V9 command class structs */             
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_GET_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   v1AlarmType;                  /**/
+    uint8_t   notificationType;             /**/
+    uint8_t   mevent;                       /**/
+} ZW_NOTIFICATION_GET_V9_FRAME;
+
+/************************************************************/
+/* Notification Report 1byte V9 command class structs */    
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_REPORT_1BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   v1AlarmType;                  /**/
+    uint8_t   v1AlarmLevel;                 /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   notificationStatus;           /**/
+    uint8_t   notificationType;             /**/
+    uint8_t   mevent;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   eventParameter1;              
+    uint8_t   sequenceNumber;               /**/
+} ZW_NOTIFICATION_REPORT_1BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Report 2byte V9 command class structs */    
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_REPORT_2BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   v1AlarmType;                  /**/
+    uint8_t   v1AlarmLevel;                 /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   notificationStatus;           /**/
+    uint8_t   notificationType;             /**/
+    uint8_t   mevent;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   eventParameter1;              /* MSB */
+    uint8_t   eventParameter2;              /* LSB */
+    uint8_t   sequenceNumber;               /**/
+} ZW_NOTIFICATION_REPORT_2BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Report 3byte V9 command class structs */    
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_REPORT_3BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   v1AlarmType;                  /**/
+    uint8_t   v1AlarmLevel;                 /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   notificationStatus;           /**/
+    uint8_t   notificationType;             /**/
+    uint8_t   mevent;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   eventParameter1;              /* MSB */
+    uint8_t   eventParameter2;              
+    uint8_t   eventParameter3;              /* LSB */
+    uint8_t   sequenceNumber;               /**/
+} ZW_NOTIFICATION_REPORT_3BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Report 4byte V9 command class structs */    
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_REPORT_4BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   v1AlarmType;                  /**/
+    uint8_t   v1AlarmLevel;                 /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   notificationStatus;           /**/
+    uint8_t   notificationType;             /**/
+    uint8_t   mevent;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   eventParameter1;              /* MSB */
+    uint8_t   eventParameter2;              
+    uint8_t   eventParameter3;              
+    uint8_t   eventParameter4;              /* LSB */
+    uint8_t   sequenceNumber;               /**/
+} ZW_NOTIFICATION_REPORT_4BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Set V9 command class structs */             
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_SET_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   notificationType;             /**/
+    uint8_t   notificationStatus;           /**/
+} ZW_NOTIFICATION_SET_V9_FRAME;
+
+/************************************************************/
+/* Notification Supported Get V9 command class structs */   
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_SUPPORTED_GET_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_NOTIFICATION_SUPPORTED_GET_V9_FRAME;
+
+/************************************************************/
+/* Notification Supported Report 1byte V9 command class structs */
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_SUPPORTED_REPORT_1BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     
+} ZW_NOTIFICATION_SUPPORTED_REPORT_1BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Supported Report 2byte V9 command class structs */
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_SUPPORTED_REPORT_2BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     /* LSB */
+} ZW_NOTIFICATION_SUPPORTED_REPORT_2BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Supported Report 3byte V9 command class structs */
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_SUPPORTED_REPORT_3BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     /* LSB */
+} ZW_NOTIFICATION_SUPPORTED_REPORT_3BYTE_V9_FRAME;
+
+/************************************************************/
+/* Notification Supported Report 4byte V9 command class structs */
+/************************************************************/
+typedef struct _ZW_NOTIFICATION_SUPPORTED_REPORT_4BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     
+    uint8_t   bitMask4;                     /* LSB */
+} ZW_NOTIFICATION_SUPPORTED_REPORT_4BYTE_V9_FRAME;
+
+/************************************************************/
+/* Event Supported Get V9 command class structs */          
+/************************************************************/
+typedef struct _ZW_EVENT_SUPPORTED_GET_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   notificationType;             /**/
+} ZW_EVENT_SUPPORTED_GET_V9_FRAME;
+
+/************************************************************/
+/* Event Supported Report 1byte V9 command class structs */ 
+/************************************************************/
+typedef struct _ZW_EVENT_SUPPORTED_REPORT_1BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   notificationType;             /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     
+} ZW_EVENT_SUPPORTED_REPORT_1BYTE_V9_FRAME;
+
+/************************************************************/
+/* Event Supported Report 2byte V9 command class structs */ 
+/************************************************************/
+typedef struct _ZW_EVENT_SUPPORTED_REPORT_2BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   notificationType;             /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     /* LSB */
+} ZW_EVENT_SUPPORTED_REPORT_2BYTE_V9_FRAME;
+
+/************************************************************/
+/* Event Supported Report 3byte V9 command class structs */ 
+/************************************************************/
+typedef struct _ZW_EVENT_SUPPORTED_REPORT_3BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   notificationType;             /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     /* LSB */
+} ZW_EVENT_SUPPORTED_REPORT_3BYTE_V9_FRAME;
+
+/************************************************************/
+/* Event Supported Report 4byte V9 command class structs */ 
+/************************************************************/
+typedef struct _ZW_EVENT_SUPPORTED_REPORT_4BYTE_V9_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   notificationType;             /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     
+    uint8_t   bitMask4;                     /* LSB */
+} ZW_EVENT_SUPPORTED_REPORT_4BYTE_V9_FRAME;
+
+/************************************************************/
 /* Application Busy command class structs */                
 /************************************************************/
 typedef struct _ZW_APPLICATION_BUSY_FRAME_
@@ -14011,6 +17025,418 @@ typedef struct _ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V2_FRAME_
 } ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V2_FRAME;
 
 /************************************************************/
+/* Association Get V3 command class structs */              
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+} ZW_ASSOCIATION_GET_V3_FRAME;
+
+/************************************************************/
+/* Association Groupings Get V3 command class structs */    
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_GROUPINGS_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ASSOCIATION_GROUPINGS_GET_V3_FRAME;
+
+/************************************************************/
+/* Association Groupings Report V3 command class structs */ 
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_GROUPINGS_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedGroupings;           /**/
+} ZW_ASSOCIATION_GROUPINGS_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Association Remove 1byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+} ZW_ASSOCIATION_REMOVE_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Remove 2byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+} ZW_ASSOCIATION_REMOVE_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Remove 3byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+} ZW_ASSOCIATION_REMOVE_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Remove 4byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+} ZW_ASSOCIATION_REMOVE_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Report 1byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      
+} ZW_ASSOCIATION_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Report 2byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      /* MSB */
+    uint8_t   nodeid2;                      /* LSB */
+} ZW_ASSOCIATION_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Report 3byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      /* MSB */
+    uint8_t   nodeid2;                      
+    uint8_t   nodeid3;                      /* LSB */
+} ZW_ASSOCIATION_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Report 4byte V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      /* MSB */
+    uint8_t   nodeid2;                      
+    uint8_t   nodeid3;                      
+    uint8_t   nodeid4;                      /* LSB */
+} ZW_ASSOCIATION_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Set 1byte V3 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+} ZW_ASSOCIATION_SET_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Set 2byte V3 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+} ZW_ASSOCIATION_SET_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Set 3byte V3 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+} ZW_ASSOCIATION_SET_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Set 4byte V3 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+} ZW_ASSOCIATION_SET_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Association Specific Group Get V3 command class structs */
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V3_FRAME;
+
+/************************************************************/
+/* Association Specific Group Report V3 command class structs */
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   group;                        /**/
+} ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Association Get V4 command class structs */              
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+} ZW_ASSOCIATION_GET_V4_FRAME;
+
+/************************************************************/
+/* Association Groupings Get V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_GROUPINGS_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ASSOCIATION_GROUPINGS_GET_V4_FRAME;
+
+/************************************************************/
+/* Association Groupings Report V4 command class structs */ 
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_GROUPINGS_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedGroupings;           /**/
+} ZW_ASSOCIATION_GROUPINGS_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Association Remove 1byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+} ZW_ASSOCIATION_REMOVE_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Remove 2byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+} ZW_ASSOCIATION_REMOVE_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Remove 3byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+} ZW_ASSOCIATION_REMOVE_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Remove 4byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REMOVE_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+} ZW_ASSOCIATION_REMOVE_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Report 1byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      
+} ZW_ASSOCIATION_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Report 2byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      /* MSB */
+    uint8_t   nodeid2;                      /* LSB */
+} ZW_ASSOCIATION_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Report 3byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      /* MSB */
+    uint8_t   nodeid2;                      
+    uint8_t   nodeid3;                      /* LSB */
+} ZW_ASSOCIATION_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Report 4byte V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeid1;                      /* MSB */
+    uint8_t   nodeid2;                      
+    uint8_t   nodeid3;                      
+    uint8_t   nodeid4;                      /* LSB */
+} ZW_ASSOCIATION_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Set 1byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+} ZW_ASSOCIATION_SET_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Set 2byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+} ZW_ASSOCIATION_SET_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Set 3byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+} ZW_ASSOCIATION_SET_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Set 4byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SET_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+} ZW_ASSOCIATION_SET_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Association Specific Group Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ASSOCIATION_SPECIFIC_GROUP_GET_V4_FRAME;
+
+/************************************************************/
+/* Association Specific Group Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   group;                        /**/
+} ZW_ASSOCIATION_SPECIFIC_GROUP_REPORT_V4_FRAME;
+
+/************************************************************/
 /* Av Content Browse Md By Letter Get command class structs */
 /************************************************************/
 typedef struct _ZW_AV_CONTENT_BROWSE_MD_BY_LETTER_GET_FRAME_
@@ -14265,6 +17691,174 @@ typedef struct _ZW_BATTERY_REPORT_FRAME_
     uint8_t   cmd;                          /* The command */
     uint8_t   batteryLevel;                 /**/
 } ZW_BATTERY_REPORT_FRAME;
+
+/************************************************************/
+/* Battery Get V2 command class structs */                  
+/************************************************************/
+typedef struct _ZW_BATTERY_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_BATTERY_GET_V2_FRAME;
+
+/************************************************************/
+/* Battery Report V2 command class structs */               
+/************************************************************/
+typedef struct _ZW_BATTERY_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   batteryLevel;                 /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+} ZW_BATTERY_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Battery Health Get V2 command class structs */           
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_BATTERY_HEALTH_GET_V2_FRAME;
+
+/************************************************************/
+/* Battery Health Report 1byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          
+} ZW_BATTERY_HEALTH_REPORT_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Battery Health Report 2byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          /* MSB */
+    uint8_t   batteryTemperature2;          /* LSB */
+} ZW_BATTERY_HEALTH_REPORT_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Battery Health Report 3byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          /* MSB */
+    uint8_t   batteryTemperature2;          
+    uint8_t   batteryTemperature3;          /* LSB */
+} ZW_BATTERY_HEALTH_REPORT_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Battery Health Report 4byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          /* MSB */
+    uint8_t   batteryTemperature2;          
+    uint8_t   batteryTemperature3;          
+    uint8_t   batteryTemperature4;          /* LSB */
+} ZW_BATTERY_HEALTH_REPORT_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Battery Get V3 command class structs */                  
+/************************************************************/
+typedef struct _ZW_BATTERY_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_BATTERY_GET_V3_FRAME;
+
+/************************************************************/
+/* Battery Report V3 command class structs */               
+/************************************************************/
+typedef struct _ZW_BATTERY_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   batteryLevel;                 /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+} ZW_BATTERY_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Battery Health Get V3 command class structs */           
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_BATTERY_HEALTH_GET_V3_FRAME;
+
+/************************************************************/
+/* Battery Health Report 1byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          
+} ZW_BATTERY_HEALTH_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Battery Health Report 2byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          /* MSB */
+    uint8_t   batteryTemperature2;          /* LSB */
+} ZW_BATTERY_HEALTH_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Battery Health Report 3byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          /* MSB */
+    uint8_t   batteryTemperature2;          
+    uint8_t   batteryTemperature3;          /* LSB */
+} ZW_BATTERY_HEALTH_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Battery Health Report 4byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_BATTERY_HEALTH_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   maximumCapacity;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   batteryTemperature1;          /* MSB */
+    uint8_t   batteryTemperature2;          
+    uint8_t   batteryTemperature3;          
+    uint8_t   batteryTemperature4;          /* LSB */
+} ZW_BATTERY_HEALTH_REPORT_4BYTE_V3_FRAME;
 
 /************************************************************/
 /* Chimney Fan Alarm Log Get command class structs */       
@@ -17626,8 +21220,8 @@ typedef struct _ZW_DOOR_LOCK_OPERATION_REPORT_FRAME_
     uint8_t   doorLockMode;                 /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   doorCondition;                /**/
-    uint8_t   lockTimeoutMinutes;           /**/
-    uint8_t   lockTimeoutSeconds;           /**/
+    uint8_t   remainingLockTimeMinutes;     /**/
+    uint8_t   remainingLockTimeSeconds;     /**/
 } ZW_DOOR_LOCK_OPERATION_REPORT_FRAME;
 
 /************************************************************/
@@ -17694,8 +21288,8 @@ typedef struct _ZW_DOOR_LOCK_OPERATION_REPORT_V2_FRAME_
     uint8_t   doorLockMode;                 /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   doorCondition;                /**/
-    uint8_t   lockTimeoutMinutes;           /**/
-    uint8_t   lockTimeoutSeconds;           /**/
+    uint8_t   remainingLockTimeMinutes;     /**/
+    uint8_t   remainingLockTimeSeconds;     /**/
 } ZW_DOOR_LOCK_OPERATION_REPORT_V2_FRAME;
 
 /************************************************************/
@@ -17762,8 +21356,8 @@ typedef struct _ZW_DOOR_LOCK_OPERATION_REPORT_V3_FRAME_
     uint8_t   currentDoorLockMode;          /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   doorCondition;                /**/
-    uint8_t   lockTimeoutMinutes;           /**/
-    uint8_t   lockTimeoutSeconds;           /**/
+    uint8_t   remainingLockTimeMinutes;     /**/
+    uint8_t   remainingLockTimeSeconds;     /**/
     uint8_t   targetDoorLockMode;           /**/
     uint8_t   duration;                     /**/
 } ZW_DOOR_LOCK_OPERATION_REPORT_V3_FRAME;
@@ -17842,8 +21436,8 @@ typedef struct _ZW_DOOR_LOCK_OPERATION_REPORT_V4_FRAME_
     uint8_t   currentDoorLockMode;          /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   doorCondition;                /**/
-    uint8_t   lockTimeoutMinutes;           /**/
-    uint8_t   lockTimeoutSeconds;           /**/
+    uint8_t   remainingLockTimeMinutes;     /**/
+    uint8_t   remainingLockTimeSeconds;     /**/
     uint8_t   targetDoorLockMode;           /**/
     uint8_t   duration;                     /**/
 } ZW_DOOR_LOCK_OPERATION_REPORT_V4_FRAME;
@@ -19024,6 +22618,883 @@ typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V5_FRAME_
 } ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V5_FRAME;
 
 /************************************************************/
+/* Firmware Md Get V6 command class structs */              
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_GET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_FIRMWARE_MD_GET_V6_FRAME;
+
+/************************************************************/
+/* Firmware Md Report V6 variant group structs */           
+/************************************************************/
+typedef struct _VG_FIRMWARE_MD_REPORT_V6_VG_
+{
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+} VG_FIRMWARE_MD_REPORT_V6_VG;
+
+/************************************************************/
+/* Firmware Md Report 1byte V6 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_1BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup1;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_1BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 2byte V6 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_2BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup2;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_2BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 3byte V6 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_3BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup2;                /**/
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup3;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_3BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 4byte V6 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_4BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup2;                /**/
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup3;                /**/
+    VG_FIRMWARE_MD_REPORT_V6_VG variantgroup4;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_4BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Get V6 command class structs */       
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_GET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfReports;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+} ZW_FIRMWARE_UPDATE_MD_GET_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 1byte V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 2byte V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 3byte V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 4byte V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        
+    uint8_t   data4;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Request Get V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   fragmentSize1;                /* MSB */
+    uint8_t   fragmentSize2;                /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Request Report V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+} ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Status Report V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   waittime1;                    /* MSB */
+    uint8_t   waittime2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Activation Set V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Activation Status Report V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   firmwareUpdateStatus;         /**/
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Prepare Get V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   fragmentSize1;                /* MSB */
+    uint8_t   fragmentSize2;                /* LSB */
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V6_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Prepare Report V6 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   firmwareChecksum1;            /* MSB */
+    uint8_t   firmwareChecksum2;            /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V6_FRAME;
+
+/************************************************************/
+/* Firmware Md Get V7 command class structs */              
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_GET_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_FIRMWARE_MD_GET_V7_FRAME;
+
+/************************************************************/
+/* Firmware Md Report V7 variant group structs */           
+/************************************************************/
+typedef struct _VG_FIRMWARE_MD_REPORT_V7_VG_
+{
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+} VG_FIRMWARE_MD_REPORT_V7_VG;
+
+/************************************************************/
+/* Firmware Md Report 1byte V7 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_1BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup1;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_1BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 2byte V7 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_2BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup2;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_2BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 3byte V7 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_3BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup2;                /**/
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup3;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_3BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 4byte V7 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_4BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup2;                /**/
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup3;                /**/
+    VG_FIRMWARE_MD_REPORT_V7_VG variantgroup4;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_4BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Get V7 command class structs */       
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_GET_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfReports;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+} ZW_FIRMWARE_UPDATE_MD_GET_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 1byte V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 2byte V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 3byte V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 4byte V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        
+    uint8_t   data4;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Request Get V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   fragmentSize1;                /* MSB */
+    uint8_t   fragmentSize2;                /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Request Report V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+} ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Status Report V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   waittime1;                    /* MSB */
+    uint8_t   waittime2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Activation Set V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Activation Status Report V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   firmwareUpdateStatus;         /**/
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Prepare Get V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   fragmentSize1;                /* MSB */
+    uint8_t   fragmentSize2;                /* LSB */
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V7_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Prepare Report V7 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V7_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   firmwareChecksum1;            /* MSB */
+    uint8_t   firmwareChecksum2;            /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V7_FRAME;
+
+/************************************************************/
+/* Firmware Md Get V8 command class structs */              
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_GET_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_FIRMWARE_MD_GET_V8_FRAME;
+
+/************************************************************/
+/* Firmware Md Report V8 variant group structs */           
+/************************************************************/
+typedef struct _VG_FIRMWARE_MD_REPORT_V8_VG_
+{
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+} VG_FIRMWARE_MD_REPORT_V8_VG;
+
+/************************************************************/
+/* Firmware Md Report 1byte V8 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_1BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup1;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_1BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 2byte V8 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_2BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup2;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_2BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 3byte V8 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_3BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup2;                /**/
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup3;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_3BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Md Report 4byte V8 command class structs */     
+/************************************************************/
+typedef struct _ZW_FIRMWARE_MD_REPORT_4BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmware0Id1;                 /* MSB */
+    uint8_t   firmware0Id2;                 /* LSB */
+    uint8_t   firmware0Checksum1;           /* MSB */
+    uint8_t   firmware0Checksum2;           /* LSB */
+    uint8_t   firmwareUpgradable;           /**/
+    uint8_t   numberOfFirmwareTargets;      /**/
+    uint8_t   maxFragmentSize1;             /* MSB */
+    uint8_t   maxFragmentSize2;             /* LSB */
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup1;                /**/
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup2;                /**/
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup3;                /**/
+    VG_FIRMWARE_MD_REPORT_V8_VG variantgroup4;                /**/
+    uint8_t   hardwareVersion;              /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_MD_REPORT_4BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Get V8 command class structs */       
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_GET_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfReports;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+} ZW_FIRMWARE_UPDATE_MD_GET_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 1byte V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_1BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 2byte V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_2BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 3byte V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_3BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Report 4byte V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumber2;                /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        
+    uint8_t   data4;                        /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_REPORT_4BYTE_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Request Get V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   fragmentSize1;                /* MSB */
+    uint8_t   fragmentSize2;                /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_MD_REQUEST_GET_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Request Report V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_FIRMWARE_UPDATE_MD_REQUEST_REPORT_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Status Report V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   waittime1;                    /* MSB */
+    uint8_t   waittime2;                    /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_STATUS_REPORT_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Activation Set V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_ACTIVATION_SET_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Activation Status Report V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   firmwareUpdateStatus;         /**/
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Prepare Get V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   firmwareId1;                  /* MSB */
+    uint8_t   firmwareId2;                  /* LSB */
+    uint8_t   firmwareTarget;               /**/
+    uint8_t   fragmentSize1;                /* MSB */
+    uint8_t   fragmentSize2;                /* LSB */
+    uint8_t   hardwareVersion;              /**/
+} ZW_FIRMWARE_UPDATE_MD_PREPARE_GET_V8_FRAME;
+
+/************************************************************/
+/* Firmware Update Md Prepare Report V8 command class structs */
+/************************************************************/
+typedef struct _ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V8_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   status;                       /**/
+    uint8_t   firmwareChecksum1;            /* MSB */
+    uint8_t   firmwareChecksum2;            /* LSB */
+} ZW_FIRMWARE_UPDATE_MD_PREPARE_REPORT_V8_FRAME;
+
+/************************************************************/
 /* Geographic Location Get command class structs */         
 /************************************************************/
 typedef struct _ZW_GEOGRAPHIC_LOCATION_GET_FRAME_
@@ -19838,6 +24309,276 @@ typedef struct _ZW_INDICATOR_SUPPORTED_REPORT_4BYTE_V3_FRAME_
 } ZW_INDICATOR_SUPPORTED_REPORT_4BYTE_V3_FRAME;
 
 /************************************************************/
+/* Indicator Get V4 command class structs */                
+/************************************************************/
+typedef struct _ZW_INDICATOR_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+} ZW_INDICATOR_GET_V4_FRAME;
+
+/************************************************************/
+/* Indicator Report V4 variant group structs */             
+/************************************************************/
+typedef struct _VG_INDICATOR_REPORT_V4_VG_
+{
+    uint8_t   indicatorId;                  /**/
+    uint8_t   propertyId;                   /**/
+    uint8_t   value;                        /**/
+} VG_INDICATOR_REPORT_V4_VG;
+
+/************************************************************/
+/* Indicator Report 1byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_INDICATOR_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_REPORT_V4_VG variantgroup1;                /**/
+} ZW_INDICATOR_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Report 2byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_INDICATOR_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_REPORT_V4_VG variantgroup1;                /**/
+    VG_INDICATOR_REPORT_V4_VG variantgroup2;                /**/
+} ZW_INDICATOR_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Report 3byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_INDICATOR_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_REPORT_V4_VG variantgroup1;                /**/
+    VG_INDICATOR_REPORT_V4_VG variantgroup2;                /**/
+    VG_INDICATOR_REPORT_V4_VG variantgroup3;                /**/
+} ZW_INDICATOR_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Report 4byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_INDICATOR_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_REPORT_V4_VG variantgroup1;                /**/
+    VG_INDICATOR_REPORT_V4_VG variantgroup2;                /**/
+    VG_INDICATOR_REPORT_V4_VG variantgroup3;                /**/
+    VG_INDICATOR_REPORT_V4_VG variantgroup4;                /**/
+} ZW_INDICATOR_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Set V4 variant group structs */                
+/************************************************************/
+typedef struct _VG_INDICATOR_SET_V4_VG_
+{
+    uint8_t   indicatorId;                  /**/
+    uint8_t   propertyId;                   /**/
+    uint8_t   value;                        /**/
+} VG_INDICATOR_SET_V4_VG;
+
+/************************************************************/
+/* Indicator Set 1byte V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_INDICATOR_SET_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_SET_V4_VG variantgroup1;                /**/
+} ZW_INDICATOR_SET_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Set 2byte V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_INDICATOR_SET_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_SET_V4_VG variantgroup1;                /**/
+    VG_INDICATOR_SET_V4_VG variantgroup2;                /**/
+} ZW_INDICATOR_SET_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Set 3byte V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_INDICATOR_SET_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_SET_V4_VG variantgroup1;                /**/
+    VG_INDICATOR_SET_V4_VG variantgroup2;                /**/
+    VG_INDICATOR_SET_V4_VG variantgroup3;                /**/
+} ZW_INDICATOR_SET_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Set 4byte V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_INDICATOR_SET_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicator0Value;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_INDICATOR_SET_V4_VG variantgroup1;                /**/
+    VG_INDICATOR_SET_V4_VG variantgroup2;                /**/
+    VG_INDICATOR_SET_V4_VG variantgroup3;                /**/
+    VG_INDICATOR_SET_V4_VG variantgroup4;                /**/
+} ZW_INDICATOR_SET_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Supported Get V4 command class structs */      
+/************************************************************/
+typedef struct _ZW_INDICATOR_SUPPORTED_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+} ZW_INDICATOR_SUPPORTED_GET_V4_FRAME;
+
+/************************************************************/
+/* Indicator Supported Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_SUPPORTED_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   nextIndicatorId;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   propertySupportedBitMask1;    
+} ZW_INDICATOR_SUPPORTED_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Supported Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_SUPPORTED_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   nextIndicatorId;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   propertySupportedBitMask1;    /* MSB */
+    uint8_t   propertySupportedBitMask2;    /* LSB */
+} ZW_INDICATOR_SUPPORTED_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Supported Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_SUPPORTED_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   nextIndicatorId;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   propertySupportedBitMask1;    /* MSB */
+    uint8_t   propertySupportedBitMask2;    
+    uint8_t   propertySupportedBitMask3;    /* LSB */
+} ZW_INDICATOR_SUPPORTED_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Supported Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_SUPPORTED_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   nextIndicatorId;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   propertySupportedBitMask1;    /* MSB */
+    uint8_t   propertySupportedBitMask2;    
+    uint8_t   propertySupportedBitMask3;    
+    uint8_t   propertySupportedBitMask4;    /* LSB */
+} ZW_INDICATOR_SUPPORTED_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Description Get V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_INDICATOR_DESCRIPTION_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+} ZW_INDICATOR_DESCRIPTION_GET_V4_FRAME;
+
+/************************************************************/
+/* Indicator Description Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_DESCRIPTION_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   descriptionLength;            /**/
+    uint8_t   description1;                 
+} ZW_INDICATOR_DESCRIPTION_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Description Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_DESCRIPTION_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   descriptionLength;            /**/
+    uint8_t   description1;                 /* MSB */
+    uint8_t   description2;                 /* LSB */
+} ZW_INDICATOR_DESCRIPTION_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Description Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_DESCRIPTION_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   descriptionLength;            /**/
+    uint8_t   description1;                 /* MSB */
+    uint8_t   description2;                 
+    uint8_t   description3;                 /* LSB */
+} ZW_INDICATOR_DESCRIPTION_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Indicator Description Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_INDICATOR_DESCRIPTION_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   indicatorId;                  /**/
+    uint8_t   descriptionLength;            /**/
+    uint8_t   description1;                 /* MSB */
+    uint8_t   description2;                 
+    uint8_t   description3;                 
+    uint8_t   description4;                 /* LSB */
+} ZW_INDICATOR_DESCRIPTION_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
 /* Ip Configuration Get command class structs */            
 /************************************************************/
 typedef struct _ZW_IP_CONFIGURATION_GET_FRAME_
@@ -19964,35 +24705,6 @@ typedef struct _ZW_LANGUAGE_SET_FRAME_
     uint8_t   country1;                     /* MSB */
     uint8_t   country2;                     /* LSB */
 } ZW_LANGUAGE_SET_FRAME;
-
-/************************************************************/
-/* Lock Get command class structs */                        
-/************************************************************/
-typedef struct _ZW_LOCK_GET_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-} ZW_LOCK_GET_FRAME;
-
-/************************************************************/
-/* Lock Report command class structs */                     
-/************************************************************/
-typedef struct _ZW_LOCK_REPORT_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   lockState;                    /**/
-} ZW_LOCK_REPORT_FRAME;
-
-/************************************************************/
-/* Lock Set command class structs */                        
-/************************************************************/
-typedef struct _ZW_LOCK_SET_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   lockState;                    /**/
-} ZW_LOCK_SET_FRAME;
 
 /************************************************************/
 /* Manufacturer Specific Get command class structs */       
@@ -20563,9 +25275,9 @@ typedef struct _ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_FRAME_
 } ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_FRAME;
 
 /************************************************************/
-/* Meter Tbl Report command class structs */                
+/* Meter Tbl Table Capability Report command class structs */
 /************************************************************/
-typedef struct _ZW_METER_TBL_REPORT_FRAME_
+typedef struct _ZW_METER_TBL_TABLE_CAPABILITY_REPORT_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
@@ -20580,7 +25292,7 @@ typedef struct _ZW_METER_TBL_REPORT_FRAME_
     uint8_t   dataHistorySupported1;        /* MSB */
     uint8_t   dataHistorySupported2;        
     uint8_t   dataHistorySupported3;        /* LSB */
-} ZW_METER_TBL_REPORT_FRAME;
+} ZW_METER_TBL_TABLE_CAPABILITY_REPORT_FRAME;
 
 /************************************************************/
 /* Meter Tbl Table Capability Get command class structs */  
@@ -21094,9 +25806,9 @@ typedef struct _ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_V2_FRAME_
 } ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_V2_FRAME;
 
 /************************************************************/
-/* Meter Tbl Report V2 command class structs */             
+/* Meter Tbl Table Capability Report V2 command class structs */
 /************************************************************/
-typedef struct _ZW_METER_TBL_REPORT_V2_FRAME_
+typedef struct _ZW_METER_TBL_TABLE_CAPABILITY_REPORT_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
@@ -21111,7 +25823,7 @@ typedef struct _ZW_METER_TBL_REPORT_V2_FRAME_
     uint8_t   dataHistorySupported1;        /* MSB */
     uint8_t   dataHistorySupported2;        
     uint8_t   dataHistorySupported3;        /* LSB */
-} ZW_METER_TBL_REPORT_V2_FRAME;
+} ZW_METER_TBL_TABLE_CAPABILITY_REPORT_V2_FRAME;
 
 /************************************************************/
 /* Meter Tbl Table Capability Get V2 command class structs */
@@ -21625,9 +26337,9 @@ typedef struct _ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_V3_FRAME_
 } ZW_METER_TBL_HISTORICAL_DATA_REPORT_4BYTE_V3_FRAME;
 
 /************************************************************/
-/* Meter Tbl Report V3 command class structs */             
+/* Meter Tbl Table Capability Report V3 command class structs */
 /************************************************************/
-typedef struct _ZW_METER_TBL_REPORT_V3_FRAME_
+typedef struct _ZW_METER_TBL_TABLE_CAPABILITY_REPORT_V3_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
@@ -21642,7 +26354,7 @@ typedef struct _ZW_METER_TBL_REPORT_V3_FRAME_
     uint8_t   dataHistorySupported1;        /* MSB */
     uint8_t   dataHistorySupported2;        
     uint8_t   dataHistorySupported3;        /* LSB */
-} ZW_METER_TBL_REPORT_V3_FRAME;
+} ZW_METER_TBL_TABLE_CAPABILITY_REPORT_V3_FRAME;
 
 /************************************************************/
 /* Meter Tbl Table Capability Get V3 command class structs */
@@ -22428,6 +27140,218 @@ typedef struct _ZW_METER_SUPPORTED_REPORT_4BYTE_V5_FRAME_
 } ZW_METER_SUPPORTED_REPORT_4BYTE_V5_FRAME;
 
 /************************************************************/
+/* Meter Get V6 command class structs */                    
+/************************************************************/
+typedef struct _ZW_METER_GET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   scale2;                       /**/
+} ZW_METER_GET_V6_FRAME;
+
+/************************************************************/
+/* Meter Report 1byte V6 command class structs */           
+/************************************************************/
+typedef struct _ZW_METER_REPORT_1BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  
+    uint8_t   deltaTime1;                   /* MSB */
+    uint8_t   deltaTime2;                   /* LSB */
+    uint8_t   previousMeterValue1;          
+    uint8_t   scale2;                       /**/
+} ZW_METER_REPORT_1BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Report 2byte V6 command class structs */           
+/************************************************************/
+typedef struct _ZW_METER_REPORT_2BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  /* MSB */
+    uint8_t   meterValue2;                  /* LSB */
+    uint8_t   deltaTime1;                   /* MSB */
+    uint8_t   deltaTime2;                   /* LSB */
+    uint8_t   previousMeterValue1;          /* MSB */
+    uint8_t   previousMeterValue2;          /* LSB */
+    uint8_t   scale2;                       /**/
+} ZW_METER_REPORT_2BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Report 3byte V6 command class structs */           
+/************************************************************/
+typedef struct _ZW_METER_REPORT_3BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  /* MSB */
+    uint8_t   meterValue2;                  
+    uint8_t   meterValue3;                  /* LSB */
+    uint8_t   deltaTime1;                   /* MSB */
+    uint8_t   deltaTime2;                   /* LSB */
+    uint8_t   previousMeterValue1;          /* MSB */
+    uint8_t   previousMeterValue2;          
+    uint8_t   previousMeterValue3;          /* LSB */
+    uint8_t   scale2;                       /**/
+} ZW_METER_REPORT_3BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Report 4byte V6 command class structs */           
+/************************************************************/
+typedef struct _ZW_METER_REPORT_4BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  /* MSB */
+    uint8_t   meterValue2;                  
+    uint8_t   meterValue3;                  
+    uint8_t   meterValue4;                  /* LSB */
+    uint8_t   deltaTime1;                   /* MSB */
+    uint8_t   deltaTime2;                   /* LSB */
+    uint8_t   previousMeterValue1;          /* MSB */
+    uint8_t   previousMeterValue2;          
+    uint8_t   previousMeterValue3;          
+    uint8_t   previousMeterValue4;          /* LSB */
+    uint8_t   scale2;                       /**/
+} ZW_METER_REPORT_4BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Reset 1byte V6 command class structs */            
+/************************************************************/
+typedef struct _ZW_METER_RESET_1BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  
+    uint8_t   scale2;                       /**/
+} ZW_METER_RESET_1BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Reset 2byte V6 command class structs */            
+/************************************************************/
+typedef struct _ZW_METER_RESET_2BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  /* MSB */
+    uint8_t   meterValue2;                  /* LSB */
+    uint8_t   scale2;                       /**/
+} ZW_METER_RESET_2BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Reset 3byte V6 command class structs */            
+/************************************************************/
+typedef struct _ZW_METER_RESET_3BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  /* MSB */
+    uint8_t   meterValue2;                  
+    uint8_t   meterValue3;                  /* LSB */
+    uint8_t   scale2;                       /**/
+} ZW_METER_RESET_3BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Reset 4byte V6 command class structs */            
+/************************************************************/
+typedef struct _ZW_METER_RESET_4BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   meterValue1;                  /* MSB */
+    uint8_t   meterValue2;                  
+    uint8_t   meterValue3;                  
+    uint8_t   meterValue4;                  /* LSB */
+    uint8_t   scale2;                       /**/
+} ZW_METER_RESET_4BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Supported Get V6 command class structs */          
+/************************************************************/
+typedef struct _ZW_METER_SUPPORTED_GET_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_METER_SUPPORTED_GET_V6_FRAME;
+
+/************************************************************/
+/* Meter Supported Report 1byte V6 command class structs */ 
+/************************************************************/
+typedef struct _ZW_METER_SUPPORTED_REPORT_1BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   numberOfScaleSupportedBytesToFollow;/**/
+    uint8_t   scaleSupported1;              
+} ZW_METER_SUPPORTED_REPORT_1BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Supported Report 2byte V6 command class structs */ 
+/************************************************************/
+typedef struct _ZW_METER_SUPPORTED_REPORT_2BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   numberOfScaleSupportedBytesToFollow;/**/
+    uint8_t   scaleSupported1;              /* MSB */
+    uint8_t   scaleSupported2;              /* LSB */
+} ZW_METER_SUPPORTED_REPORT_2BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Supported Report 3byte V6 command class structs */ 
+/************************************************************/
+typedef struct _ZW_METER_SUPPORTED_REPORT_3BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   numberOfScaleSupportedBytesToFollow;/**/
+    uint8_t   scaleSupported1;              /* MSB */
+    uint8_t   scaleSupported2;              
+    uint8_t   scaleSupported3;              /* LSB */
+} ZW_METER_SUPPORTED_REPORT_3BYTE_V6_FRAME;
+
+/************************************************************/
+/* Meter Supported Report 4byte V6 command class structs */ 
+/************************************************************/
+typedef struct _ZW_METER_SUPPORTED_REPORT_4BYTE_V6_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   numberOfScaleSupportedBytesToFollow;/**/
+    uint8_t   scaleSupported1;              /* MSB */
+    uint8_t   scaleSupported2;              
+    uint8_t   scaleSupported3;              
+    uint8_t   scaleSupported4;              /* LSB */
+} ZW_METER_SUPPORTED_REPORT_4BYTE_V6_FRAME;
+
+/************************************************************/
 /* Move To Position Get command class structs */            
 /************************************************************/
 typedef struct _ZW_MOVE_TO_POSITION_GET_FRAME_
@@ -22967,6 +27891,518 @@ typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V3_FRAME_
     VG_MULTI_CHANNEL_ASSOCIATION_SET_V3_VG variantgroup3;                /**/
     VG_MULTI_CHANNEL_ASSOCIATION_SET_V3_VG variantgroup4;                /**/
 } ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_GET_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Groupings Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Groupings Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedGroupings;           /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove V4 variant group structs */
+/************************************************************/
+typedef struct _VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG_
+{
+    uint8_t   multiChannelNodeId;           /**/
+    uint8_t   properties1;                  /* masked byte */
+} VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG;
+
+/************************************************************/
+/* Multi Channel Association Remove 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup1;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup2;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup3;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup3;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V4_VG variantgroup4;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report V4 variant group structs */
+/************************************************************/
+typedef struct _VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG_
+{
+    uint8_t   multiChannelNodeId;           /**/
+    uint8_t   properties1;                  /* masked byte */
+} VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG;
+
+/************************************************************/
+/* Multi Channel Association Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup1;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup2;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup3;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup3;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V4_VG variantgroup4;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set V4 variant group structs */
+/************************************************************/
+typedef struct _VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG_
+{
+    uint8_t   multiChannelNodeId;           /**/
+    uint8_t   properties1;                  /* masked byte */
+} VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG;
+
+/************************************************************/
+/* Multi Channel Association Set 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup1;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup2;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup3;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup3;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V4_VG variantgroup4;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Get V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_GET_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_GET_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Groupings Get V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Groupings Report V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedGroupings;           /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove V5 variant group structs */
+/************************************************************/
+typedef struct _VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG_
+{
+    uint8_t   multiChannelNodeId;           /**/
+    uint8_t   properties1;                  /* masked byte */
+} VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG;
+
+/************************************************************/
+/* Multi Channel Association Remove 1byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_1BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup1;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_1BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove 2byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_2BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup2;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_2BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove 3byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_3BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup3;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_3BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Remove 4byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_4BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup3;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REMOVE_V5_VG variantgroup4;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REMOVE_4BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report V5 variant group structs */
+/************************************************************/
+typedef struct _VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG_
+{
+    uint8_t   multiChannelNodeId;           /**/
+    uint8_t   properties1;                  /* masked byte */
+} VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG;
+
+/************************************************************/
+/* Multi Channel Association Report 1byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_1BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup1;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_1BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report 2byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_2BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup2;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_2BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report 3byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_3BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup3;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_3BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Report 4byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_4BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   maxNodesSupported;            /**/
+    uint8_t   reportsToFollow;              /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup3;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_REPORT_V5_VG variantgroup4;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_REPORT_4BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set V5 variant group structs */
+/************************************************************/
+typedef struct _VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG_
+{
+    uint8_t   multiChannelNodeId;           /**/
+    uint8_t   properties1;                  /* masked byte */
+} VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG;
+
+/************************************************************/
+/* Multi Channel Association Set 1byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_1BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup1;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_1BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set 2byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup2;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_2BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set 3byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup3;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_3BYTE_V5_FRAME;
+
+/************************************************************/
+/* Multi Channel Association Set 4byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   groupingIdentifier;           /**/
+    uint8_t   nodeId1;                      /* MSB */
+    uint8_t   nodeId2;                      
+    uint8_t   nodeId3;                      
+    uint8_t   nodeId4;                      /* LSB */
+    uint8_t   marker;                       /*This marker identifier is used to separate between nodes without and with end points attached. This field can be omitted in case no Multi Channel node follows.*/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup1;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup2;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup3;                /**/
+    VG_MULTI_CHANNEL_ASSOCIATION_SET_V5_VG variantgroup4;                /**/
+} ZW_MULTI_CHANNEL_ASSOCIATION_SET_4BYTE_V5_FRAME;
 
 /************************************************************/
 /* Multi Channel Capability Get V2 command class structs */ 
@@ -24374,6 +29810,977 @@ typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V2_FRAME_
 } ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V2_FRAME;
 
 /************************************************************/
+/* Node Info Cached Get V3 command class structs */         
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   nodeId;                       /**/
+} ZW_NODE_INFO_CACHED_GET_V3_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 1byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                
+} ZW_NODE_INFO_CACHED_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 2byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+} ZW_NODE_INFO_CACHED_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 3byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+} ZW_NODE_INFO_CACHED_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 4byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+} ZW_NODE_INFO_CACHED_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node List Get V3 command class structs */                
+/************************************************************/
+typedef struct _ZW_NODE_LIST_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+} ZW_NODE_LIST_GET_V3_FRAME;
+
+/************************************************************/
+/* Node List Report 1byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                
+} ZW_NODE_LIST_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node List Report 2byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                /* MSB */
+    uint8_t   nodeListData2;                /* LSB */
+} ZW_NODE_LIST_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node List Report 3byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                /* MSB */
+    uint8_t   nodeListData2;                
+    uint8_t   nodeListData3;                /* LSB */
+} ZW_NODE_LIST_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Node List Report 4byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                /* MSB */
+    uint8_t   nodeListData2;                
+    uint8_t   nodeListData3;                
+    uint8_t   nodeListData4;                /* LSB */
+} ZW_NODE_LIST_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel End Point Get V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_END_POINT_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+} ZW_NM_MULTI_CHANNEL_END_POINT_GET_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel End Point Report V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_END_POINT_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+} ZW_NM_MULTI_CHANNEL_END_POINT_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Get V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_GET_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 1byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 2byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 3byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 4byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Get V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report V3 variant group structs */
+/************************************************************/
+typedef struct _VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG_
+{
+    uint8_t   properties1;                  /* masked byte */
+} VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 1byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup1;                /**/
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 2byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup1;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup2;                /**/
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 3byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup1;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup2;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup3;                /**/
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 4byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup1;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup2;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup3;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V3_VG variantgroup4;                /**/
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Failed Node List Get V3 command class structs */         
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+} ZW_FAILED_NODE_LIST_GET_V3_FRAME;
+
+/************************************************************/
+/* Failed Node List Report V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   failedNodeListData1;          /* MSB */
+    uint8_t   failedNodeListData2;          
+    uint8_t   failedNodeListData3;          
+    uint8_t   failedNodeListData4;          
+    uint8_t   failedNodeListData5;          
+    uint8_t   failedNodeListData6;          
+    uint8_t   failedNodeListData7;          
+    uint8_t   failedNodeListData8;          
+    uint8_t   failedNodeListData9;          
+    uint8_t   failedNodeListData10;         
+    uint8_t   failedNodeListData11;         
+    uint8_t   failedNodeListData12;         
+    uint8_t   failedNodeListData13;         
+    uint8_t   failedNodeListData14;         
+    uint8_t   failedNodeListData15;         
+    uint8_t   failedNodeListData16;         
+    uint8_t   failedNodeListData17;         
+    uint8_t   failedNodeListData18;         
+    uint8_t   failedNodeListData19;         
+    uint8_t   failedNodeListData20;         
+    uint8_t   failedNodeListData21;         
+    uint8_t   failedNodeListData22;         
+    uint8_t   failedNodeListData23;         
+    uint8_t   failedNodeListData24;         
+    uint8_t   failedNodeListData25;         
+    uint8_t   failedNodeListData26;         
+    uint8_t   failedNodeListData27;         
+    uint8_t   failedNodeListData28;         
+    uint8_t   failedNodeListData29;         /* LSB */
+} ZW_FAILED_NODE_LIST_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Node Info Cached Get V4 command class structs */         
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   nodeId;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NODE_INFO_CACHED_GET_V4_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                
+} ZW_NODE_INFO_CACHED_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+} ZW_NODE_INFO_CACHED_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+} ZW_NODE_INFO_CACHED_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Info Cached Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NODE_INFO_CACHED_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+} ZW_NODE_INFO_CACHED_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node List Get V4 command class structs */                
+/************************************************************/
+typedef struct _ZW_NODE_LIST_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+} ZW_NODE_LIST_GET_V4_FRAME;
+
+/************************************************************/
+/* Node List Report 1byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                
+    uint8_t   extendedNodeListLength1;      /* MSB */
+    uint8_t   extendedNodeListLength2;      /* LSB */
+    uint8_t   extendedNodeList1;            
+} ZW_NODE_LIST_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node List Report 2byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                /* MSB */
+    uint8_t   nodeListData2;                /* LSB */
+    uint8_t   extendedNodeListLength1;      /* MSB */
+    uint8_t   extendedNodeListLength2;      /* LSB */
+    uint8_t   extendedNodeList1;            /* MSB */
+    uint8_t   extendedNodeList2;            /* LSB */
+} ZW_NODE_LIST_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node List Report 3byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                /* MSB */
+    uint8_t   nodeListData2;                
+    uint8_t   nodeListData3;                /* LSB */
+    uint8_t   extendedNodeListLength1;      /* MSB */
+    uint8_t   extendedNodeListLength2;      /* LSB */
+    uint8_t   extendedNodeList1;            /* MSB */
+    uint8_t   extendedNodeList2;            
+    uint8_t   extendedNodeList3;            /* LSB */
+} ZW_NODE_LIST_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node List Report 4byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_LIST_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeListControllerId;         /**/
+    uint8_t   nodeListData1;                /* MSB */
+    uint8_t   nodeListData2;                
+    uint8_t   nodeListData3;                
+    uint8_t   nodeListData4;                /* LSB */
+    uint8_t   extendedNodeListLength1;      /* MSB */
+    uint8_t   extendedNodeListLength2;      /* LSB */
+    uint8_t   extendedNodeList1;            /* MSB */
+    uint8_t   extendedNodeList2;            
+    uint8_t   extendedNodeList3;            
+    uint8_t   extendedNodeList4;            /* LSB */
+} ZW_NODE_LIST_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel End Point Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_END_POINT_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_END_POINT_GET_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel End Point Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_END_POINT_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_END_POINT_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_GET_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Capability Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   commandClassLength;           /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_CAPABILITY_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report V4 variant group structs */
+/************************************************************/
+typedef struct _VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG_
+{
+    uint8_t   properties1;                  /* masked byte */
+} VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup1;                /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup1;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup2;                /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup1;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup2;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup3;                /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Nm Multi Channel Aggregated Members Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfMembers;              /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup1;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup2;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup3;                /**/
+    VG_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_V4_VG variantgroup4;                /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Failed Node List Get V4 command class structs */         
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+} ZW_FAILED_NODE_LIST_GET_V4_FRAME;
+
+/************************************************************/
+/* Failed Node List Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   failedNodeListData1;          /* MSB */
+    uint8_t   failedNodeListData2;          
+    uint8_t   failedNodeListData3;          
+    uint8_t   failedNodeListData4;          
+    uint8_t   failedNodeListData5;          
+    uint8_t   failedNodeListData6;          
+    uint8_t   failedNodeListData7;          
+    uint8_t   failedNodeListData8;          
+    uint8_t   failedNodeListData9;          
+    uint8_t   failedNodeListData10;         
+    uint8_t   failedNodeListData11;         
+    uint8_t   failedNodeListData12;         
+    uint8_t   failedNodeListData13;         
+    uint8_t   failedNodeListData14;         
+    uint8_t   failedNodeListData15;         
+    uint8_t   failedNodeListData16;         
+    uint8_t   failedNodeListData17;         
+    uint8_t   failedNodeListData18;         
+    uint8_t   failedNodeListData19;         
+    uint8_t   failedNodeListData20;         
+    uint8_t   failedNodeListData21;         
+    uint8_t   failedNodeListData22;         
+    uint8_t   failedNodeListData23;         
+    uint8_t   failedNodeListData24;         
+    uint8_t   failedNodeListData25;         
+    uint8_t   failedNodeListData26;         
+    uint8_t   failedNodeListData27;         
+    uint8_t   failedNodeListData28;         
+    uint8_t   failedNodeListData29;         /* LSB */
+    uint8_t   extendedFailedNodeListLength1;/* MSB */
+    uint8_t   extendedFailedNodeListLength2;/* LSB */
+    uint8_t   extendedFailedNodeList1;      
+} ZW_FAILED_NODE_LIST_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Failed Node List Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   failedNodeListData1;          /* MSB */
+    uint8_t   failedNodeListData2;          
+    uint8_t   failedNodeListData3;          
+    uint8_t   failedNodeListData4;          
+    uint8_t   failedNodeListData5;          
+    uint8_t   failedNodeListData6;          
+    uint8_t   failedNodeListData7;          
+    uint8_t   failedNodeListData8;          
+    uint8_t   failedNodeListData9;          
+    uint8_t   failedNodeListData10;         
+    uint8_t   failedNodeListData11;         
+    uint8_t   failedNodeListData12;         
+    uint8_t   failedNodeListData13;         
+    uint8_t   failedNodeListData14;         
+    uint8_t   failedNodeListData15;         
+    uint8_t   failedNodeListData16;         
+    uint8_t   failedNodeListData17;         
+    uint8_t   failedNodeListData18;         
+    uint8_t   failedNodeListData19;         
+    uint8_t   failedNodeListData20;         
+    uint8_t   failedNodeListData21;         
+    uint8_t   failedNodeListData22;         
+    uint8_t   failedNodeListData23;         
+    uint8_t   failedNodeListData24;         
+    uint8_t   failedNodeListData25;         
+    uint8_t   failedNodeListData26;         
+    uint8_t   failedNodeListData27;         
+    uint8_t   failedNodeListData28;         
+    uint8_t   failedNodeListData29;         /* LSB */
+    uint8_t   extendedFailedNodeListLength1;/* MSB */
+    uint8_t   extendedFailedNodeListLength2;/* LSB */
+    uint8_t   extendedFailedNodeList1;      /* MSB */
+    uint8_t   extendedFailedNodeList2;      /* LSB */
+} ZW_FAILED_NODE_LIST_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Failed Node List Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   failedNodeListData1;          /* MSB */
+    uint8_t   failedNodeListData2;          
+    uint8_t   failedNodeListData3;          
+    uint8_t   failedNodeListData4;          
+    uint8_t   failedNodeListData5;          
+    uint8_t   failedNodeListData6;          
+    uint8_t   failedNodeListData7;          
+    uint8_t   failedNodeListData8;          
+    uint8_t   failedNodeListData9;          
+    uint8_t   failedNodeListData10;         
+    uint8_t   failedNodeListData11;         
+    uint8_t   failedNodeListData12;         
+    uint8_t   failedNodeListData13;         
+    uint8_t   failedNodeListData14;         
+    uint8_t   failedNodeListData15;         
+    uint8_t   failedNodeListData16;         
+    uint8_t   failedNodeListData17;         
+    uint8_t   failedNodeListData18;         
+    uint8_t   failedNodeListData19;         
+    uint8_t   failedNodeListData20;         
+    uint8_t   failedNodeListData21;         
+    uint8_t   failedNodeListData22;         
+    uint8_t   failedNodeListData23;         
+    uint8_t   failedNodeListData24;         
+    uint8_t   failedNodeListData25;         
+    uint8_t   failedNodeListData26;         
+    uint8_t   failedNodeListData27;         
+    uint8_t   failedNodeListData28;         
+    uint8_t   failedNodeListData29;         /* LSB */
+    uint8_t   extendedFailedNodeListLength1;/* MSB */
+    uint8_t   extendedFailedNodeListLength2;/* LSB */
+    uint8_t   extendedFailedNodeList1;      /* MSB */
+    uint8_t   extendedFailedNodeList2;      
+    uint8_t   extendedFailedNodeList3;      /* LSB */
+} ZW_FAILED_NODE_LIST_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Failed Node List Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_LIST_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   failedNodeListData1;          /* MSB */
+    uint8_t   failedNodeListData2;          
+    uint8_t   failedNodeListData3;          
+    uint8_t   failedNodeListData4;          
+    uint8_t   failedNodeListData5;          
+    uint8_t   failedNodeListData6;          
+    uint8_t   failedNodeListData7;          
+    uint8_t   failedNodeListData8;          
+    uint8_t   failedNodeListData9;          
+    uint8_t   failedNodeListData10;         
+    uint8_t   failedNodeListData11;         
+    uint8_t   failedNodeListData12;         
+    uint8_t   failedNodeListData13;         
+    uint8_t   failedNodeListData14;         
+    uint8_t   failedNodeListData15;         
+    uint8_t   failedNodeListData16;         
+    uint8_t   failedNodeListData17;         
+    uint8_t   failedNodeListData18;         
+    uint8_t   failedNodeListData19;         
+    uint8_t   failedNodeListData20;         
+    uint8_t   failedNodeListData21;         
+    uint8_t   failedNodeListData22;         
+    uint8_t   failedNodeListData23;         
+    uint8_t   failedNodeListData24;         
+    uint8_t   failedNodeListData25;         
+    uint8_t   failedNodeListData26;         
+    uint8_t   failedNodeListData27;         
+    uint8_t   failedNodeListData28;         
+    uint8_t   failedNodeListData29;         /* LSB */
+    uint8_t   extendedFailedNodeListLength1;/* MSB */
+    uint8_t   extendedFailedNodeListLength2;/* LSB */
+    uint8_t   extendedFailedNodeList1;      /* MSB */
+    uint8_t   extendedFailedNodeList2;      
+    uint8_t   extendedFailedNodeList3;      
+    uint8_t   extendedFailedNodeList4;      /* LSB */
+} ZW_FAILED_NODE_LIST_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
 /* Learn Mode Set command class structs */                  
 /************************************************************/
 typedef struct _ZW_LEARN_MODE_SET_FRAME_
@@ -25548,16 +31955,6 @@ typedef struct _ZW_NODE_ADD_DSK_SET_4BYTE_V3_FRAME_
 } ZW_NODE_ADD_DSK_SET_4BYTE_V3_FRAME;
 
 /************************************************************/
-/* S2 Advanced Join Mode Get V3 command class structs */    
-/************************************************************/
-typedef struct _ZW_S2_ADVANCED_JOIN_MODE_GET_V3_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   seqNo;                        /**/
-} ZW_S2_ADVANCED_JOIN_MODE_GET_V3_FRAME;
-
-/************************************************************/
 /* Smart Start Join Started Report 1byte V3 command class structs */
 /************************************************************/
 typedef struct _ZW_SMART_START_JOIN_STARTED_REPORT_1BYTE_V3_FRAME_
@@ -25612,28 +32009,6 @@ typedef struct _ZW_SMART_START_JOIN_STARTED_REPORT_4BYTE_V3_FRAME_
 } ZW_SMART_START_JOIN_STARTED_REPORT_4BYTE_V3_FRAME;
 
 /************************************************************/
-/* S2 Advanced Join Mode Set V3 command class structs */    
-/************************************************************/
-typedef struct _ZW_S2_ADVANCED_JOIN_MODE_SET_V3_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   seqNo;                        /**/
-    uint8_t   s2AdvancedJoinMode;           /**/
-} ZW_S2_ADVANCED_JOIN_MODE_SET_V3_FRAME;
-
-/************************************************************/
-/* S2 Advanced Join Mode Report V3 command class structs */ 
-/************************************************************/
-typedef struct _ZW_S2_ADVANCED_JOIN_MODE_REPORT_V3_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   seqNo;                        /**/
-    uint8_t   s2AdvancedJoinMode;           /**/
-} ZW_S2_ADVANCED_JOIN_MODE_REPORT_V3_FRAME;
-
-/************************************************************/
 /* Included Nif Report 1byte V3 command class structs */    
 /************************************************************/
 typedef struct _ZW_INCLUDED_NIF_REPORT_1BYTE_V3_FRAME_
@@ -25686,6 +32061,581 @@ typedef struct _ZW_INCLUDED_NIF_REPORT_4BYTE_V3_FRAME_
     uint8_t   dsk3;                         
     uint8_t   dsk4;                         /* LSB */
 } ZW_INCLUDED_NIF_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Failed Node Remove V4 command class structs */           
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_REMOVE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeId;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_FAILED_NODE_REMOVE_V4_FRAME;
+
+/************************************************************/
+/* Failed Node Remove Status V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_REMOVE_STATUS_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeId;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_FAILED_NODE_REMOVE_STATUS_V4_FRAME;
+
+/************************************************************/
+/* Node Add V4 command class structs */                     
+/************************************************************/
+typedef struct _ZW_NODE_ADD_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   mode;                         /**/
+    uint8_t   txOptions;                    /**/
+} ZW_NODE_ADD_V4_FRAME;
+
+/************************************************************/
+/* Node Add Status 1byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_NODE_ADD_STATUS_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   reserved1;                    /**/
+    uint8_t   newNodeId;                    /**/
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dsk1;                         
+} ZW_NODE_ADD_STATUS_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Status 2byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_NODE_ADD_STATUS_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   reserved1;                    /**/
+    uint8_t   newNodeId;                    /**/
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         /* LSB */
+} ZW_NODE_ADD_STATUS_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Status 3byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_NODE_ADD_STATUS_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   reserved1;                    /**/
+    uint8_t   newNodeId;                    /**/
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         /* LSB */
+} ZW_NODE_ADD_STATUS_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Status 4byte V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_NODE_ADD_STATUS_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   reserved1;                    /**/
+    uint8_t   newNodeId;                    /**/
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         
+    uint8_t   dsk4;                         /* LSB */
+} ZW_NODE_ADD_STATUS_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Remove V4 command class structs */                  
+/************************************************************/
+typedef struct _ZW_NODE_REMOVE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   reserved;                     /**/
+    uint8_t   mode;                         /**/
+} ZW_NODE_REMOVE_V4_FRAME;
+
+/************************************************************/
+/* Node Remove Status V4 command class structs */           
+/************************************************************/
+typedef struct _ZW_NODE_REMOVE_STATUS_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeid;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_NODE_REMOVE_STATUS_V4_FRAME;
+
+/************************************************************/
+/* Failed Node Replace V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_REPLACE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeId;                       /**/
+    uint8_t   txOptions;                    /**/
+    uint8_t   mode;                         /**/
+} ZW_FAILED_NODE_REPLACE_V4_FRAME;
+
+/************************************************************/
+/* Failed Node Replace Status V4 command class structs */   
+/************************************************************/
+typedef struct _ZW_FAILED_NODE_REPLACE_STATUS_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   nodeId;                       /**/
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+} ZW_FAILED_NODE_REPLACE_STATUS_V4_FRAME;
+
+/************************************************************/
+/* Node Neighbor Update Request V4 command class structs */ 
+/************************************************************/
+typedef struct _ZW_NODE_NEIGHBOR_UPDATE_REQUEST_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeId;                       /**/
+} ZW_NODE_NEIGHBOR_UPDATE_REQUEST_V4_FRAME;
+
+/************************************************************/
+/* Node Neighbor Update Status V4 command class structs */  
+/************************************************************/
+typedef struct _ZW_NODE_NEIGHBOR_UPDATE_STATUS_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+} ZW_NODE_NEIGHBOR_UPDATE_STATUS_V4_FRAME;
+
+/************************************************************/
+/* Return Route Assign V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_RETURN_ROUTE_ASSIGN_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   sourceNodeId;                 /**/
+    uint8_t   destinationNodeId;            /**/
+} ZW_RETURN_ROUTE_ASSIGN_V4_FRAME;
+
+/************************************************************/
+/* Return Route Assign Complete V4 command class structs */ 
+/************************************************************/
+typedef struct _ZW_RETURN_ROUTE_ASSIGN_COMPLETE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+} ZW_RETURN_ROUTE_ASSIGN_COMPLETE_V4_FRAME;
+
+/************************************************************/
+/* Return Route Delete V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_RETURN_ROUTE_DELETE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   nodeId;                       /**/
+} ZW_RETURN_ROUTE_DELETE_V4_FRAME;
+
+/************************************************************/
+/* Return Route Delete Complete V4 command class structs */ 
+/************************************************************/
+typedef struct _ZW_RETURN_ROUTE_DELETE_COMPLETE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+} ZW_RETURN_ROUTE_DELETE_COMPLETE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Keys Report V4 command class structs */         
+/************************************************************/
+typedef struct _ZW_NODE_ADD_KEYS_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   requestedKeys;                /**/
+} ZW_NODE_ADD_KEYS_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Node Add Keys Set V4 command class structs */            
+/************************************************************/
+typedef struct _ZW_NODE_ADD_KEYS_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   grantedKeys;                  /**/
+} ZW_NODE_ADD_KEYS_SET_V4_FRAME;
+
+/************************************************************/
+/* Node Add Dsk Report V4 command class structs */          
+/************************************************************/
+typedef struct _ZW_NODE_ADD_DSK_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         
+    uint8_t   dsk4;                         
+    uint8_t   dsk5;                         
+    uint8_t   dsk6;                         
+    uint8_t   dsk7;                         
+    uint8_t   dsk8;                         
+    uint8_t   dsk9;                         
+    uint8_t   dsk10;                        
+    uint8_t   dsk11;                        
+    uint8_t   dsk12;                        
+    uint8_t   dsk13;                        
+    uint8_t   dsk14;                        
+    uint8_t   dsk15;                        
+    uint8_t   dsk16;                        /* LSB */
+} ZW_NODE_ADD_DSK_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Node Add Dsk Set 1byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_ADD_DSK_SET_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   inputDsk1;                    
+} ZW_NODE_ADD_DSK_SET_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Dsk Set 2byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_ADD_DSK_SET_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   inputDsk1;                    /* MSB */
+    uint8_t   inputDsk2;                    /* LSB */
+} ZW_NODE_ADD_DSK_SET_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Dsk Set 3byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_ADD_DSK_SET_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   inputDsk1;                    /* MSB */
+    uint8_t   inputDsk2;                    
+    uint8_t   inputDsk3;                    /* LSB */
+} ZW_NODE_ADD_DSK_SET_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Node Add Dsk Set 4byte V4 command class structs */       
+/************************************************************/
+typedef struct _ZW_NODE_ADD_DSK_SET_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   inputDsk1;                    /* MSB */
+    uint8_t   inputDsk2;                    
+    uint8_t   inputDsk3;                    
+    uint8_t   inputDsk4;                    /* LSB */
+} ZW_NODE_ADD_DSK_SET_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Smart Start Join Started Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SMART_START_JOIN_STARTED_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         
+} ZW_SMART_START_JOIN_STARTED_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Smart Start Join Started Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SMART_START_JOIN_STARTED_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         /* LSB */
+} ZW_SMART_START_JOIN_STARTED_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Smart Start Join Started Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SMART_START_JOIN_STARTED_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         /* LSB */
+} ZW_SMART_START_JOIN_STARTED_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Smart Start Join Started Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SMART_START_JOIN_STARTED_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         
+    uint8_t   dsk4;                         /* LSB */
+} ZW_SMART_START_JOIN_STARTED_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Included Nif Report 1byte V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_INCLUDED_NIF_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         
+} ZW_INCLUDED_NIF_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Included Nif Report 2byte V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_INCLUDED_NIF_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         /* LSB */
+} ZW_INCLUDED_NIF_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Included Nif Report 3byte V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_INCLUDED_NIF_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         /* LSB */
+} ZW_INCLUDED_NIF_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Included Nif Report 4byte V4 command class structs */    
+/************************************************************/
+typedef struct _ZW_INCLUDED_NIF_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dsk1;                         /* MSB */
+    uint8_t   dsk2;                         
+    uint8_t   dsk3;                         
+    uint8_t   dsk4;                         /* LSB */
+} ZW_INCLUDED_NIF_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Node Add Status 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_NODE_ADD_STATUS_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   assignedNodeid1;              /* MSB */
+    uint8_t   assignedNodeid2;              /* LSB */
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+} ZW_EXTENDED_NODE_ADD_STATUS_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Node Add Status 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_NODE_ADD_STATUS_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   assignedNodeid1;              /* MSB */
+    uint8_t   assignedNodeid2;              /* LSB */
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+} ZW_EXTENDED_NODE_ADD_STATUS_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Node Add Status 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_NODE_ADD_STATUS_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   assignedNodeid1;              /* MSB */
+    uint8_t   assignedNodeid2;              /* LSB */
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+} ZW_EXTENDED_NODE_ADD_STATUS_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Node Add Status 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_NODE_ADD_STATUS_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seqNo;                        /**/
+    uint8_t   status;                       /**/
+    uint8_t   assignedNodeid1;              /* MSB */
+    uint8_t   assignedNodeid2;              /* LSB */
+    uint8_t   nodeInfoLength;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   basicDeviceClass;             /**/
+    uint8_t   genericDeviceClass;           /**/
+    uint8_t   specificDeviceClass;          /**/
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+    uint8_t   grantedKeys;                  /**/
+    uint8_t   kexFailType;                  /**/
+} ZW_EXTENDED_NODE_ADD_STATUS_4BYTE_V4_FRAME;
 
 /************************************************************/
 /* Node Naming Node Location Report command class structs */
@@ -27522,6 +34472,169 @@ typedef struct _ZW_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V3_FRAME_
     uint8_t   durationHour;                 /**/
     uint8_t   durationMinute;               /**/
 } ZW_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V3_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Enable Set V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   properties1;                  /* masked byte */
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_ENABLE_SET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Week Day Schedule Set V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   setAction;                    /**/
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+    uint8_t   dayOfWeek;                    /**/
+    uint8_t   startHour;                    /**/
+    uint8_t   startMinute;                  /**/
+    uint8_t   stopHour;                     /**/
+    uint8_t   stopMinute;                   /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_SET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Week Day Schedule Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_GET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Week Day Schedule Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+    uint8_t   dayOfWeek;                    /**/
+    uint8_t   startHour;                    /**/
+    uint8_t   startMinute;                  /**/
+    uint8_t   stopHour;                     /**/
+    uint8_t   stopMinute;                   /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_WEEK_DAY_SCHEDULE_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Year Day Schedule Set V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   setAction;                    /**/
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+    uint8_t   startYear;                    /**/
+    uint8_t   startMonth;                   /**/
+    uint8_t   startDay;                     /**/
+    uint8_t   startHour;                    /**/
+    uint8_t   startMinute;                  /**/
+    uint8_t   stopYear;                     /**/
+    uint8_t   stopMonth;                    /**/
+    uint8_t   stopDay;                      /**/
+    uint8_t   stopHour;                     /**/
+    uint8_t   stopMinute;                   /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_SET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Year Day Schedule Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_GET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Year Day Schedule Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+    uint8_t   startYear;                    /**/
+    uint8_t   startMonth;                   /**/
+    uint8_t   startDay;                     /**/
+    uint8_t   startHour;                    /**/
+    uint8_t   startMinute;                  /**/
+    uint8_t   stopYear;                     /**/
+    uint8_t   stopMonth;                    /**/
+    uint8_t   stopDay;                      /**/
+    uint8_t   stopHour;                     /**/
+    uint8_t   stopMinute;                   /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_YEAR_DAY_SCHEDULE_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Daily Repeating Set V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   setAction;                    /**/
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+    uint8_t   weekDayBitmask;               /**/
+    uint8_t   startHour;                    /**/
+    uint8_t   startMinute;                  /**/
+    uint8_t   durationHour;                 /**/
+    uint8_t   durationMinute;               /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Daily Repeating Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_GET_V4_FRAME;
+
+/************************************************************/
+/* Extended Schedule Entry Lock Daily Repeating Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userIdentifierMsb;            /**/
+    uint8_t   userIdentifierLsb;            /**/
+    uint8_t   scheduleSlotId;               /**/
+    uint8_t   weekDayBitmask;               /**/
+    uint8_t   startHour;                    /**/
+    uint8_t   startMinute;                  /**/
+    uint8_t   durationHour;                 /**/
+    uint8_t   durationMinute;               /**/
+} ZW_EXTENDED_SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_REPORT_V4_FRAME;
 
 /************************************************************/
 /* Screen Attributes Get command class structs */           
@@ -30278,6 +37391,456 @@ typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_FRAME_
 } ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_FRAME;
 
 /************************************************************/
+/* Simple Av Control Get V2 command class structs */        
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SIMPLE_AV_CONTROL_GET_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Report V2 command class structs */     
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfReports;              /**/
+} ZW_SIMPLE_AV_CONTROL_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set V2 variant group structs */        
+/************************************************************/
+typedef struct _VG_SIMPLE_AV_CONTROL_SET_V2_VG_
+{
+    uint8_t   command1;                     /* MSB */
+    uint8_t   command2;                     /* LSB */
+} VG_SIMPLE_AV_CONTROL_SET_V2_VG;
+
+/************************************************************/
+/* Simple Av Control Set 1byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup1;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 2byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup2;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 3byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup2;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup3;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 4byte V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup2;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup3;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V2_VG variantgroup4;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Get V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 1byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 2byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 3byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 4byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     
+    uint8_t   bitMask4;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Simple Av Control Get V3 command class structs */        
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SIMPLE_AV_CONTROL_GET_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Report V3 command class structs */     
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfReports;              /**/
+} ZW_SIMPLE_AV_CONTROL_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set V3 variant group structs */        
+/************************************************************/
+typedef struct _VG_SIMPLE_AV_CONTROL_SET_V3_VG_
+{
+    uint8_t   command1;                     /* MSB */
+    uint8_t   command2;                     /* LSB */
+} VG_SIMPLE_AV_CONTROL_SET_V3_VG;
+
+/************************************************************/
+/* Simple Av Control Set 1byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup1;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 2byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup2;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 3byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup2;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup3;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 4byte V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup2;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup3;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V3_VG variantgroup4;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Get V3 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 1byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 2byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 3byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 4byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     
+    uint8_t   bitMask4;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Simple Av Control Get V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SIMPLE_AV_CONTROL_GET_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Report V4 command class structs */     
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfReports;              /**/
+} ZW_SIMPLE_AV_CONTROL_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set V4 variant group structs */        
+/************************************************************/
+typedef struct _VG_SIMPLE_AV_CONTROL_SET_V4_VG_
+{
+    uint8_t   command1;                     /* MSB */
+    uint8_t   command2;                     /* LSB */
+} VG_SIMPLE_AV_CONTROL_SET_V4_VG;
+
+/************************************************************/
+/* Simple Av Control Set 1byte V4 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup1;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 2byte V4 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup2;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 3byte V4 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup2;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup3;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Set 4byte V4 command class structs */  
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reserved21;                   /* MSB */
+    uint8_t   reserved22;                   /* LSB */
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup1;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup2;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup3;                /**/
+    VG_SIMPLE_AV_CONTROL_SET_V4_VG variantgroup4;                /**/
+} ZW_SIMPLE_AV_CONTROL_SET_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_GET_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Simple Av Control Supported Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reportNo;                     /**/
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     
+    uint8_t   bitMask4;                     /* LSB */
+} ZW_SIMPLE_AV_CONTROL_SUPPORTED_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
 /* Switch All Get command class structs */                  
 /************************************************************/
 typedef struct _ZW_SWITCH_ALL_GET_FRAME_
@@ -30461,7 +38024,7 @@ typedef struct _ZW_SWITCH_MULTILEVEL_SET_V2_FRAME_
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   value;                        /**/
-    uint8_t   dimmingDuration;              /**/
+    uint8_t   duration;                     /**/
 } ZW_SWITCH_MULTILEVEL_SET_V2_FRAME;
 
 /************************************************************/
@@ -30512,7 +38075,7 @@ typedef struct _ZW_SWITCH_MULTILEVEL_SET_V3_FRAME_
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   value;                        /**/
-    uint8_t   dimmingDuration;              /**/
+    uint8_t   duration;                     /**/
 } ZW_SWITCH_MULTILEVEL_SET_V3_FRAME;
 
 /************************************************************/
@@ -30586,7 +38149,7 @@ typedef struct _ZW_SWITCH_MULTILEVEL_SET_V4_FRAME_
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   value;                        /**/
-    uint8_t   dimmingDuration;              /**/
+    uint8_t   duration;                     /**/
 } ZW_SWITCH_MULTILEVEL_SET_V4_FRAME;
 
 /************************************************************/
@@ -31414,6 +38977,90 @@ typedef struct _ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_4BYTE_V4_FRAME_
     uint8_t   bitMask3;                     
     uint8_t   bitMask4;                     /* LSB */
 } ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Get V5 command class structs */      
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_GET_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_THERMOSTAT_FAN_MODE_GET_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Report V5 command class structs */   
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_REPORT_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_THERMOSTAT_FAN_MODE_REPORT_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Set V5 command class structs */      
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_SET_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_THERMOSTAT_FAN_MODE_SET_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Supported Get V5 command class structs */
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_SUPPORTED_GET_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_THERMOSTAT_FAN_MODE_SUPPORTED_GET_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Supported Report 1byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_1BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   bitMask1;                     
+} ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_1BYTE_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Supported Report 2byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_2BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     /* LSB */
+} ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_2BYTE_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Supported Report 3byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_3BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     /* LSB */
+} ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_3BYTE_V5_FRAME;
+
+/************************************************************/
+/* Thermostat Fan Mode Supported Report 4byte V5 command class structs */
+/************************************************************/
+typedef struct _ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_4BYTE_V5_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   bitMask1;                     /* MSB */
+    uint8_t   bitMask2;                     
+    uint8_t   bitMask3;                     
+    uint8_t   bitMask4;                     /* LSB */
+} ZW_THERMOSTAT_FAN_MODE_SUPPORTED_REPORT_4BYTE_V5_FRAME;
 
 /************************************************************/
 /* Thermostat Fan State Get command class structs */        
@@ -33928,113 +41575,113 @@ typedef struct _ZW_USER_CODE_KEYPAD_MODE_REPORT_V2_FRAME_
 } ZW_USER_CODE_KEYPAD_MODE_REPORT_V2_FRAME;
 
 /************************************************************/
-/* Master Code Set 1byte V2 command class structs */        
+/* Admin Code Set 1byte V2 command class structs */         
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_SET_1BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_SET_1BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  
-} ZW_MASTER_CODE_SET_1BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   
+} ZW_ADMIN_CODE_SET_1BYTE_V2_FRAME;
 
 /************************************************************/
-/* Master Code Set 2byte V2 command class structs */        
+/* Admin Code Set 2byte V2 command class structs */         
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_SET_2BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_SET_2BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  /* MSB */
-    uint8_t   masterCode2;                  /* LSB */
-} ZW_MASTER_CODE_SET_2BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   /* MSB */
+    uint8_t   adminCode2;                   /* LSB */
+} ZW_ADMIN_CODE_SET_2BYTE_V2_FRAME;
 
 /************************************************************/
-/* Master Code Set 3byte V2 command class structs */        
+/* Admin Code Set 3byte V2 command class structs */         
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_SET_3BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_SET_3BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  /* MSB */
-    uint8_t   masterCode2;                  
-    uint8_t   masterCode3;                  /* LSB */
-} ZW_MASTER_CODE_SET_3BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   /* MSB */
+    uint8_t   adminCode2;                   
+    uint8_t   adminCode3;                   /* LSB */
+} ZW_ADMIN_CODE_SET_3BYTE_V2_FRAME;
 
 /************************************************************/
-/* Master Code Set 4byte V2 command class structs */        
+/* Admin Code Set 4byte V2 command class structs */         
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_SET_4BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_SET_4BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  /* MSB */
-    uint8_t   masterCode2;                  
-    uint8_t   masterCode3;                  
-    uint8_t   masterCode4;                  /* LSB */
-} ZW_MASTER_CODE_SET_4BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   /* MSB */
+    uint8_t   adminCode2;                   
+    uint8_t   adminCode3;                   
+    uint8_t   adminCode4;                   /* LSB */
+} ZW_ADMIN_CODE_SET_4BYTE_V2_FRAME;
 
 /************************************************************/
-/* Master Code Get V2 command class structs */              
+/* Admin Code Get V2 command class structs */               
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_GET_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_GET_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-} ZW_MASTER_CODE_GET_V2_FRAME;
+} ZW_ADMIN_CODE_GET_V2_FRAME;
 
 /************************************************************/
-/* Master Code Report 1byte V2 command class structs */     
+/* Admin Code Report 1byte V2 command class structs */      
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_REPORT_1BYTE_V2_FRAME_
-{
-    uint8_t   cmdClass;                     /* The command class */
-    uint8_t   cmd;                          /* The command */
-    uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  
-} ZW_MASTER_CODE_REPORT_1BYTE_V2_FRAME;
-
-/************************************************************/
-/* Master Code Report 2byte V2 command class structs */     
-/************************************************************/
-typedef struct _ZW_MASTER_CODE_REPORT_2BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_REPORT_1BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  /* MSB */
-    uint8_t   masterCode2;                  /* LSB */
-} ZW_MASTER_CODE_REPORT_2BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   
+} ZW_ADMIN_CODE_REPORT_1BYTE_V2_FRAME;
 
 /************************************************************/
-/* Master Code Report 3byte V2 command class structs */     
+/* Admin Code Report 2byte V2 command class structs */      
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_REPORT_3BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_REPORT_2BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  /* MSB */
-    uint8_t   masterCode2;                  
-    uint8_t   masterCode3;                  /* LSB */
-} ZW_MASTER_CODE_REPORT_3BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   /* MSB */
+    uint8_t   adminCode2;                   /* LSB */
+} ZW_ADMIN_CODE_REPORT_2BYTE_V2_FRAME;
 
 /************************************************************/
-/* Master Code Report 4byte V2 command class structs */     
+/* Admin Code Report 3byte V2 command class structs */      
 /************************************************************/
-typedef struct _ZW_MASTER_CODE_REPORT_4BYTE_V2_FRAME_
+typedef struct _ZW_ADMIN_CODE_REPORT_3BYTE_V2_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   properties1;                  /* masked byte */
-    uint8_t   masterCode1;                  /* MSB */
-    uint8_t   masterCode2;                  
-    uint8_t   masterCode3;                  
-    uint8_t   masterCode4;                  /* LSB */
-} ZW_MASTER_CODE_REPORT_4BYTE_V2_FRAME;
+    uint8_t   adminCode1;                   /* MSB */
+    uint8_t   adminCode2;                   
+    uint8_t   adminCode3;                   /* LSB */
+} ZW_ADMIN_CODE_REPORT_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Admin Code Report 4byte V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_ADMIN_CODE_REPORT_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   adminCode1;                   /* MSB */
+    uint8_t   adminCode2;                   
+    uint8_t   adminCode3;                   
+    uint8_t   adminCode4;                   /* LSB */
+} ZW_ADMIN_CODE_REPORT_4BYTE_V2_FRAME;
 
 /************************************************************/
 /* User Code Checksum Get V2 command class structs */       
@@ -34521,6 +42168,90 @@ typedef struct _ZW_WAKE_UP_NOTIFICATION_V2_FRAME_
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
 } ZW_WAKE_UP_NOTIFICATION_V2_FRAME;
+
+/************************************************************/
+/* Wake Up Interval Capabilities Get V3 command class structs */
+/************************************************************/
+typedef struct _ZW_WAKE_UP_INTERVAL_CAPABILITIES_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_WAKE_UP_INTERVAL_CAPABILITIES_GET_V3_FRAME;
+
+/************************************************************/
+/* Wake Up Interval Capabilities Report V3 command class structs */
+/************************************************************/
+typedef struct _ZW_WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   minimumWakeUpIntervalSeconds1;/* MSB */
+    uint8_t   minimumWakeUpIntervalSeconds2;
+    uint8_t   minimumWakeUpIntervalSeconds3;/* LSB */
+    uint8_t   maximumWakeUpIntervalSeconds1;/* MSB */
+    uint8_t   maximumWakeUpIntervalSeconds2;
+    uint8_t   maximumWakeUpIntervalSeconds3;/* LSB */
+    uint8_t   defaultWakeUpIntervalSeconds1;/* MSB */
+    uint8_t   defaultWakeUpIntervalSeconds2;
+    uint8_t   defaultWakeUpIntervalSeconds3;/* LSB */
+    uint8_t   wakeUpIntervalStepSeconds1;   /* MSB */
+    uint8_t   wakeUpIntervalStepSeconds2;   
+    uint8_t   wakeUpIntervalStepSeconds3;   /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Wake Up Interval Get V3 command class structs */         
+/************************************************************/
+typedef struct _ZW_WAKE_UP_INTERVAL_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_WAKE_UP_INTERVAL_GET_V3_FRAME;
+
+/************************************************************/
+/* Wake Up Interval Report V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_WAKE_UP_INTERVAL_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seconds1;                     /* MSB */
+    uint8_t   seconds2;                     
+    uint8_t   seconds3;                     /* LSB */
+    uint8_t   nodeid;                       /**/
+} ZW_WAKE_UP_INTERVAL_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Wake Up Interval Set V3 command class structs */         
+/************************************************************/
+typedef struct _ZW_WAKE_UP_INTERVAL_SET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   seconds1;                     /* MSB */
+    uint8_t   seconds2;                     
+    uint8_t   seconds3;                     /* LSB */
+    uint8_t   nodeid;                       /**/
+} ZW_WAKE_UP_INTERVAL_SET_V3_FRAME;
+
+/************************************************************/
+/* Wake Up No More Information V3 command class structs */  
+/************************************************************/
+typedef struct _ZW_WAKE_UP_NO_MORE_INFORMATION_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_WAKE_UP_NO_MORE_INFORMATION_V3_FRAME;
+
+/************************************************************/
+/* Wake Up Notification V3 command class structs */         
+/************************************************************/
+typedef struct _ZW_WAKE_UP_NOTIFICATION_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_WAKE_UP_NOTIFICATION_V3_FRAME;
 
 /************************************************************/
 /* Lowpan First Fragment 1byte command class structs */     
@@ -37497,6 +45228,79 @@ typedef struct _ZW_ZIP_NODE_ADVERTISEMENT_FRAME_
 } ZW_ZIP_NODE_ADVERTISEMENT_FRAME;
 
 /************************************************************/
+/* Zip Node Solicitation V2 command class structs */        
+/************************************************************/
+typedef struct _ZW_ZIP_NODE_SOLICITATION_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   reserved;                     /**/
+    uint8_t   nodeId;                       /**/
+    uint8_t   ipv6Address1;                 /* MSB */
+    uint8_t   ipv6Address2;                 
+    uint8_t   ipv6Address3;                 
+    uint8_t   ipv6Address4;                 
+    uint8_t   ipv6Address5;                 
+    uint8_t   ipv6Address6;                 
+    uint8_t   ipv6Address7;                 
+    uint8_t   ipv6Address8;                 
+    uint8_t   ipv6Address9;                 
+    uint8_t   ipv6Address10;                
+    uint8_t   ipv6Address11;                
+    uint8_t   ipv6Address12;                
+    uint8_t   ipv6Address13;                
+    uint8_t   ipv6Address14;                
+    uint8_t   ipv6Address15;                
+    uint8_t   ipv6Address16;                /* LSB */
+} ZW_ZIP_NODE_SOLICITATION_V2_FRAME;
+
+/************************************************************/
+/* Zip Inv Node Solicitation V2 command class structs */    
+/************************************************************/
+typedef struct _ZW_ZIP_INV_NODE_SOLICITATION_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   nodeId;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_ZIP_INV_NODE_SOLICITATION_V2_FRAME;
+
+/************************************************************/
+/* Zip Node Advertisement V2 command class structs */       
+/************************************************************/
+typedef struct _ZW_ZIP_NODE_ADVERTISEMENT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   nodeId;                       /**/
+    uint8_t   ipv6Address1;                 /* MSB */
+    uint8_t   ipv6Address2;                 
+    uint8_t   ipv6Address3;                 
+    uint8_t   ipv6Address4;                 
+    uint8_t   ipv6Address5;                 
+    uint8_t   ipv6Address6;                 
+    uint8_t   ipv6Address7;                 
+    uint8_t   ipv6Address8;                 
+    uint8_t   ipv6Address9;                 
+    uint8_t   ipv6Address10;                
+    uint8_t   ipv6Address11;                
+    uint8_t   ipv6Address12;                
+    uint8_t   ipv6Address13;                
+    uint8_t   ipv6Address14;                
+    uint8_t   ipv6Address15;                
+    uint8_t   ipv6Address16;                /* LSB */
+    uint8_t   homeId1;                      /* MSB */
+    uint8_t   homeId2;                      
+    uint8_t   homeId3;                      
+    uint8_t   homeId4;                      /* LSB */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_ZIP_NODE_ADVERTISEMENT_V2_FRAME;
+
+/************************************************************/
 /* Association Group Name Get command class structs */      
 /************************************************************/
 typedef struct _ZW_ASSOCIATION_GROUP_NAME_GET_FRAME_
@@ -38784,6 +46588,165 @@ typedef struct _ZW_ANTITHEFT_REPORT_4BYTE_V2_FRAME_
 } ZW_ANTITHEFT_REPORT_4BYTE_V2_FRAME;
 
 /************************************************************/
+/* Antitheft Set 1byte V3 command class structs */          
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_SET_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_SET_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Set 2byte V3 command class structs */          
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_SET_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   /* MSB */
+    uint8_t   magicCode2;                   /* LSB */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           /* MSB */
+    uint8_t   antiTheftHintByte2;           /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_SET_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Set 3byte V3 command class structs */          
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_SET_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   /* MSB */
+    uint8_t   magicCode2;                   
+    uint8_t   magicCode3;                   /* LSB */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           /* MSB */
+    uint8_t   antiTheftHintByte2;           
+    uint8_t   antiTheftHintByte3;           /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_SET_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Set 4byte V3 command class structs */          
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_SET_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   /* MSB */
+    uint8_t   magicCode2;                   
+    uint8_t   magicCode3;                   
+    uint8_t   magicCode4;                   /* LSB */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           /* MSB */
+    uint8_t   antiTheftHintByte2;           
+    uint8_t   antiTheftHintByte3;           
+    uint8_t   antiTheftHintByte4;           /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_SET_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Get V3 command class structs */                
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ANTITHEFT_GET_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Report 1byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   antiTheftProtectionStatus;    /**/
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Report 2byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   antiTheftProtectionStatus;    /**/
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           /* MSB */
+    uint8_t   antiTheftHintByte2;           /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Report 3byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   antiTheftProtectionStatus;    /**/
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           /* MSB */
+    uint8_t   antiTheftHintByte2;           
+    uint8_t   antiTheftHintByte3;           /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Antitheft Report 4byte V3 command class structs */       
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   antiTheftProtectionStatus;    /**/
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   antiTheftHintNumberBytes;     /**/
+    uint8_t   antiTheftHintByte1;           /* MSB */
+    uint8_t   antiTheftHintByte2;           
+    uint8_t   antiTheftHintByte3;           
+    uint8_t   antiTheftHintByte4;           /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
 /* Zwaveplus Info Get command class structs */              
 /************************************************************/
 typedef struct _ZW_ZWAVEPLUS_INFO_GET_FRAME_
@@ -39504,6 +47467,15 @@ typedef struct _ZW_GATEWAY_CONFIGURATION_REPORT_FRAME_
 } ZW_GATEWAY_CONFIGURATION_REPORT_FRAME;
 
 /************************************************************/
+/* Gateway Unregister command class structs */              
+/************************************************************/
+typedef struct _ZW_GATEWAY_UNREGISTER_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_GATEWAY_UNREGISTER_FRAME;
+
+/************************************************************/
 /* Dmx Address Set command class structs */                 
 /************************************************************/
 typedef struct _ZW_DMX_ADDRESS_SET_FRAME_
@@ -39697,36 +47669,36 @@ typedef struct _ZW_BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT_4BYTE_FRAME_
 } ZW_BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT_4BYTE_FRAME;
 
 /************************************************************/
-/* Barrier Operator Signal Set command class structs */     
+/* Barrier Operator Event Signal Set command class structs */
 /************************************************************/
-typedef struct _ZW_BARRIER_OPERATOR_SIGNAL_SET_FRAME_
+typedef struct _ZW_BARRIER_OPERATOR_EVENT_SIGNAL_SET_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   subsystemType;                /**/
     uint8_t   subsystemState;               /**/
-} ZW_BARRIER_OPERATOR_SIGNAL_SET_FRAME;
+} ZW_BARRIER_OPERATOR_EVENT_SIGNAL_SET_FRAME;
 
 /************************************************************/
-/* Barrier Operator Signal Get command class structs */     
+/* Barrier Operator Event Signaling Get command class structs */
 /************************************************************/
-typedef struct _ZW_BARRIER_OPERATOR_SIGNAL_GET_FRAME_
+typedef struct _ZW_BARRIER_OPERATOR_EVENT_SIGNALING_GET_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   subsystemType;                /**/
-} ZW_BARRIER_OPERATOR_SIGNAL_GET_FRAME;
+} ZW_BARRIER_OPERATOR_EVENT_SIGNALING_GET_FRAME;
 
 /************************************************************/
-/* Barrier Operator Signal Report command class structs */  
+/* Barrier Operator Event Signaling Report command class structs */
 /************************************************************/
-typedef struct _ZW_BARRIER_OPERATOR_SIGNAL_REPORT_FRAME_
+typedef struct _ZW_BARRIER_OPERATOR_EVENT_SIGNALING_REPORT_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
     uint8_t   subsystemType;                /**/
     uint8_t   subsystemState;               /**/
-} ZW_BARRIER_OPERATOR_SIGNAL_REPORT_FRAME;
+} ZW_BARRIER_OPERATOR_EVENT_SIGNALING_REPORT_FRAME;
 
 /************************************************************/
 /* Priority Route Set command class structs */              
@@ -40060,6 +48032,637 @@ typedef struct _ZW_RSSI_REPORT_V2_FRAME_
     uint8_t   channel2Rssi;                 /**/
     uint8_t   channel3Rssi;                 /**/
 } ZW_RSSI_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Priority Route Set V3 command class structs */           
+/************************************************************/
+typedef struct _ZW_PRIORITY_ROUTE_SET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    uint8_t   repeater1;                    /**/
+    uint8_t   repeater2;                    /**/
+    uint8_t   repeater3;                    /**/
+    uint8_t   repeater4;                    /**/
+    uint8_t   speed;                        /**/
+} ZW_PRIORITY_ROUTE_SET_V3_FRAME;
+
+/************************************************************/
+/* Priority Route Get V3 command class structs */           
+/************************************************************/
+typedef struct _ZW_PRIORITY_ROUTE_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+} ZW_PRIORITY_ROUTE_GET_V3_FRAME;
+
+/************************************************************/
+/* Priority Route Report V3 command class structs */        
+/************************************************************/
+typedef struct _ZW_PRIORITY_ROUTE_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    uint8_t   type;                         /**/
+    uint8_t   repeater1;                    /**/
+    uint8_t   repeater2;                    /**/
+    uint8_t   repeater3;                    /**/
+    uint8_t   repeater4;                    /**/
+    uint8_t   speed;                        /**/
+} ZW_PRIORITY_ROUTE_REPORT_V3_FRAME;
+
+/************************************************************/
+/* Statistics Get V3 command class structs */               
+/************************************************************/
+typedef struct _ZW_STATISTICS_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+} ZW_STATISTICS_GET_V3_FRAME;
+
+/************************************************************/
+/* Statistics Report V3 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_1BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       
+} VG_STATISTICS_REPORT_1BYTE_V3_VG;
+
+/************************************************************/
+/* Statistics Report V3 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_2BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       /* LSB */
+} VG_STATISTICS_REPORT_2BYTE_V3_VG;
+
+/************************************************************/
+/* Statistics Report V3 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_3BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       /* LSB */
+} VG_STATISTICS_REPORT_3BYTE_V3_VG;
+
+/************************************************************/
+/* Statistics Report V3 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_4BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       
+    uint8_t   value4;                       /* LSB */
+} VG_STATISTICS_REPORT_4BYTE_V3_VG;
+
+/************************************************************/
+/* Statistics Report 1byte V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+} ZW_STATISTICS_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Statistics Report 2byte V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup2;                /**/
+} ZW_STATISTICS_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Statistics Report 3byte V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup2;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup3;                /**/
+} ZW_STATISTICS_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Statistics Report 4byte V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup2;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup3;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V3_VG variantgroup4;                /**/
+} ZW_STATISTICS_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Statistics Clear V3 command class structs */             
+/************************************************************/
+typedef struct _ZW_STATISTICS_CLEAR_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_STATISTICS_CLEAR_V3_FRAME;
+
+/************************************************************/
+/* Rssi Get V3 command class structs */                     
+/************************************************************/
+typedef struct _ZW_RSSI_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_RSSI_GET_V3_FRAME;
+
+/************************************************************/
+/* Rssi Report V3 command class structs */                  
+/************************************************************/
+typedef struct _ZW_RSSI_REPORT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   channel1Rssi;                 /**/
+    uint8_t   channel2Rssi;                 /**/
+    uint8_t   channel3Rssi;                 /**/
+} ZW_RSSI_REPORT_V3_FRAME;
+
+/************************************************************/
+/* S2 Resynchronization Event V3 command class structs */   
+/************************************************************/
+typedef struct _ZW_S2_RESYNCHRONIZATION_EVENT_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    uint8_t   reason;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_S2_RESYNCHRONIZATION_EVENT_V3_FRAME;
+
+/************************************************************/
+/* Extended Statistics Get V3 command class structs */      
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_GET_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_EXTENDED_STATISTICS_GET_V3_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report V3 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_1BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       
+} VG_EXTENDED_STATISTICS_REPORT_1BYTE_V3_VG;
+
+/************************************************************/
+/* Extended Statistics Report V3 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_2BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       /* LSB */
+} VG_EXTENDED_STATISTICS_REPORT_2BYTE_V3_VG;
+
+/************************************************************/
+/* Extended Statistics Report V3 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_3BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       /* LSB */
+} VG_EXTENDED_STATISTICS_REPORT_3BYTE_V3_VG;
+
+/************************************************************/
+/* Extended Statistics Report V3 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       
+    uint8_t   value4;                       /* LSB */
+} VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG;
+
+/************************************************************/
+/* Extended Statistics Report 1byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_1BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_1BYTE_V3_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report 2byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_2BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup2;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_2BYTE_V3_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report 3byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_3BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup2;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup3;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_3BYTE_V3_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report 4byte V3 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_4BYTE_V3_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup1;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup2;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup3;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V3_VG variantgroup4;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_4BYTE_V3_FRAME;
+
+/************************************************************/
+/* Priority Route Set V4 command class structs */           
+/************************************************************/
+typedef struct _ZW_PRIORITY_ROUTE_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    uint8_t   repeater1;                    /**/
+    uint8_t   repeater2;                    /**/
+    uint8_t   repeater3;                    /**/
+    uint8_t   repeater4;                    /**/
+    uint8_t   speed;                        /**/
+} ZW_PRIORITY_ROUTE_SET_V4_FRAME;
+
+/************************************************************/
+/* Priority Route Get V4 command class structs */           
+/************************************************************/
+typedef struct _ZW_PRIORITY_ROUTE_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+} ZW_PRIORITY_ROUTE_GET_V4_FRAME;
+
+/************************************************************/
+/* Priority Route Report V4 command class structs */        
+/************************************************************/
+typedef struct _ZW_PRIORITY_ROUTE_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    uint8_t   type;                         /**/
+    uint8_t   repeater1;                    /**/
+    uint8_t   repeater2;                    /**/
+    uint8_t   repeater3;                    /**/
+    uint8_t   repeater4;                    /**/
+    uint8_t   speed;                        /**/
+} ZW_PRIORITY_ROUTE_REPORT_V4_FRAME;
+
+/************************************************************/
+/* Statistics Get V4 command class structs */               
+/************************************************************/
+typedef struct _ZW_STATISTICS_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+} ZW_STATISTICS_GET_V4_FRAME;
+
+/************************************************************/
+/* Statistics Report V4 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_1BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       
+} VG_STATISTICS_REPORT_1BYTE_V4_VG;
+
+/************************************************************/
+/* Statistics Report V4 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_2BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       /* LSB */
+} VG_STATISTICS_REPORT_2BYTE_V4_VG;
+
+/************************************************************/
+/* Statistics Report V4 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_3BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       /* LSB */
+} VG_STATISTICS_REPORT_3BYTE_V4_VG;
+
+/************************************************************/
+/* Statistics Report V4 variant group structs */            
+/************************************************************/
+typedef struct _VG_STATISTICS_REPORT_4BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       
+    uint8_t   value4;                       /* LSB */
+} VG_STATISTICS_REPORT_4BYTE_V4_VG;
+
+/************************************************************/
+/* Statistics Report 1byte V4 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+} ZW_STATISTICS_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Statistics Report 2byte V4 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup2;                /**/
+} ZW_STATISTICS_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Statistics Report 3byte V4 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup2;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup3;                /**/
+} ZW_STATISTICS_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Statistics Report 4byte V4 command class structs */      
+/************************************************************/
+typedef struct _ZW_STATISTICS_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup2;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup3;                /**/
+    VG_STATISTICS_REPORT_4BYTE_V4_VG variantgroup4;                /**/
+} ZW_STATISTICS_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Statistics Clear V4 command class structs */             
+/************************************************************/
+typedef struct _ZW_STATISTICS_CLEAR_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_STATISTICS_CLEAR_V4_FRAME;
+
+/************************************************************/
+/* Rssi Get V4 command class structs */                     
+/************************************************************/
+typedef struct _ZW_RSSI_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_RSSI_GET_V4_FRAME;
+
+/************************************************************/
+/* Rssi Report V4 command class structs */                  
+/************************************************************/
+typedef struct _ZW_RSSI_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   channel1Rssi;                 /**/
+    uint8_t   channel2Rssi;                 /**/
+    uint8_t   channel3Rssi;                 /**/
+} ZW_RSSI_REPORT_V4_FRAME;
+
+/************************************************************/
+/* S2 Resynchronization Event V4 command class structs */   
+/************************************************************/
+typedef struct _ZW_S2_RESYNCHRONIZATION_EVENT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nodeid;                       /**/
+    uint8_t   reason;                       /**/
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_S2_RESYNCHRONIZATION_EVENT_V4_FRAME;
+
+/************************************************************/
+/* Extended Statistics Get V4 command class structs */      
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+} ZW_EXTENDED_STATISTICS_GET_V4_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report V4 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_1BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       
+} VG_EXTENDED_STATISTICS_REPORT_1BYTE_V4_VG;
+
+/************************************************************/
+/* Extended Statistics Report V4 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_2BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       /* LSB */
+} VG_EXTENDED_STATISTICS_REPORT_2BYTE_V4_VG;
+
+/************************************************************/
+/* Extended Statistics Report V4 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_3BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       /* LSB */
+} VG_EXTENDED_STATISTICS_REPORT_3BYTE_V4_VG;
+
+/************************************************************/
+/* Extended Statistics Report V4 variant group structs */   
+/************************************************************/
+typedef struct _VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG_
+{
+    uint8_t   type;                         /**/
+    uint8_t   length;                       /**/
+    uint8_t   value1;                       /* MSB */
+    uint8_t   value2;                       
+    uint8_t   value3;                       
+    uint8_t   value4;                       /* LSB */
+} VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG;
+
+/************************************************************/
+/* Extended Statistics Report 1byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_1BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_1BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report 2byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_2BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup2;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_2BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report 3byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_3BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup2;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup3;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_3BYTE_V4_FRAME;
+
+/************************************************************/
+/* Extended Statistics Report 4byte V4 command class structs */
+/************************************************************/
+typedef struct _ZW_EXTENDED_STATISTICS_REPORT_4BYTE_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   extendedNodeid1;              /* MSB */
+    uint8_t   extendedNodeid2;              /* LSB */
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup1;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup2;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup3;                /**/
+    VG_EXTENDED_STATISTICS_REPORT_4BYTE_V4_VG variantgroup4;                /**/
+} ZW_EXTENDED_STATISTICS_REPORT_4BYTE_V4_FRAME;
+
+/************************************************************/
+/* Zwave Lr Channel Configuration Set V4 command class structs */
+/************************************************************/
+typedef struct _ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_SET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   zWaveLongRangeChannel;        /**/
+} ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_SET_V4_FRAME;
+
+/************************************************************/
+/* Zwave Lr Channel Configuration Get V4 command class structs */
+/************************************************************/
+typedef struct _ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_GET_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_GET_V4_FRAME;
+
+/************************************************************/
+/* Zwave Lr Channel Configuration Report V4 command class structs */
+/************************************************************/
+typedef struct _ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_REPORT_V4_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   zWaveLongRangeChannel;        /**/
+} ZW_ZWAVE_LR_CHANNEL_CONFIGURATION_REPORT_V4_FRAME;
 
 /************************************************************/
 /* Zip Naming Name Set 1byte command class structs */       
@@ -40407,6 +49010,151 @@ typedef struct _ZW_MAILBOX_NODE_FAILING_FRAME_
     uint8_t   cmd;                          /* The command */
     uint8_t   queueHandle;                  /**/
 } ZW_MAILBOX_NODE_FAILING_FRAME;
+
+/************************************************************/
+/* Mailbox Configuration Get V2 command class structs */    
+/************************************************************/
+typedef struct _ZW_MAILBOX_CONFIGURATION_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_MAILBOX_CONFIGURATION_GET_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Configuration Set V2 command class structs */    
+/************************************************************/
+typedef struct _ZW_MAILBOX_CONFIGURATION_SET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   forwardingDestinationIpv6Address1;/* MSB */
+    uint8_t   forwardingDestinationIpv6Address2;
+    uint8_t   forwardingDestinationIpv6Address3;
+    uint8_t   forwardingDestinationIpv6Address4;
+    uint8_t   forwardingDestinationIpv6Address5;
+    uint8_t   forwardingDestinationIpv6Address6;
+    uint8_t   forwardingDestinationIpv6Address7;
+    uint8_t   forwardingDestinationIpv6Address8;
+    uint8_t   forwardingDestinationIpv6Address9;
+    uint8_t   forwardingDestinationIpv6Address10;
+    uint8_t   forwardingDestinationIpv6Address11;
+    uint8_t   forwardingDestinationIpv6Address12;
+    uint8_t   forwardingDestinationIpv6Address13;
+    uint8_t   forwardingDestinationIpv6Address14;
+    uint8_t   forwardingDestinationIpv6Address15;
+    uint8_t   forwardingDestinationIpv6Address16;/* LSB */
+    uint8_t   udpPortNumber1;               /* MSB */
+    uint8_t   udpPortNumber2;               /* LSB */
+} ZW_MAILBOX_CONFIGURATION_SET_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Configuration Report V2 command class structs */ 
+/************************************************************/
+typedef struct _ZW_MAILBOX_CONFIGURATION_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   mailboxCapacity1;             /* MSB */
+    uint8_t   mailboxCapacity2;             /* LSB */
+    uint8_t   forwardingDestinationIpv6Address1;/* MSB */
+    uint8_t   forwardingDestinationIpv6Address2;
+    uint8_t   forwardingDestinationIpv6Address3;
+    uint8_t   forwardingDestinationIpv6Address4;
+    uint8_t   forwardingDestinationIpv6Address5;
+    uint8_t   forwardingDestinationIpv6Address6;
+    uint8_t   forwardingDestinationIpv6Address7;
+    uint8_t   forwardingDestinationIpv6Address8;
+    uint8_t   forwardingDestinationIpv6Address9;
+    uint8_t   forwardingDestinationIpv6Address10;
+    uint8_t   forwardingDestinationIpv6Address11;
+    uint8_t   forwardingDestinationIpv6Address12;
+    uint8_t   forwardingDestinationIpv6Address13;
+    uint8_t   forwardingDestinationIpv6Address14;
+    uint8_t   forwardingDestinationIpv6Address15;
+    uint8_t   forwardingDestinationIpv6Address16;/* LSB */
+    uint8_t   udpPortNumber1;               /* MSB */
+    uint8_t   udpPortNumber2;               /* LSB */
+} ZW_MAILBOX_CONFIGURATION_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Queue 1byte V2 command class structs */          
+/************************************************************/
+typedef struct _ZW_MAILBOX_QUEUE_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   queueHandle;                  /**/
+    uint8_t   mailboxEntry1;                
+} ZW_MAILBOX_QUEUE_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Queue 2byte V2 command class structs */          
+/************************************************************/
+typedef struct _ZW_MAILBOX_QUEUE_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   queueHandle;                  /**/
+    uint8_t   mailboxEntry1;                /* MSB */
+    uint8_t   mailboxEntry2;                /* LSB */
+} ZW_MAILBOX_QUEUE_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Queue 3byte V2 command class structs */          
+/************************************************************/
+typedef struct _ZW_MAILBOX_QUEUE_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   queueHandle;                  /**/
+    uint8_t   mailboxEntry1;                /* MSB */
+    uint8_t   mailboxEntry2;                
+    uint8_t   mailboxEntry3;                /* LSB */
+} ZW_MAILBOX_QUEUE_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Queue 4byte V2 command class structs */          
+/************************************************************/
+typedef struct _ZW_MAILBOX_QUEUE_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   queueHandle;                  /**/
+    uint8_t   mailboxEntry1;                /* MSB */
+    uint8_t   mailboxEntry2;                
+    uint8_t   mailboxEntry3;                
+    uint8_t   mailboxEntry4;                /* LSB */
+} ZW_MAILBOX_QUEUE_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Wakeup Notification V2 command class structs */  
+/************************************************************/
+typedef struct _ZW_MAILBOX_WAKEUP_NOTIFICATION_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   queueHandle;                  /**/
+} ZW_MAILBOX_WAKEUP_NOTIFICATION_V2_FRAME;
+
+/************************************************************/
+/* Mailbox Node Failing V2 command class structs */         
+/************************************************************/
+typedef struct _ZW_MAILBOX_NODE_FAILING_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   queueHandle;                  /**/
+} ZW_MAILBOX_NODE_FAILING_V2_FRAME;
 
 /************************************************************/
 /* Window Covering Supported Get command class structs */   
@@ -40928,6 +49676,411 @@ typedef struct _ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_4BYTE_FRAME_
 } ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_4BYTE_FRAME;
 
 /************************************************************/
+/* Security 2 Nonce Get V2 command class structs */         
+/************************************************************/
+typedef struct _ZW_SECURITY_2_NONCE_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+} ZW_SECURITY_2_NONCE_GET_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Nonce Report V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_SECURITY_2_NONCE_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   receiversEntropyInput1;       /* MSB */
+    uint8_t   receiversEntropyInput2;       
+    uint8_t   receiversEntropyInput3;       
+    uint8_t   receiversEntropyInput4;       
+    uint8_t   receiversEntropyInput5;       
+    uint8_t   receiversEntropyInput6;       
+    uint8_t   receiversEntropyInput7;       
+    uint8_t   receiversEntropyInput8;       
+    uint8_t   receiversEntropyInput9;       
+    uint8_t   receiversEntropyInput10;      
+    uint8_t   receiversEntropyInput11;      
+    uint8_t   receiversEntropyInput12;      
+    uint8_t   receiversEntropyInput13;      
+    uint8_t   receiversEntropyInput14;      
+    uint8_t   receiversEntropyInput15;      
+    uint8_t   receiversEntropyInput16;      /* LSB */
+} ZW_SECURITY_2_NONCE_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Message Encapsulation V2 variant group structs */
+/************************************************************/
+typedef struct _VG_SECURITY_2_MESSAGE_ENCAPSULATION_1BYTE_V2_VG_
+{
+    uint8_t   extensionLength;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   extension1;                   
+} VG_SECURITY_2_MESSAGE_ENCAPSULATION_1BYTE_V2_VG;
+
+/************************************************************/
+/* Security 2 Message Encapsulation V2 variant group structs */
+/************************************************************/
+typedef struct _VG_SECURITY_2_MESSAGE_ENCAPSULATION_2BYTE_V2_VG_
+{
+    uint8_t   extensionLength;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   extension1;                   /* MSB */
+    uint8_t   extension2;                   /* LSB */
+} VG_SECURITY_2_MESSAGE_ENCAPSULATION_2BYTE_V2_VG;
+
+/************************************************************/
+/* Security 2 Message Encapsulation V2 variant group structs */
+/************************************************************/
+typedef struct _VG_SECURITY_2_MESSAGE_ENCAPSULATION_3BYTE_V2_VG_
+{
+    uint8_t   extensionLength;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   extension1;                   /* MSB */
+    uint8_t   extension2;                   
+    uint8_t   extension3;                   /* LSB */
+} VG_SECURITY_2_MESSAGE_ENCAPSULATION_3BYTE_V2_VG;
+
+/************************************************************/
+/* Security 2 Message Encapsulation V2 variant group structs */
+/************************************************************/
+typedef struct _VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG_
+{
+    uint8_t   extensionLength;              /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   extension1;                   /* MSB */
+    uint8_t   extension2;                   
+    uint8_t   extension3;                   
+    uint8_t   extension4;                   /* LSB */
+} VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG;
+
+/************************************************************/
+/* Security 2 Message Encapsulation 1byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_MESSAGE_ENCAPSULATION_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup1;                /**/
+    uint8_t   ccmCiphertextObject1;         
+} ZW_SECURITY_2_MESSAGE_ENCAPSULATION_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Message Encapsulation 2byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_MESSAGE_ENCAPSULATION_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup1;                /**/
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup2;                /**/
+    uint8_t   ccmCiphertextObject1;         /* MSB */
+    uint8_t   ccmCiphertextObject2;         /* LSB */
+} ZW_SECURITY_2_MESSAGE_ENCAPSULATION_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Message Encapsulation 3byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_MESSAGE_ENCAPSULATION_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup1;                /**/
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup2;                /**/
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup3;                /**/
+    uint8_t   ccmCiphertextObject1;         /* MSB */
+    uint8_t   ccmCiphertextObject2;         
+    uint8_t   ccmCiphertextObject3;         /* LSB */
+} ZW_SECURITY_2_MESSAGE_ENCAPSULATION_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Message Encapsulation 4byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup1;                /**/
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup2;                /**/
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup3;                /**/
+    VG_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_VG variantgroup4;                /**/
+    uint8_t   ccmCiphertextObject1;         /* MSB */
+    uint8_t   ccmCiphertextObject2;         
+    uint8_t   ccmCiphertextObject3;         
+    uint8_t   ccmCiphertextObject4;         /* LSB */
+} ZW_SECURITY_2_MESSAGE_ENCAPSULATION_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Kex Get V2 command class structs */                      
+/************************************************************/
+typedef struct _ZW_KEX_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_KEX_GET_V2_FRAME;
+
+/************************************************************/
+/* Kex Report V2 command class structs */                   
+/************************************************************/
+typedef struct _ZW_KEX_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedKexSchemes;          /**/
+    uint8_t   supportedEcdhProfiles;        /**/
+    uint8_t   requestedKeys;                /**/
+} ZW_KEX_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Kex Set V2 command class structs */                      
+/************************************************************/
+typedef struct _ZW_KEX_SET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   selectedKexScheme;            /**/
+    uint8_t   selectedEcdhProfile;          /**/
+    uint8_t   grantedKeys;                  /**/
+} ZW_KEX_SET_V2_FRAME;
+
+/************************************************************/
+/* Kex Fail V2 command class structs */                     
+/************************************************************/
+typedef struct _ZW_KEX_FAIL_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   kexFailType;                  /**/
+} ZW_KEX_FAIL_V2_FRAME;
+
+/************************************************************/
+/* Public Key Report 1byte V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_PUBLIC_KEY_REPORT_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   ecdhPublicKey1;               
+} ZW_PUBLIC_KEY_REPORT_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Public Key Report 2byte V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_PUBLIC_KEY_REPORT_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   ecdhPublicKey1;               /* MSB */
+    uint8_t   ecdhPublicKey2;               /* LSB */
+} ZW_PUBLIC_KEY_REPORT_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Public Key Report 3byte V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_PUBLIC_KEY_REPORT_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   ecdhPublicKey1;               /* MSB */
+    uint8_t   ecdhPublicKey2;               
+    uint8_t   ecdhPublicKey3;               /* LSB */
+} ZW_PUBLIC_KEY_REPORT_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Public Key Report 4byte V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_PUBLIC_KEY_REPORT_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   ecdhPublicKey1;               /* MSB */
+    uint8_t   ecdhPublicKey2;               
+    uint8_t   ecdhPublicKey3;               
+    uint8_t   ecdhPublicKey4;               /* LSB */
+} ZW_PUBLIC_KEY_REPORT_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Network Key Get V2 command class structs */   
+/************************************************************/
+typedef struct _ZW_SECURITY_2_NETWORK_KEY_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   requestedKey;                 /**/
+} ZW_SECURITY_2_NETWORK_KEY_GET_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Network Key Report V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_NETWORK_KEY_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   grantedKey;                   /**/
+    uint8_t   networkKey1;                  /* MSB */
+    uint8_t   networkKey2;                  
+    uint8_t   networkKey3;                  
+    uint8_t   networkKey4;                  
+    uint8_t   networkKey5;                  
+    uint8_t   networkKey6;                  
+    uint8_t   networkKey7;                  
+    uint8_t   networkKey8;                  
+    uint8_t   networkKey9;                  
+    uint8_t   networkKey10;                 
+    uint8_t   networkKey11;                 
+    uint8_t   networkKey12;                 
+    uint8_t   networkKey13;                 
+    uint8_t   networkKey14;                 
+    uint8_t   networkKey15;                 
+    uint8_t   networkKey16;                 /* LSB */
+} ZW_SECURITY_2_NETWORK_KEY_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Network Key Verify V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_NETWORK_KEY_VERIFY_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SECURITY_2_NETWORK_KEY_VERIFY_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Transfer End V2 command class structs */      
+/************************************************************/
+typedef struct _ZW_SECURITY_2_TRANSFER_END_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_SECURITY_2_TRANSFER_END_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Commands Supported Get V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_COMMANDS_SUPPORTED_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SECURITY_2_COMMANDS_SUPPORTED_GET_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Commands Supported Report 1byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   commandClass1;                
+} ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Commands Supported Report 2byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                /* LSB */
+} ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Commands Supported Report 3byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                /* LSB */
+} ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Security 2 Commands Supported Report 4byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   commandClass1;                /* MSB */
+    uint8_t   commandClass2;                
+    uint8_t   commandClass3;                
+    uint8_t   commandClass4;                /* LSB */
+} ZW_SECURITY_2_COMMANDS_SUPPORTED_REPORT_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Nls Node List Get V2 command class structs */            
+/************************************************************/
+typedef struct _ZW_NLS_NODE_LIST_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   request;                      /**/
+} ZW_NLS_NODE_LIST_GET_V2_FRAME;
+
+/************************************************************/
+/* Nls Node List Report V2 command class structs */         
+/************************************************************/
+typedef struct _ZW_NLS_NODE_LIST_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   idMsbOfNodeN;                 /**/
+    uint8_t   idLsbOfNodeN;                 /**/
+    uint8_t   grantedKeysBitmaskOfNodeN;    /**/
+    uint8_t   nlsStateOfNodeN;              /**/
+} ZW_NLS_NODE_LIST_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Nls State Get V2 command class structs */                
+/************************************************************/
+typedef struct _ZW_NLS_STATE_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_NLS_STATE_GET_V2_FRAME;
+
+/************************************************************/
+/* Nls State Report V2 command class structs */             
+/************************************************************/
+typedef struct _ZW_NLS_STATE_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_NLS_STATE_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Nls State Set V2 command class structs */                
+/************************************************************/
+typedef struct _ZW_NLS_STATE_SET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nlsState;                     /**/
+} ZW_NLS_STATE_SET_V2_FRAME;
+
+/************************************************************/
 /* Irrigation System Info Get command class structs */      
 /************************************************************/
 typedef struct _ZW_IRRIGATION_SYSTEM_INFO_GET_FRAME_
@@ -41053,7 +50206,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_SET_1BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  
     uint8_t   properties2;                  /* masked byte */
@@ -41068,7 +50221,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_SET_2BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  /* MSB */
     uint8_t   highPressureThresholdValue2;  /* LSB */
@@ -41085,7 +50238,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_SET_3BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  /* MSB */
     uint8_t   highPressureThresholdValue2;  
@@ -41104,7 +50257,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_SET_4BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  /* MSB */
     uint8_t   highPressureThresholdValue2;  
@@ -41134,7 +50287,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_REPORT_1BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  
     uint8_t   properties2;                  /* masked byte */
@@ -41149,7 +50302,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_REPORT_2BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  /* MSB */
     uint8_t   highPressureThresholdValue2;  /* LSB */
@@ -41166,7 +50319,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_REPORT_3BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  /* MSB */
     uint8_t   highPressureThresholdValue2;  
@@ -41185,7 +50338,7 @@ typedef struct _ZW_IRRIGATION_SYSTEM_CONFIG_REPORT_4BYTE_FRAME_
 {
     uint8_t   cmdClass;                     /* The command class */
     uint8_t   cmd;                          /* The command */
-    uint8_t   masterValveDelay;             /**/
+    uint8_t   mainValveDelay;               /**/
     uint8_t   properties1;                  /* masked byte */
     uint8_t   highPressureThresholdValue1;  /* MSB */
     uint8_t   highPressureThresholdValue2;  
@@ -41651,6 +50804,29 @@ typedef struct _ZW_SUPERVISION_REPORT_FRAME_
     uint8_t   status;                       /**/
     uint8_t   duration;                     /**/
 } ZW_SUPERVISION_REPORT_FRAME;
+
+/************************************************************/
+/* Supervision Get V2 command class structs */              
+/************************************************************/
+typedef struct _ZW_SUPERVISION_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   encapsulatedCommandLength;    /**/
+} ZW_SUPERVISION_GET_V2_FRAME;
+
+/************************************************************/
+/* Supervision Report V2 command class structs */           
+/************************************************************/
+typedef struct _ZW_SUPERVISION_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   status;                       /**/
+    uint8_t   duration;                     /**/
+} ZW_SUPERVISION_REPORT_V2_FRAME;
 
 /************************************************************/
 /* Humidity Control Setpoint Set 1byte command class structs */
@@ -43104,6 +52280,2842 @@ typedef struct _ZW_SOUND_SWITCH_TONE_PLAY_REPORT_FRAME_
     uint8_t   toneIdentifier;               /**/
 } ZW_SOUND_SWITCH_TONE_PLAY_REPORT_FRAME;
 
+/************************************************************/
+/* Sound Switch Tones Number Get V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONES_NUMBER_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SOUND_SWITCH_TONES_NUMBER_GET_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tones Number Report V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONES_NUMBER_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedTones;               /**/
+} ZW_SOUND_SWITCH_TONES_NUMBER_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Info Get V2 command class structs */   
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_INFO_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+} ZW_SOUND_SWITCH_TONE_INFO_GET_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Info Report 1byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_INFO_REPORT_1BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+    uint8_t   toneDuration1;                /* MSB */
+    uint8_t   toneDuration2;                /* LSB */
+    uint8_t   nameLength;                   /**/
+    uint8_t   name1;                        
+} ZW_SOUND_SWITCH_TONE_INFO_REPORT_1BYTE_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Info Report 2byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_INFO_REPORT_2BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+    uint8_t   toneDuration1;                /* MSB */
+    uint8_t   toneDuration2;                /* LSB */
+    uint8_t   nameLength;                   /**/
+    uint8_t   name1;                        /* MSB */
+    uint8_t   name2;                        /* LSB */
+} ZW_SOUND_SWITCH_TONE_INFO_REPORT_2BYTE_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Info Report 3byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_INFO_REPORT_3BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+    uint8_t   toneDuration1;                /* MSB */
+    uint8_t   toneDuration2;                /* LSB */
+    uint8_t   nameLength;                   /**/
+    uint8_t   name1;                        /* MSB */
+    uint8_t   name2;                        
+    uint8_t   name3;                        /* LSB */
+} ZW_SOUND_SWITCH_TONE_INFO_REPORT_3BYTE_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Info Report 4byte V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_INFO_REPORT_4BYTE_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+    uint8_t   toneDuration1;                /* MSB */
+    uint8_t   toneDuration2;                /* LSB */
+    uint8_t   nameLength;                   /**/
+    uint8_t   name1;                        /* MSB */
+    uint8_t   name2;                        
+    uint8_t   name3;                        
+    uint8_t   name4;                        /* LSB */
+} ZW_SOUND_SWITCH_TONE_INFO_REPORT_4BYTE_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Configuration Set V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_CONFIGURATION_SET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   volume;                       /**/
+    uint8_t   defaultToneIdentifier;        /**/
+} ZW_SOUND_SWITCH_CONFIGURATION_SET_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Configuration Get V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_CONFIGURATION_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SOUND_SWITCH_CONFIGURATION_GET_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Configuration Report V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_CONFIGURATION_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   volume;                       /**/
+    uint8_t   defaultToneIdentifer;         /**/
+} ZW_SOUND_SWITCH_CONFIGURATION_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Play Set V2 command class structs */   
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+    uint8_t   playCommandToneVolume;        /**/
+} ZW_SOUND_SWITCH_TONE_PLAY_SET_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Play Get V2 command class structs */   
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_PLAY_GET_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_SOUND_SWITCH_TONE_PLAY_GET_V2_FRAME;
+
+/************************************************************/
+/* Sound Switch Tone Play Report V2 command class structs */
+/************************************************************/
+typedef struct _ZW_SOUND_SWITCH_TONE_PLAY_REPORT_V2_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   toneIdentifier;               /**/
+    uint8_t   playCommandToneVolume;        /**/
+} ZW_SOUND_SWITCH_TONE_PLAY_REPORT_V2_FRAME;
+
+/************************************************************/
+/* Ir Repeater Capabilities Get command class structs */    
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CAPABILITIES_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_IR_REPEATER_CAPABILITIES_GET_FRAME;
+
+/************************************************************/
+/* Ir Repeater Capabilities Report command class structs */ 
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CAPABILITIES_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfIrCodeIdentifiersForLearning;/**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   carrier;                      /**/
+    uint8_t   minimumSubCarrier;            /**/
+    uint8_t   maxiumSubCarrier;             /**/
+    uint8_t   minimumPulseTimeUnitMsb;      /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   maximumPulseTimeUnitLsb;      /**/
+} ZW_IR_REPEATER_CAPABILITIES_REPORT_FRAME;
+
+/************************************************************/
+/* Ir Repeater Ir Code Learning Start command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_IR_CODE_LEARNING_START_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   timeout;                      /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+} ZW_IR_REPEATER_IR_CODE_LEARNING_START_FRAME;
+
+/************************************************************/
+/* Ir Repeater Ir Code Learning Stop command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_IR_CODE_LEARNING_STOP_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_IR_REPEATER_IR_CODE_LEARNING_STOP_FRAME;
+
+/************************************************************/
+/* Ir Repeater Ir Code Learning Status command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_IR_CODE_LEARNING_STATUS_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   status;                       /**/
+} ZW_IR_REPEATER_IR_CODE_LEARNING_STATUS_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Remove command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_REMOVE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+} ZW_IR_REPEATER_LEARNT_IR_CODE_REMOVE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Get command class structs */  
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_IR_REPEATER_LEARNT_IR_CODE_GET_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   irCodeIdentifierStatusBitmask1;
+} ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   irCodeIdentifierStatusBitmask1;/* MSB */
+    uint8_t   irCodeIdentifierStatusBitmask2;/* LSB */
+} ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   irCodeIdentifierStatusBitmask1;/* MSB */
+    uint8_t   irCodeIdentifierStatusBitmask2;
+    uint8_t   irCodeIdentifierStatusBitmask3;/* LSB */
+} ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   irCodeIdentifierStatusBitmask1;/* MSB */
+    uint8_t   irCodeIdentifierStatusBitmask2;
+    uint8_t   irCodeIdentifierStatusBitmask3;
+    uint8_t   irCodeIdentifierStatusBitmask4;/* LSB */
+} ZW_IR_REPEATER_LEARNT_IR_CODE_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Get command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+} ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_GET_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_1BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              
+} VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_1BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_2BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              /* MSB */
+    uint8_t   dataBlockValue2;              /* LSB */
+} VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_2BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_3BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              /* MSB */
+    uint8_t   dataBlockValue2;              
+    uint8_t   dataBlockValue3;              /* LSB */
+} VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_3BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              /* MSB */
+    uint8_t   dataBlockValue2;              
+    uint8_t   dataBlockValue3;              
+    uint8_t   dataBlockValue4;              /* LSB */
+} VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup1;                /**/
+} ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup2;                /**/
+} ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup3;                /**/
+} ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Learnt Ir Code Readback Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup3;                /**/
+    VG_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_VG variantgroup4;                /**/
+} ZW_IR_REPEATER_LEARNT_IR_CODE_READBACK_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Set variant group structs */   
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_SET_1BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             
+} VG_IR_REPEATER_CONFIGURATION_SET_1BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Set variant group structs */   
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_SET_2BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             /* MSB */
+    uint8_t   dataBitEncoding2;             /* LSB */
+} VG_IR_REPEATER_CONFIGURATION_SET_2BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Set variant group structs */   
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_SET_3BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             /* MSB */
+    uint8_t   dataBitEncoding2;             
+    uint8_t   dataBitEncoding3;             /* LSB */
+} VG_IR_REPEATER_CONFIGURATION_SET_3BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Set variant group structs */   
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             /* MSB */
+    uint8_t   dataBitEncoding2;             
+    uint8_t   dataBitEncoding3;             
+    uint8_t   dataBitEncoding4;             /* LSB */
+} VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Set 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup1;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Set 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup2;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Set 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup3;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Set 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup3;                /**/
+    VG_IR_REPEATER_CONFIGURATION_SET_4BYTE_VG variantgroup4;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Get command class structs */   
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_IR_REPEATER_CONFIGURATION_GET_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_REPORT_1BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             
+} VG_IR_REPEATER_CONFIGURATION_REPORT_1BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_REPORT_2BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             /* MSB */
+    uint8_t   dataBitEncoding2;             /* LSB */
+} VG_IR_REPEATER_CONFIGURATION_REPORT_2BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_REPORT_3BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             /* MSB */
+    uint8_t   dataBitEncoding2;             
+    uint8_t   dataBitEncoding3;             /* LSB */
+} VG_IR_REPEATER_CONFIGURATION_REPORT_3BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Report variant group structs */
+/************************************************************/
+typedef struct _VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG_
+{
+    uint8_t   dataBitEncodingLength1;       /* MSB */
+    uint8_t   dataBitEncodingLength2;       /* LSB */
+    uint8_t   dataBitEncoding1;             /* MSB */
+    uint8_t   dataBitEncoding2;             
+    uint8_t   dataBitEncoding3;             
+    uint8_t   dataBitEncoding4;             /* LSB */
+} VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Configuration Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup1;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup2;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup3;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Configuration Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   periodMsb;                    /**/
+    uint8_t   properties1;                  /* masked byte */
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup3;                /**/
+    VG_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_VG variantgroup4;                /**/
+} ZW_IR_REPEATER_CONFIGURATION_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Repeat Learnt Code command class structs */  
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_REPEAT_LEARNT_CODE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   irCodeIdentifier;             /**/
+} ZW_IR_REPEATER_REPEAT_LEARNT_CODE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Repeat variant group structs */              
+/************************************************************/
+typedef struct _VG_IR_REPEATER_REPEAT_1BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              
+} VG_IR_REPEATER_REPEAT_1BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Repeat variant group structs */              
+/************************************************************/
+typedef struct _VG_IR_REPEATER_REPEAT_2BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              /* MSB */
+    uint8_t   dataBlockValue2;              /* LSB */
+} VG_IR_REPEATER_REPEAT_2BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Repeat variant group structs */              
+/************************************************************/
+typedef struct _VG_IR_REPEATER_REPEAT_3BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              /* MSB */
+    uint8_t   dataBlockValue2;              
+    uint8_t   dataBlockValue3;              /* LSB */
+} VG_IR_REPEATER_REPEAT_3BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Repeat variant group structs */              
+/************************************************************/
+typedef struct _VG_IR_REPEATER_REPEAT_4BYTE_VG_
+{
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   dataBlockValue1;              /* MSB */
+    uint8_t   dataBlockValue2;              
+    uint8_t   dataBlockValue3;              
+    uint8_t   dataBlockValue4;              /* LSB */
+} VG_IR_REPEATER_REPEAT_4BYTE_VG;
+
+/************************************************************/
+/* Ir Repeater Repeat 1byte command class structs */        
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_REPEAT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup1;                /**/
+} ZW_IR_REPEATER_REPEAT_1BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Repeat 2byte command class structs */        
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_REPEAT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup2;                /**/
+} ZW_IR_REPEATER_REPEAT_2BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Repeat 3byte command class structs */        
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_REPEAT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup3;                /**/
+} ZW_IR_REPEATER_REPEAT_3BYTE_FRAME;
+
+/************************************************************/
+/* Ir Repeater Repeat 4byte command class structs */        
+/************************************************************/
+typedef struct _ZW_IR_REPEATER_REPEAT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   subCarrier;                   /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   pulseTimeUnitLsb;             /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   reportNumberLsb;              /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup1;                /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup2;                /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup3;                /**/
+    VG_IR_REPEATER_REPEAT_4BYTE_VG variantgroup4;                /**/
+} ZW_IR_REPEATER_REPEAT_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Capability Get command class structs */   
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CAPABILITY_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_AUTHENTICATION_CAPABILITY_GET_FRAME;
+
+/************************************************************/
+/* Authentication Capability Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CAPABILITY_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedDataIdEntries1;      /* MSB */
+    uint8_t   supportedDataIdEntries2;      /* LSB */
+    uint8_t   supportedAuthenticationIdEntries1;/* MSB */
+    uint8_t   supportedAuthenticationIdEntries2;/* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask1;
+    uint8_t   supportedChecksumTypeBitMask; /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   supportedFallbackStatusBitMask1;
+} ZW_AUTHENTICATION_CAPABILITY_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Capability Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CAPABILITY_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedDataIdEntries1;      /* MSB */
+    uint8_t   supportedDataIdEntries2;      /* LSB */
+    uint8_t   supportedAuthenticationIdEntries1;/* MSB */
+    uint8_t   supportedAuthenticationIdEntries2;/* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask1;/* MSB */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask2;/* LSB */
+    uint8_t   supportedChecksumTypeBitMask; /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   supportedFallbackStatusBitMask1;/* MSB */
+    uint8_t   supportedFallbackStatusBitMask2;/* LSB */
+} ZW_AUTHENTICATION_CAPABILITY_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Capability Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CAPABILITY_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedDataIdEntries1;      /* MSB */
+    uint8_t   supportedDataIdEntries2;      /* LSB */
+    uint8_t   supportedAuthenticationIdEntries1;/* MSB */
+    uint8_t   supportedAuthenticationIdEntries2;/* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask1;/* MSB */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask2;
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask3;/* LSB */
+    uint8_t   supportedChecksumTypeBitMask; /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   supportedFallbackStatusBitMask1;/* MSB */
+    uint8_t   supportedFallbackStatusBitMask2;
+    uint8_t   supportedFallbackStatusBitMask3;/* LSB */
+} ZW_AUTHENTICATION_CAPABILITY_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Capability Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CAPABILITY_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   supportedDataIdEntries1;      /* MSB */
+    uint8_t   supportedDataIdEntries2;      /* LSB */
+    uint8_t   supportedAuthenticationIdEntries1;/* MSB */
+    uint8_t   supportedAuthenticationIdEntries2;/* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask1;/* MSB */
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask2;
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask3;
+    uint8_t   supportedAuthenticationTechnologyTypeBitMask4;/* LSB */
+    uint8_t   supportedChecksumTypeBitMask; /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   supportedFallbackStatusBitMask1;/* MSB */
+    uint8_t   supportedFallbackStatusBitMask2;
+    uint8_t   supportedFallbackStatusBitMask3;
+    uint8_t   supportedFallbackStatusBitMask4;/* LSB */
+} ZW_AUTHENTICATION_CAPABILITY_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Set 1byte command class structs */   
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          
+} ZW_AUTHENTICATION_DATA_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Set 2byte command class structs */   
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          /* MSB */
+    uint8_t   authenticationData2;          /* LSB */
+} ZW_AUTHENTICATION_DATA_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Set 3byte command class structs */   
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          /* MSB */
+    uint8_t   authenticationData2;          
+    uint8_t   authenticationData3;          /* LSB */
+} ZW_AUTHENTICATION_DATA_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Set 4byte command class structs */   
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          /* MSB */
+    uint8_t   authenticationData2;          
+    uint8_t   authenticationData3;          
+    uint8_t   authenticationData4;          /* LSB */
+} ZW_AUTHENTICATION_DATA_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Get command class structs */         
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_AUTHENTICATION_DATA_GET_FRAME;
+
+/************************************************************/
+/* Authentication Data Report variant group structs */      
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_DATA_REPORT_1BYTE_VG_
+{
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          
+} VG_AUTHENTICATION_DATA_REPORT_1BYTE_VG;
+
+/************************************************************/
+/* Authentication Data Report variant group structs */      
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_DATA_REPORT_2BYTE_VG_
+{
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          /* MSB */
+    uint8_t   authenticationData2;          /* LSB */
+} VG_AUTHENTICATION_DATA_REPORT_2BYTE_VG;
+
+/************************************************************/
+/* Authentication Data Report variant group structs */      
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_DATA_REPORT_3BYTE_VG_
+{
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          /* MSB */
+    uint8_t   authenticationData2;          
+    uint8_t   authenticationData3;          /* LSB */
+} VG_AUTHENTICATION_DATA_REPORT_3BYTE_VG;
+
+/************************************************************/
+/* Authentication Data Report variant group structs */      
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG_
+{
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   authenticationDataLength;     /**/
+    uint8_t   authenticationData1;          /* MSB */
+    uint8_t   authenticationData2;          
+    uint8_t   authenticationData3;          
+    uint8_t   authenticationData4;          /* LSB */
+} VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG;
+
+/************************************************************/
+/* Authentication Data Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationDataIdBlocks;/**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup1;                /**/
+    uint8_t   nextAuthenticationDataId1;    /* MSB */
+    uint8_t   nextAuthenticationDataId2;    /* LSB */
+} ZW_AUTHENTICATION_DATA_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationDataIdBlocks;/**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup2;                /**/
+    uint8_t   nextAuthenticationDataId1;    /* MSB */
+    uint8_t   nextAuthenticationDataId2;    /* LSB */
+} ZW_AUTHENTICATION_DATA_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationDataIdBlocks;/**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup3;                /**/
+    uint8_t   nextAuthenticationDataId1;    /* MSB */
+    uint8_t   nextAuthenticationDataId2;    /* LSB */
+} ZW_AUTHENTICATION_DATA_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Data Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_DATA_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationDataIdBlocks;/**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup3;                /**/
+    VG_AUTHENTICATION_DATA_REPORT_4BYTE_VG variantgroup4;                /**/
+    uint8_t   nextAuthenticationDataId1;    /* MSB */
+    uint8_t   nextAuthenticationDataId2;    /* LSB */
+} ZW_AUTHENTICATION_DATA_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Set variant group structs */
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG_
+{
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+} VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG;
+
+/************************************************************/
+/* Authentication Technologies Combination Set 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup1;                /**/
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Set 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup2;                /**/
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Set 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup3;                /**/
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Set 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup3;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_VG variantgroup4;                /**/
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Get command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_GET_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Report variant group structs */
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG_
+{
+    uint8_t   authenticationDataId1;        /* MSB */
+    uint8_t   authenticationDataId2;        /* LSB */
+} VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG;
+
+/************************************************************/
+/* Authentication Technologies Combination Report variant group structs */
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_1BYTE_VG_
+{
+    uint8_t   authenticationIdBlockLength;  /**/
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup1;                /**/
+} VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_1BYTE_VG;
+
+/************************************************************/
+/* Authentication Technologies Combination Report variant group structs */
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_2BYTE_VG_
+{
+    uint8_t   authenticationIdBlockLength;  /**/
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup2;                /**/
+} VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_2BYTE_VG;
+
+/************************************************************/
+/* Authentication Technologies Combination Report variant group structs */
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_3BYTE_VG_
+{
+    uint8_t   authenticationIdBlockLength;  /**/
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup3;                /**/
+} VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_3BYTE_VG;
+
+/************************************************************/
+/* Authentication Technologies Combination Report variant group structs */
+/************************************************************/
+typedef struct _VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG_
+{
+    uint8_t   authenticationIdBlockLength;  /**/
+    uint8_t   authenticationId1;            /* MSB */
+    uint8_t   authenticationId2;            /* LSB */
+    uint8_t   fallbackStatus;               /**/
+    uint8_t   userIdentifier1;              /* MSB */
+    uint8_t   userIdentifier2;              /* LSB */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup3;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_VG_VG variantgroup4;                /**/
+} VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG;
+
+/************************************************************/
+/* Authentication Technologies Combination Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationIdBlocks;/**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    uint8_t   nextAuthenticationId1;        /* MSB */
+    uint8_t   nextAuthenticationId2;        /* LSB */
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationIdBlocks;/**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup2;                /**/
+    uint8_t   nextAuthenticationId1;        /* MSB */
+    uint8_t   nextAuthenticationId2;        /* LSB */
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationIdBlocks;/**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup3;                /**/
+    uint8_t   nextAuthenticationId1;        /* MSB */
+    uint8_t   nextAuthenticationId2;        /* LSB */
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Technologies Combination Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfAuthenticationIdBlocks;/**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup1;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup2;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup3;                /**/
+    VG_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_VG variantgroup4;                /**/
+    uint8_t   nextAuthenticationId1;        /* MSB */
+    uint8_t   nextAuthenticationId2;        /* LSB */
+} ZW_AUTHENTICATION_TECHNOLOGIES_COMBINATION_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Checksum Get command class structs */     
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CHECKSUM_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_AUTHENTICATION_CHECKSUM_GET_FRAME;
+
+/************************************************************/
+/* Authentication Checksum Report command class structs */  
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_CHECKSUM_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   checksum1;                    /* MSB */
+    uint8_t   checksum2;                    /* LSB */
+} ZW_AUTHENTICATION_CHECKSUM_REPORT_FRAME;
+
+/************************************************************/
+/* Authentication Media Capability Get command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_CAPABILITY_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_AUTHENTICATION_MEDIA_CAPABILITY_GET_FRAME;
+
+/************************************************************/
+/* Authentication Media Capability Report command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_CAPABILITY_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+} ZW_AUTHENTICATION_MEDIA_CAPABILITY_REPORT_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Start 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_START_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   timeout;                      /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        
+} ZW_AUTHENTICATION_MEDIA_WRITE_START_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Start 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_START_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   timeout;                      /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        /* LSB */
+} ZW_AUTHENTICATION_MEDIA_WRITE_START_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Start 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_START_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   timeout;                      /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        /* LSB */
+} ZW_AUTHENTICATION_MEDIA_WRITE_START_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Start 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_START_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   timeout;                      /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        
+    uint8_t   data4;                        /* LSB */
+} ZW_AUTHENTICATION_MEDIA_WRITE_START_4BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Stop command class structs */ 
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_STOP_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_AUTHENTICATION_MEDIA_WRITE_STOP_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Status 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   status;                       /**/
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        
+} ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_1BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Status 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   status;                       /**/
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        /* LSB */
+} ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_2BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Status 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   status;                       /**/
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        /* LSB */
+} ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_3BYTE_FRAME;
+
+/************************************************************/
+/* Authentication Media Write Status 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sequenceNumber;               /**/
+    uint8_t   status;                       /**/
+    uint8_t   dataLength;                   /**/
+    uint8_t   data1;                        /* MSB */
+    uint8_t   data2;                        
+    uint8_t   data3;                        
+    uint8_t   data4;                        /* LSB */
+} ZW_AUTHENTICATION_MEDIA_WRITE_STATUS_4BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Capabilities Get command class structs */
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_CAPABILITIES_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_GENERIC_SCHEDULE_CAPABILITIES_GET_FRAME;
+
+/************************************************************/
+/* Generic Schedule Capabilities Report command class structs */
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_CAPABILITIES_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfSupportedScheduleIds1;/* MSB */
+    uint8_t   numberOfSupportedScheduleIds2;/* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfSupportedTimeRangeIds2;/**/
+    uint8_t   numberOfSupportedTimeRangesPerSchedule;/**/
+    uint8_t   properties2;                  /* masked byte */
+} ZW_GENERIC_SCHEDULE_CAPABILITIES_REPORT_FRAME;
+
+/************************************************************/
+/* Generic Schedule Time Range Set command class structs */ 
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_TIME_RANGE_SET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   timeRangeId2;                 /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   startYear2;                   /**/
+    uint8_t   properties4;                  /* masked byte */
+    uint8_t   stopYear2;                    /**/
+    uint8_t   properties5;                  /* masked byte */
+    uint8_t   properties6;                  /* masked byte */
+    uint8_t   properties7;                  /* masked byte */
+    uint8_t   properties8;                  /* masked byte */
+    uint8_t   properties9;                  /* masked byte */
+    uint8_t   properties10;                 /* masked byte */
+    uint8_t   properties11;                 /* masked byte */
+    uint8_t   properties12;                 /* masked byte */
+    uint8_t   properties13;                 /* masked byte */
+    uint8_t   properties14;                 /* masked byte */
+    uint8_t   properties15;                 /* masked byte */
+    uint8_t   properties16;                 /* masked byte */
+} ZW_GENERIC_SCHEDULE_TIME_RANGE_SET_FRAME;
+
+/************************************************************/
+/* Generic Schedule Time Range Get command class structs */ 
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_TIME_RANGE_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   timeRangeId2;                 /**/
+} ZW_GENERIC_SCHEDULE_TIME_RANGE_GET_FRAME;
+
+/************************************************************/
+/* Generic Schedule Time Range Report command class structs */
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_TIME_RANGE_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   timeRangeId2;                 /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   startYear2;                   /**/
+    uint8_t   properties4;                  /* masked byte */
+    uint8_t   stopYear2;                    /**/
+    uint8_t   properties5;                  /* masked byte */
+    uint8_t   properties6;                  /* masked byte */
+    uint8_t   properties7;                  /* masked byte */
+    uint8_t   properties8;                  /* masked byte */
+    uint8_t   properties9;                  /* masked byte */
+    uint8_t   properties10;                 /* masked byte */
+    uint8_t   properties11;                 /* masked byte */
+    uint8_t   properties12;                 /* masked byte */
+    uint8_t   properties13;                 /* masked byte */
+    uint8_t   properties14;                 /* masked byte */
+    uint8_t   properties15;                 /* masked byte */
+    uint8_t   properties16;                 /* masked byte */
+    uint8_t   properties17;                 /* masked byte */
+    uint8_t   nextTimeRangeId2;             /**/
+} ZW_GENERIC_SCHEDULE_TIME_RANGE_REPORT_FRAME;
+
+/************************************************************/
+/* Generic Schedule Set variant group structs */            
+/************************************************************/
+typedef struct _VG_GENERIC_SCHEDULE_SET_VG_
+{
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   timeRangeId2;                 /**/
+} VG_GENERIC_SCHEDULE_SET_VG;
+
+/************************************************************/
+/* Generic Schedule Set 1byte command class structs */      
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup1;                /**/
+} ZW_GENERIC_SCHEDULE_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Set 2byte command class structs */      
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup1;                /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup2;                /**/
+} ZW_GENERIC_SCHEDULE_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Set 3byte command class structs */      
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup1;                /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup2;                /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup3;                /**/
+} ZW_GENERIC_SCHEDULE_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Set 4byte command class structs */      
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup1;                /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup2;                /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup3;                /**/
+    VG_GENERIC_SCHEDULE_SET_VG variantgroup4;                /**/
+} ZW_GENERIC_SCHEDULE_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Get command class structs */            
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+} ZW_GENERIC_SCHEDULE_GET_FRAME;
+
+/************************************************************/
+/* Generic Schedule Report variant group structs */         
+/************************************************************/
+typedef struct _VG_GENERIC_SCHEDULE_REPORT_VG_
+{
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   timeRangeId2;                 /**/
+} VG_GENERIC_SCHEDULE_REPORT_VG;
+
+/************************************************************/
+/* Generic Schedule Report 1byte command class structs */   
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup1;                /**/
+    uint8_t   nextScheduleId1;              /* MSB */
+    uint8_t   nextScheduleId2;              /* LSB */
+} ZW_GENERIC_SCHEDULE_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Report 2byte command class structs */   
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup1;                /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup2;                /**/
+    uint8_t   nextScheduleId1;              /* MSB */
+    uint8_t   nextScheduleId2;              /* LSB */
+} ZW_GENERIC_SCHEDULE_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Report 3byte command class structs */   
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup1;                /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup2;                /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup3;                /**/
+    uint8_t   nextScheduleId1;              /* MSB */
+    uint8_t   nextScheduleId2;              /* LSB */
+} ZW_GENERIC_SCHEDULE_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Generic Schedule Report 4byte command class structs */   
+/************************************************************/
+typedef struct _ZW_GENERIC_SCHEDULE_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   scheduleId1;                  /* MSB */
+    uint8_t   scheduleId2;                  /* LSB */
+    uint8_t   numberOfTimeRangeIds;         /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup1;                /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup2;                /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup3;                /**/
+    VG_GENERIC_SCHEDULE_REPORT_VG variantgroup4;                /**/
+    uint8_t   nextScheduleId1;              /* MSB */
+    uint8_t   nextScheduleId2;              /* LSB */
+} ZW_GENERIC_SCHEDULE_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock State Get command class structs */      
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_STATE_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ANTITHEFT_UNLOCK_STATE_GET_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock State Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_STATE_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   antiTheftHint1;               
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_UNLOCK_STATE_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock State Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_STATE_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   antiTheftHint1;               /* MSB */
+    uint8_t   antiTheftHint2;               /* LSB */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_UNLOCK_STATE_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock State Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_STATE_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   antiTheftHint1;               /* MSB */
+    uint8_t   antiTheftHint2;               
+    uint8_t   antiTheftHint3;               /* LSB */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_UNLOCK_STATE_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock State Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_STATE_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   antiTheftHint1;               /* MSB */
+    uint8_t   antiTheftHint2;               
+    uint8_t   antiTheftHint3;               
+    uint8_t   antiTheftHint4;               /* LSB */
+    uint8_t   manufacturerId1;              /* MSB */
+    uint8_t   manufacturerId2;              /* LSB */
+    uint8_t   zWaveAllianceLockingEntityId1;/* MSB */
+    uint8_t   zWaveAllianceLockingEntityId2;/* LSB */
+} ZW_ANTITHEFT_UNLOCK_STATE_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock Set 1byte command class structs */      
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   
+} ZW_ANTITHEFT_UNLOCK_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock Set 2byte command class structs */      
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   /* MSB */
+    uint8_t   magicCode2;                   /* LSB */
+} ZW_ANTITHEFT_UNLOCK_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock Set 3byte command class structs */      
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   /* MSB */
+    uint8_t   magicCode2;                   
+    uint8_t   magicCode3;                   /* LSB */
+} ZW_ANTITHEFT_UNLOCK_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* Antitheft Unlock Set 4byte command class structs */      
+/************************************************************/
+typedef struct _ZW_ANTITHEFT_UNLOCK_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   magicCode1;                   /* MSB */
+    uint8_t   magicCode2;                   
+    uint8_t   magicCode3;                   
+    uint8_t   magicCode4;                   /* LSB */
+} ZW_ANTITHEFT_UNLOCK_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* User Capabilities Get command class structs */           
+/************************************************************/
+typedef struct _ZW_USER_CAPABILITIES_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_USER_CAPABILITIES_GET_FRAME;
+
+/************************************************************/
+/* User Capabilities Report variant group structs */        
+/************************************************************/
+typedef struct _VG_USER_CAPABILITIES_REPORT_VG_
+{
+    uint8_t   supportedUserTypesBitMask;    /**/
+} VG_USER_CAPABILITIES_REPORT_VG;
+
+/************************************************************/
+/* User Capabilities Report 1byte command class structs */  
+/************************************************************/
+typedef struct _ZW_USER_CAPABILITIES_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers1;/* MSB */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers2;/* LSB */
+    uint8_t   supportedCredentialRulesBitMask;/**/
+    uint8_t   maxLengthOfUserName;          /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedUserTypesBitMaskLength;/**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+} ZW_USER_CAPABILITIES_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* User Capabilities Report 2byte command class structs */  
+/************************************************************/
+typedef struct _ZW_USER_CAPABILITIES_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers1;/* MSB */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers2;/* LSB */
+    uint8_t   supportedCredentialRulesBitMask;/**/
+    uint8_t   maxLengthOfUserName;          /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedUserTypesBitMaskLength;/**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup2;                /**/
+} ZW_USER_CAPABILITIES_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* User Capabilities Report 3byte command class structs */  
+/************************************************************/
+typedef struct _ZW_USER_CAPABILITIES_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers1;/* MSB */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers2;/* LSB */
+    uint8_t   supportedCredentialRulesBitMask;/**/
+    uint8_t   maxLengthOfUserName;          /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedUserTypesBitMaskLength;/**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup2;                /**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup3;                /**/
+} ZW_USER_CAPABILITIES_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* User Capabilities Report 4byte command class structs */  
+/************************************************************/
+typedef struct _ZW_USER_CAPABILITIES_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers1;/* MSB */
+    uint8_t   numberOfSupportedUserUniqueIdentifiers2;/* LSB */
+    uint8_t   supportedCredentialRulesBitMask;/**/
+    uint8_t   maxLengthOfUserName;          /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   supportedUserTypesBitMaskLength;/**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup2;                /**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup3;                /**/
+    VG_USER_CAPABILITIES_REPORT_VG variantgroup4;                /**/
+} ZW_USER_CAPABILITIES_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Credential Capabilities Get command class structs */     
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CAPABILITIES_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_CREDENTIAL_CAPABILITIES_GET_FRAME;
+
+/************************************************************/
+/* Credential Capabilities Report variant group structs */  
+/************************************************************/
+typedef struct _VG_CREDENTIAL_CAPABILITIES_REPORT_VG_
+{
+    uint8_t   properties2;                  /* masked byte */
+} VG_CREDENTIAL_CAPABILITIES_REPORT_VG;
+
+/************************************************************/
+/* Credential Capabilities Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CAPABILITIES_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfSupportedCredentialTypes;/**/
+    uint8_t   credentialType1;              
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    uint8_t   numberOfSupportedCredentialSlots1;
+    uint8_t   minLengthOfCredentialData1;   
+    uint8_t   maxLengthOfCredentialData1;   
+    uint8_t   clRecommendedTimeout1;        
+    uint8_t   clNumberOfSteps1;             
+} ZW_CREDENTIAL_CAPABILITIES_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Credential Capabilities Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CAPABILITIES_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfSupportedCredentialTypes;/**/
+    uint8_t   credentialType1;              /* MSB */
+    uint8_t   credentialType2;              /* LSB */
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup2;                /**/
+    uint8_t   numberOfSupportedCredentialSlots1;/* MSB */
+    uint8_t   numberOfSupportedCredentialSlots2;/* LSB */
+    uint8_t   minLengthOfCredentialData1;   /* MSB */
+    uint8_t   minLengthOfCredentialData2;   /* LSB */
+    uint8_t   maxLengthOfCredentialData1;   /* MSB */
+    uint8_t   maxLengthOfCredentialData2;   /* LSB */
+    uint8_t   clRecommendedTimeout1;        /* MSB */
+    uint8_t   clRecommendedTimeout2;        /* LSB */
+    uint8_t   clNumberOfSteps1;             /* MSB */
+    uint8_t   clNumberOfSteps2;             /* LSB */
+} ZW_CREDENTIAL_CAPABILITIES_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Credential Capabilities Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CAPABILITIES_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfSupportedCredentialTypes;/**/
+    uint8_t   credentialType1;              /* MSB */
+    uint8_t   credentialType2;              
+    uint8_t   credentialType3;              /* LSB */
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup2;                /**/
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup3;                /**/
+    uint8_t   numberOfSupportedCredentialSlots1;/* MSB */
+    uint8_t   numberOfSupportedCredentialSlots2;
+    uint8_t   numberOfSupportedCredentialSlots3;/* LSB */
+    uint8_t   minLengthOfCredentialData1;   /* MSB */
+    uint8_t   minLengthOfCredentialData2;   
+    uint8_t   minLengthOfCredentialData3;   /* LSB */
+    uint8_t   maxLengthOfCredentialData1;   /* MSB */
+    uint8_t   maxLengthOfCredentialData2;   
+    uint8_t   maxLengthOfCredentialData3;   /* LSB */
+    uint8_t   clRecommendedTimeout1;        /* MSB */
+    uint8_t   clRecommendedTimeout2;        
+    uint8_t   clRecommendedTimeout3;        /* LSB */
+    uint8_t   clNumberOfSteps1;             /* MSB */
+    uint8_t   clNumberOfSteps2;             
+    uint8_t   clNumberOfSteps3;             /* LSB */
+} ZW_CREDENTIAL_CAPABILITIES_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Credential Capabilities Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CAPABILITIES_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   numberOfSupportedCredentialTypes;/**/
+    uint8_t   credentialType1;              /* MSB */
+    uint8_t   credentialType2;              
+    uint8_t   credentialType3;              
+    uint8_t   credentialType4;              /* LSB */
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup1;                /**/
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup2;                /**/
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup3;                /**/
+    VG_CREDENTIAL_CAPABILITIES_REPORT_VG variantgroup4;                /**/
+    uint8_t   numberOfSupportedCredentialSlots1;/* MSB */
+    uint8_t   numberOfSupportedCredentialSlots2;
+    uint8_t   numberOfSupportedCredentialSlots3;
+    uint8_t   numberOfSupportedCredentialSlots4;/* LSB */
+    uint8_t   minLengthOfCredentialData1;   /* MSB */
+    uint8_t   minLengthOfCredentialData2;   
+    uint8_t   minLengthOfCredentialData3;   
+    uint8_t   minLengthOfCredentialData4;   /* LSB */
+    uint8_t   maxLengthOfCredentialData1;   /* MSB */
+    uint8_t   maxLengthOfCredentialData2;   
+    uint8_t   maxLengthOfCredentialData3;   
+    uint8_t   maxLengthOfCredentialData4;   /* LSB */
+    uint8_t   clRecommendedTimeout1;        /* MSB */
+    uint8_t   clRecommendedTimeout2;        
+    uint8_t   clRecommendedTimeout3;        
+    uint8_t   clRecommendedTimeout4;        /* LSB */
+    uint8_t   clNumberOfSteps1;             /* MSB */
+    uint8_t   clNumberOfSteps2;             
+    uint8_t   clNumberOfSteps3;             
+    uint8_t   clNumberOfSteps4;             /* LSB */
+} ZW_CREDENTIAL_CAPABILITIES_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* User Set 1byte command class structs */                  
+/************************************************************/
+typedef struct _ZW_USER_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    
+} ZW_USER_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* User Set 2byte command class structs */                  
+/************************************************************/
+typedef struct _ZW_USER_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    /* LSB */
+} ZW_USER_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* User Set 3byte command class structs */                  
+/************************************************************/
+typedef struct _ZW_USER_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    
+    uint8_t   userName3;                    /* LSB */
+} ZW_USER_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* User Set 4byte command class structs */                  
+/************************************************************/
+typedef struct _ZW_USER_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties3;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    
+    uint8_t   userName3;                    
+    uint8_t   userName4;                    /* LSB */
+} ZW_USER_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* User Get command class structs */                        
+/************************************************************/
+typedef struct _ZW_USER_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+} ZW_USER_GET_FRAME;
+
+/************************************************************/
+/* User Report 1byte command class structs */               
+/************************************************************/
+typedef struct _ZW_USER_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nextUserUniqueIdentifier1;    /* MSB */
+    uint8_t   nextUserUniqueIdentifier2;    /* LSB */
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    
+} ZW_USER_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* User Report 2byte command class structs */               
+/************************************************************/
+typedef struct _ZW_USER_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nextUserUniqueIdentifier1;    /* MSB */
+    uint8_t   nextUserUniqueIdentifier2;    /* LSB */
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    /* LSB */
+} ZW_USER_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* User Report 3byte command class structs */               
+/************************************************************/
+typedef struct _ZW_USER_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nextUserUniqueIdentifier1;    /* MSB */
+    uint8_t   nextUserUniqueIdentifier2;    /* LSB */
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    
+    uint8_t   userName3;                    /* LSB */
+} ZW_USER_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* User Report 4byte command class structs */               
+/************************************************************/
+typedef struct _ZW_USER_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   nextUserUniqueIdentifier1;    /* MSB */
+    uint8_t   nextUserUniqueIdentifier2;    /* LSB */
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    
+    uint8_t   userName3;                    
+    uint8_t   userName4;                    /* LSB */
+} ZW_USER_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* User Set Error Report 1byte command class structs */     
+/************************************************************/
+typedef struct _ZW_USER_SET_ERROR_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userSetErrorType;             /**/
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    
+} ZW_USER_SET_ERROR_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* User Set Error Report 2byte command class structs */     
+/************************************************************/
+typedef struct _ZW_USER_SET_ERROR_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userSetErrorType;             /**/
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    /* LSB */
+} ZW_USER_SET_ERROR_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* User Set Error Report 3byte command class structs */     
+/************************************************************/
+typedef struct _ZW_USER_SET_ERROR_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userSetErrorType;             /**/
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    
+    uint8_t   userName3;                    /* LSB */
+} ZW_USER_SET_ERROR_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* User Set Error Report 4byte command class structs */     
+/************************************************************/
+typedef struct _ZW_USER_SET_ERROR_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userSetErrorType;             /**/
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+    uint8_t   properties2;                  /* masked byte */
+    uint8_t   userNameLength;               /**/
+    uint8_t   userName1;                    /* MSB */
+    uint8_t   userName2;                    
+    uint8_t   userName3;                    
+    uint8_t   userName4;                    /* LSB */
+} ZW_USER_SET_ERROR_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* User Notification Report command class structs */        
+/************************************************************/
+typedef struct _ZW_USER_NOTIFICATION_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userModifierType;             /**/
+    uint8_t   userModifierNodeId1;          /* MSB */
+    uint8_t   userModifierNodeId2;          /* LSB */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userType;                     /**/
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialRule;               /**/
+    uint8_t   expiringTimeoutMinutes1;      /* MSB */
+    uint8_t   expiringTimeoutMinutes2;      /* LSB */
+} ZW_USER_NOTIFICATION_REPORT_FRAME;
+
+/************************************************************/
+/* Credential Set 1byte command class structs */            
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              
+} ZW_CREDENTIAL_SET_1BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set 2byte command class structs */            
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              /* LSB */
+} ZW_CREDENTIAL_SET_2BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set 3byte command class structs */            
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              /* LSB */
+} ZW_CREDENTIAL_SET_3BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set 4byte command class structs */            
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              
+    uint8_t   credentialData4;              /* LSB */
+} ZW_CREDENTIAL_SET_4BYTE_FRAME;
+
+/************************************************************/
+/* Credential Get command class structs */                  
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+} ZW_CREDENTIAL_GET_FRAME;
+
+/************************************************************/
+/* Credential Report 1byte command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+    uint8_t   nextCredentialType;           /**/
+    uint8_t   nextCredentialSlot1;          /* MSB */
+    uint8_t   nextCredentialSlot2;          /* LSB */
+} ZW_CREDENTIAL_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Credential Report 2byte command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+    uint8_t   nextCredentialType;           /**/
+    uint8_t   nextCredentialSlot1;          /* MSB */
+    uint8_t   nextCredentialSlot2;          /* LSB */
+} ZW_CREDENTIAL_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Credential Report 3byte command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+    uint8_t   nextCredentialType;           /**/
+    uint8_t   nextCredentialSlot1;          /* MSB */
+    uint8_t   nextCredentialSlot2;          /* LSB */
+} ZW_CREDENTIAL_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Credential Report 4byte command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              
+    uint8_t   credentialData4;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+    uint8_t   nextCredentialType;           /**/
+    uint8_t   nextCredentialSlot1;          /* MSB */
+    uint8_t   nextCredentialSlot2;          /* LSB */
+} ZW_CREDENTIAL_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set Error Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_ERROR_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialSetErrorType;       /**/
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_SET_ERROR_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set Error Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_ERROR_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialSetErrorType;       /**/
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_SET_ERROR_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set Error Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_ERROR_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialSetErrorType;       /**/
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_SET_ERROR_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Credential Set Error Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_SET_ERROR_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialSetErrorType;       /**/
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              
+    uint8_t   credentialData4;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_SET_ERROR_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Credential Notification Report 1byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_NOTIFICATION_REPORT_1BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_NOTIFICATION_REPORT_1BYTE_FRAME;
+
+/************************************************************/
+/* Credential Notification Report 2byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_NOTIFICATION_REPORT_2BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_NOTIFICATION_REPORT_2BYTE_FRAME;
+
+/************************************************************/
+/* Credential Notification Report 3byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_NOTIFICATION_REPORT_3BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_NOTIFICATION_REPORT_3BYTE_FRAME;
+
+/************************************************************/
+/* Credential Notification Report 4byte command class structs */
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_NOTIFICATION_REPORT_4BYTE_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLength;             /**/
+    uint8_t   credentialData1;              /* MSB */
+    uint8_t   credentialData2;              
+    uint8_t   credentialData3;              
+    uint8_t   credentialData4;              /* LSB */
+    uint8_t   credentialModifierType;       /**/
+    uint8_t   credentialModifierNodeId1;    /* MSB */
+    uint8_t   credentialModifierNodeId2;    /* LSB */
+} ZW_CREDENTIAL_NOTIFICATION_REPORT_4BYTE_FRAME;
+
+/************************************************************/
+/* Credential Learn Start command class structs */          
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_LEARN_START_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   properties1;                  /* masked byte */
+    uint8_t   credentialLearnTimeout;       /**/
+} ZW_CREDENTIAL_LEARN_START_FRAME;
+
+/************************************************************/
+/* Credential Learn Cancel command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_LEARN_CANCEL_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_CREDENTIAL_LEARN_CANCEL_FRAME;
+
+/************************************************************/
+/* Credential Learn Report command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_LEARN_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialLearnStatus;        /**/
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialSlot1;              /* MSB */
+    uint8_t   credentialSlot2;              /* LSB */
+    uint8_t   credentialLearnStepsRemaining;/**/
+} ZW_CREDENTIAL_LEARN_REPORT_FRAME;
+
+/************************************************************/
+/* User Credential Association Set command class structs */ 
+/************************************************************/
+typedef struct _ZW_USER_CREDENTIAL_ASSOCIATION_SET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sourceUserUniqueIdentifier1;  /* MSB */
+    uint8_t   sourceUserUniqueIdentifier2;  /* LSB */
+    uint8_t   sourceCredentialType;         /**/
+    uint8_t   sourceCredentialSlot1;        /* MSB */
+    uint8_t   sourceCredentialSlot2;        /* LSB */
+    uint8_t   destinationUserUniqueIdentifier1;/* MSB */
+    uint8_t   destinationUserUniqueIdentifier2;/* LSB */
+    uint8_t   destinationCredentialSlot1;   /* MSB */
+    uint8_t   destinationCredentialSlot2;   /* LSB */
+} ZW_USER_CREDENTIAL_ASSOCIATION_SET_FRAME;
+
+/************************************************************/
+/* User Credential Association Report command class structs */
+/************************************************************/
+typedef struct _ZW_USER_CREDENTIAL_ASSOCIATION_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   sourceUserUniqueIdentifier1;  /* MSB */
+    uint8_t   sourceUserUniqueIdentifier2;  /* LSB */
+    uint8_t   sourceCredentialType;         /**/
+    uint8_t   sourceCredentialSlot1;        /* MSB */
+    uint8_t   sourceCredentialSlot2;        /* LSB */
+    uint8_t   destinationUserUniqueIdentifier1;/* MSB */
+    uint8_t   destinationUserUniqueIdentifier2;/* LSB */
+    uint8_t   destinationCredentialSlot1;   /* MSB */
+    uint8_t   destinationCredentialSlot2;   /* LSB */
+    uint8_t   userCredentialAssociationStatus;/**/
+} ZW_USER_CREDENTIAL_ASSOCIATION_REPORT_FRAME;
+
+/************************************************************/
+/* All Users Checksum Get command class structs */          
+/************************************************************/
+typedef struct _ZW_ALL_USERS_CHECKSUM_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+} ZW_ALL_USERS_CHECKSUM_GET_FRAME;
+
+/************************************************************/
+/* All Users Checksum Report command class structs */       
+/************************************************************/
+typedef struct _ZW_ALL_USERS_CHECKSUM_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   allUsersChecksum1;            /* MSB */
+    uint8_t   allUsersChecksum2;            /* LSB */
+} ZW_ALL_USERS_CHECKSUM_REPORT_FRAME;
+
+/************************************************************/
+/* User Checksum Get command class structs */               
+/************************************************************/
+typedef struct _ZW_USER_CHECKSUM_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+} ZW_USER_CHECKSUM_GET_FRAME;
+
+/************************************************************/
+/* User Checksum Report command class structs */            
+/************************************************************/
+typedef struct _ZW_USER_CHECKSUM_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   userUniqueIdentifier1;        /* MSB */
+    uint8_t   userUniqueIdentifier2;        /* LSB */
+    uint8_t   userChecksum1;                /* MSB */
+    uint8_t   userChecksum2;                /* LSB */
+} ZW_USER_CHECKSUM_REPORT_FRAME;
+
+/************************************************************/
+/* Credential Checksum Get command class structs */         
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CHECKSUM_GET_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialType;               /**/
+} ZW_CREDENTIAL_CHECKSUM_GET_FRAME;
+
+/************************************************************/
+/* Credential Checksum Report command class structs */      
+/************************************************************/
+typedef struct _ZW_CREDENTIAL_CHECKSUM_REPORT_FRAME_
+{
+    uint8_t   cmdClass;                     /* The command class */
+    uint8_t   cmd;                          /* The command */
+    uint8_t   credentialType;               /**/
+    uint8_t   credentialChecksum1;          /* MSB */
+    uint8_t   credentialChecksum2;          /* LSB */
+} ZW_CREDENTIAL_CHECKSUM_REPORT_FRAME;
+
 
 
 /**********************************************************************/
@@ -43120,6 +55132,7 @@ ZW_FRAME_COLLECTION_MACRO3
 ZW_FRAME_COLLECTION_MACRO4
 ZW_FRAME_COLLECTION_MACRO5
 ZW_FRAME_COLLECTION_MACRO6
+ZW_FRAME_COLLECTION_MACRO7
 } ALL_EXCEPT_ENCAP;
 
 typedef struct _ZW_MULTI_COMMAND_ENCAP_FRAME_
@@ -43189,7 +55202,6 @@ typedef struct _ZW_SECURITY_MESSAGE_ENCAP_FRAME_
   uint8_t        messageAuthenticationCodeByte8; /* The Authentication code byte 8 (LSB) */
 } ZW_SECURITY_MESSAGE_ENCAP_FRAME;
 
-
 /************************************************************/
 /* Union of all command classes                             */
 /************************************************************/
@@ -43207,6 +55219,8 @@ ZW_FRAME_COLLECTION_MACRO3
 ZW_FRAME_COLLECTION_MACRO4
 ZW_FRAME_COLLECTION_MACRO5
 ZW_FRAME_COLLECTION_MACRO6
+ZW_FRAME_COLLECTION_MACRO7
+  uint8_t                                bPadding[TX_DATA_MAX_DATA_SIZE];
 } ZW_APPLICATION_TX_BUFFER;
 
 /************************************************************/
@@ -43227,8 +55241,9 @@ ZW_FRAME_COLLECTION_MACRO3
 ZW_FRAME_COLLECTION_MACRO4
 ZW_FRAME_COLLECTION_MACRO5
 ZW_FRAME_COLLECTION_MACRO6
-  uint8_t                                    bPadding[META_DATA_MAX_DATA_SIZE];
+ZW_FRAME_COLLECTION_MACRO7
+  uint8_t                                bPadding[META_DATA_MAX_DATA_SIZE];
 } ZW_APPLICATION_META_TX_BUFFER;
 
-#pragma pack(pop)
+
 #endif

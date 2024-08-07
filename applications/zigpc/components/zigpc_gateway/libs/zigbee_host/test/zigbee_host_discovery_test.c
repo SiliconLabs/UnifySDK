@@ -64,68 +64,68 @@ void tearDown(void) {}
 
 void test_zigbee_host_endoints_discovery_sanity(void)
 {
-  EmberEUI64 eui64    = {1, 2, 3, 4, 5, 6, 7, 8};
-  EmberNodeId node_id = 0x1234;
+  sl_802154_long_addr_t eui64    = {1, 2, 3, 4, 5, 6, 7, 8};
+  sl_802154_short_addr_t node_id = 0x1234;
 
   // ARRANGE
-  emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(eui64, 0);
-  emberAfPluginAddressTableLookupNodeIdByIndex_ExpectAndReturn(0, node_id);
+  sl_zigbee_af_lookup_address_table_entry_by_eui64_ExpectAndReturn(eui64, 0);
+  sl_zigbee_af_address_table_lookup_node_id_by_index_ExpectAndReturn(0, node_id);
 
-  emberAfFindActiveEndpoints_ExpectAndReturn(
+  sl_zigbee_af_find_active_endpoints_ExpectAndReturn(
     node_id,
     zigbeeHostZdoActiveEndpointsResponseCallback,
-    EMBER_SUCCESS);
+    SL_STATUS_OK );
 
   // ACT
-  EmberStatus status = zigbeeHostZdoActiveEndpointsRequest(eui64);
+  sl_status_t status = zigbeeHostZdoActiveEndpointsRequest(eui64);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK , status);
 }
 
 void test_zigbee_host_clusters_discovery_sanity(void)
 {
-  EmberEUI64 eui64    = {1, 2, 3, 4, 5, 6, 7, 8};
+  sl_802154_long_addr_t eui64    = {1, 2, 3, 4, 5, 6, 7, 8};
   uint8_t endpoint    = 6;
-  EmberNodeId node_id = 0x1234;
+  sl_802154_short_addr_t node_id = 0x1234;
 
   // ARRANGE
-  emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(eui64, 0);
-  emberAfPluginAddressTableLookupNodeIdByIndex_ExpectAndReturn(0, node_id);
+  sl_zigbee_af_lookup_address_table_entry_by_eui64_ExpectAndReturn(eui64, 0);
+  sl_zigbee_af_address_table_lookup_node_id_by_index_ExpectAndReturn(0, node_id);
 
-  emberAfFindClustersByDeviceAndEndpoint_ExpectAndReturn(
+  sl_zigbee_af_find_clusters_by_device_and_endpoint_ExpectAndReturn(
     node_id,
     endpoint,
     zigbeeHostZdoSimpleDescriptorResponseCallback,
-    EMBER_SUCCESS);
+    SL_STATUS_OK );
 
   // ACT
-  EmberStatus status = zigbeeHostZdoSimpleDescriptorRequest(eui64, endpoint);
+  sl_status_t status = zigbeeHostZdoSimpleDescriptorRequest(eui64, endpoint);
 
   // ASSERT
-  TEST_ASSERT_EQUAL(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK , status);
 }
 
 void test_zigbee_host_cb_device_endpoints_discovery_sanity(void)
 {
-  EmberEUI64 eui64                = {2, 2, 3, 4, 5, 6, 7, 8};
+  sl_802154_long_addr_t eui64                = {2, 2, 3, 4, 5, 6, 7, 8};
   uint8_t activeEpCount           = 3;
   uint8_t activeEpList[3]         = {1, 3, 6};
-  EmberAfEndpointList activeEpRes = {
+  sl_zigbee_af_endpoint_list_t activeEpRes = {
     .count = activeEpCount,
     .list  = activeEpList,
   };
-  EmberAfServiceDiscoveryResult res = {
-    .status = EMBER_AF_UNICAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE,
+  sl_zigbee_af_service_discovery_result_t res = {
+    .status = SL_ZIGBEE_AF_UNICAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE,
     .zdoRequestClusterId = ACTIVE_ENDPOINTS_REQUEST,
     .responseData        = (const void *)&activeEpRes,
   };
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnMemThruPtr_address(eui64,
-                                                        sizeof(EmberEUI64));
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnMemThruPtr_address(eui64,
+                                                        sizeof(sl_802154_long_addr_t));
 
   callback_onDeviceEndpointsDiscovered_Expect(eui64,
                                               activeEpCount,
@@ -137,12 +137,12 @@ void test_zigbee_host_cb_device_endpoints_discovery_sanity(void)
 
 void test_zigbee_host_cb_endpoint_clusters_discovery_sanity(void)
 {
-  EmberEUI64 eui64                 = {2, 2, 3, 4, 5, 6, 7, 8};
+  sl_802154_long_addr_t eui64                 = {2, 2, 3, 4, 5, 6, 7, 8};
   uint8_t endpoint                 = 5;
   uint16_t deviceId                = 0x2301;
   uint16_t inClusters[2]           = {2, 4};
   uint16_t outClusters[1]          = {6};
-  EmberAfClusterList simpleDescRes = {
+  sl_zigbee_af_cluster_list_t simpleDescRes = {
     .inClusterCount  = 2,
     .inClusterList   = inClusters,
     .outClusterCount = 1,
@@ -150,13 +150,13 @@ void test_zigbee_host_cb_endpoint_clusters_discovery_sanity(void)
     .endpoint        = endpoint,
     .deviceId        = deviceId,
   };
-  EmberAfServiceDiscoveryResult res = {
-    .status = EMBER_AF_UNICAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE,
+  sl_zigbee_af_service_discovery_result_t res = {
+    .status = SL_ZIGBEE_AF_UNICAST_SERVICE_DISCOVERY_COMPLETE_WITH_RESPONSE,
     .zdoRequestClusterId = SIMPLE_DESCRIPTOR_REQUEST,
     .responseData        = (const void *)&simpleDescRes,
   };
 
-  EmberAfClusterList expectedInfo = {
+  sl_zigbee_af_cluster_list_t expectedInfo = {
     .endpoint        = simpleDescRes.endpoint,
     .deviceId        = simpleDescRes.deviceId,
     .inClusterCount  = simpleDescRes.inClusterCount,
@@ -166,10 +166,10 @@ void test_zigbee_host_cb_endpoint_clusters_discovery_sanity(void)
   };
 
   // ARRANGE
-  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
-  emberAfGetCurrentSenderEui64_IgnoreArg_address();
-  emberAfGetCurrentSenderEui64_ReturnMemThruPtr_address(eui64,
-                                                        sizeof(EmberEUI64));
+  sl_zigbee_af_get_current_sender_eui64_ExpectAndReturn(NULL, SL_STATUS_OK );
+  sl_zigbee_af_get_current_sender_eui64_IgnoreArg_address();
+  sl_zigbee_af_get_current_sender_eui64_ReturnMemThruPtr_address(eui64,
+                                                        sizeof(sl_802154_long_addr_t));
 
   callback_onEndpointClustersDiscovered_Expect(eui64, &expectedInfo);
 

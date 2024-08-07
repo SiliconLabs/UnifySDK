@@ -26,20 +26,20 @@
 
 /* Prototypes for notify functions under test */
 void zigpc_gateway_hdl_on_network_initialized(
-  const EmberEUI64 eui64_le, const EmberNetworkParameters *network);
+  const sl_802154_long_addr_t eui64_le, const sl_zigbee_network_parameters_t *network);
 
-void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le);
+void zigpc_gateway_hdl_on_node_add_start(const sl_802154_long_addr_t eui64_le);
 
-void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le);
+void zigpc_gateway_hdl_on_node_add_complete(const sl_802154_long_addr_t eui64_le);
 
 void zigpc_gateway_hdl_on_device_endpoints_discovered(
-  const EmberEUI64 eui64_le,
+  const sl_802154_long_addr_t eui64_le,
   uint8_t endpointCount,
   const uint8_t *endpointList);
 void zigpc_gateway_hdl_on_endpoint_clusters_discovered(
-  const EmberEUI64 eui64_le, const EmberAfClusterList *endpointInfo);
+  const sl_802154_long_addr_t eui64_le, const sl_zigbee_af_cluster_list_t *endpointInfo);
 
-void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le);
+void zigpc_gateway_hdl_on_node_removed(const sl_802154_long_addr_t eui64_le);
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are
@@ -154,9 +154,9 @@ void test_zigpc_gateway_notify_unregister_should_call_common_observer(void)
 void test_zigpc_gateway_network_init_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le                 = {0x1, 0x2, 0x3, 0x0};
+  sl_802154_long_addr_t test_eui64_le                 = {0x1, 0x2, 0x3, 0x0};
   zigbee_endpoint_id_t gateway_endpoint_id = 2;
-  EmberNetworkParameters test_network_params
+  sl_zigbee_network_parameters_t test_network_params
     = {.panId = 0xF8, .extendedPanId = {0xF8, 0}, .radioChannel = 0xAB};
 
   zigbeeHostGetEui64_Expect(NULL);
@@ -187,8 +187,8 @@ void test_zigpc_gateway_network_init_should_call_common_notify(void)
 void test_zigpc_gateway_node_start_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
-  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  sl_802154_long_addr_t test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  sl_802154_long_addr_t test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
   zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
 
   zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
@@ -216,8 +216,8 @@ void test_zigpc_gateway_node_start_should_call_common_notify(void)
 void test_zigpc_gateway_node_complete_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
-  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  sl_802154_long_addr_t test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  sl_802154_long_addr_t test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
   zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
 
   zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
@@ -247,8 +247,8 @@ void test_zigpc_gateway_device_discovered_zero_endpoints_should_call_common_noti
   void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le = {0xA, 0xB, 0xC, 0xD, 0x0};
-  EmberEUI64 test_eui64_be = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  sl_802154_long_addr_t test_eui64_le = {0xA, 0xB, 0xC, 0xD, 0x0};
+  sl_802154_long_addr_t test_eui64_be = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
   uint8_t ep_count         = 0;
   zigpc_gateway_on_node_discovered_t test_notify_data = {
     .endpoint_count = ep_count,
@@ -284,8 +284,8 @@ void test_zigpc_gateway_device_discovered_zero_endpoints_should_call_common_noti
 void test_zigpc_gateway_device_discovered_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
-  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  sl_802154_long_addr_t test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  sl_802154_long_addr_t test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
   zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
   uint8_t ep_count                  = 7;
   zigbee_endpoint_id_t ep_list[]    = {1, 2, 3, 40, 5, 7, 11};
@@ -325,11 +325,11 @@ void test_zigpc_gateway_device_discovered_should_call_common_notify(void)
 void test_zigpc_gateway_endpoint_discovered_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
-  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  sl_802154_long_addr_t test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  sl_802154_long_addr_t test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
   zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
   uint16_t epClusterList[]          = {0x6, 0x4, 0x1};
-  EmberAfClusterList test_epinfo    = {
+  sl_zigbee_af_cluster_list_t test_epinfo    = {
     .endpoint       = 123,
     .deviceId       = 0x456,
     .inClusterCount = 3,
@@ -363,8 +363,8 @@ void test_zigpc_gateway_endpoint_discovered_should_call_common_notify(void)
 void test_zigpc_gateway_node_removed_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
-  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  sl_802154_long_addr_t test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  sl_802154_long_addr_t test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
   zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
 
   zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);

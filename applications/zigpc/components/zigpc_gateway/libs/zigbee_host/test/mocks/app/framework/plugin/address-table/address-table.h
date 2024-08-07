@@ -22,40 +22,40 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 #include "app/framework/include/af-types.h"
 
 /*
  * @brief Searches for an EUI64 in the address table. If an entry with a
  * matching EUI64 is found, the function returns the corresponding index.
- * Otherwise the value EMBER_NULL_ADDRESS_TABLE_INDEX is returned.
+ * Otherwise the value SL_ZIGBEE_NULL_ADDRESS_TABLE_INDEX is returned.
  */
-#define emberAfPluginAddressTableLookupByEui64(longId) \
-  emberAfLookupAddressTableEntryByEui64((longId))
-uint8_t emberAfLookupAddressTableEntryByEui64(EmberEUI64 longId);
+#define sl_zigbee_af_address_table_lookup_by_eui64(longId) \
+  sl_zigbee_af_lookup_address_table_entry_by_eui64((longId))
+uint8_t sl_zigbee_af_lookup_address_table_entry_by_eui64(sl_802154_long_addr_t longId);
 
 /*
  * @brief If the passed index is valid it copies the entry stored at the passed
- * index to the passed variable and returns EMBER_SUCCESS. Otherwise the status
- * EMBER_INVALID_CALL is returned.
+ * index to the passed variable and returns SL_STATUS_OK . Otherwise the status
+ * SL_STATUS_INVALID_STATE is returned.
  */
-EmberStatus emberAfPluginAddressTableLookupByIndex(uint8_t index,
-                                                   EmberEUI64 entry);
+sl_status_t emberAfPluginAddressTableLookupByIndex(uint8_t index,
+                                                   sl_802154_long_addr_t entry);
 
 /*
  * @brief If the passed index is valid it copies the entry stored at the passed
- * index to the passed variable and returns EMBER_SUCCESS. Otherwise the status
- * EMBER_INVALID_CALL is returned.
+ * index to the passed variable and returns SL_STATUS_OK . Otherwise the status
+ * SL_STATUS_INVALID_STATE is returned.
  */
-EmberNodeId emberAfPluginAddressTableLookupNodeIdByIndex(uint8_t index);
+sl_802154_short_addr_t sl_zigbee_af_address_table_lookup_node_id_by_index(uint8_t index);
 
 /**
  * @brief Allows to send a unicast message specifying the EUI64 of the
  * destination node. Note: the specified EUI64 must be present in the address
- * table, otherwise the status EMBER_INVALID_CALL is returned.
+ * table, otherwise the status SL_STATUS_INVALID_STATE is returned.
  */
-EmberStatus emberAfSendUnicastToEui64(EmberEUI64 destination,
-                                      EmberApsFrame *apsFrame,
+sl_status_t sl_zigbee_af_send_unicast_to_eui64(sl_802154_long_addr_t destination,
+                                      sl_zigbee_aps_frame_t *apsFrame,
                                       uint16_t messageLength,
                                       uint8_t *message);
 
@@ -67,12 +67,12 @@ EmberStatus emberAfSendUnicastToEui64(EmberEUI64 destination,
  * It will be sent as unicast to the node that corresponds in the address table
  * to the passed EUI64.
  */
-EmberStatus emberAfSendCommandUnicastToEui64(EmberEUI64 destination);
+sl_status_t sl_zigbee_af_send_command_unicast_to_eui64(sl_802154_long_addr_t destination);
 
 /**
  * @brief If the sender EUI64 is available, it is copied to the address parameter
- * and returns EMBER_SUCCESS. Otherwise, it returns EMBER_INVALID_CALL.
+ * and returns SL_STATUS_OK . Otherwise, it returns SL_STATUS_INVALID_STATE .
  */
-EmberStatus emberAfGetCurrentSenderEui64(EmberEUI64 address);
+sl_status_t sl_zigbee_af_get_current_sender_eui64(sl_802154_long_addr_t address);
 
 #endif /* SILABS_PLUGIN_ADDRESS_TABLE_INTERNAL_H */

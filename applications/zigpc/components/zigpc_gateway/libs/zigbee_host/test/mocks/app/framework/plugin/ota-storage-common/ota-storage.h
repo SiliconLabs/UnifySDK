@@ -15,7 +15,7 @@
 #define SILABS_AF_OTA_STORAGE_H
 
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 #include "app/framework/include/af-types.h"
 
 /**
@@ -23,6 +23,6 @@
  * for more details.
  */
 
-EmberAfOtaStorageStatus sli_zigbee_af_ota_storage_add_image_file(const char *filename);
+sl_zigbee_af_ota_storage_status_t sli_zigbee_af_ota_storage_add_image_file(const char *filename);
 
 #endif  // SILABS_AF_OTA_STORAGE_H

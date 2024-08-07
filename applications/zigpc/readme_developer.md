@@ -38,7 +38,7 @@ for more details.
 
 ### Cross Compiling for Raspberry Pi Using Docker
 
-> Cross compilation builds currently supports only the Raspberry Pi OS Bullseye.
+> Cross compilation builds currently supports only the Raspberry Pi OS Bookworm.
 
 From the root of the Unify source directory, run the following:
 
@@ -104,7 +104,7 @@ ninja test
 ## Install Instructions
 
 For installing please refer to the general installation method in
-[Getting started](../../doc/getting_started.md).
+[Getting started](../../doc/getting_started_unify.md).
 
 ## Reading Console Logs
 

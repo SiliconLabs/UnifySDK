@@ -1,10 +1,11 @@
-@@@UnifyCore @naagarwa @mamehta @sushanka
-@@@UnifyZWave @phcoval @jeboullo
-@@@UnifyZigbee @jolitwin @mpbreton
+@@@UnifyCore @naagarwa @mamehta @sushanka @sabollim
+@@@UnifyZWave @phcoval 
+# Temporarily adding core team as reviewer for Zigbee
+@@@UnifyZigbee @naagarwa @sushanka @sabollim
 @@@UnifyBT @tabenyhe @tahornos
-@@@Documentation @naagarwa @mamehta @phcoval @jolitwin @mpbreton @nibertol @tabenyhe @jeboullo
-@@@UnifyFwkServices @naagarwa @mamehta @sushanka
-@@@UnifyIoTServices @naagarwa @sushanka @sepastuk
+@@@Documentation @naagarwa @mamehta @phcoval @nibertol @tabenyhe @jutiron @bolabbe
+@@@UnifyFwkServices @naagarwa @mamehta @sushanka @sabollim
+@@@UnifyIoTServices @naagarwa @sushanka @sabollim
 @@@CICD @naagarwa @dethammi @sushanka
 @@@UnifyMultiProtcol @nibertol @supratap @frkillee @ismaghni @alautott
 

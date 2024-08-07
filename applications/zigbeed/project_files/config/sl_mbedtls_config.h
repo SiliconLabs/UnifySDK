@@ -52,12 +52,33 @@
 // <i> Enable the ECDHE-ECDSA based ciphersuite modes in SSL / TLS.
 #define SL_MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED  0
 
+// <q SL_MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED> Enable the ECDHE-RSA based ciphersuite modes in SSL / TLS.
+// <i> Default: 0
+// <i> Enable the ECDHE-RSA based ciphersuite modes in SSL / TLS.
+#define SL_MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED  0
+
 // <q SL_MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED> Enable the ECDH-ECDSA based ciphersuite modes in SSL / TLS.
 // <i> Default: 0
 // <i> Enable the ECDH-ECDSA based ciphersuite modes in SSL / TLS.
 #define SL_MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED  0
 
+// <q SL_MBEDTLS_ECP_ENABLE_COMPRESSED_CURVE_PARSING> Enable parsing of the compressed curves.
+// <i> Default: 0
+// <i> Enable parsing of the compressed curves.
+#define SL_MBEDTLS_ECP_ENABLE_COMPRESSED_CURVE_PARSING 0
+
 // </h>
+
+// <h> RSA configuration
+
+// <q SL_MBEDTLS_RSA_NO_CRT> Disable use of the Chinese Remainder Theorem for RSA.
+// <i> Default: 0
+// <i> Disable use of the Chinese Remainder Theorem for RSA private key
+// <i> computations.
+#define SL_MBEDTLS_RSA_NO_CRT 0
+
+// </h>
+
 // <h> Miscellaneous configuration
 
 // <q SL_MBEDTLS_DRIVERS_ENABLED> Enable Silicon Labs' Mbed TLS- and PSA Crypto drivers.
@@ -91,8 +112,7 @@
 // the correct Mbed TLS / PSA Crypto options.
 #include "sli_mbedtls_config_transform_autogen.h"
 
-#include "mbedtls/config_psa.h"
-
-#include "mbedtls/check_config.h"
+// Included for backward compatibility reasons.
+#include "mbedtls/build_info.h"
 
 #endif // SL_MBEDTLS_CONFIG_H

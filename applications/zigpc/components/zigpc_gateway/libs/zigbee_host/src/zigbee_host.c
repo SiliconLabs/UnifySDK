@@ -42,12 +42,12 @@ int zigbeeHostInit(struct zigbeeHostOpts *opts)
 
   if (opts == NULL) {
     appDebugPrint("Error: Gateway options not found\n");
-    return EMBER_BAD_ARGUMENT;
+    return SL_STATUS_INVALID_PARAMETER;
   }
 
   if (opts->callbacks == NULL) {
     appDebugPrint("Error: Gateway callbacks not found\n");
-    return EMBER_BAD_ARGUMENT;
+    return SL_STATUS_INVALID_PARAMETER;
   }
   z3gwState.callbacks = opts->callbacks;
 
@@ -66,20 +66,20 @@ int zigbeeHostInit(struct zigbeeHostOpts *opts)
   }
 
   // This will process EZSP command-line options
-  if (!ezspProcessCommandOptions(argc, argv)) {
-    return EMBER_ERR_FATAL;
+  if (!sl_zigbee_ezsp_process_command_options(argc, argv)) {
+    return SL_STATUS_FAIL;
   }
 
   // NOTE: Gateway backchannel is not used/enabled
 
-  EmberStatus status =
+  sl_status_t status =
     zigbeeHostRegisterClusters(
         opts->supportedClusterList,
         opts->supportedClusterListSize);
 
-  if(EMBER_SUCCESS != status)
+  if(SL_STATUS_OK != status)
   {
-    return EMBER_ERR_FATAL;
+    return SL_STATUS_FAIL;
   }
   // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
   // Note that if the kernel is present, processing task(s) will be created by
@@ -98,34 +98,41 @@ void zigbeeHostTick(void)
 
 void zigbeeHostShutdown(void)
 {
-  emberSerialCleanup();
+  sli_legacy_serial_cleanup();
 }
 
-EmberStatus zigbeeHostGetEmberKey(EmberKeyType type, EmberKeyStruct *const key)
+sl_status_t zigbeeHostGetEmberKey(sl_zigbee_key_type_t type, sl_zigbee_key_struct_t *const key)
 {
-  EmberStatus status = EMBER_SUCCESS;
+  sl_status_t status = SL_STATUS_OK;
   if (key == NULL) {
-    status = EMBER_BAD_ARGUMENT;
+    status = SL_STATUS_INVALID_PARAMETER;
   } else {
-    status = emberGetKey(type, key);
+    sl_zigbee_sec_man_context_t ctxt = {};
+    sl_zigbee_sec_man_init_context(&ctxt);
+
+    // Currently this API is called only for current network key type.
+    UNUSED_VAR(type);
+    ctxt.core_key_type = SL_ZB_SEC_MAN_KEY_TYPE_NETWORK;
+
+    status = sl_zigbee_sec_man_export_key(&ctxt, (sl_zigbee_sec_man_key_t *)&key->key);
   }
   return status;
 }
 
-EzspStatus zigbeeHostSetEzspPolicy(EzspPolicyId policyId,
-                                   EzspDecisionId decisionId,
+sl_zigbee_ezsp_status_t zigbeeHostSetEzspPolicy(sl_zigbee_ezsp_policy_id_t policyId,
+                                   sl_zigbee_ezsp_decision_id_t decisionId,
                                    const char *policyName,
                                    const char *decisionName)
 {
-  return emberAfSetEzspPolicy(policyId, decisionId, policyName, decisionName);
+  return sl_zigbee_af_set_ezsp_policy(policyId, decisionId, policyName, decisionName);
 }
 
-EmberStatus zigbeeHostRegisterClusters(
+sl_status_t zigbeeHostRegisterClusters(
               const uint16_t *cluster_list,
               unsigned int cluster_list_size )
 {
 
-  EmberStatus status = EMBER_SUCCESS;
+  sl_status_t status = SL_STATUS_OK;
 
   if(cluster_list != NULL)
   {
@@ -147,7 +154,7 @@ EmberStatus zigbeeHostRegisterClusters(
   }
   else
   {
-    status = EMBER_BAD_ARGUMENT;
+    status = SL_STATUS_INVALID_PARAMETER;
   }
 
   return status;
@@ -177,7 +184,7 @@ EmberStatus zigbeeHostRegisterClusters(
  * Application Framework itself.
  *
  */
-void emberAfMainInitCallback(void)
+void sl_zigbee_af_main_init_cb(void)
 {
   bool callbackExists = ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks,
                                                     onEmberAfStackInitalized);
@@ -188,25 +195,20 @@ void emberAfMainInitCallback(void)
 
 /** @brief Ncp Init
  *
- * This function is called when the network coprocessor is being initialized,
- * either at startup or upon reset.  It provides applications on opportunity to
- * perform additional configuration of the NCP.  The function is always called
- * twice when the NCP is initialized.  In the first invocation, memoryAllocation
- * will be true and the application should only issue EZSP commands that affect
- * memory allocation on the NCP.  For example, tables on the NCP can be resized
- * in the first call.  In the second invocation, memoryAllocation will be false
- * and the application should only issue EZSP commands that do not affect memory
- * allocation.  For example, tables on the NCP can be populated in the second
- * call.  This callback is not called on SoCs.
- *
- * @param memoryAllocation   Ver.: always
+ * This function is always called when the network coprocessor is being
+ * initialized, either at startup or upon reset.  It provides applications
+ * an opportunity to perform additional configuration of the NCP. For
+ * example, tables on the NCP can be resized and populated. This callback
+ * issue EZSP commands to configure memory layout on the ncp and is not
+ * called on SoCs.
+ * 
  */
-void emberAfNcpInitCallback(bool memoryAllocation)
+void emberAfNcpInitCallback()
 {
   bool callbackExists
     = ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks, onEmberAfNcpPostReset);
   if (callbackExists) {
-    z3gwState.callbacks->onEmberAfNcpPostReset(memoryAllocation);
+    z3gwState.callbacks->onEmberAfNcpPostReset();
   }
 }
 
@@ -218,29 +220,29 @@ void emberAfNcpInitCallback(bool memoryAllocation)
  * rebooted and the connection between the host and NCP will drop. If not, the
  * NCP will continue operating.
  *
- * @param status The EzspStatus error code received.
+ * @param status The sl_zigbee_ezsp_status_t error code received.
  *
  * @return bool True to reset NCP, false not to.
  *
  * @note This callback is only fired on the host application. It has no use for
  * SoC or NCP applications.
  */
-bool emberAfPluginZclFrameworkCoreEzspErrorCallback(EzspStatus status)
+bool sl_zigbee_af_zcl_framework_core_ezsp_error_cb(sl_zigbee_ezsp_status_t status)
 {
 #if defined EZSP_HOST
-  if (status == EZSP_ERROR_OVERFLOW) {
+  if (status == SL_ZIGBEE_EZSP_ERROR_OVERFLOW) {
     appDebugPrint("WARNING: the NCP has run out of buffers, causing "
                   "general malfunction. Remediate network congestion, if "
                   "present.\n");
-    emberAfCoreFlush();
+    sl_zigbee_af_core_flush();
   }
 
   // Do not reset if this is a decryption failure, as we ignored the packet
   // Do not reset for a callback overflow, as we don't want the device to reboot
   // under stress
   // For all other errors, we reset the NCP
-  if ((status != EZSP_ERROR_SECURITY_PARAMETERS_INVALID)
-      && (status != EZSP_ERROR_OVERFLOW)) {
+  if ((status != SL_ZIGBEE_EZSP_ERROR_SECURITY_PARAMETERS_INVALID)
+      && (status != SL_ZIGBEE_EZSP_ERROR_OVERFLOW)) {
     bool callbackExists
       = ZIGBEE_HOST_CALLBACK_EXISTS(z3gwState.callbacks, onEmberAfNcpPreReset);
     if (callbackExists) {
@@ -255,12 +257,12 @@ bool emberAfPluginZclFrameworkCoreEzspErrorCallback(EzspStatus status)
 
 //STANDALONE_BOOTLOADER_RESET_MODE is 0
 //STANDALONE_BOOTLOADER_NORMAL_MODE is 1
-EmberStatus zigbeeHostLaunchBootloader()
+sl_status_t zigbeeHostLaunchBootloader()
 {
-  EmberStatus status = ezspLaunchStandaloneBootloader(1);
+  sl_status_t status = sl_zigbee_ezsp_launch_standalone_bootloader(1);
 
-  ezspClose();
-  //emberAfCoreFlush(); alternatively will work
+  sl_zigbee_ezsp_close();
+  //sl_zigbee_af_core_flush(); alternatively will work
 
   return status;
 }

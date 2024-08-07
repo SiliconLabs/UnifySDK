@@ -30,5 +30,27 @@
  */
 std::vector<attribute_store::attribute> endpoint_id_list();
 
+/**
+ * @brief Get a vector of all attributes of a given type in the attribute Store
+ * 
+ * @note The given attribute must be under ATTRIBUTE_ENDPOINT_ID
+ * 
+ * @param attribute_type The type of attribute to get
+ * 
+ * @returns std::vector<attribute> for the given attribute type
+ */
+std::vector<attribute_store::attribute>
+  get_attribute_list(attribute_store_type_t attribute_type);
+
+/**
+ * @brief Update bitmask from an array to a uint32_t
+ * 
+ * @param attribute_to_update Attribute to update
+ * 
+ * @returns true if the update was successful
+ * @returns false if the update was unsuccessful
+ */
+bool update_bitmask_attribute(attribute_store::attribute attribute_to_update);
+
 #endif  //ZPC_DATABASE_HELPER_HPP
 /** @} end zpc_database_helper */

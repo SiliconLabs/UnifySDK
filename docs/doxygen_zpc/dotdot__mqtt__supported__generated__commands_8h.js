@@ -50,6 +50,9 @@ var dotdot__mqtt__supported__generated__commands_8h =
     [ "uic_mqtt_dotdot_thermostat_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga1ff98d684411f21dea8aa1fab466f842", null ],
     [ "uic_mqtt_dotdot_thermostat_user_interface_configuration_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gabf73326d3eb32fcedad0c57dc9294172", null ],
     [ "uic_mqtt_dotdot_time_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gad70c6bd653d94e14b94db158d4f9abfe", null ],
+    [ "uic_mqtt_dotdot_unify_fan_control_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga56ec5ee34f71e8e38c31764125faf989", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gada5fa25f9d0ebf05bc41668faa7b0f4a", null ],
+    [ "uic_mqtt_dotdot_unify_thermostat_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga2049f7cc597411b41ca8a26e42b5c9c2", null ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga97665d282608ab42938f896756dfced5", null ],
     [ "uic_mqtt_dotdot_window_covering_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga96b35792b7daee1c829ba71de3a6cb6a", null ],
     [ "uic_mqtt_dotdot_alarms_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga334244dcbd6e54e9e240acf89e329c98", null ],
@@ -102,6 +105,9 @@ var dotdot__mqtt__supported__generated__commands_8h =
     [ "uic_mqtt_dotdot_thermostat_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga55735d08c93b8d686eb3a50ad8d23a2c", null ],
     [ "uic_mqtt_dotdot_thermostat_user_interface_configuration_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gaad828342929e12506e110ecca4eccec5", null ],
     [ "uic_mqtt_dotdot_time_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga7c8e68d1de33ac5278dfb56411d75ae2", null ],
+    [ "uic_mqtt_dotdot_unify_fan_control_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gabe904ecdde3e191a67f8bf52c97996d9", null ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga122efcb0abe178f5f56343ee4a77d745", null ],
+    [ "uic_mqtt_dotdot_unify_thermostat_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga54ace70af3c6a2ccea6870a19a115464", null ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga500905d16ebf14e7342055c8161f4c70", null ],
     [ "uic_mqtt_dotdot_window_covering_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gaf241107ef47e56f023b4d8ae69e37185", null ]
 ];

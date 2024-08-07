@@ -7,7 +7,7 @@ hidden:
 titlesonly:
 ---
 self
-./running_unify.md
+./getting_started_unify.md
 ```
 
 ```{toctree}
@@ -56,16 +56,10 @@ This documentation is for the [latest release of the Unify Host SDK](https://git
 
 * The Silicon Labs Unify Host SDK source code may be found at
   <https://github.com/SiliconLabs/UnifySDK>
-* Binary packages for Raspberry Pi 4 (Raspbian 11, Debian Bullseye 64-bit) can be found
+* Binary packages for Raspberry Pi 4 (Raspbian 12, Debian Bookworm 64-bit) can be found
   here <https://github.com/SiliconLabs/UnifySDK/releases>
 
-**To demo Unify on a Raspberry Pi see** [Running Unify on a Raspberry Pi](running_unify.md)
-
-**To get started developing with Unify** see [Getting Started as a Developer](getting_started_as_developer.md)
-
-**For detailed information about the Unify Framework** see [Unify Framework](UnifySDK.md)
-
-**For detailed information about a specific protocol** see [Protocol Controllers](protocol_controllers.md)
+**Use [Portable Runtime](portable_runtime/readme_user.md) for a quick demo with Unify**
 
 ## Overview
 
@@ -109,7 +103,7 @@ The Unify Framework has support for:
 
   [![Z-Wave](assets/img/Z-Wave_logo.png)](../applications/zpc/readme_user.md)
   [![Zigbee](assets/img/Zigbee_logo.png)](../applications/zigpc/readme_user.md)
-  [![Matter](assets/img/matter_logo.png)](https://siliconlabs.github.io/matter/latest/unify/readme_user.html)
+  [![Matter](assets/img/matter_logo.png)](https://siliconlabs.github.io/matter/latest/unify/index.html)
   [![Bluetooth AoX](assets/img/Bluetooth_logo.png)](../applications/aox/applications/aoxpc/readme_user.md)
 
 Further details can be found on the [Unify Framework introduction page](UnifySDK.md).

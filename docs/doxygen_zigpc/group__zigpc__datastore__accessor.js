@@ -1,6 +1,6 @@
 var group__zigpc__datastore__accessor =
 [
-    [ "StoreAccessor", "classStoreAccessor.html", [
+    [ "StoreAccessor< search_key_t, data_t >", "classStoreAccessor.html", [
       [ "StoreAccessor", "classStoreAccessor.html#ac9a5bc295342951ec85cbaf324aed8a8", null ],
       [ "~StoreAccessor", "classStoreAccessor.html#a1945213e52915df265e268be2cb87046", null ],
       [ "child_count", "classStoreAccessor.html#aeafc7ed20e125f4f11ca477af71b82d7", null ],
@@ -17,7 +17,7 @@ var group__zigpc__datastore__accessor =
       [ "label", "classStoreAccessor.html#a87557c20212673bed074c17cfca494d7", null ],
       [ "node_type", "classStoreAccessor.html#a7b2ac4908f498f25dbad38d6e828419c", null ]
     ] ],
-    [ "StoreListAccessor", "classStoreListAccessor.html", [
+    [ "StoreListAccessor< list_entry_t >", "classStoreListAccessor.html", [
       [ "StoreListAccessor", "classStoreListAccessor.html#ab8a9ef25f419f79ba80bbf1dd5fd2e01", null ],
       [ "~StoreListAccessor", "classStoreListAccessor.html#a094958f9289965e8ca230b003fe4afbf", null ],
       [ "create_list", "classStoreListAccessor.html#afce666754c7bff1373caaa82fc7ebc2c", null ],

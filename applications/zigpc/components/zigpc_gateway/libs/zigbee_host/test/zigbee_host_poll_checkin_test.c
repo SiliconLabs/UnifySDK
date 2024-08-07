@@ -57,38 +57,38 @@ void test_poll_control_send_checkin_response_sanity(void)
 {
   // ARRANGE
 
-  emberAfFillExternalBuffer_ExpectAndReturn(
-    (ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER),
+  sl_zigbee_af_fill_external_buffer_ExpectAndReturn(
+    (ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER | ZCL_DISABLE_DEFAULT_RESPONSE_MASK),
     ZCL_POLL_CONTROL_CLUSTER_ID,
     ZCL_CHECK_IN_RESPONSE_COMMAND_ID,
     "uv",
     4);
 
-  emberAfSendResponse_ExpectAndReturn(EMBER_SUCCESS);
+  sl_zigbee_af_send_response_ExpectAndReturn(SL_STATUS_OK );
 
   // ACT
-  EmberStatus status = zigbeeHostSendPollingCheckInResponse(true);
+  sl_status_t status = zigbeeHostSendPollingCheckInResponse(true);
 
   // ASSERT
-  TEST_ASSERT_EQUAL_HEX(EMBER_SUCCESS, status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK , status);
 }
 
 void test_poll_control_send_checkin_response_failed(void)
 {
   // ARRANGE
 
-  emberAfFillExternalBuffer_ExpectAndReturn(
-    (ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER),
+  sl_zigbee_af_fill_external_buffer_ExpectAndReturn(
+    (ZCL_CLUSTER_SPECIFIC_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER | ZCL_DISABLE_DEFAULT_RESPONSE_MASK),
     ZCL_POLL_CONTROL_CLUSTER_ID,
     ZCL_CHECK_IN_RESPONSE_COMMAND_ID,
     "uv",
     4);
 
-  emberAfSendResponse_ExpectAndReturn(EMBER_ERR_FATAL);
+  sl_zigbee_af_send_response_ExpectAndReturn(SL_STATUS_FAIL);
 
   // ACT
-  EmberStatus status = zigbeeHostSendPollingCheckInResponse(true);
+  sl_status_t status = zigbeeHostSendPollingCheckInResponse(true);
 
   // ASSERT
-  TEST_ASSERT_EQUAL_HEX(EMBER_ERR_FATAL, status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_FAIL, status);
 }

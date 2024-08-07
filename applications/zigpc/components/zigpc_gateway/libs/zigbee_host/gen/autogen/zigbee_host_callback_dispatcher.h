@@ -20,8 +20,8 @@
 
 
 // NCP Init
-void sli_zb_af_ncp_init(bool memoryAllocation);
-void emberAfPluginAddressTableNcpInitCallback(bool memoryAllocation);
-void emberAfPluginNcpConfigurationNcpInitCallback(bool memoryAllocation);
-void emberAfNcpInitCallback(bool memoryAllocation);
+void sli_zb_af_ncp_init(void);
+void sl_zigbee_af_address_table_ncp_init_cb(void);
+void sl_zigbee_af_ncp_configuration_ncp_init_cb(void);
+void emberAfNcpInitCallback(void);
 #endif // SL_ZIGBEE_HOST_CALLBACK_DISPATCHER_H

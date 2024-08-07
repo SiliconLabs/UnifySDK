@@ -19,7 +19,7 @@ else()
 endif()
 
 set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE arm64)
-set(CPACK_FILE_NAME_EXTRA bullseye)
+set(CPACK_FILE_NAME_EXTRA bookworm)
 
 # Configure pkg-config to only find target libs
 set(PKG_CONFIG_EXECUTABLE

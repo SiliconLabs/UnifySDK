@@ -19,14 +19,14 @@
 #define SL_ZIGBEE_COMMON_CALLBACK_DISPATCHER_H
 
 #include PLATFORM_HEADER
-#include "stack/include/ember.h"
+#include "stack/include/sl_zigbee.h"
 
 // Event Init
 void sli_zigbee_af_event_init(void);
 // Local data Init
 void sli_zigbee_af_local_data_init(void);
 // Init done
-void sli_zigbee_af_initDone(void);
+void sli_zigbee_af_init_done(void);
 
 // Tick
 void sli_zigbee_af_tick(void);

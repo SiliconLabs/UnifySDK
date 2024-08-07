@@ -1,6 +1,6 @@
 #include "sl_event_handler.h"
 
-#include "zigbee_app_framework_common.h"
+#include "sl_zigbee_system_common.h"
 #include "sl_iostream_stdio.h"
 #include "sl_cli_instances.h"
 #include "sl_iostream_init_instances.h"
@@ -18,8 +18,7 @@ void sl_service_init(void)
 {
   sl_iostream_init_instances();
   sl_cli_instances_init();
-  // mpbreton 2022-09-03 : Enabling the threaded cli causes interference.
-  // Do no re-enable those lines in future autogeneration.
+  // Below function to be disabled, after autogen as it cause conflicts with other cli
   //sli_cli_threaded_host_init();
 }
 

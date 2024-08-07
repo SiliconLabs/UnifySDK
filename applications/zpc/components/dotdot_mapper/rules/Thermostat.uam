@@ -6,20 +6,12 @@ def zwSENSOR_MULTILEVEL_SCALE             0x3104
 def zwSENSOR_MULTILEVEL_SENSOR_VALUE      0x3105
 def zwMULTILEVEL_SUPPORTED_SENSOR_TYPES   0x3106
 
-//Thermostat setpoint CC
-def zwTHERMOSTAT_SETPOINT_VERSION           0x4301
-def zwTHERMOSTAT_SUPPORTED_SETPOINT_TYPES   0x4302
-def zwTHERMOSTAT_SETPOINT_TYPE              0x4303
-def zwTHERMOSTAT_SETPOINT_VALUE             0x4304
-def zwTHERMOSTAT_SETPOINT_VALUE_SCALE       0x4305
-def zwTHERMOSTAT_SETPOINT_MIN_VALUE         0x4306
-def zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE   0x4307
-def zwTHERMOSTAT_SETPOINT_MAX_VALUE         0x4308
-def zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE   0x4309
-
 def zwTHERMOSTAT_MODE_VERSION     0x4001
 def zwTHERMOSTAT_MODE             0x4002
 def zwTHERMOSTAT_SUPPORTED_MODES  0x4003
+
+//Thermostat Operating State CC
+def zwTHERMOSTAT_OPERATING_STATE_MODE 0x4202
 
 // Thermostat Cluster
 def zb_LocalTemperature                     0x02010000
@@ -40,6 +32,7 @@ def zb_SystemMode                           0x0201001c
 def zb_TemperatureSetpointHold              0x02010023
 def zb_TemperatureSetpointHoldDuration      0x02010024
 def zb_ThermostatProgrammingOperationMode   0x02010025
+def zb_ThermostatRunningState               0x02010029
 def zb_OccupiedSetback                      0x02010034
 def zb_OccupiedSetbackMin                   0x02010035
 def zb_OccupiedSetbackMax                   0x02010036
@@ -54,72 +47,38 @@ def zb_ACLouverPosition                     0x02010045
 def zb_ACCoilTemperature                    0x02010046
 def zb_ACCapacityFormat                     0x02010047
 
-def thermostat_setpoint_supported (e'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE | e'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE)
+// Enum
+// Z-Wave
+def THERMOSTAT_OPERATING_STATE_MODE_IDLE 0x00
+def THERMOSTAT_OPERATING_STATE_MODE_HEATING 0x01
+def THERMOSTAT_OPERATING_STATE_MODE_COOLING 0x02
+def THERMOSTAT_OPERATING_STATE_MODE_FAN_ONLY 0x03
+def THERMOSTAT_OPERATING_STATE_MODE_PENDING_HEAT 0x04
+def THERMOSTAT_OPERATING_STATE_MODE_PENDING_COOL 0x05
+def THERMOSTAT_OPERATING_STATE_MODE_VENT_ECONOMIZER 0x06
+def THERMOSTAT_OPERATING_STATE_MODE_AUX_HEATING 0x07
+def THERMOSTAT_OPERATING_STATE_MODE_2ND_STAGE_HEATING 0x08
+def THERMOSTAT_OPERATING_STATE_MODE_2ND_STAGE_COOLING 0x09
+def THERMOSTAT_OPERATING_STATE_MODE_2ND_AUX_HEAT 0x0A
+def THERMOSTAT_OPERATING_STATE_MODE_3RD_AUX_HEAT 0x0B
+// ZCL
+def ZCL_THERMOSTAT_RUNNING_STATE_HEAT_ON 0x01
+def ZCL_THERMOSTAT_RUNNING_STATE_COOL_ON 0x02
+def ZCL_THERMOSTAT_RUNNING_STATE_FAN_ON 0x04
+def ZCL_THERMOSTAT_RUNNING_STATE_HEAT_SECOND_STAGE_ON 0x08
+def ZCL_THERMOSTAT_RUNNING_STATE_COOL_SECOND_STAGE_ON 0x10
+def ZCL_THERMOSTAT_RUNNING_STATE_FAN_SECOND_STAGE_ON 0x20
+def ZCL_THERMOSTAT_RUNNING_STATE_FAN_THIRD_STAGE_ON 0x40
+
+// Unify thermostat cluster
+def zb_ZWaveSystemMode     0xfd150001
+def zb_SupportedSystemMode 0xfd150002
+def zb_OperatingState      0xfd150003
+
+def thermostat_setpoint_supported (e'zwTHERMOSTAT_SUPPORTED_MODES)
+def no_thermostat_operating_state (e'zwTHERMOSTAT_OPERATING_STATE_MODE == 0)
 
 scope 0 {
-  // We map Setpoint setpoint_type 0x01 (HEATING) and 0x02 (COOLING)
-  // The Z-Wave units are converted into milli units, in ZigBee is should be
-  // deci-celsius.
-  // A value scale of 1 means fahrenheit
-
-  // Heating
-  r'zb_OccupiedHeatingSetpoint =
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0 )
-      (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE / 10)
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
-      (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE - 32000) * 5) / 90)
-      undefined
-
-  d'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE =
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0 )
-      (d'zb_OccupiedHeatingSetpoint*10)
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
-      (((d'zb_OccupiedHeatingSetpoint)*90) / 5 + 32000)
-      undefined
-
-  r'zb_MinHeatSetpointLimit =
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 0)
-      (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE / 10)
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 1)
-      (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MIN_VALUE - 32000) * 5) / 90)
-      undefined
-
-  r'zb_MaxHeatSetpointLimit =
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 0)
-      (r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE  / 10)
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 1)
-      (((r'zwTHERMOSTAT_SETPOINT_TYPE[1].zwTHERMOSTAT_SETPOINT_MAX_VALUE - 32000) * 5) / 90)
-      undefined
-
-  // Cooling
-  r'zb_OccupiedCoolingSetpoint =
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0)
-      (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE / 10 )
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1)
-      (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE - 32000) * 5) / 90)
-      undefined
-
-  r'zb_MinCoolSetpointLimit =
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 0)
-      (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE  / 10)
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE_SCALE == 1)
-      (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MIN_VALUE - 32000) * 5) / 90)
-      undefined
-
-  r'zb_MaxCoolSetpointLimit =
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 0)
-      (r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE  / 10)
-    if(r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE_SCALE == 1)
-      (((r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_MAX_VALUE - 32000) * 5) / 90)
-      undefined
-
-  d'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE =
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 0)
-      (d'zb_OccupiedCoolingSetpoint*10)
-    if( r'zwTHERMOSTAT_SETPOINT_TYPE[2].zwTHERMOSTAT_SETPOINT_VALUE_SCALE == 1 )
-      (((d'zb_OccupiedCoolingSetpoint)*90) / 5 + 32000)
-      undefined
-
   // Local Temperature
   r'zb_LocalTemperature =
     if(thermostat_setpoint_supported == 0) undefined
@@ -131,23 +90,48 @@ scope 0 {
 
 
   r'zb_SystemMode =
-    if (r'zwTHERMOSTAT_MODE == 0) 0
-    if (r'zwTHERMOSTAT_MODE == 1) 4
-    if (r'zwTHERMOSTAT_MODE == 2) 3
-    if (r'zwTHERMOSTAT_MODE == 3) 1
-    if (r'zwTHERMOSTAT_MODE == 6) 7
-    if (r'zwTHERMOSTAT_MODE == 8) 8
+    if (r'zwTHERMOSTAT_MODE == 0x00) 0x00
+    if (r'zwTHERMOSTAT_MODE == 0x01) 0x04
+    if (r'zwTHERMOSTAT_MODE == 0x02) 0x03
+    if (r'zwTHERMOSTAT_MODE == 0x03) 0x01
+    if (r'zwTHERMOSTAT_MODE == 0x04) 0x0A
+    if (r'zwTHERMOSTAT_MODE == 0x05) 0x0B
+    if (r'zwTHERMOSTAT_MODE == 0x06) 0x07 
+    if (r'zwTHERMOSTAT_MODE == 0x07) 0x0C
+    if (r'zwTHERMOSTAT_MODE == 0x08) 0x08
+    if (r'zwTHERMOSTAT_MODE == 0x09) 0x0D
+    if (r'zwTHERMOSTAT_MODE == 0x0A) 0x0E
+    if (r'zwTHERMOSTAT_MODE == 0x0B) 0x0F
+    if (r'zwTHERMOSTAT_MODE == 0x0C) 0x10
+    if (r'zwTHERMOSTAT_MODE == 0x0D) 0x11
+    if (r'zwTHERMOSTAT_MODE == 0x0F) 0x12
+    if (r'zwTHERMOSTAT_MODE == 0x1F) 0x13
     undefined
 
-  d'zwTHERMOSTAT_MODE =
-    if ( d'zb_SystemMode == 0) 0
-    if ( d'zb_SystemMode == 4) 1
-    if ( d'zb_SystemMode == 3) 2
-    if ( d'zb_SystemMode == 1) 3
-    if ( d'zb_SystemMode == 7) 6
-    if ( d'zb_SystemMode == 8) 8
+  r'zwTHERMOSTAT_MODE = 
+    if (r'zb_SystemMode == 0x00) 0x00
+    if (r'zb_SystemMode == 0x04) 0x01
+    if (r'zb_SystemMode == 0x03) 0x02
+    if (r'zb_SystemMode == 0x01) 0x03
+    if (r'zb_SystemMode == 0x0A) 0x04
+    if (r'zb_SystemMode == 0x0B) 0x05
+    if (r'zb_SystemMode == 0x07) 0x06
+    if (r'zb_SystemMode == 0x0C) 0x07
+    if (r'zb_SystemMode == 0x08) 0x08
+    if (r'zb_SystemMode == 0x0D) 0x09
+    if (r'zb_SystemMode == 0x0E) 0x0A
+    if (r'zb_SystemMode == 0x0F) 0x0B
+    if (r'zb_SystemMode == 0x10) 0x0C
+    if (r'zb_SystemMode == 0x11) 0x0D
+    if (r'zb_SystemMode == 0x12) 0x0F
+    if (r'zb_SystemMode == 0x13) 0x1F
     undefined
 
+  // Unify cluster is 1on 1 mapping
+  r'zb_ZWaveSystemMode = r'zwTHERMOSTAT_MODE
+  r'zwTHERMOSTAT_MODE = r'zb_ZWaveSystemMode
+
+  
   r'zb_ControlSequenceOfOperation =
     if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x06) 0x04
     if(((r'zwTHERMOSTAT_SUPPORTED_MODES) & 6) == 0x02) 0x02
@@ -252,4 +236,23 @@ scope 0 chain_reaction(0) {
   d'zb_ACCapacityFormat =
     if (r'zb_ACCapacityFormat != d'zb_ACCapacityFormat) r'zb_ACCapacityFormat
     undefined
+
+  // Thermostat Operating State
+  // UCL bindings
+  r'zb_ThermostatRunningState =
+    if (no_thermostat_operating_state) undefined
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_IDLE) 0x00
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_HEATING) ZCL_THERMOSTAT_RUNNING_STATE_HEAT_ON
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_COOLING) ZCL_THERMOSTAT_RUNNING_STATE_COOL_ON
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_FAN_ONLY) ZCL_THERMOSTAT_RUNNING_STATE_FAN_ON
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_2ND_STAGE_HEATING) ZCL_THERMOSTAT_RUNNING_STATE_HEAT_SECOND_STAGE_ON
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_2ND_STAGE_COOLING) ZCL_THERMOSTAT_RUNNING_STATE_COOL_SECOND_STAGE_ON
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_2ND_AUX_HEAT) ZCL_THERMOSTAT_RUNNING_STATE_FAN_SECOND_STAGE_ON
+    if (r'zwTHERMOSTAT_OPERATING_STATE_MODE == THERMOSTAT_OPERATING_STATE_MODE_3RD_AUX_HEAT) ZCL_THERMOSTAT_RUNNING_STATE_FAN_THIRD_STAGE_ON
+    undefined // Default state
+
+  // Custom cluster binding
+  r'zb_OperatingState = r'zwTHERMOSTAT_OPERATING_STATE_MODE
+
+  r'zb_SupportedSystemMode = r'zwTHERMOSTAT_SUPPORTED_MODES
 }

@@ -16,7 +16,7 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 /**
  * Refer to <GSDK>/protocol/zigbee/app/framework/plugin/network-creator/network-creator.h
@@ -32,9 +32,9 @@
  *
  *  @return Status of the commencement of the network creator process.
  */
-EmberStatus emberAfPluginNetworkCreatorStart(bool centralizedNetwork);
-EmberStatus emberAfPluginNetworkCreatorNetworkForm(bool centralizedNetwork,
-                                                   EmberPanId panId,
+sl_status_t sl_zigbee_af_network_creator_start(bool centralizedNetwork);
+sl_status_t sl_zigbee_af_network_creator_network_form(bool centralizedNetwork,
+                                                   sl_802154_pan_id_t panId,
                                                    int8_t radioTxPower,
                                                    uint8_t channel);
 

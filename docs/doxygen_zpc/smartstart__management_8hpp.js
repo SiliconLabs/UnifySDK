@@ -1,8 +1,8 @@
 var smartstart__management_8hpp =
 [
-    [ "Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ],
-    [ "Entry", "classsmartstart_1_1Entry.html", "classsmartstart_1_1Entry" ],
-    [ "Management", "classsmartstart_1_1Management.html", "classsmartstart_1_1Management" ],
+    [ "smartstart::Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ],
+    [ "smartstart::Entry", "classsmartstart_1_1Entry.html", "classsmartstart_1_1Entry" ],
+    [ "smartstart::Management", "classsmartstart_1_1Management.html", "classsmartstart_1_1Management" ],
     [ "notification_function_t", "smartstart__management_8hpp.html#adff5df4315ba845db07eefe7cbdda6a4", null ],
     [ "QueryValue", "smartstart__management_8hpp.html#aefc1b5969139cb011494df6c1bed1399", null ],
     [ "QueryKey", "smartstart__management_8hpp.html#a30905b6ddd0b73b0a63205eb26c99a95", [

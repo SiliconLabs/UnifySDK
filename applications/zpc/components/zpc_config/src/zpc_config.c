@@ -100,6 +100,7 @@ int zpc_config_init()
   status |= config_add_string(ZPC_RF_REGION,
                               "Z-Wave RF region setting"
                               "\n  EU: Europe"
+                              "\n  EU_LR: EU Long Range"
                               "\n  US: US"
                               "\n  US_LR: US Long Range"
                               "\n  ANZ:Australia / New Zealand"

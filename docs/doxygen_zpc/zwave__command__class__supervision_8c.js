@@ -7,6 +7,7 @@ var zwave__command__class__supervision_8c =
     [ "zwave_command_class_supervision_handle_supervision_report", "zwave__command__class__supervision_8c.html#a033177d7c253b3c99982f2a591dd1180", null ],
     [ "zwave_command_class_supervision_init", "group__zwave__command__class__supervision__handler.html#gaeaff3d9d85a38b52f67f91ea41163a72", null ],
     [ "zwave_command_class_supervision_on_send_data_complete", "zwave__command__class__supervision_8c.html#aace8983e67aecb69a062967f18389354", null ],
+    [ "zwave_command_class_supervision_on_version_attribute_update", "zwave__command__class__supervision_8c.html#a5cc064447d9d4b68e4e121b2298d3876", null ],
     [ "zwave_command_class_supervision_send_data", "group__zwave__command__class__supervision__handler.html#ga42cb4c65214e0c6b70f4b149a3e18fd9", null ],
     [ "zwave_command_class_supervision_stop_wake_on_demand", "group__zwave__command__class__supervision__handler.html#ga1582379f42a7a36fb7c6c2c37a2a4cca", null ],
     [ "zwave_command_class_supervision_support_handler", "group__zwave__command__class__supervision__handler.html#ga7922aa17b16e759a72874c995c957071", null ],

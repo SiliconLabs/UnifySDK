@@ -4,7 +4,7 @@ var uic__mqtt_8c =
     [ "PROCESS", "uic__mqtt_8c.html#a3b67f679d03a6c45c5a9c4f4d800e2e6", null ],
     [ "PROCESS_THREAD", "uic__mqtt_8c.html#ae1b0bc6a321773fe74857fec0ececa0b", null ],
     [ "uic_mqtt_count_topics", "group__uic__mqtt.html#gafa197d6f8b9ede2cb582ebb82e3e3f1d", null ],
-    [ "uic_mqtt_get_client_id", "group__uic__mqtt.html#ga885170f068f59170b27f64308f875739", null ],
+    [ "uic_mqtt_get_client_id", "group__uic__mqtt.html#ga60bc9602681524eb1d4f8ba25956fd0e", null ],
     [ "uic_mqtt_is_connected_to_broker", "group__uic__mqtt.html#gaed0f45505344d3dafa4f826aa4e5438e", null ],
     [ "uic_mqtt_process_count_events", "uic__mqtt_8c.html#ada9ab8eed7846bce3d410140ada432e2", null ],
     [ "uic_mqtt_process_on_connect", "uic__mqtt_8c.html#a2d3087a6b8541d33376701af0e03476a", null ],

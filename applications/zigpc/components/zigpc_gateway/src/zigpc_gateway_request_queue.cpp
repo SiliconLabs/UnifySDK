@@ -19,8 +19,9 @@
 #include <string>
 
 // Shared Unify includes
+#include "../inc/sl_status.h"
 #include <sl_log.h>
-#include <sl_status.h>
+
 
 // Component includes
 #include "zigpc_gateway.h"
@@ -92,10 +93,10 @@ sl_status_t RequestQueue::dispatch(void)
     // Increase attempt count
     call->incrementSendAttempt();
 
-    EmberStatus ember_status = call->invoke();
+    sl_status_t ember_status = call->invoke();
 
     sl_log_level_t log_level = sl_log_level_t::SL_LOG_DEBUG;
-    if (ember_status == EMBER_MAX_MESSAGE_LIMIT_REACHED) {
+    if (ember_status == SL_STATUS_ZIGBEE_MAX_MESSAGE_LIMIT_REACHED) {
       // Handle case of too many in-flight messages
       log_level = sl_log_level_t::SL_LOG_WARNING;
       status    = SL_STATUS_TRANSMIT_BUSY;
@@ -103,14 +104,14 @@ sl_status_t RequestQueue::dispatch(void)
       // Do not send any messages for a few cycles
       this->defer_cycles += DEFER_CYCLES_MESSAGE_LIMIT_REACHED;
 
-    } else if (ember_status == EMBER_SUCCESS) {
+    } else if (ember_status == SL_STATUS_OK) {
       log_level = sl_log_level_t::SL_LOG_INFO;
       status    = SL_STATUS_OK;
       this->defer_cycles += DEFER_CYCLES_DEFAULT;
 
-    } else if ((ember_status == EMBER_NETWORK_DOWN)
-               || (ember_status == EZSP_NOT_CONNECTED)
-               || (ember_status == EZSP_ERROR_VERSION_NOT_SET)) {
+    } else if ((ember_status == SL_STATUS_NETWORK_DOWN)
+               || (ember_status == SL_ZIGBEE_EZSP_NOT_CONNECTED)
+               || (ember_status == SL_ZIGBEE_EZSP_ERROR_VERSION_NOT_SET)) {
       // Do not send any messages for some cycles to see if an NCP reset is pending
       this->defer_cycles = DEFER_CYCLES_LOST_CONNECTION;
       log_level          = sl_log_level_t::SL_LOG_WARNING;
@@ -143,14 +144,14 @@ NetworkInitRequest::NetworkInitRequest(void) :
   RequestQueue::Entry("Network Init")
 {}
 
-EmberStatus NetworkInitRequest::invoke(void)
+sl_status_t NetworkInitRequest::invoke(void)
 {
   
 
   const zigpc_config_t* config = zigpc_get_config();
 
   bool use_network_args = config->use_network_args;
-  EmberStatus status = EMBER_ERR_FATAL;
+  sl_status_t status = SL_STATUS_FAIL;
 
   if(use_network_args)
   {
@@ -168,8 +169,8 @@ EmberStatus NetworkInitRequest::invoke(void)
   }
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_GATEWAY "Network Init EmberAfStatus: 0x%X",
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_GATEWAY "Network Init sl_zigbee_af_status_t: 0x%X",
          status);
 
   return status;
@@ -181,15 +182,15 @@ DiscoverDeviceRequest::DiscoverDeviceRequest(const zigbee_eui64_t eui64) :
   std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
 }
 
-EmberStatus DiscoverDeviceRequest::invoke(void)
+sl_status_t DiscoverDeviceRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = zigbeeHostZdoActiveEndpointsRequest(eui64_le);
+  sl_status_t status = zigbeeHostZdoActiveEndpointsRequest(eui64_le);
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_EUI64 "Interview EmberAfStatus: 0x%X",
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_EUI64 "Interview sl_zigbee_af_status_t: 0x%X",
          zigbee_eui64_to_uint(this->eui64),
          status);
   return status;
@@ -202,16 +203,16 @@ DiscoverEndpointRequest::DiscoverEndpointRequest(
   std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
 }
 
-EmberStatus DiscoverEndpointRequest::invoke(void)
+sl_status_t DiscoverEndpointRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status
+  sl_status_t status
     = zigbeeHostZdoSimpleDescriptorRequest(eui64_le, endpoint_id);
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_EUI64_EP " Discover EmberAfStatus: 0x%X",
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_EUI64_EP " Discover sl_zigbee_af_status_t: 0x%X",
          zigbee_eui64_to_uint(this->eui64),
          status);
   return status;
@@ -223,15 +224,15 @@ DeviceRemoveRequest::DeviceRemoveRequest(const zigbee_eui64_t eui64) :
   std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
 }
 
-EmberStatus DeviceRemoveRequest::invoke(void)
+sl_status_t DeviceRemoveRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = zigbeeHostNetworkDeviceLeaveRequest(eui64_le);
+  sl_status_t status = zigbeeHostNetworkDeviceLeaveRequest(eui64_le);
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_EUI64 "Remove EmberAfStatus: 0x%X",
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_EUI64 "Remove sl_zigbee_af_status_t: 0x%X",
          zigbee_eui64_to_uint(this->eui64),
          status);
 
@@ -254,7 +255,7 @@ BindingRequestRequest::BindingRequestRequest(const zigbee_eui64_t source_eui64,
   std::copy(dest_eui64, dest_eui64 + sizeof(zigbee_eui64_t), this->dest_eui64);
 }
 
-EmberStatus BindingRequestRequest::invoke(void)
+sl_status_t BindingRequestRequest::invoke(void)
 {
   zigbee_eui64_t source_eui64_le;
   zigbee_eui64_copy_switch_endian(source_eui64_le, this->source_eui64);
@@ -262,7 +263,7 @@ EmberStatus BindingRequestRequest::invoke(void)
   zigbee_eui64_t dest_eui64_le;
   zigbee_eui64_copy_switch_endian(dest_eui64_le, this->dest_eui64);
   
-  EmberStatus status
+  sl_status_t status
     = zigbeeHostInitBinding(source_eui64_le,
                             this->source_endpoint_id,
                             this->cluster_id,
@@ -272,8 +273,8 @@ EmberStatus BindingRequestRequest::invoke(void)
                             this->is_binding_req);  //only unicast bindings for now
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_EUI64_EP_CLUSTER "Binding Request " LOG_PREFIX_EUI64_EP "EmberAfStatus: 0x%X",
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_EUI64_EP_CLUSTER "Binding Request " LOG_PREFIX_EUI64_EP "sl_zigbee_af_status_t: 0x%X",
          zigbee_eui64_to_uint(this->source_eui64),
          this->source_endpoint_id,
          this->cluster_id,
@@ -302,22 +303,22 @@ ZCLConfigureReportingRequest::ZCLConfigureReportingRequest(
             this->frame.buffer);
 }
 
-EmberStatus ZCLConfigureReportingRequest::invoke(void)
+sl_status_t ZCLConfigureReportingRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
 
   unsigned int report_size = static_cast<unsigned int>(this->frame.size);
-  EmberStatus status       = zigbeeHostInitReporting(eui64_le,
+  sl_status_t status       = zigbeeHostInitReporting(eui64_le,
                                                this->endpoint_id,
                                                this->cluster_id,
                                                this->frame.buffer,
                                                report_size);
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
          LOG_PREFIX_EUI64_EP_CLUSTER
-         "ZCL Configure Reporting EmberAfStatus: 0x%X",
+         "ZCL Configure Reporting sl_zigbee_af_status_t: 0x%X",
          zigbee_eui64_to_uint(this->eui64),
          this->endpoint_id,
          this->cluster_id,
@@ -339,29 +340,29 @@ ZCLFrameUnicastRequest::ZCLFrameUnicastRequest(const zigbee_eui64_t eui64,
   std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
 }
 
-EmberStatus ZCLFrameUnicastRequest::invoke(void)
+sl_status_t ZCLFrameUnicastRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = zigbeeHostFillZclFrame(this->frame.buffer,
+  sl_status_t status = zigbeeHostFillZclFrame(this->frame.buffer,
                                               this->frame.size,
                                               this->frame.offset_sequence_id);
 
-  if (status == EMBER_SUCCESS) {
+  if (status == SL_STATUS_OK) {
     status = zigbeeHostSendZclFrameUnicast(eui64_le,
                                            this->endpoint_id,
                                            this->cluster_id);
 
     sl_log(LOG_TAG,
-           (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_WARNING,
-           LOG_PREFIX_EUI64_EP_CLUSTER "ZCL frame send EmberAfStatus: 0x%X",
+           (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_WARNING,
+           LOG_PREFIX_EUI64_EP_CLUSTER "ZCL frame send sl_zigbee_af_status_t: 0x%X",
            zigbee_eui64_to_uint(this->eui64),
            this->endpoint_id,
            this->cluster_id,
            status);
   } else {
     sl_log_error(LOG_TAG,
-                 "Failed to fill ZCL frame to send unicast EmberAfStatus: 0x%X",
+                 "Failed to fill ZCL frame to send unicast sl_zigbee_af_status_t: 0x%X",
                  status);
   }
 
@@ -377,25 +378,25 @@ ZCLFrameMulticastRequest::ZCLFrameMulticastRequest(zigbee_group_id_t group_id,
   frame(frame)
 {}
 
-EmberStatus ZCLFrameMulticastRequest::invoke(void)
+sl_status_t ZCLFrameMulticastRequest::invoke(void)
 {
-  EmberStatus status = zigbeeHostFillZclFrame(this->frame.buffer,
+  sl_status_t status = zigbeeHostFillZclFrame(this->frame.buffer,
                                               this->frame.size,
                                               this->frame.offset_sequence_id);
 
-  if (status == EMBER_SUCCESS) {
+  if (status == SL_STATUS_OK) {
     status = zigbeeHostSendZclFrameMulticast(this->group_id, this->cluster_id);
 
     sl_log(LOG_TAG,
-           (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_WARNING,
-           LOG_PREFIX_GROUP_CLUSTER "ZCL frame send EmberAfStatus: 0x%X",
+           (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_WARNING,
+           LOG_PREFIX_GROUP_CLUSTER "ZCL frame send sl_zigbee_af_status_t: 0x%X",
            this->group_id,
            this->cluster_id,
            status);
   } else {
     sl_log_error(
       LOG_TAG,
-      "Failed to fill ZCL frame to send as multicast EmberAfStatus: 0x%X",
+      "Failed to fill ZCL frame to send as multicast sl_zigbee_af_status_t: 0x%X",
       status);
   }
 
@@ -406,13 +407,13 @@ AddOTAImageRequest::AddOTAImageRequest(std::string &filename) :
   RequestQueue::Entry("Add OTA Image"), filename(filename)
 {}
 
-EmberStatus AddOTAImageRequest::invoke(void)
+sl_status_t AddOTAImageRequest::invoke(void)
 {
-  EmberStatus status = zigbeeHostAddOtaImage(this->filename.c_str());
+  sl_status_t status = zigbeeHostAddOtaImage(this->filename.c_str());
 
   sl_log(LOG_TAG,
-         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
-         LOG_PREFIX_GATEWAY "Add OTA Image [%s] EmberAfStatus: 0x%X",
+         (status == SL_STATUS_OK) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_GATEWAY "Add OTA Image [%s] sl_zigbee_af_status_t: 0x%X",
          this->filename.c_str(),
          status);
 

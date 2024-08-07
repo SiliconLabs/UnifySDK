@@ -11,7 +11,6 @@ target_include_directories(
 target_link_libraries(
   zigpc_ota_zigbee
   PRIVATE zigpc_common
-          zigpc_controller
           zigpc_datastore
           zigpc_gateway
           zigpc_zcl_util

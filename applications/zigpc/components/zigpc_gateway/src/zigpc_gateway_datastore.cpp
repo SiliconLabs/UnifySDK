@@ -58,9 +58,9 @@ sl_status_t zigpc_gateway_load_address_table_info(void)
   }
 
   for (size_t i = 0; (status == SL_STATUS_OK) && (i < mappings.size()); i++) {
-    EmberStatus em_status
+    sl_status_t em_status
       = zigbeeHostAddAddressTableEntry(mappings[i].eui64, mappings[i].node_id);
-    if (em_status != EMBER_SUCCESS) {
+    if (em_status != SL_STATUS_OK) {
       status = SL_STATUS_NO_MORE_RESOURCE;
       sl_log_error(LOG_TAG,
                    "EmberAf address-table full. NCP address-table capacity "
@@ -86,12 +86,12 @@ sl_status_t zigpc_gateway_persist_address_table_info(void)
     if (status == SL_STATUS_OK) {
       zigbee_eui64_copy_switch_endian(dev_id.eui64, eui64);
 
-      EmberNodeId node_id = 0;
+      sl_802154_short_addr_t node_id = 0;
 
-      EmberStatus em_status
+      sl_status_t em_status
         = zigbeeHostGetAddressTableEntry(dev_id.eui64, &node_id);
-      if (em_status != EMBER_SUCCESS) {
-        node_id = EMBER_UNKNOWN_NODE_ID;
+      if (em_status != SL_STATUS_OK) {
+        node_id = SL_ZIGBEE_UNKNOWN_NODE_ID;
         sl_log_warning(LOG_TAG,
                        "EmberAf address-table entry cannot be read, setting "
                        "nodeId to 0x%04X",
@@ -106,7 +106,7 @@ sl_status_t zigpc_gateway_persist_address_table_info(void)
                  eui64_i,
                  dev_id.node_id);
 
-    // Persist NodeID even if it's set to EMBER_UNKNOWN_NODE_ID
+    // Persist NodeID even if it's set to SL_ZIGBEE_UNKNOWN_NODE_ID
     mappings.push_back(dev_id);
   }
 

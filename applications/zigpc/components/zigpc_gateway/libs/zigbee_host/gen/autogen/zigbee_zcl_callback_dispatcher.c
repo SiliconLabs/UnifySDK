@@ -27,23 +27,23 @@ void sli_zigbee_af_reset_attributes(uint8_t endpointId)
 }
 
 // Pre command received
-bool sli_zigbee_af_pre_command_received(EmberAfClusterCommand* cmd)
+bool sli_zigbee_af_pre_command_received(sl_zigbee_af_cluster_command_t* cmd)
 {
   return (
-emberAfPreCommandReceivedCallback(cmd)
+sl_zigbee_af_pre_command_received_cb(cmd)
 );
 }
 
 // Pre ZDO message received
-bool sli_zigbee_af_pre_zdo_message_received(EmberNodeId nodeId, EmberApsFrame* apsFrame, uint8_t* message, uint16_t length)
+bool sli_zigbee_af_pre_zdo_message_received(sl_802154_short_addr_t nodeId, sl_zigbee_aps_frame_t* apsFrame, uint8_t* message, uint16_t length)
 {
   return (
-emberAfPreZDOMessageReceivedCallback(nodeId, apsFrame, message, length)
+sl_zigbee_af_pre_zdo_message_received_cb(nodeId, apsFrame, message, length)
 );
 }
 
 // ZDO message received
-void sli_zigbee_af_zdo_message_received(EmberNodeId sender, EmberApsFrame* apsFrame, uint8_t* message, uint16_t length)
+void sli_zigbee_af_zdo_message_received(sl_802154_short_addr_t sender, sl_zigbee_aps_frame_t* apsFrame, uint8_t* message, uint16_t length)
 {
   (void)sender;
   (void)apsFrame;
@@ -53,7 +53,7 @@ void sli_zigbee_af_zdo_message_received(EmberNodeId sender, EmberApsFrame* apsFr
 }
 
 // Retrieve attribute and craft response
-bool sli_zigbee_af_retrieve_attribute_and_craft_response(uint8_t endpoint, EmberAfClusterId clusterId, EmberAfAttributeId attrId, uint8_t mask, uint16_t maunfacturerCode, uint16_t readLength)
+bool sli_zigbee_af_retrieve_attribute_and_craft_response(uint8_t endpoint, sl_zigbee_af_cluster_id_t clusterId, sl_zigbee_af_attribute_id_t attrId, uint8_t mask, uint16_t maunfacturerCode, uint16_t readLength)
 {
   (void)endpoint;
   (void)clusterId;
@@ -68,19 +68,19 @@ return (false
 }
 
 // Read attributes response
-bool sli_zigbee_af_read_attributes_response(EmberAfClusterId clusterId, uint8_t* buffer, uint16_t bufLen)
+bool sli_zigbee_af_read_attributes_response(sl_zigbee_af_cluster_id_t clusterId, uint8_t* buffer, uint16_t bufLen)
 {
   return (
-emberAfReadAttributesResponseCallback(clusterId, buffer, bufLen)
+sl_zigbee_af_read_attributes_response_cb(clusterId, buffer, bufLen)
 || emberAfReadAttributesResponseCallback(clusterId, buffer, bufLen)
 );
 }
 
 // Report attributes
-bool sli_zigbee_af_report_attributes(EmberAfClusterId clusterId, uint8_t * buffer, uint16_t bufLen)
+bool sli_zigbee_af_report_attributes(sl_zigbee_af_cluster_id_t clusterId, uint8_t * buffer, uint16_t bufLen)
 {
   return (
-emberAfReportAttributesCallback(clusterId, buffer, bufLen)
+sl_zigbee_af_report_attributes_cb(clusterId, buffer, bufLen)
 || emberAfReportAttributesCallback(clusterId, buffer, bufLen)
 );
 }

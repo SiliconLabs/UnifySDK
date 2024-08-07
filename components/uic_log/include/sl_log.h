@@ -74,6 +74,13 @@ typedef enum sl_log_level {
 void sl_log_set_level(sl_log_level_t level);
 
 /**
+ * @brief Get log level.
+ *
+ * @return log level
+ */
+sl_log_level_t sl_log_get_level();
+
+/**
  * @brief Set log level for a given tag.
  *
  * This level will override the log level set in \ref sl_log_set_level

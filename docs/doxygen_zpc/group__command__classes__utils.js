@@ -21,9 +21,11 @@ var group__command__classes__utils =
     [ "set_command_status_value", "group__command__classes__utils.html#ga9dfaa3aa52bb9b4ba3effc1d1480b1ea", null ],
     [ "set_reports_to_follow", "group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513", null ],
     [ "time_to_zwave_duration", "group__command__classes__utils.html#ga820213e01529b38b7641e9deac083073", null ],
+    [ "ucl_temperature_to_zwave_temperature", "group__command__classes__utils.html#gabd2008fbe499d4796b7fe2207dfe351f", null ],
     [ "zwave_command_class_get_endpoint_node", "group__command__classes__utils.html#gaff12f5d1f5b9eed08201efab5854190c", null ],
     [ "zwave_command_class_get_node_id_node", "group__command__classes__utils.html#ga180f34e00efb603c228dfd62eb14d316", null ],
     [ "zwave_command_class_get_version_from_node", "group__command__classes__utils.html#ga0d2a21af7db2d395401331ec806b1bd3", null ],
     [ "zwave_command_class_send_report", "group__command__classes__utils.html#ga9a9c99943bf863fde841149699d15593", null ],
-    [ "zwave_duration_to_time", "group__command__classes__utils.html#gacb7b8e51dfc36e8bac2676255441bf26", null ]
+    [ "zwave_duration_to_time", "group__command__classes__utils.html#gacb7b8e51dfc36e8bac2676255441bf26", null ],
+    [ "zwave_temperature_to_ucl_temperature", "group__command__classes__utils.html#gaa624d551edd5fc52766ed7f3f7425750", null ]
 ];

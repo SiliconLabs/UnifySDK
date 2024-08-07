@@ -16,18 +16,18 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
-#define EMBER_INSTALL_CODE_CRC_SIZE 2
+#define SL_ZIGBEE_INSTALL_CODE_CRC_SIZE 2
 
 /*  Refer to <GSDK>/protocol/zigbee/app/framework/security/af-security.h
     for more details.
 */
 
-EmberStatus sli_zigbee_af_install_code_to_key(uint8_t *installCode,  // includes CRC
+sl_status_t sli_zigbee_af_install_code_to_key(uint8_t *installCode,  // includes CRC
                                  uint8_t length,        // includes CRC length
-                                 EmberKeyData *key);
+                                 sl_zigbee_key_data_t *key);
 
-EmberStatus zaTrustCenterSetJoinPolicy(EmberJoinDecision decision);
+sl_status_t zaTrustCenterSetJoinPolicy(sl_zigbee_join_decision_t decision);
 
 #endif  // AF_SECURITY_H

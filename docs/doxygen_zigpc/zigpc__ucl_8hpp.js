@@ -1,6 +1,6 @@
 var zigpc__ucl_8hpp =
 [
-    [ "topic_data_t", "structzigpc__ucl_1_1mqtt_1_1topic__data__t.html", "structzigpc__ucl_1_1mqtt_1_1topic__data__t" ],
+    [ "zigpc_ucl::mqtt::topic_data_t", "structzigpc__ucl_1_1mqtt_1_1topic__data__t.html", "structzigpc__ucl_1_1mqtt_1_1topic__data__t" ],
     [ "topic_type_t", "zigpc__ucl_8hpp.html#a0ae3f2434936eef3e9855e9437c03292", [
       [ "BY_UNID_PC_NWMGMT", "zigpc__ucl_8hpp.html#a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c", null ],
       [ "BY_UNID_PC_NWMGMT_WRITE", "zigpc__ucl_8hpp.html#a0ae3f2434936eef3e9855e9437c03292a0cde6a64c24ecd02af7c7f7807b6a351", null ],

@@ -554,6 +554,74 @@ var zap_types_8h =
     [ "TSTAT_SCHEDULE_MODE_COOL_OFFSET", "group__zap.html#gacb2e10e6a7f74f6e9be01c568d605517", null ],
     [ "TSTAT_SCHEDULE_MODE_HEAT", "group__zap.html#ga98882997a2b7a8c24ad5dc3bad2db7b8", null ],
     [ "TSTAT_SCHEDULE_MODE_HEAT_OFFSET", "group__zap.html#ga27fecd5a7565e838bc0d1afa1aa66d8a", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_AUTO", "group__zap.html#ga36de7155cd48ce5c3682284bff2f385c", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_AUTO_HIGH", "group__zap.html#ga42eced31d883696d411232a4fc267850", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_AUTO_HIGH_OFFSET", "group__zap.html#ga91d97c1441a0c7fec72d96af00c89f4e", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_AUTO_MEDIUM", "group__zap.html#ga9c3b8f96c09320d403952234961b2ba2", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_AUTO_MEDIUM_OFFSET", "group__zap.html#gac60b54322d42679267375d0b04e20db0", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_AUTO_OFFSET", "group__zap.html#ga90586d26f9df3877db2fbf8daf43285f", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_CIRCULATION", "group__zap.html#ga1ba4a34f3a77227c8f3ffa2b4e676c02", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_CIRCULATION_OFFSET", "group__zap.html#ga5434c752c1be6be8d9f82ec608c243e1", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_EXTERNAL_CIRCULATION", "group__zap.html#ga053545b3593a7e6179256c488cbbcfa4", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_EXTERNAL_CIRCULATION_OFFSET", "group__zap.html#ga7b5625b83443bb2f7d9d07417c054e20", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_HIGH", "group__zap.html#ga8bbb4beb2ca00f09b78e4b650c84e77d", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_HIGH_OFFSET", "group__zap.html#ga165ede5915a1897045e57640198e37f8", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_HUMIDITY_CIRCULATION", "group__zap.html#gab0d0376993017e64112785e70c374a42", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_HUMIDITY_CIRCULATION_OFFSET", "group__zap.html#ga2964cdef0e3972633cea15d542f8cb49", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_LEFT_RIGHT", "group__zap.html#ga3bafc32b8560796966d857ac97525fac", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_LEFT_RIGHT_OFFSET", "group__zap.html#ga5a4cd4c899006635fd65313c1bdfc775", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_LOW", "group__zap.html#gac31b40a6897a34bb35e7a733d30fef0d", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_LOW_OFFSET", "group__zap.html#gab75e0c48b9ec0ce9a111bf5ed4f15a36", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_MEDIUM", "group__zap.html#ga2eccc9b706259ac4049df6fbe6a08bb1", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_MEDIUM_OFFSET", "group__zap.html#ga7ed3b67122e05cfc026f5d0ca68ff426", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_QUIET", "group__zap.html#ga80a57c0c271e0b6c947b834f7889a464", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_QUIET_OFFSET", "group__zap.html#ga67a6514db99e2188a09429537f402099", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_UP_DOWN", "group__zap.html#ga12b3691de7759b1cd1502704e425dc19", null ],
+    [ "UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_UP_DOWN_OFFSET", "group__zap.html#ga7476038176e97a1866ba6cb1101a14cc", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_AUTO", "group__zap.html#gafbb2c080a5813390490affa87ca4a846", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_AUTO_OFFSET", "group__zap.html#ga573c947c26ba6059f183ebb16b997894", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_DEHUMIDIFY", "group__zap.html#ga163caf6a9ac9a971c0105997a4bd4e80", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_DEHUMIDIFY_OFFSET", "group__zap.html#ga6da3e3d49592e0e472c7faae439c1695", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_HUMIDIFY", "group__zap.html#ga32861d88affcafde222003781b3a3b57", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_HUMIDIFY_OFFSET", "group__zap.html#ga37c45f785ec2948e8678f395fdbedf38", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_AUTO", "group__zap.html#ga57fe292687c5062f7801a0896e6cdfab", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_AUTO_OFFSET", "group__zap.html#ga3a5edb333ccf30dd8e616b17b02438e9", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_DEHUMIDIFIER", "group__zap.html#gaf70d5553b6428f1f41abaa22236015ad", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_DEHUMIDIFIER_OFFSET", "group__zap.html#gad42ae17dd55c55319fd63a1f2d1f119c", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_HUMIDIFIER", "group__zap.html#gaa7bc71cc953ba5277b5be1fb0e56e4e7", null ],
+    [ "UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_HUMIDIFIER_OFFSET", "group__zap.html#ga24600c97566855f18b1c009f8081695c", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AUTO", "group__zap.html#ga72712f00eb004618573032f7a3aa3b09", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AUTO_CHANGEOVER", "group__zap.html#ga7c1d8724de437f90495a66c94e54d9b5", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AUTO_CHANGEOVER_OFFSET", "group__zap.html#ga89da569e1002c79b65e6cdc475efaf3e", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AUTO_OFFSET", "group__zap.html#ga3fbe1e7fd56780aec11dff018b651585", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AUXILIARY", "group__zap.html#ga57cea756a38864ffd5cf6e66b35e7049", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AUXILIARY_OFFSET", "group__zap.html#ga9b9b1b15009f053f8d038362338d816f", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AWAY", "group__zap.html#ga2cbc343278cd0655665c5d9a44ab8e6d", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_AWAY_OFFSET", "group__zap.html#ga9518ef9562a599da69691044e0cfdd47", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_COOL", "group__zap.html#gadbe82165b33a8bf62d092906a9b3d583", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_COOL_OFFSET", "group__zap.html#ga5330e050aa5e5f62c17105a0fff8fca5", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_DRY", "group__zap.html#ga5d281d6f17a1b053bf932fa275bc628a", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_DRY_OFFSET", "group__zap.html#ga11fb5b1ac921e47a5195a8ba75353635", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENERGY_COOL", "group__zap.html#gaaadde33ad18129ebf1d52ebc2ba547ff", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENERGY_COOL_OFFSET", "group__zap.html#gaa07ddf4a393041f7ccec75c822627b16", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENERGY_HEAT", "group__zap.html#ga0e1925232c202c100e29b6e6f514fe4e", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENERGY_HEAT_OFFSET", "group__zap.html#ga8564329d22fc76212a2d884cc7cdc9ec", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_FAN", "group__zap.html#ga966cbbc2709f3d2410f3cd8b06e308f9", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_FAN_OFFSET", "group__zap.html#gac8a7f376f5a54fafab562ec713d6eec8", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_FULL_POWER", "group__zap.html#gafb6158f01d112e4e99ac20a1dc39ab06", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_FULL_POWER_OFFSET", "group__zap.html#gac6839594d1089c2c684e4259df368997", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_FURNACE", "group__zap.html#ga729408a77d8cfd33c9758cea7b10edbb", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_FURNACE_OFFSET", "group__zap.html#gac8c92fbd3a101d5f7a33d2f8c4e81f4e", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_HEAT", "group__zap.html#ga47023e7d2a45389f4df6cf6c1891ad9f", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_HEAT_OFFSET", "group__zap.html#gafacce0b243d19120843dc299e5676c91", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_MANUFACTURER_SPECIFIC", "group__zap.html#ga9d634301809b2a0d745a67a327cd969f", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_MANUFACTURER_SPECIFIC_OFFSET", "group__zap.html#ga8384701a58e8cc32ec7f572d495bbd6b", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_MOIST", "group__zap.html#ga0c7d781b28f0685f2473e7a7f5bd9e43", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_MOIST_OFFSET", "group__zap.html#ga1429007a500de1558620af804b7f8f12", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_OFF", "group__zap.html#ga6e14cdcc287988d011f0ae33398043bf", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_OFF_OFFSET", "group__zap.html#ga097e10a80f32628be2fa724d193612cf", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_RESUME", "group__zap.html#gad467a6528b44b904c204453681196a5b", null ],
+    [ "UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_RESUME_OFFSET", "group__zap.html#gafc4139eac59095c5ce105ad339a94091", null ],
     [ "WINDOW_COVERING_CONFIG_OR_STATUS_LIFT_CLOSED_LOOP", "group__zap.html#ga0fff4324d8cc74780a932bca51fda852", null ],
     [ "WINDOW_COVERING_CONFIG_OR_STATUS_LIFT_CLOSED_LOOP_OFFSET", "group__zap.html#ga82c7eebd854a95aa9c9e827577e5c370", null ],
     [ "WINDOW_COVERING_CONFIG_OR_STATUS_LIFT_ENCODER_CONTROLLED", "group__zap.html#ga62937bd3b8feed4bf7278869aece51ab", null ],
@@ -844,8 +912,8 @@ var zap_types_8h =
       [ "ZCL_BYPASS_RESPONSE_ZONE_ID_BYPASS_RESULT_INVALID_ARM_DISARM_CODE", "group__zap.html#ggac7333edb654ee11b168cea5fbab852edaba271156820e1366e48c960a07d61c3c", null ]
     ] ],
     [ "CCColorLoopDirection", "group__zap.html#ga49306e0139202d04ab9da1340659d462", [
-      [ "ZCL_CC_COLOR_LOOP_DIRECTION_DECREMENT_ENHANCED_CURRENT_HUE", "group__zap.html#gga49306e0139202d04ab9da1340659d462a3aa705fb036483081d2a1f008349bf89", null ],
-      [ "ZCL_CC_COLOR_LOOP_DIRECTION_INCREMENT_ENHANCED_CURRENT_HUE", "group__zap.html#gga49306e0139202d04ab9da1340659d462aa618bc5277d65d0f562c99da9bc8e0b0", null ]
+      [ "ZCL_CC_COLOR_LOOP_DIRECTION_COLOR_LOOP_HUE_DECREMENT", "group__zap.html#gga49306e0139202d04ab9da1340659d462a745778430edb116325ee3d42203ecdea", null ],
+      [ "ZCL_CC_COLOR_LOOP_DIRECTION_COLOR_LOOP_HUE_INCREMENT", "group__zap.html#gga49306e0139202d04ab9da1340659d462ad41bc5cbcb7730f4b5b78ec487e36f1e", null ]
     ] ],
     [ "CCDirection", "group__zap.html#ga9ddd5dd3fe2f9b1b2ef5b66addfa785a", [
       [ "ZCL_CC_DIRECTION_SHORTEST_DISTANCE", "group__zap.html#gga9ddd5dd3fe2f9b1b2ef5b66addfa785aa20026d012877833a07e2a51972f2f438", null ],
@@ -865,6 +933,10 @@ var zap_types_8h =
     [ "ColorControlColorLoopActive", "group__zap.html#gac2862fd259aca782e2cf4cac9aecbe87", [
       [ "ZCL_COLOR_CONTROL_COLOR_LOOP_ACTIVE_COLOR_LOOP_INACTIVE", "group__zap.html#ggac2862fd259aca782e2cf4cac9aecbe87a7b2a8dfd67ac51b409335a4333a4b528", null ],
       [ "ZCL_COLOR_CONTROL_COLOR_LOOP_ACTIVE_COLOR_LOOP_ACTIVE", "group__zap.html#ggac2862fd259aca782e2cf4cac9aecbe87afdaef84e9a3795f9c4e6927fa4075789", null ]
+    ] ],
+    [ "ColorControlColorLoopDirection", "group__zap.html#ga0e13f09acbcb4bba7a1a1b287c92ce95", [
+      [ "ZCL_COLOR_CONTROL_COLOR_LOOP_DIRECTION_DECREMENT_ENHANCED_CURRENT_HUE", "group__zap.html#gga0e13f09acbcb4bba7a1a1b287c92ce95ab7ac239126ed7168d354aab6ba4525f2", null ],
+      [ "ZCL_COLOR_CONTROL_COLOR_LOOP_DIRECTION_INCREMENT_ENHANCED_CURRENT_HUE", "group__zap.html#gga0e13f09acbcb4bba7a1a1b287c92ce95a190db95d69bef41f96521b925cd1e010", null ]
     ] ],
     [ "ColorControlColorMode", "group__zap.html#ga5239853b2dc69399009569d3170f345f", [
       [ "ZCL_COLOR_CONTROL_COLOR_MODE_CURRENT_HUE_AND_CURRENT_SATURATION", "group__zap.html#gga5239853b2dc69399009569d3170f345fa855343be8388ae8667334fbb5342859c", null ],
@@ -1241,6 +1313,12 @@ var zap_types_8h =
       [ "ZCL_METERING_UNITOF_MEASURE_UNITLESS", "group__zap.html#gga4cc3bfb58de4cc9d514e4e94bb26fe44abc26dde8823ca630333e7015a7f2d474", null ],
       [ "ZCL_METERING_UNITOF_MEASURE_MEGA_JOULE_MEGA_JOULE_PER_SECOND", "group__zap.html#gga4cc3bfb58de4cc9d514e4e94bb26fe44acd701b61ef11c85600fcbcb3b59f7445", null ]
     ] ],
+    [ "ModeType", "group__zap.html#gaffedf11c575f5d8463807348d4f7f71b", [
+      [ "ZCL_MODE_TYPE_OFF", "group__zap.html#ggaffedf11c575f5d8463807348d4f7f71baab2539ee4372434106dfa984157579bf", null ],
+      [ "ZCL_MODE_TYPE_HUMIDIFY", "group__zap.html#ggaffedf11c575f5d8463807348d4f7f71bad25de52d18b80ba23145863ba7ecb18d", null ],
+      [ "ZCL_MODE_TYPE_DEHUMIDIFY", "group__zap.html#ggaffedf11c575f5d8463807348d4f7f71baec288b90fc00ab5735a21cbab78dab8c", null ],
+      [ "ZCL_MODE_TYPE_AUTO", "group__zap.html#ggaffedf11c575f5d8463807348d4f7f71ba21e2342ff15a0cf3a21e642e2eb9e939", null ]
+    ] ],
     [ "MoveStepMode", "group__zap.html#ga7139e99388eabd38b98c3014c9efdb06", [
       [ "ZCL_MOVE_STEP_MODE_UP", "group__zap.html#gga7139e99388eabd38b98c3014c9efdb06a72034ccaf0324143dc640e88df5520a0", null ],
       [ "ZCL_MOVE_STEP_MODE_DOWN", "group__zap.html#gga7139e99388eabd38b98c3014c9efdb06a84ebdcf284146381ada1a60b216db400", null ]
@@ -1373,10 +1451,19 @@ var zap_types_8h =
       [ "ZCL_PUMP_OPERATION_MODE_MAXIMUM", "group__zap.html#ggac7aa3d6d0567bec28223460b3a89a422a118738f872548d20d42675058e30ed52", null ],
       [ "ZCL_PUMP_OPERATION_MODE_LOCAL", "group__zap.html#ggac7aa3d6d0567bec28223460b3a89a422ab0cd5f9f3eb3c56d94b388baf52c42a1", null ]
     ] ],
+    [ "ScaleType", "group__zap.html#gaa4056483f16ca76a5fc35a129a3a16da", [
+      [ "ZCL_SCALE_TYPE_PERCENTAGE", "group__zap.html#ggaa4056483f16ca76a5fc35a129a3a16daa995229ca18923da56213357e3af76e82", null ],
+      [ "ZCL_SCALE_TYPE_ABSOLUTE", "group__zap.html#ggaa4056483f16ca76a5fc35a129a3a16daa114e67babb83fbfd870ecfb1f67c3836", null ]
+    ] ],
     [ "SetpointRaiseOrLowerMode", "group__zap.html#ga4e9b73c77f068834760711196178e947", [
       [ "ZCL_SETPOINT_RAISE_OR_LOWER_MODE_HEAT", "group__zap.html#gga4e9b73c77f068834760711196178e947a6ee7afd0c4ae472d6092715c9a978071", null ],
       [ "ZCL_SETPOINT_RAISE_OR_LOWER_MODE_COOL", "group__zap.html#gga4e9b73c77f068834760711196178e947a7d4f9b218e0f7a91ad0eadece190330a", null ],
       [ "ZCL_SETPOINT_RAISE_OR_LOWER_MODE_BOTH", "group__zap.html#gga4e9b73c77f068834760711196178e947a3c7a22a08d647c011ac8da1fe6962eba", null ]
+    ] ],
+    [ "SetpointType", "group__zap.html#gaab600c5a827c4d7d2b63c4344488eda5", [
+      [ "ZCL_SETPOINT_TYPE_HUMIDIFIER", "group__zap.html#ggaab600c5a827c4d7d2b63c4344488eda5a2862e0e633612df70b088f8dd018bae2", null ],
+      [ "ZCL_SETPOINT_TYPE_DEHUMIDIFIER", "group__zap.html#ggaab600c5a827c4d7d2b63c4344488eda5ac271a005acaaeb1a2f3ef3ffe8492769", null ],
+      [ "ZCL_SETPOINT_TYPE_AUTO", "group__zap.html#ggaab600c5a827c4d7d2b63c4344488eda5a0a4348013c684728c89bdb20088ac810", null ]
     ] ],
     [ "ShadeConfigurationMode", "group__zap.html#ga47968ec174b0b5952a61fef5adb9bf0e", [
       [ "ZCL_SHADE_CONFIGURATION_MODE_NORMAL", "group__zap.html#gga47968ec174b0b5952a61fef5adb9bf0ea682126fafe4b19e20d4fcc7ea96a3c74", null ],
@@ -1510,6 +1597,43 @@ var zap_types_8h =
       [ "ZCL_TX_REPORT_TRANSMISSION_SPEED_OTHER", "group__zap.html#ggab460f02f4bd631e0750c910b09928b90a0eb04f1665ffdb49dd7c8e29f860b024", null ],
       [ "ZCL_TX_REPORT_TRANSMISSION_SPEED_UNKNOWN", "group__zap.html#ggab460f02f4bd631e0750c910b09928b90ae8d36ecf69f166182ae974775aad6f43", null ]
     ] ],
+    [ "UnifyHumidityControlCurrentState", "group__zap.html#ga03ef97d68c9a434a627fa7ff34f2dab7", [
+      [ "ZCL_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_IDLE", "group__zap.html#gga03ef97d68c9a434a627fa7ff34f2dab7a9244bdba2e19dbbfb83cd8fd40b68189", null ],
+      [ "ZCL_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_HUMIDIFYING", "group__zap.html#gga03ef97d68c9a434a627fa7ff34f2dab7aec95baedf0f44f79b3c84e478e9587ad", null ],
+      [ "ZCL_UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_DEHUMIDIFYING", "group__zap.html#gga03ef97d68c9a434a627fa7ff34f2dab7adc7e1bbbf8c2fc7bfa6b901923dfbe66", null ]
+    ] ],
+    [ "UnifyThermostatOperatingState", "group__zap.html#gaae817126b3dcdc4403e0bb71758a2460", [
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_OFF", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a98844ec0857722e9588636302d2450dc", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_HEATING", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a6d5a61ef99012425d7936ec162f09825", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_COOLING", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460ac7a10379928228a2af7acf10daa41778", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_FAN_ONLY", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a5c315ca40653c0fb0aaab7951844c665", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_PENDING_HEAT", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a3980d510e6f05ab6610a1d918aac88e0", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_PENDING_COOL", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a82a0f484792d9c2e3dee972cf593ea86", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_VENT_ECONOMIZER", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460aad34626bcd41d1c68e7c5afe0549ae4b", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_AUX_HEATING", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460ae769c530084c82becdbe28a93478bc05", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_2ND_STAGE_HEATING", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460ad7a3df7deb87d550830808fdeb2924e9", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_2ND_STAGE_COOLING", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a4886e4b1fabc155c0e32aeeaed008767", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_2ND_STAGE_AUX_HEAT", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a2b5e52c89e83293fc0adc2faa3e6fefd", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_OPERATING_STATE_3RD_STAGE_AUX_HEAT", "group__zap.html#ggaae817126b3dcdc4403e0bb71758a2460a155c1d6e252dbee1845d8b4d2478962b", null ]
+    ] ],
+    [ "UnifyThermostatThermostatMode", "group__zap.html#ga5c465ae8b44bb1fca0e6e40a07f10a19", [
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_OFF", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19af8504ba826745a1a1787ec36b12c24cf", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_HEAT", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a556b67b10d86998ef66a8342ea42d3e0", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_COOL", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a655aa0950897b0fb7812bedd65e2b261", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_AUTO", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a590345e67ba4f6a3014c4c3355002871", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_AUXILIARY", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a80ec9a742cdac71b1e575fa102d3aa40", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_RESUME", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a6120e71c0c60a45ba28d45230296f432", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_FAN", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a0936a8a7925d70b972e9201908116c8f", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_FURNACE", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a727bbe806d3f009a34f5675c892765f8", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_DRY", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a7297ab90513a98ac8cf6cd08eb139257", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_MOIST", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19abb2531d2c95f5d475d0394967170d035", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_AUTO_CHANGEOVER", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a7f55e8b3c70df220398e79da8aa6fca9", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENERGY_HEAT", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a158eba420afbf90b830bedb5699d3a9b", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENERGY_COOL", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a6c666c8c8e1f5bf6c8fcf93048eac40c", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_AWAY", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19a0bb44380c7afb83ba2b467c91dc0d101", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_FULL_POWER", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19adfb4fad3990ef6b43912d70ea04f91ef", null ],
+      [ "ZCL_UNIFY_THERMOSTAT_THERMOSTAT_MODE_MANUFACTURER_SPECIFIC", "group__zap.html#gga5c465ae8b44bb1fca0e6e40a07f10a19af47b96a709df67bc5d49c10d00407f55", null ]
+    ] ],
     [ "WindowCoveringWindowCoveringType", "group__zap.html#ga1c2c15a01e1865ed963d376f77be646e", [
       [ "ZCL_WINDOW_COVERING_WINDOW_COVERING_TYPE_ROLLERSHADE", "group__zap.html#gga1c2c15a01e1865ed963d376f77be646eae8f5f929e671bc6b65da0c9b4e6275ad", null ],
       [ "ZCL_WINDOW_COVERING_WINDOW_COVERING_TYPE_ROLLERSHADE2_MOTOR", "group__zap.html#gga1c2c15a01e1865ed963d376f77be646eacb77b2ca88e754148df26d095dc6d849", null ],
@@ -1623,5 +1747,30 @@ var zap_types_8h =
       [ "ZCL_ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_NOT_SUPPORTED", "group__zap.html#ggaee9ef9d030889a09761ffc9ba4e7059faa060243feeeb22bd810acd56e587ba23", null ],
       [ "ZCL_ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_NO_ENROLL_PERMIT", "group__zap.html#ggaee9ef9d030889a09761ffc9ba4e7059fa7e8be1d286f633e5f550cb585c93cfd6", null ],
       [ "ZCL_ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_TOO_MANY_ZONES", "group__zap.html#ggaee9ef9d030889a09761ffc9ba4e7059faf738ecda4aa79a427530452195e847b2", null ]
+    ] ],
+    [ "ZWaveFanModeEnum", "group__zap.html#ga27b9aba1673e3455c50eb59cf046a95f", [
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_AUTO", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fa801b1ef1d614b3a71bf4396b280589e3", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_LOW", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fa1a09f3cb80ba1acf65246da00c9ad210", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_AUTO_HIGH", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fad500cf1155c68408aa1eb3547107cf4a", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_HIGH", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fa9763e948c9a8c0189f690aeac52ed23e", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_AUTO_MEDIUM", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fade2c56319cab6cf407aee60ada36df14", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_MEDIUM", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fa0a5f12d63bfa478cb3565edb436e61b3", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_CIRCULATION", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fa1e0dea5a1489f644e5a4696f6cb189bc", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_HUMIDITY_CIRCULATION", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fa4b3f4bc93eeccc9161bcb579c3ba703f", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_LEFT_RIGHT", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95faef7682b2118a4bc2d9f3784382489e51", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_UP_DOWN", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95faab4f03203a377edf9788bddedafc14b4", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_QUIET", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fafb80ed27048b9e4ee746953828b3e04f", null ],
+      [ "ZCL_Z_WAVE_FAN_MODE_ENUM_EXTERNAL_CIRCULATION", "group__zap.html#gga27b9aba1673e3455c50eb59cf046a95fad5980467c17f1e19aac601f919a2c722", null ]
+    ] ],
+    [ "ZWaveFanStateEnum", "group__zap.html#gab7534db59e924e1e1f61684c8f1a7ae0", [
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_IDLE", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0a703aed5c89801b8db5e0dbe456d6ad3b", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_RUNNING", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0ac320fc5c3df5b51b1bb1e1ddabd3b05d", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_RUNNING_HIGH", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0a5e5c23a54a1e37a66ea83ba15da35e66", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_RUNNING_MEDIUM", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0aa6f52470701f42ba37b30fb66f3e16d3", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_CIRCULATION", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0ab44b9af7724ee3ebcdcc48afa2627379", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_HUMIDITY_CIRCULATION", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0acdac2749da58b7bf2a748be69c53ed10", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_RIGHT_LEFT_CIRCULATION", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0aea33afb86236d278750ef87151a365e4", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_UP_DOWN_CIRCULATION", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0a9f108e84decf51709c522f0da1086610", null ],
+      [ "ZCL_Z_WAVE_FAN_STATE_ENUM_QUIET_CIRCULATION", "group__zap.html#ggab7534db59e924e1e1f61684c8f1a7ae0a53a03882e460dff0622f9ead9e8d942f", null ]
     ] ]
 ];

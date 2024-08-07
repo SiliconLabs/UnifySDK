@@ -46,7 +46,7 @@ online.
 
 The *Dockerfile*  in `docker/Dockerfile` supports building all target applications
 (protocol controllers, UPVL, Developer GUI, etc.).
-To build the Docker image with support for the 64-bit Bullseye reference platform, you can run:
+To build the Docker image with support for the 64-bit Bookworm reference platform, you can run:
 
 ``` bash
 ./docker/build_docker.sh arm64 uic_arm64
@@ -56,7 +56,7 @@ This will build the Unify toolchain docker images and name it *uic_arm64*.
 
 ### Cross Compiling for Raspberry Pi Using Docker
 
-> The Raspberry Pi build is supported by Raspberry Pi OS Bullseye 64-bit.
+> The Raspberry Pi build is supported by Raspberry Pi OS Bookworm 64-bit.
 
 To start a Docker container with a pre-configured build system, run the
 following command from the root of the Unify source directory

@@ -1,0 +1,431 @@
+@startuml ota_internal.svg
+title OTA download from image provider
+
+participant "OTA cache" as OTAC
+participant "OTA API" as API
+participant "Protocol controller" as PC
+participant "Image provider" as IP
+
+PC -> API: subscribe_unid(unid, uiid)
+
+alt If no unids listening to uiid
+API -> IP: Subscribe: ucl/OTA/info/uiid/all
+end
+API -> IP: Subscribe: ucl/OTA/info/uiid/unid
+API -> OTAC: unid listening to uiid
+alt #LightBlue specific unid available
+== image availability ==
+IP -> API: Publish: ucl/OTA/info/uiid/unid
+API -> OTAC: Cache image meta info for uiid/unid
+API -> PC: image_available_callback(meta_info)
+== image download ==
+PC -> API: get_by_unid(unid, uiid, image_ready_cb)
+alt #LightBlue image not cached
+API -> IP: Subscribe: ucl/OTA/data/uiid/unid
+API -> IP: Publish: ucl/OTA/info/uiid/unid/get
+alt #LightBlue image received
+IP -> API: Publish: image file data message
+API -> OTAC: Cache image file
+API -> PC: image_ready_cb(OK, filepath)
+else no image received
+API -> PC: image_ready_cb(ERROR, "")
+end
+API -> IP: Unsubscribe: ucl/OTA/data/uiid/unid
+else #LightBlue image cached
+API -> OTAC: get image filepath from cache
+OTAC -> API: image filepath
+API -> PC: image_ready_cb(OK, filepath)
+end
+
+else #LightGreen no specific unid available
+== image availability ==
+IP -> API: Publish: ucl/OTA/info/uiid/all
+API -> OTAC: Cache image meta info for uiid/all
+API -> OTAC: get_unids_listening_to_uiid()
+OTAC -> API: list of unids listening to the uiid
+loop #LightGreen for all unids listening to uiid
+API -> PC: image_available_callback(meta_info)
+== image download ==
+PC -> API: get_by_unid(unid, uiid, image_ready_cb)
+alt #LightGreen image not cached
+API -> IP: Subscribe: ucl/OTA/data/uiid/all
+API -> IP: Publish: ucl/OTA/info/uiid/all/get
+alt #LightGreen image received
+IP -> API: image file data message
+API -> OTAC: cache image file
+API -> PC: image_ready_cb(OK, filepath)
+else #LightGreen no image received
+API -> PC: image_ready_cb(ERROR, "")
+end
+API -> IP: Unsubscribe: ucl/OTA/data/uiid/all
+else #LightGreen image cached
+API -> OTAC: get image filepath from cache
+OTAC -> API: image filepath
+API -> PC: image_ready_cb(OK, filepath)
+end
+end
+end
+PC -> API: unsubscribe_unid(unid, uiid)
+API -> OTAC: remove unid listening to uiid
+API -> IP: Unsubscribe: ucl/OTA/info/uiid/unid
+alt If no more unids listening to uiid
+API -> IP: Unsubscribe: ucl/OTA/info/uiid/all
+end
+@enduml
+@startuml inline_umlgraph_1.svg
+class AttributeStoreRoot
+entity Network <<instance>> {
+  uint8_t search_key
+  ...network data...
+}
+entity Device_1 <<instance>> {
+  zigbee_eui64_t search_key
+  ...device data...
+}
+entity Device_2 <<instance>> {
+  zigbee_eui64_t search_key
+  ...device data...
+}
+entity Device_3 <<instance>> {
+  zigbee_eui64_t search_key
+  ...device data...
+}
+entity Endpoint_1_1 <<instance>> {
+  zigbee_endpoint_id_t search_key
+  ...endpoint data...
+}
+entity Endpoint_1_2 <<instance>> {
+  zigbee_endpoint_id_t search_key
+  ...endpoint data...
+}
+entity Endpoint_2_1 <<instance>> {
+  zigbee_endpoint_id_t search_key
+  ...endpoint data...
+}
+entity Endpoint_3_1 <<instance>> {
+  zigbee_endpoint_id_t search_key
+  ...endpoint data...
+}
+entity Endpoint_3_2 <<instance>> {
+  zigbee_endpoint_id_t search_key
+  ...endpoint data...
+}
+entity Endpoint_3_3 <<instance>> {
+  zigbee_endpoint_id_t search_key
+  ...endpoint data...
+}
+entity Cluster_1_1_x <<instance>> {
+  zcl_cluster_id_t search_key
+  ...cluster data...
+}
+entity Cluster_1_2_x <<instance>> {
+  zcl_cluster_id_t search_key
+  ...cluster data...
+}
+entity Cluster_2_1_x <<instance>> {
+  zcl_cluster_id_t search_key
+  ...cluster data...
+}
+entity Cluster_3_1_x <<instance>> {
+  zcl_cluster_id_t search_key
+  ...cluster data...
+}
+entity Cluster_3_2_x <<instance>> {
+  zcl_cluster_id_t search_key
+  ...cluster data...
+}
+entity Cluster_3_3_x <<instance>> {
+  zcl_cluster_id_t search_key
+  ...cluster data...
+}
+
+AttributeStoreRoot o-down- Network: 1..1
+Network o-down- Device_1
+Network o-down- Device_2
+Network o-down- Device_3
+Device_1 o-down- Endpoint_1_1
+Device_1 o-down- Endpoint_1_2
+Device_2 o-down- Endpoint_2_1
+Device_3 o-down- Endpoint_3_1
+Device_3 o-down- Endpoint_3_2
+Device_3 o-down- Endpoint_3_3
+Endpoint_1_1 o-down- Cluster_1_1_x
+Endpoint_1_2 o-down- Cluster_1_2_x
+Endpoint_2_1 o-down- Cluster_2_1_x
+Endpoint_3_1 o-down- Cluster_3_1_x
+Endpoint_3_2 o-down- Cluster_3_2_x
+Endpoint_3_3 o-down- Cluster_3_3_x
+@enduml
+@startuml inline_umlgraph_3.svg
+!pragma teoz true
+participant "Listener" as p_listener
+participant "Controller" as p_controller
+participant "ZigPC Discovery" as p_discovery
+participant "ZigPC Gateway" as p_gateway
+hide footbox
+title "ZigPC Discovery Behaviour"
+== Register p_listener (for all device updates) ==
+p_listener -> p_discovery: add_listener(listener_callback)
+== Start Interview with callback (for single device updates) ==
+p_controller -> p_discovery: interview_device(EUI64_X,controller_callback)
+...
+p_controller <- p_discovery: controller_callback(EUI64_X, DISCOVERY_START)
+p_listener <- p_discovery: listener_callback(EUI64_X, DISCOVERY_START)
+...
+note over p_discovery
+Discover endpoints under device
+end note
+p_discovery -> p_gateway: Send DiscoverDevice Request for EUI64_X
+...
+alt #pink DeviceDiscovery Timeout
+  p_controller <- p_discovery: controller_callback(EUI64_X, DEVICE_DISCOVERY_FAIL)
+  p_listener <- p_discovery: listener_callback(EUI64_X, DEVICE_DISCOVERY_FAIL)
+else #white
+  ...
+  p_discovery <- p_gateway: Receive DiscoverDevice Response for EUI64_X \n ActiveEndpointList: [1,2,3]
+  ...
+  loop for EP in ActiveEndpointList
+    ...
+    note over p_discovery
+    Discover clusters under EP sequentially
+    end note
+    p_discovery -> p_gateway: Send DiscoverEndpoint Request for EUI64_X::EP
+    ...
+    alt #pink EndpointDiscovery Timeout
+      p_controller <- p_discovery: controller_callback(EUI64_X, ENDPOINT_DISCOVERY_FAIL)
+      p_listener <- p_discovery: listener_callback(EUI64_X, ENDPOINT_DISCOVERY_FAIL)
+    else #white
+      ...
+      ...
+      p_discovery <- p_gateway: Receive EndpointDiscover Response for EUI64_X::EP \n {serverClusters: [1,4,6], clientClusters: [4]}
+    end alt
+  end loop
+
+  note over p_discovery
+  All Endpoints Discovered, Discovery Complete
+  end note
+  p_controller <- p_discovery: controller_callback(EUI64_X, DISCOVERY_SUCCESS)
+  p_listener <- p_discovery: listener_callback(EUI64_X, DISCOVERY_SUCCESS)
+end alt
+@enduml
+@startuml inline_umlgraph_5.svg
+hide footbox
+participant "Listener Component" as LC
+participant "ZigPC ZCL Command Parser" as CP
+participant "ZigPC Gateway" as GT
+
+=== Initialization ==
+CP -> GT : Setup notifications for incoming Commands from PAN nodes
+...
+LC -> CP: Register to receive Groups/AddGroupResponse command events
+... Time goes by ...
+
+=== ZCL Groups/AddGroupResponse Command Received from PAN node ==
+GT -> CP : Send Command data
+CP -> CP : Check cluster support
+alt Groups cluster not supported
+     CP -> GT: Send back ZCL_CLUSTER_NOT_SUPPORTED status
+else Groups cluster parsing supported by component
+     CP -> CP : Check Groups/AddGroupResponse support
+  alt Groups/AddGroupResponse not supported
+    CP -> GT: Send back ZCL_CLUSTER_COMMAND_NOT_SUPPORTED status
+  else Groups/AddGroupResponse parsing supported by component
+     CP -> CP: Parse payload for Groups/AddGroupResponse
+     CP -> CP: Find registered callbacks for Groups/AddGroupResponse
+      loop Groups/AddGroupResponse registered callbacks
+        CP -> LC: Invoke callback with Groups/AddGroupResponse data
+      end loop
+     CP -> GT: Send back ZCL_STATUS_SUCCESS status
+  end alt
+end alt
+@enduml
+@startuml inline_umlgraph_7.svg
+participant "MQTT" as mqtt
+participant "DotDot MQTT" as dotdot
+participant "OnOff Mapper" as onoff
+
+note over mqtt, onoff
+In this example only OnOff mappers are shown.
+But there should exist mappers for all supported ZCL Clusters.
+In addition only a selection of the supported commands for each of these mappers are shown here.
+end note
+=== Initialization ==
+onoff    -> dotdot: uic_mqtt_dotdot_on_off_on_callback_set(on_cb)
+onoff    -> dotdot: uic_mqtt_dotdot_on_off_off_callback_set(off_cb)
+onoff    -> dotdot: uic_mqtt_dotdot_set_on_off_write_attributes_callback(on_att_cb)
+
+note over dotdot: uic_mqtt_dotdot_init() is called
+
+dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/On", ...);
+dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/Off", ...);
+dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/WriteAttributes", ...)
+... ...
+note over onoff: An end device is added
+onoff -> dotdot:    uic_mqtt_dotdot_publish_supported_commands(unid, endpoint)
+dotdot -> onoff:    on_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK)
+dotdot -> onoff:    off_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK)
+
+note over dotdot, onoff
+When uic_mqtt_dotdot_publish_supported_commands is called,
+DotDot MQTT calls all registered OnOff command callback functions
+with UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+When the Command is supported by the unid/endpoint
+SL_STATUS_OK shall be returned, otherwise SL_STATUS_NOT_AVAILABLE.
+
+In this example both callbacks returns SL_STATUS_OK
+end note
+
+dotdot -> mqtt:     uic_mqtt_publish("ucl/by-unid/<unid>/ep<x>/OnOff/SupportedCommands", "[\"On\", \"Off\"]")
+... ...
+note over mqtt: IoT Service has published an OnOff/Commands/Off
+mqtt -> dotdot:     uic_mqtt_dotdot_on_on_off_off(topic, message)
+dotdot -> onoff:    on_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL)
+@enduml
+@startuml ota_image_listener_component.svg
+title OTA Image Listener component
+legend top
+<font color=#0039FB>MQTT Subscription</font>
+<font color=#2b3618>MQTT Unsubscribe</font>
+<font color=#00003C>Retained MQTT Publication</font>
+<font color=#6C2A0D>Unretained MQTT Publication</font>
+endlegend
+
+participant "Protocol Controller" as PC
+participant "OTA" as IL
+participant "MQTT Broker" as MQTT
+
+note over IL
+- 'image_available' callback with data containing meta data the newly available image.
+- 'image_base_path' path used to download the images to.
+- 'cache_size' defines the max amount of images to be cached by the ota component.
+- 'timeout' the time before a get function returns with result TIMEOUT
+end note
+PC-> IL: init(image_available, image_base_path, cache_size, timeout)
+note over IL: we have 2 ways to subscribe for images; 1. via uiid 2. via unid's (uiid, unid)
+PC->IL:subscribe_uiid(uiid)
+activate IL
+IL->MQTT:<font color=#0039FB>ucl/OTA/info/<UIID>/all</font>
+IL-->PC
+deactivate IL
+== node discovery ==
+loop for n nodes in the network
+note over IL
+The PC is responsible to obtian nodes and their corresponding fwk versioning info.
+Secondly, it needs to tell us when a node is not part of a network anymore.
+end note
+PC->IL:subscribe_unid(unid, uiid)
+activate IL
+IL->MQTT:<font color=#0039FB>ucl/OTA/info/<UIID>/<UNID></font>
+IL-->PC
+deactivate IL
+end
+...
+...
+note over MQTT: new image coming in!
+MQTT->IL: <font color=#00003C>ucl/OTA/info/<UIID>/all/+</font>
+activate IL
+IL->PC:image_available(uiid, unid, new_version, apply_after)
+deactivate IL
+note over PC: protocol controller decides to get the image
+PC->IL: get(uiid, image_ready_cb)
+activate IL
+IL->MQTT:<font color=#0039FB>ucl/OTA/data/<UIID></font>
+IL->MQTT:<font color=#6C2A0D>ucl/OTA/data/<UIID>/get</font>
+MQTT->IL:<font color=#6C2A0D>ucl/OTA/data/<UIID></font>
+IL->MQTT:<font color=#2b3618> ucl/OTA/data/<UIID></font>
+IL->PC: image_ready_cb(image_meta)
+deactivate IL
+
+...
+note over PC: protocol controller sends updates to the image_listener
+PC->IL: update_*status*(uiid, unid, endpoint, *status*)
+activate IL
+IL-> MQTT: <font color=#00003C>ucl/by-unid/<UNID>/OTA/<UIID>/+
+IL-->PC
+deactivate IL
+...
+
+PC->IL:unregister_unid(unid)
+activate IL
+IL-> MQTT: <font color=#00003C>ucl/by-unid/<UNID>/OTA/<UIID>/+
+deactivate IL
+PC->IL: unregister(uiid)
+PC->IL: clear_cache()
+@enduml
+@startuml inline_umlgraph_9.svg
+participant MQTT
+participant SmartStartManagement as SSM
+participant ProtocolControllerSmartStartManagement as PCSSM
+
+note over SSM: Init
+SSM         -> MQTT : Subscribe to <i>ucl/SmartStart/List</i>
+MQTT        -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+note over SSM       : Update smartstart_cache
+SSM         -> PCSSM: on_smartstart_state_changed()
+note over PCSSM : Enable/Disable Inclusion of SmartStart Devices
+... Time goes by ...
+group Node Added from ProtocolController
+  note over PCSSM   : Node added with SmartStart
+  PCSSM     -> SSM  : get_cache_entry(unid)
+  note over PCSSM   : If node is found in cache continue to add the node
+  PCSSM     -> SSM  : notify_node_added(key, unid)
+  SSM       -> MQTT : Publish(<i>ucl/SmartStart/List/Update</i>, data)\ndata contains the updated    SmartStart entry,\nthat has been added
+  MQTT        -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM       : Update smartstart_cache
+end
+group Node Removed from ProtocolController
+  note over PCSSM   : Node Removed from Network
+  PCSSM     -> SSM  : notify_node_removed(unid)
+  SSM       -> MQTT : Publish(<i>ucl/SmartStart/List/Update</i>, data)\ndata contains the updated    SmartStart entry,\nthat has been removed
+  MQTT        -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM       : Update smartstart_cache
+end
+
+group Node Added in SmartStartList
+  MQTT      -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM     : Update smartstart_cache
+  SSM       -> PCSSM: on_smartstart_state_changed()
+end
+group Node Removed from ProtocolController
+  MQTT      -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM     : Update smartstart_cache
+  SSM       -> PCSSM: on_smartstart_state_changed()
+end
+@enduml
+@startuml inline_umlgraph_11.svg
+  box "MQTT Broker" #LightYellow
+  participant MQTT
+  end box
+
+  box "ZPC" #LightBlue
+  participant StateTopic
+  participant AttributeStore
+  end box
+  note over StateTopic,AttributeStore: Init
+  StateTopic          -> AttributeStore       : attribute_store_register_callback_by_type(att_store_node_cb, ATTRIBUTE_NODE_ID)
+  StateTopic          -> AttributeStore       : attribute_store_register_callback_by_type_and_state(att_store_network_status_cb, DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, REPORTED_ATTRIBUTE)
+  ... ...
+  note over StateTopic,AttributeStore: NETWORK_STATUS updated (ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL)
+  AttributeStore      -> StateTopic           : att_store_network_status_cb(NETWORK_STATUS, ATTRIBUTE_UPDATED)
+  StateTopic          -> MQTT                 : <i>ucl/by-unid/<new-node>/State</i>\n{"NetworkState": "Included", ...}
+  ... ...
+  note over StateTopic,AttributeStore: Remove Node
+  AttributeStore      -> StateTopic           : att_store_node_cb(node_id, ATTRIBUTE_DELETED)
+  StateTopic          -> MQTT                 : delete <i>ucl/by-unid/<new-node></i>
+@enduml
+@startuml inline_umlgraph_13.svg
+title Relationships - Class Diagram
+
+title Mapping engine
+
+class ast::MapperEngine
+class ast::UAMGrammer
+class ast::eval
+class ast::dep_eval
+class attribute_store
+
+ast::MapperEngine <|-down- ast::UAMGrammer : AST
+ast::MapperEngine <|-down- ast::eval : optional value
+ast::MapperEngine <|-down- ast::dep_eval : dependencies
+ast::MapperEngine <|-up-   attribute_store:  on_attribute_updated()
+@enduml

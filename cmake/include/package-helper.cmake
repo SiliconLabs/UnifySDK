@@ -23,7 +23,10 @@ set(CPACK_SOURCE_IGNORE_FILES
     "${PROJECT_SOURCE_DIR}/GeckoSDK.*/"
     "Jenkinsfile" "Earthfile"
     "*.nix" "justfile" ".envrc" "flake.lock"
-    "\\\\.git*"
+    "\\\\.git/"
+    "\\\\.gitattributes"
+    "\\\\.gitignore"
+    "\\\\.gitmodules"
     "\\\\.pre-commit-config.yaml"
     "${PROJECT_SOURCE_DIR}/externals"
     "sonar-project\\\\.properties"
@@ -118,8 +121,8 @@ add_custom_target(
   DEPENDS package
   COMMAND mkdir -p "${DEB_PACKAGE_FOLDER}"
   COMMAND mv "\*_${FILE_NAME_VERSIONING_ARCH}.deb" "${DEB_PACKAGE_FOLDER}/"
-  COMMAND cd "${DEB_PACKAGE_FOLDER}" && dpkg-scanpackages . /dev/null | gzip -9c
-          > Packages.gz && cd ..
+  COMMAND cd "${DEB_PACKAGE_FOLDER}" && dpkg-scanpackages . /dev/null
+          > Packages && cd ..
   COMMAND zip -rm "${DEB_PACKAGE_ZIP}" "${DEB_PACKAGE_FOLDER}"
   COMMAND mkdir -p deb-packages && mv "${DEB_PACKAGE_ZIP}" deb-packages
   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan

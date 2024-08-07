@@ -37,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.5.0
+                ver_1.6.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../doc/running_unify.html">Running Unify on Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/getting_started_unify.html">Getting Started with Unify</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
@@ -99,7 +99,7 @@
 <p><strong>Prerequisites</strong>:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG12/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
 <li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
 <li><p>x86-64/amd64 CPU architecture. (Windows, MacOS or Linux)</p></li>
 <li><p>Docker version &gt; 20.10.12 installed.</p></li>
@@ -305,6 +305,16 @@ it will be automatically commissioned by the chip-tool with Matter Fabric Node I
 <p>More detailed information about chip-tool can be found in this <a class="reference external" href="https://project-chip.github.io/connectedhomeip-doc/guides/chip_tool_guide.html">link</a></p>
 </section>
 </section>
+<section id="emulated-end-device-experimental">
+<h3>Emulated End Device (<strong>Experimental</strong>)<a class="headerlink" href="#emulated-end-device-experimental" title="Permalink to this heading"></a></h3>
+<p>Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
+<br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">EED</span> <span class="pre">currently</span> <span class="pre">emulates</span> <span class="pre">a</span> <span class="pre">end</span> <span class="pre">device</span> <span class="pre">that</span> <span class="pre">only</span> <span class="pre">supports</span> <span class="pre">OnOff</span> <span class="pre">cluster,</span> <span class="pre">so</span> <span class="pre">for</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">atleast</span> <span class="pre">enable</span> <span class="pre">NAL</span> <span class="pre">service</span> <span class="pre">along</span> <span class="pre">with</span> <span class="pre">EED.</span></code>
+<br>The Emulated End Device(EED) can be configured to be run using <code class="docutils literal notranslate"><span class="pre">-a</span></code> option. This option cannot be used without a protocol selection configuration.
+<br>The option takes a predefined string “EED” representing Emulated End Device as shown below.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -a &quot;EED,UMB&quot; -m &quot;NAL&quot;</span>
+</pre></div>
+</div>
+</section>
 <section id="z-wave-options">
 <h3>Z-Wave options<a class="headerlink" href="#z-wave-options" title="Permalink to this heading"></a></h3>
 <section id="z-wave-rf-region">
@@ -488,7 +498,7 @@ and <code class="docutils literal notranslate"><span class="pre">wall-controller
 </div>
 <p>Specifying the serial number is not required - in that case you will be asked to
 select the device that you want to flash.</p>
-<p>If the RF region is not defined by the <code class="docutils literal notranslate"><span class="pre">--zwave-rf</span></code> argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.</p>
+<p>If the RF region is not defined by the <code class="docutils literal notranslate"><span class="pre">--zwave-rf</span></code> argument, then default value will be flashed (EU). It is possible to define the rf-region to be flashed to device from the region list: EU, EU_LR, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zwave-rf US_LR -s 440262138 flash-app -n switch-on-off</span>
 </pre></div>
 </div>

@@ -129,12 +129,24 @@ async fn validate(
     service_list: String,
     protocol_list: Vec<ProtocolItem>,
     region: String,
+    eed_cluster_list: String,
+    eed_device_type: String,
     window: Window,
     state: tauri::State<'_, RwLock<TauriState>>,
 ) -> Result<Vec<(String, String)>, tauri::Error> {
     println!("validate configuration {:?}", protocol_list);
     let mut conflicts: Vec<(String, String)> = vec![];
     let mut app_state = state.write().unwrap();
+
+    if eed_cluster_list != "" {
+        let emd_clusterlist_str = format!("--emd.cluster_list \"{}\"", &eed_cluster_list);
+        set_emd_cluster_arg(&emd_clusterlist_str);
+    }
+
+    if eed_device_type != "" {
+        let emd_devicetype_str = format!("--emd.device_type \"{}\"", &eed_device_type);
+        set_emd_device_type_arg(&emd_devicetype_str);
+    }
 
     protocol_list.iter().for_each(|item| {
         let mut silink_sn = String::new();

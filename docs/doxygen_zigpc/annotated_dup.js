@@ -1,34 +1,34 @@
 var annotated_dup =
 [
     [ "ast", "namespaceast.html", [
-      [ "nil", "structast_1_1nil.html", null ],
-      [ "ast_tree", "structast_1_1ast__tree.html", null ],
-      [ "signed_", "structast_1_1signed__.html", "structast_1_1signed__" ],
-      [ "operation", "structast_1_1operation.html", "structast_1_1operation" ],
-      [ "expression", "structast_1_1expression.html", "structast_1_1expression" ],
-      [ "condition", "structast_1_1condition.html", "structast_1_1condition" ],
-      [ "attribute_path_subscript", "structast_1_1attribute__path__subscript.html", "structast_1_1attribute__path__subscript" ],
-      [ "attribute", "structast_1_1attribute.html", "structast_1_1attribute" ],
       [ "assignment", "structast_1_1assignment.html", "structast_1_1assignment" ],
-      [ "function_invokation", "structast_1_1function__invokation.html", "structast_1_1function__invokation" ],
-      [ "scope_setting", "structast_1_1scope__setting.html", "structast_1_1scope__setting" ],
-      [ "scope", "structast_1_1scope.html", "structast_1_1scope" ],
+      [ "ast_tree", "structast_1_1ast__tree.html", null ],
+      [ "attribute", "structast_1_1attribute.html", "structast_1_1attribute" ],
+      [ "attribute_path_eval", "structast_1_1attribute__path__eval.html", "structast_1_1attribute__path__eval" ],
+      [ "attribute_path_subscript", "structast_1_1attribute__path__subscript.html", "structast_1_1attribute__path__subscript" ],
+      [ "built_in_function_check", "classast_1_1built__in__function__check.html", "classast_1_1built__in__function__check" ],
       [ "complexity", "classast_1_1complexity.html", "classast_1_1complexity" ],
-      [ "path_complexity", "classast_1_1path__complexity.html", "classast_1_1path__complexity" ],
+      [ "condition", "structast_1_1condition.html", "structast_1_1condition" ],
       [ "dep_eval", "classast_1_1dep__eval.html", "classast_1_1dep__eval" ],
       [ "dep_eval_path", "classast_1_1dep__eval__path.html", "classast_1_1dep__eval__path" ],
       [ "eval", "structast_1_1eval.html", "structast_1_1eval" ],
-      [ "attribute_path_eval", "structast_1_1attribute__path__eval.html", "structast_1_1attribute__path__eval" ],
+      [ "expression", "structast_1_1expression.html", "structast_1_1expression" ],
+      [ "function_invokation", "structast_1_1function__invokation.html", "structast_1_1function__invokation" ],
+      [ "nil", "structast_1_1nil.html", null ],
+      [ "operation", "structast_1_1operation.html", "structast_1_1operation" ],
+      [ "path_complexity", "classast_1_1path__complexity.html", "classast_1_1path__complexity" ],
       [ "path_match_eval", "classast_1_1path__match__eval.html", "classast_1_1path__match__eval" ],
-      [ "print", "classast_1_1print.html", "classast_1_1print" ],
       [ "path_printer", "classast_1_1path__printer.html", "classast_1_1path__printer" ],
+      [ "print", "classast_1_1print.html", "classast_1_1print" ],
       [ "reducer", "classast_1_1reducer.html", "classast_1_1reducer" ],
-      [ "built_in_function_check", "classast_1_1built__in__function__check.html", "classast_1_1built__in__function__check" ]
+      [ "scope", "structast_1_1scope.html", "structast_1_1scope" ],
+      [ "scope_setting", "structast_1_1scope__setting.html", "structast_1_1scope__setting" ],
+      [ "signed_", "structast_1_1signed__.html", "structast_1_1signed__" ]
     ] ],
     [ "smartstart", "namespacesmartstart.html", [
-      [ "Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ],
       [ "Entry", "classsmartstart_1_1Entry.html", "classsmartstart_1_1Entry" ],
-      [ "Management", "classsmartstart_1_1Management.html", "classsmartstart_1_1Management" ]
+      [ "Management", "classsmartstart_1_1Management.html", "classsmartstart_1_1Management" ],
+      [ "Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ]
     ] ],
     [ "uic_ota", "namespaceuic__ota.html", [
       [ "meta_t", "structuic__ota_1_1meta__t.html", "structuic__ota_1_1meta__t" ]
@@ -38,22 +38,22 @@ var annotated_dup =
         [ "cluster", "classunify_1_1node__state__monitor_1_1cluster.html", "classunify_1_1node__state__monitor_1_1cluster" ],
         [ "endpoint", "classunify_1_1node__state__monitor_1_1endpoint.html", "classunify_1_1node__state__monitor_1_1endpoint" ],
         [ "node", "classunify_1_1node__state__monitor_1_1node.html", "classunify_1_1node__state__monitor_1_1node" ],
-        [ "node_state_monitor_interface", "classunify_1_1node__state__monitor_1_1node__state__monitor__interface.html", "classunify_1_1node__state__monitor_1_1node__state__monitor__interface" ],
-        [ "node_state_monitor", "classunify_1_1node__state__monitor_1_1node__state__monitor.html", "classunify_1_1node__state__monitor_1_1node__state__monitor" ]
+        [ "node_state_monitor", "classunify_1_1node__state__monitor_1_1node__state__monitor.html", "classunify_1_1node__state__monitor_1_1node__state__monitor" ],
+        [ "node_state_monitor_interface", "classunify_1_1node__state__monitor_1_1node__state__monitor__interface.html", "classunify_1_1node__state__monitor_1_1node__state__monitor__interface" ]
       ] ]
     ] ],
     [ "zigpc", "namespacezigpc.html", [
       [ "gateway", "namespacezigpc_1_1gateway.html", [
-        [ "RequestQueue", "classzigpc_1_1gateway_1_1RequestQueue.html", "classzigpc_1_1gateway_1_1RequestQueue" ],
-        [ "NetworkInitRequest", "classzigpc_1_1gateway_1_1NetworkInitRequest.html", "classzigpc_1_1gateway_1_1NetworkInitRequest" ],
+        [ "AddOTAImageRequest", "classzigpc_1_1gateway_1_1AddOTAImageRequest.html", "classzigpc_1_1gateway_1_1AddOTAImageRequest" ],
+        [ "BindingRequestRequest", "classzigpc_1_1gateway_1_1BindingRequestRequest.html", "classzigpc_1_1gateway_1_1BindingRequestRequest" ],
+        [ "DeviceRemoveRequest", "classzigpc_1_1gateway_1_1DeviceRemoveRequest.html", "classzigpc_1_1gateway_1_1DeviceRemoveRequest" ],
         [ "DiscoverDeviceRequest", "classzigpc_1_1gateway_1_1DiscoverDeviceRequest.html", "classzigpc_1_1gateway_1_1DiscoverDeviceRequest" ],
         [ "DiscoverEndpointRequest", "classzigpc_1_1gateway_1_1DiscoverEndpointRequest.html", "classzigpc_1_1gateway_1_1DiscoverEndpointRequest" ],
-        [ "DeviceRemoveRequest", "classzigpc_1_1gateway_1_1DeviceRemoveRequest.html", "classzigpc_1_1gateway_1_1DeviceRemoveRequest" ],
-        [ "BindingRequestRequest", "classzigpc_1_1gateway_1_1BindingRequestRequest.html", "classzigpc_1_1gateway_1_1BindingRequestRequest" ],
+        [ "NetworkInitRequest", "classzigpc_1_1gateway_1_1NetworkInitRequest.html", "classzigpc_1_1gateway_1_1NetworkInitRequest" ],
+        [ "RequestQueue", "classzigpc_1_1gateway_1_1RequestQueue.html", "classzigpc_1_1gateway_1_1RequestQueue" ],
         [ "ZCLConfigureReportingRequest", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest" ],
-        [ "ZCLFrameUnicastRequest", "classzigpc_1_1gateway_1_1ZCLFrameUnicastRequest.html", "classzigpc_1_1gateway_1_1ZCLFrameUnicastRequest" ],
         [ "ZCLFrameMulticastRequest", "classzigpc_1_1gateway_1_1ZCLFrameMulticastRequest.html", "classzigpc_1_1gateway_1_1ZCLFrameMulticastRequest" ],
-        [ "AddOTAImageRequest", "classzigpc_1_1gateway_1_1AddOTAImageRequest.html", "classzigpc_1_1gateway_1_1AddOTAImageRequest" ]
+        [ "ZCLFrameUnicastRequest", "classzigpc_1_1gateway_1_1ZCLFrameUnicastRequest.html", "classzigpc_1_1gateway_1_1ZCLFrameUnicastRequest" ]
       ] ]
     ] ],
     [ "zigpc_common", "namespacezigpc__common.html", [
@@ -61,9 +61,9 @@ var annotated_dup =
     ] ],
     [ "zigpc_discovery", "namespacezigpc__discovery.html", [
       [ "events", "namespacezigpc__discovery_1_1events.html", [
-        [ "DiscoverEvent", "classzigpc__discovery_1_1events_1_1DiscoverEvent.html", "classzigpc__discovery_1_1events_1_1DiscoverEvent" ],
         [ "DeviceDiscoverRequest", "classzigpc__discovery_1_1events_1_1DeviceDiscoverRequest.html", "classzigpc__discovery_1_1events_1_1DeviceDiscoverRequest" ],
         [ "DeviceDiscoverResponse", "classzigpc__discovery_1_1events_1_1DeviceDiscoverResponse.html", "classzigpc__discovery_1_1events_1_1DeviceDiscoverResponse" ],
+        [ "DiscoverEvent", "classzigpc__discovery_1_1events_1_1DiscoverEvent.html", "classzigpc__discovery_1_1events_1_1DiscoverEvent" ],
         [ "EndpointDiscoverRequest", "classzigpc__discovery_1_1events_1_1EndpointDiscoverRequest.html", "classzigpc__discovery_1_1events_1_1EndpointDiscoverRequest" ],
         [ "EndpointDiscoverResponse", "classzigpc__discovery_1_1events_1_1EndpointDiscoverResponse.html", "classzigpc__discovery_1_1events_1_1EndpointDiscoverResponse" ]
       ] ]
@@ -142,6 +142,9 @@ var annotated_dup =
     [ "_uic_mqtt_dotdot_thermostat_supported_commands_", "struct__uic__mqtt__dotdot__thermostat__supported__commands__.html", "struct__uic__mqtt__dotdot__thermostat__supported__commands__" ],
     [ "_uic_mqtt_dotdot_thermostat_user_interface_configuration_supported_commands_", "struct__uic__mqtt__dotdot__thermostat__user__interface__configuration__supported__commands__.html", "struct__uic__mqtt__dotdot__thermostat__user__interface__configuration__supported__commands__" ],
     [ "_uic_mqtt_dotdot_time_supported_commands_", "struct__uic__mqtt__dotdot__time__supported__commands__.html", "struct__uic__mqtt__dotdot__time__supported__commands__" ],
+    [ "_uic_mqtt_dotdot_unify_fan_control_supported_commands_", "struct__uic__mqtt__dotdot__unify__fan__control__supported__commands__.html", "struct__uic__mqtt__dotdot__unify__fan__control__supported__commands__" ],
+    [ "_uic_mqtt_dotdot_unify_humidity_control_supported_commands_", "struct__uic__mqtt__dotdot__unify__humidity__control__supported__commands__.html", "struct__uic__mqtt__dotdot__unify__humidity__control__supported__commands__" ],
+    [ "_uic_mqtt_dotdot_unify_thermostat_supported_commands_", "struct__uic__mqtt__dotdot__unify__thermostat__supported__commands__.html", "struct__uic__mqtt__dotdot__unify__thermostat__supported__commands__" ],
     [ "_uic_mqtt_dotdot_wind_speed_measurement_supported_commands_", "struct__uic__mqtt__dotdot__wind__speed__measurement__supported__commands__.html", "struct__uic__mqtt__dotdot__wind__speed__measurement__supported__commands__" ],
     [ "_uic_mqtt_dotdot_window_covering_supported_commands_", "struct__uic__mqtt__dotdot__window__covering__supported__commands__.html", "struct__uic__mqtt__dotdot__window__covering__supported__commands__" ],
     [ "_WirelessNetworkInterfaceData", "struct__WirelessNetworkInterfaceData.html", "struct__WirelessNetworkInterfaceData" ],
@@ -446,6 +449,15 @@ var annotated_dup =
     [ "uic_mqtt_dotdot_thermostat_user_interface_configuration_updated_state_t", "structuic__mqtt__dotdot__thermostat__user__interface__configuration__updated__state__t.html", "structuic__mqtt__dotdot__thermostat__user__interface__configuration__updated__state__t" ],
     [ "uic_mqtt_dotdot_time_state_t", "structuic__mqtt__dotdot__time__state__t.html", "structuic__mqtt__dotdot__time__state__t" ],
     [ "uic_mqtt_dotdot_time_updated_state_t", "structuic__mqtt__dotdot__time__updated__state__t.html", "structuic__mqtt__dotdot__time__updated__state__t" ],
+    [ "uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t", "structuic__mqtt__dotdot__unify__fan__control__command__set__fan__mode__fields__t.html", "structuic__mqtt__dotdot__unify__fan__control__command__set__fan__mode__fields__t" ],
+    [ "uic_mqtt_dotdot_unify_fan_control_state_t", "structuic__mqtt__dotdot__unify__fan__control__state__t.html", "structuic__mqtt__dotdot__unify__fan__control__state__t" ],
+    [ "uic_mqtt_dotdot_unify_fan_control_updated_state_t", "structuic__mqtt__dotdot__unify__fan__control__updated__state__t.html", "structuic__mqtt__dotdot__unify__fan__control__updated__state__t" ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t", "structuic__mqtt__dotdot__unify__humidity__control__command__mode__set__fields__t.html", "structuic__mqtt__dotdot__unify__humidity__control__command__mode__set__fields__t" ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t", "structuic__mqtt__dotdot__unify__humidity__control__command__setpoint__set__fields__t.html", "structuic__mqtt__dotdot__unify__humidity__control__command__setpoint__set__fields__t" ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_state_t", "structuic__mqtt__dotdot__unify__humidity__control__state__t.html", "structuic__mqtt__dotdot__unify__humidity__control__state__t" ],
+    [ "uic_mqtt_dotdot_unify_humidity_control_updated_state_t", "structuic__mqtt__dotdot__unify__humidity__control__updated__state__t.html", "structuic__mqtt__dotdot__unify__humidity__control__updated__state__t" ],
+    [ "uic_mqtt_dotdot_unify_thermostat_state_t", "structuic__mqtt__dotdot__unify__thermostat__state__t.html", "structuic__mqtt__dotdot__unify__thermostat__state__t" ],
+    [ "uic_mqtt_dotdot_unify_thermostat_updated_state_t", "structuic__mqtt__dotdot__unify__thermostat__updated__state__t.html", "structuic__mqtt__dotdot__unify__thermostat__updated__state__t" ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_state_t", "structuic__mqtt__dotdot__wind__speed__measurement__state__t.html", "structuic__mqtt__dotdot__wind__speed__measurement__state__t" ],
     [ "uic_mqtt_dotdot_wind_speed_measurement_updated_state_t", "structuic__mqtt__dotdot__wind__speed__measurement__updated__state__t.html", "structuic__mqtt__dotdot__wind__speed__measurement__updated__state__t" ],
     [ "uic_mqtt_dotdot_window_covering_command_go_to_lift_percentage_fields_t", "structuic__mqtt__dotdot__window__covering__command__go__to__lift__percentage__fields__t.html", "structuic__mqtt__dotdot__window__covering__command__go__to__lift__percentage__fields__t" ],

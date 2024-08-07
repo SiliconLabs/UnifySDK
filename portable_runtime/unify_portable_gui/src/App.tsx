@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import Select from 'react-select';
 import initIcon from './assets/init-icon.svg';
 import waitingIcon from './assets/waiting-icon.jpg';
 import checkmarkIcon from './assets/checkmark-icon.svg';
 import './App.css';
 import { invoke } from '@tauri-apps/api/tauri'
-import { AppState, Frequency, Status, BuildStatus } from './app-types';
+import { AppState, Frequency, Status, BuildStatus, DeviceTypeList, ClusterList } from './app-types';
 import { listen } from '@tauri-apps/api/event'
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -49,12 +51,20 @@ class App extends Component<{}, AppState> {
       Applications: {
         UMB: false
       },
+      Emulator: {
+        "EED": {
+          Enabled: false,
+          ClusterList: 'OnOff',
+          DeviceType: ''
+        }
+      },
       ServiceList: [],
       DeviceList: [],
       StatusList: [],
       MultiProtocols: false,
       ErrorMessage: "",
-      Conflicts: {}
+      Conflicts: {},
+      isDeviceTypeActive: true
     };
   }
   isComponentMount: boolean = false;
@@ -135,7 +145,7 @@ class App extends Component<{}, AppState> {
   isNextDisabled = () => {
     return (this.state.Status === Status.Protocol
       && !this.state.ProtocolList["Z-Wave"].Enabled && !this.state.ProtocolList["AoX-Bluetooth"].Enabled
-      && !this.state.ProtocolList["Zigbee-NCP"].Enabled && !this.state.MultiProtocols)
+      && !this.state.ProtocolList["Zigbee-NCP"].Enabled && !this.state.MultiProtocols && !this.state.Emulator['EED'].Enabled)
       || !(this.state.Status !== Status.Review || !this.state.Conflicts.length) || this.state.PreRequisitesCheck.UnifyLibrary !== BuildStatus.Pass;
   }
 
@@ -153,6 +163,8 @@ class App extends Component<{}, AppState> {
       case Status.Configuration:
         let serviceList: string[] = [];
         let protocolList: any[] = [];
+        const eedClusterList = this.state.Emulator['EED'].Enabled ? this.state.Emulator['EED'].ClusterList : '';
+        const eedDeviceType = this.state.Emulator['EED'].Enabled ? this.state.Emulator['EED'].DeviceType : '';
         Object.keys(this.state.ProtocolList).map(i => {
           if ((this.state.ProtocolList as any)[i].Enabled) {
             serviceList.push(i);
@@ -167,8 +179,14 @@ class App extends Component<{}, AppState> {
           if ((this.state.Applications as any)[i])
             serviceList.push(i);
         });
+        Object.keys(this.state.Emulator).map(i => {
+          if ((this.state.Emulator as any)[i].Enabled)
+            serviceList.push(i);
+        });
         this.setState({ ServiceList: serviceList });
-        invoke('validate', { serviceList: serviceList.join(','), protocolList: protocolList, region: this.state.ProtocolList['Z-Wave'].RF }).then((res: any) => {
+        invoke('validate', { serviceList: serviceList.join(','), protocolList: protocolList, region: this.state.ProtocolList['Z-Wave'].RF, eedClusterList: eedClusterList,
+          eedDeviceType: eedDeviceType
+         }).then((res: any) => {
           if (res && res.length) {
             let conflicts: any = {};
             res.forEach((item: any) => {
@@ -227,6 +245,50 @@ class App extends Component<{}, AppState> {
     let applications = this.state.Applications;
     (applications as any)[event.target.name] = event.target.checked;
     this.setState({ Applications: applications });
+  }
+
+  onEmulatorChange = (event: any) => {
+    let emulator = this.state.Emulator;
+    (emulator as any)[event.target.name].Enabled = event.target.checked;
+    this.setState({ Emulator: emulator });
+  }
+
+  onHandleChange = (event: any) => {
+    const cluster_list = Object.keys(event).map((item) => event[item].value).join(';');
+    let emulator = this.state.Emulator;
+    (emulator as any)['EED'].ClusterList = cluster_list;
+    this.setState({ Emulator: emulator});
+    console.log(this.state.Emulator);
+  }
+
+  onEEDConfigChange = (name: string) => {
+    if (name === "DeviceType") {
+      this.setState(prevState => ({
+        isDeviceTypeActive: !this.state.isDeviceTypeActive,
+        Emulator: {
+          EED: {
+          ...prevState.Emulator.EED,
+          ClusterList: ''
+        }
+      }
+    }));
+    } else if (name === "ClusterList") {
+      this.setState(prevState => ({
+        isDeviceTypeActive: !this.state.isDeviceTypeActive,
+        Emulator: {
+          EED: {
+          ...prevState.Emulator.EED,
+          DeviceType: ''
+        }
+      }
+    }));
+    }
+  }
+
+  onDeviceTypeChange = (name: string, event: any) => {
+    let emulator = this.state.Emulator as any;
+    emulator[name][event.target.name] = event.target.value;
+    this.setState({ Applications: emulator });
   }
 
   onDeviceChange = (name: string, isCheckbox: boolean, event: any) => {
@@ -305,7 +367,7 @@ class App extends Component<{}, AppState> {
             <div className="check-container">
               <Form.Check name="MultiProtocols" checked={this.state.MultiProtocols} onChange={this.onProtocolChange} />
             </div>
-          </Form.Label> 
+          </Form.Label>
           <div className={!this.state.MultiProtocols ? "disabled" : ""}>
             <Form.Label column>
               <span className='check-label small'>Zigbee(RCP)</span>
@@ -314,6 +376,21 @@ class App extends Component<{}, AppState> {
               </div>
             </Form.Label>
           </div>
+          <Form.Label column>
+            <span className='check-label'>Emulated End Device</span>
+            <div className="check-container">
+              <Form.Check name="EED" checked={this.state.Emulator["EED"].Enabled} onChange={this.onEmulatorChange} />
+              <OverlayTrigger
+                overlay={<Tooltip className="tooltip" id="infoTooltip">No hardware? Worry not, Emulated End Device (EED)</Tooltip>}>
+                <div>
+                <span className="info-icon">
+                <IoIosInformationCircleOutline />
+                </span>
+                </div>
+              </OverlayTrigger>
+            </div>
+          </Form.Label>
+          <p className='d-flex col-6 justify-content-end' style={{ marginTop: '-14px' }}><small>(Experimental)</small></p>
         </div>);
       case Status.Framework:
         return (<>
@@ -415,6 +492,49 @@ class App extends Component<{}, AppState> {
                     </Form.Control>
                   </div>
                 </div>)
+              })}
+              {Object.keys(this.state.Emulator).map((emulator, index) => {
+                let item = (this.state.Emulator as any)[emulator];
+                if (item.Enabled){
+                  return (<div className='config-item' key={index}>
+                    <div className='config-item-label col-12'>Emulated End Device</div>
+                    <div className='config-device d-none'>
+                      <Form.Check className='eed-config-toggle'
+                        type="checkbox"
+                        onChange={() => this.onEEDConfigChange("DeviceType")}
+                        checked={this.state.isDeviceTypeActive}
+                      />
+                      <Form.Label className='col-3'>Device Type</Form.Label>
+                      <Form.Control as="select" name="DeviceType" onChange={this.onDeviceTypeChange.bind(this, emulator)} value={item.DeviceType} disabled={!this.state.isDeviceTypeActive}>
+                        <option value="">Select a device type</option>
+                        {Object.keys(DeviceTypeList).map((dt: any, index: number) => {
+                          return <option key={index} value={dt}>{dt}</option>
+                        })}
+                      </Form.Control>
+                    </div>
+                    <div className='config-device'>
+                      <Form.Check className='eed-config-toggle d-none'
+                        type="checkbox"
+                        onChange={() => this.onEEDConfigChange("ClusterList")}
+                        checked={!this.state.isDeviceTypeActive}
+                      />
+                      <Form.Label className='col-3'>Cluster List</Form.Label>
+                      <Select
+                        isMulti
+                        name="cluster-list"
+                        options={ClusterList}
+                        placeholder={"OnOff"}
+                        className="basic-multi-select multi-select"
+                        classNamePrefix="select"
+                        isSearchable={true}
+                        isClearable={true}
+                        isDisabled={this.state.isDeviceTypeActive}
+                        onChange={this.onHandleChange}
+                      />
+                    </div>
+                    <p className='note'><small>Currently, EED only supports OnOff Cluster</small></p>
+                  </div>)
+                }
               })}
             </div>
           </>);

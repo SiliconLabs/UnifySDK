@@ -58,6 +58,7 @@ else()
 # find_package(unify REQUIRED)
 endif()
 
+add_subdirectory(applications)
 add_subdirectory(components)
 
 # ZPC executable

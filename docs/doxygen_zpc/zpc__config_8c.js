@@ -46,6 +46,6 @@ var zpc__config_8c =
     [ "is_hex_string", "zpc__config_8c.html#a3afcf7d91b145ee1af2aba8f2ea223ea", null ],
     [ "zpc_config_fixt_setup", "group__zpc__config__fixture.html#gaef4ef281e7cf8bae30838ffbd4198277", null ],
     [ "zpc_config_init", "group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35", null ],
-    [ "zpc_get_config", "group__zpc__config.html#ga84d0f1604693e7387360b16efe24564f", null ],
+    [ "zpc_get_config", "group__zpc__config.html#ga4b057e8eb480ccf7000ecdaf97dcc168", null ],
     [ "config", "zpc__config_8c.html#ad407e1fe528f3ec0ed8153c85c2e8730", null ]
 ];

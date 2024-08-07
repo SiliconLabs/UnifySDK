@@ -57,11 +57,19 @@ struct Args {
     /// Selections of helper services to run eg. -m "NAL,GMS". 
     modules: Option<Vec<String>>,
     #[clap(short = 'a', long, forbid_empty_values = true, value_delimiter=',', value_parser=APPLICATIONS_LIST)]
-    /// Selections of applications to run eg. -a "UMB".
+    /// Selections of applications to run eg. -a "UMB,EED".
     applications: Option<Vec<String>>,
     #[clap(long, forbid_empty_values = true)]
     /// Region for the Z-Wave controller to operate in eg. --zwave-rf-region US.
     zwave_rf_region: Option<String>,
+    /* Disabling eed configuration options as part of experimental release
+    #[clap(long, forbid_empty_values = true)]
+    /// Input clusters list for emd to be supported.
+    emd_cluster_list: Option<String>,
+    #[clap(long, forbid_empty_values = true)]
+    /// Input device type for emd to be supported.
+    emd_device_type: Option<String>,
+    */
     #[clap(subcommand)]
     /// Additional Subcommands. For subcommands' usage, use the help of the subcommands.
     command: Option<Commands>,
@@ -256,7 +264,7 @@ fn main() {
             }
         }
         Some(Commands::ListDevices {}) => {
-            match silink_inspect() {
+            match silink_list() {
                 Err(error) => {
                     eprintln!("{}", error);
                     process::exit(exitcode::UNAVAILABLE);
@@ -292,6 +300,20 @@ fn main() {
             String::from("--zpc.rf_region ") + &parsed_args.zwave_rf_region.unwrap();
         set_zpc_config_args(&region_string);
     }
+
+    /* Disabling this as part of experminetal release
+    if parsed_args.emd_cluster_list != None {
+        let cluster_string =
+            format!("--emd.cluster_list \"{}\"", &parsed_args.emd_cluster_list.unwrap());
+        set_emd_cluster_arg(&cluster_string);
+    }
+
+    if parsed_args.emd_device_type != None {
+        let device_type_string =
+            format!("--emd.device_type \"{}\"", &parsed_args.emd_device_type.unwrap());
+        set_emd_device_type_arg(&device_type_string);
+    }
+    */
 
     // Processing ZigPC CLI arguments
     handle_device_args(
@@ -377,8 +399,15 @@ fn main() {
         sel_list_string = prot_sel_list_string.clone() + "," + mod_sel_list_string.as_str() + "," + app_sel_list_string.as_str();
     }
 
-    if prot_sel_list_string == "" {
-        prot_sel_list_string = "Z-Wave".to_string();
+    if !app_sel_list_string.contains("EED") {
+        if prot_sel_list_string == "" {
+            prot_sel_list_string = "Z-Wave".to_string();
+        }
+    } else {
+        // Currently, EED only supports OnOff Cluster
+        let cluster_string =
+            format!("--emd.cluster_list \"OnOff\"");
+        set_emd_cluster_arg(&cluster_string);
     }
 
     println!("Verifying Docker installation");
@@ -400,122 +429,124 @@ fn main() {
     // Vector to store the devices mapped.
     let mut silink_automapped_devices: Vec<String> = Vec::new();
 
-    for protocol in protocols {
-        silink_sn = String::new();
+    if !protocols.is_empty() && protocols[0] != "" {
+        for protocol in protocols {
+            silink_sn = String::new();
 
-        match protocol.as_str() {
-            "Z-Wave" =>{
-                // If serial number is not configured but other device info is configured, we continue without creating silink connection instance.
-                if zpc_silink_sn == "" && zpc_arg_count != 0 {
-                    continue;
-                } else {
-                    silink_sn = zpc_silink_sn.clone();
-                    // zpc uses the default port configuration and doesn't require explicit port setup.
-                }
-            },
-            "Zigbee-NCP" => {
-                // If serial number is not configured but other device info is configured, we continue without creating silink connection instance.
-                if zigpc_silink_sn == "" && zigpc_arg_count != 0 {
-                    continue;
-                } else {
-                    silink_sn = zigpc_silink_sn.clone();
+            match protocol.as_str() {
+                "Z-Wave" =>{
+                    // If serial number is not configured but other device info is configured, we continue without creating silink connection instance.
+                    if zpc_silink_sn == "" && zpc_arg_count != 0 {
+                        continue;
+                    } else {
+                        silink_sn = zpc_silink_sn.clone();
+                        // zpc uses the default port configuration and doesn't require explicit port setup.
+                    }
+                },
+                "Zigbee-NCP" => {
+                    // If serial number is not configured but other device info is configured, we continue without creating silink connection instance.
+                    if zigpc_silink_sn == "" && zigpc_arg_count != 0 {
+                        continue;
+                    } else {
+                        silink_sn = zigpc_silink_sn.clone();
 
-                    // Setting the PORT env w.r.t silink mapping
-                    let remote_port = get_port_env_var(protocol.as_str());
-                    set_env_var(ZIGPC_PORT_KEY, &remote_port.to_string());
-                }
-            },
-            "AoX-Bluetooth" => {
-                // If serial number is not configured but other device info is configured, we continue without creating silink connection instance.
-                if aoxpc_silink_sn == "" && aoxpc_arg_count != 0 {
-                    continue;
-                } else {
-                    silink_sn = aoxpc_silink_sn.clone();
+                        // Setting the PORT env w.r.t silink mapping
+                        let remote_port = get_port_env_var(protocol.as_str());
+                        set_env_var(ZIGPC_PORT_KEY, &remote_port.to_string());
+                    }
+                },
+                "AoX-Bluetooth" => {
+                    // If serial number is not configured but other device info is configured, we continue without creating silink connection instance.
+                    if aoxpc_silink_sn == "" && aoxpc_arg_count != 0 {
+                        continue;
+                    } else {
+                        silink_sn = aoxpc_silink_sn.clone();
 
-                    // Setting the PORT env w.r.t silink mapping
-                    let remote_port = get_port_env_var(protocol.as_str());
-                    set_env_var(AOXPC_PORT_KEY, &remote_port.to_string());
-                }
-            },
-            "MultiProtocol" => {
-                if multiprotocol_silink_sn == "" && multiprotocol_arg_count != 0 {
-                    continue;
-                } else {
-                    silink_sn = multiprotocol_silink_sn.clone();
+                        // Setting the PORT env w.r.t silink mapping
+                        let remote_port = get_port_env_var(protocol.as_str());
+                        set_env_var(AOXPC_PORT_KEY, &remote_port.to_string());
+                    }
+                },
+                "MultiProtocol" => {
+                    if multiprotocol_silink_sn == "" && multiprotocol_arg_count != 0 {
+                        continue;
+                    } else {
+                        silink_sn = multiprotocol_silink_sn.clone();
 
-                    // Setting the PORT env w.r.t silink mapping
-                    let remote_port = get_port_env_var(protocol.as_str());
-                    set_env_var(MULTIPROTOCOL_PORT_KEY, &remote_port.to_string());
+                        // Setting the PORT env w.r.t silink mapping
+                        let remote_port = get_port_env_var(protocol.as_str());
+                        set_env_var(MULTIPROTOCOL_PORT_KEY, &remote_port.to_string());
+                    }
+                },
+                _ =>{
+                    println!("Not a valid protocol!");
                 }
-            },
-            _ =>{
-                println!("Not a valid protocol!");
             }
-        }
 
-        // If silink_sn is empty, then no options are used to configure the device.
-        // So, here we list the devices connected and prompts user to select the device.
-        if silink_sn == "" {
+            // If silink_sn is empty, then no options are used to configure the device.
+            // So, here we list the devices connected and prompts user to select the device.
+            if silink_sn == "" {
 
-            if device_count == 0 {
-                eprintln!("Could not find any connected devices. Please verify that you have enough Silabs devices connected!");
-                process::exit(exitcode::USAGE);
-            } else if device_count == 1 {
-                // Auto selection if single device is connected to host.
-                let silink_result_string = silink_inspect().unwrap();
-                // Filtering out the previously mapped devices from the device list to avoid confusion.
-                let filtered_result_string = filtered_mapped_devices(&silink_result_string, silink_automapped_devices.clone()).unwrap();
-                let device = &list_devices(&filtered_result_string, false)[0];
-                if device.application_name.as_ref().unwrap().eq(&"unknown") ||
-                    device.application_name.as_ref().unwrap().eq(&"serial_api_controller") {
-                        println!("Identified as {} Serial API Controller ", device.serial_number);
-                    silink_sn = device.serial_number.clone();
-                } else {
-                    eprintln!("Found a connected device, but could not identify it as Controller.");
-                    eprintln!("Try resetting or re-flashing it!");
-                    process::exit(exitcode::UNAVAILABLE);
-                }
-            } else {
-                println!("Attempting to identify the Serial API Controller...");
-                let silink_result_string = silink_inspect().unwrap();
-                let devices = list_devices(&silink_result_string, false);
-                match devices.iter().find(|device|
-                    device.application_name.is_some() && 
-                    protocol.as_str() == "Z-Wave" &&
-                    device.application_name.as_ref().unwrap().eq(&"serial_api_controller")
-                ) {
-                    None => {
-                        eprintln!("Identification failed.");
-                        silink_sn = match get_serial_no(None, protocol.clone(), silink_automapped_devices.clone()) {
-                            Ok(sn) => sn,
-                            Err(e) => {
-                                eprintln!("{}", e);
-                                process::exit(exitcode::NOINPUT);
-                            }
-                        };
-                        println!("Setting up serial no {} device as a {} controller.", silink_sn, protocol);
-                    },
-                    Some(device) => {
-                        println!("Identified {} as a controller.", device.serial_number);
+                if device_count == 0 {
+                    eprintln!("Could not find any connected devices. Please verify that you have enough Silabs devices connected!");
+                    process::exit(exitcode::USAGE);
+                } else if device_count == 1 {
+                    // Auto selection if single device is connected to host.
+                    let silink_result_string = silink_list().unwrap();
+                    // Filtering out the previously mapped devices from the device list to avoid confusion.
+                    let filtered_result_string = filtered_mapped_devices(&silink_result_string, silink_automapped_devices.clone()).unwrap();
+                    let device = &list_devices(&filtered_result_string, false)[0];
+                    if device.application_name.as_ref().unwrap().eq(&"unknown") ||
+                        device.application_name.as_ref().unwrap().eq(&"serial_api_controller") {
+                            println!("Identified as {} Serial API Controller ", device.serial_number);
                         silink_sn = device.serial_number.clone();
+                    } else {
+                        eprintln!("Found a connected device, but could not identify it as Controller.");
+                        eprintln!("Try resetting or re-flashing it!");
+                        process::exit(exitcode::UNAVAILABLE);
+                    }
+                } else {
+                    println!("Attempting to identify the Serial API Controller...");
+                    let silink_result_string = silink_list().unwrap();
+                    let devices = list_devices(&silink_result_string, false);
+                    match devices.iter().find(|device|
+                        device.application_name.is_some() && 
+                        protocol.as_str() == "Z-Wave" &&
+                        device.application_name.as_ref().unwrap().eq(&"serial_api_controller")
+                    ) {
+                        None => {
+                            eprintln!("Identification failed.");
+                            silink_sn = match get_serial_no(None, protocol.clone(), silink_automapped_devices.clone()) {
+                                Ok(sn) => sn,
+                                Err(e) => {
+                                    eprintln!("{}", e);
+                                    process::exit(exitcode::NOINPUT);
+                                }
+                            };
+                            println!("Setting up serial no {} device as a {} controller.", silink_sn, protocol);
+                        },
+                        Some(device) => {
+                            println!("Identified {} as a controller.", device.serial_number);
+                            silink_sn = device.serial_number.clone();
+                        }
                     }
                 }
             }
-        }
-        println!("Mapping device with Silink...");
-    
-        let silink = silink_automap(&silink_sn, protocol.as_str());
-        let silink_is_running = !silink.is_err();
-        let mut silink_process = silink.unwrap();
-        if !silink_is_running || silink_process.try_wait().is_err() {
-            eprintln!("Failed to start Silink!");
-            process::exit(exitcode::TEMPFAIL);
-        }
+            println!("Mapping device with Silink...");
+        
+            let silink = silink_automap(&silink_sn, protocol.as_str());
+            let silink_is_running = !silink.is_err();
+            let mut silink_process = silink.unwrap();
+            if !silink_is_running || silink_process.try_wait().is_err() {
+                eprintln!("Failed to start Silink!");
+                process::exit(exitcode::TEMPFAIL);
+            }
 
-        // To store mapped devices to silink automapped devices Vector.
-        silink_automapped_devices.push(silink_sn);
-        device_count -= 1;
-        silink_process_list.push(silink_process);
+            // To store mapped devices to silink automapped devices Vector.
+            silink_automapped_devices.push(silink_sn);
+            device_count -= 1;
+            silink_process_list.push(silink_process);
+        }
     }
 
     let conflicts = validate_configuration(&sel_list_string);
@@ -647,7 +678,7 @@ fn get_serial_no(serial_no: Option<i32>, protocol: String, silink_automapped_dev
     } else {
         println!("Serial number is not specified.\n");
 
-        match silink_inspect() {
+        match silink_list() {
             Ok(silink_result_string) => {
                 // Filtering out the previously mapped devices from the available list to avoid confusion.
                 let filtered_result_string = filtered_mapped_devices(&silink_result_string, silink_automapped_devices.clone()).unwrap();

@@ -122,70 +122,51 @@ extern "C" {
  ******************************************************************************/
 
 // Provide function declarations
-void emberAfPluginAddressTableAddCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginAddressTableSetCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginAddressTableRemoveCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginAddressTableLookupCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginAddressTablePrintCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginConcentratorStatus(sl_cli_command_arg_t *arguments);
-void emberAfPluginConcentratorStartDiscoveryCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginConcentratorStopDiscoveryCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginConcentratorAggregationCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginConcentratorPrintSourceRouteTable(sl_cli_command_arg_t *arguments);
-void emberAfPluginConcentratorSetRouterBehaviorCommand(sl_cli_command_arg_t *arguments);
-void sli_zigbee_af_cli_info_command(sl_cli_command_arg_t *arguments);
-void printAllLibraryStatus(sl_cli_command_arg_t *arguments);
-void sli_zigbee_af_cli_bsend_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_cli_send_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_zcl_read_cli_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_zcl_write_cli_command(sl_cli_command_arg_t *arguments);
-void resetCommand(sl_cli_command_arg_t *arguments);
-void sli_zigbee_af_cli_raw_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_cli_send_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_af_cli_send_using_multicast_binding_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_af_cli_timesync_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_cli_config_cca_mode_command(sl_cli_command_arg_t *arguments);
-void sli_zigbee_cli_version_command(sl_cli_command_arg_t *arguments);
-void endpointPrint(sl_cli_command_arg_t *arguments);
-void enableDisableEndpoint(sl_cli_command_arg_t *arguments);
-void enableDisableEndpoint(sl_cli_command_arg_t *arguments);
-void printEvents(sl_cli_command_arg_t *arguments);
-void getSetMfgToken(sl_cli_command_arg_t *arguments);
-void getSetMfgToken(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersPrintCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginCounterPrintCounterTypeCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersSimplePrintCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersClear(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersPrintThresholdsCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersSetThresholdCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersResetThresholds(sl_cli_command_arg_t *arguments);
-void emberAfPluginCountersSendRequestCommand(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_address_table_add_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_address_table_set_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_address_table_remove_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_address_table_lookup_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_address_table_print_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_concentrator_status(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_concentrator_start_discovery_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_concentrator_stop_discovery_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_concentrator_aggregation_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_concentrator_print_source_route_table(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_concentrator_set_router_behavior_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_print_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_print_counters_type_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_simple_print_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_clear(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_print_thresholds_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_set_threshold_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_reset_thresholds(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_counters_send_request_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_debug_print_enable_stack_type_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_debug_print_enable_core_type_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_debug_print_enable_app_type_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_debug_print_enable_zcl_type_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_debug_print_enable_legacy_af_debug_type_command(sl_cli_command_arg_t *arguments);
-void emberAfPluginGatewaySupportTimeSyncLocal(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorStartCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorStop(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorFormCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorChannelMaskCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorChannelMaskCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorChannelMaskCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkCreatorStatusCommand(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_gateway_support_time_sync_local(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_start_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_stop(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_form_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_channel_mask_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_channel_mask_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_channel_mask_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_creator_status_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_network_creator_security_set_joining_link_key_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_network_creator_security_clear_joining_link_key_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_network_creator_security_open_or_close_network_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_network_creator_security_open_or_close_network_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_network_creator_security_open_network_with_key_command(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_network_creator_security_configure_distributed_key(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringStatusCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringStartCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringStopCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringSetPreconfiguredKeyCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringChannelSetCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringChannelAddOrSubtractCommand(sl_cli_command_arg_t *arguments);
-void emberAfPluginNetworkSteeringChannelAddOrSubtractCommand(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_status_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_start_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_stop_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_set_preconfigured_key_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_channel_set_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_channel_add_or_subtract_command(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_network_steering_channel_add_or_subtract_command(sl_cli_command_arg_t *arguments);
 void otaImageNotifyCommand(sl_cli_command_arg_t *arguments);
 void otaSendUpgradeCommand(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_ota_server_policy_print(sl_cli_command_arg_t *arguments);
@@ -206,7 +187,7 @@ void sli_zigbee_af_reporting_cli_remove(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_reporting_cli_add(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_reporting_cli_clear_last_report_time(sl_cli_command_arg_t *arguments);
 void sli_zigbee_af_reporting_cli_test_timing(sl_cli_command_arg_t *arguments);
-void emberAfPluginSetTCLinkKeyUpdateTimerCommand(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_set_t_c_link_key_update_timer_command(sl_cli_command_arg_t *arguments);
 void networkFormCommand(sl_cli_command_arg_t *arguments);
 void networkJoinCommand(sl_cli_command_arg_t *arguments);
 void networkPermitJoinCommand(sl_cli_command_arg_t *arguments);
@@ -237,7 +218,6 @@ void optionPrintRxCommand(sl_cli_command_arg_t *arguments);
 void optionRegisterCommand(sl_cli_command_arg_t *arguments);
 void optionDiscoveryTargetCommand(sl_cli_command_arg_t *arguments);
 void optionDiscoverCommand(sl_cli_command_arg_t *arguments);
-void optionEndDeviceBindCommand(sl_cli_command_arg_t *arguments);
 void optionApsRetryCommand(sl_cli_command_arg_t *arguments);
 void optionApsRetryCommand(sl_cli_command_arg_t *arguments);
 void optionApsRetryCommand(sl_cli_command_arg_t *arguments);
@@ -273,236 +253,122 @@ void zdoAddClusterCommand(sl_cli_command_arg_t *arguments);
 void zdoClearClusterCommand(sl_cli_command_arg_t *arguments);
 void zdoAddClusterCommand(sl_cli_command_arg_t *arguments);
 void zdoClearClusterCommand(sl_cli_command_arg_t *arguments);
-void emberAfPrintAttributeTable(sl_cli_command_arg_t *arguments);
+void sl_zigbee_af_print_attribute_table(sl_cli_command_arg_t *arguments);
 void printTimeCommand(sl_cli_command_arg_t *arguments);
 
 // Command structs. Names are in the format : cli_cmd_{command group name}_{command name}
 // In order to support hyphen in command and group name, every occurence of it while
 // building struct names will be replaced by "_hyphen_"
 static const sl_cli_command_info_t cli_cmd_address_hyphen_table_add = \
-  SL_CLI_COMMAND(emberAfPluginAddressTableAddCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_address_table_add_command,
                  "",
                   "Entry to be added" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_address_hyphen_table_set = \
-  SL_CLI_COMMAND(emberAfPluginAddressTableSetCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_address_table_set_command,
                  "Sets an entry in the address table according to the arguments specified.",
                   "" SL_CLI_UNIT_SEPARATOR "" SL_CLI_UNIT_SEPARATOR "" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_HEX, SL_CLI_ARG_UINT16, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_address_hyphen_table_remove = \
-  SL_CLI_COMMAND(emberAfPluginAddressTableRemoveCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_address_table_remove_command,
                  "Removes an entry from the address table.",
                   "Entry to be removed" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_address_hyphen_table_lookup = \
-  SL_CLI_COMMAND(emberAfPluginAddressTableLookupCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_address_table_lookup_command,
                  "Looks up an entry in the address table.",
                   "Entry to be looked up" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_address_hyphen_table_print = \
-  SL_CLI_COMMAND(emberAfPluginAddressTablePrintCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_address_table_print_command,
                  "Prints the address table.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_concentrator_status = \
-  SL_CLI_COMMAND(emberAfPluginConcentratorStatus,
+  SL_CLI_COMMAND(sl_zigbee_af_concentrator_status,
                  "Prints current status and configured parameters of the concentrator.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_concentrator_start = \
-  SL_CLI_COMMAND(emberAfPluginConcentratorStartDiscoveryCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_concentrator_start_discovery_command,
                  "Starts the periodic broadcast of MTORRs.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_concentrator_stop = \
-  SL_CLI_COMMAND(emberAfPluginConcentratorStopDiscoveryCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_concentrator_stop_discovery_command,
                  "Stops the periodic broadcast of MTORRs.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_concentrator_agg = \
-  SL_CLI_COMMAND(emberAfPluginConcentratorAggregationCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_concentrator_aggregation_command,
                  "(Requires Concentrator Support to be enabled on this device.) Schedules a Zigbee PRO Many-To-One Route Request (MTORR) to be sent out at the next opportunity, which will cause aggregation (many-to-one) routes to be created towards this concentrator.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_concentrator_print_hyphen_table = \
-  SL_CLI_COMMAND(emberAfPluginConcentratorPrintSourceRouteTable,
+  SL_CLI_COMMAND(sl_zigbee_af_concentrator_print_source_route_table,
                  "Prints the SoC/NCP source route table.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_concentrator_set_hyphen_router_hyphen_behavior = \
-  SL_CLI_COMMAND(emberAfPluginConcentratorSetRouterBehaviorCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_concentrator_set_router_behavior_command,
                  "This command allows the user to set the router behavior for this component. The argument values come from concentrator-support.h in the enum with members starting with EMBER_AF_PLUGIN_CONCENTRATOR_ROUTER_BEHAVIOR_.",
                   "The value of an EMBER_AF_PLUGIN_CONCENTRATOR_ROUTER_BEHAVIOR_ enum member" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
-static const sl_cli_command_info_t cli_cmd__info = \
-  SL_CLI_COMMAND(sli_zigbee_af_cli_info_command,
-                 "Prints information about the network state, clusters, and endpoints.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__libs = \
-  SL_CLI_COMMAND(printAllLibraryStatus,
-                 "Lists which optional libraries of the stack are implemented on this device.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__bsend = \
-  SL_CLI_COMMAND(sli_zigbee_af_cli_bsend_command,
-                 "Sends a message.",
-                  "Source endpoint" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__send = \
-  SL_CLI_COMMAND(sli_zigbee_cli_send_command,
-                 "Sends a message.",
-                  "Destination" SL_CLI_UNIT_SEPARATOR "Source endpoint" SL_CLI_UNIT_SEPARATOR "Destination endpoint" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__read = \
-  SL_CLI_COMMAND(sli_zigbee_zcl_read_cli_command,
-                 "Reads a message.",
-                  "Endpoint" SL_CLI_UNIT_SEPARATOR "Cluster ID" SL_CLI_UNIT_SEPARATOR "Attribute ID" SL_CLI_UNIT_SEPARATOR "1 if server direction, 0 if client direction" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__write = \
-  SL_CLI_COMMAND(sli_zigbee_zcl_write_cli_command,
-                 "Writes a message.",
-                  "Endpoint" SL_CLI_UNIT_SEPARATOR "Cluster ID" SL_CLI_UNIT_SEPARATOR "Attribute ID" SL_CLI_UNIT_SEPARATOR "Mask" SL_CLI_UNIT_SEPARATOR "Data type" SL_CLI_UNIT_SEPARATOR "Data byte" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__reset = \
-  SL_CLI_COMMAND(resetCommand,
-                 "Resets the node.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__raw = \
-  SL_CLI_COMMAND(sli_zigbee_af_cli_raw_command,
-                 "Creates a message by specifying the raw bytes. Use the send command to send the message once it has been created. Ex: raw 0x000F {00 0A 00 11 22 33 44 55} sends a message to cluster 15 (0x000F) of length 8 which includes the ZCL header.",
-                  "ClusterId" SL_CLI_UNIT_SEPARATOR "Data" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT16, SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__send_multicast = \
-  SL_CLI_COMMAND(sli_zigbee_cli_send_command,
-                 "Sends a pre-buffered multicast message to a given group ID from a given endpoint.",
-                  "groupId" SL_CLI_UNIT_SEPARATOR "src-endpoint" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__send_hyphen_using_hyphen_multicast_hyphen_binding = \
-  SL_CLI_COMMAND(sli_zigbee_af_cli_send_using_multicast_binding_command,
-                 "When sending using a binding, specifies whether a multicast binding should be used.",
-                  "useMulticastBinding" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__timesync = \
-  SL_CLI_COMMAND(sli_zigbee_af_cli_timesync_command,
-                 "Sends a read attr for the time of the device specified. It sets a flag so when it gets the response it writes the time to its own time attr.",
-                  "Id" SL_CLI_UNIT_SEPARATOR "srcEndpoint" SL_CLI_UNIT_SEPARATOR "destEndpoint" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__config_hyphen_cca_hyphen_mode = \
-  SL_CLI_COMMAND(sli_zigbee_cli_config_cca_mode_command,
-                 "Set the configured 802.15.4 CCA mode in the radio. See documentation regarding RAIL_IEEE802154_CcaMode_t.",
-                  "A RAIL_IEEE802154_CcaMode_t value" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__version = \
-  SL_CLI_COMMAND(sli_zigbee_cli_version_command,
-                 "Shows the version of the software.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd_endpoints_print = \
-  SL_CLI_COMMAND(endpointPrint,
-                 "Print status of endpoints.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd_endpoints_enable = \
-  SL_CLI_COMMAND(enableDisableEndpoint,
-                 "Enables the endpoint for ZCL messages.",
-                  "Endpoint index" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd_endpoints_disable = \
-  SL_CLI_COMMAND(enableDisableEndpoint,
-                 "Disable the endpoint for ZCL messages.",
-                  "Endpoint index" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd__events = \
-  SL_CLI_COMMAND(printEvents,
-                 "Print active events.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd_mfg_hyphen_token_get = \
-  SL_CLI_COMMAND(getSetMfgToken,
-                 "Print MFG token.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd_mfg_hyphen_token_set = \
-  SL_CLI_COMMAND(getSetMfgToken,
-                 "Set MFG token, CANNOT BE UNSET BY CLI.",
-                  "",
-                 {SL_CLI_ARG_END, });
-
 static const sl_cli_command_info_t cli_cmd_counters_print = \
-  SL_CLI_COMMAND(emberAfPluginCountersPrintCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_print_command,
                  "Prints all counter values and clears them.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_print_hyphen_counter_hyphen_type = \
-  SL_CLI_COMMAND(emberAfPluginCounterPrintCounterTypeCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_print_counters_type_command,
                  "Prints the value of this particular counter.",
                   "The counter type to print" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_simple_hyphen_print = \
-  SL_CLI_COMMAND(emberAfPluginCountersSimplePrintCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_simple_print_command,
                  "Prints all counter values.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_clear = \
-  SL_CLI_COMMAND(emberAfPluginCountersClear,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_clear,
                  "Clears all counter values.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_print_hyphen_thresholds = \
-  SL_CLI_COMMAND(emberAfPluginCountersPrintThresholdsCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_print_thresholds_command,
                  "Prints the thresholds of all the counters.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_set_hyphen_threshold = \
-  SL_CLI_COMMAND(emberAfPluginCountersSetThresholdCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_set_threshold_command,
                  "Sets a threshold value for a particular type of counter.",
                   "Type of counter" SL_CLI_UNIT_SEPARATOR "Threshold Value" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT16, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_reset_hyphen_thresholds = \
-  SL_CLI_COMMAND(emberAfPluginCountersResetThresholds,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_reset_thresholds,
                  "Resets all thresholds values to 0xFFFF.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_counters_send_hyphen_request = \
-  SL_CLI_COMMAND(emberAfPluginCountersSendRequestCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_counters_send_request_command,
                  "Sends a request for OTA counters.",
                   "",
                  {SL_CLI_ARG_END, });
@@ -538,49 +404,49 @@ static const sl_cli_command_info_t cli_cmd_enable_type_legacy_af_debug = \
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_gateway_time_hyphen_sync_hyphen_local = \
-  SL_CLI_COMMAND(emberAfPluginGatewaySupportTimeSyncLocal,
+  SL_CLI_COMMAND(sl_zigbee_af_gateway_support_time_sync_local,
                  "",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_creator_start = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorStartCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_start_command,
                  "Starts the network formation process.",
                   "Whether or not to form a centralized network. If this value is false, the device will attempt to join a distributed network." SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_INT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_creator_stop = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorStop,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_stop,
                  "Stops the network formation process.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_creator_form = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorFormCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_form_command,
                  "Forms a network with specified parameters.",
                   "Whether or not to form a centralized network. If this value is false, the device will attempt to join a distributed network." SL_CLI_UNIT_SEPARATOR "PanID of the network to be formed" SL_CLI_UNIT_SEPARATOR "Tx power of the network to be formed" SL_CLI_UNIT_SEPARATOR "Channel of the network to be formed" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_INT8, SL_CLI_ARG_UINT16, SL_CLI_ARG_INT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_mask_add = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorChannelMaskCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_channel_mask_command,
                  "Adds a channel to the channel mask of choice.",
                   "The mask to which to add the channel. 1 chooses the primary channel mask, any other argument chooses the secondary channel mask." SL_CLI_UNIT_SEPARATOR "The channel to add to the channel mask" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT32, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_mask_subtract = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorChannelMaskCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_channel_mask_command,
                  "Subtracts a channel from the channel mask of choice.",
                   "The mask from which to subtract the channel. 1 chooses the primary channel mask. Any other argument chooses the secondary channel mask." SL_CLI_UNIT_SEPARATOR "The channel to subtract from the channel mask" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT32, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_mask_set = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorChannelMaskCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_channel_mask_command,
                  "Sets a channel mask.",
                   "The mask  to set. 1 chooses the primary channel mask. Any other argument chooses the secondary channel mask." SL_CLI_UNIT_SEPARATOR "The bit mask to which to set the chosen channel mask." SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT32, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_creator_status = \
-  SL_CLI_COMMAND(emberAfPluginNetworkCreatorStatusCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_creator_status_command,
                  "Prints the status of the network-creator component.",
                   "",
                  {SL_CLI_ARG_END, });
@@ -622,43 +488,43 @@ static const sl_cli_command_info_t cli_cmd_network_hyphen_creator_hyphen_securit
                  {SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_steering_status = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringStatusCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_status_command,
                  "Displays the current status of the network steering process.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_steering_start = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringStartCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_start_command,
                  "Starts the network steering process.",
                   "A mask of options for indicating specific behavior within the network-steering process." SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_steering_stop = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringStopCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_stop_command,
                  "Stops the network steering process.",
                   "",
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_hyphen_steering_pre_hyphen_configured_hyphen_key_hyphen_set = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringSetPreconfiguredKeyCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_set_preconfigured_key_command,
                  "Sets the pre-configured key so that the joining device can enter the network.",
                   "Sets the preconfigured key" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_HEX, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_shell_mask_1_set = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringChannelSetCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_channel_set_command,
                  "Sets either the primary or secondary channel mask.",
                   "The channel mask to subtract the channel from" SL_CLI_UNIT_SEPARATOR "The value to set the channel mask to." SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT32, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_shell_mask_1_add = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringChannelAddOrSubtractCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_channel_add_or_subtract_command,
                  "Adds a channel to either the primary or secondary channel mask of the network-steering component.",
                   "The channel mask to add a channel to" SL_CLI_UNIT_SEPARATOR "The channel to add to the mask" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_shell_mask_1_subtract = \
-  SL_CLI_COMMAND(emberAfPluginNetworkSteeringChannelAddOrSubtractCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_network_steering_channel_add_or_subtract_command,
                  "Subtracts a channel from either the primary or secondary channel mask of the network-steering component.",
                   "The channel mask to subtract the channel from" SL_CLI_UNIT_SEPARATOR "The channel to subtract the mask from" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
@@ -784,7 +650,7 @@ static const sl_cli_command_info_t cli_cmd_reporting_test_hyphen_timing = \
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_update_hyphen_tc_hyphen_link_hyphen_key_timer = \
-  SL_CLI_COMMAND(emberAfPluginSetTCLinkKeyUpdateTimerCommand,
+  SL_CLI_COMMAND(sl_zigbee_af_set_t_c_link_key_update_timer_command,
                  "This sets the the amount of time between subsequent trust center link key updates in milliseconds.",
                   "The amount of time between subsequent trust center link key updates in milliseconds" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT32, SL_CLI_ARG_END, });
@@ -822,7 +688,7 @@ static const sl_cli_command_info_t cli_cmd_network_rejoin = \
 static const sl_cli_command_info_t cli_cmd_network_rejoin_hyphen_diff_hyphen_device_hyphen_type = \
   SL_CLI_COMMAND(networkRejoinDiffDeviceTypeCommand,
                  "Rejoins an existing network in a secure or insecure manner with a different device type.",
-                  "Boolean network key availability" SL_CLI_UNIT_SEPARATOR "Channel mask" SL_CLI_UNIT_SEPARATOR "An enumeration indicating the device type to rejoin as.The stack only accepts EMBER_END_DEVICE and EMBER_SLEEPY_END_DEVICE." SL_CLI_UNIT_SEPARATOR,
+                  "Boolean network key availability" SL_CLI_UNIT_SEPARATOR "Channel mask" SL_CLI_UNIT_SEPARATOR "An enumeration indicating the device type to rejoin as.The stack only accepts SL_ZIGBEE_END_DEVICE and SL_ZIGBEE_SLEEPY_END_DEVICE." SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT8, SL_CLI_ARG_INT32, SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_network_extpanid = \
@@ -968,12 +834,6 @@ static const sl_cli_command_info_t cli_cmd_option_disc = \
                  "",
                   "profileId" SL_CLI_UNIT_SEPARATOR "clusterId" SL_CLI_UNIT_SEPARATOR,
                  {SL_CLI_ARG_UINT16, SL_CLI_ARG_UINT16, SL_CLI_ARG_END, });
-
-static const sl_cli_command_info_t cli_cmd_option_edb = \
-  SL_CLI_COMMAND(optionEndDeviceBindCommand,
-                 "",
-                  "endpointId" SL_CLI_UNIT_SEPARATOR,
-                 {SL_CLI_ARG_UINT8, SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_apsretry_on = \
   SL_CLI_COMMAND(optionApsRetryCommand,
@@ -1186,7 +1046,7 @@ static const sl_cli_command_info_t cli_cmd_in_hyphen_cl_hyphen_list_clear = \
                  {SL_CLI_ARG_END, });
 
 static const sl_cli_command_info_t cli_cmd_print_attr = \
-  SL_CLI_COMMAND(emberAfPrintAttributeTable,
+  SL_CLI_COMMAND(sl_zigbee_af_print_attribute_table,
                  "Prints attribute.",
                   "",
                  {SL_CLI_ARG_END, });
@@ -1223,42 +1083,6 @@ static const sl_cli_command_entry_t concentrator_group_table[] = {
 };
 static const sl_cli_command_info_t cli_cmd_grp_concentrator = \
   SL_CLI_COMMAND_GROUP(concentrator_group_table, "concentrator related commands.");
-
-static const sl_cli_command_entry_t endpoints_group_table[] = {
-  { "print", &cli_cmd_endpoints_print, false },
-  { "enable", &cli_cmd_endpoints_enable, false },
-  { "disable", &cli_cmd_endpoints_disable, false },
-  { NULL, NULL, false },
-};
-static const sl_cli_command_info_t cli_cmd_grp_endpoints = \
-  SL_CLI_COMMAND_GROUP(endpoints_group_table, "endpoint related commands.");
-
-static const sl_cli_command_entry_t mfg_hyphen_token_group_table[] = {
-  { "get", &cli_cmd_mfg_hyphen_token_get, false },
-  { "set", &cli_cmd_mfg_hyphen_token_set, false },
-  { NULL, NULL, false },
-};
-static const sl_cli_command_info_t cli_cmd_grp_mfg_hyphen_token = \
-  SL_CLI_COMMAND_GROUP(mfg_hyphen_token_group_table, "Get/set MFG token.");
-
-static const sl_cli_command_entry_t aps_group_table[] = {
-  { "on", &cli_cmd_aps_on, false },
-  { "off", &cli_cmd_aps_off, false },
-  { NULL, NULL, false },
-};
-static const sl_cli_command_info_t cli_cmd_grp_aps = \
-  SL_CLI_COMMAND_GROUP(aps_group_table, "Security aps related commands.");
-
-static const sl_cli_command_entry_t security_group_table[] = {
-  { "set-allow-trust-center-rejoin-using-well-known-key", &cli_cmd_security_set_hyphen_allow_hyphen_trust_hyphen_center_hyphen_rejoin_hyphen_using_hyphen_well_hyphen_known_hyphen_key, false },
-  { "set-allow-trust-center-rejoin-using-well-known-key-timeout", &cli_cmd_security_set_hyphen_allow_hyphen_trust_hyphen_center_hyphen_rejoin_hyphen_using_hyphen_well_hyphen_known_hyphen_key_hyphen_timeout, false },
-  { "set-key-request-policy", &cli_cmd_security_set_hyphen_key_hyphen_request_hyphen_policy, false },
-  { "mfg-token", &cli_cmd_grp_mfg_hyphen_token, false },
-  { "aps", &cli_cmd_grp_aps, false },
-  { NULL, NULL, false },
-};
-static const sl_cli_command_info_t cli_cmd_grp_security = \
-  SL_CLI_COMMAND_GROUP(security_group_table, "security related commands");
 
 static const sl_cli_command_entry_t counters_group_table[] = {
   { "print", &cli_cmd_counters_print, false },
@@ -1487,11 +1311,28 @@ static const sl_cli_command_entry_t apsretry_group_table[] = {
 static const sl_cli_command_info_t cli_cmd_grp_apsretry = \
   SL_CLI_COMMAND_GROUP(apsretry_group_table, "APS retry flag force commands");
 
+static const sl_cli_command_entry_t aps_group_table[] = {
+  { "on", &cli_cmd_aps_on, false },
+  { "off", &cli_cmd_aps_off, false },
+  { NULL, NULL, false },
+};
+static const sl_cli_command_info_t cli_cmd_grp_aps = \
+  SL_CLI_COMMAND_GROUP(aps_group_table, "Security aps related commands.");
+
+static const sl_cli_command_entry_t security_group_table[] = {
+  { "set-allow-trust-center-rejoin-using-well-known-key", &cli_cmd_security_set_hyphen_allow_hyphen_trust_hyphen_center_hyphen_rejoin_hyphen_using_hyphen_well_hyphen_known_hyphen_key, false },
+  { "set-allow-trust-center-rejoin-using-well-known-key-timeout", &cli_cmd_security_set_hyphen_allow_hyphen_trust_hyphen_center_hyphen_rejoin_hyphen_using_hyphen_well_hyphen_known_hyphen_key_hyphen_timeout, false },
+  { "set-key-request-policy", &cli_cmd_security_set_hyphen_key_hyphen_request_hyphen_policy, false },
+  { "aps", &cli_cmd_grp_aps, false },
+  { NULL, NULL, false },
+};
+static const sl_cli_command_info_t cli_cmd_grp_security = \
+  SL_CLI_COMMAND_GROUP(security_group_table, "Security related commands.");
+
 static const sl_cli_command_entry_t option_group_table[] = {
   { "register", &cli_cmd_option_register, false },
   { "target", &cli_cmd_option_target, false },
   { "disc", &cli_cmd_option_disc, false },
-  { "edb", &cli_cmd_option_edb, false },
   { "link", &cli_cmd_option_link, false },
   { "install-code", &cli_cmd_option_install_hyphen_code, false },
   { "binding-table", &cli_cmd_grp_binding_hyphen_table, false },
@@ -1578,22 +1419,6 @@ static const sl_cli_command_info_t cli_cmd_grp_print = \
 
 // Create root command table
 const sl_cli_command_entry_t sl_cli_default_command_table[] = {
-  { "info", &cli_cmd__info, false },
-  { "libs", &cli_cmd__libs, false },
-  { "bsend", &cli_cmd__bsend, false },
-  { "send", &cli_cmd__send, false },
-  { "read", &cli_cmd__read, false },
-  { "write", &cli_cmd__write, false },
-  { "reset", &cli_cmd__reset, false },
-  { "raw", &cli_cmd__raw, false },
-  { "send_multicast", &cli_cmd__send_multicast, false },
-  { "send-using-multicast-binding", &cli_cmd__send_hyphen_using_hyphen_multicast_hyphen_binding, false },
-  { "timesync", &cli_cmd__timesync, false },
-  { "config-cca-mode", &cli_cmd__config_hyphen_cca_hyphen_mode, false },
-  { "version", &cli_cmd__version, false },
-  { "events", &cli_cmd__events, false },
-  { "endpoints", &cli_cmd_grp_endpoints, false },
-  { "security", &cli_cmd_grp_security, false },
   { "zigbee_print", &cli_cmd_grp_zigbee_print, false },
   { "plugin", &cli_cmd_grp_plugin, false },
   { "network", &cli_cmd_grp_network, false },

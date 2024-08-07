@@ -7570,9 +7570,9 @@ std::string get_json_payload_for_door_lock_set_user_command(
   json_payload["UserStatus"] =
     set_user_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
-  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
-    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -7627,7 +7627,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
   
   uint32_t &user_uniqueid,
   
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
   
   DrlkUserType &user_type,
   
@@ -7641,10 +7641,10 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
     OperationType_enum_val = data_operation_type_enum_get_enum_value_number(jsn.at("OperationType").get<std::string>());
     #endif
   }
-  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkUserStatus>("UserStatus", jsn);
-  if (UserStatus_enum_val == std::numeric_limits<DrlkUserStatus>::max()) {
-    #ifdef DRLK_USER_STATUS_ENUM_NAME_AVAILABLE
-    UserStatus_enum_val = drlk_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
+  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkSettableUserStatus>("UserStatus", jsn);
+  if (UserStatus_enum_val == std::numeric_limits<DrlkSettableUserStatus>::max()) {
+    #ifdef DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE
+    UserStatus_enum_val = drlk_settable_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
     #endif
   }
   uint32_t UserType_enum_val = get_enum_decimal_value<DrlkUserType>("UserType", jsn);
@@ -7686,7 +7686,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
-  user_status = static_cast<DrlkUserStatus>(UserStatus_enum_val);
+  user_status = static_cast<DrlkSettableUserStatus>(UserStatus_enum_val);
   if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -8155,9 +8155,9 @@ std::string get_json_payload_for_door_lock_set_credential_command(
   json_payload["UserStatus"] =
     set_credential_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
-  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
   json_payload["UserStatus"] =
-    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -8197,7 +8197,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
   
   uint16_t &user_index,
   
-  DrlkUserStatus &user_status,
+  DrlkSettableUserStatus &user_status,
   
   DrlkUserType &user_type
   
@@ -8209,10 +8209,10 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
     OperationType_enum_val = data_operation_type_enum_get_enum_value_number(jsn.at("OperationType").get<std::string>());
     #endif
   }
-  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkUserStatus>("UserStatus", jsn);
-  if (UserStatus_enum_val == std::numeric_limits<DrlkUserStatus>::max()) {
-    #ifdef DRLK_USER_STATUS_ENUM_NAME_AVAILABLE
-    UserStatus_enum_val = drlk_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
+  uint32_t UserStatus_enum_val = get_enum_decimal_value<DrlkSettableUserStatus>("UserStatus", jsn);
+  if (UserStatus_enum_val == std::numeric_limits<DrlkSettableUserStatus>::max()) {
+    #ifdef DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE
+    UserStatus_enum_val = drlk_settable_user_status_get_enum_value_number(jsn.at("UserStatus").get<std::string>());
     #endif
   }
   uint32_t UserType_enum_val = get_enum_decimal_value<DrlkUserType>("UserType", jsn);
@@ -8248,7 +8248,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
-  user_status = static_cast<DrlkUserStatus>(UserStatus_enum_val);
+  user_status = static_cast<DrlkSettableUserStatus>(UserStatus_enum_val);
   if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -14793,6 +14793,301 @@ void uic_mqtt_dotdot_parse_descriptor_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_descriptor_state_t &new_state,
   uic_mqtt_dotdot_descriptor_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
+std::string get_json_payload_for_unify_fan_control_set_fan_mode_command(
+  
+  const uic_mqtt_dotdot_unify_fan_control_command_set_fan_mode_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetFanMode / FanMode
+  #ifdef SET_FAN_MODE_FAN_MODE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["FanMode"] =
+    set_fan_mode_fan_mode_get_enum_value_name(
+      (uint32_t)fields->fan_mode);
+  #elif defined(Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["FanMode"] =
+    z_wave_fan_mode_enum_get_enum_value_name((uint32_t)fields->fan_mode);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["FanMode"] = fields->fan_mode;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_fan_control_set_fan_mode(
+  nlohmann::json &jsn,
+  ZWaveFanModeEnum &fan_mode
+  
+) {
+
+  uint32_t FanMode_enum_val = get_enum_decimal_value<ZWaveFanModeEnum>("FanMode", jsn);
+  if (FanMode_enum_val == std::numeric_limits<ZWaveFanModeEnum>::max()) {
+    #ifdef Z_WAVE_FAN_MODE_ENUM_ENUM_NAME_AVAILABLE
+    FanMode_enum_val = z_wave_fan_mode_enum_get_enum_value_number(jsn.at("FanMode").get<std::string>());
+    #endif
+  }
+  if (jsn.at("FanMode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  fan_mode = static_cast<ZWaveFanModeEnum>(FanMode_enum_val);
+}
+
+
+std::string get_json_payload_for_unify_fan_control_turn_off_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_fan_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_fan_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_fan_control_updated_state_t &new_updated_state
+) {
+
+
+  if (jsn.find("ZWaveFanMode") != jsn.end()) {
+
+    uint32_t tmp = get_enum_decimal_value<ZWaveFanModeEnum>("ZWaveFanMode", jsn);
+    if (tmp == std::numeric_limits<ZWaveFanModeEnum>::max()) {
+      #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+      tmp = unify_fan_control_z_wave_fan_mode_get_enum_value_number(jsn.at("ZWaveFanMode").get<std::string>());
+      #elif defined(Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE)
+      tmp = z_wave_fan_mode_get_enum_value_number(jsn.at("ZWaveFanMode").get<std::string>());
+      #endif
+    }
+    new_state.z_wave_fan_mode = tmp;
+  
+    new_updated_state.z_wave_fan_mode = true;
+  }
+
+
+}
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_thermostat_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_thermostat_state_t &new_state,
+  uic_mqtt_dotdot_unify_thermostat_updated_state_t &new_updated_state
+) {
+
+
+  if (jsn.find("ThermostatMode") != jsn.end()) {
+
+    uint32_t tmp = get_enum_decimal_value<UnifyThermostatThermostatMode>("ThermostatMode", jsn);
+    if (tmp == std::numeric_limits<UnifyThermostatThermostatMode>::max()) {
+      #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+      tmp = unify_thermostat_thermostat_mode_get_enum_value_number(jsn.at("ThermostatMode").get<std::string>());
+      #elif defined(THERMOSTAT_MODE_ENUM_NAME_AVAILABLE)
+      tmp = thermostat_mode_get_enum_value_number(jsn.at("ThermostatMode").get<std::string>());
+      #endif
+    }
+    new_state.thermostat_mode = tmp;
+  
+    new_updated_state.thermostat_mode = true;
+  }
+
+
+}
+
+
+std::string get_json_payload_for_unify_humidity_control_mode_set_command(
+  
+  const uic_mqtt_dotdot_unify_humidity_control_command_mode_set_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModeSet / Mode
+  #ifdef MODE_SET_MODE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["Mode"] =
+    mode_set_mode_get_enum_value_name(
+      (uint32_t)fields->mode);
+  #elif defined(MODE_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["Mode"] =
+    mode_type_get_enum_value_name((uint32_t)fields->mode);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["Mode"] = fields->mode;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_humidity_control_mode_set(
+  nlohmann::json &jsn,
+  ModeType &mode
+  
+) {
+
+  uint32_t Mode_enum_val = get_enum_decimal_value<ModeType>("Mode", jsn);
+  if (Mode_enum_val == std::numeric_limits<ModeType>::max()) {
+    #ifdef MODE_TYPE_ENUM_NAME_AVAILABLE
+    Mode_enum_val = mode_type_get_enum_value_number(jsn.at("Mode").get<std::string>());
+    #endif
+  }
+  if (jsn.at("Mode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  mode = static_cast<ModeType>(Mode_enum_val);
+}
+
+
+std::string get_json_payload_for_unify_humidity_control_setpoint_set_command(
+  
+  const uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum SetpointSet / Type
+  #ifdef SETPOINT_SET_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["Type"] =
+    setpoint_set_type_get_enum_value_name(
+      (uint32_t)fields->type);
+  #elif defined(SETPOINT_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["Type"] =
+    setpoint_type_get_enum_value_name((uint32_t)fields->type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["Type"] = fields->type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Precision"] = nlohmann::json(fields->precision);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Scale"] = nlohmann::json(fields->scale);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Value"] = nlohmann::json(fields->value);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
+  nlohmann::json &jsn,
+  SetpointType &type,
+  
+  uint8_t &precision,
+  
+  uint8_t &scale,
+  
+  int32_t &value
+  
+) {
+
+  uint32_t Type_enum_val = get_enum_decimal_value<SetpointType>("Type", jsn);
+  if (Type_enum_val == std::numeric_limits<SetpointType>::max()) {
+    #ifdef SETPOINT_TYPE_ENUM_NAME_AVAILABLE
+    Type_enum_val = setpoint_type_get_enum_value_number(jsn.at("Type").get<std::string>());
+    #endif
+  }
+  if (jsn.at("Type").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  type = static_cast<SetpointType>(Type_enum_val);
+  if (jsn.at("Precision").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  precision = jsn.at("Precision").get< uint8_t >();
+      if (jsn.at("Scale").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  scale = jsn.at("Scale").get< uint8_t >();
+      if (jsn.at("Value").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  value = jsn.at("Value").get< int32_t >();
+    }
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_humidity_control_state_t &new_state,
+  uic_mqtt_dotdot_unify_humidity_control_updated_state_t &new_updated_state
 ) {
 
 

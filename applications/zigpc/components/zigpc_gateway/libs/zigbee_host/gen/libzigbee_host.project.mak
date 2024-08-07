@@ -1,16 +1,16 @@
 ####################################################################
 # Automatically-generated file. Do not edit!                       #
-# Makefile Version 10                                              #
+# Makefile Version 15                                              #
 ####################################################################
 
-BASE_SDK_PATH =
-UNAME:=$(shell uname -s | sed -e 's/^\(CYGWIN\).*/\1/' | sed -e 's/^\(MINGW\).*/\1/')
+BASE_SDK_PATH = /home/sabollim/JIRA/utf/uic/externals/GeckoSDK
+UNAME:=$(shell $(POSIX_TOOL_PATH)uname -s | $(POSIX_TOOL_PATH)sed -e 's/^\(CYGWIN\).*/\1/' | $(POSIX_TOOL_PATH)sed -e 's/^\(MINGW\).*/\1/')
 ifeq ($(UNAME),MINGW)
 # Translate "C:/super" into "/C/super" for MinGW make.
-SDK_PATH := /$(shell echo $(BASE_SDK_PATH) | sed s/://)
+SDK_PATH := /$(shell $(POSIX_TOOL_PATH)echo $(BASE_SDK_PATH) | sed s/://)
 endif
 SDK_PATH ?= $(BASE_SDK_PATH)
-COPIED_SDK_PATH ?= gecko_sdk_4.3.0
+COPIED_SDK_PATH ?= simplicity_sdk_2024.6.0
 
 # This uses the explicit build rules below
 PROJECT_SOURCE_FILES =
@@ -23,12 +23,16 @@ ASM_SOURCE_FILES += $(filter %.S, $(PROJECT_SOURCE_FILES))
 LIB_FILES        += $(filter %.a, $(PROJECT_SOURCE_FILES))
 
 C_DEFS += \
- '-DEMBER_AF_PLUGIN_GATEWAY_SUPPORT_MAX_WAIT_FOR_EVENTS_TIMEOUT_MS=10' \
- '-DEMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32' \
+ '-DSL_ZIGBEE_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS=10' \
+ '-DSL_ZIGBEE_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32' \
  '-DSL_COMPONENT_CATALOG_PRESENT=1' \
  '-DPLATFORM_HEADER="platform-header.h"' \
+ '-DSL_CODE_COMPONENT_CORE=core' \
  '-DEZSP_HOST=1' \
  '-DGATEWAY_APP=1' \
+ '-DSTACK_CORE_HEADER="stack/core/sl_zigbee_stack.h"' \
+ '-DSTACK_HEADER="stack/include/sl_zigbee.h"' \
+ '-DSTACK_TYPES_HEADER="stack/include/sl_zigbee_types.h"' \
  '-DUC_BUILD=1' \
  '-DEZSP_ASH=1' \
  '-DEZSP_UART=1' \
@@ -36,12 +40,16 @@ C_DEFS += \
  '-DCONFIGURATION_HEADER="app/framework/util/config.h"'
 
 ASM_DEFS += \
- '-DEMBER_AF_PLUGIN_GATEWAY_SUPPORT_MAX_WAIT_FOR_EVENTS_TIMEOUT_MS=10' \
- '-DEMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32' \
+ '-DSL_ZIGBEE_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS=10' \
+ '-DSL_ZIGBEE_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT=32' \
  '-DSL_COMPONENT_CATALOG_PRESENT=1' \
  '-DPLATFORM_HEADER="platform-header.h"' \
+ '-DSL_CODE_COMPONENT_CORE=core' \
  '-DEZSP_HOST=1' \
  '-DGATEWAY_APP=1' \
+ '-DSTACK_CORE_HEADER="stack/core/sl_zigbee_stack.h"' \
+ '-DSTACK_HEADER="stack/include/sl_zigbee.h"' \
+ '-DSTACK_TYPES_HEADER="stack/include/sl_zigbee_types.h"' \
  '-DUC_BUILD=1' \
  '-DEZSP_ASH=1' \
  '-DEZSP_UART=1' \
@@ -53,12 +61,12 @@ INCLUDES += \
  -Iautogen \
  -I../src \
  -I../include \
+ -I$(SDK_PATH)/util/plugin/byte_utilities \
  -I$(SDK_PATH)/platform/service/cli/inc \
  -I$(SDK_PATH)/platform/service/cli/src \
  -I$(SDK_PATH)/platform/CMSIS/Core/Include \
- -I$(SDK_PATH)/platform/emlib/inc \
- -I$(SDK_PATH)/platform/emlib/host/inc \
  -I$(SDK_PATH)/platform/common/inc \
+ -I$(SDK_PATH)/platform/emlib/host/inc \
  -I$(SDK_PATH)/platform/service/iostream/inc \
  -I$(SDK_PATH)/platform/service/legacy_common_ash/inc \
  -I$(SDK_PATH)/platform/service/legacy_hal/inc \
@@ -66,7 +74,6 @@ INCLUDES += \
  -I$(SDK_PATH)/util/third_party/printf/inc \
  -I$(SDK_PATH)/util/silicon_labs/silabs_core \
  -I$(SDK_PATH)/util/silicon_labs/silabs_core/event_queue \
- -I$(SDK_PATH)/util/silicon_labs/silabs_core/memory_manager \
  -I$(SDK_PATH)/platform/service/system/inc \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic \
@@ -78,7 +85,6 @@ INCLUDES += \
  -I$(SDK_PATH)/. \
  -I$(SDK_PATH)/protocol/zigbee \
  -I$(SDK_PATH)/protocol/zigbee/app/ezsp-host \
- -I$(SDK_PATH)/protocol/zigbee/app/util/gateway \
  -I$(SDK_PATH)/protocol/zigbee/app/util/ezsp \
  -I$(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework \
  -I$(SDK_PATH)/protocol/zigbee/stack \
@@ -86,6 +92,7 @@ INCLUDES += \
  -I$(SDK_PATH)/protocol/zigbee/stack/include \
  -I$(SDK_PATH)/platform/radio/mac \
  -I$(SDK_PATH)/platform/service/token_manager/inc \
+ -I$(SDK_PATH)/platform/emlib/inc \
  -I$(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway \
@@ -107,6 +114,7 @@ INCLUDES += \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin/scan-dispatch \
  -I$(SDK_PATH)/protocol/zigbee/stack/security \
+ -I$(SDK_PATH)/protocol/zigbee/stack/internal/inc \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/signature-decode \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast \
  -I$(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key \
@@ -132,26 +140,26 @@ LIBS += $(GROUP_START) $(PROJECT_LIBS) $(GROUP_END)
 LIB_FILES += $(filter %.a, $(PROJECT_LIBS))
 
 C_FLAGS += \
- -std=c99 \
+ -std=c18 \
  -Wall \
  -Wextra \
  -Os \
  -std=c11 \
+ -fPIC \
  -Wno-unused-parameter \
  -Wno-missing-field-initializers \
- -Wno-missing-braces \
- -Wno-format
+ -Wno-missing-braces
 
 CXX_FLAGS += \
- -std=c++11 \
+ -std=c++17 \
  -Wall \
  -Wextra \
  -Os \
  -std=c++11 \
+ -fPIC \
  -Wno-unused-parameter \
  -Wno-missing-field-initializers \
- -Wno-missing-braces \
- -Wno-format
+ -Wno-missing-braces
 
 ASM_FLAGS += \
 
@@ -159,1129 +167,1096 @@ LD_FLAGS += \
 
 
 ####################################################################
+# Pre/Post Build Rules                                             #
+####################################################################
+pre-build:
+	# No pre-build defined
+
+post-build: $(OUTPUT_DIR)/$(PROJECTNAME).out
+	# No post-build defined
+
+####################################################################
 # SDK Build Rules                                                  #
 ####################################################################
 $(OUTPUT_DIR)/sdk/platform/common/src/sl_assert.o: $(SDK_PATH)/platform/common/src/sl_assert.c
-	@echo 'Building $(SDK_PATH)/platform/common/src/sl_assert.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/common/src/sl_assert.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/common/src/sl_assert.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_assert.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_assert.o
 
+$(OUTPUT_DIR)/sdk/platform/common/src/sl_core_mock.o: $(SDK_PATH)/platform/common/src/sl_core_mock.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/common/src/sl_core_mock.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/common/src/sl_core_mock.c
+CDEPS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_core_mock.d
+OBJS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_core_mock.o
+
 $(OUTPUT_DIR)/sdk/platform/common/src/sl_slist.o: $(SDK_PATH)/platform/common/src/sl_slist.c
-	@echo 'Building $(SDK_PATH)/platform/common/src/sl_slist.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/common/src/sl_slist.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/common/src/sl_slist.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_slist.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_slist.o
 
 $(OUTPUT_DIR)/sdk/platform/common/src/sl_string.o: $(SDK_PATH)/platform/common/src/sl_string.c
-	@echo 'Building $(SDK_PATH)/platform/common/src/sl_string.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/common/src/sl_string.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/common/src/sl_string.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_string.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/common/src/sl_string.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli.o: $(SDK_PATH)/platform/service/cli/src/sl_cli.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_arguments.o: $(SDK_PATH)/platform/service/cli/src/sl_cli_arguments.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_arguments.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_arguments.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli_arguments.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_arguments.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_arguments.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_command.o: $(SDK_PATH)/platform/service/cli/src/sl_cli_command.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_command.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_command.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli_command.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_command.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_command.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_input.o: $(SDK_PATH)/platform/service/cli/src/sl_cli_input.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_input.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_input.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli_input.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_input.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_input.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_io.o: $(SDK_PATH)/platform/service/cli/src/sl_cli_io.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_io.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_io.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli_io.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_io.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_io.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_threaded_host.o: $(SDK_PATH)/platform/service/cli/src/sl_cli_threaded_host.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_threaded_host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_threaded_host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli_threaded_host.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_threaded_host.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_threaded_host.o
 
 $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_tokenize.o: $(SDK_PATH)/platform/service/cli/src/sl_cli_tokenize.c
-	@echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_tokenize.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/cli/src/sl_cli_tokenize.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/cli/src/sl_cli_tokenize.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_tokenize.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/cli/src/sl_cli_tokenize.o
 
 $(OUTPUT_DIR)/sdk/platform/service/iostream/src/sl_iostream.o: $(SDK_PATH)/platform/service/iostream/src/sl_iostream.c
-	@echo 'Building $(SDK_PATH)/platform/service/iostream/src/sl_iostream.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/iostream/src/sl_iostream.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/iostream/src/sl_iostream.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/iostream/src/sl_iostream.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/iostream/src/sl_iostream.o
 
 $(OUTPUT_DIR)/sdk/platform/service/iostream/src/sl_iostream_stdio.o: $(SDK_PATH)/platform/service/iostream/src/sl_iostream_stdio.c
-	@echo 'Building $(SDK_PATH)/platform/service/iostream/src/sl_iostream_stdio.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/iostream/src/sl_iostream_stdio.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/iostream/src/sl_iostream_stdio.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/iostream/src/sl_iostream_stdio.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/iostream/src/sl_iostream_stdio.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_common_ash/src/ash-common.o: $(SDK_PATH)/platform/service/legacy_common_ash/src/ash-common.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_common_ash/src/ash-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_common_ash/src/ash-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_common_ash/src/ash-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_common_ash/src/ash-common.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_common_ash/src/ash-common.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/crc.o: $(SDK_PATH)/platform/service/legacy_hal/src/crc.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/crc.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/crc.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_hal/src/crc.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/crc.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/crc.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/ember-printf-convert.o: $(SDK_PATH)/platform/service/legacy_hal/src/ember-printf-convert.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/ember-printf-convert.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/ember-printf-convert.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_hal/src/ember-printf-convert.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/ember-printf-convert.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/ember-printf-convert.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/micro_host.o: $(SDK_PATH)/platform/service/legacy_hal/src/micro_host.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/micro_host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/micro_host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_hal/src/micro_host.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/micro_host.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/micro_host.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/random.o: $(SDK_PATH)/platform/service/legacy_hal/src/random.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/random.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/random.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_hal/src/random.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/random.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/random.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/system-timer.o: $(SDK_PATH)/platform/service/legacy_hal/src/system-timer.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/system-timer.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_hal/src/system-timer.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_hal/src/system-timer.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/system-timer.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_hal/src/system-timer.o
 
 $(OUTPUT_DIR)/sdk/platform/service/legacy_host/src/token.o: $(SDK_PATH)/platform/service/legacy_host/src/token.c
-	@echo 'Building $(SDK_PATH)/platform/service/legacy_host/src/token.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/legacy_host/src/token.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/legacy_host/src/token.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/legacy_host/src/token.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/legacy_host/src/token.o
 
 $(OUTPUT_DIR)/sdk/platform/service/system/src/sl_system_init.o: $(SDK_PATH)/platform/service/system/src/sl_system_init.c
-	@echo 'Building $(SDK_PATH)/platform/service/system/src/sl_system_init.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/system/src/sl_system_init.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/system/src/sl_system_init.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/system/src/sl_system_init.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/system/src/sl_system_init.o
 
 $(OUTPUT_DIR)/sdk/platform/service/system/src/sl_system_process_action.o: $(SDK_PATH)/platform/service/system/src/sl_system_process_action.c
-	@echo 'Building $(SDK_PATH)/platform/service/system/src/sl_system_process_action.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/system/src/sl_system_process_action.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/system/src/sl_system_process_action.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/system/src/sl_system_process_action.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/system/src/sl_system_process_action.o
 
 $(OUTPUT_DIR)/sdk/platform/service/token_manager/src/sl_token_def.o: $(SDK_PATH)/platform/service/token_manager/src/sl_token_def.c
-	@echo 'Building $(SDK_PATH)/platform/service/token_manager/src/sl_token_def.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/platform/service/token_manager/src/sl_token_def.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/platform/service/token_manager/src/sl_token_def.c
 CDEPS += $(OUTPUT_DIR)/sdk/platform/service/token_manager/src/sl_token_def.d
 OBJS += $(OUTPUT_DIR)/sdk/platform/service/token_manager/src/sl_token_def.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.o: $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ash/ash-host-ui.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ash/ash-host.o: $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ash/ash-host.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ash/ash-host.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ash/ash-host.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-io.o: $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-io.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-io.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-io.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-io.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-io.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-io.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-queues.o: $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-queues.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-queues.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-queues.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-queues.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-queues.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-queues.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-ui.o: $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-ui.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-ui.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-ui.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/ezsp-host/ezsp-host-ui.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-ui.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/ezsp-host/ezsp-host-ui.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/core-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/cli/core-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/core-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/core-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/cli/core-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/core-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/core-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/network-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/cli/network-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/network-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/network-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/cli/network-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/network-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/network-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/option-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/cli/option-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/option-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/option-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/cli/option-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/option-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/option-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/security-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/cli/security-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/security-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/security-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/cli/security-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/security-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/security-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/zcl-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/cli/zcl-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/zcl-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/zcl-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/cli/zcl-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/zcl-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/zcl-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/zdo-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/cli/zdo-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/zdo-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/cli/zdo-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/cli/zdo-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/zdo-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/cli/zdo-cli.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_common.o: $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_common.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_common.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_common.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_common.o
+$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/sl_zigbee_system_common.o: $(SDK_PATH)/protocol/zigbee/app/framework/common/sl_zigbee_system_common.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/common/sl_zigbee_system_common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/common/sl_zigbee_system_common.c
+CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/sl_zigbee_system_common.d
+OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/sl_zigbee_system_common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_host_cb.o
 
+$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep.o: $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep.c
+CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep.d
+OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep.o
+
+$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep_cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep_cli.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep_cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep_cli.c
+CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep_cli.d
+OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/common/zigbee_app_framework_sleep_cli.o
+
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/ezsp/ezsp-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/file-descriptor-dispatch/file-descriptor-dispatch.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/backchannel-support.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/backchannel-support.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/backchannel-support.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/backchannel-support.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/backchannel-support.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/backchannel-support.o
-
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/gateway/gateway-support.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin-host/ncp-configuration/ncp-configuration.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/address-table/address-table-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/address-table/address-table.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/address-table/address-table.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/address-table/address-table.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/address-table/address-table.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/basic/basic-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/basic/basic-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/basic/basic-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/basic/basic.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/basic/basic.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/basic/basic.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/basic/basic.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/concentrator/concentrator-support.o
 
+$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/af-counters.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/af-counters.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/af-counters.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/af-counters.c
+CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/af-counters.d
+OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/af-counters.o
+
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-cli.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-host.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-host.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-host.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-host.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-host.o
-
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/counters/counters-ota-host.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/debug-print/sl_zigbee_debug_print.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-creator/network-creator.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-creator/network-creator.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-cli.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-host.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-host.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-host.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-host.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-host.o
-
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering-v2.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/network-steering/network-steering.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/network-steering/network-steering.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-common/ota-common.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-common/ota-common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-common/ota-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-common/ota-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-common/ota-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-common/ota-common.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-common/ota-common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server-policy/ota-server-policy.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-dynamic-block-period.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server-page-request.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-server/ota-server.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-server/ota-server.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-common/ota-storage-common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/ota-storage-posix-filesystem/ota-storage-linux.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting-default-configuration.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/reporting/reporting.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/reporting/reporting.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/scan-dispatch/scan-dispatch.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-periodic/trust-center-nwk-key-update-periodic.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/trust-center-nwk-key-update-unicast/trust-center-nwk-key-update-unicast.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cb.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key-cli.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/update-tc-link-key/update-tc-link-key.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl-framework-core/zcl-framework-core-cb.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-cli.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-cli.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-cli.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-cli.o
-
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-custom-cluster-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-custom-cluster-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-custom-cluster-cli.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-custom-cluster-cli.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-custom-cluster-cli.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-custom-cluster-cli.o
-
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-global-cli.o: $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-global-cli.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-global-cli.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-global-cli.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-global-cli.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/plugin/zcl_cli/zigbee-zcl-global-cli.o
-
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-node.o: $(SDK_PATH)/protocol/zigbee/app/framework/security/af-node.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/af-node.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/af-node.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/security/af-node.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-node.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-node.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-security-common.o: $(SDK_PATH)/protocol/zigbee/app/framework/security/af-security-common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/af-security-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/af-security-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/security/af-security-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-security-common.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-security-common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-trust-center.o: $(SDK_PATH)/protocol/zigbee/app/framework/security/af-trust-center.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/af-trust-center.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/af-trust-center.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/security/af-trust-center.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-trust-center.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/af-trust-center.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/crypto-state.o: $(SDK_PATH)/protocol/zigbee/app/framework/security/crypto-state.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/crypto-state.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/security/crypto-state.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/security/crypto-state.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/crypto-state.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/security/crypto-state.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/service-function/sl_service_function.o: $(SDK_PATH)/protocol/zigbee/app/framework/service-function/sl_service_function.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/service-function/sl_service_function.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/service-function/sl_service_function.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/service-function/sl_service_function.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/service-function/sl_service_function.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/service-function/sl_service_function.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.o: $(SDK_PATH)/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/signature-decode/sl_signature_decode.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-common.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/af-common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/af-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/af-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/af-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-common.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-event.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/af-event.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/af-event.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/af-event.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/af-event.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-event.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-event.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-host.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/af-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/af-host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/af-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/af-host.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-host.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/af-host.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-size.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-size.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-size.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-size.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-size.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-size.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-size.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-storage.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-storage.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-storage.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-storage.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-storage.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-storage.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-storage.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-table.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-table.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-table.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-table.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/attribute-table.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-table.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/attribute-table.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/client-api.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/client-api.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/client-api.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/client-api.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/client-api.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/client-api.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/client-api.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/global-callback.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/global-callback.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/global-callback.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/global-callback.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/global-callback.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/global-callback.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/global-callback.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/global-other-callback.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/global-other-callback.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/global-other-callback.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/global-other-callback.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/global-other-callback.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/global-other-callback.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/global-other-callback.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/message.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/message.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/message.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/message.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/message.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/message.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/message.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/multi-network.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/multi-network.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/multi-network.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/multi-network.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/multi-network.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/multi-network.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/multi-network.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/print-formatter.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/print-formatter.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/print-formatter.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/print-formatter.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/print-formatter.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/print-formatter.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/print-formatter.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/print.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/print.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/print.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/print.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/print.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/print.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/print.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/process-cluster-message.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/process-cluster-message.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/process-cluster-message.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/process-cluster-message.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/process-cluster-message.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/process-cluster-message.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/process-cluster-message.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/process-global-message.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/process-global-message.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/process-global-message.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/process-global-message.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/process-global-message.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/process-global-message.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/process-global-message.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/service-discovery-common.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/service-discovery-common.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/service-discovery-common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/service-discovery-host.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/service-discovery-host.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/service-discovery-host.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/service-discovery-host.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/time-util.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/time-util.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/time-util.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/time-util.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/time-util.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/time-util.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/time-util.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/util.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/util.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/util.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/util.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/util.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/util.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/util.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/zcl-util.o: $(SDK_PATH)/protocol/zigbee/app/framework/util/zcl-util.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/zcl-util.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/framework/util/zcl-util.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/framework/util/zcl-util.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/zcl-util.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/framework/util/zcl-util.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/common/library.o: $(SDK_PATH)/protocol/zigbee/app/util/common/library.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/common/library.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/common/library.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/common/library.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/common/library.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/common/library.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-callbacks.o: $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-callbacks.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-callbacks.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-callbacks.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-callbacks.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-callbacks.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-callbacks.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.o: $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-enum-decode.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.o: $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp-frame-utilities.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp.o: $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/ezsp/ezsp.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/ezsp.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/secure-ezsp-stub.o: $(SDK_PATH)/protocol/zigbee/app/util/ezsp/secure-ezsp-stub.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/secure-ezsp-stub.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/ezsp/secure-ezsp-stub.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/secure-ezsp-stub.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/secure-ezsp-stub.o
-
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/serial-interface-uart.o: $(SDK_PATH)/protocol/zigbee/app/util/ezsp/serial-interface-uart.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/serial-interface-uart.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/ezsp/serial-interface-uart.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/ezsp/serial-interface-uart.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/serial-interface-uart.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/ezsp/serial-interface-uart.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/security/security-address-cache.o: $(SDK_PATH)/protocol/zigbee/app/util/security/security-address-cache.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/security/security-address-cache.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/security/security-address-cache.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/security/security-address-cache.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/security/security-address-cache.o
+$(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/security/security-address-cache-host.o: $(SDK_PATH)/protocol/zigbee/app/util/security/security-address-cache-host.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/security/security-address-cache-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/security/security-address-cache-host.c
+CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/security/security-address-cache-host.d
+OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/security/security-address-cache-host.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/serial/linux-serial.o: $(SDK_PATH)/protocol/zigbee/app/util/serial/linux-serial.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/serial/linux-serial.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/serial/linux-serial.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/serial/linux-serial.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/serial/linux-serial.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/serial/linux-serial.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.o: $(SDK_PATH)/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/serial/sl_zigbee_command_interpreter.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.o: $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/zigbee-framework/zigbee-device-common.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.o: $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/app/util/zigbee-framework/zigbee-device-host.o
 
-$(OUTPUT_DIR)/sdk/protocol/zigbee/stack/config/ember-configuration-host-access.o: $(SDK_PATH)/protocol/zigbee/stack/config/ember-configuration-host-access.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/stack/config/ember-configuration-host-access.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/stack/config/ember-configuration-host-access.c
-CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/config/ember-configuration-host-access.d
-OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/config/ember-configuration-host-access.o
+$(OUTPUT_DIR)/sdk/protocol/zigbee/stack/config/sl_zigbee_configuration_host_access.o: $(SDK_PATH)/protocol/zigbee/stack/config/sl_zigbee_configuration_host_access.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/stack/config/sl_zigbee_configuration_host_access.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/stack/config/sl_zigbee_configuration_host_access.c
+CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/config/sl_zigbee_configuration_host_access.d
+OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/config/sl_zigbee_configuration_host_access.o
 
 $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/security/zigbee-security-manager-host.o: $(SDK_PATH)/protocol/zigbee/stack/security/zigbee-security-manager-host.c
-	@echo 'Building $(SDK_PATH)/protocol/zigbee/stack/security/zigbee-security-manager-host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/protocol/zigbee/stack/security/zigbee-security-manager-host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/protocol/zigbee/stack/security/zigbee-security-manager-host.c
 CDEPS += $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/security/zigbee-security-manager-host.d
 OBJS += $(OUTPUT_DIR)/sdk/protocol/zigbee/stack/security/zigbee-security-manager-host.o
 
+$(OUTPUT_DIR)/sdk/util/plugin/byte_utilities/byte-utilities.o: $(SDK_PATH)/util/plugin/byte_utilities/byte-utilities.c
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/util/plugin/byte_utilities/byte-utilities.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
+	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/util/plugin/byte_utilities/byte-utilities.c
+CDEPS += $(OUTPUT_DIR)/sdk/util/plugin/byte_utilities/byte-utilities.d
+OBJS += $(OUTPUT_DIR)/sdk/util/plugin/byte_utilities/byte-utilities.o
+
 $(OUTPUT_DIR)/sdk/util/silicon_labs/silabs_core/event_queue/event-queue.o: $(SDK_PATH)/util/silicon_labs/silabs_core/event_queue/event-queue.c
-	@echo 'Building $(SDK_PATH)/util/silicon_labs/silabs_core/event_queue/event-queue.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/util/silicon_labs/silabs_core/event_queue/event-queue.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/util/silicon_labs/silabs_core/event_queue/event-queue.c
 CDEPS += $(OUTPUT_DIR)/sdk/util/silicon_labs/silabs_core/event_queue/event-queue.d
 OBJS += $(OUTPUT_DIR)/sdk/util/silicon_labs/silabs_core/event_queue/event-queue.o
 
-$(OUTPUT_DIR)/sdk/util/silicon_labs/silabs_core/memory_manager/sl_malloc.o: $(SDK_PATH)/util/silicon_labs/silabs_core/memory_manager/sl_malloc.c
-	@echo 'Building $(SDK_PATH)/util/silicon_labs/silabs_core/memory_manager/sl_malloc.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/util/silicon_labs/silabs_core/memory_manager/sl_malloc.c
-CDEPS += $(OUTPUT_DIR)/sdk/util/silicon_labs/silabs_core/memory_manager/sl_malloc.d
-OBJS += $(OUTPUT_DIR)/sdk/util/silicon_labs/silabs_core/memory_manager/sl_malloc.o
-
 $(OUTPUT_DIR)/sdk/util/third_party/printf/printf.o: $(SDK_PATH)/util/third_party/printf/printf.c
-	@echo 'Building $(SDK_PATH)/util/third_party/printf/printf.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/util/third_party/printf/printf.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/util/third_party/printf/printf.c
 CDEPS += $(OUTPUT_DIR)/sdk/util/third_party/printf/printf.d
 OBJS += $(OUTPUT_DIR)/sdk/util/third_party/printf/printf.o
 
 $(OUTPUT_DIR)/sdk/util/third_party/printf/src/iostream_printf.o: $(SDK_PATH)/util/third_party/printf/src/iostream_printf.c
-	@echo 'Building $(SDK_PATH)/util/third_party/printf/src/iostream_printf.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building $(SDK_PATH)/util/third_party/printf/src/iostream_printf.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ $(SDK_PATH)/util/third_party/printf/src/iostream_printf.c
 CDEPS += $(OUTPUT_DIR)/sdk/util/third_party/printf/src/iostream_printf.d
 OBJS += $(OUTPUT_DIR)/sdk/util/third_party/printf/src/iostream_printf.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host.o: ../src/zigbee_host.c
-	@echo 'Building ../src/zigbee_host.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_address_table.o: ../src/zigbee_host_address_table.c
-	@echo 'Building ../src/zigbee_host_address_table.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_address_table.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_address_table.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_address_table.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_address_table.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_attribute_mgmt.o: ../src/zigbee_host_attribute_mgmt.c
-	@echo 'Building ../src/zigbee_host_attribute_mgmt.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_attribute_mgmt.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_attribute_mgmt.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_attribute_mgmt.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_attribute_mgmt.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_cli.o: ../src/zigbee_host_cli.c
-	@echo 'Building ../src/zigbee_host_cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_cli.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_cli.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_cli.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_cluster_command_parse.o: ../src/zigbee_host_cluster_command_parse.c
-	@echo 'Building ../src/zigbee_host_cluster_command_parse.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_cluster_command_parse.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_cluster_command_parse.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_cluster_command_parse.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_cluster_command_parse.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_counters.o: ../src/zigbee_host_counters.c
-	@echo 'Building ../src/zigbee_host_counters.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_counters.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_counters.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_counters.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_counters.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_discovery.o: ../src/zigbee_host_discovery.c
-	@echo 'Building ../src/zigbee_host_discovery.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_discovery.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_discovery.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_discovery.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_discovery.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_neighbor_table.o: ../src/zigbee_host_neighbor_table.c
-	@echo 'Building ../src/zigbee_host_neighbor_table.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_neighbor_table.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_neighbor_table.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_neighbor_table.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_neighbor_table.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_ota_server.o: ../src/zigbee_host_ota_server.c
-	@echo 'Building ../src/zigbee_host_ota_server.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_ota_server.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_ota_server.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_ota_server.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_ota_server.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_poll_checkin.o: ../src/zigbee_host_poll_checkin.c
-	@echo 'Building ../src/zigbee_host_poll_checkin.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_poll_checkin.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_poll_checkin.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_poll_checkin.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_poll_checkin.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_sl_cli.o: ../src/zigbee_host_sl_cli.c
-	@echo 'Building ../src/zigbee_host_sl_cli.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_sl_cli.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_sl_cli.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_sl_cli.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_sl_cli.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_trust_center.o: ../src/zigbee_host_trust_center.c
-	@echo 'Building ../src/zigbee_host_trust_center.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_trust_center.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_trust_center.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_trust_center.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_trust_center.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_util.o: ../src/zigbee_host_util.c
-	@echo 'Building ../src/zigbee_host_util.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_util.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_util.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_util.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_util.o
 
 $(OUTPUT_DIR)/project/_/src/zigbee_host_zcl_frame.o: ../src/zigbee_host_zcl_frame.c
-	@echo 'Building ../src/zigbee_host_zcl_frame.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building ../src/zigbee_host_zcl_frame.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ ../src/zigbee_host_zcl_frame.c
 CDEPS += $(OUTPUT_DIR)/project/_/src/zigbee_host_zcl_frame.d
 OBJS += $(OUTPUT_DIR)/project/_/src/zigbee_host_zcl_frame.o
 
 $(OUTPUT_DIR)/project/autogen/sl_cli_command_table.o: autogen/sl_cli_command_table.c
-	@echo 'Building autogen/sl_cli_command_table.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/sl_cli_command_table.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/sl_cli_command_table.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/sl_cli_command_table.d
 OBJS += $(OUTPUT_DIR)/project/autogen/sl_cli_command_table.o
 
 $(OUTPUT_DIR)/project/autogen/sl_cli_instances.o: autogen/sl_cli_instances.c
-	@echo 'Building autogen/sl_cli_instances.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/sl_cli_instances.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/sl_cli_instances.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/sl_cli_instances.d
 OBJS += $(OUTPUT_DIR)/project/autogen/sl_cli_instances.o
 
 $(OUTPUT_DIR)/project/autogen/sl_cluster_service_gen.o: autogen/sl_cluster_service_gen.c
-	@echo 'Building autogen/sl_cluster_service_gen.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/sl_cluster_service_gen.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/sl_cluster_service_gen.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/sl_cluster_service_gen.d
 OBJS += $(OUTPUT_DIR)/project/autogen/sl_cluster_service_gen.o
 
 $(OUTPUT_DIR)/project/autogen/sl_event_handler.o: autogen/sl_event_handler.c
-	@echo 'Building autogen/sl_event_handler.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/sl_event_handler.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/sl_event_handler.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/sl_event_handler.d
 OBJS += $(OUTPUT_DIR)/project/autogen/sl_event_handler.o
 
 $(OUTPUT_DIR)/project/autogen/sl_iostream_handles.o: autogen/sl_iostream_handles.c
-	@echo 'Building autogen/sl_iostream_handles.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/sl_iostream_handles.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/sl_iostream_handles.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/sl_iostream_handles.d
 OBJS += $(OUTPUT_DIR)/project/autogen/sl_iostream_handles.o
 
 $(OUTPUT_DIR)/project/autogen/sli_cli_hooks.o: autogen/sli_cli_hooks.c
-	@echo 'Building autogen/sli_cli_hooks.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/sli_cli_hooks.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/sli_cli_hooks.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/sli_cli_hooks.d
 OBJS += $(OUTPUT_DIR)/project/autogen/sli_cli_hooks.o
 
-$(OUTPUT_DIR)/project/autogen/zap-cli.o: autogen/zap-cli.c
-	@echo 'Building autogen/zap-cli.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zap-cli.c
-CDEPS += $(OUTPUT_DIR)/project/autogen/zap-cli.d
-OBJS += $(OUTPUT_DIR)/project/autogen/zap-cli.o
-
-$(OUTPUT_DIR)/project/autogen/zap-cluster-command-parser.o: autogen/zap-cluster-command-parser.c
-	@echo 'Building autogen/zap-cluster-command-parser.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zap-cluster-command-parser.c
-CDEPS += $(OUTPUT_DIR)/project/autogen/zap-cluster-command-parser.d
-OBJS += $(OUTPUT_DIR)/project/autogen/zap-cluster-command-parser.o
-
-$(OUTPUT_DIR)/project/autogen/zap-event.o: autogen/zap-event.c
-	@echo 'Building autogen/zap-event.c'
-	@mkdir -p $(@D)
-	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zap-event.c
-CDEPS += $(OUTPUT_DIR)/project/autogen/zap-event.d
-OBJS += $(OUTPUT_DIR)/project/autogen/zap-event.o
-
 $(OUTPUT_DIR)/project/autogen/zigbee_common_callback_dispatcher.o: autogen/zigbee_common_callback_dispatcher.c
-	@echo 'Building autogen/zigbee_common_callback_dispatcher.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/zigbee_common_callback_dispatcher.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zigbee_common_callback_dispatcher.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/zigbee_common_callback_dispatcher.d
 OBJS += $(OUTPUT_DIR)/project/autogen/zigbee_common_callback_dispatcher.o
 
 $(OUTPUT_DIR)/project/autogen/zigbee_host_callback_dispatcher.o: autogen/zigbee_host_callback_dispatcher.c
-	@echo 'Building autogen/zigbee_host_callback_dispatcher.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/zigbee_host_callback_dispatcher.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zigbee_host_callback_dispatcher.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/zigbee_host_callback_dispatcher.d
 OBJS += $(OUTPUT_DIR)/project/autogen/zigbee_host_callback_dispatcher.o
 
 $(OUTPUT_DIR)/project/autogen/zigbee_stack_callback_dispatcher.o: autogen/zigbee_stack_callback_dispatcher.c
-	@echo 'Building autogen/zigbee_stack_callback_dispatcher.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/zigbee_stack_callback_dispatcher.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zigbee_stack_callback_dispatcher.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/zigbee_stack_callback_dispatcher.d
 OBJS += $(OUTPUT_DIR)/project/autogen/zigbee_stack_callback_dispatcher.o
 
 $(OUTPUT_DIR)/project/autogen/zigbee_zcl_callback_dispatcher.o: autogen/zigbee_zcl_callback_dispatcher.c
-	@echo 'Building autogen/zigbee_zcl_callback_dispatcher.c'
-	@mkdir -p $(@D)
+	@$(POSIX_TOOL_PATH)echo 'Building autogen/zigbee_zcl_callback_dispatcher.c'
+	@$(POSIX_TOOL_PATH)mkdir -p $(@D)
 	$(ECHO)$(CC) $(CFLAGS) -c -o $@ autogen/zigbee_zcl_callback_dispatcher.c
 CDEPS += $(OUTPUT_DIR)/project/autogen/zigbee_zcl_callback_dispatcher.d
 OBJS += $(OUTPUT_DIR)/project/autogen/zigbee_zcl_callback_dispatcher.o
 
 # Automatically-generated Simplicity Studio Metadata
 # Please do not edit or delete these lines!
-# SIMPLICITY_STUDIO_METADATA=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=END_SIMPLICITY_STUDIO_METADATA
+# SIMPLICITY_STUDIO_METADATA=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END_SIMPLICITY_STUDIO_METADATA
 # END OF METADATA

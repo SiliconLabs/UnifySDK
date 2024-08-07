@@ -1,7 +1,7 @@
 # Unify Host SDK User guide
 
 This guide contains information which is common to all Unify applications.
-For a having a general setup running, it assumes you have gone over the [Getting Started guide](getting_started.md).
+For a having a general setup running, it assumes you have gone over the [Getting Started guide](getting_started_unify.md).
 Details about each application can be found in the application specific user guides.
 
 ## Running Using Systemd

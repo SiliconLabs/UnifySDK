@@ -6,7 +6,7 @@ SCRIPT_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 DEB_ZIP_PATH_DEFAULT="./deb-packages/unify_*.zip"
 IMAGE_PATH_DEFAULT="./unify_zwave_raspberrypi.img.xz"
 PACKAGE_LIST_DEFAULT="mosquitto;uic-dev-gui;uic-gms;uic-image-provider;uic-nal;uic-upti-cap;uic-upti-writer;uic-upvl;uic-zpc"
-RPI_URL_DEFAULT="./raspios-bullseye-arm64-lite.img.xz"
+RPI_URL_DEFAULT="./raspios-bookworm-arm64-lite.img.xz"
 
 function cleanup()
 {

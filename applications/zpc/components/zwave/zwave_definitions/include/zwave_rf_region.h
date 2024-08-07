@@ -22,6 +22,8 @@
 #if !defined(ZWAVE_RF_REGION_H)
 #define ZWAVE_RF_REGION_H
 
+#include <stdbool.h>
+
 /// @name zwapi_rf_region_t
 /// These definitions represent possible rf settings for the Z-Wave module
 /// RF region values used with zwapi_set_rf_region() and zwapi_get_rf_region()
@@ -45,6 +47,8 @@ typedef enum {
   ZWAVE_RF_REGION_CN = 0x08,
   ///< US Long range radio
   ZWAVE_RF_REGION_US_LR = 0x09,
+  ///< EU Long range radio
+  ZWAVE_RF_REGION_EU_LR = 0x0B,
   ///< Radio is located in Japan. 3 Channel region.
   ZWAVE_RF_REGION_JP = 0x20,
   ///< Radio is located in Korea. 3 Channel region.
@@ -54,7 +58,7 @@ typedef enum {
 } zwave_rf_region_t;
 ///@}
 
-#define IS_RF_REGION_LR(RF_REGION) ((RF_REGION) == ZWAVE_RF_REGION_US_LR)
+static inline bool IS_RF_REGION_LR(zwave_rf_region_t rf_region) { return (rf_region == ZWAVE_RF_REGION_US_LR) || (rf_region == ZWAVE_RF_REGION_EU_LR); }
 
 #endif  // ZWAVE_RF_REGION_H
 /** @} end zwave_rf_region */

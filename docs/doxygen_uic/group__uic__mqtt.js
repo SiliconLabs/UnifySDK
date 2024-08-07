@@ -11,7 +11,7 @@ var group__uic__mqtt =
     [ "mqtt_message_callback_ex_t", "group__uic__mqtt.html#gac4617cef7714b640e5a8306ab7f40409", null ],
     [ "mqtt_message_callback_t", "group__uic__mqtt.html#gacf7c8ad274a1b1ced5ae34fef47468c3", null ],
     [ "uic_mqtt_count_topics", "group__uic__mqtt.html#gafa197d6f8b9ede2cb582ebb82e3e3f1d", null ],
-    [ "uic_mqtt_get_client_id", "group__uic__mqtt.html#ga885170f068f59170b27f64308f875739", null ],
+    [ "uic_mqtt_get_client_id", "group__uic__mqtt.html#ga60bc9602681524eb1d4f8ba25956fd0e", null ],
     [ "uic_mqtt_is_connected_to_broker", "group__uic__mqtt.html#gaed0f45505344d3dafa4f826aa4e5438e", null ],
     [ "uic_mqtt_publish", "group__uic__mqtt.html#ga6cab2f0af6353ba4cb9a4bc810ba0ad0", null ],
     [ "uic_mqtt_set_after_connect_callback", "group__uic__mqtt.html#gacc9eff67ac8ed62e455a130e4e6c4def", null ],

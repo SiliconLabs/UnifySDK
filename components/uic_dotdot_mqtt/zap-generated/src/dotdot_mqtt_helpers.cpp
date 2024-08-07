@@ -861,14 +861,14 @@ uint32_t bypass_response_zone_id_bypass_result_get_enum_value_number(const std::
 
 // Enum to string map for CCColorLoopDirection
 const std::map<uint32_t, std::string> cc_color_loop_direction_enum_id_to_string_map {
-  { 0, "DecrementEnhancedCurrentHue" },
-  { 1, "IncrementEnhancedCurrentHue" },
+  { 0, "ColorLoopHueDecrement" },
+  { 1, "ColorLoopHueIncrement" },
 };
 
 // String to enum map for CCColorLoopDirection
 const std::map<std::string, uint32_t> cc_color_loop_direction_enum_string_to_id_map {
-  { "DecrementEnhancedCurrentHue", 0 },
-  { "IncrementEnhancedCurrentHue", 1 },
+  { "ColorLoopHueDecrement", 0 },
+  { "ColorLoopHueIncrement", 1 },
 };
 
 std::string cc_color_loop_direction_get_enum_value_name(
@@ -1042,6 +1042,43 @@ uint32_t color_control_color_loop_active_get_enum_value_number(const std::string
 {
   auto it = color_control_color_loop_active_enum_string_to_id_map.find(str);
   if (it != color_control_color_loop_active_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for ColorControlColorLoopDirection
+const std::map<uint32_t, std::string> color_control_color_loop_direction_enum_id_to_string_map {
+  { 0, "DecrementEnhancedCurrentHue" },
+  { 1, "IncrementEnhancedCurrentHue" },
+};
+
+// String to enum map for ColorControlColorLoopDirection
+const std::map<std::string, uint32_t> color_control_color_loop_direction_enum_string_to_id_map {
+  { "DecrementEnhancedCurrentHue", 0 },
+  { "IncrementEnhancedCurrentHue", 1 },
+};
+
+std::string color_control_color_loop_direction_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = color_control_color_loop_direction_enum_id_to_string_map.find(value);
+  if (it != color_control_color_loop_direction_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t color_control_color_loop_direction_get_enum_value_number(const std::string &str)
+{
+  auto it = color_control_color_loop_direction_enum_string_to_id_map.find(str);
+  if (it != color_control_color_loop_direction_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -3308,6 +3345,47 @@ uint32_t metering_unitof_measure_get_enum_value_number(const std::string &str)
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for ModeType
+const std::map<uint32_t, std::string> mode_type_enum_id_to_string_map {
+  { 0, "Off" },
+  { 1, "Humidify" },
+  { 2, "Dehumidify" },
+  { 3, "Auto" },
+};
+
+// String to enum map for ModeType
+const std::map<std::string, uint32_t> mode_type_enum_string_to_id_map {
+  { "Off", 0 },
+  { "Humidify", 1 },
+  { "Dehumidify", 2 },
+  { "Auto", 3 },
+};
+
+std::string mode_type_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = mode_type_enum_id_to_string_map.find(value);
+  if (it != mode_type_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t mode_type_get_enum_value_number(const std::string &str)
+{
+  auto it = mode_type_enum_string_to_id_map.find(str);
+  if (it != mode_type_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for MoveStepMode
 const std::map<uint32_t, std::string> move_step_mode_enum_id_to_string_map {
   { 0, "Up" },
@@ -4131,6 +4209,43 @@ uint32_t shdcfg_direction_get_enum_value_number(const std::string &str)
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for ScaleType
+const std::map<uint32_t, std::string> scale_type_enum_id_to_string_map {
+  { 0, "Percentage" },
+  { 1, "Absolute" },
+};
+
+// String to enum map for ScaleType
+const std::map<std::string, uint32_t> scale_type_enum_string_to_id_map {
+  { "Percentage", 0 },
+  { "Absolute", 1 },
+};
+
+std::string scale_type_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = scale_type_enum_id_to_string_map.find(value);
+  if (it != scale_type_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t scale_type_get_enum_value_number(const std::string &str)
+{
+  auto it = scale_type_enum_string_to_id_map.find(str);
+  if (it != scale_type_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for SetpointRaiseOrLowerMode
 const std::map<uint32_t, std::string> setpoint_raise_or_lower_mode_enum_id_to_string_map {
   { 0, "Heat" },
@@ -4162,6 +4277,45 @@ uint32_t setpoint_raise_or_lower_mode_get_enum_value_number(const std::string &s
 {
   auto it = setpoint_raise_or_lower_mode_enum_string_to_id_map.find(str);
   if (it != setpoint_raise_or_lower_mode_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for SetpointType
+const std::map<uint32_t, std::string> setpoint_type_enum_id_to_string_map {
+  { 1, "Humidifier" },
+  { 2, "Dehumidifier" },
+  { 3, "Auto" },
+};
+
+// String to enum map for SetpointType
+const std::map<std::string, uint32_t> setpoint_type_enum_string_to_id_map {
+  { "Humidifier", 1 },
+  { "Dehumidifier", 2 },
+  { "Auto", 3 },
+};
+
+std::string setpoint_type_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = setpoint_type_enum_id_to_string_map.find(value);
+  if (it != setpoint_type_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t setpoint_type_get_enum_value_number(const std::string &str)
+{
+  auto it = setpoint_type_enum_string_to_id_map.find(str);
+  if (it != setpoint_type_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -5064,6 +5218,167 @@ uint32_t tx_report_transmission_speed_get_enum_value_number(const std::string &s
   return std::numeric_limits<uint32_t>::max();
 }
 
+// Enum to string map for UnifyHumidityControlCurrentState
+const std::map<uint32_t, std::string> unify_humidity_control_current_state_enum_id_to_string_map {
+  { 0, "Idle" },
+  { 1, "Humidifying" },
+  { 2, "Dehumidifying" },
+};
+
+// String to enum map for UnifyHumidityControlCurrentState
+const std::map<std::string, uint32_t> unify_humidity_control_current_state_enum_string_to_id_map {
+  { "Idle", 0 },
+  { "Humidifying", 1 },
+  { "Dehumidifying", 2 },
+};
+
+std::string unify_humidity_control_current_state_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = unify_humidity_control_current_state_enum_id_to_string_map.find(value);
+  if (it != unify_humidity_control_current_state_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t unify_humidity_control_current_state_get_enum_value_number(const std::string &str)
+{
+  auto it = unify_humidity_control_current_state_enum_string_to_id_map.find(str);
+  if (it != unify_humidity_control_current_state_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for UnifyThermostatOperatingState
+const std::map<uint32_t, std::string> unify_thermostat_operating_state_enum_id_to_string_map {
+  { 0, "Off" },
+  { 1, "Heating" },
+  { 2, "Cooling" },
+  { 3, "FanOnly" },
+  { 4, "PendingHeat" },
+  { 5, "PendingCool" },
+  { 6, "Vent/Economizer" },
+  { 7, "AuxHeating" },
+  { 8, "2ndStageHeating" },
+  { 9, "2ndStageCooling" },
+  { 10, "2ndStageAuxHeat" },
+  { 11, "3rdStageAuxHeat" },
+};
+
+// String to enum map for UnifyThermostatOperatingState
+const std::map<std::string, uint32_t> unify_thermostat_operating_state_enum_string_to_id_map {
+  { "Off", 0 },
+  { "Heating", 1 },
+  { "Cooling", 2 },
+  { "FanOnly", 3 },
+  { "PendingHeat", 4 },
+  { "PendingCool", 5 },
+  { "Vent/Economizer", 6 },
+  { "AuxHeating", 7 },
+  { "2ndStageHeating", 8 },
+  { "2ndStageCooling", 9 },
+  { "2ndStageAuxHeat", 10 },
+  { "3rdStageAuxHeat", 11 },
+};
+
+std::string unify_thermostat_operating_state_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = unify_thermostat_operating_state_enum_id_to_string_map.find(value);
+  if (it != unify_thermostat_operating_state_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t unify_thermostat_operating_state_get_enum_value_number(const std::string &str)
+{
+  auto it = unify_thermostat_operating_state_enum_string_to_id_map.find(str);
+  if (it != unify_thermostat_operating_state_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for UnifyThermostatThermostatMode
+const std::map<uint32_t, std::string> unify_thermostat_thermostat_mode_enum_id_to_string_map {
+  { 0, "Off" },
+  { 1, "Heat" },
+  { 2, "Cool" },
+  { 3, "Auto" },
+  { 4, "Auxiliary" },
+  { 5, "Resume" },
+  { 6, "Fan" },
+  { 7, "Furnace" },
+  { 8, "Dry" },
+  { 9, "Moist" },
+  { 10, "AutoChangeover" },
+  { 11, "EnergyHeat" },
+  { 12, "EnergyCool" },
+  { 13, "Away" },
+  { 15, "FullPower" },
+  { 31, "ManufacturerSpecific" },
+};
+
+// String to enum map for UnifyThermostatThermostatMode
+const std::map<std::string, uint32_t> unify_thermostat_thermostat_mode_enum_string_to_id_map {
+  { "Off", 0 },
+  { "Heat", 1 },
+  { "Cool", 2 },
+  { "Auto", 3 },
+  { "Auxiliary", 4 },
+  { "Resume", 5 },
+  { "Fan", 6 },
+  { "Furnace", 7 },
+  { "Dry", 8 },
+  { "Moist", 9 },
+  { "AutoChangeover", 10 },
+  { "EnergyHeat", 11 },
+  { "EnergyCool", 12 },
+  { "Away", 13 },
+  { "FullPower", 15 },
+  { "ManufacturerSpecific", 31 },
+};
+
+std::string unify_thermostat_thermostat_mode_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = unify_thermostat_thermostat_mode_enum_id_to_string_map.find(value);
+  if (it != unify_thermostat_thermostat_mode_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t unify_thermostat_thermostat_mode_get_enum_value_number(const std::string &str)
+{
+  auto it = unify_thermostat_thermostat_mode_enum_string_to_id_map.find(str);
+  if (it != unify_thermostat_thermostat_mode_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
 // Enum to string map for WindowCoveringWindowCoveringType
 const std::map<uint32_t, std::string> window_covering_window_covering_type_enum_id_to_string_map {
   { 0, "Rollershade" },
@@ -5109,6 +5424,114 @@ uint32_t window_covering_window_covering_type_get_enum_value_number(const std::s
 {
   auto it = window_covering_window_covering_type_enum_string_to_id_map.find(str);
   if (it != window_covering_window_covering_type_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for ZWaveFanModeEnum
+const std::map<uint32_t, std::string> z_wave_fan_mode_enum_enum_id_to_string_map {
+  { 0, "Auto" },
+  { 1, "Low" },
+  { 2, "AutoHigh" },
+  { 3, "High" },
+  { 4, "AutoMedium" },
+  { 5, "Medium" },
+  { 6, "Circulation" },
+  { 7, "HumidityCirculation" },
+  { 8, "LeftRight" },
+  { 9, "UpDown" },
+  { 10, "Quiet" },
+  { 11, "ExternalCirculation" },
+};
+
+// String to enum map for ZWaveFanModeEnum
+const std::map<std::string, uint32_t> z_wave_fan_mode_enum_enum_string_to_id_map {
+  { "Auto", 0 },
+  { "Low", 1 },
+  { "AutoHigh", 2 },
+  { "High", 3 },
+  { "AutoMedium", 4 },
+  { "Medium", 5 },
+  { "Circulation", 6 },
+  { "HumidityCirculation", 7 },
+  { "LeftRight", 8 },
+  { "UpDown", 9 },
+  { "Quiet", 10 },
+  { "ExternalCirculation", 11 },
+};
+
+std::string z_wave_fan_mode_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = z_wave_fan_mode_enum_enum_id_to_string_map.find(value);
+  if (it != z_wave_fan_mode_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t z_wave_fan_mode_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = z_wave_fan_mode_enum_enum_string_to_id_map.find(str);
+  if (it != z_wave_fan_mode_enum_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+
+// Enum to string map for ZWaveFanStateEnum
+const std::map<uint32_t, std::string> z_wave_fan_state_enum_enum_id_to_string_map {
+  { 0, "Idle" },
+  { 1, "Running" },
+  { 2, "RunningHigh" },
+  { 3, "RunningMedium" },
+  { 4, "Circulation" },
+  { 5, "HumidityCirculation" },
+  { 6, "RightLeftCirculation" },
+  { 7, "UpDownCirculation" },
+  { 8, "QuietCirculation" },
+};
+
+// String to enum map for ZWaveFanStateEnum
+const std::map<std::string, uint32_t> z_wave_fan_state_enum_enum_string_to_id_map {
+  { "Idle", 0 },
+  { "Running", 1 },
+  { "RunningHigh", 2 },
+  { "RunningMedium", 3 },
+  { "Circulation", 4 },
+  { "HumidityCirculation", 5 },
+  { "RightLeftCirculation", 6 },
+  { "UpDownCirculation", 7 },
+  { "QuietCirculation", 8 },
+};
+
+std::string z_wave_fan_state_enum_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = z_wave_fan_state_enum_enum_id_to_string_map.find(value);
+  if (it != z_wave_fan_state_enum_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t z_wave_fan_state_enum_get_enum_value_number(const std::string &str)
+{
+  auto it = z_wave_fan_state_enum_enum_string_to_id_map.find(str);
+  if (it != z_wave_fan_state_enum_enum_string_to_id_map.end()){
     return it->second;
   }
 
@@ -9908,6 +10331,165 @@ std::string get_enum_value_name(
   #endif
   }
 
+  if (64788 == cluster_id) {
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_mode instead of this: unify_fan_control_z_wave_fan_mode
+      return unify_fan_control_z_wave_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_supported_fan_mode instead of this: unify_fan_control_z_wave_supported_fan_mode
+      return unify_fan_control_z_wave_supported_fan_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_state instead of this: unify_fan_control_z_wave_fan_state
+      return unify_fan_control_z_wave_fan_state_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64789 == cluster_id) {
+  #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatthermostat_mode instead of this: unify_thermostat_thermostat_mode
+      return unify_thermostat_thermostat_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatsupported_thermostat_mode instead of this: unify_thermostat_supported_thermostat_mode
+      return unify_thermostat_supported_thermostat_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_THERMOSTAT_OPERATING_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatoperating_state instead of this: unify_thermostat_operating_state
+      return unify_thermostat_operating_state_get_enum_value_name(value);
+    }
+  #endif
+  }
+
+  if (64928 == cluster_id) {
+  #ifdef UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlreporting_mode instead of this: unify_humidity_control_reporting_mode
+      return unify_humidity_control_reporting_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlsupported_reporting_mode instead of this: unify_humidity_control_supported_reporting_mode
+      return unify_humidity_control_supported_reporting_mode_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlcurrent_state instead of this: unify_humidity_control_current_state
+      return unify_humidity_control_current_state_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlsupported_set_points instead of this: unify_humidity_control_supported_set_points
+      return unify_humidity_control_supported_set_points_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_min instead of this: unify_humidity_control_humidifier_setpoint_min
+      return unify_humidity_control_humidifier_setpoint_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_max instead of this: unify_humidity_control_humidifier_setpoint_max
+      return unify_humidity_control_humidifier_setpoint_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint instead of this: unify_humidity_control_humidifier_setpoint
+      return unify_humidity_control_humidifier_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_scale instead of this: unify_humidity_control_humidifier_setpoint_scale
+      return unify_humidity_control_humidifier_setpoint_scale_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_precision instead of this: unify_humidity_control_humidifier_setpoint_precision
+      return unify_humidity_control_humidifier_setpoint_precision_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_min instead of this: unify_humidity_control_dehumidifier_setpoint_min
+      return unify_humidity_control_dehumidifier_setpoint_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_max instead of this: unify_humidity_control_dehumidifier_setpoint_max
+      return unify_humidity_control_dehumidifier_setpoint_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint instead of this: unify_humidity_control_dehumidifier_setpoint
+      return unify_humidity_control_dehumidifier_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+    if (13 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_scale instead of this: unify_humidity_control_dehumidifier_setpoint_scale
+      return unify_humidity_control_dehumidifier_setpoint_scale_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION_ENUM_NAME_AVAILABLE
+    if (14 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_precision instead of this: unify_humidity_control_dehumidifier_setpoint_precision
+      return unify_humidity_control_dehumidifier_setpoint_precision_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_min instead of this: unify_humidity_control_auto_setpoint_min
+      return unify_humidity_control_auto_setpoint_min_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_max instead of this: unify_humidity_control_auto_setpoint_max
+      return unify_humidity_control_auto_setpoint_max_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint instead of this: unify_humidity_control_auto_setpoint
+      return unify_humidity_control_auto_setpoint_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_scale instead of this: unify_humidity_control_auto_setpoint_scale
+      return unify_humidity_control_auto_setpoint_scale_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_precision instead of this: unify_humidity_control_auto_setpoint_precision
+      return unify_humidity_control_auto_setpoint_precision_get_enum_value_name(value);
+    }
+  #endif
+  }
+
 
   std::string value_name;
   return value_name;
@@ -14376,6 +14958,165 @@ uint32_t get_enum_name_value(
   #endif
   }
 
+  if (64788 == cluster_id) {
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_mode instead of this: unify_fan_control_z_wave_fan_mode
+      return unify_fan_control_z_wave_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_SUPPORTED_FAN_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_supported_fan_mode instead of this: unify_fan_control_z_wave_supported_fan_mode
+      return unify_fan_control_z_wave_supported_fan_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_FAN_CONTROL_Z_WAVE_FAN_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_fan_controlz_wave_fan_state instead of this: unify_fan_control_z_wave_fan_state
+      return unify_fan_control_z_wave_fan_state_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64789 == cluster_id) {
+  #ifdef UNIFY_THERMOSTAT_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatthermostat_mode instead of this: unify_thermostat_thermostat_mode
+      return unify_thermostat_thermostat_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_THERMOSTAT_SUPPORTED_THERMOSTAT_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatsupported_thermostat_mode instead of this: unify_thermostat_supported_thermostat_mode
+      return unify_thermostat_supported_thermostat_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_THERMOSTAT_OPERATING_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_thermostatoperating_state instead of this: unify_thermostat_operating_state
+      return unify_thermostat_operating_state_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (64928 == cluster_id) {
+  #ifdef UNIFY_HUMIDITY_CONTROL_REPORTING_MODE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlreporting_mode instead of this: unify_humidity_control_reporting_mode
+      return unify_humidity_control_reporting_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_SUPPORTED_REPORTING_MODE_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlsupported_reporting_mode instead of this: unify_humidity_control_supported_reporting_mode
+      return unify_humidity_control_supported_reporting_mode_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_CURRENT_STATE_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlcurrent_state instead of this: unify_humidity_control_current_state
+      return unify_humidity_control_current_state_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_SUPPORTED_SET_POINTS_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlsupported_set_points instead of this: unify_humidity_control_supported_set_points
+      return unify_humidity_control_supported_set_points_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MIN_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_min instead of this: unify_humidity_control_humidifier_setpoint_min
+      return unify_humidity_control_humidifier_setpoint_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_MAX_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_max instead of this: unify_humidity_control_humidifier_setpoint_max
+      return unify_humidity_control_humidifier_setpoint_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint instead of this: unify_humidity_control_humidifier_setpoint
+      return unify_humidity_control_humidifier_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+    if (8 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_scale instead of this: unify_humidity_control_humidifier_setpoint_scale
+      return unify_humidity_control_humidifier_setpoint_scale_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION_ENUM_NAME_AVAILABLE
+    if (9 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlhumidifier_setpoint_precision instead of this: unify_humidity_control_humidifier_setpoint_precision
+      return unify_humidity_control_humidifier_setpoint_precision_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MIN_ENUM_NAME_AVAILABLE
+    if (10 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_min instead of this: unify_humidity_control_dehumidifier_setpoint_min
+      return unify_humidity_control_dehumidifier_setpoint_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_MAX_ENUM_NAME_AVAILABLE
+    if (11 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_max instead of this: unify_humidity_control_dehumidifier_setpoint_max
+      return unify_humidity_control_dehumidifier_setpoint_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_ENUM_NAME_AVAILABLE
+    if (12 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint instead of this: unify_humidity_control_dehumidifier_setpoint
+      return unify_humidity_control_dehumidifier_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+    if (13 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_scale instead of this: unify_humidity_control_dehumidifier_setpoint_scale
+      return unify_humidity_control_dehumidifier_setpoint_scale_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION_ENUM_NAME_AVAILABLE
+    if (14 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controldehumidifier_setpoint_precision instead of this: unify_humidity_control_dehumidifier_setpoint_precision
+      return unify_humidity_control_dehumidifier_setpoint_precision_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MIN_ENUM_NAME_AVAILABLE
+    if (15 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_min instead of this: unify_humidity_control_auto_setpoint_min
+      return unify_humidity_control_auto_setpoint_min_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_MAX_ENUM_NAME_AVAILABLE
+    if (16 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_max instead of this: unify_humidity_control_auto_setpoint_max
+      return unify_humidity_control_auto_setpoint_max_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_ENUM_NAME_AVAILABLE
+    if (17 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint instead of this: unify_humidity_control_auto_setpoint
+      return unify_humidity_control_auto_setpoint_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ENUM_NAME_AVAILABLE
+    if (18 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_scale instead of this: unify_humidity_control_auto_setpoint_scale
+      return unify_humidity_control_auto_setpoint_scale_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ENUM_NAME_AVAILABLE
+    if (19 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_precision instead of this: unify_humidity_control_auto_setpoint_precision
+      return unify_humidity_control_auto_setpoint_precision_get_enum_value_number(name);
+    }
+  #endif
+  }
+
 
   // No known numeric value is set for this string.
   // Return UINT32_MAX to indicate an error.
@@ -14581,6 +15322,17 @@ char *color_control_color_loop_active_get_enum_value_name_c(
 uint32_t color_control_color_loop_active_get_enum_value_number_c(const char *str)
 {
   return color_control_color_loop_active_get_enum_value_number(std::string(str));
+}
+char *color_control_color_loop_direction_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", color_control_color_loop_direction_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t color_control_color_loop_direction_get_enum_value_number_c(const char *str)
+{
+  return color_control_color_loop_direction_get_enum_value_number(std::string(str));
 }
 char *color_control_color_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
@@ -15154,6 +15906,17 @@ uint32_t metering_unitof_measure_get_enum_value_number_c(const char *str)
 {
   return metering_unitof_measure_get_enum_value_number(std::string(str));
 }
+char *mode_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", mode_type_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t mode_type_get_enum_value_number_c(const char *str)
+{
+  return mode_type_get_enum_value_number(std::string(str));
+}
 char *move_step_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -15363,6 +16126,17 @@ uint32_t shdcfg_direction_get_enum_value_number_c(const char *str)
 {
   return shdcfg_direction_get_enum_value_number(std::string(str));
 }
+char *scale_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", scale_type_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t scale_type_get_enum_value_number_c(const char *str)
+{
+  return scale_type_get_enum_value_number(std::string(str));
+}
 char *setpoint_raise_or_lower_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -15373,6 +16147,17 @@ char *setpoint_raise_or_lower_mode_get_enum_value_name_c(
 uint32_t setpoint_raise_or_lower_mode_get_enum_value_number_c(const char *str)
 {
   return setpoint_raise_or_lower_mode_get_enum_value_number(std::string(str));
+}
+char *setpoint_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", setpoint_type_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t setpoint_type_get_enum_value_number_c(const char *str)
+{
+  return setpoint_type_get_enum_value_number(std::string(str));
 }
 char *shade_configuration_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
@@ -15616,6 +16401,39 @@ uint32_t tx_report_transmission_speed_get_enum_value_number_c(const char *str)
 {
   return tx_report_transmission_speed_get_enum_value_number(std::string(str));
 }
+char *unify_humidity_control_current_state_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", unify_humidity_control_current_state_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t unify_humidity_control_current_state_get_enum_value_number_c(const char *str)
+{
+  return unify_humidity_control_current_state_get_enum_value_number(std::string(str));
+}
+char *unify_thermostat_operating_state_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", unify_thermostat_operating_state_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t unify_thermostat_operating_state_get_enum_value_number_c(const char *str)
+{
+  return unify_thermostat_operating_state_get_enum_value_number(std::string(str));
+}
+char *unify_thermostat_thermostat_mode_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", unify_thermostat_thermostat_mode_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t unify_thermostat_thermostat_mode_get_enum_value_number_c(const char *str)
+{
+  return unify_thermostat_thermostat_mode_get_enum_value_number(std::string(str));
+}
 char *window_covering_window_covering_type_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)
 {
@@ -15626,6 +16444,28 @@ char *window_covering_window_covering_type_get_enum_value_name_c(
 uint32_t window_covering_window_covering_type_get_enum_value_number_c(const char *str)
 {
   return window_covering_window_covering_type_get_enum_value_number(std::string(str));
+}
+char *z_wave_fan_mode_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", z_wave_fan_mode_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t z_wave_fan_mode_enum_get_enum_value_number_c(const char *str)
+{
+  return z_wave_fan_mode_enum_get_enum_value_number(std::string(str));
+}
+char *z_wave_fan_state_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", z_wave_fan_state_enum_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t z_wave_fan_state_enum_get_enum_value_number_c(const char *str)
+{
+  return z_wave_fan_state_enum_get_enum_value_number(std::string(str));
 }
 char *zone_enroll_response_enroll_response_code_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size)

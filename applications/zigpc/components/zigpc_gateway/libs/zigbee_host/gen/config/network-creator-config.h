@@ -18,25 +18,25 @@
 
 // <h>Zigbee Network Creator configuration
 
-// <o EMBER_AF_PLUGIN_NETWORK_CREATOR_SCAN_DURATION> Scan duration exponent <0-14>
+// <o SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_SCAN_DURATION> Scan duration exponent <0-14>
 // <i> Default: 4
 // <i> The exponent of the number of scan periods, where a scan period is 960 symbols, and a symbol is 16 miscroseconds.  The scan will occur for ((2^duration) + 1) scan periods.
-#define EMBER_AF_PLUGIN_NETWORK_CREATOR_SCAN_DURATION   4
+#define SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_SCAN_DURATION   4
 
-// <o EMBER_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_MASK> Channel Mask
+// <o SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_MASK> Channel Mask (hex) <0-0xFFFFFFFF> <f.h>
 // <i> Default: 0x02108800
 // <i> The channels that the plugin will scan when forming and joining.
-#define EMBER_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_MASK  0x02108800
+#define SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_MASK  0x02108800
 
-// <o EMBER_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_BEACONS_THRESHOLD> Channel beacons threshold <0-255>
+// <o SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_BEACONS_THRESHOLD> Channel beacons threshold <0-255>
 // <i> Default: 20
 // <i> This is the highest number of beacons that the network creator will hear on a channel and still try to form a network. If the network creator hears more than this ammount of beacons on one channel, it will disregard this channel from the formation process.
-#define EMBER_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_BEACONS_THRESHOLD   20
+#define SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_CHANNEL_BEACONS_THRESHOLD   20
 
-// <o EMBER_AF_PLUGIN_NETWORK_CREATOR_RADIO_POWER> Radio power to use on the formed network. <-8..20>
+// <o SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_RADIO_POWER> Radio power to use on the formed network. <-8..20>
 // <i> Default: 3
 // <i> This is the default radio power that will be used on the network. The units are in dBm.
-#define EMBER_AF_PLUGIN_NETWORK_CREATOR_RADIO_POWER   3
+#define SL_ZIGBEE_AF_PLUGIN_NETWORK_CREATOR_RADIO_POWER   3
 
 // </h>
 

@@ -1,8 +1,8 @@
 var namespacesmartstart =
 [
-    [ "Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ],
     [ "Entry", "classsmartstart_1_1Entry.html", "classsmartstart_1_1Entry" ],
     [ "Management", "classsmartstart_1_1Management.html", "classsmartstart_1_1Management" ],
+    [ "Query", "classsmartstart_1_1Query.html", "classsmartstart_1_1Query" ],
     [ "notification_function_t", "namespacesmartstart.html#adff5df4315ba845db07eefe7cbdda6a4", null ],
     [ "QueryValue", "namespacesmartstart.html#aefc1b5969139cb011494df6c1bed1399", null ],
     [ "QueryKey", "namespacesmartstart.html#a30905b6ddd0b73b0a63205eb26c99a95", [

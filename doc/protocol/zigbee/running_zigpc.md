@@ -6,7 +6,7 @@ Here we explain how to get up and running quickly to test out Unify on the Raspb
 
 ## Prerequisites
 
-- Zigbee module EFR32MG12/EFR32xG22 radio board on Wireless STK
+- Zigbee module EFR32MG2X/EFR32xG22 radio board on Wireless STK
 - Unify installed on Raspberry Pi (as described [here](../../running_unify.md))
 - Simplicity Studio software
 

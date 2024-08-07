@@ -17,13 +17,13 @@ var group__unify__components =
     [ "Main Function for Contiki", "group__uic__main.html", "group__uic__main" ],
     [ "Unify MQTT Client", "group__uic__mqtt.html", "group__uic__mqtt" ],
     [ "Unify Multi Invoke C++ template", "group__unify__multi__invoke.html", null ],
-    [ "OTA (Over-the-Air) Image Listener", "group__image__listener.html", null ],
-    [ "Unify SmartStart Management", "group__unify__smartstart__management.html", null ],
+    [ "OTA (Over-the-Air) Image Listener", "group__image__listener.html", "group__image__listener" ],
+    [ "Unify SmartStart Management", "group__unify__smartstart__management.html", "group__unify__smartstart__management" ],
     [ "Unify Stdin", "group__uic__stdin.html", "group__uic__stdin" ],
     [ "Unify Application Monitoring", "group__unify__application__monitoring.html", "group__unify__application__monitoring" ],
     [ "Attribute Poll Engine", "group__attribute__poll.html", "group__attribute__poll" ],
     [ "Unify DotDot Attribute Store", "group__unify__dotdot__attribute__store.html", "group__unify__dotdot__attribute__store" ],
-    [ "Unify Node State Monitor", "group__unify__node__state__monitor.html", null ],
+    [ "Unify Node State Monitor", "group__unify__node__state__monitor.html", "group__unify__node__state__monitor" ],
     [ "Unify Validator component", "group__uic__validator.html", "group__uic__validator" ],
     [ "Unify definitions", "group__unify__definitions.html", "group__unify__definitions" ]
 ];

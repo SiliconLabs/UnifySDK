@@ -16,7 +16,6 @@ readme_rust.md
 unify_library_overview.md
 standards/coding-standard.md
 api.md
-how_to_write_new_cluster.md
 ```
 
 ## Directory Structure and File Naming Conventions

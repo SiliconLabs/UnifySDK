@@ -5,7 +5,7 @@ var classzigpc_1_1gateway_1_1RequestQueue =
     [ "RequestQueue", "classzigpc_1_1gateway_1_1RequestQueue.html#adaa1aedc983b5d677dd22625b4743195", null ],
     [ "dispatch", "classzigpc_1_1gateway_1_1RequestQueue.html#ab077bb011a0cb023c176d921560d3e7a", null ],
     [ "enqueue", "classzigpc_1_1gateway_1_1RequestQueue.html#ae1b727ce76684b4fd8d26f92c9805443", null ],
-    [ "getInstance", "classzigpc_1_1gateway_1_1RequestQueue.html#aee9a3c9bc00892008ba8f8846398da74", null ],
+    [ "getInstance", "classzigpc_1_1gateway_1_1RequestQueue.html#ae54bf446d31e467b0e443e9bb50ee00f", null ],
     [ "operator=", "classzigpc_1_1gateway_1_1RequestQueue.html#abb11eb185c45a35849019b2d1f34e395", null ],
     [ "startDispatching", "classzigpc_1_1gateway_1_1RequestQueue.html#abe7b5c848b4bbc948ed57ac7df75a686", null ],
     [ "stopDispatching", "classzigpc_1_1gateway_1_1RequestQueue.html#a5e0bbfb78336ff5fc8aff67130b6e629", null ],

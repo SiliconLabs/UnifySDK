@@ -60,7 +60,7 @@ sl_status_t zigpc_gateway_process_setup(void)
     z3gw_opts.supportedClusterListSize = zigpc_zcl_get_number_supported_clusters();
     z3gw_opts.supportedClusterList = zigpc_zcl_get_supported_cluster_list();
 
-    result = (zigbeeHostInit(&z3gw_opts) == EMBER_SUCCESS) ? SL_STATUS_OK
+    result = (zigbeeHostInit(&z3gw_opts) == SL_STATUS_OK) ? SL_STATUS_OK
                                                            : SL_STATUS_FAIL;
   }
   if (result == SL_STATUS_OK) {

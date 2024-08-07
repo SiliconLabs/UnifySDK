@@ -16,7 +16,7 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 /**
  * Refer to <GSDK>/protocol/zigbee/app/framework/plugin/network-creator-security/network-creator-security.h
@@ -34,11 +34,11 @@
  *
  * @param keyData the link key to be used by the joining node.
  *
- * @return An ::EmberStatus value describing the success or failure of the
+ * @return An ::sl_status_t value describing the success or failure of the
  * network opening procedure. If this node is not currently on a network,
- * this will return ::EMBER_ERR_FATAL.
+ * this will return ::SL_STATUS_FAIL.
  */
-EmberStatus emberAfPluginNetworkCreatorSecurityOpenNetworkWithKeyPair(
-  EmberEUI64 eui64, EmberKeyData keyData);
+sl_status_t emberAfPluginNetworkCreatorSecurityOpenNetworkWithKeyPair(
+  sl_802154_long_addr_t eui64, sl_zigbee_key_data_t keyData);
 
 #endif  // AF_SECURITY_H

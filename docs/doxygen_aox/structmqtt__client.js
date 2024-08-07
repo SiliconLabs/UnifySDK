@@ -11,7 +11,7 @@ var structmqtt__client =
     [ "disconnect", "structmqtt__client.html#aa04bdd74835d9ab8b757bb3268b2efd2", null ],
     [ "event", "structmqtt__client.html#a0e19a53cf25b418e775d80c3c67353b2", null ],
     [ "file_descriptor", "structmqtt__client.html#a5897a5c38897dafc87cf6ac6a94a1858", null ],
-    [ "get_client_id", "structmqtt__client.html#a89f3f0a0499c20f182b28fd765342b15", null ],
+    [ "get_client_id", "structmqtt__client.html#a008f98ebe85f1d8af194b387572a8c44", null ],
     [ "is_connected_to_broker", "structmqtt__client.html#af1c66d3c7265bbaea83872ee528bf768", null ],
     [ "on_connect", "structmqtt__client.html#aa43be0ab7c0138b2f4a7a2ae974944aa", null ],
     [ "on_connect_callback_set", "structmqtt__client.html#a54c57180be14c620af9652b9fe5b2fcb", null ],

@@ -12,3 +12,4 @@ libreadline-dev                     // UIC_Log. The GNU readline library aids in
 libsqlite3-dev                      // GMS, NAL. SQLite is a C library that implements an SQL database engine. 
 libssl-dev                          // required for cmake
 libyaml-cpp-dev                     // UIC_config, UIC_rust. C++ library for parsing and emitting data in YAML
+libprotobuf-dev                     // Protocol buffers C++ library and proto files

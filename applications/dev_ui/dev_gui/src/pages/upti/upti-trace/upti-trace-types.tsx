@@ -51,7 +51,10 @@ export enum Frequencies {
     CN,
     US_LR1,
     US_LR2,
-    US_LR3
+    US_LR3,
+    EU_LR1,
+    EU_LR2,
+    EU_LR3
 }
 
 export enum Modes {

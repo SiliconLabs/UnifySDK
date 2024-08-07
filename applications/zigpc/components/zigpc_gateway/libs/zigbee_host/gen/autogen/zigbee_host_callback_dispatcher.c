@@ -19,9 +19,9 @@
 #include "zigbee_host_callback_dispatcher.h"
 
 
-void sli_zb_af_ncp_init(bool memoryAllocation)
+void sli_zb_af_ncp_init(void)
 {
-  emberAfPluginAddressTableNcpInitCallback(memoryAllocation);
-  emberAfPluginNcpConfigurationNcpInitCallback(memoryAllocation);
-  emberAfNcpInitCallback(memoryAllocation);
+  sl_zigbee_af_address_table_ncp_init_cb();
+  sl_zigbee_af_ncp_configuration_ncp_init_cb();
+  emberAfNcpInitCallback();
 }

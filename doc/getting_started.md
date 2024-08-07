@@ -1,38 +1,16 @@
-# Getting Started with the Unify Host SDK
-
-Before installing the Unify Host SDK components on our reference platform, a
-Raspberry Pi 4 (RPi4), the following prerequisites must be fulfilled:
+# Running Unify on Raspberry Pi
 
 The Unify Host SDK targets our reference platform, a Raspberry Pi 4 (RPi4).
 It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
-If you instead want a quick demo of Unify IoT gateway running on
-your Windows, MacOS or Linux desktop, please try our
-[Portable Runtime environment User guide](../portable_runtime/readme_user_cli.md).
-
-```{toctree}
----
-maxdepth: 1
-titlesonly:
-hidden:
----
-../portable_runtime/readme_user.md
-```
-
-The rest of this guide focuses on how to set up all of the applications and
-services on a RPi4.
-
-## Prerequisites
-
-- An RPi4 preinstalled with [Raspberry Pi OS Linux Version 11, Bullseye 64-bit](https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-09-26/)
-
-- At least one of the following, supported wireless radios is connected to the RPi4 via USB:
-  - [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
-  - [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG12/EFR32xG22 running NCP for Zigbee or RCP for Multiprotocol
-  - [Bluetooth module](https://www.silabs.com/wireless/bluetooth) EFR32xG22 running NCP Firmware for AoXPC
 
 For details on setting up a bare RPi4, follow the setup instructions in the
 [Official Raspberry Pi User Guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up),
 and ensure a supported radio module is attached to your RPi4.
+
+For set up and running quickly to test out Unify on the Raspberry Pi refer [Setting up Raspberry Pi for Unify](running_unify.md)
+
+The rest of this guide focuses on how to set up all of the applications and
+services on a RPi4.
 
 For running Unify Framework it is required to have a running MQTT broker to which the Unify Framework can connect.
 To get an MQTT broker installed on the RPi4:
@@ -43,7 +21,7 @@ pi@raspberrypi:~ $ sudo apt install mosquitto
 ```
 
 For more information regarding logging and configuration of eg. the Mosquitto
-broker, see the [Unify Framework User Guide](unify_readme_user.md).
+broker, see the [Unify Host SDK User Guide](unify_readme_user.md).
 
 ```{toctree}
 ---
@@ -58,7 +36,7 @@ unify_readme_user.md
 
 ## How to install packages
 
-The Unify Host SDK distribution targets the reference platform Debian Bullseye
+The Unify Host SDK distribution targets the reference platform Debian Bookworm
 platform. Binary Debian packages are provided with the SDK and they are
 available in a Zip file eg. unify_x.y.z_arm64.zip on
 [Unify's GitHub release page](https://github.com/SiliconLabs/UnifySDK/releases).
@@ -150,7 +128,7 @@ Getting Started with the Unify Framework <getting_started_unify_sdk.md>
 ## Multiprotocol Setup
 
 If you are interested in setting up multiprotocol CPC-based applications
-see the [Multiprotocol Setup page](getting_started_multiprotocol_cpc.md).
+see the [Multiprotocol Setup](getting_started_multiprotocol_cpc.md) page.
 
 ```{toctree}
 ---
@@ -158,5 +136,5 @@ maxdepth: 1
 titlesonly:
 hidden:
 ---
-Getting Started with the Multiprotocol Setup <getting_started_multiprotocol_cpc.md>
+getting_started_multiprotocol_cpc.md
 ```

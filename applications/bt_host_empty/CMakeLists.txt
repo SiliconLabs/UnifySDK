@@ -1,5 +1,5 @@
-find_package(GeckoSDK 4.3.0 REQUIRED)
-find_package(CPCD 4.3.0 REQUIRED)
+find_package(GeckoSDK 2024.6.0 REQUIRED)
+find_package(CPCD 4.5.0 REQUIRED)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
@@ -20,7 +20,7 @@ set(BT_HOST_EMPTY_SRC_FILES
   ${EXPORT_DIR}/app/bluetooth/common_host/ncp_host/ncp_host.c
   ${EXPORT_DIR}/app/bluetooth/common_host/tcp/tcp_posix.c
   ${EXPORT_DIR}/app/bluetooth/common_host/uart/uart_posix.c
-  ${EXPORT_DIR}/app/bluetooth/common_host/cpc/cpc.c
+  ${EXPORT_DIR}/app/bluetooth/common_host/cpc_bt/cpc_bt.c
   ${EXPORT_DIR}/protocol/bluetooth/src/sl_bt_ncp_host.c
   ${EXPORT_DIR}/protocol/bluetooth/src/sl_bt_ncp_host_api.c
   ${EXPORT_DIR}/app/bluetooth/common_host/named_socket/named_socket.c
@@ -47,7 +47,7 @@ set(BT_HOST_EMPTY_INCLUDES
   ${EXPORT_DIR}/app/bluetooth/common_host/system
   ${EXPORT_DIR}/app/bluetooth/common_host/tcp
   ${EXPORT_DIR}/app/bluetooth/common_host/uart
-  ${EXPORT_DIR}/app/bluetooth/common_host/cpc
+  ${EXPORT_DIR}/app/bluetooth/common_host/cpc_bt
   ${EXPORT_DIR}/platform/common/inc
   ${EXPORT_DIR}/protocol/bluetooth/inc
   ${EXPORT_DIR}/app/bluetooth/common_host/named_socket

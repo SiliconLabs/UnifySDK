@@ -1,0 +1,2357 @@
+@startuml ota_internal.svg
+title OTA download from image provider
+
+participant "OTA cache" as OTAC
+participant "OTA API" as API
+participant "Protocol controller" as PC
+participant "Image provider" as IP
+
+PC -> API: subscribe_unid(unid, uiid)
+
+alt If no unids listening to uiid
+API -> IP: Subscribe: ucl/OTA/info/uiid/all
+end
+API -> IP: Subscribe: ucl/OTA/info/uiid/unid
+API -> OTAC: unid listening to uiid
+alt #LightBlue specific unid available
+== image availability ==
+IP -> API: Publish: ucl/OTA/info/uiid/unid
+API -> OTAC: Cache image meta info for uiid/unid
+API -> PC: image_available_callback(meta_info)
+== image download ==
+PC -> API: get_by_unid(unid, uiid, image_ready_cb)
+alt #LightBlue image not cached
+API -> IP: Subscribe: ucl/OTA/data/uiid/unid
+API -> IP: Publish: ucl/OTA/info/uiid/unid/get
+alt #LightBlue image received
+IP -> API: Publish: image file data message
+API -> OTAC: Cache image file
+API -> PC: image_ready_cb(OK, filepath)
+else no image received
+API -> PC: image_ready_cb(ERROR, "")
+end
+API -> IP: Unsubscribe: ucl/OTA/data/uiid/unid
+else #LightBlue image cached
+API -> OTAC: get image filepath from cache
+OTAC -> API: image filepath
+API -> PC: image_ready_cb(OK, filepath)
+end
+
+else #LightGreen no specific unid available
+== image availability ==
+IP -> API: Publish: ucl/OTA/info/uiid/all
+API -> OTAC: Cache image meta info for uiid/all
+API -> OTAC: get_unids_listening_to_uiid()
+OTAC -> API: list of unids listening to the uiid
+loop #LightGreen for all unids listening to uiid
+API -> PC: image_available_callback(meta_info)
+== image download ==
+PC -> API: get_by_unid(unid, uiid, image_ready_cb)
+alt #LightGreen image not cached
+API -> IP: Subscribe: ucl/OTA/data/uiid/all
+API -> IP: Publish: ucl/OTA/info/uiid/all/get
+alt #LightGreen image received
+IP -> API: image file data message
+API -> OTAC: cache image file
+API -> PC: image_ready_cb(OK, filepath)
+else #LightGreen no image received
+API -> PC: image_ready_cb(ERROR, "")
+end
+API -> IP: Unsubscribe: ucl/OTA/data/uiid/all
+else #LightGreen image cached
+API -> OTAC: get image filepath from cache
+OTAC -> API: image filepath
+API -> PC: image_ready_cb(OK, filepath)
+end
+end
+end
+PC -> API: unsubscribe_unid(unid, uiid)
+API -> OTAC: remove unid listening to uiid
+API -> IP: Unsubscribe: ucl/OTA/info/uiid/unid
+alt If no more unids listening to uiid
+API -> IP: Unsubscribe: ucl/OTA/info/uiid/all
+end
+@enduml
+@startuml inline_umlgraph_1.svg
+  participant AttributeStore
+  box "ZPC" #LightBlue
+  participant NetworkMonitor
+  participant NetworkManagement
+  end box
+
+  note over AttributeStore,NetworkManagement: Init
+  NetworkMonitor        -> AttributeStore       : Create/Set the ZPC Node ID and Security keys nodes in AttributeStore
+  note over AttributeStore,NetworkManagement: Node is Added
+  NetworkManagement     -> NetworkMonitor       : on_node_id_assigned()
+  NetworkMonitor        -> AttributeStore       : Create Endpoint node in AttributeStore
+  NetworkMonitor        -> AttributeStore       : Create NetworkStatus node in AttributeStore
+  NetworkManagement     -> NetworkMonitor       : on_node_added()
+  NetworkMonitor        -> AttributeStore       : Create Security key node in AttributeStore
+  NetworkMonitor        -> AttributeStore       : Create NIF under Endpoint nodes in AttributeStore
+  note over AttributeStore,NetworkManagement: Node is Removed
+  NetworkManagement     -> NetworkMonitor       : on_node_deleted()
+  NetworkMonitor        -> AttributeStore       : Remove NodeID node in AttributeStore
+  note over AttributeStore,NetworkManagement: New Network
+  NetworkManagement     -> NetworkMonitor       : new_network()
+  NetworkMonitor        -> AttributeStore       : Delete the oldHomeID node from AttributeStore
+  NetworkMonitor        -> AttributeStore       : Create the newHomeID node in AttributeStore
+  NetworkMonitor        -> AttributeStore       : Create nodes in the attribute store for all nodes currently in the network
+@enduml
+@startuml inline_umlgraph_2.svg
+  hide footbox
+  title Z-Wave node interview detection and monitoring
+  participant "Attribute Resolver" as AttributeResolver
+  participant "Attribute Store" as AttributeStore
+  box "ZPC" #LightBlue
+  participant "Network Monitor" as NetworkMonitor
+  end box
+
+  activate NetworkMonitor
+  NetworkMonitor -> NetworkMonitor: Init
+  NetworkMonitor -> AttributeStore: Register callback for NIFs attributes\nnetwork_monitor_on_nif_updated()
+  deactivate NetworkMonitor
+  ...
+  AttributeStore        -> NetworkMonitor       : network_monitor_on_nif_updated()
+  activate NetworkMonitor
+  NetworkMonitor        -> AttributeStore       : Update the DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS to \nZCL_NODE_STATE_NETWORK_STATUS_ONLINE_INTERVIEWING
+  NetworkMonitor        -> AttributeResolver    : Register listener for the NodeID\nnetwork_monitor_node_id_resolution_listener()
+  deactivate NetworkMonitor
+  ...
+  note over AttributeResolver: Node is resolved
+  AttributeResolver     -> NetworkMonitor       : network_monitor_node_id_resolution_listener()
+  NetworkMonitor        -> AttributeStore       : Update the DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS to \nZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL
+@enduml
+@startuml attribute_store_span_persistence.svg
+title SPAN persistence in the attribute store
+allow_mixing
+skinparam objectBorderColor black
+
+package "Attribute Store" <<Database>> {
+  object "HomeID" as home_id #fffae6
+  home_id : ID = ATTRIBUTE_HOME_ID
+  home_id : value = Desired: [], Reported: [8C CE FB E6]
+
+  object "ZPC NodeID" as zpc_node #f2ffe6
+  zpc_node : Attribute Type = ATTRIBUTE_NODE_ID
+  zpc_node : value = Desired: [], Reported: [01]
+
+  package "Other Nodes"{
+    object "NodeID" as node #f2ffe6
+    node : Attribute Type = ATTRIBUTE_NODE_ID
+    node : value = Desired: [], Reported: [03]
+
+    object "SPAN Entry" as span_entry #FEFEFE
+    span_entry : Attribute Type = ATTRIBUTE_S2_SPAN_ENTRY
+    span_entry : value = Desired: [] - Reported: [00,3c,8c,fa,31,85,33,eb,db,70,5f,62,b4,65,95,53,91,fb,82,87,49,88,15,d5,ef,7c,dc,4e,36,ee,28,23,4b,d4,9f,01]
+  }
+}
+home_id *-- zpc_node
+home_id *-- node
+node *-- span_entry
+@enduml
+@startuml attribute_store_mpan_persistence.svg
+title MPAN persistence in the attribute store
+allow_mixing
+skinparam objectBorderColor black
+
+package "Attribute Store" <<Database>> {
+
+  object "HomeID" as home_id #fffae6
+  home_id : ID = ATTRIBUTE_HOME_ID
+  home_id : value = Desired: [], Reported: [8C CE FB E6]
+
+  object "ZPC NodeID" as zpc_node #f2ffe6
+  zpc_node : Attribute Type = ATTRIBUTE_NODE_ID
+  zpc_node : value = Desired: [], Reported: [01]
+
+  object "ZPC MPAN table" as mpan_table #FEFEFE
+  mpan_table : Attribute Type = ATTRIBUTE_S2_MPAN_TABLE
+  mpan_table : value = Desired: [], Reported: []
+
+  object "ZPC MPAN entry 1" as mpan_entry_1 #FEFEFE
+  mpan_entry_1 : Attribute Type = ATTRIBUTE_S2_MPAN_ENTRY
+  mpan_entry_1 : value = Desired: [], Reported: [1a,f0,78,62,83,14,bd,42,4c,c5,41,24,f4,02,f2,d4,00,00,01,01]
+
+  object "ZPC MPAN entry 2" as mpan_entry_2 #FEFEFE
+  mpan_entry_2 : Attribute Type = ATTRIBUTE_S2_MPAN_ENTRY
+  mpan_entry_2 : value = Desired: [], Reported: [5d,8e,47,ce,df,43,47,1f,f4,72,5d,84,43,6d,44,f3,00,00,02,01]
+
+  package "Other Nodes"{
+    object "NodeID" as node #f2ffe6
+    node : Attribute Type = ATTRIBUTE_NODE_ID
+    node : value = Desired: [], Reported: [03]
+
+    object "Multicast Group list" as multicast_group_list #FEFEFE
+    multicast_group_list : Attribute Type = ATTRIBUTE_MULTICAST_GROUP_LIST
+    multicast_group_list : value = Desired: [], Reported: []
+
+    object "Multicast Group" as multicast_group_1 #FEFEFE
+    multicast_group_1 : Attribute Type = ATTRIBUTE_MULTICAST_GROUP
+    multicast_group_1 : value = Desired: [], Reported: [01]
+
+    object "Multicast Group" as multicast_group_2 #FEFEFE
+    multicast_group_2 : Attribute Type = ATTRIBUTE_MULTICAST_GROUP
+    multicast_group_2 : value = Desired: [], Reported: [02]
+  }
+}
+
+home_id *-- zpc_node
+
+zpc_node *-- mpan_table
+mpan_table *-- mpan_entry_1
+mpan_table *-- mpan_entry_2
+
+home_id *-- node
+node *-- multicast_group_list
+multicast_group_list *-- multicast_group_1
+multicast_group_list *-- multicast_group_2
+@enduml
+@startuml inline_umlgraph_5.svg
+  box "MQTT Broker" #LightYellow
+  participant MQTT
+  end box
+
+  box "ZPC" #LightBlue
+
+  participant UclNetworkManagement
+  participant NetworkManagement
+  end box
+  '<i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/NetworkManagement</i>\n{"State": "Idle"}
+  note over MQTT: User trigger Add Node
+  MQTT                  -> UclNetworkManagement : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement/Write</i>\n{"State": "add node", ...}
+  UclNetworkManagement  -> NetworkManagement    : zwave_network_management_add_node()
+  NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_WAITING_FOR_ADD)
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "add node", ...}
+  NetworkManagement     -> UclNetworkManagement : on_keys_reported()
+  UclNetworkManagement  -> NetworkManagement    : zwave_network_management_keys_set()
+  NetworkManagement     -> UclNetworkManagement : on_dsk_report()
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "add node",\n<Request DSK>}
+  note over MQTT
+  User decides to supply DSK
+  or Reject the DSK, which
+  will end up with a non secure
+  node inclusion
+  end note
+  MQTT                  -> UclNetworkManagement : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement/Write</i>\n{"State":"add node"\nDSK or "UserAccept"=false}
+  UclNetworkManagement  -> NetworkManagement    : zwave_network_management_dsk_set()
+  NetworkManagement     -> UclNetworkManagement : on_node_added()
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/NetworkManagement</i>\nNetworkManagement {"State": "Idle"}
+@enduml
+@startuml inline_umlgraph_6.svg
+  box "MQTT Broker" #LightYellow
+  participant MQTT
+  end box
+  box "ZPC" #LightBlue
+  participant UclNetworkManagement
+  participant NetworkManagement
+  end box
+
+  note over MQTT: User trigger Remove Node
+  MQTT                  -> UclNetworkManagement : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement/Write</i>\n{"State": "remove node", ...}
+  UclNetworkManagement  -> NetworkManagement    : zwave_network_management_remove_node()
+  NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_WAITING_FOR_NODE_REMOVAL)
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "remove node", ...}
+  ... Waiting for node to be removed ...
+  NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_IDLE)
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "idle", ...}
+@enduml
+@startuml inline_umlgraph_7.svg
+  box "MQTT Broker" #LightYellow
+  participant MQTT
+  end box
+  box "ZPC" #LightBlue
+  participant UclNodeState
+  participant UclNetworkManagement
+  participant NetworkManagement
+  end box
+
+  note over MQTT: User trigger Remove Offline Node
+  MQTT                  -> UclNodeState         : <i>ucl/by-unid/<offline-node-unid>/State/Commands/OfflineRemove</i>\n"
+  UclNodeState          -> UclNetworkManagement : ucl_network_management_remove_offline_node(node_id)
+  UclNetworkManagement  -> NetworkManagement    : zwave_network_management_remove_failed(node_id)
+  NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_WAITING_FOR_FAILED_NODE_REMOVAL)
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "remove node", ...}
+  ... Waiting for offfline node to be removed ...
+  NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_IDLE)
+  UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "idle", ...}
+@enduml
+@startuml zwave_multicast.svg
+participant SomeTask as t1
+participant AttributeStore as as
+participant AttributeResolver as ar
+participant AttributeResolverGroup as ag
+participant "Z-Wave CommandClasses" as cc
+participant "Z-Wave API" as zw
+
+... Init ...
+ag -> ar : attribute_resolver_register_set_rule_listener(&on_new_set_rule_registered)
+
+... Command Class Init ...
+note over cc
+    Each CC will register rules on Desired Z-Wave
+    attributes, in this example only one rule
+    registration is shown.
+end note
+loop For each registered rule from the Z-Wave Command Class handler
+    cc -> ar : attribute_resolver_register_rule(...)
+    ar -> ag : on_new_set_rule_registered(...)
+    ag -> as : attribute_store_register_callback_by_type_and_state(on_settable_attribute_update, ...)
+    note over ag
+        Attribute Resolver Group registers a callback for
+        when the attribute value is set.
+    end note
+end
+
+... Desired attribute set ...
+note over t1
+    Task sets a number of attributes. This could
+    e.g. be a command for a ZCL group. In this
+    example the task will set the same desired
+    value for the same attribute type on 2 nodes
+    (could e.g. be On to a
+    binary switch).
+end note
+
+t1 -> as : attribute_store_set_node_attribute_value(1, DESIRED, ON, 1)
+as -> ag : on_settable_attribute_update(...)
+note over ag
+    Attribute Group Resolver stores the node
+    in the <i>multicast_candidates</i> list
+end note
+t1 -> as : attribute_store_set_node_attribute_value(2, DESIRED, ON, 1)
+as -> ag : on_settable_attribute_update(...)
+note over ag
+    Attribute Group Resolver stores the node
+    in the <i>multicast_candidates</i> list
+end note
+
+note over ar
+    Attribute Resolver will on its next scan
+    detect the Desired attribute changes and
+    call <i>attribute_resolver_send()</i>, which
+    calls <i>zpc_attribute_resolver_send_group()</i>
+end note
+ar -> ag : zpc_attribute_resolver_send_group(1)
+note over ag
+    Attribute Store Group will loop through the
+    <i>multicast_candidates</i> list and find the
+    desired attributes, that can be multicasted.
+    Each attribute, that can be multicasted over
+    Z-Wave will be sent here, and the attributes
+    will be marked added to the attribute store
+    resolution list.
+end note
+ag -> zw : zwave_tx_assign_group(...)
+ag -> zw : zwave_tx_scheme_get_node_tx_options(...)
+alt supervision
+    ag -> zw : zwave_command_class_supervision_send_data(...)
+else no supervision
+    ag -> zw : zwave_tx_send_data(...)
+end
+ag -> ar : attribute_resolver_associate_node_with_tx_sessions_id()
+
+ar -> ag : zpc_attribute_resolver_send_group(2)
+note over ag
+    When the attribute resolver calls the 2nd send
+    the attribute is already sent as a multicast,
+    and the <i>zpc_attribute_resolver_send_group()</i>
+    function will return immediately.
+end note
+@enduml
+@startuml attribute_store_color_switch_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Supported Components IDs" as supported_components_ids #FFFFFF
+  supported_components_ids : Attribute Type = ATTRIBUTE(SUPPORTED_COLOR_COMPONENT_MASK)
+  supported_components_ids : value = Desired: [] - Reported: [1C]
+
+  object "Color State" as color_state #FFFFFF
+  color_state : Attribute Type = ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_STATE)
+  color_state : value = Desired: [1] - Reported: [0]
+
+  package "For each Component ID" <<Rectangle>> {
+
+    object "Component ID" as component_id #FFFFFF
+    component_id : Attribute Type = ATTRIBUTE(COLOR_COMPONENT_ID)
+    component_id : value = Desired: [] - Reported: [3]
+
+    object "Value" as component_id_value #FFFFFF
+    component_id_value : Attribute Type = ATTRIBUTE(VALUE)
+    component_id_value : value = Desired: [] - Reported: [255]
+
+    object "Duration" as component_id_duration #FFFFFF
+    component_id_duration : Attribute Type = ATTRIBUTE(DURATION)
+    component_id_duration : value = Desired: [] - Reported: [2]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- supported_components_ids
+endpoint *-- color_state
+color_state *-- component_id
+component_id *-- component_id_value
+component_id *-- component_id_duration
+@enduml
+@startuml inline_umlgraph_11.svg
+ top to bottom direction
+ scale 2200 width
+
+ rectangle  S0_INC_IDLE #aliceblue;line:blue;line.bold;text:blue
+ together {
+ rectangle  S0_AWAITING_SCHEME_REPORT #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_HANDLE_SCHEME_REPORT #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_AWAITING_KEY_VERIFY #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_HANDLE_NET_KEY_VERIFY #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_AWAITING_2SCHEME_REPORT #aliceblue;line:blue;line.bold;text:blue
+ }
+
+   S0_INC_IDLE -down-> S0_AWAITING_SCHEME_REPORT
+ note on link
+ EV_S0_BOOTSTRAPPING_START
+ S0_SEND_SCHEME_GET_ACTION
+ s0_send_scheme_get()
+ end note
+
+   S0_AWAITING_SCHEME_REPORT --> S0_INC_IDLE
+ note on link
+ EV_S0_BOOTSTRAP_ABORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_AWAITING_SCHEME_REPORT --> S0_INC_IDLE
+ note on link
+ EV_S0_TIMEOUT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_AWAITING_SCHEME_REPORT --> S0_HANDLE_SCHEME_REPORT
+ note on link
+ EV_S0_SCHEME_REPORT_RECEIVED
+ S0_SCHEME_REPORT_RECV_ACTION
+ s0_handle_net_key_verify()
+ end note
+
+   S0_HANDLE_SCHEME_REPORT --> S0_INC_IDLE
+ note on link
+ EV_S0_WRONG_SCHEME_REPORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_HANDLE_SCHEME_REPORT --> S0_AWAITING_KEY_VERIFY
+ note on link
+ EV_S0_SEND_KEY_SET
+ S0_SEND_KEY_SET_ACTION
+ s0_send_key_set()
+ end note
+
+   S0_AWAITING_KEY_VERIFY --> S0_INC_IDLE
+ note on link
+ EV_S0_TIMEOUT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_AWAITING_KEY_VERIFY --> S0_HANDLE_NET_KEY_VERIFY
+ note on link
+ S0_HANDLE_NET_KEY_VERIFY
+ S0_NET_KEY_VERIFY_RECEIVED_ACTION
+ s0_handle_net_key_verify()
+ end note
+
+   S0_AWAITING_KEY_VERIFY --> S0_INC_IDLE
+ note on link
+ EV_S0_BOOTSTRAP_ABORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_HANDLE_NET_KEY_VERIFY --> S0_INC_IDLE
+ note on link
+ EV_S0_WAS_NOT_CONTROLLER
+ S0_NO_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_HANDLE_NET_KEY_VERIFY --> S0_AWAITING_2SCHEME_REPORT
+ note on link
+ EV_S0_SEND_SCHEME_INHERIT
+ s0_send_scheme_inherit()
+ end note
+
+   S0_AWAITING_2SCHEME_REPORT --> S0_INC_IDLE
+ note on link
+ EV_S0_SCHEME_REPORT_RECEIVED
+ S0_SEND_SCHEME_INHERIT_ACTION
+ callback to NM
+ end note
+
+   S0_AWAITING_2SCHEME_REPORT --> S0_INC_IDLE
+ note on link
+ EV_S0_TIMEOUT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+
+   S0_AWAITING_2SCHEME_REPORT --> S0_INC_IDLE
+ note on link
+ EV_S0_BOOTSTRAP_ABORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+@enduml
+@startuml inline_umlgraph_13.svg
+' Style for the diagram
+!theme plain
+hide footbox
+title Z-Wave frame transmission\nComponents with processes in grey
+
+' List of participants
+participant "User component" as u
+participant "Z-Wave TX" as tx #DEDEDE
+participant "Z-Wave Transports" as zwave_transports
+participant "Z-Wave API" as zwapi
+participant "Z-Wave RX" as rx #DEDEDE
+
+u -> tx: <b>zwave_tx_send_data\n(frame data, user_callback_function)
+tx -> tx: Queues the frame
+tx -> u: returns\nSL_STATUS_OK, zwave_tx_session_id
+tx -> tx: Process verifies\nthe TX queue
+tx -> zwave_transports: <b>zwave_controller_transport_send_data\n(frame data, Z-Wave TX Callback)
+zwave_transports -> zwapi: <b>zwapi_send_data\n(frame data, Z-Wave TX Callback)
+zwapi -> zwave_transports : SL_STATUS_OK
+zwave_transports -> tx : SL_STATUS_OK
+zwapi -> zwapi: Frame being sent\non the radio
+rx -> rx: continuously\nmonitors\nincoming\nmessages
+rx -> zwapi: <b>zwapi_poll</b>()
+zwapi -> tx: Z-Wave TX Callback\n(callback registered with last call \nto zwapi_send_data)
+tx -> u: User callback
+@enduml
+@startuml inline_umlgraph_14.svg
+' Style for the diagram
+!theme plain
+hide footbox
+
+title Z-Wave TX parent frame functionality with transports (example)
+
+' List of participants
+participant "User component" as u
+participant "Z-Wave TX" as tx #DEDEDE
+participant "Z-Wave Transports" as zwave_transports
+participant "Z-Wave\nS2" as s2 #DEDEDE
+participant "Z-Wave API" as zwapi
+participant "Z-Wave RX" as rx #DEDEDE
+
+rnote left of u: I have a frame\nto be encrypted\nand then sent.
+u -> tx: <b>zwave_tx_send_data\n(frame data, encapsulation=S2 Auth)
+
+rnote right of tx: <b>Queue:\n<b>- Frame 1</b>: Encapsulation S2 Auth
+
+tx -> zwave_transports: <b>zwave_controller_transport_send_data</b>\n(Frame 1, no parent)
+zwave_transports -> s2: <b>zwave_s2_send_data</b>\n(Frame 1, no parent)
+s2 -> zwave_transports: SL_STATUS_OK
+zwave_transports -> tx: SL_STATUS_OK
+
+rnote right of tx: Waits that Z-Wave\nTransports callbacks for Frame 1.
+
+loop for as many encapsulated frames needed\n(Nonce Get, Encapsulated frame, etc) to get Frame 1 delivered
+  s2 -> tx: <b>zwave_tx_send_data</b>\n(Frame 2 data, encapsulation = None, Parent = Frame 1)
+  rnote right of tx: <b>Queue:\n<b>- Frame 1</b>: Encapsulation S2 Auth\n<b>- Frame 2</b>: Encapsulation None, parent=Frame 1
+  tx -> zwave_transports: <b>zwave_controller_transport_send_data</b>\n(Frame 2, Parent = Frame 1)
+  zwave_transports -> s2: <b>zwave_s2_send_data</b>\n(Frame 2, Parent = Frame 1)
+  s2 -> zwave_transports: SL_STATUS_NOT_SUPPORTED
+  zwave_transports -> zwapi: <b>zwave_s2_send_data</b>\n(Frame 2, Parent = Frame 1)
+  zwapi -> zwave_transports: SL_STATUS_OK
+  zwave_transports -> tx: SL_STATUS_OK
+
+  rnote right of tx: Waits that Z-Wave\nTransports callbacks for Frame 2.
+
+  zwapi -> zwapi: Frame being sent\non the radio
+  rx -> rx: continuously\nmonitors\nincoming\nmessages
+  rx -> zwapi: <b>zwapi_poll</b>()
+  zwapi -> tx: <b>zwapi_send_data</b> callback\n(Frame 2 transmission results)
+
+  tx -> s2: <b>zwave_tx_send_data</b> callback\n(frame 2 transmission results)
+end
+s2 -> tx: <b>zwave_controller_transport_send_data</b> callback\nFrame 1 transmission completed (no more to encapsulate)
+
+rnote right of tx: <b>Queue:\n<b>- Frame 1</b>: Encap. S2 Auth (sent via Frame 2)
+tx -> tx: Process verifies the TX queue\nSee that next frame (1)\nis to be discarded because of Frame 2 replacing it.
+
+tx -> u: <b>zwave_tx_send_data</b> callback\n(frame 1 transmission results)
+@enduml
+@startuml inline_umlgraph_17.svg
+' Style for the diagram
+!theme plain
+skinparam ActivityBackgroundColor #DEDEDE
+skinparam ActivityBorderColor #480509
+skinparam ActivityBorderThickness 2
+skinparam ActivityFontColor #000000
+skinparam ActivityStartColor #797777
+
+partition "Z-Wave TX Process" {
+  (*) -->[init] ZWAVE_TX_STATE_IDLE
+  if "Queue empty?" then
+    -->[Yes] ZWAVE_TX_STATE_IDLE
+  else
+    -->[No] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
+  endif
+}
+
+partition "Z-Wave API" {
+  --> zwapi_send_data()
+}
+
+partition "Z-Wave TX Process" {
+  -->[Yes] ZWAVE_TX_STATE_BACKOFF
+  if "Backoff timer expired/answer received" then
+    if "Child frame?" then
+      -->[Yes] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
+    else
+      -->[No] ZWAVE_TX_STATE_IDLE
+    endif
+  else
+    -->[wait] ZWAVE_TX_STATE_BACKOFF
+endif
+}
+@enduml
+@startuml attribute_store_firmware_update.svg
+title Firmware Update data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_FWU_MD_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FFFFFF
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [5]
+
+  object "Firmware Update" as firmware_update #FFFFFF
+  firmware_update : Attribute Type = ATTRIBUTE(FWU)
+  firmware_update : value = Desired: [], Reported: [1]
+
+  package "For each Firmware ID (0..N)" <<Rectangle>> {
+    object "Firmware Entry" as firmare_entry #FFFFFF
+    firmare_entry : Attribute Type = ATTRIBUTE(FWU_FW)
+    firmare_entry : value = Desired: [], Reported: [0]
+
+    object "Firmware ID" as firmare_id #FFFFFF
+    firmare_id : Attribute Type = ATTRIBUTE(FWU_FW_ID)
+    firmare_id : value = Desired: [], Reported: [1234]
+
+    object "Firmware Upgradable" as firmare_upgradable #FFFFFF
+    firmare_upgradable : Attribute Type = ATTRIBUTE(FWU_FW_ID)
+    firmare_upgradable : value = Desired: [], Reported: [0xFF]
+  }
+
+  object "Manufacturer ID" as manufacturer_id #FFFFFF
+  manufacturer_id : Attribute Type = ATTRIBUTE(FWU_MANUFACTURER_ID)
+  manufacturer_id : value = Desired: [], Reported: [0000]
+
+  object "Fragment size" as fragment_size #FFFFFF
+  fragment_size : Attribute Type = ATTRIBUTE(FWU_FRAGMENT_SIZE)
+  fragment_size : value = Desired: [], Reported: [50]
+
+  object "Activation" as activation #FFFFFF
+  activation : Attribute Type = ATTRIBUTE(FWU_ACTIVATION)
+  activation : value = Desired: [], Reported: [1]
+
+  object "CC" as cc #FFFFFF
+  cc : Attribute Type = ATTRIBUTE(FWU_CC)
+  cc : value = Desired: [], Reported: [1]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- firmware_update
+firmware_update *-- firmare_entry
+firmare_entry *-- firmare_id
+firmare_entry *-- firmare_upgradable
+firmware_update *-- manufacturer_id
+firmware_update *-- fragment_size
+firmware_update *-- activation
+firmware_update *-- cc
+
+manufacturer_id -[hidden]--> fragment_size
+activation -[hidden]--> cc
+@enduml
+@startuml attribute_store_firmware_update_transfer.svg
+title Firmware Update transfer data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_FWU_MD_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Firmware Update" as firmware_update #FFFFFF
+  firmware_update : Attribute Type = ATTRIBUTE(FWU)
+  firmware_update : value = Desired: [], Reported: [1]
+
+  object "Transfer State" as transfer_state #FFFFFF
+  transfer_state : Attribute Type = ATTRIBUTE(FW_TRANSFER)
+  transfer_state : value = Desired: [1] - Reported: []
+
+  object "Target" as firmware_target #FFFFFF
+  firmware_target : Attribute Type = ATTRIBUTE(TRANSFER_TARGET)
+  firmware_target : value = Desired: [], Reported: [0]
+
+  object "Apply Timestamp" as apply_timestamp #FFFFFF
+  apply_timestamp : Attribute Type = ATTRIBUTE(TRANSFER_APPLY_TIMESTAMP)
+  apply_timestamp : value = Desired: [], Reported: [234030495820439]
+
+  object "Filename" as filename #FFFFFF
+  filename : Attribute Type = ATTRIBUTE(TRANSFER_FILENAME)
+  filename : value = Desired: [], Reported: [ZW_PowerStrip.gbl]
+
+  object "Offset" as transfer_offset #FFFFFF
+  transfer_offset : Attribute Type = ATTRIBUTE(TRANSFER_OFFSET)
+  transfer_offset : value = Desired: [], Reported: [4]
+
+  object "Size" as total_size #FFFFFF
+  total_size : Attribute Type = ATTRIBUTE(TRANSFER_SIZE)
+  total_size : value = Desired: [], Reported: [85020]
+
+  object "Last Status" as last_status #FFFFFF
+  last_status : Attribute Type = ATTRIBUTE(FW_TRANSFER_LAST_STATUS)
+  last_status : value = Desired: [], Reported: [0]
+
+  object "Fragment Size" as fragment_size #FFFFFF
+  fragment_size : Attribute Type = ATTRIBUTE(FWU_FRAGMENT_SIZE)
+  fragment_size : value = Desired: [], Reported: [1C]
+
+  object "Expiry time" as expiry_time #FFFFFF
+  expiry_time : Attribute Type = ATTRIBUTE(TRANSFER_EXPIRY_TIME)
+  expiry_time : value = Desired: [], Reported: [234030496320439]
+}
+
+node *-- endpoint
+endpoint *-- firmware_update
+firmware_update *-- transfer_state
+transfer_state *-- firmware_target
+transfer_state *-- apply_timestamp
+transfer_state *-- filename
+
+firmware_target -[hidden]--> transfer_offset
+apply_timestamp -[hidden]--> total_size
+filename -[hidden]--> last_status
+transfer_offset -[hidden]--> fragment_size
+total_size -[hidden]--> expiry_time
+
+transfer_state *-- transfer_offset
+transfer_state *-- total_size
+transfer_state *-- last_status
+transfer_state *-- fragment_size
+transfer_state *-- expiry_time
+@enduml
+@startuml inline_umlgraph_19.svg
+[*] --> IDLE
+IDLE --> ONGOING : Initiate firmware update
+IDLE: Reported: IDLE
+IDLE: Desired: IDLE
+ONGOING --> ONGOING : End node responds and frame valid
+ONGOING: Reported: ONGOING
+ONGOING: Desired: IDLE
+ONGOING --> WAITING_FOR_ACTIVATION : Update done and end node supports activation
+WAITING_FOR_ACTIVATION --> ACTIVATION_TIMEOUT: Set apply timer callback
+ACTIVATION_TIMEOUT --> IDLE : Get rule triggerred to send Activtion command. Update either success or fail.
+WAITING_FOR_ACTIVATION: Reported: WAITING_FOR_ACTIVATION
+WAITING_FOR_ACTIVATION: Desired: IDLE
+ACTIVATION_TIMEOUT: Reported: Undefined
+ACTIVATION_TIMEOUT: Desired: WAITING_FOR_ACTIVATION
+ONGOING --> WAITING_FOR_REBOOT : Update done and end node requires reboot
+WAITING_FOR_REBOOT: Reported: WAITING_FOR_REBOOT
+WAITING_FOR_REBOOT: Desired: IDLE
+WAITING_FOR_REBOOT --> IDLE : Reboot done. Update either success or fail.
+ONGOING --> IDLE : Update either success or fail. No reboot needed.
+@enduml
+@startuml multi_channel_attribute_store_tree.svg
+title Attribute Store Multi Channel Command Class attributes
+allow_mixing
+skinparam objectBorderColor black
+
+object HomeID #fffae6
+HomeID : ID = ATTRIBUTE_HOME_ID
+HomeID : value = Desired: [], Reported: [8C CE FB E6]
+
+object "NodeID" as NodeID_1 #f2ffe6
+NodeID_1 : ID = ATTRIBUTE_NODE_ID
+NodeID_1 : value = Desired: [], Reported: [01]
+
+object "Endpoint 0" as endpoint_0 #e6fff7
+endpoint_0 : ID = ATTRIBUTE_ENDPOINT_ID
+endpoint_0 : value = Desired: [], Reported: [00]
+
+object "Attribute" as attribute_1 #FFFFFF
+attribute_1 : ID = MULTI_CHANNEL_VERSION
+attribute_1 : value = Desired: [], Reported: [04]
+
+object "Attribute" as attribute_2 #FFFFFF
+attribute_2 : ID = MULTI_CHANNEL_IDENTICAL_ENDPOINTS
+attribute_2 : value = Desired: [], Reported: [00]
+
+object "Attribute" as attribute_3 #FFFFFF
+attribute_3 : ID = MULTI_CHANNEL_INDIVIDUAL_ENDPOINTS
+attribute_3 : value = Desired: [], Reported: [03]
+
+object "Attribute" as attribute_4 #FFFFFF
+attribute_4 : ID = MULTI_CHANNEL_AGGREGATED_ENDPOINTS
+attribute_4 : value = Desired: [], Reported: [02]
+
+object "Attribute" as attribute_5 #FFFFFF
+attribute_5 : ID = MULTI_CHANNEL_ALL_INDIVIDUAL_ENDPOINTS_FOUND
+attribute_5 : value = Desired: [], Reported: [01]
+
+
+package "For each Individual endpoint" <<Rectangle>> {
+  object "Endpoint X" as endpoint_x #e6fff7
+  endpoint_x : ID = ATTRIBUTE_ENDPOINT_ID
+  endpoint_x : value = Desired: [], Reported: [X]
+}
+
+package "For each Aggregated endpoint" <<Rectangle>> {
+  object "Endpoint Y" as endpoint_y #e6fff7
+  endpoint_y : ID = ATTRIBUTE_ENDPOINT_ID
+  endpoint_y : value = Desired: [], Reported: [Y]
+
+  object "Attribute" as attribute_6 #FFFFFF
+  attribute_6 : ID = MULTI_CHANNEL_AGGREGATED_MEMBERS
+  attribute_6 : value = Desired: [], Reported: [X1 X2 X3]
+}
+
+HomeID *-- NodeID_1
+NodeID_1 *-- endpoint_0
+NodeID_1 *-- endpoint_x
+NodeID_1 *-- endpoint_y
+endpoint_0 *-- attribute_1
+endpoint_0 *-- attribute_2
+endpoint_0 *-- attribute_3
+endpoint_0 *-- attribute_4
+endpoint_0 *-- attribute_5
+endpoint_y *-- attribute_6
+
+attribute_1 -[hidden]--> attribute_3
+attribute_2 -[hidden]--> attribute_4
+attribute_3 -[hidden]--> attribute_5
+attribute_4 -[hidden]--> attribute_6
+@enduml
+@startuml attribute_store_version_data.svg
+title Version Command Class data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_CC_VERSION_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node_id #f2ffe6
+  node_id : Attribute Type = ATTRIBUTE_NODE_ID
+  node_id : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version CC version" as version_cc_version #FFFFFF
+  version_cc_version : Attribute Type = ATTRIBUTE_COMMAND_CLASS_VERSION_VERSION
+  version_cc_version : value = Desired: [], Reported: [1]
+
+  object "Version Report Data" as version_report_data #FFFFFF
+  version_report_data : Attribute Type = ATTRIBUTE(VERSION_REPORT_DATA)
+  version_report_data : value = Desired: [] - Reported: [1]
+
+  object "Z-Wave Library type" as zwave_library_type #FFFFFF
+  zwave_library_type : Attribute Type = ATTRIBUTE(ZWAVE_LIBRARY_TYPE)
+  zwave_library_type : value = Desired: [] - Reported: [7]
+
+  object "Z-Wave Protocol version" as zwave_protocol_version #FFFFFF
+  zwave_protocol_version : Attribute Type = ATTRIBUTE(ZWAVE_PROTOCOL_VERSION)
+  zwave_protocol_version : value = Desired: [] - Reported: [00 07 16 03]
+
+  package "For each Firmware target" <<Rectangle>> {
+    object "Firmware (target)" as firmware #FFFFFF
+    firmware : Attribute Type = ATTRIBUTE(FIRMWARE)
+    firmware : value = Desired: [] - Reported: [00]
+
+    object "Firmware version" as firmware_version #FFFFFF
+    firmware_version : Attribute Type = ATTRIBUTE(FIRMWARE_VERSION)
+    firmware_version : value = Desired: [] - Reported: [00 07 15 03]
+  }
+
+  object "Z-Wave Software Get Support" as zwave_software_get_support #FFFFFF
+  zwave_software_get_support : Attribute Type = ATTRIBUTE(ZWAVE_SOFTWARE_GET_SUPPORT)
+  zwave_software_get_support : value = Desired: [] - Reported: [01]
+
+  object "SDK Version" as sdk_version #FFFFFF
+  sdk_version : Attribute Type = ATTRIBUTE(SDK_VERSION)
+  sdk_version : value = Desired: [] - Reported: [00 07 17 00]
+
+  object "App Framework API Version" as app_framework_api_version #FFFFFF
+  app_framework_api_version : Attribute Type = ATTRIBUTE(APPLICATION_FRAMEWORK_API_VERSION)
+  app_framework_api_version : value = Desired: [] - Reported: [00 07 12 15]
+
+  object "App Framework build number" as app_framework_build #FFFFFF
+  app_framework_build : Attribute Type = ATTRIBUTE(APPLICATION_FRAMEWORK_BUILD_NUMBER)
+  app_framework_build : value = Desired: [] - Reported: [00 00 10 00]
+
+  object "Host interface Version" as host_interface_version #FFFFFF
+  host_interface_version : Attribute Type = ATTRIBUTE(HOST_INTERFACE_VERSION)
+  host_interface_version : value = Desired: [] - Reported: [00 07 12 15]
+
+  object "Host interface build number" as host_interface_build #FFFFFF
+  host_interface_build : Attribute Type = ATTRIBUTE(HOST_INTERFACE_BUILD_NUMBER)
+  host_interface_build : value = Desired: [] - Reported: [00 00 10 00]
+
+  object "Z-Wave Protocol build number" as zwave_protocol_build #FFFFFF
+  zwave_protocol_build : Attribute Type = ATTRIBUTE(ZWAVE_PROTOCOL_BUILD_NUMBER)
+  zwave_protocol_build : value = Desired: [] - Reported: [00 00 10 00]
+
+  object "Application build number" as application_build #FFFFFF
+  application_build : Attribute Type = ATTRIBUTE(APPLICATION_BUILD_NUMBER)
+  application_build : value = Desired: [] - Reported: [00 00 10 00]
+
+  object "Hardware" as hardware_version #FFFFFF
+  hardware_version : Attribute Type = ATTRIBUTE(HARDWARE_VERSION)
+  hardware_version : value = Desired: [] - Reported: [00 00 00 01]
+
+  object "Version CC found" as version_cc_found #FFFFFF
+  version_cc_found : Attribute Type = ATTRIBUTE(FOUND)
+  version_cc_found : value = Desired: [] - Reported: []
+}
+
+node_id *-down- endpoint
+node_id *-down- version_cc_found
+endpoint *-down- version_cc_version
+endpoint *-down- version_report_data
+version_cc_version -[hidden]--> version_report_data
+version_report_data *-down- zwave_library_type
+version_report_data *-down- zwave_protocol_version
+zwave_protocol_version -[hidden]--> zwave_library_type
+zwave_library_type -[hidden]--> hardware_version
+version_report_data *-down- firmware
+firmware *-down- firmware_version
+version_report_data *-down- hardware_version
+
+endpoint *-down- zwave_software_get_support
+endpoint *-down- sdk_version
+endpoint *-down- app_framework_api_version
+endpoint *-down- app_framework_build
+endpoint *-down- host_interface_version
+endpoint *-down- host_interface_build
+endpoint *-down- zwave_protocol_build
+endpoint *-down- application_build
+
+zwave_software_get_support -[hidden]--> host_interface_version
+sdk_version -[hidden]--> host_interface_build
+host_interface_version -[hidden]--> app_framework_api_version
+host_interface_build -[hidden]--> zwave_protocol_build
+app_framework_api_version -[hidden]--> app_framework_build
+zwave_protocol_build -[hidden]--> application_build
+@enduml
+@startuml attribute_store_alarm_sensor_command_class.svg
+title Alarm Sensor data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Type" as type #FFFFFF
+  type : Attribute Type = ATTRIBUTE(TYPE)
+  type : value = Reported: [00]
+
+  object "Bitmask" as bitmask #FFFFFF
+  bitmask : Attribute Type = ATTRIBUTE(BITMASK)
+  bitmask : value = Reported: [01]
+
+  object "State" as state #FFFFFF
+  state : Attribute Type = ATTRIBUTE(STATE)
+  state : value = Reported: [255]
+
+  object "NodeID" as nodeid #FFFFFF
+  nodeid : Attribute Type = ATTRIBUTE(NODE_ID)
+  nodeid : value = Reported: [20]
+
+  object "Seconds" as seconds #FFFFFF
+  seconds : Attribute Type = ATTRIBUTE(SECONDS)
+  seconds : value = Reported: [10]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- type
+type *-- state
+type *-- nodeid
+type *-- seconds
+endpoint *-- bitmask
+@enduml
+@startuml attribute_store_association_command_class.svg
+title Association data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Supported Groupings" as group_number #FFFFFF
+  group_number : Attribute Type = ATTRIBUTE(SUPPORTED_GROUPINGS)
+  group_number : value = Desired: [] - Reported: [1]
+
+  package "For each Association Group" <<Rectangle>> {
+    object "Group ID" as group_id #FFFFFF
+    group_id : ID = ATTRIBUTE(GROUP_ID)
+    group_id : value = Desired: [], Reported: [Group X]
+
+    object "Group Name" as group_name #FFFFFF
+    group_name : ID = ATTRIBUTE(GROUP_NAME)
+    group_name : value = Desired: [], Reported: ["Group Name"]
+
+    object "Group Profile" as group_profile #FFFFFF
+    group_profile : ID = ATTRIBUTE(GROUP_PROFILE)
+    group_profile : value = Desired: [], Reported: [0x0001]
+
+    object "Group Command List" as group_command_list #FFFFFF
+    group_command_list : ID = ATTRIBUTE(GROUP_COMMAND_LIST)
+    group_command_list : value = Desired: [], Reported: [0x5A 0x01 0x25 0x03]
+
+    object "Group Content" as group_content #FFFFFF
+    group_content : ID = ATTRIBUTE(GROUP_CONTENT)
+    group_content : value = Desired: [03 00 01 00], Reported: [02]
+
+    object "Group Capacity" as group_capacity #FFFFFF
+    group_capacity : ID = ATTRIBUTE(MAX_NODES_SUPPORTED)
+    group_capacity : value = Desired: [], Reported: [05]
+  }
+}
+
+node *-- endpoint
+endpoint *-- group_number
+endpoint *-- group_id
+group_id *-- group_name
+group_id *-- group_profile
+group_id *-- group_command_list
+group_id *-- group_content
+group_id *-- group_capacity
+
+group_command_list -[hidden]--> group_content
+group_profile -[hidden]--> group_capacity
+@enduml
+@startuml attribute_store_barrier_operator_command_class.svg
+title Barrier Operator data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_BARRIER_OPERATOR_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [1]
+
+  object "State" as state #FFFFFF
+  state : Attribute Type = ATTRIBUTE(STATE)
+  state : value = Desired: [00] - Reported: [255]
+
+  object "Bitmask" as bitmask #FFFFFF
+  bitmask : Attribute Type = ATTRIBUTE(BITMASK)
+  bitmask : value = Reported: [01]
+
+  object "Subsystem Type" as stype #FFFFFF
+  stype : Attribute Type = ATTRIBUTE(SUBSYSTEM_TYPE)
+  stype : value = Reported: [0]
+
+  object "Subsystem State" as sstate #FFFFFF
+  sstate : Attribute Type = ATTRIBUTE(SUBSYSTEM_STATE)
+  sstate : value =  Desired: [00] - Reported: [255]
+
+  
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- state
+endpoint *-- bitmask
+endpoint *-- stype
+stype *-- sstate
+@enduml
+@startuml attribute_store_basic_command_class.svg
+title Basic Command Class data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_BASIC_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Value" as value #FFFFFF
+  value : Attribute Type = ATTRIBUTE(VALUE)
+  value : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Duration" as duration #FFFFFF
+  duration : Attribute Type = ATTRIBUTE(DURATION)
+  duration : value = Desired: [10], Reported: [10]
+
+  object "Probe State" as probe_status #FFFFFF
+  probe_status : Attribute Type = ATTRIBUTE(PROBE_STATUS)
+  probe_status : value = Desired: [] - Reported: [2]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- value
+endpoint *-- duration
+endpoint *-- probe_status
+@enduml
+@startuml attribute_store_binary_switch_command_class.svg
+title Binary Switch data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "State" as state #FFFFFF
+  state : Attribute Type = ATTRIBUTE(STATE)
+  state : value = Desired: [1] - Reported: [0]
+
+  object "Value" as value #FFFFFF
+  value : Attribute Type = ATTRIBUTE(VALUE)
+  value : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Duration" as duration #FFFFFF
+  duration : Attribute Type = ATTRIBUTE(DURATION)
+  duration : value = Desired: [10], Reported: [10]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- state
+state *-- value
+state *-- duration
+@enduml
+@startuml attribute_store_central_scene_command_class.svg
+title Central Scene data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Number of scenes" as number_of_scenes #FFFFFF
+  number_of_scenes : Attribute Type = ATTRIBUTE(NUMBER_OF_SCENES)
+  number_of_scenes : value = Desired: [] - Reported: [10]
+
+  object "Max Number of Key attributes" as key_attributes #FFFFFF
+  key_attributes : Attribute Type = ATTRIBUTE(MAX_KEY_ATTRIBUTE)
+  key_attributes : value = Desired: [] - Reported: [25]
+
+  object "Slow Refresh" as slow_refresh #FFFFFF
+  slow_refresh : Attribute Type = ATTRIBUTE(SLOW_REFRESH)
+  slow_refresh : value = Desired: [1], Reported: [0]
+
+  object "Active Scene" as active_scene #FFFFFF
+  active_scene : Attribute Type = ATTRIBUTE(ACTIVE_SCENE)
+  active_scene : value = Desired: [], Reported: [0]
+
+  object "Active Scene Sequence Number" as active_scene_sequence_number #FFFFFF
+  active_scene_sequence_number : Attribute Type = ATTRIBUTE(ACTIVE_SCENE_SEQUENCE_NUMBER)
+  active_scene_sequence_number : value = Desired: [], Reported: [2]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- number_of_scenes
+endpoint *-- key_attributes
+endpoint *-- slow_refresh
+endpoint *-- active_scene
+active_scene *-- active_scene_sequence_number
+@enduml
+@startuml attribute_store_configuration_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Next Supported Parameter ID" as next_parameter_id #FFFFFF
+  next_parameter_id : Attribute Type = ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID)
+  next_parameter_id : value = Desired: [] - Reported: [5]
+
+  object "Bulk Support" as bulk_support #FFFFFF
+  bulk_support : Attribute Type = ATTRIBUTE(BULK_SUPPORT)
+  bulk_support : value = Desired: [] - Reported: [1]
+
+  object "Default Reset Requested" as default_reset_requested #FFFFFF
+  default_reset_requested : Attribute Type = ATTRIBUTE(DEFAULT_RESET_REQUESTED)
+  default_reset_requested : value = Desired: [1] - Reported: [0]
+
+  package "For each Parameter" <<Rectangle>> {
+
+    object "Parameter ID" as parameter_id #FFFFFF
+    parameter_id : Attribute Type = ATTRIBUTE(PARAMETER_ID)
+    parameter_id : value = Desired: [] - Reported: [1]
+
+    object "Size" as parameter_size #FFFFFF
+    parameter_size : Attribute Type = ATTRIBUTE(PARAMETER_SIZE)
+    parameter_size : value = Desired: [] - Reported: [2]
+
+    object "Format" as parameter_format #FFFFFF
+    parameter_format : Attribute Type = ATTRIBUTE(PARAMETER_FORMAT)
+    parameter_format : value = Desired: [] - Reported: [2]
+
+    object "Name" as parameter_name #FFFFFF
+    parameter_name : Attribute Type = ATTRIBUTE(PARAMETER_NAME)
+    parameter_name : value = Desired: [] - Reported: ["Parameter 1"]
+
+    object "Info" as parameter_info #FFFFFF
+    parameter_info : Attribute Type = ATTRIBUTE(PARAMETER_INFO)
+    parameter_info : value = Desired: [] - Reported: ["Toggles the relay mode"]
+
+    object "Value" as parameter_value #FFFFFF
+    parameter_value : Attribute Type = ATTRIBUTE(PARAMETER_VALUE)
+    parameter_value : value = Desired: [12] - Reported: [23]
+
+    object "Min Value" as parameter_min_value #FFFFFF
+    parameter_min_value : Attribute Type = ATTRIBUTE(PARAMETER_MIN_VALUE)
+    parameter_min_value : value = Desired: [] - Reported: [0]
+
+    object "Max Value" as parameter_max_value #FFFFFF
+    parameter_max_value : Attribute Type = ATTRIBUTE(PARAMETER_MAX_VALUE)
+    parameter_max_value : value = Desired: [] - Reported: [100]
+
+    object "Default Value" as parameter_default_value #FFFFFF
+    parameter_default_value : Attribute Type = ATTRIBUTE(PARAMETER_DEFAULT_VALUE)
+    parameter_default_value : value = Desired: [] - Reported: [1]
+
+    object "Advanced" as parameter_advanced #FFFFFF
+    parameter_advanced : Attribute Type = ATTRIBUTE(PARAMETER_ADVANCED)
+    parameter_advanced : value = Desired: [] - Reported: [1]
+
+    object "Read-Only" as parameter_read_only #FFFFFF
+    parameter_read_only : Attribute Type = ATTRIBUTE(PARAMETER_READ_ONLY)
+    parameter_read_only : value = Desired: [] - Reported: [0]
+
+    object "Altering capabilities" as parameter_altering_capabilities #FFFFFF
+    parameter_altering_capabilities : Attribute Type = ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES)
+    parameter_altering_capabilities : value = Desired: [] - Reported: [0]
+  }
+
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- next_parameter_id
+endpoint *-- bulk_support
+endpoint *-- default_reset_requested
+endpoint *-- parameter_id
+
+next_parameter_id -[hidden]- parameter_id
+
+parameter_id *-- parameter_size
+parameter_id *-- parameter_format
+parameter_id *-- parameter_name
+
+parameter_size -[hidden]- parameter_info
+parameter_format -[hidden]- parameter_value
+parameter_name -[hidden]- parameter_min_value
+
+parameter_id *-- parameter_info
+parameter_id *-- parameter_value
+parameter_id *-- parameter_min_value
+
+parameter_info -[hidden]- parameter_max_value
+parameter_value -[hidden]- parameter_default_value
+parameter_min_value -[hidden]- parameter_advanced
+
+parameter_id *-- parameter_max_value
+parameter_id *-- parameter_default_value
+parameter_id *-- parameter_advanced
+
+parameter_max_value -[hidden]- parameter_read_only
+parameter_default_value -[hidden]- parameter_altering_capabilities
+
+parameter_id *-- parameter_read_only
+parameter_id *-- parameter_altering_capabilities
+@enduml
+@startuml inline_umlgraph_21.svg
+title Door Lock data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_VERSION
+  version : value = Desired: [] - Reported: [2]
+
+  object "Operation Lock Mode" as oper_lock_mode #FFFFFF
+  oper_lock_mode : Attribute Type = OPERATION_DOOR_LOCK_MODE
+  oper_lock_mode : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Operation Inside Handles Mode" as oper_inside_handles #FFFFFF
+  oper_inside_handles : Attribute Type = OPERATION_INSIDE_DOOR_HANDLES_MODE
+  oper_inside_handles : value = Desired: [10], Reported: [10]
+
+  object "Operation Outside Handles Mode" as oper_outside_handles #FFFFFF
+  oper_outside_handles : Attribute Type = OPERATION_OUTSIDE_DOOR_HANDLES_MODE
+  oper_outside_handles : value = Desired: [10], Reported: [10]
+
+  object "Operation Condition" as oper_condition #FFFFFF
+  oper_condition : Attribute Type = OPERATION_DOOR_CONDITION
+  oper_condition : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Operation Lock Timeout Min" as oper_lock_min #FFFFFF
+  oper_lock_min : Attribute Type = OPERATION_LOCK_TIMEOUT_MINUTES
+  oper_lock_min : value = Desired: [10], Reported: [10]
+
+  object "Operation Lock Timeout Sec" as oper_lock_sec #FFFFFF
+  oper_lock_sec : Attribute Type = OPERATION_LOCK_TIMEOUT_SECONDS
+  oper_lock_sec : value = Desired: [10], Reported: [10]
+
+  object "Configuration Type" as conf_type #FFFFFF
+  conf_type : Attribute Type = CONFIGURATION_OPERATION_TYPE
+  conf_type : value = Desired: [1] - Reported: [0]
+
+  object "Configuration Inside Handles State" as conf_inside_handles #FFFFFF
+  conf_inside_handles : Attribute Type = CONFIGURATION_INSIDE_DOOR_HANDLES_STATE
+  conf_inside_handles : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Configuration Outside Handles State" as conf_outside_handles #FFFFFF
+  conf_outside_handles : Attribute Type = CONFIGURATION_OUTSIDE_DOOR_HANDLES_STATE
+  conf_outside_handles : value = Desired: [10], Reported: [10]
+
+  object "Configuration Lock Timeout Minutes" as conf_lock_min #FFFFFF
+  conf_lock_min : Attribute Type = CONFIGURATION_LOCK_TIMEOUT_MINUTES
+  conf_lock_min : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Configuration Lock Timeout Seconds" as conf_lock_sec #FFFFFF
+  conf_lock_sec : Attribute Type = CONFIGURATION_LOCK_TIMEOUT_SECONDS
+  conf_lock_sec : value = Desired: [10], Reported: [10]
+
+  object "Operation" as operation #FFFFFF
+  operation : Attribute Type = LOCK_OPERATION_REPORT
+  operation : value = Desired: [10], Reported: [10]
+
+  object "Configuration" as configuration #FFFFFF
+  configuration : Attribute Type = CONFIGURATION
+  configuration : value = Desired: [0x00], Reported: [0xFF]
+
+  object "Capabilities" as capabilities #FFFFFF
+  capabilities : Attribute Type = CAPABILITIES
+  capabilities : value = Desired: [10], Reported: [10]
+
+
+  object "Configuration Auto Relock" as conf_relock #FFFFFF
+  conf_relock : Attribute Type = CONFIGURATION_AUTO_RELOCK
+  conf_relock : value = Desired: [10], Reported: [10]
+
+  object "Configuration Hold Release Time" as conf_release_time #FFFFFF
+  conf_release_time : Attribute Type = CONFIGURATION_HOLD_RELEASE_TIME
+  conf_release_time : value = Desired: [10], Reported: [10]
+
+  object "Configuration BTB" as conf_btb #FFFFFF
+  conf_btb : Attribute Type = CONFIGURATION_BTB
+  conf_btb : value = Desired: [10], Reported: [10]
+
+  object "Configuration TA" as conf_ta #FFFFFF
+  conf_ta : Attribute Type = CONFIGURATION_TA
+  conf_ta : value = Desired: [10], Reported: [10]
+
+
+  object "Operation Report Target Mode" as oper_mode #FFFFFF
+  oper_mode : Attribute Type = OPERATION_REPORT_TARGET_MODE
+  oper_mode : value = Desired: [10], Reported: [10]
+
+  object "Operation Report Duration" as oper_duration #FFFFFF
+  oper_duration : Attribute Type = OPERATION_REPORT_DURATION
+  oper_duration : value = Desired: [10], Reported: [10]
+
+
+  object "Capabilities Operation Type Bitmask" as capabilities_oper_type #FFFFFF
+  capabilities_oper_type : Attribute Type = CAPABILITIES_OPERATION_TYPE_BITMASK
+  capabilities_oper_type : value = Desired: [10], Reported: [10]
+
+  object "Capabilities Lock Mode" as cap_lock_mode #FFFFFF
+  cap_lock_mode : Attribute Type = CAPABILITIES_LOCK_MODE
+  cap_lock_mode : value = Desired: [10], Reported: [10]
+
+  object "Capabilities Outside Handle Modes" as cap_outside_handles_modes #FFFFFF
+  cap_outside_handles_modes : Attribute Type = CAPABILITIES_OUTSIDE_HANDLE_MODES_BITMASK
+  cap_outside_handles_modes : value = Desired: [10], Reported: [10]
+
+  object "Capabilities Inside Handle Modes" as cap_inside_handles_modes #FFFFFF
+  cap_inside_handles_modes : Attribute Type = CAPABILITIES_INSIDE_HANDLE_MODES_BITMASK
+  cap_inside_handles_modes : value = Desired: [10], Reported: [10]
+  
+  object "Capabilities Door Component" as cap_door_component #FFFFFF
+  cap_door_component : Attribute Type = CAPABILITIES_DOOR_COMPONENT_BITMASK
+  cap_door_component : value = Desired: [10], Reported: [10]
+
+  object "Capabilities ASR" as cap_asr #FFFFFF
+  cap_asr : Attribute Type = CAPABILITIES_ARS
+  cap_asr : value = Desired: [10], Reported: [10]
+
+  object "Capabilities HRS" as cap_hrs #FFFFFF
+  cap_hrs : Attribute Type = CAPABILITIES_HRS
+  cap_hrs  : value = Desired: [10], Reported: [10]
+
+  object "Capabilities TAS" as cap_tas #FFFFFF
+  cap_tas : Attribute Type = CAPABILITIES_TAS
+  cap_tas : value = Desired: [10], Reported: [10]
+ 
+  object "Capabilities BTBS" as cap_btbs #FFFFFF
+  cap_btbs : Attribute Type = CAPABILITIES_BTBS
+  cap_btbs : value = Desired: [10], Reported: [10]
+}
+
+node *-- endpoint
+
+endpoint *-- version
+
+endpoint *-- operation 
+endpoint *-- oper_lock_mode
+endpoint *-- oper_inside_handles 
+endpoint *-- oper_outside_handles 
+endpoint *-- oper_condition 
+endpoint *-- oper_lock_min 
+endpoint *-- oper_lock_sec 
+operation *-- oper_mode 
+operation *-- oper_duration 
+
+oper_lock_mode *-[hidden]- oper_inside_handles
+oper_inside_handles *-[hidden]- oper_outside_handles 
+oper_outside_handles *-[hidden]- oper_condition 
+oper_condition *-[hidden]- oper_lock_min
+oper_lock_min *-[hidden]- oper_lock_sec
+oper_lock_sec *-[hidden]- operation 
+operation *-[hidden]- oper_mode
+oper_mode *-[hidden]- oper_duration 
+
+endpoint *-- configuration 
+endpoint *-- conf_type
+endpoint *-- conf_outside_handles 
+endpoint *-- conf_inside_handles
+endpoint *-- conf_lock_min 
+endpoint *-- conf_lock_sec 
+configuration *-- conf_relock
+configuration *-- conf_release_time 
+configuration *-- conf_btb 
+configuration *-- conf_ta
+
+conf_type *-[hidden]- conf_outside_handles 
+conf_outside_handles *-[hidden]- conf_inside_handles
+conf_inside_handles *-[hidden]- conf_lock_min 
+conf_lock_min *-[hidden]- conf_lock_sec 
+conf_lock_sec *-[hidden]- configuration 
+configuration *-[hidden]- conf_relock
+conf_relock *-[hidden]- conf_release_time 
+conf_release_time *-[hidden]- conf_btb 
+conf_btb *-[hidden]- conf_ta
+
+endpoint *-- capabilities 
+capabilities *-- capabilities_oper_type 
+capabilities *-- cap_lock_mode 
+capabilities *-- cap_outside_handles_modes 
+capabilities *-- cap_inside_handles_modes 
+capabilities *-- cap_door_component 
+capabilities *-- cap_asr 
+capabilities *-- cap_hrs  
+capabilities *-- cap_tas 
+capabilities *-- cap_btbs 
+
+capabilities *-[hidden]- capabilities_oper_type 
+capabilities_oper_type *-[hidden]- cap_lock_mode  
+cap_lock_mode *-[hidden]- cap_outside_handles_modes 
+cap_outside_handles_modes *-[hidden]- cap_inside_handles_modes 
+cap_inside_handles_modes *-[hidden]- cap_door_component 
+cap_door_component *-[hidden]- cap_asr 
+cap_asr *-[hidden]- cap_hrs  
+cap_hrs *-[hidden]- cap_tas 
+cap_tas *-[hidden]- cap_btbs 
+@enduml
+@startuml attribute_store_meter_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_METER_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Meter Reset Supported" as meter_reset_supported #FFFFFF
+  meter_reset_supported : Attribute Type = ATTRIBUTE(RESET_SUPPORTED)
+  meter_reset_supported : value = Desired: [] - Reported: [1]
+
+  object "Meter Supported Rate Type" as meter_supported_rate_types #FFFFFF
+  meter_supported_rate_types : Attribute Type = ATTRIBUTE(SUPPORTED_RATE_TYPES)
+  meter_supported_rate_types : value = Desired: [] - Reported: [3]
+
+  object "Meter Supported Scales" as meter_supported_scales #FFFFFF
+  meter_supported_scales : Attribute Type = ATTRIBUTE(SUPPORTED_SCALES)
+  meter_supported_scales : value = Desired: [] - Reported: [5]
+
+  package "For each Meter Type" <<Rectangle>> {
+
+    object "Meter Type" as meter_type #FFFFFF
+    meter_type : Attribute Type = ATTRIBUTE(TYPE)
+    meter_type : value = Desired: [] - Reported: [0]
+
+    package "For each Meter Scale" <<Rectangle>> {
+
+      object "Scale" as meter_scale #FFFFFF
+      meter_scale : Attribute Type = ATTRIBUTE(SCALE)
+      meter_scale : value = Desired: [] - Reported: [1]
+
+      package "For each Meter Rate Type" <<Rectangle>> {
+
+      object "Meter Rate Type" as meter_rate_type #FFFFFF
+      meter_rate_type : Attribute Type = ATTRIBUTE(RATE_TYPE)
+      meter_rate_type : value = Desired: [] - Reported: [5]
+
+      object "Value" as meter_value #FFFFFF
+      meter_value : Attribute Type = ATTRIBUTE(VALUE)
+      meter_value : value = Desired: [] - Reported: [1]
+
+      object "Precision" as meter_precision #FFFFFF
+      meter_precision : Attribute Type = ATTRIBUTE(PRECISION)
+      meter_precision : value = Desired: [] - Reported: [1]
+      }
+    }
+  }
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- meter_reset_supported
+endpoint *-- meter_supported_scales
+endpoint *-- meter_supported_rate_types
+
+version -[hidden]- meter_reset_supported
+meter_reset_supported -[hidden]- meter_supported_scales
+meter_supported_scales -[hidden]- meter_supported_rate_types
+
+endpoint *-- meter_type
+meter_type *-- meter_scale
+meter_scale *-- meter_rate_type
+meter_rate_type *-- meter_value
+meter_rate_type *-- meter_precision
+@enduml
+@startuml node_interview_anatomy.svg
+title The anatomy of a Node (Endpoint) interview
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#118648>--></font> Listens to updates
+<font color=#7d2508><--></font> Resolves attribute
+<font color=#7e770a><--</font> Creates attribute
+endlegend
+
+package "Another Component" {
+  object "Another component" as other_component
+  other_component : Wants an interview to start
+}
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Granted keys" as granted_keys #E8EAF6
+  granted_keys : Attribute Type = ATTRIBUTE_GRANTED_SECURITY_KEYS
+  granted_keys : value = Desired: [] - Reported: [83]
+
+  object "NIF" as nif #FFFFFF
+  nif : Attribute Type = ATTRIBUTE_ZWAVE_NIF
+  nif : value = Desired: [], Reported: []
+
+  object "Secure NIF" as snif #FFFFFF
+  snif : Attribute Type = ATTRIBUTE_SECURE_ZWAVE_NIF
+  snif : value = Desired: [], Reported: []
+
+  object "Version CC Found" as version_found #FFFFFF
+  version_found : Attribute Type = ATTRIBUTE_CC_VERSION_FOUND
+  version_found : value = Desired: [], Reported: []
+}
+
+package "Z-Wave NIF Resolver" {
+  object "NIF Resolution" as nif_resolution
+  nif_resolution : Finds the right command for resolving the NIFs
+
+  object "NIF Updates" as nif_updates
+  nif_updates : Verifies granted keys
+  nif_updates : Create Secure NIF
+}
+
+
+package "Version Command Class handler" {
+  object "NIF Updates" as version_nif_updates
+  version_nif_updates : Search for Version CC
+  version_nif_updates : Create supported CC version attributes
+
+  object "Version found update" as version_found_update
+  version_found_update : unresolve CC Versions attribute, when added
+  version_found_update : set back CC Versions attributes to 1, when removed
+}
+
+node *-- endpoint
+node *-- granted_keys
+endpoint *-- nif
+endpoint *-- snif
+node *-- version_found
+
+nif <-[#7e770a]- other_component
+
+nif <-[#7d2508]-> nif_resolution
+snif <-[#7d2508]-> nif_resolution
+
+nif -[#118648]-> nif_updates
+nif_updates -[#7e770a]-> snif
+
+nif -[#118648]-> version_nif_updates
+snif -[#118648]-> version_nif_updates
+version_nif_updates -[#7e770a]-> version_found
+version_found -[#118648]-> version_found_update
+@enduml
+@startuml attribute_store_scene_activation_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_SCENE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(ACTIVATION_VERSION)
+  version : value = Desired: [] - Reported: [1]
+
+  object "Local Scenes" as local_scenes #FFFFFF
+  local_scenes : Attribute Type = ATTRIBUTE(LOCAL_SCENES)
+  local_scenes : value = Desired: [] - Reported: []
+
+  object "Active Scene" as active_scene #FFFFFF
+  active_scene : Attribute Type = ATTRIBUTE(ACTIVATION_ACTIVE_SCENE)
+  active_scene : value = Desired: [2] - Reported: [1]
+
+  object "Dimming Duration Setting" as dimming_duration_setting #FFFFFF
+  dimming_duration_setting : Attribute Type = ATTRIBUTE(SETTING_DIMMING_DURATION)
+  dimming_duration_setting : value = Desired: [0] - Reported: [24]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- local_scenes
+local_scenes *-- active_scene
+active_scene *-- dimming_duration_setting
+@enduml
+@startuml attribute_store_scene_actuator_configuration_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_SCENE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(CONTROLLER_CONF_VERSION)
+  version : value = Desired: [] - Reported: [1]
+
+  object "Local Scenes" as local_scenes #FFFFFF
+  local_scenes : Attribute Type = ATTRIBUTE(LOCAL_SCENES)
+  local_scenes : value = Desired: [] - Reported: []
+
+  object "Scene Configuration" as scene_configuration #FFFFFF
+  scene_configuration : Attribute Type = ATTRIBUTE(ACTUATOR_CONFIGURATION)
+  scene_configuration : value = Desired: [] - Reported: []
+
+  package "For Scene IDs 1..255" <<Rectangle>> {
+    object "Scene ID" as scene_id #FFFFFF
+    scene_id : Attribute Type = ATTRIBUTE(ACTUATOR_ID)
+    scene_id : value = Desired: [] - Reported: [x]
+
+    object "Dimming Duration Setting" as dimming_duration_setting #FFFFFF
+    dimming_duration_setting : Attribute Type = ATTRIBUTE(ACTUATOR_SETTING_DIMMING_DURATION)
+    dimming_duration_setting : value = Desired: [0] - Reported: [20]
+
+    object "Level Setting" as level_setting #FFFFFF
+    level_setting : Attribute Type = ATTRIBUTE(ACTUATOR_SETTING_LEVEL)
+    level_setting : value = Desired: [3] - Reported: [100]
+
+    object "Override Setting" as override_setting #FFFFFF
+    override_setting : Attribute Type = ATTRIBUTE(ACTUATOR_SETTING_OVERRIDE)
+    override_setting : value = Desired: [1] - Reported: [0]
+  }
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- local_scenes
+local_scenes *-- scene_configuration
+scene_configuration *-- scene_id
+scene_id *-- dimming_duration_setting
+scene_id *-- level_setting
+scene_id *-- override_setting
+@enduml
+@startuml attribute_store_scene_controller_configuration_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_SCENE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(ACTUATOR_CONF_VERSION)
+  version : value = Desired: [] - Reported: [1]
+
+  package "For all supported Association groups" <<Rectangle>> {
+    object "Association Group ID" as association_group_id #FFFFFF
+    association_group_id : Attribute Type = ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID
+    association_group_id : value = Desired: [] - Reported: [1]
+
+    object "Local Scene Configuration" as local_scene_configuration #FFFFFF
+    local_scene_configuration : Attribute Type = ATTRIBUTE(CONTROLLER_CONFIGURATION)
+    local_scene_configuration : value = Desired: [0] - Reported: [0]
+
+    object "Scene ID" as scene_id #FFFFFF
+    scene_id : Attribute Type = ATTRIBUTE(CONTROLLER_SETTING_ID)
+    scene_id : value = Desired: [0] - Reported: [0]
+
+    object "Dimming Duration Setting" as dimming_duration_setting #FFFFFF
+    dimming_duration_setting : Attribute Type = ATTRIBUTE(CONTROLLER_SETTING_DIMMING_DURATION)
+    dimming_duration_setting : value = Desired: [0] - Reported: [20]
+  }
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- association_group_id
+association_group_id *-- local_scene_configuration
+local_scene_configuration *-- scene_id
+local_scene_configuration *-- dimming_duration_setting
+@enduml
+@startuml attribute_store_multilevel_switch_command_class.svg
+title Multilevel Switch data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [4]
+
+  object "State" as state #FFFFFF
+  state : Attribute Type = ATTRIBUTE(STATE)
+  state : value = Desired: [1] - Reported: [1]
+
+  object "Value" as value #FFFFFF
+  value : Attribute Type = ATTRIBUTE(VALUE)
+  value : value = Desired: [63], Reported: [63]
+
+  object "Duration" as duration #FFFFFF
+  duration : Attribute Type = ATTRIBUTE(DURATION)
+  duration : value = Desired: [10], Reported: [10]
+
+  object "Substate update" as substate_update #FFFFFF
+  substate_update : Attribute Type = ATTRIBUTE(SUBSTATE_UPDATE)
+  substate_update : value = Desired: [1], Reported: []
+
+  object "On Off (virtual state)" as on_off #FFFFFF
+  on_off : Attribute Type = ATTRIBUTE(ON_OFF)
+  on_off : value = Desired: [0], Reported: [255]
+
+  object "Capabilities requested" as capabilities_requested #FFFFFF
+  capabilities_requested : Attribute Type = ATTRIBUTE(CAPABILITIES_REQUESTED)
+  capabilities_requested : value = Desired: [], Reported: [1]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- state
+state *-- value
+state *-- duration
+state *-- on_off
+state *-- substate_update
+endpoint *-- capabilities_requested
+
+value -[hidden]--> on_off
+duration -[hidden]--> substate_update
+@enduml
+@startuml attribute_store_user_code_command_class.svg
+title User Code data model
+allow_mixing
+skinparam objectBorderColor black
+skinparam NoteBackgroundColor #fffae3
+skinparam NoteBorderColor red
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_USER_CODE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [4]
+
+  object "User Code Data" as user_code_data #FFFFFF
+  user_code_data : Attribute Type = ATTRIBUTE(DATA)
+  user_code_data : value = Desired: [] - Reported: []
+
+  Object "Number of Users" as number_of_codes #FFFFFF
+  number_of_codes : Attribute Type = ATTRIBUTE(NUMBER_OF_USERS)
+  number_of_codes : value = Desired: [] - Reported: [32]
+
+  Object "Delete All Codes requested" as delete_all #FFFFFF
+  delete_all : Attribute Type = ATTRIBUTE(DELETE_ALL_REQUESTED)
+  delete_all : value = Desired: [] - Reported: []
+
+  Object "User ID" as user_id #FFFFFF
+  user_id : Attribute Type = ATTRIBUTE(USER_ID)
+  user_id : value = Desired: [] - Reported: [1]
+
+  package "For each User ID " <<Rectangle>> {
+    Object "User Code" as user_code #FFFFFF
+    user_code : Attribute Type = ATTRIBUTE(USER_ID)
+    user_code : value = Desired: [] - Reported: ["1234"]
+
+    Object "User ID Status" as user_id_status #FFFFFF
+    user_id_status : Attribute Type = ATTRIBUTE(USER_ID_STATUS)
+    user_id_status : value = Desired: [] - Reported: [1]
+  }
+
+  Object "Admin Code" as admin_code #FFFFFF
+  admin_code : Attribute Type = ATTRIBUTE(ADMIN_CODE)
+  admin_code : value = Desired: [] - Reported: ["1234"]
+
+  Object "Capabilities" as capabilities #FFFFFF
+  capabilities : Attribute Type = ATTRIBUTE(CAPABILITES)
+  capabilities : value = Desired: [] - Reported: []
+
+  Object "Supported Flags" as supported_flags #FFFFFF
+  supported_flags : Attribute Type = ATTRIBUTE(SUPPORTED_FLAGS)
+  supported_flags : value = Desired: [] - Reported: [59]
+
+  Object "Supported User ID Status" as supported_user_id_status #FFFFFF
+  supported_user_id_status : Attribute Type = ATTRIBUTE(SUPPORTED_USER_ID_STATUS)
+  supported_user_id_status : value = Desired: [] - Reported: [03]
+
+  Object "Supported Keypad Modes" as supported_keypad_modes #FFFFFF
+  supported_keypad_modes : Attribute Type = ATTRIBUTE(SUPPORTED_KEYPAD_MODES)
+  supported_keypad_modes : value = Desired: [] - Reported: [03]
+
+  Object "Supported Keys" as supported_keys #FFFFFF
+  supported_keys : Attribute Type = ATTRIBUTE(SUPPORTED_KEYS)
+  supported_keys : value = Desired: [] - Reported: [00,00,00,00,00,00,ff,03,fe,ff,ff,07]
+
+  Object "Checksum" as checksum #FFFFFF
+  checksum : Attribute Type = ATTRIBUTE(CHECKSUM)
+  checksum : value = Desired: [] - Reported: [32498]
+
+  Object "Keypad Mode" as keypad_mode #FFFFFF
+  keypad_mode : Attribute Type = ATTRIBUTE(KEYPAD_MODE)
+  keypad_mode : value = Desired: [2] - Reported: [1]
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- user_code_data
+user_code_data *-- number_of_codes
+user_code_data *-- delete_all
+user_code_data *-- user_id
+
+user_id *-- user_code
+user_id *-- user_id_status
+
+user_code_data *-- admin_code
+user_code_data *-- keypad_mode
+user_code_data *-- checksum
+user_code_data *-- capabilities
+
+capabilities *-- supported_flags
+capabilities *-- supported_user_id_status
+capabilities *-- supported_keypad_modes
+capabilities *-- supported_keys
+@enduml
+@startuml attribute_store_wake_up_command_class.svg
+title Wake Up data model
+allow_mixing
+skinparam objectBorderColor black
+skinparam NoteBackgroundColor #fffae3
+skinparam NoteBorderColor red
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_WAKE_UP_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [4]
+
+  object "Setting" as setting #FFFFFF
+  setting : Attribute Type = ATTRIBUTE(SETTING)
+  setting : value = Desired: [0] - Reported: [1]
+
+  object "Capabilities" as capabilities #FFFFFF
+  capabilities : Attribute Type = ATTRIBUTE(CAPABILITIES)
+  capabilities : value = Desired: [], Reported: [01]
+
+  object "Wake Up NodeID" as wake_up_node_id #FFFFFF
+  wake_up_node_id : Attribute Type = ATTRIBUTE(NODE_ID)
+  wake_up_node_id : value = Desired: [01], Reported: [10]
+
+  object "Wake Up Interval" as wake_up_interval #FFFFFF
+  wake_up_interval : Attribute Type = ATTRIBUTE(INTERVAL)
+  wake_up_interval : value = Desired: [80,51,01,00], Reported: [14,00,00,00]
+
+  object "Maximum Wake Up Interval" as maximum_wake_up_interval #FFFFFF
+  maximum_wake_up_interval : Attribute Type = ATTRIBUTE(MAXIMUM_INTERVAL)
+  maximum_wake_up_interval : value = Desired: [], Reported: [80,51,01,00]
+
+  object "Minimum Wake Up Interval" as minimum_wake_up_interval #FFFFFF
+  minimum_wake_up_interval : Attribute Type = ATTRIBUTE(MINIMUM_INTERVAL)
+  minimum_wake_up_interval : value = Desired: [], Reported: [14,00,00,00]
+
+  object "Default Wake Up Interval" as default_wake_up_interval #FFFFFF
+  default_wake_up_interval : Attribute Type = ATTRIBUTE(DEFAULT_INTERVAL)
+  default_wake_up_interval : value = Desired: [], Reported: [2c,01,00,00]
+
+  object "Wake Up Interval Step" as wake_up_interval_step #FFFFFF
+  wake_up_interval_step : Attribute Type = ATTRIBUTE(INTERVAL_STEP)
+  wake_up_interval_step : value = Desired: [], Reported: [14,00,00,00]
+
+  object "Capabilities bitmask" as capabilties_bitmask #FFFFFF
+  capabilties_bitmask : Attribute Type = ATTRIBUTE(CAPABILITIES_BITMASK)
+  capabilties_bitmask : value = Desired: [], Reported: [01]
+
+  note left of capabilities
+    Resolution listener
+    Configure Wake Up Interval
+  end note
+
+  note left of node
+    Resolution listener
+    Send Wake Up No More
+  end note
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- setting
+endpoint *-- capabilities
+
+setting *-- wake_up_node_id
+setting *-- wake_up_interval
+
+capabilities *-- maximum_wake_up_interval
+capabilities *-- minimum_wake_up_interval
+capabilities *-- default_wake_up_interval
+capabilities *-- wake_up_interval_step
+capabilities *-- capabilties_bitmask
+
+maximum_wake_up_interval -[hidden]--> default_wake_up_interval
+minimum_wake_up_interval -[hidden]--> wake_up_interval_step
+@enduml
+@startuml inline_umlgraph_23.svg
+participant "MQTT" as mqtt
+participant "DotDot MQTT" as dotdot
+participant "OnOff Mapper" as onoff
+
+note over mqtt, onoff
+In this example only OnOff mappers are shown.
+But there should exist mappers for all supported ZCL Clusters.
+In addition only a selection of the supported commands for each of these mappers are shown here.
+end note
+=== Initialization ==
+onoff    -> dotdot: uic_mqtt_dotdot_on_off_on_callback_set(on_cb)
+onoff    -> dotdot: uic_mqtt_dotdot_on_off_off_callback_set(off_cb)
+onoff    -> dotdot: uic_mqtt_dotdot_set_on_off_write_attributes_callback(on_att_cb)
+
+note over dotdot: uic_mqtt_dotdot_init() is called
+
+dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/On", ...);
+dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/Off", ...);
+dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/WriteAttributes", ...)
+... ...
+note over onoff: An end device is added
+onoff -> dotdot:    uic_mqtt_dotdot_publish_supported_commands(unid, endpoint)
+dotdot -> onoff:    on_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK)
+dotdot -> onoff:    off_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK)
+
+note over dotdot, onoff
+When uic_mqtt_dotdot_publish_supported_commands is called,
+DotDot MQTT calls all registered OnOff command callback functions
+with UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+When the Command is supported by the unid/endpoint
+SL_STATUS_OK shall be returned, otherwise SL_STATUS_NOT_AVAILABLE.
+
+In this example both callbacks returns SL_STATUS_OK
+end note
+
+dotdot -> mqtt:     uic_mqtt_publish("ucl/by-unid/<unid>/ep<x>/OnOff/SupportedCommands", "[\"On\", \"Off\"]")
+... ...
+note over mqtt: IoT Service has published an OnOff/Commands/Off
+mqtt -> dotdot:     uic_mqtt_dotdot_on_on_off_off(topic, message)
+dotdot -> onoff:    on_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL)
+@enduml
+@startuml ota_image_listener_component.svg
+title OTA Image Listener component
+legend top
+<font color=#0039FB>MQTT Subscription</font>
+<font color=#2b3618>MQTT Unsubscribe</font>
+<font color=#00003C>Retained MQTT Publication</font>
+<font color=#6C2A0D>Unretained MQTT Publication</font>
+endlegend
+
+participant "Protocol Controller" as PC
+participant "OTA" as IL
+participant "MQTT Broker" as MQTT
+
+note over IL
+- 'image_available' callback with data containing meta data the newly available image.
+- 'image_base_path' path used to download the images to.
+- 'cache_size' defines the max amount of images to be cached by the ota component.
+- 'timeout' the time before a get function returns with result TIMEOUT
+end note
+PC-> IL: init(image_available, image_base_path, cache_size, timeout)
+note over IL: we have 2 ways to subscribe for images; 1. via uiid 2. via unid's (uiid, unid)
+PC->IL:subscribe_uiid(uiid)
+activate IL
+IL->MQTT:<font color=#0039FB>ucl/OTA/info/<UIID>/all</font>
+IL-->PC
+deactivate IL
+== node discovery ==
+loop for n nodes in the network
+note over IL
+The PC is responsible to obtian nodes and their corresponding fwk versioning info.
+Secondly, it needs to tell us when a node is not part of a network anymore.
+end note
+PC->IL:subscribe_unid(unid, uiid)
+activate IL
+IL->MQTT:<font color=#0039FB>ucl/OTA/info/<UIID>/<UNID></font>
+IL-->PC
+deactivate IL
+end
+...
+...
+note over MQTT: new image coming in!
+MQTT->IL: <font color=#00003C>ucl/OTA/info/<UIID>/all/+</font>
+activate IL
+IL->PC:image_available(uiid, unid, new_version, apply_after)
+deactivate IL
+note over PC: protocol controller decides to get the image
+PC->IL: get(uiid, image_ready_cb)
+activate IL
+IL->MQTT:<font color=#0039FB>ucl/OTA/data/<UIID></font>
+IL->MQTT:<font color=#6C2A0D>ucl/OTA/data/<UIID>/get</font>
+MQTT->IL:<font color=#6C2A0D>ucl/OTA/data/<UIID></font>
+IL->MQTT:<font color=#2b3618> ucl/OTA/data/<UIID></font>
+IL->PC: image_ready_cb(image_meta)
+deactivate IL
+
+...
+note over PC: protocol controller sends updates to the image_listener
+PC->IL: update_*status*(uiid, unid, endpoint, *status*)
+activate IL
+IL-> MQTT: <font color=#00003C>ucl/by-unid/<UNID>/OTA/<UIID>/+
+IL-->PC
+deactivate IL
+...
+
+PC->IL:unregister_unid(unid)
+activate IL
+IL-> MQTT: <font color=#00003C>ucl/by-unid/<UNID>/OTA/<UIID>/+
+deactivate IL
+PC->IL: unregister(uiid)
+PC->IL: clear_cache()
+@enduml
+@startuml inline_umlgraph_25.svg
+participant MQTT
+participant SmartStartManagement as SSM
+participant ProtocolControllerSmartStartManagement as PCSSM
+
+note over SSM: Init
+SSM         -> MQTT : Subscribe to <i>ucl/SmartStart/List</i>
+MQTT        -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+note over SSM       : Update smartstart_cache
+SSM         -> PCSSM: on_smartstart_state_changed()
+note over PCSSM : Enable/Disable Inclusion of SmartStart Devices
+... Time goes by ...
+group Node Added from ProtocolController
+  note over PCSSM   : Node added with SmartStart
+  PCSSM     -> SSM  : get_cache_entry(unid)
+  note over PCSSM   : If node is found in cache continue to add the node
+  PCSSM     -> SSM  : notify_node_added(key, unid)
+  SSM       -> MQTT : Publish(<i>ucl/SmartStart/List/Update</i>, data)\ndata contains the updated    SmartStart entry,\nthat has been added
+  MQTT        -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM       : Update smartstart_cache
+end
+group Node Removed from ProtocolController
+  note over PCSSM   : Node Removed from Network
+  PCSSM     -> SSM  : notify_node_removed(unid)
+  SSM       -> MQTT : Publish(<i>ucl/SmartStart/List/Update</i>, data)\ndata contains the updated    SmartStart entry,\nthat has been removed
+  MQTT        -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM       : Update smartstart_cache
+end
+
+group Node Added in SmartStartList
+  MQTT      -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM     : Update smartstart_cache
+  SSM       -> PCSSM: on_smartstart_state_changed()
+end
+group Node Removed from ProtocolController
+  MQTT      -> SSM  : onMqttPublish(<i>ucl/SmartStart/List</i>)
+  note over SSM     : Update smartstart_cache
+  SSM       -> PCSSM: on_smartstart_state_changed()
+end
+@enduml
+@startuml inline_umlgraph_27.svg
+  box "MQTT Broker" #LightYellow
+  participant MQTT
+  end box
+
+  box "ZPC" #LightBlue
+  participant StateTopic
+  participant AttributeStore
+  end box
+  note over StateTopic,AttributeStore: Init
+  StateTopic          -> AttributeStore       : attribute_store_register_callback_by_type(att_store_node_cb, ATTRIBUTE_NODE_ID)
+  StateTopic          -> AttributeStore       : attribute_store_register_callback_by_type_and_state(att_store_network_status_cb, DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS, REPORTED_ATTRIBUTE)
+  ... ...
+  note over StateTopic,AttributeStore: NETWORK_STATUS updated (ZCL_NODE_STATE_NETWORK_STATUS_ONLINE_FUNCTIONAL)
+  AttributeStore      -> StateTopic           : att_store_network_status_cb(NETWORK_STATUS, ATTRIBUTE_UPDATED)
+  StateTopic          -> MQTT                 : <i>ucl/by-unid/<new-node>/State</i>\n{"NetworkState": "Included", ...}
+  ... ...
+  note over StateTopic,AttributeStore: Remove Node
+  AttributeStore      -> StateTopic           : att_store_node_cb(node_id, ATTRIBUTE_DELETED)
+  StateTopic          -> MQTT                 : delete <i>ucl/by-unid/<new-node></i>
+@enduml
+@startuml inline_umlgraph_29.svg
+title Relationships - Class Diagram
+
+title Mapping engine
+
+class ast::MapperEngine
+class ast::UAMGrammer
+class ast::eval
+class ast::dep_eval
+class attribute_store
+
+ast::MapperEngine <|-down- ast::UAMGrammer : AST
+ast::MapperEngine <|-down- ast::eval : optional value
+ast::MapperEngine <|-down- ast::dep_eval : dependencies
+ast::MapperEngine <|-up-   attribute_store:  on_attribute_updated()
+@enduml

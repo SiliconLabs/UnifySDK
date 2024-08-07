@@ -1,5 +1,10 @@
 # Portable Runtime Release Notes
 
+## [1.6.0] - Aug 2024
+
+* Portable runtime cli and gui now supports Example Emulated Device(EED) to test without actual hardware.
+* Reference platform updated to Bookworm 64-bit based Raspberry Pi OS.
+  
 ## [1.5.0] - Feb 2024
 
 * Portable runtime gui enhanced to work with latest unify core.

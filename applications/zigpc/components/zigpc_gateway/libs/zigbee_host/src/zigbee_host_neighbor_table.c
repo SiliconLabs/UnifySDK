@@ -21,12 +21,12 @@
 
 
 uint8_t zigbeeHostGetNeighborCount(){
-    return ezspNeighborCount();
+    return sl_zigbee_ezsp_neighbor_count();
 }
 
-EmberStatus zigbeeHostGetNeighborEUI64(uint8_t index, EmberEUI64 eui64){
-    EmberNeighborTableEntry entry;
-    EmberStatus status = ezspGetNeighbor(index, &entry);
+sl_status_t zigbeeHostGetNeighborEUI64(uint8_t index, sl_802154_long_addr_t eui64){
+    sl_zigbee_neighbor_table_entry_t entry;
+    sl_status_t status = sl_zigbee_ezsp_get_neighbor(index, &entry);
     memcpy(eui64, entry.longId, sizeof(uint8_t) * EUI64_SIZE);
     return status;
 }

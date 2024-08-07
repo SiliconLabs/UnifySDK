@@ -21,18 +21,18 @@
 typedef uint8_t SerialBaudRate;
 typedef uint8_t SerialParity;
 
-EmberStatus emberSerialInit(uint8_t port,
-                            SerialBaudRate rate,
-                            SerialParity parity,
-                            uint8_t stopBits);
+sl_status_t sli_legacy_serial_init(uint8_t port,
+                                   SerialBaudRate rate,
+                                   SerialParity parity,
+                                   uint8_t stopBits);
 
-EmberStatus emberSerialWriteByte(uint8_t port, uint8_t dataByte);
+sl_status_t sli_legacy_serial_write_byte(uint8_t port, uint8_t dataByte);
 
-uint16_t emberSerialWriteAvailable(uint8_t port);
+uint16_t sli_legacy_serial_write_available(uint8_t port);
 
-EmberStatus emberSerialReadByte(uint8_t port, uint8_t *dataByte);
+sl_status_t sli_legacy_serial_read_byte(uint8_t port, uint8_t *dataByte);
 
-EmberStatus emberSerialWriteString(uint8_t port, PGM_P string);
+sl_status_t sli_legacy_serial_write_string(uint8_t port, const char *string);
 
 void sli_serial_adapter_tick_callback(void);
 

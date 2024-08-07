@@ -16831,7 +16831,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/ClearAllRFI
       "type": "integer"
     },
     "UserStatus": {
-      "type": "DrlkUserStatus"
+      "type": "DrlkSettableUserStatus"
     },
     "UserType": {
       "type": "DrlkUserType"
@@ -17157,7 +17157,7 @@ mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/DoorLock/GeneratedCommands/Programming
       "type": "integer"
     },
     "UserStatus": {
-      "type": "DrlkUserStatus"
+      "type": "DrlkSettableUserStatus"
     },
     "UserType": {
       "type": "DrlkUserType"
@@ -27238,7 +27238,7 @@ ucl/by-unid/<UNID>/ep0/ColorControl/Attributes/ColorLoopActive/Reported { "value
   "type": "object",
   "properties": {
     "value": {
-      "type": "CCColorLoopDirection"
+      "type": "integer"
     }
   },
   "required": [
@@ -53949,6 +53949,1982 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <!-- END OF Descriptor Commands Section -->
 <!-- -->
 
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page unify_fan_control UnifyFanControl Cluster
+The following commands and attributes are accepted as JSON payloads for the
+UnifyFanControl cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF UnifyFanControl Attributes Section -->
+<!-- -->
+\section unify_fan_control_attrs UnifyFanControl Attributes
+The following attribute topics are used to retrieve the UnifyFanControl cluster state.
+
+<br>
+
+\subsection unify_fan_control_attr_z_wave_fan_mode UnifyFanControl/ZWaveFanMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Attributes/ZWaveFanMode/Reported
+[PREFIX]/UnifyFanControl/Attributes/ZWaveFanMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster ZWaveFanMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ZWaveFanModeEnum"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveFanMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyFanControl/Attributes/ZWaveFanMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyFanControl/Attributes/ZWaveFanMode/Desired { "value": <DESIRED_Z_WAVE_FAN_MODE>}
+ucl/by-unid/<UNID>/ep0/UnifyFanControl/Attributes/ZWaveFanMode/Reported { "value": <REPORTED_Z_WAVE_FAN_MODE>}
+
+```
+
+<br><br>
+
+\subsection unify_fan_control_attr_z_wave_supported_fan_mode UnifyFanControl/ZWaveSupportedFanMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Attributes/ZWaveSupportedFanMode/Reported
+[PREFIX]/UnifyFanControl/Attributes/ZWaveSupportedFanMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster ZWaveSupportedFanMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyFanControlZWaveSupportedFanMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveSupportedFanMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyFanControl/Attributes/ZWaveSupportedFanMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyFanControl/Attributes/ZWaveSupportedFanMode/Desired { "value": <DESIRED_Z_WAVE_SUPPORTED_FAN_MODE>}
+ucl/by-unid/<UNID>/ep0/UnifyFanControl/Attributes/ZWaveSupportedFanMode/Reported { "value": <REPORTED_Z_WAVE_SUPPORTED_FAN_MODE>}
+
+```
+
+<br><br>
+
+\subsection unify_fan_control_attr_z_wave_fan_state UnifyFanControl/ZWaveFanState Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Attributes/ZWaveFanState/Reported
+[PREFIX]/UnifyFanControl/Attributes/ZWaveFanState/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster ZWaveFanState Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ZWaveFanStateEnum"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ZWaveFanState attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyFanControl/Attributes/ZWaveFanState/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyFanControl/Attributes/ZWaveFanState/Desired { "value": <DESIRED_Z_WAVE_FAN_STATE>}
+ucl/by-unid/<UNID>/ep0/UnifyFanControl/Attributes/ZWaveFanState/Reported { "value": <REPORTED_Z_WAVE_FAN_STATE>}
+
+```
+
+<br><br>
+
+
+\subsection unify_fan_control_attr_cluster_revision UnifyFanControl/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Attributes/ClusterRevision/Reported
+[PREFIX]/UnifyFanControl/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF UnifyFanControl Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyFanControl Supported Commands Section -->
+<!-- -->
+\section unify_fan_control_recv_cmd_support UnifyFanControl Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/SupportedCommands
+[PREFIX]/UnifyFanControl/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+              "SetFanMode",
+              "TurnOff",
+              "WriteAttributes",
+              "ForceReadAttributes"
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for UnifyFanControl cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyFanControl/SupportedCommands { "value": ["SetFanMode","TurnOff","WriteAttributes", "ForceReadAttributes"] }
+```
+
+To see supported generated commands for UnifyFanControl cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyFanControl/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF UnifyFanControl Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyFanControl Commands Section -->
+<!-- -->
+\section unify_fan_control_cmds UnifyFanControl Commands
+
+<br><br>
+
+\subsection unify_fan_control_set_fan_mode_cmd UnifyFanControl/SetFanMode Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Commands/SetFanMode
+[PREFIX]/UnifyFanControl/GeneratedCommands/SetFanMode
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster SetFanMode Command Properties",
+  "type": "object",
+  "properties": {
+    "FanMode": {
+      "type": "ZWaveFanModeEnum"
+    }
+  },
+  "required": [
+    "FanMode"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UnifyFanControl/SetFanMode command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Commands/SetFanMode' -m  '{ "FanMode": <FAN_MODE_VALUE> }'
+```
+
+To receive a UnifyFanControl/SetFanMode generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/GeneratedCommands/SetFanMode'
+```
+
+<br><br>
+
+\subsection unify_fan_control_turn_off_cmd UnifyFanControl/TurnOff Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Commands/TurnOff
+[PREFIX]/UnifyFanControl/GeneratedCommands/TurnOff
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster TurnOff Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UnifyFanControl/TurnOff command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Commands/TurnOff' -m  '{  }'
+```
+
+To receive a UnifyFanControl/TurnOff generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/GeneratedCommands/TurnOff'
+```
+
+<br><br>
+
+\subsection unify_fan_control_write_attr_cmd UnifyFanControl/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "ZWaveFanMode": {
+      "type": "ZWaveFanModeEnum"
+    },
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all UnifyFanControl attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Commands/WriteAttributes' -m  '{ "ZWaveFanMode": <Z_WAVE_FAN_MODE_VALUE> , }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection unify_fan_control_force_read_attr_cmd UnifyFanControl/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyFanControl/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControl Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "ZWaveFanMode",
+          "ZWaveSupportedFanMode",
+          "ZWaveFanState"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all UnifyFanControl attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the UnifyFanControl attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyFanControl/Commands/ForceReadAttributes' -m  '{ "value": ["ZWaveFanMode"] }'
+```
+
+<!-- -->
+<!-- END OF UnifyFanControl Commands Section -->
+<!-- -->
+
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page unify_thermostat UnifyThermostat Cluster
+The following commands and attributes are accepted as JSON payloads for the
+UnifyThermostat cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF UnifyThermostat Attributes Section -->
+<!-- -->
+\section unify_thermostat_attrs UnifyThermostat Attributes
+The following attribute topics are used to retrieve the UnifyThermostat cluster state.
+
+<br>
+
+\subsection unify_thermostat_attr_thermostat_mode UnifyThermostat/ThermostatMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Attributes/ThermostatMode/Reported
+[PREFIX]/UnifyThermostat/Attributes/ThermostatMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster ThermostatMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyThermostatThermostatMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ThermostatMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyThermostat/Attributes/ThermostatMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/ThermostatMode/Desired { "value": <DESIRED_THERMOSTAT_MODE>}
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/ThermostatMode/Reported { "value": <REPORTED_THERMOSTAT_MODE>}
+
+```
+
+<br><br>
+
+\subsection unify_thermostat_attr_supported_thermostat_mode UnifyThermostat/SupportedThermostatMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Attributes/SupportedThermostatMode/Reported
+[PREFIX]/UnifyThermostat/Attributes/SupportedThermostatMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster SupportedThermostatMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyThermostatSupportedThermostatMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedThermostatMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyThermostat/Attributes/SupportedThermostatMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/SupportedThermostatMode/Desired { "value": <DESIRED_SUPPORTED_THERMOSTAT_MODE>}
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/SupportedThermostatMode/Reported { "value": <REPORTED_SUPPORTED_THERMOSTAT_MODE>}
+
+```
+
+<br><br>
+
+\subsection unify_thermostat_attr_operating_state UnifyThermostat/OperatingState Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Attributes/OperatingState/Reported
+[PREFIX]/UnifyThermostat/Attributes/OperatingState/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster OperatingState Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyThermostatOperatingState"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for OperatingState attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyThermostat/Attributes/OperatingState/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/OperatingState/Desired { "value": <DESIRED_OPERATING_STATE>}
+ucl/by-unid/<UNID>/ep0/UnifyThermostat/Attributes/OperatingState/Reported { "value": <REPORTED_OPERATING_STATE>}
+
+```
+
+<br><br>
+
+
+\subsection unify_thermostat_attr_cluster_revision UnifyThermostat/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Attributes/ClusterRevision/Reported
+[PREFIX]/UnifyThermostat/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF UnifyThermostat Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyThermostat Supported Commands Section -->
+<!-- -->
+\section unify_thermostat_recv_cmd_support UnifyThermostat Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/SupportedCommands
+[PREFIX]/UnifyThermostat/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for UnifyThermostat cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedCommands { "value": [] }
+```
+
+To see supported generated commands for UnifyThermostat cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyThermostat/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF UnifyThermostat Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyThermostat Commands Section -->
+<!-- -->
+\section unify_thermostat_cmds UnifyThermostat Commands
+
+<br><br>
+
+\subsection unify_thermostat_write_attr_cmd UnifyThermostat/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "ThermostatMode": {
+      "type": "UnifyThermostatThermostatMode"
+    },
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all UnifyThermostat attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Commands/WriteAttributes' -m  '{ "ThermostatMode": <THERMOSTAT_MODE_VALUE> , }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection unify_thermostat_force_read_attr_cmd UnifyThermostat/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyThermostat/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostat Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "ThermostatMode",
+          "SupportedThermostatMode",
+          "OperatingState"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all UnifyThermostat attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the UnifyThermostat attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyThermostat/Commands/ForceReadAttributes' -m  '{ "value": ["ThermostatMode"] }'
+```
+
+<!-- -->
+<!-- END OF UnifyThermostat Commands Section -->
+<!-- -->
+
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page unify_humidity_control UnifyHumidityControl Cluster
+The following commands and attributes are accepted as JSON payloads for the
+UnifyHumidityControl cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF UnifyHumidityControl Attributes Section -->
+<!-- -->
+\section unify_humidity_control_attrs UnifyHumidityControl Attributes
+The following attribute topics are used to retrieve the UnifyHumidityControl cluster state.
+
+<br>
+
+\subsection unify_humidity_control_attr_reporting_mode UnifyHumidityControl/ReportingMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/ReportingMode/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/ReportingMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster ReportingMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ModeType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ReportingMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/ReportingMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/ReportingMode/Desired { "value": <DESIRED_REPORTING_MODE>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/ReportingMode/Reported { "value": <REPORTED_REPORTING_MODE>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_supported_reporting_mode UnifyHumidityControl/SupportedReportingMode Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/SupportedReportingMode/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/SupportedReportingMode/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster SupportedReportingMode Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyHumidityControlSupportedReportingMode"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedReportingMode attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/SupportedReportingMode/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/SupportedReportingMode/Desired { "value": <DESIRED_SUPPORTED_REPORTING_MODE>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/SupportedReportingMode/Reported { "value": <REPORTED_SUPPORTED_REPORTING_MODE>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_current_state UnifyHumidityControl/CurrentState Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/CurrentState/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/CurrentState/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster CurrentState Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyHumidityControlCurrentState"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for CurrentState attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/CurrentState/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/CurrentState/Desired { "value": <DESIRED_CURRENT_STATE>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/CurrentState/Reported { "value": <REPORTED_CURRENT_STATE>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_supported_set_points UnifyHumidityControl/SupportedSetPoints Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/SupportedSetPoints/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/SupportedSetPoints/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster SupportedSetPoints Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "UnifyHumidityControlSupportedSetPoints"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for SupportedSetPoints attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/SupportedSetPoints/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/SupportedSetPoints/Desired { "value": <DESIRED_SUPPORTED_SET_POINTS>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/SupportedSetPoints/Reported { "value": <REPORTED_SUPPORTED_SET_POINTS>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_humidifier_setpoint_min UnifyHumidityControl/HumidifierSetpointMin Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointMin/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointMin/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster HumidifierSetpointMin Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointMin attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/HumidifierSetpointMin/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointMin/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_MIN>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointMin/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_MIN>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_humidifier_setpoint_max UnifyHumidityControl/HumidifierSetpointMax Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointMax/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointMax/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster HumidifierSetpointMax Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointMax attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/HumidifierSetpointMax/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointMax/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_MAX>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointMax/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_MAX>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_humidifier_setpoint UnifyHumidityControl/HumidifierSetpoint Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpoint/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpoint/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster HumidifierSetpoint Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpoint attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/HumidifierSetpoint/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpoint/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpoint/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_humidifier_setpoint_scale UnifyHumidityControl/HumidifierSetpointScale Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointScale/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointScale/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster HumidifierSetpointScale Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ScaleType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointScale attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/HumidifierSetpointScale/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointScale/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_SCALE>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointScale/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_SCALE>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_humidifier_setpoint_precision UnifyHumidityControl/HumidifierSetpointPrecision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster HumidifierSetpointPrecision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for HumidifierSetpointPrecision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision/Desired { "value": <DESIRED_HUMIDIFIER_SETPOINT_PRECISION>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/HumidifierSetpointPrecision/Reported { "value": <REPORTED_HUMIDIFIER_SETPOINT_PRECISION>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_dehumidifier_setpoint_min UnifyHumidityControl/DehumidifierSetpointMin Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointMin/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointMin/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster DehumidifierSetpointMin Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointMin attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/DehumidifierSetpointMin/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointMin/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_MIN>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointMin/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_MIN>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_dehumidifier_setpoint_max UnifyHumidityControl/DehumidifierSetpointMax Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointMax/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointMax/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster DehumidifierSetpointMax Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointMax attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/DehumidifierSetpointMax/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointMax/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_MAX>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointMax/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_MAX>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_dehumidifier_setpoint UnifyHumidityControl/DehumidifierSetpoint Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpoint/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpoint/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster DehumidifierSetpoint Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpoint attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/DehumidifierSetpoint/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpoint/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpoint/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_dehumidifier_setpoint_scale UnifyHumidityControl/DehumidifierSetpointScale Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointScale/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointScale/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster DehumidifierSetpointScale Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ScaleType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointScale attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/DehumidifierSetpointScale/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointScale/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_SCALE>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointScale/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_SCALE>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_dehumidifier_setpoint_precision UnifyHumidityControl/DehumidifierSetpointPrecision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster DehumidifierSetpointPrecision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for DehumidifierSetpointPrecision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision/Desired { "value": <DESIRED_DEHUMIDIFIER_SETPOINT_PRECISION>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/DehumidifierSetpointPrecision/Reported { "value": <REPORTED_DEHUMIDIFIER_SETPOINT_PRECISION>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_auto_setpoint_min UnifyHumidityControl/AutoSetpointMin Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointMin/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointMin/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster AutoSetpointMin Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointMin attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/AutoSetpointMin/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointMin/Desired { "value": <DESIRED_AUTO_SETPOINT_MIN>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointMin/Reported { "value": <REPORTED_AUTO_SETPOINT_MIN>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_auto_setpoint_max UnifyHumidityControl/AutoSetpointMax Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointMax/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointMax/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster AutoSetpointMax Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointMax attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/AutoSetpointMax/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointMax/Desired { "value": <DESIRED_AUTO_SETPOINT_MAX>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointMax/Reported { "value": <REPORTED_AUTO_SETPOINT_MAX>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_auto_setpoint UnifyHumidityControl/AutoSetpoint Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpoint/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpoint/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster AutoSetpoint Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpoint attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/AutoSetpoint/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpoint/Desired { "value": <DESIRED_AUTO_SETPOINT>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpoint/Reported { "value": <REPORTED_AUTO_SETPOINT>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_auto_setpoint_scale UnifyHumidityControl/AutoSetpointScale Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointScale/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointScale/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster AutoSetpointScale Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "ScaleType"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointScale attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/AutoSetpointScale/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointScale/Desired { "value": <DESIRED_AUTO_SETPOINT_SCALE>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointScale/Reported { "value": <REPORTED_AUTO_SETPOINT_SCALE>}
+
+```
+
+<br><br>
+
+\subsection unify_humidity_control_attr_auto_setpoint_precision UnifyHumidityControl/AutoSetpointPrecision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointPrecision/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/AutoSetpointPrecision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster AutoSetpointPrecision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for AutoSetpointPrecision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifyHumidityControl/Attributes/AutoSetpointPrecision/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointPrecision/Desired { "value": <DESIRED_AUTO_SETPOINT_PRECISION>}
+ucl/by-unid/<UNID>/ep0/UnifyHumidityControl/Attributes/AutoSetpointPrecision/Reported { "value": <REPORTED_AUTO_SETPOINT_PRECISION>}
+
+```
+
+<br><br>
+
+
+\subsection unify_humidity_control_attr_cluster_revision UnifyHumidityControl/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Attributes/ClusterRevision/Reported
+[PREFIX]/UnifyHumidityControl/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF UnifyHumidityControl Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyHumidityControl Supported Commands Section -->
+<!-- -->
+\section unify_humidity_control_recv_cmd_support UnifyHumidityControl Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/SupportedCommands
+[PREFIX]/UnifyHumidityControl/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+              "ModeSet",
+              "SetpointSet",
+              "WriteAttributes",
+              "ForceReadAttributes"
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for UnifyHumidityControl cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/SupportedCommands { "value": ["ModeSet","SetpointSet","WriteAttributes", "ForceReadAttributes"] }
+```
+
+To see supported generated commands for UnifyHumidityControl cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF UnifyHumidityControl Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifyHumidityControl Commands Section -->
+<!-- -->
+\section unify_humidity_control_cmds UnifyHumidityControl Commands
+
+<br><br>
+
+\subsection unify_humidity_control_mode_set_cmd UnifyHumidityControl/ModeSet Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Commands/ModeSet
+[PREFIX]/UnifyHumidityControl/GeneratedCommands/ModeSet
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster ModeSet Command Properties",
+  "type": "object",
+  "properties": {
+    "Mode": {
+      "type": "ModeType"
+    }
+  },
+  "required": [
+    "Mode"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UnifyHumidityControl/ModeSet command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Commands/ModeSet' -m  '{ "Mode": <MODE_VALUE> }'
+```
+
+To receive a UnifyHumidityControl/ModeSet generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/GeneratedCommands/ModeSet'
+```
+
+<br><br>
+
+\subsection unify_humidity_control_setpoint_set_cmd UnifyHumidityControl/SetpointSet Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Commands/SetpointSet
+[PREFIX]/UnifyHumidityControl/GeneratedCommands/SetpointSet
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster SetpointSet Command Properties",
+  "type": "object",
+  "properties": {
+    "Type": {
+      "type": "SetpointType"
+    },
+    "Precision": {
+      "type": "integer"
+    },
+    "Scale": {
+      "type": "integer"
+    },
+    "Value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "Type",
+    "Precision",
+    "Scale",
+    "Value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UnifyHumidityControl/SetpointSet command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Commands/SetpointSet' -m  '{ "Type": <TYPE_VALUE>,"Precision": <PRECISION_VALUE>,"Scale": <SCALE_VALUE>,"Value": <VALUE_VALUE> }'
+```
+
+To receive a UnifyHumidityControl/SetpointSet generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/GeneratedCommands/SetpointSet'
+```
+
+<br><br>
+
+\subsection unify_humidity_control_write_attr_cmd UnifyHumidityControl/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all UnifyHumidityControl attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection unify_humidity_control_force_read_attr_cmd UnifyHumidityControl/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifyHumidityControl/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControl Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "ReportingMode",
+          "SupportedReportingMode",
+          "CurrentState",
+          "SupportedSetPoints",
+          "HumidifierSetpointMin",
+          "HumidifierSetpointMax",
+          "HumidifierSetpoint",
+          "HumidifierSetpointScale",
+          "HumidifierSetpointPrecision",
+          "DehumidifierSetpointMin",
+          "DehumidifierSetpointMax",
+          "DehumidifierSetpoint",
+          "DehumidifierSetpointScale",
+          "DehumidifierSetpointPrecision",
+          "AutoSetpointMin",
+          "AutoSetpointMax",
+          "AutoSetpoint",
+          "AutoSetpointScale",
+          "AutoSetpointPrecision"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all UnifyHumidityControl attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the UnifyHumidityControl attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Commands/ForceReadAttributes' -m  '{ "value": ["ReportingMode"] }'
+```
+
+<!-- -->
+<!-- END OF UnifyHumidityControl Commands Section -->
+<!-- -->
+
 
 <br><br><br>
 
@@ -55008,8 +56984,8 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
   "title": "CCColorLoopDirection Enum Properties",
   "type": "string",
   "enum": [
-    "DecrementEnhancedCurrentHue",
-    "IncrementEnhancedCurrentHue"
+    "ColorLoopHueDecrement",
+    "ColorLoopHueIncrement"
   ]
 }
 ```
@@ -55111,6 +57087,29 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum ColorControlColorLoopActive Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum ColorControlColorLoopDirection Section -->
+<!-- -->
+\section enum_color_control_color_loop_direction ColorControlColorLoopDirection Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ColorControlColorLoopDirection Enum Properties",
+  "type": "string",
+  "enum": [
+    "DecrementEnhancedCurrentHue",
+    "IncrementEnhancedCurrentHue"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ColorControlColorLoopDirection Section -->
 <!-- -->
 
 <br><br>
@@ -56479,6 +58478,31 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
+<!-- START OF Enum ModeType Section -->
+<!-- -->
+\section enum_mode_type ModeType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ModeType Enum Properties",
+  "type": "string",
+  "enum": [
+    "Off",
+    "Humidify",
+    "Dehumidify",
+    "Auto"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ModeType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
 <!-- START OF Enum MoveStepMode Section -->
 <!-- -->
 \section enum_move_step_mode MoveStepMode Enum
@@ -56976,6 +59000,29 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
+<!-- START OF Enum ScaleType Section -->
+<!-- -->
+\section enum_scale_type ScaleType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ScaleType Enum Properties",
+  "type": "string",
+  "enum": [
+    "Percentage",
+    "Absolute"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ScaleType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
 <!-- START OF Enum SetpointRaiseOrLowerMode Section -->
 <!-- -->
 \section enum_setpoint_raise_or_lower_mode SetpointRaiseOrLowerMode Enum
@@ -56995,6 +59042,30 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum SetpointRaiseOrLowerMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum SetpointType Section -->
+<!-- -->
+\section enum_setpoint_type SetpointType Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SetpointType Enum Properties",
+  "type": "string",
+  "enum": [
+    "Humidifier",
+    "Dehumidifier",
+    "Auto"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum SetpointType Section -->
 <!-- -->
 
 <br><br>
@@ -57546,6 +59617,100 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 <br><br>
 
 <!-- -->
+<!-- START OF Enum UnifyHumidityControlCurrentState Section -->
+<!-- -->
+\section enum_unify_humidity_control_current_state UnifyHumidityControlCurrentState Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControlCurrentState Enum Properties",
+  "type": "string",
+  "enum": [
+    "Idle",
+    "Humidifying",
+    "Dehumidifying"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UnifyHumidityControlCurrentState Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum UnifyThermostatOperatingState Section -->
+<!-- -->
+\section enum_unify_thermostat_operating_state UnifyThermostatOperatingState Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostatOperatingState Enum Properties",
+  "type": "string",
+  "enum": [
+    "Off",
+    "Heating",
+    "Cooling",
+    "FanOnly",
+    "PendingHeat",
+    "PendingCool",
+    "Vent/Economizer",
+    "AuxHeating",
+    "2ndStageHeating",
+    "2ndStageCooling",
+    "2ndStageAuxHeat",
+    "3rdStageAuxHeat"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UnifyThermostatOperatingState Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum UnifyThermostatThermostatMode Section -->
+<!-- -->
+\section enum_unify_thermostat_thermostat_mode UnifyThermostatThermostatMode Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostatThermostatMode Enum Properties",
+  "type": "string",
+  "enum": [
+    "Off",
+    "Heat",
+    "Cool",
+    "Auto",
+    "Auxiliary",
+    "Resume",
+    "Fan",
+    "Furnace",
+    "Dry",
+    "Moist",
+    "AutoChangeover",
+    "EnergyHeat",
+    "EnergyCool",
+    "Away",
+    "FullPower",
+    "ManufacturerSpecific"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum UnifyThermostatThermostatMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
 <!-- START OF Enum WindowCoveringWindowCoveringType Section -->
 <!-- -->
 \section enum_window_covering_window_covering_type WindowCoveringWindowCoveringType Enum
@@ -57572,6 +59737,69 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Enum WindowCoveringWindowCoveringType Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum ZWaveFanModeEnum Section -->
+<!-- -->
+\section enum_z_wave_fan_mode_enum ZWaveFanModeEnum Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveFanModeEnum Enum Properties",
+  "type": "string",
+  "enum": [
+    "Auto",
+    "Low",
+    "AutoHigh",
+    "High",
+    "AutoMedium",
+    "Medium",
+    "Circulation",
+    "HumidityCirculation",
+    "LeftRight",
+    "UpDown",
+    "Quiet",
+    "ExternalCirculation"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ZWaveFanModeEnum Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Enum ZWaveFanStateEnum Section -->
+<!-- -->
+\section enum_z_wave_fan_state_enum ZWaveFanStateEnum Enum
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZWaveFanStateEnum Enum Properties",
+  "type": "string",
+  "enum": [
+    "Idle",
+    "Running",
+    "RunningHigh",
+    "RunningMedium",
+    "Circulation",
+    "HumidityCirculation",
+    "RightLeftCirculation",
+    "UpDownCirculation",
+    "QuietCirculation"
+  ]
+}
+```
+
+<!-- -->
+<!-- END OF Enum ZWaveFanStateEnum Section -->
 <!-- -->
 
 <br><br>
@@ -59943,6 +62171,192 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/Descriptor/Commands/ForceReadAttribute
 
 <!-- -->
 <!-- END OF Bitmap TstatScheduleMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UnifyFanControlZWaveSupportedFanMode Section -->
+<!-- -->
+\section enum_unify_fan_controlz_wave_supported_fan_mode UnifyFanControlZWaveSupportedFanMode Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyFanControlZWaveSupportedFanMode Enum Properties",
+  "type": "object",
+  "properties": {
+    "Auto": {
+        "type": "boolean"
+    },
+    "Low": {
+        "type": "boolean"
+    },
+    "AutoHigh": {
+        "type": "boolean"
+    },
+    "High": {
+        "type": "boolean"
+    },
+    "AutoMedium": {
+        "type": "boolean"
+    },
+    "Medium": {
+        "type": "boolean"
+    },
+    "Circulation": {
+        "type": "boolean"
+    },
+    "HumidityCirculation": {
+        "type": "boolean"
+    },
+    "LeftRight": {
+        "type": "boolean"
+    },
+    "UpDown": {
+        "type": "boolean"
+    },
+    "Quiet": {
+        "type": "boolean"
+    },
+    "ExternalCirculation": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UnifyFanControlZWaveSupportedFanMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UnifyHumidityControlSupportedReportingMode Section -->
+<!-- -->
+\section enum_unify_humidity_control_supported_reporting_mode UnifyHumidityControlSupportedReportingMode Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControlSupportedReportingMode Enum Properties",
+  "type": "object",
+  "properties": {
+    "Humidify": {
+        "type": "boolean"
+    },
+    "Dehumidify": {
+        "type": "boolean"
+    },
+    "Auto": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UnifyHumidityControlSupportedReportingMode Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UnifyHumidityControlSupportedSetPoints Section -->
+<!-- -->
+\section enum_unify_humidity_control_supported_set_points UnifyHumidityControlSupportedSetPoints Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyHumidityControlSupportedSetPoints Enum Properties",
+  "type": "object",
+  "properties": {
+    "Humidifier": {
+        "type": "boolean"
+    },
+    "Dehumidifier": {
+        "type": "boolean"
+    },
+    "Auto": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UnifyHumidityControlSupportedSetPoints Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF Bitmap UnifyThermostatSupportedThermostatMode Section -->
+<!-- -->
+\section enum_unify_thermostat_supported_thermostat_mode UnifyThermostatSupportedThermostatMode Bitmap
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifyThermostatSupportedThermostatMode Enum Properties",
+  "type": "object",
+  "properties": {
+    "Off": {
+        "type": "boolean"
+    },
+    "Heat": {
+        "type": "boolean"
+    },
+    "Cool": {
+        "type": "boolean"
+    },
+    "Auto": {
+        "type": "boolean"
+    },
+    "Auxiliary": {
+        "type": "boolean"
+    },
+    "Resume": {
+        "type": "boolean"
+    },
+    "Fan": {
+        "type": "boolean"
+    },
+    "Furnace": {
+        "type": "boolean"
+    },
+    "Dry": {
+        "type": "boolean"
+    },
+    "Moist": {
+        "type": "boolean"
+    },
+    "AutoChangeover": {
+        "type": "boolean"
+    },
+    "EnergyHeat": {
+        "type": "boolean"
+    },
+    "EnergyCool": {
+        "type": "boolean"
+    },
+    "Away": {
+        "type": "boolean"
+    },
+    "FullPower": {
+        "type": "boolean"
+    },
+    "ManufacturerSpecific": {
+        "type": "boolean"
+    }
+  }
+}
+```
+
+<!-- -->
+<!-- END OF Bitmap UnifyThermostatSupportedThermostatMode Section -->
 <!-- -->
 
 <br><br>

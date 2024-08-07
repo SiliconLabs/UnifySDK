@@ -37353,7 +37353,7 @@ bool dotdot_is_supported_color_control_color_loop_direction (
  *
  * @returns ColorLoopDirection attribute
  */
-CCColorLoopDirection dotdot_get_color_control_color_loop_direction(
+uint8_t dotdot_get_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37373,7 +37373,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  CCColorLoopDirection new_color_loop_direction
+  uint8_t new_color_loop_direction
   );
 
 /**
@@ -77646,6 +77646,2740 @@ bool dotdot_is_any_descriptor_attribute_supported(
  * @returns true if at least 1 writable attribute in the Attribute Store, false otherwise
  */
 bool dotdot_is_any_descriptor_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyFanControl
+////////////////////////////////////////////////////////////////////////////////
+// UnifyFanControl ZWaveFanMode
+/**
+ * @brief Verifies if the DotDot UnifyFanControl - ZWaveFanMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ZWaveFanMode is supported
+ * @returns false if ZWaveFanMode is not supported
+ */
+bool dotdot_is_supported_unify_fan_control_z_wave_fan_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyFanControl - ZWaveFanMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ZWaveFanMode attribute
+ */
+ZWaveFanModeEnum dotdot_get_unify_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_z_wave_fan_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ZWaveFanModeEnum new_z_wave_fan_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyFanControl - ZWaveFanMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyFanControl - ZWaveFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_fan_control_z_wave_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyFanControl ZWaveSupportedFanMode
+/**
+ * @brief Verifies if the DotDot UnifyFanControl - ZWaveSupportedFanMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ZWaveSupportedFanMode is supported
+ * @returns false if ZWaveSupportedFanMode is not supported
+ */
+bool dotdot_is_supported_unify_fan_control_z_wave_supported_fan_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyFanControl - ZWaveSupportedFanMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ZWaveSupportedFanMode attribute
+ */
+uint16_t dotdot_get_unify_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_z_wave_supported_fan_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_z_wave_supported_fan_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyFanControl - ZWaveSupportedFanMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_supported_fan_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_supported_fan_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_supported_fan_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_supported_fan_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyFanControl - ZWaveSupportedFanMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_fan_control_z_wave_supported_fan_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyFanControl ZWaveFanState
+/**
+ * @brief Verifies if the DotDot UnifyFanControl - ZWaveFanState is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ZWaveFanState is supported
+ * @returns false if ZWaveFanState is not supported
+ */
+bool dotdot_is_supported_unify_fan_control_z_wave_fan_state (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyFanControl - ZWaveFanState attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ZWaveFanState attribute
+ */
+ZWaveFanStateEnum dotdot_get_unify_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyFanControl - ZWaveFanState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_z_wave_fan_state new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ZWaveFanStateEnum new_z_wave_fan_state
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyFanControl - ZWaveFanState
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_state_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyFanControl - ZWaveFanState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_fan_control_z_wave_fan_state_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyFanControl - ZWaveFanState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_fan_control_z_wave_fan_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyFanControl - ZWaveFanState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_fan_control_z_wave_fan_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any attribute for the UnifyFanControl
+ * Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_fan_control_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any writable attribute for the
+ * UnifyFanControl Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 writable attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_fan_control_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyThermostat
+////////////////////////////////////////////////////////////////////////////////
+// UnifyThermostat ThermostatMode
+/**
+ * @brief Verifies if the DotDot UnifyThermostat - ThermostatMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ThermostatMode is supported
+ * @returns false if ThermostatMode is not supported
+ */
+bool dotdot_is_supported_unify_thermostat_thermostat_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyThermostat - ThermostatMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ThermostatMode attribute
+ */
+uint8_t dotdot_get_unify_thermostat_thermostat_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyThermostat - ThermostatMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_thermostat_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_thermostat_thermostat_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_thermostat_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyThermostat - ThermostatMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_thermostat_thermostat_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyThermostat - ThermostatMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_thermostat_thermostat_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyThermostat - ThermostatMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_thermostat_thermostat_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyThermostat - ThermostatMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_thermostat_thermostat_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyThermostat - ThermostatMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_thermostat_thermostat_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyThermostat SupportedThermostatMode
+/**
+ * @brief Verifies if the DotDot UnifyThermostat - SupportedThermostatMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if SupportedThermostatMode is supported
+ * @returns false if SupportedThermostatMode is not supported
+ */
+bool dotdot_is_supported_unify_thermostat_supported_thermostat_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyThermostat - SupportedThermostatMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns SupportedThermostatMode attribute
+ */
+uint16_t dotdot_get_unify_thermostat_supported_thermostat_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyThermostat - SupportedThermostatMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_supported_thermostat_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_thermostat_supported_thermostat_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_supported_thermostat_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyThermostat - SupportedThermostatMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_thermostat_supported_thermostat_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyThermostat - SupportedThermostatMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_thermostat_supported_thermostat_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyThermostat - SupportedThermostatMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_thermostat_supported_thermostat_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyThermostat - SupportedThermostatMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_thermostat_supported_thermostat_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyThermostat - SupportedThermostatMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_thermostat_supported_thermostat_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyThermostat OperatingState
+/**
+ * @brief Verifies if the DotDot UnifyThermostat - OperatingState is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if OperatingState is supported
+ * @returns false if OperatingState is not supported
+ */
+bool dotdot_is_supported_unify_thermostat_operating_state (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyThermostat - OperatingState attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns OperatingState attribute
+ */
+uint8_t dotdot_get_unify_thermostat_operating_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyThermostat - OperatingState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_operating_state new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_thermostat_operating_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_operating_state
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyThermostat - OperatingState
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_thermostat_operating_state_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyThermostat - OperatingState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_thermostat_operating_state_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyThermostat - OperatingState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_thermostat_operating_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyThermostat - OperatingState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_thermostat_operating_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyThermostat - OperatingState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_thermostat_operating_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any attribute for the UnifyThermostat
+ * Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_thermostat_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any writable attribute for the
+ * UnifyThermostat Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 writable attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_thermostat_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifyHumidityControl
+////////////////////////////////////////////////////////////////////////////////
+// UnifyHumidityControl ReportingMode
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - ReportingMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if ReportingMode is supported
+ * @returns false if ReportingMode is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_reporting_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - ReportingMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns ReportingMode attribute
+ */
+ModeType dotdot_get_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - ReportingMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_reporting_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ModeType new_reporting_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - ReportingMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_reporting_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - ReportingMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_reporting_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - ReportingMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_reporting_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - ReportingMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_reporting_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - ReportingMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_reporting_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl SupportedReportingMode
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - SupportedReportingMode is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if SupportedReportingMode is supported
+ * @returns false if SupportedReportingMode is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_supported_reporting_mode (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - SupportedReportingMode attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns SupportedReportingMode attribute
+ */
+uint8_t dotdot_get_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - SupportedReportingMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_supported_reporting_mode new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_supported_reporting_mode
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - SupportedReportingMode
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_supported_reporting_mode_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - SupportedReportingMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_supported_reporting_mode_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - SupportedReportingMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_supported_reporting_mode_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - SupportedReportingMode attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_supported_reporting_mode_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - SupportedReportingMode attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_supported_reporting_mode(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl CurrentState
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - CurrentState is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if CurrentState is supported
+ * @returns false if CurrentState is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_current_state (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - CurrentState attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns CurrentState attribute
+ */
+uint8_t dotdot_get_unify_humidity_control_current_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - CurrentState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_current_state new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_current_state(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_current_state
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - CurrentState
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_current_state_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - CurrentState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_current_state_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - CurrentState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_current_state_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - CurrentState attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_current_state_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - CurrentState attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_current_state(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl SupportedSetPoints
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - SupportedSetPoints is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if SupportedSetPoints is supported
+ * @returns false if SupportedSetPoints is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_supported_set_points (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - SupportedSetPoints attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns SupportedSetPoints attribute
+ */
+uint8_t dotdot_get_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - SupportedSetPoints attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_supported_set_points new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_supported_set_points
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - SupportedSetPoints
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_supported_set_points_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - SupportedSetPoints attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_supported_set_points_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - SupportedSetPoints attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_supported_set_points_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - SupportedSetPoints attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_supported_set_points_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - SupportedSetPoints attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_supported_set_points(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl HumidifierSetpointMin
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - HumidifierSetpointMin is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if HumidifierSetpointMin is supported
+ * @returns false if HumidifierSetpointMin is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_min (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - HumidifierSetpointMin attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns HumidifierSetpointMin attribute
+ */
+int32_t dotdot_get_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - HumidifierSetpointMin attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_humidifier_setpoint_min new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_humidifier_setpoint_min
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - HumidifierSetpointMin
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_min_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - HumidifierSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_min_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - HumidifierSetpointMin attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl HumidifierSetpointMax
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - HumidifierSetpointMax is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if HumidifierSetpointMax is supported
+ * @returns false if HumidifierSetpointMax is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_max (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - HumidifierSetpointMax attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns HumidifierSetpointMax attribute
+ */
+int32_t dotdot_get_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - HumidifierSetpointMax attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_humidifier_setpoint_max new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_humidifier_setpoint_max
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - HumidifierSetpointMax
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_max_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - HumidifierSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_max_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - HumidifierSetpointMax attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl HumidifierSetpoint
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - HumidifierSetpoint is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if HumidifierSetpoint is supported
+ * @returns false if HumidifierSetpoint is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - HumidifierSetpoint attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns HumidifierSetpoint attribute
+ */
+int32_t dotdot_get_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - HumidifierSetpoint attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_humidifier_setpoint new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_humidifier_setpoint
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - HumidifierSetpoint
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - HumidifierSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - HumidifierSetpoint attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl HumidifierSetpointScale
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - HumidifierSetpointScale is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if HumidifierSetpointScale is supported
+ * @returns false if HumidifierSetpointScale is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_scale (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - HumidifierSetpointScale attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns HumidifierSetpointScale attribute
+ */
+ScaleType dotdot_get_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - HumidifierSetpointScale attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_humidifier_setpoint_scale new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ScaleType new_humidifier_setpoint_scale
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - HumidifierSetpointScale
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_scale_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - HumidifierSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_scale_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - HumidifierSetpointScale attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl HumidifierSetpointPrecision
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - HumidifierSetpointPrecision is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if HumidifierSetpointPrecision is supported
+ * @returns false if HumidifierSetpointPrecision is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_precision (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - HumidifierSetpointPrecision attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns HumidifierSetpointPrecision attribute
+ */
+uint8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - HumidifierSetpointPrecision attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_humidifier_setpoint_precision new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_humidifier_setpoint_precision
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - HumidifierSetpointPrecision
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_precision_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - HumidifierSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_precision_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_precision_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - HumidifierSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_humidifier_setpoint_precision_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - HumidifierSetpointPrecision attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_humidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl DehumidifierSetpointMin
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - DehumidifierSetpointMin is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if DehumidifierSetpointMin is supported
+ * @returns false if DehumidifierSetpointMin is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_min (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - DehumidifierSetpointMin attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns DehumidifierSetpointMin attribute
+ */
+int32_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - DehumidifierSetpointMin attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_dehumidifier_setpoint_min new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_dehumidifier_setpoint_min
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - DehumidifierSetpointMin
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_min_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_min_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - DehumidifierSetpointMin attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl DehumidifierSetpointMax
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - DehumidifierSetpointMax is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if DehumidifierSetpointMax is supported
+ * @returns false if DehumidifierSetpointMax is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_max (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - DehumidifierSetpointMax attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns DehumidifierSetpointMax attribute
+ */
+int32_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - DehumidifierSetpointMax attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_dehumidifier_setpoint_max new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_dehumidifier_setpoint_max
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - DehumidifierSetpointMax
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_max_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_max_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - DehumidifierSetpointMax attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl DehumidifierSetpoint
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - DehumidifierSetpoint is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if DehumidifierSetpoint is supported
+ * @returns false if DehumidifierSetpoint is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - DehumidifierSetpoint attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns DehumidifierSetpoint attribute
+ */
+int32_t dotdot_get_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - DehumidifierSetpoint attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_dehumidifier_setpoint new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_dehumidifier_setpoint
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - DehumidifierSetpoint
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - DehumidifierSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - DehumidifierSetpoint attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl DehumidifierSetpointScale
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - DehumidifierSetpointScale is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if DehumidifierSetpointScale is supported
+ * @returns false if DehumidifierSetpointScale is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_scale (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - DehumidifierSetpointScale attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns DehumidifierSetpointScale attribute
+ */
+ScaleType dotdot_get_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - DehumidifierSetpointScale attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_dehumidifier_setpoint_scale new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ScaleType new_dehumidifier_setpoint_scale
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - DehumidifierSetpointScale
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_scale_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_scale_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - DehumidifierSetpointScale attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl DehumidifierSetpointPrecision
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - DehumidifierSetpointPrecision is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if DehumidifierSetpointPrecision is supported
+ * @returns false if DehumidifierSetpointPrecision is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_precision (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - DehumidifierSetpointPrecision attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns DehumidifierSetpointPrecision attribute
+ */
+uint8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - DehumidifierSetpointPrecision attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_dehumidifier_setpoint_precision new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_dehumidifier_setpoint_precision
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - DehumidifierSetpointPrecision
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_precision_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_precision_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_precision_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - DehumidifierSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_dehumidifier_setpoint_precision_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - DehumidifierSetpointPrecision attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_dehumidifier_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl AutoSetpointMin
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - AutoSetpointMin is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if AutoSetpointMin is supported
+ * @returns false if AutoSetpointMin is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_min (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - AutoSetpointMin attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns AutoSetpointMin attribute
+ */
+int32_t dotdot_get_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - AutoSetpointMin attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_auto_setpoint_min new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_auto_setpoint_min
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - AutoSetpointMin
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_min_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - AutoSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_min_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_min_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointMin attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_min_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - AutoSetpointMin attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_min(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl AutoSetpointMax
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - AutoSetpointMax is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if AutoSetpointMax is supported
+ * @returns false if AutoSetpointMax is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_max (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - AutoSetpointMax attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns AutoSetpointMax attribute
+ */
+int32_t dotdot_get_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - AutoSetpointMax attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_auto_setpoint_max new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_auto_setpoint_max
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - AutoSetpointMax
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_max_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - AutoSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_max_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_max_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointMax attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_max_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - AutoSetpointMax attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_max(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl AutoSetpoint
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - AutoSetpoint is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if AutoSetpoint is supported
+ * @returns false if AutoSetpoint is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - AutoSetpoint attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns AutoSetpoint attribute
+ */
+int32_t dotdot_get_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - AutoSetpoint attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_auto_setpoint new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int32_t new_auto_setpoint
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - AutoSetpoint
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - AutoSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpoint attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - AutoSetpoint attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl AutoSetpointScale
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - AutoSetpointScale is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if AutoSetpointScale is supported
+ * @returns false if AutoSetpointScale is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_scale (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - AutoSetpointScale attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns AutoSetpointScale attribute
+ */
+ScaleType dotdot_get_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - AutoSetpointScale attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_auto_setpoint_scale new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  ScaleType new_auto_setpoint_scale
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - AutoSetpointScale
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_scale_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - AutoSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_scale_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_scale_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointScale attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_scale_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - AutoSetpointScale attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_scale(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+// UnifyHumidityControl AutoSetpointPrecision
+/**
+ * @brief Verifies if the DotDot UnifyHumidityControl - AutoSetpointPrecision is supported
+ * under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ *
+ * @returns true if AutoSetpointPrecision is supported
+ * @returns false if AutoSetpointPrecision is not supported
+ */
+bool dotdot_is_supported_unify_humidity_control_auto_setpoint_precision (
+              const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Gets the DotDot UnifyHumidityControl - AutoSetpointPrecision attribute value under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to get,
+ *                      see \ref attribute_store_get_node_attribute_value
+ * 
+ *
+ * @returns AutoSetpointPrecision attribute
+ */
+uint8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state);
+
+/**
+ * @brief Set the DotDot UnifyHumidityControl - AutoSetpointPrecision attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @param value_state   value state to write for the node,
+ *                      see \ref attribute_store_set_node_attribute_value
+ * 
+ * @param new_auto_setpoint_precision new value to set
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_auto_setpoint_precision
+  );
+
+/**
+ * @brief Undefines the Reported value of the the DotDot UnifyHumidityControl - AutoSetpointPrecision
+ * attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_precision_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Undefines the Desired value of the DotDot
+ * UnifyHumidityControl - AutoSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_unify_humidity_control_auto_setpoint_precision_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the reported value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_precision_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if the desired value is defined for the DotDot
+ * UnifyHumidityControl - AutoSetpointPrecision attribute under a UNID/EndpointID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if defined, false is undefined or non-existent
+ */
+bool dotdot_unify_humidity_control_auto_setpoint_precision_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Creates a DotDot UnifyHumidityControl - AutoSetpointPrecision attribute under a UNID/EndpoinID
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns sl_status_t SL_STATUS_OK on success
+ */
+sl_status_t dotdot_create_unify_humidity_control_auto_setpoint_precision(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any attribute for the UnifyHumidityControl
+ * Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_humidity_control_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Checks if a UNID/Endpoint supports any writable attribute for the
+ * UnifyHumidityControl Cluster
+ *
+ * @param unid          Node's UNID
+ * @param endpoint_id   Endpoint ID
+ * @returns true if at least 1 writable attribute in the Attribute Store, false otherwise
+ */
+bool dotdot_is_any_unify_humidity_control_writable_attribute_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id);
 

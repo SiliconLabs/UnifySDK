@@ -17,6 +17,7 @@ var group__sl__log =
       [ "SL_LOG_CRITICAL", "group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba66b9e4aabb177ed4bf5ac6371e84d58d", null ]
     ] ],
     [ "sl_log", "group__sl__log.html#ga71d4ca2794003b2b1f6d1fc371cf99b6", null ],
+    [ "sl_log_get_level", "group__sl__log.html#ga15af873b56b32dcbe72e94fe0cbb40a4", null ],
     [ "sl_log_level_from_string", "group__sl__log.html#ga06a96e2c5770ed84e8958eaa08152dde", null ],
     [ "sl_log_read_config", "group__sl__log.html#ga91bfcc3c4d2cd80b49b0de6baa727a96", null ],
     [ "sl_log_set_level", "group__sl__log.html#ga98729206aac20cbeb27e213a3b6f11e0", null ],

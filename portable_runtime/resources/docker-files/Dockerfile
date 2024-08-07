@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Input arguments
 ARG DEBIAN_PACKAGES=deb-packages.zip
@@ -11,10 +11,13 @@ COPY ./run_zigpc.sh .
 COPY ./run_aoxpc.sh .
 COPY ./run_multiprotocol.sh .
 COPY ./run_matter_bridge.sh .
+COPY ./run_emd.sh .
 COPY ./uic-mb_1.1.0_amd64.deb .
 COPY ./chip-tool .
+COPY ./emd .
+COPY emd_attribute_mapper/ ./emd_attribute_mapper/
 
-RUN chmod +x run_zigpc.sh run_zpc.sh run_aoxpc.sh run_multiprotocol.sh run_matter_bridge.sh chip-tool
+RUN chmod +x run_zigpc.sh run_zpc.sh run_aoxpc.sh run_multiprotocol.sh run_matter_bridge.sh run_emd.sh emd chip-tool
 
 ENV DEBIAN_FRONTEND=noninteractive
 

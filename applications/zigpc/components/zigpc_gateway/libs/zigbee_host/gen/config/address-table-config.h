@@ -18,15 +18,15 @@
 
 // <h>Zigbee Address Table configuration
 
-// <o EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE> Address table size <1-250>
+// <o SL_ZIGBEE_AF_PLUGIN_ADDRESS_TABLE_SIZE> Address table size <1-250>
 // <i> Default: 2
 // <i> The number of entries of the address table
-#define EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE   32
+#define SL_ZIGBEE_AF_PLUGIN_ADDRESS_TABLE_SIZE   2
 
-// <o EMBER_AF_PLUGIN_ADDRESS_TABLE_TRUST_CENTER_CACHE_SIZE> Trust Center Cache Size <0-4>
+// <o SL_ZIGBEE_AF_PLUGIN_ADDRESS_TABLE_TRUST_CENTER_CACHE_SIZE> Trust Center Cache Size <0-4>
 // <i> Default: 2
 // <i> The number of entries of the trust center cache
-#define EMBER_AF_PLUGIN_ADDRESS_TABLE_TRUST_CENTER_CACHE_SIZE   2
+#define SL_ZIGBEE_AF_PLUGIN_ADDRESS_TABLE_TRUST_CENTER_CACHE_SIZE   2
 
 // </h>
 

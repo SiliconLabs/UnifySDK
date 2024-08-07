@@ -16,7 +16,7 @@
 
 #include <stdbool.h>
 #define SIGNED_ENUM
-#include "stack/include/ember-types.h"
+#include "stack/include/sl_zigbee_types.h"
 
 /*  Refer to <GSDK>/protocol/zigbee/app/util/ezsp/ezsp.h
     for more details.
@@ -25,12 +25,12 @@
 #define emberAddTransientLinkKey      ezspAddTransientLinkKey
 #define emberClearTransientLinkKeys   ezspClearTransientLinkKeys
 
-EmberStatus ezspAddOrUpdateKeyTableEntry(EmberEUI64 address,
+sl_status_t ezspAddOrUpdateKeyTableEntry(sl_802154_long_addr_t address,
                                          bool linkKey,
-                                         EmberKeyData *keyData);
+                                         sl_zigbee_key_data_t *keyData);
 
-EmberStatus ezspAddTransientLinkKey(EmberEUI64 partner,
-                                    EmberKeyData *transientKey);
+sl_status_t ezspAddTransientLinkKey(sl_802154_long_addr_t partner,
+                                    sl_zigbee_key_data_t *transientKey);
 
 void ezspClearTransientLinkKeys(void);
 
