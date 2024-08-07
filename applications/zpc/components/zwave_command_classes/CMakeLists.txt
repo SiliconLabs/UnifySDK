@@ -48,6 +48,7 @@ add_library(
   src/zwave_command_class_thermostat_setpoint.c
   src/zwave_command_class_time.c
   src/zwave_command_class_user_code.c
+  src/zwave_command_class_user_credential.cpp
   src/zwave_command_class_version.c
   src/zwave_command_class_wake_up.c
   src/zwave_command_class_zwave_plus_info.c
@@ -124,6 +125,9 @@ target_link_libraries(zwave_command_classes
 if(BUILD_TESTING)
   # Mocks
   target_add_mock(zwave_command_classes)
+
+  add_mock(zwave_command_class_notification_mock src/zwave_command_class_notification.h)
+  target_interface_libraries(zwave_command_class_notification_mock zpc_utils zwave_command_handler)
 
   # Unit test subdirectory
   add_subdirectory(test)

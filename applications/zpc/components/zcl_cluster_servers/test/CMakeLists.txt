@@ -103,3 +103,19 @@ target_add_unittest(
   DEPENDS
   unify
   zpc_config_mock)
+
+
+  # User Credential Cluster Server test
+target_add_unittest(
+  zcl_cluster_servers
+  NAME
+  user_credential_cluster_server_test
+  SOURCES
+  user_credential_cluster_server_test.cpp
+  DEPENDS
+  zpc_attribute_store_test_helper
+  uic_dotdot_mqtt_mock
+  uic_mqtt_stub
+  uic_attribute_store
+  unify)
+target_include_directories(user_credential_cluster_server_test PRIVATE ../src)

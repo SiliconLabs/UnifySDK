@@ -31576,7 +31576,7 @@ void uic_mqtt_dotdot_on_door_lock_set_user(
   uint16_t user_index = {};
   std::string user_name;
   uint32_t user_uniqueid = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   CredentialRuleEnum credential_rule = {};
 
@@ -31665,7 +31665,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user(
   uint16_t user_index = {};
   std::string user_name;
   uint32_t user_uniqueid = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   CredentialRuleEnum credential_rule = {};
 
@@ -32454,7 +32454,7 @@ void uic_mqtt_dotdot_on_door_lock_set_credential(
   CredentialStruct credential = {};
   std::string credential_data;
   uint16_t user_index = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
 
 
@@ -32538,7 +32538,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_credential(
   CredentialStruct credential = {};
   std::string credential_data;
   uint16_t user_index = {};
-  DrlkUserStatus user_status = {};
+  DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
 
 
@@ -56626,7 +56626,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
   const char *base_topic,
-  CCColorLoopDirection value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56634,14 +56634,11 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
 
   // This is a single value
 
-  #ifdef COLOR_CONTROL_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE
-  jsn["value"] = color_control_color_loop_direction_get_enum_value_name((uint32_t)value);
-  #elif defined(CC_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE)
-  jsn["value"] = cc_color_loop_direction_get_enum_value_name((uint32_t)value);
-  #else
-  sl_log_warning(LOG_TAG,"Warning: Enum name not available for COLOR_CONTROL_COLOR_LOOP_DIRECTION. Using number instead.");
-  jsn["value"] = static_cast<CCColorLoopDirection>(value);
-  #endif
+  if (true == uic_dotdot_has_attribute_value_a_name(768,16387,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(768,16387,value);
+  }else{
+    jsn["value"] = value;
+  }
 
 
   std::string payload_str;
@@ -91687,6 +91684,1651 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_init()
 }
 
 // Callbacks pointers
+static std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t> uic_mqtt_dotdot_user_credential_add_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t> uic_mqtt_dotdot_user_credential_generated_add_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t> uic_mqtt_dotdot_user_credential_modify_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t> uic_mqtt_dotdot_user_credential_generated_modify_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t> uic_mqtt_dotdot_user_credential_delete_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t> uic_mqtt_dotdot_user_credential_add_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t> uic_mqtt_dotdot_user_credential_generated_add_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t> uic_mqtt_dotdot_user_credential_modify_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t> uic_mqtt_dotdot_user_credential_generated_modify_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t> uic_mqtt_dotdot_user_credential_delete_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_write_attributes_callback_t> uic_mqtt_dotdot_user_credential_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t> uic_mqtt_dotdot_user_credential_force_read_attributes_callback;
+
+// Callbacks setters
+void uic_mqtt_dotdot_user_credential_add_user_callback_set(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_add_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_add_user_callback_unset(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_add_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_add_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_add_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t>& get_uic_mqtt_dotdot_user_credential_add_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_add_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_set(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_add_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_unset(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_add_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_add_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_set(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_modify_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_unset(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_modify_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_modify_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t>& get_uic_mqtt_dotdot_user_credential_modify_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_modify_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_set(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_modify_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_unset(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_set(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_add_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_unset(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_add_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_add_credential_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t>& get_uic_mqtt_dotdot_user_credential_add_credential_callback()
+{
+  return uic_mqtt_dotdot_user_credential_add_credential_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_set(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_add_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_unset(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_add_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_add_credential_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_set(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_modify_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_unset(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_modify_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_modify_credential_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t>& get_uic_mqtt_dotdot_user_credential_modify_credential_callback()
+{
+  return uic_mqtt_dotdot_user_credential_modify_credential_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_set(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_unset(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_set(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_unset(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_credential_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_credential_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_credential_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_set(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_unset(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.clear();
+}
+
+void uic_mqtt_dotdot_set_user_credential_write_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_user_credential_write_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_user_credential_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_user_credential_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_write_attributes_callback_t>& get_uic_mqtt_dotdot_user_credential_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_user_credential_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_user_credential_force_read_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_user_credential_force_read_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_user_credential_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_user_credential_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/AddUser
+void uic_mqtt_dotdot_on_user_credential_add_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_add_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  uint16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_add_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/AddUser
+static void uic_mqtt_dotdot_on_generated_user_credential_add_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_add_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  uint16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_add_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/ModifyUser
+void uic_mqtt_dotdot_on_user_credential_modify_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_modify_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  uint16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/ModifyUser
+static void uic_mqtt_dotdot_on_generated_user_credential_modify_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_modify_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  uint16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_modify_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteUser
+void uic_mqtt_dotdot_on_user_credential_delete_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_user(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteUser
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_user(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/AddCredential
+void uic_mqtt_dotdot_on_user_credential_add_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_add_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  CredType credential_type = {};
+  uint16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_add_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/AddCredential
+static void uic_mqtt_dotdot_on_generated_user_credential_add_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_add_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  CredType credential_type = {};
+  uint16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_add_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/ModifyCredential
+void uic_mqtt_dotdot_on_user_credential_modify_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_modify_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  CredType credential_type = {};
+  uint16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/ModifyCredential
+static void uic_mqtt_dotdot_on_generated_user_credential_modify_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  CredType credential_type = {};
+  uint16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_modify_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteCredential
+void uic_mqtt_dotdot_on_user_credential_delete_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  CredType credential_type = {};
+  uint16_t credential_slot = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteCredential
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uint16_t user_uniqueid = {};
+  CredType credential_type = {};
+  uint16_t credential_slot = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_user_credential_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_user_credential_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_user_credential_state_t new_state = {};
+  uic_mqtt_dotdot_user_credential_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_user_credential_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_user_credential_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_user_credential_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_user_credential_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.supported_user_unique_identifiers = true;
+      force_update.supported_credential_rules = true;
+      force_update.supported_credential_types = true;
+      force_update.supported_user_types = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"SupportedUserUniqueIdentifiers", &force_update.supported_user_unique_identifiers },
+        {"SupportedCredentialRules", &force_update.supported_credential_rules },
+        {"SupportedCredentialTypes", &force_update.supported_credential_types },
+        {"SupportedUserTypes", &force_update.supported_user_types },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_user_credential_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "UserCredential/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64776,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64776,0,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedUserUniqueIdentifiers", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedUserUniqueIdentifiers";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedUserUniqueIdentifiers";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_rules_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UserCredentialSupportedCredentialRules.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedCredentialRules", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedCredentialRules";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_rules_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedCredentialRules";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_types_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UserCredentialSupportedCredentialTypes.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedCredentialTypes", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedCredentialTypes";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_types_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedCredentialTypes";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_types_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UserCredentialSupportedUserTypes.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedUserTypes", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedUserTypes";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_types_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedUserTypes";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_user_credential_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_user_credential_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_user_credential_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_force_read_attributes);
+  }
+  if (!uic_mqtt_dotdot_user_credential_add_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/AddUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_add_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_add_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/AddUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_add_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_modify_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/ModifyUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_modify_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_modify_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/ModifyUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_modify_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_add_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/AddCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_add_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_add_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/AddCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_add_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_modify_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/ModifyCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_modify_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/ModifyCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_modify_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_credential);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_user_credential_attributes_init();
+
+  uic_mqtt_dotdot_by_group_user_credential_init();
+
+  return SL_STATUS_OK;
+}
+
+// Callbacks pointers
 static std::set<uic_mqtt_dotdot_aox_locator_iq_report_callback_t> uic_mqtt_dotdot_aox_locator_iq_report_callback;
 static std::set<uic_mqtt_dotdot_aox_locator_iq_report_callback_t> uic_mqtt_dotdot_aox_locator_generated_iq_report_callback;
 static std::set<uic_mqtt_dotdot_aox_locator_angle_report_callback_t> uic_mqtt_dotdot_aox_locator_angle_report_callback;
@@ -94937,6 +96579,10 @@ sl_status_t uic_mqtt_dotdot_init() {
   }
 
   if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_user_credential_init();
+  }
+
+  if (status_flag == SL_STATUS_OK) {
     status_flag = uic_mqtt_dotdot_aox_locator_init();
   }
 
@@ -95009,6 +96655,7 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_application_monitoring_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_name_and_location_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_configuration_parameters_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_user_credential_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_aox_locator_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_commands(unid, 0);
@@ -95067,6 +96714,7 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_application_monitoring_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_name_and_location_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_user_credential_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_aox_locator_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_empty_supported_commands(unid);
@@ -99807,7 +101455,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_is_supported(
     memset(&user_name_value, 0x00, sizeof(user_name_value));
     uint32_t user_uniqueid_value;
     memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
-    DrlkUserStatus user_status_value;
+    DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -99983,7 +101631,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_credential_is_supported(
     memset(&credential_data_value, 0x00, sizeof(credential_data_value));
     uint16_t user_index_value;
     memset(&user_index_value, 0x00, sizeof(user_index_value));
-    DrlkUserStatus user_status_value;
+    DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -107808,6 +109456,384 @@ void uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(
   }
 }
 
+// Publishing Cluster Revision for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/UserCredential/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+static inline bool uic_mqtt_dotdot_user_credential_add_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    uint16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    UserTypeEnum user_type_value;
+    memset(&user_type_value, 0x00, sizeof(user_type_value));
+    bool user_active_state_value;
+    memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+    CredRule credential_rule_value;
+    memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+    const char* user_name_value;
+    memset(&user_name_value, 0x00, sizeof(user_name_value));
+    uint16_t expiring_timeout_minutes_value;
+    memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+    UserNameEncodingType user_name_encoding_value;
+    memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_add_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        user_type_value,
+    
+        user_active_state_value,
+    
+        credential_rule_value,
+    
+        user_name_value,
+    
+        expiring_timeout_minutes_value,
+    
+        user_name_encoding_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_modify_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    uint16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    UserTypeEnum user_type_value;
+    memset(&user_type_value, 0x00, sizeof(user_type_value));
+    bool user_active_state_value;
+    memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+    CredRule credential_rule_value;
+    memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+    const char* user_name_value;
+    memset(&user_name_value, 0x00, sizeof(user_name_value));
+    uint16_t expiring_timeout_minutes_value;
+    memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+    UserNameEncodingType user_name_encoding_value;
+    memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        user_type_value,
+    
+        user_active_state_value,
+    
+        credential_rule_value,
+    
+        user_name_value,
+    
+        expiring_timeout_minutes_value,
+    
+        user_name_encoding_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    uint16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_add_credential_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    uint16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    uint16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    const char* credential_data_value;
+    memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_add_credential_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value,
+    
+        credential_data_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_modify_credential_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    uint16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    uint16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    const char* credential_data_value;
+    memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_credential_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value,
+    
+        credential_data_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_credential_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    uint16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    uint16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_credential_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_user_credential_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_write_attributes_callback) {
+    uic_mqtt_dotdot_user_credential_state_t user_credential_new_state = {};
+    uic_mqtt_dotdot_user_credential_updated_state_t user_credential_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          user_credential_new_state,
+          user_credential_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_user_credential_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_force_read_attributes_callback) {
+    uic_mqtt_dotdot_user_credential_updated_state_t user_credential_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          user_credential_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+  if (uic_mqtt_dotdot_user_credential_add_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("AddUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_modify_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ModifyUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_add_credential_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("AddCredential")";
+  }
+  if (uic_mqtt_dotdot_user_credential_modify_credential_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ModifyCredential")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_credential_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteCredential")";
+  }
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_user_credential_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_user_credential_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UserCredential/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/UserCredential/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UserCredential/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
 // Publishing Cluster Revision for AoXLocator Cluster
 void uic_mqtt_dotdot_aox_locator_publish_cluster_revision(const char* base_topic, uint16_t value)
 {
@@ -115037,6 +117063,222 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_paramet
 
   std::string payload =
     get_json_payload_for_configuration_parameters_discover_parameter_range_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated AddUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/AddUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModifyUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/ModifyUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated AddCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/AddCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModifyCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/ModifyCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_credential_command(
     fields);
 
   // Publish our command

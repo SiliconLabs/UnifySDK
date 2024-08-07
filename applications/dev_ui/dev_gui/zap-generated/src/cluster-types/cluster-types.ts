@@ -30,7 +30,8 @@ export enum ClusterTypes {
 	TemperatureMeasurement = "TemperatureMeasurement", 
 	Thermostat = "Thermostat", 
 	WindSpeedMeasurement = "WindSpeedMeasurement", 
-	WindowCovering = "WindowCovering"
+	WindowCovering = "WindowCovering", 
+	UserCredential = "UserCredential"
 }
 
 export enum ControllerTypes {

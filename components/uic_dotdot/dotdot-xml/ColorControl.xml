@@ -55,10 +55,10 @@ applicable to this document can be found in the LICENSE.md file.
       <type:maxInclusiveRef ref="ColorTempPhysicalMaxMireds" />
     </restriction>
   </type:type>
-  <type:type short="CCColorLoopDirection" name="CCColorLoopDirection" id="20" inheritsFrom="uint8">
+  <type:type short="CCColorLoopDirection" name="CCColorLoopDirection" id="20" inheritsFrom="enum8">
     <restriction>
-      <type:enumeration value="00" name="DecrementEnhancedCurrentHue" />
-      <type:enumeration value="01" name="IncrementEnhancedCurrentHue" />
+      <type:enumeration value="00" name="ColorLoopHueDecrement" />
+      <type:enumeration value="01" name="ColorLoopHueIncrement" />
     </restriction>
   </type:type>
   
@@ -115,7 +115,12 @@ applicable to this document can be found in the LICENSE.md file.
           <type:enumeration value="01" name="ColorLoopActive" />
         </restriction>
       </attribute>
-      <attribute id="4003" name="ColorLoopDirection" type="CCColorLoopDirection" max="255" sceneRequired="true" default="0" requiredIf="ColorCapabilities.ColorLoopSupported = true" />
+      <attribute id="4003" name="ColorLoopDirection" type="uint8" max="255" sceneRequired="true" default="0" requiredIf="ColorCapabilities.ColorLoopSupported = true">
+        <restriction>
+          <type:enumeration value="00" name="DecrementEnhancedCurrentHue" />
+          <type:enumeration value="01" name="IncrementEnhancedCurrentHue" />
+        </restriction>
+      </attribute>
       <attribute id="4004" name="ColorLoopTime" type="uint16" max="65535" sceneRequired="true" default="25" requiredIf="ColorCapabilities.ColorLoopSupported = true" />
       <attribute id="4005" name="ColorLoopStartEnhancedHue" type="uint16" max="65535" default="8960" requiredIf="ColorCapabilities.ColorLoopSupported = true" />
       <attribute id="4006" name="ColorLoopStoredEnhancedHue" type="uint16" max="65535" default="0" requiredIf="ColorCapabilities.ColorLoopSupported = true" />

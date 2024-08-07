@@ -8,6 +8,7 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 add_library(
   zcl_cluster_servers
   src/configuration_parameter_cluster_server.cpp
+  src/user_credential_cluster_server.cpp
   src/user_code_cluster_server.cpp
   src/zcl_binding_cluster_server.cpp
   src/zcl_cluster_servers.cpp

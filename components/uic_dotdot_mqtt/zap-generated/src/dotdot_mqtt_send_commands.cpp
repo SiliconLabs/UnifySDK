@@ -13445,6 +13445,450 @@ void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_c
 }
 
 /**
+ * @brief Sends/Publishes a AddUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/AddUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UserCredential/Commands/AddUser";
+
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_user_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a AddUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/AddUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UserCredential/Commands/AddUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_user_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a ModifyUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/ModifyUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UserCredential/Commands/ModifyUser";
+
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_user_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a ModifyUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/ModifyUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UserCredential/Commands/ModifyUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_user_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a DeleteUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UserCredential/Commands/DeleteUser";
+
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_user_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a DeleteUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UserCredential/Commands/DeleteUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_user_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a AddCredential command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/AddCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UserCredential/Commands/AddCredential";
+
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_credential_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a AddCredential command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/AddCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UserCredential/Commands/AddCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_credential_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a ModifyCredential command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/ModifyCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UserCredential/Commands/ModifyCredential";
+
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_credential_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a ModifyCredential command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/ModifyCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UserCredential/Commands/ModifyCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_credential_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a DeleteCredential command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UserCredential/Commands/DeleteCredential";
+
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_credential_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a DeleteCredential command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UserCredential/Commands/DeleteCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_credential_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
  * @brief Sends/Publishes a IQReport command for
  * the AoXLocator cluster to a destination.
  *
