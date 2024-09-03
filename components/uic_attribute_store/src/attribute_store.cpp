@@ -158,6 +158,27 @@ static attribute_store_node *
   return found_node;
 }
 
+sl_status_t attribute_store_change_parent(attribute_store_node_t node,
+                                          attribute_store_node_t new_parent)
+{
+  auto base_node = attribute_store_get_node_from_id(node);
+  if (base_node == NULL) {
+    sl_log_error(LOG_TAG, "Node %d not found in the attribute store.", node);
+    return SL_STATUS_FAIL;
+  }
+  auto parent_node = attribute_store_get_node_from_id(new_parent);
+  if (parent_node == NULL) {
+    sl_log_error(LOG_TAG,
+                 "Parent node %d not found in the attribute store.",
+                 new_parent);
+    return SL_STATUS_FAIL;
+  }
+
+  return base_node->change_parent(parent_node) != NULL ? SL_STATUS_OK
+                                                       : SL_STATUS_FAIL;
+}
+
+
 /**
  * @brief Compares if a node value is identical to the value/value size
  *

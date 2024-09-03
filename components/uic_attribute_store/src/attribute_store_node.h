@@ -110,6 +110,17 @@ class attribute_store_node
   attribute_store_node *find_id(attribute_store_node_t _id);
 
   /**
+   * @brief Change the parent node to new_parent
+   * 
+   * @note The new parent must be of the same type as the current parent
+   * 
+   * @param new_parent The new parent node to assign to the current node
+   * 
+   * @returns The new parent node if the operation was successful, NULL otherwise
+   */
+  attribute_store_node *change_parent(attribute_store_node* new_parent);
+
+  /**
    * @brief Logs the content of the a Node using \ref sl_log
   */
   void log();
