@@ -33,7 +33,8 @@ let topics = ["ucl/SmartStart/List",
     "ucl/UPTICap/#",
     "ucl/by-machine-id/+/SystemMetrics/SupportedCommands",
     "ucl/by-machine-id/+/SystemMetrics/Attributes/#",
-    "ucl/by-mqtt-client/+/ApplicationMonitoring/Attributes/#"
+    "ucl/by-mqtt-client/+/ApplicationMonitoring/Attributes/#",
+    "ucl/Event"
 ];
 Object.keys(supportedClusters).forEach((i) => {
     topics.push(`ucl/by-unid/+/+/${i}/SupportedCommands`);
@@ -282,6 +283,8 @@ function onMqttMessage(topic, message) {
         response = handler.processAppMonitoringList(topic, message);
     } else if (topic.match(/ucl\/SmartStart\/CommissionableDevice\/(.*)/)) {
         response = handler.processCommissionableDevices(topic, message);
+    } else if (topic === "ucl/Event") {
+        response = handler.processEvent(topic, message);
     }
     if (response && Object.keys(response).length > 0)
         handler.addToQueue(response.type, response.data);

@@ -40,6 +40,20 @@ exports.processSmartStart = (topic, message) => {
     }
 }
 
+exports.processEvent = (topic, message) => {
+    console.log(`Received Event : '${message}'`);
+    if (message.toString() == "")
+        return;
+    try {
+        return {
+            type: "event",
+            data: JSON.parse(message)
+        };
+    } catch (error) {
+        return getErrorResponse(topic, message, error);
+    }
+}
+
 exports.processCluster = (topic, message) => {
     let index = -1;
     let match = topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/(.*)/)
