@@ -42337,6 +42337,517 @@ void uic_mqtt_dotdot_unify_humidity_control_publish_supported_commands(
 void uic_mqtt_dotdot_unify_humidity_control_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the unify_switch_color cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_set_color_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint8_t color_component_id,
+
+    uint8_t value,
+
+    uint32_t duration
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    bool start_stop,
+
+    bool up_down,
+
+    bool ignor_start_level,
+
+    uint8_t color_component_id,
+
+    uint8_t start_level,
+
+    uint32_t duration
+
+);
+
+typedef struct {
+  uint8_t warm_white;
+  uint8_t cold_white;
+  uint8_t red;
+  uint8_t green;
+  uint8_t blue;
+  uint8_t amber;
+  uint8_t cyan;
+  uint8_t purple;
+} uic_mqtt_dotdot_unify_switch_color_state_t;
+
+typedef struct {
+  bool warm_white;
+  bool cold_white;
+  bool red;
+  bool green;
+  bool blue;
+  bool amber;
+  bool cyan;
+  bool purple;
+} uic_mqtt_dotdot_unify_switch_color_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_unify_switch_color_state_t,
+    uic_mqtt_dotdot_unify_switch_color_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_unify_switch_color_updated_state_t
+);
+
+
+/**
+ * @brief Command fields for UnifySwitchColor/SetColor
+ */
+typedef struct {
+  uint8_t color_component_id;
+
+  uint8_t value;
+
+  uint32_t duration;
+} uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t;
+
+/**
+ * @brief Command fields for UnifySwitchColor/StartStopChange
+ */
+typedef struct {
+  bool start_stop;
+
+  bool up_down;
+
+  bool ignor_start_level;
+
+  uint8_t color_component_id;
+
+  uint8_t start_level;
+
+  uint32_t duration;
+} uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t;
+
+
+/**
+ * @brief Setup callback to be called when a
+ * UnifySwitchColor/Commands/set_color is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_set_color_callback_set(const uic_mqtt_dotdot_unify_switch_color_set_color_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UnifySwitchColor/Commands/set_color is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_set_color_callback_unset(const uic_mqtt_dotdot_unify_switch_color_set_color_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UnifySwitchColor/Commands/set_color is received.
+ */
+void uic_mqtt_dotdot_unify_switch_color_set_color_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UnifySwitchColor/GeneratedCommands/set_color is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_generated_set_color_callback_set(const uic_mqtt_dotdot_unify_switch_color_set_color_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UnifySwitchColor/GeneratedCommands/set_color is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_generated_set_color_callback_unset(const uic_mqtt_dotdot_unify_switch_color_set_color_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UnifySwitchColor/GeneratedCommands/set_color is received.
+ */
+void uic_mqtt_dotdot_unify_switch_color_generated_set_color_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UnifySwitchColor/Commands/start_stop_change is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_set(const uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UnifySwitchColor/Commands/start_stop_change is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_unset(const uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UnifySwitchColor/Commands/start_stop_change is received.
+ */
+void uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UnifySwitchColor/GeneratedCommands/start_stop_change is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_generated_start_stop_change_callback_set(const uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UnifySwitchColor/GeneratedCommands/start_stop_change is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unify_switch_color_generated_start_stop_change_callback_unset(const uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UnifySwitchColor/GeneratedCommands/start_stop_change is received.
+ */
+void uic_mqtt_dotdot_unify_switch_color_generated_start_stop_change_callback_clear();
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/unify_switch_color/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_unify_switch_color_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/unify_switch_color/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_unify_switch_color_write_attributes_callback(
+  const uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/unify_switch_color/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_unify_switch_color_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/unify_switch_color/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_unify_switch_color_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/unify_switch_color/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_unify_switch_color_force_read_attributes_callback(
+  const uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/unify_switch_color/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_unify_switch_color_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/WarmWhite
+ *
+ * @param base_topic    topic prefix to publish, /warm_white
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_warm_white_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/WarmWhite
+ *
+ * @param base_topic    topic prefix to publish, /warm_white
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_warm_white_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/ColdWhite
+ *
+ * @param base_topic    topic prefix to publish, /cold_white
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_cold_white_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/ColdWhite
+ *
+ * @param base_topic    topic prefix to publish, /cold_white
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_cold_white_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/Red
+ *
+ * @param base_topic    topic prefix to publish, /red
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_red_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/Red
+ *
+ * @param base_topic    topic prefix to publish, /red
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_red_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/Green
+ *
+ * @param base_topic    topic prefix to publish, /green
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_green_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/Green
+ *
+ * @param base_topic    topic prefix to publish, /green
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_green_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/Blue
+ *
+ * @param base_topic    topic prefix to publish, /blue
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_blue_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/Blue
+ *
+ * @param base_topic    topic prefix to publish, /blue
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_blue_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/Amber
+ *
+ * @param base_topic    topic prefix to publish, /amber
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_amber_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/Amber
+ *
+ * @param base_topic    topic prefix to publish, /amber
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_amber_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/Cyan
+ *
+ * @param base_topic    topic prefix to publish, /cyan
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_cyan_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/Cyan
+ *
+ * @param base_topic    topic prefix to publish, /cyan
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_cyan_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UnifySwitchColor/Attributes/Purple
+ *
+ * @param base_topic    topic prefix to publish, /purple
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_purple_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UnifySwitchColor/Attributes/Purple
+ *
+ * @param base_topic    topic prefix to publish, /purple
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_purple_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the UnifySwitchColor/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UnifySwitchColor/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to UnifySwitchColor/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UnifySwitchColor/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_unify_switch_color_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the UnifySwitchColor Cluster
+ *
+ * This function will iterate over all Commands in the UnifySwitchColor Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the UnifySwitchColor Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 
 /**
  * @brief Publish the SupportedCommands for UNID/EndPoint

@@ -904,3 +904,13 @@ def zb_AutoSetpoint 0xfda00011
 def zb_AutoSetpointScale 0xfda00012
 def zb_AutoSetpointPrecision 0xfda00013
 
+// This represents short CamelCase labels the attributes in the DotDot UnifySwitchColor cluster
+def zb_WarmWhite 0xffa10000
+def zb_ColdWhite 0xffa10001
+def zb_Red 0xffa10002
+def zb_Green 0xffa10003
+def zb_Blue 0xffa10004
+def zb_Amber 0xffa10005
+def zb_Cyan 0xffa10006
+def zb_Purple 0xffa10007
+

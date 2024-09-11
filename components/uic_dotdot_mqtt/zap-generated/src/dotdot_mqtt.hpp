@@ -378,6 +378,13 @@ sl_status_t uic_mqtt_dotdot_by_group_unify_thermostat_init();
  */
 sl_status_t uic_mqtt_dotdot_by_group_unify_humidity_control_init();
 
+/**
+ * @brief Initialize UnifySwitchColor dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t uic_mqtt_dotdot_by_group_unify_switch_color_init();
+
 
 
 // clang-format on
@@ -5518,6 +5525,65 @@ std::set<uic_mqtt_dotdot_unify_humidity_control_write_attributes_callback_t> & g
  */
 // clang-format off
 void uic_mqtt_dotdot_on_unify_humidity_control_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UnifySwitchColor/Commands/SetColor messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_switch_color_set_color_callback_t> &get_uic_mqtt_dotdot_unify_switch_color_set_color_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifySwitchColor/Commands/SetColor
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_switch_color_set_color(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callbacks pointer for
+ * by-unid UnifySwitchColor/Commands/StartStopChange messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t> &get_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifySwitchColor/Commands/StartStopChange
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_switch_color_start_stop_change(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+// clang-format on
+
+/**
+ * @brief Retrieves the container with callback pointers for by-unid
+ * /Commands/WriteAttributes messages
+ *
+ * @returns std::set of callbacks.
+ */
+std::set<uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t> & get_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback();
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/UnifySwitchColor/Commands/WriteAttributes
+ */
+// clang-format off
+void uic_mqtt_dotdot_on_unify_switch_color_WriteAttributes(
   const char *topic,
   const char *message,
   const size_t message_length);

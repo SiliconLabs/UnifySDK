@@ -5461,6 +5461,70 @@ void uic_mqtt_dotdot_unify_humidity_control_publish_generated_write_attributes_c
   uic_mqtt_dotdot_unify_humidity_control_updated_state_t attribute_list
 );
 
+/**
+ * @brief Publishes an incoming/generated SetColor command for
+ * the UnifySwitchColor cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifySwitchColor/GeneratedCommands/SetColor
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_generated_set_color_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated StartStopChange command for
+ * the UnifySwitchColor cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifySwitchColor/GeneratedCommands/StartStopChange
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_generated_start_stop_change_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t *fields
+  
+);
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the UnifySwitchColor cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifySwitchColor/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_unify_switch_color_state_t attribute_values,
+  uic_mqtt_dotdot_unify_switch_color_updated_state_t attribute_list
+);
+
 
 #ifdef __cplusplus
 }

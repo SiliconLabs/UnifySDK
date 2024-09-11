@@ -4619,6 +4619,71 @@ static sl_status_t uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_
   }
   return SL_STATUS_OK;
 }
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UnifySwitchColor
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_unify_switch_color_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_unify_switch_color_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  if (true == attribute_list.warm_white) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_warm_white_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::WarmWhite under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.cold_white) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_cold_white_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::ColdWhite under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.red) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_red_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::Red under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.green) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_green_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::Green under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.blue) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_blue_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::Blue under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.amber) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_amber_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::Amber under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.cyan) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_cyan_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::Cyan under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.purple) {
+    if (SL_STATUS_OK == dotdot_unify_switch_color_purple_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UnifySwitchColor::Purple under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  return SL_STATUS_OK;
+}
 // clang-format on
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -4732,6 +4797,8 @@ sl_status_t
   uic_mqtt_dotdot_set_unify_thermostat_force_read_attributes_callback(&uic_mqtt_dotdot_unify_thermostat_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_unify_humidity_control_force_read_attributes_callback(&uic_mqtt_dotdot_unify_humidity_control_force_read_attributes_callback);
+  
+  uic_mqtt_dotdot_set_unify_switch_color_force_read_attributes_callback(&uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback);
   
   // clang-format on
 

@@ -5230,6 +5230,63 @@ typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setp
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   uint8_t auto_setpoint_precision
 );
+// Callback types used by the unify_switch_color cluster
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t warm_white
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t cold_white
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_red_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t red
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_green_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t green
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t blue
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t amber
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t cyan
+);
+typedef sl_status_t (*uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t purple
+);
 
 #ifdef __cplusplus
 extern "C" {
@@ -10052,6 +10109,62 @@ void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_scale_callba
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_precision_callback_set(const uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_precision_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the UnifySwitchColor cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_unify_switch_color_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/warm_white/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/cold_white/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/red/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_red_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_red_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/green/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_green_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_green_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/blue/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/amber/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/cyan/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UnifySwitchColor/Attributes/purple/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback_t callback);
 
 
 #ifdef __cplusplus

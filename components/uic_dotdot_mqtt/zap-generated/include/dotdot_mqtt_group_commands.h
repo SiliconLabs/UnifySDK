@@ -4073,6 +4073,55 @@ void uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_s
 
 
 
+/**
+ * @brief Callback signature for by-group UnifySwitchColor::SetColor command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UnifySwitchColor/set_color is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback_set(const uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback_t callback);
+
+/**
+ * @brief Callback signature for by-group UnifySwitchColor::StartStopChange command.
+ */
+typedef void (*uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback_t)(
+    const dotdot_group_id_t group_id,
+    const uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t *fields
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/UnifySwitchColor/start_stop_change is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback_set(const uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback_t callback);
+
+typedef void (*uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback_t)(
+    const dotdot_group_id_t group_id,
+    uic_mqtt_dotdot_unify_switch_color_state_t,
+    uic_mqtt_dotdot_unify_switch_color_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/unify_switch_color/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback_t callback
+);
+
+
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

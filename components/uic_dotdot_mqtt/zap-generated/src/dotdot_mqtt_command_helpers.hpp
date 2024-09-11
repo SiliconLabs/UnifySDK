@@ -6650,6 +6650,88 @@ void uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
 );
 
 
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifySwitchColor SetColor command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_switch_color_set_color_command(
+  
+  const uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UnifySwitchColor SetColor command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_switch_color_set_color(
+  nlohmann::json &jsn,
+  uint8_t &color_component_id,
+
+  uint8_t &value,
+
+  uint32_t &duration
+
+);
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a UnifySwitchColor StartStopChange command
+ * 
+ * @param fields       Struct pointer with the list of fields for the command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_unify_switch_color_start_stop_change_command(
+  
+  const uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t *fields
+  
+);
+
+
+/**
+ * @brief JSON parser for UnifySwitchColor StartStopChange command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_switch_color_start_stop_change(
+  nlohmann::json &jsn,
+  bool &start_stop,
+
+  bool &up_down,
+
+  bool &ignor_start_level,
+
+  uint8_t &color_component_id,
+
+  uint8_t &start_level,
+
+  uint32_t &duration
+
+);
+
+
+
+/**
+ * @brief JSON parser for UnifySwitchColor WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_switch_color_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_switch_color_state_t &new_state,
+  uic_mqtt_dotdot_unify_switch_color_updated_state_t &new_updated_state
+);
+
+
 
 #endif  //DOTDOT_MQTT_COMMAND_HELPERS_HPP
 /** @} end dotdot_mqtt_command_helpers */

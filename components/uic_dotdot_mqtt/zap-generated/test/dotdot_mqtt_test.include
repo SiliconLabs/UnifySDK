@@ -3339,6 +3339,46 @@ static sl_status_t uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_
   return SL_STATUS_OK;
 }
 
+static unsigned int uic_mqtt_dotdot_unify_switch_color_set_color_callback_count;
+static sl_status_t uic_mqtt_dotdot_unify_switch_color_set_color_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint8_t color_component_id,
+
+    uint8_t value,
+
+    uint32_t duration
+
+) {
+  uic_mqtt_dotdot_unify_switch_color_set_color_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_count;
+static sl_status_t uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    bool start_stop,
+
+    bool up_down,
+
+    bool ignor_start_level,
+
+    uint8_t color_component_id,
+
+    uint8_t start_level,
+
+    uint32_t duration
+
+) {
+  uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
 static unsigned int set_all_callbacks()
 {
   unsigned int num_callbacks = 0;
@@ -3765,6 +3805,10 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set(&uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_func);
   num_callbacks++;
+  uic_mqtt_dotdot_unify_switch_color_set_color_callback_set(&uic_mqtt_dotdot_unify_switch_color_set_color_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_set(&uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_func);
+  num_callbacks++;
   return num_callbacks;
 }
 
@@ -4036,6 +4080,9 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_clear();
   uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_clear();
   uic_mqtt_dotdot_clear_unify_humidity_control_write_attributes_callbacks();
+  uic_mqtt_dotdot_unify_switch_color_set_color_callback_clear();
+  uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_clear();
+  uic_mqtt_dotdot_clear_unify_switch_color_write_attributes_callbacks();
 }
 
 static void reset_callback_counters()
@@ -4252,4 +4299,6 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_unify_fan_control_turn_off_callback_count = 0;
   uic_mqtt_dotdot_unify_humidity_control_mode_set_callback_count = 0;
   uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_count = 0;
+  uic_mqtt_dotdot_unify_switch_color_set_color_callback_count = 0;
+  uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_count = 0;
 }

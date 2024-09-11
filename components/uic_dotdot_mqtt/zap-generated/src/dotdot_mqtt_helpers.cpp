@@ -10644,6 +10644,57 @@ std::string get_enum_value_name(
   #endif
   }
 
+  if (65441 == cluster_id) {
+  #ifdef UNIFY_SWITCH_COLOR_WARM_WHITE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorwarm_white instead of this: unify_switch_color_warm_white
+      return unify_switch_color_warm_white_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_COLD_WHITE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorcold_white instead of this: unify_switch_color_cold_white
+      return unify_switch_color_cold_white_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_RED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorred instead of this: unify_switch_color_red
+      return unify_switch_color_red_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_GREEN_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorgreen instead of this: unify_switch_color_green
+      return unify_switch_color_green_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_BLUE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorblue instead of this: unify_switch_color_blue
+      return unify_switch_color_blue_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_AMBER_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_coloramber instead of this: unify_switch_color_amber
+      return unify_switch_color_amber_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_CYAN_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorcyan instead of this: unify_switch_color_cyan
+      return unify_switch_color_cyan_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_PURPLE_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorpurple instead of this: unify_switch_color_purple
+      return unify_switch_color_purple_get_enum_value_name(value);
+    }
+  #endif
+  }
+
 
   std::string value_name;
   return value_name;
@@ -15198,6 +15249,57 @@ uint32_t get_enum_name_value(
     if (19 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_humidity_controlauto_setpoint_precision instead of this: unify_humidity_control_auto_setpoint_precision
       return unify_humidity_control_auto_setpoint_precision_get_enum_value_number(name);
+    }
+  #endif
+  }
+
+  if (65441 == cluster_id) {
+  #ifdef UNIFY_SWITCH_COLOR_WARM_WHITE_ENUM_NAME_AVAILABLE
+    if (0 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorwarm_white instead of this: unify_switch_color_warm_white
+      return unify_switch_color_warm_white_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_COLD_WHITE_ENUM_NAME_AVAILABLE
+    if (1 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorcold_white instead of this: unify_switch_color_cold_white
+      return unify_switch_color_cold_white_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_RED_ENUM_NAME_AVAILABLE
+    if (2 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorred instead of this: unify_switch_color_red
+      return unify_switch_color_red_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_GREEN_ENUM_NAME_AVAILABLE
+    if (3 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorgreen instead of this: unify_switch_color_green
+      return unify_switch_color_green_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_BLUE_ENUM_NAME_AVAILABLE
+    if (4 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorblue instead of this: unify_switch_color_blue
+      return unify_switch_color_blue_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_AMBER_ENUM_NAME_AVAILABLE
+    if (5 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_coloramber instead of this: unify_switch_color_amber
+      return unify_switch_color_amber_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_CYAN_ENUM_NAME_AVAILABLE
+    if (6 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorcyan instead of this: unify_switch_color_cyan
+      return unify_switch_color_cyan_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef UNIFY_SWITCH_COLOR_PURPLE_ENUM_NAME_AVAILABLE
+    if (7 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: unify_switch_colorpurple instead of this: unify_switch_color_purple
+      return unify_switch_color_purple_get_enum_value_number(name);
     }
   #endif
   }

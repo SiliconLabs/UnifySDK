@@ -15295,3 +15295,151 @@ void uic_mqtt_dotdot_unify_humidity_control_publish_setpoint_set_command_to_grou
                    payload.size(),
                    false);
 }
+
+/**
+ * @brief Sends/Publishes a SetColor command for
+ * the UnifySwitchColor cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifySwitchColor/Commands/SetColor
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_set_color_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UnifySwitchColor/Commands/SetColor";
+
+
+  std::string payload =
+    get_json_payload_for_unify_switch_color_set_color_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a SetColor command for
+ * the UnifySwitchColor cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UnifySwitchColor/Commands/SetColor
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_set_color_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UnifySwitchColor/Commands/SetColor";
+
+  std::string payload =
+    get_json_payload_for_unify_switch_color_set_color_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a StartStopChange command for
+ * the UnifySwitchColor cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UnifySwitchColor/Commands/StartStopChange
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_start_stop_change_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
+                      std::to_string(destination_endpoint) + "/";
+  topic += "UnifySwitchColor/Commands/StartStopChange";
+
+
+  std::string payload =
+    get_json_payload_for_unify_switch_color_start_stop_change_command(
+    fields);
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a StartStopChange command for
+ * the UnifySwitchColor cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UnifySwitchColor/Commands/StartStopChange
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_unify_switch_color_publish_start_stop_change_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t *fields
+  
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/UnifySwitchColor/Commands/StartStopChange";
+
+  std::string payload =
+    get_json_payload_for_unify_switch_color_start_stop_change_command(
+    fields);
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}

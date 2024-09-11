@@ -26377,6 +26377,375 @@ static void unify_humidity_control_cluster_cluster_revision_callback(
 }
 
 
+/**
+ * @brief Publishes the desired value of an updated attribute store node for
+ * the UnifySwitchColor cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_switch_color_cluster_publish_desired_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_WARM_WHITE) {
+          uic_mqtt_dotdot_unify_switch_color_warm_white_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_COLD_WHITE) {
+          uic_mqtt_dotdot_unify_switch_color_cold_white_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_RED) {
+          uic_mqtt_dotdot_unify_switch_color_red_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_GREEN) {
+          uic_mqtt_dotdot_unify_switch_color_green_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_BLUE) {
+          uic_mqtt_dotdot_unify_switch_color_blue_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_AMBER) {
+          uic_mqtt_dotdot_unify_switch_color_amber_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_CYAN) {
+          uic_mqtt_dotdot_unify_switch_color_cyan_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_PURPLE) {
+          uic_mqtt_dotdot_unify_switch_color_purple_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
+  }
+}
+
+/**
+ * @brief Publishes the reported value of an updated attribute store node for
+ * the UnifySwitchColor cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void unify_switch_color_cluster_publish_reported_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // Deletion case:
+  if (change == ATTRIBUTE_DELETED) {
+    // clang-format off
+    switch(type) {
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_WARM_WHITE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::WarmWhite under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_warm_white_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_COLD_WHITE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::ColdWhite under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_cold_white_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_RED:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::Red under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_red_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_GREEN:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::Green under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_green_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_BLUE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::Blue under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_blue_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_AMBER:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::Amber under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_amber_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_CYAN:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::Cyan under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_cyan_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_PURPLE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UnifySwitchColor::Purple under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_unify_switch_color_purple_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+    default:
+    break;
+    }
+    // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
+    return;
+  }
+
+  // Else we assume update case:
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_WARM_WHITE) {
+          uic_mqtt_dotdot_unify_switch_color_warm_white_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_COLD_WHITE) {
+          uic_mqtt_dotdot_unify_switch_color_cold_white_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_RED) {
+          uic_mqtt_dotdot_unify_switch_color_red_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_GREEN) {
+          uic_mqtt_dotdot_unify_switch_color_green_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_BLUE) {
+          uic_mqtt_dotdot_unify_switch_color_blue_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_AMBER) {
+          uic_mqtt_dotdot_unify_switch_color_amber_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_CYAN) {
+          uic_mqtt_dotdot_unify_switch_color_cyan_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_PURPLE) {
+          uic_mqtt_dotdot_unify_switch_color_purple_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
+  }
+}
+
+static void unify_switch_color_cluster_cluster_revision_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  // clang-format off
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+
+  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
+    // On attribute creation, make sure to publish the attribute revision for the first time
+    std::string cluster_revision_topic = base_topic + "/UnifySwitchColor/Attributes/ClusterRevision";
+    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
+      uic_mqtt_dotdot_unify_switch_color_publish_cluster_revision(base_topic.c_str(), 1);
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // Check if we just erased the last attribute under a cluster, if yes, unretain
+    // the Cluster revision too.
+    if (false == dotdot_is_any_unify_switch_color_attribute_supported(unid, endpoint_id)) {
+      base_topic +=  "/UnifySwitchColor";
+      sl_log_debug(LOG_TAG, "No more attributes supported for UnifySwitchColor cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
+      uic_mqtt_unretain(base_topic.c_str());
+    }
+  }
+}
+
+
 
 // Initialization of the component.
 sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
@@ -36615,6 +36984,118 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       unify_humidity_control_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_WARM_WHITE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_WARM_WHITE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_WARM_WHITE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_COLD_WHITE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_COLD_WHITE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_COLD_WHITE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_RED,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_RED,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_RED);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_GREEN,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_GREEN,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_GREEN);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_BLUE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_BLUE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_BLUE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_AMBER,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_AMBER,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_AMBER);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_CYAN,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_CYAN,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_CYAN);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_PURPLE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      unify_switch_color_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_PURPLE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      unify_switch_color_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_UNIFY_SWITCH_COLOR_PURPLE);
 
   return SL_STATUS_OK;
 }

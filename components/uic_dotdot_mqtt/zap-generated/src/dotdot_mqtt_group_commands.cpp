@@ -393,6 +393,11 @@ static uic_mqtt_dotdot_by_group_unify_humidity_control_setpoint_set_callback_t u
 static uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_t uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback = nullptr;
 
 
+static uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback_t uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback = nullptr;
+static uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback_t uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback = nullptr;
+static uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback_t uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback = nullptr;
+
+
 
 // Callbacks setters
 
@@ -2043,6 +2048,27 @@ void uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_s
   const uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback_t callback)
 {
   uic_mqtt_dotdot_by_group_unify_humidity_control_write_attributes_callback = callback;
+}
+
+
+
+// Callbacks setters
+
+void uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback_set(const uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback = callback;
+}
+
+
+void uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback_set(const uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback = callback;
+}
+
+void uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback_set(
+  const uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback = callback;
 }
 
 
@@ -25768,6 +25794,311 @@ sl_status_t uic_mqtt_dotdot_by_group_unify_humidity_control_init()
 
 
 
+
+// Callback function for incoming publications on ucl/by-group/+/UnifySwitchColor/Commands/SetColor
+static void uic_mqtt_dotdot_on_by_group_unify_switch_color_set_color(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_unify_switch_color_set_color(
+          jsn,
+          fields.color_component_id,
+              
+          fields.value,
+              
+          fields.duration
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifySwitchColor", "SetColor");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifySwitchColor", "SetColor", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifySwitchColor", "SetColor", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_switch_color_set_color_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("ColorComponentId") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::SetColor: Missing command-argument: ColorComponentId\n");
+        return;
+      }
+      if (jsn.find("Value") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::SetColor: Missing command-argument: Value\n");
+        return;
+      }
+      if (jsn.find("Duration") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::SetColor: Missing command-argument: Duration\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UnifySwitchColor",
+        "SetColor",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_unify_switch_color_set_color);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "SetColor: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-group/+/UnifySwitchColor/Commands/StartStopChange
+static void uic_mqtt_dotdot_on_by_group_unify_switch_color_start_stop_change(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if (uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback != nullptr) {
+
+    
+    uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t fields;
+
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      
+        uic_mqtt_dotdot_parse_unify_switch_color_start_stop_change(
+          jsn,
+          fields.start_stop,
+              
+          fields.up_down,
+              
+          fields.ignor_start_level,
+              
+          fields.color_component_id,
+              
+          fields.start_level,
+              
+          fields.duration
+              );
+
+      // Populate list fields from vector or string types
+      
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifySwitchColor", "StartStopChange");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifySwitchColor", "StartStopChange", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifySwitchColor", "StartStopChange", "");
+        return;
+      }
+
+      uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback(
+        group_id,
+        &fields
+      );
+  } else if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback().empty())) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn.find("StartStop") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::StartStopChange: Missing command-argument: StartStop\n");
+        return;
+      }
+      if (jsn.find("UpDown") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::StartStopChange: Missing command-argument: UpDown\n");
+        return;
+      }
+      if (jsn.find("IgnorStartLevel") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::StartStopChange: Missing command-argument: IgnorStartLevel\n");
+        return;
+      }
+      if (jsn.find("ColorComponentId") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::StartStopChange: Missing command-argument: ColorComponentId\n");
+        return;
+      }
+      if (jsn.find("StartLevel") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::StartStopChange: Missing command-argument: StartLevel\n");
+        return;
+      }
+      if (jsn.find("Duration") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::StartStopChange: Missing command-argument: Duration\n");
+        return;
+      }
+
+      group_dispatch_callback(
+        group_id,
+        "UnifySwitchColor",
+        "StartStopChange",
+        message,
+        message_length,
+        uic_mqtt_dotdot_on_unify_switch_color_start_stop_change);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "StartStopChange: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_by_group_unify_switch_color_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && (uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && (!get_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback().empty())) {
+    try {
+      group_dispatch_callback(group_id,
+                              "UnifySwitchColor",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              uic_mqtt_dotdot_on_unify_switch_color_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "UnifySwitchColor: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if (uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback != nullptr) {
+
+    uic_mqtt_dotdot_unify_switch_color_state_t new_state = {};
+    uic_mqtt_dotdot_unify_switch_color_updated_state_t new_updated_state = {};
+    
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      uic_mqtt_dotdot_parse_unify_switch_color_write_attributes(
+        jsn,
+        new_state,
+        new_updated_state
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UnifySwitchColor", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifySwitchColor", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UnifySwitchColor", "WriteAttributes", "");
+      return;
+    }
+
+    uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_by_group_unify_switch_color_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if(uic_mqtt_dotdot_by_group_unify_switch_color_write_attributes_callback) {
+    subscription_topic = topic_bygroup + "UnifySwitchColor/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_switch_color_WriteAttributes);
+  }
+  if (uic_mqtt_dotdot_by_group_unify_switch_color_set_color_callback) {
+    subscription_topic = topic_bygroup + "UnifySwitchColor/Commands/SetColor";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_switch_color_set_color);
+  }
+  if (uic_mqtt_dotdot_by_group_unify_switch_color_start_stop_change_callback) {
+    subscription_topic = topic_bygroup + "UnifySwitchColor/Commands/StartStopChange";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_by_group_unify_switch_color_start_stop_change);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+
 void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
 {
   // Check for uninitialized value in order to subscribe with on_group handlers
@@ -26073,6 +26404,10 @@ void uic_mqtt_dotdot_set_group_dispatch_callback(group_dispatch_t callback)
     uic_mqtt_subscribe("ucl/by-group/+/UnifyHumidityControl/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_unify_humidity_control_WriteAttributes);
     uic_mqtt_subscribe("ucl/by-group/+/UnifyHumidityControl/Commands/ModeSet", uic_mqtt_dotdot_on_by_group_unify_humidity_control_mode_set);
     uic_mqtt_subscribe("ucl/by-group/+/UnifyHumidityControl/Commands/SetpointSet", uic_mqtt_dotdot_on_by_group_unify_humidity_control_setpoint_set);
+
+    uic_mqtt_subscribe("ucl/by-group/+/UnifySwitchColor/Commands/WriteAttributes", uic_mqtt_dotdot_on_by_group_unify_switch_color_WriteAttributes);
+    uic_mqtt_subscribe("ucl/by-group/+/UnifySwitchColor/Commands/SetColor", uic_mqtt_dotdot_on_by_group_unify_switch_color_set_color);
+    uic_mqtt_subscribe("ucl/by-group/+/UnifySwitchColor/Commands/StartStopChange", uic_mqtt_dotdot_on_by_group_unify_switch_color_start_stop_change);
 
   }
 

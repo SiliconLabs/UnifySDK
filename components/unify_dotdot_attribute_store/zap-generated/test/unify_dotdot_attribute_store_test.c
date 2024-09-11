@@ -1420,6 +1420,24 @@ static uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t test_uic_m
 uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_t get_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback(){
   return test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback;
 }
+static uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_t test_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t test_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_t get_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t get_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_unify_switch_color_set_color_callback_t test_uic_mqtt_dotdot_unify_switch_color_set_color_callback = NULL;
+uic_mqtt_dotdot_unify_switch_color_set_color_callback_t get_uic_mqtt_dotdot_unify_switch_color_set_color_callback(){
+  return test_uic_mqtt_dotdot_unify_switch_color_set_color_callback;
+}
+static uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback = NULL;
+uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t get_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback(){
+  return test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback;
+}
 // clang-format on
 
 #define TEST_UNID "test-unid-123"
@@ -3131,6 +3149,26 @@ void uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set_stub(
 {
   test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback = callback;
 }
+void set_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_set_color_callback_set_stub(
+  const uic_mqtt_dotdot_unify_switch_color_set_color_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_switch_color_set_color_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_set_stub(
+  const uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback = callback;
+}
 // clang-format on
 
 // Test functions
@@ -4129,6 +4167,18 @@ void setUp()
   test_uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback = NULL;
   uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set_Stub(
     &uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_set_stub);
+  test_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_switch_color_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_switch_color_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_unify_switch_color_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_unify_switch_color_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_unify_switch_color_set_color_callback = NULL;
+  uic_mqtt_dotdot_unify_switch_color_set_color_callback_set_Stub(
+    &uic_mqtt_dotdot_unify_switch_color_set_color_callback_set_stub);
+  test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback = NULL;
+  uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_set_Stub(
+    &uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback_set_stub);
   // clang-format on
 
   group_command_dispatch = NULL;
@@ -4905,6 +4955,14 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint_scale(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_humidity_control_auto_setpoint_precision(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_warm_white(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_cold_white(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_red(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_green(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_blue(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_amber(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_cyan(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_switch_color_purple(expected_unid,expected_endpoint_id) );
 
   // clang-format on
   // ColorControl checks the value in the bitmask:
@@ -8352,6 +8410,56 @@ void test_automatic_deduction_of_supported_commands()
       
       ));
   }
+  if (NULL != test_uic_mqtt_dotdot_unify_switch_color_set_color_callback) {
+    // Dummy command parameters
+      uint8_t color_component_id_value;
+      memset(&color_component_id_value, 0x00, sizeof(color_component_id_value));
+      uint8_t value_value;
+      memset(&value_value, 0x00, sizeof(value_value));
+      uint32_t duration_value;
+      memset(&duration_value, 0x00, sizeof(duration_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_unify_switch_color_set_color_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        color_component_id_value,
+      
+        value_value,
+      
+        duration_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback) {
+    // Dummy command parameters
+      bool start_stop_value;
+      memset(&start_stop_value, 0x00, sizeof(start_stop_value));
+      bool up_down_value;
+      memset(&up_down_value, 0x00, sizeof(up_down_value));
+      bool ignor_start_level_value;
+      memset(&ignor_start_level_value, 0x00, sizeof(ignor_start_level_value));
+      uint8_t color_component_id_value;
+      memset(&color_component_id_value, 0x00, sizeof(color_component_id_value));
+      uint8_t start_level_value;
+      memset(&start_level_value, 0x00, sizeof(start_level_value));
+      uint32_t duration_value;
+      memset(&duration_value, 0x00, sizeof(duration_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        start_stop_value,
+      
+        up_down_value,
+      
+        ignor_start_level_value,
+      
+        color_component_id_value,
+      
+        start_level_value,
+      
+        duration_value
+      
+      ));
+  }
 
   // Invoke all commands with support check, they should return SL_STATUS_OK
   // because all ZCL attributes are supported
@@ -11788,6 +11896,56 @@ void test_automatic_deduction_of_supported_commands()
         scale_value,
       
         value_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_switch_color_set_color_callback) {
+    // Dummy command parameters
+      uint8_t color_component_id_value;
+      memset(&color_component_id_value, 0x00, sizeof(color_component_id_value));
+      uint8_t value_value;
+      memset(&value_value, 0x00, sizeof(value_value));
+      uint32_t duration_value;
+      memset(&duration_value, 0x00, sizeof(duration_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_unify_switch_color_set_color_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        color_component_id_value,
+      
+        value_value,
+      
+        duration_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback) {
+    // Dummy command parameters
+      bool start_stop_value;
+      memset(&start_stop_value, 0x00, sizeof(start_stop_value));
+      bool up_down_value;
+      memset(&up_down_value, 0x00, sizeof(up_down_value));
+      bool ignor_start_level_value;
+      memset(&ignor_start_level_value, 0x00, sizeof(ignor_start_level_value));
+      uint8_t color_component_id_value;
+      memset(&color_component_id_value, 0x00, sizeof(color_component_id_value));
+      uint8_t start_level_value;
+      memset(&start_level_value, 0x00, sizeof(start_level_value));
+      uint32_t duration_value;
+      memset(&duration_value, 0x00, sizeof(duration_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_unify_switch_color_start_stop_change_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        start_stop_value,
+      
+        up_down_value,
+      
+        ignor_start_level_value,
+      
+        color_component_id_value,
+      
+        start_level_value,
+      
+        duration_value
       
       ));
   }

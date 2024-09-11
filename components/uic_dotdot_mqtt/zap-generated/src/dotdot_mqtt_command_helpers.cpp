@@ -15959,3 +15959,179 @@ void uic_mqtt_dotdot_parse_unify_humidity_control_write_attributes(
 
 }
 
+
+std::string get_json_payload_for_unify_switch_color_set_color_command(
+  
+  const uic_mqtt_dotdot_unify_switch_color_command_set_color_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["ColorComponentId"] = nlohmann::json(fields->color_component_id);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Value"] = nlohmann::json(fields->value);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Duration"] = nlohmann::json(fields->duration);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_switch_color_set_color(
+  nlohmann::json &jsn,
+  uint8_t &color_component_id,
+  
+  uint8_t &value,
+  
+  uint32_t &duration
+  
+) {
+
+  if (jsn.at("ColorComponentId").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  color_component_id = jsn.at("ColorComponentId").get< uint8_t >();
+      if (jsn.at("Value").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  value = jsn.at("Value").get< uint8_t >();
+      if (jsn.at("Duration").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  duration = jsn.at("Duration").get< uint32_t >();
+    }
+
+
+std::string get_json_payload_for_unify_switch_color_start_stop_change_command(
+  
+  const uic_mqtt_dotdot_unify_switch_color_command_start_stop_change_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["StartStop"] = nlohmann::json(fields->start_stop);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UpDown"] = nlohmann::json(fields->up_down);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["IgnorStartLevel"] = nlohmann::json(fields->ignor_start_level);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["ColorComponentId"] = nlohmann::json(fields->color_component_id);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["StartLevel"] = nlohmann::json(fields->start_level);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["Duration"] = nlohmann::json(fields->duration);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_unify_switch_color_start_stop_change(
+  nlohmann::json &jsn,
+  bool &start_stop,
+  
+  bool &up_down,
+  
+  bool &ignor_start_level,
+  
+  uint8_t &color_component_id,
+  
+  uint8_t &start_level,
+  
+  uint32_t &duration
+  
+) {
+
+  if (jsn.at("StartStop").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  start_stop = jsn.at("StartStop").get< bool >();
+      if (jsn.at("UpDown").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  up_down = jsn.at("UpDown").get< bool >();
+      if (jsn.at("IgnorStartLevel").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  ignor_start_level = jsn.at("IgnorStartLevel").get< bool >();
+      if (jsn.at("ColorComponentId").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  color_component_id = jsn.at("ColorComponentId").get< uint8_t >();
+      if (jsn.at("StartLevel").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  start_level = jsn.at("StartLevel").get< uint8_t >();
+      if (jsn.at("Duration").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  duration = jsn.at("Duration").get< uint32_t >();
+    }
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_unify_switch_color_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_unify_switch_color_state_t &new_state,
+  uic_mqtt_dotdot_unify_switch_color_updated_state_t &new_updated_state
+) {
+
+
+
+}
+

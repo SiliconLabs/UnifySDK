@@ -64347,3 +64347,710 @@ void uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_precision_ca
 
 // End of supported cluster.
 
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for UnifySwitchColor
+///////////////////////////////////////////////////////////////////////////////
+static uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_red_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_red_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_green_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_green_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback = nullptr;
+static uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback_t uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback = nullptr;
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for UnifySwitchColor
+///////////////////////////////////////////////////////////////////////////////
+static void uic_mqtt_dotdot_on_unify_switch_color_warm_white_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t warm_white = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::WarmWhite: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      warm_white = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    warm_white
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_cold_white_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t cold_white = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::ColdWhite: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      cold_white = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    cold_white
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_red_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_red_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t red = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::Red: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      red = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_red_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    red
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_green_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_green_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t green = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::Green: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      green = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_green_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    green
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_blue_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t blue = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::Blue: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      blue = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    blue
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_amber_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t amber = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::Amber: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      amber = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    amber
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_cyan_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t cyan = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::Cyan: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      cyan = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    cyan
+  );
+
+}
+static void uic_mqtt_dotdot_on_unify_switch_color_purple_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if (uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+  uint8_t purple = {};
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "UnifySwitchColor::Purple: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+      purple = json_payload.at("value").get<uint8_t>();
+    
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    purple
+  );
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for UnifySwitchColor
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t uic_mqtt_dotdot_unify_switch_color_attributes_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/WarmWhite/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_warm_white_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/ColdWhite/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_cold_white_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_red_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/Red/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_red_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_green_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/Green/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_green_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/Blue/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_blue_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/Amber/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_amber_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/Cyan/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_cyan_attribute_update);
+  }
+  if(uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback) {
+    subscription_topic = base_topic + "UnifySwitchColor/Attributes/Purple/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_unify_switch_color_purple_attribute_update);
+  }
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for UnifySwitchColor
+///////////////////////////////////////////////////////////////////////////////
+void uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_warm_white_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_cold_white_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_red_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_red_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_red_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_green_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_green_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_green_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_blue_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_amber_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_cyan_callback = callback;
+}
+void uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback_set(const uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback_t callback)
+{
+  uic_mqtt_dotdot_unify_switch_color_attribute_purple_callback = callback;
+}
+
+// End of supported cluster.
+
