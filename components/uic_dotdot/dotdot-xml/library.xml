@@ -502,5 +502,5 @@ applicable to this document can be found in the LICENSE.md file.
   <xi:include href="Unify_Thermostat.xml" parse="xml"/>
   <xi:include href="Unify_FanControl.xml" parse="xml"/>
   <xi:include href="Unify_UserCredential.xml" parse="xml"/>
-  
+  <xi:include href="Unify_SwitchColor.xml" parse="xml"/>
 </zcl:library>
