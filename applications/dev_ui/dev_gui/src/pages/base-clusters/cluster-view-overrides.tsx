@@ -10,7 +10,7 @@ import { ClusterTypes } from '../../cluster-types/cluster-types';
 import { ClusterViewOverride } from './base-cluster-types';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
-import { Button } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
 
 //Here you can find icons that can be used to customize you page: https://react-icons.github.io/react-icons/
 //Don`t forgot to check licence if you use something that is not in Licence.txt
@@ -768,5 +768,24 @@ export let ClusterViewOverrides = {
             subMenu: SideMenu.NodeManagement
         } as NavbarItem,
         IsExpandable: true
+    } as ClusterViewOverride,
+
+    UserCredential: {
+        NodesTooltip: (endpoint: string) =>
+            <Tooltip title={`Endpoint ${endpoint}: User Credential`}>
+                <span className="cursor-default">
+                    <Link to={`/usercredential`}>
+                        <RiIcons.RiUserSettingsFill color="#212529" />
+                    </Link>
+                </span>
+            </Tooltip>,
+        NavbarItem: {
+            name: "User Credential",
+            title: 'User Credential',
+            path: '/usercredential',
+            icon: <RiIcons.RiUserSettingsFill />,
+            cName: 'nav-text',
+            subMenu: SideMenu.Actuators
+        } as NavbarItem
     } as ClusterViewOverride,
 }
