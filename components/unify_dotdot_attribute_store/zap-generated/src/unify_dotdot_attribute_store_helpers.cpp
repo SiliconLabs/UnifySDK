@@ -40,7 +40,7 @@ bool dotdot_is_supported_basic_zcl_version(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_basic_zcl_version(
+int8_t dotdot_get_basic_zcl_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -51,7 +51,7 @@ uint8_t dotdot_get_basic_zcl_version(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BASIC_ZCL_VERSION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -63,7 +63,7 @@ sl_status_t dotdot_set_basic_zcl_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_zcl_version
+  int8_t new_zcl_version
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -76,7 +76,7 @@ sl_status_t dotdot_set_basic_zcl_version(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_zcl_version,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_basic_zcl_version_undefine_reported(
@@ -151,7 +151,7 @@ bool dotdot_is_supported_basic_application_version(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_basic_application_version(
+int8_t dotdot_get_basic_application_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -162,7 +162,7 @@ uint8_t dotdot_get_basic_application_version(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BASIC_APPLICATION_VERSION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -174,7 +174,7 @@ sl_status_t dotdot_set_basic_application_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_application_version
+  int8_t new_application_version
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -187,7 +187,7 @@ sl_status_t dotdot_set_basic_application_version(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_application_version,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_basic_application_version_undefine_reported(
@@ -262,7 +262,7 @@ bool dotdot_is_supported_basic_stack_version(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_basic_stack_version(
+int8_t dotdot_get_basic_stack_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -273,7 +273,7 @@ uint8_t dotdot_get_basic_stack_version(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BASIC_STACK_VERSION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -285,7 +285,7 @@ sl_status_t dotdot_set_basic_stack_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_stack_version
+  int8_t new_stack_version
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -298,7 +298,7 @@ sl_status_t dotdot_set_basic_stack_version(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_stack_version,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_basic_stack_version_undefine_reported(
@@ -373,7 +373,7 @@ bool dotdot_is_supported_basic_hw_version(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_basic_hw_version(
+int8_t dotdot_get_basic_hw_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -384,7 +384,7 @@ uint8_t dotdot_get_basic_hw_version(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -396,7 +396,7 @@ sl_status_t dotdot_set_basic_hw_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_hw_version
+  int8_t new_hw_version
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -409,7 +409,7 @@ sl_status_t dotdot_set_basic_hw_version(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_hw_version,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_basic_hw_version_undefine_reported(
@@ -1153,7 +1153,7 @@ bool dotdot_is_supported_basic_product_code(
   return attribute_store_node_exists(node);
 }
 
-const char* dotdot_get_basic_product_code(
+uint8_t dotdot_get_basic_product_code(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -1176,7 +1176,7 @@ sl_status_t dotdot_set_basic_product_code(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  const char* new_product_code
+  uint8_t new_product_code
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -2478,7 +2478,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_mains_voltage(
+int16_t dotdot_get_power_configuration_mains_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -2489,7 +2489,7 @@ uint16_t dotdot_get_power_configuration_mains_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -2501,7 +2501,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_mains_voltage
+  int16_t new_mains_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -2514,7 +2514,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mains_voltage,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_mains_voltage_undefine_reported(
@@ -2589,7 +2589,7 @@ bool dotdot_is_supported_power_configuration_mains_frequency(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_mains_frequency(
+int8_t dotdot_get_power_configuration_mains_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -2600,7 +2600,7 @@ uint8_t dotdot_get_power_configuration_mains_frequency(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_FREQUENCY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -2612,7 +2612,7 @@ sl_status_t dotdot_set_power_configuration_mains_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_mains_frequency
+  int8_t new_mains_frequency
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -2625,7 +2625,7 @@ sl_status_t dotdot_set_power_configuration_mains_frequency(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mains_frequency,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_mains_frequency_undefine_reported(
@@ -2811,7 +2811,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_mains_voltage_min_threshold(
+int16_t dotdot_get_power_configuration_mains_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -2822,7 +2822,7 @@ uint16_t dotdot_get_power_configuration_mains_voltage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -2834,7 +2834,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_mains_voltage_min_threshold
+  int16_t new_mains_voltage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -2847,7 +2847,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mains_voltage_min_threshold,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_mains_voltage_min_threshold_undefine_reported(
@@ -2922,7 +2922,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage_max_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_mains_voltage_max_threshold(
+int16_t dotdot_get_power_configuration_mains_voltage_max_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -2933,7 +2933,7 @@ uint16_t dotdot_get_power_configuration_mains_voltage_max_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -2945,7 +2945,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_max_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_mains_voltage_max_threshold
+  int16_t new_mains_voltage_max_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -2958,7 +2958,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_max_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mains_voltage_max_threshold,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_mains_voltage_max_threshold_undefine_reported(
@@ -3033,7 +3033,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage_dwell_trip_point(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_mains_voltage_dwell_trip_point(
+int16_t dotdot_get_power_configuration_mains_voltage_dwell_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -3044,7 +3044,7 @@ uint16_t dotdot_get_power_configuration_mains_voltage_dwell_trip_point(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -3056,7 +3056,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_dwell_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_mains_voltage_dwell_trip_point
+  int16_t new_mains_voltage_dwell_trip_point
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -3069,7 +3069,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_dwell_trip_point(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mains_voltage_dwell_trip_point,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_mains_voltage_dwell_trip_point_undefine_reported(
@@ -3144,7 +3144,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_voltage(
+int8_t dotdot_get_power_configuration_battery_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -3155,7 +3155,7 @@ uint8_t dotdot_get_power_configuration_battery_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -3167,7 +3167,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_voltage
+  int8_t new_battery_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -3180,7 +3180,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_voltage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_voltage_undefine_reported(
@@ -3255,7 +3255,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_remaining(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_percentage_remaining(
+int8_t dotdot_get_power_configuration_battery_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -3266,7 +3266,7 @@ uint8_t dotdot_get_power_configuration_battery_percentage_remaining(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -3278,7 +3278,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_percentage_remaining
+  int8_t new_battery_percentage_remaining
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -3291,7 +3291,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_remaining(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_percentage_remaining,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_percentage_remaining_undefine_reported(
@@ -3589,7 +3589,7 @@ bool dotdot_is_supported_power_configuration_batterya_hr_rating(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_batterya_hr_rating(
+int16_t dotdot_get_power_configuration_batterya_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -3600,7 +3600,7 @@ uint16_t dotdot_get_power_configuration_batterya_hr_rating(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERYA_HR_RATING);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -3612,7 +3612,7 @@ sl_status_t dotdot_set_power_configuration_batterya_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_batterya_hr_rating
+  int16_t new_batterya_hr_rating
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -3625,7 +3625,7 @@ sl_status_t dotdot_set_power_configuration_batterya_hr_rating(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_batterya_hr_rating,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_batterya_hr_rating_undefine_reported(
@@ -3700,7 +3700,7 @@ bool dotdot_is_supported_power_configuration_battery_quantity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_quantity(
+int8_t dotdot_get_power_configuration_battery_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -3711,7 +3711,7 @@ uint8_t dotdot_get_power_configuration_battery_quantity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_QUANTITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -3723,7 +3723,7 @@ sl_status_t dotdot_set_power_configuration_battery_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_quantity
+  int8_t new_battery_quantity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -3736,7 +3736,7 @@ sl_status_t dotdot_set_power_configuration_battery_quantity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_quantity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_quantity_undefine_reported(
@@ -3811,7 +3811,7 @@ bool dotdot_is_supported_power_configuration_battery_rated_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_rated_voltage(
+int8_t dotdot_get_power_configuration_battery_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -3822,7 +3822,7 @@ uint8_t dotdot_get_power_configuration_battery_rated_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -3834,7 +3834,7 @@ sl_status_t dotdot_set_power_configuration_battery_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_rated_voltage
+  int8_t new_battery_rated_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -3847,7 +3847,7 @@ sl_status_t dotdot_set_power_configuration_battery_rated_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_rated_voltage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_rated_voltage_undefine_reported(
@@ -4033,7 +4033,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_voltage_min_threshold(
+int8_t dotdot_get_power_configuration_battery_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4044,7 +4044,7 @@ uint8_t dotdot_get_power_configuration_battery_voltage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4056,7 +4056,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_voltage_min_threshold
+  int8_t new_battery_voltage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4069,7 +4069,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_voltage_min_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_voltage_min_threshold_undefine_reported(
@@ -4144,7 +4144,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_threshold1(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_voltage_threshold1(
+int8_t dotdot_get_power_configuration_battery_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4155,7 +4155,7 @@ uint8_t dotdot_get_power_configuration_battery_voltage_threshold1(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4167,7 +4167,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_voltage_threshold1
+  int8_t new_battery_voltage_threshold1
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4180,7 +4180,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold1(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_voltage_threshold1,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_voltage_threshold1_undefine_reported(
@@ -4255,7 +4255,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_threshold2(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_voltage_threshold2(
+int8_t dotdot_get_power_configuration_battery_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4266,7 +4266,7 @@ uint8_t dotdot_get_power_configuration_battery_voltage_threshold2(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4278,7 +4278,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_voltage_threshold2
+  int8_t new_battery_voltage_threshold2
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4291,7 +4291,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold2(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_voltage_threshold2,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_voltage_threshold2_undefine_reported(
@@ -4366,7 +4366,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_threshold3(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_voltage_threshold3(
+int8_t dotdot_get_power_configuration_battery_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4377,7 +4377,7 @@ uint8_t dotdot_get_power_configuration_battery_voltage_threshold3(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4389,7 +4389,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_voltage_threshold3
+  int8_t new_battery_voltage_threshold3
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4402,7 +4402,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold3(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_voltage_threshold3,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_voltage_threshold3_undefine_reported(
@@ -4477,7 +4477,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_percentage_min_threshold(
+int8_t dotdot_get_power_configuration_battery_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4488,7 +4488,7 @@ uint8_t dotdot_get_power_configuration_battery_percentage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4500,7 +4500,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_percentage_min_threshold
+  int8_t new_battery_percentage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4513,7 +4513,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_percentage_min_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_percentage_min_threshold_undefine_reported(
@@ -4588,7 +4588,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_threshold1(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_percentage_threshold1(
+int8_t dotdot_get_power_configuration_battery_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4599,7 +4599,7 @@ uint8_t dotdot_get_power_configuration_battery_percentage_threshold1(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4611,7 +4611,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_percentage_threshold1
+  int8_t new_battery_percentage_threshold1
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4624,7 +4624,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold1(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_percentage_threshold1,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_percentage_threshold1_undefine_reported(
@@ -4699,7 +4699,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_threshold2(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_percentage_threshold2(
+int8_t dotdot_get_power_configuration_battery_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4710,7 +4710,7 @@ uint8_t dotdot_get_power_configuration_battery_percentage_threshold2(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4722,7 +4722,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_percentage_threshold2
+  int8_t new_battery_percentage_threshold2
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4735,7 +4735,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold2(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_percentage_threshold2,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_percentage_threshold2_undefine_reported(
@@ -4810,7 +4810,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_threshold3(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery_percentage_threshold3(
+int8_t dotdot_get_power_configuration_battery_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -4821,7 +4821,7 @@ uint8_t dotdot_get_power_configuration_battery_percentage_threshold3(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -4833,7 +4833,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery_percentage_threshold3
+  int8_t new_battery_percentage_threshold3
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -4846,7 +4846,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold3(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery_percentage_threshold3,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery_percentage_threshold3_undefine_reported(
@@ -5032,7 +5032,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_voltage(
+int8_t dotdot_get_power_configuration_battery2_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -5043,7 +5043,7 @@ uint8_t dotdot_get_power_configuration_battery2_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -5055,7 +5055,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_voltage
+  int8_t new_battery2_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -5068,7 +5068,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_voltage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_voltage_undefine_reported(
@@ -5143,7 +5143,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_remaining(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_percentage_remaining(
+int8_t dotdot_get_power_configuration_battery2_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -5154,7 +5154,7 @@ uint8_t dotdot_get_power_configuration_battery2_percentage_remaining(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -5166,7 +5166,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_percentage_remaining
+  int8_t new_battery2_percentage_remaining
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -5179,7 +5179,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_remaining(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_percentage_remaining,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_percentage_remaining_undefine_reported(
@@ -5477,7 +5477,7 @@ bool dotdot_is_supported_power_configuration_battery2a_hr_rating(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_battery2a_hr_rating(
+int16_t dotdot_get_power_configuration_battery2a_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -5488,7 +5488,7 @@ uint16_t dotdot_get_power_configuration_battery2a_hr_rating(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2A_HR_RATING);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -5500,7 +5500,7 @@ sl_status_t dotdot_set_power_configuration_battery2a_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_battery2a_hr_rating
+  int16_t new_battery2a_hr_rating
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -5513,7 +5513,7 @@ sl_status_t dotdot_set_power_configuration_battery2a_hr_rating(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2a_hr_rating,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2a_hr_rating_undefine_reported(
@@ -5588,7 +5588,7 @@ bool dotdot_is_supported_power_configuration_battery2_quantity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_quantity(
+int8_t dotdot_get_power_configuration_battery2_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -5599,7 +5599,7 @@ uint8_t dotdot_get_power_configuration_battery2_quantity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_QUANTITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -5611,7 +5611,7 @@ sl_status_t dotdot_set_power_configuration_battery2_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_quantity
+  int8_t new_battery2_quantity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -5624,7 +5624,7 @@ sl_status_t dotdot_set_power_configuration_battery2_quantity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_quantity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_quantity_undefine_reported(
@@ -5699,7 +5699,7 @@ bool dotdot_is_supported_power_configuration_battery2_rated_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_rated_voltage(
+int8_t dotdot_get_power_configuration_battery2_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -5710,7 +5710,7 @@ uint8_t dotdot_get_power_configuration_battery2_rated_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -5722,7 +5722,7 @@ sl_status_t dotdot_set_power_configuration_battery2_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_rated_voltage
+  int8_t new_battery2_rated_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -5735,7 +5735,7 @@ sl_status_t dotdot_set_power_configuration_battery2_rated_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_rated_voltage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_rated_voltage_undefine_reported(
@@ -5921,7 +5921,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_voltage_min_threshold(
+int8_t dotdot_get_power_configuration_battery2_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -5932,7 +5932,7 @@ uint8_t dotdot_get_power_configuration_battery2_voltage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -5944,7 +5944,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_voltage_min_threshold
+  int8_t new_battery2_voltage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -5957,7 +5957,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_voltage_min_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_voltage_min_threshold_undefine_reported(
@@ -6032,7 +6032,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_threshold1(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_voltage_threshold1(
+int8_t dotdot_get_power_configuration_battery2_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6043,7 +6043,7 @@ uint8_t dotdot_get_power_configuration_battery2_voltage_threshold1(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6055,7 +6055,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_voltage_threshold1
+  int8_t new_battery2_voltage_threshold1
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6068,7 +6068,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold1(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_voltage_threshold1,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_voltage_threshold1_undefine_reported(
@@ -6143,7 +6143,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_threshold2(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_voltage_threshold2(
+int8_t dotdot_get_power_configuration_battery2_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6154,7 +6154,7 @@ uint8_t dotdot_get_power_configuration_battery2_voltage_threshold2(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6166,7 +6166,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_voltage_threshold2
+  int8_t new_battery2_voltage_threshold2
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6179,7 +6179,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold2(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_voltage_threshold2,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_voltage_threshold2_undefine_reported(
@@ -6254,7 +6254,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_threshold3(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_voltage_threshold3(
+int8_t dotdot_get_power_configuration_battery2_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6265,7 +6265,7 @@ uint8_t dotdot_get_power_configuration_battery2_voltage_threshold3(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6277,7 +6277,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_voltage_threshold3
+  int8_t new_battery2_voltage_threshold3
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6290,7 +6290,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold3(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_voltage_threshold3,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_voltage_threshold3_undefine_reported(
@@ -6365,7 +6365,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_percentage_min_threshold(
+int8_t dotdot_get_power_configuration_battery2_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6376,7 +6376,7 @@ uint8_t dotdot_get_power_configuration_battery2_percentage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6388,7 +6388,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_percentage_min_threshold
+  int8_t new_battery2_percentage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6401,7 +6401,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_percentage_min_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_percentage_min_threshold_undefine_reported(
@@ -6476,7 +6476,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_threshold1(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_percentage_threshold1(
+int8_t dotdot_get_power_configuration_battery2_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6487,7 +6487,7 @@ uint8_t dotdot_get_power_configuration_battery2_percentage_threshold1(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6499,7 +6499,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_percentage_threshold1
+  int8_t new_battery2_percentage_threshold1
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6512,7 +6512,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold1(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_percentage_threshold1,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_percentage_threshold1_undefine_reported(
@@ -6587,7 +6587,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_threshold2(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_percentage_threshold2(
+int8_t dotdot_get_power_configuration_battery2_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6598,7 +6598,7 @@ uint8_t dotdot_get_power_configuration_battery2_percentage_threshold2(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6610,7 +6610,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_percentage_threshold2
+  int8_t new_battery2_percentage_threshold2
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6623,7 +6623,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold2(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_percentage_threshold2,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_percentage_threshold2_undefine_reported(
@@ -6698,7 +6698,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_threshold3(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery2_percentage_threshold3(
+int8_t dotdot_get_power_configuration_battery2_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6709,7 +6709,7 @@ uint8_t dotdot_get_power_configuration_battery2_percentage_threshold3(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6721,7 +6721,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery2_percentage_threshold3
+  int8_t new_battery2_percentage_threshold3
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6734,7 +6734,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold3(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery2_percentage_threshold3,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery2_percentage_threshold3_undefine_reported(
@@ -6920,7 +6920,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_voltage(
+int8_t dotdot_get_power_configuration_battery3_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -6931,7 +6931,7 @@ uint8_t dotdot_get_power_configuration_battery3_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -6943,7 +6943,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_voltage
+  int8_t new_battery3_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -6956,7 +6956,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_voltage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_voltage_undefine_reported(
@@ -7031,7 +7031,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_remaining(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_percentage_remaining(
+int8_t dotdot_get_power_configuration_battery3_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -7042,7 +7042,7 @@ uint8_t dotdot_get_power_configuration_battery3_percentage_remaining(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -7054,7 +7054,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_percentage_remaining
+  int8_t new_battery3_percentage_remaining
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -7067,7 +7067,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_remaining(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_percentage_remaining,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_percentage_remaining_undefine_reported(
@@ -7365,7 +7365,7 @@ bool dotdot_is_supported_power_configuration_battery3a_hr_rating(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_power_configuration_battery3a_hr_rating(
+int16_t dotdot_get_power_configuration_battery3a_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -7376,7 +7376,7 @@ uint16_t dotdot_get_power_configuration_battery3a_hr_rating(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3A_HR_RATING);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -7388,7 +7388,7 @@ sl_status_t dotdot_set_power_configuration_battery3a_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_battery3a_hr_rating
+  int16_t new_battery3a_hr_rating
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -7401,7 +7401,7 @@ sl_status_t dotdot_set_power_configuration_battery3a_hr_rating(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3a_hr_rating,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3a_hr_rating_undefine_reported(
@@ -7476,7 +7476,7 @@ bool dotdot_is_supported_power_configuration_battery3_quantity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_quantity(
+int8_t dotdot_get_power_configuration_battery3_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -7487,7 +7487,7 @@ uint8_t dotdot_get_power_configuration_battery3_quantity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_QUANTITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -7499,7 +7499,7 @@ sl_status_t dotdot_set_power_configuration_battery3_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_quantity
+  int8_t new_battery3_quantity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -7512,7 +7512,7 @@ sl_status_t dotdot_set_power_configuration_battery3_quantity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_quantity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_quantity_undefine_reported(
@@ -7587,7 +7587,7 @@ bool dotdot_is_supported_power_configuration_battery3_rated_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_rated_voltage(
+int8_t dotdot_get_power_configuration_battery3_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -7598,7 +7598,7 @@ uint8_t dotdot_get_power_configuration_battery3_rated_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -7610,7 +7610,7 @@ sl_status_t dotdot_set_power_configuration_battery3_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_rated_voltage
+  int8_t new_battery3_rated_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -7623,7 +7623,7 @@ sl_status_t dotdot_set_power_configuration_battery3_rated_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_rated_voltage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_rated_voltage_undefine_reported(
@@ -7809,7 +7809,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_voltage_min_threshold(
+int8_t dotdot_get_power_configuration_battery3_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -7820,7 +7820,7 @@ uint8_t dotdot_get_power_configuration_battery3_voltage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -7832,7 +7832,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_voltage_min_threshold
+  int8_t new_battery3_voltage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -7845,7 +7845,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_voltage_min_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_voltage_min_threshold_undefine_reported(
@@ -7920,7 +7920,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_threshold1(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_voltage_threshold1(
+int8_t dotdot_get_power_configuration_battery3_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -7931,7 +7931,7 @@ uint8_t dotdot_get_power_configuration_battery3_voltage_threshold1(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -7943,7 +7943,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_voltage_threshold1
+  int8_t new_battery3_voltage_threshold1
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -7956,7 +7956,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold1(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_voltage_threshold1,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_voltage_threshold1_undefine_reported(
@@ -8031,7 +8031,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_threshold2(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_voltage_threshold2(
+int8_t dotdot_get_power_configuration_battery3_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -8042,7 +8042,7 @@ uint8_t dotdot_get_power_configuration_battery3_voltage_threshold2(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -8054,7 +8054,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_voltage_threshold2
+  int8_t new_battery3_voltage_threshold2
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -8067,7 +8067,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold2(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_voltage_threshold2,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_voltage_threshold2_undefine_reported(
@@ -8142,7 +8142,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_threshold3(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_voltage_threshold3(
+int8_t dotdot_get_power_configuration_battery3_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -8153,7 +8153,7 @@ uint8_t dotdot_get_power_configuration_battery3_voltage_threshold3(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -8165,7 +8165,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_voltage_threshold3
+  int8_t new_battery3_voltage_threshold3
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -8178,7 +8178,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold3(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_voltage_threshold3,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_voltage_threshold3_undefine_reported(
@@ -8253,7 +8253,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_min_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_percentage_min_threshold(
+int8_t dotdot_get_power_configuration_battery3_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -8264,7 +8264,7 @@ uint8_t dotdot_get_power_configuration_battery3_percentage_min_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -8276,7 +8276,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_percentage_min_threshold
+  int8_t new_battery3_percentage_min_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -8289,7 +8289,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_min_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_percentage_min_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_percentage_min_threshold_undefine_reported(
@@ -8364,7 +8364,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_threshold1(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_percentage_threshold1(
+int8_t dotdot_get_power_configuration_battery3_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -8375,7 +8375,7 @@ uint8_t dotdot_get_power_configuration_battery3_percentage_threshold1(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -8387,7 +8387,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_percentage_threshold1
+  int8_t new_battery3_percentage_threshold1
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -8400,7 +8400,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold1(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_percentage_threshold1,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_percentage_threshold1_undefine_reported(
@@ -8475,7 +8475,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_threshold2(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_percentage_threshold2(
+int8_t dotdot_get_power_configuration_battery3_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -8486,7 +8486,7 @@ uint8_t dotdot_get_power_configuration_battery3_percentage_threshold2(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -8498,7 +8498,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_percentage_threshold2
+  int8_t new_battery3_percentage_threshold2
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -8511,7 +8511,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold2(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_percentage_threshold2,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_percentage_threshold2_undefine_reported(
@@ -8586,7 +8586,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_threshold3(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_power_configuration_battery3_percentage_threshold3(
+int8_t dotdot_get_power_configuration_battery3_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -8597,7 +8597,7 @@ uint8_t dotdot_get_power_configuration_battery3_percentage_threshold3(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -8609,7 +8609,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_battery3_percentage_threshold3
+  int8_t new_battery3_percentage_threshold3
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -8622,7 +8622,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold3(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_battery3_percentage_threshold3,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_power_configuration_battery3_percentage_threshold3_undefine_reported(
@@ -9469,7 +9469,7 @@ bool dotdot_is_supported_device_temperature_configuration_over_temp_total_dwell(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_device_temperature_configuration_over_temp_total_dwell(
+int16_t dotdot_get_device_temperature_configuration_over_temp_total_dwell(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -9480,7 +9480,7 @@ uint16_t dotdot_get_device_temperature_configuration_over_temp_total_dwell(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -9492,7 +9492,7 @@ sl_status_t dotdot_set_device_temperature_configuration_over_temp_total_dwell(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_over_temp_total_dwell
+  int16_t new_over_temp_total_dwell
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -9505,7 +9505,7 @@ sl_status_t dotdot_set_device_temperature_configuration_over_temp_total_dwell(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_over_temp_total_dwell,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_device_temperature_configuration_over_temp_total_dwell_undefine_reported(
@@ -9913,7 +9913,7 @@ bool dotdot_is_supported_device_temperature_configuration_low_temp_dwell_trip_po
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_device_temperature_configuration_low_temp_dwell_trip_point(
+int32_t dotdot_get_device_temperature_configuration_low_temp_dwell_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -9924,7 +9924,7 @@ uint32_t dotdot_get_device_temperature_configuration_low_temp_dwell_trip_point(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -9936,7 +9936,7 @@ sl_status_t dotdot_set_device_temperature_configuration_low_temp_dwell_trip_poin
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_low_temp_dwell_trip_point
+  int32_t new_low_temp_dwell_trip_point
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -9949,7 +9949,7 @@ sl_status_t dotdot_set_device_temperature_configuration_low_temp_dwell_trip_poin
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_low_temp_dwell_trip_point,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_device_temperature_configuration_low_temp_dwell_trip_point_undefine_reported(
@@ -10024,7 +10024,7 @@ bool dotdot_is_supported_device_temperature_configuration_high_temp_dwell_trip_p
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_device_temperature_configuration_high_temp_dwell_trip_point(
+int32_t dotdot_get_device_temperature_configuration_high_temp_dwell_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -10035,7 +10035,7 @@ uint32_t dotdot_get_device_temperature_configuration_high_temp_dwell_trip_point(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -10047,7 +10047,7 @@ sl_status_t dotdot_set_device_temperature_configuration_high_temp_dwell_trip_poi
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_high_temp_dwell_trip_point
+  int32_t new_high_temp_dwell_trip_point
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -10060,7 +10060,7 @@ sl_status_t dotdot_set_device_temperature_configuration_high_temp_dwell_trip_poi
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_high_temp_dwell_trip_point,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_device_temperature_configuration_high_temp_dwell_trip_point_undefine_reported(
@@ -10196,7 +10196,7 @@ bool dotdot_is_supported_identify_identify_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_identify_identify_time(
+int16_t dotdot_get_identify_identify_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -10207,7 +10207,7 @@ uint16_t dotdot_get_identify_identify_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -10219,7 +10219,7 @@ sl_status_t dotdot_set_identify_identify_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_identify_time
+  int16_t new_identify_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -10232,7 +10232,7 @@ sl_status_t dotdot_set_identify_identify_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_identify_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_identify_identify_time_undefine_reported(
@@ -10465,7 +10465,7 @@ bool dotdot_is_supported_scenes_scene_count(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_scenes_scene_count(
+int8_t dotdot_get_scenes_scene_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -10476,7 +10476,7 @@ uint8_t dotdot_get_scenes_scene_count(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_COUNT);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -10488,7 +10488,7 @@ sl_status_t dotdot_set_scenes_scene_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_scene_count
+  int8_t new_scene_count
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -10501,7 +10501,7 @@ sl_status_t dotdot_set_scenes_scene_count(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_scene_count,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_scenes_scene_count_undefine_reported(
@@ -10576,7 +10576,7 @@ bool dotdot_is_supported_scenes_current_scene(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_scenes_current_scene(
+int8_t dotdot_get_scenes_current_scene(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -10587,7 +10587,7 @@ uint8_t dotdot_get_scenes_current_scene(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_SCENE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -10599,7 +10599,7 @@ sl_status_t dotdot_set_scenes_current_scene(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_scene
+  int8_t new_current_scene
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -10612,7 +10612,7 @@ sl_status_t dotdot_set_scenes_current_scene(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_scene,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_scenes_current_scene_undefine_reported(
@@ -10687,7 +10687,7 @@ bool dotdot_is_supported_scenes_current_group(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_scenes_current_group(
+uint8_t * dotdot_get_scenes_current_group(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -10698,7 +10698,7 @@ uint16_t dotdot_get_scenes_current_group(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP);
 
-  uint16_t result = {};
+  uint8_t * result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -10710,7 +10710,7 @@ sl_status_t dotdot_set_scenes_current_group(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_current_group
+  uint8_t * new_current_group
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -10723,7 +10723,7 @@ sl_status_t dotdot_set_scenes_current_group(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_group,
-                                                  sizeof(uint16_t));
+                                                  sizeof(uint8_t *));
   }
 
 sl_status_t dotdot_scenes_current_group_undefine_reported(
@@ -11507,7 +11507,7 @@ bool dotdot_is_supported_on_off_on_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_on_off_on_time(
+int16_t dotdot_get_on_off_on_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -11518,7 +11518,7 @@ uint16_t dotdot_get_on_off_on_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -11530,7 +11530,7 @@ sl_status_t dotdot_set_on_off_on_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_on_time
+  int16_t new_on_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -11543,7 +11543,7 @@ sl_status_t dotdot_set_on_off_on_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_on_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_on_off_on_time_undefine_reported(
@@ -11618,7 +11618,7 @@ bool dotdot_is_supported_on_off_off_wait_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_on_off_off_wait_time(
+int16_t dotdot_get_on_off_off_wait_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -11629,7 +11629,7 @@ uint16_t dotdot_get_on_off_off_wait_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -11641,7 +11641,7 @@ sl_status_t dotdot_set_on_off_off_wait_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_off_wait_time
+  int16_t new_off_wait_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -11654,7 +11654,7 @@ sl_status_t dotdot_set_on_off_off_wait_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_off_wait_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_on_off_off_wait_time_undefine_reported(
@@ -11883,7 +11883,7 @@ bool dotdot_is_supported_level_current_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_level_current_level(
+int8_t dotdot_get_level_current_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -11894,7 +11894,7 @@ uint8_t dotdot_get_level_current_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -11906,7 +11906,7 @@ sl_status_t dotdot_set_level_current_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_level
+  int8_t new_current_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -11919,7 +11919,7 @@ sl_status_t dotdot_set_level_current_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_level_current_level_undefine_reported(
@@ -11994,7 +11994,7 @@ bool dotdot_is_supported_level_remaining_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_remaining_time(
+int16_t dotdot_get_level_remaining_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12005,7 +12005,7 @@ uint16_t dotdot_get_level_remaining_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12017,7 +12017,7 @@ sl_status_t dotdot_set_level_remaining_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_remaining_time
+  int16_t new_remaining_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12030,7 +12030,7 @@ sl_status_t dotdot_set_level_remaining_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_remaining_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_remaining_time_undefine_reported(
@@ -12105,7 +12105,7 @@ bool dotdot_is_supported_level_min_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_level_min_level(
+int8_t dotdot_get_level_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12116,7 +12116,7 @@ uint8_t dotdot_get_level_min_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12128,7 +12128,7 @@ sl_status_t dotdot_set_level_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_min_level
+  int8_t new_min_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12141,7 +12141,7 @@ sl_status_t dotdot_set_level_min_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_level_min_level_undefine_reported(
@@ -12216,7 +12216,7 @@ bool dotdot_is_supported_level_max_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_level_max_level(
+int8_t dotdot_get_level_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12227,7 +12227,7 @@ uint8_t dotdot_get_level_max_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12239,7 +12239,7 @@ sl_status_t dotdot_set_level_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_max_level
+  int8_t new_max_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12252,7 +12252,7 @@ sl_status_t dotdot_set_level_max_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_level_max_level_undefine_reported(
@@ -12327,7 +12327,7 @@ bool dotdot_is_supported_level_current_frequency(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_current_frequency(
+int16_t dotdot_get_level_current_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12338,7 +12338,7 @@ uint16_t dotdot_get_level_current_frequency(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_FREQUENCY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12350,7 +12350,7 @@ sl_status_t dotdot_set_level_current_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_current_frequency
+  int16_t new_current_frequency
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12363,7 +12363,7 @@ sl_status_t dotdot_set_level_current_frequency(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_frequency,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_current_frequency_undefine_reported(
@@ -12438,7 +12438,7 @@ bool dotdot_is_supported_level_min_frequency(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_min_frequency(
+int16_t dotdot_get_level_min_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12449,7 +12449,7 @@ uint16_t dotdot_get_level_min_frequency(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_FREQUENCY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12461,7 +12461,7 @@ sl_status_t dotdot_set_level_min_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_frequency
+  int16_t new_min_frequency
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12474,7 +12474,7 @@ sl_status_t dotdot_set_level_min_frequency(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_frequency,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_min_frequency_undefine_reported(
@@ -12549,7 +12549,7 @@ bool dotdot_is_supported_level_max_frequency(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_max_frequency(
+int16_t dotdot_get_level_max_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12560,7 +12560,7 @@ uint16_t dotdot_get_level_max_frequency(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_FREQUENCY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12572,7 +12572,7 @@ sl_status_t dotdot_set_level_max_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_frequency
+  int16_t new_max_frequency
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12585,7 +12585,7 @@ sl_status_t dotdot_set_level_max_frequency(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_frequency,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_max_frequency_undefine_reported(
@@ -12771,7 +12771,7 @@ bool dotdot_is_supported_level_on_off_transition_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_on_off_transition_time(
+int16_t dotdot_get_level_on_off_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12782,7 +12782,7 @@ uint16_t dotdot_get_level_on_off_transition_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12794,7 +12794,7 @@ sl_status_t dotdot_set_level_on_off_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_on_off_transition_time
+  int16_t new_on_off_transition_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12807,7 +12807,7 @@ sl_status_t dotdot_set_level_on_off_transition_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_on_off_transition_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_on_off_transition_time_undefine_reported(
@@ -12882,7 +12882,7 @@ bool dotdot_is_supported_level_on_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_level_on_level(
+int8_t dotdot_get_level_on_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -12893,7 +12893,7 @@ uint8_t dotdot_get_level_on_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_ON_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -12905,7 +12905,7 @@ sl_status_t dotdot_set_level_on_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_on_level
+  int8_t new_on_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -12918,7 +12918,7 @@ sl_status_t dotdot_set_level_on_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_on_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_level_on_level_undefine_reported(
@@ -12993,7 +12993,7 @@ bool dotdot_is_supported_level_on_transition_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_on_transition_time(
+int16_t dotdot_get_level_on_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13004,7 +13004,7 @@ uint16_t dotdot_get_level_on_transition_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_ON_TRANSITION_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -13016,7 +13016,7 @@ sl_status_t dotdot_set_level_on_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_on_transition_time
+  int16_t new_on_transition_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -13029,7 +13029,7 @@ sl_status_t dotdot_set_level_on_transition_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_on_transition_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_on_transition_time_undefine_reported(
@@ -13104,7 +13104,7 @@ bool dotdot_is_supported_level_off_transition_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_off_transition_time(
+int16_t dotdot_get_level_off_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13115,7 +13115,7 @@ uint16_t dotdot_get_level_off_transition_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_OFF_TRANSITION_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -13127,7 +13127,7 @@ sl_status_t dotdot_set_level_off_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_off_transition_time
+  int16_t new_off_transition_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -13140,7 +13140,7 @@ sl_status_t dotdot_set_level_off_transition_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_off_transition_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_off_transition_time_undefine_reported(
@@ -13215,7 +13215,7 @@ bool dotdot_is_supported_level_default_move_rate(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_level_default_move_rate(
+int16_t dotdot_get_level_default_move_rate(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13226,7 +13226,7 @@ uint16_t dotdot_get_level_default_move_rate(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_DEFAULT_MOVE_RATE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -13238,7 +13238,7 @@ sl_status_t dotdot_set_level_default_move_rate(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_default_move_rate
+  int16_t new_default_move_rate
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -13251,7 +13251,7 @@ sl_status_t dotdot_set_level_default_move_rate(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_default_move_rate,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_level_default_move_rate_undefine_reported(
@@ -13326,7 +13326,7 @@ bool dotdot_is_supported_level_start_up_current_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_level_start_up_current_level(
+int8_t dotdot_get_level_start_up_current_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13337,7 +13337,7 @@ uint8_t dotdot_get_level_start_up_current_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_LEVEL_START_UP_CURRENT_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -13349,7 +13349,7 @@ sl_status_t dotdot_set_level_start_up_current_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_start_up_current_level
+  int8_t new_start_up_current_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -13362,7 +13362,7 @@ sl_status_t dotdot_set_level_start_up_current_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_start_up_current_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_level_start_up_current_level_undefine_reported(
@@ -13519,7 +13519,7 @@ bool dotdot_is_supported_alarms_alarm_count(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_alarms_alarm_count(
+int16_t dotdot_get_alarms_alarm_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13530,7 +13530,7 @@ uint16_t dotdot_get_alarms_alarm_count(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ALARMS_ALARM_COUNT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -13542,7 +13542,7 @@ sl_status_t dotdot_set_alarms_alarm_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_alarm_count
+  int16_t new_alarm_count
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -13555,7 +13555,7 @@ sl_status_t dotdot_set_alarms_alarm_count(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_alarm_count,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_alarms_alarm_count_undefine_reported(
@@ -13652,7 +13652,7 @@ bool dotdot_is_supported_time_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_time(
+uint8_t dotdot_get_time_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13663,7 +13663,7 @@ uint32_t dotdot_get_time_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_TIME);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -13675,7 +13675,7 @@ sl_status_t dotdot_set_time_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_time
+  uint8_t new_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -13688,7 +13688,7 @@ sl_status_t dotdot_set_time_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_time_time_undefine_reported(
@@ -13985,7 +13985,7 @@ bool dotdot_is_supported_time_dst_start(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_dst_start(
+int32_t dotdot_get_time_dst_start(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -13996,7 +13996,7 @@ uint32_t dotdot_get_time_dst_start(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_DST_START);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14008,7 +14008,7 @@ sl_status_t dotdot_set_time_dst_start(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_dst_start
+  int32_t new_dst_start
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14021,7 +14021,7 @@ sl_status_t dotdot_set_time_dst_start(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dst_start,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_time_dst_start_undefine_reported(
@@ -14096,7 +14096,7 @@ bool dotdot_is_supported_time_dst_end(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_dst_end(
+int32_t dotdot_get_time_dst_end(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14107,7 +14107,7 @@ uint32_t dotdot_get_time_dst_end(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_DST_END);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14119,7 +14119,7 @@ sl_status_t dotdot_set_time_dst_end(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_dst_end
+  int32_t new_dst_end
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14132,7 +14132,7 @@ sl_status_t dotdot_set_time_dst_end(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dst_end,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_time_dst_end_undefine_reported(
@@ -14318,7 +14318,7 @@ bool dotdot_is_supported_time_standard_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_standard_time(
+int32_t dotdot_get_time_standard_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14329,7 +14329,7 @@ uint32_t dotdot_get_time_standard_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_STANDARD_TIME);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14341,7 +14341,7 @@ sl_status_t dotdot_set_time_standard_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_standard_time
+  int32_t new_standard_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14354,7 +14354,7 @@ sl_status_t dotdot_set_time_standard_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_standard_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_time_standard_time_undefine_reported(
@@ -14429,7 +14429,7 @@ bool dotdot_is_supported_time_local_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_local_time(
+int32_t dotdot_get_time_local_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14440,7 +14440,7 @@ uint32_t dotdot_get_time_local_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14452,7 +14452,7 @@ sl_status_t dotdot_set_time_local_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_local_time
+  int32_t new_local_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14465,7 +14465,7 @@ sl_status_t dotdot_set_time_local_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_local_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_time_local_time_undefine_reported(
@@ -14540,7 +14540,7 @@ bool dotdot_is_supported_time_last_set_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_last_set_time(
+uint8_t dotdot_get_time_last_set_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14551,7 +14551,7 @@ uint32_t dotdot_get_time_last_set_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14563,7 +14563,7 @@ sl_status_t dotdot_set_time_last_set_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_last_set_time
+  uint8_t new_last_set_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14576,7 +14576,7 @@ sl_status_t dotdot_set_time_last_set_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_last_set_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_time_last_set_time_undefine_reported(
@@ -14651,7 +14651,7 @@ bool dotdot_is_supported_time_valid_until_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_time_valid_until_time(
+uint8_t dotdot_get_time_valid_until_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14662,7 +14662,7 @@ uint32_t dotdot_get_time_valid_until_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14674,7 +14674,7 @@ sl_status_t dotdot_set_time_valid_until_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_valid_until_time
+  uint8_t new_valid_until_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14687,7 +14687,7 @@ sl_status_t dotdot_set_time_valid_until_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_valid_until_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_time_valid_until_time_undefine_reported(
@@ -14832,7 +14832,7 @@ bool dotdot_is_supported_poll_control_check_in_interval(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_poll_control_check_in_interval(
+int32_t dotdot_get_poll_control_check_in_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14843,7 +14843,7 @@ uint32_t dotdot_get_poll_control_check_in_interval(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14855,7 +14855,7 @@ sl_status_t dotdot_set_poll_control_check_in_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_check_in_interval
+  int32_t new_check_in_interval
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14868,7 +14868,7 @@ sl_status_t dotdot_set_poll_control_check_in_interval(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_check_in_interval,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_poll_control_check_in_interval_undefine_reported(
@@ -14943,7 +14943,7 @@ bool dotdot_is_supported_poll_control_long_poll_interval(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_poll_control_long_poll_interval(
+int32_t dotdot_get_poll_control_long_poll_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -14954,7 +14954,7 @@ uint32_t dotdot_get_poll_control_long_poll_interval(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -14966,7 +14966,7 @@ sl_status_t dotdot_set_poll_control_long_poll_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_long_poll_interval
+  int32_t new_long_poll_interval
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -14979,7 +14979,7 @@ sl_status_t dotdot_set_poll_control_long_poll_interval(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_long_poll_interval,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_poll_control_long_poll_interval_undefine_reported(
@@ -15054,7 +15054,7 @@ bool dotdot_is_supported_poll_control_short_poll_interval(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_poll_control_short_poll_interval(
+int16_t dotdot_get_poll_control_short_poll_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15065,7 +15065,7 @@ uint16_t dotdot_get_poll_control_short_poll_interval(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_SHORT_POLL_INTERVAL);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15077,7 +15077,7 @@ sl_status_t dotdot_set_poll_control_short_poll_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_short_poll_interval
+  int16_t new_short_poll_interval
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15090,7 +15090,7 @@ sl_status_t dotdot_set_poll_control_short_poll_interval(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_short_poll_interval,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_poll_control_short_poll_interval_undefine_reported(
@@ -15165,7 +15165,7 @@ bool dotdot_is_supported_poll_control_fast_poll_timeout(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_poll_control_fast_poll_timeout(
+int16_t dotdot_get_poll_control_fast_poll_timeout(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15176,7 +15176,7 @@ uint16_t dotdot_get_poll_control_fast_poll_timeout(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15188,7 +15188,7 @@ sl_status_t dotdot_set_poll_control_fast_poll_timeout(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_fast_poll_timeout
+  int16_t new_fast_poll_timeout
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15201,7 +15201,7 @@ sl_status_t dotdot_set_poll_control_fast_poll_timeout(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_fast_poll_timeout,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_poll_control_fast_poll_timeout_undefine_reported(
@@ -15276,7 +15276,7 @@ bool dotdot_is_supported_poll_control_check_in_interval_min(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_poll_control_check_in_interval_min(
+int32_t dotdot_get_poll_control_check_in_interval_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15287,7 +15287,7 @@ uint32_t dotdot_get_poll_control_check_in_interval_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL_MIN);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15299,7 +15299,7 @@ sl_status_t dotdot_set_poll_control_check_in_interval_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_check_in_interval_min
+  int32_t new_check_in_interval_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15312,7 +15312,7 @@ sl_status_t dotdot_set_poll_control_check_in_interval_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_check_in_interval_min,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_poll_control_check_in_interval_min_undefine_reported(
@@ -15387,7 +15387,7 @@ bool dotdot_is_supported_poll_control_long_poll_interval_min(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_poll_control_long_poll_interval_min(
+int32_t dotdot_get_poll_control_long_poll_interval_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15398,7 +15398,7 @@ uint32_t dotdot_get_poll_control_long_poll_interval_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL_MIN);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15410,7 +15410,7 @@ sl_status_t dotdot_set_poll_control_long_poll_interval_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_long_poll_interval_min
+  int32_t new_long_poll_interval_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15423,7 +15423,7 @@ sl_status_t dotdot_set_poll_control_long_poll_interval_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_long_poll_interval_min,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_poll_control_long_poll_interval_min_undefine_reported(
@@ -15498,7 +15498,7 @@ bool dotdot_is_supported_poll_control_fast_poll_timeout_max(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_poll_control_fast_poll_timeout_max(
+int16_t dotdot_get_poll_control_fast_poll_timeout_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15509,7 +15509,7 @@ uint16_t dotdot_get_poll_control_fast_poll_timeout_max(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT_MAX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15521,7 +15521,7 @@ sl_status_t dotdot_set_poll_control_fast_poll_timeout_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_fast_poll_timeout_max
+  int16_t new_fast_poll_timeout_max
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15534,7 +15534,7 @@ sl_status_t dotdot_set_poll_control_fast_poll_timeout_max(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_fast_poll_timeout_max,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_poll_control_fast_poll_timeout_max_undefine_reported(
@@ -15655,7 +15655,7 @@ bool dotdot_is_supported_shade_configuration_physical_closed_limit(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_shade_configuration_physical_closed_limit(
+int16_t dotdot_get_shade_configuration_physical_closed_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15666,7 +15666,7 @@ uint16_t dotdot_get_shade_configuration_physical_closed_limit(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15678,7 +15678,7 @@ sl_status_t dotdot_set_shade_configuration_physical_closed_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_physical_closed_limit
+  int16_t new_physical_closed_limit
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15691,7 +15691,7 @@ sl_status_t dotdot_set_shade_configuration_physical_closed_limit(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_closed_limit,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_shade_configuration_physical_closed_limit_undefine_reported(
@@ -15766,7 +15766,7 @@ bool dotdot_is_supported_shade_configuration_motor_step_size(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_shade_configuration_motor_step_size(
+int8_t dotdot_get_shade_configuration_motor_step_size(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15777,7 +15777,7 @@ uint8_t dotdot_get_shade_configuration_motor_step_size(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MOTOR_STEP_SIZE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -15789,7 +15789,7 @@ sl_status_t dotdot_set_shade_configuration_motor_step_size(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_motor_step_size
+  int8_t new_motor_step_size
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -15802,7 +15802,7 @@ sl_status_t dotdot_set_shade_configuration_motor_step_size(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_motor_step_size,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_shade_configuration_motor_step_size_undefine_reported(
@@ -15988,7 +15988,7 @@ bool dotdot_is_supported_shade_configuration_closed_limit(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_shade_configuration_closed_limit(
+int16_t dotdot_get_shade_configuration_closed_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -15999,7 +15999,7 @@ uint16_t dotdot_get_shade_configuration_closed_limit(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_CLOSED_LIMIT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -16011,7 +16011,7 @@ sl_status_t dotdot_set_shade_configuration_closed_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_closed_limit
+  int16_t new_closed_limit
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -16024,7 +16024,7 @@ sl_status_t dotdot_set_shade_configuration_closed_limit(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_closed_limit,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_shade_configuration_closed_limit_undefine_reported(
@@ -16697,7 +16697,7 @@ bool dotdot_is_supported_door_lock_door_open_events(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_door_lock_door_open_events(
+int32_t dotdot_get_door_lock_door_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -16708,7 +16708,7 @@ uint32_t dotdot_get_door_lock_door_open_events(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_OPEN_EVENTS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -16720,7 +16720,7 @@ sl_status_t dotdot_set_door_lock_door_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_door_open_events
+  int32_t new_door_open_events
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -16733,7 +16733,7 @@ sl_status_t dotdot_set_door_lock_door_open_events(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_door_open_events,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_door_lock_door_open_events_undefine_reported(
@@ -16808,7 +16808,7 @@ bool dotdot_is_supported_door_lock_door_closed_events(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_door_lock_door_closed_events(
+int32_t dotdot_get_door_lock_door_closed_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -16819,7 +16819,7 @@ uint32_t dotdot_get_door_lock_door_closed_events(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_CLOSED_EVENTS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -16831,7 +16831,7 @@ sl_status_t dotdot_set_door_lock_door_closed_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_door_closed_events
+  int32_t new_door_closed_events
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -16844,7 +16844,7 @@ sl_status_t dotdot_set_door_lock_door_closed_events(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_door_closed_events,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_door_lock_door_closed_events_undefine_reported(
@@ -16919,7 +16919,7 @@ bool dotdot_is_supported_door_lock_open_period(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_open_period(
+int16_t dotdot_get_door_lock_open_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -16930,7 +16930,7 @@ uint16_t dotdot_get_door_lock_open_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPEN_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -16942,7 +16942,7 @@ sl_status_t dotdot_set_door_lock_open_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_open_period
+  int16_t new_open_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -16955,7 +16955,7 @@ sl_status_t dotdot_set_door_lock_open_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_open_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_door_lock_open_period_undefine_reported(
@@ -17030,7 +17030,7 @@ bool dotdot_is_supported_door_lock_number_of_log_records_supported(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_number_of_log_records_supported(
+int16_t dotdot_get_door_lock_number_of_log_records_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17041,7 +17041,7 @@ uint16_t dotdot_get_door_lock_number_of_log_records_supported(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17053,7 +17053,7 @@ sl_status_t dotdot_set_door_lock_number_of_log_records_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_log_records_supported
+  int16_t new_number_of_log_records_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17066,7 +17066,7 @@ sl_status_t dotdot_set_door_lock_number_of_log_records_supported(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_log_records_supported,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_log_records_supported_undefine_reported(
@@ -17141,7 +17141,7 @@ bool dotdot_is_supported_door_lock_number_of_total_users_supported(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_number_of_total_users_supported(
+int16_t dotdot_get_door_lock_number_of_total_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17152,7 +17152,7 @@ uint16_t dotdot_get_door_lock_number_of_total_users_supported(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17164,7 +17164,7 @@ sl_status_t dotdot_set_door_lock_number_of_total_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_total_users_supported
+  int16_t new_number_of_total_users_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17177,7 +17177,7 @@ sl_status_t dotdot_set_door_lock_number_of_total_users_supported(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_total_users_supported,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_total_users_supported_undefine_reported(
@@ -17252,7 +17252,7 @@ bool dotdot_is_supported_door_lock_number_of_pin_users_supported(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_number_of_pin_users_supported(
+int16_t dotdot_get_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17263,7 +17263,7 @@ uint16_t dotdot_get_door_lock_number_of_pin_users_supported(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17275,7 +17275,7 @@ sl_status_t dotdot_set_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_pin_users_supported
+  int16_t new_number_of_pin_users_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17288,7 +17288,7 @@ sl_status_t dotdot_set_door_lock_number_of_pin_users_supported(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_pin_users_supported,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_pin_users_supported_undefine_reported(
@@ -17363,7 +17363,7 @@ bool dotdot_is_supported_door_lock_number_of_rfid_users_supported(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_number_of_rfid_users_supported(
+int16_t dotdot_get_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17374,7 +17374,7 @@ uint16_t dotdot_get_door_lock_number_of_rfid_users_supported(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17386,7 +17386,7 @@ sl_status_t dotdot_set_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_rfid_users_supported
+  int16_t new_number_of_rfid_users_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17399,7 +17399,7 @@ sl_status_t dotdot_set_door_lock_number_of_rfid_users_supported(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_rfid_users_supported,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_rfid_users_supported_undefine_reported(
@@ -17474,7 +17474,7 @@ bool dotdot_is_supported_door_lock_number_of_week_day_schedules_supported_per_us
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_number_of_week_day_schedules_supported_per_user(
+int8_t dotdot_get_door_lock_number_of_week_day_schedules_supported_per_user(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17485,7 +17485,7 @@ uint8_t dotdot_get_door_lock_number_of_week_day_schedules_supported_per_user(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17497,7 +17497,7 @@ sl_status_t dotdot_set_door_lock_number_of_week_day_schedules_supported_per_user
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_week_day_schedules_supported_per_user
+  int8_t new_number_of_week_day_schedules_supported_per_user
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17510,7 +17510,7 @@ sl_status_t dotdot_set_door_lock_number_of_week_day_schedules_supported_per_user
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_week_day_schedules_supported_per_user,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_week_day_schedules_supported_per_user_undefine_reported(
@@ -17585,7 +17585,7 @@ bool dotdot_is_supported_door_lock_number_of_year_day_schedules_supported_per_us
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_number_of_year_day_schedules_supported_per_user(
+int8_t dotdot_get_door_lock_number_of_year_day_schedules_supported_per_user(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17596,7 +17596,7 @@ uint8_t dotdot_get_door_lock_number_of_year_day_schedules_supported_per_user(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17608,7 +17608,7 @@ sl_status_t dotdot_set_door_lock_number_of_year_day_schedules_supported_per_user
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_year_day_schedules_supported_per_user
+  int8_t new_number_of_year_day_schedules_supported_per_user
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17621,7 +17621,7 @@ sl_status_t dotdot_set_door_lock_number_of_year_day_schedules_supported_per_user
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_year_day_schedules_supported_per_user,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_year_day_schedules_supported_per_user_undefine_reported(
@@ -17696,7 +17696,7 @@ bool dotdot_is_supported_door_lock_number_of_holiday_schedules_supported(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_number_of_holiday_schedules_supported(
+int8_t dotdot_get_door_lock_number_of_holiday_schedules_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17707,7 +17707,7 @@ uint8_t dotdot_get_door_lock_number_of_holiday_schedules_supported(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17719,7 +17719,7 @@ sl_status_t dotdot_set_door_lock_number_of_holiday_schedules_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_holiday_schedules_supported
+  int8_t new_number_of_holiday_schedules_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17732,7 +17732,7 @@ sl_status_t dotdot_set_door_lock_number_of_holiday_schedules_supported(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_holiday_schedules_supported,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_holiday_schedules_supported_undefine_reported(
@@ -17807,7 +17807,7 @@ bool dotdot_is_supported_door_lock_max_pin_code_length(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_max_pin_code_length(
+int8_t dotdot_get_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17818,7 +17818,7 @@ uint8_t dotdot_get_door_lock_max_pin_code_length(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17830,7 +17830,7 @@ sl_status_t dotdot_set_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_max_pin_code_length
+  int8_t new_max_pin_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17843,7 +17843,7 @@ sl_status_t dotdot_set_door_lock_max_pin_code_length(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_pin_code_length,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_max_pin_code_length_undefine_reported(
@@ -17918,7 +17918,7 @@ bool dotdot_is_supported_door_lock_min_pin_code_length(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_min_pin_code_length(
+int8_t dotdot_get_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -17929,7 +17929,7 @@ uint8_t dotdot_get_door_lock_min_pin_code_length(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -17941,7 +17941,7 @@ sl_status_t dotdot_set_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_min_pin_code_length
+  int8_t new_min_pin_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -17954,7 +17954,7 @@ sl_status_t dotdot_set_door_lock_min_pin_code_length(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_pin_code_length,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_min_pin_code_length_undefine_reported(
@@ -18029,7 +18029,7 @@ bool dotdot_is_supported_door_lock_max_rfid_code_length(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_max_rfid_code_length(
+int8_t dotdot_get_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18040,7 +18040,7 @@ uint8_t dotdot_get_door_lock_max_rfid_code_length(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -18052,7 +18052,7 @@ sl_status_t dotdot_set_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_max_rfid_code_length
+  int8_t new_max_rfid_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18065,7 +18065,7 @@ sl_status_t dotdot_set_door_lock_max_rfid_code_length(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_rfid_code_length,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_max_rfid_code_length_undefine_reported(
@@ -18140,7 +18140,7 @@ bool dotdot_is_supported_door_lock_min_rfid_code_length(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_min_rfid_code_length(
+int8_t dotdot_get_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18151,7 +18151,7 @@ uint8_t dotdot_get_door_lock_min_rfid_code_length(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -18163,7 +18163,7 @@ sl_status_t dotdot_set_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_min_rfid_code_length
+  int8_t new_min_rfid_code_length
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18176,7 +18176,7 @@ sl_status_t dotdot_set_door_lock_min_rfid_code_length(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_rfid_code_length,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_min_rfid_code_length_undefine_reported(
@@ -18362,7 +18362,7 @@ bool dotdot_is_supported_door_lock_number_of_credentials_supported_per_user(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_number_of_credentials_supported_per_user(
+int8_t dotdot_get_door_lock_number_of_credentials_supported_per_user(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18373,7 +18373,7 @@ uint8_t dotdot_get_door_lock_number_of_credentials_supported_per_user(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -18385,7 +18385,7 @@ sl_status_t dotdot_set_door_lock_number_of_credentials_supported_per_user(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_credentials_supported_per_user
+  int8_t new_number_of_credentials_supported_per_user
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18398,7 +18398,7 @@ sl_status_t dotdot_set_door_lock_number_of_credentials_supported_per_user(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_credentials_supported_per_user,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_number_of_credentials_supported_per_user_undefine_reported(
@@ -18696,7 +18696,7 @@ bool dotdot_is_supported_door_lock_led_settings(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_led_settings(
+int8_t dotdot_get_door_lock_led_settings(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18707,7 +18707,7 @@ uint8_t dotdot_get_door_lock_led_settings(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LED_SETTINGS);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -18719,7 +18719,7 @@ sl_status_t dotdot_set_door_lock_led_settings(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_led_settings
+  int8_t new_led_settings
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18732,7 +18732,7 @@ sl_status_t dotdot_set_door_lock_led_settings(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_led_settings,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_led_settings_undefine_reported(
@@ -18807,7 +18807,7 @@ bool dotdot_is_supported_door_lock_auto_relock_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_door_lock_auto_relock_time(
+int32_t dotdot_get_door_lock_auto_relock_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18818,7 +18818,7 @@ uint32_t dotdot_get_door_lock_auto_relock_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_AUTO_RELOCK_TIME);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -18830,7 +18830,7 @@ sl_status_t dotdot_set_door_lock_auto_relock_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_auto_relock_time
+  int32_t new_auto_relock_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18843,7 +18843,7 @@ sl_status_t dotdot_set_door_lock_auto_relock_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_auto_relock_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_door_lock_auto_relock_time_undefine_reported(
@@ -18918,7 +18918,7 @@ bool dotdot_is_supported_door_lock_sound_volume(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_sound_volume(
+int8_t dotdot_get_door_lock_sound_volume(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -18929,7 +18929,7 @@ uint8_t dotdot_get_door_lock_sound_volume(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SOUND_VOLUME);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -18941,7 +18941,7 @@ sl_status_t dotdot_set_door_lock_sound_volume(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_sound_volume
+  int8_t new_sound_volume
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -18954,7 +18954,7 @@ sl_status_t dotdot_set_door_lock_sound_volume(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_sound_volume,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_sound_volume_undefine_reported(
@@ -19917,7 +19917,7 @@ bool dotdot_is_supported_door_lock_wrong_code_entry_limit(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_wrong_code_entry_limit(
+int8_t dotdot_get_door_lock_wrong_code_entry_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -19928,7 +19928,7 @@ uint8_t dotdot_get_door_lock_wrong_code_entry_limit(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -19940,7 +19940,7 @@ sl_status_t dotdot_set_door_lock_wrong_code_entry_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_wrong_code_entry_limit
+  int8_t new_wrong_code_entry_limit
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -19953,7 +19953,7 @@ sl_status_t dotdot_set_door_lock_wrong_code_entry_limit(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_wrong_code_entry_limit,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_wrong_code_entry_limit_undefine_reported(
@@ -20028,7 +20028,7 @@ bool dotdot_is_supported_door_lock_user_code_temporary_disable_time(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_door_lock_user_code_temporary_disable_time(
+int8_t dotdot_get_door_lock_user_code_temporary_disable_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -20039,7 +20039,7 @@ uint8_t dotdot_get_door_lock_user_code_temporary_disable_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -20051,7 +20051,7 @@ sl_status_t dotdot_set_door_lock_user_code_temporary_disable_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_user_code_temporary_disable_time
+  int8_t new_user_code_temporary_disable_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -20064,7 +20064,7 @@ sl_status_t dotdot_set_door_lock_user_code_temporary_disable_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_user_code_temporary_disable_time,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_door_lock_user_code_temporary_disable_time_undefine_reported(
@@ -20472,7 +20472,7 @@ bool dotdot_is_supported_door_lock_expiring_user_timeout(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_door_lock_expiring_user_timeout(
+int16_t dotdot_get_door_lock_expiring_user_timeout(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -20483,7 +20483,7 @@ uint16_t dotdot_get_door_lock_expiring_user_timeout(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -20495,7 +20495,7 @@ sl_status_t dotdot_set_door_lock_expiring_user_timeout(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_expiring_user_timeout
+  int16_t new_expiring_user_timeout
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -20508,7 +20508,7 @@ sl_status_t dotdot_set_door_lock_expiring_user_timeout(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_expiring_user_timeout,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_door_lock_expiring_user_timeout_undefine_reported(
@@ -21937,7 +21937,7 @@ bool dotdot_is_supported_window_covering_physical_closed_limit_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_physical_closed_limit_lift(
+int16_t dotdot_get_window_covering_physical_closed_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -21948,7 +21948,7 @@ uint16_t dotdot_get_window_covering_physical_closed_limit_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -21960,7 +21960,7 @@ sl_status_t dotdot_set_window_covering_physical_closed_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_physical_closed_limit_lift
+  int16_t new_physical_closed_limit_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -21973,7 +21973,7 @@ sl_status_t dotdot_set_window_covering_physical_closed_limit_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_closed_limit_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_physical_closed_limit_lift_undefine_reported(
@@ -22048,7 +22048,7 @@ bool dotdot_is_supported_window_covering_physical_closed_limit_tilt(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_physical_closed_limit_tilt(
+int16_t dotdot_get_window_covering_physical_closed_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22059,7 +22059,7 @@ uint16_t dotdot_get_window_covering_physical_closed_limit_tilt(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22071,7 +22071,7 @@ sl_status_t dotdot_set_window_covering_physical_closed_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_physical_closed_limit_tilt
+  int16_t new_physical_closed_limit_tilt
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22084,7 +22084,7 @@ sl_status_t dotdot_set_window_covering_physical_closed_limit_tilt(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_closed_limit_tilt,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_physical_closed_limit_tilt_undefine_reported(
@@ -22159,7 +22159,7 @@ bool dotdot_is_supported_window_covering_current_position_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_current_position_lift(
+int16_t dotdot_get_window_covering_current_position_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22170,7 +22170,7 @@ uint16_t dotdot_get_window_covering_current_position_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22182,7 +22182,7 @@ sl_status_t dotdot_set_window_covering_current_position_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_current_position_lift
+  int16_t new_current_position_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22195,7 +22195,7 @@ sl_status_t dotdot_set_window_covering_current_position_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_position_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_current_position_lift_undefine_reported(
@@ -22270,7 +22270,7 @@ bool dotdot_is_supported_window_covering_current_position_tilt(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_current_position_tilt(
+int16_t dotdot_get_window_covering_current_position_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22281,7 +22281,7 @@ uint16_t dotdot_get_window_covering_current_position_tilt(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22293,7 +22293,7 @@ sl_status_t dotdot_set_window_covering_current_position_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_current_position_tilt
+  int16_t new_current_position_tilt
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22306,7 +22306,7 @@ sl_status_t dotdot_set_window_covering_current_position_tilt(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_position_tilt,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_current_position_tilt_undefine_reported(
@@ -22381,7 +22381,7 @@ bool dotdot_is_supported_window_covering_number_of_actuations_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_number_of_actuations_lift(
+int16_t dotdot_get_window_covering_number_of_actuations_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22392,7 +22392,7 @@ uint16_t dotdot_get_window_covering_number_of_actuations_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22404,7 +22404,7 @@ sl_status_t dotdot_set_window_covering_number_of_actuations_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_actuations_lift
+  int16_t new_number_of_actuations_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22417,7 +22417,7 @@ sl_status_t dotdot_set_window_covering_number_of_actuations_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_actuations_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_number_of_actuations_lift_undefine_reported(
@@ -22492,7 +22492,7 @@ bool dotdot_is_supported_window_covering_number_of_actuations_tilt(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_number_of_actuations_tilt(
+int16_t dotdot_get_window_covering_number_of_actuations_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22503,7 +22503,7 @@ uint16_t dotdot_get_window_covering_number_of_actuations_tilt(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22515,7 +22515,7 @@ sl_status_t dotdot_set_window_covering_number_of_actuations_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_actuations_tilt
+  int16_t new_number_of_actuations_tilt
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22528,7 +22528,7 @@ sl_status_t dotdot_set_window_covering_number_of_actuations_tilt(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_actuations_tilt,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_number_of_actuations_tilt_undefine_reported(
@@ -22714,7 +22714,7 @@ bool dotdot_is_supported_window_covering_current_position_lift_percentage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_window_covering_current_position_lift_percentage(
+int8_t dotdot_get_window_covering_current_position_lift_percentage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22725,7 +22725,7 @@ uint8_t dotdot_get_window_covering_current_position_lift_percentage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22737,7 +22737,7 @@ sl_status_t dotdot_set_window_covering_current_position_lift_percentage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_position_lift_percentage
+  int8_t new_current_position_lift_percentage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22750,7 +22750,7 @@ sl_status_t dotdot_set_window_covering_current_position_lift_percentage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_position_lift_percentage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_window_covering_current_position_lift_percentage_undefine_reported(
@@ -22825,7 +22825,7 @@ bool dotdot_is_supported_window_covering_current_position_tilt_percentage(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_window_covering_current_position_tilt_percentage(
+int8_t dotdot_get_window_covering_current_position_tilt_percentage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22836,7 +22836,7 @@ uint8_t dotdot_get_window_covering_current_position_tilt_percentage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22848,7 +22848,7 @@ sl_status_t dotdot_set_window_covering_current_position_tilt_percentage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_position_tilt_percentage
+  int8_t new_current_position_tilt_percentage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22861,7 +22861,7 @@ sl_status_t dotdot_set_window_covering_current_position_tilt_percentage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_position_tilt_percentage,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_window_covering_current_position_tilt_percentage_undefine_reported(
@@ -22936,7 +22936,7 @@ bool dotdot_is_supported_window_covering_installed_open_limit_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_installed_open_limit_lift(
+int16_t dotdot_get_window_covering_installed_open_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -22947,7 +22947,7 @@ uint16_t dotdot_get_window_covering_installed_open_limit_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -22959,7 +22959,7 @@ sl_status_t dotdot_set_window_covering_installed_open_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_installed_open_limit_lift
+  int16_t new_installed_open_limit_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -22972,7 +22972,7 @@ sl_status_t dotdot_set_window_covering_installed_open_limit_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_installed_open_limit_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_installed_open_limit_lift_undefine_reported(
@@ -23047,7 +23047,7 @@ bool dotdot_is_supported_window_covering_installed_closed_limit_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_installed_closed_limit_lift(
+int16_t dotdot_get_window_covering_installed_closed_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23058,7 +23058,7 @@ uint16_t dotdot_get_window_covering_installed_closed_limit_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -23070,7 +23070,7 @@ sl_status_t dotdot_set_window_covering_installed_closed_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_installed_closed_limit_lift
+  int16_t new_installed_closed_limit_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23083,7 +23083,7 @@ sl_status_t dotdot_set_window_covering_installed_closed_limit_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_installed_closed_limit_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_installed_closed_limit_lift_undefine_reported(
@@ -23158,7 +23158,7 @@ bool dotdot_is_supported_window_covering_installed_open_limit_tilt(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_installed_open_limit_tilt(
+int16_t dotdot_get_window_covering_installed_open_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23169,7 +23169,7 @@ uint16_t dotdot_get_window_covering_installed_open_limit_tilt(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -23181,7 +23181,7 @@ sl_status_t dotdot_set_window_covering_installed_open_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_installed_open_limit_tilt
+  int16_t new_installed_open_limit_tilt
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23194,7 +23194,7 @@ sl_status_t dotdot_set_window_covering_installed_open_limit_tilt(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_installed_open_limit_tilt,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_installed_open_limit_tilt_undefine_reported(
@@ -23269,7 +23269,7 @@ bool dotdot_is_supported_window_covering_installed_closed_limit_tilt(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_installed_closed_limit_tilt(
+int16_t dotdot_get_window_covering_installed_closed_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23280,7 +23280,7 @@ uint16_t dotdot_get_window_covering_installed_closed_limit_tilt(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -23292,7 +23292,7 @@ sl_status_t dotdot_set_window_covering_installed_closed_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_installed_closed_limit_tilt
+  int16_t new_installed_closed_limit_tilt
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23305,7 +23305,7 @@ sl_status_t dotdot_set_window_covering_installed_closed_limit_tilt(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_installed_closed_limit_tilt,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_installed_closed_limit_tilt_undefine_reported(
@@ -23380,7 +23380,7 @@ bool dotdot_is_supported_window_covering_velocity_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_velocity_lift(
+int16_t dotdot_get_window_covering_velocity_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23391,7 +23391,7 @@ uint16_t dotdot_get_window_covering_velocity_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_VELOCITY_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -23403,7 +23403,7 @@ sl_status_t dotdot_set_window_covering_velocity_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_velocity_lift
+  int16_t new_velocity_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23416,7 +23416,7 @@ sl_status_t dotdot_set_window_covering_velocity_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_velocity_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_velocity_lift_undefine_reported(
@@ -23491,7 +23491,7 @@ bool dotdot_is_supported_window_covering_acceleration_time_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_acceleration_time_lift(
+int16_t dotdot_get_window_covering_acceleration_time_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23502,7 +23502,7 @@ uint16_t dotdot_get_window_covering_acceleration_time_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_ACCELERATION_TIME_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -23514,7 +23514,7 @@ sl_status_t dotdot_set_window_covering_acceleration_time_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_acceleration_time_lift
+  int16_t new_acceleration_time_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23527,7 +23527,7 @@ sl_status_t dotdot_set_window_covering_acceleration_time_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_acceleration_time_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_acceleration_time_lift_undefine_reported(
@@ -23602,7 +23602,7 @@ bool dotdot_is_supported_window_covering_deceleration_time_lift(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_window_covering_deceleration_time_lift(
+int16_t dotdot_get_window_covering_deceleration_time_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23613,7 +23613,7 @@ uint16_t dotdot_get_window_covering_deceleration_time_lift(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_DECELERATION_TIME_LIFT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -23625,7 +23625,7 @@ sl_status_t dotdot_set_window_covering_deceleration_time_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_deceleration_time_lift
+  int16_t new_deceleration_time_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23638,7 +23638,7 @@ sl_status_t dotdot_set_window_covering_deceleration_time_lift(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_deceleration_time_lift,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_window_covering_deceleration_time_lift_undefine_reported(
@@ -23824,7 +23824,7 @@ bool dotdot_is_supported_window_covering_intermediate_setpoints_lift(
   return attribute_store_node_exists(node);
 }
 
-const char* dotdot_get_window_covering_intermediate_setpoints_lift(
+uint8_t dotdot_get_window_covering_intermediate_setpoints_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23847,7 +23847,7 @@ sl_status_t dotdot_set_window_covering_intermediate_setpoints_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  const char* new_intermediate_setpoints_lift
+  uint8_t new_intermediate_setpoints_lift
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -23936,7 +23936,7 @@ bool dotdot_is_supported_window_covering_intermediate_setpoints_tilt(
   return attribute_store_node_exists(node);
 }
 
-const char* dotdot_get_window_covering_intermediate_setpoints_tilt(
+uint8_t dotdot_get_window_covering_intermediate_setpoints_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -23959,7 +23959,7 @@ sl_status_t dotdot_set_window_covering_intermediate_setpoints_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  const char* new_intermediate_setpoints_tilt
+  uint8_t new_intermediate_setpoints_tilt
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -24472,7 +24472,7 @@ bool dotdot_is_supported_barrier_control_open_events(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_barrier_control_open_events(
+int16_t dotdot_get_barrier_control_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -24483,7 +24483,7 @@ uint16_t dotdot_get_barrier_control_open_events(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_EVENTS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -24495,7 +24495,7 @@ sl_status_t dotdot_set_barrier_control_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_open_events
+  int16_t new_open_events
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -24508,7 +24508,7 @@ sl_status_t dotdot_set_barrier_control_open_events(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_open_events,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_barrier_control_open_events_undefine_reported(
@@ -24583,7 +24583,7 @@ bool dotdot_is_supported_barrier_control_close_events(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_barrier_control_close_events(
+int16_t dotdot_get_barrier_control_close_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -24594,7 +24594,7 @@ uint16_t dotdot_get_barrier_control_close_events(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_EVENTS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -24606,7 +24606,7 @@ sl_status_t dotdot_set_barrier_control_close_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_close_events
+  int16_t new_close_events
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -24619,7 +24619,7 @@ sl_status_t dotdot_set_barrier_control_close_events(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_close_events,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_barrier_control_close_events_undefine_reported(
@@ -24694,7 +24694,7 @@ bool dotdot_is_supported_barrier_control_command_open_events(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_barrier_control_command_open_events(
+int16_t dotdot_get_barrier_control_command_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -24705,7 +24705,7 @@ uint16_t dotdot_get_barrier_control_command_open_events(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_OPEN_EVENTS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -24717,7 +24717,7 @@ sl_status_t dotdot_set_barrier_control_command_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_command_open_events
+  int16_t new_command_open_events
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -24730,7 +24730,7 @@ sl_status_t dotdot_set_barrier_control_command_open_events(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_command_open_events,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_barrier_control_command_open_events_undefine_reported(
@@ -24805,7 +24805,7 @@ bool dotdot_is_supported_barrier_control_command_close_events(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_barrier_control_command_close_events(
+int16_t dotdot_get_barrier_control_command_close_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -24816,7 +24816,7 @@ uint16_t dotdot_get_barrier_control_command_close_events(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_CLOSE_EVENTS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -24828,7 +24828,7 @@ sl_status_t dotdot_set_barrier_control_command_close_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_command_close_events
+  int16_t new_command_close_events
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -24841,7 +24841,7 @@ sl_status_t dotdot_set_barrier_control_command_close_events(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_command_close_events,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_barrier_control_command_close_events_undefine_reported(
@@ -24916,7 +24916,7 @@ bool dotdot_is_supported_barrier_control_open_period(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_barrier_control_open_period(
+int16_t dotdot_get_barrier_control_open_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -24927,7 +24927,7 @@ uint16_t dotdot_get_barrier_control_open_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -24939,7 +24939,7 @@ sl_status_t dotdot_set_barrier_control_open_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_open_period
+  int16_t new_open_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -24952,7 +24952,7 @@ sl_status_t dotdot_set_barrier_control_open_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_open_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_barrier_control_open_period_undefine_reported(
@@ -25027,7 +25027,7 @@ bool dotdot_is_supported_barrier_control_close_period(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_barrier_control_close_period(
+int16_t dotdot_get_barrier_control_close_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -25038,7 +25038,7 @@ uint16_t dotdot_get_barrier_control_close_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -25050,7 +25050,7 @@ sl_status_t dotdot_set_barrier_control_close_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_close_period
+  int16_t new_close_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -25063,7 +25063,7 @@ sl_status_t dotdot_set_barrier_control_close_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_close_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_barrier_control_close_period_undefine_reported(
@@ -25138,7 +25138,7 @@ bool dotdot_is_supported_barrier_control_barrier_position(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_barrier_control_barrier_position(
+int8_t dotdot_get_barrier_control_barrier_position(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -25149,7 +25149,7 @@ uint8_t dotdot_get_barrier_control_barrier_position(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_BARRIER_POSITION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -25161,7 +25161,7 @@ sl_status_t dotdot_set_barrier_control_barrier_position(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_barrier_position
+  int8_t new_barrier_position
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -25174,7 +25174,7 @@ sl_status_t dotdot_set_barrier_control_barrier_position(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_barrier_position,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_barrier_control_barrier_position_undefine_reported(
@@ -25427,7 +25427,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_speed(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_max_speed(
+int16_t dotdot_get_pump_configuration_and_control_max_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -25438,7 +25438,7 @@ uint16_t dotdot_get_pump_configuration_and_control_max_speed(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -25450,7 +25450,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_speed
+  int16_t new_max_speed
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -25463,7 +25463,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_speed(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_speed,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_max_speed_undefine_reported(
@@ -25538,7 +25538,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_flow(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_max_flow(
+int16_t dotdot_get_pump_configuration_and_control_max_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -25549,7 +25549,7 @@ uint16_t dotdot_get_pump_configuration_and_control_max_flow(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -25561,7 +25561,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_flow
+  int16_t new_max_flow
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -25574,7 +25574,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_flow(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_flow,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_max_flow_undefine_reported(
@@ -26093,7 +26093,7 @@ bool dotdot_is_supported_pump_configuration_and_control_min_const_speed(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_min_const_speed(
+int16_t dotdot_get_pump_configuration_and_control_min_const_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -26104,7 +26104,7 @@ uint16_t dotdot_get_pump_configuration_and_control_min_const_speed(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -26116,7 +26116,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_min_const_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_const_speed
+  int16_t new_min_const_speed
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -26129,7 +26129,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_min_const_speed(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_const_speed,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_min_const_speed_undefine_reported(
@@ -26204,7 +26204,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_const_speed(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_max_const_speed(
+int16_t dotdot_get_pump_configuration_and_control_max_const_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -26215,7 +26215,7 @@ uint16_t dotdot_get_pump_configuration_and_control_max_const_speed(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -26227,7 +26227,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_const_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_const_speed
+  int16_t new_max_const_speed
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -26240,7 +26240,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_const_speed(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_const_speed,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_max_const_speed_undefine_reported(
@@ -26315,7 +26315,7 @@ bool dotdot_is_supported_pump_configuration_and_control_min_const_flow(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_min_const_flow(
+int16_t dotdot_get_pump_configuration_and_control_min_const_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -26326,7 +26326,7 @@ uint16_t dotdot_get_pump_configuration_and_control_min_const_flow(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -26338,7 +26338,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_min_const_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_const_flow
+  int16_t new_min_const_flow
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -26351,7 +26351,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_min_const_flow(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_const_flow,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_min_const_flow_undefine_reported(
@@ -26426,7 +26426,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_const_flow(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_max_const_flow(
+int16_t dotdot_get_pump_configuration_and_control_max_const_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -26437,7 +26437,7 @@ uint16_t dotdot_get_pump_configuration_and_control_max_const_flow(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -26449,7 +26449,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_const_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_const_flow
+  int16_t new_max_const_flow
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -26462,7 +26462,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_const_flow(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_const_flow,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_max_const_flow_undefine_reported(
@@ -27203,7 +27203,7 @@ bool dotdot_is_supported_pump_configuration_and_control_speed(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pump_configuration_and_control_speed(
+int16_t dotdot_get_pump_configuration_and_control_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -27214,7 +27214,7 @@ uint16_t dotdot_get_pump_configuration_and_control_speed(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_SPEED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -27226,7 +27226,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_speed
+  int16_t new_speed
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -27239,7 +27239,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_speed(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_speed,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_speed_undefine_reported(
@@ -27314,7 +27314,7 @@ bool dotdot_is_supported_pump_configuration_and_control_lifetime_running_hours(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_pump_configuration_and_control_lifetime_running_hours(
+int32_t dotdot_get_pump_configuration_and_control_lifetime_running_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -27325,7 +27325,7 @@ uint32_t dotdot_get_pump_configuration_and_control_lifetime_running_hours(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -27337,7 +27337,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_lifetime_running_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_lifetime_running_hours
+  int32_t new_lifetime_running_hours
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -27350,7 +27350,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_lifetime_running_hours(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_lifetime_running_hours,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_lifetime_running_hours_undefine_reported(
@@ -27425,7 +27425,7 @@ bool dotdot_is_supported_pump_configuration_and_control_power(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_pump_configuration_and_control_power(
+int32_t dotdot_get_pump_configuration_and_control_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -27436,7 +27436,7 @@ uint32_t dotdot_get_pump_configuration_and_control_power(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_POWER);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -27448,7 +27448,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_power
+  int32_t new_power
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -27461,7 +27461,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_power(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_power,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_power_undefine_reported(
@@ -27536,7 +27536,7 @@ bool dotdot_is_supported_pump_configuration_and_control_lifetime_energy_consumed
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_pump_configuration_and_control_lifetime_energy_consumed(
+int32_t dotdot_get_pump_configuration_and_control_lifetime_energy_consumed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -27547,7 +27547,7 @@ uint32_t dotdot_get_pump_configuration_and_control_lifetime_energy_consumed(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -27559,7 +27559,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_lifetime_energy_consumed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_lifetime_energy_consumed
+  int32_t new_lifetime_energy_consumed
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -27572,7 +27572,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_lifetime_energy_consumed(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_lifetime_energy_consumed,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_pump_configuration_and_control_lifetime_energy_consumed_undefine_reported(
@@ -28860,7 +28860,7 @@ bool dotdot_is_supported_thermostat_pi_cooling_demand(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_pi_cooling_demand(
+int8_t dotdot_get_thermostat_pi_cooling_demand(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -28871,7 +28871,7 @@ uint8_t dotdot_get_thermostat_pi_cooling_demand(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_COOLING_DEMAND);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -28883,7 +28883,7 @@ sl_status_t dotdot_set_thermostat_pi_cooling_demand(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_pi_cooling_demand
+  int8_t new_pi_cooling_demand
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -28896,7 +28896,7 @@ sl_status_t dotdot_set_thermostat_pi_cooling_demand(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_pi_cooling_demand,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_pi_cooling_demand_undefine_reported(
@@ -28971,7 +28971,7 @@ bool dotdot_is_supported_thermostat_pi_heating_demand(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_pi_heating_demand(
+int8_t dotdot_get_thermostat_pi_heating_demand(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -28982,7 +28982,7 @@ uint8_t dotdot_get_thermostat_pi_heating_demand(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_HEATING_DEMAND);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -28994,7 +28994,7 @@ sl_status_t dotdot_set_thermostat_pi_heating_demand(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_pi_heating_demand
+  int8_t new_pi_heating_demand
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -29007,7 +29007,7 @@ sl_status_t dotdot_set_thermostat_pi_heating_demand(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_pi_heating_demand,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_pi_heating_demand_undefine_reported(
@@ -30969,7 +30969,7 @@ bool dotdot_is_supported_thermostat_number_of_weekly_transitions(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_number_of_weekly_transitions(
+int8_t dotdot_get_thermostat_number_of_weekly_transitions(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -30980,7 +30980,7 @@ uint8_t dotdot_get_thermostat_number_of_weekly_transitions(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -30992,7 +30992,7 @@ sl_status_t dotdot_set_thermostat_number_of_weekly_transitions(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_weekly_transitions
+  int8_t new_number_of_weekly_transitions
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -31005,7 +31005,7 @@ sl_status_t dotdot_set_thermostat_number_of_weekly_transitions(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_weekly_transitions,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_number_of_weekly_transitions_undefine_reported(
@@ -31080,7 +31080,7 @@ bool dotdot_is_supported_thermostat_number_of_daily_transitions(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_number_of_daily_transitions(
+int8_t dotdot_get_thermostat_number_of_daily_transitions(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -31091,7 +31091,7 @@ uint8_t dotdot_get_thermostat_number_of_daily_transitions(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -31103,7 +31103,7 @@ sl_status_t dotdot_set_thermostat_number_of_daily_transitions(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_daily_transitions
+  int8_t new_number_of_daily_transitions
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -31116,7 +31116,7 @@ sl_status_t dotdot_set_thermostat_number_of_daily_transitions(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_daily_transitions,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_number_of_daily_transitions_undefine_reported(
@@ -31302,7 +31302,7 @@ bool dotdot_is_supported_thermostat_temperature_setpoint_hold_duration(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_thermostat_temperature_setpoint_hold_duration(
+int16_t dotdot_get_thermostat_temperature_setpoint_hold_duration(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -31313,7 +31313,7 @@ uint16_t dotdot_get_thermostat_temperature_setpoint_hold_duration(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -31325,7 +31325,7 @@ sl_status_t dotdot_set_thermostat_temperature_setpoint_hold_duration(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_temperature_setpoint_hold_duration
+  int16_t new_temperature_setpoint_hold_duration
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -31338,7 +31338,7 @@ sl_status_t dotdot_set_thermostat_temperature_setpoint_hold_duration(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_temperature_setpoint_hold_duration,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_thermostat_temperature_setpoint_hold_duration_undefine_reported(
@@ -31857,7 +31857,7 @@ bool dotdot_is_supported_thermostat_setpoint_change_source_timestamp(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_thermostat_setpoint_change_source_timestamp(
+uint8_t dotdot_get_thermostat_setpoint_change_source_timestamp(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -31868,7 +31868,7 @@ uint32_t dotdot_get_thermostat_setpoint_change_source_timestamp(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -31880,7 +31880,7 @@ sl_status_t dotdot_set_thermostat_setpoint_change_source_timestamp(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_setpoint_change_source_timestamp
+  uint8_t new_setpoint_change_source_timestamp
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -31893,7 +31893,7 @@ sl_status_t dotdot_set_thermostat_setpoint_change_source_timestamp(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_setpoint_change_source_timestamp,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_thermostat_setpoint_change_source_timestamp_undefine_reported(
@@ -31968,7 +31968,7 @@ bool dotdot_is_supported_thermostat_occupied_setback(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_occupied_setback(
+int8_t dotdot_get_thermostat_occupied_setback(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -31979,7 +31979,7 @@ uint8_t dotdot_get_thermostat_occupied_setback(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -31991,7 +31991,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_occupied_setback
+  int8_t new_occupied_setback
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32004,7 +32004,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_occupied_setback,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_occupied_setback_undefine_reported(
@@ -32079,7 +32079,7 @@ bool dotdot_is_supported_thermostat_occupied_setback_min(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_occupied_setback_min(
+int8_t dotdot_get_thermostat_occupied_setback_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32090,7 +32090,7 @@ uint8_t dotdot_get_thermostat_occupied_setback_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MIN);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32102,7 +32102,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_occupied_setback_min
+  int8_t new_occupied_setback_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32115,7 +32115,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_occupied_setback_min,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_occupied_setback_min_undefine_reported(
@@ -32190,7 +32190,7 @@ bool dotdot_is_supported_thermostat_occupied_setback_max(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_occupied_setback_max(
+int8_t dotdot_get_thermostat_occupied_setback_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32201,7 +32201,7 @@ uint8_t dotdot_get_thermostat_occupied_setback_max(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MAX);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32213,7 +32213,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_occupied_setback_max
+  int8_t new_occupied_setback_max
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32226,7 +32226,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback_max(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_occupied_setback_max,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_occupied_setback_max_undefine_reported(
@@ -32301,7 +32301,7 @@ bool dotdot_is_supported_thermostat_unoccupied_setback(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_unoccupied_setback(
+int8_t dotdot_get_thermostat_unoccupied_setback(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32312,7 +32312,7 @@ uint8_t dotdot_get_thermostat_unoccupied_setback(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32324,7 +32324,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_unoccupied_setback
+  int8_t new_unoccupied_setback
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32337,7 +32337,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_unoccupied_setback,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_unoccupied_setback_undefine_reported(
@@ -32412,7 +32412,7 @@ bool dotdot_is_supported_thermostat_unoccupied_setback_min(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_unoccupied_setback_min(
+int8_t dotdot_get_thermostat_unoccupied_setback_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32423,7 +32423,7 @@ uint8_t dotdot_get_thermostat_unoccupied_setback_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MIN);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32435,7 +32435,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_unoccupied_setback_min
+  int8_t new_unoccupied_setback_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32448,7 +32448,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_unoccupied_setback_min,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_unoccupied_setback_min_undefine_reported(
@@ -32523,7 +32523,7 @@ bool dotdot_is_supported_thermostat_unoccupied_setback_max(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_unoccupied_setback_max(
+int8_t dotdot_get_thermostat_unoccupied_setback_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32534,7 +32534,7 @@ uint8_t dotdot_get_thermostat_unoccupied_setback_max(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MAX);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32546,7 +32546,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_unoccupied_setback_max
+  int8_t new_unoccupied_setback_max
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32559,7 +32559,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback_max(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_unoccupied_setback_max,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_unoccupied_setback_max_undefine_reported(
@@ -32634,7 +32634,7 @@ bool dotdot_is_supported_thermostat_emergency_heat_delta(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_thermostat_emergency_heat_delta(
+int8_t dotdot_get_thermostat_emergency_heat_delta(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32645,7 +32645,7 @@ uint8_t dotdot_get_thermostat_emergency_heat_delta(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_EMERGENCY_HEAT_DELTA);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32657,7 +32657,7 @@ sl_status_t dotdot_set_thermostat_emergency_heat_delta(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_emergency_heat_delta
+  int8_t new_emergency_heat_delta
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32670,7 +32670,7 @@ sl_status_t dotdot_set_thermostat_emergency_heat_delta(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_emergency_heat_delta,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_thermostat_emergency_heat_delta_undefine_reported(
@@ -32856,7 +32856,7 @@ bool dotdot_is_supported_thermostat_ac_capacity(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_thermostat_ac_capacity(
+int16_t dotdot_get_thermostat_ac_capacity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -32867,7 +32867,7 @@ uint16_t dotdot_get_thermostat_ac_capacity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -32879,7 +32879,7 @@ sl_status_t dotdot_set_thermostat_ac_capacity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_capacity
+  int16_t new_ac_capacity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -32892,7 +32892,7 @@ sl_status_t dotdot_set_thermostat_ac_capacity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_capacity,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_thermostat_ac_capacity_undefine_reported(
@@ -34136,7 +34136,7 @@ bool dotdot_is_supported_dehumidification_control_relative_humidity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_dehumidification_control_relative_humidity(
+int8_t dotdot_get_dehumidification_control_relative_humidity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -34147,7 +34147,7 @@ uint8_t dotdot_get_dehumidification_control_relative_humidity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -34159,7 +34159,7 @@ sl_status_t dotdot_set_dehumidification_control_relative_humidity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_relative_humidity
+  int8_t new_relative_humidity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -34172,7 +34172,7 @@ sl_status_t dotdot_set_dehumidification_control_relative_humidity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_relative_humidity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_dehumidification_control_relative_humidity_undefine_reported(
@@ -34247,7 +34247,7 @@ bool dotdot_is_supported_dehumidification_control_dehumidification_cooling(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_dehumidification_control_dehumidification_cooling(
+int8_t dotdot_get_dehumidification_control_dehumidification_cooling(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -34258,7 +34258,7 @@ uint8_t dotdot_get_dehumidification_control_dehumidification_cooling(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -34270,7 +34270,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_cooling(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_dehumidification_cooling
+  int8_t new_dehumidification_cooling
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -34283,7 +34283,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_cooling(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dehumidification_cooling,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_dehumidification_control_dehumidification_cooling_undefine_reported(
@@ -34358,7 +34358,7 @@ bool dotdot_is_supported_dehumidification_control_rh_dehumidification_setpoint(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_dehumidification_control_rh_dehumidification_setpoint(
+int8_t dotdot_get_dehumidification_control_rh_dehumidification_setpoint(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -34369,7 +34369,7 @@ uint8_t dotdot_get_dehumidification_control_rh_dehumidification_setpoint(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -34381,7 +34381,7 @@ sl_status_t dotdot_set_dehumidification_control_rh_dehumidification_setpoint(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_rh_dehumidification_setpoint
+  int8_t new_rh_dehumidification_setpoint
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -34394,7 +34394,7 @@ sl_status_t dotdot_set_dehumidification_control_rh_dehumidification_setpoint(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rh_dehumidification_setpoint,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_dehumidification_control_rh_dehumidification_setpoint_undefine_reported(
@@ -34691,7 +34691,7 @@ bool dotdot_is_supported_dehumidification_control_dehumidification_hysteresis(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_dehumidification_control_dehumidification_hysteresis(
+int8_t dotdot_get_dehumidification_control_dehumidification_hysteresis(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -34702,7 +34702,7 @@ uint8_t dotdot_get_dehumidification_control_dehumidification_hysteresis(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -34714,7 +34714,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_hysteresis(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_dehumidification_hysteresis
+  int8_t new_dehumidification_hysteresis
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -34727,7 +34727,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_hysteresis(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dehumidification_hysteresis,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_dehumidification_control_dehumidification_hysteresis_undefine_reported(
@@ -34802,7 +34802,7 @@ bool dotdot_is_supported_dehumidification_control_dehumidification_max_cool(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_dehumidification_control_dehumidification_max_cool(
+int8_t dotdot_get_dehumidification_control_dehumidification_max_cool(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -34813,7 +34813,7 @@ uint8_t dotdot_get_dehumidification_control_dehumidification_max_cool(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -34825,7 +34825,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_max_cool(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_dehumidification_max_cool
+  int8_t new_dehumidification_max_cool
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -34838,7 +34838,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_max_cool(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dehumidification_max_cool,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_dehumidification_control_dehumidification_max_cool_undefine_reported(
@@ -35455,7 +35455,7 @@ bool dotdot_is_supported_color_control_current_hue(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_current_hue(
+int8_t dotdot_get_color_control_current_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -35466,7 +35466,7 @@ uint8_t dotdot_get_color_control_current_hue(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_HUE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -35478,7 +35478,7 @@ sl_status_t dotdot_set_color_control_current_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_hue
+  int8_t new_current_hue
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -35491,7 +35491,7 @@ sl_status_t dotdot_set_color_control_current_hue(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_hue,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_current_hue_undefine_reported(
@@ -35566,7 +35566,7 @@ bool dotdot_is_supported_color_control_current_saturation(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_current_saturation(
+int8_t dotdot_get_color_control_current_saturation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -35577,7 +35577,7 @@ uint8_t dotdot_get_color_control_current_saturation(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_SATURATION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -35589,7 +35589,7 @@ sl_status_t dotdot_set_color_control_current_saturation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_saturation
+  int8_t new_current_saturation
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -35602,7 +35602,7 @@ sl_status_t dotdot_set_color_control_current_saturation(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_saturation,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_current_saturation_undefine_reported(
@@ -35677,7 +35677,7 @@ bool dotdot_is_supported_color_control_remaining_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_remaining_time(
+int16_t dotdot_get_color_control_remaining_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -35688,7 +35688,7 @@ uint16_t dotdot_get_color_control_remaining_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_REMAINING_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -35700,7 +35700,7 @@ sl_status_t dotdot_set_color_control_remaining_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_remaining_time
+  int16_t new_remaining_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -35713,7 +35713,7 @@ sl_status_t dotdot_set_color_control_remaining_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_remaining_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_remaining_time_undefine_reported(
@@ -35788,7 +35788,7 @@ bool dotdot_is_supported_color_control_currentx(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_currentx(
+int16_t dotdot_get_color_control_currentx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -35799,7 +35799,7 @@ uint16_t dotdot_get_color_control_currentx(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -35811,7 +35811,7 @@ sl_status_t dotdot_set_color_control_currentx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_currentx
+  int16_t new_currentx
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -35824,7 +35824,7 @@ sl_status_t dotdot_set_color_control_currentx(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_currentx,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_currentx_undefine_reported(
@@ -35899,7 +35899,7 @@ bool dotdot_is_supported_color_control_currenty(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_currenty(
+int16_t dotdot_get_color_control_currenty(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -35910,7 +35910,7 @@ uint16_t dotdot_get_color_control_currenty(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -35922,7 +35922,7 @@ sl_status_t dotdot_set_color_control_currenty(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_currenty
+  int16_t new_currenty
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -35935,7 +35935,7 @@ sl_status_t dotdot_set_color_control_currenty(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_currenty,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_currenty_undefine_reported(
@@ -36233,7 +36233,7 @@ bool dotdot_is_supported_color_control_color_temperature_mireds(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_temperature_mireds(
+int16_t dotdot_get_color_control_color_temperature_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -36244,7 +36244,7 @@ uint16_t dotdot_get_color_control_color_temperature_mireds(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -36256,7 +36256,7 @@ sl_status_t dotdot_set_color_control_color_temperature_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_temperature_mireds
+  int16_t new_color_temperature_mireds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -36269,7 +36269,7 @@ sl_status_t dotdot_set_color_control_color_temperature_mireds(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_temperature_mireds,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_temperature_mireds_undefine_reported(
@@ -36566,7 +36566,7 @@ bool dotdot_is_supported_color_control_number_of_primaries(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_number_of_primaries(
+int8_t dotdot_get_color_control_number_of_primaries(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -36577,7 +36577,7 @@ uint8_t dotdot_get_color_control_number_of_primaries(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_NUMBER_OF_PRIMARIES);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -36589,7 +36589,7 @@ sl_status_t dotdot_set_color_control_number_of_primaries(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_primaries
+  int8_t new_number_of_primaries
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -36602,7 +36602,7 @@ sl_status_t dotdot_set_color_control_number_of_primaries(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_primaries,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_number_of_primaries_undefine_reported(
@@ -36677,7 +36677,7 @@ bool dotdot_is_supported_color_control_primary1x(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary1x(
+int16_t dotdot_get_color_control_primary1x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -36688,7 +36688,7 @@ uint16_t dotdot_get_color_control_primary1x(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1X);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -36700,7 +36700,7 @@ sl_status_t dotdot_set_color_control_primary1x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary1x
+  int16_t new_primary1x
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -36713,7 +36713,7 @@ sl_status_t dotdot_set_color_control_primary1x(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary1x,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary1x_undefine_reported(
@@ -36788,7 +36788,7 @@ bool dotdot_is_supported_color_control_primary1y(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary1y(
+int16_t dotdot_get_color_control_primary1y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -36799,7 +36799,7 @@ uint16_t dotdot_get_color_control_primary1y(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1Y);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -36811,7 +36811,7 @@ sl_status_t dotdot_set_color_control_primary1y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary1y
+  int16_t new_primary1y
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -36824,7 +36824,7 @@ sl_status_t dotdot_set_color_control_primary1y(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary1y,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary1y_undefine_reported(
@@ -36899,7 +36899,7 @@ bool dotdot_is_supported_color_control_primary1_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_primary1_intensity(
+int8_t dotdot_get_color_control_primary1_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -36910,7 +36910,7 @@ uint8_t dotdot_get_color_control_primary1_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -36922,7 +36922,7 @@ sl_status_t dotdot_set_color_control_primary1_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_primary1_intensity
+  int8_t new_primary1_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -36935,7 +36935,7 @@ sl_status_t dotdot_set_color_control_primary1_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary1_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_primary1_intensity_undefine_reported(
@@ -37010,7 +37010,7 @@ bool dotdot_is_supported_color_control_primary2x(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary2x(
+int16_t dotdot_get_color_control_primary2x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37021,7 +37021,7 @@ uint16_t dotdot_get_color_control_primary2x(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2X);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37033,7 +37033,7 @@ sl_status_t dotdot_set_color_control_primary2x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary2x
+  int16_t new_primary2x
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37046,7 +37046,7 @@ sl_status_t dotdot_set_color_control_primary2x(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary2x,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary2x_undefine_reported(
@@ -37121,7 +37121,7 @@ bool dotdot_is_supported_color_control_primary2y(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary2y(
+int16_t dotdot_get_color_control_primary2y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37132,7 +37132,7 @@ uint16_t dotdot_get_color_control_primary2y(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2Y);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37144,7 +37144,7 @@ sl_status_t dotdot_set_color_control_primary2y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary2y
+  int16_t new_primary2y
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37157,7 +37157,7 @@ sl_status_t dotdot_set_color_control_primary2y(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary2y,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary2y_undefine_reported(
@@ -37232,7 +37232,7 @@ bool dotdot_is_supported_color_control_primary2_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_primary2_intensity(
+int8_t dotdot_get_color_control_primary2_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37243,7 +37243,7 @@ uint8_t dotdot_get_color_control_primary2_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37255,7 +37255,7 @@ sl_status_t dotdot_set_color_control_primary2_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_primary2_intensity
+  int8_t new_primary2_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37268,7 +37268,7 @@ sl_status_t dotdot_set_color_control_primary2_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary2_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_primary2_intensity_undefine_reported(
@@ -37343,7 +37343,7 @@ bool dotdot_is_supported_color_control_primary3x(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary3x(
+int16_t dotdot_get_color_control_primary3x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37354,7 +37354,7 @@ uint16_t dotdot_get_color_control_primary3x(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3X);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37366,7 +37366,7 @@ sl_status_t dotdot_set_color_control_primary3x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary3x
+  int16_t new_primary3x
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37379,7 +37379,7 @@ sl_status_t dotdot_set_color_control_primary3x(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary3x,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary3x_undefine_reported(
@@ -37454,7 +37454,7 @@ bool dotdot_is_supported_color_control_primary3y(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary3y(
+int16_t dotdot_get_color_control_primary3y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37465,7 +37465,7 @@ uint16_t dotdot_get_color_control_primary3y(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3Y);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37477,7 +37477,7 @@ sl_status_t dotdot_set_color_control_primary3y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary3y
+  int16_t new_primary3y
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37490,7 +37490,7 @@ sl_status_t dotdot_set_color_control_primary3y(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary3y,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary3y_undefine_reported(
@@ -37565,7 +37565,7 @@ bool dotdot_is_supported_color_control_primary3_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_primary3_intensity(
+int8_t dotdot_get_color_control_primary3_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37576,7 +37576,7 @@ uint8_t dotdot_get_color_control_primary3_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37588,7 +37588,7 @@ sl_status_t dotdot_set_color_control_primary3_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_primary3_intensity
+  int8_t new_primary3_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37601,7 +37601,7 @@ sl_status_t dotdot_set_color_control_primary3_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary3_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_primary3_intensity_undefine_reported(
@@ -37676,7 +37676,7 @@ bool dotdot_is_supported_color_control_primary4x(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary4x(
+int16_t dotdot_get_color_control_primary4x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37687,7 +37687,7 @@ uint16_t dotdot_get_color_control_primary4x(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4X);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37699,7 +37699,7 @@ sl_status_t dotdot_set_color_control_primary4x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary4x
+  int16_t new_primary4x
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37712,7 +37712,7 @@ sl_status_t dotdot_set_color_control_primary4x(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary4x,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary4x_undefine_reported(
@@ -37787,7 +37787,7 @@ bool dotdot_is_supported_color_control_primary4y(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary4y(
+int16_t dotdot_get_color_control_primary4y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37798,7 +37798,7 @@ uint16_t dotdot_get_color_control_primary4y(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4Y);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37810,7 +37810,7 @@ sl_status_t dotdot_set_color_control_primary4y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary4y
+  int16_t new_primary4y
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37823,7 +37823,7 @@ sl_status_t dotdot_set_color_control_primary4y(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary4y,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary4y_undefine_reported(
@@ -37898,7 +37898,7 @@ bool dotdot_is_supported_color_control_primary4_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_primary4_intensity(
+int8_t dotdot_get_color_control_primary4_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -37909,7 +37909,7 @@ uint8_t dotdot_get_color_control_primary4_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -37921,7 +37921,7 @@ sl_status_t dotdot_set_color_control_primary4_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_primary4_intensity
+  int8_t new_primary4_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -37934,7 +37934,7 @@ sl_status_t dotdot_set_color_control_primary4_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary4_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_primary4_intensity_undefine_reported(
@@ -38009,7 +38009,7 @@ bool dotdot_is_supported_color_control_primary5x(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary5x(
+int16_t dotdot_get_color_control_primary5x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38020,7 +38020,7 @@ uint16_t dotdot_get_color_control_primary5x(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5X);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38032,7 +38032,7 @@ sl_status_t dotdot_set_color_control_primary5x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary5x
+  int16_t new_primary5x
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38045,7 +38045,7 @@ sl_status_t dotdot_set_color_control_primary5x(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary5x,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary5x_undefine_reported(
@@ -38120,7 +38120,7 @@ bool dotdot_is_supported_color_control_primary5y(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary5y(
+int16_t dotdot_get_color_control_primary5y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38131,7 +38131,7 @@ uint16_t dotdot_get_color_control_primary5y(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5Y);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38143,7 +38143,7 @@ sl_status_t dotdot_set_color_control_primary5y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary5y
+  int16_t new_primary5y
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38156,7 +38156,7 @@ sl_status_t dotdot_set_color_control_primary5y(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary5y,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary5y_undefine_reported(
@@ -38231,7 +38231,7 @@ bool dotdot_is_supported_color_control_primary5_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_primary5_intensity(
+int8_t dotdot_get_color_control_primary5_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38242,7 +38242,7 @@ uint8_t dotdot_get_color_control_primary5_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38254,7 +38254,7 @@ sl_status_t dotdot_set_color_control_primary5_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_primary5_intensity
+  int8_t new_primary5_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38267,7 +38267,7 @@ sl_status_t dotdot_set_color_control_primary5_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary5_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_primary5_intensity_undefine_reported(
@@ -38342,7 +38342,7 @@ bool dotdot_is_supported_color_control_primary6x(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary6x(
+int16_t dotdot_get_color_control_primary6x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38353,7 +38353,7 @@ uint16_t dotdot_get_color_control_primary6x(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6X);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38365,7 +38365,7 @@ sl_status_t dotdot_set_color_control_primary6x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary6x
+  int16_t new_primary6x
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38378,7 +38378,7 @@ sl_status_t dotdot_set_color_control_primary6x(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary6x,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary6x_undefine_reported(
@@ -38453,7 +38453,7 @@ bool dotdot_is_supported_color_control_primary6y(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_primary6y(
+int16_t dotdot_get_color_control_primary6y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38464,7 +38464,7 @@ uint16_t dotdot_get_color_control_primary6y(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6Y);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38476,7 +38476,7 @@ sl_status_t dotdot_set_color_control_primary6y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_primary6y
+  int16_t new_primary6y
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38489,7 +38489,7 @@ sl_status_t dotdot_set_color_control_primary6y(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary6y,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_primary6y_undefine_reported(
@@ -38564,7 +38564,7 @@ bool dotdot_is_supported_color_control_primary6_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_primary6_intensity(
+int8_t dotdot_get_color_control_primary6_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38575,7 +38575,7 @@ uint8_t dotdot_get_color_control_primary6_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38587,7 +38587,7 @@ sl_status_t dotdot_set_color_control_primary6_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_primary6_intensity
+  int8_t new_primary6_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38600,7 +38600,7 @@ sl_status_t dotdot_set_color_control_primary6_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_primary6_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_primary6_intensity_undefine_reported(
@@ -38675,7 +38675,7 @@ bool dotdot_is_supported_color_control_white_pointx(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_white_pointx(
+int16_t dotdot_get_color_control_white_pointx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38686,7 +38686,7 @@ uint16_t dotdot_get_color_control_white_pointx(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38698,7 +38698,7 @@ sl_status_t dotdot_set_color_control_white_pointx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_white_pointx
+  int16_t new_white_pointx
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38711,7 +38711,7 @@ sl_status_t dotdot_set_color_control_white_pointx(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_white_pointx,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_white_pointx_undefine_reported(
@@ -38786,7 +38786,7 @@ bool dotdot_is_supported_color_control_white_pointy(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_white_pointy(
+int16_t dotdot_get_color_control_white_pointy(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38797,7 +38797,7 @@ uint16_t dotdot_get_color_control_white_pointy(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38809,7 +38809,7 @@ sl_status_t dotdot_set_color_control_white_pointy(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_white_pointy
+  int16_t new_white_pointy
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38822,7 +38822,7 @@ sl_status_t dotdot_set_color_control_white_pointy(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_white_pointy,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_white_pointy_undefine_reported(
@@ -38897,7 +38897,7 @@ bool dotdot_is_supported_color_control_color_pointrx(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_pointrx(
+int16_t dotdot_get_color_control_color_pointrx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -38908,7 +38908,7 @@ uint16_t dotdot_get_color_control_color_pointrx(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -38920,7 +38920,7 @@ sl_status_t dotdot_set_color_control_color_pointrx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_pointrx
+  int16_t new_color_pointrx
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -38933,7 +38933,7 @@ sl_status_t dotdot_set_color_control_color_pointrx(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointrx,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_pointrx_undefine_reported(
@@ -39008,7 +39008,7 @@ bool dotdot_is_supported_color_control_color_pointry(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_pointry(
+int16_t dotdot_get_color_control_color_pointry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39019,7 +39019,7 @@ uint16_t dotdot_get_color_control_color_pointry(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39031,7 +39031,7 @@ sl_status_t dotdot_set_color_control_color_pointry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_pointry
+  int16_t new_color_pointry
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39044,7 +39044,7 @@ sl_status_t dotdot_set_color_control_color_pointry(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointry,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_pointry_undefine_reported(
@@ -39119,7 +39119,7 @@ bool dotdot_is_supported_color_control_color_pointr_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_color_pointr_intensity(
+int8_t dotdot_get_color_control_color_pointr_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39130,7 +39130,7 @@ uint8_t dotdot_get_color_control_color_pointr_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTR_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39142,7 +39142,7 @@ sl_status_t dotdot_set_color_control_color_pointr_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_color_pointr_intensity
+  int8_t new_color_pointr_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39155,7 +39155,7 @@ sl_status_t dotdot_set_color_control_color_pointr_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointr_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_color_pointr_intensity_undefine_reported(
@@ -39230,7 +39230,7 @@ bool dotdot_is_supported_color_control_color_pointgx(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_pointgx(
+int16_t dotdot_get_color_control_color_pointgx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39241,7 +39241,7 @@ uint16_t dotdot_get_color_control_color_pointgx(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39253,7 +39253,7 @@ sl_status_t dotdot_set_color_control_color_pointgx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_pointgx
+  int16_t new_color_pointgx
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39266,7 +39266,7 @@ sl_status_t dotdot_set_color_control_color_pointgx(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointgx,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_pointgx_undefine_reported(
@@ -39341,7 +39341,7 @@ bool dotdot_is_supported_color_control_color_pointgy(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_pointgy(
+int16_t dotdot_get_color_control_color_pointgy(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39352,7 +39352,7 @@ uint16_t dotdot_get_color_control_color_pointgy(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39364,7 +39364,7 @@ sl_status_t dotdot_set_color_control_color_pointgy(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_pointgy
+  int16_t new_color_pointgy
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39377,7 +39377,7 @@ sl_status_t dotdot_set_color_control_color_pointgy(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointgy,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_pointgy_undefine_reported(
@@ -39452,7 +39452,7 @@ bool dotdot_is_supported_color_control_color_pointg_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_color_pointg_intensity(
+int8_t dotdot_get_color_control_color_pointg_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39463,7 +39463,7 @@ uint8_t dotdot_get_color_control_color_pointg_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTG_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39475,7 +39475,7 @@ sl_status_t dotdot_set_color_control_color_pointg_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_color_pointg_intensity
+  int8_t new_color_pointg_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39488,7 +39488,7 @@ sl_status_t dotdot_set_color_control_color_pointg_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointg_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_color_pointg_intensity_undefine_reported(
@@ -39563,7 +39563,7 @@ bool dotdot_is_supported_color_control_color_pointbx(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_pointbx(
+int16_t dotdot_get_color_control_color_pointbx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39574,7 +39574,7 @@ uint16_t dotdot_get_color_control_color_pointbx(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39586,7 +39586,7 @@ sl_status_t dotdot_set_color_control_color_pointbx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_pointbx
+  int16_t new_color_pointbx
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39599,7 +39599,7 @@ sl_status_t dotdot_set_color_control_color_pointbx(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointbx,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_pointbx_undefine_reported(
@@ -39674,7 +39674,7 @@ bool dotdot_is_supported_color_control_color_pointby(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_pointby(
+int16_t dotdot_get_color_control_color_pointby(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39685,7 +39685,7 @@ uint16_t dotdot_get_color_control_color_pointby(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39697,7 +39697,7 @@ sl_status_t dotdot_set_color_control_color_pointby(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_pointby
+  int16_t new_color_pointby
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39710,7 +39710,7 @@ sl_status_t dotdot_set_color_control_color_pointby(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointby,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_pointby_undefine_reported(
@@ -39785,7 +39785,7 @@ bool dotdot_is_supported_color_control_color_pointb_intensity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_color_pointb_intensity(
+int8_t dotdot_get_color_control_color_pointb_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39796,7 +39796,7 @@ uint8_t dotdot_get_color_control_color_pointb_intensity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTB_INTENSITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39808,7 +39808,7 @@ sl_status_t dotdot_set_color_control_color_pointb_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_color_pointb_intensity
+  int8_t new_color_pointb_intensity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39821,7 +39821,7 @@ sl_status_t dotdot_set_color_control_color_pointb_intensity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_pointb_intensity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_color_pointb_intensity_undefine_reported(
@@ -39896,7 +39896,7 @@ bool dotdot_is_supported_color_control_enhanced_current_hue(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_enhanced_current_hue(
+int16_t dotdot_get_color_control_enhanced_current_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -39907,7 +39907,7 @@ uint16_t dotdot_get_color_control_enhanced_current_hue(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_CURRENT_HUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -39919,7 +39919,7 @@ sl_status_t dotdot_set_color_control_enhanced_current_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_enhanced_current_hue
+  int16_t new_enhanced_current_hue
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -39932,7 +39932,7 @@ sl_status_t dotdot_set_color_control_enhanced_current_hue(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_enhanced_current_hue,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_enhanced_current_hue_undefine_reported(
@@ -40118,7 +40118,7 @@ bool dotdot_is_supported_color_control_color_loop_active(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_color_loop_active(
+int8_t dotdot_get_color_control_color_loop_active(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40129,7 +40129,7 @@ uint8_t dotdot_get_color_control_color_loop_active(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_ACTIVE);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40141,7 +40141,7 @@ sl_status_t dotdot_set_color_control_color_loop_active(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_color_loop_active
+  int8_t new_color_loop_active
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40154,7 +40154,7 @@ sl_status_t dotdot_set_color_control_color_loop_active(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_loop_active,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_color_loop_active_undefine_reported(
@@ -40229,7 +40229,7 @@ bool dotdot_is_supported_color_control_color_loop_direction(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_color_control_color_loop_direction(
+int8_t dotdot_get_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40240,7 +40240,7 @@ uint8_t dotdot_get_color_control_color_loop_direction(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40252,7 +40252,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_color_loop_direction
+  int8_t new_color_loop_direction
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40265,7 +40265,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_loop_direction,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_color_control_color_loop_direction_undefine_reported(
@@ -40340,7 +40340,7 @@ bool dotdot_is_supported_color_control_color_loop_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_loop_time(
+int16_t dotdot_get_color_control_color_loop_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40351,7 +40351,7 @@ uint16_t dotdot_get_color_control_color_loop_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40363,7 +40363,7 @@ sl_status_t dotdot_set_color_control_color_loop_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_loop_time
+  int16_t new_color_loop_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40376,7 +40376,7 @@ sl_status_t dotdot_set_color_control_color_loop_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_loop_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_loop_time_undefine_reported(
@@ -40451,7 +40451,7 @@ bool dotdot_is_supported_color_control_color_loop_start_enhanced_hue(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_loop_start_enhanced_hue(
+int16_t dotdot_get_color_control_color_loop_start_enhanced_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40462,7 +40462,7 @@ uint16_t dotdot_get_color_control_color_loop_start_enhanced_hue(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40474,7 +40474,7 @@ sl_status_t dotdot_set_color_control_color_loop_start_enhanced_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_loop_start_enhanced_hue
+  int16_t new_color_loop_start_enhanced_hue
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40487,7 +40487,7 @@ sl_status_t dotdot_set_color_control_color_loop_start_enhanced_hue(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_loop_start_enhanced_hue,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_loop_start_enhanced_hue_undefine_reported(
@@ -40562,7 +40562,7 @@ bool dotdot_is_supported_color_control_color_loop_stored_enhanced_hue(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_loop_stored_enhanced_hue(
+int16_t dotdot_get_color_control_color_loop_stored_enhanced_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40573,7 +40573,7 @@ uint16_t dotdot_get_color_control_color_loop_stored_enhanced_hue(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40585,7 +40585,7 @@ sl_status_t dotdot_set_color_control_color_loop_stored_enhanced_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_loop_stored_enhanced_hue
+  int16_t new_color_loop_stored_enhanced_hue
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40598,7 +40598,7 @@ sl_status_t dotdot_set_color_control_color_loop_stored_enhanced_hue(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_loop_stored_enhanced_hue,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_loop_stored_enhanced_hue_undefine_reported(
@@ -40784,7 +40784,7 @@ bool dotdot_is_supported_color_control_color_temp_physical_min_mireds(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_temp_physical_min_mireds(
+int16_t dotdot_get_color_control_color_temp_physical_min_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40795,7 +40795,7 @@ uint16_t dotdot_get_color_control_color_temp_physical_min_mireds(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40807,7 +40807,7 @@ sl_status_t dotdot_set_color_control_color_temp_physical_min_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_temp_physical_min_mireds
+  int16_t new_color_temp_physical_min_mireds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40820,7 +40820,7 @@ sl_status_t dotdot_set_color_control_color_temp_physical_min_mireds(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_temp_physical_min_mireds,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_temp_physical_min_mireds_undefine_reported(
@@ -40895,7 +40895,7 @@ bool dotdot_is_supported_color_control_color_temp_physical_max_mireds(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_color_temp_physical_max_mireds(
+int16_t dotdot_get_color_control_color_temp_physical_max_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -40906,7 +40906,7 @@ uint16_t dotdot_get_color_control_color_temp_physical_max_mireds(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -40918,7 +40918,7 @@ sl_status_t dotdot_set_color_control_color_temp_physical_max_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_color_temp_physical_max_mireds
+  int16_t new_color_temp_physical_max_mireds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -40931,7 +40931,7 @@ sl_status_t dotdot_set_color_control_color_temp_physical_max_mireds(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_color_temp_physical_max_mireds,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_color_temp_physical_max_mireds_undefine_reported(
@@ -41006,7 +41006,7 @@ bool dotdot_is_supported_color_control_couple_color_temp_to_level_min_mireds(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_couple_color_temp_to_level_min_mireds(
+int16_t dotdot_get_color_control_couple_color_temp_to_level_min_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -41017,7 +41017,7 @@ uint16_t dotdot_get_color_control_couple_color_temp_to_level_min_mireds(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -41029,7 +41029,7 @@ sl_status_t dotdot_set_color_control_couple_color_temp_to_level_min_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_couple_color_temp_to_level_min_mireds
+  int16_t new_couple_color_temp_to_level_min_mireds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -41042,7 +41042,7 @@ sl_status_t dotdot_set_color_control_couple_color_temp_to_level_min_mireds(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_couple_color_temp_to_level_min_mireds,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_couple_color_temp_to_level_min_mireds_undefine_reported(
@@ -41117,7 +41117,7 @@ bool dotdot_is_supported_color_control_start_up_color_temperature_mireds(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_color_control_start_up_color_temperature_mireds(
+int16_t dotdot_get_color_control_start_up_color_temperature_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -41128,7 +41128,7 @@ uint16_t dotdot_get_color_control_start_up_color_temperature_mireds(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -41140,7 +41140,7 @@ sl_status_t dotdot_set_color_control_start_up_color_temperature_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_start_up_color_temperature_mireds
+  int16_t new_start_up_color_temperature_mireds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -41153,7 +41153,7 @@ sl_status_t dotdot_set_color_control_start_up_color_temperature_mireds(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_start_up_color_temperature_mireds,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_color_control_start_up_color_temperature_mireds_undefine_reported(
@@ -41442,7 +41442,7 @@ bool dotdot_is_supported_ballast_configuration_physical_min_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_physical_min_level(
+int8_t dotdot_get_ballast_configuration_physical_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -41453,7 +41453,7 @@ uint8_t dotdot_get_ballast_configuration_physical_min_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -41465,7 +41465,7 @@ sl_status_t dotdot_set_ballast_configuration_physical_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_physical_min_level
+  int8_t new_physical_min_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -41478,7 +41478,7 @@ sl_status_t dotdot_set_ballast_configuration_physical_min_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_min_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_physical_min_level_undefine_reported(
@@ -41553,7 +41553,7 @@ bool dotdot_is_supported_ballast_configuration_physical_max_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_physical_max_level(
+int8_t dotdot_get_ballast_configuration_physical_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -41564,7 +41564,7 @@ uint8_t dotdot_get_ballast_configuration_physical_max_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -41576,7 +41576,7 @@ sl_status_t dotdot_set_ballast_configuration_physical_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_physical_max_level
+  int8_t new_physical_max_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -41589,7 +41589,7 @@ sl_status_t dotdot_set_ballast_configuration_physical_max_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_max_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_physical_max_level_undefine_reported(
@@ -41775,7 +41775,7 @@ bool dotdot_is_supported_ballast_configuration_min_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_min_level(
+int8_t dotdot_get_ballast_configuration_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -41786,7 +41786,7 @@ uint8_t dotdot_get_ballast_configuration_min_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MIN_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -41798,7 +41798,7 @@ sl_status_t dotdot_set_ballast_configuration_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_min_level
+  int8_t new_min_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -41811,7 +41811,7 @@ sl_status_t dotdot_set_ballast_configuration_min_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_min_level_undefine_reported(
@@ -41886,7 +41886,7 @@ bool dotdot_is_supported_ballast_configuration_max_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_max_level(
+int8_t dotdot_get_ballast_configuration_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -41897,7 +41897,7 @@ uint8_t dotdot_get_ballast_configuration_max_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MAX_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -41909,7 +41909,7 @@ sl_status_t dotdot_set_ballast_configuration_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_max_level
+  int8_t new_max_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -41922,7 +41922,7 @@ sl_status_t dotdot_set_ballast_configuration_max_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_max_level_undefine_reported(
@@ -41997,7 +41997,7 @@ bool dotdot_is_supported_ballast_configuration_power_on_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_power_on_level(
+int8_t dotdot_get_ballast_configuration_power_on_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42008,7 +42008,7 @@ uint8_t dotdot_get_ballast_configuration_power_on_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42020,7 +42020,7 @@ sl_status_t dotdot_set_ballast_configuration_power_on_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_power_on_level
+  int8_t new_power_on_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42033,7 +42033,7 @@ sl_status_t dotdot_set_ballast_configuration_power_on_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_power_on_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_power_on_level_undefine_reported(
@@ -42108,7 +42108,7 @@ bool dotdot_is_supported_ballast_configuration_power_on_fade_time(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_ballast_configuration_power_on_fade_time(
+int16_t dotdot_get_ballast_configuration_power_on_fade_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42119,7 +42119,7 @@ uint16_t dotdot_get_ballast_configuration_power_on_fade_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_FADE_TIME);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42131,7 +42131,7 @@ sl_status_t dotdot_set_ballast_configuration_power_on_fade_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_power_on_fade_time
+  int16_t new_power_on_fade_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42144,7 +42144,7 @@ sl_status_t dotdot_set_ballast_configuration_power_on_fade_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_power_on_fade_time,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_ballast_configuration_power_on_fade_time_undefine_reported(
@@ -42219,7 +42219,7 @@ bool dotdot_is_supported_ballast_configuration_intrinsic_ballast_factor(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_intrinsic_ballast_factor(
+int8_t dotdot_get_ballast_configuration_intrinsic_ballast_factor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42230,7 +42230,7 @@ uint8_t dotdot_get_ballast_configuration_intrinsic_ballast_factor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42242,7 +42242,7 @@ sl_status_t dotdot_set_ballast_configuration_intrinsic_ballast_factor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_intrinsic_ballast_factor
+  int8_t new_intrinsic_ballast_factor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42255,7 +42255,7 @@ sl_status_t dotdot_set_ballast_configuration_intrinsic_ballast_factor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_intrinsic_ballast_factor,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_intrinsic_ballast_factor_undefine_reported(
@@ -42330,7 +42330,7 @@ bool dotdot_is_supported_ballast_configuration_ballast_factor_adjustment(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_ballast_factor_adjustment(
+int8_t dotdot_get_ballast_configuration_ballast_factor_adjustment(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42341,7 +42341,7 @@ uint8_t dotdot_get_ballast_configuration_ballast_factor_adjustment(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42353,7 +42353,7 @@ sl_status_t dotdot_set_ballast_configuration_ballast_factor_adjustment(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_ballast_factor_adjustment
+  int8_t new_ballast_factor_adjustment
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42366,7 +42366,7 @@ sl_status_t dotdot_set_ballast_configuration_ballast_factor_adjustment(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ballast_factor_adjustment,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_ballast_factor_adjustment_undefine_reported(
@@ -42441,7 +42441,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_quantity(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ballast_configuration_lamp_quantity(
+int8_t dotdot_get_ballast_configuration_lamp_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42452,7 +42452,7 @@ uint8_t dotdot_get_ballast_configuration_lamp_quantity(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_QUANTITY);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42464,7 +42464,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_lamp_quantity
+  int8_t new_lamp_quantity
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42477,7 +42477,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_quantity(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_lamp_quantity,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ballast_configuration_lamp_quantity_undefine_reported(
@@ -42776,7 +42776,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_rated_hours(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_ballast_configuration_lamp_rated_hours(
+int32_t dotdot_get_ballast_configuration_lamp_rated_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42787,7 +42787,7 @@ uint32_t dotdot_get_ballast_configuration_lamp_rated_hours(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_RATED_HOURS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42799,7 +42799,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_rated_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_lamp_rated_hours
+  int32_t new_lamp_rated_hours
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42812,7 +42812,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_rated_hours(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_lamp_rated_hours,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_ballast_configuration_lamp_rated_hours_undefine_reported(
@@ -42887,7 +42887,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_burn_hours(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_ballast_configuration_lamp_burn_hours(
+int32_t dotdot_get_ballast_configuration_lamp_burn_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -42898,7 +42898,7 @@ uint32_t dotdot_get_ballast_configuration_lamp_burn_hours(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -42910,7 +42910,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_burn_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_lamp_burn_hours
+  int32_t new_lamp_burn_hours
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -42923,7 +42923,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_burn_hours(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_lamp_burn_hours,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_ballast_configuration_lamp_burn_hours_undefine_reported(
@@ -43109,7 +43109,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_burn_hours_trip_point(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_ballast_configuration_lamp_burn_hours_trip_point(
+int32_t dotdot_get_ballast_configuration_lamp_burn_hours_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -43120,7 +43120,7 @@ uint32_t dotdot_get_ballast_configuration_lamp_burn_hours_trip_point(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -43132,7 +43132,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_burn_hours_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_lamp_burn_hours_trip_point
+  int32_t new_lamp_burn_hours_trip_point
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -43145,7 +43145,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_burn_hours_trip_point(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_lamp_burn_hours_trip_point,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_ballast_configuration_lamp_burn_hours_trip_point_undefine_reported(
@@ -43323,7 +43323,7 @@ bool dotdot_is_supported_illuminance_measurement_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_illuminance_measurement_measured_value(
+int16_t dotdot_get_illuminance_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -43334,7 +43334,7 @@ uint16_t dotdot_get_illuminance_measurement_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -43346,7 +43346,7 @@ sl_status_t dotdot_set_illuminance_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -43359,7 +43359,7 @@ sl_status_t dotdot_set_illuminance_measurement_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_illuminance_measurement_measured_value_undefine_reported(
@@ -43434,7 +43434,7 @@ bool dotdot_is_supported_illuminance_measurement_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_illuminance_measurement_min_measured_value(
+int16_t dotdot_get_illuminance_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -43445,7 +43445,7 @@ uint16_t dotdot_get_illuminance_measurement_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -43457,7 +43457,7 @@ sl_status_t dotdot_set_illuminance_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -43470,7 +43470,7 @@ sl_status_t dotdot_set_illuminance_measurement_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_illuminance_measurement_min_measured_value_undefine_reported(
@@ -43545,7 +43545,7 @@ bool dotdot_is_supported_illuminance_measurement_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_illuminance_measurement_max_measured_value(
+int16_t dotdot_get_illuminance_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -43556,7 +43556,7 @@ uint16_t dotdot_get_illuminance_measurement_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -43568,7 +43568,7 @@ sl_status_t dotdot_set_illuminance_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -43581,7 +43581,7 @@ sl_status_t dotdot_set_illuminance_measurement_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_illuminance_measurement_max_measured_value_undefine_reported(
@@ -43656,7 +43656,7 @@ bool dotdot_is_supported_illuminance_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_illuminance_measurement_tolerance(
+int16_t dotdot_get_illuminance_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -43667,7 +43667,7 @@ uint16_t dotdot_get_illuminance_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -43679,7 +43679,7 @@ sl_status_t dotdot_set_illuminance_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -43692,7 +43692,7 @@ sl_status_t dotdot_set_illuminance_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_illuminance_measurement_tolerance_undefine_reported(
@@ -44134,7 +44134,7 @@ bool dotdot_is_supported_illuminance_level_sensing_illuminance_target_level(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_illuminance_level_sensing_illuminance_target_level(
+int16_t dotdot_get_illuminance_level_sensing_illuminance_target_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -44145,7 +44145,7 @@ uint16_t dotdot_get_illuminance_level_sensing_illuminance_target_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -44157,7 +44157,7 @@ sl_status_t dotdot_set_illuminance_level_sensing_illuminance_target_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_illuminance_target_level
+  int16_t new_illuminance_target_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -44170,7 +44170,7 @@ sl_status_t dotdot_set_illuminance_level_sensing_illuminance_target_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_illuminance_target_level,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_illuminance_level_sensing_illuminance_target_level_undefine_reported(
@@ -44609,7 +44609,7 @@ bool dotdot_is_supported_temperature_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_temperature_measurement_tolerance(
+int16_t dotdot_get_temperature_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -44620,7 +44620,7 @@ uint16_t dotdot_get_temperature_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -44632,7 +44632,7 @@ sl_status_t dotdot_set_temperature_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -44645,7 +44645,7 @@ sl_status_t dotdot_set_temperature_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_temperature_measurement_tolerance_undefine_reported(
@@ -45084,7 +45084,7 @@ bool dotdot_is_supported_pressure_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pressure_measurement_tolerance(
+int16_t dotdot_get_pressure_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -45095,7 +45095,7 @@ uint16_t dotdot_get_pressure_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -45107,7 +45107,7 @@ sl_status_t dotdot_set_pressure_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -45120,7 +45120,7 @@ sl_status_t dotdot_set_pressure_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pressure_measurement_tolerance_undefine_reported(
@@ -45528,7 +45528,7 @@ bool dotdot_is_supported_pressure_measurement_scaled_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_pressure_measurement_scaled_tolerance(
+int16_t dotdot_get_pressure_measurement_scaled_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -45539,7 +45539,7 @@ uint16_t dotdot_get_pressure_measurement_scaled_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -45551,7 +45551,7 @@ sl_status_t dotdot_set_pressure_measurement_scaled_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_scaled_tolerance
+  int16_t new_scaled_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -45564,7 +45564,7 @@ sl_status_t dotdot_set_pressure_measurement_scaled_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_scaled_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_pressure_measurement_scaled_tolerance_undefine_reported(
@@ -45796,7 +45796,7 @@ bool dotdot_is_supported_flow_measurement_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_flow_measurement_measured_value(
+int16_t dotdot_get_flow_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -45807,7 +45807,7 @@ uint16_t dotdot_get_flow_measurement_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -45819,7 +45819,7 @@ sl_status_t dotdot_set_flow_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -45832,7 +45832,7 @@ sl_status_t dotdot_set_flow_measurement_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_flow_measurement_measured_value_undefine_reported(
@@ -45907,7 +45907,7 @@ bool dotdot_is_supported_flow_measurement_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_flow_measurement_min_measured_value(
+int16_t dotdot_get_flow_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -45918,7 +45918,7 @@ uint16_t dotdot_get_flow_measurement_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -45930,7 +45930,7 @@ sl_status_t dotdot_set_flow_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -45943,7 +45943,7 @@ sl_status_t dotdot_set_flow_measurement_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_flow_measurement_min_measured_value_undefine_reported(
@@ -46018,7 +46018,7 @@ bool dotdot_is_supported_flow_measurement_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_flow_measurement_max_measured_value(
+int16_t dotdot_get_flow_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -46029,7 +46029,7 @@ uint16_t dotdot_get_flow_measurement_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -46041,7 +46041,7 @@ sl_status_t dotdot_set_flow_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -46054,7 +46054,7 @@ sl_status_t dotdot_set_flow_measurement_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_flow_measurement_max_measured_value_undefine_reported(
@@ -46129,7 +46129,7 @@ bool dotdot_is_supported_flow_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_flow_measurement_tolerance(
+int16_t dotdot_get_flow_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -46140,7 +46140,7 @@ uint16_t dotdot_get_flow_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -46152,7 +46152,7 @@ sl_status_t dotdot_set_flow_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -46165,7 +46165,7 @@ sl_status_t dotdot_set_flow_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_flow_measurement_tolerance_undefine_reported(
@@ -46271,7 +46271,7 @@ bool dotdot_is_supported_relativity_humidity_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_relativity_humidity_measured_value(
+int16_t dotdot_get_relativity_humidity_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -46282,7 +46282,7 @@ uint16_t dotdot_get_relativity_humidity_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -46294,7 +46294,7 @@ sl_status_t dotdot_set_relativity_humidity_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -46307,7 +46307,7 @@ sl_status_t dotdot_set_relativity_humidity_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_relativity_humidity_measured_value_undefine_reported(
@@ -46382,7 +46382,7 @@ bool dotdot_is_supported_relativity_humidity_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_relativity_humidity_min_measured_value(
+int16_t dotdot_get_relativity_humidity_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -46393,7 +46393,7 @@ uint16_t dotdot_get_relativity_humidity_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -46405,7 +46405,7 @@ sl_status_t dotdot_set_relativity_humidity_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -46418,7 +46418,7 @@ sl_status_t dotdot_set_relativity_humidity_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_relativity_humidity_min_measured_value_undefine_reported(
@@ -46493,7 +46493,7 @@ bool dotdot_is_supported_relativity_humidity_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_relativity_humidity_max_measured_value(
+int16_t dotdot_get_relativity_humidity_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -46504,7 +46504,7 @@ uint16_t dotdot_get_relativity_humidity_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -46516,7 +46516,7 @@ sl_status_t dotdot_set_relativity_humidity_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -46529,7 +46529,7 @@ sl_status_t dotdot_set_relativity_humidity_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_relativity_humidity_max_measured_value_undefine_reported(
@@ -46604,7 +46604,7 @@ bool dotdot_is_supported_relativity_humidity_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_relativity_humidity_tolerance(
+int16_t dotdot_get_relativity_humidity_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -46615,7 +46615,7 @@ uint16_t dotdot_get_relativity_humidity_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -46627,7 +46627,7 @@ sl_status_t dotdot_set_relativity_humidity_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -46640,7 +46640,7 @@ sl_status_t dotdot_set_relativity_humidity_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_relativity_humidity_tolerance_undefine_reported(
@@ -47079,7 +47079,7 @@ bool dotdot_is_supported_occupancy_sensing_pir_occupied_to_unoccupied_delay(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_occupancy_sensing_pir_occupied_to_unoccupied_delay(
+int16_t dotdot_get_occupancy_sensing_pir_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47090,7 +47090,7 @@ uint16_t dotdot_get_occupancy_sensing_pir_occupied_to_unoccupied_delay(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47102,7 +47102,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_pir_occupied_to_unoccupied_delay
+  int16_t new_pir_occupied_to_unoccupied_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47115,7 +47115,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_occupied_to_unoccupied_delay(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_pir_occupied_to_unoccupied_delay,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_undefine_reported(
@@ -47190,7 +47190,7 @@ bool dotdot_is_supported_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_delay(
+int16_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47201,7 +47201,7 @@ uint16_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_delay(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47213,7 +47213,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_pir_unoccupied_to_occupied_delay
+  int16_t new_pir_unoccupied_to_occupied_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47226,7 +47226,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_pir_unoccupied_to_occupied_delay,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_undefine_reported(
@@ -47301,7 +47301,7 @@ bool dotdot_is_supported_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
+int8_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47312,7 +47312,7 @@ uint8_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47324,7 +47324,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_pir_unoccupied_to_occupied_threshold
+  int8_t new_pir_unoccupied_to_occupied_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47337,7 +47337,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_pir_unoccupied_to_occupied_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_undefine_reported(
@@ -47412,7 +47412,7 @@ bool dotdot_is_supported_occupancy_sensing_ultrasonic_occupied_to_unoccupied_del
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay(
+int16_t dotdot_get_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47423,7 +47423,7 @@ uint16_t dotdot_get_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47435,7 +47435,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ultrasonic_occupied_to_unoccupied_delay
+  int16_t new_ultrasonic_occupied_to_unoccupied_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47448,7 +47448,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ultrasonic_occupied_to_unoccupied_delay,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_undefine_reported(
@@ -47523,7 +47523,7 @@ bool dotdot_is_supported_occupancy_sensing_ultrasonic_unoccupied_to_occupied_del
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay(
+int16_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47534,7 +47534,7 @@ uint16_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47546,7 +47546,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ultrasonic_unoccupied_to_occupied_delay
+  int16_t new_ultrasonic_unoccupied_to_occupied_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47559,7 +47559,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ultrasonic_unoccupied_to_occupied_delay,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_undefine_reported(
@@ -47634,7 +47634,7 @@ bool dotdot_is_supported_occupancy_sensing_ultrasonic_unoccupied_to_occupied_thr
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold(
+int8_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47645,7 +47645,7 @@ uint8_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47657,7 +47657,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_unoccupied_to_occupied_thres
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_ultrasonic_unoccupied_to_occupied_threshold
+  int8_t new_ultrasonic_unoccupied_to_occupied_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47670,7 +47670,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_unoccupied_to_occupied_thres
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ultrasonic_unoccupied_to_occupied_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_undefine_reported(
@@ -47745,7 +47745,7 @@ bool dotdot_is_supported_occupancy_sensing_physical_contact_occupied_to_unoccupi
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay(
+int16_t dotdot_get_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47756,7 +47756,7 @@ uint16_t dotdot_get_occupancy_sensing_physical_contact_occupied_to_unoccupied_de
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47768,7 +47768,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_occupied_to_unoccupied
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_physical_contact_occupied_to_unoccupied_delay
+  int16_t new_physical_contact_occupied_to_unoccupied_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47781,7 +47781,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_occupied_to_unoccupied
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_contact_occupied_to_unoccupied_delay,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_undefine_reported(
@@ -47856,7 +47856,7 @@ bool dotdot_is_supported_occupancy_sensing_physical_contact_unoccupied_to_occupi
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay(
+int16_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47867,7 +47867,7 @@ uint16_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_de
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47879,7 +47879,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_unoccupied_to_occupied
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_physical_contact_unoccupied_to_occupied_delay
+  int16_t new_physical_contact_unoccupied_to_occupied_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -47892,7 +47892,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_unoccupied_to_occupied
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_contact_unoccupied_to_occupied_delay,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_undefine_reported(
@@ -47967,7 +47967,7 @@ bool dotdot_is_supported_occupancy_sensing_physical_contact_unoccupied_to_occupi
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold(
+int8_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -47978,7 +47978,7 @@ uint8_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_thr
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -47990,7 +47990,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_unoccupied_to_occupied
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_physical_contact_unoccupied_to_occupied_threshold
+  int8_t new_physical_contact_unoccupied_to_occupied_threshold
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48003,7 +48003,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_unoccupied_to_occupied
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_physical_contact_unoccupied_to_occupied_threshold,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_undefine_reported(
@@ -48160,7 +48160,7 @@ bool dotdot_is_supported_soil_moisture_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_soil_moisture_measured_value(
+int16_t dotdot_get_soil_moisture_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48171,7 +48171,7 @@ uint16_t dotdot_get_soil_moisture_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48183,7 +48183,7 @@ sl_status_t dotdot_set_soil_moisture_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48196,7 +48196,7 @@ sl_status_t dotdot_set_soil_moisture_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_soil_moisture_measured_value_undefine_reported(
@@ -48271,7 +48271,7 @@ bool dotdot_is_supported_soil_moisture_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_soil_moisture_min_measured_value(
+int16_t dotdot_get_soil_moisture_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48282,7 +48282,7 @@ uint16_t dotdot_get_soil_moisture_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48294,7 +48294,7 @@ sl_status_t dotdot_set_soil_moisture_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48307,7 +48307,7 @@ sl_status_t dotdot_set_soil_moisture_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_soil_moisture_min_measured_value_undefine_reported(
@@ -48382,7 +48382,7 @@ bool dotdot_is_supported_soil_moisture_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_soil_moisture_max_measured_value(
+int16_t dotdot_get_soil_moisture_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48393,7 +48393,7 @@ uint16_t dotdot_get_soil_moisture_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48405,7 +48405,7 @@ sl_status_t dotdot_set_soil_moisture_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48418,7 +48418,7 @@ sl_status_t dotdot_set_soil_moisture_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_soil_moisture_max_measured_value_undefine_reported(
@@ -48493,7 +48493,7 @@ bool dotdot_is_supported_soil_moisture_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_soil_moisture_tolerance(
+int16_t dotdot_get_soil_moisture_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48504,7 +48504,7 @@ uint16_t dotdot_get_soil_moisture_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48516,7 +48516,7 @@ sl_status_t dotdot_set_soil_moisture_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48529,7 +48529,7 @@ sl_status_t dotdot_set_soil_moisture_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_soil_moisture_tolerance_undefine_reported(
@@ -48635,7 +48635,7 @@ bool dotdot_is_supported_ph_measurement_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_ph_measurement_measured_value(
+int16_t dotdot_get_ph_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48646,7 +48646,7 @@ uint16_t dotdot_get_ph_measurement_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48658,7 +48658,7 @@ sl_status_t dotdot_set_ph_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48671,7 +48671,7 @@ sl_status_t dotdot_set_ph_measurement_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_ph_measurement_measured_value_undefine_reported(
@@ -48746,7 +48746,7 @@ bool dotdot_is_supported_ph_measurement_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_ph_measurement_min_measured_value(
+int16_t dotdot_get_ph_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48757,7 +48757,7 @@ uint16_t dotdot_get_ph_measurement_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48769,7 +48769,7 @@ sl_status_t dotdot_set_ph_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48782,7 +48782,7 @@ sl_status_t dotdot_set_ph_measurement_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_ph_measurement_min_measured_value_undefine_reported(
@@ -48857,7 +48857,7 @@ bool dotdot_is_supported_ph_measurement_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_ph_measurement_max_measured_value(
+int16_t dotdot_get_ph_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48868,7 +48868,7 @@ uint16_t dotdot_get_ph_measurement_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48880,7 +48880,7 @@ sl_status_t dotdot_set_ph_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -48893,7 +48893,7 @@ sl_status_t dotdot_set_ph_measurement_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_ph_measurement_max_measured_value_undefine_reported(
@@ -48968,7 +48968,7 @@ bool dotdot_is_supported_ph_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_ph_measurement_tolerance(
+int16_t dotdot_get_ph_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -48979,7 +48979,7 @@ uint16_t dotdot_get_ph_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -48991,7 +48991,7 @@ sl_status_t dotdot_set_ph_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49004,7 +49004,7 @@ sl_status_t dotdot_set_ph_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_ph_measurement_tolerance_undefine_reported(
@@ -49110,7 +49110,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_conductivity_measurement_measured_value(
+int16_t dotdot_get_electrical_conductivity_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49121,7 +49121,7 @@ uint16_t dotdot_get_electrical_conductivity_measurement_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49133,7 +49133,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49146,7 +49146,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_conductivity_measurement_measured_value_undefine_reported(
@@ -49221,7 +49221,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_conductivity_measurement_min_measured_value(
+int16_t dotdot_get_electrical_conductivity_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49232,7 +49232,7 @@ uint16_t dotdot_get_electrical_conductivity_measurement_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49244,7 +49244,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49257,7 +49257,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_conductivity_measurement_min_measured_value_undefine_reported(
@@ -49332,7 +49332,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_conductivity_measurement_max_measured_value(
+int16_t dotdot_get_electrical_conductivity_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49343,7 +49343,7 @@ uint16_t dotdot_get_electrical_conductivity_measurement_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49355,7 +49355,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49368,7 +49368,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_conductivity_measurement_max_measured_value_undefine_reported(
@@ -49443,7 +49443,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_conductivity_measurement_tolerance(
+int16_t dotdot_get_electrical_conductivity_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49454,7 +49454,7 @@ uint16_t dotdot_get_electrical_conductivity_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49466,7 +49466,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49479,7 +49479,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_conductivity_measurement_tolerance_undefine_reported(
@@ -49585,7 +49585,7 @@ bool dotdot_is_supported_wind_speed_measurement_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_wind_speed_measurement_measured_value(
+int16_t dotdot_get_wind_speed_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49596,7 +49596,7 @@ uint16_t dotdot_get_wind_speed_measurement_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49608,7 +49608,7 @@ sl_status_t dotdot_set_wind_speed_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_measured_value
+  int16_t new_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49621,7 +49621,7 @@ sl_status_t dotdot_set_wind_speed_measurement_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_wind_speed_measurement_measured_value_undefine_reported(
@@ -49696,7 +49696,7 @@ bool dotdot_is_supported_wind_speed_measurement_min_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_wind_speed_measurement_min_measured_value(
+int16_t dotdot_get_wind_speed_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49707,7 +49707,7 @@ uint16_t dotdot_get_wind_speed_measurement_min_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49719,7 +49719,7 @@ sl_status_t dotdot_set_wind_speed_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_min_measured_value
+  int16_t new_min_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49732,7 +49732,7 @@ sl_status_t dotdot_set_wind_speed_measurement_min_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_min_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_wind_speed_measurement_min_measured_value_undefine_reported(
@@ -49807,7 +49807,7 @@ bool dotdot_is_supported_wind_speed_measurement_max_measured_value(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_wind_speed_measurement_max_measured_value(
+int16_t dotdot_get_wind_speed_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49818,7 +49818,7 @@ uint16_t dotdot_get_wind_speed_measurement_max_measured_value(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49830,7 +49830,7 @@ sl_status_t dotdot_set_wind_speed_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_measured_value
+  int16_t new_max_measured_value
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49843,7 +49843,7 @@ sl_status_t dotdot_set_wind_speed_measurement_max_measured_value(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_measured_value,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_wind_speed_measurement_max_measured_value_undefine_reported(
@@ -49918,7 +49918,7 @@ bool dotdot_is_supported_wind_speed_measurement_tolerance(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_wind_speed_measurement_tolerance(
+int16_t dotdot_get_wind_speed_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -49929,7 +49929,7 @@ uint16_t dotdot_get_wind_speed_measurement_tolerance(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_TOLERANCE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -49941,7 +49941,7 @@ sl_status_t dotdot_set_wind_speed_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_tolerance
+  int16_t new_tolerance
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -49954,7 +49954,7 @@ sl_status_t dotdot_set_wind_speed_measurement_tolerance(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_tolerance,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_wind_speed_measurement_tolerance_undefine_reported(
@@ -51929,7 +51929,7 @@ bool dotdot_is_supported_ias_zone_zoneid(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ias_zone_zoneid(
+int8_t dotdot_get_ias_zone_zoneid(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -51940,7 +51940,7 @@ uint8_t dotdot_get_ias_zone_zoneid(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONEID);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -51952,7 +51952,7 @@ sl_status_t dotdot_set_ias_zone_zoneid(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_zoneid
+  int8_t new_zoneid
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -51965,7 +51965,7 @@ sl_status_t dotdot_set_ias_zone_zoneid(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_zoneid,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ias_zone_zoneid_undefine_reported(
@@ -52040,7 +52040,7 @@ bool dotdot_is_supported_ias_zone_number_of_zone_sensitivity_levels_supported(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ias_zone_number_of_zone_sensitivity_levels_supported(
+int8_t dotdot_get_ias_zone_number_of_zone_sensitivity_levels_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -52051,7 +52051,7 @@ uint8_t dotdot_get_ias_zone_number_of_zone_sensitivity_levels_supported(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -52063,7 +52063,7 @@ sl_status_t dotdot_set_ias_zone_number_of_zone_sensitivity_levels_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_number_of_zone_sensitivity_levels_supported
+  int8_t new_number_of_zone_sensitivity_levels_supported
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -52076,7 +52076,7 @@ sl_status_t dotdot_set_ias_zone_number_of_zone_sensitivity_levels_supported(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_zone_sensitivity_levels_supported,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_undefine_reported(
@@ -52151,7 +52151,7 @@ bool dotdot_is_supported_ias_zone_current_zone_sensitivity_level(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_ias_zone_current_zone_sensitivity_level(
+int8_t dotdot_get_ias_zone_current_zone_sensitivity_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -52162,7 +52162,7 @@ uint8_t dotdot_get_ias_zone_current_zone_sensitivity_level(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -52174,7 +52174,7 @@ sl_status_t dotdot_set_ias_zone_current_zone_sensitivity_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_zone_sensitivity_level
+  int8_t new_current_zone_sensitivity_level
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -52187,7 +52187,7 @@ sl_status_t dotdot_set_ias_zone_current_zone_sensitivity_level(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_zone_sensitivity_level,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_ias_zone_current_zone_sensitivity_level_undefine_reported(
@@ -52308,7 +52308,7 @@ bool dotdot_is_supported_iaswd_max_duration(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_iaswd_max_duration(
+int16_t dotdot_get_iaswd_max_duration(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -52319,7 +52319,7 @@ uint16_t dotdot_get_iaswd_max_duration(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_IASWD_MAX_DURATION);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -52331,7 +52331,7 @@ sl_status_t dotdot_set_iaswd_max_duration(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_max_duration
+  int16_t new_max_duration
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -52344,7 +52344,7 @@ sl_status_t dotdot_set_iaswd_max_duration(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_max_duration,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_iaswd_max_duration_undefine_reported(
@@ -52444,7 +52444,7 @@ bool dotdot_is_supported_metering_current_summation_delivered(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_metering_current_summation_delivered(
+int64_t dotdot_get_metering_current_summation_delivered(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -52455,7 +52455,7 @@ uint64_t dotdot_get_metering_current_summation_delivered(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_DELIVERED);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -52467,7 +52467,7 @@ sl_status_t dotdot_set_metering_current_summation_delivered(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_current_summation_delivered
+  int64_t new_current_summation_delivered
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -52480,7 +52480,7 @@ sl_status_t dotdot_set_metering_current_summation_delivered(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_summation_delivered,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_metering_current_summation_delivered_undefine_reported(
@@ -52555,7 +52555,7 @@ bool dotdot_is_supported_metering_current_summation_received(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_metering_current_summation_received(
+int64_t dotdot_get_metering_current_summation_received(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -52566,7 +52566,7 @@ uint64_t dotdot_get_metering_current_summation_received(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_RECEIVED);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -52578,7 +52578,7 @@ sl_status_t dotdot_set_metering_current_summation_received(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_current_summation_received
+  int64_t new_current_summation_received
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -52591,7 +52591,7 @@ sl_status_t dotdot_set_metering_current_summation_received(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_summation_received,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_metering_current_summation_received_undefine_reported(
@@ -52666,7 +52666,7 @@ bool dotdot_is_supported_metering_current_max_demand_delivered(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_metering_current_max_demand_delivered(
+int64_t dotdot_get_metering_current_max_demand_delivered(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -52677,7 +52677,7 @@ uint64_t dotdot_get_metering_current_max_demand_delivered(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -52689,7 +52689,7 @@ sl_status_t dotdot_set_metering_current_max_demand_delivered(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_current_max_demand_delivered
+  int64_t new_current_max_demand_delivered
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -52702,7 +52702,7 @@ sl_status_t dotdot_set_metering_current_max_demand_delivered(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_max_demand_delivered,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_metering_current_max_demand_delivered_undefine_reported(
@@ -52999,7 +52999,7 @@ bool dotdot_is_supported_metering_reading_snap_shot_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_metering_reading_snap_shot_time(
+uint8_t dotdot_get_metering_reading_snap_shot_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -53010,7 +53010,7 @@ uint32_t dotdot_get_metering_reading_snap_shot_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -53022,7 +53022,7 @@ sl_status_t dotdot_set_metering_reading_snap_shot_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_reading_snap_shot_time
+  uint8_t new_reading_snap_shot_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -53035,7 +53035,7 @@ sl_status_t dotdot_set_metering_reading_snap_shot_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_reading_snap_shot_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_metering_reading_snap_shot_time_undefine_reported(
@@ -53110,7 +53110,7 @@ bool dotdot_is_supported_metering_current_max_demand_delivered_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_metering_current_max_demand_delivered_time(
+uint8_t dotdot_get_metering_current_max_demand_delivered_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -53121,7 +53121,7 @@ uint32_t dotdot_get_metering_current_max_demand_delivered_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -53133,7 +53133,7 @@ sl_status_t dotdot_set_metering_current_max_demand_delivered_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_current_max_demand_delivered_time
+  uint8_t new_current_max_demand_delivered_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -53146,7 +53146,7 @@ sl_status_t dotdot_set_metering_current_max_demand_delivered_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_max_demand_delivered_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_metering_current_max_demand_delivered_time_undefine_reported(
@@ -53221,7 +53221,7 @@ bool dotdot_is_supported_metering_current_max_demand_received_time(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_metering_current_max_demand_received_time(
+uint8_t dotdot_get_metering_current_max_demand_received_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -53232,7 +53232,7 @@ uint32_t dotdot_get_metering_current_max_demand_received_time(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME);
 
-  uint32_t result = {};
+  uint8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -53244,7 +53244,7 @@ sl_status_t dotdot_set_metering_current_max_demand_received_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_current_max_demand_received_time
+  uint8_t new_current_max_demand_received_time
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -53257,7 +53257,7 @@ sl_status_t dotdot_set_metering_current_max_demand_received_time(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_max_demand_received_time,
-                                                  sizeof(uint32_t));
+                                                  sizeof(uint8_t));
   }
 
 sl_status_t dotdot_metering_current_max_demand_received_time_undefine_reported(
@@ -53332,7 +53332,7 @@ bool dotdot_is_supported_metering_default_update_period(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_metering_default_update_period(
+int8_t dotdot_get_metering_default_update_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -53343,7 +53343,7 @@ uint8_t dotdot_get_metering_default_update_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_DEFAULT_UPDATE_PERIOD);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -53355,7 +53355,7 @@ sl_status_t dotdot_set_metering_default_update_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_default_update_period
+  int8_t new_default_update_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -53368,7 +53368,7 @@ sl_status_t dotdot_set_metering_default_update_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_default_update_period,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_metering_default_update_period_undefine_reported(
@@ -53554,7 +53554,7 @@ bool dotdot_is_supported_metering_current_inlet_energy_carrier_summation(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_metering_current_inlet_energy_carrier_summation(
+int64_t dotdot_get_metering_current_inlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -53565,7 +53565,7 @@ uint64_t dotdot_get_metering_current_inlet_energy_carrier_summation(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -53577,7 +53577,7 @@ sl_status_t dotdot_set_metering_current_inlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_current_inlet_energy_carrier_summation
+  int64_t new_current_inlet_energy_carrier_summation
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -53590,7 +53590,7 @@ sl_status_t dotdot_set_metering_current_inlet_energy_carrier_summation(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_inlet_energy_carrier_summation,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_metering_current_inlet_energy_carrier_summation_undefine_reported(
@@ -53665,7 +53665,7 @@ bool dotdot_is_supported_metering_current_outlet_energy_carrier_summation(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_metering_current_outlet_energy_carrier_summation(
+int64_t dotdot_get_metering_current_outlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -53676,7 +53676,7 @@ uint64_t dotdot_get_metering_current_outlet_energy_carrier_summation(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -53688,7 +53688,7 @@ sl_status_t dotdot_set_metering_current_outlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_current_outlet_energy_carrier_summation
+  int64_t new_current_outlet_energy_carrier_summation
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -53701,7 +53701,7 @@ sl_status_t dotdot_set_metering_current_outlet_energy_carrier_summation(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_current_outlet_energy_carrier_summation,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_metering_current_outlet_energy_carrier_summation_undefine_reported(
@@ -54109,7 +54109,7 @@ bool dotdot_is_supported_metering_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_metering_multiplier(
+int32_t dotdot_get_metering_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -54120,7 +54120,7 @@ uint32_t dotdot_get_metering_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_MULTIPLIER);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -54132,7 +54132,7 @@ sl_status_t dotdot_set_metering_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_multiplier
+  int32_t new_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -54145,7 +54145,7 @@ sl_status_t dotdot_set_metering_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_multiplier,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_metering_multiplier_undefine_reported(
@@ -54220,7 +54220,7 @@ bool dotdot_is_supported_metering_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_metering_divisor(
+int32_t dotdot_get_metering_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -54231,7 +54231,7 @@ uint32_t dotdot_get_metering_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_METERING_DIVISOR);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -54243,7 +54243,7 @@ sl_status_t dotdot_set_metering_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_divisor
+  int32_t new_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -54256,7 +54256,7 @@ sl_status_t dotdot_set_metering_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_divisor,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_metering_divisor_undefine_reported(
@@ -56537,7 +56537,7 @@ bool dotdot_is_supported_electrical_measurement_dc_voltage_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_dc_voltage_multiplier(
+int16_t dotdot_get_electrical_measurement_dc_voltage_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -56548,7 +56548,7 @@ uint16_t dotdot_get_electrical_measurement_dc_voltage_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -56560,7 +56560,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_voltage_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_dc_voltage_multiplier
+  int16_t new_dc_voltage_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -56573,7 +56573,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_voltage_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dc_voltage_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_dc_voltage_multiplier_undefine_reported(
@@ -56648,7 +56648,7 @@ bool dotdot_is_supported_electrical_measurement_dc_voltage_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_dc_voltage_divisor(
+int16_t dotdot_get_electrical_measurement_dc_voltage_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -56659,7 +56659,7 @@ uint16_t dotdot_get_electrical_measurement_dc_voltage_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -56671,7 +56671,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_voltage_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_dc_voltage_divisor
+  int16_t new_dc_voltage_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -56684,7 +56684,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_voltage_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dc_voltage_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_dc_voltage_divisor_undefine_reported(
@@ -56759,7 +56759,7 @@ bool dotdot_is_supported_electrical_measurement_dc_current_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_dc_current_multiplier(
+int16_t dotdot_get_electrical_measurement_dc_current_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -56770,7 +56770,7 @@ uint16_t dotdot_get_electrical_measurement_dc_current_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -56782,7 +56782,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_current_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_dc_current_multiplier
+  int16_t new_dc_current_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -56795,7 +56795,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_current_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dc_current_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_dc_current_multiplier_undefine_reported(
@@ -56870,7 +56870,7 @@ bool dotdot_is_supported_electrical_measurement_dc_current_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_dc_current_divisor(
+int16_t dotdot_get_electrical_measurement_dc_current_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -56881,7 +56881,7 @@ uint16_t dotdot_get_electrical_measurement_dc_current_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -56893,7 +56893,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_current_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_dc_current_divisor
+  int16_t new_dc_current_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -56906,7 +56906,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_current_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dc_current_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_dc_current_divisor_undefine_reported(
@@ -56981,7 +56981,7 @@ bool dotdot_is_supported_electrical_measurement_dc_power_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_dc_power_multiplier(
+int16_t dotdot_get_electrical_measurement_dc_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -56992,7 +56992,7 @@ uint16_t dotdot_get_electrical_measurement_dc_power_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57004,7 +57004,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_dc_power_multiplier
+  int16_t new_dc_power_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57017,7 +57017,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_power_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dc_power_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_dc_power_multiplier_undefine_reported(
@@ -57092,7 +57092,7 @@ bool dotdot_is_supported_electrical_measurement_dc_power_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_dc_power_divisor(
+int16_t dotdot_get_electrical_measurement_dc_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -57103,7 +57103,7 @@ uint16_t dotdot_get_electrical_measurement_dc_power_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57115,7 +57115,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_dc_power_divisor
+  int16_t new_dc_power_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57128,7 +57128,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_power_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dc_power_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_dc_power_divisor_undefine_reported(
@@ -57203,7 +57203,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_frequency(
+int16_t dotdot_get_electrical_measurement_ac_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -57214,7 +57214,7 @@ uint16_t dotdot_get_electrical_measurement_ac_frequency(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57226,7 +57226,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_frequency
+  int16_t new_ac_frequency
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57239,7 +57239,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_frequency,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_frequency_undefine_reported(
@@ -57314,7 +57314,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_min(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_frequency_min(
+int16_t dotdot_get_electrical_measurement_ac_frequency_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -57325,7 +57325,7 @@ uint16_t dotdot_get_electrical_measurement_ac_frequency_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57337,7 +57337,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_frequency_min
+  int16_t new_ac_frequency_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57350,7 +57350,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_frequency_min,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_frequency_min_undefine_reported(
@@ -57425,7 +57425,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_max(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_frequency_max(
+int16_t dotdot_get_electrical_measurement_ac_frequency_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -57436,7 +57436,7 @@ uint16_t dotdot_get_electrical_measurement_ac_frequency_max(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57448,7 +57448,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_frequency_max
+  int16_t new_ac_frequency_max
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57461,7 +57461,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_max(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_frequency_max,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_frequency_max_undefine_reported(
@@ -57536,7 +57536,7 @@ bool dotdot_is_supported_electrical_measurement_neutral_current(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_neutral_current(
+int16_t dotdot_get_electrical_measurement_neutral_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -57547,7 +57547,7 @@ uint16_t dotdot_get_electrical_measurement_neutral_current(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57559,7 +57559,7 @@ sl_status_t dotdot_set_electrical_measurement_neutral_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_neutral_current
+  int16_t new_neutral_current
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57572,7 +57572,7 @@ sl_status_t dotdot_set_electrical_measurement_neutral_current(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_neutral_current,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_neutral_current_undefine_reported(
@@ -57869,7 +57869,7 @@ bool dotdot_is_supported_electrical_measurement_total_apparent_power(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_electrical_measurement_total_apparent_power(
+int32_t dotdot_get_electrical_measurement_total_apparent_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -57880,7 +57880,7 @@ uint32_t dotdot_get_electrical_measurement_total_apparent_power(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -57892,7 +57892,7 @@ sl_status_t dotdot_set_electrical_measurement_total_apparent_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_total_apparent_power
+  int32_t new_total_apparent_power
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -57905,7 +57905,7 @@ sl_status_t dotdot_set_electrical_measurement_total_apparent_power(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_total_apparent_power,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_electrical_measurement_total_apparent_power_undefine_reported(
@@ -59312,7 +59312,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_frequency_multiplier(
+int16_t dotdot_get_electrical_measurement_ac_frequency_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -59323,7 +59323,7 @@ uint16_t dotdot_get_electrical_measurement_ac_frequency_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -59335,7 +59335,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_frequency_multiplier
+  int16_t new_ac_frequency_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -59348,7 +59348,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_frequency_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_frequency_multiplier_undefine_reported(
@@ -59423,7 +59423,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_frequency_divisor(
+int16_t dotdot_get_electrical_measurement_ac_frequency_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -59434,7 +59434,7 @@ uint16_t dotdot_get_electrical_measurement_ac_frequency_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -59446,7 +59446,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_frequency_divisor
+  int16_t new_ac_frequency_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -59459,7 +59459,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_frequency_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_frequency_divisor_undefine_reported(
@@ -59534,7 +59534,7 @@ bool dotdot_is_supported_electrical_measurement_power_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_electrical_measurement_power_multiplier(
+int32_t dotdot_get_electrical_measurement_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -59545,7 +59545,7 @@ uint32_t dotdot_get_electrical_measurement_power_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -59557,7 +59557,7 @@ sl_status_t dotdot_set_electrical_measurement_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_power_multiplier
+  int32_t new_power_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -59570,7 +59570,7 @@ sl_status_t dotdot_set_electrical_measurement_power_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_power_multiplier,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_electrical_measurement_power_multiplier_undefine_reported(
@@ -59645,7 +59645,7 @@ bool dotdot_is_supported_electrical_measurement_power_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_electrical_measurement_power_divisor(
+int32_t dotdot_get_electrical_measurement_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -59656,7 +59656,7 @@ uint32_t dotdot_get_electrical_measurement_power_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_DIVISOR);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -59668,7 +59668,7 @@ sl_status_t dotdot_set_electrical_measurement_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_power_divisor
+  int32_t new_power_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -59681,7 +59681,7 @@ sl_status_t dotdot_set_electrical_measurement_power_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_power_divisor,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_electrical_measurement_power_divisor_undefine_reported(
@@ -59978,7 +59978,7 @@ bool dotdot_is_supported_electrical_measurement_line_current(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_line_current(
+int16_t dotdot_get_electrical_measurement_line_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -59989,7 +59989,7 @@ uint16_t dotdot_get_electrical_measurement_line_current(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60001,7 +60001,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_line_current
+  int16_t new_line_current
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60014,7 +60014,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_line_current,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_line_current_undefine_reported(
@@ -60311,7 +60311,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage(
+int16_t dotdot_get_electrical_measurement_rms_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -60322,7 +60322,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60334,7 +60334,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage
+  int16_t new_rms_voltage
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60347,7 +60347,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_undefine_reported(
@@ -60422,7 +60422,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_min(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_min(
+int16_t dotdot_get_electrical_measurement_rms_voltage_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -60433,7 +60433,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60445,7 +60445,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_min
+  int16_t new_rms_voltage_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60458,7 +60458,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_min,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_min_undefine_reported(
@@ -60533,7 +60533,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_max(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_max(
+int16_t dotdot_get_electrical_measurement_rms_voltage_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -60544,7 +60544,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_max(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60556,7 +60556,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_max
+  int16_t new_rms_voltage_max
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60569,7 +60569,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_max,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_max_undefine_reported(
@@ -60644,7 +60644,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current(
+int16_t dotdot_get_electrical_measurement_rms_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -60655,7 +60655,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60667,7 +60667,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current
+  int16_t new_rms_current
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60680,7 +60680,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_undefine_reported(
@@ -60755,7 +60755,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_min(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_min(
+int16_t dotdot_get_electrical_measurement_rms_current_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -60766,7 +60766,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_min(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60778,7 +60778,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_min
+  int16_t new_rms_current_min
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60791,7 +60791,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_min,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_min_undefine_reported(
@@ -60866,7 +60866,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_max(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_max(
+int16_t dotdot_get_electrical_measurement_rms_current_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -60877,7 +60877,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_max(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -60889,7 +60889,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_max
+  int16_t new_rms_current_max
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -60902,7 +60902,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_max,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_max_undefine_reported(
@@ -61421,7 +61421,7 @@ bool dotdot_is_supported_electrical_measurement_apparent_power(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_apparent_power(
+int16_t dotdot_get_electrical_measurement_apparent_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61432,7 +61432,7 @@ uint16_t dotdot_get_electrical_measurement_apparent_power(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -61444,7 +61444,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_apparent_power
+  int16_t new_apparent_power
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61457,7 +61457,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_apparent_power,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_apparent_power_undefine_reported(
@@ -61643,7 +61643,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period(
+int16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61654,7 +61654,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_perio
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -61666,7 +61666,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_voltage_measurement_period
+  int16_t new_average_rms_voltage_measurement_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61679,7 +61679,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_voltage_measurement_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_undefine_reported(
@@ -61754,7 +61754,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter(
+int16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61765,7 +61765,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -61777,7 +61777,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_over_voltage_counter
+  int16_t new_average_rms_over_voltage_counter
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61790,7 +61790,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_over_voltage_counter,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_undefine_reported(
@@ -61865,7 +61865,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counte
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter(
+int16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61876,7 +61876,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -61888,7 +61888,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_under_voltage_counter
+  int16_t new_average_rms_under_voltage_counter
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -61901,7 +61901,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_under_voltage_counter,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_undefine_reported(
@@ -61976,7 +61976,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period(
+int16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -61987,7 +61987,7 @@ uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -61999,7 +61999,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_extreme_over_voltage_period
+  int16_t new_rms_extreme_over_voltage_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62012,7 +62012,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_extreme_over_voltage_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_period_undefine_reported(
@@ -62087,7 +62087,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_under_voltage_period
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period(
+int16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62098,7 +62098,7 @@ uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62110,7 +62110,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_extreme_under_voltage_period
+  int16_t new_rms_extreme_under_voltage_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62123,7 +62123,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_extreme_under_voltage_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_period_undefine_reported(
@@ -62198,7 +62198,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_sag_period(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period(
+int16_t dotdot_get_electrical_measurement_rms_voltage_sag_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62209,7 +62209,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62221,7 +62221,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_sag_period
+  int16_t new_rms_voltage_sag_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62234,7 +62234,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_sag_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_sag_period_undefine_reported(
@@ -62309,7 +62309,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_swell_period(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period(
+int16_t dotdot_get_electrical_measurement_rms_voltage_swell_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62320,7 +62320,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62332,7 +62332,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_swell_period
+  int16_t new_rms_voltage_swell_period
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62345,7 +62345,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_swell_period,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_swell_period_undefine_reported(
@@ -62420,7 +62420,7 @@ bool dotdot_is_supported_electrical_measurement_ac_voltage_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_voltage_multiplier(
+int16_t dotdot_get_electrical_measurement_ac_voltage_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62431,7 +62431,7 @@ uint16_t dotdot_get_electrical_measurement_ac_voltage_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62443,7 +62443,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_voltage_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_voltage_multiplier
+  int16_t new_ac_voltage_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62456,7 +62456,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_voltage_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_voltage_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_voltage_multiplier_undefine_reported(
@@ -62531,7 +62531,7 @@ bool dotdot_is_supported_electrical_measurement_ac_voltage_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_voltage_divisor(
+int16_t dotdot_get_electrical_measurement_ac_voltage_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62542,7 +62542,7 @@ uint16_t dotdot_get_electrical_measurement_ac_voltage_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62554,7 +62554,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_voltage_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_voltage_divisor
+  int16_t new_ac_voltage_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62567,7 +62567,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_voltage_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_voltage_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_voltage_divisor_undefine_reported(
@@ -62642,7 +62642,7 @@ bool dotdot_is_supported_electrical_measurement_ac_current_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_current_multiplier(
+int16_t dotdot_get_electrical_measurement_ac_current_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62653,7 +62653,7 @@ uint16_t dotdot_get_electrical_measurement_ac_current_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62665,7 +62665,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_current_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_current_multiplier
+  int16_t new_ac_current_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62678,7 +62678,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_current_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_current_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_current_multiplier_undefine_reported(
@@ -62753,7 +62753,7 @@ bool dotdot_is_supported_electrical_measurement_ac_current_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_current_divisor(
+int16_t dotdot_get_electrical_measurement_ac_current_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62764,7 +62764,7 @@ uint16_t dotdot_get_electrical_measurement_ac_current_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62776,7 +62776,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_current_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_current_divisor
+  int16_t new_ac_current_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62789,7 +62789,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_current_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_current_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_current_divisor_undefine_reported(
@@ -62864,7 +62864,7 @@ bool dotdot_is_supported_electrical_measurement_ac_power_multiplier(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_power_multiplier(
+int16_t dotdot_get_electrical_measurement_ac_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62875,7 +62875,7 @@ uint16_t dotdot_get_electrical_measurement_ac_power_multiplier(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62887,7 +62887,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_power_multiplier
+  int16_t new_ac_power_multiplier
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -62900,7 +62900,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_power_multiplier(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_power_multiplier,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_power_multiplier_undefine_reported(
@@ -62975,7 +62975,7 @@ bool dotdot_is_supported_electrical_measurement_ac_power_divisor(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_ac_power_divisor(
+int16_t dotdot_get_electrical_measurement_ac_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -62986,7 +62986,7 @@ uint16_t dotdot_get_electrical_measurement_ac_power_divisor(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -62998,7 +62998,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_ac_power_divisor
+  int16_t new_ac_power_divisor
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -63011,7 +63011,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_power_divisor(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_ac_power_divisor,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_ac_power_divisor_undefine_reported(
@@ -64640,7 +64640,7 @@ bool dotdot_is_supported_electrical_measurement_line_current_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_line_current_phb(
+int16_t dotdot_get_electrical_measurement_line_current_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -64651,7 +64651,7 @@ uint16_t dotdot_get_electrical_measurement_line_current_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -64663,7 +64663,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_line_current_phb
+  int16_t new_line_current_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -64676,7 +64676,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_line_current_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_line_current_phb_undefine_reported(
@@ -64973,7 +64973,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_phb(
+int16_t dotdot_get_electrical_measurement_rms_voltage_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -64984,7 +64984,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -64996,7 +64996,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_phb
+  int16_t new_rms_voltage_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65009,7 +65009,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_phb_undefine_reported(
@@ -65084,7 +65084,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_min_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_min_phb(
+int16_t dotdot_get_electrical_measurement_rms_voltage_min_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65095,7 +65095,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_min_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -65107,7 +65107,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_min_phb
+  int16_t new_rms_voltage_min_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65120,7 +65120,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_min_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_min_phb_undefine_reported(
@@ -65195,7 +65195,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_max_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_max_phb(
+int16_t dotdot_get_electrical_measurement_rms_voltage_max_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65206,7 +65206,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_max_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -65218,7 +65218,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_max_phb
+  int16_t new_rms_voltage_max_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65231,7 +65231,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_max_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_max_phb_undefine_reported(
@@ -65306,7 +65306,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_phb(
+int16_t dotdot_get_electrical_measurement_rms_current_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65317,7 +65317,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -65329,7 +65329,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_phb
+  int16_t new_rms_current_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65342,7 +65342,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_phb_undefine_reported(
@@ -65417,7 +65417,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_min_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_min_phb(
+int16_t dotdot_get_electrical_measurement_rms_current_min_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65428,7 +65428,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_min_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -65440,7 +65440,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_min_phb
+  int16_t new_rms_current_min_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65453,7 +65453,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_min_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_min_phb_undefine_reported(
@@ -65528,7 +65528,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_max_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_max_phb(
+int16_t dotdot_get_electrical_measurement_rms_current_max_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -65539,7 +65539,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_max_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -65551,7 +65551,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_max_phb
+  int16_t new_rms_current_max_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -65564,7 +65564,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_max_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_max_phb_undefine_reported(
@@ -66083,7 +66083,7 @@ bool dotdot_is_supported_electrical_measurement_apparent_power_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_apparent_power_phb(
+int16_t dotdot_get_electrical_measurement_apparent_power_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66094,7 +66094,7 @@ uint16_t dotdot_get_electrical_measurement_apparent_power_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66106,7 +66106,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_apparent_power_phb
+  int16_t new_apparent_power_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66119,7 +66119,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_apparent_power_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_apparent_power_phb_undefine_reported(
@@ -66305,7 +66305,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phb(
+int16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66316,7 +66316,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_perio
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66328,7 +66328,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_voltage_measurement_period_phb
+  int16_t new_average_rms_voltage_measurement_period_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66341,7 +66341,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_voltage_measurement_period_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_undefine_reported(
@@ -66416,7 +66416,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phb(
+int16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66427,7 +66427,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66439,7 +66439,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_over_voltage_counter_phb
+  int16_t new_average_rms_over_voltage_counter_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66452,7 +66452,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_p
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_over_voltage_counter_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_undefine_reported(
@@ -66527,7 +66527,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counte
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phb(
+int16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66538,7 +66538,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phb
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66550,7 +66550,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_under_voltage_counter_phb
+  int16_t new_average_rms_under_voltage_counter_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66563,7 +66563,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_under_voltage_counter_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_undefine_reported(
@@ -66638,7 +66638,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phb(
+int16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66649,7 +66649,7 @@ uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66661,7 +66661,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period_ph
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_extreme_over_voltage_period_phb
+  int16_t new_rms_extreme_over_voltage_period_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66674,7 +66674,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period_ph
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_extreme_over_voltage_period_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_undefine_reported(
@@ -66749,7 +66749,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_under_voltage_period
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phb(
+int16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66760,7 +66760,7 @@ uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66772,7 +66772,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_extreme_under_voltage_period_phb
+  int16_t new_rms_extreme_under_voltage_period_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66785,7 +66785,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period_p
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_extreme_under_voltage_period_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_undefine_reported(
@@ -66860,7 +66860,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_sag_period_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phb(
+int16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66871,7 +66871,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66883,7 +66883,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_sag_period_phb
+  int16_t new_rms_voltage_sag_period_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -66896,7 +66896,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_sag_period_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_sag_period_phb_undefine_reported(
@@ -66971,7 +66971,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_swell_period_phb(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phb(
+int16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -66982,7 +66982,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phb(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -66994,7 +66994,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_swell_period_phb
+  int16_t new_rms_voltage_swell_period_phb
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67007,7 +67007,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period_phb(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_swell_period_phb,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_swell_period_phb_undefine_reported(
@@ -67082,7 +67082,7 @@ bool dotdot_is_supported_electrical_measurement_line_current_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_line_current_phc(
+int16_t dotdot_get_electrical_measurement_line_current_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67093,7 +67093,7 @@ uint16_t dotdot_get_electrical_measurement_line_current_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67105,7 +67105,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_line_current_phc
+  int16_t new_line_current_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67118,7 +67118,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_line_current_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_line_current_phc_undefine_reported(
@@ -67415,7 +67415,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_phc(
+int16_t dotdot_get_electrical_measurement_rms_voltage_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67426,7 +67426,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67438,7 +67438,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_phc
+  int16_t new_rms_voltage_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67451,7 +67451,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_phc_undefine_reported(
@@ -67526,7 +67526,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_min_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_min_phc(
+int16_t dotdot_get_electrical_measurement_rms_voltage_min_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67537,7 +67537,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_min_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67549,7 +67549,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_min_phc
+  int16_t new_rms_voltage_min_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67562,7 +67562,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_min_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_min_phc_undefine_reported(
@@ -67637,7 +67637,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_max_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_max_phc(
+int16_t dotdot_get_electrical_measurement_rms_voltage_max_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67648,7 +67648,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_max_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67660,7 +67660,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_max_phc
+  int16_t new_rms_voltage_max_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67673,7 +67673,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_max_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_max_phc_undefine_reported(
@@ -67748,7 +67748,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_phc(
+int16_t dotdot_get_electrical_measurement_rms_current_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67759,7 +67759,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67771,7 +67771,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_phc
+  int16_t new_rms_current_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67784,7 +67784,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_phc_undefine_reported(
@@ -67859,7 +67859,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_min_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_min_phc(
+int16_t dotdot_get_electrical_measurement_rms_current_min_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67870,7 +67870,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_min_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67882,7 +67882,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_min_phc
+  int16_t new_rms_current_min_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -67895,7 +67895,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_min_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_min_phc_undefine_reported(
@@ -67970,7 +67970,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_max_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_current_max_phc(
+int16_t dotdot_get_electrical_measurement_rms_current_max_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -67981,7 +67981,7 @@ uint16_t dotdot_get_electrical_measurement_rms_current_max_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -67993,7 +67993,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_current_max_phc
+  int16_t new_rms_current_max_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68006,7 +68006,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_current_max_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_current_max_phc_undefine_reported(
@@ -68525,7 +68525,7 @@ bool dotdot_is_supported_electrical_measurement_apparent_power_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_apparent_power_phc(
+int16_t dotdot_get_electrical_measurement_apparent_power_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68536,7 +68536,7 @@ uint16_t dotdot_get_electrical_measurement_apparent_power_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -68548,7 +68548,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_apparent_power_phc
+  int16_t new_apparent_power_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68561,7 +68561,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_apparent_power_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_apparent_power_phc_undefine_reported(
@@ -68747,7 +68747,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phc(
+int16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68758,7 +68758,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_perio
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -68770,7 +68770,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_voltage_measurement_period_phc
+  int16_t new_average_rms_voltage_measurement_period_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68783,7 +68783,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_voltage_measurement_period_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_undefine_reported(
@@ -68858,7 +68858,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phc(
+int16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68869,7 +68869,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -68881,7 +68881,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_over_voltage_counter_phc
+  int16_t new_average_rms_over_voltage_counter_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -68894,7 +68894,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_p
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_over_voltage_counter_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_undefine_reported(
@@ -68969,7 +68969,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counte
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phc(
+int16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -68980,7 +68980,7 @@ uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phc
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -68992,7 +68992,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_rms_under_voltage_counter_phc
+  int16_t new_average_rms_under_voltage_counter_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -69005,7 +69005,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_rms_under_voltage_counter_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_undefine_reported(
@@ -69080,7 +69080,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phc(
+int16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -69091,7 +69091,7 @@ uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -69103,7 +69103,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period_ph
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_extreme_over_voltage_period_phc
+  int16_t new_rms_extreme_over_voltage_period_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -69116,7 +69116,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period_ph
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_extreme_over_voltage_period_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_undefine_reported(
@@ -69191,7 +69191,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_under_voltage_period
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phc(
+int16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -69202,7 +69202,7 @@ uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -69214,7 +69214,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_extreme_under_voltage_period_phc
+  int16_t new_rms_extreme_under_voltage_period_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -69227,7 +69227,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period_p
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_extreme_under_voltage_period_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_undefine_reported(
@@ -69302,7 +69302,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_sag_period_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phc(
+int16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -69313,7 +69313,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -69325,7 +69325,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_sag_period_phc
+  int16_t new_rms_voltage_sag_period_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -69338,7 +69338,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_sag_period_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_sag_period_phc_undefine_reported(
@@ -69413,7 +69413,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_swell_period_phc(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phc(
+int16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -69424,7 +69424,7 @@ uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phc(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -69436,7 +69436,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_rms_voltage_swell_period_phc
+  int16_t new_rms_voltage_swell_period_phc
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -69449,7 +69449,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period_phc(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_rms_voltage_swell_period_phc,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_electrical_measurement_rms_voltage_swell_period_phc_undefine_reported(
@@ -70005,7 +70005,7 @@ bool dotdot_is_supported_diagnostics_number_of_resets(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_number_of_resets(
+int16_t dotdot_get_diagnostics_number_of_resets(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70016,7 +70016,7 @@ uint16_t dotdot_get_diagnostics_number_of_resets(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NUMBER_OF_RESETS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70028,7 +70028,7 @@ sl_status_t dotdot_set_diagnostics_number_of_resets(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_number_of_resets
+  int16_t new_number_of_resets
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70041,7 +70041,7 @@ sl_status_t dotdot_set_diagnostics_number_of_resets(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_number_of_resets,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_number_of_resets_undefine_reported(
@@ -70116,7 +70116,7 @@ bool dotdot_is_supported_diagnostics_persistent_memory_writes(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_persistent_memory_writes(
+int16_t dotdot_get_diagnostics_persistent_memory_writes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70127,7 +70127,7 @@ uint16_t dotdot_get_diagnostics_persistent_memory_writes(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PERSISTENT_MEMORY_WRITES);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70139,7 +70139,7 @@ sl_status_t dotdot_set_diagnostics_persistent_memory_writes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_persistent_memory_writes
+  int16_t new_persistent_memory_writes
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70152,7 +70152,7 @@ sl_status_t dotdot_set_diagnostics_persistent_memory_writes(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_persistent_memory_writes,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_persistent_memory_writes_undefine_reported(
@@ -70227,7 +70227,7 @@ bool dotdot_is_supported_diagnostics_mac_rx_bcast(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_diagnostics_mac_rx_bcast(
+int32_t dotdot_get_diagnostics_mac_rx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70238,7 +70238,7 @@ uint32_t dotdot_get_diagnostics_mac_rx_bcast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_BCAST);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70250,7 +70250,7 @@ sl_status_t dotdot_set_diagnostics_mac_rx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_mac_rx_bcast
+  int32_t new_mac_rx_bcast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70263,7 +70263,7 @@ sl_status_t dotdot_set_diagnostics_mac_rx_bcast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mac_rx_bcast,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_diagnostics_mac_rx_bcast_undefine_reported(
@@ -70338,7 +70338,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_bcast(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_diagnostics_mac_tx_bcast(
+int32_t dotdot_get_diagnostics_mac_tx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70349,7 +70349,7 @@ uint32_t dotdot_get_diagnostics_mac_tx_bcast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_BCAST);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70361,7 +70361,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_mac_tx_bcast
+  int32_t new_mac_tx_bcast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70374,7 +70374,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_bcast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mac_tx_bcast,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_diagnostics_mac_tx_bcast_undefine_reported(
@@ -70449,7 +70449,7 @@ bool dotdot_is_supported_diagnostics_mac_rx_ucast(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_diagnostics_mac_rx_ucast(
+int32_t dotdot_get_diagnostics_mac_rx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70460,7 +70460,7 @@ uint32_t dotdot_get_diagnostics_mac_rx_ucast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_UCAST);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70472,7 +70472,7 @@ sl_status_t dotdot_set_diagnostics_mac_rx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_mac_rx_ucast
+  int32_t new_mac_rx_ucast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70485,7 +70485,7 @@ sl_status_t dotdot_set_diagnostics_mac_rx_ucast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mac_rx_ucast,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_diagnostics_mac_rx_ucast_undefine_reported(
@@ -70560,7 +70560,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_ucast(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_diagnostics_mac_tx_ucast(
+int32_t dotdot_get_diagnostics_mac_tx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70571,7 +70571,7 @@ uint32_t dotdot_get_diagnostics_mac_tx_ucast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70583,7 +70583,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_mac_tx_ucast
+  int32_t new_mac_tx_ucast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70596,7 +70596,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mac_tx_ucast,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_diagnostics_mac_tx_ucast_undefine_reported(
@@ -70671,7 +70671,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_ucast_retry(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_mac_tx_ucast_retry(
+int16_t dotdot_get_diagnostics_mac_tx_ucast_retry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70682,7 +70682,7 @@ uint16_t dotdot_get_diagnostics_mac_tx_ucast_retry(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_RETRY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70694,7 +70694,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast_retry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_mac_tx_ucast_retry
+  int16_t new_mac_tx_ucast_retry
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70707,7 +70707,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast_retry(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mac_tx_ucast_retry,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_mac_tx_ucast_retry_undefine_reported(
@@ -70782,7 +70782,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_ucast_fail(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_mac_tx_ucast_fail(
+int16_t dotdot_get_diagnostics_mac_tx_ucast_fail(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70793,7 +70793,7 @@ uint16_t dotdot_get_diagnostics_mac_tx_ucast_fail(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_FAIL);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70805,7 +70805,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast_fail(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_mac_tx_ucast_fail
+  int16_t new_mac_tx_ucast_fail
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70818,7 +70818,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast_fail(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mac_tx_ucast_fail,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_mac_tx_ucast_fail_undefine_reported(
@@ -70893,7 +70893,7 @@ bool dotdot_is_supported_diagnostics_aps_rx_bcast(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_rx_bcast(
+int16_t dotdot_get_diagnostics_aps_rx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -70904,7 +70904,7 @@ uint16_t dotdot_get_diagnostics_aps_rx_bcast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_BCAST);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -70916,7 +70916,7 @@ sl_status_t dotdot_set_diagnostics_aps_rx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_rx_bcast
+  int16_t new_aps_rx_bcast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -70929,7 +70929,7 @@ sl_status_t dotdot_set_diagnostics_aps_rx_bcast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_rx_bcast,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_rx_bcast_undefine_reported(
@@ -71004,7 +71004,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_bcast(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_tx_bcast(
+int16_t dotdot_get_diagnostics_aps_tx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71015,7 +71015,7 @@ uint16_t dotdot_get_diagnostics_aps_tx_bcast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_BCAST);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71027,7 +71027,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_tx_bcast
+  int16_t new_aps_tx_bcast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71040,7 +71040,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_bcast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_tx_bcast,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_tx_bcast_undefine_reported(
@@ -71115,7 +71115,7 @@ bool dotdot_is_supported_diagnostics_aps_rx_ucast(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_rx_ucast(
+int16_t dotdot_get_diagnostics_aps_rx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71126,7 +71126,7 @@ uint16_t dotdot_get_diagnostics_aps_rx_ucast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_UCAST);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71138,7 +71138,7 @@ sl_status_t dotdot_set_diagnostics_aps_rx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_rx_ucast
+  int16_t new_aps_rx_ucast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71151,7 +71151,7 @@ sl_status_t dotdot_set_diagnostics_aps_rx_ucast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_rx_ucast,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_rx_ucast_undefine_reported(
@@ -71226,7 +71226,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_ucast_success(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_tx_ucast_success(
+int16_t dotdot_get_diagnostics_aps_tx_ucast_success(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71237,7 +71237,7 @@ uint16_t dotdot_get_diagnostics_aps_tx_ucast_success(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_SUCCESS);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71249,7 +71249,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_success(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_tx_ucast_success
+  int16_t new_aps_tx_ucast_success
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71262,7 +71262,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_success(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_tx_ucast_success,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_tx_ucast_success_undefine_reported(
@@ -71337,7 +71337,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_ucast_retry(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_tx_ucast_retry(
+int16_t dotdot_get_diagnostics_aps_tx_ucast_retry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71348,7 +71348,7 @@ uint16_t dotdot_get_diagnostics_aps_tx_ucast_retry(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_RETRY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71360,7 +71360,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_retry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_tx_ucast_retry
+  int16_t new_aps_tx_ucast_retry
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71373,7 +71373,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_retry(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_tx_ucast_retry,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_tx_ucast_retry_undefine_reported(
@@ -71448,7 +71448,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_ucast_fail(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_tx_ucast_fail(
+int16_t dotdot_get_diagnostics_aps_tx_ucast_fail(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71459,7 +71459,7 @@ uint16_t dotdot_get_diagnostics_aps_tx_ucast_fail(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_FAIL);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71471,7 +71471,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_fail(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_tx_ucast_fail
+  int16_t new_aps_tx_ucast_fail
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71484,7 +71484,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_fail(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_tx_ucast_fail,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_tx_ucast_fail_undefine_reported(
@@ -71559,7 +71559,7 @@ bool dotdot_is_supported_diagnostics_route_disc_initiated(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_route_disc_initiated(
+int16_t dotdot_get_diagnostics_route_disc_initiated(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71570,7 +71570,7 @@ uint16_t dotdot_get_diagnostics_route_disc_initiated(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_ROUTE_DISC_INITIATED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71582,7 +71582,7 @@ sl_status_t dotdot_set_diagnostics_route_disc_initiated(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_route_disc_initiated
+  int16_t new_route_disc_initiated
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71595,7 +71595,7 @@ sl_status_t dotdot_set_diagnostics_route_disc_initiated(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_route_disc_initiated,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_route_disc_initiated_undefine_reported(
@@ -71670,7 +71670,7 @@ bool dotdot_is_supported_diagnostics_neighbor_added(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_neighbor_added(
+int16_t dotdot_get_diagnostics_neighbor_added(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71681,7 +71681,7 @@ uint16_t dotdot_get_diagnostics_neighbor_added(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_ADDED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71693,7 +71693,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_added(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_neighbor_added
+  int16_t new_neighbor_added
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71706,7 +71706,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_added(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_neighbor_added,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_neighbor_added_undefine_reported(
@@ -71781,7 +71781,7 @@ bool dotdot_is_supported_diagnostics_neighbor_removed(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_neighbor_removed(
+int16_t dotdot_get_diagnostics_neighbor_removed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71792,7 +71792,7 @@ uint16_t dotdot_get_diagnostics_neighbor_removed(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_REMOVED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71804,7 +71804,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_removed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_neighbor_removed
+  int16_t new_neighbor_removed
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71817,7 +71817,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_removed(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_neighbor_removed,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_neighbor_removed_undefine_reported(
@@ -71892,7 +71892,7 @@ bool dotdot_is_supported_diagnostics_neighbor_stale(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_neighbor_stale(
+int16_t dotdot_get_diagnostics_neighbor_stale(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -71903,7 +71903,7 @@ uint16_t dotdot_get_diagnostics_neighbor_stale(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_STALE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -71915,7 +71915,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_stale(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_neighbor_stale
+  int16_t new_neighbor_stale
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -71928,7 +71928,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_stale(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_neighbor_stale,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_neighbor_stale_undefine_reported(
@@ -72003,7 +72003,7 @@ bool dotdot_is_supported_diagnostics_join_indication(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_join_indication(
+int16_t dotdot_get_diagnostics_join_indication(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72014,7 +72014,7 @@ uint16_t dotdot_get_diagnostics_join_indication(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_JOIN_INDICATION);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72026,7 +72026,7 @@ sl_status_t dotdot_set_diagnostics_join_indication(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_join_indication
+  int16_t new_join_indication
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72039,7 +72039,7 @@ sl_status_t dotdot_set_diagnostics_join_indication(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_join_indication,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_join_indication_undefine_reported(
@@ -72114,7 +72114,7 @@ bool dotdot_is_supported_diagnostics_child_moved(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_child_moved(
+int16_t dotdot_get_diagnostics_child_moved(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72125,7 +72125,7 @@ uint16_t dotdot_get_diagnostics_child_moved(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_CHILD_MOVED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72137,7 +72137,7 @@ sl_status_t dotdot_set_diagnostics_child_moved(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_child_moved
+  int16_t new_child_moved
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72150,7 +72150,7 @@ sl_status_t dotdot_set_diagnostics_child_moved(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_child_moved,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_child_moved_undefine_reported(
@@ -72225,7 +72225,7 @@ bool dotdot_is_supported_diagnostics_nwkfc_failure(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_nwkfc_failure(
+int16_t dotdot_get_diagnostics_nwkfc_failure(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72236,7 +72236,7 @@ uint16_t dotdot_get_diagnostics_nwkfc_failure(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWKFC_FAILURE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72248,7 +72248,7 @@ sl_status_t dotdot_set_diagnostics_nwkfc_failure(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_nwkfc_failure
+  int16_t new_nwkfc_failure
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72261,7 +72261,7 @@ sl_status_t dotdot_set_diagnostics_nwkfc_failure(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_nwkfc_failure,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_nwkfc_failure_undefine_reported(
@@ -72336,7 +72336,7 @@ bool dotdot_is_supported_diagnostics_apsfc_failure(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_apsfc_failure(
+int16_t dotdot_get_diagnostics_apsfc_failure(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72347,7 +72347,7 @@ uint16_t dotdot_get_diagnostics_apsfc_failure(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APSFC_FAILURE);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72359,7 +72359,7 @@ sl_status_t dotdot_set_diagnostics_apsfc_failure(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_apsfc_failure
+  int16_t new_apsfc_failure
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72372,7 +72372,7 @@ sl_status_t dotdot_set_diagnostics_apsfc_failure(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_apsfc_failure,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_apsfc_failure_undefine_reported(
@@ -72447,7 +72447,7 @@ bool dotdot_is_supported_diagnostics_aps_unauthorized_key(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_unauthorized_key(
+int16_t dotdot_get_diagnostics_aps_unauthorized_key(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72458,7 +72458,7 @@ uint16_t dotdot_get_diagnostics_aps_unauthorized_key(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_UNAUTHORIZED_KEY);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72470,7 +72470,7 @@ sl_status_t dotdot_set_diagnostics_aps_unauthorized_key(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_unauthorized_key
+  int16_t new_aps_unauthorized_key
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72483,7 +72483,7 @@ sl_status_t dotdot_set_diagnostics_aps_unauthorized_key(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_unauthorized_key,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_unauthorized_key_undefine_reported(
@@ -72558,7 +72558,7 @@ bool dotdot_is_supported_diagnostics_nwk_decrypt_failures(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_nwk_decrypt_failures(
+int16_t dotdot_get_diagnostics_nwk_decrypt_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72569,7 +72569,7 @@ uint16_t dotdot_get_diagnostics_nwk_decrypt_failures(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWK_DECRYPT_FAILURES);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72581,7 +72581,7 @@ sl_status_t dotdot_set_diagnostics_nwk_decrypt_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_nwk_decrypt_failures
+  int16_t new_nwk_decrypt_failures
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72594,7 +72594,7 @@ sl_status_t dotdot_set_diagnostics_nwk_decrypt_failures(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_nwk_decrypt_failures,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_nwk_decrypt_failures_undefine_reported(
@@ -72669,7 +72669,7 @@ bool dotdot_is_supported_diagnostics_aps_decrypt_failures(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_aps_decrypt_failures(
+int16_t dotdot_get_diagnostics_aps_decrypt_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72680,7 +72680,7 @@ uint16_t dotdot_get_diagnostics_aps_decrypt_failures(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_DECRYPT_FAILURES);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72692,7 +72692,7 @@ sl_status_t dotdot_set_diagnostics_aps_decrypt_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_aps_decrypt_failures
+  int16_t new_aps_decrypt_failures
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72705,7 +72705,7 @@ sl_status_t dotdot_set_diagnostics_aps_decrypt_failures(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_aps_decrypt_failures,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_aps_decrypt_failures_undefine_reported(
@@ -72780,7 +72780,7 @@ bool dotdot_is_supported_diagnostics_packet_buffer_allocate_failures(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_packet_buffer_allocate_failures(
+int16_t dotdot_get_diagnostics_packet_buffer_allocate_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72791,7 +72791,7 @@ uint16_t dotdot_get_diagnostics_packet_buffer_allocate_failures(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72803,7 +72803,7 @@ sl_status_t dotdot_set_diagnostics_packet_buffer_allocate_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_packet_buffer_allocate_failures
+  int16_t new_packet_buffer_allocate_failures
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72816,7 +72816,7 @@ sl_status_t dotdot_set_diagnostics_packet_buffer_allocate_failures(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_packet_buffer_allocate_failures,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_packet_buffer_allocate_failures_undefine_reported(
@@ -72891,7 +72891,7 @@ bool dotdot_is_supported_diagnostics_relayed_ucast(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_relayed_ucast(
+int16_t dotdot_get_diagnostics_relayed_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -72902,7 +72902,7 @@ uint16_t dotdot_get_diagnostics_relayed_ucast(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_RELAYED_UCAST);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -72914,7 +72914,7 @@ sl_status_t dotdot_set_diagnostics_relayed_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_relayed_ucast
+  int16_t new_relayed_ucast
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -72927,7 +72927,7 @@ sl_status_t dotdot_set_diagnostics_relayed_ucast(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_relayed_ucast,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_relayed_ucast_undefine_reported(
@@ -73002,7 +73002,7 @@ bool dotdot_is_supported_diagnostics_phy_to_mac_queue_limit_reached(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_phy_to_mac_queue_limit_reached(
+int16_t dotdot_get_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -73013,7 +73013,7 @@ uint16_t dotdot_get_diagnostics_phy_to_mac_queue_limit_reached(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -73025,7 +73025,7 @@ sl_status_t dotdot_set_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_phy_to_mac_queue_limit_reached
+  int16_t new_phy_to_mac_queue_limit_reached
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -73038,7 +73038,7 @@ sl_status_t dotdot_set_diagnostics_phy_to_mac_queue_limit_reached(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_phy_to_mac_queue_limit_reached,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_phy_to_mac_queue_limit_reached_undefine_reported(
@@ -73113,7 +73113,7 @@ bool dotdot_is_supported_diagnostics_packet_validate_drop_count(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_packet_validate_drop_count(
+int16_t dotdot_get_diagnostics_packet_validate_drop_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -73124,7 +73124,7 @@ uint16_t dotdot_get_diagnostics_packet_validate_drop_count(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -73136,7 +73136,7 @@ sl_status_t dotdot_set_diagnostics_packet_validate_drop_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_packet_validate_drop_count
+  int16_t new_packet_validate_drop_count
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -73149,7 +73149,7 @@ sl_status_t dotdot_set_diagnostics_packet_validate_drop_count(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_packet_validate_drop_count,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_packet_validate_drop_count_undefine_reported(
@@ -73224,7 +73224,7 @@ bool dotdot_is_supported_diagnostics_average_mac_retry_per_aps_message_sent(
   return attribute_store_node_exists(node);
 }
 
-uint16_t dotdot_get_diagnostics_average_mac_retry_per_aps_message_sent(
+int16_t dotdot_get_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -73235,7 +73235,7 @@ uint16_t dotdot_get_diagnostics_average_mac_retry_per_aps_message_sent(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT);
 
-  uint16_t result = {};
+  int16_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -73247,7 +73247,7 @@ sl_status_t dotdot_set_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint16_t new_average_mac_retry_per_aps_message_sent
+  int16_t new_average_mac_retry_per_aps_message_sent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -73260,7 +73260,7 @@ sl_status_t dotdot_set_diagnostics_average_mac_retry_per_aps_message_sent(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_average_mac_retry_per_aps_message_sent,
-                                                  sizeof(uint16_t));
+                                                  sizeof(int16_t));
   }
 
 sl_status_t dotdot_diagnostics_average_mac_retry_per_aps_message_sent_undefine_reported(
@@ -73335,7 +73335,7 @@ bool dotdot_is_supported_diagnostics_last_messagelqi(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_diagnostics_last_messagelqi(
+int8_t dotdot_get_diagnostics_last_messagelqi(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -73346,7 +73346,7 @@ uint8_t dotdot_get_diagnostics_last_messagelqi(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGELQI);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -73358,7 +73358,7 @@ sl_status_t dotdot_set_diagnostics_last_messagelqi(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_last_messagelqi
+  int8_t new_last_messagelqi
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -73371,7 +73371,7 @@ sl_status_t dotdot_set_diagnostics_last_messagelqi(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_last_messagelqi,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_diagnostics_last_messagelqi_undefine_reported(
@@ -73925,7 +73925,7 @@ bool dotdot_is_supported_state_endpoint_id_list(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_state_endpoint_id_list(
+int8_t dotdot_get_state_endpoint_id_list(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -73936,7 +73936,7 @@ uint8_t dotdot_get_state_endpoint_id_list(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_STATE_ENDPOINT_ID_LIST);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -73949,7 +73949,7 @@ sl_status_t dotdot_set_state_endpoint_id_list(
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
   size_t new_endpoint_id_list_count,
-  const uint8_t* new_endpoint_id_list
+  const int8_t* new_endpoint_id_list
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -74261,7 +74261,7 @@ bool dotdot_is_supported_state_maximum_command_delay(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_state_maximum_command_delay(
+int32_t dotdot_get_state_maximum_command_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -74272,7 +74272,7 @@ uint32_t dotdot_get_state_maximum_command_delay(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -74284,7 +74284,7 @@ sl_status_t dotdot_set_state_maximum_command_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_maximum_command_delay
+  int32_t new_maximum_command_delay
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -74297,7 +74297,7 @@ sl_status_t dotdot_set_state_maximum_command_delay(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_maximum_command_delay,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_state_maximum_command_delay_undefine_reported(
@@ -74887,7 +74887,7 @@ bool dotdot_is_supported_system_metrics_reporting_interval_seconds(
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_system_metrics_reporting_interval_seconds(
+int32_t dotdot_get_system_metrics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -74898,7 +74898,7 @@ uint32_t dotdot_get_system_metrics_reporting_interval_seconds(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -74910,7 +74910,7 @@ sl_status_t dotdot_set_system_metrics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_reporting_interval_seconds
+  int32_t new_reporting_interval_seconds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -74923,7 +74923,7 @@ sl_status_t dotdot_set_system_metrics_reporting_interval_seconds(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_reporting_interval_seconds,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_system_metrics_reporting_interval_seconds_undefine_reported(
@@ -77025,7 +77025,7 @@ bool dotdot_is_supported_system_metrics_uptime_minutes(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_system_metrics_uptime_minutes(
+int64_t dotdot_get_system_metrics_uptime_minutes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -77036,7 +77036,7 @@ uint64_t dotdot_get_system_metrics_uptime_minutes(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_UPTIME_MINUTES);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -77048,7 +77048,7 @@ sl_status_t dotdot_set_system_metrics_uptime_minutes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_uptime_minutes
+  int64_t new_uptime_minutes
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -77061,7 +77061,7 @@ sl_status_t dotdot_set_system_metrics_uptime_minutes(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_uptime_minutes,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_system_metrics_uptime_minutes_undefine_reported(
@@ -77802,7 +77802,7 @@ bool dotdot_is_supported_system_metrics_system_interrupts(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_system_metrics_system_interrupts(
+int64_t dotdot_get_system_metrics_system_interrupts(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -77813,7 +77813,7 @@ uint64_t dotdot_get_system_metrics_system_interrupts(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SYSTEM_INTERRUPTS);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -77825,7 +77825,7 @@ sl_status_t dotdot_set_system_metrics_system_interrupts(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_system_interrupts
+  int64_t new_system_interrupts
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -77838,7 +77838,7 @@ sl_status_t dotdot_set_system_metrics_system_interrupts(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_system_interrupts,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_system_metrics_system_interrupts_undefine_reported(
@@ -78465,7 +78465,7 @@ bool dotdot_is_supported_application_monitoring_uptime_minutes(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_application_monitoring_uptime_minutes(
+int64_t dotdot_get_application_monitoring_uptime_minutes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -78476,7 +78476,7 @@ uint64_t dotdot_get_application_monitoring_uptime_minutes(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_UPTIME_MINUTES);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -78488,7 +78488,7 @@ sl_status_t dotdot_set_application_monitoring_uptime_minutes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_uptime_minutes
+  int64_t new_uptime_minutes
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -78501,7 +78501,7 @@ sl_status_t dotdot_set_application_monitoring_uptime_minutes(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_uptime_minutes,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_application_monitoring_uptime_minutes_undefine_reported(
@@ -78576,7 +78576,7 @@ bool dotdot_is_supported_application_monitoring_process_id(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_application_monitoring_process_id(
+int64_t dotdot_get_application_monitoring_process_id(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -78587,7 +78587,7 @@ uint64_t dotdot_get_application_monitoring_process_id(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_PROCESS_ID);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -78599,7 +78599,7 @@ sl_status_t dotdot_set_application_monitoring_process_id(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_process_id
+  int64_t new_process_id
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -78612,7 +78612,7 @@ sl_status_t dotdot_set_application_monitoring_process_id(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_process_id,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_application_monitoring_process_id_undefine_reported(
@@ -79133,7 +79133,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_statistics_reporting_interv
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_application_monitoring_mqtt_statistics_reporting_interval_seconds(
+int32_t dotdot_get_application_monitoring_mqtt_statistics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79144,7 +79144,7 @@ uint32_t dotdot_get_application_monitoring_mqtt_statistics_reporting_interval_se
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -79156,7 +79156,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_statistics_reporting_interval
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_mqtt_statistics_reporting_interval_seconds
+  int32_t new_mqtt_statistics_reporting_interval_seconds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79169,7 +79169,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_statistics_reporting_interval
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mqtt_statistics_reporting_interval_seconds,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_undefine_reported(
@@ -79244,7 +79244,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_messages_sent(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_application_monitoring_mqtt_messages_sent(
+int64_t dotdot_get_application_monitoring_mqtt_messages_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79255,7 +79255,7 @@ uint64_t dotdot_get_application_monitoring_mqtt_messages_sent(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_SENT);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -79267,7 +79267,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_messages_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_mqtt_messages_sent
+  int64_t new_mqtt_messages_sent
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79280,7 +79280,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_messages_sent(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mqtt_messages_sent,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_application_monitoring_mqtt_messages_sent_undefine_reported(
@@ -79355,7 +79355,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_messages_received(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_application_monitoring_mqtt_messages_received(
+int64_t dotdot_get_application_monitoring_mqtt_messages_received(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79366,7 +79366,7 @@ uint64_t dotdot_get_application_monitoring_mqtt_messages_received(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -79378,7 +79378,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_messages_received(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_mqtt_messages_received
+  int64_t new_mqtt_messages_received
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79391,7 +79391,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_messages_received(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mqtt_messages_received,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_application_monitoring_mqtt_messages_received_undefine_reported(
@@ -79466,7 +79466,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_subscription_count(
   return attribute_store_node_exists(node);
 }
 
-uint64_t dotdot_get_application_monitoring_mqtt_subscription_count(
+int64_t dotdot_get_application_monitoring_mqtt_subscription_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79477,7 +79477,7 @@ uint64_t dotdot_get_application_monitoring_mqtt_subscription_count(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT);
 
-  uint64_t result = {};
+  int64_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -79489,7 +79489,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_subscription_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint64_t new_mqtt_subscription_count
+  int64_t new_mqtt_subscription_count
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79502,7 +79502,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_subscription_count(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_mqtt_subscription_count,
-                                                  sizeof(uint64_t));
+                                                  sizeof(int64_t));
   }
 
 sl_status_t dotdot_application_monitoring_mqtt_subscription_count_undefine_reported(
@@ -79910,7 +79910,7 @@ bool dotdot_is_supported_application_monitoring_application_statistics_reporting
   return attribute_store_node_exists(node);
 }
 
-uint32_t dotdot_get_application_monitoring_application_statistics_reporting_interval_seconds(
+int32_t dotdot_get_application_monitoring_application_statistics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -79921,7 +79921,7 @@ uint32_t dotdot_get_application_monitoring_application_statistics_reporting_inte
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS);
 
-  uint32_t result = {};
+  int32_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -79933,7 +79933,7 @@ sl_status_t dotdot_set_application_monitoring_application_statistics_reporting_i
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint32_t new_application_statistics_reporting_interval_seconds
+  int32_t new_application_statistics_reporting_interval_seconds
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -79946,7 +79946,7 @@ sl_status_t dotdot_set_application_monitoring_application_statistics_reporting_i
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_application_statistics_reporting_interval_seconds,
-                                                  sizeof(uint32_t));
+                                                  sizeof(int32_t));
   }
 
 sl_status_t dotdot_application_monitoring_application_statistics_reporting_interval_seconds_undefine_reported(
@@ -81047,6 +81047,938 @@ bool dotdot_is_any_configuration_parameters_attribute_supported(
 }
 
 bool dotdot_is_any_configuration_parameters_writable_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+
+  return false;
+}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UserCredential
+////////////////////////////////////////////////////////////////////////////////
+bool dotdot_is_supported_user_credential_supported_user_unique_identifiers(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+  return attribute_store_node_exists(node);
+}
+
+int16_t dotdot_get_user_credential_supported_user_unique_identifiers(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+
+  int16_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_supported_user_unique_identifiers(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  int16_t new_supported_user_unique_identifiers
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_supported_user_unique_identifiers,
+                                                  sizeof(int16_t));
+  }
+
+sl_status_t dotdot_user_credential_supported_user_unique_identifiers_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_supported_user_unique_identifiers_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_supported_user_unique_identifiers_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_supported_user_unique_identifiers_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_supported_user_unique_identifiers(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_supported_credential_rules(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+  return attribute_store_node_exists(node);
+}
+
+uint8_t dotdot_get_user_credential_supported_credential_rules(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+
+  uint8_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_supported_credential_rules(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint8_t new_supported_credential_rules
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_supported_credential_rules,
+                                                  sizeof(uint8_t));
+  }
+
+sl_status_t dotdot_user_credential_supported_credential_rules_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_supported_credential_rules_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_supported_credential_rules_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_supported_credential_rules_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_supported_credential_rules(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_supported_credential_types(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+  return attribute_store_node_exists(node);
+}
+
+uint16_t dotdot_get_user_credential_supported_credential_types(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+
+  uint16_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_supported_credential_types(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_supported_credential_types
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_supported_credential_types,
+                                                  sizeof(uint16_t));
+  }
+
+sl_status_t dotdot_user_credential_supported_credential_types_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_supported_credential_types_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_supported_credential_types_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_supported_credential_types_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_supported_credential_types(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_supported_user_types(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+  return attribute_store_node_exists(node);
+}
+
+uint16_t dotdot_get_user_credential_supported_user_types(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+
+  uint16_t result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_supported_user_types(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  uint16_t new_supported_user_types
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_supported_user_types,
+                                                  sizeof(uint16_t));
+  }
+
+sl_status_t dotdot_user_credential_supported_user_types_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_supported_user_types_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_supported_user_types_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_supported_user_types_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_supported_user_types(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_support_credential_checksum(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+  return attribute_store_node_exists(node);
+}
+
+bool dotdot_get_user_credential_support_credential_checksum(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+
+  bool result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_support_credential_checksum(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  bool new_support_credential_checksum
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_support_credential_checksum,
+                                                  sizeof(bool));
+  }
+
+sl_status_t dotdot_user_credential_support_credential_checksum_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_support_credential_checksum_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_support_credential_checksum_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_support_credential_checksum_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_support_credential_checksum(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_support_admin_pin_code(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+  return attribute_store_node_exists(node);
+}
+
+bool dotdot_get_user_credential_support_admin_pin_code(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+
+  bool result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_support_admin_pin_code(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  bool new_support_admin_pin_code
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_support_admin_pin_code,
+                                                  sizeof(bool));
+  }
+
+sl_status_t dotdot_user_credential_support_admin_pin_code_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_support_admin_pin_code_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_support_admin_pin_code_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_support_admin_pin_code_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_support_admin_pin_code(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_support_admin_pin_code_deactivation(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+  return attribute_store_node_exists(node);
+}
+
+bool dotdot_get_user_credential_support_admin_pin_code_deactivation(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+
+  bool result = {};
+  attribute_store_read_value(node,
+                             value_state,
+                             (uint8_t *)&result,
+                             sizeof(result));
+  return result;
+}
+
+sl_status_t dotdot_set_user_credential_support_admin_pin_code_deactivation(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  bool new_support_admin_pin_code_deactivation
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+
+  return attribute_store_set_node_attribute_value(node,
+                                                  value_state,
+                                                  (uint8_t *)&new_support_admin_pin_code_deactivation,
+                                                  sizeof(bool));
+  }
+
+sl_status_t dotdot_user_credential_support_admin_pin_code_deactivation_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_support_admin_pin_code_deactivation_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_support_admin_pin_code_deactivation_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_support_admin_pin_code_deactivation_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_support_admin_pin_code_deactivation(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+bool dotdot_is_supported_user_credential_admin_pin_code(
+  const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+  return attribute_store_node_exists(node);
+}
+
+const char* dotdot_get_user_credential_admin_pin_code(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+
+  if (REPORTED_ATTRIBUTE == value_state) {
+    attribute_store_get_reported_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  } else {
+    attribute_store_get_desired_string(node, received_string, ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
+  }
+  return received_string;
+}
+
+sl_status_t dotdot_set_user_credential_admin_pin_code(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  attribute_store_node_value_state_t value_state,
+  const char* new_admin_pin_code
+  )
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+
+  if (REPORTED_ATTRIBUTE == value_state){
+    return attribute_store_set_reported_string(node, new_admin_pin_code);
+  } else {
+    return attribute_store_set_desired_string(node, new_admin_pin_code);
+  }
+}
+
+sl_status_t dotdot_user_credential_admin_pin_code_undefine_reported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+  attribute_store_undefine_reported(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+sl_status_t dotdot_user_credential_admin_pin_code_undefine_desired(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+  attribute_store_undefine_desired(node);
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+
+bool dotdot_user_credential_admin_pin_code_is_reported_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+  return attribute_store_is_reported_defined(node);
+}
+
+bool dotdot_user_credential_admin_pin_code_is_desired_defined(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id)
+{
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+  return attribute_store_is_desired_defined(node);
+}
+
+sl_status_t dotdot_create_user_credential_admin_pin_code(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
+  attribute_store_node_t node =
+    attribute_store_create_child_if_missing(endpoint_node,
+                                           DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
+
+  return (node != ATTRIBUTE_STORE_INVALID_NODE) ? SL_STATUS_OK : SL_STATUS_FAIL;
+}
+
+bool dotdot_is_any_user_credential_attribute_supported(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint_id) {
+
+  if (true == dotdot_is_supported_user_credential_supported_user_unique_identifiers(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_supported_credential_rules(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_supported_credential_types(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_supported_user_types(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_support_credential_checksum(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_support_admin_pin_code(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_support_admin_pin_code_deactivation(unid, endpoint_id)) {
+    return true;
+  }
+  if (true == dotdot_is_supported_user_credential_admin_pin_code(unid, endpoint_id)) {
+    return true;
+  }
+
+  return false;
+}
+
+bool dotdot_is_any_user_credential_writable_attribute_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id) {
 
@@ -82954,7 +83886,7 @@ bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_precision(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
+int8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -82965,7 +83897,7 @@ uint8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -82977,7 +83909,7 @@ sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_humidifier_setpoint_precision
+  int8_t new_humidifier_setpoint_precision
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -82990,7 +83922,7 @@ sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_precision(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_humidifier_setpoint_precision,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_unify_humidity_control_humidifier_setpoint_precision_undefine_reported(
@@ -83509,7 +84441,7 @@ bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_precision(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
+int8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -83520,7 +84452,7 @@ uint8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -83532,7 +84464,7 @@ sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_dehumidifier_setpoint_precision
+  int8_t new_dehumidifier_setpoint_precision
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -83545,7 +84477,7 @@ sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_precision(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_dehumidifier_setpoint_precision,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_unify_humidity_control_dehumidifier_setpoint_precision_undefine_reported(
@@ -84064,7 +84996,7 @@ bool dotdot_is_supported_unify_humidity_control_auto_setpoint_precision(
   return attribute_store_node_exists(node);
 }
 
-uint8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
+int8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state)
@@ -84075,7 +85007,7 @@ uint8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
       endpoint_node,
       DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION);
 
-  uint8_t result = {};
+  int8_t result = {};
   attribute_store_read_value(node,
                              value_state,
                              (uint8_t *)&result,
@@ -84087,7 +85019,7 @@ sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_auto_setpoint_precision
+  int8_t new_auto_setpoint_precision
   )
 {
   attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint_id);
@@ -84100,7 +85032,7 @@ sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_precision(
   return attribute_store_set_node_attribute_value(node,
                                                   value_state,
                                                   (uint8_t *)&new_auto_setpoint_precision,
-                                                  sizeof(uint8_t));
+                                                  sizeof(int8_t));
   }
 
 sl_status_t dotdot_unify_humidity_control_auto_setpoint_precision_undefine_reported(

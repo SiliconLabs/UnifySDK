@@ -1260,6 +1260,96 @@ static uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callbac
 uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_t get_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback(){
   return test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback;
 }
+static uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback = NULL;
+static uic_mqtt_dotdot_user_credential_write_attributes_callback_t test_uic_mqtt_dotdot_user_credential_write_attributes_callback = NULL;
+
+uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t get_uic_mqtt_dotdot_user_credential_force_read_attributes_callback(){
+  return test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback;
+}
+uic_mqtt_dotdot_user_credential_write_attributes_callback_t get_uic_mqtt_dotdot_user_credential_write_attributes_callback(){
+  return test_uic_mqtt_dotdot_user_credential_write_attributes_callback;
+}
+
+static uic_mqtt_dotdot_user_credential_add_user_callback_t test_uic_mqtt_dotdot_user_credential_add_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_add_user_callback_t get_uic_mqtt_dotdot_user_credential_add_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_add_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_modify_user_callback_t test_uic_mqtt_dotdot_user_credential_modify_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_modify_user_callback_t get_uic_mqtt_dotdot_user_credential_modify_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_modify_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_user_callback_t test_uic_mqtt_dotdot_user_credential_delete_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_user_callback_t get_uic_mqtt_dotdot_user_credential_delete_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_add_credential_callback_t test_uic_mqtt_dotdot_user_credential_add_credential_callback = NULL;
+uic_mqtt_dotdot_user_credential_add_credential_callback_t get_uic_mqtt_dotdot_user_credential_add_credential_callback(){
+  return test_uic_mqtt_dotdot_user_credential_add_credential_callback;
+}
+static uic_mqtt_dotdot_user_credential_modify_credential_callback_t test_uic_mqtt_dotdot_user_credential_modify_credential_callback = NULL;
+uic_mqtt_dotdot_user_credential_modify_credential_callback_t get_uic_mqtt_dotdot_user_credential_modify_credential_callback(){
+  return test_uic_mqtt_dotdot_user_credential_modify_credential_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_credential_callback_t test_uic_mqtt_dotdot_user_credential_delete_credential_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_credential_callback_t get_uic_mqtt_dotdot_user_credential_delete_credential_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_credential_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_all_users_callback_t test_uic_mqtt_dotdot_user_credential_delete_all_users_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_all_users_callback_t get_uic_mqtt_dotdot_user_credential_delete_all_users_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_all_users_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t get_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t get_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t get_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback;
+}
+static uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback = NULL;
+uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t get_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback(){
+  return test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback;
+}
+static uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback = NULL;
+uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t get_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback(){
+  return test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback;
+}
+static uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback = NULL;
+uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t get_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback(){
+  return test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback;
+}
+static uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback = NULL;
+uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t get_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback(){
+  return test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback;
+}
+static uic_mqtt_dotdot_user_credential_credential_association_callback_t test_uic_mqtt_dotdot_user_credential_credential_association_callback = NULL;
+uic_mqtt_dotdot_user_credential_credential_association_callback_t get_uic_mqtt_dotdot_user_credential_credential_association_callback(){
+  return test_uic_mqtt_dotdot_user_credential_credential_association_callback;
+}
+static uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback = NULL;
+uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t get_uic_mqtt_dotdot_user_credential_get_user_checksum_callback(){
+  return test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback;
+}
+static uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback = NULL;
+uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t get_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback(){
+  return test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback;
+}
+static uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback = NULL;
+uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t get_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback(){
+  return test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback;
+}
+static uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback = NULL;
+uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t get_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback(){
+  return test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback;
+}
+static uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback = NULL;
+uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t get_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback(){
+  return test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback;
+}
 static uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_t test_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_protocol_controller_network_management_write_attributes_callback_t test_uic_mqtt_dotdot_protocol_controller_network_management_write_attributes_callback = NULL;
 
@@ -2856,6 +2946,116 @@ void uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_
 {
   test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback = callback;
 }
+void set_uic_mqtt_dotdot_user_credential_force_read_attributes_callback_stub(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback = callback;
+}
+void set_uic_mqtt_dotdot_user_credential_write_attributes_callback_stub(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_write_attributes_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_add_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_add_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_add_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_modify_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_add_credential_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_modify_credential_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_credential_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_all_users_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_credential_association_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_credential_association_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback = callback;
+}
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_set_stub(
+  const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback = callback;
+}
 void set_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_t callback, int cmock_num_calls)
 {
@@ -3818,6 +4018,72 @@ void setUp()
   test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback = NULL;
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_Stub(
     &uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_force_read_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_user_credential_force_read_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_user_credential_force_read_attributes_callback_stub);
+  test_uic_mqtt_dotdot_user_credential_write_attributes_callback = NULL;
+  uic_mqtt_dotdot_set_user_credential_write_attributes_callback_Stub(
+    &set_uic_mqtt_dotdot_user_credential_write_attributes_callback_stub);
+  test_uic_mqtt_dotdot_user_credential_add_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_add_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_add_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_modify_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_modify_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_modify_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_add_credential_callback = NULL;
+  uic_mqtt_dotdot_user_credential_add_credential_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_add_credential_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_modify_credential_callback = NULL;
+  uic_mqtt_dotdot_user_credential_modify_credential_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_modify_credential_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_credential_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_credential_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_credential_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_all_users_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_all_users_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback = NULL;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback = NULL;
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback = NULL;
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback = NULL;
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_credential_association_callback = NULL;
+  uic_mqtt_dotdot_user_credential_credential_association_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_credential_association_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback = NULL;
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_get_user_checksum_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback = NULL;
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback = NULL;
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback = NULL;
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_set_stub);
+  test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback = NULL;
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_set_Stub(
+    &uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_set_stub);
   test_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_protocol_controller_network_management_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_stub);
@@ -4604,6 +4870,14 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_name_and_location_name(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_name_and_location_location(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_configuration_parameters_configuration_parameters(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_user_unique_identifiers(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_credential_rules(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_credential_types(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_supported_user_types(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_support_credential_checksum(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_support_admin_pin_code(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_support_admin_pin_code_deactivation(expected_unid,expected_endpoint_id) );
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_user_credential_admin_pin_code(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_protocol_controller_network_management_network_management_state(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_descriptor_device_type_list(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_fan_control_z_wave_fan_mode(expected_unid,expected_endpoint_id) );
@@ -4652,7 +4926,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_identify_identify_callback) {
     // Dummy command parameters
-      uint16_t identify_time_value;
+      int16_t identify_time_value;
       memset(&identify_time_value, 0x00, sizeof(identify_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_identify_identify_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4663,7 +4937,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_identify_identify_query_response_callback) {
     // Dummy command parameters
-      uint16_t timeout_value;
+      int16_t timeout_value;
       memset(&timeout_value, 0x00, sizeof(timeout_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_identify_identify_query_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4696,7 +4970,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_add_group_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
       const char* group_name_value;
       memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -4713,7 +4987,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_groups_add_group_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4726,7 +5000,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_view_group_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_groups_view_group_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4739,7 +5013,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
       const char* group_name_value;
       memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -4765,7 +5039,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_get_group_membership_response_callback) {
     // Dummy command parameters
-      uint8_t capacity_value;
+      int8_t capacity_value;
       memset(&capacity_value, 0x00, sizeof(capacity_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_groups_get_group_membership_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4778,7 +5052,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_remove_group_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_groups_remove_group_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4791,7 +5065,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_groups_remove_group_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4811,7 +5085,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_add_group_if_identifying_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
       const char* group_name_value;
       memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -4826,15 +5100,15 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_add_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
-      uint8_t transition_time100ms_value;
+      int8_t transition_time100ms_value;
       memset(&transition_time100ms_value, 0x00, sizeof(transition_time100ms_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_add_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4857,9 +5131,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_add_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4874,9 +5148,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_view_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_view_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4891,13 +5165,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4918,9 +5192,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_remove_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4935,9 +5209,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_remove_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4952,7 +5226,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4965,7 +5239,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4978,9 +5252,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_store_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_store_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -4995,9 +5269,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_store_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5012,11 +5286,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_recall_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_recall_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5031,7 +5305,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_get_scene_membership_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_get_scene_membership_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5044,9 +5318,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint8_t capacity_value;
+      int8_t capacity_value;
       memset(&capacity_value, 0x00, sizeof(capacity_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_get_scene_membership_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5063,13 +5337,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5090,9 +5364,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5107,9 +5381,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5124,13 +5398,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5153,13 +5427,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t mode_value;
       memset(&mode_value, 0x00, sizeof(mode_value));
-      uint16_t group_identifier_from_value;
+      uint8_t * group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
-      uint8_t scene_identifier_from_value;
+      int8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
-      uint16_t group_identifier_to_value;
+      uint8_t * group_identifier_to_value;
       memset(&group_identifier_to_value, 0x00, sizeof(group_identifier_to_value));
-      uint8_t scene_identifier_to_value;
+      int8_t scene_identifier_to_value;
       memset(&scene_identifier_to_value, 0x00, sizeof(scene_identifier_to_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_copy_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5180,9 +5454,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_identifier_from_value;
+      uint8_t * group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
-      uint8_t scene_identifier_from_value;
+      int8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_copy_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5220,7 +5494,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       OffWithEffectEffectIdentifier effect_identifier_value;
       memset(&effect_identifier_value, 0x00, sizeof(effect_identifier_value));
-      uint8_t effect_variant_value;
+      int8_t effect_variant_value;
       memset(&effect_variant_value, 0x00, sizeof(effect_variant_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_on_off_off_with_effect_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5242,9 +5516,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t on_off_control_value;
       memset(&on_off_control_value, 0x00, sizeof(on_off_control_value));
-      uint16_t on_time_value;
+      int16_t on_time_value;
       memset(&on_time_value, 0x00, sizeof(on_time_value));
-      uint16_t off_wait_time_value;
+      int16_t off_wait_time_value;
       memset(&off_wait_time_value, 0x00, sizeof(off_wait_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_on_off_on_with_timed_off_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5259,9 +5533,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_level_move_to_level_callback) {
     // Dummy command parameters
-      uint8_t level_value;
+      int8_t level_value;
       memset(&level_value, 0x00, sizeof(level_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -5284,7 +5558,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -5307,9 +5581,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -5347,9 +5621,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_level_move_to_level_with_on_off_callback) {
     // Dummy command parameters
-      uint8_t level_value;
+      int8_t level_value;
       memset(&level_value, 0x00, sizeof(level_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -5372,7 +5646,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -5395,9 +5669,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -5435,7 +5709,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_level_move_to_closest_frequency_callback) {
     // Dummy command parameters
-      uint16_t frequency_value;
+      int16_t frequency_value;
       memset(&frequency_value, 0x00, sizeof(frequency_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_level_move_to_closest_frequency_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5448,7 +5722,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      uint16_t cluster_identifier_value;
+      uint8_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_alarms_reset_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5463,7 +5737,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      uint16_t cluster_identifier_value;
+      uint8_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_alarms_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5487,9 +5761,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      uint16_t cluster_identifier_value;
+      uint8_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
-      uint32_t time_stamp_value;
+      int32_t time_stamp_value;
       memset(&time_stamp_value, 0x00, sizeof(time_stamp_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_alarms_get_alarm_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5529,7 +5803,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       bool start_fast_polling_value;
       memset(&start_fast_polling_value, 0x00, sizeof(start_fast_polling_value));
-      uint16_t fast_poll_timeout_value;
+      int16_t fast_poll_timeout_value;
       memset(&fast_poll_timeout_value, 0x00, sizeof(fast_poll_timeout_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_poll_control_check_in_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5549,7 +5823,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback) {
     // Dummy command parameters
-      uint32_t new_long_poll_interval_value;
+      int32_t new_long_poll_interval_value;
       memset(&new_long_poll_interval_value, 0x00, sizeof(new_long_poll_interval_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5560,7 +5834,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback) {
     // Dummy command parameters
-      uint16_t new_short_poll_interval_value;
+      int16_t new_short_poll_interval_value;
       memset(&new_short_poll_interval_value, 0x00, sizeof(new_short_poll_interval_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5571,7 +5845,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_lock_door_callback) {
     // Dummy command parameters
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_lock_door_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5593,7 +5867,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_unlock_door_callback) {
     // Dummy command parameters
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_unlock_door_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5615,7 +5889,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_toggle_callback) {
     // Dummy command parameters
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_toggle_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5637,9 +5911,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback) {
     // Dummy command parameters
-      uint16_t timeout_in_seconds_value;
+      int16_t timeout_in_seconds_value;
       memset(&timeout_in_seconds_value, 0x00, sizeof(timeout_in_seconds_value));
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5663,7 +5937,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_log_record_callback) {
     // Dummy command parameters
-      uint16_t log_index_value;
+      int16_t log_index_value;
       memset(&log_index_value, 0x00, sizeof(log_index_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_log_record_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5674,19 +5948,19 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_log_record_response_callback) {
     // Dummy command parameters
-      uint16_t log_entryid_value;
+      int16_t log_entryid_value;
       memset(&log_entryid_value, 0x00, sizeof(log_entryid_value));
-      uint32_t timestamp_value;
+      int32_t timestamp_value;
       memset(&timestamp_value, 0x00, sizeof(timestamp_value));
       GetLogRecordResponseEventType event_type_value;
       memset(&event_type_value, 0x00, sizeof(event_type_value));
       DrlkOperEventSource source_operation_event_value;
       memset(&source_operation_event_value, 0x00, sizeof(source_operation_event_value));
-      uint8_t event_id_or_alarm_code_value;
+      int8_t event_id_or_alarm_code_value;
       memset(&event_id_or_alarm_code_value, 0x00, sizeof(event_id_or_alarm_code_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_log_record_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5709,13 +5983,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_pin_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_set_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5743,7 +6017,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_pin_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5754,13 +6028,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_pin_code_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* code_value;
+      uint8_t code_value;
       memset(&code_value, 0x00, sizeof(code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_pin_code_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5777,7 +6051,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5817,7 +6091,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_status_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -5843,7 +6117,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_status_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_user_status_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5854,7 +6128,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_status_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -5869,19 +6143,19 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       uint8_t days_mask_value;
       memset(&days_mask_value, 0x00, sizeof(days_mask_value));
-      uint8_t start_hour_value;
+      int8_t start_hour_value;
       memset(&start_hour_value, 0x00, sizeof(start_hour_value));
-      uint8_t start_minute_value;
+      int8_t start_minute_value;
       memset(&start_minute_value, 0x00, sizeof(start_minute_value));
-      uint8_t end_hour_value;
+      int8_t end_hour_value;
       memset(&end_hour_value, 0x00, sizeof(end_hour_value));
-      uint8_t end_minute_value;
+      int8_t end_minute_value;
       memset(&end_minute_value, 0x00, sizeof(end_minute_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5915,9 +6189,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5930,21 +6204,21 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      int8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t days_mask_value;
       memset(&days_mask_value, 0x00, sizeof(days_mask_value));
-      uint8_t start_hour_value;
+      int8_t start_hour_value;
       memset(&start_hour_value, 0x00, sizeof(start_hour_value));
-      uint8_t start_minute_value;
+      int8_t start_minute_value;
       memset(&start_minute_value, 0x00, sizeof(start_minute_value));
-      uint8_t end_hour_value;
+      int8_t end_hour_value;
       memset(&end_hour_value, 0x00, sizeof(end_hour_value));
-      uint8_t end_minute_value;
+      int8_t end_minute_value;
       memset(&end_minute_value, 0x00, sizeof(end_minute_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5969,9 +6243,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5995,13 +6269,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6029,9 +6303,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6044,15 +6318,15 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      int8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6071,9 +6345,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6097,11 +6371,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      uint8_t * holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
       DrlkOperMode operating_mode_during_holiday_value;
       memset(&operating_mode_during_holiday_value, 0x00, sizeof(operating_mode_during_holiday_value));
@@ -6131,7 +6405,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      uint8_t * holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6142,13 +6416,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      int8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
       DrlkOperMode operating_mode_during_holiday_value;
       memset(&operating_mode_during_holiday_value, 0x00, sizeof(operating_mode_during_holiday_value));
@@ -6169,7 +6443,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      uint8_t * holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6191,7 +6465,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_type_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -6217,7 +6491,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_type_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_user_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6228,7 +6502,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_type_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -6243,13 +6517,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_rfid_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* rfid_code_value;
+      uint8_t rfid_code_value;
       memset(&rfid_code_value, 0x00, sizeof(rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_set_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6277,7 +6551,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6288,13 +6562,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* rfid_code_value;
+      uint8_t rfid_code_value;
       memset(&rfid_code_value, 0x00, sizeof(rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6311,7 +6585,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6353,11 +6627,11 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       DataOperationTypeEnum operation_type_value;
       memset(&operation_type_value, 0x00, sizeof(operation_type_value));
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
       const char* user_name_value;
       memset(&user_name_value, 0x00, sizeof(user_name_value));
-      uint32_t user_uniqueid_value;
+      int32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -6386,7 +6660,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_callback) {
     // Dummy command parameters
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6404,7 +6678,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_user_callback) {
     // Dummy command parameters
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6419,11 +6693,11 @@ void test_automatic_deduction_of_supported_commands()
       memset(&operation_event_source_value, 0x00, sizeof(operation_event_source_value));
       OperatingEventNotificationOperationEventCode operation_event_code_value;
       memset(&operation_event_code_value, 0x00, sizeof(operation_event_code_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
-      uint32_t local_time_value;
+      int32_t local_time_value;
       memset(&local_time_value, 0x00, sizeof(local_time_value));
       const char* data_value;
       memset(&data_value, 0x00, sizeof(data_value));
@@ -6450,15 +6724,15 @@ void test_automatic_deduction_of_supported_commands()
       memset(&program_event_source_value, 0x00, sizeof(program_event_source_value));
       ProgrammingEventNotificationProgramEventCode program_event_code_value;
       memset(&program_event_code_value, 0x00, sizeof(program_event_code_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
-      uint32_t local_time_value;
+      int32_t local_time_value;
       memset(&local_time_value, 0x00, sizeof(local_time_value));
       const char* data_value;
       memset(&data_value, 0x00, sizeof(data_value));
@@ -6489,9 +6763,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&operation_type_value, 0x00, sizeof(operation_type_value));
       CredentialStruct credential_value;
       memset(&credential_value, 0x00, sizeof(credential_value));
-      const char* credential_data_value;
+      uint8_t credential_data_value;
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -6552,7 +6826,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_unbolt_door_callback) {
     // Dummy command parameters
-      const char* pin_code_value;
+      uint8_t pin_code_value;
       memset(&pin_code_value, 0x00, sizeof(pin_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_unbolt_door_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6584,7 +6858,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_lift_value_callback) {
     // Dummy command parameters
-      uint16_t lift_value_value;
+      int16_t lift_value_value;
       memset(&lift_value_value, 0x00, sizeof(lift_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_window_covering_go_to_lift_value_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6595,7 +6869,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback) {
     // Dummy command parameters
-      uint8_t percentage_lift_value_value;
+      int8_t percentage_lift_value_value;
       memset(&percentage_lift_value_value, 0x00, sizeof(percentage_lift_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6606,7 +6880,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback) {
     // Dummy command parameters
-      uint16_t tilt_value_value;
+      int16_t tilt_value_value;
       memset(&tilt_value_value, 0x00, sizeof(tilt_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6617,7 +6891,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback) {
     // Dummy command parameters
-      uint8_t percentage_tilt_value_value;
+      int8_t percentage_tilt_value_value;
       memset(&percentage_tilt_value_value, 0x00, sizeof(percentage_tilt_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6628,7 +6902,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_barrier_control_go_to_percent_callback) {
     // Dummy command parameters
-      uint8_t percent_open_value;
+      int8_t percent_open_value;
       memset(&percent_open_value, 0x00, sizeof(percent_open_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_barrier_control_go_to_percent_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6703,17 +6977,17 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback) {
     // Dummy command parameters
-      uint16_t time_of_day_value;
+      int16_t time_of_day_value;
       memset(&time_of_day_value, 0x00, sizeof(time_of_day_value));
       uint8_t relay_status_value;
       memset(&relay_status_value, 0x00, sizeof(relay_status_value));
       int16_t local_temperature_value;
       memset(&local_temperature_value, 0x00, sizeof(local_temperature_value));
-      uint8_t humidity_percentage_value;
+      int8_t humidity_percentage_value;
       memset(&humidity_percentage_value, 0x00, sizeof(humidity_percentage_value));
       int16_t set_point_value;
       memset(&set_point_value, 0x00, sizeof(set_point_value));
-      uint16_t unread_entries_value;
+      int16_t unread_entries_value;
       memset(&unread_entries_value, 0x00, sizeof(unread_entries_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6763,11 +7037,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_hue_callback) {
     // Dummy command parameters
-      uint8_t hue_value;
+      int8_t hue_value;
       memset(&hue_value, 0x00, sizeof(hue_value));
       CCDirection direction_value;
       memset(&direction_value, 0x00, sizeof(direction_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6792,7 +7066,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6815,9 +7089,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint8_t transition_time_value;
+      int8_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6840,9 +7114,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_saturation_callback) {
     // Dummy command parameters
-      uint8_t saturation_value;
+      int8_t saturation_value;
       memset(&saturation_value, 0x00, sizeof(saturation_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6865,7 +7139,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6888,9 +7162,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint8_t transition_time_value;
+      int8_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6913,11 +7187,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_callback) {
     // Dummy command parameters
-      uint8_t hue_value;
+      int8_t hue_value;
       memset(&hue_value, 0x00, sizeof(hue_value));
-      uint8_t saturation_value;
+      int8_t saturation_value;
       memset(&saturation_value, 0x00, sizeof(saturation_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6940,11 +7214,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_color_callback) {
     // Dummy command parameters
-      uint16_t colorx_value;
+      int16_t colorx_value;
       memset(&colorx_value, 0x00, sizeof(colorx_value));
-      uint16_t colory_value;
+      int16_t colory_value;
       memset(&colory_value, 0x00, sizeof(colory_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -6994,7 +7268,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&stepx_value, 0x00, sizeof(stepx_value));
       int16_t stepy_value;
       memset(&stepy_value, 0x00, sizeof(stepy_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7017,9 +7291,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_color_temperature_callback) {
     // Dummy command parameters
-      uint16_t color_temperature_mireds_value;
+      int16_t color_temperature_mireds_value;
       memset(&color_temperature_mireds_value, 0x00, sizeof(color_temperature_mireds_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7040,11 +7314,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_enhanced_move_to_hue_callback) {
     // Dummy command parameters
-      uint16_t enhanced_hue_value;
+      int16_t enhanced_hue_value;
       memset(&enhanced_hue_value, 0x00, sizeof(enhanced_hue_value));
       CCDirection direction_value;
       memset(&direction_value, 0x00, sizeof(direction_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7069,7 +7343,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint16_t rate_value;
+      int16_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7092,9 +7366,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint16_t step_size_value;
+      int16_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7117,11 +7391,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_saturation_callback) {
     // Dummy command parameters
-      uint16_t enhanced_hue_value;
+      int16_t enhanced_hue_value;
       memset(&enhanced_hue_value, 0x00, sizeof(enhanced_hue_value));
-      uint8_t saturation_value;
+      int8_t saturation_value;
       memset(&saturation_value, 0x00, sizeof(saturation_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7150,9 +7424,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&action_value, 0x00, sizeof(action_value));
       CCColorLoopDirection direction_value;
       memset(&direction_value, 0x00, sizeof(direction_value));
-      uint16_t time_value;
+      int16_t time_value;
       memset(&time_value, 0x00, sizeof(time_value));
-      uint16_t start_hue_value;
+      int16_t start_hue_value;
       memset(&start_hue_value, 0x00, sizeof(start_hue_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7196,11 +7470,11 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint16_t rate_value;
+      int16_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
-      uint16_t color_temperature_minimum_mireds_value;
+      uint8_t * color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      uint16_t color_temperature_maximum_mireds_value;
+      uint8_t * color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7227,13 +7501,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint16_t step_size_value;
+      int16_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      uint16_t color_temperature_minimum_mireds_value;
+      uint8_t * color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      uint16_t color_temperature_maximum_mireds_value;
+      uint8_t * color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7262,7 +7536,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       ZoneEnrollResponseEnrollResponseCode enroll_response_code_value;
       memset(&enroll_response_code_value, 0x00, sizeof(enroll_response_code_value));
-      uint8_t zoneid_value;
+      int8_t zoneid_value;
       memset(&zoneid_value, 0x00, sizeof(zoneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7279,9 +7553,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&zone_status_value, 0x00, sizeof(zone_status_value));
       uint8_t extended_status_value;
       memset(&extended_status_value, 0x00, sizeof(extended_status_value));
-      uint8_t zoneid_value;
+      int8_t zoneid_value;
       memset(&zoneid_value, 0x00, sizeof(zoneid_value));
-      uint16_t delay_value;
+      int16_t delay_value;
       memset(&delay_value, 0x00, sizeof(delay_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7307,7 +7581,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       IasZoneType zone_type_value;
       memset(&zone_type_value, 0x00, sizeof(zone_type_value));
-      uint16_t manufacturer_code_value;
+      int16_t manufacturer_code_value;
       memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7320,9 +7594,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback) {
     // Dummy command parameters
-      uint8_t test_mode_duration_value;
+      int8_t test_mode_duration_value;
       memset(&test_mode_duration_value, 0x00, sizeof(test_mode_duration_value));
-      uint8_t current_zone_sensitivity_level_value;
+      int8_t current_zone_sensitivity_level_value;
       memset(&current_zone_sensitivity_level_value, 0x00, sizeof(current_zone_sensitivity_level_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7337,9 +7611,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t siren_configuration_value;
       memset(&siren_configuration_value, 0x00, sizeof(siren_configuration_value));
-      uint16_t warning_duration_value;
+      int16_t warning_duration_value;
       memset(&warning_duration_value, 0x00, sizeof(warning_duration_value));
-      uint8_t strobe_duty_cycle_value;
+      int8_t strobe_duty_cycle_value;
       memset(&strobe_duty_cycle_value, 0x00, sizeof(strobe_duty_cycle_value));
       IaswdLevel strobe_level_value;
       memset(&strobe_level_value, 0x00, sizeof(strobe_level_value));
@@ -7369,11 +7643,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback) {
     // Dummy command parameters
-      uint8_t profile_count_value;
+      int8_t profile_count_value;
       memset(&profile_count_value, 0x00, sizeof(profile_count_value));
       ProfileIntervalPeriod profile_interval_period_value;
       memset(&profile_interval_period_value, 0x00, sizeof(profile_interval_period_value));
-      uint8_t max_number_of_intervals_value;
+      int8_t max_number_of_intervals_value;
       memset(&max_number_of_intervals_value, 0x00, sizeof(max_number_of_intervals_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7397,15 +7671,15 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback) {
     // Dummy command parameters
-      uint32_t start_time_value;
+      uint8_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
       GetMeasurementProfileResponseStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
       ProfileIntervalPeriod profile_interval_period_value;
       memset(&profile_interval_period_value, 0x00, sizeof(profile_interval_period_value));
-      uint8_t number_of_intervals_delivered_value;
+      int8_t number_of_intervals_delivered_value;
       memset(&number_of_intervals_delivered_value, 0x00, sizeof(number_of_intervals_delivered_value));
-      uint16_t attribute_id_value;
+      uint8_t attribute_id_value;
       memset(&attribute_id_value, 0x00, sizeof(attribute_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7426,11 +7700,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback) {
     // Dummy command parameters
-      uint16_t attributeid_value;
+      uint8_t attributeid_value;
       memset(&attributeid_value, 0x00, sizeof(attributeid_value));
-      uint32_t start_time_value;
+      uint8_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
-      uint8_t number_of_intervals_value;
+      int8_t number_of_intervals_value;
       memset(&number_of_intervals_value, 0x00, sizeof(number_of_intervals_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7451,13 +7725,13 @@ void test_automatic_deduction_of_supported_commands()
       memset(&destinationunid_value, 0x00, sizeof(destinationunid_value));
       bool transmission_successful_value;
       memset(&transmission_successful_value, 0x00, sizeof(transmission_successful_value));
-      uint16_t transmission_time_ms_value;
+      int16_t transmission_time_ms_value;
       memset(&transmission_time_ms_value, 0x00, sizeof(transmission_time_ms_value));
       int8_t tx_powerd_bm_value;
       memset(&tx_powerd_bm_value, 0x00, sizeof(tx_powerd_bm_value));
-      uint8_t tx_channel_value;
+      int8_t tx_channel_value;
       memset(&tx_channel_value, 0x00, sizeof(tx_channel_value));
-      uint8_t routing_attempts_value;
+      int8_t routing_attempts_value;
       memset(&routing_attempts_value, 0x00, sizeof(routing_attempts_value));
       bool route_changed_value;
       memset(&route_changed_value, 0x00, sizeof(route_changed_value));
@@ -7467,7 +7741,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&measured_noise_floord_bm_value, 0x00, sizeof(measured_noise_floord_bm_value));
       int8_t ackrssi_value;
       memset(&ackrssi_value, 0x00, sizeof(ackrssi_value));
-      uint8_t ack_channel_value;
+      int8_t ack_channel_value;
       memset(&ack_channel_value, 0x00, sizeof(ack_channel_value));
       const char* last_route_failed_link_functionalunid_value;
       memset(&last_route_failed_link_functionalunid_value, 0x00, sizeof(last_route_failed_link_functionalunid_value));
@@ -7570,7 +7844,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&cluster_name_value, 0x00, sizeof(cluster_name_value));
       const char* destination_unid_value;
       memset(&destination_unid_value, 0x00, sizeof(destination_unid_value));
-      uint8_t destination_ep_value;
+      int8_t destination_ep_value;
       memset(&destination_ep_value, 0x00, sizeof(destination_ep_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_binding_bind_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7589,7 +7863,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&cluster_name_value, 0x00, sizeof(cluster_name_value));
       const char* destination_unid_value;
       memset(&destination_unid_value, 0x00, sizeof(destination_unid_value));
-      uint8_t destination_ep_value;
+      int8_t destination_ep_value;
       memset(&destination_ep_value, 0x00, sizeof(destination_ep_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_binding_unbind_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7649,7 +7923,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback) {
     // Dummy command parameters
-      uint16_t parameter_id_value;
+      int16_t parameter_id_value;
       memset(&parameter_id_value, 0x00, sizeof(parameter_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7667,7 +7941,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_configuration_parameters_set_parameter_callback) {
     // Dummy command parameters
-      uint16_t parameter_id_value;
+      int16_t parameter_id_value;
       memset(&parameter_id_value, 0x00, sizeof(parameter_id_value));
       int64_t value_value;
       memset(&value_value, 0x00, sizeof(value_value));
@@ -7682,9 +7956,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback) {
     // Dummy command parameters
-      uint16_t first_parameter_id_value;
+      int16_t first_parameter_id_value;
       memset(&first_parameter_id_value, 0x00, sizeof(first_parameter_id_value));
-      uint16_t last_parameter_id_value;
+      int16_t last_parameter_id_value;
       memset(&last_parameter_id_value, 0x00, sizeof(last_parameter_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7692,6 +7966,330 @@ void test_automatic_deduction_of_supported_commands()
         first_parameter_id_value,
       
         last_parameter_id_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      int16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_add_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      int16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_modify_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_credential_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_add_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_credential_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_modify_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_credential_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_users_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_all_users_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback) {
+    // Dummy command parameters
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        credential_type_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      int8_t credential_learn_timeout_value;
+      memset(&credential_learn_timeout_value, 0x00, sizeof(credential_learn_timeout_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_learn_timeout_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      int8_t credential_learn_timeout_value;
+      memset(&credential_learn_timeout_value, 0x00, sizeof(credential_learn_timeout_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_learn_timeout_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_association_callback) {
+    // Dummy command parameters
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t source_user_uniqueid_value;
+      memset(&source_user_uniqueid_value, 0x00, sizeof(source_user_uniqueid_value));
+      int16_t source_credential_slot_value;
+      memset(&source_credential_slot_value, 0x00, sizeof(source_credential_slot_value));
+      int16_t destination_user_uniqueid_value;
+      memset(&destination_user_uniqueid_value, 0x00, sizeof(destination_user_uniqueid_value));
+      int16_t destination_credential_slot_value;
+      memset(&destination_credential_slot_value, 0x00, sizeof(destination_credential_slot_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_credential_association_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        credential_type_value,
+      
+        source_user_uniqueid_value,
+      
+        source_credential_slot_value,
+      
+        destination_user_uniqueid_value,
+      
+        destination_credential_slot_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback) {
+    // Dummy command parameters
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        credential_type_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback) {
+    // Dummy command parameters
+      const char* pin_code_value;
+      memset(&pin_code_value, 0x00, sizeof(pin_code_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        pin_code_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }
@@ -7735,9 +8333,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       SetpointType type_value;
       memset(&type_value, 0x00, sizeof(type_value));
-      uint8_t precision_value;
+      int8_t precision_value;
       memset(&precision_value, 0x00, sizeof(precision_value));
-      uint8_t scale_value;
+      int8_t scale_value;
       memset(&scale_value, 0x00, sizeof(scale_value));
       int32_t value_value;
       memset(&value_value, 0x00, sizeof(value_value));
@@ -7767,7 +8365,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_identify_identify_callback) {
     // Dummy command parameters
-      uint16_t identify_time_value;
+      int16_t identify_time_value;
       memset(&identify_time_value, 0x00, sizeof(identify_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_identify_identify_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7778,7 +8376,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_identify_identify_query_response_callback) {
     // Dummy command parameters
-      uint16_t timeout_value;
+      int16_t timeout_value;
       memset(&timeout_value, 0x00, sizeof(timeout_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_identify_identify_query_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7811,7 +8409,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_add_group_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
       const char* group_name_value;
       memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -7828,7 +8426,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_groups_add_group_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7841,7 +8439,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_view_group_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_groups_view_group_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7854,7 +8452,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
       const char* group_name_value;
       memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -7880,7 +8478,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_get_group_membership_response_callback) {
     // Dummy command parameters
-      uint8_t capacity_value;
+      int8_t capacity_value;
       memset(&capacity_value, 0x00, sizeof(capacity_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_groups_get_group_membership_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7893,7 +8491,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_remove_group_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_groups_remove_group_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7906,7 +8504,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_groups_remove_group_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7926,7 +8524,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_groups_add_group_if_identifying_callback) {
     // Dummy command parameters
-      uint16_t group_id_value;
+      int16_t group_id_value;
       memset(&group_id_value, 0x00, sizeof(group_id_value));
       const char* group_name_value;
       memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -7941,15 +8539,15 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_add_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
-      uint8_t transition_time100ms_value;
+      int8_t transition_time100ms_value;
       memset(&transition_time100ms_value, 0x00, sizeof(transition_time100ms_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_add_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7972,9 +8570,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_add_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7989,9 +8587,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_view_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_view_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8006,13 +8604,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8033,9 +8631,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_remove_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8050,9 +8648,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_remove_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8067,7 +8665,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8080,7 +8678,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8093,9 +8691,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_store_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_store_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8110,9 +8708,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_store_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8127,11 +8725,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_recall_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_recall_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8146,7 +8744,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_get_scene_membership_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_get_scene_membership_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8159,9 +8757,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint8_t capacity_value;
+      int8_t capacity_value;
       memset(&capacity_value, 0x00, sizeof(capacity_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_get_scene_membership_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8178,13 +8776,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8205,9 +8803,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8222,9 +8820,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback) {
     // Dummy command parameters
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8239,13 +8837,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t groupid_value;
+      uint8_t * groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
-      uint8_t sceneid_value;
+      int8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      const char* scene_name_value;
+      uint8_t * scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8268,13 +8866,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t mode_value;
       memset(&mode_value, 0x00, sizeof(mode_value));
-      uint16_t group_identifier_from_value;
+      uint8_t * group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
-      uint8_t scene_identifier_from_value;
+      int8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
-      uint16_t group_identifier_to_value;
+      uint8_t * group_identifier_to_value;
       memset(&group_identifier_to_value, 0x00, sizeof(group_identifier_to_value));
-      uint8_t scene_identifier_to_value;
+      int8_t scene_identifier_to_value;
       memset(&scene_identifier_to_value, 0x00, sizeof(scene_identifier_to_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_copy_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8295,9 +8893,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint16_t group_identifier_from_value;
+      uint8_t * group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
-      uint8_t scene_identifier_from_value;
+      int8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_copy_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8335,7 +8933,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       OffWithEffectEffectIdentifier effect_identifier_value;
       memset(&effect_identifier_value, 0x00, sizeof(effect_identifier_value));
-      uint8_t effect_variant_value;
+      int8_t effect_variant_value;
       memset(&effect_variant_value, 0x00, sizeof(effect_variant_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_on_off_off_with_effect_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8357,9 +8955,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t on_off_control_value;
       memset(&on_off_control_value, 0x00, sizeof(on_off_control_value));
-      uint16_t on_time_value;
+      int16_t on_time_value;
       memset(&on_time_value, 0x00, sizeof(on_time_value));
-      uint16_t off_wait_time_value;
+      int16_t off_wait_time_value;
       memset(&off_wait_time_value, 0x00, sizeof(off_wait_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_on_off_on_with_timed_off_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8374,9 +8972,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_level_move_to_level_callback) {
     // Dummy command parameters
-      uint8_t level_value;
+      int8_t level_value;
       memset(&level_value, 0x00, sizeof(level_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -8399,7 +8997,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -8422,9 +9020,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -8462,9 +9060,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_level_move_to_level_with_on_off_callback) {
     // Dummy command parameters
-      uint8_t level_value;
+      int8_t level_value;
       memset(&level_value, 0x00, sizeof(level_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -8487,7 +9085,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -8510,9 +9108,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       MoveStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -8550,7 +9148,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_level_move_to_closest_frequency_callback) {
     // Dummy command parameters
-      uint16_t frequency_value;
+      int16_t frequency_value;
       memset(&frequency_value, 0x00, sizeof(frequency_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_level_move_to_closest_frequency_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8563,7 +9161,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      uint16_t cluster_identifier_value;
+      uint8_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_alarms_reset_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8578,7 +9176,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      uint16_t cluster_identifier_value;
+      uint8_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_alarms_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8602,9 +9200,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      uint16_t cluster_identifier_value;
+      uint8_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
-      uint32_t time_stamp_value;
+      int32_t time_stamp_value;
       memset(&time_stamp_value, 0x00, sizeof(time_stamp_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_alarms_get_alarm_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8644,7 +9242,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       bool start_fast_polling_value;
       memset(&start_fast_polling_value, 0x00, sizeof(start_fast_polling_value));
-      uint16_t fast_poll_timeout_value;
+      int16_t fast_poll_timeout_value;
       memset(&fast_poll_timeout_value, 0x00, sizeof(fast_poll_timeout_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_poll_control_check_in_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8664,7 +9262,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback) {
     // Dummy command parameters
-      uint32_t new_long_poll_interval_value;
+      int32_t new_long_poll_interval_value;
       memset(&new_long_poll_interval_value, 0x00, sizeof(new_long_poll_interval_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8675,7 +9273,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback) {
     // Dummy command parameters
-      uint16_t new_short_poll_interval_value;
+      int16_t new_short_poll_interval_value;
       memset(&new_short_poll_interval_value, 0x00, sizeof(new_short_poll_interval_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8686,7 +9284,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_lock_door_callback) {
     // Dummy command parameters
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_lock_door_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8708,7 +9306,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_unlock_door_callback) {
     // Dummy command parameters
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_unlock_door_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8730,7 +9328,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_toggle_callback) {
     // Dummy command parameters
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_toggle_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8752,9 +9350,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback) {
     // Dummy command parameters
-      uint16_t timeout_in_seconds_value;
+      int16_t timeout_in_seconds_value;
       memset(&timeout_in_seconds_value, 0x00, sizeof(timeout_in_seconds_value));
-      const char* pin_or_rfid_code_value;
+      uint8_t pin_or_rfid_code_value;
       memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8778,7 +9376,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_log_record_callback) {
     // Dummy command parameters
-      uint16_t log_index_value;
+      int16_t log_index_value;
       memset(&log_index_value, 0x00, sizeof(log_index_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_log_record_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8789,19 +9387,19 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_log_record_response_callback) {
     // Dummy command parameters
-      uint16_t log_entryid_value;
+      int16_t log_entryid_value;
       memset(&log_entryid_value, 0x00, sizeof(log_entryid_value));
-      uint32_t timestamp_value;
+      int32_t timestamp_value;
       memset(&timestamp_value, 0x00, sizeof(timestamp_value));
       GetLogRecordResponseEventType event_type_value;
       memset(&event_type_value, 0x00, sizeof(event_type_value));
       DrlkOperEventSource source_operation_event_value;
       memset(&source_operation_event_value, 0x00, sizeof(source_operation_event_value));
-      uint8_t event_id_or_alarm_code_value;
+      int8_t event_id_or_alarm_code_value;
       memset(&event_id_or_alarm_code_value, 0x00, sizeof(event_id_or_alarm_code_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_log_record_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8824,13 +9422,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_pin_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_set_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8858,7 +9456,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_pin_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8869,13 +9467,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_pin_code_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* code_value;
+      uint8_t code_value;
       memset(&code_value, 0x00, sizeof(code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_pin_code_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8892,7 +9490,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8932,7 +9530,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_status_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -8958,7 +9556,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_status_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_user_status_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8969,7 +9567,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_status_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -8984,19 +9582,19 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       uint8_t days_mask_value;
       memset(&days_mask_value, 0x00, sizeof(days_mask_value));
-      uint8_t start_hour_value;
+      int8_t start_hour_value;
       memset(&start_hour_value, 0x00, sizeof(start_hour_value));
-      uint8_t start_minute_value;
+      int8_t start_minute_value;
       memset(&start_minute_value, 0x00, sizeof(start_minute_value));
-      uint8_t end_hour_value;
+      int8_t end_hour_value;
       memset(&end_hour_value, 0x00, sizeof(end_hour_value));
-      uint8_t end_minute_value;
+      int8_t end_minute_value;
       memset(&end_minute_value, 0x00, sizeof(end_minute_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9030,9 +9628,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9045,21 +9643,21 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      int8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t days_mask_value;
       memset(&days_mask_value, 0x00, sizeof(days_mask_value));
-      uint8_t start_hour_value;
+      int8_t start_hour_value;
       memset(&start_hour_value, 0x00, sizeof(start_hour_value));
-      uint8_t start_minute_value;
+      int8_t start_minute_value;
       memset(&start_minute_value, 0x00, sizeof(start_minute_value));
-      uint8_t end_hour_value;
+      int8_t end_hour_value;
       memset(&end_hour_value, 0x00, sizeof(end_hour_value));
-      uint8_t end_minute_value;
+      int8_t end_minute_value;
       memset(&end_minute_value, 0x00, sizeof(end_minute_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9084,9 +9682,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9110,13 +9708,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9144,9 +9742,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9159,15 +9757,15 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      int8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9186,9 +9784,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback) {
     // Dummy command parameters
-      uint8_t scheduleid_value;
+      uint8_t * scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9212,11 +9810,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      uint8_t * holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
       DrlkOperMode operating_mode_during_holiday_value;
       memset(&operating_mode_during_holiday_value, 0x00, sizeof(operating_mode_during_holiday_value));
@@ -9246,7 +9844,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      uint8_t * holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9257,13 +9855,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      int8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      uint32_t local_start_time_value;
+      int32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-      uint32_t local_end_time_value;
+      int32_t local_end_time_value;
       memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
       DrlkOperMode operating_mode_during_holiday_value;
       memset(&operating_mode_during_holiday_value, 0x00, sizeof(operating_mode_during_holiday_value));
@@ -9284,7 +9882,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback) {
     // Dummy command parameters
-      uint8_t holiday_scheduleid_value;
+      uint8_t * holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9306,7 +9904,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_type_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9332,7 +9930,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_type_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_user_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9343,7 +9941,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_type_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9358,13 +9956,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_rfid_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* rfid_code_value;
+      uint8_t rfid_code_value;
       memset(&rfid_code_value, 0x00, sizeof(rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_set_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9392,7 +9990,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9403,13 +10001,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
-      const char* rfid_code_value;
+      uint8_t rfid_code_value;
       memset(&rfid_code_value, 0x00, sizeof(rfid_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9426,7 +10024,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback) {
     // Dummy command parameters
-      uint16_t userid_value;
+      uint8_t * userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9468,11 +10066,11 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       DataOperationTypeEnum operation_type_value;
       memset(&operation_type_value, 0x00, sizeof(operation_type_value));
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
       const char* user_name_value;
       memset(&user_name_value, 0x00, sizeof(user_name_value));
-      uint32_t user_uniqueid_value;
+      int32_t user_uniqueid_value;
       memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -9501,7 +10099,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_callback) {
     // Dummy command parameters
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9519,7 +10117,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_user_callback) {
     // Dummy command parameters
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9534,11 +10132,11 @@ void test_automatic_deduction_of_supported_commands()
       memset(&operation_event_source_value, 0x00, sizeof(operation_event_source_value));
       OperatingEventNotificationOperationEventCode operation_event_code_value;
       memset(&operation_event_code_value, 0x00, sizeof(operation_event_code_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
-      uint32_t local_time_value;
+      int32_t local_time_value;
       memset(&local_time_value, 0x00, sizeof(local_time_value));
       const char* data_value;
       memset(&data_value, 0x00, sizeof(data_value));
@@ -9565,15 +10163,15 @@ void test_automatic_deduction_of_supported_commands()
       memset(&program_event_source_value, 0x00, sizeof(program_event_source_value));
       ProgrammingEventNotificationProgramEventCode program_event_code_value;
       memset(&program_event_code_value, 0x00, sizeof(program_event_code_value));
-      uint16_t userid_value;
+      int16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
-      const char* pin_value;
+      uint8_t pin_value;
       memset(&pin_value, 0x00, sizeof(pin_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
       DrlkUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
-      uint32_t local_time_value;
+      int32_t local_time_value;
       memset(&local_time_value, 0x00, sizeof(local_time_value));
       const char* data_value;
       memset(&data_value, 0x00, sizeof(data_value));
@@ -9604,9 +10202,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&operation_type_value, 0x00, sizeof(operation_type_value));
       CredentialStruct credential_value;
       memset(&credential_value, 0x00, sizeof(credential_value));
-      const char* credential_data_value;
+      uint8_t credential_data_value;
       memset(&credential_data_value, 0x00, sizeof(credential_data_value));
-      uint16_t user_index_value;
+      int16_t user_index_value;
       memset(&user_index_value, 0x00, sizeof(user_index_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -9667,7 +10265,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_unbolt_door_callback) {
     // Dummy command parameters
-      const char* pin_code_value;
+      uint8_t pin_code_value;
       memset(&pin_code_value, 0x00, sizeof(pin_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_unbolt_door_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9699,7 +10297,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_lift_value_callback) {
     // Dummy command parameters
-      uint16_t lift_value_value;
+      int16_t lift_value_value;
       memset(&lift_value_value, 0x00, sizeof(lift_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_window_covering_go_to_lift_value_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9710,7 +10308,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback) {
     // Dummy command parameters
-      uint8_t percentage_lift_value_value;
+      int8_t percentage_lift_value_value;
       memset(&percentage_lift_value_value, 0x00, sizeof(percentage_lift_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9721,7 +10319,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback) {
     // Dummy command parameters
-      uint16_t tilt_value_value;
+      int16_t tilt_value_value;
       memset(&tilt_value_value, 0x00, sizeof(tilt_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9732,7 +10330,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback) {
     // Dummy command parameters
-      uint8_t percentage_tilt_value_value;
+      int8_t percentage_tilt_value_value;
       memset(&percentage_tilt_value_value, 0x00, sizeof(percentage_tilt_value_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9743,7 +10341,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_barrier_control_go_to_percent_callback) {
     // Dummy command parameters
-      uint8_t percent_open_value;
+      int8_t percent_open_value;
       memset(&percent_open_value, 0x00, sizeof(percent_open_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_barrier_control_go_to_percent_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9818,17 +10416,17 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback) {
     // Dummy command parameters
-      uint16_t time_of_day_value;
+      int16_t time_of_day_value;
       memset(&time_of_day_value, 0x00, sizeof(time_of_day_value));
       uint8_t relay_status_value;
       memset(&relay_status_value, 0x00, sizeof(relay_status_value));
       int16_t local_temperature_value;
       memset(&local_temperature_value, 0x00, sizeof(local_temperature_value));
-      uint8_t humidity_percentage_value;
+      int8_t humidity_percentage_value;
       memset(&humidity_percentage_value, 0x00, sizeof(humidity_percentage_value));
       int16_t set_point_value;
       memset(&set_point_value, 0x00, sizeof(set_point_value));
-      uint16_t unread_entries_value;
+      int16_t unread_entries_value;
       memset(&unread_entries_value, 0x00, sizeof(unread_entries_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9878,11 +10476,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_hue_callback) {
     // Dummy command parameters
-      uint8_t hue_value;
+      int8_t hue_value;
       memset(&hue_value, 0x00, sizeof(hue_value));
       CCDirection direction_value;
       memset(&direction_value, 0x00, sizeof(direction_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -9907,7 +10505,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -9930,9 +10528,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint8_t transition_time_value;
+      int8_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -9955,9 +10553,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_saturation_callback) {
     // Dummy command parameters
-      uint8_t saturation_value;
+      int8_t saturation_value;
       memset(&saturation_value, 0x00, sizeof(saturation_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -9980,7 +10578,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint8_t rate_value;
+      int8_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10003,9 +10601,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint8_t step_size_value;
+      int8_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint8_t transition_time_value;
+      int8_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10028,11 +10626,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_callback) {
     // Dummy command parameters
-      uint8_t hue_value;
+      int8_t hue_value;
       memset(&hue_value, 0x00, sizeof(hue_value));
-      uint8_t saturation_value;
+      int8_t saturation_value;
       memset(&saturation_value, 0x00, sizeof(saturation_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10055,11 +10653,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_color_callback) {
     // Dummy command parameters
-      uint16_t colorx_value;
+      int16_t colorx_value;
       memset(&colorx_value, 0x00, sizeof(colorx_value));
-      uint16_t colory_value;
+      int16_t colory_value;
       memset(&colory_value, 0x00, sizeof(colory_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10109,7 +10707,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&stepx_value, 0x00, sizeof(stepx_value));
       int16_t stepy_value;
       memset(&stepy_value, 0x00, sizeof(stepy_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10132,9 +10730,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_move_to_color_temperature_callback) {
     // Dummy command parameters
-      uint16_t color_temperature_mireds_value;
+      int16_t color_temperature_mireds_value;
       memset(&color_temperature_mireds_value, 0x00, sizeof(color_temperature_mireds_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10155,11 +10753,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_enhanced_move_to_hue_callback) {
     // Dummy command parameters
-      uint16_t enhanced_hue_value;
+      int16_t enhanced_hue_value;
       memset(&enhanced_hue_value, 0x00, sizeof(enhanced_hue_value));
       CCDirection direction_value;
       memset(&direction_value, 0x00, sizeof(direction_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10184,7 +10782,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint16_t rate_value;
+      int16_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10207,9 +10805,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint16_t step_size_value;
+      int16_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10232,11 +10830,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_saturation_callback) {
     // Dummy command parameters
-      uint16_t enhanced_hue_value;
+      int16_t enhanced_hue_value;
       memset(&enhanced_hue_value, 0x00, sizeof(enhanced_hue_value));
-      uint8_t saturation_value;
+      int8_t saturation_value;
       memset(&saturation_value, 0x00, sizeof(saturation_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10265,9 +10863,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&action_value, 0x00, sizeof(action_value));
       CCColorLoopDirection direction_value;
       memset(&direction_value, 0x00, sizeof(direction_value));
-      uint16_t time_value;
+      int16_t time_value;
       memset(&time_value, 0x00, sizeof(time_value));
-      uint16_t start_hue_value;
+      int16_t start_hue_value;
       memset(&start_hue_value, 0x00, sizeof(start_hue_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10311,11 +10909,11 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCMoveMode move_mode_value;
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-      uint16_t rate_value;
+      int16_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
-      uint16_t color_temperature_minimum_mireds_value;
+      uint8_t * color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      uint16_t color_temperature_maximum_mireds_value;
+      uint8_t * color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10342,13 +10940,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       CCStepMode step_mode_value;
       memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-      uint16_t step_size_value;
+      int16_t step_size_value;
       memset(&step_size_value, 0x00, sizeof(step_size_value));
-      uint16_t transition_time_value;
+      int16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      uint16_t color_temperature_minimum_mireds_value;
+      uint8_t * color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      uint16_t color_temperature_maximum_mireds_value;
+      uint8_t * color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10377,7 +10975,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       ZoneEnrollResponseEnrollResponseCode enroll_response_code_value;
       memset(&enroll_response_code_value, 0x00, sizeof(enroll_response_code_value));
-      uint8_t zoneid_value;
+      int8_t zoneid_value;
       memset(&zoneid_value, 0x00, sizeof(zoneid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10394,9 +10992,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&zone_status_value, 0x00, sizeof(zone_status_value));
       uint8_t extended_status_value;
       memset(&extended_status_value, 0x00, sizeof(extended_status_value));
-      uint8_t zoneid_value;
+      int8_t zoneid_value;
       memset(&zoneid_value, 0x00, sizeof(zoneid_value));
-      uint16_t delay_value;
+      int16_t delay_value;
       memset(&delay_value, 0x00, sizeof(delay_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10422,7 +11020,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       IasZoneType zone_type_value;
       memset(&zone_type_value, 0x00, sizeof(zone_type_value));
-      uint16_t manufacturer_code_value;
+      int16_t manufacturer_code_value;
       memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10435,9 +11033,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback) {
     // Dummy command parameters
-      uint8_t test_mode_duration_value;
+      int8_t test_mode_duration_value;
       memset(&test_mode_duration_value, 0x00, sizeof(test_mode_duration_value));
-      uint8_t current_zone_sensitivity_level_value;
+      int8_t current_zone_sensitivity_level_value;
       memset(&current_zone_sensitivity_level_value, 0x00, sizeof(current_zone_sensitivity_level_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10452,9 +11050,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t siren_configuration_value;
       memset(&siren_configuration_value, 0x00, sizeof(siren_configuration_value));
-      uint16_t warning_duration_value;
+      int16_t warning_duration_value;
       memset(&warning_duration_value, 0x00, sizeof(warning_duration_value));
-      uint8_t strobe_duty_cycle_value;
+      int8_t strobe_duty_cycle_value;
       memset(&strobe_duty_cycle_value, 0x00, sizeof(strobe_duty_cycle_value));
       IaswdLevel strobe_level_value;
       memset(&strobe_level_value, 0x00, sizeof(strobe_level_value));
@@ -10484,11 +11082,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback) {
     // Dummy command parameters
-      uint8_t profile_count_value;
+      int8_t profile_count_value;
       memset(&profile_count_value, 0x00, sizeof(profile_count_value));
       ProfileIntervalPeriod profile_interval_period_value;
       memset(&profile_interval_period_value, 0x00, sizeof(profile_interval_period_value));
-      uint8_t max_number_of_intervals_value;
+      int8_t max_number_of_intervals_value;
       memset(&max_number_of_intervals_value, 0x00, sizeof(max_number_of_intervals_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10512,15 +11110,15 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback) {
     // Dummy command parameters
-      uint32_t start_time_value;
+      uint8_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
       GetMeasurementProfileResponseStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
       ProfileIntervalPeriod profile_interval_period_value;
       memset(&profile_interval_period_value, 0x00, sizeof(profile_interval_period_value));
-      uint8_t number_of_intervals_delivered_value;
+      int8_t number_of_intervals_delivered_value;
       memset(&number_of_intervals_delivered_value, 0x00, sizeof(number_of_intervals_delivered_value));
-      uint16_t attribute_id_value;
+      uint8_t attribute_id_value;
       memset(&attribute_id_value, 0x00, sizeof(attribute_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10541,11 +11139,11 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback) {
     // Dummy command parameters
-      uint16_t attributeid_value;
+      uint8_t attributeid_value;
       memset(&attributeid_value, 0x00, sizeof(attributeid_value));
-      uint32_t start_time_value;
+      uint8_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
-      uint8_t number_of_intervals_value;
+      int8_t number_of_intervals_value;
       memset(&number_of_intervals_value, 0x00, sizeof(number_of_intervals_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10566,13 +11164,13 @@ void test_automatic_deduction_of_supported_commands()
       memset(&destinationunid_value, 0x00, sizeof(destinationunid_value));
       bool transmission_successful_value;
       memset(&transmission_successful_value, 0x00, sizeof(transmission_successful_value));
-      uint16_t transmission_time_ms_value;
+      int16_t transmission_time_ms_value;
       memset(&transmission_time_ms_value, 0x00, sizeof(transmission_time_ms_value));
       int8_t tx_powerd_bm_value;
       memset(&tx_powerd_bm_value, 0x00, sizeof(tx_powerd_bm_value));
-      uint8_t tx_channel_value;
+      int8_t tx_channel_value;
       memset(&tx_channel_value, 0x00, sizeof(tx_channel_value));
-      uint8_t routing_attempts_value;
+      int8_t routing_attempts_value;
       memset(&routing_attempts_value, 0x00, sizeof(routing_attempts_value));
       bool route_changed_value;
       memset(&route_changed_value, 0x00, sizeof(route_changed_value));
@@ -10582,7 +11180,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&measured_noise_floord_bm_value, 0x00, sizeof(measured_noise_floord_bm_value));
       int8_t ackrssi_value;
       memset(&ackrssi_value, 0x00, sizeof(ackrssi_value));
-      uint8_t ack_channel_value;
+      int8_t ack_channel_value;
       memset(&ack_channel_value, 0x00, sizeof(ack_channel_value));
       const char* last_route_failed_link_functionalunid_value;
       memset(&last_route_failed_link_functionalunid_value, 0x00, sizeof(last_route_failed_link_functionalunid_value));
@@ -10685,7 +11283,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&cluster_name_value, 0x00, sizeof(cluster_name_value));
       const char* destination_unid_value;
       memset(&destination_unid_value, 0x00, sizeof(destination_unid_value));
-      uint8_t destination_ep_value;
+      int8_t destination_ep_value;
       memset(&destination_ep_value, 0x00, sizeof(destination_ep_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_binding_bind_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10704,7 +11302,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&cluster_name_value, 0x00, sizeof(cluster_name_value));
       const char* destination_unid_value;
       memset(&destination_unid_value, 0x00, sizeof(destination_unid_value));
-      uint8_t destination_ep_value;
+      int8_t destination_ep_value;
       memset(&destination_ep_value, 0x00, sizeof(destination_ep_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_binding_unbind_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10764,7 +11362,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback) {
     // Dummy command parameters
-      uint16_t parameter_id_value;
+      int16_t parameter_id_value;
       memset(&parameter_id_value, 0x00, sizeof(parameter_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10782,7 +11380,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_configuration_parameters_set_parameter_callback) {
     // Dummy command parameters
-      uint16_t parameter_id_value;
+      int16_t parameter_id_value;
       memset(&parameter_id_value, 0x00, sizeof(parameter_id_value));
       int64_t value_value;
       memset(&value_value, 0x00, sizeof(value_value));
@@ -10797,9 +11395,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback) {
     // Dummy command parameters
-      uint16_t first_parameter_id_value;
+      int16_t first_parameter_id_value;
       memset(&first_parameter_id_value, 0x00, sizeof(first_parameter_id_value));
-      uint16_t last_parameter_id_value;
+      int16_t last_parameter_id_value;
       memset(&last_parameter_id_value, 0x00, sizeof(last_parameter_id_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10807,6 +11405,330 @@ void test_automatic_deduction_of_supported_commands()
         first_parameter_id_value,
       
         last_parameter_id_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      int16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_add_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      UserTypeEnum user_type_value;
+      memset(&user_type_value, 0x00, sizeof(user_type_value));
+      bool user_active_state_value;
+      memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+      CredRule credential_rule_value;
+      memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+      const char* user_name_value;
+      memset(&user_name_value, 0x00, sizeof(user_name_value));
+      int16_t expiring_timeout_minutes_value;
+      memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+      UserNameEncodingType user_name_encoding_value;
+      memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_modify_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        user_type_value,
+      
+        user_active_state_value,
+      
+        credential_rule_value,
+      
+        user_name_value,
+      
+        expiring_timeout_minutes_value,
+      
+        user_name_encoding_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_add_credential_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_add_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_modify_credential_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      const char* credential_data_value;
+      memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_modify_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_data_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_credential_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_credential_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_users_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_all_users_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback) {
+    // Dummy command parameters
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        credential_type_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      int8_t credential_learn_timeout_value;
+      memset(&credential_learn_timeout_value, 0x00, sizeof(credential_learn_timeout_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_learn_timeout_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t credential_slot_value;
+      memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+      int8_t credential_learn_timeout_value;
+      memset(&credential_learn_timeout_value, 0x00, sizeof(credential_learn_timeout_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value,
+      
+        credential_type_value,
+      
+        credential_slot_value,
+      
+        credential_learn_timeout_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_credential_association_callback) {
+    // Dummy command parameters
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+      int16_t source_user_uniqueid_value;
+      memset(&source_user_uniqueid_value, 0x00, sizeof(source_user_uniqueid_value));
+      int16_t source_credential_slot_value;
+      memset(&source_credential_slot_value, 0x00, sizeof(source_credential_slot_value));
+      int16_t destination_user_uniqueid_value;
+      memset(&destination_user_uniqueid_value, 0x00, sizeof(destination_user_uniqueid_value));
+      int16_t destination_credential_slot_value;
+      memset(&destination_credential_slot_value, 0x00, sizeof(destination_credential_slot_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_credential_association_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        credential_type_value,
+      
+        source_user_uniqueid_value,
+      
+        source_credential_slot_value,
+      
+        destination_user_uniqueid_value,
+      
+        destination_credential_slot_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback) {
+    // Dummy command parameters
+      int16_t user_uniqueid_value;
+      memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_get_user_checksum_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        user_uniqueid_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback) {
+    // Dummy command parameters
+      CredType credential_type_value;
+      memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        credential_type_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback) {
+    // Dummy command parameters
+      const char* pin_code_value;
+      memset(&pin_code_value, 0x00, sizeof(pin_code_value));
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      ,
+        pin_code_value
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }
@@ -10850,9 +11772,9 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       SetpointType type_value;
       memset(&type_value, 0x00, sizeof(type_value));
-      uint8_t precision_value;
+      int8_t precision_value;
       memset(&precision_value, 0x00, sizeof(precision_value));
-      uint8_t scale_value;
+      int8_t scale_value;
       memset(&scale_value, 0x00, sizeof(scale_value));
       int32_t value_value;
       memset(&value_value, 0x00, sizeof(value_value));

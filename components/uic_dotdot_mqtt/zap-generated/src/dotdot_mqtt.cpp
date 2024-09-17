@@ -394,7 +394,7 @@ static void uic_mqtt_dotdot_on_basic_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_basic_zcl_version_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -464,7 +464,7 @@ sl_status_t uic_mqtt_dotdot_basic_zcl_version_unretain(
 
 sl_status_t uic_mqtt_dotdot_basic_application_version_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -534,7 +534,7 @@ sl_status_t uic_mqtt_dotdot_basic_application_version_unretain(
 
 sl_status_t uic_mqtt_dotdot_basic_stack_version_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -604,7 +604,7 @@ sl_status_t uic_mqtt_dotdot_basic_stack_version_unretain(
 
 sl_status_t uic_mqtt_dotdot_basic_hw_version_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -1091,7 +1091,7 @@ sl_status_t uic_mqtt_dotdot_basic_generic_device_type_unretain(
 
 sl_status_t uic_mqtt_dotdot_basic_product_code_publish(
   const char *base_topic,
-  const char* value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2144,7 +2144,7 @@ static void uic_mqtt_dotdot_on_power_configuration_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2214,7 +2214,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_frequency_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2353,7 +2353,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_alarm_mask_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2423,7 +2423,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2493,7 +2493,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2563,7 +2563,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2633,7 +2633,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_remaining_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2842,7 +2842,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_size_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_batterya_hr_rating_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2912,7 +2912,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_batterya_hr_rating_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_quantity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -2982,7 +2982,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_quantity_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_rated_voltage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3121,7 +3121,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_alarm_mask_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3191,7 +3191,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_un
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3261,7 +3261,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_unret
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3331,7 +3331,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_unret
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3401,7 +3401,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_unret
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3471,7 +3471,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3541,7 +3541,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_un
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3611,7 +3611,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_un
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold3_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3750,7 +3750,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_alarm_state_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -3820,7 +3820,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_remaining_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4029,7 +4029,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_size_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4099,7 +4099,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_quantity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4169,7 +4169,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_quantity_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_rated_voltage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4308,7 +4308,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_alarm_mask_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4378,7 +4378,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4448,7 +4448,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4518,7 +4518,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4588,7 +4588,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4658,7 +4658,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshol
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4728,7 +4728,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4798,7 +4798,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold3_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -4937,7 +4937,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_alarm_state_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5007,7 +5007,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_remaining_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5216,7 +5216,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_size_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5286,7 +5286,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_quantity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5356,7 +5356,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_quantity_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_rated_voltage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5495,7 +5495,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_alarm_mask_unretain(
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5565,7 +5565,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5635,7 +5635,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5705,7 +5705,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5775,7 +5775,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_unre
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5845,7 +5845,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshol
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5915,7 +5915,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -5985,7 +5985,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_u
 
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold3_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -6540,7 +6540,7 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_max_temp_experience
 
 sl_status_t uic_mqtt_dotdot_device_temperature_configuration_over_temp_total_dwell_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -6819,7 +6819,7 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_high_temp_threshold
 
 sl_status_t uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip_point_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -6889,7 +6889,7 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip
 
 sl_status_t uic_mqtt_dotdot_device_temperature_configuration_high_temp_dwell_trip_point_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -7185,7 +7185,7 @@ void uic_mqtt_dotdot_on_identify_identify(
     return;
   }
 
-  uint16_t identify_time = {};
+  int16_t identify_time = {};
 
 
   nlohmann::json jsn;
@@ -7244,7 +7244,7 @@ static void uic_mqtt_dotdot_on_generated_identify_identify(
     return;
   }
 
-  uint16_t identify_time = {};
+  int16_t identify_time = {};
 
 
   nlohmann::json jsn;
@@ -7304,7 +7304,7 @@ void uic_mqtt_dotdot_on_identify_identify_query_response(
     return;
   }
 
-  uint16_t timeout = {};
+  int16_t timeout = {};
 
 
   nlohmann::json jsn;
@@ -7363,7 +7363,7 @@ static void uic_mqtt_dotdot_on_generated_identify_identify_query_response(
     return;
   }
 
-  uint16_t timeout = {};
+  int16_t timeout = {};
 
 
   nlohmann::json jsn;
@@ -7759,7 +7759,7 @@ static void uic_mqtt_dotdot_on_identify_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_identify_identify_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -8297,7 +8297,7 @@ void uic_mqtt_dotdot_on_groups_add_group(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
   std::string group_name;
 
 
@@ -8361,7 +8361,7 @@ static void uic_mqtt_dotdot_on_generated_groups_add_group(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
   std::string group_name;
 
 
@@ -8427,7 +8427,7 @@ void uic_mqtt_dotdot_on_groups_add_group_response(
   }
 
   uint8_t status = {};
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -8491,7 +8491,7 @@ static void uic_mqtt_dotdot_on_generated_groups_add_group_response(
   }
 
   uint8_t status = {};
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -8555,7 +8555,7 @@ void uic_mqtt_dotdot_on_groups_view_group(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -8614,7 +8614,7 @@ static void uic_mqtt_dotdot_on_generated_groups_view_group(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -8675,7 +8675,7 @@ void uic_mqtt_dotdot_on_groups_view_group_response(
   }
 
   uint8_t status = {};
-  uint16_t group_id = {};
+  int16_t group_id = {};
   std::string group_name;
 
 
@@ -8744,7 +8744,7 @@ static void uic_mqtt_dotdot_on_generated_groups_view_group_response(
   }
 
   uint8_t status = {};
-  uint16_t group_id = {};
+  int16_t group_id = {};
   std::string group_name;
 
 
@@ -8813,7 +8813,7 @@ void uic_mqtt_dotdot_on_groups_get_group_membership(
     return;
   }
 
-  std::vector<uint16_t> group_list;
+  std::vector<int16_t> group_list;
 
 
   nlohmann::json jsn;
@@ -8873,7 +8873,7 @@ static void uic_mqtt_dotdot_on_generated_groups_get_group_membership(
     return;
   }
 
-  std::vector<uint16_t> group_list;
+  std::vector<int16_t> group_list;
 
 
   nlohmann::json jsn;
@@ -8934,8 +8934,8 @@ void uic_mqtt_dotdot_on_groups_get_group_membership_response(
     return;
   }
 
-  uint8_t capacity = {};
-  std::vector<uint16_t> group_list;
+  int8_t capacity = {};
+  std::vector<int16_t> group_list;
 
 
   nlohmann::json jsn;
@@ -8999,8 +8999,8 @@ static void uic_mqtt_dotdot_on_generated_groups_get_group_membership_response(
     return;
   }
 
-  uint8_t capacity = {};
-  std::vector<uint16_t> group_list;
+  int8_t capacity = {};
+  std::vector<int16_t> group_list;
 
 
   nlohmann::json jsn;
@@ -9065,7 +9065,7 @@ void uic_mqtt_dotdot_on_groups_remove_group(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -9124,7 +9124,7 @@ static void uic_mqtt_dotdot_on_generated_groups_remove_group(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -9185,7 +9185,7 @@ void uic_mqtt_dotdot_on_groups_remove_group_response(
   }
 
   uint8_t status = {};
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -9249,7 +9249,7 @@ static void uic_mqtt_dotdot_on_generated_groups_remove_group_response(
   }
 
   uint8_t status = {};
-  uint16_t group_id = {};
+  int16_t group_id = {};
 
 
   nlohmann::json jsn;
@@ -9416,7 +9416,7 @@ void uic_mqtt_dotdot_on_groups_add_group_if_identifying(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
   std::string group_name;
 
 
@@ -9480,7 +9480,7 @@ static void uic_mqtt_dotdot_on_generated_groups_add_group_if_identifying(
     return;
   }
 
-  uint16_t group_id = {};
+  int16_t group_id = {};
   std::string group_name;
 
 
@@ -10549,12 +10549,12 @@ void uic_mqtt_dotdot_on_scenes_add_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
-  uint8_t transition_time100ms = {};
+  int8_t transition_time100ms = {};
 
 
   nlohmann::json jsn;
@@ -10634,12 +10634,12 @@ static void uic_mqtt_dotdot_on_generated_scenes_add_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
-  uint8_t transition_time100ms = {};
+  int8_t transition_time100ms = {};
 
 
   nlohmann::json jsn;
@@ -10721,8 +10721,8 @@ void uic_mqtt_dotdot_on_scenes_add_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -10790,8 +10790,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_add_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -10859,8 +10859,8 @@ void uic_mqtt_dotdot_on_scenes_view_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -10923,8 +10923,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_view_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -10989,9 +10989,9 @@ void uic_mqtt_dotdot_on_scenes_view_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
 
@@ -11074,9 +11074,9 @@ static void uic_mqtt_dotdot_on_generated_scenes_view_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
 
@@ -11159,8 +11159,8 @@ void uic_mqtt_dotdot_on_scenes_remove_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11223,8 +11223,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11289,8 +11289,8 @@ void uic_mqtt_dotdot_on_scenes_remove_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11358,8 +11358,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11427,7 +11427,7 @@ void uic_mqtt_dotdot_on_scenes_remove_all_scenes(
     return;
   }
 
-  uint16_t groupid = {};
+  uint8_t * groupid = {};
 
 
   nlohmann::json jsn;
@@ -11486,7 +11486,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_all_scenes(
     return;
   }
 
-  uint16_t groupid = {};
+  uint8_t * groupid = {};
 
 
   nlohmann::json jsn;
@@ -11547,7 +11547,7 @@ void uic_mqtt_dotdot_on_scenes_remove_all_scenes_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
+  uint8_t * groupid = {};
 
 
   nlohmann::json jsn;
@@ -11611,7 +11611,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_all_scenes_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
+  uint8_t * groupid = {};
 
 
   nlohmann::json jsn;
@@ -11675,8 +11675,8 @@ void uic_mqtt_dotdot_on_scenes_store_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11739,8 +11739,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_store_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11805,8 +11805,8 @@ void uic_mqtt_dotdot_on_scenes_store_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11874,8 +11874,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_store_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -11943,9 +11943,9 @@ void uic_mqtt_dotdot_on_scenes_recall_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
 
 
   nlohmann::json jsn;
@@ -12012,9 +12012,9 @@ static void uic_mqtt_dotdot_on_generated_scenes_recall_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
 
 
   nlohmann::json jsn;
@@ -12082,7 +12082,7 @@ void uic_mqtt_dotdot_on_scenes_get_scene_membership(
     return;
   }
 
-  uint16_t groupid = {};
+  uint8_t * groupid = {};
 
 
   nlohmann::json jsn;
@@ -12141,7 +12141,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_get_scene_membership(
     return;
   }
 
-  uint16_t groupid = {};
+  uint8_t * groupid = {};
 
 
   nlohmann::json jsn;
@@ -12202,9 +12202,9 @@ void uic_mqtt_dotdot_on_scenes_get_scene_membership_response(
   }
 
   zclStatus status = {};
-  uint8_t capacity = {};
-  uint16_t groupid = {};
-  std::vector<uint8_t> scene_list;
+  int8_t capacity = {};
+  uint8_t * groupid = {};
+  std::vector<int8_t> scene_list;
 
 
   nlohmann::json jsn;
@@ -12277,9 +12277,9 @@ static void uic_mqtt_dotdot_on_generated_scenes_get_scene_membership_response(
   }
 
   zclStatus status = {};
-  uint8_t capacity = {};
-  uint16_t groupid = {};
-  std::vector<uint8_t> scene_list;
+  int8_t capacity = {};
+  uint8_t * groupid = {};
+  std::vector<int8_t> scene_list;
 
 
   nlohmann::json jsn;
@@ -12352,9 +12352,9 @@ void uic_mqtt_dotdot_on_scenes_enhanced_add_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
 
@@ -12432,9 +12432,9 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_add_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
 
@@ -12514,8 +12514,8 @@ void uic_mqtt_dotdot_on_scenes_enhanced_add_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -12583,8 +12583,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_add_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -12652,8 +12652,8 @@ void uic_mqtt_dotdot_on_scenes_enhanced_view_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -12716,8 +12716,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_view_scene(
     return;
   }
 
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
 
 
   nlohmann::json jsn;
@@ -12782,9 +12782,9 @@ void uic_mqtt_dotdot_on_scenes_enhanced_view_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
 
@@ -12867,9 +12867,9 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_view_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t groupid = {};
-  uint8_t sceneid = {};
-  uint16_t transition_time = {};
+  uint8_t * groupid = {};
+  int8_t sceneid = {};
+  int16_t transition_time = {};
   std::string scene_name;
   std::vector<SExtensionFieldSetList> extension_field_sets;
 
@@ -12953,10 +12953,10 @@ void uic_mqtt_dotdot_on_scenes_copy_scene(
   }
 
   uint8_t mode = {};
-  uint16_t group_identifier_from = {};
-  uint8_t scene_identifier_from = {};
-  uint16_t group_identifier_to = {};
-  uint8_t scene_identifier_to = {};
+  uint8_t * group_identifier_from = {};
+  int8_t scene_identifier_from = {};
+  uint8_t * group_identifier_to = {};
+  int8_t scene_identifier_to = {};
 
 
   nlohmann::json jsn;
@@ -13032,10 +13032,10 @@ static void uic_mqtt_dotdot_on_generated_scenes_copy_scene(
   }
 
   uint8_t mode = {};
-  uint16_t group_identifier_from = {};
-  uint8_t scene_identifier_from = {};
-  uint16_t group_identifier_to = {};
-  uint8_t scene_identifier_to = {};
+  uint8_t * group_identifier_from = {};
+  int8_t scene_identifier_from = {};
+  uint8_t * group_identifier_to = {};
+  int8_t scene_identifier_to = {};
 
 
   nlohmann::json jsn;
@@ -13112,8 +13112,8 @@ void uic_mqtt_dotdot_on_scenes_copy_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t group_identifier_from = {};
-  uint8_t scene_identifier_from = {};
+  uint8_t * group_identifier_from = {};
+  int8_t scene_identifier_from = {};
 
 
   nlohmann::json jsn;
@@ -13181,8 +13181,8 @@ static void uic_mqtt_dotdot_on_generated_scenes_copy_scene_response(
   }
 
   zclStatus status = {};
-  uint16_t group_identifier_from = {};
-  uint8_t scene_identifier_from = {};
+  uint8_t * group_identifier_from = {};
+  int8_t scene_identifier_from = {};
 
 
   nlohmann::json jsn;
@@ -13366,7 +13366,7 @@ static void uic_mqtt_dotdot_on_scenes_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_scenes_scene_count_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -13436,7 +13436,7 @@ sl_status_t uic_mqtt_dotdot_scenes_scene_count_unretain(
 
 sl_status_t uic_mqtt_dotdot_scenes_current_scene_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -13506,7 +13506,7 @@ sl_status_t uic_mqtt_dotdot_scenes_current_scene_unretain(
 
 sl_status_t uic_mqtt_dotdot_scenes_current_group_publish(
   const char *base_topic,
-  uint16_t value,
+  uint8_t * value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -14623,7 +14623,7 @@ void uic_mqtt_dotdot_on_on_off_off_with_effect(
   }
 
   OffWithEffectEffectIdentifier effect_identifier = {};
-  uint8_t effect_variant = {};
+  int8_t effect_variant = {};
 
 
   nlohmann::json jsn;
@@ -14687,7 +14687,7 @@ static void uic_mqtt_dotdot_on_generated_on_off_off_with_effect(
   }
 
   OffWithEffectEffectIdentifier effect_identifier = {};
-  uint8_t effect_variant = {};
+  int8_t effect_variant = {};
 
 
   nlohmann::json jsn;
@@ -14855,8 +14855,8 @@ void uic_mqtt_dotdot_on_on_off_on_with_timed_off(
   }
 
   uint8_t on_off_control = {};
-  uint16_t on_time = {};
-  uint16_t off_wait_time = {};
+  int16_t on_time = {};
+  int16_t off_wait_time = {};
 
 
   nlohmann::json jsn;
@@ -14924,8 +14924,8 @@ static void uic_mqtt_dotdot_on_generated_on_off_on_with_timed_off(
   }
 
   uint8_t on_off_control = {};
-  uint16_t on_time = {};
-  uint16_t off_wait_time = {};
+  int16_t on_time = {};
+  int16_t off_wait_time = {};
 
 
   nlohmann::json jsn;
@@ -15245,7 +15245,7 @@ sl_status_t uic_mqtt_dotdot_on_off_global_scene_control_unretain(
 
 sl_status_t uic_mqtt_dotdot_on_off_on_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -15315,7 +15315,7 @@ sl_status_t uic_mqtt_dotdot_on_off_on_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_on_off_off_wait_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -15907,8 +15907,8 @@ void uic_mqtt_dotdot_on_level_move_to_level(
     return;
   }
 
-  uint8_t level = {};
-  uint16_t transition_time = {};
+  int8_t level = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -15981,8 +15981,8 @@ static void uic_mqtt_dotdot_on_generated_level_move_to_level(
     return;
   }
 
-  uint8_t level = {};
-  uint16_t transition_time = {};
+  int8_t level = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16057,7 +16057,7 @@ void uic_mqtt_dotdot_on_level_move(
   }
 
   MoveStepMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16131,7 +16131,7 @@ static void uic_mqtt_dotdot_on_generated_level_move(
   }
 
   MoveStepMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16206,8 +16206,8 @@ void uic_mqtt_dotdot_on_level_step(
   }
 
   MoveStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint16_t transition_time = {};
+  int8_t step_size = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16285,8 +16285,8 @@ static void uic_mqtt_dotdot_on_generated_level_step(
   }
 
   MoveStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint16_t transition_time = {};
+  int8_t step_size = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16493,8 +16493,8 @@ void uic_mqtt_dotdot_on_level_move_to_level_with_on_off(
     return;
   }
 
-  uint8_t level = {};
-  uint16_t transition_time = {};
+  int8_t level = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16567,8 +16567,8 @@ static void uic_mqtt_dotdot_on_generated_level_move_to_level_with_on_off(
     return;
   }
 
-  uint8_t level = {};
-  uint16_t transition_time = {};
+  int8_t level = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16643,7 +16643,7 @@ void uic_mqtt_dotdot_on_level_move_with_on_off(
   }
 
   MoveStepMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16717,7 +16717,7 @@ static void uic_mqtt_dotdot_on_generated_level_move_with_on_off(
   }
 
   MoveStepMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16792,8 +16792,8 @@ void uic_mqtt_dotdot_on_level_step_with_on_off(
   }
 
   MoveStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint16_t transition_time = {};
+  int8_t step_size = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -16871,8 +16871,8 @@ static void uic_mqtt_dotdot_on_generated_level_step_with_on_off(
   }
 
   MoveStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint16_t transition_time = {};
+  int8_t step_size = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -17079,7 +17079,7 @@ void uic_mqtt_dotdot_on_level_move_to_closest_frequency(
     return;
   }
 
-  uint16_t frequency = {};
+  int16_t frequency = {};
 
 
   nlohmann::json jsn;
@@ -17138,7 +17138,7 @@ static void uic_mqtt_dotdot_on_generated_level_move_to_closest_frequency(
     return;
   }
 
-  uint16_t frequency = {};
+  int16_t frequency = {};
 
 
   nlohmann::json jsn;
@@ -17328,7 +17328,7 @@ static void uic_mqtt_dotdot_on_level_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_level_current_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17398,7 +17398,7 @@ sl_status_t uic_mqtt_dotdot_level_current_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_remaining_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17468,7 +17468,7 @@ sl_status_t uic_mqtt_dotdot_level_remaining_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_min_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17538,7 +17538,7 @@ sl_status_t uic_mqtt_dotdot_level_min_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_max_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17608,7 +17608,7 @@ sl_status_t uic_mqtt_dotdot_level_max_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_current_frequency_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17678,7 +17678,7 @@ sl_status_t uic_mqtt_dotdot_level_current_frequency_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_min_frequency_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17748,7 +17748,7 @@ sl_status_t uic_mqtt_dotdot_level_min_frequency_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_max_frequency_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17887,7 +17887,7 @@ sl_status_t uic_mqtt_dotdot_level_options_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_on_off_transition_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -17957,7 +17957,7 @@ sl_status_t uic_mqtt_dotdot_level_on_off_transition_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_on_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -18027,7 +18027,7 @@ sl_status_t uic_mqtt_dotdot_level_on_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_on_transition_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -18097,7 +18097,7 @@ sl_status_t uic_mqtt_dotdot_level_on_transition_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_off_transition_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -18167,7 +18167,7 @@ sl_status_t uic_mqtt_dotdot_level_off_transition_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_default_move_rate_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -18237,7 +18237,7 @@ sl_status_t uic_mqtt_dotdot_level_default_move_rate_unretain(
 
 sl_status_t uic_mqtt_dotdot_level_start_up_current_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -18676,7 +18676,7 @@ void uic_mqtt_dotdot_on_alarms_reset_alarm(
   }
 
   uint8_t alarm_code = {};
-  uint16_t cluster_identifier = {};
+  uint8_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -18740,7 +18740,7 @@ static void uic_mqtt_dotdot_on_generated_alarms_reset_alarm(
   }
 
   uint8_t alarm_code = {};
-  uint16_t cluster_identifier = {};
+  uint8_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -18805,7 +18805,7 @@ void uic_mqtt_dotdot_on_alarms_alarm(
   }
 
   uint8_t alarm_code = {};
-  uint16_t cluster_identifier = {};
+  uint8_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -18869,7 +18869,7 @@ static void uic_mqtt_dotdot_on_generated_alarms_alarm(
   }
 
   uint8_t alarm_code = {};
-  uint16_t cluster_identifier = {};
+  uint8_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -19038,8 +19038,8 @@ void uic_mqtt_dotdot_on_alarms_get_alarm_response(
 
   zclStatus status = {};
   uint8_t alarm_code = {};
-  uint16_t cluster_identifier = {};
-  uint32_t time_stamp = {};
+  uint8_t cluster_identifier = {};
+  int32_t time_stamp = {};
 
 
   nlohmann::json jsn;
@@ -19112,8 +19112,8 @@ static void uic_mqtt_dotdot_on_generated_alarms_get_alarm_response(
 
   zclStatus status = {};
   uint8_t alarm_code = {};
-  uint16_t cluster_identifier = {};
-  uint32_t time_stamp = {};
+  uint8_t cluster_identifier = {};
+  int32_t time_stamp = {};
 
 
   nlohmann::json jsn;
@@ -19495,7 +19495,7 @@ static void uic_mqtt_dotdot_on_alarms_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_alarms_alarm_count_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -19821,7 +19821,7 @@ static void uic_mqtt_dotdot_on_time_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_time_time_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20030,7 +20030,7 @@ sl_status_t uic_mqtt_dotdot_time_time_zone_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_dst_start_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20100,7 +20100,7 @@ sl_status_t uic_mqtt_dotdot_time_dst_start_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_dst_end_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20240,7 +20240,7 @@ sl_status_t uic_mqtt_dotdot_time_dst_shift_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_standard_time_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20310,7 +20310,7 @@ sl_status_t uic_mqtt_dotdot_time_standard_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_local_time_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20380,7 +20380,7 @@ sl_status_t uic_mqtt_dotdot_time_local_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_last_set_time_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20450,7 +20450,7 @@ sl_status_t uic_mqtt_dotdot_time_last_set_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_valid_until_time_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20885,7 +20885,7 @@ void uic_mqtt_dotdot_on_poll_control_check_in_response(
   }
 
   bool start_fast_polling = {};
-  uint16_t fast_poll_timeout = {};
+  int16_t fast_poll_timeout = {};
 
 
   nlohmann::json jsn;
@@ -20949,7 +20949,7 @@ static void uic_mqtt_dotdot_on_generated_poll_control_check_in_response(
   }
 
   bool start_fast_polling = {};
-  uint16_t fast_poll_timeout = {};
+  int16_t fast_poll_timeout = {};
 
 
   nlohmann::json jsn;
@@ -21116,7 +21116,7 @@ void uic_mqtt_dotdot_on_poll_control_set_long_poll_interval(
     return;
   }
 
-  uint32_t new_long_poll_interval = {};
+  int32_t new_long_poll_interval = {};
 
 
   nlohmann::json jsn;
@@ -21175,7 +21175,7 @@ static void uic_mqtt_dotdot_on_generated_poll_control_set_long_poll_interval(
     return;
   }
 
-  uint32_t new_long_poll_interval = {};
+  int32_t new_long_poll_interval = {};
 
 
   nlohmann::json jsn;
@@ -21235,7 +21235,7 @@ void uic_mqtt_dotdot_on_poll_control_set_short_poll_interval(
     return;
   }
 
-  uint16_t new_short_poll_interval = {};
+  int16_t new_short_poll_interval = {};
 
 
   nlohmann::json jsn;
@@ -21294,7 +21294,7 @@ static void uic_mqtt_dotdot_on_generated_poll_control_set_short_poll_interval(
     return;
   }
 
-  uint16_t new_short_poll_interval = {};
+  int16_t new_short_poll_interval = {};
 
 
   nlohmann::json jsn;
@@ -21470,7 +21470,7 @@ static void uic_mqtt_dotdot_on_poll_control_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -21540,7 +21540,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_unretain(
 
 sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -21610,7 +21610,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_unretain(
 
 sl_status_t uic_mqtt_dotdot_poll_control_short_poll_interval_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -21680,7 +21680,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_short_poll_interval_unretain(
 
 sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -21750,7 +21750,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_unretain(
 
 sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_min_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -21820,7 +21820,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_min_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -21890,7 +21890,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_max_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -22198,7 +22198,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_shade_configuration_physical_closed_limit_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -22268,7 +22268,7 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_physical_closed_limit_unretain(
 
 sl_status_t uic_mqtt_dotdot_shade_configuration_motor_step_size_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -22407,7 +22407,7 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_status_unretain(
 
 sl_status_t uic_mqtt_dotdot_shade_configuration_closed_limit_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -25590,7 +25590,7 @@ void uic_mqtt_dotdot_on_door_lock_unlock_with_timeout(
     return;
   }
 
-  uint16_t timeout_in_seconds = {};
+  int16_t timeout_in_seconds = {};
   std::string pin_or_rfid_code;
 
 
@@ -25654,7 +25654,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_unlock_with_timeout(
     return;
   }
 
-  uint16_t timeout_in_seconds = {};
+  int16_t timeout_in_seconds = {};
   std::string pin_or_rfid_code;
 
 
@@ -25838,7 +25838,7 @@ void uic_mqtt_dotdot_on_door_lock_get_log_record(
     return;
   }
 
-  uint16_t log_index = {};
+  int16_t log_index = {};
 
 
   nlohmann::json jsn;
@@ -25897,7 +25897,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_log_record(
     return;
   }
 
-  uint16_t log_index = {};
+  int16_t log_index = {};
 
 
   nlohmann::json jsn;
@@ -25957,12 +25957,12 @@ void uic_mqtt_dotdot_on_door_lock_get_log_record_response(
     return;
   }
 
-  uint16_t log_entryid = {};
-  uint32_t timestamp = {};
+  int16_t log_entryid = {};
+  int32_t timestamp = {};
   GetLogRecordResponseEventType event_type = {};
   DrlkOperEventSource source_operation_event = {};
-  uint8_t event_id_or_alarm_code = {};
-  uint16_t userid = {};
+  int8_t event_id_or_alarm_code = {};
+  int16_t userid = {};
   std::string pin;
 
 
@@ -26046,12 +26046,12 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_log_record_response(
     return;
   }
 
-  uint16_t log_entryid = {};
-  uint32_t timestamp = {};
+  int16_t log_entryid = {};
+  int32_t timestamp = {};
   GetLogRecordResponseEventType event_type = {};
   DrlkOperEventSource source_operation_event = {};
-  uint8_t event_id_or_alarm_code = {};
-  uint16_t userid = {};
+  int8_t event_id_or_alarm_code = {};
+  int16_t userid = {};
   std::string pin;
 
 
@@ -26136,7 +26136,7 @@ void uic_mqtt_dotdot_on_door_lock_set_pin_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string pin;
@@ -26210,7 +26210,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_pin_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string pin;
@@ -26404,7 +26404,7 @@ void uic_mqtt_dotdot_on_door_lock_get_pin_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -26463,7 +26463,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_pin_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -26523,7 +26523,7 @@ void uic_mqtt_dotdot_on_door_lock_get_pin_code_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string code;
@@ -26597,7 +26597,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_pin_code_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string code;
@@ -26672,7 +26672,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_pin_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -26731,7 +26731,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_pin_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -27132,7 +27132,7 @@ void uic_mqtt_dotdot_on_door_lock_set_user_status(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkSettableUserStatus user_status = {};
 
 
@@ -27196,7 +27196,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user_status(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkSettableUserStatus user_status = {};
 
 
@@ -27380,7 +27380,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user_status(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -27439,7 +27439,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user_status(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -27499,7 +27499,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user_status_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserStatus user_status = {};
 
 
@@ -27563,7 +27563,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user_status_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserStatus user_status = {};
 
 
@@ -27628,13 +27628,13 @@ void uic_mqtt_dotdot_on_door_lock_set_weekday_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
   uint8_t days_mask = {};
-  uint8_t start_hour = {};
-  uint8_t start_minute = {};
-  uint8_t end_hour = {};
-  uint8_t end_minute = {};
+  int8_t start_hour = {};
+  int8_t start_minute = {};
+  int8_t end_hour = {};
+  int8_t end_minute = {};
 
 
   nlohmann::json jsn;
@@ -27717,13 +27717,13 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_weekday_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
   uint8_t days_mask = {};
-  uint8_t start_hour = {};
-  uint8_t start_minute = {};
-  uint8_t end_hour = {};
-  uint8_t end_minute = {};
+  int8_t start_hour = {};
+  int8_t start_minute = {};
+  int8_t end_hour = {};
+  int8_t end_minute = {};
 
 
   nlohmann::json jsn;
@@ -27926,8 +27926,8 @@ void uic_mqtt_dotdot_on_door_lock_get_weekday_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -27990,8 +27990,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_weekday_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -28055,14 +28055,14 @@ void uic_mqtt_dotdot_on_door_lock_get_weekday_schedule_response(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  int8_t scheduleid = {};
+  int16_t userid = {};
   zclStatus status = {};
   uint8_t days_mask = {};
-  uint8_t start_hour = {};
-  uint8_t start_minute = {};
-  uint8_t end_hour = {};
-  uint8_t end_minute = {};
+  int8_t start_hour = {};
+  int8_t start_minute = {};
+  int8_t end_hour = {};
+  int8_t end_minute = {};
 
 
   nlohmann::json jsn;
@@ -28149,14 +28149,14 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_weekday_schedule_response
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  int8_t scheduleid = {};
+  int16_t userid = {};
   zclStatus status = {};
   uint8_t days_mask = {};
-  uint8_t start_hour = {};
-  uint8_t start_minute = {};
-  uint8_t end_hour = {};
-  uint8_t end_minute = {};
+  int8_t start_hour = {};
+  int8_t start_minute = {};
+  int8_t end_hour = {};
+  int8_t end_minute = {};
 
 
   nlohmann::json jsn;
@@ -28244,8 +28244,8 @@ void uic_mqtt_dotdot_on_door_lock_clear_weekday_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -28308,8 +28308,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_weekday_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -28492,10 +28492,10 @@ void uic_mqtt_dotdot_on_door_lock_set_year_day_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
 
 
   nlohmann::json jsn;
@@ -28566,10 +28566,10 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_year_day_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
 
 
   nlohmann::json jsn;
@@ -28760,8 +28760,8 @@ void uic_mqtt_dotdot_on_door_lock_get_year_day_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -28824,8 +28824,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_year_day_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -28889,11 +28889,11 @@ void uic_mqtt_dotdot_on_door_lock_get_year_day_schedule_response(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  int8_t scheduleid = {};
+  int16_t userid = {};
   zclStatus status = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
 
 
   nlohmann::json jsn;
@@ -28968,11 +28968,11 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_year_day_schedule_respons
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  int8_t scheduleid = {};
+  int16_t userid = {};
   zclStatus status = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
 
 
   nlohmann::json jsn;
@@ -29048,8 +29048,8 @@ void uic_mqtt_dotdot_on_door_lock_clear_year_day_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -29112,8 +29112,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_year_day_schedule(
     return;
   }
 
-  uint8_t scheduleid = {};
-  uint16_t userid = {};
+  uint8_t * scheduleid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -29296,9 +29296,9 @@ void uic_mqtt_dotdot_on_door_lock_set_holiday_schedule(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  uint8_t * holiday_scheduleid = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
   DrlkOperMode operating_mode_during_holiday = {};
 
 
@@ -29370,9 +29370,9 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_holiday_schedule(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  uint8_t * holiday_scheduleid = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
   DrlkOperMode operating_mode_during_holiday = {};
 
 
@@ -29564,7 +29564,7 @@ void uic_mqtt_dotdot_on_door_lock_get_holiday_schedule(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
+  uint8_t * holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -29623,7 +29623,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_holiday_schedule(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
+  uint8_t * holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -29683,10 +29683,10 @@ void uic_mqtt_dotdot_on_door_lock_get_holiday_schedule_response(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
+  int8_t holiday_scheduleid = {};
   zclStatus status = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
   DrlkOperMode operating_mode_during_holiday = {};
 
 
@@ -29762,10 +29762,10 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_holiday_schedule_response
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
+  int8_t holiday_scheduleid = {};
   zclStatus status = {};
-  uint32_t local_start_time = {};
-  uint32_t local_end_time = {};
+  int32_t local_start_time = {};
+  int32_t local_end_time = {};
   DrlkOperMode operating_mode_during_holiday = {};
 
 
@@ -29842,7 +29842,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_holiday_schedule(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
+  uint8_t * holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -29901,7 +29901,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_holiday_schedule(
     return;
   }
 
-  uint8_t holiday_scheduleid = {};
+  uint8_t * holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -30080,7 +30080,7 @@ void uic_mqtt_dotdot_on_door_lock_set_user_type(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkUserType user_type = {};
 
 
@@ -30144,7 +30144,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user_type(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkUserType user_type = {};
 
 
@@ -30328,7 +30328,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user_type(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -30387,7 +30387,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user_type(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -30447,7 +30447,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user_type_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserType user_type = {};
 
 
@@ -30511,7 +30511,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user_type_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserType user_type = {};
 
 
@@ -30576,7 +30576,7 @@ void uic_mqtt_dotdot_on_door_lock_set_rfid_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string rfid_code;
@@ -30650,7 +30650,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_rfid_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string rfid_code;
@@ -30844,7 +30844,7 @@ void uic_mqtt_dotdot_on_door_lock_get_rfid_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -30903,7 +30903,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_rfid_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -30963,7 +30963,7 @@ void uic_mqtt_dotdot_on_door_lock_get_rfid_code_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string rfid_code;
@@ -31037,7 +31037,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_rfid_code_response(
     return;
   }
 
-  uint16_t userid = {};
+  int16_t userid = {};
   DrlkUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string rfid_code;
@@ -31112,7 +31112,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_rfid_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -31171,7 +31171,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_rfid_code(
     return;
   }
 
-  uint16_t userid = {};
+  uint8_t * userid = {};
 
 
   nlohmann::json jsn;
@@ -31573,9 +31573,9 @@ void uic_mqtt_dotdot_on_door_lock_set_user(
   }
 
   DataOperationTypeEnum operation_type = {};
-  uint16_t user_index = {};
+  int16_t user_index = {};
   std::string user_name;
-  uint32_t user_uniqueid = {};
+  int32_t user_uniqueid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   CredentialRuleEnum credential_rule = {};
@@ -31662,9 +31662,9 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user(
   }
 
   DataOperationTypeEnum operation_type = {};
-  uint16_t user_index = {};
+  int16_t user_index = {};
   std::string user_name;
-  uint32_t user_uniqueid = {};
+  int32_t user_uniqueid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   CredentialRuleEnum credential_rule = {};
@@ -31751,7 +31751,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user(
     return;
   }
 
-  uint16_t user_index = {};
+  int16_t user_index = {};
 
 
   nlohmann::json jsn;
@@ -31810,7 +31810,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user(
     return;
   }
 
-  uint16_t user_index = {};
+  int16_t user_index = {};
 
 
   nlohmann::json jsn;
@@ -31973,7 +31973,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_user(
     return;
   }
 
-  uint16_t user_index = {};
+  int16_t user_index = {};
 
 
   nlohmann::json jsn;
@@ -32032,7 +32032,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_user(
     return;
   }
 
-  uint16_t user_index = {};
+  int16_t user_index = {};
 
 
   nlohmann::json jsn;
@@ -32094,9 +32094,9 @@ void uic_mqtt_dotdot_on_door_lock_operating_event_notification(
 
   DrlkOperEventSource operation_event_source = {};
   OperatingEventNotificationOperationEventCode operation_event_code = {};
-  uint16_t userid = {};
+  int16_t userid = {};
   std::string pin;
-  uint32_t local_time = {};
+  int32_t local_time = {};
   std::string data;
 
 
@@ -32178,9 +32178,9 @@ static void uic_mqtt_dotdot_on_generated_door_lock_operating_event_notification(
 
   DrlkOperEventSource operation_event_source = {};
   OperatingEventNotificationOperationEventCode operation_event_code = {};
-  uint16_t userid = {};
+  int16_t userid = {};
   std::string pin;
-  uint32_t local_time = {};
+  int32_t local_time = {};
   std::string data;
 
 
@@ -32263,11 +32263,11 @@ void uic_mqtt_dotdot_on_door_lock_programming_event_notification(
 
   ProgrammingEventNotificationProgramEventSource program_event_source = {};
   ProgrammingEventNotificationProgramEventCode program_event_code = {};
-  uint16_t userid = {};
+  int16_t userid = {};
   std::string pin;
   DrlkUserType user_type = {};
   DrlkUserStatus user_status = {};
-  uint32_t local_time = {};
+  int32_t local_time = {};
   std::string data;
 
 
@@ -32357,11 +32357,11 @@ static void uic_mqtt_dotdot_on_generated_door_lock_programming_event_notificatio
 
   ProgrammingEventNotificationProgramEventSource program_event_source = {};
   ProgrammingEventNotificationProgramEventCode program_event_code = {};
-  uint16_t userid = {};
+  int16_t userid = {};
   std::string pin;
   DrlkUserType user_type = {};
   DrlkUserStatus user_status = {};
-  uint32_t local_time = {};
+  int32_t local_time = {};
   std::string data;
 
 
@@ -32453,7 +32453,7 @@ void uic_mqtt_dotdot_on_door_lock_set_credential(
   DataOperationTypeEnum operation_type = {};
   CredentialStruct credential = {};
   std::string credential_data;
-  uint16_t user_index = {};
+  int16_t user_index = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
 
@@ -32537,7 +32537,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_credential(
   DataOperationTypeEnum operation_type = {};
   CredentialStruct credential = {};
   std::string credential_data;
-  uint16_t user_index = {};
+  int16_t user_index = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
 
@@ -33669,7 +33669,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_state_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_door_open_events_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -33739,7 +33739,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_open_events_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_door_closed_events_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -33809,7 +33809,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_closed_events_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_open_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -33879,7 +33879,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_open_period_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_log_records_supported_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -33949,7 +33949,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_log_records_supported_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_total_users_supported_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34019,7 +34019,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_total_users_supported_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34089,7 +34089,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34159,7 +34159,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per_user_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34229,7 +34229,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per_user_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34299,7 +34299,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34369,7 +34369,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_unre
 
 sl_status_t uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34439,7 +34439,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_max_pin_code_length_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34509,7 +34509,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_min_pin_code_length_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34579,7 +34579,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_max_rfid_code_length_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34718,7 +34718,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_credential_rules_support_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34924,7 +34924,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_language_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_led_settings_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -34994,7 +34994,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_led_settings_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_auto_relock_time_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -35064,7 +35064,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_auto_relock_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_sound_volume_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -35694,7 +35694,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_local_programming_features_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -35764,7 +35764,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -36047,7 +36047,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_security_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -37890,7 +37890,7 @@ void uic_mqtt_dotdot_on_window_covering_go_to_lift_value(
     return;
   }
 
-  uint16_t lift_value = {};
+  int16_t lift_value = {};
 
 
   nlohmann::json jsn;
@@ -37949,7 +37949,7 @@ static void uic_mqtt_dotdot_on_generated_window_covering_go_to_lift_value(
     return;
   }
 
-  uint16_t lift_value = {};
+  int16_t lift_value = {};
 
 
   nlohmann::json jsn;
@@ -38009,7 +38009,7 @@ void uic_mqtt_dotdot_on_window_covering_go_to_lift_percentage(
     return;
   }
 
-  uint8_t percentage_lift_value = {};
+  int8_t percentage_lift_value = {};
 
 
   nlohmann::json jsn;
@@ -38068,7 +38068,7 @@ static void uic_mqtt_dotdot_on_generated_window_covering_go_to_lift_percentage(
     return;
   }
 
-  uint8_t percentage_lift_value = {};
+  int8_t percentage_lift_value = {};
 
 
   nlohmann::json jsn;
@@ -38128,7 +38128,7 @@ void uic_mqtt_dotdot_on_window_covering_go_to_tilt_value(
     return;
   }
 
-  uint16_t tilt_value = {};
+  int16_t tilt_value = {};
 
 
   nlohmann::json jsn;
@@ -38187,7 +38187,7 @@ static void uic_mqtt_dotdot_on_generated_window_covering_go_to_tilt_value(
     return;
   }
 
-  uint16_t tilt_value = {};
+  int16_t tilt_value = {};
 
 
   nlohmann::json jsn;
@@ -38247,7 +38247,7 @@ void uic_mqtt_dotdot_on_window_covering_go_to_tilt_percentage(
     return;
   }
 
-  uint8_t percentage_tilt_value = {};
+  int8_t percentage_tilt_value = {};
 
 
   nlohmann::json jsn;
@@ -38306,7 +38306,7 @@ static void uic_mqtt_dotdot_on_generated_window_covering_go_to_tilt_percentage(
     return;
   }
 
-  uint8_t percentage_tilt_value = {};
+  int8_t percentage_tilt_value = {};
 
 
   nlohmann::json jsn;
@@ -38581,7 +38581,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_window_covering_type_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -38651,7 +38651,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -38721,7 +38721,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -38791,7 +38791,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -38861,7 +38861,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -38931,7 +38931,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_lift_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_tilt_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39070,7 +39070,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_config_or_status_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_percentage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39140,7 +39140,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_percentage_unr
 
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39210,7 +39210,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_unr
 
 sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39280,7 +39280,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_lift_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39350,7 +39350,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_unretain
 
 sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39420,7 +39420,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39490,7 +39490,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_unretain
 
 sl_status_t uic_mqtt_dotdot_window_covering_velocity_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39560,7 +39560,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_velocity_lift_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_acceleration_time_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39630,7 +39630,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_acceleration_time_lift_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_deceleration_time_lift_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39769,7 +39769,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_mode_unretain(
 
 sl_status_t uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_publish(
   const char *base_topic,
-  const char* value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -39835,7 +39835,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_unretain
 
 sl_status_t uic_mqtt_dotdot_window_covering_intermediate_setpoints_tilt_publish(
   const char *base_topic,
-  const char* value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -40113,7 +40113,7 @@ void uic_mqtt_dotdot_on_barrier_control_go_to_percent(
     return;
   }
 
-  uint8_t percent_open = {};
+  int8_t percent_open = {};
 
 
   nlohmann::json jsn;
@@ -40172,7 +40172,7 @@ static void uic_mqtt_dotdot_on_generated_barrier_control_go_to_percent(
     return;
   }
 
-  uint8_t percent_open = {};
+  int8_t percent_open = {};
 
 
   nlohmann::json jsn;
@@ -40668,7 +40668,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_capabilities_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_open_events_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -40738,7 +40738,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_open_events_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_close_events_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -40808,7 +40808,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_close_events_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_command_open_events_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -40878,7 +40878,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_command_open_events_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_command_close_events_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -40948,7 +40948,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_command_close_events_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_open_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -41018,7 +41018,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_open_period_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_close_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -41088,7 +41088,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_close_period_unretain(
 
 sl_status_t uic_mqtt_dotdot_barrier_control_barrier_position_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -41480,7 +41480,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_pressure_unretain
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_speed_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -41550,7 +41550,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_speed_unretain(
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_flow_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -41900,7 +41900,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_comp_pressure_unr
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -41970,7 +41970,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_unret
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -42040,7 +42040,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_unret
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -42110,7 +42110,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_unreta
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_flow_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -42605,7 +42605,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_capacity_unretain(
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_speed_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -42675,7 +42675,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_speed_unretain(
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hours_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -42745,7 +42745,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hour
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_power_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -42815,7 +42815,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_power_unretain(
 
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_energy_consumed_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -43862,12 +43862,12 @@ void uic_mqtt_dotdot_on_thermostat_get_relay_status_log_response(
     return;
   }
 
-  uint16_t time_of_day = {};
+  int16_t time_of_day = {};
   uint8_t relay_status = {};
   int16_t local_temperature = {};
-  uint8_t humidity_percentage = {};
+  int8_t humidity_percentage = {};
   int16_t set_point = {};
-  uint16_t unread_entries = {};
+  int16_t unread_entries = {};
 
 
   nlohmann::json jsn;
@@ -43946,12 +43946,12 @@ static void uic_mqtt_dotdot_on_generated_thermostat_get_relay_status_log_respons
     return;
   }
 
-  uint16_t time_of_day = {};
+  int16_t time_of_day = {};
   uint8_t relay_status = {};
   int16_t local_temperature = {};
-  uint8_t humidity_percentage = {};
+  int8_t humidity_percentage = {};
   int16_t set_point = {};
-  uint16_t unread_entries = {};
+  int16_t unread_entries = {};
 
 
   nlohmann::json jsn;
@@ -45057,7 +45057,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_abs_max_cool_setpoint_limit_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_pi_cooling_demand_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -45127,7 +45127,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_pi_cooling_demand_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_pi_heating_demand_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -46396,7 +46396,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_start_of_week_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -46466,7 +46466,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_number_of_daily_transitions_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -46609,7 +46609,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_duration_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -46960,7 +46960,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_amount_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47030,7 +47030,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_unretain
 
 sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47100,7 +47100,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_min_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47170,7 +47170,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_max_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47240,7 +47240,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_max_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47310,7 +47310,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_min_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47380,7 +47380,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_max_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47450,7 +47450,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_max_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_emergency_heat_delta_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -47593,7 +47593,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_type_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_ac_capacity_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -48692,7 +48692,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -48762,7 +48762,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_unretain(
 
 sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -48832,7 +48832,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_un
 
 sl_status_t uic_mqtt_dotdot_dehumidification_control_rh_dehumidification_setpoint_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -49048,7 +49048,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_lockout_un
 
 sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -49118,7 +49118,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis
 
 sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_max_cool_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -50425,9 +50425,9 @@ void uic_mqtt_dotdot_on_color_control_move_to_hue(
     return;
   }
 
-  uint8_t hue = {};
+  int8_t hue = {};
   CCDirection direction = {};
-  uint16_t transition_time = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50504,9 +50504,9 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_to_hue(
     return;
   }
 
-  uint8_t hue = {};
+  int8_t hue = {};
   CCDirection direction = {};
-  uint16_t transition_time = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50585,7 +50585,7 @@ void uic_mqtt_dotdot_on_color_control_move_hue(
   }
 
   CCMoveMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50659,7 +50659,7 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_hue(
   }
 
   CCMoveMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50734,8 +50734,8 @@ void uic_mqtt_dotdot_on_color_control_step_hue(
   }
 
   CCStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint8_t transition_time = {};
+  int8_t step_size = {};
+  int8_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50813,8 +50813,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_step_hue(
   }
 
   CCStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint8_t transition_time = {};
+  int8_t step_size = {};
+  int8_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50892,8 +50892,8 @@ void uic_mqtt_dotdot_on_color_control_move_to_saturation(
     return;
   }
 
-  uint8_t saturation = {};
-  uint16_t transition_time = {};
+  int8_t saturation = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -50966,8 +50966,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_to_saturation(
     return;
   }
 
-  uint8_t saturation = {};
-  uint16_t transition_time = {};
+  int8_t saturation = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51042,7 +51042,7 @@ void uic_mqtt_dotdot_on_color_control_move_saturation(
   }
 
   CCMoveMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51116,7 +51116,7 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_saturation(
   }
 
   CCMoveMode move_mode = {};
-  uint8_t rate = {};
+  int8_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51191,8 +51191,8 @@ void uic_mqtt_dotdot_on_color_control_step_saturation(
   }
 
   CCStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint8_t transition_time = {};
+  int8_t step_size = {};
+  int8_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51270,8 +51270,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_step_saturation(
   }
 
   CCStepMode step_mode = {};
-  uint8_t step_size = {};
-  uint8_t transition_time = {};
+  int8_t step_size = {};
+  int8_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51349,9 +51349,9 @@ void uic_mqtt_dotdot_on_color_control_move_to_hue_and_saturation(
     return;
   }
 
-  uint8_t hue = {};
-  uint8_t saturation = {};
-  uint16_t transition_time = {};
+  int8_t hue = {};
+  int8_t saturation = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51428,9 +51428,9 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_to_hue_and_saturatio
     return;
   }
 
-  uint8_t hue = {};
-  uint8_t saturation = {};
-  uint16_t transition_time = {};
+  int8_t hue = {};
+  int8_t saturation = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51508,9 +51508,9 @@ void uic_mqtt_dotdot_on_color_control_move_to_color(
     return;
   }
 
-  uint16_t colorx = {};
-  uint16_t colory = {};
-  uint16_t transition_time = {};
+  int16_t colorx = {};
+  int16_t colory = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51587,9 +51587,9 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_to_color(
     return;
   }
 
-  uint16_t colorx = {};
-  uint16_t colory = {};
-  uint16_t transition_time = {};
+  int16_t colorx = {};
+  int16_t colory = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51818,7 +51818,7 @@ void uic_mqtt_dotdot_on_color_control_step_color(
 
   int16_t stepx = {};
   int16_t stepy = {};
-  uint16_t transition_time = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51897,7 +51897,7 @@ static void uic_mqtt_dotdot_on_generated_color_control_step_color(
 
   int16_t stepx = {};
   int16_t stepy = {};
-  uint16_t transition_time = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -51975,8 +51975,8 @@ void uic_mqtt_dotdot_on_color_control_move_to_color_temperature(
     return;
   }
 
-  uint16_t color_temperature_mireds = {};
-  uint16_t transition_time = {};
+  int16_t color_temperature_mireds = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52049,8 +52049,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_to_color_temperature
     return;
   }
 
-  uint16_t color_temperature_mireds = {};
-  uint16_t transition_time = {};
+  int16_t color_temperature_mireds = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52124,9 +52124,9 @@ void uic_mqtt_dotdot_on_color_control_enhanced_move_to_hue(
     return;
   }
 
-  uint16_t enhanced_hue = {};
+  int16_t enhanced_hue = {};
   CCDirection direction = {};
-  uint16_t transition_time = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52203,9 +52203,9 @@ static void uic_mqtt_dotdot_on_generated_color_control_enhanced_move_to_hue(
     return;
   }
 
-  uint16_t enhanced_hue = {};
+  int16_t enhanced_hue = {};
   CCDirection direction = {};
-  uint16_t transition_time = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52284,7 +52284,7 @@ void uic_mqtt_dotdot_on_color_control_enhanced_move_hue(
   }
 
   CCMoveMode move_mode = {};
-  uint16_t rate = {};
+  int16_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52358,7 +52358,7 @@ static void uic_mqtt_dotdot_on_generated_color_control_enhanced_move_hue(
   }
 
   CCMoveMode move_mode = {};
-  uint16_t rate = {};
+  int16_t rate = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52433,8 +52433,8 @@ void uic_mqtt_dotdot_on_color_control_enhanced_step_hue(
   }
 
   CCStepMode step_mode = {};
-  uint16_t step_size = {};
-  uint16_t transition_time = {};
+  int16_t step_size = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52512,8 +52512,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_enhanced_step_hue(
   }
 
   CCStepMode step_mode = {};
-  uint16_t step_size = {};
-  uint16_t transition_time = {};
+  int16_t step_size = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52591,9 +52591,9 @@ void uic_mqtt_dotdot_on_color_control_enhanced_move_to_hue_and_saturation(
     return;
   }
 
-  uint16_t enhanced_hue = {};
-  uint8_t saturation = {};
-  uint16_t transition_time = {};
+  int16_t enhanced_hue = {};
+  int8_t saturation = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52670,9 +52670,9 @@ static void uic_mqtt_dotdot_on_generated_color_control_enhanced_move_to_hue_and_
     return;
   }
 
-  uint16_t enhanced_hue = {};
-  uint8_t saturation = {};
-  uint16_t transition_time = {};
+  int16_t enhanced_hue = {};
+  int8_t saturation = {};
+  int16_t transition_time = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52753,8 +52753,8 @@ void uic_mqtt_dotdot_on_color_control_color_loop_set(
   uint8_t update_flags = {};
   ColorLoopSetAction action = {};
   CCColorLoopDirection direction = {};
-  uint16_t time = {};
-  uint16_t start_hue = {};
+  int16_t time = {};
+  int16_t start_hue = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -52842,8 +52842,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_color_loop_set(
   uint8_t update_flags = {};
   ColorLoopSetAction action = {};
   CCColorLoopDirection direction = {};
-  uint16_t time = {};
-  uint16_t start_hue = {};
+  int16_t time = {};
+  int16_t start_hue = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53059,9 +53059,9 @@ void uic_mqtt_dotdot_on_color_control_move_color_temperature(
   }
 
   CCMoveMode move_mode = {};
-  uint16_t rate = {};
-  uint16_t color_temperature_minimum_mireds = {};
-  uint16_t color_temperature_maximum_mireds = {};
+  int16_t rate = {};
+  uint8_t * color_temperature_minimum_mireds = {};
+  uint8_t * color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53143,9 +53143,9 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_color_temperature(
   }
 
   CCMoveMode move_mode = {};
-  uint16_t rate = {};
-  uint16_t color_temperature_minimum_mireds = {};
-  uint16_t color_temperature_maximum_mireds = {};
+  int16_t rate = {};
+  uint8_t * color_temperature_minimum_mireds = {};
+  uint8_t * color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53228,10 +53228,10 @@ void uic_mqtt_dotdot_on_color_control_step_color_temperature(
   }
 
   CCStepMode step_mode = {};
-  uint16_t step_size = {};
-  uint16_t transition_time = {};
-  uint16_t color_temperature_minimum_mireds = {};
-  uint16_t color_temperature_maximum_mireds = {};
+  int16_t step_size = {};
+  int16_t transition_time = {};
+  uint8_t * color_temperature_minimum_mireds = {};
+  uint8_t * color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53317,10 +53317,10 @@ static void uic_mqtt_dotdot_on_generated_color_control_step_color_temperature(
   }
 
   CCStepMode step_mode = {};
-  uint16_t step_size = {};
-  uint16_t transition_time = {};
-  uint16_t color_temperature_minimum_mireds = {};
-  uint16_t color_temperature_maximum_mireds = {};
+  int16_t step_size = {};
+  int16_t transition_time = {};
+  uint8_t * color_temperature_minimum_mireds = {};
+  uint8_t * color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53612,7 +53612,7 @@ static void uic_mqtt_dotdot_on_color_control_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_color_control_current_hue_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -53682,7 +53682,7 @@ sl_status_t uic_mqtt_dotdot_color_control_current_hue_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_current_saturation_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -53752,7 +53752,7 @@ sl_status_t uic_mqtt_dotdot_color_control_current_saturation_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_remaining_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -53822,7 +53822,7 @@ sl_status_t uic_mqtt_dotdot_color_control_remaining_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_currentx_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -53892,7 +53892,7 @@ sl_status_t uic_mqtt_dotdot_color_control_currentx_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_currenty_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54101,7 +54101,7 @@ sl_status_t uic_mqtt_dotdot_color_control_compensation_text_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_temperature_mireds_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54313,7 +54313,7 @@ sl_status_t uic_mqtt_dotdot_color_control_options_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_number_of_primaries_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54383,7 +54383,7 @@ sl_status_t uic_mqtt_dotdot_color_control_number_of_primaries_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary1x_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54453,7 +54453,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1x_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary1y_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54523,7 +54523,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1y_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary1_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54593,7 +54593,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary2x_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54663,7 +54663,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2x_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary2y_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54733,7 +54733,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2y_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary2_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54803,7 +54803,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary3x_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54873,7 +54873,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3x_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary3y_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -54943,7 +54943,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3y_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary3_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55013,7 +55013,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary4x_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55083,7 +55083,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4x_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary4y_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55153,7 +55153,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4y_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary4_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55223,7 +55223,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary5x_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55293,7 +55293,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5x_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary5y_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55363,7 +55363,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5y_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary5_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55433,7 +55433,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary6x_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55503,7 +55503,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6x_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary6y_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55573,7 +55573,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6y_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_primary6_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55643,7 +55643,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_white_pointx_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55713,7 +55713,7 @@ sl_status_t uic_mqtt_dotdot_color_control_white_pointx_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_white_pointy_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55783,7 +55783,7 @@ sl_status_t uic_mqtt_dotdot_color_control_white_pointy_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointrx_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55853,7 +55853,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointrx_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointry_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55923,7 +55923,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointry_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointr_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -55993,7 +55993,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointr_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointgx_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56063,7 +56063,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointgx_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointgy_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56133,7 +56133,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointgy_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointg_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56203,7 +56203,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointg_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointbx_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56273,7 +56273,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointbx_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointby_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56343,7 +56343,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointby_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_pointb_intensity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56413,7 +56413,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointb_intensity_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_enhanced_current_hue_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56556,7 +56556,7 @@ sl_status_t uic_mqtt_dotdot_color_control_enhanced_color_mode_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56626,7 +56626,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56696,7 +56696,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56766,7 +56766,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56836,7 +56836,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_unretain
 
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_stored_enhanced_hue_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -56975,7 +56975,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_capabilities_unretain(
 
 sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57045,7 +57045,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_unretai
 
 sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57115,7 +57115,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_unretai
 
 sl_status_t uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57185,7 +57185,7 @@ sl_status_t uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_
 
 sl_status_t uic_mqtt_dotdot_color_control_start_up_color_temperature_mireds_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57627,7 +57627,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_min_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57697,7 +57697,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_min_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_max_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57836,7 +57836,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_status_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_min_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57906,7 +57906,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_min_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_max_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -57976,7 +57976,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_max_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58046,7 +58046,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58116,7 +58116,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58186,7 +58186,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_unret
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58256,7 +58256,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_unre
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_quantity_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58458,7 +58458,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_manufacturer_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58528,7 +58528,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58667,7 +58667,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_alarm_mode_unretain(
 
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_trip_point_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -58935,7 +58935,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -59005,7 +59005,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -59075,7 +59075,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_min_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -59145,7 +59145,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -59628,7 +59628,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_light_sensor_type_unretain
 
 sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_illuminance_target_level_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -60104,7 +60104,7 @@ sl_status_t uic_mqtt_dotdot_temperature_measurement_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_temperature_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -60590,7 +60590,7 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_pressure_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -60870,7 +60870,7 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_max_scaled_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_pressure_measurement_scaled_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61206,7 +61206,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_flow_measurement_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61276,7 +61276,7 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_flow_measurement_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61346,7 +61346,7 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_min_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_flow_measurement_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61416,7 +61416,7 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_flow_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61682,7 +61682,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_relativity_humidity_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61752,7 +61752,7 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_relativity_humidity_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61822,7 +61822,7 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_min_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_relativity_humidity_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -61892,7 +61892,7 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_relativity_humidity_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62385,7 +62385,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_occupancy_sensor_type_bitmap_unret
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62455,7 +62455,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_u
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62525,7 +62525,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_u
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62595,7 +62595,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_thresho
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62665,7 +62665,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62735,7 +62735,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62805,7 +62805,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62875,7 +62875,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unocc
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -62945,7 +62945,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occ
 
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63211,7 +63211,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63281,7 +63281,7 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63351,7 +63351,7 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63421,7 +63421,7 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63687,7 +63687,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_ph_measurement_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63757,7 +63757,7 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_ph_measurement_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63827,7 +63827,7 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_min_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_ph_measurement_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -63897,7 +63897,7 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_ph_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64163,7 +64163,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_force_read_at
 
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64233,7 +64233,7 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_u
 
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64303,7 +64303,7 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_val
 
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64373,7 +64373,7 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_val
 
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64639,7 +64639,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64709,7 +64709,7 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64779,7 +64779,7 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -64849,7 +64849,7 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_unretain(
 
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_tolerance_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -66609,7 +66609,7 @@ void uic_mqtt_dotdot_on_ias_zone_zone_enroll_response(
   }
 
   ZoneEnrollResponseEnrollResponseCode enroll_response_code = {};
-  uint8_t zoneid = {};
+  int8_t zoneid = {};
 
 
   nlohmann::json jsn;
@@ -66673,7 +66673,7 @@ static void uic_mqtt_dotdot_on_generated_ias_zone_zone_enroll_response(
   }
 
   ZoneEnrollResponseEnrollResponseCode enroll_response_code = {};
-  uint8_t zoneid = {};
+  int8_t zoneid = {};
 
 
   nlohmann::json jsn;
@@ -66739,8 +66739,8 @@ void uic_mqtt_dotdot_on_ias_zone_zone_status_change_notification(
 
   uint16_t zone_status = {};
   uint8_t extended_status = {};
-  uint8_t zoneid = {};
-  uint16_t delay = {};
+  int8_t zoneid = {};
+  int16_t delay = {};
 
 
   nlohmann::json jsn;
@@ -66813,8 +66813,8 @@ static void uic_mqtt_dotdot_on_generated_ias_zone_zone_status_change_notificatio
 
   uint16_t zone_status = {};
   uint8_t extended_status = {};
-  uint8_t zoneid = {};
-  uint16_t delay = {};
+  int8_t zoneid = {};
+  int16_t delay = {};
 
 
   nlohmann::json jsn;
@@ -66990,7 +66990,7 @@ void uic_mqtt_dotdot_on_ias_zone_zone_enroll_request(
   }
 
   IasZoneType zone_type = {};
-  uint16_t manufacturer_code = {};
+  int16_t manufacturer_code = {};
 
 
   nlohmann::json jsn;
@@ -67054,7 +67054,7 @@ static void uic_mqtt_dotdot_on_generated_ias_zone_zone_enroll_request(
   }
 
   IasZoneType zone_type = {};
-  uint16_t manufacturer_code = {};
+  int16_t manufacturer_code = {};
 
 
   nlohmann::json jsn;
@@ -67118,8 +67118,8 @@ void uic_mqtt_dotdot_on_ias_zone_initiate_test_mode(
     return;
   }
 
-  uint8_t test_mode_duration = {};
-  uint8_t current_zone_sensitivity_level = {};
+  int8_t test_mode_duration = {};
+  int8_t current_zone_sensitivity_level = {};
 
 
   nlohmann::json jsn;
@@ -67182,8 +67182,8 @@ static void uic_mqtt_dotdot_on_generated_ias_zone_initiate_test_mode(
     return;
   }
 
-  uint8_t test_mode_duration = {};
-  uint8_t current_zone_sensitivity_level = {};
+  int8_t test_mode_duration = {};
+  int8_t current_zone_sensitivity_level = {};
 
 
   nlohmann::json jsn;
@@ -67648,7 +67648,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_iascie_address_unretain(
 
 sl_status_t uic_mqtt_dotdot_ias_zone_zoneid_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -67718,7 +67718,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zoneid_unretain(
 
 sl_status_t uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -67788,7 +67788,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported
 
 sl_status_t uic_mqtt_dotdot_ias_zone_current_zone_sensitivity_level_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -68055,8 +68055,8 @@ void uic_mqtt_dotdot_on_iaswd_start_warning(
   }
 
   uint8_t siren_configuration = {};
-  uint16_t warning_duration = {};
-  uint8_t strobe_duty_cycle = {};
+  int16_t warning_duration = {};
+  int8_t strobe_duty_cycle = {};
   IaswdLevel strobe_level = {};
 
 
@@ -68129,8 +68129,8 @@ static void uic_mqtt_dotdot_on_generated_iaswd_start_warning(
   }
 
   uint8_t siren_configuration = {};
-  uint16_t warning_duration = {};
-  uint8_t strobe_duty_cycle = {};
+  int16_t warning_duration = {};
+  int8_t strobe_duty_cycle = {};
   IaswdLevel strobe_level = {};
 
 
@@ -68426,7 +68426,7 @@ static void uic_mqtt_dotdot_on_iaswd_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_iaswd_max_duration_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -68752,7 +68752,7 @@ static void uic_mqtt_dotdot_on_metering_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_metering_current_summation_delivered_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -68822,7 +68822,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_summation_delivered_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_summation_received_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -68892,7 +68892,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_summation_received_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69102,7 +69102,7 @@ sl_status_t uic_mqtt_dotdot_metering_power_factor_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69172,7 +69172,7 @@ sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69242,7 +69242,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
   const char *base_topic,
-  uint32_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69312,7 +69312,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_default_update_period_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69455,7 +69455,7 @@ sl_status_t uic_mqtt_dotdot_metering_supply_status_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69525,7 +69525,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_unre
 
 sl_status_t uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69808,7 +69808,7 @@ sl_status_t uic_mqtt_dotdot_metering_unitof_measure_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_multiplier_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69878,7 +69878,7 @@ sl_status_t uic_mqtt_dotdot_metering_multiplier_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_divisor_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -70807,10 +70807,10 @@ void uic_mqtt_dotdot_on_electrical_measurement_get_profile_info_response(
     return;
   }
 
-  uint8_t profile_count = {};
+  int8_t profile_count = {};
   ProfileIntervalPeriod profile_interval_period = {};
-  uint8_t max_number_of_intervals = {};
-  std::vector<uint16_t> list_of_attributes;
+  int8_t max_number_of_intervals = {};
+  std::vector<uint8_t> list_of_attributes;
 
 
   nlohmann::json jsn;
@@ -70882,10 +70882,10 @@ static void uic_mqtt_dotdot_on_generated_electrical_measurement_get_profile_info
     return;
   }
 
-  uint8_t profile_count = {};
+  int8_t profile_count = {};
   ProfileIntervalPeriod profile_interval_period = {};
-  uint8_t max_number_of_intervals = {};
-  std::vector<uint16_t> list_of_attributes;
+  int8_t max_number_of_intervals = {};
+  std::vector<uint8_t> list_of_attributes;
 
 
   nlohmann::json jsn;
@@ -71061,12 +71061,12 @@ void uic_mqtt_dotdot_on_electrical_measurement_get_measurement_profile_response(
     return;
   }
 
-  uint32_t start_time = {};
+  uint8_t start_time = {};
   GetMeasurementProfileResponseStatus status = {};
   ProfileIntervalPeriod profile_interval_period = {};
-  uint8_t number_of_intervals_delivered = {};
-  uint16_t attribute_id = {};
-  std::vector<uint8_t> intervals;
+  int8_t number_of_intervals_delivered = {};
+  uint8_t attribute_id = {};
+  std::vector<int8_t> intervals;
 
 
   nlohmann::json jsn;
@@ -71146,12 +71146,12 @@ static void uic_mqtt_dotdot_on_generated_electrical_measurement_get_measurement_
     return;
   }
 
-  uint32_t start_time = {};
+  uint8_t start_time = {};
   GetMeasurementProfileResponseStatus status = {};
   ProfileIntervalPeriod profile_interval_period = {};
-  uint8_t number_of_intervals_delivered = {};
-  uint16_t attribute_id = {};
-  std::vector<uint8_t> intervals;
+  int8_t number_of_intervals_delivered = {};
+  uint8_t attribute_id = {};
+  std::vector<int8_t> intervals;
 
 
   nlohmann::json jsn;
@@ -71232,9 +71232,9 @@ void uic_mqtt_dotdot_on_electrical_measurement_get_measurement_profile(
     return;
   }
 
-  uint16_t attributeid = {};
-  uint32_t start_time = {};
-  uint8_t number_of_intervals = {};
+  uint8_t attributeid = {};
+  uint8_t start_time = {};
+  int8_t number_of_intervals = {};
 
 
   nlohmann::json jsn;
@@ -71301,9 +71301,9 @@ static void uic_mqtt_dotdot_on_generated_electrical_measurement_get_measurement_
     return;
   }
 
-  uint16_t attributeid = {};
-  uint32_t start_time = {};
-  uint8_t number_of_intervals = {};
+  uint8_t attributeid = {};
+  uint8_t start_time = {};
+  int8_t number_of_intervals = {};
 
 
   nlohmann::json jsn;
@@ -72426,7 +72426,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_max_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72496,7 +72496,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_unretai
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72566,7 +72566,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72636,7 +72636,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_unretai
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72706,7 +72706,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72776,7 +72776,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72846,7 +72846,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72916,7 +72916,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -72986,7 +72986,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -73056,7 +73056,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_neutral_current_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -73266,7 +73266,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_total_reactive_power_unretain
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_total_apparent_power_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74176,7 +74176,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase11th_harmonic_c
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74246,7 +74246,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_unret
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74316,7 +74316,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_unretain
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_power_multiplier_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74386,7 +74386,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_multiplier_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_power_divisor_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74596,7 +74596,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_phase_harmonic_current_multip
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74806,7 +74806,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74876,7 +74876,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -74946,7 +74946,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75016,7 +75016,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75086,7 +75086,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75156,7 +75156,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75506,7 +75506,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75646,7 +75646,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75716,7 +75716,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measureme
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75786,7 +75786,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_coun
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75856,7 +75856,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_cou
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75926,7 +75926,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -75996,7 +75996,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76066,7 +76066,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_unreta
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76136,7 +76136,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_unre
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76206,7 +76206,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_unretai
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76276,7 +76276,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76346,7 +76346,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_unretai
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76416,7 +76416,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -76486,7 +76486,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_divisor_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -77534,7 +77534,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -77744,7 +77744,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_phb_unretain
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -77814,7 +77814,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -77884,7 +77884,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -77954,7 +77954,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78024,7 +78024,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78094,7 +78094,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78444,7 +78444,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78584,7 +78584,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phb_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78654,7 +78654,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measureme
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78724,7 +78724,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_coun
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78794,7 +78794,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_cou
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78864,7 +78864,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -78934,7 +78934,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79004,7 +79004,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_un
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79074,7 +79074,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79284,7 +79284,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_phc_unretain
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79354,7 +79354,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79424,7 +79424,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79494,7 +79494,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79564,7 +79564,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79634,7 +79634,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -79984,7 +79984,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80124,7 +80124,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phc_unretain(
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80194,7 +80194,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measureme
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80264,7 +80264,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_coun
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80334,7 +80334,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_cou
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80404,7 +80404,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80474,7 +80474,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80544,7 +80544,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_un
 
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phc_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80898,7 +80898,7 @@ static void uic_mqtt_dotdot_on_diagnostics_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_number_of_resets_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -80968,7 +80968,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_number_of_resets_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_persistent_memory_writes_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81038,7 +81038,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_persistent_memory_writes_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_bcast_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81108,7 +81108,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_bcast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_bcast_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81178,7 +81178,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_bcast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_ucast_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81248,7 +81248,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_ucast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81318,7 +81318,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81388,7 +81388,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81458,7 +81458,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_bcast_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81528,7 +81528,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_bcast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_bcast_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81598,7 +81598,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_bcast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_ucast_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81668,7 +81668,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_ucast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81738,7 +81738,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81808,7 +81808,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81878,7 +81878,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_route_disc_initiated_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -81948,7 +81948,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_route_disc_initiated_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_added_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82018,7 +82018,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_added_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_removed_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82088,7 +82088,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_removed_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_stale_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82158,7 +82158,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_stale_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_join_indication_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82228,7 +82228,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_join_indication_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_child_moved_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82298,7 +82298,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_child_moved_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_nwkfc_failure_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82368,7 +82368,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_nwkfc_failure_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_apsfc_failure_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82438,7 +82438,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_apsfc_failure_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82508,7 +82508,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82578,7 +82578,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82648,7 +82648,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82718,7 +82718,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_unretain
 
 sl_status_t uic_mqtt_dotdot_diagnostics_relayed_ucast_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82788,7 +82788,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_relayed_ucast_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82858,7 +82858,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82928,7 +82928,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_unretain(
 
 sl_status_t uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
   const char *base_topic,
-  uint16_t value,
+  int16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -82998,7 +82998,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_u
 
 sl_status_t uic_mqtt_dotdot_diagnostics_last_messagelqi_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -83262,17 +83262,17 @@ void uic_mqtt_dotdot_on_protocol_controller_rf_telemetry_tx_report(
   std::string sourceunid;
   std::string destinationunid;
   bool transmission_successful = {};
-  uint16_t transmission_time_ms = {};
+  int16_t transmission_time_ms = {};
   int8_t tx_powerd_bm = {};
-  uint8_t tx_channel = {};
-  uint8_t routing_attempts = {};
+  int8_t tx_channel = {};
+  int8_t routing_attempts = {};
   bool route_changed = {};
   TxReportTransmissionSpeed transmission_speed = {};
   int8_t measured_noise_floord_bm = {};
   std::vector<std::string> last_route_repeaters;
   std::vector<int8_t> incoming_rssi_repeaters;
   int8_t ackrssi = {};
-  uint8_t ack_channel = {};
+  int8_t ack_channel = {};
   std::string last_route_failed_link_functionalunid;
   std::string last_route_failed_link_non_functionalunid;
   int8_t destination_ack_tx_powerd_bm = {};
@@ -83419,17 +83419,17 @@ static void uic_mqtt_dotdot_on_generated_protocol_controller_rf_telemetry_tx_rep
   std::string sourceunid;
   std::string destinationunid;
   bool transmission_successful = {};
-  uint16_t transmission_time_ms = {};
+  int16_t transmission_time_ms = {};
   int8_t tx_powerd_bm = {};
-  uint8_t tx_channel = {};
-  uint8_t routing_attempts = {};
+  int8_t tx_channel = {};
+  int8_t routing_attempts = {};
   bool route_changed = {};
   TxReportTransmissionSpeed transmission_speed = {};
   int8_t measured_noise_floord_bm = {};
   std::vector<std::string> last_route_repeaters;
   std::vector<int8_t> incoming_rssi_repeaters;
   int8_t ackrssi = {};
-  uint8_t ack_channel = {};
+  int8_t ack_channel = {};
   std::string last_route_failed_link_functionalunid;
   std::string last_route_failed_link_non_functionalunid;
   int8_t destination_ack_tx_powerd_bm = {};
@@ -84854,7 +84854,7 @@ static void uic_mqtt_dotdot_on_state_force_read_attributes(
 sl_status_t uic_mqtt_dotdot_state_endpoint_id_list_publish(
   const char *base_topic,
   size_t value_count,
-  const uint8_t* value,
+  const int8_t* value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -85071,7 +85071,7 @@ sl_status_t uic_mqtt_dotdot_state_security_unretain(
 
 sl_status_t uic_mqtt_dotdot_state_maximum_command_delay_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -85489,7 +85489,7 @@ void uic_mqtt_dotdot_on_binding_bind(
 
   std::string cluster_name;
   std::string destination_unid;
-  uint8_t destination_ep = {};
+  int8_t destination_ep = {};
 
 
   nlohmann::json jsn;
@@ -85558,7 +85558,7 @@ static void uic_mqtt_dotdot_on_generated_binding_bind(
 
   std::string cluster_name;
   std::string destination_unid;
-  uint8_t destination_ep = {};
+  int8_t destination_ep = {};
 
 
   nlohmann::json jsn;
@@ -85628,7 +85628,7 @@ void uic_mqtt_dotdot_on_binding_unbind(
 
   std::string cluster_name;
   std::string destination_unid;
-  uint8_t destination_ep = {};
+  int8_t destination_ep = {};
 
 
   nlohmann::json jsn;
@@ -85697,7 +85697,7 @@ static void uic_mqtt_dotdot_on_generated_binding_unbind(
 
   std::string cluster_name;
   std::string destination_unid;
-  uint8_t destination_ep = {};
+  int8_t destination_ep = {};
 
 
   nlohmann::json jsn;
@@ -86605,7 +86605,7 @@ static void uic_mqtt_dotdot_on_system_metrics_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_system_metrics_reporting_interval_seconds_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -87972,7 +87972,7 @@ sl_status_t uic_mqtt_dotdot_system_metrics_fqdn_unretain(
 
 sl_status_t uic_mqtt_dotdot_system_metrics_uptime_minutes_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -88462,7 +88462,7 @@ sl_status_t uic_mqtt_dotdot_system_metrics_battery_percentage_unretain(
 
 sl_status_t uic_mqtt_dotdot_system_metrics_system_interrupts_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -89224,7 +89224,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_mqtt_topics_unret
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_uptime_minutes_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -89294,7 +89294,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_uptime_minutes_unretain(
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_process_id_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -89639,7 +89639,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_logging_level_unretain(
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -89709,7 +89709,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_int
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -89779,7 +89779,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_unretain(
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -89849,7 +89849,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_unreta
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_subscription_count_publish(
   const char *base_topic,
-  uint64_t value,
+  int64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -90129,7 +90129,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_max_delivery_time_second
 
 sl_status_t uic_mqtt_dotdot_application_monitoring_application_statistics_reporting_interval_seconds_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -91106,7 +91106,7 @@ void uic_mqtt_dotdot_on_configuration_parameters_discover_parameter(
     return;
   }
 
-  uint16_t parameter_id = {};
+  int16_t parameter_id = {};
 
 
   nlohmann::json jsn;
@@ -91165,7 +91165,7 @@ static void uic_mqtt_dotdot_on_generated_configuration_parameters_discover_param
     return;
   }
 
-  uint16_t parameter_id = {};
+  int16_t parameter_id = {};
 
 
   nlohmann::json jsn;
@@ -91328,7 +91328,7 @@ void uic_mqtt_dotdot_on_configuration_parameters_set_parameter(
     return;
   }
 
-  uint16_t parameter_id = {};
+  int16_t parameter_id = {};
   int64_t value = {};
 
 
@@ -91392,7 +91392,7 @@ static void uic_mqtt_dotdot_on_generated_configuration_parameters_set_parameter(
     return;
   }
 
-  uint16_t parameter_id = {};
+  int16_t parameter_id = {};
   int64_t value = {};
 
 
@@ -91457,8 +91457,8 @@ void uic_mqtt_dotdot_on_configuration_parameters_discover_parameter_range(
     return;
   }
 
-  uint16_t first_parameter_id = {};
-  uint16_t last_parameter_id = {};
+  int16_t first_parameter_id = {};
+  int16_t last_parameter_id = {};
 
 
   nlohmann::json jsn;
@@ -91521,8 +91521,8 @@ static void uic_mqtt_dotdot_on_generated_configuration_parameters_discover_param
     return;
   }
 
-  uint16_t first_parameter_id = {};
-  uint16_t last_parameter_id = {};
+  int16_t first_parameter_id = {};
+  int16_t last_parameter_id = {};
 
 
   nlohmann::json jsn;
@@ -91825,6 +91825,4233 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_init()
   uic_mqtt_dotdot_configuration_parameters_attributes_init();
 
   uic_mqtt_dotdot_by_group_configuration_parameters_init();
+
+  return SL_STATUS_OK;
+}
+
+// Callbacks pointers
+static std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t> uic_mqtt_dotdot_user_credential_add_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t> uic_mqtt_dotdot_user_credential_generated_add_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t> uic_mqtt_dotdot_user_credential_modify_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t> uic_mqtt_dotdot_user_credential_generated_modify_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t> uic_mqtt_dotdot_user_credential_delete_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t> uic_mqtt_dotdot_user_credential_add_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t> uic_mqtt_dotdot_user_credential_generated_add_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t> uic_mqtt_dotdot_user_credential_modify_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t> uic_mqtt_dotdot_user_credential_generated_modify_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t> uic_mqtt_dotdot_user_credential_delete_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_credential_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_users_callback_t> uic_mqtt_dotdot_user_credential_delete_all_users_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_users_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t> uic_mqtt_dotdot_user_credential_delete_all_credentials_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t> uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t> uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t> uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback;
+static std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t> uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t> uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t> uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t> uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t> uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t> uic_mqtt_dotdot_user_credential_credential_learn_stop_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t> uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_association_callback_t> uic_mqtt_dotdot_user_credential_credential_association_callback;
+static std::set<uic_mqtt_dotdot_user_credential_credential_association_callback_t> uic_mqtt_dotdot_user_credential_generated_credential_association_callback;
+static std::set<uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t> uic_mqtt_dotdot_user_credential_get_user_checksum_callback;
+static std::set<uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t> uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback;
+static std::set<uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t> uic_mqtt_dotdot_user_credential_get_credential_checksum_callback;
+static std::set<uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t> uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback;
+static std::set<uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t> uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback;
+static std::set<uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t> uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback;
+static std::set<uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t> uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback;
+static std::set<uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t> uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback;
+static std::set<uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t> uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback;
+static std::set<uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t> uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback;
+static std::set<uic_mqtt_dotdot_user_credential_write_attributes_callback_t> uic_mqtt_dotdot_user_credential_write_attributes_callback;
+static std::set<uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t> uic_mqtt_dotdot_user_credential_force_read_attributes_callback;
+
+// Callbacks setters
+void uic_mqtt_dotdot_user_credential_add_user_callback_set(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_add_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_add_user_callback_unset(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_add_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_add_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_add_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_add_user_callback_t>& get_uic_mqtt_dotdot_user_credential_add_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_add_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_set(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_add_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_unset(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_add_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_add_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_set(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_modify_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_unset(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_modify_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_modify_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_modify_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_modify_user_callback_t>& get_uic_mqtt_dotdot_user_credential_modify_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_modify_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_set(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_modify_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_unset(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_user_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_set(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_add_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_unset(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_add_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_add_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_add_credential_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_add_credential_callback_t>& get_uic_mqtt_dotdot_user_credential_add_credential_callback()
+{
+  return uic_mqtt_dotdot_user_credential_add_credential_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_set(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_add_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_unset(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_add_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_add_credential_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_set(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_modify_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_unset(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_modify_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_modify_credential_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_modify_credential_callback_t>& get_uic_mqtt_dotdot_user_credential_modify_credential_callback()
+{
+  return uic_mqtt_dotdot_user_credential_modify_credential_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_set(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_unset(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_set(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_unset(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_credential_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_credential_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_credential_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_credential_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_set(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_unset(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_all_users_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_all_users_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_all_users_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_all_users_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_all_credentials_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_all_credentials_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_all_credentials_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t>& get_uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback()
+{
+  return uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t>& get_uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback()
+{
+  return uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t>& get_uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback()
+{
+  return uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_credential_learn_stop_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t>& get_uic_mqtt_dotdot_user_credential_credential_learn_stop_callback()
+{
+  return uic_mqtt_dotdot_user_credential_credential_learn_stop_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_credential_association_callback_set(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_credential_association_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_credential_association_callback_unset(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_credential_association_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_credential_association_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_credential_association_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_credential_association_callback_t>& get_uic_mqtt_dotdot_user_credential_credential_association_callback()
+{
+  return uic_mqtt_dotdot_user_credential_credential_association_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_credential_association_callback_set(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_credential_association_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_association_callback_unset(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_association_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_credential_association_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_credential_association_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_get_user_checksum_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t>& get_uic_mqtt_dotdot_user_credential_get_user_checksum_callback()
+{
+  return uic_mqtt_dotdot_user_credential_get_user_checksum_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_get_credential_checksum_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t>& get_uic_mqtt_dotdot_user_credential_get_credential_checksum_callback()
+{
+  return uic_mqtt_dotdot_user_credential_get_credential_checksum_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t>& get_uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback()
+{
+  return uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t>& get_uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback()
+{
+  return uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback.clear();
+}
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t>& get_uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback()
+{
+  return uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback;
+}
+
+void uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback.erase(callback);
+}
+void uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback_clear()
+{
+  uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback.clear();
+}
+
+void uic_mqtt_dotdot_set_user_credential_write_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_write_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_user_credential_write_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_write_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_user_credential_write_attributes_callbacks()
+{
+  uic_mqtt_dotdot_user_credential_write_attributes_callback.clear();
+}
+std::set<uic_mqtt_dotdot_user_credential_write_attributes_callback_t>& get_uic_mqtt_dotdot_user_credential_write_attributes_callback()
+{
+  return uic_mqtt_dotdot_user_credential_write_attributes_callback;
+}
+
+void uic_mqtt_dotdot_set_user_credential_force_read_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_user_credential_force_read_attributes_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_unset_user_credential_force_read_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback)
+{
+  uic_mqtt_dotdot_user_credential_force_read_attributes_callback.erase(callback);
+}
+void uic_mqtt_dotdot_clear_user_credential_force_read_attributes_callbacks()
+{
+  uic_mqtt_dotdot_user_credential_force_read_attributes_callback.clear();
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/AddUser
+void uic_mqtt_dotdot_on_user_credential_add_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_add_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  int16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_add_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/AddUser
+static void uic_mqtt_dotdot_on_generated_user_credential_add_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_add_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  int16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_add_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/ModifyUser
+void uic_mqtt_dotdot_on_user_credential_modify_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_modify_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  int16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/ModifyUser
+static void uic_mqtt_dotdot_on_generated_user_credential_modify_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_modify_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  UserTypeEnum user_type = {};
+  bool user_active_state = {};
+  CredRule credential_rule = {};
+  std::string user_name;
+  int16_t expiring_timeout_minutes = {};
+  UserNameEncodingType user_name_encoding = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_user(
+      jsn,
+      user_uniqueid,
+
+      user_type,
+
+      user_active_state,
+
+      credential_rule,
+
+      user_name,
+
+      expiring_timeout_minutes,
+
+      user_name_encoding
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_modify_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      user_type,
+  
+      user_active_state,
+  
+      credential_rule,
+  
+      user_name.c_str(),
+  
+      expiring_timeout_minutes,
+  
+      user_name_encoding
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteUser
+void uic_mqtt_dotdot_on_user_credential_delete_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_user(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteUser
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_user(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/AddCredential
+void uic_mqtt_dotdot_on_user_credential_add_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_add_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_add_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/AddCredential
+static void uic_mqtt_dotdot_on_generated_user_credential_add_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_add_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_add_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "AddCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "AddCredential", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_add_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/ModifyCredential
+void uic_mqtt_dotdot_on_user_credential_modify_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_modify_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/ModifyCredential
+static void uic_mqtt_dotdot_on_generated_user_credential_modify_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  std::string credential_data;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_modify_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_data
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "ModifyCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "ModifyCredential", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_modify_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_data.c_str()
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteCredential
+void uic_mqtt_dotdot_on_user_credential_delete_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteCredential
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_credential(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_credential(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteCredential");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteCredential", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_credential_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteAllUsers
+void uic_mqtt_dotdot_on_user_credential_delete_all_users(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_all_users_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllUsers");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllUsers", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllUsers", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_users_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteAllUsers
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_all_users(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllUsers");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllUsers", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllUsers", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteAllCredentials
+void uic_mqtt_dotdot_on_user_credential_delete_all_credentials(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_all_credentials_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentials");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentials", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentials", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteAllCredentials
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentials");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentials", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentials", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteAllCredentialsByType
+void uic_mqtt_dotdot_on_user_credential_delete_all_credentials_by_type(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  CredType credential_type = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_by_type(
+      jsn,
+      credential_type
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentialsByType");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsByType", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsByType", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      credential_type
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteAllCredentialsByType
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials_by_type(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  CredType credential_type = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_by_type(
+      jsn,
+      credential_type
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentialsByType");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsByType", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsByType", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      credential_type
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteAllCredentialsForUser
+void uic_mqtt_dotdot_on_user_credential_delete_all_credentials_for_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentialsForUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUser", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteAllCredentialsForUser
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials_for_user(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentialsForUser");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUser", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUser", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeleteAllCredentialsForUserByType
+void uic_mqtt_dotdot_on_user_credential_delete_all_credentials_for_user_by_type(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user_by_type(
+      jsn,
+      user_uniqueid,
+
+      credential_type
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentialsForUserByType");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUserByType", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUserByType", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType
+static void uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials_for_user_by_type(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user_by_type(
+      jsn,
+      user_uniqueid,
+
+      credential_type
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeleteAllCredentialsForUserByType");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUserByType", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeleteAllCredentialsForUserByType", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/CredentialLearnStartAdd
+void uic_mqtt_dotdot_on_user_credential_credential_learn_start_add(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  int8_t credential_learn_timeout = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_credential_learn_start_add(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_learn_timeout
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialLearnStartAdd");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartAdd", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartAdd", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_learn_timeout
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/CredentialLearnStartAdd
+static void uic_mqtt_dotdot_on_generated_user_credential_credential_learn_start_add(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  int8_t credential_learn_timeout = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_credential_learn_start_add(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_learn_timeout
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialLearnStartAdd");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartAdd", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartAdd", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_learn_timeout
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/CredentialLearnStartModify
+void uic_mqtt_dotdot_on_user_credential_credential_learn_start_modify(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  int8_t credential_learn_timeout = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_credential_learn_start_modify(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_learn_timeout
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialLearnStartModify");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartModify", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartModify", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_learn_timeout
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/CredentialLearnStartModify
+static void uic_mqtt_dotdot_on_generated_user_credential_credential_learn_start_modify(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+  CredType credential_type = {};
+  int16_t credential_slot = {};
+  int8_t credential_learn_timeout = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_credential_learn_start_modify(
+      jsn,
+      user_uniqueid,
+
+      credential_type,
+
+      credential_slot,
+
+      credential_learn_timeout
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialLearnStartModify");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartModify", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStartModify", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid,
+  
+      credential_type,
+  
+      credential_slot,
+  
+      credential_learn_timeout
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/CredentialLearnStop
+void uic_mqtt_dotdot_on_user_credential_credential_learn_stop(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_credential_learn_stop_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialLearnStop");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStop", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStop", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_learn_stop_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/CredentialLearnStop
+static void uic_mqtt_dotdot_on_generated_user_credential_credential_learn_stop(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialLearnStop");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStop", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialLearnStop", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/CredentialAssociation
+void uic_mqtt_dotdot_on_user_credential_credential_association(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_credential_association_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  CredType credential_type = {};
+  int16_t source_user_uniqueid = {};
+  int16_t source_credential_slot = {};
+  int16_t destination_user_uniqueid = {};
+  int16_t destination_credential_slot = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_credential_association(
+      jsn,
+      credential_type,
+
+      source_user_uniqueid,
+
+      source_credential_slot,
+
+      destination_user_uniqueid,
+
+      destination_credential_slot
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialAssociation");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialAssociation", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialAssociation", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_association_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      credential_type,
+  
+      source_user_uniqueid,
+  
+      source_credential_slot,
+  
+      destination_user_uniqueid,
+  
+      destination_credential_slot
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/CredentialAssociation
+static void uic_mqtt_dotdot_on_generated_user_credential_credential_association(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_credential_association_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  CredType credential_type = {};
+  int16_t source_user_uniqueid = {};
+  int16_t source_credential_slot = {};
+  int16_t destination_user_uniqueid = {};
+  int16_t destination_credential_slot = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_credential_association(
+      jsn,
+      credential_type,
+
+      source_user_uniqueid,
+
+      source_credential_slot,
+
+      destination_user_uniqueid,
+
+      destination_credential_slot
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "CredentialAssociation");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialAssociation", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "CredentialAssociation", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_credential_association_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      credential_type,
+  
+      source_user_uniqueid,
+  
+      source_credential_slot,
+  
+      destination_user_uniqueid,
+  
+      destination_credential_slot
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/GetUserChecksum
+void uic_mqtt_dotdot_on_user_credential_get_user_checksum(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_get_user_checksum_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_get_user_checksum(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "GetUserChecksum");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetUserChecksum", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetUserChecksum", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_get_user_checksum_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/GetUserChecksum
+static void uic_mqtt_dotdot_on_generated_user_credential_get_user_checksum(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  int16_t user_uniqueid = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_get_user_checksum(
+      jsn,
+      user_uniqueid
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "GetUserChecksum");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetUserChecksum", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetUserChecksum", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      user_uniqueid
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/GetCredentialChecksum
+void uic_mqtt_dotdot_on_user_credential_get_credential_checksum(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_get_credential_checksum_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  CredType credential_type = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_get_credential_checksum(
+      jsn,
+      credential_type
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "GetCredentialChecksum");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetCredentialChecksum", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetCredentialChecksum", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_get_credential_checksum_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      credential_type
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/GetCredentialChecksum
+static void uic_mqtt_dotdot_on_generated_user_credential_get_credential_checksum(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  CredType credential_type = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_get_credential_checksum(
+      jsn,
+      credential_type
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "GetCredentialChecksum");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetCredentialChecksum", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetCredentialChecksum", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      credential_type
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/GetAllUsersChecksum
+void uic_mqtt_dotdot_on_user_credential_get_all_users_checksum(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "GetAllUsersChecksum");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetAllUsersChecksum", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetAllUsersChecksum", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/GetAllUsersChecksum
+static void uic_mqtt_dotdot_on_generated_user_credential_get_all_users_checksum(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "GetAllUsersChecksum");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetAllUsersChecksum", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "GetAllUsersChecksum", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/SetAdminPINCode
+void uic_mqtt_dotdot_on_user_credential_set_admin_pin_code(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string pin_code;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_set_admin_pin_code(
+      jsn,
+      pin_code
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "SetAdminPINCode");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "SetAdminPINCode", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "SetAdminPINCode", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      pin_code.c_str()
+  
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/SetAdminPINCode
+static void uic_mqtt_dotdot_on_generated_user_credential_set_admin_pin_code(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  std::string pin_code;
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+    uic_mqtt_dotdot_parse_user_credential_set_admin_pin_code(
+      jsn,
+      pin_code
+      );
+
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "SetAdminPINCode");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "SetAdminPINCode", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "SetAdminPINCode", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      pin_code.c_str()
+  
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/DeactivateAdminPINCode
+void uic_mqtt_dotdot_on_user_credential_deactivate_admin_pin_code(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeactivateAdminPINCode");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeactivateAdminPINCode", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeactivateAdminPINCode", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/GeneratedCommands/DeactivateAdminPINCode
+static void uic_mqtt_dotdot_on_generated_user_credential_deactivate_admin_pin_code(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "DeactivateAdminPINCode");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeactivateAdminPINCode", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "DeactivateAdminPINCode", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
+// Callback function for incoming publications on ucl/by-unid/+/+/UserCredential/Commands/WriteAttributes
+void uic_mqtt_dotdot_on_user_credential_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (uic_mqtt_dotdot_user_credential_write_attributes_callback.empty()) {
+    return;
+  }
+
+  if (message_length == 0) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_user_credential_state_t new_state = {};
+  uic_mqtt_dotdot_user_credential_updated_state_t new_updated_state = {};
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+    uic_mqtt_dotdot_parse_user_credential_write_attributes(
+      jsn,
+      new_state,
+      new_updated_state
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "UserCredential", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential", "WriteAttributes", "");
+    return;
+  }
+
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_write_attributes_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+      new_state,
+      new_updated_state
+    );
+  }
+
+}
+
+static void uic_mqtt_dotdot_on_user_credential_force_read_attributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  uint8_t endpoint = 0;
+  std::string unid;
+
+  if ((message_length == 0) || (uic_mqtt_dotdot_user_credential_force_read_attributes_callback.empty())) {
+    return;
+  }
+
+  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  try {
+    uic_mqtt_dotdot_user_credential_updated_state_t force_update = {0};
+    bool trigger_handler = false;
+
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
+
+    // Assume all attributes to be read on empty array received
+    if (attributes.size() == 0) {
+      force_update.supported_user_unique_identifiers = true;
+      force_update.supported_credential_rules = true;
+      force_update.supported_credential_types = true;
+      force_update.supported_user_types = true;
+      force_update.support_credential_checksum = true;
+      force_update.support_admin_pin_code = true;
+      force_update.support_admin_pin_code_deactivation = true;
+      force_update.admin_pin_code = true;
+      trigger_handler = true;
+    } else {
+      std::unordered_map<std::string, bool *> supported_attrs = {
+        {"SupportedUserUniqueIdentifiers", &force_update.supported_user_unique_identifiers },
+        {"SupportedCredentialRules", &force_update.supported_credential_rules },
+        {"SupportedCredentialTypes", &force_update.supported_credential_types },
+        {"SupportedUserTypes", &force_update.supported_user_types },
+        {"SupportCredentialChecksum", &force_update.support_credential_checksum },
+        {"SupportAdminPinCode", &force_update.support_admin_pin_code },
+        {"SupportAdminPinCodeDeactivation", &force_update.support_admin_pin_code_deactivation },
+        {"AdminPinCode", &force_update.admin_pin_code },
+      };
+
+      for (auto& attribute : attributes) {
+        auto found_attr = supported_attrs.find(attribute);
+        if (found_attr != supported_attrs.end()) {
+          *(found_attr->second) = true;
+          trigger_handler = true;
+        }
+      }
+    }
+
+    if (trigger_handler == true) {
+      for (const auto& callback: uic_mqtt_dotdot_user_credential_force_read_attributes_callback) {
+        callback(
+          static_cast<dotdot_unid_t>(unid.c_str()),
+          endpoint,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+          force_update
+        );
+      }
+    }
+  } catch (...) {
+    sl_log_debug(LOG_TAG, "UserCredential/Commands/ForceReadAttributes: Unable to parse JSON payload");
+    return;
+  }
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
+  const char *base_topic,
+  int16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64776,0,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64776,0,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedUserUniqueIdentifiers", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedUserUniqueIdentifiers";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedUserUniqueIdentifiers";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_rules_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UserCredentialSupportedCredentialRules.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedCredentialRules", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedCredentialRules";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_rules_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedCredentialRules";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_types_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UserCredentialSupportedCredentialTypes.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedCredentialTypes", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedCredentialTypes";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_types_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedCredentialTypes";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_types_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = UserCredentialSupportedUserTypes.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportedUserTypes", e.what());
+    return SL_STATUS_OK;
+  }
+
+  boost::replace_all(payload_str, "\"true\"", "true");
+  boost::replace_all(payload_str, "\"false\"", "false");
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportedUserTypes";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_types_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportedUserTypes";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_support_credential_checksum_publish(
+  const char *base_topic,
+  bool value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64776,4,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64776,4,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportCredentialChecksum", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportCredentialChecksum";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_support_credential_checksum_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportCredentialChecksum";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_publish(
+  const char *base_topic,
+  bool value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64776,5,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64776,5,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportAdminPinCode", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportAdminPinCode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportAdminPinCode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_publish(
+  const char *base_topic,
+  bool value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  if (true == uic_dotdot_has_attribute_value_a_name(64776,6,value)) {
+    jsn["value"] = uic_dotdot_get_attribute_value_name(64776,6,value);
+  }else{
+    jsn["value"] = value;
+  }
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/SupportAdminPinCodeDeactivation", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/SupportAdminPinCodeDeactivation";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/SupportAdminPinCodeDeactivation";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+sl_status_t uic_mqtt_dotdot_user_credential_admin_pin_code_publish(
+  const char *base_topic,
+  const char* value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+)
+{
+  nlohmann::json jsn;
+
+  // This is a single value
+
+  jsn["value"] = std::string(value);
+
+
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "UserCredential/Attributes/AdminPinCode", e.what());
+    return SL_STATUS_OK;
+  }
+
+
+  std::string topic = std::string(base_topic) + "/UserCredential/Attributes/AdminPinCode";
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
+  {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
+  {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(),
+              payload_str.c_str(),
+              payload_str.length(),
+              true);
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t uic_mqtt_dotdot_user_credential_admin_pin_code_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
+{
+  // clang-format on
+  std::string topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/AdminPinCode";
+
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_desired = topic + "/Desired";
+    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
+  }
+  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
+      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
+    std::string topic_reported = topic + "/Reported";
+    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
+  }
+  return SL_STATUS_OK;
+}
+// clang-format off
+
+
+sl_status_t uic_mqtt_dotdot_user_credential_init()
+{
+  std::string base_topic = "ucl/by-unid/+/+/";
+
+  std::string subscription_topic;
+  if(!uic_mqtt_dotdot_user_credential_write_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_WriteAttributes);
+  }
+
+  if(!uic_mqtt_dotdot_user_credential_force_read_attributes_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_force_read_attributes);
+  }
+  if (!uic_mqtt_dotdot_user_credential_add_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/AddUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_add_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_add_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/AddUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_add_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_modify_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/ModifyUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_modify_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_modify_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/ModifyUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_modify_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_add_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/AddCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_add_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_add_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/AddCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_add_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_modify_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/ModifyCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_modify_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_modify_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/ModifyCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_modify_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_credential_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteCredential";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_credential);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_all_users_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteAllUsers";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_all_users);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteAllUsers";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_all_users);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_all_credentials_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteAllCredentials";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_all_credentials);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteAllCredentials";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteAllCredentialsByType";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_all_credentials_by_type);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteAllCredentialsByType";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials_by_type);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteAllCredentialsForUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_all_credentials_for_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteAllCredentialsForUser";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials_for_user);
+  }
+  if (!uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeleteAllCredentialsForUserByType";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_delete_all_credentials_for_user_by_type);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_delete_all_credentials_for_user_by_type);
+  }
+  if (!uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/CredentialLearnStartAdd";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_credential_learn_start_add);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/CredentialLearnStartAdd";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_credential_learn_start_add);
+  }
+  if (!uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/CredentialLearnStartModify";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_credential_learn_start_modify);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/CredentialLearnStartModify";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_credential_learn_start_modify);
+  }
+  if (!uic_mqtt_dotdot_user_credential_credential_learn_stop_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/CredentialLearnStop";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_credential_learn_stop);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/CredentialLearnStop";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_credential_learn_stop);
+  }
+  if (!uic_mqtt_dotdot_user_credential_credential_association_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/CredentialAssociation";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_credential_association);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_credential_association_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/CredentialAssociation";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_credential_association);
+  }
+  if (!uic_mqtt_dotdot_user_credential_get_user_checksum_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/GetUserChecksum";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_get_user_checksum);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/GetUserChecksum";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_get_user_checksum);
+  }
+  if (!uic_mqtt_dotdot_user_credential_get_credential_checksum_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/GetCredentialChecksum";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_get_credential_checksum);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/GetCredentialChecksum";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_get_credential_checksum);
+  }
+  if (!uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/GetAllUsersChecksum";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_get_all_users_checksum);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/GetAllUsersChecksum";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_get_all_users_checksum);
+  }
+  if (!uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/SetAdminPINCode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_set_admin_pin_code);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/SetAdminPINCode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_set_admin_pin_code);
+  }
+  if (!uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/Commands/DeactivateAdminPINCode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_user_credential_deactivate_admin_pin_code);
+  }
+  if (!uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback.empty()) {
+    subscription_topic = base_topic + "UserCredential/GeneratedCommands/DeactivateAdminPINCode";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_user_credential_deactivate_admin_pin_code);
+  }
+
+  // Init the attributes for that cluster
+  uic_mqtt_dotdot_user_credential_attributes_init();
+
+  uic_mqtt_dotdot_by_group_user_credential_init();
 
   return SL_STATUS_OK;
 }
@@ -93881,8 +98108,8 @@ void uic_mqtt_dotdot_on_unify_humidity_control_setpoint_set(
   }
 
   SetpointType type = {};
-  uint8_t precision = {};
-  uint8_t scale = {};
+  int8_t precision = {};
+  int8_t scale = {};
   int32_t value = {};
 
 
@@ -93955,8 +98182,8 @@ static void uic_mqtt_dotdot_on_generated_unify_humidity_control_setpoint_set(
   }
 
   SetpointType type = {};
-  uint8_t precision = {};
-  uint8_t scale = {};
+  int8_t precision = {};
+  int8_t scale = {};
   int32_t value = {};
 
 
@@ -94736,7 +98963,7 @@ sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_unr
 
 sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -95089,7 +99316,7 @@ sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_u
 
 sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -95442,7 +99669,7 @@ sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_unretain(
 
 sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
   const char *base_topic,
-  uint8_t value,
+  int8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -95748,6 +99975,10 @@ sl_status_t uic_mqtt_dotdot_init() {
   }
 
   if (status_flag == SL_STATUS_OK) {
+    status_flag = uic_mqtt_dotdot_user_credential_init();
+  }
+
+  if (status_flag == SL_STATUS_OK) {
     status_flag = uic_mqtt_dotdot_protocol_controller_network_management_init();
   }
 
@@ -95824,6 +100055,7 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_application_monitoring_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_name_and_location_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_configuration_parameters_publish_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_user_credential_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_descriptor_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_unify_fan_control_publish_supported_commands(unid, endpoint_id);
@@ -95883,6 +100115,7 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_application_monitoring_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_name_and_location_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(unid, endpoint_id);
+  uic_mqtt_dotdot_user_credential_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_unify_fan_control_publish_empty_supported_commands(unid, endpoint_id);
@@ -96395,7 +100628,7 @@ static inline bool uic_mqtt_dotdot_identify_identify_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t identify_time_value;
+    int16_t identify_time_value;
     memset(&identify_time_value, 0x00, sizeof(identify_time_value));
     for (const auto& callback: uic_mqtt_dotdot_identify_identify_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96413,7 +100646,7 @@ static inline bool uic_mqtt_dotdot_identify_identify_query_response_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t timeout_value;
+    int16_t timeout_value;
     memset(&timeout_value, 0x00, sizeof(timeout_value));
     for (const auto& callback: uic_mqtt_dotdot_identify_identify_query_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96643,7 +100876,7 @@ static inline bool uic_mqtt_dotdot_groups_add_group_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     const char* group_name_value;
     memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -96667,7 +100900,7 @@ static inline bool uic_mqtt_dotdot_groups_add_group_response_is_supported(
 {
     uint8_t status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     for (const auto& callback: uic_mqtt_dotdot_groups_add_group_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96687,7 +100920,7 @@ static inline bool uic_mqtt_dotdot_groups_view_group_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     for (const auto& callback: uic_mqtt_dotdot_groups_view_group_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96707,7 +100940,7 @@ static inline bool uic_mqtt_dotdot_groups_view_group_response_is_supported(
 {
     uint8_t status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     const char* group_name_value;
     memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -96747,7 +100980,7 @@ static inline bool uic_mqtt_dotdot_groups_get_group_membership_response_is_suppo
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t capacity_value;
+    int8_t capacity_value;
     memset(&capacity_value, 0x00, sizeof(capacity_value));
     for (const auto& callback: uic_mqtt_dotdot_groups_get_group_membership_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96767,7 +101000,7 @@ static inline bool uic_mqtt_dotdot_groups_remove_group_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     for (const auto& callback: uic_mqtt_dotdot_groups_remove_group_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96787,7 +101020,7 @@ static inline bool uic_mqtt_dotdot_groups_remove_group_response_is_supported(
 {
     uint8_t status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     for (const auto& callback: uic_mqtt_dotdot_groups_remove_group_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -96821,7 +101054,7 @@ static inline bool uic_mqtt_dotdot_groups_add_group_if_identifying_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t group_id_value;
+    int16_t group_id_value;
     memset(&group_id_value, 0x00, sizeof(group_id_value));
     const char* group_name_value;
     memset(&group_name_value, 0x00, sizeof(group_name_value));
@@ -97061,15 +101294,15 @@ static inline bool uic_mqtt_dotdot_scenes_add_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    const char* scene_name_value;
+    uint8_t * scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
-    uint8_t transition_time100ms_value;
+    int8_t transition_time100ms_value;
     memset(&transition_time100ms_value, 0x00, sizeof(transition_time100ms_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_add_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97099,9 +101332,9 @@ static inline bool uic_mqtt_dotdot_scenes_add_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_add_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97123,9 +101356,9 @@ static inline bool uic_mqtt_dotdot_scenes_view_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_view_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97147,13 +101380,13 @@ static inline bool uic_mqtt_dotdot_scenes_view_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    const char* scene_name_value;
+    uint8_t * scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_view_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97181,9 +101414,9 @@ static inline bool uic_mqtt_dotdot_scenes_remove_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_remove_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97205,9 +101438,9 @@ static inline bool uic_mqtt_dotdot_scenes_remove_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_remove_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97229,7 +101462,7 @@ static inline bool uic_mqtt_dotdot_scenes_remove_all_scenes_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_remove_all_scenes_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97249,7 +101482,7 @@ static inline bool uic_mqtt_dotdot_scenes_remove_all_scenes_response_is_supporte
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97269,9 +101502,9 @@ static inline bool uic_mqtt_dotdot_scenes_store_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_store_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97293,9 +101526,9 @@ static inline bool uic_mqtt_dotdot_scenes_store_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_store_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97317,11 +101550,11 @@ static inline bool uic_mqtt_dotdot_scenes_recall_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_recall_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97343,7 +101576,7 @@ static inline bool uic_mqtt_dotdot_scenes_get_scene_membership_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_get_scene_membership_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97363,9 +101596,9 @@ static inline bool uic_mqtt_dotdot_scenes_get_scene_membership_response_is_suppo
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint8_t capacity_value;
+    int8_t capacity_value;
     memset(&capacity_value, 0x00, sizeof(capacity_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_get_scene_membership_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97389,13 +101622,13 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_add_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    const char* scene_name_value;
+    uint8_t * scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_enhanced_add_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97423,9 +101656,9 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_add_scene_response_is_support
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97447,9 +101680,9 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_view_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_enhanced_view_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97471,13 +101704,13 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_view_scene_response_is_suppor
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t groupid_value;
+    uint8_t * groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
-    uint8_t sceneid_value;
+    int8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    const char* scene_name_value;
+    uint8_t * scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97507,13 +101740,13 @@ static inline bool uic_mqtt_dotdot_scenes_copy_scene_is_supported(
 {
     uint8_t mode_value;
     memset(&mode_value, 0x00, sizeof(mode_value));
-    uint16_t group_identifier_from_value;
+    uint8_t * group_identifier_from_value;
     memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
-    uint8_t scene_identifier_from_value;
+    int8_t scene_identifier_from_value;
     memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
-    uint16_t group_identifier_to_value;
+    uint8_t * group_identifier_to_value;
     memset(&group_identifier_to_value, 0x00, sizeof(group_identifier_to_value));
-    uint8_t scene_identifier_to_value;
+    int8_t scene_identifier_to_value;
     memset(&scene_identifier_to_value, 0x00, sizeof(scene_identifier_to_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_copy_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97541,9 +101774,9 @@ static inline bool uic_mqtt_dotdot_scenes_copy_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint16_t group_identifier_from_value;
+    uint8_t * group_identifier_from_value;
     memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
-    uint8_t scene_identifier_from_value;
+    int8_t scene_identifier_from_value;
     memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_copy_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97890,7 +102123,7 @@ static inline bool uic_mqtt_dotdot_on_off_off_with_effect_is_supported(
 {
     OffWithEffectEffectIdentifier effect_identifier_value;
     memset(&effect_identifier_value, 0x00, sizeof(effect_identifier_value));
-    uint8_t effect_variant_value;
+    int8_t effect_variant_value;
     memset(&effect_variant_value, 0x00, sizeof(effect_variant_value));
     for (const auto& callback: uic_mqtt_dotdot_on_off_off_with_effect_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -97926,9 +102159,9 @@ static inline bool uic_mqtt_dotdot_on_off_on_with_timed_off_is_supported(
 {
     uint8_t on_off_control_value;
     memset(&on_off_control_value, 0x00, sizeof(on_off_control_value));
-    uint16_t on_time_value;
+    int16_t on_time_value;
     memset(&on_time_value, 0x00, sizeof(on_time_value));
-    uint16_t off_wait_time_value;
+    int16_t off_wait_time_value;
     memset(&off_wait_time_value, 0x00, sizeof(off_wait_time_value));
     for (const auto& callback: uic_mqtt_dotdot_on_off_on_with_timed_off_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -98140,9 +102373,9 @@ static inline bool uic_mqtt_dotdot_level_move_to_level_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t level_value;
+    int8_t level_value;
     memset(&level_value, 0x00, sizeof(level_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -98172,7 +102405,7 @@ static inline bool uic_mqtt_dotdot_level_move_is_supported(
 {
     MoveStepMode move_mode_value;
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-    uint8_t rate_value;
+    int8_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -98202,9 +102435,9 @@ static inline bool uic_mqtt_dotdot_level_step_is_supported(
 {
     MoveStepMode step_mode_value;
     memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-    uint8_t step_size_value;
+    int8_t step_size_value;
     memset(&step_size_value, 0x00, sizeof(step_size_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -98256,9 +102489,9 @@ static inline bool uic_mqtt_dotdot_level_move_to_level_with_on_off_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t level_value;
+    int8_t level_value;
     memset(&level_value, 0x00, sizeof(level_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -98288,7 +102521,7 @@ static inline bool uic_mqtt_dotdot_level_move_with_on_off_is_supported(
 {
     MoveStepMode move_mode_value;
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-    uint8_t rate_value;
+    int8_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -98318,9 +102551,9 @@ static inline bool uic_mqtt_dotdot_level_step_with_on_off_is_supported(
 {
     MoveStepMode step_mode_value;
     memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-    uint8_t step_size_value;
+    int8_t step_size_value;
     memset(&step_size_value, 0x00, sizeof(step_size_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -98372,7 +102605,7 @@ static inline bool uic_mqtt_dotdot_level_move_to_closest_frequency_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t frequency_value;
+    int16_t frequency_value;
     memset(&frequency_value, 0x00, sizeof(frequency_value));
     for (const auto& callback: uic_mqtt_dotdot_level_move_to_closest_frequency_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -98603,7 +102836,7 @@ static inline bool uic_mqtt_dotdot_alarms_reset_alarm_is_supported(
 {
     uint8_t alarm_code_value;
     memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-    uint16_t cluster_identifier_value;
+    uint8_t cluster_identifier_value;
     memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
     for (const auto& callback: uic_mqtt_dotdot_alarms_reset_alarm_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -98625,7 +102858,7 @@ static inline bool uic_mqtt_dotdot_alarms_alarm_is_supported(
 {
     uint8_t alarm_code_value;
     memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-    uint16_t cluster_identifier_value;
+    uint8_t cluster_identifier_value;
     memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
     for (const auto& callback: uic_mqtt_dotdot_alarms_alarm_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -98663,9 +102896,9 @@ static inline bool uic_mqtt_dotdot_alarms_get_alarm_response_is_supported(
     memset(&status_value, 0x00, sizeof(status_value));
     uint8_t alarm_code_value;
     memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-    uint16_t cluster_identifier_value;
+    uint8_t cluster_identifier_value;
     memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
-    uint32_t time_stamp_value;
+    int32_t time_stamp_value;
     memset(&time_stamp_value, 0x00, sizeof(time_stamp_value));
     for (const auto& callback: uic_mqtt_dotdot_alarms_get_alarm_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99071,7 +103304,7 @@ static inline bool uic_mqtt_dotdot_poll_control_check_in_response_is_supported(
 {
     bool start_fast_polling_value;
     memset(&start_fast_polling_value, 0x00, sizeof(start_fast_polling_value));
-    uint16_t fast_poll_timeout_value;
+    int16_t fast_poll_timeout_value;
     memset(&fast_poll_timeout_value, 0x00, sizeof(fast_poll_timeout_value));
     for (const auto& callback: uic_mqtt_dotdot_poll_control_check_in_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99105,7 +103338,7 @@ static inline bool uic_mqtt_dotdot_poll_control_set_long_poll_interval_is_suppor
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint32_t new_long_poll_interval_value;
+    int32_t new_long_poll_interval_value;
     memset(&new_long_poll_interval_value, 0x00, sizeof(new_long_poll_interval_value));
     for (const auto& callback: uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99123,7 +103356,7 @@ static inline bool uic_mqtt_dotdot_poll_control_set_short_poll_interval_is_suppo
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t new_short_poll_interval_value;
+    int16_t new_short_poll_interval_value;
     memset(&new_short_poll_interval_value, 0x00, sizeof(new_short_poll_interval_value));
     for (const auto& callback: uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99472,7 +103705,7 @@ static inline bool uic_mqtt_dotdot_door_lock_lock_door_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    const char* pin_or_rfid_code_value;
+    uint8_t pin_or_rfid_code_value;
     memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_lock_door_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99508,7 +103741,7 @@ static inline bool uic_mqtt_dotdot_door_lock_unlock_door_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    const char* pin_or_rfid_code_value;
+    uint8_t pin_or_rfid_code_value;
     memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_unlock_door_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99544,7 +103777,7 @@ static inline bool uic_mqtt_dotdot_door_lock_toggle_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    const char* pin_or_rfid_code_value;
+    uint8_t pin_or_rfid_code_value;
     memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_toggle_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99580,9 +103813,9 @@ static inline bool uic_mqtt_dotdot_door_lock_unlock_with_timeout_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t timeout_in_seconds_value;
+    int16_t timeout_in_seconds_value;
     memset(&timeout_in_seconds_value, 0x00, sizeof(timeout_in_seconds_value));
-    const char* pin_or_rfid_code_value;
+    uint8_t pin_or_rfid_code_value;
     memset(&pin_or_rfid_code_value, 0x00, sizeof(pin_or_rfid_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99620,7 +103853,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_log_record_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t log_index_value;
+    int16_t log_index_value;
     memset(&log_index_value, 0x00, sizeof(log_index_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_log_record_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99638,19 +103871,19 @@ static inline bool uic_mqtt_dotdot_door_lock_get_log_record_response_is_supporte
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t log_entryid_value;
+    int16_t log_entryid_value;
     memset(&log_entryid_value, 0x00, sizeof(log_entryid_value));
-    uint32_t timestamp_value;
+    int32_t timestamp_value;
     memset(&timestamp_value, 0x00, sizeof(timestamp_value));
     GetLogRecordResponseEventType event_type_value;
     memset(&event_type_value, 0x00, sizeof(event_type_value));
     DrlkOperEventSource source_operation_event_value;
     memset(&source_operation_event_value, 0x00, sizeof(source_operation_event_value));
-    uint8_t event_id_or_alarm_code_value;
+    int8_t event_id_or_alarm_code_value;
     memset(&event_id_or_alarm_code_value, 0x00, sizeof(event_id_or_alarm_code_value));
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
-    const char* pin_value;
+    uint8_t pin_value;
     memset(&pin_value, 0x00, sizeof(pin_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_log_record_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99680,13 +103913,13 @@ static inline bool uic_mqtt_dotdot_door_lock_set_pin_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
-    const char* pin_value;
+    uint8_t pin_value;
     memset(&pin_value, 0x00, sizeof(pin_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_set_pin_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99728,7 +103961,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_pin_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_pin_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99746,13 +103979,13 @@ static inline bool uic_mqtt_dotdot_door_lock_get_pin_code_response_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
-    const char* code_value;
+    uint8_t code_value;
     memset(&code_value, 0x00, sizeof(code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_pin_code_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99776,7 +104009,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_pin_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_pin_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99844,7 +104077,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_status_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -99884,7 +104117,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_status_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_user_status_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99902,7 +104135,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_status_response_is_support
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -99924,19 +104157,19 @@ static inline bool uic_mqtt_dotdot_door_lock_set_weekday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    uint8_t * scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     uint8_t days_mask_value;
     memset(&days_mask_value, 0x00, sizeof(days_mask_value));
-    uint8_t start_hour_value;
+    int8_t start_hour_value;
     memset(&start_hour_value, 0x00, sizeof(start_hour_value));
-    uint8_t start_minute_value;
+    int8_t start_minute_value;
     memset(&start_minute_value, 0x00, sizeof(start_minute_value));
-    uint8_t end_hour_value;
+    int8_t end_hour_value;
     memset(&end_hour_value, 0x00, sizeof(end_hour_value));
-    uint8_t end_minute_value;
+    int8_t end_minute_value;
     memset(&end_minute_value, 0x00, sizeof(end_minute_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99984,9 +104217,9 @@ static inline bool uic_mqtt_dotdot_door_lock_get_weekday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    uint8_t * scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100006,21 +104239,21 @@ static inline bool uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_is_su
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    int8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
     uint8_t days_mask_value;
     memset(&days_mask_value, 0x00, sizeof(days_mask_value));
-    uint8_t start_hour_value;
+    int8_t start_hour_value;
     memset(&start_hour_value, 0x00, sizeof(start_hour_value));
-    uint8_t start_minute_value;
+    int8_t start_minute_value;
     memset(&start_minute_value, 0x00, sizeof(start_minute_value));
-    uint8_t end_hour_value;
+    int8_t end_hour_value;
     memset(&end_hour_value, 0x00, sizeof(end_hour_value));
-    uint8_t end_minute_value;
+    int8_t end_minute_value;
     memset(&end_minute_value, 0x00, sizeof(end_minute_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100052,9 +104285,9 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_weekday_schedule_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    uint8_t * scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100092,13 +104325,13 @@ static inline bool uic_mqtt_dotdot_door_lock_set_year_day_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    uint8_t * scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
-    uint32_t local_start_time_value;
+    int32_t local_start_time_value;
     memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-    uint32_t local_end_time_value;
+    int32_t local_end_time_value;
     memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100140,9 +104373,9 @@ static inline bool uic_mqtt_dotdot_door_lock_get_year_day_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    uint8_t * scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100162,15 +104395,15 @@ static inline bool uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_is_s
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    int8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint32_t local_start_time_value;
+    int32_t local_start_time_value;
     memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-    uint32_t local_end_time_value;
+    int32_t local_end_time_value;
     memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100196,9 +104429,9 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_year_day_schedule_is_supporte
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t scheduleid_value;
+    uint8_t * scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100236,11 +104469,11 @@ static inline bool uic_mqtt_dotdot_door_lock_set_holiday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t holiday_scheduleid_value;
+    uint8_t * holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
-    uint32_t local_start_time_value;
+    int32_t local_start_time_value;
     memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-    uint32_t local_end_time_value;
+    int32_t local_end_time_value;
     memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
     DrlkOperMode operating_mode_during_holiday_value;
     memset(&operating_mode_during_holiday_value, 0x00, sizeof(operating_mode_during_holiday_value));
@@ -100284,7 +104517,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_holiday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t holiday_scheduleid_value;
+    uint8_t * holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100302,13 +104535,13 @@ static inline bool uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_is_su
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t holiday_scheduleid_value;
+    int8_t holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    uint32_t local_start_time_value;
+    int32_t local_start_time_value;
     memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
-    uint32_t local_end_time_value;
+    int32_t local_end_time_value;
     memset(&local_end_time_value, 0x00, sizeof(local_end_time_value));
     DrlkOperMode operating_mode_during_holiday_value;
     memset(&operating_mode_during_holiday_value, 0x00, sizeof(operating_mode_during_holiday_value));
@@ -100336,7 +104569,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_holiday_schedule_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t holiday_scheduleid_value;
+    uint8_t * holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100372,7 +104605,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_type_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -100412,7 +104645,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_type_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_user_type_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100430,7 +104663,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_type_response_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -100452,13 +104685,13 @@ static inline bool uic_mqtt_dotdot_door_lock_set_rfid_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
-    const char* rfid_code_value;
+    uint8_t rfid_code_value;
     memset(&rfid_code_value, 0x00, sizeof(rfid_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_set_rfid_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100500,7 +104733,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_rfid_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_rfid_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100518,13 +104751,13 @@ static inline bool uic_mqtt_dotdot_door_lock_get_rfid_code_response_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
-    const char* rfid_code_value;
+    uint8_t rfid_code_value;
     memset(&rfid_code_value, 0x00, sizeof(rfid_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100548,7 +104781,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_rfid_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t userid_value;
+    uint8_t * userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_rfid_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100618,11 +104851,11 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_is_supported(
 {
     DataOperationTypeEnum operation_type_value;
     memset(&operation_type_value, 0x00, sizeof(operation_type_value));
-    uint16_t user_index_value;
+    int16_t user_index_value;
     memset(&user_index_value, 0x00, sizeof(user_index_value));
     const char* user_name_value;
     memset(&user_name_value, 0x00, sizeof(user_name_value));
-    uint32_t user_uniqueid_value;
+    int32_t user_uniqueid_value;
     memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -100658,7 +104891,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t user_index_value;
+    int16_t user_index_value;
     memset(&user_index_value, 0x00, sizeof(user_index_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_user_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100690,7 +104923,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_user_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t user_index_value;
+    int16_t user_index_value;
     memset(&user_index_value, 0x00, sizeof(user_index_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_user_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100712,11 +104945,11 @@ static inline bool uic_mqtt_dotdot_door_lock_operating_event_notification_is_sup
     memset(&operation_event_source_value, 0x00, sizeof(operation_event_source_value));
     OperatingEventNotificationOperationEventCode operation_event_code_value;
     memset(&operation_event_code_value, 0x00, sizeof(operation_event_code_value));
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
-    const char* pin_value;
+    uint8_t pin_value;
     memset(&pin_value, 0x00, sizeof(pin_value));
-    uint32_t local_time_value;
+    int32_t local_time_value;
     memset(&local_time_value, 0x00, sizeof(local_time_value));
     const char* data_value;
     memset(&data_value, 0x00, sizeof(data_value));
@@ -100750,15 +104983,15 @@ static inline bool uic_mqtt_dotdot_door_lock_programming_event_notification_is_s
     memset(&program_event_source_value, 0x00, sizeof(program_event_source_value));
     ProgrammingEventNotificationProgramEventCode program_event_code_value;
     memset(&program_event_code_value, 0x00, sizeof(program_event_code_value));
-    uint16_t userid_value;
+    int16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
-    const char* pin_value;
+    uint8_t pin_value;
     memset(&pin_value, 0x00, sizeof(pin_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
     DrlkUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
-    uint32_t local_time_value;
+    int32_t local_time_value;
     memset(&local_time_value, 0x00, sizeof(local_time_value));
     const char* data_value;
     memset(&data_value, 0x00, sizeof(data_value));
@@ -100796,9 +105029,9 @@ static inline bool uic_mqtt_dotdot_door_lock_set_credential_is_supported(
     memset(&operation_type_value, 0x00, sizeof(operation_type_value));
     CredentialStruct credential_value;
     memset(&credential_value, 0x00, sizeof(credential_value));
-    const char* credential_data_value;
+    uint8_t credential_data_value;
     memset(&credential_data_value, 0x00, sizeof(credential_data_value));
-    uint16_t user_index_value;
+    int16_t user_index_value;
     memset(&user_index_value, 0x00, sizeof(user_index_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -100894,7 +105127,7 @@ static inline bool uic_mqtt_dotdot_door_lock_unbolt_door_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    const char* pin_code_value;
+    uint8_t pin_code_value;
     memset(&pin_code_value, 0x00, sizeof(pin_code_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_unbolt_door_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -101550,7 +105783,7 @@ static inline bool uic_mqtt_dotdot_window_covering_go_to_lift_value_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t lift_value_value;
+    int16_t lift_value_value;
     memset(&lift_value_value, 0x00, sizeof(lift_value_value));
     for (const auto& callback: uic_mqtt_dotdot_window_covering_go_to_lift_value_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -101568,7 +105801,7 @@ static inline bool uic_mqtt_dotdot_window_covering_go_to_lift_percentage_is_supp
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t percentage_lift_value_value;
+    int8_t percentage_lift_value_value;
     memset(&percentage_lift_value_value, 0x00, sizeof(percentage_lift_value_value));
     for (const auto& callback: uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -101586,7 +105819,7 @@ static inline bool uic_mqtt_dotdot_window_covering_go_to_tilt_value_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t tilt_value_value;
+    int16_t tilt_value_value;
     memset(&tilt_value_value, 0x00, sizeof(tilt_value_value));
     for (const auto& callback: uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -101604,7 +105837,7 @@ static inline bool uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_is_supp
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t percentage_tilt_value_value;
+    int8_t percentage_tilt_value_value;
     memset(&percentage_tilt_value_value, 0x00, sizeof(percentage_tilt_value_value));
     for (const auto& callback: uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -101819,7 +106052,7 @@ static inline bool uic_mqtt_dotdot_barrier_control_go_to_percent_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t percent_open_value;
+    int8_t percent_open_value;
     memset(&percent_open_value, 0x00, sizeof(percent_open_value));
     for (const auto& callback: uic_mqtt_dotdot_barrier_control_go_to_percent_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102239,17 +106472,17 @@ static inline bool uic_mqtt_dotdot_thermostat_get_relay_status_log_response_is_s
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t time_of_day_value;
+    int16_t time_of_day_value;
     memset(&time_of_day_value, 0x00, sizeof(time_of_day_value));
     uint8_t relay_status_value;
     memset(&relay_status_value, 0x00, sizeof(relay_status_value));
     int16_t local_temperature_value;
     memset(&local_temperature_value, 0x00, sizeof(local_temperature_value));
-    uint8_t humidity_percentage_value;
+    int8_t humidity_percentage_value;
     memset(&humidity_percentage_value, 0x00, sizeof(humidity_percentage_value));
     int16_t set_point_value;
     memset(&set_point_value, 0x00, sizeof(set_point_value));
-    uint16_t unread_entries_value;
+    int16_t unread_entries_value;
     memset(&unread_entries_value, 0x00, sizeof(unread_entries_value));
     for (const auto& callback: uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102968,11 +107201,11 @@ static inline bool uic_mqtt_dotdot_color_control_move_to_hue_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t hue_value;
+    int8_t hue_value;
     memset(&hue_value, 0x00, sizeof(hue_value));
     CCDirection direction_value;
     memset(&direction_value, 0x00, sizeof(direction_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103004,7 +107237,7 @@ static inline bool uic_mqtt_dotdot_color_control_move_hue_is_supported(
 {
     CCMoveMode move_mode_value;
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-    uint8_t rate_value;
+    int8_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103034,9 +107267,9 @@ static inline bool uic_mqtt_dotdot_color_control_step_hue_is_supported(
 {
     CCStepMode step_mode_value;
     memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-    uint8_t step_size_value;
+    int8_t step_size_value;
     memset(&step_size_value, 0x00, sizeof(step_size_value));
-    uint8_t transition_time_value;
+    int8_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103066,9 +107299,9 @@ static inline bool uic_mqtt_dotdot_color_control_move_to_saturation_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t saturation_value;
+    int8_t saturation_value;
     memset(&saturation_value, 0x00, sizeof(saturation_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103098,7 +107331,7 @@ static inline bool uic_mqtt_dotdot_color_control_move_saturation_is_supported(
 {
     CCMoveMode move_mode_value;
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-    uint8_t rate_value;
+    int8_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103128,9 +107361,9 @@ static inline bool uic_mqtt_dotdot_color_control_step_saturation_is_supported(
 {
     CCStepMode step_mode_value;
     memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-    uint8_t step_size_value;
+    int8_t step_size_value;
     memset(&step_size_value, 0x00, sizeof(step_size_value));
-    uint8_t transition_time_value;
+    int8_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103160,11 +107393,11 @@ static inline bool uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_is_s
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t hue_value;
+    int8_t hue_value;
     memset(&hue_value, 0x00, sizeof(hue_value));
-    uint8_t saturation_value;
+    int8_t saturation_value;
     memset(&saturation_value, 0x00, sizeof(saturation_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103194,11 +107427,11 @@ static inline bool uic_mqtt_dotdot_color_control_move_to_color_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t colorx_value;
+    int16_t colorx_value;
     memset(&colorx_value, 0x00, sizeof(colorx_value));
-    uint16_t colory_value;
+    int16_t colory_value;
     memset(&colory_value, 0x00, sizeof(colory_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103262,7 +107495,7 @@ static inline bool uic_mqtt_dotdot_color_control_step_color_is_supported(
     memset(&stepx_value, 0x00, sizeof(stepx_value));
     int16_t stepy_value;
     memset(&stepy_value, 0x00, sizeof(stepy_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103292,9 +107525,9 @@ static inline bool uic_mqtt_dotdot_color_control_move_to_color_temperature_is_su
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t color_temperature_mireds_value;
+    int16_t color_temperature_mireds_value;
     memset(&color_temperature_mireds_value, 0x00, sizeof(color_temperature_mireds_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103322,11 +107555,11 @@ static inline bool uic_mqtt_dotdot_color_control_enhanced_move_to_hue_is_support
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t enhanced_hue_value;
+    int16_t enhanced_hue_value;
     memset(&enhanced_hue_value, 0x00, sizeof(enhanced_hue_value));
     CCDirection direction_value;
     memset(&direction_value, 0x00, sizeof(direction_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103358,7 +107591,7 @@ static inline bool uic_mqtt_dotdot_color_control_enhanced_move_hue_is_supported(
 {
     CCMoveMode move_mode_value;
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-    uint16_t rate_value;
+    int16_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103388,9 +107621,9 @@ static inline bool uic_mqtt_dotdot_color_control_enhanced_step_hue_is_supported(
 {
     CCStepMode step_mode_value;
     memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-    uint16_t step_size_value;
+    int16_t step_size_value;
     memset(&step_size_value, 0x00, sizeof(step_size_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103420,11 +107653,11 @@ static inline bool uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_satura
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t enhanced_hue_value;
+    int16_t enhanced_hue_value;
     memset(&enhanced_hue_value, 0x00, sizeof(enhanced_hue_value));
-    uint8_t saturation_value;
+    int8_t saturation_value;
     memset(&saturation_value, 0x00, sizeof(saturation_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103460,9 +107693,9 @@ static inline bool uic_mqtt_dotdot_color_control_color_loop_set_is_supported(
     memset(&action_value, 0x00, sizeof(action_value));
     CCColorLoopDirection direction_value;
     memset(&direction_value, 0x00, sizeof(direction_value));
-    uint16_t time_value;
+    int16_t time_value;
     memset(&time_value, 0x00, sizeof(time_value));
-    uint16_t start_hue_value;
+    int16_t start_hue_value;
     memset(&start_hue_value, 0x00, sizeof(start_hue_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103520,11 +107753,11 @@ static inline bool uic_mqtt_dotdot_color_control_move_color_temperature_is_suppo
 {
     CCMoveMode move_mode_value;
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
-    uint16_t rate_value;
+    int16_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
-    uint16_t color_temperature_minimum_mireds_value;
+    uint8_t * color_temperature_minimum_mireds_value;
     memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-    uint16_t color_temperature_maximum_mireds_value;
+    uint8_t * color_temperature_maximum_mireds_value;
     memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -103558,13 +107791,13 @@ static inline bool uic_mqtt_dotdot_color_control_step_color_temperature_is_suppo
 {
     CCStepMode step_mode_value;
     memset(&step_mode_value, 0x00, sizeof(step_mode_value));
-    uint16_t step_size_value;
+    int16_t step_size_value;
     memset(&step_size_value, 0x00, sizeof(step_size_value));
-    uint16_t transition_time_value;
+    int16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    uint16_t color_temperature_minimum_mireds_value;
+    uint8_t * color_temperature_minimum_mireds_value;
     memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-    uint16_t color_temperature_maximum_mireds_value;
+    uint8_t * color_temperature_maximum_mireds_value;
     memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -106101,7 +110334,7 @@ static inline bool uic_mqtt_dotdot_ias_zone_zone_enroll_response_is_supported(
 {
     ZoneEnrollResponseEnrollResponseCode enroll_response_code_value;
     memset(&enroll_response_code_value, 0x00, sizeof(enroll_response_code_value));
-    uint8_t zoneid_value;
+    int8_t zoneid_value;
     memset(&zoneid_value, 0x00, sizeof(zoneid_value));
     for (const auto& callback: uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -106125,9 +110358,9 @@ static inline bool uic_mqtt_dotdot_ias_zone_zone_status_change_notification_is_s
     memset(&zone_status_value, 0x00, sizeof(zone_status_value));
     uint8_t extended_status_value;
     memset(&extended_status_value, 0x00, sizeof(extended_status_value));
-    uint8_t zoneid_value;
+    int8_t zoneid_value;
     memset(&zoneid_value, 0x00, sizeof(zoneid_value));
-    uint16_t delay_value;
+    int16_t delay_value;
     memset(&delay_value, 0x00, sizeof(delay_value));
     for (const auto& callback: uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -106167,7 +110400,7 @@ static inline bool uic_mqtt_dotdot_ias_zone_zone_enroll_request_is_supported(
 {
     IasZoneType zone_type_value;
     memset(&zone_type_value, 0x00, sizeof(zone_type_value));
-    uint16_t manufacturer_code_value;
+    int16_t manufacturer_code_value;
     memset(&manufacturer_code_value, 0x00, sizeof(manufacturer_code_value));
     for (const auto& callback: uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -106187,9 +110420,9 @@ static inline bool uic_mqtt_dotdot_ias_zone_initiate_test_mode_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t test_mode_duration_value;
+    int8_t test_mode_duration_value;
     memset(&test_mode_duration_value, 0x00, sizeof(test_mode_duration_value));
-    uint8_t current_zone_sensitivity_level_value;
+    int8_t current_zone_sensitivity_level_value;
     memset(&current_zone_sensitivity_level_value, 0x00, sizeof(current_zone_sensitivity_level_value));
     for (const auto& callback: uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -106394,9 +110627,9 @@ static inline bool uic_mqtt_dotdot_iaswd_start_warning_is_supported(
 {
     uint8_t siren_configuration_value;
     memset(&siren_configuration_value, 0x00, sizeof(siren_configuration_value));
-    uint16_t warning_duration_value;
+    int16_t warning_duration_value;
     memset(&warning_duration_value, 0x00, sizeof(warning_duration_value));
-    uint8_t strobe_duty_cycle_value;
+    int8_t strobe_duty_cycle_value;
     memset(&strobe_duty_cycle_value, 0x00, sizeof(strobe_duty_cycle_value));
     IaswdLevel strobe_level_value;
     memset(&strobe_level_value, 0x00, sizeof(strobe_level_value));
@@ -106750,11 +110983,11 @@ static inline bool uic_mqtt_dotdot_electrical_measurement_get_profile_info_respo
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint8_t profile_count_value;
+    int8_t profile_count_value;
     memset(&profile_count_value, 0x00, sizeof(profile_count_value));
     ProfileIntervalPeriod profile_interval_period_value;
     memset(&profile_interval_period_value, 0x00, sizeof(profile_interval_period_value));
-    uint8_t max_number_of_intervals_value;
+    int8_t max_number_of_intervals_value;
     memset(&max_number_of_intervals_value, 0x00, sizeof(max_number_of_intervals_value));
     for (const auto& callback: uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -106792,15 +111025,15 @@ static inline bool uic_mqtt_dotdot_electrical_measurement_get_measurement_profil
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint32_t start_time_value;
+    uint8_t start_time_value;
     memset(&start_time_value, 0x00, sizeof(start_time_value));
     GetMeasurementProfileResponseStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
     ProfileIntervalPeriod profile_interval_period_value;
     memset(&profile_interval_period_value, 0x00, sizeof(profile_interval_period_value));
-    uint8_t number_of_intervals_delivered_value;
+    int8_t number_of_intervals_delivered_value;
     memset(&number_of_intervals_delivered_value, 0x00, sizeof(number_of_intervals_delivered_value));
-    uint16_t attribute_id_value;
+    uint8_t attribute_id_value;
     memset(&attribute_id_value, 0x00, sizeof(attribute_id_value));
     for (const auto& callback: uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -106828,11 +111061,11 @@ static inline bool uic_mqtt_dotdot_electrical_measurement_get_measurement_profil
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t attributeid_value;
+    uint8_t attributeid_value;
     memset(&attributeid_value, 0x00, sizeof(attributeid_value));
-    uint32_t start_time_value;
+    uint8_t start_time_value;
     memset(&start_time_value, 0x00, sizeof(start_time_value));
-    uint8_t number_of_intervals_value;
+    int8_t number_of_intervals_value;
     memset(&number_of_intervals_value, 0x00, sizeof(number_of_intervals_value));
     for (const auto& callback: uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -107184,13 +111417,13 @@ static inline bool uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report_is
     memset(&destinationunid_value, 0x00, sizeof(destinationunid_value));
     bool transmission_successful_value;
     memset(&transmission_successful_value, 0x00, sizeof(transmission_successful_value));
-    uint16_t transmission_time_ms_value;
+    int16_t transmission_time_ms_value;
     memset(&transmission_time_ms_value, 0x00, sizeof(transmission_time_ms_value));
     int8_t tx_powerd_bm_value;
     memset(&tx_powerd_bm_value, 0x00, sizeof(tx_powerd_bm_value));
-    uint8_t tx_channel_value;
+    int8_t tx_channel_value;
     memset(&tx_channel_value, 0x00, sizeof(tx_channel_value));
-    uint8_t routing_attempts_value;
+    int8_t routing_attempts_value;
     memset(&routing_attempts_value, 0x00, sizeof(routing_attempts_value));
     bool route_changed_value;
     memset(&route_changed_value, 0x00, sizeof(route_changed_value));
@@ -107200,7 +111433,7 @@ static inline bool uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report_is
     memset(&measured_noise_floord_bm_value, 0x00, sizeof(measured_noise_floord_bm_value));
     int8_t ackrssi_value;
     memset(&ackrssi_value, 0x00, sizeof(ackrssi_value));
-    uint8_t ack_channel_value;
+    int8_t ack_channel_value;
     memset(&ack_channel_value, 0x00, sizeof(ack_channel_value));
     const char* last_route_failed_link_functionalunid_value;
     memset(&last_route_failed_link_functionalunid_value, 0x00, sizeof(last_route_failed_link_functionalunid_value));
@@ -107695,7 +111928,7 @@ static inline bool uic_mqtt_dotdot_binding_bind_is_supported(
     memset(&cluster_name_value, 0x00, sizeof(cluster_name_value));
     const char* destination_unid_value;
     memset(&destination_unid_value, 0x00, sizeof(destination_unid_value));
-    uint8_t destination_ep_value;
+    int8_t destination_ep_value;
     memset(&destination_ep_value, 0x00, sizeof(destination_ep_value));
     for (const auto& callback: uic_mqtt_dotdot_binding_bind_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -107721,7 +111954,7 @@ static inline bool uic_mqtt_dotdot_binding_unbind_is_supported(
     memset(&cluster_name_value, 0x00, sizeof(cluster_name_value));
     const char* destination_unid_value;
     memset(&destination_unid_value, 0x00, sizeof(destination_unid_value));
-    uint8_t destination_ep_value;
+    int8_t destination_ep_value;
     memset(&destination_ep_value, 0x00, sizeof(destination_ep_value));
     for (const auto& callback: uic_mqtt_dotdot_binding_unbind_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -108434,7 +112667,7 @@ static inline bool uic_mqtt_dotdot_configuration_parameters_discover_parameter_i
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t parameter_id_value;
+    int16_t parameter_id_value;
     memset(&parameter_id_value, 0x00, sizeof(parameter_id_value));
     for (const auto& callback: uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -108466,7 +112699,7 @@ static inline bool uic_mqtt_dotdot_configuration_parameters_set_parameter_is_sup
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t parameter_id_value;
+    int16_t parameter_id_value;
     memset(&parameter_id_value, 0x00, sizeof(parameter_id_value));
     int64_t value_value;
     memset(&value_value, 0x00, sizeof(value_value));
@@ -108488,9 +112721,9 @@ static inline bool uic_mqtt_dotdot_configuration_parameters_discover_parameter_r
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    uint16_t first_parameter_id_value;
+    int16_t first_parameter_id_value;
     memset(&first_parameter_id_value, 0x00, sizeof(first_parameter_id_value));
-    uint16_t last_parameter_id_value;
+    int16_t last_parameter_id_value;
     memset(&last_parameter_id_value, 0x00, sizeof(last_parameter_id_value));
     for (const auto& callback: uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -108637,6 +112870,758 @@ void uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(
   std::string topic = "ucl/by-unid/" + std::string(unid);
   topic +=  "/ep"+ std::to_string(endpoint_id);
   topic +=  "/ConfigurationParameters/SupportedCommands";
+
+  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
+    uic_mqtt_publish(topic.c_str(),
+                     EMPTY_VALUE_ARRAY,
+                     strlen(EMPTY_VALUE_ARRAY),
+                     true);
+  }
+}
+
+// Publishing Cluster Revision for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_publish_cluster_revision(const char* base_topic, uint16_t value)
+{
+  std::string cluster_topic = std::string(base_topic) + "/UserCredential/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string pub_topic_des = cluster_topic + "/Desired";
+  std::string payload = std::string(R"({"value": )")
+    + std::to_string(value) + std::string("}");
+  uic_mqtt_publish(pub_topic_des.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+  // Publish Reported
+  std::string pub_topic_rep = cluster_topic + "/Reported";
+  uic_mqtt_publish(pub_topic_rep.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    true);
+}
+
+// Unretain Cluster Revision for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_unretain_cluster_revision(const char* base_topic)
+{
+  // clang-format on
+  std::string cluster_topic
+    = std::string(base_topic)
+      + "/UserCredential/Attributes/ClusterRevision";
+  // Publish Desired
+  std::string desired_topic = cluster_topic + "/Desired";
+  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
+  // Publish Reported
+  std::string reported_topic = cluster_topic + "/Reported";
+  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
+  // clang-format off
+}
+
+static inline bool uic_mqtt_dotdot_user_credential_add_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    UserTypeEnum user_type_value;
+    memset(&user_type_value, 0x00, sizeof(user_type_value));
+    bool user_active_state_value;
+    memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+    CredRule credential_rule_value;
+    memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+    const char* user_name_value;
+    memset(&user_name_value, 0x00, sizeof(user_name_value));
+    int16_t expiring_timeout_minutes_value;
+    memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+    UserNameEncodingType user_name_encoding_value;
+    memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_add_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        user_type_value,
+    
+        user_active_state_value,
+    
+        credential_rule_value,
+    
+        user_name_value,
+    
+        expiring_timeout_minutes_value,
+    
+        user_name_encoding_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_modify_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    UserTypeEnum user_type_value;
+    memset(&user_type_value, 0x00, sizeof(user_type_value));
+    bool user_active_state_value;
+    memset(&user_active_state_value, 0x00, sizeof(user_active_state_value));
+    CredRule credential_rule_value;
+    memset(&credential_rule_value, 0x00, sizeof(credential_rule_value));
+    const char* user_name_value;
+    memset(&user_name_value, 0x00, sizeof(user_name_value));
+    int16_t expiring_timeout_minutes_value;
+    memset(&expiring_timeout_minutes_value, 0x00, sizeof(expiring_timeout_minutes_value));
+    UserNameEncodingType user_name_encoding_value;
+    memset(&user_name_encoding_value, 0x00, sizeof(user_name_encoding_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        user_type_value,
+    
+        user_active_state_value,
+    
+        credential_rule_value,
+    
+        user_name_value,
+    
+        expiring_timeout_minutes_value,
+    
+        user_name_encoding_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_add_credential_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    int16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    const char* credential_data_value;
+    memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_add_credential_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value,
+    
+        credential_data_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_modify_credential_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    int16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    const char* credential_data_value;
+    memset(&credential_data_value, 0x00, sizeof(credential_data_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_modify_credential_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value,
+    
+        credential_data_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_credential_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    int16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_credential_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_all_users_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_users_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_all_credentials_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        credential_type_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_credential_learn_start_add_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    int16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    int8_t credential_learn_timeout_value;
+    memset(&credential_learn_timeout_value, 0x00, sizeof(credential_learn_timeout_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value,
+    
+        credential_learn_timeout_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_credential_learn_start_modify_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    int16_t credential_slot_value;
+    memset(&credential_slot_value, 0x00, sizeof(credential_slot_value));
+    int8_t credential_learn_timeout_value;
+    memset(&credential_learn_timeout_value, 0x00, sizeof(credential_learn_timeout_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value,
+    
+        credential_type_value,
+    
+        credential_slot_value,
+    
+        credential_learn_timeout_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_credential_learn_stop_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_learn_stop_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_credential_association_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    int16_t source_user_uniqueid_value;
+    memset(&source_user_uniqueid_value, 0x00, sizeof(source_user_uniqueid_value));
+    int16_t source_credential_slot_value;
+    memset(&source_credential_slot_value, 0x00, sizeof(source_credential_slot_value));
+    int16_t destination_user_uniqueid_value;
+    memset(&destination_user_uniqueid_value, 0x00, sizeof(destination_user_uniqueid_value));
+    int16_t destination_credential_slot_value;
+    memset(&destination_credential_slot_value, 0x00, sizeof(destination_credential_slot_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_credential_association_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        credential_type_value,
+    
+        source_user_uniqueid_value,
+    
+        source_credential_slot_value,
+    
+        destination_user_uniqueid_value,
+    
+        destination_credential_slot_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_get_user_checksum_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    int16_t user_uniqueid_value;
+    memset(&user_uniqueid_value, 0x00, sizeof(user_uniqueid_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_get_user_checksum_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        user_uniqueid_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_get_credential_checksum_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    CredType credential_type_value;
+    memset(&credential_type_value, 0x00, sizeof(credential_type_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_get_credential_checksum_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        credential_type_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_get_all_users_checksum_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_set_admin_pin_code_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    const char* pin_code_value;
+    memset(&pin_code_value, 0x00, sizeof(pin_code_value));
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    ,
+        pin_code_value
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+static inline bool uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_user_credential_write_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_write_attributes_callback) {
+    uic_mqtt_dotdot_user_credential_state_t user_credential_new_state = {};
+    uic_mqtt_dotdot_user_credential_updated_state_t user_credential_new_updated_state = {};
+
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          user_credential_new_state,
+          user_credential_new_updated_state
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static inline bool uic_mqtt_dotdot_user_credential_force_read_attributes_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  for (const auto& callback: uic_mqtt_dotdot_user_credential_force_read_attributes_callback) {
+    uic_mqtt_dotdot_user_credential_updated_state_t user_credential_force_update = {0};
+    if (callback(
+          unid,
+          endpoint_id,
+          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
+          user_credential_force_update
+      ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Publishing Supported Commands for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+  std::stringstream ss;
+  bool first_command = true;
+  ss.str("");
+
+  // check if there is callback for each command
+  if (uic_mqtt_dotdot_user_credential_add_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("AddUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_modify_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ModifyUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_add_credential_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("AddCredential")";
+  }
+  if (uic_mqtt_dotdot_user_credential_modify_credential_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ModifyCredential")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_credential_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteCredential")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_all_users_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteAllUsers")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_all_credentials_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteAllCredentials")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteAllCredentialsByType")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteAllCredentialsForUser")";
+  }
+  if (uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeleteAllCredentialsForUserByType")";
+  }
+  if (uic_mqtt_dotdot_user_credential_credential_learn_start_add_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("CredentialLearnStartAdd")";
+  }
+  if (uic_mqtt_dotdot_user_credential_credential_learn_start_modify_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("CredentialLearnStartModify")";
+  }
+  if (uic_mqtt_dotdot_user_credential_credential_learn_stop_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("CredentialLearnStop")";
+  }
+  if (uic_mqtt_dotdot_user_credential_credential_association_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("CredentialAssociation")";
+  }
+  if (uic_mqtt_dotdot_user_credential_get_user_checksum_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("GetUserChecksum")";
+  }
+  if (uic_mqtt_dotdot_user_credential_get_credential_checksum_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("GetCredentialChecksum")";
+  }
+  if (uic_mqtt_dotdot_user_credential_get_all_users_checksum_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("GetAllUsersChecksum")";
+  }
+  if (uic_mqtt_dotdot_user_credential_set_admin_pin_code_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("SetAdminPINCode")";
+  }
+  if (uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("DeactivateAdminPINCode")";
+  }
+
+  // Check for a WriteAttributes Callback
+  if(uic_mqtt_dotdot_user_credential_write_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("WriteAttributes")";
+  }
+
+  // Check for a ForceReadAttributes Callback
+  if (uic_mqtt_dotdot_user_credential_force_read_attributes_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("ForceReadAttributes")";
+  }
+
+  // Publish supported commands
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UserCredential/SupportedCommands";
+  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+  if (first_command == false) {
+    uic_mqtt_publish(topic.c_str(),
+                      payload_str.c_str(),
+                      payload_str.length(),
+                      true);
+  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+    // There are no supported commands, but make sure we publish some
+    // SupportedCommands = [] if any attribute has been published for a cluster.
+    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
+    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
+    attributes_topic += "/UserCredential/Attributes";
+
+    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+      uic_mqtt_publish(topic.c_str(),
+                      EMPTY_VALUE_ARRAY,
+                      strlen(EMPTY_VALUE_ARRAY),
+                      true);
+    }
+  }
+}
+
+// Publishing empty/no Supported Commands for UserCredential Cluster
+void uic_mqtt_dotdot_user_credential_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  , dotdot_endpoint_id_t endpoint_id)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint_id);
+  topic +=  "/UserCredential/SupportedCommands";
 
   if (uic_mqtt_count_topics(topic.c_str()) > 0) {
     uic_mqtt_publish(topic.c_str(),
@@ -109364,9 +114349,9 @@ static inline bool uic_mqtt_dotdot_unify_humidity_control_setpoint_set_is_suppor
 {
     SetpointType type_value;
     memset(&type_value, 0x00, sizeof(type_value));
-    uint8_t precision_value;
+    int8_t precision_value;
     memset(&precision_value, 0x00, sizeof(precision_value));
-    uint8_t scale_value;
+    int8_t scale_value;
     memset(&scale_value, 0x00, sizeof(scale_value));
     int32_t value_value;
     memset(&value_value, 0x00, sizeof(value_value));
@@ -116047,6 +121032,706 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_paramet
   std::string payload =
     get_json_payload_for_configuration_parameters_discover_parameter_range_command(
     fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated AddUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/AddUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModifyUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/ModifyUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated AddCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/AddCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModifyCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/ModifyCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllUsers command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllUsers
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_users_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllUsers";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_users_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentials command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentials
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentials";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsByType command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsByType
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_by_type_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentialsByType";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_by_type_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsForUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsForUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_for_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentialsForUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_for_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsForUserByType command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_for_user_by_type_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_for_user_by_type_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStartAdd command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStartAdd
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_start_add_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialLearnStartAdd";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_learn_start_add_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStartModify command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStartModify
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_start_modify_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialLearnStartModify";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_learn_start_modify_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStop command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStop
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_stop_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialLearnStop";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_learn_stop_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialAssociation command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialAssociation
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_association_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialAssociation";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_association_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetUserChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetUserChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_user_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/GetUserChecksum";
+
+  std::string payload =
+    get_json_payload_for_user_credential_get_user_checksum_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetCredentialChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetCredentialChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_credential_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/GetCredentialChecksum";
+
+  std::string payload =
+    get_json_payload_for_user_credential_get_credential_checksum_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetAllUsersChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetAllUsersChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_all_users_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/GetAllUsersChecksum";
+
+  std::string payload =
+    get_json_payload_for_user_credential_get_all_users_checksum_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetAdminPINCode command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/SetAdminPINCode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_set_admin_pin_code_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/SetAdminPINCode";
+
+  std::string payload =
+    get_json_payload_for_user_credential_set_admin_pin_code_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeactivateAdminPINCode command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeactivateAdminPINCode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_deactivate_admin_pin_code_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeactivateAdminPINCode";
+
+  std::string payload =
+    get_json_payload_for_user_credential_deactivate_admin_pin_code_command(
+    );
 
   // Publish our command
   uic_mqtt_publish(topic.c_str(),

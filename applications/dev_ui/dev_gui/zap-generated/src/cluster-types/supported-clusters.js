@@ -33,7 +33,8 @@ const SupportedClusters = {
 	TemperatureMeasurement: "TemperatureMeasurement", 
 	Thermostat: "Thermostat", 
 	WindSpeedMeasurement: "WindSpeedMeasurement", 
-	WindowCovering: "WindowCovering"
+	WindowCovering: "WindowCovering", 
+	UserCredential: "UserCredential"
 }
 
 module.exports.SupportedClusters = SupportedClusters;

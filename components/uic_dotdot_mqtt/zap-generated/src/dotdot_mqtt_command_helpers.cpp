@@ -160,21 +160,21 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("MainsVoltageMinThreshold") != jsn.end()) {
 
-    new_state.mains_voltage_min_threshold = jsn.at("MainsVoltageMinThreshold").get<uint16_t>();
+    new_state.mains_voltage_min_threshold = jsn.at("MainsVoltageMinThreshold").get<int16_t>();
         
     new_updated_state.mains_voltage_min_threshold = true;
   }
 
   if (jsn.find("MainsVoltageMaxThreshold") != jsn.end()) {
 
-    new_state.mains_voltage_max_threshold = jsn.at("MainsVoltageMaxThreshold").get<uint16_t>();
+    new_state.mains_voltage_max_threshold = jsn.at("MainsVoltageMaxThreshold").get<int16_t>();
         
     new_updated_state.mains_voltage_max_threshold = true;
   }
 
   if (jsn.find("MainsVoltageDwellTripPoint") != jsn.end()) {
 
-    new_state.mains_voltage_dwell_trip_point = jsn.at("MainsVoltageDwellTripPoint").get<uint16_t>();
+    new_state.mains_voltage_dwell_trip_point = jsn.at("MainsVoltageDwellTripPoint").get<int16_t>();
         
     new_updated_state.mains_voltage_dwell_trip_point = true;
   }
@@ -203,21 +203,21 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("BatteryAHrRating") != jsn.end()) {
 
-    new_state.batterya_hr_rating = jsn.at("BatteryAHrRating").get<uint16_t>();
+    new_state.batterya_hr_rating = jsn.at("BatteryAHrRating").get<int16_t>();
         
     new_updated_state.batterya_hr_rating = true;
   }
 
   if (jsn.find("BatteryQuantity") != jsn.end()) {
 
-    new_state.battery_quantity = jsn.at("BatteryQuantity").get<uint8_t>();
+    new_state.battery_quantity = jsn.at("BatteryQuantity").get<int8_t>();
         
     new_updated_state.battery_quantity = true;
   }
 
   if (jsn.find("BatteryRatedVoltage") != jsn.end()) {
 
-    new_state.battery_rated_voltage = jsn.at("BatteryRatedVoltage").get<uint8_t>();
+    new_state.battery_rated_voltage = jsn.at("BatteryRatedVoltage").get<int8_t>();
         
     new_updated_state.battery_rated_voltage = true;
   }
@@ -231,56 +231,56 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("BatteryVoltageMinThreshold") != jsn.end()) {
 
-    new_state.battery_voltage_min_threshold = jsn.at("BatteryVoltageMinThreshold").get<uint8_t>();
+    new_state.battery_voltage_min_threshold = jsn.at("BatteryVoltageMinThreshold").get<int8_t>();
         
     new_updated_state.battery_voltage_min_threshold = true;
   }
 
   if (jsn.find("BatteryVoltageThreshold1") != jsn.end()) {
 
-    new_state.battery_voltage_threshold1 = jsn.at("BatteryVoltageThreshold1").get<uint8_t>();
+    new_state.battery_voltage_threshold1 = jsn.at("BatteryVoltageThreshold1").get<int8_t>();
         
     new_updated_state.battery_voltage_threshold1 = true;
   }
 
   if (jsn.find("BatteryVoltageThreshold2") != jsn.end()) {
 
-    new_state.battery_voltage_threshold2 = jsn.at("BatteryVoltageThreshold2").get<uint8_t>();
+    new_state.battery_voltage_threshold2 = jsn.at("BatteryVoltageThreshold2").get<int8_t>();
         
     new_updated_state.battery_voltage_threshold2 = true;
   }
 
   if (jsn.find("BatteryVoltageThreshold3") != jsn.end()) {
 
-    new_state.battery_voltage_threshold3 = jsn.at("BatteryVoltageThreshold3").get<uint8_t>();
+    new_state.battery_voltage_threshold3 = jsn.at("BatteryVoltageThreshold3").get<int8_t>();
         
     new_updated_state.battery_voltage_threshold3 = true;
   }
 
   if (jsn.find("BatteryPercentageMinThreshold") != jsn.end()) {
 
-    new_state.battery_percentage_min_threshold = jsn.at("BatteryPercentageMinThreshold").get<uint8_t>();
+    new_state.battery_percentage_min_threshold = jsn.at("BatteryPercentageMinThreshold").get<int8_t>();
         
     new_updated_state.battery_percentage_min_threshold = true;
   }
 
   if (jsn.find("BatteryPercentageThreshold1") != jsn.end()) {
 
-    new_state.battery_percentage_threshold1 = jsn.at("BatteryPercentageThreshold1").get<uint8_t>();
+    new_state.battery_percentage_threshold1 = jsn.at("BatteryPercentageThreshold1").get<int8_t>();
         
     new_updated_state.battery_percentage_threshold1 = true;
   }
 
   if (jsn.find("BatteryPercentageThreshold2") != jsn.end()) {
 
-    new_state.battery_percentage_threshold2 = jsn.at("BatteryPercentageThreshold2").get<uint8_t>();
+    new_state.battery_percentage_threshold2 = jsn.at("BatteryPercentageThreshold2").get<int8_t>();
         
     new_updated_state.battery_percentage_threshold2 = true;
   }
 
   if (jsn.find("BatteryPercentageThreshold3") != jsn.end()) {
 
-    new_state.battery_percentage_threshold3 = jsn.at("BatteryPercentageThreshold3").get<uint8_t>();
+    new_state.battery_percentage_threshold3 = jsn.at("BatteryPercentageThreshold3").get<int8_t>();
         
     new_updated_state.battery_percentage_threshold3 = true;
   }
@@ -309,21 +309,21 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("Battery2AHrRating") != jsn.end()) {
 
-    new_state.battery2a_hr_rating = jsn.at("Battery2AHrRating").get<uint16_t>();
+    new_state.battery2a_hr_rating = jsn.at("Battery2AHrRating").get<int16_t>();
         
     new_updated_state.battery2a_hr_rating = true;
   }
 
   if (jsn.find("Battery2Quantity") != jsn.end()) {
 
-    new_state.battery2_quantity = jsn.at("Battery2Quantity").get<uint8_t>();
+    new_state.battery2_quantity = jsn.at("Battery2Quantity").get<int8_t>();
         
     new_updated_state.battery2_quantity = true;
   }
 
   if (jsn.find("Battery2RatedVoltage") != jsn.end()) {
 
-    new_state.battery2_rated_voltage = jsn.at("Battery2RatedVoltage").get<uint8_t>();
+    new_state.battery2_rated_voltage = jsn.at("Battery2RatedVoltage").get<int8_t>();
         
     new_updated_state.battery2_rated_voltage = true;
   }
@@ -337,56 +337,56 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("Battery2VoltageMinThreshold") != jsn.end()) {
 
-    new_state.battery2_voltage_min_threshold = jsn.at("Battery2VoltageMinThreshold").get<uint8_t>();
+    new_state.battery2_voltage_min_threshold = jsn.at("Battery2VoltageMinThreshold").get<int8_t>();
         
     new_updated_state.battery2_voltage_min_threshold = true;
   }
 
   if (jsn.find("Battery2VoltageThreshold1") != jsn.end()) {
 
-    new_state.battery2_voltage_threshold1 = jsn.at("Battery2VoltageThreshold1").get<uint8_t>();
+    new_state.battery2_voltage_threshold1 = jsn.at("Battery2VoltageThreshold1").get<int8_t>();
         
     new_updated_state.battery2_voltage_threshold1 = true;
   }
 
   if (jsn.find("Battery2VoltageThreshold2") != jsn.end()) {
 
-    new_state.battery2_voltage_threshold2 = jsn.at("Battery2VoltageThreshold2").get<uint8_t>();
+    new_state.battery2_voltage_threshold2 = jsn.at("Battery2VoltageThreshold2").get<int8_t>();
         
     new_updated_state.battery2_voltage_threshold2 = true;
   }
 
   if (jsn.find("Battery2VoltageThreshold3") != jsn.end()) {
 
-    new_state.battery2_voltage_threshold3 = jsn.at("Battery2VoltageThreshold3").get<uint8_t>();
+    new_state.battery2_voltage_threshold3 = jsn.at("Battery2VoltageThreshold3").get<int8_t>();
         
     new_updated_state.battery2_voltage_threshold3 = true;
   }
 
   if (jsn.find("Battery2PercentageMinThreshold") != jsn.end()) {
 
-    new_state.battery2_percentage_min_threshold = jsn.at("Battery2PercentageMinThreshold").get<uint8_t>();
+    new_state.battery2_percentage_min_threshold = jsn.at("Battery2PercentageMinThreshold").get<int8_t>();
         
     new_updated_state.battery2_percentage_min_threshold = true;
   }
 
   if (jsn.find("Battery2PercentageThreshold1") != jsn.end()) {
 
-    new_state.battery2_percentage_threshold1 = jsn.at("Battery2PercentageThreshold1").get<uint8_t>();
+    new_state.battery2_percentage_threshold1 = jsn.at("Battery2PercentageThreshold1").get<int8_t>();
         
     new_updated_state.battery2_percentage_threshold1 = true;
   }
 
   if (jsn.find("Battery2PercentageThreshold2") != jsn.end()) {
 
-    new_state.battery2_percentage_threshold2 = jsn.at("Battery2PercentageThreshold2").get<uint8_t>();
+    new_state.battery2_percentage_threshold2 = jsn.at("Battery2PercentageThreshold2").get<int8_t>();
         
     new_updated_state.battery2_percentage_threshold2 = true;
   }
 
   if (jsn.find("Battery2PercentageThreshold3") != jsn.end()) {
 
-    new_state.battery2_percentage_threshold3 = jsn.at("Battery2PercentageThreshold3").get<uint8_t>();
+    new_state.battery2_percentage_threshold3 = jsn.at("Battery2PercentageThreshold3").get<int8_t>();
         
     new_updated_state.battery2_percentage_threshold3 = true;
   }
@@ -415,21 +415,21 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("Battery3AHrRating") != jsn.end()) {
 
-    new_state.battery3a_hr_rating = jsn.at("Battery3AHrRating").get<uint16_t>();
+    new_state.battery3a_hr_rating = jsn.at("Battery3AHrRating").get<int16_t>();
         
     new_updated_state.battery3a_hr_rating = true;
   }
 
   if (jsn.find("Battery3Quantity") != jsn.end()) {
 
-    new_state.battery3_quantity = jsn.at("Battery3Quantity").get<uint8_t>();
+    new_state.battery3_quantity = jsn.at("Battery3Quantity").get<int8_t>();
         
     new_updated_state.battery3_quantity = true;
   }
 
   if (jsn.find("Battery3RatedVoltage") != jsn.end()) {
 
-    new_state.battery3_rated_voltage = jsn.at("Battery3RatedVoltage").get<uint8_t>();
+    new_state.battery3_rated_voltage = jsn.at("Battery3RatedVoltage").get<int8_t>();
         
     new_updated_state.battery3_rated_voltage = true;
   }
@@ -443,56 +443,56 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
   if (jsn.find("Battery3VoltageMinThreshold") != jsn.end()) {
 
-    new_state.battery3_voltage_min_threshold = jsn.at("Battery3VoltageMinThreshold").get<uint8_t>();
+    new_state.battery3_voltage_min_threshold = jsn.at("Battery3VoltageMinThreshold").get<int8_t>();
         
     new_updated_state.battery3_voltage_min_threshold = true;
   }
 
   if (jsn.find("Battery3VoltageThreshold1") != jsn.end()) {
 
-    new_state.battery3_voltage_threshold1 = jsn.at("Battery3VoltageThreshold1").get<uint8_t>();
+    new_state.battery3_voltage_threshold1 = jsn.at("Battery3VoltageThreshold1").get<int8_t>();
         
     new_updated_state.battery3_voltage_threshold1 = true;
   }
 
   if (jsn.find("Battery3VoltageThreshold2") != jsn.end()) {
 
-    new_state.battery3_voltage_threshold2 = jsn.at("Battery3VoltageThreshold2").get<uint8_t>();
+    new_state.battery3_voltage_threshold2 = jsn.at("Battery3VoltageThreshold2").get<int8_t>();
         
     new_updated_state.battery3_voltage_threshold2 = true;
   }
 
   if (jsn.find("Battery3VoltageThreshold3") != jsn.end()) {
 
-    new_state.battery3_voltage_threshold3 = jsn.at("Battery3VoltageThreshold3").get<uint8_t>();
+    new_state.battery3_voltage_threshold3 = jsn.at("Battery3VoltageThreshold3").get<int8_t>();
         
     new_updated_state.battery3_voltage_threshold3 = true;
   }
 
   if (jsn.find("Battery3PercentageMinThreshold") != jsn.end()) {
 
-    new_state.battery3_percentage_min_threshold = jsn.at("Battery3PercentageMinThreshold").get<uint8_t>();
+    new_state.battery3_percentage_min_threshold = jsn.at("Battery3PercentageMinThreshold").get<int8_t>();
         
     new_updated_state.battery3_percentage_min_threshold = true;
   }
 
   if (jsn.find("Battery3PercentageThreshold1") != jsn.end()) {
 
-    new_state.battery3_percentage_threshold1 = jsn.at("Battery3PercentageThreshold1").get<uint8_t>();
+    new_state.battery3_percentage_threshold1 = jsn.at("Battery3PercentageThreshold1").get<int8_t>();
         
     new_updated_state.battery3_percentage_threshold1 = true;
   }
 
   if (jsn.find("Battery3PercentageThreshold2") != jsn.end()) {
 
-    new_state.battery3_percentage_threshold2 = jsn.at("Battery3PercentageThreshold2").get<uint8_t>();
+    new_state.battery3_percentage_threshold2 = jsn.at("Battery3PercentageThreshold2").get<int8_t>();
         
     new_updated_state.battery3_percentage_threshold2 = true;
   }
 
   if (jsn.find("Battery3PercentageThreshold3") != jsn.end()) {
 
-    new_state.battery3_percentage_threshold3 = jsn.at("Battery3PercentageThreshold3").get<uint8_t>();
+    new_state.battery3_percentage_threshold3 = jsn.at("Battery3PercentageThreshold3").get<int8_t>();
         
     new_updated_state.battery3_percentage_threshold3 = true;
   }
@@ -536,14 +536,14 @@ void uic_mqtt_dotdot_parse_device_temperature_configuration_write_attributes(
 
   if (jsn.find("LowTempDwellTripPoint") != jsn.end()) {
 
-    new_state.low_temp_dwell_trip_point = jsn.at("LowTempDwellTripPoint").get<uint32_t>();
+    new_state.low_temp_dwell_trip_point = jsn.at("LowTempDwellTripPoint").get<int32_t>();
         
     new_updated_state.low_temp_dwell_trip_point = true;
   }
 
   if (jsn.find("HighTempDwellTripPoint") != jsn.end()) {
 
-    new_state.high_temp_dwell_trip_point = jsn.at("HighTempDwellTripPoint").get<uint32_t>();
+    new_state.high_temp_dwell_trip_point = jsn.at("HighTempDwellTripPoint").get<int32_t>();
         
     new_updated_state.high_temp_dwell_trip_point = true;
   }
@@ -577,7 +577,7 @@ std::string get_json_payload_for_identify_identify_command(
 
 void uic_mqtt_dotdot_parse_identify_identify(
   nlohmann::json &jsn,
-  uint16_t &identify_time
+  int16_t &identify_time
   
 ) {
 
@@ -586,7 +586,7 @@ void uic_mqtt_dotdot_parse_identify_identify(
     return;
   }
         
-  identify_time = jsn.at("IdentifyTime").get< uint16_t >();
+  identify_time = jsn.at("IdentifyTime").get< int16_t >();
     }
 
 
@@ -615,7 +615,7 @@ std::string get_json_payload_for_identify_identify_query_response_command(
 
 void uic_mqtt_dotdot_parse_identify_identify_query_response(
   nlohmann::json &jsn,
-  uint16_t &timeout
+  int16_t &timeout
   
 ) {
 
@@ -624,7 +624,7 @@ void uic_mqtt_dotdot_parse_identify_identify_query_response(
     return;
   }
         
-  timeout = jsn.at("Timeout").get< uint16_t >();
+  timeout = jsn.at("Timeout").get< int16_t >();
     }
 
 
@@ -743,7 +743,7 @@ void uic_mqtt_dotdot_parse_identify_write_attributes(
 
   if (jsn.find("IdentifyTime") != jsn.end()) {
 
-    new_state.identify_time = jsn.at("IdentifyTime").get<uint16_t>();
+    new_state.identify_time = jsn.at("IdentifyTime").get<int16_t>();
         
     new_updated_state.identify_time = true;
   }
@@ -781,7 +781,7 @@ std::string get_json_payload_for_groups_add_group_command(
 
 void uic_mqtt_dotdot_parse_groups_add_group(
   nlohmann::json &jsn,
-  uint16_t &group_id,
+  int16_t &group_id,
   
   std::string &group_name
   
@@ -792,7 +792,7 @@ void uic_mqtt_dotdot_parse_groups_add_group(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
       if (jsn.at("GroupName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -844,7 +844,7 @@ void uic_mqtt_dotdot_parse_groups_add_group_response(
   nlohmann::json &jsn,
   uint8_t &status,
   
-  uint16_t &group_id
+  int16_t &group_id
   
 ) {
 
@@ -864,7 +864,7 @@ void uic_mqtt_dotdot_parse_groups_add_group_response(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
     }
 
 
@@ -893,7 +893,7 @@ std::string get_json_payload_for_groups_view_group_command(
 
 void uic_mqtt_dotdot_parse_groups_view_group(
   nlohmann::json &jsn,
-  uint16_t &group_id
+  int16_t &group_id
   
 ) {
 
@@ -902,7 +902,7 @@ void uic_mqtt_dotdot_parse_groups_view_group(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
     }
 
 
@@ -952,7 +952,7 @@ void uic_mqtt_dotdot_parse_groups_view_group_response(
   nlohmann::json &jsn,
   uint8_t &status,
   
-  uint16_t &group_id,
+  int16_t &group_id,
   
   std::string &group_name
   
@@ -974,7 +974,7 @@ void uic_mqtt_dotdot_parse_groups_view_group_response(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
       if (jsn.at("GroupName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -995,7 +995,7 @@ std::string get_json_payload_for_groups_get_group_membership_command(
   nlohmann::json json_payload;
   command_with_no_fields = false;
   // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["GroupList"] = std::vector< uint16_t >(
+  json_payload["GroupList"] = std::vector< int16_t >(
     fields->group_list,
     fields->group_list + fields->group_list_count);
 
@@ -1011,7 +1011,7 @@ std::string get_json_payload_for_groups_get_group_membership_command(
 
 void uic_mqtt_dotdot_parse_groups_get_group_membership(
   nlohmann::json &jsn,
-  std::vector<uint16_t> &group_list
+  std::vector<int16_t> &group_list
 
 ) {
 
@@ -1020,7 +1020,7 @@ void uic_mqtt_dotdot_parse_groups_get_group_membership(
     return;
   }
         
-  group_list = jsn.at("GroupList").get< std::vector< uint16_t >>();
+  group_list = jsn.at("GroupList").get< std::vector< int16_t >>();
       }
 
 
@@ -1039,7 +1039,7 @@ std::string get_json_payload_for_groups_get_group_membership_response_command(
   json_payload["Capacity"] = nlohmann::json(fields->capacity);
   command_with_no_fields = false;
   // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["GroupList"] = std::vector< uint16_t >(
+  json_payload["GroupList"] = std::vector< int16_t >(
     fields->group_list,
     fields->group_list + fields->group_list_count);
 
@@ -1055,9 +1055,9 @@ std::string get_json_payload_for_groups_get_group_membership_response_command(
 
 void uic_mqtt_dotdot_parse_groups_get_group_membership_response(
   nlohmann::json &jsn,
-  uint8_t &capacity,
+  int8_t &capacity,
   
-  std::vector<uint16_t> &group_list
+  std::vector<int16_t> &group_list
 
 ) {
 
@@ -1066,13 +1066,13 @@ void uic_mqtt_dotdot_parse_groups_get_group_membership_response(
     return;
   }
         
-  capacity = jsn.at("Capacity").get< uint8_t >();
+  capacity = jsn.at("Capacity").get< int8_t >();
       if (jsn.at("GroupList").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  group_list = jsn.at("GroupList").get< std::vector< uint16_t >>();
+  group_list = jsn.at("GroupList").get< std::vector< int16_t >>();
       }
 
 
@@ -1101,7 +1101,7 @@ std::string get_json_payload_for_groups_remove_group_command(
 
 void uic_mqtt_dotdot_parse_groups_remove_group(
   nlohmann::json &jsn,
-  uint16_t &group_id
+  int16_t &group_id
   
 ) {
 
@@ -1110,7 +1110,7 @@ void uic_mqtt_dotdot_parse_groups_remove_group(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
     }
 
 
@@ -1156,7 +1156,7 @@ void uic_mqtt_dotdot_parse_groups_remove_group_response(
   nlohmann::json &jsn,
   uint8_t &status,
   
-  uint16_t &group_id
+  int16_t &group_id
   
 ) {
 
@@ -1176,7 +1176,7 @@ void uic_mqtt_dotdot_parse_groups_remove_group_response(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
     }
 
 
@@ -1228,7 +1228,7 @@ std::string get_json_payload_for_groups_add_group_if_identifying_command(
 
 void uic_mqtt_dotdot_parse_groups_add_group_if_identifying(
   nlohmann::json &jsn,
-  uint16_t &group_id,
+  int16_t &group_id,
   
   std::string &group_name
   
@@ -1239,7 +1239,7 @@ void uic_mqtt_dotdot_parse_groups_add_group_if_identifying(
     return;
   }
         
-  group_id = jsn.at("GroupId").get< uint16_t >();
+  group_id = jsn.at("GroupId").get< int16_t >();
       if (jsn.at("GroupName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1312,17 +1312,17 @@ std::string get_json_payload_for_scenes_add_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_add_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid,
+  int8_t &sceneid,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   std::string &scene_name,
   
   std::vector<SExtensionFieldSetList> &extension_field_sets,
 
-  uint8_t &transition_time100ms
+  int8_t &transition_time100ms
   
 ) {
 
@@ -1331,19 +1331,19 @@ void uic_mqtt_dotdot_parse_scenes_add_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("SceneName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1375,7 +1375,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene(
     return;
   }
         
-  transition_time100ms = jsn.at("TransitionTime100ms").get< uint8_t >();
+  transition_time100ms = jsn.at("TransitionTime100ms").get< int8_t >();
     }
 
 
@@ -1425,9 +1425,9 @@ void uic_mqtt_dotdot_parse_scenes_add_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -1447,13 +1447,13 @@ void uic_mqtt_dotdot_parse_scenes_add_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -1486,9 +1486,9 @@ std::string get_json_payload_for_scenes_view_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_view_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -1497,13 +1497,13 @@ void uic_mqtt_dotdot_parse_scenes_view_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -1567,11 +1567,11 @@ void uic_mqtt_dotdot_parse_scenes_view_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid,
+  int8_t &sceneid,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   std::string &scene_name,
   
@@ -1595,19 +1595,19 @@ void uic_mqtt_dotdot_parse_scenes_view_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("SceneName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1666,9 +1666,9 @@ std::string get_json_payload_for_scenes_remove_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_remove_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -1677,13 +1677,13 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -1733,9 +1733,9 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -1755,13 +1755,13 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -1790,7 +1790,7 @@ std::string get_json_payload_for_scenes_remove_all_scenes_command(
 
 void uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
   nlohmann::json &jsn,
-  uint16_t &groupid
+  uint8_t * &groupid
   
 ) {
 
@@ -1799,7 +1799,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
     }
 
 
@@ -1845,7 +1845,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid
+  uint8_t * &groupid
   
 ) {
 
@@ -1865,7 +1865,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
     }
 
 
@@ -1898,9 +1898,9 @@ std::string get_json_payload_for_scenes_store_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_store_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -1909,13 +1909,13 @@ void uic_mqtt_dotdot_parse_scenes_store_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -1965,9 +1965,9 @@ void uic_mqtt_dotdot_parse_scenes_store_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -1987,13 +1987,13 @@ void uic_mqtt_dotdot_parse_scenes_store_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -2030,11 +2030,11 @@ std::string get_json_payload_for_scenes_recall_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_recall_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid,
+  int8_t &sceneid,
   
-  uint16_t &transition_time
+  int16_t &transition_time
   
 ) {
 
@@ -2043,19 +2043,19 @@ void uic_mqtt_dotdot_parse_scenes_recall_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
     }
 
 
@@ -2084,7 +2084,7 @@ std::string get_json_payload_for_scenes_get_scene_membership_command(
 
 void uic_mqtt_dotdot_parse_scenes_get_scene_membership(
   nlohmann::json &jsn,
-  uint16_t &groupid
+  uint8_t * &groupid
   
 ) {
 
@@ -2093,7 +2093,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
     }
 
 
@@ -2131,7 +2131,7 @@ std::string get_json_payload_for_scenes_get_scene_membership_response_command(
   json_payload["GroupID"] = nlohmann::json(fields->groupid);
   command_with_no_fields = false;
   // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["SceneList"] = std::vector< uint8_t >(
+  json_payload["SceneList"] = std::vector< int8_t >(
     fields->scene_list,
     fields->scene_list + fields->scene_list_count);
 
@@ -2149,11 +2149,11 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint8_t &capacity,
+  int8_t &capacity,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  std::vector<uint8_t> &scene_list
+  std::vector<int8_t> &scene_list
 
 ) {
 
@@ -2173,19 +2173,19 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
     return;
   }
         
-  capacity = jsn.at("Capacity").get< uint8_t >();
+  capacity = jsn.at("Capacity").get< int8_t >();
       if (jsn.at("GroupID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneList").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  scene_list = jsn.at("SceneList").get< std::vector< uint8_t >>();
+  scene_list = jsn.at("SceneList").get< std::vector< int8_t >>();
       }
 
 
@@ -2232,11 +2232,11 @@ std::string get_json_payload_for_scenes_enhanced_add_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid,
+  int8_t &sceneid,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   std::string &scene_name,
   
@@ -2249,19 +2249,19 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("SceneName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2337,9 +2337,9 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -2359,13 +2359,13 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -2398,9 +2398,9 @@ std::string get_json_payload_for_scenes_enhanced_view_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
   nlohmann::json &jsn,
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid
+  int8_t &sceneid
   
 ) {
 
@@ -2409,13 +2409,13 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
     }
 
 
@@ -2479,11 +2479,11 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &groupid,
+  uint8_t * &groupid,
   
-  uint8_t &sceneid,
+  int8_t &sceneid,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   std::string &scene_name,
   
@@ -2507,19 +2507,19 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< uint16_t >();
+  groupid = jsn.at("GroupID").get< uint8_t * >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  sceneid = jsn.at("SceneID").get< uint8_t >();
+  sceneid = jsn.at("SceneID").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("SceneName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2594,13 +2594,13 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
   nlohmann::json &jsn,
   uint8_t &mode,
   
-  uint16_t &group_identifier_from,
+  uint8_t * &group_identifier_from,
   
-  uint8_t &scene_identifier_from,
+  int8_t &scene_identifier_from,
   
-  uint16_t &group_identifier_to,
+  uint8_t * &group_identifier_to,
   
-  uint8_t &scene_identifier_to
+  int8_t &scene_identifier_to
   
 ) {
 
@@ -2614,25 +2614,25 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
     return;
   }
         
-  group_identifier_from = jsn.at("GroupIdentifierFrom").get< uint16_t >();
+  group_identifier_from = jsn.at("GroupIdentifierFrom").get< uint8_t * >();
       if (jsn.at("SceneIdentifierFrom").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  scene_identifier_from = jsn.at("SceneIdentifierFrom").get< uint8_t >();
+  scene_identifier_from = jsn.at("SceneIdentifierFrom").get< int8_t >();
       if (jsn.at("GroupIdentifierTo").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  group_identifier_to = jsn.at("GroupIdentifierTo").get< uint16_t >();
+  group_identifier_to = jsn.at("GroupIdentifierTo").get< uint8_t * >();
       if (jsn.at("SceneIdentifierTo").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  scene_identifier_to = jsn.at("SceneIdentifierTo").get< uint8_t >();
+  scene_identifier_to = jsn.at("SceneIdentifierTo").get< int8_t >();
     }
 
 
@@ -2682,9 +2682,9 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  uint16_t &group_identifier_from,
+  uint8_t * &group_identifier_from,
   
-  uint8_t &scene_identifier_from
+  int8_t &scene_identifier_from
   
 ) {
 
@@ -2704,13 +2704,13 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene_response(
     return;
   }
         
-  group_identifier_from = jsn.at("GroupIdentifierFrom").get< uint16_t >();
+  group_identifier_from = jsn.at("GroupIdentifierFrom").get< uint8_t * >();
       if (jsn.at("SceneIdentifierFrom").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  scene_identifier_from = jsn.at("SceneIdentifierFrom").get< uint8_t >();
+  scene_identifier_from = jsn.at("SceneIdentifierFrom").get< int8_t >();
     }
 
 
@@ -2829,7 +2829,7 @@ void uic_mqtt_dotdot_parse_on_off_off_with_effect(
   nlohmann::json &jsn,
   OffWithEffectEffectIdentifier &effect_identifier,
   
-  uint8_t &effect_variant
+  int8_t &effect_variant
   
 ) {
 
@@ -2849,7 +2849,7 @@ void uic_mqtt_dotdot_parse_on_off_off_with_effect(
     return;
   }
         
-  effect_variant = jsn.at("EffectVariant").get< uint8_t >();
+  effect_variant = jsn.at("EffectVariant").get< int8_t >();
     }
 
 
@@ -2909,9 +2909,9 @@ void uic_mqtt_dotdot_parse_on_off_on_with_timed_off(
   nlohmann::json &jsn,
   uint8_t &on_off_control,
   
-  uint16_t &on_time,
+  int16_t &on_time,
   
-  uint16_t &off_wait_time
+  int16_t &off_wait_time
   
 ) {
 
@@ -2925,13 +2925,13 @@ void uic_mqtt_dotdot_parse_on_off_on_with_timed_off(
     return;
   }
         
-  on_time = jsn.at("OnTime").get< uint16_t >();
+  on_time = jsn.at("OnTime").get< int16_t >();
       if (jsn.at("OffWaitTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  off_wait_time = jsn.at("OffWaitTime").get< uint16_t >();
+  off_wait_time = jsn.at("OffWaitTime").get< int16_t >();
     }
 
 
@@ -2949,14 +2949,14 @@ void uic_mqtt_dotdot_parse_on_off_write_attributes(
 
   if (jsn.find("OnTime") != jsn.end()) {
 
-    new_state.on_time = jsn.at("OnTime").get<uint16_t>();
+    new_state.on_time = jsn.at("OnTime").get<int16_t>();
         
     new_updated_state.on_time = true;
   }
 
   if (jsn.find("OffWaitTime") != jsn.end()) {
 
-    new_state.off_wait_time = jsn.at("OffWaitTime").get<uint16_t>();
+    new_state.off_wait_time = jsn.at("OffWaitTime").get<int16_t>();
         
     new_updated_state.off_wait_time = true;
   }
@@ -3021,9 +3021,9 @@ std::string get_json_payload_for_level_move_to_level_command(
 
 void uic_mqtt_dotdot_parse_level_move_to_level(
   nlohmann::json &jsn,
-  uint8_t &level,
+  int8_t &level,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -3036,13 +3036,13 @@ void uic_mqtt_dotdot_parse_level_move_to_level(
     return;
   }
         
-  level = jsn.at("Level").get< uint8_t >();
+  level = jsn.at("Level").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3110,7 +3110,7 @@ void uic_mqtt_dotdot_parse_level_move(
   nlohmann::json &jsn,
   MoveStepMode &move_mode,
   
-  uint8_t &rate,
+  int8_t &rate,
   
   uint8_t &options_mask,
   
@@ -3134,7 +3134,7 @@ void uic_mqtt_dotdot_parse_level_move(
     return;
   }
         
-  rate = jsn.at("Rate").get< uint8_t >();
+  rate = jsn.at("Rate").get< int8_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3206,9 +3206,9 @@ void uic_mqtt_dotdot_parse_level_step(
   nlohmann::json &jsn,
   MoveStepMode &step_mode,
   
-  uint8_t &step_size,
+  int8_t &step_size,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -3232,13 +3232,13 @@ void uic_mqtt_dotdot_parse_level_step(
     return;
   }
         
-  step_size = jsn.at("StepSize").get< uint8_t >();
+  step_size = jsn.at("StepSize").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3345,9 +3345,9 @@ std::string get_json_payload_for_level_move_to_level_with_on_off_command(
 
 void uic_mqtt_dotdot_parse_level_move_to_level_with_on_off(
   nlohmann::json &jsn,
-  uint8_t &level,
+  int8_t &level,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -3360,13 +3360,13 @@ void uic_mqtt_dotdot_parse_level_move_to_level_with_on_off(
     return;
   }
         
-  level = jsn.at("Level").get< uint8_t >();
+  level = jsn.at("Level").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3434,7 +3434,7 @@ void uic_mqtt_dotdot_parse_level_move_with_on_off(
   nlohmann::json &jsn,
   MoveStepMode &move_mode,
   
-  uint8_t &rate,
+  int8_t &rate,
   
   uint8_t &options_mask,
   
@@ -3458,7 +3458,7 @@ void uic_mqtt_dotdot_parse_level_move_with_on_off(
     return;
   }
         
-  rate = jsn.at("Rate").get< uint8_t >();
+  rate = jsn.at("Rate").get< int8_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3530,9 +3530,9 @@ void uic_mqtt_dotdot_parse_level_step_with_on_off(
   nlohmann::json &jsn,
   MoveStepMode &step_mode,
   
-  uint8_t &step_size,
+  int8_t &step_size,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -3556,13 +3556,13 @@ void uic_mqtt_dotdot_parse_level_step_with_on_off(
     return;
   }
         
-  step_size = jsn.at("StepSize").get< uint8_t >();
+  step_size = jsn.at("StepSize").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3653,7 +3653,7 @@ std::string get_json_payload_for_level_move_to_closest_frequency_command(
 
 void uic_mqtt_dotdot_parse_level_move_to_closest_frequency(
   nlohmann::json &jsn,
-  uint16_t &frequency
+  int16_t &frequency
   
 ) {
 
@@ -3662,7 +3662,7 @@ void uic_mqtt_dotdot_parse_level_move_to_closest_frequency(
     return;
   }
         
-  frequency = jsn.at("Frequency").get< uint16_t >();
+  frequency = jsn.at("Frequency").get< int16_t >();
     }
 
 
@@ -3687,42 +3687,42 @@ void uic_mqtt_dotdot_parse_level_write_attributes(
 
   if (jsn.find("OnOffTransitionTime") != jsn.end()) {
 
-    new_state.on_off_transition_time = jsn.at("OnOffTransitionTime").get<uint16_t>();
+    new_state.on_off_transition_time = jsn.at("OnOffTransitionTime").get<int16_t>();
         
     new_updated_state.on_off_transition_time = true;
   }
 
   if (jsn.find("OnLevel") != jsn.end()) {
 
-    new_state.on_level = jsn.at("OnLevel").get<uint8_t>();
+    new_state.on_level = jsn.at("OnLevel").get<int8_t>();
         
     new_updated_state.on_level = true;
   }
 
   if (jsn.find("OnTransitionTime") != jsn.end()) {
 
-    new_state.on_transition_time = jsn.at("OnTransitionTime").get<uint16_t>();
+    new_state.on_transition_time = jsn.at("OnTransitionTime").get<int16_t>();
         
     new_updated_state.on_transition_time = true;
   }
 
   if (jsn.find("OffTransitionTime") != jsn.end()) {
 
-    new_state.off_transition_time = jsn.at("OffTransitionTime").get<uint16_t>();
+    new_state.off_transition_time = jsn.at("OffTransitionTime").get<int16_t>();
         
     new_updated_state.off_transition_time = true;
   }
 
   if (jsn.find("DefaultMoveRate") != jsn.end()) {
 
-    new_state.default_move_rate = jsn.at("DefaultMoveRate").get<uint16_t>();
+    new_state.default_move_rate = jsn.at("DefaultMoveRate").get<int16_t>();
         
     new_updated_state.default_move_rate = true;
   }
 
   if (jsn.find("StartUpCurrentLevel") != jsn.end()) {
 
-    new_state.start_up_current_level = jsn.at("StartUpCurrentLevel").get<uint8_t>();
+    new_state.start_up_current_level = jsn.at("StartUpCurrentLevel").get<int8_t>();
         
     new_updated_state.start_up_current_level = true;
   }
@@ -3773,7 +3773,7 @@ void uic_mqtt_dotdot_parse_alarms_reset_alarm(
   nlohmann::json &jsn,
   uint8_t &alarm_code,
   
-  uint16_t &cluster_identifier
+  uint8_t &cluster_identifier
   
 ) {
 
@@ -3793,7 +3793,7 @@ void uic_mqtt_dotdot_parse_alarms_reset_alarm(
     return;
   }
         
-  cluster_identifier = jsn.at("ClusterIdentifier").get< uint16_t >();
+  cluster_identifier = jsn.at("ClusterIdentifier").get< uint8_t >();
     }
 
 
@@ -3839,7 +3839,7 @@ void uic_mqtt_dotdot_parse_alarms_alarm(
   nlohmann::json &jsn,
   uint8_t &alarm_code,
   
-  uint16_t &cluster_identifier
+  uint8_t &cluster_identifier
   
 ) {
 
@@ -3859,7 +3859,7 @@ void uic_mqtt_dotdot_parse_alarms_alarm(
     return;
   }
         
-  cluster_identifier = jsn.at("ClusterIdentifier").get< uint16_t >();
+  cluster_identifier = jsn.at("ClusterIdentifier").get< uint8_t >();
     }
 
 
@@ -3945,9 +3945,9 @@ void uic_mqtt_dotdot_parse_alarms_get_alarm_response(
   
   uint8_t &alarm_code,
   
-  uint16_t &cluster_identifier,
+  uint8_t &cluster_identifier,
   
-  uint32_t &time_stamp
+  int32_t &time_stamp
   
 ) {
 
@@ -3978,13 +3978,13 @@ void uic_mqtt_dotdot_parse_alarms_get_alarm_response(
     return;
   }
         
-  cluster_identifier = jsn.at("ClusterIdentifier").get< uint16_t >();
+  cluster_identifier = jsn.at("ClusterIdentifier").get< uint8_t >();
       if (jsn.at("TimeStamp").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  time_stamp = jsn.at("TimeStamp").get< uint32_t >();
+  time_stamp = jsn.at("TimeStamp").get< int32_t >();
     }
 
 
@@ -4056,7 +4056,7 @@ void uic_mqtt_dotdot_parse_time_write_attributes(
 
   if (jsn.find("Time") != jsn.end()) {
 
-    new_state.time = jsn.at("Time").get<uint32_t>();
+    new_state.time = jsn.at("Time").get<uint8_t>();
         
     new_updated_state.time = true;
   }
@@ -4077,14 +4077,14 @@ void uic_mqtt_dotdot_parse_time_write_attributes(
 
   if (jsn.find("DstStart") != jsn.end()) {
 
-    new_state.dst_start = jsn.at("DstStart").get<uint32_t>();
+    new_state.dst_start = jsn.at("DstStart").get<int32_t>();
         
     new_updated_state.dst_start = true;
   }
 
   if (jsn.find("DstEnd") != jsn.end()) {
 
-    new_state.dst_end = jsn.at("DstEnd").get<uint32_t>();
+    new_state.dst_end = jsn.at("DstEnd").get<int32_t>();
         
     new_updated_state.dst_end = true;
   }
@@ -4098,7 +4098,7 @@ void uic_mqtt_dotdot_parse_time_write_attributes(
 
   if (jsn.find("ValidUntilTime") != jsn.end()) {
 
-    new_state.valid_until_time = jsn.at("ValidUntilTime").get<uint32_t>();
+    new_state.valid_until_time = jsn.at("ValidUntilTime").get<uint8_t>();
         
     new_updated_state.valid_until_time = true;
   }
@@ -4157,7 +4157,7 @@ void uic_mqtt_dotdot_parse_poll_control_check_in_response(
   nlohmann::json &jsn,
   bool &start_fast_polling,
   
-  uint16_t &fast_poll_timeout
+  int16_t &fast_poll_timeout
   
 ) {
 
@@ -4172,7 +4172,7 @@ void uic_mqtt_dotdot_parse_poll_control_check_in_response(
     return;
   }
         
-  fast_poll_timeout = jsn.at("FastPollTimeout").get< uint16_t >();
+  fast_poll_timeout = jsn.at("FastPollTimeout").get< int16_t >();
     }
 
 
@@ -4220,7 +4220,7 @@ std::string get_json_payload_for_poll_control_set_long_poll_interval_command(
 
 void uic_mqtt_dotdot_parse_poll_control_set_long_poll_interval(
   nlohmann::json &jsn,
-  uint32_t &new_long_poll_interval
+  int32_t &new_long_poll_interval
   
 ) {
 
@@ -4229,7 +4229,7 @@ void uic_mqtt_dotdot_parse_poll_control_set_long_poll_interval(
     return;
   }
         
-  new_long_poll_interval = jsn.at("NewLongPollInterval").get< uint32_t >();
+  new_long_poll_interval = jsn.at("NewLongPollInterval").get< int32_t >();
     }
 
 
@@ -4258,7 +4258,7 @@ std::string get_json_payload_for_poll_control_set_short_poll_interval_command(
 
 void uic_mqtt_dotdot_parse_poll_control_set_short_poll_interval(
   nlohmann::json &jsn,
-  uint16_t &new_short_poll_interval
+  int16_t &new_short_poll_interval
   
 ) {
 
@@ -4267,7 +4267,7 @@ void uic_mqtt_dotdot_parse_poll_control_set_short_poll_interval(
     return;
   }
         
-  new_short_poll_interval = jsn.at("NewShortPollInterval").get< uint16_t >();
+  new_short_poll_interval = jsn.at("NewShortPollInterval").get< int16_t >();
     }
 
 
@@ -4285,14 +4285,14 @@ void uic_mqtt_dotdot_parse_poll_control_write_attributes(
 
   if (jsn.find("CheckInInterval") != jsn.end()) {
 
-    new_state.check_in_interval = jsn.at("CheckInInterval").get<uint32_t>();
+    new_state.check_in_interval = jsn.at("CheckInInterval").get<int32_t>();
         
     new_updated_state.check_in_interval = true;
   }
 
   if (jsn.find("FastPollTimeout") != jsn.end()) {
 
-    new_state.fast_poll_timeout = jsn.at("FastPollTimeout").get<uint16_t>();
+    new_state.fast_poll_timeout = jsn.at("FastPollTimeout").get<int16_t>();
         
     new_updated_state.fast_poll_timeout = true;
   }
@@ -4322,7 +4322,7 @@ void uic_mqtt_dotdot_parse_shade_configuration_write_attributes(
 
   if (jsn.find("ClosedLimit") != jsn.end()) {
 
-    new_state.closed_limit = jsn.at("ClosedLimit").get<uint16_t>();
+    new_state.closed_limit = jsn.at("ClosedLimit").get<int16_t>();
         
     new_updated_state.closed_limit = true;
   }
@@ -4651,7 +4651,7 @@ std::string get_json_payload_for_door_lock_unlock_with_timeout_command(
 
 void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
   nlohmann::json &jsn,
-  uint16_t &timeout_in_seconds,
+  int16_t &timeout_in_seconds,
   
   std::string &pin_or_rfid_code
   
@@ -4662,7 +4662,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
     return;
   }
         
-  timeout_in_seconds = jsn.at("TimeoutInSeconds").get< uint16_t >();
+  timeout_in_seconds = jsn.at("TimeoutInSeconds").get< int16_t >();
       if (jsn.at("PINOrRFIDCode").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -4751,7 +4751,7 @@ std::string get_json_payload_for_door_lock_get_log_record_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_log_record(
   nlohmann::json &jsn,
-  uint16_t &log_index
+  int16_t &log_index
   
 ) {
 
@@ -4760,7 +4760,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record(
     return;
   }
         
-  log_index = jsn.at("LogIndex").get< uint16_t >();
+  log_index = jsn.at("LogIndex").get< int16_t >();
     }
 
 
@@ -4835,17 +4835,17 @@ std::string get_json_payload_for_door_lock_get_log_record_response_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
   nlohmann::json &jsn,
-  uint16_t &log_entryid,
+  int16_t &log_entryid,
   
-  uint32_t &timestamp,
+  int32_t &timestamp,
   
   GetLogRecordResponseEventType &event_type,
   
   DrlkOperEventSource &source_operation_event,
   
-  uint8_t &event_id_or_alarm_code,
+  int8_t &event_id_or_alarm_code,
   
-  uint16_t &userid,
+  int16_t &userid,
   
   std::string &pin
   
@@ -4868,13 +4868,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
     return;
   }
         
-  log_entryid = jsn.at("LogEntryID").get< uint16_t >();
+  log_entryid = jsn.at("LogEntryID").get< int16_t >();
       if (jsn.at("Timestamp").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  timestamp = jsn.at("Timestamp").get< uint32_t >();
+  timestamp = jsn.at("Timestamp").get< int32_t >();
       if (jsn.at("EventType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -4890,13 +4890,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
     return;
   }
         
-  event_id_or_alarm_code = jsn.at("EventIDOrAlarmCode").get< uint8_t >();
+  event_id_or_alarm_code = jsn.at("EventIDOrAlarmCode").get< int8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("PIN").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -4965,7 +4965,7 @@ std::string get_json_payload_for_door_lock_set_pin_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  uint8_t * &userid,
   
   DrlkSettableUserStatus &user_status,
   
@@ -4992,7 +4992,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5091,7 +5091,7 @@ std::string get_json_payload_for_door_lock_get_pin_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
   nlohmann::json &jsn,
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -5100,7 +5100,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -5163,7 +5163,7 @@ std::string get_json_payload_for_door_lock_get_pin_code_response_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_pin_code_response(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  int16_t &userid,
   
   DrlkUserStatus &user_status,
   
@@ -5190,7 +5190,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_pin_code_response(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5235,7 +5235,7 @@ std::string get_json_payload_for_door_lock_clear_pin_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
   nlohmann::json &jsn,
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -5244,7 +5244,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -5415,7 +5415,7 @@ std::string get_json_payload_for_door_lock_set_user_status_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_user_status(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  uint8_t * &userid,
   
   DrlkSettableUserStatus &user_status
   
@@ -5432,7 +5432,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_status(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5520,7 +5520,7 @@ std::string get_json_payload_for_door_lock_get_user_status_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user_status(
   nlohmann::json &jsn,
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -5529,7 +5529,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_status(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -5573,7 +5573,7 @@ std::string get_json_payload_for_door_lock_get_user_status_response_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user_status_response(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  int16_t &userid,
   
   DrlkUserStatus &user_status
   
@@ -5590,7 +5590,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_status_response(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5650,19 +5650,19 @@ std::string get_json_payload_for_door_lock_set_weekday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  uint8_t * &scheduleid,
   
-  uint16_t &userid,
+  uint8_t * &userid,
   
   uint8_t &days_mask,
   
-  uint8_t &start_hour,
+  int8_t &start_hour,
   
-  uint8_t &start_minute,
+  int8_t &start_minute,
   
-  uint8_t &end_hour,
+  int8_t &end_hour,
   
-  uint8_t &end_minute
+  int8_t &end_minute
   
 ) {
 
@@ -5671,13 +5671,13 @@ void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t * >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
       if (jsn.at("DaysMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5688,25 +5688,25 @@ void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
     return;
   }
         
-  start_hour = jsn.at("StartHour").get< uint8_t >();
+  start_hour = jsn.at("StartHour").get< int8_t >();
       if (jsn.at("StartMinute").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  start_minute = jsn.at("StartMinute").get< uint8_t >();
+  start_minute = jsn.at("StartMinute").get< int8_t >();
       if (jsn.at("EndHour").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  end_hour = jsn.at("EndHour").get< uint8_t >();
+  end_hour = jsn.at("EndHour").get< int8_t >();
       if (jsn.at("EndMinute").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  end_minute = jsn.at("EndMinute").get< uint8_t >();
+  end_minute = jsn.at("EndMinute").get< int8_t >();
     }
 
 
@@ -5793,9 +5793,9 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  uint8_t * &scheduleid,
   
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -5804,13 +5804,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t * >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -5880,21 +5880,21 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_response_command
 
 void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule_response(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  int8_t &scheduleid,
   
-  uint16_t &userid,
+  int16_t &userid,
   
   zclStatus &status,
   
   uint8_t &days_mask,
   
-  uint8_t &start_hour,
+  int8_t &start_hour,
   
-  uint8_t &start_minute,
+  int8_t &start_minute,
   
-  uint8_t &end_hour,
+  int8_t &end_hour,
   
-  uint8_t &end_minute
+  int8_t &end_minute
   
 ) {
 
@@ -5909,13 +5909,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule_response(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< int8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("Status").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5931,25 +5931,25 @@ void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule_response(
     return;
   }
         
-  start_hour = jsn.at("StartHour").get< uint8_t >();
+  start_hour = jsn.at("StartHour").get< int8_t >();
       if (jsn.at("StartMinute").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  start_minute = jsn.at("StartMinute").get< uint8_t >();
+  start_minute = jsn.at("StartMinute").get< int8_t >();
       if (jsn.at("EndHour").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  end_hour = jsn.at("EndHour").get< uint8_t >();
+  end_hour = jsn.at("EndHour").get< int8_t >();
       if (jsn.at("EndMinute").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  end_minute = jsn.at("EndMinute").get< uint8_t >();
+  end_minute = jsn.at("EndMinute").get< int8_t >();
     }
 
 
@@ -5982,9 +5982,9 @@ std::string get_json_payload_for_door_lock_clear_weekday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  uint8_t * &scheduleid,
   
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -5993,13 +5993,13 @@ void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t * >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -6094,13 +6094,13 @@ std::string get_json_payload_for_door_lock_set_year_day_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  uint8_t * &scheduleid,
   
-  uint16_t &userid,
+  uint8_t * &userid,
   
-  uint32_t &local_start_time,
+  int32_t &local_start_time,
   
-  uint32_t &local_end_time
+  int32_t &local_end_time
   
 ) {
 
@@ -6109,25 +6109,25 @@ void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t * >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
       if (jsn.at("LocalStartTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  local_start_time = jsn.at("LocalStartTime").get< uint32_t >();
+  local_start_time = jsn.at("LocalStartTime").get< int32_t >();
       if (jsn.at("LocalEndTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  local_end_time = jsn.at("LocalEndTime").get< uint32_t >();
+  local_end_time = jsn.at("LocalEndTime").get< int32_t >();
     }
 
 
@@ -6214,9 +6214,9 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  uint8_t * &scheduleid,
   
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -6225,13 +6225,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t * >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -6287,15 +6287,15 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_response_comman
 
 void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule_response(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  int8_t &scheduleid,
   
-  uint16_t &userid,
+  int16_t &userid,
   
   zclStatus &status,
   
-  uint32_t &local_start_time,
+  int32_t &local_start_time,
   
-  uint32_t &local_end_time
+  int32_t &local_end_time
   
 ) {
 
@@ -6310,13 +6310,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule_response(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< int8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("Status").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6327,13 +6327,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule_response(
     return;
   }
         
-  local_start_time = jsn.at("LocalStartTime").get< uint32_t >();
+  local_start_time = jsn.at("LocalStartTime").get< int32_t >();
       if (jsn.at("LocalEndTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  local_end_time = jsn.at("LocalEndTime").get< uint32_t >();
+  local_end_time = jsn.at("LocalEndTime").get< int32_t >();
     }
 
 
@@ -6366,9 +6366,9 @@ std::string get_json_payload_for_door_lock_clear_year_day_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
   nlohmann::json &jsn,
-  uint8_t &scheduleid,
+  uint8_t * &scheduleid,
   
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -6377,13 +6377,13 @@ void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t * >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -6489,11 +6489,11 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
   nlohmann::json &jsn,
-  uint8_t &holiday_scheduleid,
+  uint8_t * &holiday_scheduleid,
   
-  uint32_t &local_start_time,
+  int32_t &local_start_time,
   
-  uint32_t &local_end_time,
+  int32_t &local_end_time,
   
   DrlkOperMode &operating_mode_during_holiday
   
@@ -6510,19 +6510,19 @@ void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t * >();
       if (jsn.at("LocalStartTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  local_start_time = jsn.at("LocalStartTime").get< uint32_t >();
+  local_start_time = jsn.at("LocalStartTime").get< int32_t >();
       if (jsn.at("LocalEndTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  local_end_time = jsn.at("LocalEndTime").get< uint32_t >();
+  local_end_time = jsn.at("LocalEndTime").get< int32_t >();
       if (jsn.at("OperatingModeDuringHoliday").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6610,7 +6610,7 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
   nlohmann::json &jsn,
-  uint8_t &holiday_scheduleid
+  uint8_t * &holiday_scheduleid
   
 ) {
 
@@ -6619,7 +6619,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t * >();
     }
 
 
@@ -6686,13 +6686,13 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_response_command
 
 void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule_response(
   nlohmann::json &jsn,
-  uint8_t &holiday_scheduleid,
+  int8_t &holiday_scheduleid,
   
   zclStatus &status,
   
-  uint32_t &local_start_time,
+  int32_t &local_start_time,
   
-  uint32_t &local_end_time,
+  int32_t &local_end_time,
   
   DrlkOperMode &operating_mode_during_holiday
   
@@ -6715,7 +6715,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule_response(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< int8_t >();
       if (jsn.at("Status").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6726,13 +6726,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule_response(
     return;
   }
         
-  local_start_time = jsn.at("LocalStartTime").get< uint32_t >();
+  local_start_time = jsn.at("LocalStartTime").get< int32_t >();
       if (jsn.at("LocalEndTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  local_end_time = jsn.at("LocalEndTime").get< uint32_t >();
+  local_end_time = jsn.at("LocalEndTime").get< int32_t >();
       if (jsn.at("OperatingModeDuringHoliday").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6766,7 +6766,7 @@ std::string get_json_payload_for_door_lock_clear_holiday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
   nlohmann::json &jsn,
-  uint8_t &holiday_scheduleid
+  uint8_t * &holiday_scheduleid
   
 ) {
 
@@ -6775,7 +6775,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t * >();
     }
 
 
@@ -6873,7 +6873,7 @@ std::string get_json_payload_for_door_lock_set_user_type_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_user_type(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  uint8_t * &userid,
   
   DrlkUserType &user_type
   
@@ -6890,7 +6890,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_type(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
       if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6978,7 +6978,7 @@ std::string get_json_payload_for_door_lock_get_user_type_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user_type(
   nlohmann::json &jsn,
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -6987,7 +6987,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -7031,7 +7031,7 @@ std::string get_json_payload_for_door_lock_get_user_type_response_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user_type_response(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  int16_t &userid,
   
   DrlkUserType &user_type
   
@@ -7048,7 +7048,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type_response(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7116,7 +7116,7 @@ std::string get_json_payload_for_door_lock_set_rfid_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  uint8_t * &userid,
   
   DrlkSettableUserStatus &user_status,
   
@@ -7143,7 +7143,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7242,7 +7242,7 @@ std::string get_json_payload_for_door_lock_get_rfid_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
   nlohmann::json &jsn,
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -7251,7 +7251,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -7314,7 +7314,7 @@ std::string get_json_payload_for_door_lock_get_rfid_code_response_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_rfid_code_response(
   nlohmann::json &jsn,
-  uint16_t &userid,
+  int16_t &userid,
   
   DrlkUserStatus &user_status,
   
@@ -7341,7 +7341,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_rfid_code_response(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7386,7 +7386,7 @@ std::string get_json_payload_for_door_lock_clear_rfid_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
   nlohmann::json &jsn,
-  uint16_t &userid
+  uint8_t * &userid
   
 ) {
 
@@ -7395,7 +7395,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< uint8_t * >();
     }
 
 
@@ -7621,11 +7621,11 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
   nlohmann::json &jsn,
   DataOperationTypeEnum &operation_type,
   
-  uint16_t &user_index,
+  int16_t &user_index,
   
   std::string &user_name,
   
-  uint32_t &user_uniqueid,
+  int32_t &user_uniqueid,
   
   DrlkSettableUserStatus &user_status,
   
@@ -7669,7 +7669,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
     return;
   }
         
-  user_index = jsn.at("UserIndex").get< uint16_t >();
+  user_index = jsn.at("UserIndex").get< int16_t >();
       if (jsn.at("UserName").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7681,7 +7681,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user(
     return;
   }
         
-  user_uniqueid = jsn.at("UserUniqueID").get< uint32_t >();
+  user_uniqueid = jsn.at("UserUniqueID").get< int32_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7725,7 +7725,7 @@ std::string get_json_payload_for_door_lock_get_user_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user(
   nlohmann::json &jsn,
-  uint16_t &user_index
+  int16_t &user_index
   
 ) {
 
@@ -7734,7 +7734,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user(
     return;
   }
         
-  user_index = jsn.at("UserIndex").get< uint16_t >();
+  user_index = jsn.at("UserIndex").get< int16_t >();
     }
 
 
@@ -7782,7 +7782,7 @@ std::string get_json_payload_for_door_lock_clear_user_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_user(
   nlohmann::json &jsn,
-  uint16_t &user_index
+  int16_t &user_index
   
 ) {
 
@@ -7791,7 +7791,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_user(
     return;
   }
         
-  user_index = jsn.at("UserIndex").get< uint16_t >();
+  user_index = jsn.at("UserIndex").get< int16_t >();
     }
 
 
@@ -7866,11 +7866,11 @@ void uic_mqtt_dotdot_parse_door_lock_operating_event_notification(
   
   OperatingEventNotificationOperationEventCode &operation_event_code,
   
-  uint16_t &userid,
+  int16_t &userid,
   
   std::string &pin,
   
-  uint32_t &local_time,
+  int32_t &local_time,
   
   std::string &data
   
@@ -7903,7 +7903,7 @@ void uic_mqtt_dotdot_parse_door_lock_operating_event_notification(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("PIN").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7915,7 +7915,7 @@ void uic_mqtt_dotdot_parse_door_lock_operating_event_notification(
     return;
   }
         
-  local_time = jsn.at("LocalTime").get< uint32_t >();
+  local_time = jsn.at("LocalTime").get< int32_t >();
       if (jsn.at("Data").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -8026,7 +8026,7 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
   
   ProgrammingEventNotificationProgramEventCode &program_event_code,
   
-  uint16_t &userid,
+  int16_t &userid,
   
   std::string &pin,
   
@@ -8034,7 +8034,7 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
   
   DrlkUserStatus &user_status,
   
-  uint32_t &local_time,
+  int32_t &local_time,
   
   std::string &data
   
@@ -8079,7 +8079,7 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
     return;
   }
         
-  userid = jsn.at("UserID").get< uint16_t >();
+  userid = jsn.at("UserID").get< int16_t >();
       if (jsn.at("PIN").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -8101,7 +8101,7 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
     return;
   }
         
-  local_time = jsn.at("LocalTime").get< uint32_t >();
+  local_time = jsn.at("LocalTime").get< int32_t >();
       if (jsn.at("Data").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -8195,7 +8195,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
   
   std::string &credential_data,
   
-  uint16_t &user_index,
+  int16_t &user_index,
   
   DrlkSettableUserStatus &user_status,
   
@@ -8243,7 +8243,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_credential(
     return;
   }
         
-  user_index = jsn.at("UserIndex").get< uint16_t >();
+  user_index = jsn.at("UserIndex").get< int16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -8423,21 +8423,21 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
 
   if (jsn.find("DoorOpenEvents") != jsn.end()) {
 
-    new_state.door_open_events = jsn.at("DoorOpenEvents").get<uint32_t>();
+    new_state.door_open_events = jsn.at("DoorOpenEvents").get<int32_t>();
         
     new_updated_state.door_open_events = true;
   }
 
   if (jsn.find("DoorClosedEvents") != jsn.end()) {
 
-    new_state.door_closed_events = jsn.at("DoorClosedEvents").get<uint32_t>();
+    new_state.door_closed_events = jsn.at("DoorClosedEvents").get<int32_t>();
         
     new_updated_state.door_closed_events = true;
   }
 
   if (jsn.find("OpenPeriod") != jsn.end()) {
 
-    new_state.open_period = jsn.at("OpenPeriod").get<uint16_t>();
+    new_state.open_period = jsn.at("OpenPeriod").get<int16_t>();
         
     new_updated_state.open_period = true;
   }
@@ -8458,21 +8458,21 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
 
   if (jsn.find("LEDSettings") != jsn.end()) {
 
-    new_state.led_settings = jsn.at("LEDSettings").get<uint8_t>();
+    new_state.led_settings = jsn.at("LEDSettings").get<int8_t>();
         
     new_updated_state.led_settings = true;
   }
 
   if (jsn.find("AutoRelockTime") != jsn.end()) {
 
-    new_state.auto_relock_time = jsn.at("AutoRelockTime").get<uint32_t>();
+    new_state.auto_relock_time = jsn.at("AutoRelockTime").get<int32_t>();
         
     new_updated_state.auto_relock_time = true;
   }
 
   if (jsn.find("SoundVolume") != jsn.end()) {
 
-    new_state.sound_volume = jsn.at("SoundVolume").get<uint8_t>();
+    new_state.sound_volume = jsn.at("SoundVolume").get<int8_t>();
         
     new_updated_state.sound_volume = true;
   }
@@ -8529,14 +8529,14 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
 
   if (jsn.find("WrongCodeEntryLimit") != jsn.end()) {
 
-    new_state.wrong_code_entry_limit = jsn.at("WrongCodeEntryLimit").get<uint8_t>();
+    new_state.wrong_code_entry_limit = jsn.at("WrongCodeEntryLimit").get<int8_t>();
         
     new_updated_state.wrong_code_entry_limit = true;
   }
 
   if (jsn.find("UserCodeTemporaryDisableTime") != jsn.end()) {
 
-    new_state.user_code_temporary_disable_time = jsn.at("UserCodeTemporaryDisableTime").get<uint8_t>();
+    new_state.user_code_temporary_disable_time = jsn.at("UserCodeTemporaryDisableTime").get<int8_t>();
         
     new_updated_state.user_code_temporary_disable_time = true;
   }
@@ -8557,7 +8557,7 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
 
   if (jsn.find("ExpiringUserTimeout") != jsn.end()) {
 
-    new_state.expiring_user_timeout = jsn.at("ExpiringUserTimeout").get<uint16_t>();
+    new_state.expiring_user_timeout = jsn.at("ExpiringUserTimeout").get<int16_t>();
         
     new_updated_state.expiring_user_timeout = true;
   }
@@ -8704,7 +8704,7 @@ std::string get_json_payload_for_window_covering_go_to_lift_value_command(
 
 void uic_mqtt_dotdot_parse_window_covering_go_to_lift_value(
   nlohmann::json &jsn,
-  uint16_t &lift_value
+  int16_t &lift_value
   
 ) {
 
@@ -8713,7 +8713,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_lift_value(
     return;
   }
         
-  lift_value = jsn.at("LiftValue").get< uint16_t >();
+  lift_value = jsn.at("LiftValue").get< int16_t >();
     }
 
 
@@ -8742,7 +8742,7 @@ std::string get_json_payload_for_window_covering_go_to_lift_percentage_command(
 
 void uic_mqtt_dotdot_parse_window_covering_go_to_lift_percentage(
   nlohmann::json &jsn,
-  uint8_t &percentage_lift_value
+  int8_t &percentage_lift_value
   
 ) {
 
@@ -8751,7 +8751,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_lift_percentage(
     return;
   }
         
-  percentage_lift_value = jsn.at("PercentageLiftValue").get< uint8_t >();
+  percentage_lift_value = jsn.at("PercentageLiftValue").get< int8_t >();
     }
 
 
@@ -8780,7 +8780,7 @@ std::string get_json_payload_for_window_covering_go_to_tilt_value_command(
 
 void uic_mqtt_dotdot_parse_window_covering_go_to_tilt_value(
   nlohmann::json &jsn,
-  uint16_t &tilt_value
+  int16_t &tilt_value
   
 ) {
 
@@ -8789,7 +8789,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_tilt_value(
     return;
   }
         
-  tilt_value = jsn.at("TiltValue").get< uint16_t >();
+  tilt_value = jsn.at("TiltValue").get< int16_t >();
     }
 
 
@@ -8818,7 +8818,7 @@ std::string get_json_payload_for_window_covering_go_to_tilt_percentage_command(
 
 void uic_mqtt_dotdot_parse_window_covering_go_to_tilt_percentage(
   nlohmann::json &jsn,
-  uint8_t &percentage_tilt_value
+  int8_t &percentage_tilt_value
   
 ) {
 
@@ -8827,7 +8827,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_tilt_percentage(
     return;
   }
         
-  percentage_tilt_value = jsn.at("PercentageTiltValue").get< uint8_t >();
+  percentage_tilt_value = jsn.at("PercentageTiltValue").get< int8_t >();
     }
 
 
@@ -8845,21 +8845,21 @@ void uic_mqtt_dotdot_parse_window_covering_write_attributes(
 
   if (jsn.find("VelocityLift") != jsn.end()) {
 
-    new_state.velocity_lift = jsn.at("VelocityLift").get<uint16_t>();
+    new_state.velocity_lift = jsn.at("VelocityLift").get<int16_t>();
         
     new_updated_state.velocity_lift = true;
   }
 
   if (jsn.find("AccelerationTimeLift") != jsn.end()) {
 
-    new_state.acceleration_time_lift = jsn.at("AccelerationTimeLift").get<uint16_t>();
+    new_state.acceleration_time_lift = jsn.at("AccelerationTimeLift").get<int16_t>();
         
     new_updated_state.acceleration_time_lift = true;
   }
 
   if (jsn.find("DecelerationTimeLift") != jsn.end()) {
 
-    new_state.deceleration_time_lift = jsn.at("DecelerationTimeLift").get<uint16_t>();
+    new_state.deceleration_time_lift = jsn.at("DecelerationTimeLift").get<int16_t>();
         
     new_updated_state.deceleration_time_lift = true;
   }
@@ -8900,7 +8900,7 @@ std::string get_json_payload_for_barrier_control_go_to_percent_command(
 
 void uic_mqtt_dotdot_parse_barrier_control_go_to_percent(
   nlohmann::json &jsn,
-  uint8_t &percent_open
+  int8_t &percent_open
   
 ) {
 
@@ -8909,7 +8909,7 @@ void uic_mqtt_dotdot_parse_barrier_control_go_to_percent(
     return;
   }
         
-  percent_open = jsn.at("PercentOpen").get< uint8_t >();
+  percent_open = jsn.at("PercentOpen").get< int8_t >();
     }
 
 
@@ -8946,42 +8946,42 @@ void uic_mqtt_dotdot_parse_barrier_control_write_attributes(
 
   if (jsn.find("OpenEvents") != jsn.end()) {
 
-    new_state.open_events = jsn.at("OpenEvents").get<uint16_t>();
+    new_state.open_events = jsn.at("OpenEvents").get<int16_t>();
         
     new_updated_state.open_events = true;
   }
 
   if (jsn.find("CloseEvents") != jsn.end()) {
 
-    new_state.close_events = jsn.at("CloseEvents").get<uint16_t>();
+    new_state.close_events = jsn.at("CloseEvents").get<int16_t>();
         
     new_updated_state.close_events = true;
   }
 
   if (jsn.find("CommandOpenEvents") != jsn.end()) {
 
-    new_state.command_open_events = jsn.at("CommandOpenEvents").get<uint16_t>();
+    new_state.command_open_events = jsn.at("CommandOpenEvents").get<int16_t>();
         
     new_updated_state.command_open_events = true;
   }
 
   if (jsn.find("CommandCloseEvents") != jsn.end()) {
 
-    new_state.command_close_events = jsn.at("CommandCloseEvents").get<uint16_t>();
+    new_state.command_close_events = jsn.at("CommandCloseEvents").get<int16_t>();
         
     new_updated_state.command_close_events = true;
   }
 
   if (jsn.find("OpenPeriod") != jsn.end()) {
 
-    new_state.open_period = jsn.at("OpenPeriod").get<uint16_t>();
+    new_state.open_period = jsn.at("OpenPeriod").get<int16_t>();
         
     new_updated_state.open_period = true;
   }
 
   if (jsn.find("ClosePeriod") != jsn.end()) {
 
-    new_state.close_period = jsn.at("ClosePeriod").get<uint16_t>();
+    new_state.close_period = jsn.at("ClosePeriod").get<int16_t>();
         
     new_updated_state.close_period = true;
   }
@@ -9004,14 +9004,14 @@ void uic_mqtt_dotdot_parse_pump_configuration_and_control_write_attributes(
 
   if (jsn.find("LifetimeRunningHours") != jsn.end()) {
 
-    new_state.lifetime_running_hours = jsn.at("LifetimeRunningHours").get<uint32_t>();
+    new_state.lifetime_running_hours = jsn.at("LifetimeRunningHours").get<int32_t>();
         
     new_updated_state.lifetime_running_hours = true;
   }
 
   if (jsn.find("Power") != jsn.end()) {
 
-    new_state.power = jsn.at("Power").get<uint32_t>();
+    new_state.power = jsn.at("Power").get<int32_t>();
         
     new_updated_state.power = true;
   }
@@ -9383,17 +9383,17 @@ std::string get_json_payload_for_thermostat_get_relay_status_log_response_comman
 
 void uic_mqtt_dotdot_parse_thermostat_get_relay_status_log_response(
   nlohmann::json &jsn,
-  uint16_t &time_of_day,
+  int16_t &time_of_day,
   
   uint8_t &relay_status,
   
   int16_t &local_temperature,
   
-  uint8_t &humidity_percentage,
+  int8_t &humidity_percentage,
   
   int16_t &set_point,
   
-  uint16_t &unread_entries
+  int16_t &unread_entries
   
 ) {
 
@@ -9402,7 +9402,7 @@ void uic_mqtt_dotdot_parse_thermostat_get_relay_status_log_response(
     return;
   }
         
-  time_of_day = jsn.at("TimeOfDay").get< uint16_t >();
+  time_of_day = jsn.at("TimeOfDay").get< int16_t >();
       if (jsn.at("RelayStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -9419,7 +9419,7 @@ void uic_mqtt_dotdot_parse_thermostat_get_relay_status_log_response(
     return;
   }
         
-  humidity_percentage = jsn.at("HumidityPercentage").get< uint8_t >();
+  humidity_percentage = jsn.at("HumidityPercentage").get< int8_t >();
       if (jsn.at("SetPoint").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -9431,7 +9431,7 @@ void uic_mqtt_dotdot_parse_thermostat_get_relay_status_log_response(
     return;
   }
         
-  unread_entries = jsn.at("UnreadEntries").get< uint16_t >();
+  unread_entries = jsn.at("UnreadEntries").get< int16_t >();
     }
 
 
@@ -9668,7 +9668,7 @@ void uic_mqtt_dotdot_parse_thermostat_write_attributes(
 
   if (jsn.find("TemperatureSetpointHoldDuration") != jsn.end()) {
 
-    new_state.temperature_setpoint_hold_duration = jsn.at("TemperatureSetpointHoldDuration").get<uint16_t>();
+    new_state.temperature_setpoint_hold_duration = jsn.at("TemperatureSetpointHoldDuration").get<int16_t>();
         
     new_updated_state.temperature_setpoint_hold_duration = true;
   }
@@ -9682,21 +9682,21 @@ void uic_mqtt_dotdot_parse_thermostat_write_attributes(
 
   if (jsn.find("OccupiedSetback") != jsn.end()) {
 
-    new_state.occupied_setback = jsn.at("OccupiedSetback").get<uint8_t>();
+    new_state.occupied_setback = jsn.at("OccupiedSetback").get<int8_t>();
         
     new_updated_state.occupied_setback = true;
   }
 
   if (jsn.find("UnoccupiedSetback") != jsn.end()) {
 
-    new_state.unoccupied_setback = jsn.at("UnoccupiedSetback").get<uint8_t>();
+    new_state.unoccupied_setback = jsn.at("UnoccupiedSetback").get<int8_t>();
         
     new_updated_state.unoccupied_setback = true;
   }
 
   if (jsn.find("EmergencyHeatDelta") != jsn.end()) {
 
-    new_state.emergency_heat_delta = jsn.at("EmergencyHeatDelta").get<uint8_t>();
+    new_state.emergency_heat_delta = jsn.at("EmergencyHeatDelta").get<int8_t>();
         
     new_updated_state.emergency_heat_delta = true;
   }
@@ -9718,7 +9718,7 @@ void uic_mqtt_dotdot_parse_thermostat_write_attributes(
 
   if (jsn.find("ACCapacity") != jsn.end()) {
 
-    new_state.ac_capacity = jsn.at("ACCapacity").get<uint16_t>();
+    new_state.ac_capacity = jsn.at("ACCapacity").get<int16_t>();
         
     new_updated_state.ac_capacity = true;
   }
@@ -9854,7 +9854,7 @@ void uic_mqtt_dotdot_parse_dehumidification_control_write_attributes(
 
   if (jsn.find("RHDehumidificationSetpoint") != jsn.end()) {
 
-    new_state.rh_dehumidification_setpoint = jsn.at("RHDehumidificationSetpoint").get<uint8_t>();
+    new_state.rh_dehumidification_setpoint = jsn.at("RHDehumidificationSetpoint").get<int8_t>();
         
     new_updated_state.rh_dehumidification_setpoint = true;
   }
@@ -9891,14 +9891,14 @@ void uic_mqtt_dotdot_parse_dehumidification_control_write_attributes(
 
   if (jsn.find("DehumidificationHysteresis") != jsn.end()) {
 
-    new_state.dehumidification_hysteresis = jsn.at("DehumidificationHysteresis").get<uint8_t>();
+    new_state.dehumidification_hysteresis = jsn.at("DehumidificationHysteresis").get<int8_t>();
         
     new_updated_state.dehumidification_hysteresis = true;
   }
 
   if (jsn.find("DehumidificationMaxCool") != jsn.end()) {
 
-    new_state.dehumidification_max_cool = jsn.at("DehumidificationMaxCool").get<uint8_t>();
+    new_state.dehumidification_max_cool = jsn.at("DehumidificationMaxCool").get<int8_t>();
         
     new_updated_state.dehumidification_max_cool = true;
   }
@@ -10039,11 +10039,11 @@ std::string get_json_payload_for_color_control_move_to_hue_command(
 
 void uic_mqtt_dotdot_parse_color_control_move_to_hue(
   nlohmann::json &jsn,
-  uint8_t &hue,
+  int8_t &hue,
   
   CCDirection &direction,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10062,7 +10062,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_hue(
     return;
   }
         
-  hue = jsn.at("Hue").get< uint8_t >();
+  hue = jsn.at("Hue").get< int8_t >();
       if (jsn.at("Direction").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10073,7 +10073,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_hue(
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10141,7 +10141,7 @@ void uic_mqtt_dotdot_parse_color_control_move_hue(
   nlohmann::json &jsn,
   CCMoveMode &move_mode,
   
-  uint8_t &rate,
+  int8_t &rate,
   
   uint8_t &options_mask,
   
@@ -10165,7 +10165,7 @@ void uic_mqtt_dotdot_parse_color_control_move_hue(
     return;
   }
         
-  rate = jsn.at("Rate").get< uint8_t >();
+  rate = jsn.at("Rate").get< int8_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10237,9 +10237,9 @@ void uic_mqtt_dotdot_parse_color_control_step_hue(
   nlohmann::json &jsn,
   CCStepMode &step_mode,
   
-  uint8_t &step_size,
+  int8_t &step_size,
   
-  uint8_t &transition_time,
+  int8_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10263,13 +10263,13 @@ void uic_mqtt_dotdot_parse_color_control_step_hue(
     return;
   }
         
-  step_size = jsn.at("StepSize").get< uint8_t >();
+  step_size = jsn.at("StepSize").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint8_t >();
+  transition_time = jsn.at("TransitionTime").get< int8_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10324,9 +10324,9 @@ std::string get_json_payload_for_color_control_move_to_saturation_command(
 
 void uic_mqtt_dotdot_parse_color_control_move_to_saturation(
   nlohmann::json &jsn,
-  uint8_t &saturation,
+  int8_t &saturation,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10339,13 +10339,13 @@ void uic_mqtt_dotdot_parse_color_control_move_to_saturation(
     return;
   }
         
-  saturation = jsn.at("Saturation").get< uint8_t >();
+  saturation = jsn.at("Saturation").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10413,7 +10413,7 @@ void uic_mqtt_dotdot_parse_color_control_move_saturation(
   nlohmann::json &jsn,
   CCMoveMode &move_mode,
   
-  uint8_t &rate,
+  int8_t &rate,
   
   uint8_t &options_mask,
   
@@ -10437,7 +10437,7 @@ void uic_mqtt_dotdot_parse_color_control_move_saturation(
     return;
   }
         
-  rate = jsn.at("Rate").get< uint8_t >();
+  rate = jsn.at("Rate").get< int8_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10509,9 +10509,9 @@ void uic_mqtt_dotdot_parse_color_control_step_saturation(
   nlohmann::json &jsn,
   CCStepMode &step_mode,
   
-  uint8_t &step_size,
+  int8_t &step_size,
   
-  uint8_t &transition_time,
+  int8_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10535,13 +10535,13 @@ void uic_mqtt_dotdot_parse_color_control_step_saturation(
     return;
   }
         
-  step_size = jsn.at("StepSize").get< uint8_t >();
+  step_size = jsn.at("StepSize").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint8_t >();
+  transition_time = jsn.at("TransitionTime").get< int8_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10600,11 +10600,11 @@ std::string get_json_payload_for_color_control_move_to_hue_and_saturation_comman
 
 void uic_mqtt_dotdot_parse_color_control_move_to_hue_and_saturation(
   nlohmann::json &jsn,
-  uint8_t &hue,
+  int8_t &hue,
   
-  uint8_t &saturation,
+  int8_t &saturation,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10617,19 +10617,19 @@ void uic_mqtt_dotdot_parse_color_control_move_to_hue_and_saturation(
     return;
   }
         
-  hue = jsn.at("Hue").get< uint8_t >();
+  hue = jsn.at("Hue").get< int8_t >();
       if (jsn.at("Saturation").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  saturation = jsn.at("Saturation").get< uint8_t >();
+  saturation = jsn.at("Saturation").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10688,11 +10688,11 @@ std::string get_json_payload_for_color_control_move_to_color_command(
 
 void uic_mqtt_dotdot_parse_color_control_move_to_color(
   nlohmann::json &jsn,
-  uint16_t &colorx,
+  int16_t &colorx,
   
-  uint16_t &colory,
+  int16_t &colory,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10705,19 +10705,19 @@ void uic_mqtt_dotdot_parse_color_control_move_to_color(
     return;
   }
         
-  colorx = jsn.at("ColorX").get< uint16_t >();
+  colorx = jsn.at("ColorX").get< int16_t >();
       if (jsn.at("ColorY").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  colory = jsn.at("ColorY").get< uint16_t >();
+  colory = jsn.at("ColorY").get< int16_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10856,7 +10856,7 @@ void uic_mqtt_dotdot_parse_color_control_step_color(
   
   int16_t &stepy,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10881,7 +10881,7 @@ void uic_mqtt_dotdot_parse_color_control_step_color(
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -10936,9 +10936,9 @@ std::string get_json_payload_for_color_control_move_to_color_temperature_command
 
 void uic_mqtt_dotdot_parse_color_control_move_to_color_temperature(
   nlohmann::json &jsn,
-  uint16_t &color_temperature_mireds,
+  int16_t &color_temperature_mireds,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -10951,13 +10951,13 @@ void uic_mqtt_dotdot_parse_color_control_move_to_color_temperature(
     return;
   }
         
-  color_temperature_mireds = jsn.at("ColorTemperatureMireds").get< uint16_t >();
+  color_temperature_mireds = jsn.at("ColorTemperatureMireds").get< int16_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11027,11 +11027,11 @@ std::string get_json_payload_for_color_control_enhanced_move_to_hue_command(
 
 void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue(
   nlohmann::json &jsn,
-  uint16_t &enhanced_hue,
+  int16_t &enhanced_hue,
   
   CCDirection &direction,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -11050,7 +11050,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue(
     return;
   }
         
-  enhanced_hue = jsn.at("EnhancedHue").get< uint16_t >();
+  enhanced_hue = jsn.at("EnhancedHue").get< int16_t >();
       if (jsn.at("Direction").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11061,7 +11061,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue(
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11129,7 +11129,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_hue(
   nlohmann::json &jsn,
   CCMoveMode &move_mode,
   
-  uint16_t &rate,
+  int16_t &rate,
   
   uint8_t &options_mask,
   
@@ -11153,7 +11153,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_hue(
     return;
   }
         
-  rate = jsn.at("Rate").get< uint16_t >();
+  rate = jsn.at("Rate").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11225,9 +11225,9 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_step_hue(
   nlohmann::json &jsn,
   CCStepMode &step_mode,
   
-  uint16_t &step_size,
+  int16_t &step_size,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -11251,13 +11251,13 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_step_hue(
     return;
   }
         
-  step_size = jsn.at("StepSize").get< uint16_t >();
+  step_size = jsn.at("StepSize").get< int16_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11316,11 +11316,11 @@ std::string get_json_payload_for_color_control_enhanced_move_to_hue_and_saturati
 
 void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue_and_saturation(
   nlohmann::json &jsn,
-  uint16_t &enhanced_hue,
+  int16_t &enhanced_hue,
   
-  uint8_t &saturation,
+  int8_t &saturation,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
   uint8_t &options_mask,
   
@@ -11333,19 +11333,19 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue_and_saturation(
     return;
   }
         
-  enhanced_hue = jsn.at("EnhancedHue").get< uint16_t >();
+  enhanced_hue = jsn.at("EnhancedHue").get< int16_t >();
       if (jsn.at("Saturation").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  saturation = jsn.at("Saturation").get< uint8_t >();
+  saturation = jsn.at("Saturation").get< int8_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11442,9 +11442,9 @@ void uic_mqtt_dotdot_parse_color_control_color_loop_set(
   
   CCColorLoopDirection &direction,
   
-  uint16_t &time,
+  int16_t &time,
   
-  uint16_t &start_hue,
+  int16_t &start_hue,
   
   uint8_t &options_mask,
   
@@ -11484,13 +11484,13 @@ void uic_mqtt_dotdot_parse_color_control_color_loop_set(
     return;
   }
         
-  time = jsn.at("Time").get< uint16_t >();
+  time = jsn.at("Time").get< int16_t >();
       if (jsn.at("StartHue").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  start_hue = jsn.at("StartHue").get< uint16_t >();
+  start_hue = jsn.at("StartHue").get< int16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11618,11 +11618,11 @@ void uic_mqtt_dotdot_parse_color_control_move_color_temperature(
   nlohmann::json &jsn,
   CCMoveMode &move_mode,
   
-  uint16_t &rate,
+  int16_t &rate,
   
-  uint16_t &color_temperature_minimum_mireds,
+  uint8_t * &color_temperature_minimum_mireds,
   
-  uint16_t &color_temperature_maximum_mireds,
+  uint8_t * &color_temperature_maximum_mireds,
   
   uint8_t &options_mask,
   
@@ -11646,19 +11646,19 @@ void uic_mqtt_dotdot_parse_color_control_move_color_temperature(
     return;
   }
         
-  rate = jsn.at("Rate").get< uint16_t >();
+  rate = jsn.at("Rate").get< int16_t >();
       if (jsn.at("ColorTemperatureMinimumMireds").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< uint16_t >();
+  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< uint8_t * >();
       if (jsn.at("ColorTemperatureMaximumMireds").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< uint16_t >();
+  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< uint8_t * >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11738,13 +11738,13 @@ void uic_mqtt_dotdot_parse_color_control_step_color_temperature(
   nlohmann::json &jsn,
   CCStepMode &step_mode,
   
-  uint16_t &step_size,
+  int16_t &step_size,
   
-  uint16_t &transition_time,
+  int16_t &transition_time,
   
-  uint16_t &color_temperature_minimum_mireds,
+  uint8_t * &color_temperature_minimum_mireds,
   
-  uint16_t &color_temperature_maximum_mireds,
+  uint8_t * &color_temperature_maximum_mireds,
   
   uint8_t &options_mask,
   
@@ -11768,25 +11768,25 @@ void uic_mqtt_dotdot_parse_color_control_step_color_temperature(
     return;
   }
         
-  step_size = jsn.at("StepSize").get< uint16_t >();
+  step_size = jsn.at("StepSize").get< int16_t >();
       if (jsn.at("TransitionTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  transition_time = jsn.at("TransitionTime").get< uint16_t >();
+  transition_time = jsn.at("TransitionTime").get< int16_t >();
       if (jsn.at("ColorTemperatureMinimumMireds").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< uint16_t >();
+  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< uint8_t * >();
       if (jsn.at("ColorTemperatureMaximumMireds").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< uint16_t >();
+  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< uint8_t * >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11821,84 +11821,84 @@ void uic_mqtt_dotdot_parse_color_control_write_attributes(
 
   if (jsn.find("WhitePointX") != jsn.end()) {
 
-    new_state.white_pointx = jsn.at("WhitePointX").get<uint16_t>();
+    new_state.white_pointx = jsn.at("WhitePointX").get<int16_t>();
         
     new_updated_state.white_pointx = true;
   }
 
   if (jsn.find("WhitePointY") != jsn.end()) {
 
-    new_state.white_pointy = jsn.at("WhitePointY").get<uint16_t>();
+    new_state.white_pointy = jsn.at("WhitePointY").get<int16_t>();
         
     new_updated_state.white_pointy = true;
   }
 
   if (jsn.find("ColorPointRX") != jsn.end()) {
 
-    new_state.color_pointrx = jsn.at("ColorPointRX").get<uint16_t>();
+    new_state.color_pointrx = jsn.at("ColorPointRX").get<int16_t>();
         
     new_updated_state.color_pointrx = true;
   }
 
   if (jsn.find("ColorPointRY") != jsn.end()) {
 
-    new_state.color_pointry = jsn.at("ColorPointRY").get<uint16_t>();
+    new_state.color_pointry = jsn.at("ColorPointRY").get<int16_t>();
         
     new_updated_state.color_pointry = true;
   }
 
   if (jsn.find("ColorPointRIntensity") != jsn.end()) {
 
-    new_state.color_pointr_intensity = jsn.at("ColorPointRIntensity").get<uint8_t>();
+    new_state.color_pointr_intensity = jsn.at("ColorPointRIntensity").get<int8_t>();
         
     new_updated_state.color_pointr_intensity = true;
   }
 
   if (jsn.find("ColorPointGX") != jsn.end()) {
 
-    new_state.color_pointgx = jsn.at("ColorPointGX").get<uint16_t>();
+    new_state.color_pointgx = jsn.at("ColorPointGX").get<int16_t>();
         
     new_updated_state.color_pointgx = true;
   }
 
   if (jsn.find("ColorPointGY") != jsn.end()) {
 
-    new_state.color_pointgy = jsn.at("ColorPointGY").get<uint16_t>();
+    new_state.color_pointgy = jsn.at("ColorPointGY").get<int16_t>();
         
     new_updated_state.color_pointgy = true;
   }
 
   if (jsn.find("ColorPointGIntensity") != jsn.end()) {
 
-    new_state.color_pointg_intensity = jsn.at("ColorPointGIntensity").get<uint8_t>();
+    new_state.color_pointg_intensity = jsn.at("ColorPointGIntensity").get<int8_t>();
         
     new_updated_state.color_pointg_intensity = true;
   }
 
   if (jsn.find("ColorPointBX") != jsn.end()) {
 
-    new_state.color_pointbx = jsn.at("ColorPointBX").get<uint16_t>();
+    new_state.color_pointbx = jsn.at("ColorPointBX").get<int16_t>();
         
     new_updated_state.color_pointbx = true;
   }
 
   if (jsn.find("ColorPointBY") != jsn.end()) {
 
-    new_state.color_pointby = jsn.at("ColorPointBY").get<uint16_t>();
+    new_state.color_pointby = jsn.at("ColorPointBY").get<int16_t>();
         
     new_updated_state.color_pointby = true;
   }
 
   if (jsn.find("ColorPointBIntensity") != jsn.end()) {
 
-    new_state.color_pointb_intensity = jsn.at("ColorPointBIntensity").get<uint8_t>();
+    new_state.color_pointb_intensity = jsn.at("ColorPointBIntensity").get<int8_t>();
         
     new_updated_state.color_pointb_intensity = true;
   }
 
   if (jsn.find("StartUpColorTemperatureMireds") != jsn.end()) {
 
-    new_state.start_up_color_temperature_mireds = jsn.at("StartUpColorTemperatureMireds").get<uint16_t>();
+    new_state.start_up_color_temperature_mireds = jsn.at("StartUpColorTemperatureMireds").get<int16_t>();
         
     new_updated_state.start_up_color_temperature_mireds = true;
   }
@@ -11921,42 +11921,42 @@ void uic_mqtt_dotdot_parse_ballast_configuration_write_attributes(
 
   if (jsn.find("MinLevel") != jsn.end()) {
 
-    new_state.min_level = jsn.at("MinLevel").get<uint8_t>();
+    new_state.min_level = jsn.at("MinLevel").get<int8_t>();
         
     new_updated_state.min_level = true;
   }
 
   if (jsn.find("MaxLevel") != jsn.end()) {
 
-    new_state.max_level = jsn.at("MaxLevel").get<uint8_t>();
+    new_state.max_level = jsn.at("MaxLevel").get<int8_t>();
         
     new_updated_state.max_level = true;
   }
 
   if (jsn.find("PowerOnLevel") != jsn.end()) {
 
-    new_state.power_on_level = jsn.at("PowerOnLevel").get<uint8_t>();
+    new_state.power_on_level = jsn.at("PowerOnLevel").get<int8_t>();
         
     new_updated_state.power_on_level = true;
   }
 
   if (jsn.find("PowerOnFadeTime") != jsn.end()) {
 
-    new_state.power_on_fade_time = jsn.at("PowerOnFadeTime").get<uint16_t>();
+    new_state.power_on_fade_time = jsn.at("PowerOnFadeTime").get<int16_t>();
         
     new_updated_state.power_on_fade_time = true;
   }
 
   if (jsn.find("IntrinsicBallastFactor") != jsn.end()) {
 
-    new_state.intrinsic_ballast_factor = jsn.at("IntrinsicBallastFactor").get<uint8_t>();
+    new_state.intrinsic_ballast_factor = jsn.at("IntrinsicBallastFactor").get<int8_t>();
         
     new_updated_state.intrinsic_ballast_factor = true;
   }
 
   if (jsn.find("BallastFactorAdjustment") != jsn.end()) {
 
-    new_state.ballast_factor_adjustment = jsn.at("BallastFactorAdjustment").get<uint8_t>();
+    new_state.ballast_factor_adjustment = jsn.at("BallastFactorAdjustment").get<int8_t>();
         
     new_updated_state.ballast_factor_adjustment = true;
   }
@@ -11977,14 +11977,14 @@ void uic_mqtt_dotdot_parse_ballast_configuration_write_attributes(
 
   if (jsn.find("LampRatedHours") != jsn.end()) {
 
-    new_state.lamp_rated_hours = jsn.at("LampRatedHours").get<uint32_t>();
+    new_state.lamp_rated_hours = jsn.at("LampRatedHours").get<int32_t>();
         
     new_updated_state.lamp_rated_hours = true;
   }
 
   if (jsn.find("LampBurnHours") != jsn.end()) {
 
-    new_state.lamp_burn_hours = jsn.at("LampBurnHours").get<uint32_t>();
+    new_state.lamp_burn_hours = jsn.at("LampBurnHours").get<int32_t>();
         
     new_updated_state.lamp_burn_hours = true;
   }
@@ -11998,7 +11998,7 @@ void uic_mqtt_dotdot_parse_ballast_configuration_write_attributes(
 
   if (jsn.find("LampBurnHoursTripPoint") != jsn.end()) {
 
-    new_state.lamp_burn_hours_trip_point = jsn.at("LampBurnHoursTripPoint").get<uint32_t>();
+    new_state.lamp_burn_hours_trip_point = jsn.at("LampBurnHoursTripPoint").get<int32_t>();
         
     new_updated_state.lamp_burn_hours_trip_point = true;
   }
@@ -12037,7 +12037,7 @@ void uic_mqtt_dotdot_parse_illuminance_level_sensing_write_attributes(
 
   if (jsn.find("IlluminanceTargetLevel") != jsn.end()) {
 
-    new_state.illuminance_target_level = jsn.at("IlluminanceTargetLevel").get<uint16_t>();
+    new_state.illuminance_target_level = jsn.at("IlluminanceTargetLevel").get<int16_t>();
         
     new_updated_state.illuminance_target_level = true;
   }
@@ -12124,63 +12124,63 @@ void uic_mqtt_dotdot_parse_occupancy_sensing_write_attributes(
 
   if (jsn.find("PIROccupiedToUnoccupiedDelay") != jsn.end()) {
 
-    new_state.pir_occupied_to_unoccupied_delay = jsn.at("PIROccupiedToUnoccupiedDelay").get<uint16_t>();
+    new_state.pir_occupied_to_unoccupied_delay = jsn.at("PIROccupiedToUnoccupiedDelay").get<int16_t>();
         
     new_updated_state.pir_occupied_to_unoccupied_delay = true;
   }
 
   if (jsn.find("PIRUnoccupiedToOccupiedDelay") != jsn.end()) {
 
-    new_state.pir_unoccupied_to_occupied_delay = jsn.at("PIRUnoccupiedToOccupiedDelay").get<uint16_t>();
+    new_state.pir_unoccupied_to_occupied_delay = jsn.at("PIRUnoccupiedToOccupiedDelay").get<int16_t>();
         
     new_updated_state.pir_unoccupied_to_occupied_delay = true;
   }
 
   if (jsn.find("PIRUnoccupiedToOccupiedThreshold") != jsn.end()) {
 
-    new_state.pir_unoccupied_to_occupied_threshold = jsn.at("PIRUnoccupiedToOccupiedThreshold").get<uint8_t>();
+    new_state.pir_unoccupied_to_occupied_threshold = jsn.at("PIRUnoccupiedToOccupiedThreshold").get<int8_t>();
         
     new_updated_state.pir_unoccupied_to_occupied_threshold = true;
   }
 
   if (jsn.find("UltrasonicOccupiedToUnoccupiedDelay") != jsn.end()) {
 
-    new_state.ultrasonic_occupied_to_unoccupied_delay = jsn.at("UltrasonicOccupiedToUnoccupiedDelay").get<uint16_t>();
+    new_state.ultrasonic_occupied_to_unoccupied_delay = jsn.at("UltrasonicOccupiedToUnoccupiedDelay").get<int16_t>();
         
     new_updated_state.ultrasonic_occupied_to_unoccupied_delay = true;
   }
 
   if (jsn.find("UltrasonicUnoccupiedToOccupiedDelay") != jsn.end()) {
 
-    new_state.ultrasonic_unoccupied_to_occupied_delay = jsn.at("UltrasonicUnoccupiedToOccupiedDelay").get<uint16_t>();
+    new_state.ultrasonic_unoccupied_to_occupied_delay = jsn.at("UltrasonicUnoccupiedToOccupiedDelay").get<int16_t>();
         
     new_updated_state.ultrasonic_unoccupied_to_occupied_delay = true;
   }
 
   if (jsn.find("UltrasonicUnoccupiedToOccupiedThreshold") != jsn.end()) {
 
-    new_state.ultrasonic_unoccupied_to_occupied_threshold = jsn.at("UltrasonicUnoccupiedToOccupiedThreshold").get<uint8_t>();
+    new_state.ultrasonic_unoccupied_to_occupied_threshold = jsn.at("UltrasonicUnoccupiedToOccupiedThreshold").get<int8_t>();
         
     new_updated_state.ultrasonic_unoccupied_to_occupied_threshold = true;
   }
 
   if (jsn.find("PhysicalContactOccupiedToUnoccupiedDelay") != jsn.end()) {
 
-    new_state.physical_contact_occupied_to_unoccupied_delay = jsn.at("PhysicalContactOccupiedToUnoccupiedDelay").get<uint16_t>();
+    new_state.physical_contact_occupied_to_unoccupied_delay = jsn.at("PhysicalContactOccupiedToUnoccupiedDelay").get<int16_t>();
         
     new_updated_state.physical_contact_occupied_to_unoccupied_delay = true;
   }
 
   if (jsn.find("PhysicalContactUnoccupiedToOccupiedDelay") != jsn.end()) {
 
-    new_state.physical_contact_unoccupied_to_occupied_delay = jsn.at("PhysicalContactUnoccupiedToOccupiedDelay").get<uint16_t>();
+    new_state.physical_contact_unoccupied_to_occupied_delay = jsn.at("PhysicalContactUnoccupiedToOccupiedDelay").get<int16_t>();
         
     new_updated_state.physical_contact_unoccupied_to_occupied_delay = true;
   }
 
   if (jsn.find("PhysicalContactUnoccupiedToOccupiedThreshold") != jsn.end()) {
 
-    new_state.physical_contact_unoccupied_to_occupied_threshold = jsn.at("PhysicalContactUnoccupiedToOccupiedThreshold").get<uint8_t>();
+    new_state.physical_contact_unoccupied_to_occupied_threshold = jsn.at("PhysicalContactUnoccupiedToOccupiedThreshold").get<int8_t>();
         
     new_updated_state.physical_contact_unoccupied_to_occupied_threshold = true;
   }
@@ -12343,7 +12343,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_enroll_response(
   nlohmann::json &jsn,
   ZoneEnrollResponseEnrollResponseCode &enroll_response_code,
   
-  uint8_t &zoneid
+  int8_t &zoneid
   
 ) {
 
@@ -12363,7 +12363,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_enroll_response(
     return;
   }
         
-  zoneid = jsn.at("ZoneID").get< uint8_t >();
+  zoneid = jsn.at("ZoneID").get< int8_t >();
     }
 
 
@@ -12410,9 +12410,9 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_status_change_notification(
   
   uint8_t &extended_status,
   
-  uint8_t &zoneid,
+  int8_t &zoneid,
   
-  uint16_t &delay
+  int16_t &delay
   
 ) {
 
@@ -12431,13 +12431,13 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_status_change_notification(
     return;
   }
         
-  zoneid = jsn.at("ZoneID").get< uint8_t >();
+  zoneid = jsn.at("ZoneID").get< int8_t >();
       if (jsn.at("Delay").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  delay = jsn.at("Delay").get< uint16_t >();
+  delay = jsn.at("Delay").get< int16_t >();
     }
 
 
@@ -12502,7 +12502,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_enroll_request(
   nlohmann::json &jsn,
   IasZoneType &zone_type,
   
-  uint16_t &manufacturer_code
+  int16_t &manufacturer_code
   
 ) {
 
@@ -12522,7 +12522,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_enroll_request(
     return;
   }
         
-  manufacturer_code = jsn.at("ManufacturerCode").get< uint16_t >();
+  manufacturer_code = jsn.at("ManufacturerCode").get< int16_t >();
     }
 
 
@@ -12555,9 +12555,9 @@ std::string get_json_payload_for_ias_zone_initiate_test_mode_command(
 
 void uic_mqtt_dotdot_parse_ias_zone_initiate_test_mode(
   nlohmann::json &jsn,
-  uint8_t &test_mode_duration,
+  int8_t &test_mode_duration,
   
-  uint8_t &current_zone_sensitivity_level
+  int8_t &current_zone_sensitivity_level
   
 ) {
 
@@ -12566,13 +12566,13 @@ void uic_mqtt_dotdot_parse_ias_zone_initiate_test_mode(
     return;
   }
         
-  test_mode_duration = jsn.at("TestModeDuration").get< uint8_t >();
+  test_mode_duration = jsn.at("TestModeDuration").get< int8_t >();
       if (jsn.at("CurrentZoneSensitivityLevel").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  current_zone_sensitivity_level = jsn.at("CurrentZoneSensitivityLevel").get< uint8_t >();
+  current_zone_sensitivity_level = jsn.at("CurrentZoneSensitivityLevel").get< int8_t >();
     }
 
 
@@ -12597,7 +12597,7 @@ void uic_mqtt_dotdot_parse_ias_zone_write_attributes(
 
   if (jsn.find("CurrentZoneSensitivityLevel") != jsn.end()) {
 
-    new_state.current_zone_sensitivity_level = jsn.at("CurrentZoneSensitivityLevel").get<uint8_t>();
+    new_state.current_zone_sensitivity_level = jsn.at("CurrentZoneSensitivityLevel").get<int8_t>();
         
     new_updated_state.current_zone_sensitivity_level = true;
   }
@@ -12658,9 +12658,9 @@ void uic_mqtt_dotdot_parse_iaswd_start_warning(
   nlohmann::json &jsn,
   uint8_t &siren_configuration,
   
-  uint16_t &warning_duration,
+  int16_t &warning_duration,
   
-  uint8_t &strobe_duty_cycle,
+  int8_t &strobe_duty_cycle,
   
   IaswdLevel &strobe_level
   
@@ -12682,13 +12682,13 @@ void uic_mqtt_dotdot_parse_iaswd_start_warning(
     return;
   }
         
-  warning_duration = jsn.at("WarningDuration").get< uint16_t >();
+  warning_duration = jsn.at("WarningDuration").get< int16_t >();
       if (jsn.at("StrobeDutyCycle").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  strobe_duty_cycle = jsn.at("StrobeDutyCycle").get< uint8_t >();
+  strobe_duty_cycle = jsn.at("StrobeDutyCycle").get< int8_t >();
       if (jsn.at("StrobeLevel").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -12750,7 +12750,7 @@ void uic_mqtt_dotdot_parse_iaswd_write_attributes(
 
   if (jsn.find("MaxDuration") != jsn.end()) {
 
-    new_state.max_duration = jsn.at("MaxDuration").get<uint16_t>();
+    new_state.max_duration = jsn.at("MaxDuration").get<int16_t>();
         
     new_updated_state.max_duration = true;
   }
@@ -12809,7 +12809,7 @@ std::string get_json_payload_for_electrical_measurement_get_profile_info_respons
   json_payload["MaxNumberOfIntervals"] = nlohmann::json(fields->max_number_of_intervals);
   command_with_no_fields = false;
   // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["ListOfAttributes"] = std::vector< uint16_t >(
+  json_payload["ListOfAttributes"] = std::vector< uint8_t >(
     fields->list_of_attributes,
     fields->list_of_attributes + fields->list_of_attributes_count);
 
@@ -12825,13 +12825,13 @@ std::string get_json_payload_for_electrical_measurement_get_profile_info_respons
 
 void uic_mqtt_dotdot_parse_electrical_measurement_get_profile_info_response(
   nlohmann::json &jsn,
-  uint8_t &profile_count,
+  int8_t &profile_count,
   
   ProfileIntervalPeriod &profile_interval_period,
   
-  uint8_t &max_number_of_intervals,
+  int8_t &max_number_of_intervals,
   
-  std::vector<uint16_t> &list_of_attributes
+  std::vector<uint8_t> &list_of_attributes
 
 ) {
 
@@ -12846,7 +12846,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_profile_info_response(
     return;
   }
         
-  profile_count = jsn.at("ProfileCount").get< uint8_t >();
+  profile_count = jsn.at("ProfileCount").get< int8_t >();
       if (jsn.at("ProfileIntervalPeriod").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -12857,13 +12857,13 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_profile_info_response(
     return;
   }
         
-  max_number_of_intervals = jsn.at("MaxNumberOfIntervals").get< uint8_t >();
+  max_number_of_intervals = jsn.at("MaxNumberOfIntervals").get< int8_t >();
       if (jsn.at("ListOfAttributes").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  list_of_attributes = jsn.at("ListOfAttributes").get< std::vector< uint16_t >>();
+  list_of_attributes = jsn.at("ListOfAttributes").get< std::vector< uint8_t >>();
       }
 
 
@@ -12939,7 +12939,7 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
   json_payload["AttributeId"] = nlohmann::json(fields->attribute_id);
   command_with_no_fields = false;
   // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Intervals"] = std::vector< uint8_t >(
+  json_payload["Intervals"] = std::vector< int8_t >(
     fields->intervals,
     fields->intervals + fields->intervals_count);
 
@@ -12955,17 +12955,17 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
 
 void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_response(
   nlohmann::json &jsn,
-  uint32_t &start_time,
+  uint8_t &start_time,
   
   GetMeasurementProfileResponseStatus &status,
   
   ProfileIntervalPeriod &profile_interval_period,
   
-  uint8_t &number_of_intervals_delivered,
+  int8_t &number_of_intervals_delivered,
   
-  uint16_t &attribute_id,
+  uint8_t &attribute_id,
   
-  std::vector<uint8_t> &intervals
+  std::vector<int8_t> &intervals
 
 ) {
 
@@ -12986,7 +12986,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_respon
     return;
   }
         
-  start_time = jsn.at("StartTime").get< uint32_t >();
+  start_time = jsn.at("StartTime").get< uint8_t >();
       if (jsn.at("Status").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -13002,19 +13002,19 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_respon
     return;
   }
         
-  number_of_intervals_delivered = jsn.at("NumberOfIntervalsDelivered").get< uint8_t >();
+  number_of_intervals_delivered = jsn.at("NumberOfIntervalsDelivered").get< int8_t >();
       if (jsn.at("AttributeId").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  attribute_id = jsn.at("AttributeId").get< uint16_t >();
+  attribute_id = jsn.at("AttributeId").get< uint8_t >();
       if (jsn.at("Intervals").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  intervals = jsn.at("Intervals").get< std::vector< uint8_t >>();
+  intervals = jsn.at("Intervals").get< std::vector< int8_t >>();
       }
 
 
@@ -13051,11 +13051,11 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
 
 void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
   nlohmann::json &jsn,
-  uint16_t &attributeid,
+  uint8_t &attributeid,
   
-  uint32_t &start_time,
+  uint8_t &start_time,
   
-  uint8_t &number_of_intervals
+  int8_t &number_of_intervals
   
 ) {
 
@@ -13064,19 +13064,19 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
     return;
   }
         
-  attributeid = jsn.at("AttributeID").get< uint16_t >();
+  attributeid = jsn.at("AttributeID").get< uint8_t >();
       if (jsn.at("StartTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  start_time = jsn.at("StartTime").get< uint32_t >();
+  start_time = jsn.at("StartTime").get< uint8_t >();
       if (jsn.at("NumberOfIntervals").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  number_of_intervals = jsn.at("NumberOfIntervals").get< uint8_t >();
+  number_of_intervals = jsn.at("NumberOfIntervals").get< int8_t >();
     }
 
 
@@ -13094,49 +13094,49 @@ void uic_mqtt_dotdot_parse_electrical_measurement_write_attributes(
 
   if (jsn.find("AverageRMSVoltageMeasurementPeriod") != jsn.end()) {
 
-    new_state.average_rms_voltage_measurement_period = jsn.at("AverageRMSVoltageMeasurementPeriod").get<uint16_t>();
+    new_state.average_rms_voltage_measurement_period = jsn.at("AverageRMSVoltageMeasurementPeriod").get<int16_t>();
         
     new_updated_state.average_rms_voltage_measurement_period = true;
   }
 
   if (jsn.find("AverageRMSOverVoltageCounter") != jsn.end()) {
 
-    new_state.average_rms_over_voltage_counter = jsn.at("AverageRMSOverVoltageCounter").get<uint16_t>();
+    new_state.average_rms_over_voltage_counter = jsn.at("AverageRMSOverVoltageCounter").get<int16_t>();
         
     new_updated_state.average_rms_over_voltage_counter = true;
   }
 
   if (jsn.find("AverageRMSUnderVoltageCounter") != jsn.end()) {
 
-    new_state.average_rms_under_voltage_counter = jsn.at("AverageRMSUnderVoltageCounter").get<uint16_t>();
+    new_state.average_rms_under_voltage_counter = jsn.at("AverageRMSUnderVoltageCounter").get<int16_t>();
         
     new_updated_state.average_rms_under_voltage_counter = true;
   }
 
   if (jsn.find("RMSExtremeOverVoltagePeriod") != jsn.end()) {
 
-    new_state.rms_extreme_over_voltage_period = jsn.at("RMSExtremeOverVoltagePeriod").get<uint16_t>();
+    new_state.rms_extreme_over_voltage_period = jsn.at("RMSExtremeOverVoltagePeriod").get<int16_t>();
         
     new_updated_state.rms_extreme_over_voltage_period = true;
   }
 
   if (jsn.find("RMSExtremeUnderVoltagePeriod") != jsn.end()) {
 
-    new_state.rms_extreme_under_voltage_period = jsn.at("RMSExtremeUnderVoltagePeriod").get<uint16_t>();
+    new_state.rms_extreme_under_voltage_period = jsn.at("RMSExtremeUnderVoltagePeriod").get<int16_t>();
         
     new_updated_state.rms_extreme_under_voltage_period = true;
   }
 
   if (jsn.find("RMSVoltageSagPeriod") != jsn.end()) {
 
-    new_state.rms_voltage_sag_period = jsn.at("RMSVoltageSagPeriod").get<uint16_t>();
+    new_state.rms_voltage_sag_period = jsn.at("RMSVoltageSagPeriod").get<int16_t>();
         
     new_updated_state.rms_voltage_sag_period = true;
   }
 
   if (jsn.find("RMSVoltageSwellPeriod") != jsn.end()) {
 
-    new_state.rms_voltage_swell_period = jsn.at("RMSVoltageSwellPeriod").get<uint16_t>();
+    new_state.rms_voltage_swell_period = jsn.at("RMSVoltageSwellPeriod").get<int16_t>();
         
     new_updated_state.rms_voltage_swell_period = true;
   }
@@ -13185,98 +13185,98 @@ void uic_mqtt_dotdot_parse_electrical_measurement_write_attributes(
 
   if (jsn.find("AverageRMSVoltageMeasurementPeriodPhB") != jsn.end()) {
 
-    new_state.average_rms_voltage_measurement_period_phb = jsn.at("AverageRMSVoltageMeasurementPeriodPhB").get<uint16_t>();
+    new_state.average_rms_voltage_measurement_period_phb = jsn.at("AverageRMSVoltageMeasurementPeriodPhB").get<int16_t>();
         
     new_updated_state.average_rms_voltage_measurement_period_phb = true;
   }
 
   if (jsn.find("AverageRMSOverVoltageCounterPhB") != jsn.end()) {
 
-    new_state.average_rms_over_voltage_counter_phb = jsn.at("AverageRMSOverVoltageCounterPhB").get<uint16_t>();
+    new_state.average_rms_over_voltage_counter_phb = jsn.at("AverageRMSOverVoltageCounterPhB").get<int16_t>();
         
     new_updated_state.average_rms_over_voltage_counter_phb = true;
   }
 
   if (jsn.find("AverageRMSUnderVoltageCounterPhB") != jsn.end()) {
 
-    new_state.average_rms_under_voltage_counter_phb = jsn.at("AverageRMSUnderVoltageCounterPhB").get<uint16_t>();
+    new_state.average_rms_under_voltage_counter_phb = jsn.at("AverageRMSUnderVoltageCounterPhB").get<int16_t>();
         
     new_updated_state.average_rms_under_voltage_counter_phb = true;
   }
 
   if (jsn.find("RMSExtremeOverVoltagePeriodPhB") != jsn.end()) {
 
-    new_state.rms_extreme_over_voltage_period_phb = jsn.at("RMSExtremeOverVoltagePeriodPhB").get<uint16_t>();
+    new_state.rms_extreme_over_voltage_period_phb = jsn.at("RMSExtremeOverVoltagePeriodPhB").get<int16_t>();
         
     new_updated_state.rms_extreme_over_voltage_period_phb = true;
   }
 
   if (jsn.find("RMSExtremeUnderVoltagePeriodPhB") != jsn.end()) {
 
-    new_state.rms_extreme_under_voltage_period_phb = jsn.at("RMSExtremeUnderVoltagePeriodPhB").get<uint16_t>();
+    new_state.rms_extreme_under_voltage_period_phb = jsn.at("RMSExtremeUnderVoltagePeriodPhB").get<int16_t>();
         
     new_updated_state.rms_extreme_under_voltage_period_phb = true;
   }
 
   if (jsn.find("RMSVoltageSagPeriodPhB") != jsn.end()) {
 
-    new_state.rms_voltage_sag_period_phb = jsn.at("RMSVoltageSagPeriodPhB").get<uint16_t>();
+    new_state.rms_voltage_sag_period_phb = jsn.at("RMSVoltageSagPeriodPhB").get<int16_t>();
         
     new_updated_state.rms_voltage_sag_period_phb = true;
   }
 
   if (jsn.find("RMSVoltageSwellPeriodPhB") != jsn.end()) {
 
-    new_state.rms_voltage_swell_period_phb = jsn.at("RMSVoltageSwellPeriodPhB").get<uint16_t>();
+    new_state.rms_voltage_swell_period_phb = jsn.at("RMSVoltageSwellPeriodPhB").get<int16_t>();
         
     new_updated_state.rms_voltage_swell_period_phb = true;
   }
 
   if (jsn.find("AverageRMSVoltageMeasurementPeriodPhC") != jsn.end()) {
 
-    new_state.average_rms_voltage_measurement_period_phc = jsn.at("AverageRMSVoltageMeasurementPeriodPhC").get<uint16_t>();
+    new_state.average_rms_voltage_measurement_period_phc = jsn.at("AverageRMSVoltageMeasurementPeriodPhC").get<int16_t>();
         
     new_updated_state.average_rms_voltage_measurement_period_phc = true;
   }
 
   if (jsn.find("AverageRMSOverVoltageCounterPhC") != jsn.end()) {
 
-    new_state.average_rms_over_voltage_counter_phc = jsn.at("AverageRMSOverVoltageCounterPhC").get<uint16_t>();
+    new_state.average_rms_over_voltage_counter_phc = jsn.at("AverageRMSOverVoltageCounterPhC").get<int16_t>();
         
     new_updated_state.average_rms_over_voltage_counter_phc = true;
   }
 
   if (jsn.find("AverageRMSUnderVoltageCounterPhC") != jsn.end()) {
 
-    new_state.average_rms_under_voltage_counter_phc = jsn.at("AverageRMSUnderVoltageCounterPhC").get<uint16_t>();
+    new_state.average_rms_under_voltage_counter_phc = jsn.at("AverageRMSUnderVoltageCounterPhC").get<int16_t>();
         
     new_updated_state.average_rms_under_voltage_counter_phc = true;
   }
 
   if (jsn.find("RMSExtremeOverVoltagePeriodPhC") != jsn.end()) {
 
-    new_state.rms_extreme_over_voltage_period_phc = jsn.at("RMSExtremeOverVoltagePeriodPhC").get<uint16_t>();
+    new_state.rms_extreme_over_voltage_period_phc = jsn.at("RMSExtremeOverVoltagePeriodPhC").get<int16_t>();
         
     new_updated_state.rms_extreme_over_voltage_period_phc = true;
   }
 
   if (jsn.find("RMSExtremeUnderVoltagePeriodPhC") != jsn.end()) {
 
-    new_state.rms_extreme_under_voltage_period_phc = jsn.at("RMSExtremeUnderVoltagePeriodPhC").get<uint16_t>();
+    new_state.rms_extreme_under_voltage_period_phc = jsn.at("RMSExtremeUnderVoltagePeriodPhC").get<int16_t>();
         
     new_updated_state.rms_extreme_under_voltage_period_phc = true;
   }
 
   if (jsn.find("RMSVoltageSagPeriodPhC") != jsn.end()) {
 
-    new_state.rms_voltage_sag_period_phc = jsn.at("RMSVoltageSagPeriodPhC").get<uint16_t>();
+    new_state.rms_voltage_sag_period_phc = jsn.at("RMSVoltageSagPeriodPhC").get<int16_t>();
         
     new_updated_state.rms_voltage_sag_period_phc = true;
   }
 
   if (jsn.find("RMSVoltageSwellPeriodPhC") != jsn.end()) {
 
-    new_state.rms_voltage_swell_period_phc = jsn.at("RMSVoltageSwellPeriodPhC").get<uint16_t>();
+    new_state.rms_voltage_swell_period_phc = jsn.at("RMSVoltageSwellPeriodPhC").get<int16_t>();
         
     new_updated_state.rms_voltage_swell_period_phc = true;
   }
@@ -13419,13 +13419,13 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
   
   bool &transmission_successful,
   
-  uint16_t &transmission_time_ms,
+  int16_t &transmission_time_ms,
   
   int8_t &tx_powerd_bm,
   
-  uint8_t &tx_channel,
+  int8_t &tx_channel,
   
-  uint8_t &routing_attempts,
+  int8_t &routing_attempts,
   
   bool &route_changed,
   
@@ -13439,7 +13439,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
 
   int8_t &ackrssi,
   
-  uint8_t &ack_channel,
+  int8_t &ack_channel,
   
   std::string &last_route_failed_link_functionalunid,
   
@@ -13482,7 +13482,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
     return;
   }
         
-  transmission_time_ms = jsn.at("TransmissionTimeMs").get< uint16_t >();
+  transmission_time_ms = jsn.at("TransmissionTimeMs").get< int16_t >();
       if (jsn.at("TxPowerdBm").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -13494,13 +13494,13 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
     return;
   }
         
-  tx_channel = jsn.at("TxChannel").get< uint8_t >();
+  tx_channel = jsn.at("TxChannel").get< int8_t >();
       if (jsn.at("RoutingAttempts").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  routing_attempts = jsn.at("RoutingAttempts").get< uint8_t >();
+  routing_attempts = jsn.at("RoutingAttempts").get< int8_t >();
       if (jsn.at("RouteChanged").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -13543,7 +13543,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
     return;
   }
         
-  ack_channel = jsn.at("AckChannel").get< uint8_t >();
+  ack_channel = jsn.at("AckChannel").get< int8_t >();
       if (jsn.at("LastRouteFailedLinkFunctionalUNID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -13774,7 +13774,7 @@ void uic_mqtt_dotdot_parse_binding_bind(
   
   std::string &destination_unid,
   
-  uint8_t &destination_ep
+  int8_t &destination_ep
   
 ) {
 
@@ -13795,7 +13795,7 @@ void uic_mqtt_dotdot_parse_binding_bind(
     return;
   }
         
-  destination_ep = jsn.at("DestinationEp").get< uint8_t >();
+  destination_ep = jsn.at("DestinationEp").get< int8_t >();
     }
 
 
@@ -13836,7 +13836,7 @@ void uic_mqtt_dotdot_parse_binding_unbind(
   
   std::string &destination_unid,
   
-  uint8_t &destination_ep
+  int8_t &destination_ep
   
 ) {
 
@@ -13857,7 +13857,7 @@ void uic_mqtt_dotdot_parse_binding_unbind(
     return;
   }
         
-  destination_ep = jsn.at("DestinationEp").get< uint8_t >();
+  destination_ep = jsn.at("DestinationEp").get< int8_t >();
     }
 
 
@@ -13967,7 +13967,7 @@ void uic_mqtt_dotdot_parse_system_metrics_write_attributes(
 
   if (jsn.find("ReportingIntervalSeconds") != jsn.end()) {
 
-    new_state.reporting_interval_seconds = jsn.at("ReportingIntervalSeconds").get<uint32_t>();
+    new_state.reporting_interval_seconds = jsn.at("ReportingIntervalSeconds").get<int32_t>();
         
     new_updated_state.reporting_interval_seconds = true;
   }
@@ -14102,14 +14102,14 @@ void uic_mqtt_dotdot_parse_application_monitoring_write_attributes(
 
   if (jsn.find("MQTTStatisticsReportingIntervalSeconds") != jsn.end()) {
 
-    new_state.mqtt_statistics_reporting_interval_seconds = jsn.at("MQTTStatisticsReportingIntervalSeconds").get<uint32_t>();
+    new_state.mqtt_statistics_reporting_interval_seconds = jsn.at("MQTTStatisticsReportingIntervalSeconds").get<int32_t>();
         
     new_updated_state.mqtt_statistics_reporting_interval_seconds = true;
   }
 
   if (jsn.find("ApplicationStatisticsReportingIntervalSeconds") != jsn.end()) {
 
-    new_state.application_statistics_reporting_interval_seconds = jsn.at("ApplicationStatisticsReportingIntervalSeconds").get<uint32_t>();
+    new_state.application_statistics_reporting_interval_seconds = jsn.at("ApplicationStatisticsReportingIntervalSeconds").get<int32_t>();
         
     new_updated_state.application_statistics_reporting_interval_seconds = true;
   }
@@ -14173,7 +14173,7 @@ std::string get_json_payload_for_configuration_parameters_discover_parameter_com
 
 void uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter(
   nlohmann::json &jsn,
-  uint16_t &parameter_id
+  int16_t &parameter_id
   
 ) {
 
@@ -14182,7 +14182,7 @@ void uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter(
     return;
   }
         
-  parameter_id = jsn.at("ParameterId").get< uint16_t >();
+  parameter_id = jsn.at("ParameterId").get< int16_t >();
     }
 
 
@@ -14234,7 +14234,7 @@ std::string get_json_payload_for_configuration_parameters_set_parameter_command(
 
 void uic_mqtt_dotdot_parse_configuration_parameters_set_parameter(
   nlohmann::json &jsn,
-  uint16_t &parameter_id,
+  int16_t &parameter_id,
   
   int64_t &value
   
@@ -14245,7 +14245,7 @@ void uic_mqtt_dotdot_parse_configuration_parameters_set_parameter(
     return;
   }
         
-  parameter_id = jsn.at("ParameterId").get< uint16_t >();
+  parameter_id = jsn.at("ParameterId").get< int16_t >();
       if (jsn.at("Value").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -14284,9 +14284,9 @@ std::string get_json_payload_for_configuration_parameters_discover_parameter_ran
 
 void uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter_range(
   nlohmann::json &jsn,
-  uint16_t &first_parameter_id,
+  int16_t &first_parameter_id,
   
-  uint16_t &last_parameter_id
+  int16_t &last_parameter_id
   
 ) {
 
@@ -14295,13 +14295,13 @@ void uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter_range(
     return;
   }
         
-  first_parameter_id = jsn.at("FirstParameterId").get< uint16_t >();
+  first_parameter_id = jsn.at("FirstParameterId").get< int16_t >();
       if (jsn.at("LastParameterId").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  last_parameter_id = jsn.at("LastParameterId").get< uint16_t >();
+  last_parameter_id = jsn.at("LastParameterId").get< int16_t >();
     }
 
 
@@ -14314,6 +14314,1299 @@ void uic_mqtt_dotdot_parse_configuration_parameters_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_configuration_parameters_state_t &new_state,
   uic_mqtt_dotdot_configuration_parameters_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
+std::string get_json_payload_for_user_credential_add_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddUser / UserType
+  #ifdef ADD_USER_USER_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserType"] =
+    add_user_user_type_get_enum_value_name(
+      (uint32_t)fields->user_type);
+  #elif defined(USER_TYPE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    user_type_enum_get_enum_value_name((uint32_t)fields->user_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserType"] = fields->user_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserActiveState"] = nlohmann::json(fields->user_active_state);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddUser / CredentialRule
+  #ifdef ADD_USER_CREDENTIAL_RULE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialRule"] =
+    add_user_credential_rule_get_enum_value_name(
+      (uint32_t)fields->credential_rule);
+  #elif defined(CRED_RULE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialRule"] =
+    cred_rule_get_enum_value_name((uint32_t)fields->credential_rule);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialRule"] = fields->credential_rule;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserName"] = nlohmann::json(fields->user_name);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["ExpiringTimeoutMinutes"] = nlohmann::json(fields->expiring_timeout_minutes);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddUser / UserNameEncoding
+  #ifdef ADD_USER_USER_NAME_ENCODING_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserNameEncoding"] =
+    add_user_user_name_encoding_get_enum_value_name(
+      (uint32_t)fields->user_name_encoding);
+  #elif defined(USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserNameEncoding"] =
+    user_name_encoding_type_get_enum_value_name((uint32_t)fields->user_name_encoding);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserNameEncoding"] = fields->user_name_encoding;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_add_user(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  UserTypeEnum &user_type,
+  
+  bool &user_active_state,
+  
+  CredRule &credential_rule,
+  
+  std::string &user_name,
+  
+  int16_t &expiring_timeout_minutes,
+  
+  UserNameEncodingType &user_name_encoding
+  
+) {
+
+  uint32_t UserType_enum_val = get_enum_decimal_value<UserTypeEnum>("UserType", jsn);
+  if (UserType_enum_val == std::numeric_limits<UserTypeEnum>::max()) {
+    #ifdef USER_TYPE_ENUM_ENUM_NAME_AVAILABLE
+    UserType_enum_val = user_type_enum_get_enum_value_number(jsn.at("UserType").get<std::string>());
+    #endif
+  }
+  uint32_t CredentialRule_enum_val = get_enum_decimal_value<CredRule>("CredentialRule", jsn);
+  if (CredentialRule_enum_val == std::numeric_limits<CredRule>::max()) {
+    #ifdef CRED_RULE_ENUM_NAME_AVAILABLE
+    CredentialRule_enum_val = cred_rule_get_enum_value_number(jsn.at("CredentialRule").get<std::string>());
+    #endif
+  }
+  uint32_t UserNameEncoding_enum_val = get_enum_decimal_value<UserNameEncodingType>("UserNameEncoding", jsn);
+  if (UserNameEncoding_enum_val == std::numeric_limits<UserNameEncodingType>::max()) {
+    #ifdef USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE
+    UserNameEncoding_enum_val = user_name_encoding_type_get_enum_value_number(jsn.at("UserNameEncoding").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("UserType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_type = static_cast<UserTypeEnum>(UserType_enum_val);
+  if (jsn.at("UserActiveState").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_active_state = jsn.at("UserActiveState").get< bool >();
+      if (jsn.at("CredentialRule").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_rule = static_cast<CredRule>(CredentialRule_enum_val);
+  if (jsn.at("UserName").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  user_name = jsn.at("UserName").get<std::string>();
+            if (jsn.at("ExpiringTimeoutMinutes").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  expiring_timeout_minutes = jsn.at("ExpiringTimeoutMinutes").get< int16_t >();
+      if (jsn.at("UserNameEncoding").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_name_encoding = static_cast<UserNameEncodingType>(UserNameEncoding_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_modify_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyUser / UserType
+  #ifdef MODIFY_USER_USER_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserType"] =
+    modify_user_user_type_get_enum_value_name(
+      (uint32_t)fields->user_type);
+  #elif defined(USER_TYPE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    user_type_enum_get_enum_value_name((uint32_t)fields->user_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserType"] = fields->user_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserActiveState"] = nlohmann::json(fields->user_active_state);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyUser / CredentialRule
+  #ifdef MODIFY_USER_CREDENTIAL_RULE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialRule"] =
+    modify_user_credential_rule_get_enum_value_name(
+      (uint32_t)fields->credential_rule);
+  #elif defined(CRED_RULE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialRule"] =
+    cred_rule_get_enum_value_name((uint32_t)fields->credential_rule);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialRule"] = fields->credential_rule;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserName"] = nlohmann::json(fields->user_name);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["ExpiringTimeoutMinutes"] = nlohmann::json(fields->expiring_timeout_minutes);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyUser / UserNameEncoding
+  #ifdef MODIFY_USER_USER_NAME_ENCODING_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserNameEncoding"] =
+    modify_user_user_name_encoding_get_enum_value_name(
+      (uint32_t)fields->user_name_encoding);
+  #elif defined(USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserNameEncoding"] =
+    user_name_encoding_type_get_enum_value_name((uint32_t)fields->user_name_encoding);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserNameEncoding"] = fields->user_name_encoding;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_modify_user(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  UserTypeEnum &user_type,
+  
+  bool &user_active_state,
+  
+  CredRule &credential_rule,
+  
+  std::string &user_name,
+  
+  int16_t &expiring_timeout_minutes,
+  
+  UserNameEncodingType &user_name_encoding
+  
+) {
+
+  uint32_t UserType_enum_val = get_enum_decimal_value<UserTypeEnum>("UserType", jsn);
+  if (UserType_enum_val == std::numeric_limits<UserTypeEnum>::max()) {
+    #ifdef USER_TYPE_ENUM_ENUM_NAME_AVAILABLE
+    UserType_enum_val = user_type_enum_get_enum_value_number(jsn.at("UserType").get<std::string>());
+    #endif
+  }
+  uint32_t CredentialRule_enum_val = get_enum_decimal_value<CredRule>("CredentialRule", jsn);
+  if (CredentialRule_enum_val == std::numeric_limits<CredRule>::max()) {
+    #ifdef CRED_RULE_ENUM_NAME_AVAILABLE
+    CredentialRule_enum_val = cred_rule_get_enum_value_number(jsn.at("CredentialRule").get<std::string>());
+    #endif
+  }
+  uint32_t UserNameEncoding_enum_val = get_enum_decimal_value<UserNameEncodingType>("UserNameEncoding", jsn);
+  if (UserNameEncoding_enum_val == std::numeric_limits<UserNameEncodingType>::max()) {
+    #ifdef USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE
+    UserNameEncoding_enum_val = user_name_encoding_type_get_enum_value_number(jsn.at("UserNameEncoding").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("UserType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_type = static_cast<UserTypeEnum>(UserType_enum_val);
+  if (jsn.at("UserActiveState").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_active_state = jsn.at("UserActiveState").get< bool >();
+      if (jsn.at("CredentialRule").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_rule = static_cast<CredRule>(CredentialRule_enum_val);
+  if (jsn.at("UserName").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  user_name = jsn.at("UserName").get<std::string>();
+            if (jsn.at("ExpiringTimeoutMinutes").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  expiring_timeout_minutes = jsn.at("ExpiringTimeoutMinutes").get< int16_t >();
+      if (jsn.at("UserNameEncoding").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_name_encoding = static_cast<UserNameEncodingType>(UserNameEncoding_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_delete_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_user(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid
+  
+) {
+
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_add_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddCredential / CredentialType
+  #ifdef ADD_CREDENTIAL_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    add_credential_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialData"] = nlohmann::json(fields->credential_data);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_add_credential(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  int16_t &credential_slot,
+  
+  std::string &credential_data
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< int16_t >();
+      if (jsn.at("CredentialData").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  credential_data = jsn.at("CredentialData").get<std::string>();
+          }
+
+
+std::string get_json_payload_for_user_credential_modify_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyCredential / CredentialType
+  #ifdef MODIFY_CREDENTIAL_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    modify_credential_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialData"] = nlohmann::json(fields->credential_data);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_modify_credential(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  int16_t &credential_slot,
+  
+  std::string &credential_data
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< int16_t >();
+      if (jsn.at("CredentialData").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  credential_data = jsn.at("CredentialData").get<std::string>();
+          }
+
+
+std::string get_json_payload_for_user_credential_delete_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum DeleteCredential / CredentialType
+  #ifdef DELETE_CREDENTIAL_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    delete_credential_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_credential(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  int16_t &credential_slot
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< int16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_delete_all_users_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_by_type_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum DeleteAllCredentialsByType / CredentialType
+  #ifdef DELETE_ALL_CREDENTIALS_BY_TYPE_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    delete_all_credentials_by_type_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_by_type(
+  nlohmann::json &jsn,
+  CredType &credential_type
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_for_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid
+  
+) {
+
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_for_user_by_type_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum DeleteAllCredentialsForUserByType / CredentialType
+  #ifdef DELETE_ALL_CREDENTIALS_FOR_USER_BY_TYPE_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    delete_all_credentials_for_user_by_type_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user_by_type(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  CredType &credential_type
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_credential_learn_start_add_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum CredentialLearnStartAdd / CredentialType
+  #ifdef CREDENTIAL_LEARN_START_ADD_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    credential_learn_start_add_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialLearnTimeout"] = nlohmann::json(fields->credential_learn_timeout);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_credential_learn_start_add(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  int16_t &credential_slot,
+  
+  int8_t &credential_learn_timeout
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< int16_t >();
+      if (jsn.at("CredentialLearnTimeout").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_learn_timeout = jsn.at("CredentialLearnTimeout").get< int8_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_credential_learn_start_modify_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum CredentialLearnStartModify / CredentialType
+  #ifdef CREDENTIAL_LEARN_START_MODIFY_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    credential_learn_start_modify_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialLearnTimeout"] = nlohmann::json(fields->credential_learn_timeout);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_credential_learn_start_modify(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  int16_t &credential_slot,
+  
+  int8_t &credential_learn_timeout
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< int16_t >();
+      if (jsn.at("CredentialLearnTimeout").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_learn_timeout = jsn.at("CredentialLearnTimeout").get< int8_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_credential_learn_stop_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_credential_association_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum CredentialAssociation / CredentialType
+  #ifdef CREDENTIAL_ASSOCIATION_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    credential_association_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["SourceUserUniqueID"] = nlohmann::json(fields->source_user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["SourceCredentialSlot"] = nlohmann::json(fields->source_credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["DestinationUserUniqueID"] = nlohmann::json(fields->destination_user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["DestinationCredentialSlot"] = nlohmann::json(fields->destination_credential_slot);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_credential_association(
+  nlohmann::json &jsn,
+  CredType &credential_type,
+  
+  int16_t &source_user_uniqueid,
+  
+  int16_t &source_credential_slot,
+  
+  int16_t &destination_user_uniqueid,
+  
+  int16_t &destination_credential_slot
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("SourceUserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  source_user_uniqueid = jsn.at("SourceUserUniqueID").get< int16_t >();
+      if (jsn.at("SourceCredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  source_credential_slot = jsn.at("SourceCredentialSlot").get< int16_t >();
+      if (jsn.at("DestinationUserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  destination_user_uniqueid = jsn.at("DestinationUserUniqueID").get< int16_t >();
+      if (jsn.at("DestinationCredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  destination_credential_slot = jsn.at("DestinationCredentialSlot").get< int16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_get_user_checksum_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_get_user_checksum(
+  nlohmann::json &jsn,
+  int16_t &user_uniqueid
+  
+) {
+
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< int16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_get_credential_checksum_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum GetCredentialChecksum / CredentialType
+  #ifdef GET_CREDENTIAL_CHECKSUM_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    get_credential_checksum_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_get_credential_checksum(
+  nlohmann::json &jsn,
+  CredType &credential_type
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_get_all_users_checksum_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_set_admin_pin_code_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["PINCode"] = nlohmann::json(fields->pin_code);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_set_admin_pin_code(
+  nlohmann::json &jsn,
+  std::string &pin_code
+  
+) {
+
+  if (jsn.at("PINCode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  pin_code = jsn.at("PINCode").get<std::string>();
+          }
+
+
+std::string get_json_payload_for_user_credential_deactivate_admin_pin_code_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_user_credential_state_t &new_state,
+  uic_mqtt_dotdot_user_credential_updated_state_t &new_updated_state
 ) {
 
 
@@ -14611,9 +15904,9 @@ void uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
   nlohmann::json &jsn,
   SetpointType &type,
   
-  uint8_t &precision,
+  int8_t &precision,
   
-  uint8_t &scale,
+  int8_t &scale,
   
   int32_t &value
   
@@ -14635,13 +15928,13 @@ void uic_mqtt_dotdot_parse_unify_humidity_control_setpoint_set(
     return;
   }
         
-  precision = jsn.at("Precision").get< uint8_t >();
+  precision = jsn.at("Precision").get< int8_t >();
       if (jsn.at("Scale").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  scale = jsn.at("Scale").get< uint8_t >();
+  scale = jsn.at("Scale").get< int8_t >();
       if (jsn.at("Value").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;

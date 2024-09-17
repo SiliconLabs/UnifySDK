@@ -216,6 +216,20 @@ char *commissioning_startup_control_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get commissioning_startup_control enum representation from string. */
 uint32_t commissioning_startup_control_get_enum_value_number_c(const char *str);
+#define CRED_RULE_ENUM_NAME_AVAILABLE 1
+
+/** Get cred_rule string representation from enum. */
+char *cred_rule_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get cred_rule enum representation from string. */
+uint32_t cred_rule_get_enum_value_number_c(const char *str);
+#define CRED_TYPE_ENUM_NAME_AVAILABLE 1
+
+/** Get cred_type string representation from enum. */
+char *cred_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get cred_type enum representation from string. */
+uint32_t cred_type_get_enum_value_number_c(const char *str);
 #define CREDENTIAL_RULE_ENUM_ENUM_NAME_AVAILABLE 1
 
 /** Get credential_rule_enum string representation from enum. */
@@ -860,6 +874,27 @@ char *unify_thermostat_thermostat_mode_get_enum_value_name_c(
   uint32_t value, char *result, size_t max_result_size);
 /** Get unify_thermostat_thermostat_mode enum representation from string. */
 uint32_t unify_thermostat_thermostat_mode_get_enum_value_number_c(const char *str);
+#define USER_MODIFIER_TYPE_ENUM_NAME_AVAILABLE 1
+
+/** Get user_modifier_type string representation from enum. */
+char *user_modifier_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get user_modifier_type enum representation from string. */
+uint32_t user_modifier_type_get_enum_value_number_c(const char *str);
+#define USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE 1
+
+/** Get user_name_encoding_type string representation from enum. */
+char *user_name_encoding_type_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get user_name_encoding_type enum representation from string. */
+uint32_t user_name_encoding_type_get_enum_value_number_c(const char *str);
+#define USER_TYPE_ENUM_ENUM_NAME_AVAILABLE 1
+
+/** Get user_type_enum string representation from enum. */
+char *user_type_enum_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get user_type_enum enum representation from string. */
+uint32_t user_type_enum_get_enum_value_number_c(const char *str);
 #define WINDOW_COVERING_WINDOW_COVERING_TYPE_ENUM_NAME_AVAILABLE 1
 
 /** Get window_covering_window_covering_type string representation from enum. */
