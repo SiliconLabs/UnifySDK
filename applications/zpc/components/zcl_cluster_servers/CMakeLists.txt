@@ -9,6 +9,7 @@ add_library(
   zcl_cluster_servers
   src/configuration_parameter_cluster_server.cpp
   src/humidity_control_cluster_server.c
+  src/user_credential_cluster_server.cpp
   src/user_code_cluster_server.cpp
   src/fan_control_cluster_server.c
   src/zcl_binding_cluster_server.cpp

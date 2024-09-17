@@ -132,6 +132,9 @@ if(BUILD_TESTING)
   # Mocks
   target_add_mock(zwave_command_classes)
 
+  add_mock(zwave_command_class_notification_mock src/zwave_command_class_notification.h)
+  target_interface_libraries(zwave_command_class_notification_mock zpc_utils zwave_command_handler)
+
   # Unit test subdirectory
   add_subdirectory(test)
 endif()

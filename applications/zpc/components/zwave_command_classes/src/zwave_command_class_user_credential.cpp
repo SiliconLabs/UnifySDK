@@ -16,9 +16,10 @@
 #include <cstdlib>
 
 #include "zwave_command_class_user_credential.h"
-#include "zwave_command_class_user_credential_types.h"
 #include "zwave_command_classes_utils.h"
 #include "ZW_classcmd.h"
+
+#include "zwave_command_class_notification.h"
 
 // Includes from other ZPC Components
 #include "zwave_command_class_indices.h"
@@ -40,6 +41,12 @@
 // Cpp related
 #include <vector>
 #include <string>
+#include <map>
+
+// UTF16 conversion (deprecated in C++17)
+// Needed for credential data (password) per specification
+#include <locale>
+#include <codecvt>
 
 // Macro
 #define LOG_TAG         "zwave_command_class_user_credential"
@@ -127,9 +134,53 @@ std::string get_string_value(const uint8_t *frame_data,
   return value;
 }
 
+///////////////////////////////////////////////////////////////////////
+// Mics helpers
+///////////////////////////////////////////////////////////////////////
+std::u16string utf8_to_utf16(const std::string &utf8)
+{
+  std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> cnv;
+  std::u16string s = cnv.from_bytes(utf8);
+  if (cnv.converted() < utf8.size())
+    throw std::runtime_error("incomplete conversion");
+  return s;
+}
+
 /////////////////////////////////////////////////////////////////////////////
 // Command Class Helper
 /////////////////////////////////////////////////////////////////////////////
+
+void set_operation_type(attribute_store_node_t node,
+                        attribute_store_type_t operation_type_node_type,
+                        user_credential_operation_type_t operation_type)
+{
+  auto operation_type_node
+    = attribute_store_get_node_child_by_type(node, operation_type_node_type, 0);
+
+  if (!attribute_store_node_exists(operation_type_node)) {
+    operation_type_node
+      = attribute_store_add_node(operation_type_node_type, node);
+  }
+  // Undefine reported to be sure that we can so the same operation twice in a row
+  attribute_store_undefine_reported(operation_type_node);
+  attribute_store_set_desired(operation_type_node,
+                              &operation_type,
+                              sizeof(operation_type));
+}
+void set_user_operation_type(attribute_store_node_t user_node,
+                             user_credential_operation_type_t operation_type)
+{
+  set_operation_type(user_node, ATTRIBUTE(USER_OPERATION_TYPE), operation_type);
+}
+
+void set_credential_operation_type(
+  attribute_store_node_t slot_node,
+  user_credential_operation_type_t operation_type)
+{
+  set_operation_type(slot_node,
+                     ATTRIBUTE(CREDENTIAL_OPERATION_TYPE),
+                     operation_type);
+}
 
 /**
  * @brief Get user id node 
@@ -193,7 +244,7 @@ attribute_store_node_t
  */
 attribute_store_node_t
   get_desired_user_id_node(attribute_store_node_t endpoint_node,
-                            user_credential_user_unique_id_t user_id)
+                           user_credential_user_unique_id_t user_id)
 {
   attribute_store_node_t user_id_node;
   get_user_id_node(endpoint_node, user_id, DESIRED_ATTRIBUTE, user_id_node);
@@ -472,6 +523,634 @@ sl_status_t
   return SL_STATUS_OK;
 }
 
+/**
+ * @brief Updates the desired values of attributes in the attribute store.
+ *
+ * This function takes a map of attribute values and their corresponding sizes, and updates the desired values
+ * of the attributes in the attribute store. 
+ * The attribute store is updated for the specified parent node.
+ *
+ * @param attribute_map_values A map containing the attribute values and their sizes.
+ * @param parent_node The parent node of values that will be updated
+ * 
+ * @return SL_STATUS_OK if the desired values were updated successfully, an otherwise an error code.
+ */
+sl_status_t update_desired_values(
+  attribute_store_node_t parent_node,
+  std::map<attribute_store_type_t, std::pair<const void *, uint8_t>>
+    attribute_map_values)
+{
+  sl_status_t status = SL_STATUS_OK;
+  for (auto &attr: attribute_map_values) {
+    auto value      = attr.second.first;
+    auto value_size = attr.second.second;
+
+    if (attribute_store_get_storage_type(attr.first) == C_STRING_STORAGE_TYPE) {
+      auto str_attribute_node
+        = attribute_store_get_node_child_by_type(parent_node, attr.first, 0);
+      auto value_str = static_cast<const char *>(value);
+      sl_log_debug(LOG_TAG,
+                   "Update desired value of %s to %s",
+                   attribute_store_get_type_name(attr.first),
+                   value_str);
+      status
+        |= attribute_store_set_desired_string(str_attribute_node, value_str);
+    } else {
+      sl_log_debug(LOG_TAG,
+                   "Update desired value of %s",
+                   attribute_store_get_type_name(attr.first));
+      status |= attribute_store_set_child_desired(parent_node,
+                                                  attr.first,
+                                                  value,
+                                                  value_size);
+    }
+
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Error while setting desired value of %s",
+                   attribute_store_get_type_name(attr.first));
+    }
+  }
+
+  return status;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Notification callback
+/////////////////////////////////////////////////////////////////////////////
+
+namespace notification_handler
+{
+namespace user
+{
+// Indexes
+// User Notification Report Frame
+constexpr uint8_t INDEX_USER_MODIFIER_TYPE            = 2;
+constexpr uint8_t INDEX_USER_MODIFIER_NODE_ID         = 3;
+constexpr uint8_t INDEX_USER_UNIQUE_ID                = 5;
+constexpr uint8_t INDEX_USER_TYPE                     = 7;
+constexpr uint8_t INDEX_USER_ACTIVE_STATE             = 8;
+constexpr uint8_t INDEX_USER_CREDENTIAL_RULE          = 9;
+constexpr uint8_t INDEX_USER_EXPIRING_TIMEOUT_MINUTES = 10;
+constexpr uint8_t USER_NOTIFICATION_REPORT_FRAME_LENGTH
+  = INDEX_USER_EXPIRING_TIMEOUT_MINUTES + 2;
+
+// Constains the indexes mapped of the User Notification Report
+const std::vector<user_field_data> user_notification_report_data
+  = {{ATTRIBUTE(USER_MODIFIER_TYPE), INDEX_USER_MODIFIER_TYPE},
+     {ATTRIBUTE(USER_MODIFIER_NODE_ID), INDEX_USER_MODIFIER_NODE_ID},
+     {ATTRIBUTE(USER_TYPE), INDEX_USER_TYPE},
+     {ATTRIBUTE(USER_ACTIVE_STATE),
+      INDEX_USER_ACTIVE_STATE,
+      USER_REPORT_PROPERTIES1_USER_ACTIVE_STATE_BIT_MASK},
+     {ATTRIBUTE(CREDENTIAL_RULE), INDEX_USER_CREDENTIAL_RULE},
+     {ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES),
+      INDEX_USER_EXPIRING_TIMEOUT_MINUTES}};
+
+// Contains all the user data attributes
+const std::vector<attribute_store_type_t> user_data_attribute_types
+  = {ATTRIBUTE(USER_MODIFIER_TYPE),
+     ATTRIBUTE(USER_MODIFIER_NODE_ID),
+     ATTRIBUTE(USER_TYPE),
+     ATTRIBUTE(USER_ACTIVE_STATE),
+     ATTRIBUTE(CREDENTIAL_RULE),
+     ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES),
+     ATTRIBUTE(USER_NAME_ENCODING),
+     ATTRIBUTE(USER_NAME)};
+
+user_credential_user_unique_id_t get_user_id(const uint8_t *event_parameters)
+{
+  return get_uint16_value(event_parameters, INDEX_USER_UNIQUE_ID);
+}
+
+user_credential_user_modifier_type_t
+  get_user_modifier_type(const uint8_t *event_parameters)
+{
+  return event_parameters[INDEX_USER_MODIFIER_TYPE];
+}
+// Get user node reported in the notification parameters
+attribute_store_node_t get_user_node(attribute_store_node_t endpoint_node,
+                                     const uint8_t *event_parameters,
+                                     attribute_store_node_value_state_t state)
+{
+  user_credential_user_unique_id_t user_id
+    = get_uint16_value(event_parameters, INDEX_USER_UNIQUE_ID);
+
+  attribute_store_node_t user_node
+    = (state == REPORTED_ATTRIBUTE)
+        ? get_reported_user_id_node(endpoint_node, user_id)
+        : get_desired_user_id_node(endpoint_node, user_id);
+
+  if (user_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    sl_log_debug(LOG_TAG,
+                 "Can't find user %d present in Notification Parameters",
+                 user_id);
+  }
+  return user_node;
+}
+
+void update_user_reported_values(attribute_store_node_t user_id_node,
+                                 const uint8_t *event_parameters)
+{
+  sl_status_t set_status
+    = set_reported_attributes(user_id_node,
+                              event_parameters,
+                              user_notification_report_data);
+
+  if (set_status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, "Error while setting reported attributes");
+  }
+
+  // Those are not present in the User Notification command, we assume they stay the same
+  // FIXME: https://github.com/Z-Wave-Alliance/AWG/issues/168
+  auto user_name_encoding_node
+    = attribute_store_get_node_child_by_type(user_id_node,
+                                             ATTRIBUTE(USER_NAME_ENCODING),
+                                             0);
+  attribute_store_set_reported_as_desired(user_name_encoding_node);
+  auto user_name_node
+    = attribute_store_get_node_child_by_type(user_id_node,
+                                             ATTRIBUTE(USER_NAME),
+                                             0);
+  attribute_store_set_reported_as_desired(user_name_node);
+};
+
+bool is_report_size_conform(uint8_t event_parameters_length)
+{
+  if (event_parameters_length != USER_NOTIFICATION_REPORT_FRAME_LENGTH) {
+    sl_log_error(LOG_TAG, "Invalid User Notification Report size");
+    return false;
+  }
+  return true;
+};
+
+}  // namespace user
+
+namespace credential
+{
+// Indexes
+// Credential Notification Report Frame
+constexpr uint8_t INDEX_USER_UNIQUE_ID    = 0;
+constexpr uint8_t INDEX_CREDENTIAL_TYPE   = 2;
+constexpr uint8_t INDEX_CREDENTIAL_SLOT   = 3;
+constexpr uint8_t INDEX_CREDENTIAL_CRB    = 5;
+constexpr uint8_t INDEX_CREDENTIAL_LENGTH = 6;
+constexpr uint8_t INDEX_CREDENTIAL_DATA   = 7;
+constexpr uint8_t CREDENTIAL_NOTIFICATION_REPORT_MIN_FRAME_LENGTH
+  = INDEX_CREDENTIAL_DATA + 3;
+
+user_credential_type_t get_credential_type(const uint8_t *event_parameters)
+{
+  return event_parameters[INDEX_CREDENTIAL_TYPE];
+}
+
+user_credential_slot_t get_credential_slot(const uint8_t *event_parameters)
+{
+  return get_uint16_value(event_parameters, INDEX_CREDENTIAL_SLOT);
+}
+user_credential_user_unique_id_t get_user_id(const uint8_t *event_parameters)
+{
+  return get_uint16_value(event_parameters, INDEX_USER_UNIQUE_ID);
+}
+
+attribute_store_node_t
+  get_credential_type_node(attribute_store_node_t endpoint_node,
+                           const uint8_t *event_parameters,
+                           attribute_store_node_value_state_t state)
+{
+  user_credential_user_unique_id_t user_id
+    = get_uint16_value(event_parameters, INDEX_USER_UNIQUE_ID);
+  user_credential_type_t credential_type
+    = get_credential_type(event_parameters);
+
+  attribute_store_node_t credential_type_node = ATTRIBUTE_STORE_INVALID_NODE;
+  bool credential_type_node_found
+    = get_credential_type_node(endpoint_node,
+                               user_id,
+                               credential_type,
+                               state,
+                               credential_type_node);
+  if (!credential_type_node_found) {
+    sl_log_debug(
+      LOG_TAG,
+      "Can't find credential type %d present in Notification Parameters",
+      credential_type);
+  }
+
+  return credential_type_node;
+}
+
+attribute_store_node_t
+  get_credential_slot_node(attribute_store_node_t credential_type_node,
+                           const uint8_t *event_parameters,
+                           attribute_store_node_value_state_t state)
+{
+  attribute_store_node_t credential_slot_node = ATTRIBUTE_STORE_INVALID_NODE;
+
+  user_credential_slot_t credential_slot
+    = get_credential_slot(event_parameters);
+
+  bool credential_slot_node_found
+    = get_credential_slot_node(credential_type_node,
+                               credential_slot,
+                               state,
+                               credential_slot_node);
+  if (!credential_slot_node_found) {
+    sl_log_debug(
+      LOG_TAG,
+      "Can't find credential slot %d present in Notification Parameters",
+      credential_slot);
+  }
+  return credential_slot_node;
+}
+
+bool is_report_size_conform(uint8_t event_parameters_length)
+{
+  if (event_parameters_length
+      < CREDENTIAL_NOTIFICATION_REPORT_MIN_FRAME_LENGTH) {
+    sl_log_error(LOG_TAG, "Invalid Credential Notification Report size");
+    return false;
+  }
+
+  return true;
+};
+
+void update_credential_reported_values(
+  attribute_store_node_t credential_slot_node, const uint8_t *event_parameters)
+{
+  const uint8_t credential_length = event_parameters[INDEX_CREDENTIAL_LENGTH];
+  const uint8_t INDEX_CREDENTIAL_MODIFIER_TYPE
+    = INDEX_CREDENTIAL_DATA + credential_length;
+  const uint8_t INDEX_CREDENTIAL_MODIFIER_NODE_ID
+    = INDEX_CREDENTIAL_MODIFIER_TYPE + 1;
+
+  // Set standard (uint8 & uint16) data
+  std::vector<user_field_data> user_data = {
+    {ATTRIBUTE(CREDENTIAL_READ_BACK),
+     INDEX_CREDENTIAL_CRB,
+     CREDENTIAL_REPORT_PROPERTIES1_CRB_BIT_MASK,
+     7},
+    {ATTRIBUTE(CREDENTIAL_MODIFIER_TYPE), INDEX_CREDENTIAL_MODIFIER_TYPE},
+    {ATTRIBUTE(CREDENTIAL_MODIFIER_NODE_ID), INDEX_CREDENTIAL_MODIFIER_NODE_ID},
+    {ATTRIBUTE(CREDENTIAL_DATA_LENGTH), INDEX_CREDENTIAL_LENGTH},
+  };
+
+  sl_status_t status = set_reported_attributes(credential_slot_node,
+                                               event_parameters,
+                                               user_data);
+
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, "Error while setting reported attributes");
+    return;
+  }
+
+  auto credential_data_length_node = attribute_store_get_first_child_by_type(
+    credential_slot_node,
+    ATTRIBUTE(CREDENTIAL_DATA_LENGTH));
+  auto credential_data_node
+    = attribute_store_get_first_child_by_type(credential_data_length_node,
+                                              ATTRIBUTE(CREDENTIAL_DATA));
+
+  status
+    = attribute_store_set_reported(credential_data_node,
+                                   &event_parameters[INDEX_CREDENTIAL_DATA],
+                                   credential_length);
+
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, "Can't set CREDENTIAL_DATA in attribute store");
+    return;
+  }
+  attribute_store_undefine_desired(credential_data_node);
+};
+
+}  // namespace credential
+}  // namespace notification_handler
+
+void on_notification_event(attribute_store_node_t endpoint_node,
+                           uint8_t notification_type,
+                           uint8_t event_code,
+                           const uint8_t *event_parameters,
+                           uint8_t event_parameters_length)
+{
+  // We don't care about anything else than access control
+  if (notification_type != NOTIFICATION_ACCESS_CONTROL) {
+    return;
+  }
+
+  auto get_credential_slot_node_by_type = [&]() {
+    user_credential_type_t credential_type
+      = notification_handler::credential::get_credential_type(event_parameters);
+    user_credential_slot_t credential_slot
+      = notification_handler::credential::get_credential_slot(event_parameters);
+    user_credential_user_unique_id_t user_id
+      = notification_handler::credential::get_user_id(event_parameters);
+
+    // Credential type node
+    attribute_store_node_t credential_type_node
+      = notification_handler::credential::get_credential_type_node(
+        endpoint_node,
+        event_parameters,
+        REPORTED_ATTRIBUTE);
+
+    if (!attribute_store_node_exists(credential_type_node)) {
+      sl_log_error(LOG_TAG,
+                   "Didn't find credential type %d (user %d).",
+                   credential_type,
+                   user_id);
+      return ATTRIBUTE_STORE_INVALID_NODE;
+    }
+
+    attribute_store_node_t credential_slot_node
+      = notification_handler::credential::get_credential_slot_node(
+        credential_type_node,
+        event_parameters,
+        REPORTED_ATTRIBUTE);
+
+    if (!attribute_store_node_exists(credential_slot_node)) {
+      sl_log_error(LOG_TAG,
+                   "Didn't find credential slot %d for credential type %d "
+                   "(user %d).",
+                   credential_slot,
+                   credential_type,
+                   user_id);
+      return ATTRIBUTE_STORE_INVALID_NODE;
+    }
+
+    return credential_slot_node;
+  };
+
+  // Logic
+  switch (event_code) {
+    // User unchanged
+    case 0x2A: {
+      sl_log_debug(LOG_TAG, "Notification : User Unchanged");
+      if (!notification_handler::user::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+      user_credential_user_unique_id_t user_id
+        = notification_handler::user::get_user_id(event_parameters);
+
+      attribute_store_node_t user_id_node
+        = notification_handler::user::get_user_node(endpoint_node,
+                                                    event_parameters,
+                                                    REPORTED_ATTRIBUTE);
+      if (!attribute_store_node_exists(user_id_node)) {
+        // Check desired value in case the Add operation didn't work
+        user_id_node
+          = notification_handler::user::get_user_node(endpoint_node,
+                                                      event_parameters,
+                                                      DESIRED_ATTRIBUTE);
+
+        // If still not exists we return an error
+        if (!attribute_store_node_exists(user_id_node)) {
+          sl_log_error(LOG_TAG, "Didn't find user ID %d.", user_id);
+          return;
+        }
+      }
+
+      // If user doesn't exists in the device we try to remove it also from our side
+      user_credential_user_modifier_type_t modifier_type
+        = notification_handler::user::get_user_modifier_type(event_parameters);
+      if (modifier_type == USER_REPORT_DNE) {
+        attribute_store_delete_node(user_id_node);
+      } else {
+        sl_log_info(LOG_TAG, "User Unchanged, clearing desired values.");
+
+        for (auto &user_data_type:
+             notification_handler::user::user_data_attribute_types) {
+          attribute_store_undefine_desired(
+            attribute_store_get_node_child_by_type(user_id_node,
+                                                   user_data_type,
+                                                   0));
+        }
+      }
+    } break;
+    // User Added
+    case 0x27: {
+      sl_log_debug(LOG_TAG, "Notification : User Added");
+
+      if (!notification_handler::user::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+      // User node
+      attribute_store_node_t user_id_node
+        = notification_handler::user::get_user_node(endpoint_node,
+                                                    event_parameters,
+                                                    DESIRED_ATTRIBUTE);
+      user_credential_user_unique_id_t user_id
+        = notification_handler::user::get_user_id(event_parameters);
+
+      // Fallback if we didn't find the user in desired value, we check the reported ones
+      if (!attribute_store_node_exists(user_id_node)) {
+        sl_log_error(LOG_TAG,
+                     "Didn't find user ID %d in 'add state' (desired value). "
+                     "Can't add user.",
+                     user_id);
+        return;
+      } else {
+        // Do not use attribute_store_set_reported_as_desired here since it will introduce wired behavior for some reason
+        attribute_store_undefine_desired(user_id_node);
+        // If we found the user id, we mark it a reported now.
+        attribute_store_set_reported(user_id_node, &user_id, sizeof(user_id));
+      }
+
+      notification_handler::user::update_user_reported_values(user_id_node,
+                                                              event_parameters);
+
+    } break;
+    // User Modified
+    case 0x28: {
+      sl_log_debug(LOG_TAG, "Notification : User Modified");
+
+      if (!notification_handler::user::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+
+      attribute_store_node_t user_id_node
+        = notification_handler::user::get_user_node(endpoint_node,
+                                                    event_parameters,
+                                                    REPORTED_ATTRIBUTE);
+
+      if (!attribute_store_node_exists(user_id_node)) {
+        user_credential_user_unique_id_t user_id
+          = notification_handler::user::get_user_id(event_parameters);
+        sl_log_error(LOG_TAG,
+                     "Didn't find user ID %d. Can't modify user.",
+                     user_id);
+        return;
+      }
+
+      notification_handler::user::update_user_reported_values(user_id_node,
+                                                              event_parameters);
+
+    } break;
+    // User Deleted
+    case 0x29: {
+      sl_log_debug(LOG_TAG, "Notification : User Deleted");
+
+      if (!notification_handler::user::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+
+      // Get user node so we can remove it
+      attribute_store_node_t deleted_user_id_node
+        = notification_handler::user::get_user_node(endpoint_node,
+                                                    event_parameters,
+                                                    REPORTED_ATTRIBUTE);
+      attribute_store_delete_node(deleted_user_id_node);
+    } break;
+    // Credential Added
+    case 0x2B: {
+      sl_log_debug(LOG_TAG, "Notification : Credential Added");
+
+      if (!notification_handler::credential::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+
+      // Type and slot
+      user_credential_type_t credential_type
+        = notification_handler::credential::get_credential_type(
+          event_parameters);
+      user_credential_slot_t credential_slot
+        = notification_handler::credential::get_credential_slot(
+          event_parameters);
+
+      // Credential type node
+      attribute_store_node_t credential_type_node
+        = notification_handler::credential::get_credential_type_node(
+          endpoint_node,
+          event_parameters,
+          DESIRED_ATTRIBUTE);
+
+      // Credential Type might be already present here
+      if (!attribute_store_node_exists(credential_type_node)) {
+        sl_log_debug(
+          LOG_TAG,
+          "Didn't find credential type %d with desired value, checking "
+          "reported value.",
+          credential_type);
+        credential_type_node
+          = notification_handler::credential::get_credential_type_node(
+            endpoint_node,
+            event_parameters,
+            REPORTED_ATTRIBUTE);
+        // Now this is a real issue, we doesn't update anything
+        if (!attribute_store_node_exists(credential_type_node)) {
+          sl_log_error(LOG_TAG,
+                       "Didn't find credential type %d. Can't add credential.",
+                       credential_type);
+          return;
+        }
+      } else {
+        // Do not use attribute_store_set_reported_as_desired here since it will introduce wired behavior for some reason
+        attribute_store_undefine_desired(credential_type_node);
+        // If we found the credential we mark it a reported now.
+        attribute_store_set_reported(credential_type_node,
+                                     &credential_type,
+                                     sizeof(credential_type));
+      }
+
+      // Now we'll check the credential slot
+      attribute_store_node_t credential_slot_node
+        = notification_handler::credential::get_credential_slot_node(
+          credential_type_node,
+          event_parameters,
+          DESIRED_ATTRIBUTE);
+      // This must be in defined state
+      if (!attribute_store_node_exists(credential_slot_node)) {
+        sl_log_error(LOG_TAG,
+                     "Didn't find credential slot %d with desired value. Not "
+                     "adding credential",
+                     credential_slot);
+        return;
+      }
+
+      // Do not use attribute_store_set_reported_as_desired here since it will introduce wired behavior for some reason
+      attribute_store_undefine_desired(credential_slot_node);
+      // If we found the credential we mark it a reported now.
+      attribute_store_set_reported(credential_slot_node,
+                                   &credential_slot,
+                                   sizeof(credential_slot));
+
+      notification_handler::credential::update_credential_reported_values(
+        credential_slot_node,
+        event_parameters);
+
+    } break;
+    // Credential Modified
+    case 0x2C: {
+      sl_log_debug(LOG_TAG, "Notification : Credential Modified");
+      if (!notification_handler::credential::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+
+      // Used in logs
+      user_credential_type_t credential_type
+        = notification_handler::credential::get_credential_type(
+          event_parameters);
+      user_credential_slot_t credential_slot
+        = notification_handler::credential::get_credential_slot(
+          event_parameters);
+      user_credential_user_unique_id_t user_id
+        = notification_handler::credential::get_user_id(event_parameters);
+
+      // Get credential slot
+      auto credential_slot_node = get_credential_slot_node_by_type();
+      if (credential_slot_node == ATTRIBUTE_STORE_INVALID_NODE) {
+        return;
+      }
+
+      notification_handler::credential::update_credential_reported_values(
+        credential_slot_node,
+        event_parameters);
+
+      sl_log_debug(LOG_TAG,
+                   "Credential Modified. Type %d, Slot %d (User %d) ",
+                   credential_type,
+                   credential_slot,
+                   user_id);
+    } break;
+    // Credential Deleted
+    case 0x2D: {
+      sl_log_debug(LOG_TAG, "Notification : Credential Deleted");
+      if (!notification_handler::credential::is_report_size_conform(
+            event_parameters_length)) {
+        return;
+      }
+
+      // Used in logs
+      user_credential_type_t credential_type
+        = notification_handler::credential::get_credential_type(
+          event_parameters);
+      user_credential_slot_t credential_slot
+        = notification_handler::credential::get_credential_slot(
+          event_parameters);
+      user_credential_user_unique_id_t user_id
+        = notification_handler::credential::get_user_id(event_parameters);
+
+      // Type and slot
+      auto credential_slot_node = get_credential_slot_node_by_type();
+      if (credential_slot_node == ATTRIBUTE_STORE_INVALID_NODE) {
+        return;
+      }
+      attribute_store_delete_node(credential_slot_node);
+      sl_log_debug(LOG_TAG,
+                   "Credential Deleted. Type %d, Slot %d (User %d) ",
+                   credential_type,
+                   credential_slot,
+                   user_id);
+    } break;
+    default:
+      break;
+  }
+}
+
 /////////////////////////////////////////////////////////////////////////////
 // Version & Attribute Creation
 /////////////////////////////////////////////////////////////////////////////
@@ -505,6 +1184,11 @@ static void zwave_command_class_user_credential_on_version_attribute_update(
   attribute_store_add_if_missing(endpoint_node,
                                  attributes,
                                  COUNT_OF(attributes));
+
+  // Listen to
+  zwave_command_class_notification_register_event_callback(
+    endpoint_node,
+    &on_notification_event);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -680,10 +1364,14 @@ sl_status_t
     attribute_store_delete_node(type_node);
   } while (type_node != ATTRIBUTE_STORE_INVALID_NODE);
 
+  uint16_t ucl_credential_type_mask = 0;
+
   uint16_t current_index = 4;
   for (uint8_t i = 0; i < supported_credential_types_count; i++) {
     // > Root node : Credential Type
     user_credential_type_t credential_type = frame_data[current_index];
+
+    ucl_credential_type_mask |= (1 << (credential_type - 1));
 
     attribute_store_node_t credential_type_node
       = attribute_store_emplace(endpoint_node,
@@ -736,6 +1424,13 @@ sl_status_t
 
     current_index++;
   }
+
+  // Set UCL mask for supported user credential types
+  attribute_store_set_child_reported(
+    endpoint_node,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES,
+    &ucl_credential_type_mask,
+    sizeof(ucl_credential_type_mask));
 
   return SL_STATUS_OK;
 }
@@ -845,6 +1540,7 @@ static sl_status_t zwave_command_class_user_credential_credential_set(
   attribute_store_node_t user_unique_id_node
     = attribute_store_get_first_parent_with_type(credential_type_node,
                                                  ATTRIBUTE(USER_UNIQUE_ID));
+
   // Since CREDENTIAL_DATA is not directly under credential_slot_node we need to fetch it first
   attribute_store_node_t credential_length_node
     = attribute_store_get_first_child_by_type(
@@ -1042,7 +1738,11 @@ sl_status_t zwave_command_class_user_credential_credential_handle_report(
     attribute_store_node_t slot_node_0;
 
     // Get nodes 0
-    get_credential_type_node(endpoint_node, user_id, 0, REPORTED_ATTRIBUTE, type_node_0);
+    get_credential_type_node(endpoint_node,
+                             user_id,
+                             0,
+                             REPORTED_ATTRIBUTE,
+                             type_node_0);
     get_credential_slot_node(type_node_0, 0, DESIRED_ATTRIBUTE, slot_node_0);
 
     // Remove them
@@ -1259,8 +1959,6 @@ static sl_status_t zwave_command_class_user_credential_user_set(
                                             &user_id,
                                             sizeof(user_id));
 
-  sl_log_debug(LOG_TAG, "User SET for user %d", user_id);
-
   // If we can't get the user unique id we can't continue
   if (!attribute_store_node_exists(user_unique_id_node)) {
     return SL_STATUS_NOT_SUPPORTED;
@@ -1268,19 +1966,25 @@ static sl_status_t zwave_command_class_user_credential_user_set(
 
   user_credential_operation_type_t user_operation_type = 0;
   sl_status_t status = attribute_store_get_desired(user_operation_type_node,
-                              &user_operation_type,
-                              sizeof(user_operation_type));
+                                                   &user_operation_type,
+                                                   sizeof(user_operation_type));
 
-  if (status != SL_STATUS_OK) { 
+  sl_log_debug(LOG_TAG,
+               "User SET for user %d (operation type : %d)",
+               user_id,
+               user_operation_type);
+
+  if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG,
                  "Can't get user operation type value. Not sending USER_SET.");
     return SL_STATUS_NOT_SUPPORTED;
   }
 
-  std::vector<attribute_command_data> set_data = {
-      {ATTRIBUTE(USER_OPERATION_TYPE), DESIRED_ATTRIBUTE},
-      {ATTRIBUTE(USER_UNIQUE_ID), DESIRED_OR_REPORTED_ATTRIBUTE, user_unique_id_node}
-  };
+  std::vector<attribute_command_data> set_data
+    = {{ATTRIBUTE(USER_OPERATION_TYPE), DESIRED_ATTRIBUTE},
+       {ATTRIBUTE(USER_UNIQUE_ID),
+        DESIRED_OR_REPORTED_ATTRIBUTE,
+        user_unique_id_node}};
 
   // If we are not deleting the user we need more data
   if (user_operation_type != USER_SET_OPERATION_TYPE_DELETE) {
@@ -1424,7 +2128,10 @@ sl_status_t zwave_command_class_user_credential_user_handle_report(
 
   // Check if user still exists
   if (frame_data[INDEX_USER_MODIFIER_TYPE] == USER_REPORT_DNE) {
-    sl_log_debug(LOG_TAG, "User %d does not exist anymore, removing from attribute store.", user_id);
+    sl_log_debug(
+      LOG_TAG,
+      "User %d does not exist anymore, removing from attribute store.",
+      user_id);
     attribute_store_delete_node(user_unique_id_node);
     return SL_STATUS_OK;
   }
@@ -1567,6 +2274,514 @@ void zwave_network_status_changed(attribute_store_node_t updated_node,
       }
     }
   }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Exposed class functions
+/////////////////////////////////////////////////////////////////////////////
+
+sl_status_t zwave_command_class_user_credential_add_new_user(
+  attribute_store_node_t endpoint_node,
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t user_type,
+  user_credential_rule_t credential_rule,
+  user_credential_user_active_state_t user_active_state,
+  user_credential_expiring_timeout_minutes_t expiring_timeout,
+  user_credential_user_name_encoding_t user_name_encoding,
+  const char *user_name)
+{
+  // Check user id
+  if (user_id == 0) {
+    sl_log_error(LOG_TAG, "User ID 0 is reserved. Not adding user.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Check if the user already exists
+  attribute_store_node_t user_id_node
+    = get_reported_user_id_node(endpoint_node, user_id);
+
+  // Node already exists, can't create user.
+  if (attribute_store_node_exists(user_id_node)) {
+    sl_log_error(LOG_TAG,
+                 "User with ID %d already exists. Not adding user.",
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+  // Debug info
+  sl_log_debug(
+    LOG_TAG,
+    "zwave_command_class_user_credential_add_new_user called with : ");
+  sl_log_debug(LOG_TAG, "\tuser_id : %d", user_id);
+  sl_log_debug(LOG_TAG, "\tuser_type : %d", user_type);
+  sl_log_debug(LOG_TAG, "\tcredential_rule : %d", credential_rule);
+  sl_log_debug(LOG_TAG, "\tuser_active_state : %d", user_active_state);
+  sl_log_debug(LOG_TAG, "\texpiring_timeout : %d", expiring_timeout);
+  sl_log_debug(LOG_TAG, "\tuser_name_encoding : %d", user_name_encoding);
+  sl_log_debug(LOG_TAG, "\tuser_name : %s", user_name);
+
+  // Create the user node
+  user_id_node = attribute_store_emplace_desired(endpoint_node,
+                                                 ATTRIBUTE(USER_UNIQUE_ID),
+                                                 &user_id,
+                                                 sizeof(user_id));
+
+  attribute_store_emplace_desired(user_id_node,
+                                  ATTRIBUTE(USER_TYPE),
+                                  &user_type,
+                                  sizeof(user_type));
+
+  attribute_store_emplace_desired(user_id_node,
+                                  ATTRIBUTE(CREDENTIAL_RULE),
+                                  &credential_rule,
+                                  sizeof(credential_rule));
+
+  attribute_store_emplace_desired(user_id_node,
+                                  ATTRIBUTE(USER_ACTIVE_STATE),
+                                  &user_active_state,
+                                  sizeof(user_active_state));
+
+  if (user_type != USER_CREDENTIAL_USER_TYPE_EXPIRING_USER) {
+    if (expiring_timeout != 0) {
+      sl_log_warning(
+        LOG_TAG,
+        "Expiring timeout set for non-expiring user, set value to 0.");
+    }
+    expiring_timeout = 0;
+  }
+
+  attribute_store_emplace_desired(user_id_node,
+                                  ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES),
+                                  &expiring_timeout,
+                                  sizeof(expiring_timeout));
+
+  attribute_store_emplace_desired(user_id_node,
+                                  ATTRIBUTE(USER_NAME_ENCODING),
+                                  &user_name_encoding,
+                                  sizeof(user_name_encoding));
+  // User name node
+  auto user_name_node
+    = attribute_store_add_node(ATTRIBUTE(USER_NAME), user_id_node);
+  attribute_store_set_desired_string(user_name_node, user_name);
+
+  // Finally set operation type add
+  set_user_operation_type(user_id_node, USER_CREDENTIAL_OPERATION_TYPE_ADD);
+
+  sl_log_debug(LOG_TAG, "Add user with ID %d", user_id);
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zwave_command_class_user_credential_delete_user(
+  attribute_store_node_t endpoint_node,
+  user_credential_user_unique_id_t user_id)
+{
+  // Check if the user exists
+  attribute_store_node_t user_id_node
+    = get_reported_user_id_node(endpoint_node, user_id);
+
+  // Node doesn't exists, can't delete user.
+  if (!attribute_store_node_exists(user_id_node)) {
+    sl_log_error(LOG_TAG,
+                 "Can't find user with ID %d. Not deleting user.",
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  // Finally set operation type delete
+  set_user_operation_type(user_id_node, USER_CREDENTIAL_OPERATION_TYPE_DELETE);
+
+  sl_log_debug(LOG_TAG, "Remove user with ID %d", user_id);
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zwave_command_class_user_credential_modify_user(
+  attribute_store_node_t endpoint_node,
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t user_type,
+  user_credential_rule_t credential_rule,
+  user_credential_user_active_state_t user_active_state,
+  user_credential_expiring_timeout_minutes_t expiring_timeout,
+  user_credential_user_name_encoding_t user_name_encoding,
+  const char *user_name)
+{
+  // Check user id
+  if (user_id == 0) {
+    sl_log_error(LOG_TAG, "User ID 0 is reserved. Can't modify user.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Check if the user already exists
+  attribute_store_node_t user_id_node
+    = get_reported_user_id_node(endpoint_node, user_id);
+
+  // Node already exists, can't create user.
+  if (!attribute_store_node_exists(user_id_node)) {
+    sl_log_error(LOG_TAG,
+                 "User with ID %d doesn't exists. Can't modify user.",
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  // Debug info
+  sl_log_debug(
+    LOG_TAG,
+    "zwave_command_class_user_credential_modify_user called with : ");
+  sl_log_debug(LOG_TAG, "\tuser_id : %d", user_id);
+  sl_log_debug(LOG_TAG, "\tuser_type : %d", user_type);
+  sl_log_debug(LOG_TAG, "\tcredential_rule : %d", credential_rule);
+  sl_log_debug(LOG_TAG, "\tuser_active_state : %d", user_active_state);
+  sl_log_debug(LOG_TAG, "\texpiring_timeout : %d", expiring_timeout);
+  sl_log_debug(LOG_TAG, "\tuser_name_encoding : %d", user_name_encoding);
+  sl_log_debug(LOG_TAG, "\tuser_name : %s", user_name);
+
+  std::map<attribute_store_type_t, std::pair<const void *, uint8_t>> values = {
+    {ATTRIBUTE(USER_TYPE), {&user_type, sizeof(user_type)}},
+    {ATTRIBUTE(CREDENTIAL_RULE), {&credential_rule, sizeof(credential_rule)}},
+    {ATTRIBUTE(USER_ACTIVE_STATE),
+     {&user_active_state, sizeof(user_active_state)}},
+    {ATTRIBUTE(USER_NAME_ENCODING),
+     {&user_name_encoding, sizeof(user_name_encoding)}},
+    {ATTRIBUTE(USER_NAME), {user_name, sizeof(user_name)}},
+  };
+
+  // Only add expiring timeout if user is expiring
+  if (user_type == USER_CREDENTIAL_USER_TYPE_EXPIRING_USER) {
+    values.insert({ATTRIBUTE(USER_EXPIRING_TIMEOUT_MINUTES),
+                   {&expiring_timeout, sizeof(expiring_timeout)}});
+  }
+
+  // Update values based on the map
+  sl_status_t status = update_desired_values(user_id_node, values);
+  // If everything went well set operation type to modify
+  if (status == SL_STATUS_OK) {
+    set_user_operation_type(user_id_node,
+                            USER_CREDENTIAL_OPERATION_TYPE_MODIFY);
+    sl_log_debug(LOG_TAG, "Modify user with ID %d", user_id);
+  } else {
+    sl_log_error(LOG_TAG, "Can't modify user with ID %d", user_id);
+  }
+
+  return status;
+}
+
+/**
+ * @brief Convert credential data str to a vector of uint8_t
+ * 
+ * @note CC:0083.01.0A.11.021 Passwords MUST be transmitted in Unicode UTF-16 format, in big endian order
+ * 
+ * @param credential_data Credential data to convert
+ * @param credential_type Credential type
+ * @param credential_data_vector Vector to store the converted data
+ * 
+ * @return SL_STATUS_OK if the conversion was successful, SL_STATUS_FAIL otherwise
+*/
+sl_status_t get_credential_data(const char *credential_data,
+                                user_credential_type_t credential_type,
+                                std::vector<uint8_t> &credential_data_vector)
+{
+  std::string credential_data_str(credential_data);
+  switch (credential_type) {
+    case CREDENTIAL_REPORT_PASSWORD: {
+      // CC:0083.01.0A.11.021 Passwords MUST be transmitted in Unicode UTF-16 format, in big endian order
+      try {
+        auto credential_data_utf16 = utf8_to_utf16(credential_data_str);
+        for (const auto &c: credential_data_utf16) {
+          credential_data_vector.push_back((uint8_t)(c >> 8));
+          credential_data_vector.push_back((uint8_t)c);
+        }
+      } catch (const std::exception &e) {
+        sl_log_error(LOG_TAG,
+                     "Error while converting credential data to UTF16: %s",
+                     e.what());
+        return SL_STATUS_FAIL;
+      }
+    } break;
+    case CREDENTIAL_REPORT_PIN_CODE:
+      for (const auto &c: credential_data_str) {
+        if (c < '0' || c > '9') {
+          sl_log_error(LOG_TAG,
+                       "Invalid character in PIN code: %c. Only digits are "
+                       "allowed.",
+                       c);
+          return SL_STATUS_FAIL;
+        }
+        credential_data_vector.push_back(c);
+      }
+      break;
+    default:
+      for (const auto &c: credential_data_str) {
+        credential_data_vector.push_back(c);
+      }
+  }
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zwave_command_class_user_credential_add_new_credential(
+  attribute_store_node_t endpoint_node,
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t credential_type,
+  user_credential_slot_t credential_slot,
+  const char *credential_data)
+{
+  // First see if the user exists
+  auto user_id_node = get_reported_user_id_node(endpoint_node, user_id);
+  if (!attribute_store_node_exists(user_id_node)) {
+    sl_log_error(LOG_TAG,
+                 "Can't find user with ID %d. Not adding credentials.",
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  if (credential_type == 0 || credential_slot == 0) {
+    sl_log_error(
+      LOG_TAG,
+      "Credential Type and Slot 0 are reserved. Not adding credentials.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Create or update existing structure
+  attribute_store_node_t credential_type_node = ATTRIBUTE_STORE_INVALID_NODE;
+  attribute_store_node_t credential_slot_node = ATTRIBUTE_STORE_INVALID_NODE;
+
+  // First check Credential Type existance
+  get_credential_type_node(endpoint_node,
+                           user_id,
+                           credential_type,
+                           REPORTED_ATTRIBUTE,
+                           credential_type_node);
+  if (attribute_store_node_exists(credential_type_node)) {
+    get_credential_slot_node(credential_type_node,
+                             credential_slot,
+                             REPORTED_ATTRIBUTE,
+                             credential_slot_node);
+
+    // If a Credential Slot already exists we can't add a new one
+    if (attribute_store_node_exists(credential_slot_node)) {
+      sl_log_error(LOG_TAG,
+                   "Credential slot %d for Credential Type %d already exists. "
+                   "Not adding credentials.",
+                   credential_slot,
+                   credential_type);
+      return SL_STATUS_FAIL;
+    }
+
+  } else {
+    // Create Credential Type if it doesn't exists
+    credential_type_node
+      = attribute_store_emplace_desired(user_id_node,
+                                        ATTRIBUTE(CREDENTIAL_TYPE),
+                                        &credential_type,
+                                        sizeof(credential_type));
+  }
+
+  // Debug info
+  sl_log_debug(
+    LOG_TAG,
+    "zwave_command_class_user_credential_add_new_credential called with : ");
+  sl_log_debug(LOG_TAG, "\tuser_id : %d", user_id);
+  sl_log_debug(LOG_TAG, "\tcredential_type : %d", credential_type);
+  sl_log_debug(LOG_TAG, "\tcredential_slot : %d", credential_slot);
+  sl_log_debug(LOG_TAG, "\tcredential_data : %s", credential_data);
+
+  // Create credential slot
+  credential_slot_node
+    = attribute_store_emplace_desired(credential_type_node,
+                                      ATTRIBUTE(CREDENTIAL_SLOT),
+                                      &credential_slot,
+                                      sizeof(credential_slot));
+
+  // Process credential data
+  std::vector<uint8_t> credential_data_vector;
+  sl_status_t credential_data_conversion_status
+    = get_credential_data(credential_data,
+                          credential_type,
+                          credential_data_vector);
+  // Something went wrong, we need to delete the slot
+  if (credential_data_conversion_status == SL_STATUS_FAIL) {
+    attribute_store_delete_node(credential_slot_node);
+    return SL_STATUS_FAIL;
+  }
+
+  // Add data
+  uint8_t data_size = credential_data_vector.size();
+  auto credential_data_length_node
+    = attribute_store_emplace_desired(credential_slot_node,
+                                      ATTRIBUTE(CREDENTIAL_DATA_LENGTH),
+                                      &data_size,
+                                      sizeof(data_size));
+
+  attribute_store_emplace_desired(credential_data_length_node,
+                                  ATTRIBUTE(CREDENTIAL_DATA),
+                                  credential_data_vector.data(),
+                                  credential_data_vector.size());
+
+  // Finally set operation type add
+  set_credential_operation_type(credential_slot_node,
+                                USER_CREDENTIAL_OPERATION_TYPE_ADD);
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zwave_command_class_user_credential_modify_credential(
+  attribute_store_node_t endpoint_node,
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t credential_type,
+  user_credential_slot_t credential_slot,
+  const char *credential_data)
+{
+  // Get credential structure
+  attribute_store_node_t credential_type_node = ATTRIBUTE_STORE_INVALID_NODE;
+  attribute_store_node_t credential_slot_node = ATTRIBUTE_STORE_INVALID_NODE;
+
+  // First check Credential Type existence
+  bool node_found = get_credential_type_node(endpoint_node,
+                                             user_id,
+                                             credential_type,
+                                             REPORTED_ATTRIBUTE,
+                                             credential_type_node);
+  if (!node_found) {
+    sl_log_error(
+      LOG_TAG,
+      "Can't find Credential Type %d for User %d. Not modifing credentials.",
+      credential_type,
+      user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  node_found = get_credential_slot_node(credential_type_node,
+                                        credential_slot,
+                                        REPORTED_ATTRIBUTE,
+                                        credential_slot_node);
+
+  if (!node_found) {
+    sl_log_error(LOG_TAG,
+                 "Can't find Credential Slot %d for Credential Type %d (User "
+                 "%d). Not modifing credentials.",
+                 credential_slot,
+                 credential_type,
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  // Debug info
+  sl_log_debug(
+    LOG_TAG,
+    "zwave_command_class_user_credential_modify_credential called with : ");
+  sl_log_debug(LOG_TAG, "\tuser_id : %d", user_id);
+  sl_log_debug(LOG_TAG, "\tcredential_type : %d", credential_type);
+  sl_log_debug(LOG_TAG, "\tcredential_slot : %d", credential_slot);
+  sl_log_debug(LOG_TAG, "\tcredential_data : %s", credential_data);
+
+  // Process credential data
+  std::vector<uint8_t> credential_data_vector;
+  sl_status_t credential_data_conversion_status
+    = get_credential_data(credential_data,
+                          credential_type,
+                          credential_data_vector);
+  // Something went wrong, we don't modify
+  if (credential_data_conversion_status == SL_STATUS_FAIL) {
+    sl_log_error(LOG_TAG,
+                 "Something went wrong while processing credential data. Not "
+                 "modifying credentials.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Add data
+  uint8_t data_size = credential_data_vector.size();
+
+  auto credential_data_length_node = attribute_store_get_first_child_by_type(
+    credential_slot_node,
+    ATTRIBUTE(CREDENTIAL_DATA_LENGTH));
+
+  if (!attribute_store_node_exists(credential_data_length_node)) {
+    sl_log_error(LOG_TAG,
+                 "Can't find CREDENTIAL_DATA_LENGTH in attribute store. Not "
+                 "modifying credential.");
+    return SL_STATUS_FAIL;
+  }
+  attribute_store_set_desired(credential_data_length_node,
+                              &data_size,
+                              sizeof(data_size));
+
+  sl_status_t status
+    = attribute_store_set_child_desired(credential_data_length_node,
+                                        ATTRIBUTE(CREDENTIAL_DATA),
+                                        credential_data_vector.data(),
+                                        credential_data_vector.size());
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG,
+                 "Can't set CREDENTIAL_DATA in attribute store. Not modifying "
+                 "credential.");
+    return SL_STATUS_FAIL;
+  }
+
+  // Finally set operation type modify
+  set_credential_operation_type(credential_slot_node,
+                                USER_CREDENTIAL_OPERATION_TYPE_MODIFY);
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zwave_command_class_user_credential_delete_credential(
+  attribute_store_node_t endpoint_node,
+  user_credential_user_unique_id_t user_id,
+  user_credential_type_t credential_type,
+  user_credential_slot_t credential_slot)
+{
+  // First see if the user exists
+  auto user_id_node = get_reported_user_id_node(endpoint_node, user_id);
+  if (!attribute_store_node_exists(user_id_node)) {
+    sl_log_error(LOG_TAG,
+                 "Can't find user with ID %d. Not adding credentials.",
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  // Get credential structure
+  attribute_store_node_t credential_type_node = ATTRIBUTE_STORE_INVALID_NODE;
+  attribute_store_node_t credential_slot_node = ATTRIBUTE_STORE_INVALID_NODE;
+
+  // First check Credential Type existence
+  bool node_found = get_credential_type_node(endpoint_node,
+                                             user_id,
+                                             credential_type,
+                                             REPORTED_ATTRIBUTE,
+                                             credential_type_node);
+  if (!node_found) {
+    sl_log_error(
+      LOG_TAG,
+      "Can't find Credential Type %d for User %d. Not deleting credentials.",
+      credential_type,
+      user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  node_found = get_credential_slot_node(credential_type_node,
+                                        credential_slot,
+                                        REPORTED_ATTRIBUTE,
+                                        credential_slot_node);
+
+  if (!node_found) {
+    sl_log_error(LOG_TAG,
+                 "Can't find Credential Slot %d for Credential Type %d (User "
+                 "%d). Not deleting credentials.",
+                 credential_slot,
+                 credential_type,
+                 user_id);
+    return SL_STATUS_FAIL;
+  }
+
+  // Finally set operation type delete
+  set_credential_operation_type(credential_slot_node,
+                                USER_CREDENTIAL_OPERATION_TYPE_DELETE);
+  sl_log_debug(LOG_TAG,
+               "Delete credential slot %d (credential type %d, user id %d)",
+               credential_slot,
+               credential_type,
+               user_id);
+  return SL_STATUS_OK;
 }
 
 /////////////////////////////////////////////////////////////////////////////

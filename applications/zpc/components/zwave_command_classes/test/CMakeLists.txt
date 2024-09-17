@@ -841,6 +841,9 @@ target_add_unittest(
     zwave_command_class_user_credential_test
     SOURCES
     zwave_command_class_user_credential_test.cpp
+    # Allow to use notification mock
+    EXCLUDE
+    zwave_command_class_notification.cpp
     DEPENDS
     zpc_attribute_store_test_helper
     zwave_controller
@@ -848,4 +851,5 @@ target_add_unittest(
     uic_attribute_resolver_mock
     zpc_attribute_resolver_mock
     uic_dotdot_mqtt_mock
-    zwave_network_management_mock)
+    zwave_network_management_mock
+    zwave_command_class_notification_mock)
