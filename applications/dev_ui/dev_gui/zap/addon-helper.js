@@ -32,7 +32,8 @@ const supportedClusters = [
     "TemperatureMeasurement",
     "Thermostat",
     "WindSpeedMeasurement",
-    "WindowCovering"
+    "WindowCovering",
+    "UserCredential"
 ];
 
 let enums = new Set();

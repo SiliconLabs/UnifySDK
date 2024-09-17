@@ -32,6 +32,7 @@ import Scene from './pages/scenes/scene/scene';
 import EpScenes from './pages/scenes/ep-scenes/ep-scenes';
 import { CommissionableDevices } from './pages/commissionable-devices/commissionable-devices';
 import { Button, Modal, Spinner } from 'react-bootstrap';
+import UserCredential from './pages/user-credential/user-credential';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -276,6 +277,7 @@ class App extends Component<{}, AppState> {
                   <Route path='/networkmanagement' exact render={() => <NetworkManagement ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/measurements' exact render={() => <Measurements {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/commissionabledevices' exact render={() => <CommissionableDevices {...baseProps} List={this.state.CommissionableDevices} />} />
+                  <Route path='/usercredential' exact render={() => <UserCredential  ref={this.changeConfParams} {...baseProps} NodeList={this.state.NodeList}  />} />
                   <Redirect from="/" exact to="/nodes" />
                   {Object.keys(ClusterTypes).map((type, index) =>
                     <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} render={() =>
