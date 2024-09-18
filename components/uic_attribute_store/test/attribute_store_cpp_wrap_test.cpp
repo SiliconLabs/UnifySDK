@@ -336,4 +336,24 @@ void test_attribute_store_change_parent_not_same_parent()
                             "D should have 42 as reported value");
 }
 
+void test_attribute_store_change_parent_invalids()
+{
+  attribute root = attribute::root();
+  attribute a    = root.add_node('A');
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_FAIL,
+                            root.change_parent(a),
+                            "Shouldn't be able to change root node parent");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    a.change_parent(attribute(0)),
+    "Shouldn't be able to change parent to a invalid node parent");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    attribute(0).change_parent(a),
+    "Shouldn't be able to change a invalid node parent");
+}
+
 } // extern "C"

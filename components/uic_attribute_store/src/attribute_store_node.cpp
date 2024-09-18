@@ -96,6 +96,11 @@ attribute_store_node *attribute_store_node::find_id(attribute_store_node_t _id)
 attribute_store_node*
   attribute_store_node::change_parent(attribute_store_node* new_parent)
 {
+  if (this->parent_node == NULL) {
+    sl_log_critical(LOG_TAG, "Cannot change parent of the root node.");
+    return NULL;
+  }
+
   if (new_parent == NULL) {
     sl_log_warning(LOG_TAG, "Cannot change parent to a NULL node.");
     return NULL;
