@@ -144,7 +144,7 @@ sl_status_t
   // Add a failsafe in case the queue is getting blocked
   // This prevent one faulty device to block the whole queue
   // The subsequent frames will most likely discarded since they timed out by now
-  if (tx_queue.size() == ZWAVE_TX_QUEUE_BUFFER_SIZE) {
+  if (tx_queue.size() >= ZWAVE_TX_QUEUE_BUFFER_SIZE) {
     sl_log_info(
       LOG_TAG,
       "Abort transmission of first frame in queue due to full Tx Queue.");
