@@ -2949,6 +2949,318 @@ static sl_status_t uic_mqtt_dotdot_configuration_parameters_discover_parameter_r
   return SL_STATUS_OK;
 }
 
+static unsigned int uic_mqtt_dotdot_user_credential_add_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_add_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    UserTypeEnum user_type,
+
+    bool user_active_state,
+
+    CredRule credential_rule,
+
+    const char* user_name,
+
+    uint16_t expiring_timeout_minutes,
+
+    UserNameEncodingType user_name_encoding
+
+) {
+  uic_mqtt_dotdot_user_credential_add_user_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_modify_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_modify_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    UserTypeEnum user_type,
+
+    bool user_active_state,
+
+    CredRule credential_rule,
+
+    const char* user_name,
+
+    uint16_t expiring_timeout_minutes,
+
+    UserNameEncodingType user_name_encoding
+
+) {
+  uic_mqtt_dotdot_user_credential_modify_user_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid
+
+) {
+  uic_mqtt_dotdot_user_credential_delete_user_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_add_credential_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_add_credential_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    const char* credential_data
+
+) {
+  uic_mqtt_dotdot_user_credential_add_credential_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_modify_credential_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_modify_credential_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    const char* credential_data
+
+) {
+  uic_mqtt_dotdot_user_credential_modify_credential_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_credential_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_credential_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot
+
+) {
+  uic_mqtt_dotdot_user_credential_delete_credential_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_all_users_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_users_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredType credential_type
+
+) {
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid
+
+) {
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type
+
+) {
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    uint8_t credential_learn_timeout
+
+) {
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    uint8_t credential_learn_timeout
+
+) {
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_credential_association_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_credential_association_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredType credential_type,
+
+    uint16_t source_user_uniqueid,
+
+    uint16_t source_credential_slot,
+
+    uint16_t destination_user_uniqueid,
+
+    uint16_t destination_credential_slot
+
+) {
+  uic_mqtt_dotdot_user_credential_credential_association_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_get_user_checksum_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_get_user_checksum_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    uint16_t user_uniqueid
+
+) {
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    CredType credential_type
+
+) {
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type,
+    const char* pin_code
+
+) {
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
+static unsigned int uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_count;
+static sl_status_t uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_func(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t callback_type
+) {
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_count++;
+  num_command_callbacks++;
+  return SL_STATUS_OK;
+}
+
 static unsigned int uic_mqtt_dotdot_aox_locator_iq_report_callback_count;
 static sl_status_t uic_mqtt_dotdot_aox_locator_iq_report_callback_func(
     dotdot_unid_t unid,
@@ -3450,6 +3762,46 @@ static unsigned int set_all_callbacks()
   num_callbacks++;
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set(&uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_func);
   num_callbacks++;
+  uic_mqtt_dotdot_user_credential_add_user_callback_set(&uic_mqtt_dotdot_user_credential_add_user_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_modify_user_callback_set(&uic_mqtt_dotdot_user_credential_modify_user_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_user_callback_set(&uic_mqtt_dotdot_user_credential_delete_user_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_add_credential_callback_set(&uic_mqtt_dotdot_user_credential_add_credential_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_modify_credential_callback_set(&uic_mqtt_dotdot_user_credential_modify_credential_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_credential_callback_set(&uic_mqtt_dotdot_user_credential_delete_credential_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback_set(&uic_mqtt_dotdot_user_credential_delete_all_users_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_set(&uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_set(&uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_set(&uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_set(&uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_set(&uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_set(&uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_set(&uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_credential_association_callback_set(&uic_mqtt_dotdot_user_credential_credential_association_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback_set(&uic_mqtt_dotdot_user_credential_get_user_checksum_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_set(&uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_set(&uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_set(&uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_func);
+  num_callbacks++;
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_set(&uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_func);
+  num_callbacks++;
   uic_mqtt_dotdot_aox_locator_iq_report_callback_set(&uic_mqtt_dotdot_aox_locator_iq_report_callback_func);
   num_callbacks++;
   uic_mqtt_dotdot_aox_locator_angle_report_callback_set(&uic_mqtt_dotdot_aox_locator_angle_report_callback_func);
@@ -3705,6 +4057,27 @@ static void unset_all_callbacks()
   uic_mqtt_dotdot_configuration_parameters_set_parameter_callback_clear();
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_clear();
   uic_mqtt_dotdot_clear_configuration_parameters_write_attributes_callbacks();
+  uic_mqtt_dotdot_user_credential_add_user_callback_clear();
+  uic_mqtt_dotdot_user_credential_modify_user_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_user_callback_clear();
+  uic_mqtt_dotdot_user_credential_add_credential_callback_clear();
+  uic_mqtt_dotdot_user_credential_modify_credential_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_credential_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_clear();
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_clear();
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_clear();
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_clear();
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_clear();
+  uic_mqtt_dotdot_user_credential_credential_association_callback_clear();
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback_clear();
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_clear();
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_clear();
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_clear();
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_clear();
+  uic_mqtt_dotdot_clear_user_credential_write_attributes_callbacks();
   uic_mqtt_dotdot_aox_locator_iq_report_callback_clear();
   uic_mqtt_dotdot_aox_locator_angle_report_callback_clear();
   uic_mqtt_dotdot_aox_locator_angle_correction_callback_clear();
@@ -3910,6 +4283,26 @@ static void reset_callback_counters()
   uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback_count = 0;
   uic_mqtt_dotdot_configuration_parameters_set_parameter_callback_count = 0;
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_add_user_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_modify_user_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_user_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_add_credential_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_modify_credential_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_credential_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_all_users_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_credential_association_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_get_user_checksum_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_count = 0;
+  uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_count = 0;
   uic_mqtt_dotdot_aox_locator_iq_report_callback_count = 0;
   uic_mqtt_dotdot_aox_locator_angle_report_callback_count = 0;
   uic_mqtt_dotdot_aox_locator_angle_correction_callback_count = 0;

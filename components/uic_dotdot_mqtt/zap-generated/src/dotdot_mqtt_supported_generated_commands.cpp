@@ -2634,6 +2634,109 @@ void uic_mqtt_dotdot_configuration_parameters_publish_supported_generated_comman
 
 /**
  * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the UserCredential cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * 
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * 
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void uic_mqtt_dotdot_user_credential_publish_supported_generated_commands(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  topic +=  "/ep"+ std::to_string(endpoint);
+  topic +=  "/UserCredential/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
+  if (command_list->add_user == true) {
+    command_vector.emplace_back("AddUser");
+  }
+  if (command_list->modify_user == true) {
+    command_vector.emplace_back("ModifyUser");
+  }
+  if (command_list->delete_user == true) {
+    command_vector.emplace_back("DeleteUser");
+  }
+  if (command_list->add_credential == true) {
+    command_vector.emplace_back("AddCredential");
+  }
+  if (command_list->modify_credential == true) {
+    command_vector.emplace_back("ModifyCredential");
+  }
+  if (command_list->delete_credential == true) {
+    command_vector.emplace_back("DeleteCredential");
+  }
+  if (command_list->delete_all_users == true) {
+    command_vector.emplace_back("DeleteAllUsers");
+  }
+  if (command_list->delete_all_credentials == true) {
+    command_vector.emplace_back("DeleteAllCredentials");
+  }
+  if (command_list->delete_all_credentials_by_type == true) {
+    command_vector.emplace_back("DeleteAllCredentialsByType");
+  }
+  if (command_list->delete_all_credentials_for_user == true) {
+    command_vector.emplace_back("DeleteAllCredentialsForUser");
+  }
+  if (command_list->delete_all_credentials_for_user_by_type == true) {
+    command_vector.emplace_back("DeleteAllCredentialsForUserByType");
+  }
+  if (command_list->credential_learn_start_add == true) {
+    command_vector.emplace_back("CredentialLearnStartAdd");
+  }
+  if (command_list->credential_learn_start_modify == true) {
+    command_vector.emplace_back("CredentialLearnStartModify");
+  }
+  if (command_list->credential_learn_stop == true) {
+    command_vector.emplace_back("CredentialLearnStop");
+  }
+  if (command_list->credential_association == true) {
+    command_vector.emplace_back("CredentialAssociation");
+  }
+  if (command_list->get_user_checksum == true) {
+    command_vector.emplace_back("GetUserChecksum");
+  }
+  if (command_list->get_credential_checksum == true) {
+    command_vector.emplace_back("GetCredentialChecksum");
+  }
+  if (command_list->get_all_users_checksum == true) {
+    command_vector.emplace_back("GetAllUsersChecksum");
+  }
+  if (command_list->set_admin_pin_code == true) {
+    command_vector.emplace_back("SetAdminPINCode");
+  }
+  if (command_list->deactivate_admin_pin_code == true) {
+    command_vector.emplace_back("DeactivateAdminPINCode");
+  }
+  if (command_list->write_attributes == true) {
+    command_vector.emplace_back("WriteAttributes");
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
  * the AoXLocator cluster for a UNID/Endpoint
  *
  * Publication will be made at the following topic

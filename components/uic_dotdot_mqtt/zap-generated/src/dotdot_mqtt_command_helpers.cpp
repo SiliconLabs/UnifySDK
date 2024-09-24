@@ -14295,6 +14295,1299 @@ void uic_mqtt_dotdot_parse_configuration_parameters_write_attributes(
 }
 
 
+std::string get_json_payload_for_user_credential_add_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddUser / UserType
+  #ifdef ADD_USER_USER_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserType"] =
+    add_user_user_type_get_enum_value_name(
+      (uint32_t)fields->user_type);
+  #elif defined(USER_TYPE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    user_type_enum_get_enum_value_name((uint32_t)fields->user_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserType"] = fields->user_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserActiveState"] = nlohmann::json(fields->user_active_state);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddUser / CredentialRule
+  #ifdef ADD_USER_CREDENTIAL_RULE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialRule"] =
+    add_user_credential_rule_get_enum_value_name(
+      (uint32_t)fields->credential_rule);
+  #elif defined(CRED_RULE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialRule"] =
+    cred_rule_get_enum_value_name((uint32_t)fields->credential_rule);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialRule"] = fields->credential_rule;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserName"] = nlohmann::json(fields->user_name);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["ExpiringTimeoutMinutes"] = nlohmann::json(fields->expiring_timeout_minutes);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddUser / UserNameEncoding
+  #ifdef ADD_USER_USER_NAME_ENCODING_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserNameEncoding"] =
+    add_user_user_name_encoding_get_enum_value_name(
+      (uint32_t)fields->user_name_encoding);
+  #elif defined(USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserNameEncoding"] =
+    user_name_encoding_type_get_enum_value_name((uint32_t)fields->user_name_encoding);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserNameEncoding"] = fields->user_name_encoding;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_add_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  UserTypeEnum &user_type,
+  
+  bool &user_active_state,
+  
+  CredRule &credential_rule,
+  
+  std::string &user_name,
+  
+  uint16_t &expiring_timeout_minutes,
+  
+  UserNameEncodingType &user_name_encoding
+  
+) {
+
+  uint32_t UserType_enum_val = get_enum_decimal_value<UserTypeEnum>("UserType", jsn);
+  if (UserType_enum_val == std::numeric_limits<UserTypeEnum>::max()) {
+    #ifdef USER_TYPE_ENUM_ENUM_NAME_AVAILABLE
+    UserType_enum_val = user_type_enum_get_enum_value_number(jsn.at("UserType").get<std::string>());
+    #endif
+  }
+  uint32_t CredentialRule_enum_val = get_enum_decimal_value<CredRule>("CredentialRule", jsn);
+  if (CredentialRule_enum_val == std::numeric_limits<CredRule>::max()) {
+    #ifdef CRED_RULE_ENUM_NAME_AVAILABLE
+    CredentialRule_enum_val = cred_rule_get_enum_value_number(jsn.at("CredentialRule").get<std::string>());
+    #endif
+  }
+  uint32_t UserNameEncoding_enum_val = get_enum_decimal_value<UserNameEncodingType>("UserNameEncoding", jsn);
+  if (UserNameEncoding_enum_val == std::numeric_limits<UserNameEncodingType>::max()) {
+    #ifdef USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE
+    UserNameEncoding_enum_val = user_name_encoding_type_get_enum_value_number(jsn.at("UserNameEncoding").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("UserType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_type = static_cast<UserTypeEnum>(UserType_enum_val);
+  if (jsn.at("UserActiveState").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_active_state = jsn.at("UserActiveState").get< bool >();
+      if (jsn.at("CredentialRule").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_rule = static_cast<CredRule>(CredentialRule_enum_val);
+  if (jsn.at("UserName").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  user_name = jsn.at("UserName").get<std::string>();
+            if (jsn.at("ExpiringTimeoutMinutes").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  expiring_timeout_minutes = jsn.at("ExpiringTimeoutMinutes").get< uint16_t >();
+      if (jsn.at("UserNameEncoding").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_name_encoding = static_cast<UserNameEncodingType>(UserNameEncoding_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_modify_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyUser / UserType
+  #ifdef MODIFY_USER_USER_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserType"] =
+    modify_user_user_type_get_enum_value_name(
+      (uint32_t)fields->user_type);
+  #elif defined(USER_TYPE_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    user_type_enum_get_enum_value_name((uint32_t)fields->user_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserType"] = fields->user_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserActiveState"] = nlohmann::json(fields->user_active_state);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyUser / CredentialRule
+  #ifdef MODIFY_USER_CREDENTIAL_RULE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialRule"] =
+    modify_user_credential_rule_get_enum_value_name(
+      (uint32_t)fields->credential_rule);
+  #elif defined(CRED_RULE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialRule"] =
+    cred_rule_get_enum_value_name((uint32_t)fields->credential_rule);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialRule"] = fields->credential_rule;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserName"] = nlohmann::json(fields->user_name);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["ExpiringTimeoutMinutes"] = nlohmann::json(fields->expiring_timeout_minutes);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyUser / UserNameEncoding
+  #ifdef MODIFY_USER_USER_NAME_ENCODING_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["UserNameEncoding"] =
+    modify_user_user_name_encoding_get_enum_value_name(
+      (uint32_t)fields->user_name_encoding);
+  #elif defined(USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserNameEncoding"] =
+    user_name_encoding_type_get_enum_value_name((uint32_t)fields->user_name_encoding);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["UserNameEncoding"] = fields->user_name_encoding;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_modify_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  UserTypeEnum &user_type,
+  
+  bool &user_active_state,
+  
+  CredRule &credential_rule,
+  
+  std::string &user_name,
+  
+  uint16_t &expiring_timeout_minutes,
+  
+  UserNameEncodingType &user_name_encoding
+  
+) {
+
+  uint32_t UserType_enum_val = get_enum_decimal_value<UserTypeEnum>("UserType", jsn);
+  if (UserType_enum_val == std::numeric_limits<UserTypeEnum>::max()) {
+    #ifdef USER_TYPE_ENUM_ENUM_NAME_AVAILABLE
+    UserType_enum_val = user_type_enum_get_enum_value_number(jsn.at("UserType").get<std::string>());
+    #endif
+  }
+  uint32_t CredentialRule_enum_val = get_enum_decimal_value<CredRule>("CredentialRule", jsn);
+  if (CredentialRule_enum_val == std::numeric_limits<CredRule>::max()) {
+    #ifdef CRED_RULE_ENUM_NAME_AVAILABLE
+    CredentialRule_enum_val = cred_rule_get_enum_value_number(jsn.at("CredentialRule").get<std::string>());
+    #endif
+  }
+  uint32_t UserNameEncoding_enum_val = get_enum_decimal_value<UserNameEncodingType>("UserNameEncoding", jsn);
+  if (UserNameEncoding_enum_val == std::numeric_limits<UserNameEncodingType>::max()) {
+    #ifdef USER_NAME_ENCODING_TYPE_ENUM_NAME_AVAILABLE
+    UserNameEncoding_enum_val = user_name_encoding_type_get_enum_value_number(jsn.at("UserNameEncoding").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("UserType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_type = static_cast<UserTypeEnum>(UserType_enum_val);
+  if (jsn.at("UserActiveState").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_active_state = jsn.at("UserActiveState").get< bool >();
+      if (jsn.at("CredentialRule").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_rule = static_cast<CredRule>(CredentialRule_enum_val);
+  if (jsn.at("UserName").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  user_name = jsn.at("UserName").get<std::string>();
+            if (jsn.at("ExpiringTimeoutMinutes").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  expiring_timeout_minutes = jsn.at("ExpiringTimeoutMinutes").get< uint16_t >();
+      if (jsn.at("UserNameEncoding").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  user_name_encoding = static_cast<UserNameEncodingType>(UserNameEncoding_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_delete_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid
+  
+) {
+
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_add_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum AddCredential / CredentialType
+  #ifdef ADD_CREDENTIAL_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    add_credential_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialData"] = nlohmann::json(fields->credential_data);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_add_credential(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  uint16_t &credential_slot,
+  
+  std::string &credential_data
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< uint16_t >();
+      if (jsn.at("CredentialData").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  credential_data = jsn.at("CredentialData").get<std::string>();
+          }
+
+
+std::string get_json_payload_for_user_credential_modify_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum ModifyCredential / CredentialType
+  #ifdef MODIFY_CREDENTIAL_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    modify_credential_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialData"] = nlohmann::json(fields->credential_data);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_modify_credential(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  uint16_t &credential_slot,
+  
+  std::string &credential_data
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< uint16_t >();
+      if (jsn.at("CredentialData").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  credential_data = jsn.at("CredentialData").get<std::string>();
+          }
+
+
+std::string get_json_payload_for_user_credential_delete_credential_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum DeleteCredential / CredentialType
+  #ifdef DELETE_CREDENTIAL_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    delete_credential_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_credential(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  uint16_t &credential_slot
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< uint16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_delete_all_users_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_by_type_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum DeleteAllCredentialsByType / CredentialType
+  #ifdef DELETE_ALL_CREDENTIALS_BY_TYPE_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    delete_all_credentials_by_type_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_by_type(
+  nlohmann::json &jsn,
+  CredType &credential_type
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_for_user_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid
+  
+) {
+
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_delete_all_credentials_for_user_by_type_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum DeleteAllCredentialsForUserByType / CredentialType
+  #ifdef DELETE_ALL_CREDENTIALS_FOR_USER_BY_TYPE_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    delete_all_credentials_for_user_by_type_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_delete_all_credentials_for_user_by_type(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  CredType &credential_type
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_credential_learn_start_add_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum CredentialLearnStartAdd / CredentialType
+  #ifdef CREDENTIAL_LEARN_START_ADD_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    credential_learn_start_add_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialLearnTimeout"] = nlohmann::json(fields->credential_learn_timeout);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_credential_learn_start_add(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  uint16_t &credential_slot,
+  
+  uint8_t &credential_learn_timeout
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< uint16_t >();
+      if (jsn.at("CredentialLearnTimeout").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_learn_timeout = jsn.at("CredentialLearnTimeout").get< uint8_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_credential_learn_start_modify_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Enum CredentialLearnStartModify / CredentialType
+  #ifdef CREDENTIAL_LEARN_START_MODIFY_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    credential_learn_start_modify_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialSlot"] = nlohmann::json(fields->credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["CredentialLearnTimeout"] = nlohmann::json(fields->credential_learn_timeout);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_credential_learn_start_modify(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid,
+  
+  CredType &credential_type,
+  
+  uint16_t &credential_slot,
+  
+  uint8_t &credential_learn_timeout
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+      if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("CredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_slot = jsn.at("CredentialSlot").get< uint16_t >();
+      if (jsn.at("CredentialLearnTimeout").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  credential_learn_timeout = jsn.at("CredentialLearnTimeout").get< uint8_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_credential_learn_stop_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_credential_association_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum CredentialAssociation / CredentialType
+  #ifdef CREDENTIAL_ASSOCIATION_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    credential_association_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["SourceUserUniqueID"] = nlohmann::json(fields->source_user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["SourceCredentialSlot"] = nlohmann::json(fields->source_credential_slot);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["DestinationUserUniqueID"] = nlohmann::json(fields->destination_user_uniqueid);
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["DestinationCredentialSlot"] = nlohmann::json(fields->destination_credential_slot);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_credential_association(
+  nlohmann::json &jsn,
+  CredType &credential_type,
+  
+  uint16_t &source_user_uniqueid,
+  
+  uint16_t &source_credential_slot,
+  
+  uint16_t &destination_user_uniqueid,
+  
+  uint16_t &destination_credential_slot
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+  if (jsn.at("SourceUserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  source_user_uniqueid = jsn.at("SourceUserUniqueID").get< uint16_t >();
+      if (jsn.at("SourceCredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  source_credential_slot = jsn.at("SourceCredentialSlot").get< uint16_t >();
+      if (jsn.at("DestinationUserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  destination_user_uniqueid = jsn.at("DestinationUserUniqueID").get< uint16_t >();
+      if (jsn.at("DestinationCredentialSlot").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  destination_credential_slot = jsn.at("DestinationCredentialSlot").get< uint16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_get_user_checksum_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["UserUniqueID"] = nlohmann::json(fields->user_uniqueid);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_get_user_checksum(
+  nlohmann::json &jsn,
+  uint16_t &user_uniqueid
+  
+) {
+
+  if (jsn.at("UserUniqueID").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+        
+  user_uniqueid = jsn.at("UserUniqueID").get< uint16_t >();
+    }
+
+
+std::string get_json_payload_for_user_credential_get_credential_checksum_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Enum GetCredentialChecksum / CredentialType
+  #ifdef GET_CREDENTIAL_CHECKSUM_CREDENTIAL_TYPE_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["CredentialType"] =
+    get_credential_checksum_credential_type_get_enum_value_name(
+      (uint32_t)fields->credential_type);
+  #elif defined(CRED_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["CredentialType"] =
+    cred_type_get_enum_value_name((uint32_t)fields->credential_type);
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["CredentialType"] = fields->credential_type;
+  #endif
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_get_credential_checksum(
+  nlohmann::json &jsn,
+  CredType &credential_type
+  
+) {
+
+  uint32_t CredentialType_enum_val = get_enum_decimal_value<CredType>("CredentialType", jsn);
+  if (CredentialType_enum_val == std::numeric_limits<CredType>::max()) {
+    #ifdef CRED_TYPE_ENUM_NAME_AVAILABLE
+    CredentialType_enum_val = cred_type_get_enum_value_number(jsn.at("CredentialType").get<std::string>());
+    #endif
+  }
+  if (jsn.at("CredentialType").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+  credential_type = static_cast<CredType>(CredentialType_enum_val);
+}
+
+
+std::string get_json_payload_for_user_credential_get_all_users_checksum_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+std::string get_json_payload_for_user_credential_set_admin_pin_code_command(
+  
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  command_with_no_fields = false;
+  // Single Value
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["PINCode"] = nlohmann::json(fields->pin_code);
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+void uic_mqtt_dotdot_parse_user_credential_set_admin_pin_code(
+  nlohmann::json &jsn,
+  std::string &pin_code
+  
+) {
+
+  if (jsn.at("PINCode").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
+       
+  pin_code = jsn.at("PINCode").get<std::string>();
+          }
+
+
+std::string get_json_payload_for_user_credential_deactivate_admin_pin_code_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
+/**
+ * @brief JSON parser for ::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void uic_mqtt_dotdot_parse_user_credential_write_attributes(
+  nlohmann::json &jsn,
+  uic_mqtt_dotdot_user_credential_state_t &new_state,
+  uic_mqtt_dotdot_user_credential_updated_state_t &new_updated_state
+) {
+
+
+
+}
+
+
 std::string get_json_payload_for_aox_locator_iq_report_command(
   
   const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields

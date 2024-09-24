@@ -4978,6 +4978,63 @@ typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_attribute_configu
   size_t configuration_parameters_count,
   const ConfigurationParameter* configuration_parameters
 );
+// Callback types used by the user_credential cluster
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t supported_user_unique_identifiers
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint8_t supported_credential_rules
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t supported_credential_types
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  uint16_t supported_user_types
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_support_credential_checksum_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  bool support_credential_checksum
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_support_admin_pin_code_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  bool support_admin_pin_code
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_support_admin_pin_code_deactivation_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  bool support_admin_pin_code_deactivation
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_admin_pin_code_callback_t)(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  bool unretained,
+  uic_mqtt_dotdot_attribute_update_type_t update_type,
+  const char* admin_pin_code
+);
 // Callback types used by the aox_locator cluster
 typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_t)(
   dotdot_unid_t unid,
@@ -9876,6 +9933,62 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_attributes_init();
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_set(const uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_t callback);
+
+
+/**
+ *  Initializes the attributes features for the UserCredential cluster,
+ *  allowing to receive attribute updates from other UNIDs.
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_attributes_init();
+
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/supported_user_unique_identifiers/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_user_unique_identifiers_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/supported_credential_rules/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/supported_credential_types/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_credential_types_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/supported_user_types/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback_set(const uic_mqtt_dotdot_user_credential_attribute_supported_user_types_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/support_credential_checksum/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_support_credential_checksum_callback_set(const uic_mqtt_dotdot_user_credential_attribute_support_credential_checksum_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/support_admin_pin_code/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_support_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_attribute_support_admin_pin_code_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/support_admin_pin_code_deactivation/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_support_admin_pin_code_deactivation_callback_set(const uic_mqtt_dotdot_user_credential_attribute_support_admin_pin_code_deactivation_callback_t callback);
+/**
+ * Setup callback to be called when a
+ * UserCredential/Attributes/admin_pin_code/# is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void uic_mqtt_dotdot_user_credential_attribute_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_attribute_admin_pin_code_callback_t callback);
 
 
 /**

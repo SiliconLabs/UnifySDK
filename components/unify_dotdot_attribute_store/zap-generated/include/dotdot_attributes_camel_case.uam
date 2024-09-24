@@ -834,6 +834,16 @@ def zb_Location 0xfd060001
 // This represents short CamelCase labels the attributes in the DotDot ConfigurationParameters cluster
 def zb_ConfigurationParameters 0xfd070000
 
+// This represents short CamelCase labels the attributes in the DotDot UserCredential cluster
+def zb_SupportedUserUniqueIdentifiers 0xfd080000
+def zb_SupportedCredentialRules 0xfd080001
+def zb_SupportedCredentialTypes 0xfd080002
+def zb_SupportedUserTypes 0xfd080003
+def zb_SupportCredentialChecksum 0xfd080004
+def zb_SupportAdminPinCode 0xfd080005
+def zb_SupportAdminPinCodeDeactivation 0xfd080006
+def zb_AdminPinCode 0xfd080007
+
 // This represents short CamelCase labels the attributes in the DotDot AoXLocator cluster
 def zb_ReportingMode 0xfd100001
 def zb_PositionAndOrientationValid 0xfd100002

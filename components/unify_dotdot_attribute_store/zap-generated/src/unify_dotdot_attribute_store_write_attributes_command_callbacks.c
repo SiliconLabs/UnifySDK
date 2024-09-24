@@ -2394,6 +2394,36 @@ static sl_status_t configuration_parameters_cluster_write_attributes_callback(
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UserCredential
+////////////////////////////////////////////////////////////////////////////////
+// WriteAttribute Callbacks user_credential
+static sl_status_t user_credential_cluster_write_attributes_callback(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_user_credential_state_t attributes,
+  uic_mqtt_dotdot_user_credential_updated_state_t updated_attributes)
+{
+  if (false == is_write_attributes_enabled()) {
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_user_credential_writable_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "user_credential: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint_id);
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
 // Start of cluster AoXLocator
 ////////////////////////////////////////////////////////////////////////////////
 // WriteAttribute Callbacks aox_locator
@@ -2837,6 +2867,9 @@ sl_status_t
   
   uic_mqtt_dotdot_set_configuration_parameters_write_attributes_callback(
     &configuration_parameters_cluster_write_attributes_callback);
+  
+  uic_mqtt_dotdot_set_user_credential_write_attributes_callback(
+    &user_credential_cluster_write_attributes_callback);
   
   uic_mqtt_dotdot_set_aox_locator_write_attributes_callback(
     &aox_locator_cluster_write_attributes_callback);

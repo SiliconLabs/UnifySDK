@@ -24479,6 +24479,377 @@ static void configuration_parameters_cluster_cluster_revision_callback(
 
 /**
  * @brief Publishes the desired value of an updated attribute store node for
+ * the UserCredential cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void user_credential_cluster_publish_desired_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // If the value got updated but both Reported and Desired undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)
+      && false == attribute_store_is_desired_defined(updated_node)) {
+    sl_log_debug(LOG_TAG,
+                 "Reported/Desired values are undefined. "
+                 "Skipping publication");
+    return;
+  }
+
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS) {
+          uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES) {
+          uic_mqtt_dotdot_user_credential_supported_credential_rules_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES) {
+          uic_mqtt_dotdot_user_credential_supported_credential_types_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES) {
+          uic_mqtt_dotdot_user_credential_supported_user_types_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM) {
+          uic_mqtt_dotdot_user_credential_support_credential_checksum_publish(
+            base_topic.c_str(),
+            static_cast<bool>(attr.desired_or_reported<bool>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE) {
+          uic_mqtt_dotdot_user_credential_support_admin_pin_code_publish(
+            base_topic.c_str(),
+            static_cast<bool>(attr.desired_or_reported<bool>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION) {
+          uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_publish(
+            base_topic.c_str(),
+            static_cast<bool>(attr.desired_or_reported<bool>()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE) {
+          std::vector<char> str_desired = attr.desired_or_reported<std::vector<char>>();
+          uic_mqtt_dotdot_user_credential_admin_pin_code_publish(
+            base_topic.c_str(),
+            static_cast<const char*>(str_desired.data()),
+            UCL_MQTT_PUBLISH_TYPE_DESIRED);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
+  }
+}
+
+/**
+ * @brief Publishes the reported value of an updated attribute store node for
+ * the UserCredential cluster.
+ * @param updated_node Updated attribute store node
+ * @param change       Type of change applied
+ */
+static void user_credential_cluster_publish_reported_value_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
+  if (ATTRIBUTE_STORE_INVALID_NODE
+      != attribute_store_get_first_parent_with_type(
+        updated_node,
+        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  // clang-format off
+  // clang-format on
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+  // clang-format on
+
+  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
+  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: Invalid type for Attribute ID %d, "
+                 "this should not happen.",
+                 updated_node);
+    return;
+  }
+
+  // Deletion case:
+  if (change == ATTRIBUTE_DELETED) {
+    // clang-format off
+    switch(type) {
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportedUserUniqueIdentifiers under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportedCredentialRules under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_supported_credential_rules_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportedCredentialTypes under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_supported_credential_types_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportedUserTypes under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_supported_user_types_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportCredentialChecksum under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_support_credential_checksum_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportAdminPinCode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_support_admin_pin_code_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::SupportAdminPinCodeDeactivation under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+     case DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE:
+        // clang-format on
+        sl_log_debug(LOG_TAG,
+                     "Unretaining UserCredential::AdminPinCode under topic %s",
+                     base_topic.c_str());
+        // clang-format off
+      uic_mqtt_dotdot_user_credential_admin_pin_code_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
+      break;
+    default:
+    break;
+    }
+    // clang-format on
+    return;
+  }
+
+  // If the value got updated but undefined, we skip publication
+  if (false == attribute_store_is_reported_defined(updated_node)) {
+    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
+    return;
+  }
+
+  // Else we assume update case:
+  // clang-format off
+  try {
+    attribute_store::attribute attr(updated_node);
+      if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS) {
+          uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES) {
+          uic_mqtt_dotdot_user_credential_supported_credential_rules_publish(
+            base_topic.c_str(),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES) {
+          uic_mqtt_dotdot_user_credential_supported_credential_types_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES) {
+          uic_mqtt_dotdot_user_credential_supported_user_types_publish(
+            base_topic.c_str(),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM) {
+          uic_mqtt_dotdot_user_credential_support_credential_checksum_publish(
+            base_topic.c_str(),
+            static_cast<bool>(attr.reported<bool>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE) {
+          uic_mqtt_dotdot_user_credential_support_admin_pin_code_publish(
+            base_topic.c_str(),
+            static_cast<bool>(attr.reported<bool>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION) {
+          uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_publish(
+            base_topic.c_str(),
+            static_cast<bool>(attr.reported<bool>()),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+          if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE) {
+          std::vector<char> str_desired = attr.reported<std::vector<char>>();
+          uic_mqtt_dotdot_user_credential_admin_pin_code_publish(
+            base_topic.c_str(),
+            static_cast<const char*>( str_desired.data() ),
+            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
+        return;
+      }
+      } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
+  }
+}
+
+static void user_credential_cluster_cluster_revision_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // clang-format on
+  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
+    return;
+  }
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  // clang-format off
+  // clang-format on
+  if (SL_STATUS_OK
+      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
+                                                     unid,
+                                                     &endpoint_id)) {
+    return;
+  }
+  // clang-format off
+  // clang-format on
+
+  std::string base_topic = "ucl/by-unid/" + std::string(unid);
+  // clang-format off
+  base_topic += "/ep" + std::to_string(endpoint_id);
+
+  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
+    // On attribute creation, make sure to publish the attribute revision for the first time
+    std::string cluster_revision_topic = base_topic + "/UserCredential/Attributes/ClusterRevision";
+    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
+      uic_mqtt_dotdot_user_credential_publish_cluster_revision(base_topic.c_str(), 1);
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // Check if we just erased the last attribute under a cluster, if yes, unretain
+    // the Cluster revision too.
+    if (false == dotdot_is_any_user_credential_attribute_supported(unid, endpoint_id)) {
+      base_topic +=  "/UserCredential";
+      sl_log_debug(LOG_TAG, "No more attributes supported for UserCredential cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
+      uic_mqtt_unretain(base_topic.c_str());
+    }
+  }
+}
+
+
+/**
+ * @brief Publishes the desired value of an updated attribute store node for
  * the AoXLocator cluster.
  * @param updated_node Updated attribute store node
  * @param change       Type of change applied
@@ -36510,6 +36881,118 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       configuration_parameters_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION);
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_desired_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE,
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      user_credential_cluster_publish_reported_value_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE,
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      user_credential_cluster_cluster_revision_callback,
+      DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       aox_locator_cluster_publish_desired_value_callback,

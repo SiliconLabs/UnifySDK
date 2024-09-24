@@ -39032,6 +39032,1540 @@ void uic_mqtt_dotdot_configuration_parameters_publish_supported_commands(
 void uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
+// Callback types used by the user_credential cluster
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_add_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    UserTypeEnum user_type,
+
+    bool user_active_state,
+
+    CredRule credential_rule,
+
+    const char* user_name,
+
+    uint16_t expiring_timeout_minutes,
+
+    UserNameEncodingType user_name_encoding
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_modify_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    UserTypeEnum user_type,
+
+    bool user_active_state,
+
+    CredRule credential_rule,
+
+    const char* user_name,
+
+    uint16_t expiring_timeout_minutes,
+
+    UserNameEncodingType user_name_encoding
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_add_credential_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    const char* credential_data
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_modify_credential_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    const char* credential_data
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_credential_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_users_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    CredType credential_type
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    uint8_t credential_learn_timeout
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid,
+
+    CredType credential_type,
+
+    uint16_t credential_slot,
+
+    uint8_t credential_learn_timeout
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_association_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    CredType credential_type,
+
+    uint16_t source_user_uniqueid,
+
+    uint16_t source_credential_slot,
+
+    uint16_t destination_user_uniqueid,
+
+    uint16_t destination_credential_slot
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uint16_t user_uniqueid
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    CredType credential_type
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    const char* pin_code
+
+);
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
+
+typedef struct {
+  uint16_t supported_user_unique_identifiers;
+  uint8_t supported_credential_rules;
+  uint16_t supported_credential_types;
+  uint16_t supported_user_types;
+  bool support_credential_checksum;
+  bool support_admin_pin_code;
+  bool support_admin_pin_code_deactivation;
+  const char* admin_pin_code;
+} uic_mqtt_dotdot_user_credential_state_t;
+
+typedef struct {
+  bool supported_user_unique_identifiers;
+  bool supported_credential_rules;
+  bool supported_credential_types;
+  bool supported_user_types;
+  bool support_credential_checksum;
+  bool support_admin_pin_code;
+  bool support_admin_pin_code_deactivation;
+  bool admin_pin_code;
+} uic_mqtt_dotdot_user_credential_updated_state_t;
+
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_write_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_user_credential_state_t,
+    uic_mqtt_dotdot_user_credential_updated_state_t
+);
+
+typedef sl_status_t (*uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    uic_mqtt_dotdot_user_credential_updated_state_t
+);
+
+
+/**
+ * @brief Command fields for UserCredential/AddUser
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  UserTypeEnum user_type;
+
+  bool user_active_state;
+
+  CredRule credential_rule;
+
+  const char* user_name;
+
+  uint16_t expiring_timeout_minutes;
+
+  UserNameEncodingType user_name_encoding;
+} uic_mqtt_dotdot_user_credential_command_add_user_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/ModifyUser
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  UserTypeEnum user_type;
+
+  bool user_active_state;
+
+  CredRule credential_rule;
+
+  const char* user_name;
+
+  uint16_t expiring_timeout_minutes;
+
+  UserNameEncodingType user_name_encoding;
+} uic_mqtt_dotdot_user_credential_command_modify_user_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/DeleteUser
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+} uic_mqtt_dotdot_user_credential_command_delete_user_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/AddCredential
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  CredType credential_type;
+
+  uint16_t credential_slot;
+
+  const char* credential_data;
+} uic_mqtt_dotdot_user_credential_command_add_credential_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/ModifyCredential
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  CredType credential_type;
+
+  uint16_t credential_slot;
+
+  const char* credential_data;
+} uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/DeleteCredential
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  CredType credential_type;
+
+  uint16_t credential_slot;
+} uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/DeleteAllCredentialsByType
+ */
+typedef struct {
+  CredType credential_type;
+} uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/DeleteAllCredentialsForUser
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+} uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/DeleteAllCredentialsForUserByType
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  CredType credential_type;
+} uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/CredentialLearnStartAdd
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  CredType credential_type;
+
+  uint16_t credential_slot;
+
+  uint8_t credential_learn_timeout;
+} uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/CredentialLearnStartModify
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+
+  CredType credential_type;
+
+  uint16_t credential_slot;
+
+  uint8_t credential_learn_timeout;
+} uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/CredentialAssociation
+ */
+typedef struct {
+  CredType credential_type;
+
+  uint16_t source_user_uniqueid;
+
+  uint16_t source_credential_slot;
+
+  uint16_t destination_user_uniqueid;
+
+  uint16_t destination_credential_slot;
+} uic_mqtt_dotdot_user_credential_command_credential_association_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/GetUserChecksum
+ */
+typedef struct {
+  uint16_t user_uniqueid;
+} uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/GetCredentialChecksum
+ */
+typedef struct {
+  CredType credential_type;
+} uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t;
+
+/**
+ * @brief Command fields for UserCredential/SetAdminPINCode
+ */
+typedef struct {
+  const char* pin_code;
+} uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t;
+
+
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/add_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_add_user_callback_set(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/add_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_add_user_callback_unset(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/add_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_add_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/add_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_set(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/add_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_unset(const uic_mqtt_dotdot_user_credential_add_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/add_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_add_user_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/modify_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_modify_user_callback_set(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/modify_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_modify_user_callback_unset(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/modify_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_modify_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/modify_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_set(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/modify_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_unset(const uic_mqtt_dotdot_user_credential_modify_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/modify_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_modify_user_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_user_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/add_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_add_credential_callback_set(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/add_credential is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_add_credential_callback_unset(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/add_credential is received.
+ */
+void uic_mqtt_dotdot_user_credential_add_credential_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/add_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_set(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/add_credential is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_unset(const uic_mqtt_dotdot_user_credential_add_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/add_credential is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_add_credential_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/modify_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_set(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/modify_credential is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_unset(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/modify_credential is received.
+ */
+void uic_mqtt_dotdot_user_credential_modify_credential_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/modify_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_set(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/modify_credential is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_unset(const uic_mqtt_dotdot_user_credential_modify_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/modify_credential is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_modify_credential_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_set(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_credential is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_unset(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_credential is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_credential_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_credential is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_set(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_credential is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_unset(const uic_mqtt_dotdot_user_credential_delete_credential_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_credential is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_credential_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_all_users is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_all_users is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_all_users is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_users_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_users is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_users is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_users_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_all_users is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_users_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_all_credentials is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_all_credentials is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_all_credentials is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_all_credentials is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_all_credentials_by_type is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_all_credentials_by_type is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_all_credentials_by_type is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_by_type is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_by_type is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_by_type_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_by_type is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_by_type_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_all_credentials_for_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_all_credentials_for_user is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_all_credentials_for_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_for_user is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_for_user is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_for_user is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/delete_all_credentials_for_user_by_type is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/delete_all_credentials_for_user_by_type is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/delete_all_credentials_for_user_by_type is received.
+ */
+void uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_for_user_by_type is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback_set(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_for_user_by_type is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback_unset(const uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/delete_all_credentials_for_user_by_type is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_delete_all_credentials_for_user_by_type_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/credential_learn_start_add is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/credential_learn_start_add is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/credential_learn_start_add is received.
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_learn_start_add is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_learn_start_add is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/credential_learn_start_add is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_add_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/credential_learn_start_modify is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/credential_learn_start_modify is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/credential_learn_start_modify is received.
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_learn_start_modify is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_learn_start_modify is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/credential_learn_start_modify is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_start_modify_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/credential_learn_stop is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/credential_learn_stop is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/credential_learn_stop is received.
+ */
+void uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_learn_stop is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback_set(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_learn_stop is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback_unset(const uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/credential_learn_stop is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_learn_stop_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/credential_association is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_association_callback_set(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/credential_association is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_credential_association_callback_unset(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/credential_association is received.
+ */
+void uic_mqtt_dotdot_user_credential_credential_association_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_association is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_association_callback_set(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/credential_association is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_association_callback_unset(const uic_mqtt_dotdot_user_credential_credential_association_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/credential_association is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_credential_association_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/get_user_checksum is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/get_user_checksum is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/get_user_checksum is received.
+ */
+void uic_mqtt_dotdot_user_credential_get_user_checksum_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/get_user_checksum is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/get_user_checksum is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/get_user_checksum is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_user_checksum_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/get_credential_checksum is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/get_credential_checksum is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/get_credential_checksum is received.
+ */
+void uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/get_credential_checksum is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/get_credential_checksum is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/get_credential_checksum is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_credential_checksum_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/get_all_users_checksum is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/get_all_users_checksum is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/get_all_users_checksum is received.
+ */
+void uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/get_all_users_checksum is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback_set(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/get_all_users_checksum is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback_unset(const uic_mqtt_dotdot_user_credential_get_all_users_checksum_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/get_all_users_checksum is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_get_all_users_checksum_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/set_admin_pin_code is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/set_admin_pin_code is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/set_admin_pin_code is received.
+ */
+void uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/set_admin_pin_code is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/set_admin_pin_code is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_set_admin_pin_code_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/set_admin_pin_code is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_set_admin_pin_code_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * UserCredential/Commands/deactivate_admin_pin_code is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * UserCredential/Commands/deactivate_admin_pin_code is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * UserCredential/Commands/deactivate_admin_pin_code is received.
+ */
+void uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/UserCredential/GeneratedCommands/deactivate_admin_pin_code is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback_set(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/UserCredential/GeneratedCommands/deactivate_admin_pin_code is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback_unset(const uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/UserCredential/GeneratedCommands/deactivate_admin_pin_code is received.
+ */
+void uic_mqtt_dotdot_user_credential_generated_deactivate_admin_pin_code_callback_clear();
+
+/**
+ * @brief Setup a callback for WriteAttribute to be called when a
+ * +/user_credential/Commands/WriteAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_user_credential_write_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for WriteAttribute to be called when a
+ * +/user_credential/Commands/WriteAttributes is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_user_credential_write_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_write_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/user_credential/Commands/WriteAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_user_credential_write_attributes_callbacks();
+
+/**
+ * @brief Setup a callback for ForceReadAttributes to be called when a
+ * +/user_credential/Commands/ForceReadAttributes is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_set_user_credential_force_read_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Unsets a callback for ForceReadAttributes to be called when a
+ * +/user_credential/Commands/ForceReadAttributes is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_unset_user_credential_force_read_attributes_callback(
+  const uic_mqtt_dotdot_user_credential_force_read_attributes_callback_t callback
+);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/user_credential/Commands/ForceReadAttributes is received.
+ */
+void uic_mqtt_dotdot_clear_user_credential_force_read_attributes_callbacks();
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportedUserUniqueIdentifiers
+ *
+ * @param base_topic    topic prefix to publish, /supported_user_unique_identifiers
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportedUserUniqueIdentifiers
+ *
+ * @param base_topic    topic prefix to publish, /supported_user_unique_identifiers
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportedCredentialRules
+ *
+ * @param base_topic    topic prefix to publish, /supported_credential_rules
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_rules_publish(
+  const char *base_topic,
+  uint8_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportedCredentialRules
+ *
+ * @param base_topic    topic prefix to publish, /supported_credential_rules
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_rules_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportedCredentialTypes
+ *
+ * @param base_topic    topic prefix to publish, /supported_credential_types
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_types_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportedCredentialTypes
+ *
+ * @param base_topic    topic prefix to publish, /supported_credential_types
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_credential_types_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportedUserTypes
+ *
+ * @param base_topic    topic prefix to publish, /supported_user_types
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_types_publish(
+  const char *base_topic,
+  uint16_t value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportedUserTypes
+ *
+ * @param base_topic    topic prefix to publish, /supported_user_types
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_supported_user_types_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportCredentialChecksum
+ *
+ * @param base_topic    topic prefix to publish, /support_credential_checksum
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_support_credential_checksum_publish(
+  const char *base_topic,
+  bool value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportCredentialChecksum
+ *
+ * @param base_topic    topic prefix to publish, /support_credential_checksum
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_support_credential_checksum_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportAdminPinCode
+ *
+ * @param base_topic    topic prefix to publish, /support_admin_pin_code
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_publish(
+  const char *base_topic,
+  bool value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportAdminPinCode
+ *
+ * @param base_topic    topic prefix to publish, /support_admin_pin_code
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/SupportAdminPinCodeDeactivation
+ *
+ * @param base_topic    topic prefix to publish, /support_admin_pin_code_deactivation
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_publish(
+  const char *base_topic,
+  bool value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/SupportAdminPinCodeDeactivation
+ *
+ * @param base_topic    topic prefix to publish, /support_admin_pin_code_deactivation
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Publish the attribute; UserCredential/Attributes/AdminPinCode
+ *
+ * @param base_topic    topic prefix to publish, /admin_pin_code
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_admin_pin_code_publish(
+  const char *base_topic,
+  const char* value,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+/**
+ * @brief Unretains a published attribute; UserCredential/Attributes/AdminPinCode
+ *
+ * @param base_topic    topic prefix to publish, /admin_pin_code
+ *                      will be appended
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ *
+ * @returns SL_STATUS_OK on success
+ */
+sl_status_t uic_mqtt_dotdot_user_credential_admin_pin_code_unretain(
+  const char *base_topic,
+  uic_mqtt_dotdot_attribute_publish_type_t publish_type
+);
+
+
+/**
+ * @brief Publish the UserCredential/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UserCredential/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void uic_mqtt_dotdot_user_credential_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+/**
+ * @brief Unretain a publication to UserCredential/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /UserCredential/Attributes/ClusterRevision
+ *                      will be appended.
+ */
+void uic_mqtt_dotdot_user_credential_unretain_cluster_revision(const char* base_topic);
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint for the UserCredential Cluster
+ *
+ * This function will iterate over all Commands in the UserCredential Cluster and
+ * call all registered callback functions with UNID/endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+ * All Cluster Command callback functions that return SL_STATUS_OK
+ * will be added to the list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void uic_mqtt_dotdot_user_credential_publish_supported_commands(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+ * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
+ * the UserCredential Cluster
+ *
+ * @param unid
+ * @param endpoint )
+ */
+void uic_mqtt_dotdot_user_credential_publish_empty_supported_commands(
+  const dotdot_unid_t unid
+  ,dotdot_endpoint_id_t endpoint);
 // Callback types used by the aox_locator cluster
 typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_iq_report_callback_t)(
     dotdot_unid_t unid,

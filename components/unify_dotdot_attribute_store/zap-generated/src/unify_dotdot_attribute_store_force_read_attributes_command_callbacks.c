@@ -4325,6 +4325,71 @@ static sl_status_t uic_mqtt_dotdot_configuration_parameters_force_read_attribute
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
+// Start of cluster UserCredential
+////////////////////////////////////////////////////////////////////////////////
+static sl_status_t uic_mqtt_dotdot_user_credential_force_read_attributes_callback (
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_user_credential_updated_state_t attribute_list) {
+
+  if (false == is_force_read_attributes_enabled()){
+    return SL_STATUS_FAIL;
+  }
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    if (is_automatic_deduction_of_supported_commands_enabled()) {
+      return dotdot_is_any_user_credential_attribute_supported(unid, endpoint_id) ?
+        SL_STATUS_OK : SL_STATUS_FAIL;
+    } else {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Go and undefine everything that needs to be read again:
+  if (true == attribute_list.supported_user_unique_identifiers) {
+    if (SL_STATUS_OK == dotdot_user_credential_supported_user_unique_identifiers_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportedUserUniqueIdentifiers under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.supported_credential_rules) {
+    if (SL_STATUS_OK == dotdot_user_credential_supported_credential_rules_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportedCredentialRules under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.supported_credential_types) {
+    if (SL_STATUS_OK == dotdot_user_credential_supported_credential_types_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportedCredentialTypes under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.supported_user_types) {
+    if (SL_STATUS_OK == dotdot_user_credential_supported_user_types_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportedUserTypes under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.support_credential_checksum) {
+    if (SL_STATUS_OK == dotdot_user_credential_support_credential_checksum_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportCredentialChecksum under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.support_admin_pin_code) {
+    if (SL_STATUS_OK == dotdot_user_credential_support_admin_pin_code_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportAdminPinCode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.support_admin_pin_code_deactivation) {
+    if (SL_STATUS_OK == dotdot_user_credential_support_admin_pin_code_deactivation_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::SupportAdminPinCodeDeactivation under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  if (true == attribute_list.admin_pin_code) {
+    if (SL_STATUS_OK == dotdot_user_credential_admin_pin_code_undefine_reported(unid, endpoint_id)) {
+      sl_log_debug(LOG_TAG, "Undefined Reported value of UserCredential::AdminPinCode under %s - Endpoint %d", unid, endpoint_id);
+    }
+  }
+  return SL_STATUS_OK;
+}
+////////////////////////////////////////////////////////////////////////////////
 // Start of cluster AoXLocator
 ////////////////////////////////////////////////////////////////////////////////
 static sl_status_t uic_mqtt_dotdot_aox_locator_force_read_attributes_callback (
@@ -4801,6 +4866,8 @@ sl_status_t
   uic_mqtt_dotdot_set_name_and_location_force_read_attributes_callback(&uic_mqtt_dotdot_name_and_location_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_configuration_parameters_force_read_attributes_callback(&uic_mqtt_dotdot_configuration_parameters_force_read_attributes_callback);
+  
+  uic_mqtt_dotdot_set_user_credential_force_read_attributes_callback(&uic_mqtt_dotdot_user_credential_force_read_attributes_callback);
   
   uic_mqtt_dotdot_set_aox_locator_force_read_attributes_callback(&uic_mqtt_dotdot_aox_locator_force_read_attributes_callback);
   
