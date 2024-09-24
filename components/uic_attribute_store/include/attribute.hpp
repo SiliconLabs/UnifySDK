@@ -504,6 +504,11 @@ class attribute
     _n = ATTRIBUTE_STORE_INVALID_NODE;
   }
 
+  sl_status_t change_parent(attribute new_parent)
+  {
+    return attribute_store_change_parent(this->_n, new_parent);
+  }
+
   /**
    * @brief Visit all nodes in the tree.
    *

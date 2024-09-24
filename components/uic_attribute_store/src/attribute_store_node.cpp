@@ -93,6 +93,40 @@ attribute_store_node *attribute_store_node::find_id(attribute_store_node_t _id)
   return NULL;
 }
 
+attribute_store_node*
+  attribute_store_node::change_parent(attribute_store_node* new_parent)
+{
+  if (this->parent_node == NULL) {
+    sl_log_critical(LOG_TAG, "Cannot change parent of the root node.");
+    return NULL;
+  }
+
+  if (new_parent == NULL) {
+    sl_log_warning(LOG_TAG, "Cannot change parent to a NULL node.");
+    return NULL;
+  }
+
+  if (new_parent == this->parent_node) {
+    sl_log_warning(LOG_TAG, "Cannot change parent to the same node.");
+    return NULL;
+  }
+
+  if (new_parent->type != this->parent_node->type) {
+    sl_log_warning(LOG_TAG,
+                   "Cannot change parent to a node of different type. "
+                   "New Parent type: %s, Old parent type: %s",
+                   attribute_store_get_type_name(new_parent->type),
+                   attribute_store_get_type_name(this->parent_node->type));
+    return NULL;
+  }
+  // Clear old parent child link
+  this->parent_node->remove_child_link(this);
+
+  new_parent->child_nodes.push_back(this);
+  this->parent_node = new_parent;
+  return new_parent;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Log functions
 ///////////////////////////////////////////////////////////////////////////////

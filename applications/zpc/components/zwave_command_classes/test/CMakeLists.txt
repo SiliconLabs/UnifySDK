@@ -847,6 +847,7 @@ target_add_unittest(
     EXCLUDE
     zwave_command_class_notification.cpp
     DEPENDS
+    zwave_command_class_test_helpers
     zpc_attribute_store_test_helper
     zwave_controller
     zwave_command_handler_mock

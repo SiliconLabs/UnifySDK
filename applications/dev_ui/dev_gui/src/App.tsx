@@ -149,6 +149,23 @@ class App extends Component<{}, AppState> {
     this.setState({ CommissionableDevices: list });
   }
 
+  handleEvents(data: any) {
+    var toastType = toast.TYPE.DEFAULT;
+    switch (data.level) {
+      case 1:
+        toastType = toast.TYPE.INFO;
+        break;
+      case 2:
+        toastType = toast.TYPE.WARNING;
+        break;
+      case 3:
+      case 4:
+        toastType = toast.TYPE.ERROR;
+        break;
+    }
+    toast(data.message, { type: toastType })
+  }
+
   handleUPTIChange(list: any[]) {
     let upti = this.state.UPTI;
     upti.List = list;
@@ -413,6 +430,9 @@ class App extends Component<{}, AppState> {
         break;
       case "commissionable-device":
         this.handleCommissionableDevices(mes.data);
+        break;
+      case "event":
+        this.handleEvents(mes.data);
         break;
     }
   }

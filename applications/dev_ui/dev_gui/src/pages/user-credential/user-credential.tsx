@@ -224,6 +224,7 @@ export class UserCredential extends React.Component<UserCredentialProps, UserCre
                   <th>Supported User Types</th>
                   <th>Supported Credential Types</th>
                   <th>Supported Credential Rules</th>
+                  <th>Admin PIN Code</th>
                   <th>Supported Commands</th>
                 </tr>
               </thead>
@@ -251,6 +252,13 @@ export class UserCredential extends React.Component<UserCredentialProps, UserCre
                           <td>{this.getBadges(item.UserCredential?.SupportedUserTypes?.Reported)}</td>
                           <td>{this.getSupportedCredentialType(item.UserCredential?.SupportedCredentialTypes?.Reported, item.UserCredential?.Credentials)}</td>
                           <td>{this.getBadges(item.UserCredential?.SupportedCredentialRules?.Reported)}</td>
+                          <td>{(item.UserCredential?.SupportAdminPinCode?.Reported) ?
+                            <Tooltip key={index} title={"Deactivation supported : " + item.UserCredential?.SupportAdminPinCodeDeactivation?.Reported}>
+                              <span>{item.UserCredential?.AdminPinCode?.Reported}</span>
+                            </Tooltip>
+                            : <RiIcons.RiCloseCircleFill color="red"/>
+                          }
+                          </td>
                           <td className="float-left">
                             {commands && commands.length
                               ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Commands" className="float-right" disabled={isOffline} size="sm">

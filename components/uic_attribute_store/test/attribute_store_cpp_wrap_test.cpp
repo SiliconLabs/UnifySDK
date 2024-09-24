@@ -246,4 +246,114 @@ void test_attribute_store_cpp_wrap_emplace_happy_case()
                             "Should have created a new node");
 }
 
+void test_attribute_store_change_parent_happy_case()
+{
+  /*         A
+ *        / \
+ *        B   B
+ *       / \
+ *      C   D
+*/
+
+  attribute a = attribute::root().add_node('A');
+  attribute b1 = a.add_node('B');
+  attribute b2 = a.add_node('B');
+  attribute c = b1.add_node('C');
+  attribute d = b1.add_node('D');
+
+  c.set_reported(55);
+  d.set_reported(42);
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK, d.change_parent(b2), "Change parent should have worked");
+
+  TEST_ASSERT_EQUAL_MESSAGE(1, b1.child_count(), "B1 should only have 1 child now");
+  TEST_ASSERT_EQUAL_MESSAGE(1, b2.child_count(), "B2 should have 1 child now");
+  TEST_ASSERT_EQUAL_MESSAGE(d, b2.child(0), "D should be the only child of B2");
+  TEST_ASSERT_EQUAL_MESSAGE(d.parent(), b2, "D should have B2 as parent");
+  TEST_ASSERT_EQUAL_MESSAGE(42,
+                            d.reported<int>(),
+                            "D should have 42 as reported value");
+}
+
+void test_attribute_store_change_parent_not_same_parent_type()
+{
+  /*       A
+ *        / \
+ *        B  E
+ *       / \
+ *      C   D
+*/
+
+  attribute a = attribute::root().add_node('A');
+  attribute b = a.add_node('B');
+  attribute e = a.add_node('E');
+  attribute c = b.add_node('C');
+  attribute d = b.add_node('D');
+
+  c.set_reported(55);
+  d.set_reported(42);
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_FAIL,
+                            d.change_parent(e),
+                            "Change parent should NOT have worked");
+
+  TEST_ASSERT_EQUAL_MESSAGE(2, b.child_count(), "B should still have 2 child");
+  TEST_ASSERT_EQUAL_MESSAGE(0, e.child_count(), "E should not have any child");
+  TEST_ASSERT_EQUAL_MESSAGE(d.parent(), b, "D should have B as parent");
+  TEST_ASSERT_EQUAL_MESSAGE(42,
+                            d.reported<int>(),
+                            "D should have 42 as reported value");
+}
+
+
+void test_attribute_store_change_parent_not_same_parent()
+{
+  /*       A
+ *        / \
+ *        B  E
+ *       / \
+ *      C   D
+*/
+
+  attribute a = attribute::root().add_node('A');
+  attribute b = a.add_node('B');
+  attribute e = a.add_node('E');
+  attribute c = b.add_node('C');
+  attribute d = b.add_node('D');
+
+  c.set_reported(55);
+  d.set_reported(42);
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_FAIL,
+                            d.change_parent(b),
+                            "Change parent should NOT have worked");
+
+  TEST_ASSERT_EQUAL_MESSAGE(2, b.child_count(), "B should still have 2 child");
+  TEST_ASSERT_EQUAL_MESSAGE(0, e.child_count(), "E should not have any child");
+  TEST_ASSERT_EQUAL_MESSAGE(d.parent(), b, "D should have B as parent");
+  TEST_ASSERT_EQUAL_MESSAGE(42,
+                            d.reported<int>(),
+                            "D should have 42 as reported value");
+}
+
+void test_attribute_store_change_parent_invalids()
+{
+  attribute root = attribute::root();
+  attribute a    = root.add_node('A');
+
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_FAIL,
+                            root.change_parent(a),
+                            "Shouldn't be able to change root node parent");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    a.change_parent(attribute(0)),
+    "Shouldn't be able to change parent to a invalid node parent");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_FAIL,
+    attribute(0).change_parent(a),
+    "Shouldn't be able to change a invalid node parent");
+}
+
 } // extern "C"
