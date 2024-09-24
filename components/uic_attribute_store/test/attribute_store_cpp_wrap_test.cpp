@@ -150,13 +150,37 @@ void test_attribute_store_cpp_wrap_navigation_test()
   attribute n3 = d.add_node(0x42);
 
   n1.set_reported<uint8_t>(0);
+  n1.set_desired<uint8_t>(3);
+
   n2.set_reported<uint8_t>(1);
+  n2.set_desired<uint8_t>(4);
+
   n3.set_reported<uint8_t>(2);
 
   for (int i = 0; i < 3; i++) {
     TEST_ASSERT_EQUAL(i, d.child_by_type(0x42, i).reported<uint8_t>());
   }
-  TEST_ASSERT_TRUE(n3 == d.child_by_type_and_value<uint8_t>(0x42, 2));
+
+
+  TEST_ASSERT_EQUAL(n3, d.child_by_type_and_value<uint8_t>(0x42, 2));
+  TEST_ASSERT_EQUAL(
+    n3, d.child_by_type_and_value<uint8_t>(0x42, 2, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(
+    n2, d.child_by_type_and_value<uint8_t>(0x42, 4, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(
+    n1, d.child_by_type_and_value<uint8_t>(0x42, 3, DESIRED_OR_REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(
+    n3,
+    d.child_by_type_and_value<uint8_t>(0x42, 2, DESIRED_OR_REPORTED_ATTRIBUTE));
+
+  // DESIRED_OR_REPORTED_ATTRIBUTE checks for desired value if defined, otherwise takes reported.
+  // Since n2 have it's desired value set to 4, it will not be returned here.
+  TEST_ASSERT_EQUAL(
+    ATTRIBUTE_STORE_INVALID_NODE,
+    d.child_by_type_and_value<uint8_t>(0x42, 1, DESIRED_OR_REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(
+    ATTRIBUTE_STORE_INVALID_NODE,
+    d.child_by_type_and_value<uint8_t>(0x42, 5, DESIRED_ATTRIBUTE));
 }
 
 void test_attribute_store_cpp_wrap_strings()
@@ -192,4 +216,34 @@ void test_attribute_store_cpp_wrap_strings()
                                       ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
   TEST_ASSERT_EQUAL_STRING("my new string value", read_string);
 }
+
+void test_attribute_store_cpp_wrap_emplace_happy_case()
+{
+  constexpr attribute_store_type_t node_id = 0x42;
+
+  auto root = attribute::root();
+  auto node = root.add_node(node_id);
+
+  node.set_reported(12);
+
+  TEST_ASSERT_EQUAL_MESSAGE(node,
+                            root.emplace_node(node_id, 12),
+                            "Should not create a new node");
+
+  TEST_ASSERT_EQUAL_MESSAGE(node + 1,
+                            root.emplace_node(node_id, 13),
+                            "Should have created a new node");
+
+  node.set_desired(15);
+
+
+  TEST_ASSERT_EQUAL_MESSAGE(node,
+                            root.emplace_node(node_id, 15, DESIRED_ATTRIBUTE),
+                            "Should not create a new node");
+
+  TEST_ASSERT_EQUAL_MESSAGE(node + 2,
+                            root.emplace_node(node_id, 16, DESIRED_ATTRIBUTE),
+                            "Should have created a new node");
 }
+
+} // extern "C"

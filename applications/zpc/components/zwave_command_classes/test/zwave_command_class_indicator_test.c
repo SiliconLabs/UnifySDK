@@ -20,7 +20,7 @@
 
 // Includes from this component
 #include "zwave_command_class_indicator.h"
-#include "zwave_command_class_test_helper.h"
+#include "zwave_raw_frame_test_helper.h"
 
 // Includes from other components
 #include "zwave_controller_connection_info.h"

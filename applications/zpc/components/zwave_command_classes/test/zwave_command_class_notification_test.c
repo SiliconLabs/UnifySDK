@@ -12,7 +12,7 @@
  *****************************************************************************/
 // Includes from this component
 #include "zwave_command_class_notification.h"
-#include "zwave_command_class_test_helper.h"
+#include "zwave_raw_frame_test_helper.h"
 
 // Generic includes
 #include <string.h>  // for memset

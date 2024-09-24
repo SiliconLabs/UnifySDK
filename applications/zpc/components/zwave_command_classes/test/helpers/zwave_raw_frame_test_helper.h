@@ -11,8 +11,8 @@
  *
  *****************************************************************************/
 
-#ifndef ZWAVE_COMMAND_CLASS_TEST_HELPER_H
-#define ZWAVE_COMMAND_CLASS_TEST_HELPER_H
+#ifndef ZWAVE_RAW_FRAME_TEST_HELPER_H
+#define ZWAVE_RAW_FRAME_TEST_HELPER_H
 
 #include "sl_status.h"
 #include "zwave_controller_connection_info.h"

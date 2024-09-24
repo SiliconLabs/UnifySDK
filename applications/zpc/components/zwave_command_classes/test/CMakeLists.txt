@@ -4,6 +4,9 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   add_link_options("-Wl,--unresolved-symbols=ignore-in-object-files"
                    "-Wl,--allow-multiple-definition")
 endif()
+
+add_subdirectory(helpers)
+
 set(MOCK_LIBS
     uic_attribute_store_mock
     zpc_attribute_store_mock
@@ -21,9 +24,8 @@ set(MOCK_LIBS
 add_library(zwave_command_classes_test $<TARGET_OBJECTS:zwave_command_classes>)
 target_link_libraries(zwave_command_classes_test PUBLIC zwave_command_classes)
 
-add_library(zwave_command_class_test_helper zwave_command_class_test_helper.c)
 target_link_libraries(
-  zwave_command_class_test_helper
+  zwave_command_class_test_helpers
   zwave_command_classes
   unity2
   zwave_tx_scheme_selector_mock
@@ -41,7 +43,7 @@ target_add_unittest(
   SOURCES
   zwave_command_class_time_test.c
   DEPENDS
-  zwave_command_class_test_helper
+  zwave_command_class_test_helpers
   ${MOCK_LIBS})
 
 target_add_unittest(
@@ -51,7 +53,7 @@ target_add_unittest(
   SOURCES
   zwave_command_class_powerlevel_test.c
   DEPENDS
-  zwave_command_class_test_helper
+  zwave_command_class_test_helpers
   uic_contiki_stub
   ${MOCK_LIBS})
 
@@ -63,7 +65,7 @@ target_add_unittest(
   zwave_command_class_manufacturer_specific_test.c
   zwave_command_class_manufacturer_specific_test_zpc_config_mock.c
   DEPENDS
-  zwave_command_class_test_helper
+  zwave_command_class_test_helpers
   zwave_security_validation_mock
   ${MOCK_LIBS})
 
@@ -87,7 +89,7 @@ target_add_unittest(
   SOURCES
   zwave_command_class_indicator_test.c
   DEPENDS
-  zwave_command_class_test_helper
+  zwave_command_class_test_helpers
   uic_attribute_store_mock
   zwave_command_handler_mock
   zwave_controller_mock
@@ -103,7 +105,7 @@ target_add_unittest(
   zwave_command_class_notification_test.c
   DEPENDS
   ${MOCK_LIBS}
-  zwave_command_class_test_helper)
+  zwave_command_class_test_helpers)
 
 target_add_unittest(
   zwave_command_classes
@@ -212,7 +214,7 @@ target_add_unittest(
   SOURCES
   zwave_command_class_zwaveplus_info_test.c
   DEPENDS
-  zwave_command_class_test_helper
+  zwave_command_class_test_helpers
   uic_contiki_stub
   ${MOCK_LIBS})
 
