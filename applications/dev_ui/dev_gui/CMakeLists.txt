@@ -1,5 +1,5 @@
 # Developer GUI install
-find_program(YARN_EXECUTABLE "yarn" REQUIRED)
+find_program(YARN_EXECUTABLE "yarnpkg" "yarn" REQUIRED)
 
 if(APPLE)
   set(NPM_TARGET macos-x64)
@@ -27,7 +27,7 @@ add_custom_command(
   COMMAND cp -r ${ZAP_CURRENT_OUTPUT_DIR}/. .
   COMMAND ${YARN_EXECUTABLE} version --no-git-tag-version --new-version
           ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}
-  COMMAND ${YARN_EXECUTABLE} install --allow-same-version
+  COMMAND ${YARN_EXECUTABLE} install
   COMMAND ${YARN_EXECUTABLE} run build
   USES_TERMINAL)
 
