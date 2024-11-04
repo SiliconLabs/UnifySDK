@@ -68,8 +68,8 @@ void suiteSetUp()
   n5ep0.emplace_node<uint32_t>(ATTRIBUTE_MANUFACTURER_SPECIFIC_MANUFACTURER_ID,
                                0);
   n5ep0.emplace_node<uint32_t>(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_TYPE_ID,
-                               42);
-  n5ep0.emplace_node<uint32_t>(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_ID, 1);
+                               1);
+  n5ep0.emplace_node<uint32_t>(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_ID, 42);
 
   n5ep0.emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA, 1)
     .emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_FIRMWARE, 0x1)
