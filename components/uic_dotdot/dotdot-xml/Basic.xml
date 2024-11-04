@@ -230,6 +230,8 @@ applicable to this document can be found in the LICENSE.md file.
           <type:maxLength value="16" />
         </restriction>
       </attribute>
+      <attribute id="FF01" name="ZWaveGenericDeviceClass" type="uint8"/>
+      <attribute id="FF02" name="ZWaveSpecificDeviceClass" type="uint8"/>
     </attributes>
     <commands>
       <command id="00" name="ResetToFactoryDefaults" />

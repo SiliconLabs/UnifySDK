@@ -6000,6 +6000,18 @@ std::string get_enum_value_name(
       return basic_sw_buildid_get_enum_value_name(value);
     }
   #endif
+  #ifdef BASIC_Z_WAVE_GENERIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
+    if (65281 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicz_wave_generic_device_class instead of this: basic_z_wave_generic_device_class
+      return basic_z_wave_generic_device_class_get_enum_value_name(value);
+    }
+  #endif
+  #ifdef BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
+    if (65282 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicz_wave_specific_device_class instead of this: basic_z_wave_specific_device_class
+      return basic_z_wave_specific_device_class_get_enum_value_name(value);
+    }
+  #endif
   }
 
   if (1 == cluster_id) {
@@ -10625,6 +10637,18 @@ uint32_t get_enum_name_value(
     if (16384 == attribute_id) {
       // FIXME: Some attributes don't work because multi-upper case names end up like this: basicsw_buildid instead of this: basic_sw_buildid
       return basic_sw_buildid_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_Z_WAVE_GENERIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
+    if (65281 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicz_wave_generic_device_class instead of this: basic_z_wave_generic_device_class
+      return basic_z_wave_generic_device_class_get_enum_value_number(name);
+    }
+  #endif
+  #ifdef BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS_ENUM_NAME_AVAILABLE
+    if (65282 == attribute_id) {
+      // FIXME: Some attributes don't work because multi-upper case names end up like this: basicz_wave_specific_device_class instead of this: basic_z_wave_specific_device_class
+      return basic_z_wave_specific_device_class_get_enum_value_number(name);
     }
   #endif
   }

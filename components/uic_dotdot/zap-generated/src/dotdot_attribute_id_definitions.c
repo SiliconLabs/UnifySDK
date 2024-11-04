@@ -68,6 +68,10 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "DisableLocalConfig";
         case DOTDOT_BASIC_SW_BUILDID_ATTRIBUTE_ID:
           return "SWBuildID";
+        case DOTDOT_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS_ATTRIBUTE_ID:
+          return "ZWaveGenericDeviceClass";
+        case DOTDOT_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS_ATTRIBUTE_ID:
+          return "ZWaveSpecificDeviceClass";
           // clang-format on
         default:
           return "Unknown";
@@ -2177,6 +2181,12 @@ dotdot_attribute_id_t
       }
       if (strcmp ("SWBuildID", attribute_name) == 0) {
         return DOTDOT_BASIC_SW_BUILDID_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveGenericDeviceClass", attribute_name) == 0) {
+        return DOTDOT_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ZWaveSpecificDeviceClass", attribute_name) == 0) {
+        return DOTDOT_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS_ATTRIBUTE_ID;
       }
     break;
     case DOTDOT_POWER_CONFIGURATION_CLUSTER_ID:
@@ -4627,7 +4637,11 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_NUMBER;
                 case DOTDOT_BASIC_SW_BUILDID_ATTRIBUTE_ID:
           return JSON_TYPE_STRING;
-          // clang-format on
+        case DOTDOT_BASIC_Z_WAVE_GENERIC_DEVICE_CLASS_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_BASIC_Z_WAVE_SPECIFIC_DEVICE_CLASS_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
         default:
           return JSON_TYPE_UNKNOWN;
       }
