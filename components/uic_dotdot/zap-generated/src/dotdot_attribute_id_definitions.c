@@ -1947,6 +1947,31 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "Unknown";
       }
       // clang-format off
+    case DOTDOT_USER_CREDENTIAL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS_ATTRIBUTE_ID:
+          return "SupportedUserUniqueIdentifiers";
+        case DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES_ATTRIBUTE_ID:
+          return "SupportedCredentialRules";
+        case DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES_ATTRIBUTE_ID:
+          return "SupportedCredentialTypes";
+        case DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_TYPES_ATTRIBUTE_ID:
+          return "SupportedUserTypes";
+        case DOTDOT_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM_ATTRIBUTE_ID:
+          return "SupportCredentialChecksum";
+        case DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_ATTRIBUTE_ID:
+          return "SupportAdminPinCode";
+        case DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION_ATTRIBUTE_ID:
+          return "SupportAdminPinCodeDeactivation";
+        case DOTDOT_USER_CREDENTIAL_ADMIN_PIN_CODE_ATTRIBUTE_ID:
+          return "AdminPinCode";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
     case DOTDOT_AOX_LOCATOR_CLUSTER_ID:
       // clang-format on
       switch (attribute_id) {
@@ -4415,6 +4440,32 @@ dotdot_attribute_id_t
         return DOTDOT_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS_ATTRIBUTE_ID;
       }
     break;
+    case DOTDOT_USER_CREDENTIAL_CLUSTER_ID:
+      if (strcmp ("SupportedUserUniqueIdentifiers", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportedCredentialRules", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportedCredentialTypes", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportedUserTypes", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_TYPES_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportCredentialChecksum", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportAdminPinCode", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("SupportAdminPinCodeDeactivation", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION_ATTRIBUTE_ID;
+      }
+      if (strcmp ("AdminPinCode", attribute_name) == 0) {
+        return DOTDOT_USER_CREDENTIAL_ADMIN_PIN_CODE_ATTRIBUTE_ID;
+      }
+    break;
     case DOTDOT_AOX_LOCATOR_CLUSTER_ID:
       if (strcmp ("ReportingMode", attribute_name) == 0) {
         return DOTDOT_AOX_LOCATOR_REPORTING_MODE_ATTRIBUTE_ID;
@@ -6506,6 +6557,31 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_UNKNOWN;
       }
       // clang-format off
+    case DOTDOT_USER_CREDENTIAL_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_TYPES_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM_ATTRIBUTE_ID:
+          return JSON_TYPE_BOOL;
+        case DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_ATTRIBUTE_ID:
+          return JSON_TYPE_BOOL;
+        case DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION_ATTRIBUTE_ID:
+          return JSON_TYPE_BOOL;
+        case DOTDOT_USER_CREDENTIAL_ADMIN_PIN_CODE_ATTRIBUTE_ID:
+          return JSON_TYPE_STRING;
+          // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
     case DOTDOT_AOX_LOCATOR_CLUSTER_ID:
       // clang-format on
       switch (attribute_id) {
@@ -6980,6 +7056,9 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   }
 
   if (64775 == cluster_id) {
+  }
+
+  if (64776 == cluster_id) {
   }
 
   if (64784 == cluster_id) {

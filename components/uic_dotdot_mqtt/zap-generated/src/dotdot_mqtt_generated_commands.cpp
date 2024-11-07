@@ -10877,6 +10877,746 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_write_attributes
 }
 
 /**
+ * @brief Publishes an incoming/generated AddUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/AddUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModifyUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/ModifyUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated AddCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/AddCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_add_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated ModifyCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/ModifyCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_modify_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteCredential";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_credential_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllUsers command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllUsers
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_users_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllUsers";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_users_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentials command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentials
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentials";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsByType command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsByType
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_by_type_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentialsByType";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_by_type_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsForUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsForUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_for_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentialsForUser";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_for_user_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsForUserByType command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_for_user_by_type_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType";
+
+  std::string payload =
+    get_json_payload_for_user_credential_delete_all_credentials_for_user_by_type_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStartAdd command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStartAdd
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_start_add_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialLearnStartAdd";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_learn_start_add_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStartModify command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStartModify
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_start_modify_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialLearnStartModify";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_learn_start_modify_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStop command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStop
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_stop_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialLearnStop";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_learn_stop_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated CredentialAssociation command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialAssociation
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_association_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/CredentialAssociation";
+
+  std::string payload =
+    get_json_payload_for_user_credential_credential_association_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetUserChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetUserChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_user_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/GetUserChecksum";
+
+  std::string payload =
+    get_json_payload_for_user_credential_get_user_checksum_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetCredentialChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetCredentialChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_credential_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/GetCredentialChecksum";
+
+  std::string payload =
+    get_json_payload_for_user_credential_get_credential_checksum_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated GetAllUsersChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetAllUsersChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_all_users_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/GetAllUsersChecksum";
+
+  std::string payload =
+    get_json_payload_for_user_credential_get_all_users_checksum_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated SetAdminPINCode command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/SetAdminPINCode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_set_admin_pin_code_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/SetAdminPINCode";
+
+  std::string payload =
+    get_json_payload_for_user_credential_set_admin_pin_code_command(
+    fields);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
+ * @brief Publishes an incoming/generated DeactivateAdminPINCode command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeactivateAdminPINCode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_deactivate_admin_pin_code_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/DeactivateAdminPINCode";
+
+  std::string payload =
+    get_json_payload_for_user_credential_deactivate_admin_pin_code_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_user_credential_state_t attribute_values,
+  uic_mqtt_dotdot_user_credential_updated_state_t attribute_list
+){
+  // Create the topic
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  topic += "UserCredential/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
  * @brief Publishes an incoming/generated IQReport command for
  * the AoXLocator cluster.
  *

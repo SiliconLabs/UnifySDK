@@ -56,3 +56,23 @@ target_add_unittest(
   DEPENDS
   zpc_attribute_store_test_helper
   zwave_network_management_mock)
+
+# Frame Parser test
+target_add_unittest(
+  zpc_attribute_store
+  NAME
+  zwave_frame_parser_test
+  SOURCES
+  zwave_frame_parser_test.cpp
+  DEPENDS
+  zpc_attribute_store_test_helper)
+
+# Frame Generator test
+target_add_unittest(
+  zpc_attribute_store
+  NAME
+  zwave_frame_generator_test
+  SOURCES
+  zwave_frame_generator_test.cpp
+  DEPENDS
+  zpc_attribute_store_test_helper)

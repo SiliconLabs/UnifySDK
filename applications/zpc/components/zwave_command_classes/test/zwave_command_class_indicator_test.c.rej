@@ -1,0 +1,10 @@
+diff a/applications/zpc/components/zwave_command_classes/test/zwave_command_class_indicator_test.c b/applications/zpc/components/zwave_command_classes/test/zwave_command_class_indicator_test.c	(rejected hunks)
+@@ -20,7 +20,7 @@
+ 
+ // Includes from this component
+ #include "zwave_command_class_indicator.h"
+-#include "zwave_command_class_test_helper.h"
++#include "zwave_raw_frame_test_helper.h"
+ 
+ // Includes from other components
+ #include "zwave_controller_connection_info.h"

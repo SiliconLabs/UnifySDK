@@ -6,7 +6,10 @@ add_library(
   src/zpc_attribute_store_register_default_attribute_type_data.cpp
   src/zpc_attribute_store_type_registration.cpp
   src/zwave_association_toolbox.cpp
-  src/zwave_utils.c)
+  src/zwave_utils.c
+  src/zwave_frame_parser.cpp
+  src/zwave_frame_generator.cpp
+  )
 
 target_include_directories(
   zpc_attribute_store

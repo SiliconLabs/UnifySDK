@@ -54,13 +54,23 @@ add_library(
   src/zwave_command_class_thermostat_operating_state.c
   src/zwave_command_class_time.c
   src/zwave_command_class_user_code.c
+  src/zwave_command_class_user_credential.cpp
+  src/zwave_command_class_user_credential_api.cpp
+
   src/zwave_command_class_version.c
   src/zwave_command_class_wake_up.c
   src/zwave_command_class_zwave_plus_info.c
   src/zwave_command_classes_fixt.c
   src/zwave_command_classes_utils.c
   src/zwave_command_class_inclusion_controller.cpp
-  src/zwave_command_class_transport_service.c)
+  src/zwave_command_class_transport_service.c
+  
+  src/private/user_credential/user_credential_user_capabilities.cpp
+  src/private/user_credential/user_credential_credential_capabilities.cpp
+  src/private/user_credential/user_credential_credential_type_capabilities.cpp
+  src/private/user_credential/user_credential_checksum_calculator.cpp
+  src/private/user_credential/user_credential_helpers.cpp
+  )
 install(TARGETS zwave_command_classes LIBRARY DESTINATION lib)
 
 target_include_directories(
@@ -130,6 +140,9 @@ target_link_libraries(zwave_command_classes
 if(BUILD_TESTING)
   # Mocks
   target_add_mock(zwave_command_classes)
+
+  add_mock(zwave_command_class_notification_mock src/zwave_command_class_notification.h)
+  target_interface_libraries(zwave_command_class_notification_mock zpc_utils zwave_command_handler)
 
   # Unit test subdirectory
   add_subdirectory(test)

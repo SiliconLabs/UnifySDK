@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 #include "zwave_command_class_zwave_plus_info.h"
-#include "zwave_command_class_test_helper.h"
+#include "zwave_raw_frame_test_helper.h"
 
 // Includes from other components
 #include "zwave_tx_mock.h"

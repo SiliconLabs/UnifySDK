@@ -14,7 +14,7 @@
 
 // Test includes
 #include "unity.h"
-#include "zwave_command_class_test_helper.h"
+#include "zwave_raw_frame_test_helper.h"
 
 // Mock includes
 #include "zwave_tx_scheme_selector_mock.h"

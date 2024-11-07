@@ -1,8 +1,8 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
     Basic: {
@@ -15201,6 +15201,1021 @@ export let ClusterTypeAttrs: any = {
                     type: "number",
                     isArray: false,
                   }
+              ]              
+            }
+        ] 
+      }
+    },
+    UserCredential: {
+      server:{
+        attributes: [
+            {                
+              id: 0,
+              name: "SupportedUserUniqueIdentifiers",
+              type: "number",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 1,
+              name: "SupportedCredentialRules",
+              type: "bitmap",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              bitmap: [
+                { name: "Single", mask: 2, type: "boolean", offset: 1 },
+								{ name: "Dual", mask: 4, type: "boolean", offset: 2 },
+								{ name: "Triple", mask: 8, type: "boolean", offset: 3 }
+              ]
+            },
+            {                
+              id: 2,
+              name: "SupportedCredentialTypes",
+              type: "bitmap",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              bitmap: [
+                { name: "PINCode", mask: 1, type: "boolean", offset: 0 },
+								{ name: "Password", mask: 2, type: "boolean", offset: 1 },
+								{ name: "RFIDCode", mask: 4, type: "boolean", offset: 2 },
+								{ name: "BLE", mask: 8, type: "boolean", offset: 3 },
+								{ name: "NFC", mask: 16, type: "boolean", offset: 4 },
+								{ name: "UWB", mask: 32, type: "boolean", offset: 5 },
+								{ name: "EyeBiometric", mask: 64, type: "boolean", offset: 6 },
+								{ name: "FaceBiometric", mask: 128, type: "boolean", offset: 7 },
+								{ name: "FingerBiometric", mask: 256, type: "boolean", offset: 8 },
+								{ name: "HandBiometric", mask: 512, type: "boolean", offset: 9 },
+								{ name: "UnspecifiedBiometric", mask: 1024, type: "boolean", offset: 10 }
+              ]
+            },
+            {                
+              id: 3,
+              name: "SupportedUserTypes",
+              type: "bitmap",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+              bitmap: [
+                { name: "GeneralUser", mask: 1, type: "boolean", offset: 0 },
+								{ name: "ProgrammingUser", mask: 8, type: "boolean", offset: 3 },
+								{ name: "NonAccessUser", mask: 16, type: "boolean", offset: 4 },
+								{ name: "DuressUser", mask: 32, type: "boolean", offset: 5 },
+								{ name: "DisposableUser", mask: 64, type: "boolean", offset: 6 },
+								{ name: "ExpiringUser", mask: 128, type: "boolean", offset: 7 },
+								{ name: "RemoteOnlyUser", mask: 512, type: "boolean", offset: 9 }
+              ]
+            },
+            {                
+              id: 4,
+              name: "SupportCredentialChecksum",
+              type: "boolean",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 5,
+              name: "SupportAdminPinCode",
+              type: "boolean",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 6,
+              name: "SupportAdminPinCodeDeactivation",
+              type: "boolean",            
+              required: true,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            },
+            {                
+              id: 7,
+              name: "AdminPinCode",
+              type: "text",            
+              required: false,
+              reportRequired: false,
+              sceneRequired: false,
+              writable: false,
+              isArray: false,
+            }
+        ],
+        commands: [
+            {
+              id: 1,
+              name: "AddUser",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "GeneralUser",
+                              value: 0
+                            },
+                            {
+                              name: "ProgrammingUser",
+                              value: 3
+                            },
+                            {
+                              name: "NonAccessUser",
+                              value: 4
+                            },
+                            {
+                              name: "DuressUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserActiveState",
+                    type: "boolean",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialRule",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Single",
+                              value: 1
+                            },
+                            {
+                              name: "Dual",
+                              value: 2
+                            },
+                            {
+                              name: "Triple",
+                              value: 3
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserName",
+                    type: "text",
+                    isArray: false,
+                  },
+                  {
+                    name: "ExpiringTimeoutMinutes",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserNameEncoding",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "ASCII",
+                              value: 0
+                            },
+                            {
+                              name: "OEMExtendedASCII",
+                              value: 1
+                            },
+                            {
+                              name: "UTF-16",
+                              value: 2
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 2,
+              name: "ModifyUser",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "GeneralUser",
+                              value: 0
+                            },
+                            {
+                              name: "ProgrammingUser",
+                              value: 3
+                            },
+                            {
+                              name: "NonAccessUser",
+                              value: 4
+                            },
+                            {
+                              name: "DuressUser",
+                              value: 5
+                            },
+                            {
+                              name: "DisposableUser",
+                              value: 6
+                            },
+                            {
+                              name: "ExpiringUser",
+                              value: 7
+                            },
+                            {
+                              name: "RemoteOnlyUser",
+                              value: 9
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserActiveState",
+                    type: "boolean",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialRule",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "Single",
+                              value: 1
+                            },
+                            {
+                              name: "Dual",
+                              value: 2
+                            },
+                            {
+                              name: "Triple",
+                              value: 3
+                            }
+                    ],
+                  },
+                  {
+                    name: "UserName",
+                    type: "text",
+                    isArray: false,
+                  },
+                  {
+                    name: "ExpiringTimeoutMinutes",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "UserNameEncoding",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "ASCII",
+                              value: 0
+                            },
+                            {
+                              name: "OEMExtendedASCII",
+                              value: 1
+                            },
+                            {
+                              name: "UTF-16",
+                              value: 2
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 3,
+              name: "DeleteUser",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 4,
+              name: "AddCredential",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  },
+                  {
+                    name: "CredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialData",
+                    type: "text",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 5,
+              name: "ModifyCredential",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  },
+                  {
+                    name: "CredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialData",
+                    type: "text",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 6,
+              name: "DeleteCredential",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  },
+                  {
+                    name: "CredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 7,
+              name: "DeleteAllUsers",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 8,
+              name: "DeleteAllCredentials",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 9,
+              name: "DeleteAllCredentialsByType",
+              required: false,
+              fields: [
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 10,
+              name: "DeleteAllCredentialsForUser",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 11,
+              name: "DeleteAllCredentialsForUserByType",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 12,
+              name: "CredentialLearnStartAdd",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  },
+                  {
+                    name: "CredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialLearnTimeout",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 13,
+              name: "CredentialLearnStartModify",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  },
+                  {
+                    name: "CredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "CredentialLearnTimeout",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 14,
+              name: "CredentialLearnStop",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 15,
+              name: "CredentialAssociation",
+              required: false,
+              fields: [
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  },
+                  {
+                    name: "SourceUserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "SourceCredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "DestinationUserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  },
+                  {
+                    name: "DestinationCredentialSlot",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 16,
+              name: "GetUserChecksum",
+              required: false,
+              fields: [
+                  {
+                    name: "UserUniqueID",
+                    type: "number",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 17,
+              name: "GetCredentialChecksum",
+              required: false,
+              fields: [
+                  {
+                    name: "CredentialType",
+                    type: "enum",
+                    isArray: false,
+                    enum:[
+                            {
+                              name: "PINCode",
+                              value: 1
+                            },
+                            {
+                              name: "Password",
+                              value: 2
+                            },
+                            {
+                              name: "RFIDCode",
+                              value: 3
+                            },
+                            {
+                              name: "BLE",
+                              value: 4
+                            },
+                            {
+                              name: "NFC",
+                              value: 5
+                            },
+                            {
+                              name: "UWB",
+                              value: 6
+                            },
+                            {
+                              name: "EyeBiometric",
+                              value: 7
+                            },
+                            {
+                              name: "FaceBiometric",
+                              value: 8
+                            },
+                            {
+                              name: "FingerBiometric",
+                              value: 9
+                            },
+                            {
+                              name: "HandBiometric",
+                              value: 10
+                            },
+                            {
+                              name: "UnspecifiedBiometric",
+                              value: 11
+                            }
+                    ],
+                  }
+              ]              
+            },
+            {
+              id: 18,
+              name: "GetAllUsersChecksum",
+              required: false,
+              fields: [
+              ]              
+            },
+            {
+              id: 19,
+              name: "SetAdminPINCode",
+              required: false,
+              fields: [
+                  {
+                    name: "PINCode",
+                    type: "text",
+                    isArray: false,
+                  }
+              ]              
+            },
+            {
+              id: 20,
+              name: "DeactivateAdminPINCode",
+              required: false,
+              fields: [
               ]              
             }
         ] 

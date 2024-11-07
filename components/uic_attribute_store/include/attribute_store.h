@@ -506,6 +506,20 @@ sl_status_t attribute_store_refresh_node_and_children_callbacks(
   attribute_store_node_t node);
 
 /**
+ * @brief Change parent of node to the new parent.
+ * 
+ * @note The parent node must be a valid node in the attribute store.
+ * @note The new parent should have the type than the node current parent
+ * 
+ * @param node        The node handle of the node to change parent
+ * @param new_parent  The node handle of the new parent
+ * 
+ * @return SL_STATUS_OK if the parent was changed successfully, SL_STATUS_FAIL otherwise
+ */
+sl_status_t attribute_store_change_parent(attribute_store_node_t node,
+                                          attribute_store_node_t new_parent);
+
+/**
  * @brief Log the content of the Attribute Store tree using \ref sl_log.
 */
 void attribute_store_log(void);

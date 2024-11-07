@@ -4825,6 +4825,428 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_write_attributes
 );
 
 /**
+ * @brief Publishes an incoming/generated AddUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated ModifyUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated DeleteUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated AddCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/AddCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_add_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated ModifyCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/ModifyCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_modify_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated DeleteCredential command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteCredential
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_credential_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated DeleteAllUsers command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllUsers
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_users_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+);
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentials command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentials
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+);
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsByType command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsByType
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_by_type_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsForUser command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsForUser
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_for_user_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated DeleteAllCredentialsForUserByType command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeleteAllCredentialsForUserByType
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_delete_all_credentials_for_user_by_type_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStartAdd command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStartAdd
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_start_add_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStartModify command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStartModify
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_start_modify_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated CredentialLearnStop command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialLearnStop
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_learn_stop_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+);
+/**
+ * @brief Publishes an incoming/generated CredentialAssociation command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/CredentialAssociation
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_credential_association_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated GetUserChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetUserChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_user_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated GetCredentialChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetCredentialChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_credential_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated GetAllUsersChecksum command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/GetAllUsersChecksum
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_get_all_users_checksum_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+);
+/**
+ * @brief Publishes an incoming/generated SetAdminPINCode command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/SetAdminPINCode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_set_admin_pin_code_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+);
+/**
+ * @brief Publishes an incoming/generated DeactivateAdminPINCode command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/DeactivateAdminPINCode
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_deactivate_admin_pin_code_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint
+);
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the UserCredential cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * 
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void uic_mqtt_dotdot_user_credential_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_user_credential_state_t attribute_values,
+  uic_mqtt_dotdot_user_credential_updated_state_t attribute_list
+);
+
+/**
  * @brief Publishes an incoming/generated IQReport command for
  * the AoXLocator cluster.
  *

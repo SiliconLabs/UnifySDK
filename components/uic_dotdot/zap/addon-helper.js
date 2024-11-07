@@ -124,7 +124,6 @@ function isStruct(type) {
     case 'NetworkManagementState': return true
     case 'SSceneTable': return true
     case 'DeviceTypeStruct': return true
-    case 'CredentialStruct': return true
     default: return false
   }
 }

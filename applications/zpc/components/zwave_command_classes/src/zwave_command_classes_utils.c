@@ -73,8 +73,14 @@ zwave_cc_version_t
   zwave_command_class_get_version_from_node(attribute_store_node_t node,
                                             zwave_command_class_t command_class)
 {
-  attribute_store_node_t endpoint_node
-    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+  attribute_store_node_t endpoint_node;
+
+  if (attribute_store_get_node_type(node) == ATTRIBUTE_ENDPOINT_ID) {
+    endpoint_node = node;
+  } else {
+    endpoint_node
+      = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+  }
 
   attribute_store_node_t version_node = attribute_store_get_first_child_by_type(
     endpoint_node,

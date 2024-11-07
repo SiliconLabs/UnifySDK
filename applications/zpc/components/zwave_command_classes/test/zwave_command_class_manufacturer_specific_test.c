@@ -12,7 +12,7 @@
  *****************************************************************************/
 // Includes from this component
 #include "zwave_command_class_manufacturer_specific.h"
-#include "zwave_command_class_test_helper.h"
+#include "zwave_raw_frame_test_helper.h"
 
 #define MANUFACTURER_ID 0x1234
 #define PRODUCT_TYPE    0x5678

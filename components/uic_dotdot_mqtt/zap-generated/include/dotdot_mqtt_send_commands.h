@@ -6983,6 +6983,746 @@ void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_c
   
 );
 /**
+ * @brief Sends/Publishes a AddUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/AddUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a AddUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/AddUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_add_user_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a ModifyUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/ModifyUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a ModifyUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/ModifyUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_modify_user_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a DeleteUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a DeleteUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_user_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a AddCredential command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/AddCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a AddCredential command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/AddCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_add_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_add_credential_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a ModifyCredential command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/ModifyCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a ModifyCredential command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/ModifyCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_modify_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a DeleteCredential command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteCredential
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_credential_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a DeleteCredential command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteCredential
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_credential_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a DeleteAllUsers command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteAllUsers
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_users_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a DeleteAllUsers command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteAllUsers
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_users_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a DeleteAllCredentials command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteAllCredentials
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a DeleteAllCredentials command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteAllCredentials
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a DeleteAllCredentialsByType command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteAllCredentialsByType
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_by_type_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a DeleteAllCredentialsByType command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteAllCredentialsByType
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_by_type_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_by_type_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a DeleteAllCredentialsForUser command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteAllCredentialsForUser
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_for_user_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a DeleteAllCredentialsForUser command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteAllCredentialsForUser
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_for_user_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a DeleteAllCredentialsForUserByType command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeleteAllCredentialsForUserByType
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_for_user_by_type_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a DeleteAllCredentialsForUserByType command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeleteAllCredentialsForUserByType
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_delete_all_credentials_for_user_by_type_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a CredentialLearnStartAdd command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/CredentialLearnStartAdd
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_learn_start_add_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a CredentialLearnStartAdd command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/CredentialLearnStartAdd
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_learn_start_add_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a CredentialLearnStartModify command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/CredentialLearnStartModify
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_learn_start_modify_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a CredentialLearnStartModify command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/CredentialLearnStartModify
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_learn_start_modify_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a CredentialLearnStop command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/CredentialLearnStop
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_learn_stop_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a CredentialLearnStop command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/CredentialLearnStop
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_learn_stop_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a CredentialAssociation command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/CredentialAssociation
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_association_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a CredentialAssociation command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/CredentialAssociation
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_credential_association_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_credential_association_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a GetUserChecksum command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/GetUserChecksum
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_get_user_checksum_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a GetUserChecksum command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/GetUserChecksum
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_get_user_checksum_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a GetCredentialChecksum command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/GetCredentialChecksum
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_get_credential_checksum_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a GetCredentialChecksum command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/GetCredentialChecksum
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_get_credential_checksum_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_get_credential_checksum_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a GetAllUsersChecksum command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/GetAllUsersChecksum
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_get_all_users_checksum_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a GetAllUsersChecksum command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/GetAllUsersChecksum
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_get_all_users_checksum_command_to_group(
+  uint16_t destination_group_id
+);
+/**
+ * @brief Sends/Publishes a SetAdminPINCode command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/SetAdminPINCode
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_set_admin_pin_code_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint,
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+);
+
+/**
+ * @brief Sends/Publishes a SetAdminPINCode command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/SetAdminPINCode
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ * @param fields                Struct pointer with the fields value of the command
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_set_admin_pin_code_command_to_group(
+  uint16_t destination_group_id,
+  const uic_mqtt_dotdot_user_credential_command_set_admin_pin_code_fields_t *fields
+  
+);
+/**
+ * @brief Sends/Publishes a DeactivateAdminPINCode command for
+ * the UserCredential cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/epID/UserCredential/Commands/DeactivateAdminPINCode
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_deactivate_admin_pin_code_command(
+  const dotdot_unid_t destination_unid,
+  const dotdot_endpoint_id_t destination_endpoint
+);
+
+/**
+ * @brief Sends/Publishes a DeactivateAdminPINCode command for
+ * the UserCredential cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/UserCredential/Commands/DeactivateAdminPINCode
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_user_credential_publish_deactivate_admin_pin_code_command_to_group(
+  uint16_t destination_group_id
+);
+/**
  * @brief Sends/Publishes a IQReport command for
  * the AoXLocator cluster to a destination.
  *
