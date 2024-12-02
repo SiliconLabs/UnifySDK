@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# SPDX-License-Identifier: LicenseRef-MSLA
+# SPDX-FileCopyrightText: Silicon Laboratories Inc. https://www.silabs.com
 '''
 Created on 08/11/2011
 
