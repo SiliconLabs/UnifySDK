@@ -8,10 +8,28 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   build:
+    env:
+      project-name: unifysdk  # This should be lowercase for docker (and aligned)
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
+      - id: describe
+        name: Describe HEAD
+        run: >-
+          echo "describe=$(git describe --tags --always || echo 0)"
+          | tee $GITHUB_OUTPUT
       - name: Build Docker image from sources
-        run: docker build .
+        run: docker build --tag "${{ env.project-name }}:latest" .
+      - name: Extract artifacts
+        run: >-
+          container=$(docker create "${{ env.project-name }}:latest")
+          && docker cp
+          ${container}:/usr/local/opt/${{ env.project-name }}/build/dist .
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          # yamllint disable-line
+          name: ${{ github.event.repository.name }}-${{ steps.describe.outputs.describe }}
+          path: dist/
