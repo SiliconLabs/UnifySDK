@@ -159,6 +159,11 @@ test: ${build_dir}
 
 check: test
 
+dist: ${build_dir}
+	cmake --build $< --target package
+	install -d $</$@
+	cp -av ${<}/*.deb $</$@
+
 distclean:
 	rm -rf ${build_dir}
 
@@ -176,7 +181,7 @@ zpc/build: zpc/configure build
 zpc/test: ${build_dir}/applications/zpc/components/zwave_command_classes/test/
 	ctest --test-dir ${<}
 
-zpc/default: zpc/configure zpc/build zpc/test
+zpc/default: zpc/configure zpc/build zpc/test dist
 	@date -u
 
 ### @rootfs is faster than docker for env check
