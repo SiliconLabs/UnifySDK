@@ -5,9 +5,6 @@ name: Build in docker
 
 on:  # yamllint disable-line rule:truthy
   push:
-    branches: [ '*' ]
-  pull_request:
-    branches: [ '*' ]
 
 jobs:
   build:
