@@ -11,6 +11,9 @@ SELF?=${CURDIR}/helper.mk
 
 project?=unifysdk
 
+# Allow overloading from env if needed
+BUILD_DEV_GUI?=OFF
+
 CMAKE_GENERATOR?=Ninja
 export CMAKE_GENERATOR
 
@@ -25,7 +28,6 @@ packages+=nlohmann-json3-dev
 # TODO: remove for offline build
 packages+=curl wget python3-pip
 packages+=time
-packages+=yarnpkg
 
 rust_url?=https://sh.rustup.rs
 RUST_VERSION?=1.65.0
@@ -34,10 +36,17 @@ export PATH := ${HOME}/.cargo/bin:${PATH}
 zpc_exe?=${build_dir}/applications/zpc/zpc
 exes+=${zpc_exe}
 
+# Allow overloading from env if needed
+ifeq (${BUILD_DEV_GUI}, ON)
+packages+=nodejs
+packages+=yarnpkg
+endif
+
+
 zpc_cmake_options?=\
 	-DBUILD_AOXPC=OFF \
 	-DBUILD_CPCD=OFF \
-	-DBUILD_DEV_GUI=ON \
+	-DBUILD_DEV_GUI=${BUILD_DEV_GUI} \
 	-DBUILD_EMD=OFF \
 	-DBUILD_EPC=OFF \
 	-DBUILD_GMS=OFF \
