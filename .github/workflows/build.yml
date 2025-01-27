@@ -1,6 +1,9 @@
-name: Docker Image CI
+# YAML -*- mode: yaml; tab-width: 2; indent-tabs-mode: nil; coding: utf-8 -*-
+---
 
-on:
+name: Build in docker
+
+on:  # yamllint disable-line rule:truthy
   push:
     branches: [ '*' ]
   pull_request:
@@ -10,8 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4.1.1
-      with:
-        fetch-depth: 0
-    - name: Build Docker image from sources
-      run: docker build .
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - name: Build Docker image from sources
+        run: docker build .
