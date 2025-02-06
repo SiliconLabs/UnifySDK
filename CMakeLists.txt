@@ -43,6 +43,9 @@ include(cmake/include/package-helper.cmake)
 include(cmake/include/uic_helper.cmake)
 
 if(BUILD_TESTING)
+  include(cmake/modules/FindCMock.cmake)
+  set(THS-CMOCK_LOCATION "${cmock_SOURCE_DIR}")
+  set(THS-UNITY_LOCATION "${cmock_SOURCE_DIR}/vendor/unity")
   include(components/testframework/target_add_unittest.cmake)
 endif()
 

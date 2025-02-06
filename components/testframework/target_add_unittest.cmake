@@ -24,24 +24,20 @@ function(generate_unity_runner test_runner test_file)
   endif()
   if(EXISTS ${THS-UNITY_LOCATION})
     set(UNITY_DIR ${THS-UNITY_LOCATION})
-    add_custom_command(
-      OUTPUT ${TEST_RUNNER}
-      DEPENDS ${TEST_FILE}
-      COMMAND
-        ${UNITY2_RUBY_EXECUTABLE} ${UNITY_DIR}/auto/generate_test_runner.rb
-        ${ZWAVE_UNITY_CONFIG} ${TEST_FILE} ${TEST_RUNNER}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   else()
     set(UNITY_DIR "${DIR_OF_TARGET_ADD_UNIT_TEST}/libs/cmock/vendor/unity")
-    add_custom_command(
-      OUTPUT ${TEST_RUNNER}
-      DEPENDS ${TEST_FILE}
-      COMMAND
-        ${UNITY2_RUBY_EXECUTABLE} ${UNITY_DIR}/auto/generate_test_runner.rb
-        ${DIR_OF_TARGET_ADD_UNIT_TEST}/zwave_unity_config.yml ${TEST_FILE}
-        ${TEST_RUNNER}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   endif()
+  if(NOT DEFINED ${UNIFY_UNITY_RUNNER_CONFIG})
+    set(UNIFY_UNITY_RUNNER_CONFIG ${DIR_OF_TARGET_ADD_UNIT_TEST}/zwave_unity_config.yml)
+  endif()
+  add_custom_command(
+    OUTPUT ${TEST_RUNNER}
+    DEPENDS ${TEST_FILE} ${UNIFY_UNITY_RUNNER_CONFIG}
+    COMMAND
+    ${UNITY2_RUBY_EXECUTABLE} ${UNITY_DIR}/auto/generate_test_runner.rb
+    ${UNIFY_UNITY_RUNNER_CONFIG}
+    ${TEST_FILE} ${TEST_RUNNER}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endfunction()
 
 # This function creates unity2 test executables. It uses the provided target to setup and import configuration
