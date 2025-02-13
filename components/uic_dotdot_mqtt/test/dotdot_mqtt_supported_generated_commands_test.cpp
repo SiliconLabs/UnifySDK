@@ -116,29 +116,4 @@ void test_aox_locator_publish_rf_telemetry_supported_generated_commands_no_endpo
   TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
 }
 
-void test_aox_locator_publish_aox_locator_empty_supported_generated_commands()
-{
-  const dotdot_unid_t unid      = "AoXPC_Unid_ble-1234";
-  dotdot_endpoint_id_t endpoint = 123;
-
-  uic_mqtt_dotdot_aox_locator_supported_commands_t command_list = {};
-
-  // Ask DotDot MQTT to publish.
-  uic_mqtt_dotdot_aox_locator_publish_supported_generated_commands(
-    unid,
-    endpoint,
-    &command_list);
-
-  // Verify that it did its job:
-  const char *expected_topic = "ucl/by-unid/AoXPC_Unid_ble-1234/ep123/"
-                               "AoXLocator/SupportedGeneratedCommands";
-
-  char published_message[1000] = {};
-  TEST_ASSERT_NOT_NULL(
-    mqtt_test_helper_pop_publish(expected_topic, published_message));
-
-  const char expected_published_message[] = R"({"value": []})";
-
-  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
-}
 }

@@ -1,0 +1,33 @@
+// Sets the constants for the ColorControl Cluster
+// ZCL ColorControl attributes
+def zbCURRENT_X                     0x03000003
+def zbCURRENT_Y                     0x03000004
+def zbCOLOR_TEMPERATURE             0x03000007
+def zbCOLOR_MODE                    0x03000008
+def zbENHANCED_COLOR_MODE           0x03004001
+def zbCOLOR_LOOP_TIME               0x03004004
+def zbCOLOR_LOOP_START_ENHANCED_HUE 0x03004005
+def zbCOLOR_CAPABILITIES            0x0300400A
+def zbMIN_COLOR_TEMPERATURE         0x0300400B
+def zbMAX_COLOR_TEMPERATURE         0x0300400C
+
+scope 0 chain_reaction(0) clear_desired(0) {
+
+  r'zbCURRENT_X = if(e'zbCURRENT_X) 24939 undefined
+  
+  r'zbCURRENT_Y = if(e'zbCURRENT_Y) 24701 undefined
+  
+  r'zbCOLOR_TEMPERATURE = if(e'zbCOLOR_TEMPERATURE) 250 undefined
+  
+  r'zbCOLOR_MODE = if(e'zbCOLOR_MODE) 1 undefined
+  
+  r'zbCOLOR_LOOP_TIME = if(e'zbCOLOR_LOOP_TIME) 25 undefined
+  
+  r'zbCOLOR_LOOP_START_ENHANCED_HUE = if(e'zbCOLOR_LOOP_START_ENHANCED_HUE) 8960 undefined
+
+  // Example device supports everything
+  r'zbCOLOR_CAPABILITIES = if (e'zbCOLOR_CAPABILITIES) 255 undefined
+
+  r'zbMIN_COLOR_TEMPERATURE = if (e'zbMIN_COLOR_TEMPERATURE) 100 undefined
+  r'zbMAX_COLOR_TEMPERATURE = if (e'zbMAX_COLOR_TEMPERATURE) 500 undefined
+}

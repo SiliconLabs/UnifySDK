@@ -1,0 +1,1 @@
+target_add_unittest(eed_config SOURCES eed_config_test.c)

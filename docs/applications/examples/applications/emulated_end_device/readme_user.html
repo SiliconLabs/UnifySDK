@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emulated End Device User’s Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/examples/applications/emulated_end_device/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/js/charenc.js"></script>
+        <script src="../../../../_static/js/crypt.js"></script>
+        <script src="../../../../_static/js/sha1.js"></script>
+        <script src="../../../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.7.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started_unify.html">Getting Started with Unify</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/unify_specifications/index.html">Unify Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="emulated-end-device-users-guide">
+<h1>Emulated End Device User’s Guide<a class="headerlink" href="#emulated-end-device-users-guide" title="Permalink to this heading"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>This application emulates a combination of end device and PC having all possible UCL capabilities
+using the Unify Library. This is primarily developed to demonstrate Unify capabilities without having to implement and deploy custom protocol controller and its end device.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>For installing please refer to the general installation method in
+<span class="xref myst">Getting started</span>.</p>
+</section>
+<section id="running-the-eed">
+<h2>Running the EED<a class="headerlink" href="#running-the-eed" title="Permalink to this heading"></a></h2>
+<section id="using-systemd-service">
+<h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
+<p>Alternatively, you can run the EED using the Systemd service that is
+installed with the Debian installer.
+For more information, see
+<span class="xref myst">Unify Framework User guide</span>.</p>
+</section>
+<section id="using-the-command-line">
+<h3>Using the Command Line<a class="headerlink" href="#using-the-command-line" title="Permalink to this heading"></a></h3>
+<p>The best way to run the EED is by executing <code class="docutils literal notranslate"><span class="pre">uic-eed</span></code>.
+You can configure the MQTT server, database path, and much more through command line options.
+For details about options, run <code class="docutils literal notranslate"><span class="pre">uic-eed</span> <span class="pre">--help</span></code> command:</p>
+<p>Make sure that you do not run the EED both as a service and using the
+command line.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-eed
+<span class="go">* uic-eed.service - Unify Emulated End Device</span>
+<span class="go">   Loaded: loaded (/lib/systemd/system/uic-eed.service; disabled; preset: enabled)</span>
+<span class="go">   Active: active (running) since Tue 2024-12-23 14:50:26 IST; 1 day 20h ago</span>
+<span class="go"> Main PID: 13235 (uic-eed)</span>
+<span class="go">    Tasks: 2 (limit: 4915)</span>
+<span class="go">   CGroup: /system.slice/uic-eed.service</span>
+<span class="go">           |─13235 /usr/bin/uic-eed</span>
+</pre></div>
+</div>
+<p>If the service is running, stop it using the following command before
+you run the application manually:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>uic-eed
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuring-eed">
+<h2>Configuring EED<a class="headerlink" href="#configuring-eed" title="Permalink to this heading"></a></h2>
+<p>EED can run with single device support in both service mode as well as standalone(command line) mode. Single device support is configured with a device type that needs to be emulated.
+EED can support/emulate multiple end devices when run in command line mode and the CLI menu enables user to configure and/or reconfigure devices.</p>
+<section id="systemd-service">
+<h3>Systemd Service<a class="headerlink" href="#systemd-service" title="Permalink to this heading"></a></h3>
+<p>When running as a service, user can reconfigure the device type of choice by using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>sudo<span class="w"> </span>dpkg-reconfigure<span class="w"> </span>uic-eed
+</pre></div>
+</div>
+<p>Follow this up with the following command to restart with new configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>uic-eed
+</pre></div>
+</div>
+</section>
+<section id="standalone-command-line">
+<h3>Standalone (Command-line)<a class="headerlink" href="#standalone-command-line" title="Permalink to this heading"></a></h3>
+<p>Command line mode enables CLI menu which support many configuration option. However if user wants a quick start with a predefined device type then user shall use the <code class="docutils literal notranslate"><span class="pre">--eed.devicetype</span></code> command line option.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>uic-eed<span class="w"> </span>--eed.device_type<span class="w"> </span>thermostat
+</pre></div>
+</div>
+<section id="cli-configuration">
+<h4>CLI Configuration<a class="headerlink" href="#cli-configuration" title="Permalink to this heading"></a></h4>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">help</span></code> command to get the complete list:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;help</span>
+<span class="go">==================================================</span>
+<span class="go">Unify Command line interface Help:</span>
+<span class="go">==================================================</span>
+<span class="go">add_cluster_support Adds a cluster to an endpoint under a UNID from the attribute store</span>
+<span class="go">add_endpoint Adds an endpoint under a UNID in the attribute store with all clusters or can take      cluster-name(s) in UpperCamelCase separated with semi-colon      (Eg: add_endpoint 1,0,&quot;OnOff;Level;ColorControl&quot;) or device type(Eg: onofflight) for customized cluster selection</span>
+<span class="go">add_unid Adds a UNID in the attribute store</span>
+<span class="gp"># </span>---<span class="w"> </span>SNIP<span class="w"> </span>---
+<span class="go">remove_cluster_support Removes a cluster from  an endpoint under a UNID from the attribute Store</span>
+<span class="go">remove_endpoint Removes an endpoint under a UNID from the attribute Store</span>
+<span class="go">remove_unid Removes a UNID from the attribute Store</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">add_cluster_support</span></code> Adds a cluster support to an existing endpoint under a UNID. It take UNID, endpoint ID and cluster as arguments. <strong>Format:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;add_cluster_support &lt;UNID&gt;,&lt;EPID&gt;,&lt;ClusterName&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">add_endpoint</span></code> Adds a new endpoint under an existing UNID. It takes UNID and endpoint ID and optionally cluster list or device-type as arguments. When the cluster list and device-type are missing, endpoint is configured with all supported clusters. <strong>Format:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;add_endpoint &lt;UNID&gt;,&lt;EPID&gt;</span>
+</pre></div>
+</div>
+<p><em>OR</em></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;add_endpoint &lt;UNID&gt;,&lt;EPID&gt;,&quot;&lt;Cluster1&gt;;&lt;Cluster2&gt;;...&quot;</span>
+</pre></div>
+</div>
+<p><em>OR</em></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;add_endpoint &lt;UNID&gt;,&lt;EPID&gt;,&lt;DeviceType&gt;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Note: Refer <span class="xref myst">Supported Device Types</span> section for list of supported device type that can be configured.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">add_unid</span></code> Adds a new device emulation with given UNID. <strong>Format:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;add_unid &lt;UNID&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">The</span> <span class="pre">UNID</span> <span class="pre">is</span> <span class="pre">given</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">above</span> <span class="pre">configuration</span> <span class="pre">is</span> <span class="pre">prepended</span> <span class="pre">with</span> <span class="pre">&quot;emd-&quot;</span> <span class="pre">to</span> <span class="pre">form</span> <span class="pre">actual</span> <span class="pre">UNID</span> <span class="pre">string</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">remove_cluster_support</span></code> Removes a cluster support from an existing endpoint under a UNID. It take UNID, endpoint ID and cluster as arguments. <strong>Format:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;remove_cluster_support &lt;UNID&gt;,&lt;EPID&gt;,&lt;ClusterName&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">remove_endpoint</span></code> Removes a new endpoint under an existing UNID. It takes UNID and endpoint ID. <strong>Format:</strong></p>
+<div class="highlight-console** notranslate"><div class="highlight"><pre><span></span>EED&gt;remove_endpoint &lt;UNID&gt;,&lt;EPID&gt;
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">remove_unid</span></code> Removes devices emulated under the given UNID from unify system. <strong>Format:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">EED&gt;remove_unid &lt;UNID&gt;</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">Along</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">above</span> <span class="pre">command,</span> <span class="pre">the</span> <span class="pre">Unify</span> <span class="pre">Attribute</span> <span class="pre">Store</span> <span class="pre">commands</span> <span class="pre">are</span> <span class="pre">also</span> <span class="pre">available,</span> <span class="pre">which</span> <span class="pre">can</span> <span class="pre">be</span> <span class="pre">used</span> <span class="pre">if</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">update</span> <span class="pre">values</span> <span class="pre">that</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">updatable</span> <span class="pre">via</span> <span class="pre">MQTT.</span></code></strong></p>
+</section>
+<section id="supported-device-types">
+<h4>Supported Device Types:<a class="headerlink" href="#supported-device-types" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>dimmablelight</p></li>
+<li><p>onofflight</p></li>
+<li><p>doorlock</p></li>
+<li><p>onofflightswitch</p></li>
+<li><p>lightsensor</p></li>
+<li><p>occupancysensor</p></li>
+<li><p>onoffpluginunit</p></li>
+<li><p>dimmablepluginunit</p></li>
+<li><p>extendedcolorlight</p></li>
+<li><p>windowcovering</p></li>
+<li><p>thermostat</p></li>
+<li><p>flowsensor</p></li>
+<li><p>allclustersdevice</p></li>
+</ul>
+<blockquote>
+<div><p>As the name suggests <code class="docutils literal notranslate"><span class="pre">allclustersdevice</span></code> can be used when all supported clusters are needed.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

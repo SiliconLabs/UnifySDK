@@ -100,7 +100,12 @@ endfunction()
 # --locked   only build specific versions
 # defined in Cargo.lock file. the goal is to get more deterministic builds
 # --target   specify the target triple to build for.
-get_target_triple(CARGO_TARGET_TRIPLE)
+
+# Allow overide from env (the above detection may not be reliable or scale)
+if(NOT DEFINED CARGO_TARGET_TRIPLE)
+  get_target_triple(CARGO_TARGET_TRIPLE)
+endif()
+
 rust_build_profile(CARGO_PROFILE)
 set(CARGO_ARGS
     " --locked --target ${CARGO_TARGET_TRIPLE} --profile ${CARGO_PROFILE}")

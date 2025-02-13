@@ -15,7 +15,7 @@ endif()
 set(CONFIG_SRC platform/${COMPATIBLE_PLATFORM}/config.cpp)
 set(CONFIG_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/include/)
 set(CONFIG_DEPS Boost::program_options ${YAML_CPP_LIBRARIES})
-add_library(uic_config OBJECT ${CONFIG_SRC})
+add_library(uic_config ${CONFIG_SRC})
 target_include_directories(
   uic_config
   PUBLIC $<BUILD_INTERFACE:${CONFIG_INCLUDE}>

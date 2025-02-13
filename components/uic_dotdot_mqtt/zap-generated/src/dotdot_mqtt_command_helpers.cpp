@@ -1312,7 +1312,7 @@ std::string get_json_payload_for_scenes_add_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_add_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid,
   
@@ -1331,7 +1331,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1425,7 +1425,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -1447,7 +1447,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1486,7 +1486,7 @@ std::string get_json_payload_for_scenes_view_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_view_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -1497,7 +1497,7 @@ void uic_mqtt_dotdot_parse_scenes_view_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1567,7 +1567,7 @@ void uic_mqtt_dotdot_parse_scenes_view_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid,
   
@@ -1595,7 +1595,7 @@ void uic_mqtt_dotdot_parse_scenes_view_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1666,7 +1666,7 @@ std::string get_json_payload_for_scenes_remove_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_remove_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -1677,7 +1677,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1733,7 +1733,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -1755,7 +1755,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1790,7 +1790,7 @@ std::string get_json_payload_for_scenes_remove_all_scenes_command(
 
 void uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
   nlohmann::json &jsn,
-  SGroupId &groupid
+  uint16_t &groupid
   
 ) {
 
@@ -1799,7 +1799,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
     }
 
 
@@ -1845,7 +1845,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid
+  uint16_t &groupid
   
 ) {
 
@@ -1865,7 +1865,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
     }
 
 
@@ -1898,7 +1898,7 @@ std::string get_json_payload_for_scenes_store_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_store_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -1909,7 +1909,7 @@ void uic_mqtt_dotdot_parse_scenes_store_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -1965,7 +1965,7 @@ void uic_mqtt_dotdot_parse_scenes_store_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -1987,7 +1987,7 @@ void uic_mqtt_dotdot_parse_scenes_store_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2030,7 +2030,7 @@ std::string get_json_payload_for_scenes_recall_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_recall_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid,
   
@@ -2043,7 +2043,7 @@ void uic_mqtt_dotdot_parse_scenes_recall_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2084,7 +2084,7 @@ std::string get_json_payload_for_scenes_get_scene_membership_command(
 
 void uic_mqtt_dotdot_parse_scenes_get_scene_membership(
   nlohmann::json &jsn,
-  SGroupId &groupid
+  uint16_t &groupid
   
 ) {
 
@@ -2093,7 +2093,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
     }
 
 
@@ -2151,7 +2151,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
   
   uint8_t &capacity,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   std::vector<uint8_t> &scene_list
 
@@ -2179,7 +2179,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneList").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2232,7 +2232,7 @@ std::string get_json_payload_for_scenes_enhanced_add_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid,
   
@@ -2249,7 +2249,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2337,7 +2337,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -2359,7 +2359,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2398,7 +2398,7 @@ std::string get_json_payload_for_scenes_enhanced_view_scene_command(
 
 void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid
   
@@ -2409,7 +2409,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2479,7 +2479,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &groupid,
+  uint16_t &groupid,
   
   uint8_t &sceneid,
   
@@ -2507,7 +2507,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
     return;
   }
         
-  groupid = jsn.at("GroupID").get< SGroupId >();
+  groupid = jsn.at("GroupID").get< uint16_t >();
       if (jsn.at("SceneID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2594,11 +2594,11 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
   nlohmann::json &jsn,
   uint8_t &mode,
   
-  SGroupId &group_identifier_from,
+  uint16_t &group_identifier_from,
   
   uint8_t &scene_identifier_from,
   
-  SGroupId &group_identifier_to,
+  uint16_t &group_identifier_to,
   
   uint8_t &scene_identifier_to
   
@@ -2614,7 +2614,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
     return;
   }
         
-  group_identifier_from = jsn.at("GroupIdentifierFrom").get< SGroupId >();
+  group_identifier_from = jsn.at("GroupIdentifierFrom").get< uint16_t >();
       if (jsn.at("SceneIdentifierFrom").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2626,7 +2626,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
     return;
   }
         
-  group_identifier_to = jsn.at("GroupIdentifierTo").get< SGroupId >();
+  group_identifier_to = jsn.at("GroupIdentifierTo").get< uint16_t >();
       if (jsn.at("SceneIdentifierTo").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -2682,7 +2682,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
   
-  SGroupId &group_identifier_from,
+  uint16_t &group_identifier_from,
   
   uint8_t &scene_identifier_from
   
@@ -2704,7 +2704,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene_response(
     return;
   }
         
-  group_identifier_from = jsn.at("GroupIdentifierFrom").get< SGroupId >();
+  group_identifier_from = jsn.at("GroupIdentifierFrom").get< uint16_t >();
       if (jsn.at("SceneIdentifierFrom").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -3773,7 +3773,7 @@ void uic_mqtt_dotdot_parse_alarms_reset_alarm(
   nlohmann::json &jsn,
   uint8_t &alarm_code,
   
-  clusterId &cluster_identifier
+  uint16_t &cluster_identifier
   
 ) {
 
@@ -3793,7 +3793,7 @@ void uic_mqtt_dotdot_parse_alarms_reset_alarm(
     return;
   }
         
-  cluster_identifier = jsn.at("ClusterIdentifier").get< clusterId >();
+  cluster_identifier = jsn.at("ClusterIdentifier").get< uint16_t >();
     }
 
 
@@ -3839,7 +3839,7 @@ void uic_mqtt_dotdot_parse_alarms_alarm(
   nlohmann::json &jsn,
   uint8_t &alarm_code,
   
-  clusterId &cluster_identifier
+  uint16_t &cluster_identifier
   
 ) {
 
@@ -3859,7 +3859,7 @@ void uic_mqtt_dotdot_parse_alarms_alarm(
     return;
   }
         
-  cluster_identifier = jsn.at("ClusterIdentifier").get< clusterId >();
+  cluster_identifier = jsn.at("ClusterIdentifier").get< uint16_t >();
     }
 
 
@@ -3945,7 +3945,7 @@ void uic_mqtt_dotdot_parse_alarms_get_alarm_response(
   
   uint8_t &alarm_code,
   
-  clusterId &cluster_identifier,
+  uint16_t &cluster_identifier,
   
   uint32_t &time_stamp
   
@@ -3978,7 +3978,7 @@ void uic_mqtt_dotdot_parse_alarms_get_alarm_response(
     return;
   }
         
-  cluster_identifier = jsn.at("ClusterIdentifier").get< clusterId >();
+  cluster_identifier = jsn.at("ClusterIdentifier").get< uint16_t >();
       if (jsn.at("TimeStamp").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -4056,7 +4056,7 @@ void uic_mqtt_dotdot_parse_time_write_attributes(
 
   if (jsn.find("Time") != jsn.end()) {
 
-    new_state.time = jsn.at("Time").get<UTC>();
+    new_state.time = jsn.at("Time").get<uint32_t>();
         
     new_updated_state.time = true;
   }
@@ -4098,7 +4098,7 @@ void uic_mqtt_dotdot_parse_time_write_attributes(
 
   if (jsn.find("ValidUntilTime") != jsn.end()) {
 
-    new_state.valid_until_time = jsn.at("ValidUntilTime").get<UTC>();
+    new_state.valid_until_time = jsn.at("ValidUntilTime").get<uint32_t>();
         
     new_updated_state.valid_until_time = true;
   }
@@ -4965,7 +4965,7 @@ std::string get_json_payload_for_door_lock_set_pin_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
   nlohmann::json &jsn,
-  DrlkPINUserID &userid,
+  uint16_t &userid,
   
   DrlkSettableUserStatus &user_status,
   
@@ -4992,7 +4992,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkPINUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5091,7 +5091,7 @@ std::string get_json_payload_for_door_lock_get_pin_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
   nlohmann::json &jsn,
-  DrlkPINUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -5100,7 +5100,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkPINUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -5235,7 +5235,7 @@ std::string get_json_payload_for_door_lock_clear_pin_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
   nlohmann::json &jsn,
-  DrlkPINUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -5244,7 +5244,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkPINUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -5415,7 +5415,7 @@ std::string get_json_payload_for_door_lock_set_user_status_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_user_status(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
   
   DrlkSettableUserStatus &user_status
   
@@ -5432,7 +5432,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_status(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5520,7 +5520,7 @@ std::string get_json_payload_for_door_lock_get_user_status_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user_status(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -5529,7 +5529,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_status(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -5650,9 +5650,9 @@ std::string get_json_payload_for_door_lock_set_weekday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
   nlohmann::json &jsn,
-  DrlkWeekDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
   
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
   
   uint8_t &days_mask,
   
@@ -5671,13 +5671,13 @@ void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< DrlkWeekDayScheduleID >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
       if (jsn.at("DaysMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -5793,9 +5793,9 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
   nlohmann::json &jsn,
-  DrlkWeekDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
   
-  DrlkTotalUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -5804,13 +5804,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< DrlkWeekDayScheduleID >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -5982,9 +5982,9 @@ std::string get_json_payload_for_door_lock_clear_weekday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
   nlohmann::json &jsn,
-  DrlkWeekDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
   
-  DrlkTotalUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -5993,13 +5993,13 @@ void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< DrlkWeekDayScheduleID >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -6094,9 +6094,9 @@ std::string get_json_payload_for_door_lock_set_year_day_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
   nlohmann::json &jsn,
-  DrlkYearDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
   
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
   
   uint32_t &local_start_time,
   
@@ -6109,13 +6109,13 @@ void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< DrlkYearDayScheduleID >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
       if (jsn.at("LocalStartTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6214,9 +6214,9 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
   nlohmann::json &jsn,
-  DrlkYearDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
   
-  DrlkTotalUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -6225,13 +6225,13 @@ void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< DrlkYearDayScheduleID >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -6366,9 +6366,9 @@ std::string get_json_payload_for_door_lock_clear_year_day_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
   nlohmann::json &jsn,
-  DrlkYearDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
   
-  DrlkTotalUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -6377,13 +6377,13 @@ void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
     return;
   }
         
-  scheduleid = jsn.at("ScheduleID").get< DrlkYearDayScheduleID >();
+  scheduleid = jsn.at("ScheduleID").get< uint8_t >();
       if (jsn.at("UserID").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -6489,7 +6489,7 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
   nlohmann::json &jsn,
-  DrlkHolidayScheduleID &holiday_scheduleid,
+  uint8_t &holiday_scheduleid,
   
   uint32_t &local_start_time,
   
@@ -6510,7 +6510,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< DrlkHolidayScheduleID >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
       if (jsn.at("LocalStartTime").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6610,7 +6610,7 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
   nlohmann::json &jsn,
-  DrlkHolidayScheduleID &holiday_scheduleid
+  uint8_t &holiday_scheduleid
   
 ) {
 
@@ -6619,7 +6619,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< DrlkHolidayScheduleID >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
     }
 
 
@@ -6766,7 +6766,7 @@ std::string get_json_payload_for_door_lock_clear_holiday_schedule_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
   nlohmann::json &jsn,
-  DrlkHolidayScheduleID &holiday_scheduleid
+  uint8_t &holiday_scheduleid
   
 ) {
 
@@ -6775,7 +6775,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
     return;
   }
         
-  holiday_scheduleid = jsn.at("HolidayScheduleID").get< DrlkHolidayScheduleID >();
+  holiday_scheduleid = jsn.at("HolidayScheduleID").get< uint8_t >();
     }
 
 
@@ -6873,7 +6873,7 @@ std::string get_json_payload_for_door_lock_set_user_type_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_user_type(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
   
   DrlkUserType &user_type
   
@@ -6890,7 +6890,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_type(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
       if (jsn.at("UserType").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -6978,7 +6978,7 @@ std::string get_json_payload_for_door_lock_get_user_type_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_user_type(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -6987,7 +6987,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkTotalUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -7116,7 +7116,7 @@ std::string get_json_payload_for_door_lock_set_rfid_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
   nlohmann::json &jsn,
-  DrlkRFIDUserID &userid,
+  uint16_t &userid,
   
   DrlkSettableUserStatus &user_status,
   
@@ -7143,7 +7143,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkRFIDUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
       if (jsn.at("UserStatus").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -7242,7 +7242,7 @@ std::string get_json_payload_for_door_lock_get_rfid_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
   nlohmann::json &jsn,
-  DrlkRFIDUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -7251,7 +7251,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkRFIDUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -7386,7 +7386,7 @@ std::string get_json_payload_for_door_lock_clear_rfid_code_command(
 
 void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
   nlohmann::json &jsn,
-  DrlkRFIDUserID &userid
+  uint16_t &userid
   
 ) {
 
@@ -7395,7 +7395,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
     return;
   }
         
-  userid = jsn.at("UserID").get< DrlkRFIDUserID >();
+  userid = jsn.at("UserID").get< uint16_t >();
     }
 
 
@@ -8862,6 +8862,13 @@ void uic_mqtt_dotdot_parse_window_covering_write_attributes(
     new_state.deceleration_time_lift = jsn.at("DecelerationTimeLift").get<uint16_t>();
         
     new_updated_state.deceleration_time_lift = true;
+  }
+
+  if (jsn.find("Mode") != jsn.end()) {
+
+    new_state.mode = uic_dotdot_mqtt::get_bitmap_decimal_value("Mode", jsn, WindowCoveringMode);
+  
+    new_updated_state.mode = true;
   }
 
 
@@ -11613,9 +11620,9 @@ void uic_mqtt_dotdot_parse_color_control_move_color_temperature(
   
   uint16_t &rate,
   
-  CCMinMiredsField &color_temperature_minimum_mireds,
+  uint16_t &color_temperature_minimum_mireds,
   
-  CCMaxMiredsField &color_temperature_maximum_mireds,
+  uint16_t &color_temperature_maximum_mireds,
   
   uint8_t &options_mask,
   
@@ -11645,13 +11652,13 @@ void uic_mqtt_dotdot_parse_color_control_move_color_temperature(
     return;
   }
         
-  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< CCMinMiredsField >();
+  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< uint16_t >();
       if (jsn.at("ColorTemperatureMaximumMireds").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< CCMaxMiredsField >();
+  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< uint16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -11735,9 +11742,9 @@ void uic_mqtt_dotdot_parse_color_control_step_color_temperature(
   
   uint16_t &transition_time,
   
-  CCMinMiredsField &color_temperature_minimum_mireds,
+  uint16_t &color_temperature_minimum_mireds,
   
-  CCMaxMiredsField &color_temperature_maximum_mireds,
+  uint16_t &color_temperature_maximum_mireds,
   
   uint8_t &options_mask,
   
@@ -11773,13 +11780,13 @@ void uic_mqtt_dotdot_parse_color_control_step_color_temperature(
     return;
   }
         
-  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< CCMinMiredsField >();
+  color_temperature_minimum_mireds = jsn.at("ColorTemperatureMinimumMireds").get< uint16_t >();
       if (jsn.at("ColorTemperatureMaximumMireds").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
   }
         
-  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< CCMaxMiredsField >();
+  color_temperature_maximum_mireds = jsn.at("ColorTemperatureMaximumMireds").get< uint16_t >();
       if (jsn.at("OptionsMask").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -12583,7 +12590,7 @@ void uic_mqtt_dotdot_parse_ias_zone_write_attributes(
 
   if (jsn.find("IASCIEAddress") != jsn.end()) {
 
-    new_state.iascie_address = jsn.at("IASCIEAddress").get<EUI64>();
+    new_state.iascie_address = jsn.at("IASCIEAddress").get<uint64_t>();
         
     new_updated_state.iascie_address = true;
   }
@@ -12948,7 +12955,7 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
 
 void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_response(
   nlohmann::json &jsn,
-  UTC &start_time,
+  uint32_t &start_time,
   
   GetMeasurementProfileResponseStatus &status,
   
@@ -12979,7 +12986,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_respon
     return;
   }
         
-  start_time = jsn.at("StartTime").get< UTC >();
+  start_time = jsn.at("StartTime").get< uint32_t >();
       if (jsn.at("Status").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -13046,7 +13053,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
   nlohmann::json &jsn,
   uint16_t &attributeid,
   
-  UTC &start_time,
+  uint32_t &start_time,
   
   uint8_t &number_of_intervals
   
@@ -13063,7 +13070,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
     return;
   }
         
-  start_time = jsn.at("StartTime").get< UTC >();
+  start_time = jsn.at("StartTime").get< uint32_t >();
       if (jsn.at("NumberOfIntervals").is_null()) {
     sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
     return;
@@ -13695,6 +13702,25 @@ std::string get_json_payload_for_state_discover_security_command(
 
 
 
+std::string get_json_payload_for_state_enable_nls_command(
+  
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+}
+
+
+
+
 /**
  * @brief JSON parser for ::WriteAttributes command arguments.
  *
@@ -14288,460 +14314,6 @@ void uic_mqtt_dotdot_parse_configuration_parameters_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_configuration_parameters_state_t &new_state,
   uic_mqtt_dotdot_configuration_parameters_updated_state_t &new_updated_state
-) {
-
-
-
-}
-
-
-std::string get_json_payload_for_aox_locator_iq_report_command(
-  
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-){
-  bool command_with_no_fields = true;
-
-  // Create a JSON payload from all the parameters
-  nlohmann::json json_payload;
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["TagUnid"] = nlohmann::json(fields->tag_unid);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Channel"] = nlohmann::json(fields->channel);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["RSSI"] = nlohmann::json(fields->rssi);
-  command_with_no_fields = false;
-  // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Samples"] = std::vector< int8_t >(
-    fields->samples,
-    fields->samples + fields->samples_count);
-
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Sequence"] = nlohmann::json(fields->sequence);
-
-  // Get the string
-  if (command_with_no_fields == true) {
-    return std::string("{}");
-  }
-  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-}
-
-
-void uic_mqtt_dotdot_parse_aox_locator_iq_report(
-  nlohmann::json &jsn,
-  std::string &tag_unid,
-  
-  uint8_t &channel,
-  
-  int8_t &rssi,
-  
-  std::vector<int8_t> &samples,
-
-  int32_t &sequence
-  
-) {
-
-  if (jsn.at("TagUnid").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-       
-  tag_unid = jsn.at("TagUnid").get<std::string>();
-            if (jsn.at("Channel").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  channel = jsn.at("Channel").get< uint8_t >();
-      if (jsn.at("RSSI").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  rssi = jsn.at("RSSI").get< int8_t >();
-      if (jsn.at("Samples").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  samples = jsn.at("Samples").get< std::vector< int8_t >>();
-        if (jsn.at("Sequence").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  sequence = jsn.at("Sequence").get< int32_t >();
-    }
-
-
-std::string get_json_payload_for_aox_locator_angle_report_command(
-  
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-){
-  bool command_with_no_fields = true;
-
-  // Create a JSON payload from all the parameters
-  nlohmann::json json_payload;
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["TagUnid"] = nlohmann::json(fields->tag_unid);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Direction"] = nlohmann::json(fields->direction);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Deviation"] = nlohmann::json(fields->deviation);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Sequence"] = nlohmann::json(fields->sequence);
-
-  // Get the string
-  if (command_with_no_fields == true) {
-    return std::string("{}");
-  }
-  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-}
-
-
-void uic_mqtt_dotdot_parse_aox_locator_angle_report(
-  nlohmann::json &jsn,
-  std::string &tag_unid,
-  
-  SphericalCoordinates &direction,
-  
-  SphericalCoordinates &deviation,
-  
-  int32_t &sequence
-  
-) {
-
-  if (jsn.at("TagUnid").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-       
-  tag_unid = jsn.at("TagUnid").get<std::string>();
-            if (jsn.at("Direction").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  direction = jsn.at("Direction").get< SphericalCoordinates >();
-      if (jsn.at("Deviation").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  deviation = jsn.at("Deviation").get< SphericalCoordinates >();
-      if (jsn.at("Sequence").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  sequence = jsn.at("Sequence").get< int32_t >();
-    }
-
-
-std::string get_json_payload_for_aox_locator_angle_correction_command(
-  
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-){
-  bool command_with_no_fields = true;
-
-  // Create a JSON payload from all the parameters
-  nlohmann::json json_payload;
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["TagUnid"] = nlohmann::json(fields->tag_unid);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Direction"] = nlohmann::json(fields->direction);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Deviation"] = nlohmann::json(fields->deviation);
-  command_with_no_fields = false;
-  // Single Value
-  // Non-enum and non-bitmask (struct, string or scalar)
-  json_payload["Sequence"] = nlohmann::json(fields->sequence);
-
-  // Get the string
-  if (command_with_no_fields == true) {
-    return std::string("{}");
-  }
-  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-}
-
-
-void uic_mqtt_dotdot_parse_aox_locator_angle_correction(
-  nlohmann::json &jsn,
-  std::string &tag_unid,
-  
-  SphericalCoordinates &direction,
-  
-  SphericalCoordinates &deviation,
-  
-  int32_t &sequence
-  
-) {
-
-  if (jsn.at("TagUnid").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-       
-  tag_unid = jsn.at("TagUnid").get<std::string>();
-            if (jsn.at("Direction").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  direction = jsn.at("Direction").get< SphericalCoordinates >();
-      if (jsn.at("Deviation").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  deviation = jsn.at("Deviation").get< SphericalCoordinates >();
-      if (jsn.at("Sequence").is_null()) {
-    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
-    return;
-  }
-        
-  sequence = jsn.at("Sequence").get< int32_t >();
-    }
-
-
-/**
- * @brief JSON parser for ::WriteAttributes command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_locator_write_attributes(
-  nlohmann::json &jsn,
-  uic_mqtt_dotdot_aox_locator_state_t &new_state,
-  uic_mqtt_dotdot_aox_locator_updated_state_t &new_updated_state,
-  std::vector<MinMaxPair> &azimuth_mask,
-  std::vector<MinMaxPair> &elevation_mask,
-  std::vector<const char*> &allow_list,
-  std::vector<int8_t> &antenna_array
-) {
-
-
-  if (jsn.find("ReportingMode") != jsn.end()) {
-
-    uint32_t tmp = get_enum_decimal_value<AoXLocatorReportingMode>("ReportingMode", jsn);
-    if (tmp == std::numeric_limits<AoXLocatorReportingMode>::max()) {
-      #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
-      tmp = aox_locator_reporting_mode_get_enum_value_number(jsn.at("ReportingMode").get<std::string>());
-      #elif defined(REPORTING_MODE_ENUM_NAME_AVAILABLE)
-      tmp = reporting_mode_get_enum_value_number(jsn.at("ReportingMode").get<std::string>());
-      #endif
-    }
-    new_state.reporting_mode = tmp;
-  
-    new_updated_state.reporting_mode = true;
-  }
-
-  if (jsn.find("PositionAndOrientationValid") != jsn.end()) {
-
-    new_state.position_and_orientation_valid = get_bool_from_json(jsn, "PositionAndOrientationValid");
-  
-    new_updated_state.position_and_orientation_valid = true;
-  }
-
-  if (jsn.find("PositionAndOrientation") != jsn.end()) {
-
-    new_state.position_and_orientation = jsn.at("PositionAndOrientation").get<CoordinateAndOrientation>();
-        
-    new_updated_state.position_and_orientation = true;
-  }
-
-  if (jsn.find("AzimuthMask") != jsn.end()) {
-
-    auto &azimuth_mask_jsn = jsn.at("AzimuthMask");
-    for (size_t i = 0; i < azimuth_mask_jsn.size(); i++) {
-      azimuth_mask.push_back(azimuth_mask_jsn.at(i).get<MinMaxPair>());
-          }
-    // Take our vector and pack it into the updated state
-    new_state.azimuth_mask_count = azimuth_mask.size();
-    new_state.azimuth_mask = azimuth_mask.data();
-
-    new_updated_state.azimuth_mask = true;
-  }
-
-  if (jsn.find("ElevationMask") != jsn.end()) {
-
-    auto &elevation_mask_jsn = jsn.at("ElevationMask");
-    for (size_t i = 0; i < elevation_mask_jsn.size(); i++) {
-      elevation_mask.push_back(elevation_mask_jsn.at(i).get<MinMaxPair>());
-          }
-    // Take our vector and pack it into the updated state
-    new_state.elevation_mask_count = elevation_mask.size();
-    new_state.elevation_mask = elevation_mask.data();
-
-    new_updated_state.elevation_mask = true;
-  }
-
-  if (jsn.find("AllowList") != jsn.end()) {
-
-    auto &allow_list_jsn = jsn.at("AllowList");
-    for (size_t i = 0; i < allow_list_jsn.size(); i++) {
-      allow_list.push_back(allow_list_jsn.at(i).get_ptr<const std::string*>()->c_str());
-    }
-    // Take our vector and pack it into the updated state
-    new_state.allow_list_count = allow_list.size();
-    new_state.allow_list = allow_list.data();
-
-    new_updated_state.allow_list = true;
-  }
-
-  if (jsn.find("AoXMode") != jsn.end()) {
-
-    uint32_t tmp = get_enum_decimal_value<AoXLocatorAoXMode>("AoXMode", jsn);
-    if (tmp == std::numeric_limits<AoXLocatorAoXMode>::max()) {
-      #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
-      tmp = aox_locator_aox_mode_get_enum_value_number(jsn.at("AoXMode").get<std::string>());
-      #elif defined(AOX_MODE_ENUM_NAME_AVAILABLE)
-      tmp = aox_mode_get_enum_value_number(jsn.at("AoXMode").get<std::string>());
-      #endif
-    }
-    new_state.aox_mode = tmp;
-  
-    new_updated_state.aox_mode = true;
-  }
-
-  if (jsn.find("AntennaMode") != jsn.end()) {
-
-    uint32_t tmp = get_enum_decimal_value<AoXLocatorAntennaMode>("AntennaMode", jsn);
-    if (tmp == std::numeric_limits<AoXLocatorAntennaMode>::max()) {
-      #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
-      tmp = aox_locator_antenna_mode_get_enum_value_number(jsn.at("AntennaMode").get<std::string>());
-      #elif defined(ANTENNA_MODE_ENUM_NAME_AVAILABLE)
-      tmp = antenna_mode_get_enum_value_number(jsn.at("AntennaMode").get<std::string>());
-      #endif
-    }
-    new_state.antenna_mode = tmp;
-  
-    new_updated_state.antenna_mode = true;
-  }
-
-  if (jsn.find("AntennaArray") != jsn.end()) {
-
-    auto &antenna_array_jsn = jsn.at("AntennaArray");
-    for (size_t i = 0; i < antenna_array_jsn.size(); i++) {
-      antenna_array.push_back(antenna_array_jsn.at(i).get<int8_t>());
-          }
-    // Take our vector and pack it into the updated state
-    new_state.antenna_array_count = antenna_array.size();
-    new_state.antenna_array = antenna_array.data();
-
-    new_updated_state.antenna_array = true;
-  }
-
-  if (jsn.find("PeriodSamples") != jsn.end()) {
-
-    new_state.period_samples = jsn.at("PeriodSamples").get<int8_t>();
-        
-    new_updated_state.period_samples = true;
-  }
-
-  if (jsn.find("AngleFiltering") != jsn.end()) {
-
-    new_state.angle_filtering = get_bool_from_json(jsn, "AngleFiltering");
-  
-    new_updated_state.angle_filtering = true;
-  }
-
-  if (jsn.find("AngleFilteringWeight") != jsn.end()) {
-
-    new_state.angle_filtering_weight = jsn.at("AngleFilteringWeight").get<double>();
-        
-    new_updated_state.angle_filtering_weight = true;
-  }
-
-  if (jsn.find("AngleCorrectionTimeout") != jsn.end()) {
-
-    new_state.angle_correction_timeout = jsn.at("AngleCorrectionTimeout").get<int8_t>();
-        
-    new_updated_state.angle_correction_timeout = true;
-  }
-
-  if (jsn.find("AngleCorrectionDelay") != jsn.end()) {
-
-    new_state.angle_correction_delay = jsn.at("AngleCorrectionDelay").get<int8_t>();
-        
-    new_updated_state.angle_correction_delay = true;
-  }
-
-  if (jsn.find("CTEMode") != jsn.end()) {
-
-    uint32_t tmp = get_enum_decimal_value<AoXLocatorCTEMode>("CTEMode", jsn);
-    if (tmp == std::numeric_limits<AoXLocatorCTEMode>::max()) {
-      #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
-      tmp = aox_locator_cte_mode_get_enum_value_number(jsn.at("CTEMode").get<std::string>());
-      #elif defined(CTE_MODE_ENUM_NAME_AVAILABLE)
-      tmp = cte_mode_get_enum_value_number(jsn.at("CTEMode").get<std::string>());
-      #endif
-    }
-    new_state.cte_mode = tmp;
-  
-    new_updated_state.cte_mode = true;
-  }
-
-  if (jsn.find("CTESamplingInterval") != jsn.end()) {
-
-    new_state.cte_sampling_interval = jsn.at("CTESamplingInterval").get<int8_t>();
-        
-    new_updated_state.cte_sampling_interval = true;
-  }
-
-  if (jsn.find("CTELength") != jsn.end()) {
-
-    new_state.cte_length = jsn.at("CTELength").get<int8_t>();
-        
-    new_updated_state.cte_length = true;
-  }
-
-  if (jsn.find("SlotDuration") != jsn.end()) {
-
-    new_state.slot_duration = jsn.at("SlotDuration").get<int8_t>();
-        
-    new_updated_state.slot_duration = true;
-  }
-
-
-}
-
-
-/**
- * @brief JSON parser for ::WriteAttributes command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_position_estimation_write_attributes(
-  nlohmann::json &jsn,
-  uic_mqtt_dotdot_aox_position_estimation_state_t &new_state,
-  uic_mqtt_dotdot_aox_position_estimation_updated_state_t &new_updated_state
 ) {
 
 

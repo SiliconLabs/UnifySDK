@@ -220,7 +220,7 @@ Install the `gcovr` package using `apt-get` on Ubuntu/Debian or `brew` on Mac. `
 
 ## Debian Package for a Unify Component
 
-The Unify Host SDK includes a macro for making a Debian package
+The Unify SDK includes a macro for making a Debian package
 for a component.
 
 To make a new package, just make CMake component and decorate the
@@ -229,7 +229,7 @@ install artifacts of the package with the component name:
 Ie:
 
 ```cmake
-install(TARGETS zpc RUNTIME DESTINATION "bin" COMPONENT uic-zpc)
+install(TARGETS eed RUNTIME DESTINATION "bin" COMPONENT uic-eed)
 ```
 
 Make *debconf* scripts for the package ie `config`, `templates`, `postinst` etc if needed. See `man debconf` for details.
@@ -238,9 +238,9 @@ Finally, define a Debian package for the CMake component
 
 ```cmake
 add_component_to_uic(
-  uic-zpc # Package Name
-  "Universal IOT controller - Z-Wave protocol Controller"
-  "${CMAKE_PROJECT_NAME}-zpc" # Package Debian filename
+  uic-eed # Package Name
+  "Universal IOT controller - Emulated End Device"
+  "${CMAKE_PROJECT_NAME}-eed" # Package Debian filename
   "libfoo" # Package Depends on
   "" # Package replaces
   "debconf/config;\

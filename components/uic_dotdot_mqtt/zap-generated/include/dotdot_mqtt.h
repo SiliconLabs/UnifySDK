@@ -4370,13 +4370,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_add_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid,
 
     uint16_t transition_time,
 
-    SSceneName scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets,
@@ -4390,7 +4390,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_add_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4399,7 +4399,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_view_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4410,13 +4410,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_view_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid,
 
     uint16_t transition_time,
 
-    SSceneName scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -4426,7 +4426,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4437,7 +4437,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4446,7 +4446,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_all_scenes_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid
+    uint16_t groupid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback_t)(
@@ -4455,14 +4455,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid
+    uint16_t groupid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_store_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4473,7 +4473,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_store_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4482,7 +4482,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_recall_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid,
 
@@ -4493,7 +4493,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_get_scene_membership_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid
+    uint16_t groupid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_t)(
@@ -4504,7 +4504,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_get_scene_membership_response_callb
 
     uint8_t capacity,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t scene_list_count,
     const uint8_t *scene_list
@@ -4514,13 +4514,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_add_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid,
 
     uint16_t transition_time,
 
-    SSceneName scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -4532,7 +4532,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callbac
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4541,7 +4541,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_view_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid
 
@@ -4552,13 +4552,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callba
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId groupid,
+    uint16_t groupid,
 
     uint8_t sceneid,
 
     uint16_t transition_time,
 
-    SSceneName scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -4570,11 +4570,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_copy_scene_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t mode,
 
-    SGroupId group_identifier_from,
+    uint16_t group_identifier_from,
 
     uint8_t scene_identifier_from,
 
-    SGroupId group_identifier_to,
+    uint16_t group_identifier_to,
 
     uint8_t scene_identifier_to
 
@@ -4585,7 +4585,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_copy_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    SGroupId group_identifier_from,
+    uint16_t group_identifier_from,
 
     uint8_t scene_identifier_from
 
@@ -4594,10 +4594,10 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_copy_scene_response_callback_t)(
 typedef struct {
   uint8_t scene_count;
   uint8_t current_scene;
-  SGroupId current_group;
+  uint16_t current_group;
   bool scene_valid;
   uint8_t name_support;
-  EUI64 last_configured_by;
+  uint64_t last_configured_by;
   size_t scene_table_count;
   const SSceneTable* scene_table;
 } uic_mqtt_dotdot_scenes_state_t;
@@ -4632,13 +4632,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_force_read_attributes_callback_t)(
  * @brief Command fields for Scenes/AddScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 
   uint16_t transition_time;
 
-  SSceneName scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4652,7 +4652,7 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_add_scene_response_fields_t;
@@ -4661,7 +4661,7 @@ typedef struct {
  * @brief Command fields for Scenes/ViewScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_view_scene_fields_t;
@@ -4672,13 +4672,13 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 
   uint16_t transition_time;
 
-  SSceneName scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4688,7 +4688,7 @@ typedef struct {
  * @brief Command fields for Scenes/RemoveScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_remove_scene_fields_t;
@@ -4699,7 +4699,7 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_remove_scene_response_fields_t;
@@ -4708,7 +4708,7 @@ typedef struct {
  * @brief Command fields for Scenes/RemoveAllScenes
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 } uic_mqtt_dotdot_scenes_command_remove_all_scenes_fields_t;
 
 /**
@@ -4717,14 +4717,14 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 } uic_mqtt_dotdot_scenes_command_remove_all_scenes_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/StoreScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_store_scene_fields_t;
@@ -4735,7 +4735,7 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_store_scene_response_fields_t;
@@ -4744,7 +4744,7 @@ typedef struct {
  * @brief Command fields for Scenes/RecallScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 
@@ -4755,7 +4755,7 @@ typedef struct {
  * @brief Command fields for Scenes/GetSceneMembership
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 } uic_mqtt_dotdot_scenes_command_get_scene_membership_fields_t;
 
 /**
@@ -4766,7 +4766,7 @@ typedef struct {
 
   uint8_t capacity;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t scene_list_count;
   const uint8_t *scene_list;
@@ -4776,13 +4776,13 @@ typedef struct {
  * @brief Command fields for Scenes/EnhancedAddScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 
   uint16_t transition_time;
 
-  SSceneName scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4794,7 +4794,7 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_enhanced_add_scene_response_fields_t;
@@ -4803,7 +4803,7 @@ typedef struct {
  * @brief Command fields for Scenes/EnhancedViewScene
  */
 typedef struct {
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_enhanced_view_scene_fields_t;
@@ -4814,13 +4814,13 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId groupid;
+  uint16_t groupid;
 
   uint8_t sceneid;
 
   uint16_t transition_time;
 
-  SSceneName scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4832,11 +4832,11 @@ typedef struct {
 typedef struct {
   uint8_t mode;
 
-  SGroupId group_identifier_from;
+  uint16_t group_identifier_from;
 
   uint8_t scene_identifier_from;
 
-  SGroupId group_identifier_to;
+  uint16_t group_identifier_to;
 
   uint8_t scene_identifier_to;
 } uic_mqtt_dotdot_scenes_command_copy_scene_fields_t;
@@ -4847,7 +4847,7 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  SGroupId group_identifier_from;
+  uint16_t group_identifier_from;
 
   uint8_t scene_identifier_from;
 } uic_mqtt_dotdot_scenes_command_copy_scene_response_fields_t;
@@ -5735,7 +5735,7 @@ sl_status_t uic_mqtt_dotdot_scenes_current_scene_unretain(
  */
 sl_status_t uic_mqtt_dotdot_scenes_current_group_publish(
   const char *base_topic,
-  SGroupId value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -5825,7 +5825,7 @@ sl_status_t uic_mqtt_dotdot_scenes_name_support_unretain(
  */
 sl_status_t uic_mqtt_dotdot_scenes_last_configured_by_publish(
   const char *base_topic,
-  EUI64 value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7646,7 +7646,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_reset_alarm_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t alarm_code,
 
-    clusterId cluster_identifier
+    uint16_t cluster_identifier
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_alarms_alarm_callback_t)(
@@ -7655,7 +7655,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_alarm_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t alarm_code,
 
-    clusterId cluster_identifier
+    uint16_t cluster_identifier
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_alarms_reset_all_alarms_callback_t)(
@@ -7671,7 +7671,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_get_alarm_response_callback_t)(
 
     uint8_t alarm_code,
 
-    clusterId cluster_identifier,
+    uint16_t cluster_identifier,
 
     uint32_t time_stamp
 
@@ -7717,7 +7717,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_force_read_attributes_callback_t)(
 typedef struct {
   uint8_t alarm_code;
 
-  clusterId cluster_identifier;
+  uint16_t cluster_identifier;
 } uic_mqtt_dotdot_alarms_command_reset_alarm_fields_t;
 
 /**
@@ -7726,7 +7726,7 @@ typedef struct {
 typedef struct {
   uint8_t alarm_code;
 
-  clusterId cluster_identifier;
+  uint16_t cluster_identifier;
 } uic_mqtt_dotdot_alarms_command_alarm_fields_t;
 
 /**
@@ -7737,7 +7737,7 @@ typedef struct {
 
   uint8_t alarm_code;
 
-  clusterId cluster_identifier;
+  uint16_t cluster_identifier;
 
   uint32_t time_stamp;
 } uic_mqtt_dotdot_alarms_command_get_alarm_response_fields_t;
@@ -8110,7 +8110,7 @@ void uic_mqtt_dotdot_alarms_publish_empty_supported_commands(
 // Callback types used by the time cluster
 
 typedef struct {
-  UTC time;
+  uint32_t time;
   uint8_t time_status;
   int32_t time_zone;
   uint32_t dst_start;
@@ -8118,8 +8118,8 @@ typedef struct {
   int32_t dst_shift;
   uint32_t standard_time;
   uint32_t local_time;
-  UTC last_set_time;
-  UTC valid_until_time;
+  uint32_t last_set_time;
+  uint32_t valid_until_time;
 } uic_mqtt_dotdot_time_state_t;
 
 typedef struct {
@@ -8214,7 +8214,7 @@ void uic_mqtt_dotdot_clear_time_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_time_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8454,7 +8454,7 @@ sl_status_t uic_mqtt_dotdot_time_local_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_last_set_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8484,7 +8484,7 @@ sl_status_t uic_mqtt_dotdot_time_last_set_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_valid_until_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9513,7 +9513,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkPINUserID userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status,
 
@@ -9533,7 +9533,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkPINUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t)(
@@ -9553,7 +9553,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkPINUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t)(
@@ -9579,7 +9579,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_status_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkTotalUserID userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status
 
@@ -9595,7 +9595,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_status_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkTotalUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_status_response_callback_t)(
@@ -9611,9 +9611,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkWeekDayScheduleID scheduleid,
+    uint8_t scheduleid,
 
-    DrlkTotalUserID userid,
+    uint16_t userid,
 
     uint8_t days_mask,
 
@@ -9637,9 +9637,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkWeekDayScheduleID scheduleid,
+    uint8_t scheduleid,
 
-    DrlkTotalUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback_t)(
@@ -9667,9 +9667,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback_
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkWeekDayScheduleID scheduleid,
+    uint8_t scheduleid,
 
-    DrlkTotalUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_weekday_schedule_response_callback_t)(
@@ -9683,9 +9683,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkYearDayScheduleID scheduleid,
+    uint8_t scheduleid,
 
-    DrlkTotalUserID userid,
+    uint16_t userid,
 
     uint32_t local_start_time,
 
@@ -9703,9 +9703,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkYearDayScheduleID scheduleid,
+    uint8_t scheduleid,
 
-    DrlkTotalUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback_t)(
@@ -9727,9 +9727,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkYearDayScheduleID scheduleid,
+    uint8_t scheduleid,
 
-    DrlkTotalUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_year_day_schedule_response_callback_t)(
@@ -9743,7 +9743,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkHolidayScheduleID holiday_scheduleid,
+    uint8_t holiday_scheduleid,
 
     uint32_t local_start_time,
 
@@ -9763,7 +9763,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkHolidayScheduleID holiday_scheduleid
+    uint8_t holiday_scheduleid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback_t)(
@@ -9785,7 +9785,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback_
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkHolidayScheduleID holiday_scheduleid
+    uint8_t holiday_scheduleid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_holiday_schedule_response_callback_t)(
@@ -9799,7 +9799,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_type_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkTotalUserID userid,
+    uint16_t userid,
 
     DrlkUserType user_type
 
@@ -9815,7 +9815,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_type_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkTotalUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_type_response_callback_t)(
@@ -9831,7 +9831,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkRFIDUserID userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status,
 
@@ -9851,7 +9851,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkRFIDUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t)(
@@ -9871,7 +9871,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    DrlkRFIDUserID userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t)(
@@ -10224,7 +10224,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetPINCode
  */
 typedef struct {
-  DrlkPINUserID userid;
+  uint16_t userid;
 
   DrlkSettableUserStatus user_status;
 
@@ -10244,7 +10244,7 @@ typedef struct {
  * @brief Command fields for DoorLock/GetPINCode
  */
 typedef struct {
-  DrlkPINUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t;
 
 /**
@@ -10264,7 +10264,7 @@ typedef struct {
  * @brief Command fields for DoorLock/ClearPINCode
  */
 typedef struct {
-  DrlkPINUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t;
 
 /**
@@ -10285,7 +10285,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetUserStatus
  */
 typedef struct {
-  DrlkTotalUserID userid;
+  uint16_t userid;
 
   DrlkSettableUserStatus user_status;
 } uic_mqtt_dotdot_door_lock_command_set_user_status_fields_t;
@@ -10301,7 +10301,7 @@ typedef struct {
  * @brief Command fields for DoorLock/GetUserStatus
  */
 typedef struct {
-  DrlkTotalUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_user_status_fields_t;
 
 /**
@@ -10317,9 +10317,9 @@ typedef struct {
  * @brief Command fields for DoorLock/SetWeekdaySchedule
  */
 typedef struct {
-  DrlkWeekDayScheduleID scheduleid;
+  uint8_t scheduleid;
 
-  DrlkTotalUserID userid;
+  uint16_t userid;
 
   uint8_t days_mask;
 
@@ -10343,9 +10343,9 @@ typedef struct {
  * @brief Command fields for DoorLock/GetWeekdaySchedule
  */
 typedef struct {
-  DrlkWeekDayScheduleID scheduleid;
+  uint8_t scheduleid;
 
-  DrlkTotalUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_weekday_schedule_fields_t;
 
 /**
@@ -10373,9 +10373,9 @@ typedef struct {
  * @brief Command fields for DoorLock/ClearWeekdaySchedule
  */
 typedef struct {
-  DrlkWeekDayScheduleID scheduleid;
+  uint8_t scheduleid;
 
-  DrlkTotalUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_weekday_schedule_fields_t;
 
 /**
@@ -10389,9 +10389,9 @@ typedef struct {
  * @brief Command fields for DoorLock/SetYearDaySchedule
  */
 typedef struct {
-  DrlkYearDayScheduleID scheduleid;
+  uint8_t scheduleid;
 
-  DrlkTotalUserID userid;
+  uint16_t userid;
 
   uint32_t local_start_time;
 
@@ -10409,9 +10409,9 @@ typedef struct {
  * @brief Command fields for DoorLock/GetYearDaySchedule
  */
 typedef struct {
-  DrlkYearDayScheduleID scheduleid;
+  uint8_t scheduleid;
 
-  DrlkTotalUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_fields_t;
 
 /**
@@ -10433,9 +10433,9 @@ typedef struct {
  * @brief Command fields for DoorLock/ClearYearDaySchedule
  */
 typedef struct {
-  DrlkYearDayScheduleID scheduleid;
+  uint8_t scheduleid;
 
-  DrlkTotalUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_year_day_schedule_fields_t;
 
 /**
@@ -10449,7 +10449,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetHolidaySchedule
  */
 typedef struct {
-  DrlkHolidayScheduleID holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 
   uint32_t local_start_time;
 
@@ -10469,7 +10469,7 @@ typedef struct {
  * @brief Command fields for DoorLock/GetHolidaySchedule
  */
 typedef struct {
-  DrlkHolidayScheduleID holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 } uic_mqtt_dotdot_door_lock_command_get_holiday_schedule_fields_t;
 
 /**
@@ -10491,7 +10491,7 @@ typedef struct {
  * @brief Command fields for DoorLock/ClearHolidaySchedule
  */
 typedef struct {
-  DrlkHolidayScheduleID holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 } uic_mqtt_dotdot_door_lock_command_clear_holiday_schedule_fields_t;
 
 /**
@@ -10505,7 +10505,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetUserType
  */
 typedef struct {
-  DrlkTotalUserID userid;
+  uint16_t userid;
 
   DrlkUserType user_type;
 } uic_mqtt_dotdot_door_lock_command_set_user_type_fields_t;
@@ -10521,7 +10521,7 @@ typedef struct {
  * @brief Command fields for DoorLock/GetUserType
  */
 typedef struct {
-  DrlkTotalUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_user_type_fields_t;
 
 /**
@@ -10537,7 +10537,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetRFIDCode
  */
 typedef struct {
-  DrlkRFIDUserID userid;
+  uint16_t userid;
 
   DrlkSettableUserStatus user_status;
 
@@ -10557,7 +10557,7 @@ typedef struct {
  * @brief Command fields for DoorLock/GetRFIDCode
  */
 typedef struct {
-  DrlkRFIDUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t;
 
 /**
@@ -10577,7 +10577,7 @@ typedef struct {
  * @brief Command fields for DoorLock/ClearRFIDCode
  */
 typedef struct {
-  DrlkRFIDUserID userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t;
 
 /**
@@ -17443,7 +17443,7 @@ typedef struct {
   uint16_t thermostat_running_state;
   uint8_t setpoint_change_source;
   int16_t setpoint_change_amount;
-  UTC setpoint_change_source_timestamp;
+  uint32_t setpoint_change_source_timestamp;
   uint8_t occupied_setback;
   uint8_t occupied_setback_min;
   uint8_t occupied_setback_max;
@@ -18956,7 +18956,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_amount_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -20491,9 +20491,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_color_temperature_callb
 
     uint16_t rate,
 
-    CCMinMiredsField color_temperature_minimum_mireds,
+    uint16_t color_temperature_minimum_mireds,
 
-    CCMaxMiredsField color_temperature_maximum_mireds,
+    uint16_t color_temperature_maximum_mireds,
 
     uint8_t options_mask,
 
@@ -20510,9 +20510,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_step_color_temperature_callb
 
     uint16_t transition_time,
 
-    CCMinMiredsField color_temperature_minimum_mireds,
+    uint16_t color_temperature_minimum_mireds,
 
-    CCMaxMiredsField color_temperature_maximum_mireds,
+    uint16_t color_temperature_maximum_mireds,
 
     uint8_t options_mask,
 
@@ -20895,9 +20895,9 @@ typedef struct {
 
   uint16_t rate;
 
-  CCMinMiredsField color_temperature_minimum_mireds;
+  uint16_t color_temperature_minimum_mireds;
 
-  CCMaxMiredsField color_temperature_maximum_mireds;
+  uint16_t color_temperature_maximum_mireds;
 
   uint8_t options_mask;
 
@@ -20914,9 +20914,9 @@ typedef struct {
 
   uint16_t transition_time;
 
-  CCMinMiredsField color_temperature_minimum_mireds;
+  uint16_t color_temperature_minimum_mireds;
 
-  CCMaxMiredsField color_temperature_maximum_mireds;
+  uint16_t color_temperature_maximum_mireds;
 
   uint8_t options_mask;
 
@@ -27894,7 +27894,7 @@ typedef struct {
   uint8_t zone_state;
   uint8_t zone_type;
   uint16_t zone_status;
-  EUI64 iascie_address;
+  uint64_t iascie_address;
   uint8_t zoneid;
   uint8_t number_of_zone_sensitivity_levels_supported;
   uint8_t current_zone_sensitivity_level;
@@ -28319,7 +28319,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zone_status_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ias_zone_iascie_address_publish(
   const char *base_topic,
-  EUI64 value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28750,15 +28750,15 @@ typedef struct {
   uint64_t current_max_demand_delivered;
   int8_t current_max_demand_received;
   int8_t power_factor;
-  UTC reading_snap_shot_time;
-  UTC current_max_demand_delivered_time;
-  UTC current_max_demand_received_time;
+  uint32_t reading_snap_shot_time;
+  uint32_t current_max_demand_delivered_time;
+  uint32_t current_max_demand_received_time;
   uint8_t default_update_period;
   uint8_t supply_status;
   uint64_t current_inlet_energy_carrier_summation;
   uint64_t current_outlet_energy_carrier_summation;
-  uint32_t inlet_temperature;
-  uint32_t outlet_temperature;
+  int32_t inlet_temperature;
+  int32_t outlet_temperature;
   uint8_t unitof_measure;
   uint32_t multiplier;
   uint32_t divisor;
@@ -29031,7 +29031,7 @@ sl_status_t uic_mqtt_dotdot_metering_power_factor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29061,7 +29061,7 @@ sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29091,7 +29091,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29241,7 +29241,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_unr
  */
 sl_status_t uic_mqtt_dotdot_metering_inlet_temperature_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29271,7 +29271,7 @@ sl_status_t uic_mqtt_dotdot_metering_inlet_temperature_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_outlet_temperature_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29717,7 +29717,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_get_measurement_pro
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    UTC start_time,
+    uint32_t start_time,
 
     GetMeasurementProfileResponseStatus status,
 
@@ -29737,7 +29737,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_get_measurement_pro
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint16_t attributeid,
 
-    UTC start_time,
+    uint32_t start_time,
 
     uint8_t number_of_intervals
 
@@ -30037,7 +30037,7 @@ typedef struct {
  * @brief Command fields for ElectricalMeasurement/GetMeasurementProfileResponse
  */
 typedef struct {
-  UTC start_time;
+  uint32_t start_time;
 
   GetMeasurementProfileResponseStatus status;
 
@@ -30057,7 +30057,7 @@ typedef struct {
 typedef struct {
   uint16_t attributeid;
 
-  UTC start_time;
+  uint32_t start_time;
 
   uint8_t number_of_intervals;
 } uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_fields_t;
@@ -35609,6 +35609,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_state_discover_security_callback_t)(
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type
 );
+typedef sl_status_t (*uic_mqtt_dotdot_state_enable_nls_callback_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type
+);
 
 typedef struct {
   size_t endpoint_id_list_count;
@@ -35845,6 +35850,46 @@ void uic_mqtt_dotdot_state_generated_discover_security_callback_unset(const uic_
  * +/State/GeneratedCommands/discover_security is received.
  */
 void uic_mqtt_dotdot_state_generated_discover_security_callback_clear();
+/**
+ * @brief Setup callback to be called when a
+ * State/Commands/enable_nls is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_state_enable_nls_callback_set(const uic_mqtt_dotdot_state_enable_nls_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * State/Commands/enable_nls is received.
+ *
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_state_enable_nls_callback_unset(const uic_mqtt_dotdot_state_enable_nls_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * State/Commands/enable_nls is received.
+ */
+void uic_mqtt_dotdot_state_enable_nls_callback_clear();
+
+/**
+ * @brief Setup callback to be called when a
+ * +/State/GeneratedCommands/enable_nls is received.
+ *
+ * Setting this callback will not overwrite the previous set callback
+ * @param callback      Function to be called on command reception
+ */
+void uic_mqtt_dotdot_state_generated_enable_nls_callback_set(const uic_mqtt_dotdot_state_enable_nls_callback_t callback);
+/**
+ * @brief Unsets callback to be called when a
+ * +/State/GeneratedCommands/enable_nls is received.
+ * @param callback      Function to be no longer called on command reception
+ */
+void uic_mqtt_dotdot_state_generated_enable_nls_callback_unset(const uic_mqtt_dotdot_state_enable_nls_callback_t callback);
+/**
+ * @brief Clears all callbacks registered for when
+ * +/State/GeneratedCommands/enable_nls is received.
+ */
+void uic_mqtt_dotdot_state_generated_enable_nls_callback_clear();
 
 /**
  * @brief Setup a callback for WriteAttribute to be called when a
@@ -39030,1068 +39075,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_supported_commands(
  * @param endpoint )
  */
 void uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(
-  const dotdot_unid_t unid
-  ,dotdot_endpoint_id_t endpoint);
-// Callback types used by the aox_locator cluster
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_iq_report_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* tag_unid,
-
-    uint8_t channel,
-
-    int8_t rssi,
-
-    uint8_t samples_count,
-    const int8_t *samples,
-
-    int32_t sequence
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_angle_report_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* tag_unid,
-
-    SphericalCoordinates direction,
-
-    SphericalCoordinates deviation,
-
-    int32_t sequence
-
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_angle_correction_callback_t)(
-    dotdot_unid_t unid,
-    dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* tag_unid,
-
-    SphericalCoordinates direction,
-
-    SphericalCoordinates deviation,
-
-    int32_t sequence
-
-);
-
-typedef struct {
-  uint8_t reporting_mode;
-  bool position_and_orientation_valid;
-  CoordinateAndOrientation position_and_orientation;
-  size_t azimuth_mask_count;
-  const MinMaxPair* azimuth_mask;
-  size_t elevation_mask_count;
-  const MinMaxPair* elevation_mask;
-  size_t allow_list_count;
-  const char** allow_list;
-  uint8_t aox_mode;
-  uint8_t antenna_mode;
-  size_t antenna_array_count;
-  const int8_t* antenna_array;
-  int8_t period_samples;
-  bool angle_filtering;
-  double angle_filtering_weight;
-  int8_t angle_correction_timeout;
-  int8_t angle_correction_delay;
-  uint8_t cte_mode;
-  int8_t cte_sampling_interval;
-  int8_t cte_length;
-  int8_t slot_duration;
-} uic_mqtt_dotdot_aox_locator_state_t;
-
-typedef struct {
-  bool reporting_mode;
-  bool position_and_orientation_valid;
-  bool position_and_orientation;
-  bool azimuth_mask;
-  bool elevation_mask;
-  bool allow_list;
-  bool aox_mode;
-  bool antenna_mode;
-  bool antenna_array;
-  bool period_samples;
-  bool angle_filtering;
-  bool angle_filtering_weight;
-  bool angle_correction_timeout;
-  bool angle_correction_delay;
-  bool cte_mode;
-  bool cte_sampling_interval;
-  bool cte_length;
-  bool slot_duration;
-} uic_mqtt_dotdot_aox_locator_updated_state_t;
-
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_write_attributes_callback_t)(
-    const dotdot_unid_t unid,
-    const dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uic_mqtt_dotdot_aox_locator_state_t,
-    uic_mqtt_dotdot_aox_locator_updated_state_t
-);
-
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t)(
-    const dotdot_unid_t unid,
-    const dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uic_mqtt_dotdot_aox_locator_updated_state_t
-);
-
-
-/**
- * @brief Command fields for AoXLocator/IQReport
- */
-typedef struct {
-  const char* tag_unid;
-
-  uint8_t channel;
-
-  int8_t rssi;
-
-  uint8_t samples_count;
-  const int8_t *samples;
-
-  int32_t sequence;
-} uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t;
-
-/**
- * @brief Command fields for AoXLocator/AngleReport
- */
-typedef struct {
-  const char* tag_unid;
-
-  SphericalCoordinates direction;
-
-  SphericalCoordinates deviation;
-
-  int32_t sequence;
-} uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t;
-
-/**
- * @brief Command fields for AoXLocator/AngleCorrection
- */
-typedef struct {
-  const char* tag_unid;
-
-  SphericalCoordinates direction;
-
-  SphericalCoordinates deviation;
-
-  int32_t sequence;
-} uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t;
-
-
-/**
- * @brief Setup callback to be called when a
- * AoXLocator/Commands/iq_report is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_set(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * AoXLocator/Commands/iq_report is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_unset(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * AoXLocator/Commands/iq_report is received.
- */
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/AoXLocator/GeneratedCommands/iq_report is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_set(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/AoXLocator/GeneratedCommands/iq_report is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_unset(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/AoXLocator/GeneratedCommands/iq_report is received.
- */
-void uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * AoXLocator/Commands/angle_report is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_set(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * AoXLocator/Commands/angle_report is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * AoXLocator/Commands/angle_report is received.
- */
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/AoXLocator/GeneratedCommands/angle_report is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_set(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/AoXLocator/GeneratedCommands/angle_report is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/AoXLocator/GeneratedCommands/angle_report is received.
- */
-void uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_clear();
-/**
- * @brief Setup callback to be called when a
- * AoXLocator/Commands/angle_correction is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_set(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * AoXLocator/Commands/angle_correction is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * AoXLocator/Commands/angle_correction is received.
- */
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_clear();
-
-/**
- * @brief Setup callback to be called when a
- * +/AoXLocator/GeneratedCommands/angle_correction is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_set(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback);
-/**
- * @brief Unsets callback to be called when a
- * +/AoXLocator/GeneratedCommands/angle_correction is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback);
-/**
- * @brief Clears all callbacks registered for when
- * +/AoXLocator/GeneratedCommands/angle_correction is received.
- */
-void uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_clear();
-
-/**
- * @brief Setup a callback for WriteAttribute to be called when a
- * +/aox_locator/Commands/WriteAttributes is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_set_aox_locator_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_write_attributes_callback_t callback
-);
-/**
- * @brief Unsets a callback for WriteAttribute to be called when a
- * +/aox_locator/Commands/WriteAttributes is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_unset_aox_locator_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_write_attributes_callback_t callback
-);
-/**
- * @brief Clears all callbacks registered for when
- * +/aox_locator/Commands/WriteAttributes is received.
- */
-void uic_mqtt_dotdot_clear_aox_locator_write_attributes_callbacks();
-
-/**
- * @brief Setup a callback for ForceReadAttributes to be called when a
- * +/aox_locator/Commands/ForceReadAttributes is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_set_aox_locator_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t callback
-);
-/**
- * @brief Unsets a callback for ForceReadAttributes to be called when a
- * +/aox_locator/Commands/ForceReadAttributes is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_unset_aox_locator_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t callback
-);
-/**
- * @brief Clears all callbacks registered for when
- * +/aox_locator/Commands/ForceReadAttributes is received.
- */
-void uic_mqtt_dotdot_clear_aox_locator_force_read_attributes_callbacks();
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/ReportingMode
- *
- * @param base_topic    topic prefix to publish, /reporting_mode
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_reporting_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/ReportingMode
- *
- * @param base_topic    topic prefix to publish, /reporting_mode
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_reporting_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/PositionAndOrientationValid
- *
- * @param base_topic    topic prefix to publish, /position_and_orientation_valid
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_publish(
-  const char *base_topic,
-  bool value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/PositionAndOrientationValid
- *
- * @param base_topic    topic prefix to publish, /position_and_orientation_valid
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/PositionAndOrientation
- *
- * @param base_topic    topic prefix to publish, /position_and_orientation
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_publish(
-  const char *base_topic,
-  CoordinateAndOrientation value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/PositionAndOrientation
- *
- * @param base_topic    topic prefix to publish, /position_and_orientation
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AzimuthMask
- *
- * @param base_topic    topic prefix to publish, /azimuth_mask
- *                      will be appended
- * @param value_count   Size of the array contained at value
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_azimuth_mask_publish(
-  const char *base_topic,
-  size_t value_count,
-  const MinMaxPair* value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AzimuthMask
- *
- * @param base_topic    topic prefix to publish, /azimuth_mask
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_azimuth_mask_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/ElevationMask
- *
- * @param base_topic    topic prefix to publish, /elevation_mask
- *                      will be appended
- * @param value_count   Size of the array contained at value
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_elevation_mask_publish(
-  const char *base_topic,
-  size_t value_count,
-  const MinMaxPair* value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/ElevationMask
- *
- * @param base_topic    topic prefix to publish, /elevation_mask
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_elevation_mask_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AllowList
- *
- * @param base_topic    topic prefix to publish, /allow_list
- *                      will be appended
- * @param value_count   Size of the array contained at value
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_allow_list_publish(
-  const char *base_topic,
-  size_t value_count,
-  const char** value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AllowList
- *
- * @param base_topic    topic prefix to publish, /allow_list
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_allow_list_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AoXMode
- *
- * @param base_topic    topic prefix to publish, /aox_mode
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_aox_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AoXMode
- *
- * @param base_topic    topic prefix to publish, /aox_mode
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_aox_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AntennaMode
- *
- * @param base_topic    topic prefix to publish, /antenna_mode
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AntennaMode
- *
- * @param base_topic    topic prefix to publish, /antenna_mode
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AntennaArray
- *
- * @param base_topic    topic prefix to publish, /antenna_array
- *                      will be appended
- * @param value_count   Size of the array contained at value
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_array_publish(
-  const char *base_topic,
-  size_t value_count,
-  const int8_t* value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AntennaArray
- *
- * @param base_topic    topic prefix to publish, /antenna_array
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_array_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/PeriodSamples
- *
- * @param base_topic    topic prefix to publish, /period_samples
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_period_samples_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/PeriodSamples
- *
- * @param base_topic    topic prefix to publish, /period_samples
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_period_samples_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AngleFiltering
- *
- * @param base_topic    topic prefix to publish, /angle_filtering
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_publish(
-  const char *base_topic,
-  bool value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AngleFiltering
- *
- * @param base_topic    topic prefix to publish, /angle_filtering
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AngleFilteringWeight
- *
- * @param base_topic    topic prefix to publish, /angle_filtering_weight
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_weight_publish(
-  const char *base_topic,
-  double value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AngleFilteringWeight
- *
- * @param base_topic    topic prefix to publish, /angle_filtering_weight
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_weight_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AngleCorrectionTimeout
- *
- * @param base_topic    topic prefix to publish, /angle_correction_timeout
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_timeout_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AngleCorrectionTimeout
- *
- * @param base_topic    topic prefix to publish, /angle_correction_timeout
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_timeout_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/AngleCorrectionDelay
- *
- * @param base_topic    topic prefix to publish, /angle_correction_delay
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_delay_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/AngleCorrectionDelay
- *
- * @param base_topic    topic prefix to publish, /angle_correction_delay
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_delay_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/CTEMode
- *
- * @param base_topic    topic prefix to publish, /cte_mode
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/CTEMode
- *
- * @param base_topic    topic prefix to publish, /cte_mode
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/CTESamplingInterval
- *
- * @param base_topic    topic prefix to publish, /cte_sampling_interval
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_sampling_interval_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/CTESamplingInterval
- *
- * @param base_topic    topic prefix to publish, /cte_sampling_interval
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_sampling_interval_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/CTELength
- *
- * @param base_topic    topic prefix to publish, /cte_length
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_length_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/CTELength
- *
- * @param base_topic    topic prefix to publish, /cte_length
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_length_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Publish the attribute; AoXLocator/Attributes/SlotDuration
- *
- * @param base_topic    topic prefix to publish, /slot_duration
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_slot_duration_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXLocator/Attributes/SlotDuration
- *
- * @param base_topic    topic prefix to publish, /slot_duration
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_slot_duration_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-
-/**
- * @brief Publish the AoXLocator/ClusterRevision attribute
- *
- * @param base_topic    topic prefix to publish, /AoXLocator/Attributes/ClusterRevision
- *                      will be appended.
- * @param value         Value to publish.
- */
-void uic_mqtt_dotdot_aox_locator_publish_cluster_revision(const char* base_topic, uint16_t value);
-
-/**
- * @brief Unretain a publication to AoXLocator/ClusterRevision attribute
- *
- * @param base_topic    topic prefix to publish, /AoXLocator/Attributes/ClusterRevision
- *                      will be appended.
- */
-void uic_mqtt_dotdot_aox_locator_unretain_cluster_revision(const char* base_topic);
-
-/**
- * @brief Publish the SupportedCommands for UNID/EndPoint for the AoXLocator Cluster
- *
- * This function will iterate over all Commands in the AoXLocator Cluster and
- * call all registered callback functions with UNID/endpoint, and
- * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
- * All Cluster Command callback functions that return SL_STATUS_OK
- * will be added to the list of supported commands and published.
- *
- * @param unid
- * @param endpoint
- */
-void uic_mqtt_dotdot_aox_locator_publish_supported_commands(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint);
-
-/**
- * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
- * the AoXLocator Cluster
- *
- * @param unid
- * @param endpoint )
- */
-void uic_mqtt_dotdot_aox_locator_publish_empty_supported_commands(
-  const dotdot_unid_t unid
-  ,dotdot_endpoint_id_t endpoint);
-// Callback types used by the aox_position_estimation cluster
-
-typedef struct {
-  EstimatedPosition position;
-} uic_mqtt_dotdot_aox_position_estimation_state_t;
-
-typedef struct {
-  bool position;
-} uic_mqtt_dotdot_aox_position_estimation_updated_state_t;
-
-typedef sl_status_t (*uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t)(
-    const dotdot_unid_t unid,
-    const dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uic_mqtt_dotdot_aox_position_estimation_state_t,
-    uic_mqtt_dotdot_aox_position_estimation_updated_state_t
-);
-
-typedef sl_status_t (*uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t)(
-    const dotdot_unid_t unid,
-    const dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t call_type,
-    uic_mqtt_dotdot_aox_position_estimation_updated_state_t
-);
-
-
-
-
-/**
- * @brief Setup a callback for WriteAttribute to be called when a
- * +/aox_position_estimation/Commands/WriteAttributes is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_set_aox_position_estimation_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t callback
-);
-/**
- * @brief Unsets a callback for WriteAttribute to be called when a
- * +/aox_position_estimation/Commands/WriteAttributes is received.
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_unset_aox_position_estimation_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t callback
-);
-/**
- * @brief Clears all callbacks registered for when
- * +/aox_position_estimation/Commands/WriteAttributes is received.
- */
-void uic_mqtt_dotdot_clear_aox_position_estimation_write_attributes_callbacks();
-
-/**
- * @brief Setup a callback for ForceReadAttributes to be called when a
- * +/aox_position_estimation/Commands/ForceReadAttributes is received.
- *
- * Setting this callback will not overwrite the previous set callback
- * @param callback      Function to be called on command reception
- */
-void uic_mqtt_dotdot_set_aox_position_estimation_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t callback
-);
-/**
- * @brief Unsets a callback for ForceReadAttributes to be called when a
- * +/aox_position_estimation/Commands/ForceReadAttributes is received.
- *
- * @param callback      Function to be no longer called on command reception
- */
-void uic_mqtt_dotdot_unset_aox_position_estimation_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t callback
-);
-/**
- * @brief Clears all callbacks registered for when
- * +/aox_position_estimation/Commands/ForceReadAttributes is received.
- */
-void uic_mqtt_dotdot_clear_aox_position_estimation_force_read_attributes_callbacks();
-
-/**
- * @brief Publish the attribute; AoXPositionEstimation/Attributes/Position
- *
- * @param base_topic    topic prefix to publish, /position
- *                      will be appended
- * @param value         Value to publish
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_position_publish(
-  const char *base_topic,
-  EstimatedPosition value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-/**
- * @brief Unretains a published attribute; AoXPositionEstimation/Attributes/Position
- *
- * @param base_topic    topic prefix to publish, /position
- *                      will be appended
- * @param publish_type  Whether to publish as Desired, Reported, or Both.
- *
- * @returns SL_STATUS_OK on success
- */
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_position_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-);
-
-
-/**
- * @brief Publish the AoXPositionEstimation/ClusterRevision attribute
- *
- * @param base_topic    topic prefix to publish, /AoXPositionEstimation/Attributes/ClusterRevision
- *                      will be appended.
- * @param value         Value to publish.
- */
-void uic_mqtt_dotdot_aox_position_estimation_publish_cluster_revision(const char* base_topic, uint16_t value);
-
-/**
- * @brief Unretain a publication to AoXPositionEstimation/ClusterRevision attribute
- *
- * @param base_topic    topic prefix to publish, /AoXPositionEstimation/Attributes/ClusterRevision
- *                      will be appended.
- */
-void uic_mqtt_dotdot_aox_position_estimation_unretain_cluster_revision(const char* base_topic);
-
-/**
- * @brief Publish the SupportedCommands for UNID/EndPoint for the AoXPositionEstimation Cluster
- *
- * This function will iterate over all Commands in the AoXPositionEstimation Cluster and
- * call all registered callback functions with UNID/endpoint, and
- * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
- * All Cluster Command callback functions that return SL_STATUS_OK
- * will be added to the list of supported commands and published.
- *
- * @param unid
- * @param endpoint
- */
-void uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint);
-
-/**
- * @brief Publish an empty array of SupportedCommands for UNID/EndPoint for
- * the AoXPositionEstimation Cluster
- *
- * @param unid
- * @param endpoint )
- */
-void uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands(
   const dotdot_unid_t unid
   ,dotdot_endpoint_id_t endpoint);
 // Callback types used by the protocol_controller_network_management cluster

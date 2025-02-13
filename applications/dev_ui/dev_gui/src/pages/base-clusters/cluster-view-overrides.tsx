@@ -417,26 +417,6 @@ export let ClusterViewOverrides = {
                 </span>
             </Tooltip>
     } as ClusterViewOverride,
-    AoXLocator: {
-        NodesTooltip: (endpoint: string) =>
-            <Tooltip title={`Endpoint ${endpoint}: AoXLocator`}>
-                <span className="cursor-default">
-                    <Link to={`/locators`}>
-                        <IoIcons.IoIosLocate color="#212529" />
-                    </Link>
-                </span>
-            </Tooltip>
-    } as ClusterViewOverride,
-    AoXPositionEstimation: {
-        NodesTooltip: (endpoint: string) =>
-            <Tooltip title={`Endpoint ${endpoint}: AoXPositionEstimation`}>
-                <span className="cursor-default">
-                    <Link to={`/locators`}>
-                        <IoIcons.IoMdLocate color="#212529" />
-                    </Link>
-                </span>
-            </Tooltip>
-    } as ClusterViewOverride,
     ConfigurationParameters: {
         NodesTooltip: (endpoint: string) =>
             <Tooltip title={`Endpoint ${endpoint}: Configuration Parameters`}>

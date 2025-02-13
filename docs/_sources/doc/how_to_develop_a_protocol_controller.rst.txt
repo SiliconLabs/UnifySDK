@@ -415,15 +415,15 @@ network properties under for example the HomeID.
 UNID/Endpoint approach
 **********************
 
-The **AoXPC** uses a more UNID-like strategy, where the UNIDs are directly saved
+In this approach, **PCs** uses a more UNID-like strategy, where the UNIDs are directly saved
 under the **Attribute Store** tree root.
 
 .. include:: plantuml/attribute_store_tree_unid_addressing_example.rst
 
 Using this methodology, to publish the state of the OnOff attribute when updated,
-the **AoxPC** navigates up the **Attribute Store**, collects the value of the
+the **PCs** navigates up the **Attribute Store**, collects the value of the
 Endpoint, UNID, and does require any further calculation.
-The **AoxPC** can subsequently make these 2 publications:
+The **PCs** can subsequently make these 2 publications:
 
 .. code-block:: mqtt
 

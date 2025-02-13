@@ -1,0 +1,17 @@
+// ZCL attributes for SoilMoisture (defined in the XML file called WaterContentMeasurement). It will be in the range [0;10000] representing [0;100]%
+def zbSOIL_MOISTURE_MEASURED_VALUE        0x04080000
+def zbSOIL_MOISTURE_MIN_MEASURED_VALUE    0x04080001
+def zbSOIL_MOISTURE_MAX_MEASURED_VALUE    0x04080002
+def zbSOIL_MOISTURE_TOLERANCE             0x04080003
+
+scope 0 chain_reaction(0) {
+
+  r'zbSOIL_MOISTURE_MIN_MEASURED_VALUE =
+    if (e'zbSOIL_MOISTURE_MIN_MEASURED_VALUE) 0 undefined
+    
+  r'zbSOIL_MOISTURE_MAX_MEASURED_VALUE =
+    if (e'zbSOIL_MOISTURE_MAX_MEASURED_VALUE) 10000 undefined
+    
+  r'zbSOIL_MOISTURE_TOLERANCE =
+    if (e'zbSOIL_MOISTURE_TOLERANCE) 10 undefined
+}

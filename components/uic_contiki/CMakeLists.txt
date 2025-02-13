@@ -22,28 +22,16 @@ set(CONTIKI_INC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/platform/${COMPATIBLE_PLATFORM}>
 )
 
-if(ZWAVE_BUILD_SYSTEM EQUAL 1)
-  add_library(uic_contiki ${CONTIKI_SRC})
-  target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC} ${ZW_ROOT}/ZWave)
-else()
-  add_library(uic_contiki OBJECT ${CONTIKI_SRC} src/rust_process.c)
-  target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC})
-endif()
+add_library(uic_contiki OBJECT ${CONTIKI_SRC} src/rust_process.c)
+target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC})
 
-if(ZWAVE_BUILD_SYSTEM EQUAL 1)
-  add_library(uic_contiki_platform platform/${COMPATIBLE_PLATFORM}/clock.c)
-else()
-  add_library(uic_contiki_platform OBJECT
-              platform/${COMPATIBLE_PLATFORM}/clock.c)
+add_library(uic_contiki_platform OBJECT
+            platform/${COMPATIBLE_PLATFORM}/clock.c)
 
-  if(ZWAVE_BUILD_SYSTEM EQUAL 1)
-    set(PRIVATE_LIB_LIST "")
-  else()
-    set(PRIVATE_LIB_LIST "rt")
-  endif()
-  if(NOT APPLE)
-    target_link_libraries(uic_contiki_platform PRIVATE ${PRIVATE_LIB_LIST})
-  endif()
+set(PRIVATE_LIB_LIST "rt")
+
+if(NOT APPLE)
+  target_link_libraries(uic_contiki_platform PRIVATE ${PRIVATE_LIB_LIST})
 endif()
 
 target_include_directories(

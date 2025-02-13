@@ -62,30 +62,12 @@ pi@raspberrypi:~ $ sudo apt install mosquitto
 pi@raspberrypi:~ $ sudo apt install ./*deb
 ```
 
-To finish installing and running Unify choose a protocol to continue with and following the remaining steps
+To finish installing and running Unify choose a emulated end device to continue with and following the remaining steps
 
-[Z-Wave (ZPC)](protocol/zwave/running_zpc.md)
+[Emulated End Device (EED)](../applications/examples/applications/emulated_end_device/readme_user.md)
 
-```{toctree}
----
-maxdepth: 1
-titlesonly:
-hidden:
----
-protocol/zwave/running_zpc.md
-```
+or you can choose protocol controller supported by unify ecosystem
 
-[Zigbee (ZigPC)](protocol/zigbee/running_zigpc.md)
+For ZPC reference, please refer to related chapter of [Z-Wave-Protocol-Controller documentation](https://siliconlabssoftware.github.io/z-wave-protocol-controller)
 
-```{toctree}
----
-maxdepth: 1
-titlesonly:
-hidden:
----
-protocol/zigbee/running_zigpc.md
-```
-
-[Matter Protocol Controller](protocol/matter/matter_mpc.md)
-
-[Multiprotocol](getting_started_multiprotocol_cpc.md)
+[Matter Protocol Controller (Deprecated)](protocol/matter/matter_mpc.md)

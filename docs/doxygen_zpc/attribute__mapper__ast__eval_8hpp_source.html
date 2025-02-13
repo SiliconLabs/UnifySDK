@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -217,11 +217,11 @@ $(document).ready(function(){initNavTree('attribute__mapper__ast__eval_8hpp_sour
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="structast_1_1eval.html#a15aadbbeb7e431f6d02e66c6f21924a4">  195</a></span>  <a class="code hl_typedef" href="structast_1_1eval.html#ab7eee5d19b9b8a5ae8fe25bc2263f9f0">result_type</a> <a class="code hl_function" href="structast_1_1eval.html#a15aadbbeb7e431f6d02e66c6f21924a4">operator()</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structast_1_1expression.html">expression</a> &amp;x)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <a class="code hl_typedef" href="structast_1_1eval.html#ab7eee5d19b9b8a5ae8fe25bc2263f9f0">result_type</a> <a class="code hl_variable" href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a> = boost::apply_visitor(*<span class="keyword">this</span>, x.<a class="code hl_variable" href="structast_1_1expression.html#a853dc1c95b6de6b9cf1241a13a0b0467">first</a>);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <a class="code hl_typedef" href="structast_1_1eval.html#ab7eee5d19b9b8a5ae8fe25bc2263f9f0">result_type</a> state = boost::apply_visitor(*<span class="keyword">this</span>, x.<a class="code hl_variable" href="structast_1_1expression.html#a853dc1c95b6de6b9cf1241a13a0b0467">first</a>);</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">for</span> (<a class="code hl_struct" href="structast_1_1operation.html">operation</a> <span class="keyword">const</span> &amp;oper: x.<a class="code hl_variable" href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">rest</a>) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      <a class="code hl_variable" href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a> = (*this)(oper, <a class="code hl_variable" href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      state = (*this)(oper, state);</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">return</span> state;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  }</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="structast_1_1eval.html#a63a58a369587ed1a07cbbcf23195015e">  207</a></span>  <a class="code hl_typedef" href="structast_1_1eval.html#ab7eee5d19b9b8a5ae8fe25bc2263f9f0">result_type</a> <a class="code hl_function" href="structast_1_1eval.html#a63a58a369587ed1a07cbbcf23195015e">operator()</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structast_1_1condition.html">condition</a> &amp;x)<span class="keyword"> const</span></div>
@@ -296,7 +296,7 @@ $(document).ready(function(){initNavTree('attribute__mapper__ast__eval_8hpp_sour
 <div class="ttc" id="aattribute__mapper__built__in__functions_8hpp_html"><div class="ttname"><a href="attribute__mapper__built__in__functions_8hpp.html">attribute_mapper_built_in_functions.hpp</a></div></div>
 <div class="ttc" id="agroup__attribute__store__value__helpers_html_ga484011953d1c3ec8762c233870ed3ed3"><div class="ttname"><a href="group__attribute__store__value__helpers.html#ga484011953d1c3ec8762c233870ed3ed3">attribute_store_get_reported_number</a></div><div class="ttdeci">number_t attribute_store_get_reported_number(attribute_store_node_t node)</div><div class="ttdoc">Gets a numerical value from an Attribute Store node.</div><div class="ttdef"><b>Definition:</b> attribute_store_helper.c:796</div></div>
 <div class="ttc" id="agroup__attribute__store__value__helpers_html_ga70e4fc4d951dfd16d00b4d45f3519ad5"><div class="ttname"><a href="group__attribute__store__value__helpers.html#ga70e4fc4d951dfd16d00b4d45f3519ad5">attribute_store_get_desired_number</a></div><div class="ttdeci">number_t attribute_store_get_desired_number(attribute_store_node_t node)</div><div class="ttdoc">Gets a numerical value from an Attribute Store node.</div><div class="ttdef"><b>Definition:</b> attribute_store_helper.c:801</div></div>
-<div class="ttc" id="agroup__sl__log_html_ga9f10c1dd2f7a05a8ccba92b0c1ce9dca"><div class="ttname"><a href="group__sl__log.html#ga9f10c1dd2f7a05a8ccba92b0c1ce9dca">sl_log_error</a></div><div class="ttdeci">#define sl_log_error(tag, fmtstr,...)</div><div class="ttdef"><b>Definition:</b> sl_log.h:145</div></div>
+<div class="ttc" id="agroup__sl__log_html_ga9f10c1dd2f7a05a8ccba92b0c1ce9dca"><div class="ttname"><a href="group__sl__log.html#ga9f10c1dd2f7a05a8ccba92b0c1ce9dca">sl_log_error</a></div><div class="ttdeci">#define sl_log_error(tag, fmtstr,...)</div><div class="ttdef"><b>Definition:</b> sl_log.h:139</div></div>
 <div class="ttc" id="anamespaceast_html"><div class="ttname"><a href="namespaceast.html">ast</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:39</div></div>
 <div class="ttc" id="anamespaceast_html_a103453ee4c6f922adfc20d135c7f4689a003259468d49dc3cae500ab308957f24"><div class="ttname"><a href="namespaceast.html#a103453ee4c6f922adfc20d135c7f4689a003259468d49dc3cae500ab308957f24">ast::operator_modulo</a></div><div class="ttdeci">@ operator_modulo</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:72</div></div>
 <div class="ttc" id="anamespaceast_html_a103453ee4c6f922adfc20d135c7f4689a0a863906cef22114f5500f210c1ba610"><div class="ttname"><a href="namespaceast.html#a103453ee4c6f922adfc20d135c7f4689a0a863906cef22114f5500f210c1ba610">ast::operator_div</a></div><div class="ttdeci">@ operator_div</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:65</div></div>
@@ -351,14 +351,13 @@ $(document).ready(function(){initNavTree('attribute__mapper__ast__eval_8hpp_sour
 <div class="ttc" id="astructast_1_1signed___html_a357d70786c02b4b7b06ea7c76215cc0e"><div class="ttname"><a href="structast_1_1signed__.html#a357d70786c02b4b7b06ea7c76215cc0e">ast::signed_::sign</a></div><div class="ttdeci">char sign</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:112</div></div>
 <div class="ttc" id="astructast_1_1signed___html_a9d98b5d1457d601374e0a4348cb072d3"><div class="ttname"><a href="structast_1_1signed__.html#a9d98b5d1457d601374e0a4348cb072d3">ast::signed_::operand_</a></div><div class="ttdeci">operand operand_</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:113</div></div>
 <div class="ttc" id="auic__stdin__process_8c_html_a0a1433271fddfed84bc959ae6c202e5a"><div class="ttname"><a href="uic__stdin__process_8c.html#a0a1433271fddfed84bc959ae6c202e5a">cond</a></div><div class="ttdeci">pthread_cond_t cond</div><div class="ttdef"><b>Definition:</b> uic_stdin_process.c:53</div></div>
-<div class="ttc" id="azwave__multi__channel__transport_8c_html_a9ad7ce1c8d5add698d70903b7db6d795"><div class="ttname"><a href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a></div><div class="ttdeci">static send_data_state_t state</div><div class="ttdef"><b>Definition:</b> zwave_multi_channel_transport.c:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_c7bb0fe74842c66edf906a662906edce.html">uic_attribute_mapper</a></li><li class="navelem"><a class="el" href="dir_636ca02ee6dde62d4183f0464b01c4f1.html">src</a></li><li class="navelem"><a class="el" href="attribute__mapper__ast__eval_8hpp.html">attribute_mapper_ast_eval.hpp</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:43 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:08 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

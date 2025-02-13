@@ -141,8 +141,6 @@ pub use attribute_store_instance::*;
 #[doc(inline)]
 pub use attribute_store_trait::*;
 #[doc(inline)]
-pub use attribute_store_trait::*;
-#[doc(inline)]
 pub use attribute_stream::*;
 #[doc(inline)]
 pub use attribute_trait::*;

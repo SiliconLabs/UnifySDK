@@ -11,15 +11,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#if __C51__
-  typedef uint16_t WORD;
-  typedef uint8_t  BYTE;
-  #define CODE   code
-  #define VOID_CALLBACKFUNC(completedFunc)  void (CODE *completedFunc)
-  #define STRIP_GENERIC_PTR(p) ((unsigned) (void *) (p))
-  #define IS_NULL(x)  (STRIP_GENERIC_PTR(x) == 0)
-  #define NON_NULL(x) (STRIP_GENERIC_PTR(x) != 0)
-#elif __GNUC__
+#if __GNUC__
   typedef uint16_t WORD;
   typedef uint8_t  BYTE;
   #define CODE

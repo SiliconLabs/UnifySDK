@@ -86,11 +86,11 @@ RUN curl -L https://github.com/plantuml/plantuml/releases/download/v1.2022.0/pla
   && sha256sum -c /tmp/plantuml.jar.sha256
 ENV PLANTUML_JAR_PATH=/opt/plantuml.jar
 
-# Install ZAP and dependencies
-RUN wget -O /tmp/zap.deb https://github.com/project-chip/zap/releases/download/v2023.05.04/zap-linux.deb \
-  && echo a9ef0608035a106d4df4dd126490546cf8ba5d7cd13039a18d19cd3edd418a47 /tmp/zap.deb > /tmp/zap.deb.sha256 \
-  && sha256sum -c /tmp/zap.deb.sha256\
-  && apt update \
+
+# Fetch and install ZAP and dependencies
+RUN apt update \
+  && echo "Latest ZAP .deb URL: https://github.com/project-chip/zap/releases/download/v2025.01.15/zap-linux-x64.deb" \
+  && wget -O /tmp/zap.deb https://github.com/project-chip/zap/releases/download/v2025.01.15/zap-linux-x64.deb \
   && apt install -y --no-install-recommends /tmp/zap.deb \
   && rm -rf /var/lib/apt/lists/*
 

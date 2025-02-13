@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Known Abbreviations" href="standards/known-abbreviations.html" />
-    <link rel="prev" title="14. Unify Controller Language Data Model (Experimental)" href="unify_specifications/Chapter14-unify-controller-language-data-model.html" /> 
+    <link rel="prev" title="13. Unify Controller Language Data Model (Experimental)" href="unify_specifications/Chapter13-unify-controller-language-data-model.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -90,7 +90,7 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="system-requirements">
 <h1>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h1>
-<p>The Unify Host SDK is at the moment only implemented for the Linux OS. The table
+<p>The Unify SDK is at the moment only implemented for the Linux OS. The table
 below shows the resource usage of the individual components measured on arm64
 release binaries. No debug symbols included. RAM figures are indicative for
 applications without any data added (i.e. initial memory usage). The measurement
@@ -116,83 +116,48 @@ when running multiple Unify applications that use the same shared library
 <tbody>
 <tr>
 <td>libunify</td>
-<td style="text-align: right;">15427 kB</td>
+<td style="text-align: right;">16773 kB</td>
 <td style="text-align: right;">N/A</td>
 </tr>
 <tr>
-<td>uic-aoxpc</td>
-<td style="text-align: right;">1507 kB</td>
-<td style="text-align: right;">17872 kB</td>
-</tr>
-<tr>
-<td>uic-zigpc</td>
-<td style="text-align: right;">1485 kB</td>
-<td style="text-align: right;">17332 kB</td>
-</tr>
-<tr>
 <td>uic-zpc</td>
-<td style="text-align: right;">5061 kB</td>
-<td style="text-align: right;">24888 kB</td>
+<td style="text-align: right;">5621 kB</td>
+<td style="text-align: right;">26048 kB</td>
 </tr>
 <tr>
 <td>uic-gms</td>
-<td style="text-align: right;">1579 kB</td>
-<td style="text-align: right;">16160 kB</td>
+<td style="text-align: right;">6519 kB</td>
+<td style="text-align: right;">18152 kB</td>
 </tr>
 <tr>
 <td>uic-nal</td>
-<td style="text-align: right;">1620 kB</td>
-<td style="text-align: right;">17324 kB</td>
-</tr>
-<tr>
-<td>uic-positioning</td>
-<td style="text-align: right;">1420 kB</td>
-<td style="text-align: right;">16816 kB</td>
+<td style="text-align: right;">6609 kB</td>
+<td style="text-align: right;">19224 kB</td>
 </tr>
 <tr>
 <td>uic-upti-cap</td>
-<td style="text-align: right;">1624 kB</td>
-<td style="text-align: right;">16276 kB</td>
+<td style="text-align: right;">6610 kB</td>
+<td style="text-align: right;">18080 kB</td>
 </tr>
 <tr>
 <td>uic-upti-writer</td>
-<td style="text-align: right;">1608 kB</td>
-<td style="text-align: right;">16168 kB</td>
+<td style="text-align: right;">6591 kB</td>
+<td style="text-align: right;">18088 kB</td>
 </tr>
 <tr>
 <td>uic-image-provider</td>
-<td style="text-align: right;">1579 kB</td>
-<td style="text-align: right;">16440 kB</td>
+<td style="text-align: right;">6523 kB</td>
+<td style="text-align: right;">17980 kB</td>
 </tr>
 <tr>
 <td>uic-upvl</td>
-<td style="text-align: right;">1628 kB</td>
-<td style="text-align: right;">17392 kB</td>
+<td style="text-align: right;">6616 kB</td>
+<td style="text-align: right;">19200 kB</td>
 </tr>
 <tr>
 <td>uic-dev-gui</td>
-<td style="text-align: right;">48089 kB</td>
-<td style="text-align: right;">47440 kB</td>
-</tr>
-<tr>
-<td>zigbeed</td>
-<td style="text-align: right;">4019 kB</td>
-<td style="text-align: right;">3108 kB</td>
-</tr>
-<tr>
-<td>Z3Gateway</td>
-<td style="text-align: right;">621 kB</td>
-<td style="text-align: right;">TBD</td>
-</tr>
-<tr>
-<td>uic-cpcd</td>
-<td style="text-align: right;">290 kB</td>
-<td style="text-align: right;">772 kB</td>
-</tr>
-<tr>
-<td>uic-cpc-hci-bridge</td>
-<td style="text-align: right;">10 kB</td>
-<td style="text-align: right;">TBD</td>
+<td style="text-align: right;">48130 kB</td>
+<td style="text-align: right;">48676 kB</td>
 </tr>
 </tbody>
 </table>

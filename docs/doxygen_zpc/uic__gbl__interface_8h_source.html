@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -110,11 +110,11 @@ $(document).ready(function(){initNavTree('uic__gbl__interface_8h_source.html',''
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="group__uic__gbl__interface.html#ga818a8c9b61f5f91d6662c6942fab1aed">   38</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="group__uic__gbl__interface.html#ga818a8c9b61f5f91d6662c6942fab1aed">uic_gbl_interface_transfer_progress_t</a>)(<span class="keywordtype">int</span> offset, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group__uic__gbl__interface.html#gae47c5e6a372b5c965defa83470ee2066">   48</a></span><a class="code hl_typedef" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code hl_function" href="group__uic__gbl__interface.html#gae47c5e6a372b5c965defa83470ee2066">uic_gbl_interface_detect_bootloader</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="zwapi__serial_8c.html#a08c9783fbb7e427a35de1f672681f6bd">serial_fd</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group__uic__gbl__interface.html#gae47c5e6a372b5c965defa83470ee2066">   48</a></span><a class="code hl_typedef" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code hl_function" href="group__uic__gbl__interface.html#gae47c5e6a372b5c965defa83470ee2066">uic_gbl_interface_detect_bootloader</a>(<span class="keywordtype">int</span> serial_fd);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="group__uic__gbl__interface.html#ga767866dc8be3d2bb018d6befc21f465d">   64</a></span><a class="code hl_typedef" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code hl_function" href="group__uic__gbl__interface.html#ga767866dc8be3d2bb018d6befc21f465d">uic_gbl_interface_transfer_image</a>(</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *gbl_filename,</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">int</span> <a class="code hl_variable" href="zwapi__serial_8c.html#a08c9783fbb7e427a35de1f672681f6bd">serial_fd</a>,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">int</span> serial_fd,</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <a class="code hl_typedef" href="group__uic__gbl__interface.html#ga818a8c9b61f5f91d6662c6942fab1aed">uic_gbl_interface_transfer_progress_t</a> progress_callback);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#ifdef __cplusplus</span></div>
@@ -127,14 +127,13 @@ $(document).ready(function(){initNavTree('uic__gbl__interface_8h_source.html',''
 <div class="ttc" id="agroup__uic__gbl__interface_html_gae47c5e6a372b5c965defa83470ee2066"><div class="ttname"><a href="group__uic__gbl__interface.html#gae47c5e6a372b5c965defa83470ee2066">uic_gbl_interface_detect_bootloader</a></div><div class="ttdeci">sl_status_t uic_gbl_interface_detect_bootloader(int serial_fd)</div><div class="ttdoc">Probe for Gecko Bootloader.</div></div>
 <div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:139</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
-<div class="ttc" id="azwapi__serial_8c_html_a08c9783fbb7e427a35de1f672681f6bd"><div class="ttname"><a href="zwapi__serial_8c.html#a08c9783fbb7e427a35de1f672681f6bd">serial_fd</a></div><div class="ttdeci">static int serial_fd</div><div class="ttdef"><b>Definition:</b> zwapi_serial.c:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_0cdfc6ab4dc950f3ea41176841f2ab7f.html">uic_gbl_interface</a></li><li class="navelem"><a class="el" href="dir_8aa60f2313be223a8b8e0506e49ebd75.html">include</a></li><li class="navelem"><a class="el" href="uic__gbl__interface_8h.html">uic_gbl_interface.h</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:44 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:09 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

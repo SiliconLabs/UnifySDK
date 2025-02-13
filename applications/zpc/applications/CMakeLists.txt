@@ -1,2 +1,0 @@
-add_subdirectory(zwave_api_demo)
-add_subdirectory(zpc_database_tool)

@@ -164,13 +164,40 @@ static void dotdot_set_level_current_level_and_on_off_transition_time(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   uint8_t level,
+  int8_t step,
   uint16_t transition_time)
 {
   if (is_desired_value_update_on_commands_enabled()) {
     sl_log_debug(LOG_TAG,
                  "Updating ZCL desired values after "
                  "Level:CurrentLevel command");
-    dotdot_set_level_current_level(unid, endpoint, DESIRED_ATTRIBUTE, level);
+    attribute_store_node_t endpoint_node = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint);
+
+    attribute_store_node_t node
+      = attribute_store_get_first_child_by_type(
+        endpoint_node,
+        DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL);
+
+    if (step != 0) {
+      // transitions won't start if the node is undefined, so define
+      //  for the first step of transition
+      uint8_t next_level
+        = dotdot_get_level_current_level(unid, endpoint, REPORTED_ATTRIBUTE);
+      next_level += step;
+      dotdot_set_level_current_level(unid,
+                                     endpoint,
+                                     DESIRED_ATTRIBUTE,
+                                     next_level);
+      attribute_start_fixed_transition(node,
+                                       DESIRED_ATTRIBUTE,
+                                       level,
+                                       step,
+                                       1000);
+    } else {
+      attribute_stop_transition(node);
+      dotdot_set_level_current_level(unid, endpoint, DESIRED_ATTRIBUTE, level);
+    }
+
     if (is_clear_reported_enabled()) {
       dotdot_level_current_level_undefine_reported(unid, endpoint);
 
@@ -237,8 +264,7 @@ sl_status_t level_cluster_mapper_move_to_level(
     if (is_automatic_deduction_of_supported_commands_enabled()) {
       return (dotdot_is_supported_level_current_level(unid, endpoint)
               && dotdot_is_supported_level_on_off_transition_time(unid,
-                                                                  endpoint)
-              && dotdot_is_supported_on_off_on_off(unid, endpoint))
+                                                                  endpoint))
                ? SL_STATUS_OK
                : SL_STATUS_FAIL;
     } else {
@@ -259,11 +285,15 @@ sl_status_t level_cluster_mapper_move_to_level(
 
   // Set the level and transition time as received in the command.
   level = validated_level_value(unid, endpoint, level);
-  dotdot_set_level_current_level_and_on_off_transition_time(unid,
-                                                            endpoint,
-                                                            level,
-                                                            transition_time);
-  // We ignore OptionsMask / OptionsOverride.
+  uint8_t current_level
+    = dotdot_get_level_current_level(unid, endpoint, REPORTED_ATTRIBUTE);
+  dotdot_set_level_current_level_and_on_off_transition_time(
+    unid,
+    endpoint,
+    level,
+    (transition_time) ? ((level - current_level) / (transition_time / 10.0f))
+                      : 0,
+    transition_time);
   return SL_STATUS_OK;
 }
 
@@ -280,8 +310,7 @@ sl_status_t
     if (is_automatic_deduction_of_supported_commands_enabled()) {
       return (dotdot_is_supported_level_current_level(unid, endpoint)
               && dotdot_is_supported_level_on_off_transition_time(unid,
-                                                                  endpoint)
-              && dotdot_is_supported_on_off_on_off(unid, endpoint))
+                                                                  endpoint))
                ? SL_STATUS_OK
                : SL_STATUS_FAIL;
     } else {
@@ -328,6 +357,7 @@ sl_status_t
   dotdot_set_level_current_level_and_on_off_transition_time(unid,
                                                             endpoint,
                                                             level,
+                                                            (move_mode == ZCL_MOVE_STEP_MODE_DOWN) ? -rate : rate,
                                                             transition_time);
 
   // We ignore OptionsMask / OptionsOverride.
@@ -348,8 +378,7 @@ sl_status_t
     if (is_automatic_deduction_of_supported_commands_enabled()) {
       return (dotdot_is_supported_level_current_level(unid, endpoint)
               && dotdot_is_supported_level_on_off_transition_time(unid,
-                                                                  endpoint)
-              && dotdot_is_supported_on_off_on_off(unid, endpoint))
+                                                                  endpoint))
                ? SL_STATUS_OK
                : SL_STATUS_FAIL;
     } else {
@@ -357,11 +386,14 @@ sl_status_t
     }
   }
 
-  // Command has no effect if OnOff::OnOff is Off.
-  if (false
-      == dotdot_get_on_off_on_off(unid,
+  uint8_t option_level = dotdot_get_level_options(unid, endpoint, DESIRED_OR_REPORTED_ATTRIBUTE);
+  bool execute_even_if_off_option = has_execute_if_off_option(option_level, options_mask, options_override);
+
+  // Command has no effect if OnOff::OnOff is Off and execute_even_if_off_option is not specified
+  if (!execute_even_if_off_option && 
+        dotdot_get_on_off_on_off(unid,
                                   endpoint,
-                                  DESIRED_OR_REPORTED_ATTRIBUTE)) {
+                                  DESIRED_OR_REPORTED_ATTRIBUTE) == false) {
     return SL_STATUS_OK;
   }
 
@@ -375,6 +407,7 @@ sl_status_t
 
   // Apply the Step to our current level.
   uint8_t level = 0;
+  uint8_t step  = 0;
   if (step_mode == ZCL_MOVE_STEP_MODE_DOWN) {
     level = current_reported_level - step_size;
   } else if (step_mode == ZCL_MOVE_STEP_MODE_UP) {
@@ -387,12 +420,19 @@ sl_status_t
   // Transition time 0xFFFF will be converted to "as fast as possible."
   if (transition_time == 0xFFFF) {
     transition_time = 0;
+    step = level;
   }
+  else
+  {
+    step = step_size / (transition_time / 10);
+  }
+  
 
   // Make the transition with our calculated target level
   dotdot_set_level_current_level_and_on_off_transition_time(unid,
                                                             endpoint,
                                                             level,
+                                                            (step_mode == ZCL_MOVE_STEP_MODE_DOWN) ? -step : step,
                                                             transition_time);
 
   // We ignore OptionsMask / OptionsOverride.
@@ -410,14 +450,25 @@ sl_status_t
     if (is_automatic_deduction_of_supported_commands_enabled()) {
       return (dotdot_is_supported_level_current_level(unid, endpoint)
               && dotdot_is_supported_level_on_off_transition_time(unid,
-                                                                  endpoint)
-              && dotdot_is_supported_on_off_on_off(unid, endpoint))
+                                                                  endpoint))
                ? SL_STATUS_OK
                : SL_STATUS_FAIL;
     } else {
       return SL_STATUS_FAIL;
     }
   }
+
+  uint8_t option_level = dotdot_get_level_options(unid, endpoint, DESIRED_OR_REPORTED_ATTRIBUTE);
+  bool execute_even_if_off_option = has_execute_if_off_option(option_level, options_mask, options_override);
+
+  // Command has no effect if OnOff::OnOff is Off and execute_even_if_off_option is not specified
+  if (!execute_even_if_off_option && 
+        dotdot_get_on_off_on_off(unid,
+                                  endpoint,
+                                  DESIRED_OR_REPORTED_ATTRIBUTE) == false) {
+    return SL_STATUS_OK;
+  }
+
   // Set the remaining of the transition time to 0.
   // Set the desired value to the current reported.
   int32_t current_reported_level
@@ -426,6 +477,7 @@ sl_status_t
     unid,
     endpoint,
     current_reported_level,
+    0,
     0);
 
   // We ignore OptionsMask / OptionsOverride.
@@ -455,11 +507,16 @@ sl_status_t level_cluster_mapper_move_to_level_with_on_off(
   }
   // Set the level and transition time as received in the command.
   level = validated_level_value(unid, endpoint, level);
+  uint8_t current_level
+    = dotdot_get_level_current_level(unid, endpoint, REPORTED_ATTRIBUTE);
 
-  dotdot_set_level_current_level_and_on_off_transition_time(unid,
-                                                            endpoint,
-                                                            level,
-                                                            transition_time);
+  dotdot_set_level_current_level_and_on_off_transition_time(
+    unid,
+    endpoint,
+    level,
+    (transition_time) ? ((level - current_level) / (transition_time / 10.0f))
+                      : 0,
+    transition_time);
   // Do the with OnOff magic:
   if (level > get_min_level(unid, endpoint)) {
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, ON);
@@ -530,6 +587,7 @@ sl_status_t level_cluster_mapper_move_with_on_off(
   dotdot_set_level_current_level_and_on_off_transition_time(unid,
                                                             endpoint,
                                                             level,
+                                                            rate,
                                                             transition_time);
 
   // Do the with OnOff magic:
@@ -576,6 +634,7 @@ sl_status_t level_cluster_mapper_step_with_on_off(
 
   // Apply the Step to our current level.
   uint8_t level = 0;
+  uint8_t step = 0;
   if (step_mode == ZCL_MOVE_STEP_MODE_DOWN) {
     level = current_reported_level - step_size;
   } else if (step_mode == ZCL_MOVE_STEP_MODE_UP) {
@@ -588,12 +647,18 @@ sl_status_t level_cluster_mapper_step_with_on_off(
   // Transition time 0xFFFF will be converted to "as fast as possible."
   if (transition_time == 0xFFFF) {
     transition_time = 0;
+    step = level;
+  }
+  else if (transition_time != 0)
+  {
+    step = step_size / (transition_time / 10);
   }
 
   // Make the transition with our calculated target level
   dotdot_set_level_current_level_and_on_off_transition_time(unid,
                                                             endpoint,
                                                             level,
+                                                            (step_mode == ZCL_MOVE_STEP_MODE_DOWN) ? -step : step,
                                                             transition_time);
   // Do the with OnOff magic:
   // Do not go off here, the multilevel switch level going to zero will make
@@ -634,6 +699,7 @@ sl_status_t level_cluster_mapper_stop_with_on_off(
     unid,
     endpoint,
     current_reported_level,
+    0,
     0);
 
   // Do the with OnOff magic:

@@ -1,0 +1,29 @@
+// the DotDot Thermostat cluster
+def zb_OCCUPIED_COOLING_SETPOINT_VALUE       0x02010011              
+def zb_OCCUPIED_HEATING_SETPOINT_VALUE       0x02010012   
+def zb_MIN_HEAT_SETPOINT_VALUE               0x02010015
+def zb_MAX_HEAT_SETPOINT_VALUE               0x02010016
+def zb_MIN_COOL_SETPOINT_VALUE               0x02010017
+def zb_MAX_COOL_SETPOINT_VALUE               0x02010018      
+def zb_CONTROL_SEQUENCE_OF_OPERATION         0x0201001B              
+def zb_SYSTEM_MODE                           0x0201001C    
+          
+scope 0 chain_reaction(0) {
+    
+  r'zb_OCCUPIED_COOLING_SETPOINT_VALUE =
+    if(e'zb_OCCUPIED_COOLING_SETPOINT_VALUE) 0x0a28 undefined
+  r'zb_OCCUPIED_HEATING_SETPOINT_VALUE =
+    if(e'zb_OCCUPIED_HEATING_SETPOINT_VALUE) 0x07d0 undefined
+  r'zb_MIN_HEAT_SETPOINT_VALUE =
+    if(e'zb_MIN_HEAT_SETPOINT_VALUE) 0x02bc undefined
+  r'zb_MAX_HEAT_SETPOINT_VALUE =
+    if(e'zb_MAX_HEAT_SETPOINT_VALUE) 0x0bb8 undefined
+  r'zb_MIN_COOL_SETPOINT_VALUE =
+    if(e'zb_MIN_COOL_SETPOINT_VALUE) 0x0640 undefined
+  r'zb_MAX_COOL_SETPOINT_VALUE =
+    if(e'zb_MAX_COOL_SETPOINT_VALUE) 0x0c80 undefined
+  r'zb_CONTROL_SEQUENCE_OF_OPERATION =
+    if(e'zb_CONTROL_SEQUENCE_OF_OPERATION) 0x04 undefined
+  r'zb_SYSTEM_MODE =
+    if(e'zb_SYSTEM_MODE) 0x01 undefined
+}

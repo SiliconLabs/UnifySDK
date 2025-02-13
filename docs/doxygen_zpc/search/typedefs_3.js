@@ -19,6 +19,5 @@ var searchData=
   ['drlkrfiduserid_16',['DrlkRFIDUserID',['../group__zap.html#ga452c8423538e75a3dce5b1252c312696',1,'zap-types.h']]],
   ['drlktotaluserid_17',['DrlkTotalUserID',['../group__zap.html#gab0bd245335facee8f5607da120a70fb6',1,'zap-types.h']]],
   ['drlkweekdayscheduleid_18',['DrlkWeekDayScheduleID',['../group__zap.html#gacbb2c3920f95330c69cc6fef7a926afa',1,'zap-types.h']]],
-  ['drlkyeardayscheduleid_19',['DrlkYearDayScheduleID',['../group__zap.html#ga93aca6ac2ad7d323daa0941128652365',1,'zap-types.h']]],
-  ['dword_20',['DWORD',['../ZW__typedefs_8h.html#ad342ac907eb044443153a22f964bf0af',1,'ZW_typedefs.h']]]
+  ['drlkyeardayscheduleid_19',['DrlkYearDayScheduleID',['../group__zap.html#ga93aca6ac2ad7d323daa0941128652365',1,'zap-types.h']]]
 ];

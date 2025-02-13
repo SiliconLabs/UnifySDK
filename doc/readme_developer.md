@@ -56,12 +56,9 @@ i.e. "unify_my_sample_component".
 ```text
 .
 |-- applications/               // Unify application specific code goes here
-|   |-- zpc/                    // ZPC application code
-|   |   |-- components/         // ZPC components
-|   |   `-- ...
-|   |-- zigpc/                  // ZIGPC application code
-|   |   |-- components/         // ZIGPC components
-|   |   `-- ...
+|   |-- examples/                    // Unify Examples
+|   |   |-- applications/
+|   |       |--emulated_end_device/         // Emulated End Device(EED)
 |   |-- gms/                    // GMS application code
 |   |-- upvl/                   // UPVL application code
 |   `-- ...

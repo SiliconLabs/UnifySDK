@@ -25,6 +25,7 @@
 
 // Includes from auto-generated files
 #include "dotdot_mqtt.h"
+#include "dotdot_mqtt_generated_commands.h"
 
 // Setup Log ID
 #define LOG_TAG "unify_dotdot_attribute_store_identify_commands_callbacks"
@@ -45,14 +46,15 @@ static void
 
   // If the reported is set to a non-zero value, make sure to initiate a countdown.
   number_t identify_time = attribute_store_get_reported_number(updated_node);
-  if ((identify_time > 0)
-      && (false == is_attribute_transition_ongoing(updated_node))) {
+  if (identify_time > 0) {
     // Attribute is in seconds, so decrement by 1 every second
     attribute_start_fixed_transition(updated_node,
                                      REPORTED_ATTRIBUTE,
                                      0,
                                      -1,
                                      1000);
+  } else {
+    attribute_store_undefine_desired(updated_node);
   }
 }
 
@@ -108,14 +110,16 @@ static sl_status_t on_query(dotdot_unid_t unid,
 
   if (dotdot_is_supported_identify_identify_time(unid, endpoint)
       && (is_desired_value_update_on_commands_enabled())) {
-    sl_log_debug(LOG_TAG,
-                 "Updating ZCL desired values after "
-                 "Identify:IdentifyQuery command");
-    dotdot_set_identify_identify_time(unid, endpoint, DESIRED_ATTRIBUTE, 0);
-    if (is_clear_reported_enabled()) {
-      sl_log_debug(LOG_TAG, "Clearing Identify:IdentifyTime reported value");
-      dotdot_identify_identify_time_undefine_reported(unid, endpoint);
+    uint16_t identify_time = 0;
+    identify_time = dotdot_get_identify_identify_time(unid,endpoint,
+                                                      REPORTED_ATTRIBUTE);
+    if (identify_time == 0) {
+      return SL_STATUS_OK;
     }
+    uic_mqtt_dotdot_identify_command_identify_query_response_fields_t fields = {};
+    fields.timeout = identify_time;
+    uic_mqtt_dotdot_identify_publish_generated_identify_query_response_command(unid,endpoint,
+    &fields);
   }
 
   return SL_STATUS_OK;

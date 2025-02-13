@@ -3,13 +3,12 @@
 ## Introduction
 
 The Unify Framework provides software source code and binary packages for Raspberry Pi 4 to
-help build an IoT gateway product. The Unify Framework enables an IoT service to
-control and manage end nodes in several wireless PHY radios (e.g., Z-Wave,
-Zigbee, and so on) supported by Silicon Labs. The Unify Framework uses the Unify
-Controller Language (UCL) as an internal abstraction layer to seamlessly control
-various end nodes that are enabled with multiple wireless PHY radios. The
-detailed architecture of the Unify Framework is described in the
-[Unify Framework Specification](./unify_specifications/index.rst).
+help build an IoT gateway product. The Unify Framework allows an IoT service to control and
+manage end nodes using supported wireless PHY radio protocol, which is [Z-Wave protocol](https://github.com/SiliconLabsSoftware/z-wave-protocol-controller),
+provided by Silicon Labs. The Unify Framework uses the Unify Controller Language (UCL) as
+an internal abstraction layer to seamlessly control various end nodes that are enabled with
+multiple wireless PHY radios. The detailed architecture of the Unify Framework is described in 
+the [Unify Framework Specification](./unify_specifications/index.rst).
 
 The Unify Framework uses Unify Framework library to decouple API modules from the PHY
 drivers. This facilitates code reuse and enables easily adding new high-level
@@ -36,10 +35,13 @@ The Unify Framework contains the following applications:
 - [Framework Services](unify_framework_services.md)
 - [Protocol Controllers](protocol_controllers.md)
 - [IOT Services](unify_iot_services.md)
+- [Emulated End Device](../applications/examples/applications/emulated_end_device/readme_user.md)
 
 The framework services work with the protocol controllers to facilitate different features such as group management, OTA updates etc. See links above for more details.
 
 The IOT services interface with the MQTT broker to provide high level functionality on top of the Unify framework. See the link above for more information.
+
+The Emulated End Device helps to emulate end device with user configured clusters or device emulating a specific device type. See the link above for more information.
 
 Please read the [Unify Framework User guide](unify_readme_user.md) for details
 on configuring and running Unify Framework applications.

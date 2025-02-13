@@ -6982,24 +6982,6 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
   if (64775 == cluster_id) {
   }
 
-  if (64784 == cluster_id) {
-    if (1 == attribute_id) {
-      return true;
-    }
-    if (8 == attribute_id) {
-      return true;
-    }
-    if (9 == attribute_id) {
-      return true;
-    }
-    if (16 == attribute_id) {
-      return true;
-    }
-  }
-
-  if (64785 == cluster_id) {
-  }
-
   if (64786 == cluster_id) {
   }
 

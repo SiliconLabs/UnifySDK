@@ -1,5 +1,0 @@
-Template: uic-cpcd/serial_port
-Type: string
-Default: /dev/ttyACM0
-Description: The serial port where CPC RCP is connected.
- (default: /dev/ttyACM0)

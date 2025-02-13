@@ -18,6 +18,7 @@
 #include "datastore.h"
 #include "attribute_store_fixt.h"
 #include "attribute_store_helper.h"
+#include "attribute_transitions.h"
 #include "sl_log.h"
 
 // Mock includes
@@ -149,6 +150,7 @@ void test_level_move_to_level_command()
 
 void test_level_move_command()
 {
+  attribute_transitions_init();
   test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
   test_configuration.update_attribute_desired_values_on_commands = true;
   test_configuration.automatic_deduction_of_supported_commands   = true;
@@ -227,7 +229,7 @@ void test_level_move_command()
     uic_mqtt_dotdot_level_move_callback(expected_unid,
                                         expected_endpoint_id,
                                         UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-                                        ZCL_MOVE_STEP_MODE_DOWN,
+                                        ZCL_MOVE_STEP_MODE_UP,
                                         0x10,
                                         0,
                                         0));
@@ -235,6 +237,15 @@ void test_level_move_command()
     attribute_store_is_value_defined(level_node, DESIRED_ATTRIBUTE));
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(transition_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0x10,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
+  contiki_test_helper_run(1000);
+  TEST_ASSERT_EQUAL(0x20,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
 }
 
 void test_level_step_command()
@@ -350,6 +361,8 @@ void test_level_step_command()
     attribute_store_is_value_defined(level_node, DESIRED_ATTRIBUTE));
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(transition_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(2, dotdot_get_level_current_level(expected_unid,
+                                        expected_endpoint_id, DESIRED_ATTRIBUTE));
 }
 
 void test_level_stop_command()
@@ -386,6 +399,7 @@ void test_level_stop_command()
 
   attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
                            attribute_store_get_root());
+  dotdot_set_on_off_on_off(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE, true);
 
   // Still not supported:
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
@@ -638,6 +652,15 @@ void test_level_move_with_on_off_command()
                       0));
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(on_off_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0x10,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
+  contiki_test_helper_run(1000);
+  TEST_ASSERT_EQUAL(0x20,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
 }
 
 void test_level_step_with_on_off_command()
@@ -745,6 +768,10 @@ void test_level_step_with_on_off_command()
     attribute_store_is_value_defined(transition_node, DESIRED_ATTRIBUTE));
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(on_off_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0x2,
+                    dotdot_get_level_current_level(expected_unid,
+                                                   expected_endpoint_id,
+                                                   DESIRED_ATTRIBUTE));
 }
 
 void test_level_stop_with_on_off_command()

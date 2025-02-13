@@ -1,12 +1,9 @@
-libavahi-client-dev                 // OT-BR. LGPL framework for Multicast DNS Service Discovery
 libboost-filesystem-dev             // UIC_Log. Provides portable facilities to query and manipulate paths, files, and directories. 
 libboost-log-dev                    // UIC_Log. This library aims to make logging significantly easier for the application developer.
 libboost-program-options-dev        // UIC_Log. Library to let program developers obtain program options
 libboost-system-dev                 // required for cmake
 libboost-thread-dev                 // required for cmake
 libedit-dev                         // STDIN line editor library provides generic line editing, history, and tokenization functions
-libjsoncpp-dev                      // OT-BR. an implementation of a JSON reader and writer in C++
-libmbedtls-dev                      // CPCD crypto and SSL/TLS library
 libmosquitto-dev                    // Mosquitto
 libreadline-dev                     // UIC_Log. The GNU readline library aids in the consistency of user interface across discrete programs that need to provide a command line interface
 libsqlite3-dev                      // GMS, NAL. SQLite is a C library that implements an SQL database engine. 

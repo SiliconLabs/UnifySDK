@@ -38,7 +38,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -99,9 +99,9 @@
 </div>
 <div class="toctree-wrapper compound">
 </div>
-<p>This documentation is for the <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases/latest">latest release of the Unify Host SDK</a>.</p>
+<p>This documentation is for the <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases/latest">latest release of the Unify SDK</a>.</p>
 <ul class="simple">
-<li><p>The Silicon Labs Unify Host SDK source code may be found at
+<li><p>The Silicon Labs Unify SDK source code may be found at
 <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK">https://github.com/SiliconLabs/UnifySDK</a></p></li>
 <li><p>Binary packages for Raspberry Pi 4 (Raspbian 12, Debian Bookworm 64-bit) can be found
 here <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">https://github.com/SiliconLabs/UnifySDK/releases</a></p></li>
@@ -109,7 +109,7 @@ here <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK
 <p><strong>Use <a class="reference internal" href="portable_runtime/readme_user.html"><span class="doc std std-doc">Portable Runtime</span></a> for a quick demo with Unify</strong></p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
-<p>Unify SDK is a software framework that simplifies the developer experience, removing difficult parts of network control and network management as it relates to gateway and hub development in IoT applications. It can also provide Matter bridge functionality to other protocols that do not natively run matter.</p>
+<p>Unify is a software framework that simplifies the developer experience, removing difficult parts of network control and network management as it relates to gateway and hub development in IoT applications. Unify SDK natively supports Z-Wave protocol, and also provides an example code to showcase Matter bridge functionality to Z-Wave and Custom protocols that do not run Matter.</p>
 <p>Unify SDK is developed as an open, modular, and portable architecture based on ubiquitous lightweight MQTT technology. The software framework is designed and developed on Linux. It provides an extensible set of software features to enable IoT wireless connectivity in gateways, multiprotocol scalability and application processor-based end products. Unify SDK simplifies development and ongoing software maintenance for IoT gateways and application processor-based end devices.</p>
 <p>The Unify SDK provides software source and binary packages for Raspberry Pi 4.</p>
 <p>Unify SDK provides common building blocks that ease connectivity across IoT ecosystems.</p>
@@ -121,34 +121,30 @@ complex IoT applications for single or multi-protocol use cases, Silicon Labs
 has created a single repository for important customer software needs on a Linux
 gateway. We’ve aggregated software from multiple repositories and simplified the
 distribution to enhance ease of use and accessibility.</p>
-<p>The Unify Host SDK contains:</p>
+<p>The Unify Ecosystem contains:</p>
 <ul class="simple">
 <li><p>The Unify Framework - A powerful IoT gateway framework that can support multiple wireless protocols.</p></li>
-<li><p>Protocol Controllers that implement various wireless protocols.</p></li>
-<li><p>Multiprotocol Host Software - A collection of host software for simultaneously
-running multiple protocol stacks on the host.
-Using a single radio co-processor, you can run Zigbee, OpenThread, and Bluetooth.</p></li>
+<li><p>A Z-Wave protocol Controller that implement wireless Z-Wave protocol.</p></li>
+<li><p>Current software solution can also be leveraged to use proprietary(custom) Protocol Controllers.</p></li>
+<li><p>Emulation of end device for better dev experience.</p></li>
 </ul>
+<p><strong>Refer <a class="reference internal" href="how_to_develop_a_protocol_controller.html"><span class="doc std std-doc">how to develop Protocol Controller</span></a> for adding proprietary(custom) Protocol Contoller to Unify Ecosystem</strong></p>
 <p>Here is a component view along with further detailed descriptions below.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/unify-sdk-block-diagram.jpg"><img alt="Unify Host SDK" src="../_images/unify-sdk-block-diagram.jpg" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../_images/unify-ecosystem-block-diagram.jpg"><img alt="Unify Ecosystem" src="../_images/unify-ecosystem-block-diagram.jpg" style="width: 75%;" /></a>
 </figure>
 </section>
 <section id="unify-framework">
 <h2>Unify Framework<a class="headerlink" href="#unify-framework" title="Permalink to this heading"></a></h2>
 <p>The Unify Framework has support for:</p>
-<p><a class="reference internal" href="../applications/zpc/readme_user.html"><span class="doc std std-doc"><img alt="Z-Wave" src="../_images/Z-Wave_logo.png" /></span></a>
-<a class="reference internal" href="../applications/zigpc/readme_user.html"><span class="doc std std-doc"><img alt="Zigbee" src="../_images/Zigbee_logo.png" /></span></a>
-<a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/index.html"><img alt="Matter" src="../_images/matter_logo.png" /></a>
-<a class="reference internal" href="../applications/aox/applications/aoxpc/readme_user.html"><span class="doc std std-doc"><img alt="Bluetooth AoX" src="../_images/Bluetooth_logo.png" /></span></a></p>
+<p><a class="reference external" href="https://siliconlabssoftware.github.io/z-wave-protocol-controller"><img alt="Z-Wave" src="../_images/Z-Wave_logo.png" /></a>
+[<img alt="Matter" src="../_images/matter_logo.png" />]</p>
 <p>Further details can be found on the <a class="reference internal" href="UnifySDK.html"><span class="doc std std-doc">Unify Framework introduction page</span></a>.</p>
 </section>
-<section id="multiprotocol">
-<h2>Multiprotocol<a class="headerlink" href="#multiprotocol" title="Permalink to this heading"></a></h2>
-<p>The Unify Host SDK contains support for running Zigbee, OpenThread, and Bluetooth on a
-Linux host, using only a single low-cost Radio Co-Processor (RCP) chip from Silicon Labs.
-This system allows for running multiple protocols simultaneously using the same RCP.</p>
-<p>Further details can be found on the <a class="reference internal" href="multiprotocol.html"><span class="doc std std-doc">Multiprotocol Host Software page</span></a>.</p>
+<section id="emulated-end-device-eed">
+<h2>Emulated End Device (EED)<a class="headerlink" href="#emulated-end-device-eed" title="Permalink to this heading"></a></h2>
+<p>The EED emulates a single or set of end devices as if controlled by a protocol controller. This is solely for better developer experience and is a experimental implementation.</p>
+<p>Further details can be found on the <a class="reference internal" href="../applications/examples/applications/emulated_end_device/readme_user.html"><span class="doc std std-doc">EED User Guide</span></a>.</p>
 </section>
 </section>
 

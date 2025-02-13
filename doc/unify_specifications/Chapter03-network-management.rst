@@ -610,6 +610,10 @@ operations.
     - This command is used to instruct a Protocol Controller to interview a
 
       node, i.e. discover its capabilities and state.
+  * - EnableNls
+    - This command is used to instruct a Z-Wave node to enable Network Layer
+    
+      Security (NLS) that comes with Security V2 (S2V2).
 
 The protocol controllers MUST advertise the list of SupportedCommands under a
 node state topic if they support the functionalities.
@@ -905,6 +909,59 @@ verification.
   & mqtt_broker -> protocol_controller : <font color=#6C2A0D>ucl/by-unid/zw-1234/State/Commands/DiscoverSecurity
 
   == Security Discovery starts ==
+
+  == When the operation is completed ==
+
+  protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State \n<font color=#00003C><b>{ "NetworkStatus": "Online interviewing", \n<font color=#00003C><b>"Security": "Z-Wave S2 Access Control", \n<font color=#00003C><b>"MaximumCommandDelay": 5 }</b>
+  & mqtt_broker -> iot_service
+
+
+EnableNls Command
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Other operations may be paused while a Protocol Controller performs an enable NLS
+process.
+
+.. uml::
+
+  ' Allows to do simultaneous transmissions
+  !pragma teoz true
+
+  ' Style for the diagram
+  !theme plain
+  skinparam LegendBackgroundColor #F0F0F0
+
+  title Initiating an Enable NLS command (EnableNls) on a node itself (5)
+
+  legend top
+  <font color=#0039FB>MQTT Subscription</font>
+  <font color=#00003C>Retained MQTT Publication</font>
+  <font color=#6C2A0D>Unretained MQTT Publication</font>
+  endlegend
+
+  ' List of participants
+  participant "IoT Service" as iot_service
+  participant "MQTT Broker" as mqtt_broker
+  participant "Protocol Controller" as protocol_controller
+
+  protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/+/Commands/+
+  protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/State/Commands/+
+
+  iot_service -> mqtt_broker: <font color=#0039FB>ucl/unid/+/State
+  iot_service -> mqtt_broker: <font color=#0039FB>ucl/unid/+/State/SupportedCommands
+
+  protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State \n<font color=#00003C><b>{ "NetworkStatus": "Online functional", \n<font color=#00003C><b>"Security": "Z-Wave S2 Authenticated", \n<font color=#00003C><b>"MaximumCommandDelay": 5 }</b>
+  & mqtt_broker -> iot_service
+
+  protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/State/SupportedCommands \n<font color=#00003C><b>{ "value":["Interview", "DiscoverSecurity", "EnableNls"]}</b>
+  & mqtt_broker -> iot_service
+
+  rnote over iot_service, protocol_controller: IoT Service wants to enable network\nlayer security (NLS) of zw-1234
+
+  iot_service -> mqtt_broker
+  & mqtt_broker -> protocol_controller : <font color=#6C2A0D>ucl/by-unid/zw-1234/State/Commands/EnableNls
+
+  == Enable NLS operation starts ==
 
   == When the operation is completed ==
 

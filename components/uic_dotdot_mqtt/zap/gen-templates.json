@@ -3,9 +3,17 @@
     "version": "Unify-dotdot-v1",
     "override": "../../uic_dotdot/zap/addon-override.js",
     "helpers": [
-        "../../uic_dotdot/zap/addon-helper.js",
-        "../../uic_dotdot/zap/addon-base-helper.js"
+        "../../uic_dotdot/zap/addon-helper.js"
     ],
+    "options": {
+        "types": {
+            "CSKey":"uint8_t"
+        }
+    },
+    "partials":[{
+        "name": "zcl_type",
+        "path": "zcl_type_partial.zapt"
+    }],
     "templates": [{
             "path": "dotdot_mqtt_cpp.zapt",
             "name": "Implementation for parsing mqtt topics for Unify",

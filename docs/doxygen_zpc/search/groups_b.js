@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['occupancysensing_20cluster_20mapper_0',['OccupancySensing Cluster Mapper',['../group__occupancy__sensing__cluster__mapper.html',1,'']]],
-  ['onoff_20cluster_20mapper_1',['OnOff Cluster Mapper',['../group__on__off__cluster__mapper.html',1,'']]],
-  ['ota_20_28over_2dthe_2dair_29_20image_20listener_2',['OTA (Over-the-Air) Image Listener',['../group__image__listener.html',1,'']]]
+  ['scope_20settings_20helpers_0',['Scope settings helpers',['../group__attribute__mapper__scope__settings.html',1,'']]],
+  ['signal_20handler_20for_20unify_20main_1',['Signal handler for Unify Main',['../group__uic__main__signal.html',1,'']]],
+  ['status_20codes_2',['Status Codes',['../group__unify__sl__status__codes.html',1,'']]],
+  ['system_3',['System',['../group__sys.html',1,'']]]
 ];

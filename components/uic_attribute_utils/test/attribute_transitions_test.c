@@ -210,3 +210,83 @@ void test_attribute_transitions_fixed_transition()
 
 }
 
+
+void test_attribute_transitions_fixed_cyclic_transition()
+{
+    // Start with a transition on undefined values:
+  value_node    = attribute_store_add_node(0x03, attribute_store_get_root());
+  int32_t value = 100;
+  attribute_store_set_reported(value_node, &value, sizeof(value));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_cyclic_transition(value_node,REPORTED_ATTRIBUTE,5,10,0,150,100)); 
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(110.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(120.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(130.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(140.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(150.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(5.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_cyclic_transition(value_node,REPORTED_ATTRIBUTE,0,-10,0,150,100));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(0.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  
+  value = 10;
+  attribute_store_set_reported(value_node, &value, sizeof(value));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_cyclic_transition(value_node,REPORTED_ATTRIBUTE,135,-7,0,150,100));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(3.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(146.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(139.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(135.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_fixed_cyclic_transition(value_node,DESIRED_ATTRIBUTE,0,-7,0,150,100));
+  contiki_test_helper_run(100);
+  TEST_ASSERT(!is_attribute_transition_ongoing(value_node));
+}
+
+void test_attribute_transitions_cyclic_transition()
+{
+    // Start with a transition on undefined values:
+  value_node    = attribute_store_add_node(0x03, attribute_store_get_root());
+  int32_t value = 10;
+  attribute_store_set_reported(value_node, &value, sizeof(value));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_cyclic_transition(value_node,REPORTED_ATTRIBUTE,4,0,15,100)); 
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(14.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(3.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(7.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(11.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(15.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(4.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  attribute_stop_transition(value_node);
+  contiki_test_helper_run(100);
+  TEST_ASSERT_EQUAL(4.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_cyclic_transition(value_node,REPORTED_ATTRIBUTE,-3,0,15,100));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(1.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);  
+  TEST_ASSERT_EQUAL(13.0, attribute_store_get_number(value_node, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);
+  TEST_ASSERT(is_attribute_transition_ongoing(value_node));
+}

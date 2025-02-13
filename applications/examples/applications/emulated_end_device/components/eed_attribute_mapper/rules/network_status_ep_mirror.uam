@@ -1,0 +1,14 @@
+// Mirrors the value of the Network Status from ep0 to under the UNID,
+// to compensate for the inconsistency in the unify dotdot attribute store
+// Expecting network status under the UNID node.
+def UNID 0x2
+def ep 0x3
+
+//  DOTDOT_ATTRIBUTE_ID_STATE_NETWORK_STATUS
+def network_status 0xfd020001
+
+scope 0 common_parent_type(2) chain_reaction(0) clear_desired(0) {
+
+  // Mirror the Network Status under UNID from under ep0
+  r'network_status = r'ep[0].network_status
+}

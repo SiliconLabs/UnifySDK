@@ -690,7 +690,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_current_group_callback_t)
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  SGroupId current_group
+  uint16_t current_group
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_scene_valid_callback_t)(
   dotdot_unid_t unid,
@@ -711,7 +711,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_last_configured_by_callba
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  EUI64 last_configured_by
+  uint64_t last_configured_by
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_scene_table_callback_t)(
   dotdot_unid_t unid,
@@ -870,7 +870,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_time_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC time
+  uint32_t time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_time_status_callback_t)(
   dotdot_unid_t unid,
@@ -926,14 +926,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_last_set_time_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC last_set_time
+  uint32_t last_set_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_valid_until_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC valid_until_time
+  uint32_t valid_until_time
 );
 // Callback types used by the poll_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_check_in_interval_callback_t)(
@@ -1983,7 +1983,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_setpoint_change_sourc
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC setpoint_change_source_timestamp
+  uint32_t setpoint_change_source_timestamp
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_occupied_setback_callback_t)(
   dotdot_unid_t unid,
@@ -3186,7 +3186,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_attribute_iascie_address_callback
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  EUI64 iascie_address
+  uint64_t iascie_address
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_attribute_zoneid_callback_t)(
   dotdot_unid_t unid,
@@ -3258,21 +3258,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_reading_snap_shot_time_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC reading_snap_shot_time
+  uint32_t reading_snap_shot_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_max_demand_delivered_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC current_max_demand_delivered_time
+  uint32_t current_max_demand_delivered_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_max_demand_received_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  UTC current_max_demand_received_time
+  uint32_t current_max_demand_received_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_default_update_period_callback_t)(
   dotdot_unid_t unid,
@@ -3307,14 +3307,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_inlet_temperature_callb
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint32_t inlet_temperature
+  int32_t inlet_temperature
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_outlet_temperature_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint32_t outlet_temperature
+  int32_t outlet_temperature
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_unitof_measure_callback_t)(
   dotdot_unid_t unid,
@@ -4977,145 +4977,6 @@ typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_attribute_configu
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   size_t configuration_parameters_count,
   const ConfigurationParameter* configuration_parameters
-);
-// Callback types used by the aox_locator cluster
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t reporting_mode
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  bool position_and_orientation_valid
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  CoordinateAndOrientation position_and_orientation
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  size_t azimuth_mask_count,
-  const MinMaxPair* azimuth_mask
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  size_t elevation_mask_count,
-  const MinMaxPair* elevation_mask
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  size_t allow_list_count,
-  const char** allow_list
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t aox_mode
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t antenna_mode
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  size_t antenna_array_count,
-  const int8_t* antenna_array
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t period_samples
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  bool angle_filtering
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  double angle_filtering_weight
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t angle_correction_timeout
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t angle_correction_delay
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t cte_mode
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t cte_sampling_interval
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t cte_length
-);
-typedef sl_status_t (*uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t slot_duration
-);
-// Callback types used by the aox_position_estimation cluster
-typedef sl_status_t (*uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback_t)(
-  dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint,
-  bool unretained,
-  uic_mqtt_dotdot_attribute_update_type_t update_type,
-  EstimatedPosition position
 );
 // Callback types used by the protocol_controller_network_management cluster
 typedef sl_status_t (*uic_mqtt_dotdot_protocol_controller_network_management_attribute_network_management_state_callback_t)(
@@ -9876,136 +9737,6 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_attributes_init();
  * this callback will overwrite the previous set callback
  */
 void uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_set(const uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_t callback);
-
-
-/**
- *  Initializes the attributes features for the AoXLocator cluster,
- *  allowing to receive attribute updates from other UNIDs.
- */
-sl_status_t uic_mqtt_dotdot_aox_locator_attributes_init();
-
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/reporting_mode/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/position_and_orientation_valid/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/position_and_orientation/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/azimuth_mask/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/elevation_mask/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/allow_list/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/aox_mode/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/antenna_mode/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/antenna_array/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/period_samples/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/angle_filtering/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/angle_filtering_weight/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/angle_correction_timeout/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/angle_correction_delay/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/cte_mode/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/cte_sampling_interval/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/cte_length/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback_t callback);
-/**
- * Setup callback to be called when a
- * AoXLocator/Attributes/slot_duration/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback_t callback);
-
-
-/**
- *  Initializes the attributes features for the AoXPositionEstimation cluster,
- *  allowing to receive attribute updates from other UNIDs.
- */
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_attributes_init();
-
-/**
- * Setup callback to be called when a
- * AoXPositionEstimation/Attributes/position/# is received. Setting
- * this callback will overwrite the previous set callback
- */
-void uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback_set(const uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback_t callback);
 
 
 /**

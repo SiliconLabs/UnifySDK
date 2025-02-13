@@ -1,5 +1,0 @@
-#!/bin/sh
-if type "systemctl" > /dev/null; then
-    systemctl stop uic-zpc.service
-    systemctl disable uic-zpc.service
-fi

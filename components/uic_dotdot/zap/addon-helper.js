@@ -17,6 +17,8 @@ function supportedCluster(clusterName) {
     case "IASACE": return false
     case "Commissioning": return false
     case "OTAUpgrade": return false
+    case "AoXLocator": return false
+    case "AoXPositionEstimation": return false
     default: return true
   }
 }

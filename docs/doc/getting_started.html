@@ -26,7 +26,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Unify Host SDK User guide" href="unify_readme_user.html" />
+    <link rel="next" title="Unify SDK User guide" href="unify_readme_user.html" />
     <link rel="prev" title="Getting Started with Unify using Portable runtime" href="portable_runtime/readme_user.html" /> 
 </head>
 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -54,9 +54,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="portable_runtime/readme_user.html">Getting Started with Unify using Portable runtime</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Running Unify on Raspberry Pi</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify Host SDK User guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify SDK User guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="getting_started_unify_sdk.html">Getting Started with the Unify Framework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Getting Started with the Multiprotocol Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -99,7 +98,7 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="running-unify-on-raspberry-pi">
 <h1>Running Unify on Raspberry Pi<a class="headerlink" href="#running-unify-on-raspberry-pi" title="Permalink to this heading"></a></h1>
-<p>The Unify Host SDK targets our reference platform, a Raspberry Pi 4 (RPi4).
+<p>The Unify SDK targets our reference platform, a Raspberry Pi 4 (RPi4).
 It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.</p>
 <p>For details on setting up a bare RPi4, follow the setup instructions in the
 <a class="reference external" href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up">Official Raspberry Pi User Guide</a>,
@@ -114,12 +113,12 @@ To get an MQTT broker installed on the RPi4:</p>
 </pre></div>
 </div>
 <p>For more information regarding logging and configuration of eg. the Mosquitto
-broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Host SDK User Guide</span></a>.</p>
+broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify SDK User Guide</span></a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <section id="how-to-install-packages">
 <span id="how-to-install"></span><h2>How to install packages<a class="headerlink" href="#how-to-install-packages" title="Permalink to this heading"></a></h2>
-<p>The Unify Host SDK distribution targets the reference platform Debian Bookworm
+<p>The Unify SDK distribution targets the reference platform Debian Bookworm
 platform. Binary Debian packages are provided with the SDK and they are
 available in a Zip file eg. unify_x.y.z_arm64.zip on
 <a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>.</p>
@@ -141,43 +140,34 @@ for the package in the wrong place and fail.</p>
 </div>
 <section id="verify-the-configuration">
 <h3>Verify the configuration<a class="headerlink" href="#verify-the-configuration" title="Permalink to this heading"></a></h3>
-<p>After installing the desired Unify Host SDK packages, make sure the configuration is set correctly.</p>
+<p>After installing the desired Unify SDK packages, make sure the configuration is set correctly.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>cat<span class="w"> </span>/etc/uic/uic.cfg
-<span class="go">zpc:</span>
-<span class="go">  serial: /dev/ttyUSB0</span>
-<span class="go">  rf_region: EU</span>
-<span class="go">  datastore_file: /var/lib/uic/zpc.db</span>
-<span class="go">zigpc:</span>
-<span class="go">  serial: /dev/ttyACM0</span>
-<span class="go">  datastore_file: /var/lib/uic/zigpc.db</span>
-<span class="go">cpcd:</span>
-<span class="go">  serial: /dev/ttyACM0</span>
+<span class="go">eed:</span>
+<span class="go">  datastore_file: /var/lib/uic/eed.db</span>
+<span class="go">  device_type: doorlock</span>
 </pre></div>
 </div>
 <p>If your configuration is wrong, you can either edit the file directly or reconfigure a specific package.
 After making changes to the configuration make sure to either reboot or restart the service.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>dpkg-reconfigure<span class="w"> </span>uic-zpc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>dpkg-reconfigure<span class="w"> </span>uic-eed
 </pre></div>
 </div>
 </section>
 <section id="verifying-if-an-application-is-running">
 <h3>Verifying if an application is running<a class="headerlink" href="#verifying-if-an-application-is-running" title="Permalink to this heading"></a></h3>
 <p>The Unify applications all install SystemD service files for handling the starting and stopping of the applications on a RPi4.
-You can check if a Unify Host SDK application is running by using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>.
+You can check if a Unify SDK application is running by using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>.
 For information on how to handle SystemD services using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>, see <a class="reference external" href="https://man7.org/linux/man-pages/man1/systemctl.1.html">the systemctl man pages</a>.</p>
-<p>Here we can see that the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> service is loaded and active:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-zpc.service
-<span class="go">* uic-zpc.service - Unify Z-Wave protocol controller</span>
-<span class="go">   Loaded: loaded (/lib/systemd/system/uic-zpc.service; enabled; vendor preset: enabled)</span>
-<span class="go">   Active: active (running) since Tue 2022-08-02 14:14:58 CEST; 8s ago</span>
-<span class="go"> Main PID: 9471 (zpc)</span>
-<span class="go">    Tasks: 1 (limit: 4915)</span>
-<span class="go">   CGroup: /system.slice/uic-zpc.service</span>
-<span class="go">           -9471 /usr/bin/zpc</span>
-
-<span class="go">aug 02 14:15:02 raspberrypi zpc[9471]: 2022-Aug-02 14:15:02.158423 &lt;W&gt; [uic_stdin_process] stdin is not a tty, input will not be handled.</span>
-<span class="go">aug 02 14:15:02 raspberrypi zpc[9471]: 2022-Aug-02 14:15:02.166045 &lt;i&gt; [mqtt_client] Connection to MQTT broker localhost:1883 established.</span>
-<span class="go">aug 02 14:15:02 raspberrypi zpc[9471]: 2022-Aug-02 14:15:02.168337 &lt;i&gt; [mqtt_client_fsm_connecting] We are connected to the MQTT broker.</span>
+<p>Here we can see that the <code class="docutils literal notranslate"><span class="pre">uic-eed</span></code> service is loaded and active:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>uic-eed
+<span class="go">● uic-eed.service - Unify Emulated End Device</span>
+<span class="go">     Loaded: loaded (/lib/systemd/system/uic-eed.service; disabled; preset: enabled)</span>
+<span class="go">     Active: active (running) since Fri 2025-01-24 18:52:20 IST; 2s ago</span>
+<span class="go">   Main PID: 3516 (eed)</span>
+<span class="go">      Tasks: 1 (limit: 8738)</span>
+<span class="go">        CPU: 133ms</span>
+<span class="go">     CGroup: /system.slice/uic-eed.service</span>
+<span class="go">             └─3516 /usr/bin/eed</span>
 </pre></div>
 </div>
 </section>
@@ -186,13 +176,6 @@ For information on how to handle SystemD services using <code class="docutils li
 <h2>Unify Framework<a class="headerlink" href="#unify-framework" title="Permalink to this heading"></a></h2>
 <p>If you are interested in building an IoT Gateway based on the Unify Framework refer to
 the <a class="reference internal" href="getting_started_unify_sdk.html"><span class="doc std std-doc">Unify Framework Getting Started</span></a>.</p>
-<div class="toctree-wrapper compound">
-</div>
-</section>
-<section id="multiprotocol-setup">
-<h2>Multiprotocol Setup<a class="headerlink" href="#multiprotocol-setup" title="Permalink to this heading"></a></h2>
-<p>If you are interested in setting up multiprotocol CPC-based applications
-see the <a class="reference internal" href="getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup</span></a> page.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>

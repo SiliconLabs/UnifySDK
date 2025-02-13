@@ -1,0 +1,12 @@
+Template: uic-eed/device_type
+Type: select
+Choices:doorlock, onofflight, dimmablelight, onofflightswitch, lightsensor, occupancysensor, onoffpluginunit, dimmablepluginunit, extendedcolorlight, windowcovering, thermostat, pressuresensor, flowsensor,,
+Default: onofflight
+Description: Device type the EED needs to emulate 
+ (default: onofflight)
+
+Template: uic-eed/datastore_file
+Type: string
+Default: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/eed.db
+Description: The datastore file
+ (default: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/eed.db)

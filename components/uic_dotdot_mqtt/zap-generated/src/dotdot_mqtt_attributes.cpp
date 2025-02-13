@@ -8029,7 +8029,7 @@ static void uic_mqtt_dotdot_on_scenes_current_group_attribute_update(
   }
 
 
-  SGroupId current_group = {};
+  uint16_t current_group = {};
 
   nlohmann::json json_payload;
   try {
@@ -8042,7 +8042,7 @@ static void uic_mqtt_dotdot_on_scenes_current_group_attribute_update(
         return;
       }
 // Start parsing value
-      current_group = json_payload.at("value").get<SGroupId>();
+      current_group = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -8257,7 +8257,7 @@ static void uic_mqtt_dotdot_on_scenes_last_configured_by_attribute_update(
   }
 
 
-  EUI64 last_configured_by = {};
+  uint64_t last_configured_by = {};
 
   nlohmann::json json_payload;
   try {
@@ -8270,7 +8270,7 @@ static void uic_mqtt_dotdot_on_scenes_last_configured_by_attribute_update(
         return;
       }
 // Start parsing value
-      last_configured_by = json_payload.at("value").get<EUI64>();
+      last_configured_by = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -10305,7 +10305,7 @@ static void uic_mqtt_dotdot_on_time_time_attribute_update(
   }
 
 
-  UTC time = {};
+  uint32_t time = {};
 
   nlohmann::json json_payload;
   try {
@@ -10318,7 +10318,7 @@ static void uic_mqtt_dotdot_on_time_time_attribute_update(
         return;
       }
 // Start parsing value
-      time = json_payload.at("value").get<UTC>();
+      time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10913,7 +10913,7 @@ static void uic_mqtt_dotdot_on_time_last_set_time_attribute_update(
   }
 
 
-  UTC last_set_time = {};
+  uint32_t last_set_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -10926,7 +10926,7 @@ static void uic_mqtt_dotdot_on_time_last_set_time_attribute_update(
         return;
       }
 // Start parsing value
-      last_set_time = json_payload.at("value").get<UTC>();
+      last_set_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10989,7 +10989,7 @@ static void uic_mqtt_dotdot_on_time_valid_until_time_attribute_update(
   }
 
 
-  UTC valid_until_time = {};
+  uint32_t valid_until_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -11002,7 +11002,7 @@ static void uic_mqtt_dotdot_on_time_valid_until_time_attribute_update(
         return;
       }
 // Start parsing value
-      valid_until_time = json_payload.at("value").get<UTC>();
+      valid_until_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -23802,7 +23802,7 @@ static void uic_mqtt_dotdot_on_thermostat_setpoint_change_source_timestamp_attri
   }
 
 
-  UTC setpoint_change_source_timestamp = {};
+  uint32_t setpoint_change_source_timestamp = {};
 
   nlohmann::json json_payload;
   try {
@@ -23815,7 +23815,7 @@ static void uic_mqtt_dotdot_on_thermostat_setpoint_change_source_timestamp_attri
         return;
       }
 // Start parsing value
-      setpoint_change_source_timestamp = json_payload.at("value").get<UTC>();
+      setpoint_change_source_timestamp = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -39119,7 +39119,7 @@ static void uic_mqtt_dotdot_on_ias_zone_iascie_address_attribute_update(
   }
 
 
-  EUI64 iascie_address = {};
+  uint64_t iascie_address = {};
 
   nlohmann::json json_payload;
   try {
@@ -39132,7 +39132,7 @@ static void uic_mqtt_dotdot_on_ias_zone_iascie_address_attribute_update(
         return;
       }
 // Start parsing value
-      iascie_address = json_payload.at("value").get<EUI64>();
+      iascie_address = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -40024,7 +40024,7 @@ static void uic_mqtt_dotdot_on_metering_reading_snap_shot_time_attribute_update(
   }
 
 
-  UTC reading_snap_shot_time = {};
+  uint32_t reading_snap_shot_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -40037,7 +40037,7 @@ static void uic_mqtt_dotdot_on_metering_reading_snap_shot_time_attribute_update(
         return;
       }
 // Start parsing value
-      reading_snap_shot_time = json_payload.at("value").get<UTC>();
+      reading_snap_shot_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40100,7 +40100,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_delivered_time_attrib
   }
 
 
-  UTC current_max_demand_delivered_time = {};
+  uint32_t current_max_demand_delivered_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -40113,7 +40113,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_delivered_time_attrib
         return;
       }
 // Start parsing value
-      current_max_demand_delivered_time = json_payload.at("value").get<UTC>();
+      current_max_demand_delivered_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40176,7 +40176,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_received_time_attribu
   }
 
 
-  UTC current_max_demand_received_time = {};
+  uint32_t current_max_demand_received_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -40189,7 +40189,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_received_time_attribu
         return;
       }
 // Start parsing value
-      current_max_demand_received_time = json_payload.at("value").get<UTC>();
+      current_max_demand_received_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40564,7 +40564,7 @@ static void uic_mqtt_dotdot_on_metering_inlet_temperature_attribute_update(
   }
 
 
-  uint32_t inlet_temperature = {};
+  int32_t inlet_temperature = {};
 
   nlohmann::json json_payload;
   try {
@@ -40577,7 +40577,7 @@ static void uic_mqtt_dotdot_on_metering_inlet_temperature_attribute_update(
         return;
       }
 // Start parsing value
-      inlet_temperature = json_payload.at("value").get<uint32_t>();
+      inlet_temperature = json_payload.at("value").get<int32_t>();
     
     // End parsing value
     }
@@ -40640,7 +40640,7 @@ static void uic_mqtt_dotdot_on_metering_outlet_temperature_attribute_update(
   }
 
 
-  uint32_t outlet_temperature = {};
+  int32_t outlet_temperature = {};
 
   nlohmann::json json_payload;
   try {
@@ -40653,7 +40653,7 @@ static void uic_mqtt_dotdot_on_metering_outlet_temperature_attribute_update(
         return;
       }
 // Start parsing value
-      outlet_temperature = json_payload.at("value").get<uint32_t>();
+      outlet_temperature = json_payload.at("value").get<int32_t>();
     
     // End parsing value
     }
@@ -61121,1753 +61121,6 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_attributes_init()
 void uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_set(const uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback_t callback)
 {
   uic_mqtt_dotdot_configuration_parameters_attribute_configuration_parameters_callback = callback;
-}
-
-// End of supported cluster.
-
-///////////////////////////////////////////////////////////////////////////////
-// Callback pointers for AoXLocator
-///////////////////////////////////////////////////////////////////////////////
-static uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_t uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_t uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_t uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_t uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback_t uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_t uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback_t uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback_t uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback_t uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_t uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback_t uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback_t uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback_t uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback_t uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback_t uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback_t uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback_t uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback = nullptr;
-static uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback_t uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback = nullptr;
-
-///////////////////////////////////////////////////////////////////////////////
-// Attribute update handlers for AoXLocator
-///////////////////////////////////////////////////////////////////////////////
-static void uic_mqtt_dotdot_on_aox_locator_reporting_mode_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t reporting_mode = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::ReportingMode: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<AoXLocatorReportingMode>("value", json_payload);
-      if (tmp == numeric_limits<AoXLocatorReportingMode>::max()) {
-      #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
-        tmp = aox_locator_reporting_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(REPORTING_MODE_ENUM_NAME_AVAILABLE)
-        tmp = reporting_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      reporting_mode = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    reporting_mode
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_position_and_orientation_valid_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  bool position_and_orientation_valid = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::PositionAndOrientationValid: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      position_and_orientation_valid = get_bool_from_json(json_payload, "value");
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    position_and_orientation_valid
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_position_and_orientation_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  CoordinateAndOrientation position_and_orientation = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::PositionAndOrientation: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      position_and_orientation.CoordinateX = json_payload.at("value").at("CoordinateX").get<double>();
-      position_and_orientation.CoordinateY = json_payload.at("value").at("CoordinateY").get<double>();
-      position_and_orientation.CoordinateZ = json_payload.at("value").at("CoordinateZ").get<double>();
-      position_and_orientation.OrientationX = json_payload.at("value").at("OrientationX").get<double>();
-      position_and_orientation.OrientationY = json_payload.at("value").at("OrientationY").get<double>();
-      position_and_orientation.OrientationZ = json_payload.at("value").at("OrientationZ").get<double>();
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    position_and_orientation
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_azimuth_mask_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  std::vector<MinMaxPair> azimuth_mask;
-  size_t azimuth_mask_count = 0;
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AzimuthMask: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      auto &azimuth_mask_json = json_payload.at("value");
-      for (size_t i = 0; i < azimuth_mask_json.size(); i++) {
-        MinMaxPair element = {};
-        element.Min = azimuth_mask_json.at(i).at("Min").get<double>();
-        element.Max = azimuth_mask_json.at(i).at("Max").get<double>();
-        azimuth_mask.push_back(element);
-      }
-      // Take our vector and pack it into the updated state
-      azimuth_mask_count = azimuth_mask.size();
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    azimuth_mask_count,
-    azimuth_mask.data()
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_elevation_mask_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  std::vector<MinMaxPair> elevation_mask;
-  size_t elevation_mask_count = 0;
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::ElevationMask: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      auto &elevation_mask_json = json_payload.at("value");
-      for (size_t i = 0; i < elevation_mask_json.size(); i++) {
-        MinMaxPair element = {};
-        element.Min = elevation_mask_json.at(i).at("Min").get<double>();
-        element.Max = elevation_mask_json.at(i).at("Max").get<double>();
-        elevation_mask.push_back(element);
-      }
-      // Take our vector and pack it into the updated state
-      elevation_mask_count = elevation_mask.size();
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    elevation_mask_count,
-    elevation_mask.data()
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_allow_list_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  std::vector<const char*> allow_list;
-  size_t allow_list_count = 0;
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AllowList: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      auto &allow_list_json = json_payload.at("value");
-      for (size_t i = 0; i < allow_list_json.size(); i++) {
-        allow_list.push_back(allow_list_json.at(i).get_ptr<const std::string*>()->c_str());
-      }
-      // Take our vector and pack it into the updated state
-      allow_list_count = allow_list.size();
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    allow_list_count,
-    allow_list.data()
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_aox_mode_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t aox_mode = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AoXMode: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<AoXLocatorAoXMode>("value", json_payload);
-      if (tmp == numeric_limits<AoXLocatorAoXMode>::max()) {
-      #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
-        tmp = aox_locator_aox_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(AOX_MODE_ENUM_NAME_AVAILABLE)
-        tmp = aox_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      aox_mode = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    aox_mode
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_antenna_mode_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t antenna_mode = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AntennaMode: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<AoXLocatorAntennaMode>("value", json_payload);
-      if (tmp == numeric_limits<AoXLocatorAntennaMode>::max()) {
-      #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
-        tmp = aox_locator_antenna_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(ANTENNA_MODE_ENUM_NAME_AVAILABLE)
-        tmp = antenna_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      antenna_mode = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    antenna_mode
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_antenna_array_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  std::vector<int8_t> antenna_array;
-  size_t antenna_array_count = 0;
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AntennaArray: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      auto &antenna_array_json = json_payload.at("value");
-      for (size_t i = 0; i < antenna_array_json.size(); i++) {
-        antenna_array.push_back(antenna_array_json.at(i).get<int8_t>());
-          }
-      // Take our vector and pack it into the updated state
-      antenna_array_count = antenna_array.size();
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    antenna_array_count,
-    antenna_array.data()
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_period_samples_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  int8_t period_samples = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::PeriodSamples: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      period_samples = json_payload.at("value").get<int8_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    period_samples
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_angle_filtering_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  bool angle_filtering = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AngleFiltering: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      angle_filtering = get_bool_from_json(json_payload, "value");
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    angle_filtering
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_angle_filtering_weight_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  double angle_filtering_weight = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AngleFilteringWeight: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      angle_filtering_weight = json_payload.at("value").get<double>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    angle_filtering_weight
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_angle_correction_timeout_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  int8_t angle_correction_timeout = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AngleCorrectionTimeout: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      angle_correction_timeout = json_payload.at("value").get<int8_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    angle_correction_timeout
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_angle_correction_delay_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  int8_t angle_correction_delay = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::AngleCorrectionDelay: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      angle_correction_delay = json_payload.at("value").get<int8_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    angle_correction_delay
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_cte_mode_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  uint8_t cte_mode = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::CTEMode: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      uint32_t tmp = get_enum_decimal_value<AoXLocatorCTEMode>("value", json_payload);
-      if (tmp == numeric_limits<AoXLocatorCTEMode>::max()) {
-      #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
-        tmp = aox_locator_cte_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #elif defined(CTE_MODE_ENUM_NAME_AVAILABLE)
-        tmp = cte_mode_get_enum_value_number(json_payload.at("value").get<std::string>());
-      #endif
-      }
-      cte_mode = static_cast<uint8_t>(tmp);
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    cte_mode
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_cte_sampling_interval_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  int8_t cte_sampling_interval = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::CTESamplingInterval: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      cte_sampling_interval = json_payload.at("value").get<int8_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    cte_sampling_interval
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_cte_length_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  int8_t cte_length = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::CTELength: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      cte_length = json_payload.at("value").get<int8_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    cte_length
-  );
-
-}
-static void uic_mqtt_dotdot_on_aox_locator_slot_duration_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  int8_t slot_duration = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXLocator::SlotDuration: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      slot_duration = json_payload.at("value").get<int8_t>();
-    
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    slot_duration
-  );
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Attribute init functions for AoXLocator
-///////////////////////////////////////////////////////////////////////////////
-sl_status_t uic_mqtt_dotdot_aox_locator_attributes_init()
-{
-  std::string base_topic = "ucl/by-unid/+/+/";
-
-  std::string subscription_topic;
-  if(uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/ReportingMode/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_reporting_mode_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/PositionAndOrientationValid/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_position_and_orientation_valid_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/PositionAndOrientation/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_position_and_orientation_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AzimuthMask/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_azimuth_mask_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/ElevationMask/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_elevation_mask_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AllowList/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_allow_list_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AoXMode/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_aox_mode_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AntennaMode/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_antenna_mode_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AntennaArray/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_antenna_array_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/PeriodSamples/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_period_samples_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AngleFiltering/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_angle_filtering_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AngleFilteringWeight/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_angle_filtering_weight_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AngleCorrectionTimeout/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_angle_correction_timeout_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/AngleCorrectionDelay/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_angle_correction_delay_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/CTEMode/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_cte_mode_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/CTESamplingInterval/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_cte_sampling_interval_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/CTELength/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_cte_length_attribute_update);
-  }
-  if(uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback) {
-    subscription_topic = base_topic + "AoXLocator/Attributes/SlotDuration/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_locator_slot_duration_attribute_update);
-  }
-
-  return SL_STATUS_OK;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Callback setters and getters for AoXLocator
-///////////////////////////////////////////////////////////////////////////////
-void uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_reporting_mode_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_elevation_mask_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_aox_mode_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_antenna_mode_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_antenna_array_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_angle_filtering_weight_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_angle_correction_timeout_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_angle_correction_delay_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_cte_mode_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_cte_sampling_interval_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_cte_length_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback_set(const uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_attribute_slot_duration_callback = callback;
-}
-
-// End of supported cluster.
-
-///////////////////////////////////////////////////////////////////////////////
-// Callback pointers for AoXPositionEstimation
-///////////////////////////////////////////////////////////////////////////////
-static uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback_t uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback = nullptr;
-
-///////////////////////////////////////////////////////////////////////////////
-// Attribute update handlers for AoXPositionEstimation
-///////////////////////////////////////////////////////////////////////////////
-static void uic_mqtt_dotdot_on_aox_position_estimation_position_attribute_update(
-  const char *topic,
-  const char *message,
-  const size_t message_length) {
-  if (uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback == nullptr) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string last_item;
-  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
-    sl_log_debug(LOG_TAG,
-                "Error parsing last item from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_attribute_update_type_t update_type;
-  if (last_item == "Reported") {
-    update_type = UCL_REPORTED_UPDATED;
-  } else if (last_item == "Desired") {
-    update_type = UCL_DESIRED_UPDATED;
-  } else {
-    sl_log_debug(LOG_TAG,
-                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  // Empty message means unretained value.
-  bool unretained = false;
-  if (message_length == 0) {
-    unretained = true;
-  }
-
-
-  EstimatedPosition position = {};
-
-  nlohmann::json json_payload;
-  try {
-
-    if (unretained == false) {
-      json_payload = nlohmann::json::parse(std::string(message));
-
-      if (json_payload.find("value") == json_payload.end()) {
-        sl_log_debug(LOG_TAG, "AoXPositionEstimation::Position: Missing attribute element: 'value'\n");
-        return;
-      }
-// Start parsing value
-      position.ApplicationId = json_payload.at("value").at("ApplicationId").get_ptr<const std::string*>()->c_str();
-      position.X = json_payload.at("value").at("X").get<double>();
-      position.Y = json_payload.at("value").at("Y").get<double>();
-      position.Z = json_payload.at("value").at("Z").get<double>();
-      position.DeviationX = json_payload.at("value").at("DeviationX").get<double>();
-      position.DeviationY = json_payload.at("value").at("DeviationY").get<double>();
-      position.DeviationZ = json_payload.at("value").at("DeviationZ").get<double>();
-      position.Sequence = json_payload.at("value").at("Sequence").get<int32_t>();
-
-    // End parsing value
-    }
-
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback(
-    static_cast<dotdot_unid_t>(unid.c_str()),
-    endpoint,
-    unretained,
-    update_type,
-    position
-  );
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Attribute init functions for AoXPositionEstimation
-///////////////////////////////////////////////////////////////////////////////
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_attributes_init()
-{
-  std::string base_topic = "ucl/by-unid/+/+/";
-
-  std::string subscription_topic;
-  if(uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback) {
-    subscription_topic = base_topic + "AoXPositionEstimation/Attributes/Position/#";
-    uic_mqtt_subscribe(subscription_topic.c_str(), &uic_mqtt_dotdot_on_aox_position_estimation_position_attribute_update);
-  }
-
-  return SL_STATUS_OK;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Callback setters and getters for AoXPositionEstimation
-///////////////////////////////////////////////////////////////////////////////
-void uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback_set(const uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_position_estimation_attribute_position_callback = callback;
 }
 
 // End of supported cluster.

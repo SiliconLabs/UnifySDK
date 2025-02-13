@@ -1,4 +1,0 @@
-#!/bin/sh
-if type "systemctl" >/dev/null; then
-    systemctl --system daemon-reload || true
-fi

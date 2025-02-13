@@ -2,7 +2,12 @@
     "name": "Unify Dotdot Shared",
     "version": "UnifyShared-dotdot-v1",
     "override": "addon-override.js",
-    "helpers": ["addon-helper.js", "addon-base-helper.js"],
+    "helpers": ["addon-helper.js"],
+    "options": {
+        "types": {
+            "CSKey":"uint8_t"
+        }
+    },
     "templates": [{
             "path": "zap-types.zapt",
             "name": "ZCL types",

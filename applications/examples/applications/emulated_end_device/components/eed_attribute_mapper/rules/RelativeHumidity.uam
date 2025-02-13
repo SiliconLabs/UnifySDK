@@ -1,0 +1,17 @@
+// ZCL attributes for RelativityHumidity (defined in the XML file called WaterContentMeasurement). It will be in the range [0;10000] representing [0;100]%
+def zbRELATIVITY_HUMIDITY_MEASURED_VALUE        0x04050000
+def zbRELATIVITY_HUMIDITY_MIN_MEASURED_VALUE    0x04050001
+def zbRELATIVITY_HUMIDITY_MAX_MEASURED_VALUE    0x04050002
+def zbRELATIVITY_HUMIDITY_TOLERANCE             0x04050003
+
+scope 0 chain_reaction(0) {
+
+  r'zbRELATIVITY_HUMIDITY_MIN_MEASURED_VALUE =
+    if (e'zbRELATIVITY_HUMIDITY_MIN_MEASURED_VALUE) 0 undefined
+    
+  r'zbRELATIVITY_HUMIDITY_MAX_MEASURED_VALUE =
+    if (e'zbRELATIVITY_HUMIDITY_MAX_MEASURED_VALUE) 10000 undefined
+    
+  r'zbRELATIVITY_HUMIDITY_TOLERANCE =
+    if (e'zbRELATIVITY_HUMIDITY_TOLERANCE) 10 undefined
+}

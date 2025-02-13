@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -107,10 +107,10 @@ $(document).ready(function(){initNavTree('unify__dotdot__attribute__store_8h_sou
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="uic__typedefs_8h.html">uic_typedefs.h</a>&quot;</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="group__unify__dotdot__attribute__store.html#ga6332ab831a42ceb452a175065bbc13ba">   41</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> (*<a class="code hl_typedef" href="group__unify__dotdot__attribute__store.html#ga6332ab831a42ceb452a175065bbc13ba">endpoint_node_fetching_function_t</a>)(</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="code hl_typedef" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> <a class="code hl_variable" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">const</span> <a class="code hl_typedef" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="code hl_typedef" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint_id);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="group__unify__dotdot__attribute__store.html#ga765a48c9ef85bba9d59cd174ccfa3992">   48</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> (*<a class="code hl_typedef" href="group__unify__dotdot__attribute__store.html#ga765a48c9ef85bba9d59cd174ccfa3992">unid_fetching_function_t</a>)(</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <a class="code hl_typedef" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <span class="keywordtype">char</span> *unid, <a class="code hl_typedef" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> *<a class="code hl_variable" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <a class="code hl_typedef" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <span class="keywordtype">char</span> *unid, <a class="code hl_typedef" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> *endpoint_id);</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group__unify__dotdot__attribute__store.html#ga5c78ae816c0163f71f886988d3a5dd5c">   55</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> (*<a class="code hl_typedef" href="group__unify__dotdot__attribute__store.html#ga5c78ae816c0163f71f886988d3a5dd5c">unid_only_fetching_function_t</a>)(</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_typedef" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <span class="keywordtype">char</span> *unid);</div>
@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('unify__dotdot__attribute__store_8h_sou
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keyword">const</span> <a class="code hl_struct" href="structunify__dotdot__attribute__store__configuration__t.html">unify_dotdot_attribute_store_configuration_t</a> *configuration);</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="group__unify__dotdot__attribute__store.html#gad025ca3a67069c6196a3497f00647484">  142</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__unify__dotdot__attribute__store.html#gad025ca3a67069c6196a3497f00647484">unify_dotdot_attribute_store_set_configuration_update_callback</a>(</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <a class="code hl_typedef" href="group__unify__dotdot__attribute__store.html#ga7655dca8025ff18b1996501149701571">configuration_udpate_callback_t</a> <a class="code hl_function" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <a class="code hl_typedef" href="group__unify__dotdot__attribute__store.html#ga7655dca8025ff18b1996501149701571">configuration_udpate_callback_t</a> callback);</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
@@ -180,15 +180,13 @@ $(document).ready(function(){initNavTree('unify__dotdot__attribute__store_8h_sou
 <div class="ttc" id="auic__typedefs_8h_html"><div class="ttname"><a href="uic__typedefs_8h.html">uic_typedefs.h</a></div><div class="ttdoc">Generic type definitions for Unify.</div></div>
 <div class="ttc" id="auic__typedefs_8h_html_aaf28aac2318abc987ffd6f71dcda14c2"><div class="ttname"><a href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a></div><div class="ttdeci">uint8_t dotdot_endpoint_id_t</div><div class="ttdef"><b>Definition:</b> uic_typedefs.h:38</div></div>
 <div class="ttc" id="auic__typedefs_8h_html_afa204c3a4aca223f5345d60519083395"><div class="ttname"><a href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a></div><div class="ttdeci">const char * dotdot_unid_t</div><div class="ttdef"><b>Definition:</b> uic_typedefs.h:39</div></div>
-<div class="ttc" id="azpc__attribute__store__test__helper_8h_html_a352c17f92a89fc8fdf459c2afbb39fd2"><div class="ttname"><a href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a></div><div class="ttdeci">const zwave_endpoint_id_t endpoint_id</div></div>
-<div class="ttc" id="azwave__s0__transport_8c_html_a800e1cc61a01bde0fe6d9a3eddb91b5e"><div class="ttname"><a href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a></div><div class="ttdeci">static void callback(uint8_t status, const zwapi_tx_report_t *tx_info, void *user)</div><div class="ttdoc">Z-Wave Tx Send data callback function.</div><div class="ttdef"><b>Definition:</b> zwave_s0_transport.c:601</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_112d20045a7ca684343196244a8f6d73.html">unify_dotdot_attribute_store</a></li><li class="navelem"><a class="el" href="dir_70074af215e535b9bdd59b93fa37f250.html">include</a></li><li class="navelem"><a class="el" href="unify__dotdot__attribute__store_8h.html">unify_dotdot_attribute_store.h</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:44 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:09 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

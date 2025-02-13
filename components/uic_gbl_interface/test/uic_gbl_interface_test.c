@@ -61,7 +61,6 @@ typedef enum {
   TEST_TRANSFER_GBL_WRITE_LESS_DATA,
   TEST_TRANSFER_GBL_FAIL_IN_BL_RUN,
   TEST_TRANSFER_GBL_FAIL_IN_EOT,
-  TEST_TRANSFER_GBL_SEND_WEIRD_CHAR_IN_WAIT_FOR_C,
 } transfer_test_type_t;
 
 test_state_t state                          = INIT;
@@ -70,10 +69,7 @@ transfer_test_type_t transfer_test          = TEST_TRANSFER_GBL;
 
 static int read_offset        = 0;
 int fdp                       = 0xff;
-int gtransferred              = 0;
-int greceived                 = 0;
 int gbl_remaining_to_transfer = 0;
-int gcount                    = 0;
 int gbl_size                  = 0;
 static int nack_sent          = 0;
 const char *gbl_file          = "zwave_ncp_serial_api_controller_BRD4201A.gbl";
@@ -137,11 +133,6 @@ ssize_t read(int fd, void *buf, size_t count)
     TEST_FAIL();  // This should not happen. As poll() will always return 0 and read() should not be called
     return 0;
   } else if (state == TRANSFER_C) {
-    if (transfer_test == TEST_TRANSFER_GBL_SEND_WEIRD_CHAR_IN_WAIT_FOR_C) {
-      sl_log_warning(LOG_TAG, "sending weird char\n");
-      str[0] = 'W';
-      return count;
-    }
     str[0] = 'C';
     TEST_ASSERT_EQUAL(count, 1);
     state = TRANSFER_IMAGE;
@@ -223,8 +214,7 @@ ssize_t write(int fd, const void *buf, size_t count)
       state = TRANSFER_IMAGE_DONE;
       break;
     case '3':
-      TEST_ASSERT_EQUAL_CHAR(str[1], '\n');  //check there is newline after 3
-      TEST_ASSERT_EQUAL(count, 2);
+      TEST_ASSERT_EQUAL(count, 1);
       if (bootloader_test_type == TEST_RIGHT_BOOTLOADER) {
         sl_log_debug(LOG_TAG, "Writing Gecko Bootloader\n");
         state
@@ -238,13 +228,11 @@ ssize_t write(int fd, const void *buf, size_t count)
       }
       break;
     case '1':
-      TEST_ASSERT_EQUAL_CHAR(str[1], '\n');  //check there is newline after 1
-      TEST_ASSERT_EQUAL(count, 2);
+      TEST_ASSERT_EQUAL(count, 1);
       state = TRANSFER_C;
       break;
     case '2':
-      TEST_ASSERT_EQUAL_CHAR(str[1], '\n');  //check there is newline after 1
-      TEST_ASSERT_EQUAL(count, 2);
+      TEST_ASSERT_EQUAL(count, 1);
       if (transfer_test == TEST_TRANSFER_GBL_FAIL_IN_BL_RUN) {
         return count - 1;
       }
@@ -269,7 +257,7 @@ int poll(struct pollfd fds[], nfds_t nfds, int timeout)
 }
 
 /* Test State machine:
- * uic_gbl_interface_detect_bootloader calls write(3\n)
+ * uic_gbl_interface_detect_bootloader calls write('3')
  *  - write() sets state to WRITING_BOOTLOADER_NAME 
  *  - poll() will return 1 everytime called in WRITING_BOOTLOADER_NAME
  *  - read() will return "Gecko Bootloader v1.5.1" string one chracter each time called
@@ -286,8 +274,8 @@ void test_uic_gbl_interfaces_correct_bootloader_name()
 }
 
 /* Test State machine:
- * uic_gbl_interface_detect_bootloader calls write(3\n)
- *  - write() returns 1 instead of 2 for write("3\n") call 
+ * uic_gbl_interface_detect_bootloader calls write('3')
+ *  - write() returns 0 instead of 1 for write('3') call 
  *  - uic_gbl_interface_detect_bootloader() will return SL_STATUS_NOT_FOUND
  * */
 
@@ -299,7 +287,7 @@ void test_uic_gbl_interfaces_correct_bootloader_name_fail_in_writing_3()
 }
 
 /* Test State machine:
- * uic_gbl_interface_detect_bootloader calls write(3\n)
+ * uic_gbl_interface_detect_bootloader calls write('3')
  *  - write() sets state to WRITING_WRONG_BOOTLOADER_NAME 
  *  - poll() will return 1 everytime called in WRITING_WRONG_BOOTLOADER_NAME
  *  - read() will return "Wrong Bootloader vWhoCares" string one chracter each time called
@@ -325,7 +313,7 @@ void progress_callback(int offset, int size)
 
 /* Test State machine:
  * Do same stuff as test_uic_gbl_interfaces_correct_bootloader_name
- * When uic_gbl_interface_transfer_image() writes "1\n" set state = TRANSFER_C
+ * When uic_gbl_interface_transfer_image() writes '1' set state = TRANSFER_C
  * poll() will return 1 in state TRANSFER_C
  * read() on serial fd will return 'C' in state TRANSFER_C and move to state TRANSFER_IMAGE
  * poll() will return 1 in state TRANSFER_IMAGE
@@ -406,7 +394,7 @@ void test_uic_gbl_interface_transfer_image_c()
 /*
  * Test State machine:
  * Do same stuff as test_uic_gbl_interfaces_correct_bootloader_name
- * When uic_gbl_interface_transfer_image() writes "1\n" set state = TRANSFER_IMAGE
+ * When uic_gbl_interface_transfer_image() writes '1' set state = TRANSFER_IMAGE
  * poll() will return 1 in state TRANSFER_C
  * read() on serial fd will return 'C' in state TRANSFER_C and move to state TRANSFER_IMAGE
  * poll() will return 1 in state TRANSFER_IMAGE
@@ -446,7 +434,7 @@ void test_uic_gbl_interface_transfer_image_wrong_gbl_file()
 /*
  * Test State machine:
  * Do same stuff as test_uic_gbl_interfaces_correct_bootloader_name
- * When uic_gbl_interface_transfer_image() writes "1\n" set state = TRANSFER_C
+ * When uic_gbl_interface_transfer_image() writes '1' set state = TRANSFER_C
  * poll() will return 1 in state TRANSFER_C
  * read() on serial fd will return 'C' in state TRANSFER_C and move to state TRANSFER_IMAGE
  * poll() will return 1 in state TRANSFER_IMAGE
@@ -474,7 +462,7 @@ void test_uic_gbl_interface_transfer_image_fail_in_bootloader_run()
 /*
  * Test State machine:
  * Do same stuff as test_uic_gbl_interfaces_correct_bootloader_name
- * When uic_gbl_interface_transfer_image() writes "1\n" set state = TRANSFER_C
+ * When uic_gbl_interface_transfer_image() writes '1' set state = TRANSFER_C
  * poll() will return 1 in state TRANSFER_C
  * read() on serial fd will return 'C' in state TRANSFER_C and move to state TRANSFER_IMAGE
  * poll() will return 1 in state TRANSFER_IMAGE
@@ -499,20 +487,3 @@ void test_uic_gbl_interface_transfer_image_fail_in_eot()
     uic_gbl_interface_transfer_image(gbl_file, fdp, progress_callback),
     SL_STATUS_FAIL);
 }
-/*
- * Test State machine:
- * Do same stuff as test_uic_gbl_interfaces_correct_bootloader_name
- * When uic_gbl_interface_transfer_image() writes "1\n" set state = TRANSFER_C
- * poll() will return 1 in state TRANSFER_C
- * read() on serial fd will return wrong character 'W' in state TRANSFER_C and move to state TRANSFER_IMAGE
- * uic_gbl_interface_transfer_image() should return SL_STATUS_FAIL here
- */
-void test_uic_gbl_interface_transfer_image_send_weird_char_in_wait_for_c()
-{
-  bootloader_test_type = TEST_RIGHT_BOOTLOADER;
-  transfer_test        = TEST_TRANSFER_GBL_SEND_WEIRD_CHAR_IN_WAIT_FOR_C;
-  TEST_ASSERT_EQUAL(
-    uic_gbl_interface_transfer_image(gbl_file, fdp, progress_callback),
-    SL_STATUS_FAIL);
-}
-

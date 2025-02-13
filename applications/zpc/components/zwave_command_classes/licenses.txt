@@ -1,4 +1,0 @@
- Name           Version  License     
- PyMeta3        0.5.1    MIT License 
- pybars3        0.9.7    UNKNOWN
-

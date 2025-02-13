@@ -39,7 +39,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -97,17 +97,8 @@
 <p>With the Portable runtime, initiating the Unify Network requires minimal effort, whether through <a href="#portable-runtime-gui">a graphical user interface</a> (GUI) or <a href="#portable-runtime-cli">a command-line interface</a> (CLI).</p>
 <section id="unify-portable-runtime-environment">
 <h2>Unify Portable Runtime Environment<a class="headerlink" href="#unify-portable-runtime-environment" title="Permalink to this heading"></a></h2>
-<p><strong>Disclaimer</strong>: Currently the Unify Portable Runtime environment does not supports the following protocol:</p>
-<ul class="simple">
-<li><p>Bluetooth in Multiprotocol</p></li>
-<li><p>Thread in Multiprotocol</p></li>
-<li><p>Matter</p></li>
-</ul>
 <p><strong>Prerequisites</strong>:</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
 <li><p>Docker version &gt; 20.10.12 installed.</p></li>
 <li><p>docker-compose version &gt; 2.5.1</p></li>
 <li><p>x86-64/amd64 CPU architecture.</p></li>
@@ -150,19 +141,14 @@ This should launch up the Unify Portable Runtime GUI.</p>
 <h4>Protocol Selection<a class="headerlink" href="#protocol-selection" title="Permalink to this heading"></a></h4>
 <p>After initial pre-requisites check, the GUI will render protocol selection page.</p>
 <a class="reference internal image-reference" href="../../_images/protocols.jpg"><img alt="../../_images/protocols.jpg" src="../../_images/protocols.jpg" style="width: 200px; height: 250px;" /></a>
-<p><strong>Note</strong>:</p>
-<ul class="simple">
-<li><p>_Zigbee(RCP) is disabled until <em>MultiProtocol</em> is selected and enabled automatically upon enabling <em>MultiProtocol</em></p></li>
-<li><p><em>Zigbee(NCP)</em> and <em>Zigbee(RCP)</em> are mutually exclusive options.</p></li>
-</ul>
-<p>By default only Z-Wave (ZPC) is selected. Select other protocols as needed and
+<p>By default only EED (Emulated End Device) is selected.
 click on <code class="docutils literal notranslate"><span class="pre">Next</span></code>.</p>
 <section id="emulated-end-device-experimental">
 <h5>Emulated End Device (<strong>Experimental</strong>):<a class="headerlink" href="#emulated-end-device-experimental" title="Permalink to this heading"></a></h5>
-<p>Portable runtime supports end device emulation as an experimental feature. The Emulated End Device (EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
-<br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">EED</span> <span class="pre">currently</span> <span class="pre">emulates</span> <span class="pre">a</span> <span class="pre">end</span> <span class="pre">device</span> <span class="pre">that</span> <span class="pre">only</span> <span class="pre">supports</span> <span class="pre">OnOff</span> <span class="pre">cluster,</span> <span class="pre">so</span> <span class="pre">for</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">enable</span> <span class="pre">atleast</span> <span class="pre">select</span> <span class="pre">NAL</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">framework</span> <span class="pre">service</span> <span class="pre">page</span> <span class="pre">that</span> <span class="pre">follows.</span></code></p>
-<p><br>The EED can be enabled in protocol selection page of latest portable runtime GUI.
-<a class="reference internal" href="../../_images/EED-GUI.png"><img alt="../../_images/EED-GUI.png" src="../../_images/EED-GUI.png" style="width: 200px; height: 250px;" /></a></p>
+<p>Portable runtime supports end device emulation as an experimental feature. The Emulated End Device (EED) is experimental emulation of end device to enable UMB demo without any actual Z-Wave devices.
+<br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">For</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">with</span> <span class="pre">only</span> <span class="pre">one</span> <span class="pre">cluster</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">enable</span> <span class="pre">atleast</span> <span class="pre">select</span> <span class="pre">NAL</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">framework</span> <span class="pre">service</span> <span class="pre">page</span> <span class="pre">that</span> <span class="pre">follows.</span></code></p>
+<p><br>The EED can be enabled in protocol selection page of latest portable runtime GUI.</p>
+<a class="reference internal image-reference" href="../../_images/protocols.jpg"><img alt="../../_images/protocols.jpg" src="../../_images/protocols.jpg" style="width: 200px; height: 250px;" /></a>
 </section>
 </section>
 <section id="framework-services-and-application-selection">
@@ -173,7 +159,9 @@ click on <code class="docutils literal notranslate"><span class="pre">Next</span
 </section>
 <section id="configuration">
 <h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h4>
-<p>Select the <code class="docutils literal notranslate"><span class="pre">Device</span></code> for each protocol selected in <span class="xref myst">Protocol Selection page</span>. If Z-Wave was selected then also configure <code class="docutils literal notranslate"><span class="pre">RF</span> <span class="pre">Region</span></code>.</p>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">Device</span></code> for each protocol selected in <span class="xref myst">Protocol Selection page</span>. If Z-Wave was selected then also configure <code class="docutils literal notranslate"><span class="pre">RF</span> <span class="pre">Region</span></code>.
+If EED was selected then select preferred Device Type from the dropdown.
+<br>Select AllClustersDevice for all possible device types supported by EED.</p>
 <a class="reference internal image-reference" href="../../_images/configuration.jpg"><img alt="../../_images/configuration.jpg" src="../../_images/configuration.jpg" style="width: 200px; height: 250px;" /></a>
 <p>If the required device is not yet connected, connect the device to the host and click <code class="docutils literal notranslate"><span class="pre">Discover</span> <span class="pre">Device</span></code> for it to show up in the drop-down list.</p>
 <p>If you wish manual input serial number or have connected the device remotely over ethernet and wish to input its IP address, tick the <code class="docutils literal notranslate"><span class="pre">manual</span></code> check box and type in the serial-no or IP address of the device.</p>
@@ -197,10 +185,6 @@ click on <code class="docutils literal notranslate"><span class="pre">Next</span
 </section>
 </section>
 </section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
-<p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
-</section>
 <section id="portable-runtime-cli">
 <h2>Portable Runtime CLI<a class="headerlink" href="#portable-runtime-cli" title="Permalink to this heading"></a></h2>
 <p>Portable runtime CLI provides extra functionalities such as <a href="flash-application">flash-app</a>, <a href="#read-devicec-specific-key-dsk">read-dsk</a> where as GUI lacks.</p>
@@ -210,7 +194,7 @@ click on <code class="docutils literal notranslate"><span class="pre">Next</span
 connected to your desktop and run the binary <code class="docutils literal notranslate"><span class="pre">unify_portable_cli</span></code>.
 This should set up the whole Unify Framework ecosystem.
 An example of this can be seen below on a Windows machine.</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">someuser</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">portable_runtime_windows</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">unify_portable_cli</span><span class="p">.</span><span class="n">exe</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">someuser</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">portable_runtime_windows</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">unify_portable_cli</span><span class="p">.</span><span class="n">exe</span> <span class="n">-p</span> <span class="s2">&quot;Z-Wave&quot;</span>
 <span class="n">Verifying</span> <span class="n">Docker</span> <span class="n">installation</span>
 <span class="n">devices</span><span class="p">:</span> <span class="n">1</span> <span class="n">device</span> <span class="n">found</span><span class="p">.</span>
 
@@ -235,46 +219,35 @@ be found in the <a class="reference internal" href="../../applications/dev_ui/de
 </section>
 <section id="portable-runtime-combinations">
 <h2>Portable runtime combinations<a class="headerlink" href="#portable-runtime-combinations" title="Permalink to this heading"></a></h2>
-<p>Portable runtime environment now supports more than ZPC. It can run other protocol controllers individually or combination of supported protocol controllers. Also, now the portable runtime environment can be configured to run only the selected framework services.</p>
+<p>Portable runtime environment now supports both ZPC and EED. It can even run EED individually or in combinations of ZPC and supported Applications. Also, now the portable runtime environment can be configured to run only the selected framework services.</p>
 <p><strong>Supported Protocol Controllers</strong>:</p>
 <ul class="simple">
 <li><p>Z-Wave Protocol Controller (<code class="docutils literal notranslate"><span class="pre">ZPC</span></code>)</p></li>
-<li><p>Zigbee Protocol Controller (<code class="docutils literal notranslate"><span class="pre">ZigPC</span></code>)</p></li>
-<li><p>AoX Protocol Controller (<code class="docutils literal notranslate"><span class="pre">AoXPC</span></code>)
-<br>Note: ZigPC can be run in NCP mode or in RCP mode with multiprotocol setup.</p></li>
 </ul>
 <p><strong>Supported Applications</strong>:</p>
 <ul class="simple">
 <li><p>Unify Matter Bridge (<code class="docutils literal notranslate"><span class="pre">UMB</span></code>)</p></li>
-<li><p>Dev-GUI
+<li><p>Dev-GUI</p></li>
+<li><p>Emulated End Device (EED)
 <br>Note: Dev-GUI Application will be always enabled by default.</p></li>
 </ul>
 </section>
 <section id="advanced-options">
 <h2>Advanced options<a class="headerlink" href="#advanced-options" title="Permalink to this heading"></a></h2>
 <p>To start up the environment, run the <em>unify_portable_cli</em> binary file.
-With only one device connected with only ZPC, you can just run the <em>unify_portable_cli</em> application. For multiple connected devices or new protocol combinations, see below.
+For combinations which require no device, you can just run the <em>unify_portabke_cli</em> application. For multiple connected devices or new protocol combinations, see below.
 Once it is running, it will wait for you to press ‘<em>CTRL-C</em>’ to end it.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli</span>
 </pre></div>
 </div>
 <section id="protocol-controller-selection">
 <h3>Protocol Controller Selection<a class="headerlink" href="#protocol-controller-selection" title="Permalink to this heading"></a></h3>
-<p>The list of protocol controller to be run can be configured using this option. If this option is not configured by default only ZPC will be run within portable runtime environment.
-<br>The option takes a list of comma-separated predefined strings representing each supported protocol controller.
+<p>The list of protocol controller to be run can be configured using this option. If this option is not configured by default only EED will be run within portable runtime environment.
 <br>The predefined strings are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Z-Wave</span></code> for ZPC</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Zigbee-NCP</span></code> for ZigPC in NCP mode</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AoX-Bluetooth</span></code> for AoXPC</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiProtocol</span></code> for multiprotocol (currently only supports ZigPC in RCP mode )</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave,Zigbee-NCP&quot;</span>
-</pre></div>
-</div>
-<p>Note: The list can have single string if only one PC is needed.
-Example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Zigbee-NCP&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -295,7 +268,7 @@ The predefined strings are:</p>
 </section>
 <section id="unify-matter-bridge-selection">
 <h3>Unify Matter Bridge selection<a class="headerlink" href="#unify-matter-bridge-selection" title="Permalink to this heading"></a></h3>
-<p>The Unify Matter Bridge is an application that makes legacy devices, such as Z-Wave and Zigbee devices, accessible on a Matter fabric. It does so by acting as an IoT Service in a Unify Framework. Please visit <a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/matter-bridge/readme_overview.html">Unify Matter Bridge</a> for more details.
+<p>The Unify Matter Bridge is a reference application that makes legacy devices, such as Z-Wave Devices accessible on a Matter fabric. It does so by acting as an IoT Service in a Unify Framework. Please visit <a class="reference external" href="https://siliconlabs.github.io/matter/latest/unify/matter-bridge/readme_overview.html">Unify Matter Bridge</a> for more details.
 <br>The Unify Matter Bridge can be configured to be run using <code class="docutils literal notranslate"><span class="pre">-a</span></code> option. This option cannot be used without a protocol selection configuration.
 <br>The option takes a predefined string “UMB” representing Unify Matter Bridge as shown below.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -a &quot;UMB&quot; -p &quot;Z-Wave&quot;</span>
@@ -374,10 +347,15 @@ it will be automatically commissioned by the chip-tool with Matter Fabric Node I
 </section>
 <section id="id1">
 <h3>Emulated End Device (<strong>Experimental</strong>)<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
-<p><br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">EED</span> <span class="pre">currently</span> <span class="pre">emulates</span> <span class="pre">a</span> <span class="pre">end</span> <span class="pre">device</span> <span class="pre">that</span> <span class="pre">only</span> <span class="pre">supports</span> <span class="pre">OnOff</span> <span class="pre">cluster,</span> <span class="pre">so</span> <span class="pre">for</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">at</span> <span class="pre">least</span> <span class="pre">enable</span> <span class="pre">NAL</span> <span class="pre">service</span> <span class="pre">along</span> <span class="pre">with</span> <span class="pre">EED.</span></code>
+<p><br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">For</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">with</span> <span class="pre">only</span> <span class="pre">one</span> <span class="pre">cluster</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">enable</span> <span class="pre">atleast</span> <span class="pre">NAL</span> <span class="pre">along</span> <span class="pre">with</span> <span class="pre">EED</span></code>
 <br>The Emulated End Device(EED) can be configured to be run using <code class="docutils literal notranslate"><span class="pre">-a</span></code> option. This option cannot be used without a protocol selection configuration.
 <br>The option takes a predefined string “EED” representing Emulated End Device as shown below.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -a &quot;EED,UMB&quot; -m &quot;NAL&quot;</span>
+</pre></div>
+</div>
+<p><br>The EED can be configured to bring up with desired device type using <code class="docutils literal notranslate"><span class="pre">--eed_device_type</span></code>. Supported device types: dimmablelight, onofflight, doorlock, onofflightswitch, lightsensor, occupancysensor, onoffpluginunit, dimmablepluginunit, extendedcolorlight, windowcovering, thermostat, flowsensor, allclustersdevice. Use –eed_device_type “allclustersdevice” for all supported clusters.
+<br>If <code class="docutils literal notranslate"><span class="pre">--eed_device_type</span></code> is not configured by default EED is up with onofflight device type.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -a &quot;EED,UMB&quot; -m &quot;NAL&quot; --eed_device_type &quot;allclustesdevice&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -388,14 +366,14 @@ it will be automatically commissioned by the chip-tool with Matter Fabric Node I
 <p>The Z-Wave controller will default to running the <code class="docutils literal notranslate"><span class="pre">EU</span></code> region setting.
 A command-line switch is available to choose a different region from the region list EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.
 Here is an example on how to start it up in the US region.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zwave-rf-region US</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot; --zwave-rf-region US</span>
 </pre></div>
 </div>
 </section>
 <section id="serial-no">
 <h4>Serial no<a class="headerlink" href="#serial-no" title="Permalink to this heading"></a></h4>
 <p>Specifying the device’s serial no. that you would like to use, can be done like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --serial-no 440262195</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot; --serial-no 440262195</span>
 </pre></div>
 </div>
 <p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
@@ -407,7 +385,7 @@ For Debian based distro, it can be installed like so:</p>
 <section id="ip-address">
 <h4>IP address<a class="headerlink" href="#ip-address" title="Permalink to this heading"></a></h4>
 <p>If you have eg. a WSTK board connected to the same network, you can specify its IP address like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --ip-address 10.0.0.12</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot; --ip-address 10.0.0.12</span>
 </pre></div>
 </div>
 </section>
@@ -415,67 +393,7 @@ For Debian based distro, it can be installed like so:</p>
 <h4>Direct device<a class="headerlink" href="#direct-device" title="Permalink to this heading"></a></h4>
 <p>This method is only supported on Linux.
 By specifying the device path, you can map that device into the portable runtime.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>--device<span class="w"> </span>/dev/ttyUSB0.
-</pre></div>
-</div>
-</section>
-</section>
-<section id="zigbee-options">
-<h3>Zigbee Options<a class="headerlink" href="#zigbee-options" title="Permalink to this heading"></a></h3>
-<section id="zigbee-device-serial-no">
-<h4>Zigbee Device Serial no<a class="headerlink" href="#zigbee-device-serial-no" title="Permalink to this heading"></a></h4>
-<p>Specifying the Zigbee device’s serial no. that you would like to use, can be done like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zigpc_serial_no 440262196</span>
-</pre></div>
-</div>
-<p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
-For Debian based distro, it can be installed like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>libqt5network5
-</pre></div>
-</div>
-</section>
-<section id="zigbee-ip-address">
-<h4>Zigbee IP address<a class="headerlink" href="#zigbee-ip-address" title="Permalink to this heading"></a></h4>
-<p>If you have eg. a WSTK board with Zigbee module connected to the same network, you can specify its IP address like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --zigpc-ip-address 10.0.0.13</span>
-</pre></div>
-</div>
-</section>
-<section id="id2">
-<h4>Direct device<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
-<p>This method is only supported on Linux.
-By specifying the device path, you can map that Zigbee NCP device into the portable runtime.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>--zigpc-device<span class="w"> </span>/dev/ttyUSB1.
-</pre></div>
-</div>
-</section>
-</section>
-<section id="aox-options">
-<h3>AoX Options<a class="headerlink" href="#aox-options" title="Permalink to this heading"></a></h3>
-<section id="aox-device-serial-no">
-<h4>AoX Device Serial no<a class="headerlink" href="#aox-device-serial-no" title="Permalink to this heading"></a></h4>
-<p>Specifying the AoX BT device’s serial no. that you would like to use, can be done like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --aoxpc_serial_no 440262196</span>
-</pre></div>
-</div>
-<p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
-For Debian based distro, it can be installed like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>libqt5network5
-</pre></div>
-</div>
-</section>
-<section id="aox-ip-address">
-<h4>AoX IP address<a class="headerlink" href="#aox-ip-address" title="Permalink to this heading"></a></h4>
-<p>If you have eg. a WSTK board with AoX BT module connected to the same network, you can specify its IP address like so:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli --aoxpc-ip-address 10.0.0.13</span>
-</pre></div>
-</div>
-</section>
-<section id="id3">
-<h4>Direct device<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
-<p>This method is only supported on Linux.
-By specifying the device path, you can map that AoX BT NCP device into the portable runtime.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>--aoxpc-device<span class="w"> </span>/dev/ttyUSB1.
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli<span class="w"> </span>p<span class="w"> </span><span class="s2">&quot;Z-Wave&quot;</span><span class="w"> </span>--device<span class="w"> </span>/dev/ttyUSB0.
 </pre></div>
 </div>
 </section>
@@ -489,7 +407,7 @@ This can be done by providing the path to a serial device, a serial number or an
 identify the controller device based on its application name. If that fails,
 you will be asked to select the controller from a the list of the connected
 devices.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p Z-Wave -m UPVL,GMS,NAL</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot; -m &quot;UPVL,GMS,NAL&quot;</span>
 <span class="go">Verifying Docker installation</span>
 <span class="go">devices: 2 devices found.</span>
 <span class="go">0: 440297793, J-Link EnergyMicro</span>
@@ -511,7 +429,7 @@ devices.</p>
 </div>
 <p>For <code class="docutils literal notranslate"><span class="pre">rest</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">protocols</span></code>:
 <br>If you do not specify a serial number, you will be asked to select the controller from a the list of the connected devices.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p Zigbee-NCP -m UPVL,GMS,NAL</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">unify_portable_cli -p &quot;Z-Wave&quot; -m &quot;UPVL,GMS,NAL&quot;</span>
 <span class="go">Verifying Docker installation</span>
 <span class="go">devices: 2 devices found.</span>
 <span class="go">0: 440297793, J-Link EnergyMicro</span>
@@ -526,7 +444,7 @@ devices.</p>
 <span class="go">         0 | 440297793  | 224710182 | ?     | unknown                      </span>
 <span class="go">         1 | 440206482  | 204705627 | ?     | unknown                      </span>
 
-<span class="go">Please select a device for Zigbee-NCP.</span>
+<span class="go">Please select a device for Z-Wave.</span>
 <span class="go">Note that the device&#39;s number may change when multiple boards are connected!</span>
 <span class="go">Type 0, 1, ... or x to cancel:</span>
 </pre></div>
@@ -534,8 +452,8 @@ devices.</p>
 <p><strong>Note</strong>: When multiple protocols are selected and multiple devices are connected, after a device selected on above prompt for a protocol, it will not be displayed again in the next prompt for another protocol to avoid conflict between two PC configuration.</p>
 </section>
 </section>
-<section id="id4">
-<h2>Troubleshooting<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
 </section>
 <section id="additional-subcommands">
@@ -589,6 +507,11 @@ be invoked as follows:</p>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="id2">
+<h2>Troubleshooting<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>In case you want to use different version of UnifySDK or UMB, replace desired packages in portable_runtime_<OS>/resources/docker-files and for commander replace resources/commander such that commander.exe and silink.exe path looks like ./resources/commander/commander.exe and ./resources/commander/silink.exe.</p>
+<p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
 </section>
 </section>
 

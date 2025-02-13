@@ -1,5 +1,7 @@
 var group__unify__attribute__transitions =
 [
+    [ "attribute_start_cyclic_transition", "group__unify__attribute__transitions.html#ga1baf9d8ffd79d34902d987fec5386fca", null ],
+    [ "attribute_start_fixed_cyclic_transition", "group__unify__attribute__transitions.html#ga2f333bf69af73430a5bcc1a3c6dc6218", null ],
     [ "attribute_start_fixed_transition", "group__unify__attribute__transitions.html#gaaf55f0b13ba8d0dc55af81ab0aafb82b", null ],
     [ "attribute_start_transition", "group__unify__attribute__transitions.html#ga05d538a76f3385df16b6c6e1d47dc25d", null ],
     [ "attribute_stop_transition", "group__unify__attribute__transitions.html#gac43c2f6e881f177e600145f72dc822bc", null ],

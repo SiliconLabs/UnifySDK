@@ -357,7 +357,11 @@ function(rust_is_configured_for_deb CARGO_META_PACKAGE CONFIGURED)
   endif()
 endfunction()
 
-get_target_triple(CARGO_TARGET_TRIPLE)
+# Allow overide from env (the above detection may not be reliable or scale)
+if(NOT DEFINED CARGO_TARGET_TRIPLE)
+  get_target_triple(CARGO_TARGET_TRIPLE)
+endif()
+
 set(DIR_OF_CARGO_META
     ${CMAKE_CURRENT_LIST_DIR}
     CACHE INTERNAL "DIR_OF_CARGO_META")
@@ -369,7 +373,9 @@ function(rust_workspace_metadata CARGO_MANIFEST_DIR CARGO_METADATA)
         ${CARGO_EXECUTABLE} "metadata" "--manifest-path"
         "${CARGO_MANIFEST_DIR}/Cargo.toml" "--format-version" "1"
         "--filter-platform" "${CARGO_TARGET_TRIPLE}"
-      OUTPUT_VARIABLE METADATA COMMAND_ERROR_IS_FATAL ANY)
+      OUTPUT_VARIABLE METADATA COMMAND_ERROR_IS_FATAL ANY
+      COMMAND_ECHO STDERR
+)
     set(${CARGO_METADATA}
         ${METADATA}
         PARENT_SCOPE)

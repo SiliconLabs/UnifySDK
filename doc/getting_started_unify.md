@@ -2,16 +2,11 @@
 
 ## Introduction
 
-Unify SDK is a software framework that simplifies the developer experience, removing difficult parts of network control and network management as it relates to gateway and hub development in IoT applications. It can also provide Matter bridge functionality to other protocols that do not natively run matter.
+Unify SDK is a software framework that simplifies the developer experience, removing difficult parts of network control and network management as it relates to gateway and hub development in IoT applications. It is extended to support Z-Wave protocol using [Z-Wave Protocol Controller](https://github.com/SiliconLabsSoftware/z-wave-protocol-controller). [Matter Bridge](https://github.com/SiliconLabs/unify-matter-bridge) serves as a reference IoT service, providing the capability to connect Matter to protocols that do not natively run .
 
 ## Prerequisites
 
 - An RPi4 preinstalled with [Raspberry Pi OS Linux Version 12, Bookworm 64-bit](https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2024-03-15/)
-
-- At least one of the following, supported wireless radios is connected to the RPi4 via USB:
-  - [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
-  - [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG2X/EFR32xG22 running NCP for Zigbee or RCP for Multiprotocol
-  - [Bluetooth module](https://www.silabs.com/wireless/bluetooth) EFR32xG22 running NCP Firmware for AoXPC
 
 
 The following are the ways to get started with Unify..

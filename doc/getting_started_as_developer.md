@@ -26,6 +26,9 @@ The IoT or cloud connector must use UCL (MQTT) to communicate with the other com
 
 Also see <a href="../reference_ucl_mqtt/index.html">UCL MQTT API</a>
 
+## Developing EED
+See [Building EED](../applications/examples/applications/emulated_end_device/readme_developer.md) on how to build EED. The section also has some useful notes for developers interested in updating EED.
+
 ## Developing protocol controllers
 
 See [How to Develop a Protocol Controller](how_to_develop_a_protocol_controller.rst) 
@@ -33,30 +36,7 @@ See [How to Develop a Protocol Controller](how_to_develop_a_protocol_controller.
 The attribute mapper helps to translate protocol commands to UCL MQTT messages.
 See [How to write UAM files](how_to_write_uam_files.md)
 
-## Extend UCL clusters
+## Extend UCL clusters to non-zigbee controllers
 
-See [How to write a new Cluster](../applications/zpc/how_to_interact_with_clusters.rst)
-
-It might be needed for non-zigbee controllers if some description are missing.
-
-## Overview of relations among Unify Applications
-
-The Unify Framework consists of several applications including Protocol Controllers, IoT
-Services (e.g. Developer GUI, UPTICap) and multiple application services that
-facilitate various functionalities such as SmartStart Provisioning, Group
-Management, Name and Location Service and OTA Image Provider.
-
-The following table presents the relationship amongst Unify Framework applications and
-the Unify Protocol Controllers. If a given component is supported via a
-Protocol Controller, it will be marked as [x].
-
-|                                                                                  | [ZPC](../applications/zpc/readme_user.html) | [ZigPC](../applications/zigpc/readme_user.html) | [AoXPC](../applications/aox/applications/aoxpc/readme_user.html) |
-| -------------------------------------------------------------------------------- | :------------------------------------------ | :---------------------------------------------- | :--------------------------------------------------------------- |
-| [UPVL](../applications/upvl/readme_user.html)                                    | [x]                                         | [x]                                             |                                                                  |
-| [GMS](../applications/gms/readme_user.html)                                      | [x]                                         | [x]                                             |                                                                  |
-| [NAL](../applications/nal/readme_user.html)                                      | [x]                                         | [x]                                             | [x]                                                              |
-| [OTA Image Provider](../applications/image_provider/readme_user.html)            | [x]                                         | [x]                                             |                                                                  |
-| [Dev GUI](../applications/dev_ui/dev_gui/readme_user.html)                       | [x]                                         | [x]                                             | [x]                                                              |
-| [UPTICap](../applications/upti_cap/readme_user.html)                             | [x]                                         | [x]                                             |                                                                  |
-| [UPTIWriter](../applications/upti_writer/readme_user.html)                       | [x]                                         | [x]                                             |                                                                  |
-| [AoX Positioning](../applications/aox/applications/positioning/readme_user.html) |                                             |                                                 | [x]                                                              |
+Refer related chapter in [Z-Wave-Protocol-Controller documentation](https://siliconlabssoftware.github.io/z-wave-protocol-controller)
+ 

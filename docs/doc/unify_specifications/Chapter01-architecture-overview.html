@@ -41,7 +41,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -71,17 +71,16 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. Unify Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave and ZigBee</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter08-binding.html">8. Binding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter09-descriptor-cluster.html">9. Descriptor Cluster ( Experimental )</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter10-aox-application.html">10. AoX Application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter11-name-and-location-service.html">11. Name and Location Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter13-system-metrics.html">13. System Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter14-unify-controller-language-data-model.html">14. Unify Controller Language Data Model ( Experimental )</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter11-unify-applications-monitoring.html">11. Unify Applications Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter12-system-metrics.html">12. System Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter13-unify-controller-language-data-model.html">13. Unify Controller Language Data Model ( Experimental )</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
@@ -252,7 +251,6 @@ is named after the expected use case, which is a cloud-based remote control.
 Examples of IoT Services include:</p>
 <ul>
 <li><p>AWS IoT</p></li>
-<li><p>HomeAssistant</p></li>
 <li><p>Azure IoT</p></li>
 <li><p>Rules Engines (even if running locally)</p></li>
 <li><p>Web UI for local control</p></li>
@@ -262,11 +260,7 @@ Examples of IoT Services include:</p>
 through Unify. They also translate from UCL to the native language of
 the radio. Examples include the following:</p>
 <ul>
-<li><p>Zigbee Protocol Controller owning an NCP</p></li>
 <li><p>Z-Wave Protocol Controller owning a SerialAPI</p></li>
-<li><p>BLE Protocol Controller</p></li>
-<li><p>BLE-Mesh Protocol Controller</p></li>
-<li><p>Silicon Labs Connect Stack Protocol Controller</p></li>
 </ul>
 </li>
 <li><p>A singleton Resource Directory MQTT client, responsible for aggregating
@@ -295,14 +289,12 @@ as shown in <a class="reference internal" href="#figure-uic-system-diagram"><spa
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#figure-uic-system-diagram"><span class="std std-numref">Figure 1.3</span></a> shows the overall Unify architecture with
-MQTT as an integral part. IoT Services (blue boxes) for AWS IoT, Azure,
-HomeAssistant and so on are shown. Protocol Controllers (green boxes) for all
-Silicon Labs PHYs are possible, with a random selection of Z-Wave, Zigbee,
-and Bluetooth shown. All IoT Services and Protocol Controllers are
-connected by a common Unify abstraction layer consisting of an MQTT broker
-transporting the Unify Controller Language. Clients can roughly be grouped
-into IoT Services, local middlewares, Protocol Controllers, and a Singleton
-Resource Directory.</p>
+MQTT as an integral part. IoT Services (blue boxes) for AWS IoT, Azure and so
+on are shown. Z-Wave Protocol Controllers (green boxes) for Silicon Labs PHYs
+are shown. All IoT Services and Protocol Controllers are connected by a common
+Unify abstraction layer consisting of an MQTT broker transporting the Unify
+Controller Language. Clients can roughly be grouped into IoT Services, local
+middlewares, Protocol Controllers, and a Singleton Resource Directory.</p>
 <p>The Resource Directory is also an MQTT client.</p>
 <p>The MQTT server should run as a separate Linux process.</p>
 <p>The Resource Directory facilitates device discovery and communicates with each
@@ -336,9 +328,9 @@ happen either locally or in the cloud.</p>
 <p><span class="caption-number">Figure 1.4 </span><span class="caption-text">Block UG design</span><a class="headerlink" href="#figure-slide20-lego-block-ug-design" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#figure-slide20-lego-block-ug-design"><span class="std std-numref">Figure 1.4</span></a> shows an example of 3
-single-Protocol Controller Unify-based gateways, that when connected to the
-same IP backbone can unify Zigbee, Z-Wave and the AWS IoT cloud service.
+<p><a class="reference internal" href="#figure-slide20-lego-block-ug-design"><span class="std std-numref">Figure 1.4</span></a> shows an example of
+2 single-Protocol Controller Unify-based gateways, that when connected to
+the same IP backbone can unify Z-Wave and the AWS IoT cloud service.
 Each gateway is represented by a green, blue or yellow rectangle, showing
 which connectors it has attached.</p>
 </section>
@@ -371,7 +363,7 @@ encryption to provide adequate security (e.g., MQTT over TLS or WebSocket).</p>
 translation to and from as many PHYs and cloud services as possible. The UCL
 serves as an abstraction layer between the PHY-specific data models and the
 models used in various Unify services for controlling IoT devices.</p>
-<p>See <a class="reference internal" href="Chapter14-unify-controller-language-data-model.html#unify-specifications-chapter-unify-controller-language-data-model"><span class="std std-ref">Unify Controller Language Data Model (Experimental)</span></a>
+<p>See <a class="reference internal" href="Chapter13-unify-controller-language-data-model.html#unify-specifications-chapter-unify-controller-language-data-model"><span class="std std-ref">Unify Controller Language Data Model (Experimental)</span></a>
 for details.</p>
 </section>
 <section id="unid-unified-node-ids">
@@ -408,29 +400,14 @@ UNIDs:</p>
 <td><p>“zw-DEADBEEF-0001” for NodeID 01 in HomeID 0xDEADBEEF.
 NodeID is mutable on network reset.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Zigbee</p></td>
-<td><p>“zb”</p></td>
-<td><p>“zb-DEADBEEFC0FFEE12” for node with EUI-64 DEADBEEFC0FFEE12.</p></td>
-</tr>
-<tr class="row-even"><td><p>BLE</p></td>
-<td><p>“ble-sr”</p></td>
-<td><p>Static random addresses. “ble-sr-112233445566” for a BLE device with
-random identifier 11:22:33:44:55:66.</p></td>
-</tr>
-<tr class="row-odd"><td><p>BLE</p></td>
-<td><p>“ble-pd”</p></td>
-<td><p>Public device addresses. “ble-sr-112233445566” for a BLE device with
-public address 11:22:33:44:55:66.</p></td>
-</tr>
 </tbody>
 </table>
-<p>For example, Z-Wave UNIDs could be prefixed “zw”, zigbee with “zb”, and so on.
-The prefix should be short (max 8-10 characters) to keep MQTT topics short.</p>
-<p>The UNID PAN parts can be derived from a unique identifier, such as the EUI-64 of a
-Bluetooth LE or Zigbee device. For devices without a permanent unique
-identifier, something like the currently assigned address on the PAN can
-be used, for example a combination of HomeID and
-NodeID in Z-Wave.</p>
+<p>For example, Z-Wave UNIDs could be prefixed “zw”. The prefix should be short
+(max 8-10 characters) to keep MQTT topics short.</p>
+<p>The UNID PAN parts can be derived from a unique identifier, such as the EUI-64
+of a Z-Wave device. For devices without a permanent unique identifier, something
+like the currently assigned address on the PAN can be used, for example a
+combination of HomeID and NodeID in Z-Wave.</p>
 <p>Mutable UNID PAN parts may be used instead of permanent identifiers if they
 allow simpler diagnostics and troubleshooting of the system. This may be
 the case when choosing Z-Wave HomeID/NodeIDs instead of S2 DSKs. The
@@ -501,14 +478,6 @@ functionality on any and all Door Locks in the network.</p>
                                       its own UNID as sub-topic.
                                       Subscribe to ucl/by-devicetype/&lt;DEVICETYPE&gt;/+ to receive a message from
                                       each UNID in of that type.
-
-  by-homeassistant-type/
-    &lt;HOMEASSISTANT_TYPE&gt;              e.g. &quot;binary_sensor&quot; or &quot;camera&quot;
-      &lt;UNID&gt;                          Subscribe to ucl/by-type/by-homeassistant-type/+ to receive a message
-                                      for each HomeAssistant type in the network
-                                      Subscribe to ucl/by-type/by-homeassistant-type/&lt;HOMEASSISTANT_TYPE&gt;/+ to
-                                      receive messages from each UNID of that type
-
   by-group/                           For multicast groups
     &lt;GroupID&gt;/                        A unique, numeric group ID
                                       e.g. 1, 2, ... 65535.
@@ -580,8 +549,6 @@ functionality on any and all Door Locks in the network.</p>
 <p>The &lt;DEVICETYPE&gt; MUST adequately describe the Device Types (i.e.,
 the practical functions) of all the device types found in all PANs
 supported by Silicon Labs.</p>
-<p>The &lt;HOMEASSISTANT_TYPE&gt; MUST be a strict superset of the
-<a class="reference external" href="https://www.home-assistant.io/docs/mqtt/discovery/">MQTT discovery types defined in the HomeAssistant open-source project</a>.</p>
 <p>The subscribers to the ucl/_well_known topic/+ MUST receive a
 <a class="reference external" href="https://www.w3schools.com/js/js_json_datatypes.asp">JSON-encoded</a>
 <a class="reference external" href="https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/">Retained Message</a>
@@ -663,10 +630,9 @@ The Protocol Controller subscribes for example to an MQTT topic:</p>
 <p>&gt; <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/#</span></code></p>
 <p>When packets are received, the Protocol Controller must drop all messages where
 the UNID prefix does not match the manually-configured prefix of the Protocol
-Controller. For example, the Zigbee Protocol Controller may be manually
-configured to handle all UNIDs starting with, for example, <cite>zb-example-pc-*</cite> prefix, and
-the BLE Protocol Controller might be configured for <cite>ble001-*</cite>. They will each
-drop everything with UNID not matching that prefix.</p>
+Controller. For example, the Z-Wave Protocol Controller may be manually
+configured to handle all UNIDs starting with, for example, <cite>zw-example-pc-*</cite> prefix.
+They will each drop everything with UNID not matching that prefix.</p>
 <p>A Protocol Controller MUST publish a message to the topic
 <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/State</span></code> to notify the IoT Services of the new node.</p>
 <p>It MUST also process and translate all commands from a topic
@@ -902,7 +868,7 @@ respective topics
 Protocol Controller. When the message has been application layer acknowledged
 by the PAN Node (“the garage door is now fully lowered and closed”), another
 update must be published, this time changing the “reported” state. of
-the Cluster attrbutes. The Supervision Command Class can be used to
+the Cluster attributes. The Supervision Command Class can be used to
 obtain application level confirmations in Z-Wave.</p>
 </section>
 </section>
@@ -952,7 +918,7 @@ in the Unify design, if the PAN nodes support it.</p>
 are received. Rules Engines should be distributed, in the sense that
 multiple IoT Services should be able to set up rules without conflicting
 with each other. For this, a single Rules Engine Module should be provided
-that manages a namespace likg ucl/rules_engine/ and providing an API for
+that manages a namespace like ucl/rules_engine/ and providing an API for
 setting, getting and modifying if-then-else style rules.</p>
 <p>The Rules Engine SHOULD be implemented as a separate MQTT client to keep the
 Broker simple.</p>
@@ -1007,37 +973,37 @@ delays when translating and communicating with the PHY Radio.</p>
 </section>
 <section id="examples-and-use-cases">
 <h2><span class="section-number">1.24. </span>Examples and Use Cases<a class="headerlink" href="#examples-and-use-cases" title="Permalink to this heading"></a></h2>
-<section id="turning-on-a-zigbee-light-bulb-from-aws-iot">
-<h3><span class="section-number">1.24.1. </span>Turning On a Zigbee Light Bulb from AWS IoT<a class="headerlink" href="#turning-on-a-zigbee-light-bulb-from-aws-iot" title="Permalink to this heading"></a></h3>
-<p>Assume the Zigbee Protocol Controller has the prefix “zb” and the bulb has
-EUI-64 0x9876543210abcdef. The Protocol Controller has assigned the UNID
-“zb-9876543210abcdef” to the bulb.</p>
+<section id="turning-on-a-z-wave-light-bulb-from-aws-iot">
+<h3><span class="section-number">1.24.1. </span>Turning On a Z-Wave Light Bulb from AWS IoT<a class="headerlink" href="#turning-on-a-z-wave-light-bulb-from-aws-iot" title="Permalink to this heading"></a></h3>
+<p>Assume the Z-Wave Protocol Controller has the prefix “zw” and the bulb has
+NodeID 01 in HomeID 0xC87E6FB8. The Protocol Controller has assigned the UNID
+“zw-C87E6FB8-0001” to the bulb.</p>
 <ol class="arabic simple">
 <li><p>Unify GW starts up.</p></li>
-<li><p>Zigbee Protocol Controller initializes, connects to the NCP, and discovers the
-Zigbee PAN devices. It also probes which clusters the light bulb supports. For
+<li><p>Z-Wave Protocol Controller initializes, connects to the NCP, and discovers the
+Z-Wave PAN devices. It also probes which clusters the light bulb supports. For
 simplicity, assume that only the Level and basic clusters are supported.
 The Level cluster is trivially translated to UCL as Level cluster (same data
 model in UCL and Zigbee makes this easy). The Protocol Controller publishes
 the following Retained Message to allow service discovery:
-<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zb-9876543210abcdef/ep0/Level/SupportedCommands</span></code> payload:
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zw-C87E6FB8-0001/ep0/Level/SupportedCommands</span></code> payload:
 <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">&quot;value&quot;</span> <span class="pre">[&quot;MoveToLevel&quot;,</span> <span class="pre">&quot;Move&quot;,</span> <span class="pre">&quot;Step&quot;,</span> <span class="pre">&quot;Stop&quot;,</span> <span class="pre">&quot;MoveToLevelWwithOnOff&quot;]</span> <span class="pre">}</span></code>.</p></li>
-<li><p>The Zigbee Protocol Controller subscribes to the following topics so it
+<li><p>The Z-Wave Protocol Controller subscribes to the following topics so it
 can execute commands in the cluster:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zb-9876543210abcdef/ep0/OnOff/Commands/WriteAttributes</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zb-9876543210abcdef/ep0/OnOff/Commands/ForceReadAttributes</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zw-C87E6FB8-0001/ep0/OnOff/Commands/WriteAttributes</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zw-C87E6FB8-0001/ep0/OnOff/Commands/ForceReadAttributes</span></code></p></li>
 <li><p>and one for each command in the LevelCluster: …/Move, …/MoveToLevelWithOnOff) etc.</p></li>
 </ul>
 </li>
 <li><p>The AWS-IoT IoT Service wants to display all devices that can be dimmed and
 turn on the first one. It connects to the Unify Broker and subscribes to
 ucl/by-unid/+/+/LevelCluster and receives the message described above. It now
-knows that UNID zb-9876543210abcdef Supports the Level cluster and can be
+knows that UNID zw-C87E6FB8-0001 Supports the Level cluster and can be
 dimmed.</p></li>
 <li><p>To learn the type IoT device, the AWS-IoT IoT Service subscribes to
 ucl/by-type/dimmable_light/+ and receives a message back on the topic
-ucl/by-type/dimmable_light/zb-9876543210abcdef and knows that this is indeed
+ucl/by-type/dimmable_light/zw-C87E6FB8-0001 and knows that this is indeed
 a light.</p></li>
 <li><p>The home owner’s Alexa Smartphone App now displays the light bulb
 complete with a colorful bulb icon. The home owner
@@ -1045,9 +1011,9 @@ clicks the “ON” button.</p></li>
 <li><p>In a matter of milliseconds, the AWS-IoT IoT Service receives a command from
 the cloud to turn on the bulb. The IoT Service quickly translates this into
 UCL and publishes to the topic
-<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zb-9876543210abcdef/ep0/Level/Commands/MoveToLevelWithOnOff</span></code>
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/zw-C87E6FB8-0001/ep0/Level/Commands/MoveToLevelWithOnOff</span></code>
 with a payload = <code class="docutils literal notranslate"><span class="pre">{&quot;Level&quot;:&quot;100&quot;,</span> <span class="pre">&quot;TransitionTime&quot;</span> <span class="pre">:</span> <span class="pre">5,</span> <span class="pre">...}</span></code></p></li>
-<li><p>The Zigbee Protocol Controller receives this message, matches the prefix and
+<li><p>The Z-Wave Protocol Controller receives this message, matches the prefix and
 translates the UCL message to a sequence of Zigbee Cluster Library Commands
 (maybe just one command) and sends those out over the NCP.</p></li>
 <li><p>The bulb turns on.</p></li>

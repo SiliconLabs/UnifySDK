@@ -33,7 +33,8 @@ set(CPACK_SOURCE_IGNORE_FILES
     "${PROJECT_SOURCE_DIR}/scripts/ci"
     "${PROJECT_SOURCE_DIR}/scripts/internal"
     ".*\\\\.internal\\\\.md"
-    "${PROJECT_SOURCE_DIR}/applications/examples/applications/example_mqtt_device")
+    "${PROJECT_SOURCE_DIR}/docker/Dockerfile-nomad"
+    "${PROJECT_SOURCE_DIR}/portable_runtime")
 
 # Generate Debian package
 set(CPACK_GENERATOR "DEB")

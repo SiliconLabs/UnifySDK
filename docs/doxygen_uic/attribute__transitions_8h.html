@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Unify Framework Lib<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Unify Framework Lib<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -102,6 +102,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaaf55f0b13ba8d0dc55af81ab0aafb82b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__attribute__transitions.html#gaaf55f0b13ba8d0dc55af81ab0aafb82b">attribute_start_fixed_transition</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_type, float target_value, float step, <a class="el" href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a> step_interval)</td></tr>
 <tr class="memdesc:gaaf55f0b13ba8d0dc55af81ab0aafb82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start attribute transition with a fixed step, target value and interval.  <a href="group__unify__attribute__transitions.html#gaaf55f0b13ba8d0dc55af81ab0aafb82b">More...</a><br /></td></tr>
 <tr class="separator:gaaf55f0b13ba8d0dc55af81ab0aafb82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f333bf69af73430a5bcc1a3c6dc6218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__attribute__transitions.html#ga2f333bf69af73430a5bcc1a3c6dc6218">attribute_start_fixed_cyclic_transition</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_type, float target_value, float step, float min_value, float max_value, <a class="el" href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a> step_interval)</td></tr>
+<tr class="memdesc:ga2f333bf69af73430a5bcc1a3c6dc6218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start attribute transition with a fixed step within cyclic range, target value and interval.  <a href="group__unify__attribute__transitions.html#ga2f333bf69af73430a5bcc1a3c6dc6218">More...</a><br /></td></tr>
+<tr class="separator:ga2f333bf69af73430a5bcc1a3c6dc6218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1baf9d8ffd79d34902d987fec5386fca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__attribute__transitions.html#ga1baf9d8ffd79d34902d987fec5386fca">attribute_start_cyclic_transition</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_type, float step, float min_value, float max_value, <a class="el" href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a> step_interval)</td></tr>
+<tr class="memdesc:ga1baf9d8ffd79d34902d987fec5386fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start attribute transition with a continuous step within cyclic range and interval.  <a href="group__unify__attribute__transitions.html#ga1baf9d8ffd79d34902d987fec5386fca">More...</a><br /></td></tr>
+<tr class="separator:ga1baf9d8ffd79d34902d987fec5386fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac43c2f6e881f177e600145f72dc822bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__attribute__transitions.html#gac43c2f6e881f177e600145f72dc822bc">attribute_stop_transition</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:gac43c2f6e881f177e600145f72dc822bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops an ongoing transition for an attribute.  <a href="group__unify__attribute__transitions.html#gac43c2f6e881f177e600145f72dc822bc">More...</a><br /></td></tr>
 <tr class="separator:gac43c2f6e881f177e600145f72dc822bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,7 +130,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_7ae99e22e7f2630b0926b8e8347da62e.html">uic_attribute_utils</a></li><li class="navelem"><a class="el" href="dir_33d00ec0ddc6a53e379204f6ad540127.html">include</a></li><li class="navelem"><a class="el" href="attribute__transitions_8h.html">attribute_transitions.h</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:43 for Unify Framework Lib by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:09 for Unify Framework Lib by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

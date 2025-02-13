@@ -11,9 +11,6 @@
  *
  *****************************************************************************/
 
-{{#zcl_enums}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_enums}}
-{{#zcl_bitmaps}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_bitmaps}}
-
 // clang-format off
 {{zap_header}}
 // clang-format on
@@ -109,7 +106,7 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 } }{{listComma this}}
   {{/zcl_bitmap_items}}
 };
-const dotdot_bitmap {{label}}("{{label}}", "{{zcl_type_map_get_item label}}", {{label}}_bitmap_data);
+const dotdot_bitmap {{label}}("{{label}}", "{{>zcl_type type=label size=size}}", {{label}}_bitmap_data);
 {{/zcl_bitmaps}}
 
 #endif  //DOTDOT_MQTT_HPP

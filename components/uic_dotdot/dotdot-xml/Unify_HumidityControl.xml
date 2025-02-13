@@ -107,7 +107,7 @@ This is a manufacturer specific cluster.
           <field name="Mode" type="ModeType" />
         </fields>
       </command>
-      <command id="01" name="SetpointSet">
+      <command id="02" name="SetpointSet">
         <fields>
           <field name="Type" type="SetpointType" />
           <field name="Precision" type="uint8" />

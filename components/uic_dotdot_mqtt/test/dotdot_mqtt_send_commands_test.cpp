@@ -31,55 +31,6 @@ void setUp()
   mqtt_test_helper_init();
 }
 
-void test_aox_locator_publish_angle_correction_command()
-{
-  const dotdot_unid_t destination_unid      = "ble-1334";
-  dotdot_endpoint_id_t destination_endpoint = 99;
-
-  uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t fields;
-  fields.tag_unid            = "ble-tag-12345";
-  fields.direction.Azimuth   = 34.2354563;
-  fields.direction.Elevation = 3.00078;
-  fields.direction.Distance  = 45.02;
-  fields.deviation.Azimuth   = 0.001;
-  fields.deviation.Elevation = 0.002;
-  fields.deviation.Distance  = 0.00015;
-  fields.sequence            = -10;
-
-  // Ask DotDot MQTT to publish.
-  uic_mqtt_dotdot_aox_locator_publish_angle_correction_command(
-    destination_unid,
-    destination_endpoint,
-    &fields);
-
-  // Verify that it did its job:
-  const char *expected_topic
-    = "ucl/by-unid/ble-1334/ep99/AoXLocator/Commands/AngleCorrection";
-
-  char published_message[1000] = {};
-  TEST_ASSERT_NOT_NULL(
-    mqtt_test_helper_pop_publish(expected_topic, published_message));
-
-  const char expected_published_message[] = R"(
-    {
-      "Deviation": {
-        "Azimuth": 0.001,
-        "Distance": 0.00015,
-        "Elevation": 0.002
-      },
-      "Direction": {
-        "Azimuth": 34.2354563,
-        "Distance": 45.02,
-        "Elevation": 3.00078
-      },
-      "Sequence": -10,
-      "TagUnid": "ble-tag-12345"
-    }
-    )";
-
-  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
-}
-
 void test_on_off_publish_on_off_command()
 {
   const dotdot_unid_t destination_unid      = "zw-cafecafe-1010";

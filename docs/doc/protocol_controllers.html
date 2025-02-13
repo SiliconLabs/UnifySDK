@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -60,10 +60,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Protocol Controllers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="protocol/zwave/zpc_introduction.html">Z-Wave (ZPC)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol/zigbee/zigpc_introduction.html">Zigbee (ZigPC)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol/aox/aox_introduction.html">Bluetooth AoX (AoXPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol/matter/matter_mpc.html">Matter Protocol Controller (MPC) (Deprecated)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="unify_iot_services.html">IoT Services</a></li>
@@ -97,14 +94,12 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="protocol-controllers">
 <h1>Protocol Controllers<a class="headerlink" href="#protocol-controllers" title="Permalink to this heading"></a></h1>
-<p>The Unify Framework currently includes several protocol controllers.</p>
-<p>Each protocol controller interfaces with its radio hardware and implements a
+<p>The Unify Framework natively supports Z-Wave Protocol Controller.</p>
+<p>Z-Wave Protocol Controller interfaces with its radio hardware and implements a
 translation between its own wireless protocol and the <em>Unified Command Language</em>
 (UCL), which is defined in the <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.
-In addition, these protocol controllers implement best practices regarding
-message delivery and adherence to regulatory requirements. Protocol-specific
-implementation details can be found in the user guide for each protocol
-controller.</p>
+Z-Wave Protocol-specific implementation details can be found in <a class="reference external" href="https://siliconlabssoftware.github.io/z-wave-protocol-controller">Z-Wave Protocol
+Controller Documentation</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
@@ -113,23 +108,12 @@ controller.</p>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
-<li><p><a class="reference internal" href="protocol/zigbee/zigpc_introduction.html"><span class="doc std std-doc">The Zigbee protocol controller (ZigPC)</span></a> implements the ZigBee wireless protocol using a Zigbee NCP.</p></li>
+<li><p><a class="reference internal" href="protocol/matter/matter_mpc.html"><span class="doc std std-doc">The Matter protocol controller (Deprecated)</span></a> implements the matter protocol.</p></li>
+<li><p>The Zigbee Protocol Controller (Deprecated)</p></li>
+<li><p>The AoX Protocol Controller (Deprecated)</p></li>
 </ul>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="multiprotocol.html"><span class="doc std std-doc">The Multiprotocol Host Software (Zigbee, OpenThread, Bluetooth)</span></a> uses the RCP mode of the wireless SoC to implement Zigbee, OpenThread, and Bluetooth.</p></li>
-</ul>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="protocol/matter/matter_mpc.html"><span class="doc std std-doc">The Matter protocol controller</span></a> implements the matter protocol.</p></li>
-</ul>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="protocol/aox/aox_introduction.html"><span class="doc std std-doc">The Bluetooth AoX protocol controller (AoXPC)</span></a> implements Bluetooth AoX functionality.</p></li>
-</ul>
+<p>Please reach out to Silicon Labs Developers Services if you need a tailored protocol controller implementation.</p>
+<p>For detailed information on how to develop custom protocol controller, please refer to <a class="reference internal" href="how_to_develop_a_protocol_controller.html"><span class="doc std std-doc">How to develop a protocol controller</span></a></p>
 </section>
 
 

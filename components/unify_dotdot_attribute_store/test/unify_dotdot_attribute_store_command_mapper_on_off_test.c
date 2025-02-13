@@ -22,6 +22,7 @@
 // Mock includes
 #include "dotdot_mqtt_mock.h"
 #include "uic_mqtt_mock.h"
+#include "contiki_test_helper.h"
 
 // Generic includes
 #include <string.h>
@@ -296,6 +297,7 @@ void test_on_off_off_command_update_desired()
   test_configuration.update_attribute_desired_values_on_commands = false;
   unify_dotdot_attribute_store_set_configuration(&test_configuration);
   attribute_store_undefine_desired(on_off_node);
+  dotdot_create_on_off_on_time(expected_unid, expected_endpoint_id);
 
   // Now it is not supported, feature is disabled
   TEST_ASSERT_EQUAL(
@@ -760,4 +762,158 @@ void test_on_off_on_command_update_desired_with_level_supported_last_non_zero_le
                     dotdot_get_level_current_level(expected_unid,
                                                    expected_endpoint_id,
                                                    DESIRED_ATTRIBUTE));
+}
+
+void test_off_with_effect_command()
+{
+  // Configure auto-desired update
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.update_attribute_desired_values_on_commands = true;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Check that the dispatch on_off_command exists.
+  uic_mqtt_dotdot_on_off_off_with_effect_callback
+    = get_uic_mqtt_dotdot_on_off_off_with_effect_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_off_with_effect_callback);
+
+  // Add the OnOff attribute
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  attribute_store_node_t global_scene_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_GLOBAL_SCENE_CONTROL,
+                               attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME,
+                               attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME,
+                               attribute_store_get_root());
+  bool value = true;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));  
+  attribute_store_set_reported(global_scene_node, &value, sizeof(value));
+
+  // Add a level capability
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL,
+                           attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME,
+                           attribute_store_get_root());
+
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_dotdot_on_off_off_with_effect_callback(
+    expected_unid,
+    expected_endpoint_id,
+    UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+    0,
+    0);
+  uic_mqtt_publish_StopIgnore();
+  for (int i = 0; i < 9; i++)
+    contiki_test_helper_run(100);
+    
+  attribute_store_set_reported(global_scene_node, &value, sizeof(value));
+  uic_mqtt_publish_Ignore();  
+  uic_mqtt_dotdot_on_off_off_with_effect_callback(
+    expected_unid,
+    expected_endpoint_id,
+    UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+    0,
+    1);
+  uic_mqtt_publish_StopIgnore();
+  contiki_test_helper_run(100);
+  
+  attribute_store_set_reported(global_scene_node, &value, sizeof(value));
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_dotdot_on_off_off_with_effect_callback(
+    expected_unid,
+    expected_endpoint_id,
+    UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+    0,
+    2);
+  uic_mqtt_publish_StopIgnore();
+  for (int i = 0; i < 9; i++)
+    contiki_test_helper_run(100);
+  
+  attribute_store_set_reported(global_scene_node, &value, sizeof(value));
+  uic_mqtt_publish_Ignore();
+  uic_mqtt_dotdot_on_off_off_with_effect_callback(
+    expected_unid,
+    expected_endpoint_id,
+    UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+    1,
+    0);
+  uic_mqtt_publish_StopIgnore();
+  for (int i = 0; i < 13; i++)
+    contiki_test_helper_run(100);
+}
+
+void test_on_with_timed_off_command()
+{
+  // Configure auto-desired update
+  test_configuration.get_endpoint_node_function = &test_get_endpoint_node;
+  test_configuration.update_attribute_desired_values_on_commands = true;
+  unify_dotdot_attribute_store_set_configuration(&test_configuration);
+
+  // Check that the dispatch on_off_command exists.
+  uic_mqtt_dotdot_on_off_on_with_timed_off_callback
+    = get_uic_mqtt_dotdot_on_off_on_with_timed_off_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_on_with_timed_off_callback);
+  uic_mqtt_dotdot_on_off_off_callback
+    = get_uic_mqtt_dotdot_on_off_off_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_off_callback);
+  uic_mqtt_dotdot_on_off_on_callback
+    = get_uic_mqtt_dotdot_on_off_on_callback();
+  TEST_ASSERT_NOT_NULL(uic_mqtt_dotdot_on_off_on_callback);
+
+    // Add the OnOff attribute
+  attribute_store_node_t on_off_node
+    = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF,
+                               attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME,
+                               attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME,
+                               attribute_store_get_root());
+  bool value = false;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+
+  // Add a level capability
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL,
+                           attribute_store_get_root());
+  attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME,
+                           attribute_store_get_root());
+
+  uic_mqtt_dotdot_on_off_on_with_timed_off_callback(expected_unid, expected_endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL, 0, 300, 300);
+  contiki_test_helper_run(100);
+  TEST_ASSERT_EQUAL(300, dotdot_get_on_off_on_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  value = true;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+  contiki_test_helper_run(100);
+  contiki_test_helper_run(100);
+  TEST_ASSERT_EQUAL(298, dotdot_get_on_off_on_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(300, dotdot_get_on_off_off_wait_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  for (int i = 0; i < 298; i++)
+    contiki_test_helper_run(100);
+  TEST_ASSERT_EQUAL(0, dotdot_get_on_off_on_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);
+  TEST_ASSERT_EQUAL(0, dotdot_get_on_off_off_wait_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_EQUAL(0, dotdot_get_on_off_on_off(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+
+  uic_mqtt_dotdot_on_off_on_with_timed_off_callback(expected_unid, expected_endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL, 0, 300, 300);
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+  contiki_test_helper_run(100);
+  contiki_test_helper_run(100);
+  uic_mqtt_dotdot_on_off_off_callback(expected_unid, expected_endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL);
+  TEST_ASSERT_EQUAL(0, dotdot_get_on_off_on_time(expected_unid, expected_endpoint_id, DESIRED_ATTRIBUTE));
+  value = false;
+  attribute_store_set_reported(on_off_node, &value, sizeof(value));
+  contiki_test_helper_run(100);
+  contiki_test_helper_run(100);
+  uic_mqtt_dotdot_on_off_on_with_timed_off_callback(expected_unid, expected_endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL, 0, 300, 300);
+  TEST_ASSERT_EQUAL(298, dotdot_get_on_off_off_wait_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);
+  contiki_test_helper_run(100);
+  uic_mqtt_dotdot_on_off_on_with_timed_off_callback(expected_unid, expected_endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL, 0, 300, 200);
+  TEST_ASSERT_EQUAL(200, dotdot_get_on_off_off_wait_time(expected_unid, expected_endpoint_id, REPORTED_ATTRIBUTE));
+  contiki_test_helper_run(100);
+  contiki_test_helper_run(100);
+  uic_mqtt_dotdot_on_off_on_callback(expected_unid, expected_endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL);
+  contiki_test_helper_run(100);
+  contiki_test_helper_run(100);
 }

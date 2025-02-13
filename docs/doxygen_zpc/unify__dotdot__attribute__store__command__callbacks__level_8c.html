@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -120,8 +120,8 @@ Functions</h2></td></tr>
 <tr class="separator:a7a03ba34b42525cc20997d14d0898b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5e491991a34be6570eaeb659c6457e5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#ab5e491991a34be6570eaeb659c6457e5">on_remaining_time_reported_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="separator:ab5e491991a34be6570eaeb659c6457e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8ddfefa953421ec9f82d67575da591c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#ad8ddfefa953421ec9f82d67575da591c">dotdot_set_level_current_level_and_on_off_transition_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint8_t level, uint16_t transition_time)</td></tr>
-<tr class="separator:ad8ddfefa953421ec9f82d67575da591c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a520a815a798190d80356f16d7c818210"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a520a815a798190d80356f16d7c818210">dotdot_set_level_current_level_and_on_off_transition_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint8_t level, int8_t step, uint16_t transition_time)</td></tr>
+<tr class="separator:a520a815a798190d80356f16d7c818210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b9b00191160a053157040f293943b18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a6b9b00191160a053157040f293943b18">is_option_active</a> (uint8_t option, uint8_t mask_offset)</td></tr>
 <tr class="separator:a6b9b00191160a053157040f293943b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a607ef0c08cb29e468ce88873b4d2f201"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html#a607ef0c08cb29e468ce88873b4d2f201">has_execute_if_off_option</a> (uint8_t option_level, uint8_t options_mask, uint8_t options_override)</td></tr>
@@ -167,8 +167,8 @@ Variables</h2></td></tr>
 <tr class="separator:a8979039f1537820b57b65347845774fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad8ddfefa953421ec9f82d67575da591c" name="ad8ddfefa953421ec9f82d67575da591c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8ddfefa953421ec9f82d67575da591c">&#9670;&nbsp;</a></span>dotdot_set_level_current_level_and_on_off_transition_time()</h2>
+<a id="a520a815a798190d80356f16d7c818210" name="a520a815a798190d80356f16d7c818210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a520a815a798190d80356f16d7c818210">&#9670;&nbsp;</a></span>dotdot_set_level_current_level_and_on_off_transition_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,6 +193,12 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>step</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1051,7 +1057,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_112d20045a7ca684343196244a8f6d73.html">unify_dotdot_attribute_store</a></li><li class="navelem"><a class="el" href="dir_4d908a52017a2c1804f64ff3615d4d5e.html">src</a></li><li class="navelem"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__level_8c.html">unify_dotdot_attribute_store_command_callbacks_level.c</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:45 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:10 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

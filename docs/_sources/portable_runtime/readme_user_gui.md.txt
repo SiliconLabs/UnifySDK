@@ -9,12 +9,9 @@
 
 **Prerequisites**:
 
-1. [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
-2. [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP
-3. [Bluetooth module](https://www.silabs.com/wireless/bluetooth) EFR32xG22 running NCP Firmware for AoXPC
-4. Docker version > 20.10.12 installed.
-5. docker-compose version > 2.5.1
-6. x86-64/amd64 CPU architecture.
+1. Docker version > 20.10.12 installed.
+2. docker-compose version > 2.5.1
+3. x86-64/amd64 CPU architecture.
 
 The Unify Portable Runtime Environment strives to get Unify running as fast as
 possible on your desktop. The portable runtime comes as a binary executable GUI,
@@ -55,19 +52,15 @@ After initial pre-requisites check, the GUI will render protocol selection page.
 
 <img src="./protocols.jpg" width="200" height="250" border="1px">
 
-   **Note**: 
-   - _Zigbee(RCP) is disabled until _MultiProtocol_ is selected and enabled automatically upon enabling _MultiProtocol_
-   - _Zigbee(NCP)_ and _Zigbee(RCP)_ are mutually exclusive options.
-
-By default only Z-Wave (ZPC) is selected. Select other protocols as needed and 
+By default only EED (Emulated End Device) is selected.
 click on `Next`.
 
 ##### Emulated End Device (**Experimental**): 
-Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
-<br>```Note: EED currently emulates a end device that only supports OnOff cluster, so for UMB to process EED as a valid device enable atleast select NAL in the framework service page that follows.```
+Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Z-Wave devices.
+<br>```Note: For UMB to process EED with only one cluster as a valid device enable atleast select NAL in the framework service page that follows.```
 
 <br>The EED can be enable in protocol selection page of latest portable runtime GUI.
-<img src="./EED-GUI.png" width="200" height="250" border="1px">
+<img src="./protocols.jpg" width="200" height="250" border="1px">
 
 #### Framework Services and Application Selection
 <img src="./framework_and_application.jpg" width="200" height="250" border="1px">
@@ -79,6 +72,8 @@ Select the framework services and the unify matter bridge application as needed 
 
 #### Configuration
 Select the `Device` for each protocol selected in [Protocol Selection page](#protocol-selection). If Z-Wave was selected then also configure `RF Region`.
+If EED was selected then select prefered Device Type from the dropdown.
+<br>Select AllClustersDevice for all possible device types supported by EED.
 
 <img src="./configuration.jpg" width="200" height="250" border="1px">
 
@@ -107,5 +102,6 @@ In case of any issues in bring-up or pre-requisites check, error page is display
 <img src="./error.jpg" width="200" height="250" border="1px">
 
 ## Troubleshooting
+In case you want to use different version of UnifySDK or UMB, replace desired packages in portable_runtime_<OS>/resources/docker-files and for commander replace resources/commander such that commander.exe and silink.exe path looks like ./resources/commander/commander.exe and ./resources/commander/silink.exe.
 
 In case you run into any issues, a log file is produced in the base directory, called `portable_runtime.log`.

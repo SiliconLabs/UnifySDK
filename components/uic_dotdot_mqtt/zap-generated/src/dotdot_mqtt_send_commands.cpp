@@ -12791,6 +12791,68 @@ void uic_mqtt_dotdot_state_publish_discover_security_command_to_group(
 }
 
 /**
+ * @brief Sends/Publishes a EnableNls command for
+ * the State cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/Commands/EnableNls
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_enable_nls_command(
+  const dotdot_unid_t destination_unid
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/" + std::string(destination_unid) + "/";
+  topic += "State/Commands/EnableNls";
+
+
+  std::string payload =
+    get_json_payload_for_state_enable_nls_command(
+    );
+
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
+ * @brief Sends/Publishes a EnableNls command for
+ * the State cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/State/Commands/EnableNls
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_enable_nls_command_to_group(
+  uint16_t destination_group_id
+){
+  // Create the topic
+  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
+                      "/State/Commands/EnableNls";
+
+  std::string payload =
+    get_json_payload_for_state_enable_nls_command(
+    );
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
+
+  // Publish our command, not retained
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+/**
  * @brief Sends/Publishes a Bind command for
  * the Binding cluster to a destination.
  *
@@ -13433,228 +13495,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_c
 
   std::string payload =
     get_json_payload_for_configuration_parameters_discover_parameter_range_command(
-    fields);
-
-  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
-
-  // Publish our command, not retained
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Sends/Publishes a IQReport command for
- * the AoXLocator cluster to a destination.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/Commands/IQReport
- *
- * @param destination_unid      The UNID of the node that should receive the command.
- * 
- * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_iq_report_command(
-  const dotdot_unid_t destination_unid,
-  const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
-                      std::to_string(destination_endpoint) + "/";
-  topic += "AoXLocator/Commands/IQReport";
-
-
-  std::string payload =
-    get_json_payload_for_aox_locator_iq_report_command(
-    fields);
-
-  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
-
-  // Publish our command, not retained
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Sends/Publishes a IQReport command for
- * the AoXLocator cluster to a group.
- *
- * Publication will be made at the following topic
- * ucl/by-group/GroupID/AoXLocator/Commands/IQReport
- *
- * @param destination_group_id  The GroupID that should receive the command.
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_iq_report_command_to_group(
-  uint16_t destination_group_id,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-){
-  // Create the topic
-  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
-                      "/AoXLocator/Commands/IQReport";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_iq_report_command(
-    fields);
-
-  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
-
-  // Publish our command, not retained
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Sends/Publishes a AngleReport command for
- * the AoXLocator cluster to a destination.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/Commands/AngleReport
- *
- * @param destination_unid      The UNID of the node that should receive the command.
- * 
- * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_report_command(
-  const dotdot_unid_t destination_unid,
-  const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
-                      std::to_string(destination_endpoint) + "/";
-  topic += "AoXLocator/Commands/AngleReport";
-
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_report_command(
-    fields);
-
-  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
-
-  // Publish our command, not retained
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Sends/Publishes a AngleReport command for
- * the AoXLocator cluster to a group.
- *
- * Publication will be made at the following topic
- * ucl/by-group/GroupID/AoXLocator/Commands/AngleReport
- *
- * @param destination_group_id  The GroupID that should receive the command.
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_report_command_to_group(
-  uint16_t destination_group_id,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-){
-  // Create the topic
-  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
-                      "/AoXLocator/Commands/AngleReport";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_report_command(
-    fields);
-
-  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
-
-  // Publish our command, not retained
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Sends/Publishes a AngleCorrection command for
- * the AoXLocator cluster to a destination.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/Commands/AngleCorrection
- *
- * @param destination_unid      The UNID of the node that should receive the command.
- * 
- * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_correction_command(
-  const dotdot_unid_t destination_unid,
-  const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(destination_unid) + "/ep" +
-                      std::to_string(destination_endpoint) + "/";
-  topic += "AoXLocator/Commands/AngleCorrection";
-
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_correction_command(
-    fields);
-
-  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
-
-  // Publish our command, not retained
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Sends/Publishes a AngleCorrection command for
- * the AoXLocator cluster to a group.
- *
- * Publication will be made at the following topic
- * ucl/by-group/GroupID/AoXLocator/Commands/AngleCorrection
- *
- * @param destination_group_id  The GroupID that should receive the command.
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_correction_command_to_group(
-  uint16_t destination_group_id,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-){
-  // Create the topic
-  std::string topic = "ucl/by-group/"+ std::to_string(destination_group_id) +
-                      "/AoXLocator/Commands/AngleCorrection";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_correction_command(
     fields);
 
   sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());

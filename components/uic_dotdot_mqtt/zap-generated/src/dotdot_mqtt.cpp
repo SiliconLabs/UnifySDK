@@ -10549,7 +10549,7 @@ void uic_mqtt_dotdot_on_scenes_add_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -10634,7 +10634,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_add_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -10721,7 +10721,7 @@ void uic_mqtt_dotdot_on_scenes_add_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -10790,7 +10790,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_add_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -10859,7 +10859,7 @@ void uic_mqtt_dotdot_on_scenes_view_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -10923,7 +10923,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_view_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -10989,7 +10989,7 @@ void uic_mqtt_dotdot_on_scenes_view_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -11074,7 +11074,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_view_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -11159,7 +11159,7 @@ void uic_mqtt_dotdot_on_scenes_remove_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11223,7 +11223,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11289,7 +11289,7 @@ void uic_mqtt_dotdot_on_scenes_remove_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11358,7 +11358,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11427,7 +11427,7 @@ void uic_mqtt_dotdot_on_scenes_remove_all_scenes(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
 
 
   nlohmann::json jsn;
@@ -11486,7 +11486,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_all_scenes(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
 
 
   nlohmann::json jsn;
@@ -11547,7 +11547,7 @@ void uic_mqtt_dotdot_on_scenes_remove_all_scenes_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
 
 
   nlohmann::json jsn;
@@ -11611,7 +11611,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_remove_all_scenes_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
 
 
   nlohmann::json jsn;
@@ -11675,7 +11675,7 @@ void uic_mqtt_dotdot_on_scenes_store_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11739,7 +11739,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_store_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11805,7 +11805,7 @@ void uic_mqtt_dotdot_on_scenes_store_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11874,7 +11874,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_store_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -11943,7 +11943,7 @@ void uic_mqtt_dotdot_on_scenes_recall_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
 
@@ -12012,7 +12012,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_recall_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
 
@@ -12082,7 +12082,7 @@ void uic_mqtt_dotdot_on_scenes_get_scene_membership(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
 
 
   nlohmann::json jsn;
@@ -12141,7 +12141,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_get_scene_membership(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
 
 
   nlohmann::json jsn;
@@ -12203,7 +12203,7 @@ void uic_mqtt_dotdot_on_scenes_get_scene_membership_response(
 
   zclStatus status = {};
   uint8_t capacity = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   std::vector<uint8_t> scene_list;
 
 
@@ -12278,7 +12278,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_get_scene_membership_response(
 
   zclStatus status = {};
   uint8_t capacity = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   std::vector<uint8_t> scene_list;
 
 
@@ -12352,7 +12352,7 @@ void uic_mqtt_dotdot_on_scenes_enhanced_add_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -12432,7 +12432,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_add_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -12514,7 +12514,7 @@ void uic_mqtt_dotdot_on_scenes_enhanced_add_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -12583,7 +12583,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_add_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -12652,7 +12652,7 @@ void uic_mqtt_dotdot_on_scenes_enhanced_view_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -12716,7 +12716,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_view_scene(
     return;
   }
 
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
 
 
@@ -12782,7 +12782,7 @@ void uic_mqtt_dotdot_on_scenes_enhanced_view_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -12867,7 +12867,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_enhanced_view_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId groupid = {};
+  uint16_t groupid = {};
   uint8_t sceneid = {};
   uint16_t transition_time = {};
   std::string scene_name;
@@ -12953,9 +12953,9 @@ void uic_mqtt_dotdot_on_scenes_copy_scene(
   }
 
   uint8_t mode = {};
-  SGroupId group_identifier_from = {};
+  uint16_t group_identifier_from = {};
   uint8_t scene_identifier_from = {};
-  SGroupId group_identifier_to = {};
+  uint16_t group_identifier_to = {};
   uint8_t scene_identifier_to = {};
 
 
@@ -13032,9 +13032,9 @@ static void uic_mqtt_dotdot_on_generated_scenes_copy_scene(
   }
 
   uint8_t mode = {};
-  SGroupId group_identifier_from = {};
+  uint16_t group_identifier_from = {};
   uint8_t scene_identifier_from = {};
-  SGroupId group_identifier_to = {};
+  uint16_t group_identifier_to = {};
   uint8_t scene_identifier_to = {};
 
 
@@ -13112,7 +13112,7 @@ void uic_mqtt_dotdot_on_scenes_copy_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId group_identifier_from = {};
+  uint16_t group_identifier_from = {};
   uint8_t scene_identifier_from = {};
 
 
@@ -13181,7 +13181,7 @@ static void uic_mqtt_dotdot_on_generated_scenes_copy_scene_response(
   }
 
   zclStatus status = {};
-  SGroupId group_identifier_from = {};
+  uint16_t group_identifier_from = {};
   uint8_t scene_identifier_from = {};
 
 
@@ -13506,7 +13506,7 @@ sl_status_t uic_mqtt_dotdot_scenes_current_scene_unretain(
 
 sl_status_t uic_mqtt_dotdot_scenes_current_group_publish(
   const char *base_topic,
-  SGroupId value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -13715,7 +13715,7 @@ sl_status_t uic_mqtt_dotdot_scenes_name_support_unretain(
 
 sl_status_t uic_mqtt_dotdot_scenes_last_configured_by_publish(
   const char *base_topic,
-  EUI64 value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -18676,7 +18676,7 @@ void uic_mqtt_dotdot_on_alarms_reset_alarm(
   }
 
   uint8_t alarm_code = {};
-  clusterId cluster_identifier = {};
+  uint16_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -18740,7 +18740,7 @@ static void uic_mqtt_dotdot_on_generated_alarms_reset_alarm(
   }
 
   uint8_t alarm_code = {};
-  clusterId cluster_identifier = {};
+  uint16_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -18805,7 +18805,7 @@ void uic_mqtt_dotdot_on_alarms_alarm(
   }
 
   uint8_t alarm_code = {};
-  clusterId cluster_identifier = {};
+  uint16_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -18869,7 +18869,7 @@ static void uic_mqtt_dotdot_on_generated_alarms_alarm(
   }
 
   uint8_t alarm_code = {};
-  clusterId cluster_identifier = {};
+  uint16_t cluster_identifier = {};
 
 
   nlohmann::json jsn;
@@ -19038,7 +19038,7 @@ void uic_mqtt_dotdot_on_alarms_get_alarm_response(
 
   zclStatus status = {};
   uint8_t alarm_code = {};
-  clusterId cluster_identifier = {};
+  uint16_t cluster_identifier = {};
   uint32_t time_stamp = {};
 
 
@@ -19112,7 +19112,7 @@ static void uic_mqtt_dotdot_on_generated_alarms_get_alarm_response(
 
   zclStatus status = {};
   uint8_t alarm_code = {};
-  clusterId cluster_identifier = {};
+  uint16_t cluster_identifier = {};
   uint32_t time_stamp = {};
 
 
@@ -19821,7 +19821,7 @@ static void uic_mqtt_dotdot_on_time_force_read_attributes(
 
 sl_status_t uic_mqtt_dotdot_time_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20380,7 +20380,7 @@ sl_status_t uic_mqtt_dotdot_time_local_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_last_set_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -20450,7 +20450,7 @@ sl_status_t uic_mqtt_dotdot_time_last_set_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_time_valid_until_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -26136,7 +26136,7 @@ void uic_mqtt_dotdot_on_door_lock_set_pin_code(
     return;
   }
 
-  DrlkPINUserID userid = {};
+  uint16_t userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string pin;
@@ -26210,7 +26210,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_pin_code(
     return;
   }
 
-  DrlkPINUserID userid = {};
+  uint16_t userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string pin;
@@ -26404,7 +26404,7 @@ void uic_mqtt_dotdot_on_door_lock_get_pin_code(
     return;
   }
 
-  DrlkPINUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -26463,7 +26463,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_pin_code(
     return;
   }
 
-  DrlkPINUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -26672,7 +26672,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_pin_code(
     return;
   }
 
-  DrlkPINUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -26731,7 +26731,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_pin_code(
     return;
   }
 
-  DrlkPINUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -27132,7 +27132,7 @@ void uic_mqtt_dotdot_on_door_lock_set_user_status(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
   DrlkSettableUserStatus user_status = {};
 
 
@@ -27196,7 +27196,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user_status(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
   DrlkSettableUserStatus user_status = {};
 
 
@@ -27380,7 +27380,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user_status(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -27439,7 +27439,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user_status(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -27628,8 +27628,8 @@ void uic_mqtt_dotdot_on_door_lock_set_weekday_schedule(
     return;
   }
 
-  DrlkWeekDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
   uint8_t days_mask = {};
   uint8_t start_hour = {};
   uint8_t start_minute = {};
@@ -27717,8 +27717,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_weekday_schedule(
     return;
   }
 
-  DrlkWeekDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
   uint8_t days_mask = {};
   uint8_t start_hour = {};
   uint8_t start_minute = {};
@@ -27926,8 +27926,8 @@ void uic_mqtt_dotdot_on_door_lock_get_weekday_schedule(
     return;
   }
 
-  DrlkWeekDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -27990,8 +27990,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_weekday_schedule(
     return;
   }
 
-  DrlkWeekDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -28244,8 +28244,8 @@ void uic_mqtt_dotdot_on_door_lock_clear_weekday_schedule(
     return;
   }
 
-  DrlkWeekDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -28308,8 +28308,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_weekday_schedule(
     return;
   }
 
-  DrlkWeekDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -28492,8 +28492,8 @@ void uic_mqtt_dotdot_on_door_lock_set_year_day_schedule(
     return;
   }
 
-  DrlkYearDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
   uint32_t local_start_time = {};
   uint32_t local_end_time = {};
 
@@ -28566,8 +28566,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_year_day_schedule(
     return;
   }
 
-  DrlkYearDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
   uint32_t local_start_time = {};
   uint32_t local_end_time = {};
 
@@ -28760,8 +28760,8 @@ void uic_mqtt_dotdot_on_door_lock_get_year_day_schedule(
     return;
   }
 
-  DrlkYearDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -28824,8 +28824,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_year_day_schedule(
     return;
   }
 
-  DrlkYearDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -29048,8 +29048,8 @@ void uic_mqtt_dotdot_on_door_lock_clear_year_day_schedule(
     return;
   }
 
-  DrlkYearDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -29112,8 +29112,8 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_year_day_schedule(
     return;
   }
 
-  DrlkYearDayScheduleID scheduleid = {};
-  DrlkTotalUserID userid = {};
+  uint8_t scheduleid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -29296,7 +29296,7 @@ void uic_mqtt_dotdot_on_door_lock_set_holiday_schedule(
     return;
   }
 
-  DrlkHolidayScheduleID holiday_scheduleid = {};
+  uint8_t holiday_scheduleid = {};
   uint32_t local_start_time = {};
   uint32_t local_end_time = {};
   DrlkOperMode operating_mode_during_holiday = {};
@@ -29370,7 +29370,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_holiday_schedule(
     return;
   }
 
-  DrlkHolidayScheduleID holiday_scheduleid = {};
+  uint8_t holiday_scheduleid = {};
   uint32_t local_start_time = {};
   uint32_t local_end_time = {};
   DrlkOperMode operating_mode_during_holiday = {};
@@ -29564,7 +29564,7 @@ void uic_mqtt_dotdot_on_door_lock_get_holiday_schedule(
     return;
   }
 
-  DrlkHolidayScheduleID holiday_scheduleid = {};
+  uint8_t holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -29623,7 +29623,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_holiday_schedule(
     return;
   }
 
-  DrlkHolidayScheduleID holiday_scheduleid = {};
+  uint8_t holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -29842,7 +29842,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_holiday_schedule(
     return;
   }
 
-  DrlkHolidayScheduleID holiday_scheduleid = {};
+  uint8_t holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -29901,7 +29901,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_holiday_schedule(
     return;
   }
 
-  DrlkHolidayScheduleID holiday_scheduleid = {};
+  uint8_t holiday_scheduleid = {};
 
 
   nlohmann::json jsn;
@@ -30080,7 +30080,7 @@ void uic_mqtt_dotdot_on_door_lock_set_user_type(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
   DrlkUserType user_type = {};
 
 
@@ -30144,7 +30144,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_user_type(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
   DrlkUserType user_type = {};
 
 
@@ -30328,7 +30328,7 @@ void uic_mqtt_dotdot_on_door_lock_get_user_type(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -30387,7 +30387,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_user_type(
     return;
   }
 
-  DrlkTotalUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -30576,7 +30576,7 @@ void uic_mqtt_dotdot_on_door_lock_set_rfid_code(
     return;
   }
 
-  DrlkRFIDUserID userid = {};
+  uint16_t userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string rfid_code;
@@ -30650,7 +30650,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_set_rfid_code(
     return;
   }
 
-  DrlkRFIDUserID userid = {};
+  uint16_t userid = {};
   DrlkSettableUserStatus user_status = {};
   DrlkUserType user_type = {};
   std::string rfid_code;
@@ -30844,7 +30844,7 @@ void uic_mqtt_dotdot_on_door_lock_get_rfid_code(
     return;
   }
 
-  DrlkRFIDUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -30903,7 +30903,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_get_rfid_code(
     return;
   }
 
-  DrlkRFIDUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -31112,7 +31112,7 @@ void uic_mqtt_dotdot_on_door_lock_clear_rfid_code(
     return;
   }
 
-  DrlkRFIDUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -31171,7 +31171,7 @@ static void uic_mqtt_dotdot_on_generated_door_lock_clear_rfid_code(
     return;
   }
 
-  DrlkRFIDUserID userid = {};
+  uint16_t userid = {};
 
 
   nlohmann::json jsn;
@@ -46960,7 +46960,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_amount_unretain(
 
 sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -53060,8 +53060,8 @@ void uic_mqtt_dotdot_on_color_control_move_color_temperature(
 
   CCMoveMode move_mode = {};
   uint16_t rate = {};
-  CCMinMiredsField color_temperature_minimum_mireds = {};
-  CCMaxMiredsField color_temperature_maximum_mireds = {};
+  uint16_t color_temperature_minimum_mireds = {};
+  uint16_t color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53144,8 +53144,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_move_color_temperature(
 
   CCMoveMode move_mode = {};
   uint16_t rate = {};
-  CCMinMiredsField color_temperature_minimum_mireds = {};
-  CCMaxMiredsField color_temperature_maximum_mireds = {};
+  uint16_t color_temperature_minimum_mireds = {};
+  uint16_t color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53230,8 +53230,8 @@ void uic_mqtt_dotdot_on_color_control_step_color_temperature(
   CCStepMode step_mode = {};
   uint16_t step_size = {};
   uint16_t transition_time = {};
-  CCMinMiredsField color_temperature_minimum_mireds = {};
-  CCMaxMiredsField color_temperature_maximum_mireds = {};
+  uint16_t color_temperature_minimum_mireds = {};
+  uint16_t color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -53319,8 +53319,8 @@ static void uic_mqtt_dotdot_on_generated_color_control_step_color_temperature(
   CCStepMode step_mode = {};
   uint16_t step_size = {};
   uint16_t transition_time = {};
-  CCMinMiredsField color_temperature_minimum_mireds = {};
-  CCMaxMiredsField color_temperature_maximum_mireds = {};
+  uint16_t color_temperature_minimum_mireds = {};
+  uint16_t color_temperature_maximum_mireds = {};
   uint8_t options_mask = {};
   uint8_t options_override = {};
 
@@ -67578,7 +67578,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zone_status_unretain(
 
 sl_status_t uic_mqtt_dotdot_ias_zone_iascie_address_publish(
   const char *base_topic,
-  EUI64 value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69102,7 +69102,7 @@ sl_status_t uic_mqtt_dotdot_metering_power_factor_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69172,7 +69172,7 @@ sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69242,7 +69242,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
   const char *base_topic,
-  UTC value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69595,7 +69595,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_unr
 
 sl_status_t uic_mqtt_dotdot_metering_inlet_temperature_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -69665,7 +69665,7 @@ sl_status_t uic_mqtt_dotdot_metering_inlet_temperature_unretain(
 
 sl_status_t uic_mqtt_dotdot_metering_outlet_temperature_publish(
   const char *base_topic,
-  uint32_t value,
+  int32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 )
 {
@@ -71061,7 +71061,7 @@ void uic_mqtt_dotdot_on_electrical_measurement_get_measurement_profile_response(
     return;
   }
 
-  UTC start_time = {};
+  uint32_t start_time = {};
   GetMeasurementProfileResponseStatus status = {};
   ProfileIntervalPeriod profile_interval_period = {};
   uint8_t number_of_intervals_delivered = {};
@@ -71146,7 +71146,7 @@ static void uic_mqtt_dotdot_on_generated_electrical_measurement_get_measurement_
     return;
   }
 
-  UTC start_time = {};
+  uint32_t start_time = {};
   GetMeasurementProfileResponseStatus status = {};
   ProfileIntervalPeriod profile_interval_period = {};
   uint8_t number_of_intervals_delivered = {};
@@ -71233,7 +71233,7 @@ void uic_mqtt_dotdot_on_electrical_measurement_get_measurement_profile(
   }
 
   uint16_t attributeid = {};
-  UTC start_time = {};
+  uint32_t start_time = {};
   uint8_t number_of_intervals = {};
 
 
@@ -71302,7 +71302,7 @@ static void uic_mqtt_dotdot_on_generated_electrical_measurement_get_measurement_
   }
 
   uint16_t attributeid = {};
-  UTC start_time = {};
+  uint32_t start_time = {};
   uint8_t number_of_intervals = {};
 
 
@@ -83860,6 +83860,8 @@ static std::set<uic_mqtt_dotdot_state_interview_callback_t> uic_mqtt_dotdot_stat
 static std::set<uic_mqtt_dotdot_state_interview_callback_t> uic_mqtt_dotdot_state_generated_interview_callback;
 static std::set<uic_mqtt_dotdot_state_discover_security_callback_t> uic_mqtt_dotdot_state_discover_security_callback;
 static std::set<uic_mqtt_dotdot_state_discover_security_callback_t> uic_mqtt_dotdot_state_generated_discover_security_callback;
+static std::set<uic_mqtt_dotdot_state_enable_nls_callback_t> uic_mqtt_dotdot_state_enable_nls_callback;
+static std::set<uic_mqtt_dotdot_state_enable_nls_callback_t> uic_mqtt_dotdot_state_generated_enable_nls_callback;
 static std::set<uic_mqtt_dotdot_state_write_attributes_callback_t> uic_mqtt_dotdot_state_write_attributes_callback;
 static std::set<uic_mqtt_dotdot_state_force_read_attributes_callback_t> uic_mqtt_dotdot_state_force_read_attributes_callback;
 
@@ -84028,6 +84030,39 @@ void uic_mqtt_dotdot_state_generated_discover_security_callback_unset(const uic_
 void uic_mqtt_dotdot_state_generated_discover_security_callback_clear()
 {
   uic_mqtt_dotdot_state_generated_discover_security_callback.clear();
+}
+void uic_mqtt_dotdot_state_enable_nls_callback_set(const uic_mqtt_dotdot_state_enable_nls_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_state_enable_nls_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_state_enable_nls_callback_unset(const uic_mqtt_dotdot_state_enable_nls_callback_t callback)
+{
+  uic_mqtt_dotdot_state_enable_nls_callback.erase(callback);
+}
+void uic_mqtt_dotdot_state_enable_nls_callback_clear()
+{
+  uic_mqtt_dotdot_state_enable_nls_callback.clear();
+}
+std::set<uic_mqtt_dotdot_state_enable_nls_callback_t>& get_uic_mqtt_dotdot_state_enable_nls_callback()
+{
+  return uic_mqtt_dotdot_state_enable_nls_callback;
+}
+
+void uic_mqtt_dotdot_state_generated_enable_nls_callback_set(const uic_mqtt_dotdot_state_enable_nls_callback_t callback)
+{
+  if (callback != nullptr) {
+    uic_mqtt_dotdot_state_generated_enable_nls_callback.insert(callback);
+  }
+}
+void uic_mqtt_dotdot_state_generated_enable_nls_callback_unset(const uic_mqtt_dotdot_state_enable_nls_callback_t callback)
+{
+  uic_mqtt_dotdot_state_generated_enable_nls_callback.erase(callback);
+}
+void uic_mqtt_dotdot_state_generated_enable_nls_callback_clear()
+{
+  uic_mqtt_dotdot_state_generated_enable_nls_callback.clear();
 }
 
 void uic_mqtt_dotdot_set_state_write_attributes_callback(
@@ -84584,6 +84619,109 @@ static void uic_mqtt_dotdot_on_generated_state_discover_security(
 }
 
 
+// Callback function for incoming publications on ucl/by-unid/+/+/State/Commands/EnableNls
+void uic_mqtt_dotdot_on_state_enable_nls(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_state_enable_nls_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "State", "EnableNls");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "EnableNls", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "EnableNls", "");
+    return;
+  }
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_state_enable_nls_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+
+}
+
+// Callback function for incoming publications on ucl/by-unid/+/+/State/GeneratedCommands/EnableNls
+static void uic_mqtt_dotdot_on_generated_state_enable_nls(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if (message_length == 0 || (uic_mqtt_dotdot_state_generated_enable_nls_callback.empty())) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+
+
+  nlohmann::json jsn;
+  try {
+    jsn = nlohmann::json::parse(std::string(message));
+
+  
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "State", "EnableNls");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "EnableNls", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "State", "EnableNls", "");
+    return;
+  }
+
+
+
+
+  for (const auto& callback: uic_mqtt_dotdot_state_generated_enable_nls_callback){
+    callback(
+      static_cast<dotdot_unid_t>(unid.c_str()),
+      endpoint,
+      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL
+    );
+  }
+}
+
+
 // Callback function for incoming publications on ucl/by-unid/+/+/State/Commands/WriteAttributes
 void uic_mqtt_dotdot_on_state_WriteAttributes(
   const char *topic,
@@ -85128,6 +85266,14 @@ sl_status_t uic_mqtt_dotdot_state_init()
   if (!uic_mqtt_dotdot_state_generated_discover_security_callback.empty()) {
     subscription_topic = base_topic + "State/GeneratedCommands/DiscoverSecurity";
     uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_state_discover_security);
+  }
+  if (!uic_mqtt_dotdot_state_enable_nls_callback.empty()) {
+    subscription_topic = base_topic + "State/Commands/EnableNls";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_state_enable_nls);
+  }
+  if (!uic_mqtt_dotdot_state_generated_enable_nls_callback.empty()) {
+    subscription_topic = base_topic + "State/GeneratedCommands/EnableNls";
+    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_state_enable_nls);
   }
 
   // Init the attributes for that cluster
@@ -91684,2387 +91830,6 @@ sl_status_t uic_mqtt_dotdot_configuration_parameters_init()
 }
 
 // Callbacks pointers
-static std::set<uic_mqtt_dotdot_aox_locator_iq_report_callback_t> uic_mqtt_dotdot_aox_locator_iq_report_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_iq_report_callback_t> uic_mqtt_dotdot_aox_locator_generated_iq_report_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_angle_report_callback_t> uic_mqtt_dotdot_aox_locator_angle_report_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_angle_report_callback_t> uic_mqtt_dotdot_aox_locator_generated_angle_report_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_angle_correction_callback_t> uic_mqtt_dotdot_aox_locator_angle_correction_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_angle_correction_callback_t> uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_write_attributes_callback_t> uic_mqtt_dotdot_aox_locator_write_attributes_callback;
-static std::set<uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t> uic_mqtt_dotdot_aox_locator_force_read_attributes_callback;
-
-// Callbacks setters
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_set(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_iq_report_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_unset(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_iq_report_callback.erase(callback);
-}
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_clear()
-{
-  uic_mqtt_dotdot_aox_locator_iq_report_callback.clear();
-}
-std::set<uic_mqtt_dotdot_aox_locator_iq_report_callback_t>& get_uic_mqtt_dotdot_aox_locator_iq_report_callback()
-{
-  return uic_mqtt_dotdot_aox_locator_iq_report_callback;
-}
-
-void uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_set(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_generated_iq_report_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_unset(const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_generated_iq_report_callback.erase(callback);
-}
-void uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_clear()
-{
-  uic_mqtt_dotdot_aox_locator_generated_iq_report_callback.clear();
-}
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_set(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_angle_report_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_angle_report_callback.erase(callback);
-}
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_clear()
-{
-  uic_mqtt_dotdot_aox_locator_angle_report_callback.clear();
-}
-std::set<uic_mqtt_dotdot_aox_locator_angle_report_callback_t>& get_uic_mqtt_dotdot_aox_locator_angle_report_callback()
-{
-  return uic_mqtt_dotdot_aox_locator_angle_report_callback;
-}
-
-void uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_set(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_generated_angle_report_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_generated_angle_report_callback.erase(callback);
-}
-void uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_clear()
-{
-  uic_mqtt_dotdot_aox_locator_generated_angle_report_callback.clear();
-}
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_set(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_angle_correction_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_angle_correction_callback.erase(callback);
-}
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_clear()
-{
-  uic_mqtt_dotdot_aox_locator_angle_correction_callback.clear();
-}
-std::set<uic_mqtt_dotdot_aox_locator_angle_correction_callback_t>& get_uic_mqtt_dotdot_aox_locator_angle_correction_callback()
-{
-  return uic_mqtt_dotdot_aox_locator_angle_correction_callback;
-}
-
-void uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_set(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_unset(const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback.erase(callback);
-}
-void uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_clear()
-{
-  uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback.clear();
-}
-
-void uic_mqtt_dotdot_set_aox_locator_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_write_attributes_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_write_attributes_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_unset_aox_locator_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_write_attributes_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_write_attributes_callback.erase(callback);
-}
-void uic_mqtt_dotdot_clear_aox_locator_write_attributes_callbacks()
-{
-  uic_mqtt_dotdot_aox_locator_write_attributes_callback.clear();
-}
-std::set<uic_mqtt_dotdot_aox_locator_write_attributes_callback_t>& get_uic_mqtt_dotdot_aox_locator_write_attributes_callback()
-{
-  return uic_mqtt_dotdot_aox_locator_write_attributes_callback;
-}
-
-void uic_mqtt_dotdot_set_aox_locator_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_locator_force_read_attributes_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_unset_aox_locator_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_locator_force_read_attributes_callback.erase(callback);
-}
-void uic_mqtt_dotdot_clear_aox_locator_force_read_attributes_callbacks()
-{
-  uic_mqtt_dotdot_aox_locator_force_read_attributes_callback.clear();
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/Commands/IQReport
-void uic_mqtt_dotdot_on_aox_locator_iq_report(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_aox_locator_iq_report_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string tag_unid;
-  uint8_t channel = {};
-  int8_t rssi = {};
-  std::vector<int8_t> samples;
-  int32_t sequence = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_aox_locator_iq_report(
-      jsn,
-      tag_unid,
-
-      channel,
-
-      rssi,
-
-      samples,
-
-      sequence
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "IQReport");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "IQReport", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "IQReport", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_iq_report_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      tag_unid.c_str(),
-  
-      channel,
-  
-      rssi,
-  
-      samples.size(),
-      samples.data(),
-
-      sequence
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/GeneratedCommands/IQReport
-static void uic_mqtt_dotdot_on_generated_aox_locator_iq_report(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_aox_locator_generated_iq_report_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string tag_unid;
-  uint8_t channel = {};
-  int8_t rssi = {};
-  std::vector<int8_t> samples;
-  int32_t sequence = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_aox_locator_iq_report(
-      jsn,
-      tag_unid,
-
-      channel,
-
-      rssi,
-
-      samples,
-
-      sequence
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "IQReport");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "IQReport", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "IQReport", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_generated_iq_report_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      tag_unid.c_str(),
-  
-      channel,
-  
-      rssi,
-  
-      samples.size(),
-      samples.data(),
-
-      sequence
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/Commands/AngleReport
-void uic_mqtt_dotdot_on_aox_locator_angle_report(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_aox_locator_angle_report_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string tag_unid;
-  SphericalCoordinates direction = {};
-  SphericalCoordinates deviation = {};
-  int32_t sequence = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_aox_locator_angle_report(
-      jsn,
-      tag_unid,
-
-      direction,
-
-      deviation,
-
-      sequence
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "AngleReport");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleReport", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleReport", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_angle_report_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      tag_unid.c_str(),
-  
-      direction,
-  
-      deviation,
-  
-      sequence
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/GeneratedCommands/AngleReport
-static void uic_mqtt_dotdot_on_generated_aox_locator_angle_report(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_aox_locator_generated_angle_report_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string tag_unid;
-  SphericalCoordinates direction = {};
-  SphericalCoordinates deviation = {};
-  int32_t sequence = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_aox_locator_angle_report(
-      jsn,
-      tag_unid,
-
-      direction,
-
-      deviation,
-
-      sequence
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "AngleReport");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleReport", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleReport", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_generated_angle_report_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      tag_unid.c_str(),
-  
-      direction,
-  
-      deviation,
-  
-      sequence
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/Commands/AngleCorrection
-void uic_mqtt_dotdot_on_aox_locator_angle_correction(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_aox_locator_angle_correction_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string tag_unid;
-  SphericalCoordinates direction = {};
-  SphericalCoordinates deviation = {};
-  int32_t sequence = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_aox_locator_angle_correction(
-      jsn,
-      tag_unid,
-
-      direction,
-
-      deviation,
-
-      sequence
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "AngleCorrection");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleCorrection", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleCorrection", "");
-    return;
-  }
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_angle_correction_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      tag_unid.c_str(),
-  
-      direction,
-  
-      deviation,
-  
-      sequence
-  
-    );
-  }
-
-}
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/GeneratedCommands/AngleCorrection
-static void uic_mqtt_dotdot_on_generated_aox_locator_angle_correction(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (message_length == 0 || (uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback.empty())) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  std::string tag_unid;
-  SphericalCoordinates direction = {};
-  SphericalCoordinates deviation = {};
-  int32_t sequence = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-  
-    uic_mqtt_dotdot_parse_aox_locator_angle_correction(
-      jsn,
-      tag_unid,
-
-      direction,
-
-      deviation,
-
-      sequence
-      );
-
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "AngleCorrection");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleCorrection", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "AngleCorrection", "");
-    return;
-  }
-
-
-
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      tag_unid.c_str(),
-  
-      direction,
-  
-      deviation,
-  
-      sequence
-  
-    );
-  }
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXLocator/Commands/WriteAttributes
-void uic_mqtt_dotdot_on_aox_locator_WriteAttributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (uic_mqtt_dotdot_aox_locator_write_attributes_callback.empty()) {
-    return;
-  }
-
-  if (message_length == 0) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_locator_state_t new_state = {};
-  uic_mqtt_dotdot_aox_locator_updated_state_t new_updated_state = {};
-
-  std::vector<MinMaxPair> azimuth_mask;
-
-  std::vector<MinMaxPair> elevation_mask;
-
-  std::vector<const char*> allow_list;
-
-  std::vector<int8_t> antenna_array;
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-    uic_mqtt_dotdot_parse_aox_locator_write_attributes(
-      jsn,
-      new_state,
-      new_updated_state,
-      azimuth_mask,
-      elevation_mask,
-      allow_list,
-      antenna_array
-    );
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXLocator", "WriteAttributes");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "WriteAttributes", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator", "WriteAttributes", "");
-    return;
-  }
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_write_attributes_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      new_state,
-      new_updated_state
-    );
-  }
-
-}
-
-static void uic_mqtt_dotdot_on_aox_locator_force_read_attributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  uint8_t endpoint = 0;
-  std::string unid;
-
-  if ((message_length == 0) || (uic_mqtt_dotdot_aox_locator_force_read_attributes_callback.empty())) {
-    return;
-  }
-
-  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  try {
-    uic_mqtt_dotdot_aox_locator_updated_state_t force_update = {0};
-    bool trigger_handler = false;
-
-    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
-    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
-
-    // Assume all attributes to be read on empty array received
-    if (attributes.size() == 0) {
-      force_update.reporting_mode = true;
-      force_update.position_and_orientation_valid = true;
-      force_update.position_and_orientation = true;
-      force_update.azimuth_mask = true;
-      force_update.elevation_mask = true;
-      force_update.allow_list = true;
-      force_update.aox_mode = true;
-      force_update.antenna_mode = true;
-      force_update.antenna_array = true;
-      force_update.period_samples = true;
-      force_update.angle_filtering = true;
-      force_update.angle_filtering_weight = true;
-      force_update.angle_correction_timeout = true;
-      force_update.angle_correction_delay = true;
-      force_update.cte_mode = true;
-      force_update.cte_sampling_interval = true;
-      force_update.cte_length = true;
-      force_update.slot_duration = true;
-      trigger_handler = true;
-    } else {
-      std::unordered_map<std::string, bool *> supported_attrs = {
-        {"ReportingMode", &force_update.reporting_mode },
-        {"PositionAndOrientationValid", &force_update.position_and_orientation_valid },
-        {"PositionAndOrientation", &force_update.position_and_orientation },
-        {"AzimuthMask", &force_update.azimuth_mask },
-        {"ElevationMask", &force_update.elevation_mask },
-        {"AllowList", &force_update.allow_list },
-        {"AoXMode", &force_update.aox_mode },
-        {"AntennaMode", &force_update.antenna_mode },
-        {"AntennaArray", &force_update.antenna_array },
-        {"PeriodSamples", &force_update.period_samples },
-        {"AngleFiltering", &force_update.angle_filtering },
-        {"AngleFilteringWeight", &force_update.angle_filtering_weight },
-        {"AngleCorrectionTimeout", &force_update.angle_correction_timeout },
-        {"AngleCorrectionDelay", &force_update.angle_correction_delay },
-        {"CTEMode", &force_update.cte_mode },
-        {"CTESamplingInterval", &force_update.cte_sampling_interval },
-        {"CTELength", &force_update.cte_length },
-        {"SlotDuration", &force_update.slot_duration },
-      };
-
-      for (auto& attribute : attributes) {
-        auto found_attr = supported_attrs.find(attribute);
-        if (found_attr != supported_attrs.end()) {
-          *(found_attr->second) = true;
-          trigger_handler = true;
-        }
-      }
-    }
-
-    if (trigger_handler == true) {
-      for (const auto& callback: uic_mqtt_dotdot_aox_locator_force_read_attributes_callback) {
-        callback(
-          static_cast<dotdot_unid_t>(unid.c_str()),
-          endpoint,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-          force_update
-        );
-      }
-    }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "AoXLocator/Commands/ForceReadAttributes: Unable to parse JSON payload");
-    return;
-  }
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_reporting_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
-  jsn["value"] = aox_locator_reporting_mode_get_enum_value_name((uint32_t)value);
-  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
-  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
-  #else
-  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_REPORTING_MODE. Using number instead.");
-  jsn["value"] = static_cast<AoXLocatorReportingMode>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/ReportingMode", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/ReportingMode";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_reporting_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/ReportingMode";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_publish(
-  const char *base_topic,
-  bool value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,2,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,2,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/PositionAndOrientationValid", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/PositionAndOrientationValid";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/PositionAndOrientationValid";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_publish(
-  const char *base_topic,
-  CoordinateAndOrientation value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  nlohmann::json json_object = nlohmann::json::object();
-   json_object["CoordinateX"] = value.CoordinateX;
-   json_object["CoordinateY"] = value.CoordinateY;
-   json_object["CoordinateZ"] = value.CoordinateZ;
-   json_object["OrientationX"] = value.OrientationX;
-   json_object["OrientationY"] = value.OrientationY;
-   json_object["OrientationZ"] = value.OrientationZ;
-  jsn["value"]= json_object;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/PositionAndOrientation", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/PositionAndOrientation";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_position_and_orientation_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/PositionAndOrientation";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_azimuth_mask_publish(
-  const char *base_topic,
-  size_t value_count,
-  const MinMaxPair* value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  jsn["value"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<value_count;i++){
-    // Struct type
-    nlohmann::json json_object = nlohmann::json::object();
-    json_object["Min"] = value[i].Min;
-    json_object["Max"] = value[i].Max;
-    jsn["value"].push_back(json_object);
-  }
-
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AzimuthMask", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AzimuthMask";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_azimuth_mask_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AzimuthMask";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_elevation_mask_publish(
-  const char *base_topic,
-  size_t value_count,
-  const MinMaxPair* value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  jsn["value"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<value_count;i++){
-    // Struct type
-    nlohmann::json json_object = nlohmann::json::object();
-    json_object["Min"] = value[i].Min;
-    json_object["Max"] = value[i].Max;
-    jsn["value"].push_back(json_object);
-  }
-
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/ElevationMask", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/ElevationMask";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_elevation_mask_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/ElevationMask";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_allow_list_publish(
-  const char *base_topic,
-  size_t value_count,
-  const char** value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  jsn["value"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<value_count;i++){
-    // String type
-    jsn["value"].push_back(std::string(value[i]));
-  }
-
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AllowList", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AllowList";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_allow_list_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AllowList";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_aox_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
-  jsn["value"] = aox_locator_aox_mode_get_enum_value_name((uint32_t)value);
-  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
-  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
-  #else
-  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_AOX_MODE. Using number instead.");
-  jsn["value"] = static_cast<AoXLocatorAoXMode>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AoXMode", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AoXMode";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_aox_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AoXMode";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
-  jsn["value"] = aox_locator_antenna_mode_get_enum_value_name((uint32_t)value);
-  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
-  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
-  #else
-  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_ANTENNA_MODE. Using number instead.");
-  jsn["value"] = static_cast<AoXLocatorAntennaMode>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AntennaMode", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AntennaMode";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AntennaMode";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_array_publish(
-  const char *base_topic,
-  size_t value_count,
-  const int8_t* value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  jsn["value"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<value_count;i++){
-    jsn["value"].push_back(value[i]);
-  }
-
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AntennaArray", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AntennaArray";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_antenna_array_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AntennaArray";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_period_samples_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,11,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,11,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/PeriodSamples", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/PeriodSamples";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_period_samples_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/PeriodSamples";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_publish(
-  const char *base_topic,
-  bool value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,12,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,12,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AngleFiltering", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AngleFiltering";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AngleFiltering";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_weight_publish(
-  const char *base_topic,
-  double value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,13,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,13,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AngleFilteringWeight", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AngleFilteringWeight";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_filtering_weight_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AngleFilteringWeight";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_timeout_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,14,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,14,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AngleCorrectionTimeout", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AngleCorrectionTimeout";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_timeout_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AngleCorrectionTimeout";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_delay_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,15,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,15,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/AngleCorrectionDelay", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/AngleCorrectionDelay";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_delay_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/AngleCorrectionDelay";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_mode_publish(
-  const char *base_topic,
-  uint8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
-  jsn["value"] = aox_locator_cte_mode_get_enum_value_name((uint32_t)value);
-  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
-  jsn["value"] = enum8_get_enum_value_name((uint32_t)value);
-  #else
-  sl_log_warning(LOG_TAG,"Warning: Enum name not available for AOX_LOCATOR_CTE_MODE. Using number instead.");
-  jsn["value"] = static_cast<AoXLocatorCTEMode>(value);
-  #endif
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/CTEMode", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/CTEMode";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_mode_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/CTEMode";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_sampling_interval_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,17,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,17,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/CTESamplingInterval", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/CTESamplingInterval";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_sampling_interval_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/CTESamplingInterval";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_length_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,18,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,18,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/CTELength", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/CTELength";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_cte_length_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/CTELength";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-sl_status_t uic_mqtt_dotdot_aox_locator_slot_duration_publish(
-  const char *base_topic,
-  int8_t value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  if (true == uic_dotdot_has_attribute_value_a_name(64784,19,value)) {
-    jsn["value"] = uic_dotdot_get_attribute_value_name(64784,19,value);
-  }else{
-    jsn["value"] = value;
-  }
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXLocator/Attributes/SlotDuration", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXLocator/Attributes/SlotDuration";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_locator_slot_duration_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/SlotDuration";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-
-sl_status_t uic_mqtt_dotdot_aox_locator_init()
-{
-  std::string base_topic = "ucl/by-unid/+/+/";
-
-  std::string subscription_topic;
-  if(!uic_mqtt_dotdot_aox_locator_write_attributes_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/Commands/WriteAttributes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_locator_WriteAttributes);
-  }
-
-  if(!uic_mqtt_dotdot_aox_locator_force_read_attributes_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/Commands/ForceReadAttributes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_locator_force_read_attributes);
-  }
-  if (!uic_mqtt_dotdot_aox_locator_iq_report_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/Commands/IQReport";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_locator_iq_report);
-  }
-  if (!uic_mqtt_dotdot_aox_locator_generated_iq_report_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/GeneratedCommands/IQReport";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_aox_locator_iq_report);
-  }
-  if (!uic_mqtt_dotdot_aox_locator_angle_report_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/Commands/AngleReport";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_locator_angle_report);
-  }
-  if (!uic_mqtt_dotdot_aox_locator_generated_angle_report_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/GeneratedCommands/AngleReport";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_aox_locator_angle_report);
-  }
-  if (!uic_mqtt_dotdot_aox_locator_angle_correction_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/Commands/AngleCorrection";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_locator_angle_correction);
-  }
-  if (!uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback.empty()) {
-    subscription_topic = base_topic + "AoXLocator/GeneratedCommands/AngleCorrection";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_generated_aox_locator_angle_correction);
-  }
-
-  // Init the attributes for that cluster
-  uic_mqtt_dotdot_aox_locator_attributes_init();
-
-  uic_mqtt_dotdot_by_group_aox_locator_init();
-
-  return SL_STATUS_OK;
-}
-
-// Callbacks pointers
-static std::set<uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t> uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback;
-static std::set<uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t> uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback;
-
-// Callbacks setters
-
-void uic_mqtt_dotdot_set_aox_position_estimation_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_unset_aox_position_estimation_write_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback.erase(callback);
-}
-void uic_mqtt_dotdot_clear_aox_position_estimation_write_attributes_callbacks()
-{
-  uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback.clear();
-}
-std::set<uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t>& get_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback()
-{
-  return uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback;
-}
-
-void uic_mqtt_dotdot_set_aox_position_estimation_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t callback)
-{
-  if (callback != nullptr) {
-    uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback.insert(callback);
-  }
-}
-void uic_mqtt_dotdot_unset_aox_position_estimation_force_read_attributes_callback(
-  const uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t callback)
-{
-  uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback.erase(callback);
-}
-void uic_mqtt_dotdot_clear_aox_position_estimation_force_read_attributes_callbacks()
-{
-  uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback.clear();
-}
-
-
-// Callback function for incoming publications on ucl/by-unid/+/+/AoXPositionEstimation/Commands/WriteAttributes
-void uic_mqtt_dotdot_on_aox_position_estimation_WriteAttributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback.empty()) {
-    return;
-  }
-
-  if (message_length == 0) {
-    return;
-  }
-
-  std::string unid;
-  uint8_t endpoint = 0; // Default value for endpoint-less topics.
-  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  uic_mqtt_dotdot_aox_position_estimation_state_t new_state = {};
-  uic_mqtt_dotdot_aox_position_estimation_updated_state_t new_updated_state = {};
-
-
-  nlohmann::json jsn;
-  try {
-    jsn = nlohmann::json::parse(std::string(message));
-
-    uic_mqtt_dotdot_parse_aox_position_estimation_write_attributes(
-      jsn,
-      new_state,
-      new_updated_state
-    );
-  } catch (const nlohmann::json::parse_error& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "AoXPositionEstimation", "WriteAttributes");
-    return;
-  } catch (const nlohmann::json::exception& e) {
-    // Catch JSON object field parsing errors
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXPositionEstimation", "WriteAttributes", e.what());
-    return;
-  } catch (const std::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXPositionEstimation", "WriteAttributes", "");
-    return;
-  }
-
-  for (const auto& callback: uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback){
-    callback(
-      static_cast<dotdot_unid_t>(unid.c_str()),
-      endpoint,
-      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-      new_state,
-      new_updated_state
-    );
-  }
-
-}
-
-static void uic_mqtt_dotdot_on_aox_position_estimation_force_read_attributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  uint8_t endpoint = 0;
-  std::string unid;
-
-  if ((message_length == 0) || (uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback.empty())) {
-    return;
-  }
-
-  if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
-    sl_log_debug(LOG_TAG,
-                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
-                topic);
-    return;
-  }
-
-  try {
-    uic_mqtt_dotdot_aox_position_estimation_updated_state_t force_update = {0};
-    bool trigger_handler = false;
-
-    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
-    std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
-
-    // Assume all attributes to be read on empty array received
-    if (attributes.size() == 0) {
-      force_update.position = true;
-      trigger_handler = true;
-    } else {
-      std::unordered_map<std::string, bool *> supported_attrs = {
-        {"Position", &force_update.position },
-      };
-
-      for (auto& attribute : attributes) {
-        auto found_attr = supported_attrs.find(attribute);
-        if (found_attr != supported_attrs.end()) {
-          *(found_attr->second) = true;
-          trigger_handler = true;
-        }
-      }
-    }
-
-    if (trigger_handler == true) {
-      for (const auto& callback: uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback) {
-        callback(
-          static_cast<dotdot_unid_t>(unid.c_str()),
-          endpoint,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-          force_update
-        );
-      }
-    }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "AoXPositionEstimation/Commands/ForceReadAttributes: Unable to parse JSON payload");
-    return;
-  }
-}
-
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_position_publish(
-  const char *base_topic,
-  EstimatedPosition value,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type
-)
-{
-  nlohmann::json jsn;
-
-  // This is a single value
-
-  nlohmann::json json_object = nlohmann::json::object();
-   json_object["ApplicationId"] = value.ApplicationId;
-   json_object["X"] = value.X;
-   json_object["Y"] = value.Y;
-   json_object["Z"] = value.Z;
-   json_object["DeviationX"] = value.DeviationX;
-   json_object["DeviationY"] = value.DeviationY;
-   json_object["DeviationZ"] = value.DeviationZ;
-   json_object["Sequence"] = value.Sequence;
-  jsn["value"]= json_object;
-
-
-  std::string payload_str;
-  try {
-    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-  } catch (const nlohmann::json::exception& e) {
-    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "AoXPositionEstimation/Attributes/Position", e.what());
-    return SL_STATUS_OK;
-  }
-
-
-  std::string topic = std::string(base_topic) + "/AoXPositionEstimation/Attributes/Position";
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
-  {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  if (publish_type & UCL_MQTT_PUBLISH_TYPE_REPORTED)
-  {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(),
-              payload_str.c_str(),
-              payload_str.length(),
-              true);
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_position_unretain(
-  const char *base_topic,
-  uic_mqtt_dotdot_attribute_publish_type_t publish_type)
-{
-  // clang-format on
-  std::string topic
-    = std::string(base_topic)
-      + "/AoXPositionEstimation/Attributes/Position";
-
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_DESIRED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_desired = topic + "/Desired";
-    uic_mqtt_publish(topic_desired.c_str(), NULL, 0, true);
-  }
-  if ((publish_type == UCL_MQTT_PUBLISH_TYPE_REPORTED)
-      || (publish_type == UCL_MQTT_PUBLISH_TYPE_ALL)) {
-    std::string topic_reported = topic + "/Reported";
-    uic_mqtt_publish(topic_reported.c_str(), NULL, 0, true);
-  }
-  return SL_STATUS_OK;
-}
-// clang-format off
-
-
-sl_status_t uic_mqtt_dotdot_aox_position_estimation_init()
-{
-  std::string base_topic = "ucl/by-unid/+/+/";
-
-  std::string subscription_topic;
-  if(!uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback.empty()) {
-    subscription_topic = base_topic + "AoXPositionEstimation/Commands/WriteAttributes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_position_estimation_WriteAttributes);
-  }
-
-  if(!uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback.empty()) {
-    subscription_topic = base_topic + "AoXPositionEstimation/Commands/ForceReadAttributes";
-    uic_mqtt_subscribe(subscription_topic.c_str(), uic_mqtt_dotdot_on_aox_position_estimation_force_read_attributes);
-  }
-
-  // Init the attributes for that cluster
-  uic_mqtt_dotdot_aox_position_estimation_attributes_init();
-
-  uic_mqtt_dotdot_by_group_aox_position_estimation_init();
-
-  return SL_STATUS_OK;
-}
-
-// Callbacks pointers
 static std::set<uic_mqtt_dotdot_protocol_controller_network_management_write_callback_t> uic_mqtt_dotdot_protocol_controller_network_management_write_callback;
 static std::set<uic_mqtt_dotdot_protocol_controller_network_management_write_callback_t> uic_mqtt_dotdot_protocol_controller_network_management_generated_write_callback;
 static std::set<uic_mqtt_dotdot_protocol_controller_network_management_write_attributes_callback_t> uic_mqtt_dotdot_protocol_controller_network_management_write_attributes_callback;
@@ -97983,14 +95748,6 @@ sl_status_t uic_mqtt_dotdot_init() {
   }
 
   if (status_flag == SL_STATUS_OK) {
-    status_flag = uic_mqtt_dotdot_aox_locator_init();
-  }
-
-  if (status_flag == SL_STATUS_OK) {
-    status_flag = uic_mqtt_dotdot_aox_position_estimation_init();
-  }
-
-  if (status_flag == SL_STATUS_OK) {
     status_flag = uic_mqtt_dotdot_protocol_controller_network_management_init();
   }
 
@@ -98067,8 +95824,6 @@ void uic_mqtt_dotdot_publish_supported_commands(
   uic_mqtt_dotdot_application_monitoring_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_name_and_location_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_configuration_parameters_publish_supported_commands(unid, endpoint_id);
-  uic_mqtt_dotdot_aox_locator_publish_supported_commands(unid, endpoint_id);
-  uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_supported_commands(unid, 0);
   uic_mqtt_dotdot_descriptor_publish_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_unify_fan_control_publish_supported_commands(unid, endpoint_id);
@@ -98128,8 +95883,6 @@ void uic_mqtt_dotdot_publish_empty_supported_commands(
   uic_mqtt_dotdot_application_monitoring_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_name_and_location_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(unid, endpoint_id);
-  uic_mqtt_dotdot_aox_locator_publish_empty_supported_commands(unid, endpoint_id);
-  uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_protocol_controller_network_management_publish_empty_supported_commands(unid);
   uic_mqtt_dotdot_descriptor_publish_empty_supported_commands(unid, endpoint_id);
   uic_mqtt_dotdot_unify_fan_control_publish_empty_supported_commands(unid, endpoint_id);
@@ -99308,13 +97061,13 @@ static inline bool uic_mqtt_dotdot_scenes_add_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     uint16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    SSceneName scene_name_value;
+    const char* scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     uint8_t transition_time100ms_value;
     memset(&transition_time100ms_value, 0x00, sizeof(transition_time100ms_value));
@@ -99346,7 +97099,7 @@ static inline bool uic_mqtt_dotdot_scenes_add_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99370,7 +97123,7 @@ static inline bool uic_mqtt_dotdot_scenes_view_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99394,13 +97147,13 @@ static inline bool uic_mqtt_dotdot_scenes_view_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     uint16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    SSceneName scene_name_value;
+    const char* scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_view_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99428,7 +97181,7 @@ static inline bool uic_mqtt_dotdot_scenes_remove_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99452,7 +97205,7 @@ static inline bool uic_mqtt_dotdot_scenes_remove_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99476,7 +97229,7 @@ static inline bool uic_mqtt_dotdot_scenes_remove_all_scenes_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_remove_all_scenes_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99496,7 +97249,7 @@ static inline bool uic_mqtt_dotdot_scenes_remove_all_scenes_response_is_supporte
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99516,7 +97269,7 @@ static inline bool uic_mqtt_dotdot_scenes_store_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99540,7 +97293,7 @@ static inline bool uic_mqtt_dotdot_scenes_store_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99564,7 +97317,7 @@ static inline bool uic_mqtt_dotdot_scenes_recall_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99590,7 +97343,7 @@ static inline bool uic_mqtt_dotdot_scenes_get_scene_membership_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_get_scene_membership_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99612,7 +97365,7 @@ static inline bool uic_mqtt_dotdot_scenes_get_scene_membership_response_is_suppo
     memset(&status_value, 0x00, sizeof(status_value));
     uint8_t capacity_value;
     memset(&capacity_value, 0x00, sizeof(capacity_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_get_scene_membership_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99636,13 +97389,13 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_add_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     uint16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    SSceneName scene_name_value;
+    const char* scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_enhanced_add_scene_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99670,7 +97423,7 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_add_scene_response_is_support
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99694,7 +97447,7 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_view_scene_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -99718,13 +97471,13 @@ static inline bool uic_mqtt_dotdot_scenes_enhanced_view_scene_response_is_suppor
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId groupid_value;
+    uint16_t groupid_value;
     memset(&groupid_value, 0x00, sizeof(groupid_value));
     uint8_t sceneid_value;
     memset(&sceneid_value, 0x00, sizeof(sceneid_value));
     uint16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    SSceneName scene_name_value;
+    const char* scene_name_value;
     memset(&scene_name_value, 0x00, sizeof(scene_name_value));
     for (const auto& callback: uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -99754,11 +97507,11 @@ static inline bool uic_mqtt_dotdot_scenes_copy_scene_is_supported(
 {
     uint8_t mode_value;
     memset(&mode_value, 0x00, sizeof(mode_value));
-    SGroupId group_identifier_from_value;
+    uint16_t group_identifier_from_value;
     memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
     uint8_t scene_identifier_from_value;
     memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
-    SGroupId group_identifier_to_value;
+    uint16_t group_identifier_to_value;
     memset(&group_identifier_to_value, 0x00, sizeof(group_identifier_to_value));
     uint8_t scene_identifier_to_value;
     memset(&scene_identifier_to_value, 0x00, sizeof(scene_identifier_to_value));
@@ -99788,7 +97541,7 @@ static inline bool uic_mqtt_dotdot_scenes_copy_scene_response_is_supported(
 {
     zclStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
-    SGroupId group_identifier_from_value;
+    uint16_t group_identifier_from_value;
     memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
     uint8_t scene_identifier_from_value;
     memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
@@ -100850,7 +98603,7 @@ static inline bool uic_mqtt_dotdot_alarms_reset_alarm_is_supported(
 {
     uint8_t alarm_code_value;
     memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-    clusterId cluster_identifier_value;
+    uint16_t cluster_identifier_value;
     memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
     for (const auto& callback: uic_mqtt_dotdot_alarms_reset_alarm_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100872,7 +98625,7 @@ static inline bool uic_mqtt_dotdot_alarms_alarm_is_supported(
 {
     uint8_t alarm_code_value;
     memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-    clusterId cluster_identifier_value;
+    uint16_t cluster_identifier_value;
     memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
     for (const auto& callback: uic_mqtt_dotdot_alarms_alarm_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -100910,7 +98663,7 @@ static inline bool uic_mqtt_dotdot_alarms_get_alarm_response_is_supported(
     memset(&status_value, 0x00, sizeof(status_value));
     uint8_t alarm_code_value;
     memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-    clusterId cluster_identifier_value;
+    uint16_t cluster_identifier_value;
     memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
     uint32_t time_stamp_value;
     memset(&time_stamp_value, 0x00, sizeof(time_stamp_value));
@@ -101927,7 +99680,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_pin_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkPINUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -101975,7 +99728,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_pin_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkPINUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_pin_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102023,7 +99776,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_pin_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkPINUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_pin_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102091,7 +99844,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_status_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -102131,7 +99884,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_status_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_user_status_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102171,9 +99924,9 @@ static inline bool uic_mqtt_dotdot_door_lock_set_weekday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkWeekDayScheduleID scheduleid_value;
+    uint8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     uint8_t days_mask_value;
     memset(&days_mask_value, 0x00, sizeof(days_mask_value));
@@ -102231,9 +99984,9 @@ static inline bool uic_mqtt_dotdot_door_lock_get_weekday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkWeekDayScheduleID scheduleid_value;
+    uint8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102299,9 +100052,9 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_weekday_schedule_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkWeekDayScheduleID scheduleid_value;
+    uint8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102339,9 +100092,9 @@ static inline bool uic_mqtt_dotdot_door_lock_set_year_day_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkYearDayScheduleID scheduleid_value;
+    uint8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     uint32_t local_start_time_value;
     memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
@@ -102387,9 +100140,9 @@ static inline bool uic_mqtt_dotdot_door_lock_get_year_day_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkYearDayScheduleID scheduleid_value;
+    uint8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102443,9 +100196,9 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_year_day_schedule_is_supporte
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkYearDayScheduleID scheduleid_value;
+    uint8_t scheduleid_value;
     memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102483,7 +100236,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_holiday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkHolidayScheduleID holiday_scheduleid_value;
+    uint8_t holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
     uint32_t local_start_time_value;
     memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
@@ -102531,7 +100284,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_holiday_schedule_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkHolidayScheduleID holiday_scheduleid_value;
+    uint8_t holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102583,7 +100336,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_holiday_schedule_is_supported
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkHolidayScheduleID holiday_scheduleid_value;
+    uint8_t holiday_scheduleid_value;
     memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102619,7 +100372,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_user_type_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkUserType user_type_value;
     memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -102659,7 +100412,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_user_type_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkTotalUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_user_type_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102699,7 +100452,7 @@ static inline bool uic_mqtt_dotdot_door_lock_set_rfid_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkRFIDUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     DrlkSettableUserStatus user_status_value;
     memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -102747,7 +100500,7 @@ static inline bool uic_mqtt_dotdot_door_lock_get_rfid_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkRFIDUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_get_rfid_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -102795,7 +100548,7 @@ static inline bool uic_mqtt_dotdot_door_lock_clear_rfid_code_is_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    DrlkRFIDUserID userid_value;
+    uint16_t userid_value;
     memset(&userid_value, 0x00, sizeof(userid_value));
     for (const auto& callback: uic_mqtt_dotdot_door_lock_clear_rfid_code_callback) {
       if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -105769,9 +103522,9 @@ static inline bool uic_mqtt_dotdot_color_control_move_color_temperature_is_suppo
     memset(&move_mode_value, 0x00, sizeof(move_mode_value));
     uint16_t rate_value;
     memset(&rate_value, 0x00, sizeof(rate_value));
-    CCMinMiredsField color_temperature_minimum_mireds_value;
+    uint16_t color_temperature_minimum_mireds_value;
     memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-    CCMaxMiredsField color_temperature_maximum_mireds_value;
+    uint16_t color_temperature_maximum_mireds_value;
     memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -105809,9 +103562,9 @@ static inline bool uic_mqtt_dotdot_color_control_step_color_temperature_is_suppo
     memset(&step_size_value, 0x00, sizeof(step_size_value));
     uint16_t transition_time_value;
     memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-    CCMinMiredsField color_temperature_minimum_mireds_value;
+    uint16_t color_temperature_minimum_mireds_value;
     memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-    CCMaxMiredsField color_temperature_maximum_mireds_value;
+    uint16_t color_temperature_maximum_mireds_value;
     memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
     uint8_t options_mask_value;
     memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -109039,7 +106792,7 @@ static inline bool uic_mqtt_dotdot_electrical_measurement_get_measurement_profil
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id)
 {
-    UTC start_time_value;
+    uint32_t start_time_value;
     memset(&start_time_value, 0x00, sizeof(start_time_value));
     GetMeasurementProfileResponseStatus status_value;
     memset(&status_value, 0x00, sizeof(status_value));
@@ -109077,7 +106830,7 @@ static inline bool uic_mqtt_dotdot_electrical_measurement_get_measurement_profil
 {
     uint16_t attributeid_value;
     memset(&attributeid_value, 0x00, sizeof(attributeid_value));
-    UTC start_time_value;
+    uint32_t start_time_value;
     memset(&start_time_value, 0x00, sizeof(start_time_value));
     uint8_t number_of_intervals_value;
     memset(&number_of_intervals_value, 0x00, sizeof(number_of_intervals_value));
@@ -109731,6 +107484,20 @@ static inline bool uic_mqtt_dotdot_state_discover_security_is_supported(
 
   return false;
 }
+static inline bool uic_mqtt_dotdot_state_enable_nls_is_supported(
+  const dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint_id)
+{
+    for (const auto& callback: uic_mqtt_dotdot_state_enable_nls_callback) {
+      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+    
+        ) == SL_STATUS_OK) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 static inline bool uic_mqtt_dotdot_state_write_attributes_is_supported(
   const dotdot_unid_t unid,
@@ -109815,6 +107582,13 @@ void uic_mqtt_dotdot_state_publish_supported_commands(
     }
     first_command = false;
     ss << R"("DiscoverSecurity")";
+  }
+  if (uic_mqtt_dotdot_state_enable_nls_is_supported(unid, endpoint_id)) {
+    if (first_command == false) {
+      ss << ", ";
+    }
+    first_command = false;
+    ss << R"("EnableNls")";
   }
 
   // Check for a WriteAttributes Callback
@@ -110863,415 +108637,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(
   std::string topic = "ucl/by-unid/" + std::string(unid);
   topic +=  "/ep"+ std::to_string(endpoint_id);
   topic +=  "/ConfigurationParameters/SupportedCommands";
-
-  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
-    uic_mqtt_publish(topic.c_str(),
-                     EMPTY_VALUE_ARRAY,
-                     strlen(EMPTY_VALUE_ARRAY),
-                     true);
-  }
-}
-
-// Publishing Cluster Revision for AoXLocator Cluster
-void uic_mqtt_dotdot_aox_locator_publish_cluster_revision(const char* base_topic, uint16_t value)
-{
-  std::string cluster_topic = std::string(base_topic) + "/AoXLocator/Attributes/ClusterRevision";
-  // Publish Desired
-  std::string pub_topic_des = cluster_topic + "/Desired";
-  std::string payload = std::string(R"({"value": )")
-    + std::to_string(value) + std::string("}");
-  uic_mqtt_publish(pub_topic_des.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    true);
-  // Publish Reported
-  std::string pub_topic_rep = cluster_topic + "/Reported";
-  uic_mqtt_publish(pub_topic_rep.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    true);
-}
-
-// Unretain Cluster Revision for AoXLocator Cluster
-void uic_mqtt_dotdot_aox_locator_unretain_cluster_revision(const char* base_topic)
-{
-  // clang-format on
-  std::string cluster_topic
-    = std::string(base_topic)
-      + "/AoXLocator/Attributes/ClusterRevision";
-  // Publish Desired
-  std::string desired_topic = cluster_topic + "/Desired";
-  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
-  // Publish Reported
-  std::string reported_topic = cluster_topic + "/Reported";
-  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
-  // clang-format off
-}
-
-static inline bool uic_mqtt_dotdot_aox_locator_iq_report_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    const char* tag_unid_value;
-    memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-    uint8_t channel_value;
-    memset(&channel_value, 0x00, sizeof(channel_value));
-    int8_t rssi_value;
-    memset(&rssi_value, 0x00, sizeof(rssi_value));
-    int32_t sequence_value;
-    memset(&sequence_value, 0x00, sizeof(sequence_value));
-    for (const auto& callback: uic_mqtt_dotdot_aox_locator_iq_report_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        tag_unid_value,
-    
-        channel_value,
-    
-        rssi_value,
-    
-        0, nullptr,
-
-        sequence_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_aox_locator_angle_report_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    const char* tag_unid_value;
-    memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-    SphericalCoordinates direction_value;
-    memset(&direction_value, 0x00, sizeof(direction_value));
-    SphericalCoordinates deviation_value;
-    memset(&deviation_value, 0x00, sizeof(deviation_value));
-    int32_t sequence_value;
-    memset(&sequence_value, 0x00, sizeof(sequence_value));
-    for (const auto& callback: uic_mqtt_dotdot_aox_locator_angle_report_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        tag_unid_value,
-    
-        direction_value,
-    
-        deviation_value,
-    
-        sequence_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-static inline bool uic_mqtt_dotdot_aox_locator_angle_correction_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-    const char* tag_unid_value;
-    memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-    SphericalCoordinates direction_value;
-    memset(&direction_value, 0x00, sizeof(direction_value));
-    SphericalCoordinates deviation_value;
-    memset(&deviation_value, 0x00, sizeof(deviation_value));
-    int32_t sequence_value;
-    memset(&sequence_value, 0x00, sizeof(sequence_value));
-    for (const auto& callback: uic_mqtt_dotdot_aox_locator_angle_correction_callback) {
-      if (callback( unid, endpoint_id, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-    ,
-        tag_unid_value,
-    
-        direction_value,
-    
-        deviation_value,
-    
-        sequence_value
-    
-        ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-static inline bool uic_mqtt_dotdot_aox_locator_write_attributes_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_write_attributes_callback) {
-    uic_mqtt_dotdot_aox_locator_state_t aox_locator_new_state = {};
-    uic_mqtt_dotdot_aox_locator_updated_state_t aox_locator_new_updated_state = {};
-
-    if (callback(
-          unid,
-          endpoint_id,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
-          aox_locator_new_state,
-          aox_locator_new_updated_state
-      ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-  return false;
-}
-
-static inline bool uic_mqtt_dotdot_aox_locator_force_read_attributes_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  for (const auto& callback: uic_mqtt_dotdot_aox_locator_force_read_attributes_callback) {
-    uic_mqtt_dotdot_aox_locator_updated_state_t aox_locator_force_update = {0};
-    if (callback(
-          unid,
-          endpoint_id,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
-          aox_locator_force_update
-      ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-  return false;
-}
-
-// Publishing Supported Commands for AoXLocator Cluster
-void uic_mqtt_dotdot_aox_locator_publish_supported_commands(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  std::stringstream ss;
-  bool first_command = true;
-  ss.str("");
-
-  // check if there is callback for each command
-  if (uic_mqtt_dotdot_aox_locator_iq_report_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("IQReport")";
-  }
-  if (uic_mqtt_dotdot_aox_locator_angle_report_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("AngleReport")";
-  }
-  if (uic_mqtt_dotdot_aox_locator_angle_correction_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("AngleCorrection")";
-  }
-
-  // Check for a WriteAttributes Callback
-  if(uic_mqtt_dotdot_aox_locator_write_attributes_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("WriteAttributes")";
-  }
-
-  // Check for a ForceReadAttributes Callback
-  if (uic_mqtt_dotdot_aox_locator_force_read_attributes_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ForceReadAttributes")";
-  }
-
-  // Publish supported commands
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint_id);
-  topic +=  "/AoXLocator/SupportedCommands";
-  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
-  if (first_command == false) {
-    uic_mqtt_publish(topic.c_str(),
-                      payload_str.c_str(),
-                      payload_str.length(),
-                      true);
-  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
-    // There are no supported commands, but make sure we publish some
-    // SupportedCommands = [] if any attribute has been published for a cluster.
-    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
-    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
-    attributes_topic += "/AoXLocator/Attributes";
-
-    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
-      uic_mqtt_publish(topic.c_str(),
-                      EMPTY_VALUE_ARRAY,
-                      strlen(EMPTY_VALUE_ARRAY),
-                      true);
-    }
-  }
-}
-
-// Publishing empty/no Supported Commands for AoXLocator Cluster
-void uic_mqtt_dotdot_aox_locator_publish_empty_supported_commands(
-  const dotdot_unid_t unid
-  , dotdot_endpoint_id_t endpoint_id)
-{
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint_id);
-  topic +=  "/AoXLocator/SupportedCommands";
-
-  if (uic_mqtt_count_topics(topic.c_str()) > 0) {
-    uic_mqtt_publish(topic.c_str(),
-                     EMPTY_VALUE_ARRAY,
-                     strlen(EMPTY_VALUE_ARRAY),
-                     true);
-  }
-}
-
-// Publishing Cluster Revision for AoXPositionEstimation Cluster
-void uic_mqtt_dotdot_aox_position_estimation_publish_cluster_revision(const char* base_topic, uint16_t value)
-{
-  std::string cluster_topic = std::string(base_topic) + "/AoXPositionEstimation/Attributes/ClusterRevision";
-  // Publish Desired
-  std::string pub_topic_des = cluster_topic + "/Desired";
-  std::string payload = std::string(R"({"value": )")
-    + std::to_string(value) + std::string("}");
-  uic_mqtt_publish(pub_topic_des.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    true);
-  // Publish Reported
-  std::string pub_topic_rep = cluster_topic + "/Reported";
-  uic_mqtt_publish(pub_topic_rep.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    true);
-}
-
-// Unretain Cluster Revision for AoXPositionEstimation Cluster
-void uic_mqtt_dotdot_aox_position_estimation_unretain_cluster_revision(const char* base_topic)
-{
-  // clang-format on
-  std::string cluster_topic
-    = std::string(base_topic)
-      + "/AoXPositionEstimation/Attributes/ClusterRevision";
-  // Publish Desired
-  std::string desired_topic = cluster_topic + "/Desired";
-  uic_mqtt_publish(desired_topic.c_str(), NULL, 0, true);
-  // Publish Reported
-  std::string reported_topic = cluster_topic + "/Reported";
-  uic_mqtt_publish(reported_topic.c_str(), NULL, 0, true);
-  // clang-format off
-}
-
-
-static inline bool uic_mqtt_dotdot_aox_position_estimation_write_attributes_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  for (const auto& callback: uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback) {
-    uic_mqtt_dotdot_aox_position_estimation_state_t aox_position_estimation_new_state = {};
-    uic_mqtt_dotdot_aox_position_estimation_updated_state_t aox_position_estimation_new_updated_state = {};
-
-    if (callback(
-          unid,
-          endpoint_id,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
-          aox_position_estimation_new_state,
-          aox_position_estimation_new_updated_state
-      ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-  return false;
-}
-
-static inline bool uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_is_supported(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  for (const auto& callback: uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback) {
-    uic_mqtt_dotdot_aox_position_estimation_updated_state_t aox_position_estimation_force_update = {0};
-    if (callback(
-          unid,
-          endpoint_id,
-          UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK,
-          aox_position_estimation_force_update
-      ) == SL_STATUS_OK) {
-      return true;
-    }
-  }
-  return false;
-}
-
-// Publishing Supported Commands for AoXPositionEstimation Cluster
-void uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id)
-{
-  std::stringstream ss;
-  bool first_command = true;
-  ss.str("");
-
-  // check if there is callback for each command
-
-  // Check for a WriteAttributes Callback
-  if(uic_mqtt_dotdot_aox_position_estimation_write_attributes_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("WriteAttributes")";
-  }
-
-  // Check for a ForceReadAttributes Callback
-  if (uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_is_supported(unid, endpoint_id)) {
-    if (first_command == false) {
-      ss << ", ";
-    }
-    first_command = false;
-    ss << R"("ForceReadAttributes")";
-  }
-
-  // Publish supported commands
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint_id);
-  topic +=  "/AoXPositionEstimation/SupportedCommands";
-  std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
-  if (first_command == false) {
-    uic_mqtt_publish(topic.c_str(),
-                      payload_str.c_str(),
-                      payload_str.length(),
-                      true);
-  } else if (uic_mqtt_count_topics(topic.c_str()) == 0) {
-    // There are no supported commands, but make sure we publish some
-    // SupportedCommands = [] if any attribute has been published for a cluster.
-    std::string attributes_topic = "ucl/by-unid/" + std::string(unid);
-    attributes_topic +=  "/ep"+ std::to_string(endpoint_id);
-    attributes_topic += "/AoXPositionEstimation/Attributes";
-
-    if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
-      uic_mqtt_publish(topic.c_str(),
-                      EMPTY_VALUE_ARRAY,
-                      strlen(EMPTY_VALUE_ARRAY),
-                      true);
-    }
-  }
-}
-
-// Publishing empty/no Supported Commands for AoXPositionEstimation Cluster
-void uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands(
-  const dotdot_unid_t unid
-  , dotdot_endpoint_id_t endpoint_id)
-{
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint_id);
-  topic +=  "/AoXPositionEstimation/SupportedCommands";
 
   if (uic_mqtt_count_topics(topic.c_str()) > 0) {
     uic_mqtt_publish(topic.c_str(),
@@ -118346,6 +115711,34 @@ void uic_mqtt_dotdot_state_publish_generated_discover_security_command(
                     false);
 }
 /**
+ * @brief Publishes an incoming/generated EnableNls command for
+ * the State cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/GeneratedCommands/EnableNls
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_generated_enable_nls_command(
+  const dotdot_unid_t unid
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
+  topic += "State/GeneratedCommands/EnableNls";
+
+  std::string payload =
+    get_json_payload_for_state_enable_nls_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+/**
  * @brief Publishes an incoming/generated Bind command for
  * the Binding cluster.
  *
@@ -118653,114 +116046,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_discover_paramet
 
   std::string payload =
     get_json_payload_for_configuration_parameters_discover_parameter_range_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated IQReport command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/IQReport
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_iq_report_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/IQReport";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_iq_report_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated AngleReport command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/AngleReport
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_angle_report_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/AngleReport";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_report_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated AngleCorrection command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/AngleCorrection
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_angle_correction_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/AngleCorrection";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_correction_command(
     fields);
 
   // Publish our command

@@ -1,2 +1,0 @@
-add_library(zwave_definitions INTERFACE)
-target_include_directories(zwave_definitions INTERFACE include)

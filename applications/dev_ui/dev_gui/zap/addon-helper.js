@@ -1,6 +1,4 @@
 const supportedClusters = [
-    "AoXLocator",
-    "AoXPositionEstimation",
     "BarrierControl",
     "Basic",
     "Binding",
@@ -41,7 +39,7 @@ let enums = new Set();
 let enumList = {};
 let bitmaps = new Set();
 let bitmapList = {};
-const unifyClusters = ["ProtocolController-RFTelemetry", "ProtocolController-NetworkManagement", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters", "SystemMetrics", "Binding"];
+const unifyClusters = ["ProtocolController-RFTelemetry", "ProtocolController-NetworkManagement", "NameAndLocation", "ConfigurationParameters", "SystemMetrics", "Binding"];
 const clusterArrayAttributes = [
     "Groups.GetGroupMembership.GroupList",
     "Groups.GetGroupMembershipResponse.GroupList",
@@ -56,11 +54,6 @@ const clusterArrayAttributes = [
     "Scenes.EnhancedViewSceneResponse.ExtensionFieldSets.ExtensionFieldSet",
     "Thermostat.SetWeeklySchedule.Transitions",
     "Thermostat.GetWeeklyScheduleResponse.Transitions",
-    "AoXLocator.AzimuthMask",
-    "AoXLocator.ElevationMask",
-    "AoXLocator.AllowList",
-    "AoXLocator.AntennaArray",
-    "AoXLocator.IQReport.Samples",
     "ConfigurationParameters.ConfigurationParameters",
     "ProtocolController-RFTelemetry.TxReport.LastRouteRepeaters",
     "ProtocolController-RFTelemetry.TxReport.IncomingRSSIRepeaters",

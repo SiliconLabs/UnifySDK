@@ -20,6 +20,14 @@
 #include "unity.h"
 #include "example_test_mock.h"
 
+void setUpSuite(void) {
+
+}
+
+void tearDownSuite(void) {
+
+}
+
 static bool     m_callback_executed = false;
 static uint32_t m_callback_test_number;
 

@@ -25,6 +25,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <unistd.h>
+#include <algorithm>
 
 // Type aliasing
 using attribute_store_get_string_function_t

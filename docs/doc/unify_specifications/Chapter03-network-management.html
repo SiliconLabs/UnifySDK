@@ -28,7 +28,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Scenario Mapping to Specific PHYs: Z-Wave, BLE and ZigBee" href="Chapter04-scenario-mappings.html" />
+    <link rel="next" title="4. Scenario Mapping to Specific PHYs: Z-Wave" href="Chapter04-scenario-mappings.html" />
     <link rel="prev" title="2. Dotdot ZCL in Unify Framework for Application Level Control" href="Chapter02-ZCL-in-uic.html" /> 
 </head>
 
@@ -41,7 +41,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -71,17 +71,16 @@
 <li class="toctree-l2"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">3. Network Management Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave, BLE and ZigBee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave and ZigBee</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter08-binding.html">8. Binding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter09-descriptor-cluster.html">9. Descriptor Cluster ( Experimental )</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter10-aox-application.html">10. AoX Application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter11-name-and-location-service.html">11. Name and Location Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter12-unify-applications-monitoring.html">12. Unify Applications Monitoring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter13-system-metrics.html">13. System Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter14-unify-controller-language-data-model.html">14. Unify Controller Language Data Model ( Experimental )</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter11-unify-applications-monitoring.html">11. Unify Applications Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter12-system-metrics.html">12. System Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter13-unify-controller-language-data-model.html">13. Unify Controller Language Data Model ( Experimental )</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
@@ -706,6 +705,11 @@ operations.</p>
 <p>node, i.e. discover its capabilities and state.</p>
 </td>
 </tr>
+<tr class="row-even"><td><p>EnableNls</p></td>
+<td><p>This command is used to instruct a Z-Wave node to enable Network Layer</p>
+<p>Security (NLS) that comes with Security V2 (S2V2).</p>
+</td>
+</tr>
 </tbody>
 </table>
 <p>The protocol controllers MUST advertise the list of SupportedCommands under a
@@ -984,6 +988,56 @@ iot_service -&gt; mqtt_broker
 &amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/DiscoverSecurity
 
 == Security Discovery starts ==
+
+== When the operation is completed ==
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online interviewing&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Access Control&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service"/>
+</p>
+</section>
+<section id="enablenls-command">
+<h4><span class="section-number">3.3.2.11. </span>EnableNls Command<a class="headerlink" href="#enablenls-command" title="Permalink to this heading"></a></h4>
+<p>Other operations may be paused while a Protocol Controller performs an enable NLS
+process.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-9e867864a43bc8f490dd501609d711062c630d48.png" alt="' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Initiating an Enable NLS command (EnableNls) on a node itself (5)
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+' List of participants
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller&quot; as protocol_controller
+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/+/Commands/+
+protocol_controller -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Commands/+
+
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/unid/+/State/SupportedCommands
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;NetworkStatus&quot;: &quot;Online functional&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;Security&quot;: &quot;Z-Wave S2 Authenticated&quot;, \n&lt;font color=#00003C&gt;&lt;b&gt;&quot;MaximumCommandDelay&quot;: 5 }&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+protocol_controller -&gt; mqtt_broker : &lt;font color=#00003C&gt;ucl/by-unid/zw-1234/State/SupportedCommands \n&lt;font color=#00003C&gt;&lt;b&gt;{ &quot;value&quot;:[&quot;Interview&quot;, &quot;DiscoverSecurity&quot;, &quot;EnableNls&quot;]}&lt;/b&gt;
+&amp; mqtt_broker -&gt; iot_service
+
+rnote over iot_service, protocol_controller: IoT Service wants to enable network\nlayer security (NLS) of zw-1234
+
+iot_service -&gt; mqtt_broker
+&amp; mqtt_broker -&gt; protocol_controller : &lt;font color=#6C2A0D&gt;ucl/by-unid/zw-1234/State/Commands/EnableNls
+
+== Enable NLS operation starts ==
 
 == When the operation is completed ==
 

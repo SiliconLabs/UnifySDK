@@ -5,10 +5,10 @@ skinparam roundCorner 15
 top to bottom direction
 
 cloud "IoT Services" as IOTService {
-    rectangle "Developer GUI" as DEVGUI 
-    rectangle "UPTICap" as UPTICAP
-    rectangle "UPTIWriter" as UPTIWRITER
-    rectangle "Matter Bridge" as UMB
+    rectangle "Developer GUI" as DEVGUI #FEFECE
+    rectangle "UPTICap" as UPTICAP #FEFECE
+    rectangle "UPTIWriter" as UPTIWRITER #FEFECE
+    rectangle "Matter Bridge" as UMB #FEFECE
 
     DEVGUI -[hidden]r->UPTICAP
     UPTICAP -[hidden]r->UPTIWRITER 
@@ -18,15 +18,14 @@ cloud "IoT Services" as IOTService {
 rectangle "IoT Gateway" {
 
     package "Unify Framework services" as services {
-        rectangle "NAL" as NAL
-        rectangle "UPVL" as UPVL
-        rectangle "Image provider" as IMP
-        rectangle "GMS" as GMS
-        rectangle "AoX Positioning" as positioning
+        rectangle "NAL" as NAL #FEFECE
+        rectangle "UPVL" as UPVL #FEFECE
+        rectangle "Image provider" as IMP #FEFECE
+        rectangle "GMS" as GMS #FEFECE
     }
 
     rectangle "MQTT Broker" as Broker {
-        rectangle "Unify Controller Language (UCL)" as ABLayer
+        rectangle "Unify Controller Language (UCL)" as ABLayer #FEFECE
     }
 
     ABLayer <-> services
@@ -34,19 +33,24 @@ rectangle "IoT Gateway" {
     GMS -[hidden]r-> IMP
     IMP -[hidden]r-> NAL
     NAL -[hidden]d-> GMS
-    UPVL -[hidden]d-> positioning
 
     package "Unify Framework protocol controllers" as PCS {
-        rectangle "Z-Wave - ZPC" as ZPC
-        rectangle "Zigbee - ZigPC" as ZIGPC
-        rectangle "Angle of X - AoXPC" as AOX
+        rectangle "Z-Wave - ZPC" as ZPC #FEFECE
+        rectangle "Proprietary PC" as ProprietaryPC #FEFECE
+    }
+
+    package "Emulators" as Emulators {
+        rectangle "Emulated End Device" as EED #FEFECE
     }
 }
 
-ZPC -[hidden]r-> ZIGPC
-ZIGPC -[hidden]r-> AOX
+ZPC -[hidden]r-> ProprietaryPC
+EED -[hidden]r-> PCS
 
-' Relation between Protocol controllers and MQTT abstration layer
+' Relation between EED and MQTT abstraction layer
+ABLayer <-d-> EED
+
+' Relation between Protocol controllers and MQTT abstraction layer
 ABLayer <-d-> PCS
 
 ' IoT Services relation to the rest

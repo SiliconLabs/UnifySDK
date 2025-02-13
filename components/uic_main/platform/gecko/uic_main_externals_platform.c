@@ -21,8 +21,6 @@
 #include "SwTimer.h"
 #include "ZW_timer.h"
 
-//#define DEBUGPRINT
-#include "DebugPrint.h"
 
 static bool initialized = false;
 static SSwTimer contikiLoopTimer;

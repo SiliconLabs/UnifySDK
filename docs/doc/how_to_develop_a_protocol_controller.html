@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -476,20 +476,20 @@ network properties under for example the HomeID.</p>
 </section>
 <section id="unid-endpoint-approach">
 <h5>UNID/Endpoint approach<a class="headerlink" href="#unid-endpoint-approach" title="Permalink to this heading"></a></h5>
-<p>The <strong>AoXPC</strong> uses a more UNID-like strategy, where the UNIDs are directly saved
+<p>In this approach, <strong>PCs</strong> uses a more UNID-like strategy, where the UNIDs are directly saved
 under the <strong>Attribute Store</strong> tree root.</p>
 <figure class="align-center">
 <p class="plantuml">
-<img src="../_images/plantuml-61208c548cf26b54717d665f06b16f1c0a01bfed.png" alt="!theme plain
+<img src="../_images/plantuml-0dc64da59aa9a4046dc1b9d3062c75bc632da742.png" alt="!theme plain
 title Attribute Store tree UNID addressing example
 
 object &quot;Root&quot; as root #DEDEDE
 root : Attribute Type = TREE_ROOT
 root : value = Desired: [], Reported: []
 
-object &quot;BLE-UNID&quot; as node_1 #fffae6
-node_1 : Attribute Type = ATTRIBUTE_BLE_UNID
-node_1 : value = Desired: [], Reported: [&quot;ble-pd-588E81A54788&quot;]
+object &quot;UNID&quot; as node_1 #fffae6
+node_1 : Attribute Type = ATTRIBUTE_UNID
+node_1 : value = Desired: [], Reported: [&quot;zb-04CD15FFFE730912&quot;]
 
 object &quot;Endpoint&quot; as endpoint_1 #f2ffe6
 endpoint_1 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
@@ -499,9 +499,9 @@ object &quot;Endpoint&quot; as endpoint_2 #f2ffe6
 endpoint_2 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
 endpoint_2 : value = Desired: [], Reported: [01]
 
-object &quot;BLE-UNID&quot; as node_2 #fffae6
-node_2 : Attribute Type = ATTRIBUTE_BLE_UNID
-node_2 : value = Desired: [], Reported: [&quot;ble-pd-588E81A54788&quot;]
+object &quot;UNID&quot; as node_2 #fffae6
+node_2 : Attribute Type = ATTRIBUTE_UNID
+node_2 : value = Desired: [], Reported: [&quot;zb-04CD15FFFE730912&quot;]
 
 object &quot;Endpoint&quot; as endpoint_3 #f2ffe6
 endpoint_3 : Attribute Type = ATTRIBUTE_ENDPOINT_ID
@@ -520,9 +520,9 @@ endpoint_2 *-- node_1_ep_2_on_off"/>
 </p>
 </figure>
 <p>Using this methodology, to publish the state of the OnOff attribute when updated,
-the <strong>AoxPC</strong> navigates up the <strong>Attribute Store</strong>, collects the value of the
+the <strong>PCs</strong> navigates up the <strong>Attribute Store</strong>, collects the value of the
 Endpoint, UNID, and does require any further calculation.
-The <strong>AoxPC</strong> can subsequently make these 2 publications:</p>
+The <strong>PCs</strong> can subsequently make these 2 publications:</p>
 <div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Desired</span> - {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>}
 <span class="ow">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported</span> - {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>}
 </pre></div>

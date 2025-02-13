@@ -74,8 +74,36 @@ struct fixed_transition {
   }
 };
 
+struct continuous_cyclic_transition {
+  attribute_store_node_t node;
+  attribute_store_node_value_state_t value_type;
+  float step;
+  float min_value;
+  float max_value;
+  struct ctimer timer;
+
+  // Dont copy this as it has a reference
+  continuous_cyclic_transition(continuous_cyclic_transition const &) = delete;
+
+  continuous_cyclic_transition() : timer({}) {}
+
+  ~continuous_cyclic_transition()
+  {
+    ctimer_stop(&timer);
+  }
+};
+
+struct fixed_cyclic_transition : fixed_transition {
+  float min_value;
+  float max_value;
+};
+
 std::map<attribute_store_node_t, std::unique_ptr<fixed_transition>>
   fixed_transition_pool;
+std::map<attribute_store_node_t, std::unique_ptr<fixed_cyclic_transition>>
+  fixed_cyclic_transition_pool;
+std::map<attribute_store_node_t, std::unique_ptr<continuous_cyclic_transition>>
+  cyclic_transition_pool;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions
@@ -84,6 +112,119 @@ static void on_attribute_node_deleted(attribute_store_node_t deleted_node)
 {
   nodes_under_transition.erase(deleted_node);
   //attribute_stop_transition(deleted_node);
+}
+
+static void continuous_transition_cyclic_step(void *data)
+{
+  auto transition = static_cast<continuous_cyclic_transition *>(data);
+
+  if (false
+      == attribute_store_is_value_defined(transition->node,
+                                          transition->value_type)) {
+    // Value got undefined during a transition, just abort the transition.
+    attribute_stop_transition(transition->node);
+    return;
+  }
+
+  float current_value
+    = attribute_store_get_number(transition->node, transition->value_type);
+  float next_value = current_value + transition->step;
+
+  // cyclic range adjustment
+  if (next_value > transition->max_value) {
+    // the next_value crosses the max boundary    
+    // get the cyclic range adjusted next value
+    next_value = transition->min_value + (next_value - transition->max_value);
+  } else if (next_value < transition->min_value) {
+    // the next_value crosses the min boundary
+    // get the cyclic range adjusted next value
+    next_value = transition->max_value - (transition->min_value - next_value);
+  }
+
+  attribute_store_set_number(transition->node,
+                             next_value,
+                             transition->value_type);
+  // keep restarting since continuous, only stops when explicitly asked
+  ctimer_restart(&transition->timer);
+}
+
+static void fixed_transition_cyclic_step(void *data)
+{
+  auto transition = static_cast<fixed_cyclic_transition *>(data);
+
+  if (false
+      == attribute_store_is_value_defined(transition->node,
+                                          transition->value_type)) {
+    // Value got undefined during a transition, just abort the transition.
+    attribute_stop_transition(transition->node);
+    return;
+  }
+
+  float current_value
+    = attribute_store_get_number(transition->node, transition->value_type);
+  // just in case if missed to stop transition due to floating point mismatch
+  if (current_value == transition->target_value) {
+    attribute_stop_transition(transition->node);
+    return;
+  }
+  float next_value = current_value + transition->step;
+
+  // cyclic range adjustment + overshoot adjustment around cyclic bounds
+  if (next_value > transition->max_value) {
+    // the next_value crosses the max boundary    
+    // get the cyclic range adjusted next value
+    float temp_next_value
+      = transition->min_value + (next_value - transition->max_value);
+
+    // over shoot adjustment
+    // if overshot after cyclic adjustment (say next_value=258, max=255, target=1)
+    if ((temp_next_value > transition->target_value)
+    // or if overshot even before cyclic adjustment (say next_value=258, max=255, target=253)
+        || (next_value > transition->target_value
+            && current_value < transition->target_value)) 
+      next_value = transition->target_value;
+    else
+      next_value = temp_next_value; // if no overshoot, use cyclic adjusted value
+  } else if (next_value < transition->min_value) {
+    // the next_value crosses the min boundary
+    // get the cyclic range adjusted next value
+    float temp_next_value
+      = transition->max_value - (transition->min_value - next_value);
+
+    // over shoot adjustment
+    // if overshot after cyclic adjustment (say next_value=-5, min=0, target=253)
+    if ((temp_next_value < transition->target_value)
+    // or if overshot even before cyclic adjustment (say next_value=-5, min=0, target=2)
+        || (next_value < transition->target_value
+            && transition->target_value < current_value)) 
+      next_value = transition->target_value;
+    else
+      next_value = temp_next_value; // if no overshoot, use cyclic adjusted value
+  }
+
+  // overshoot adjustment, current_value check ensures there is no false adjustment due to cyclic nature
+  if (((transition->step > 0.0)
+       && (current_value < transition->target_value
+           && next_value > transition->target_value))
+      || ((transition->step < 0.0)
+          && (current_value > transition->target_value
+              && next_value < transition->target_value))) {
+    attribute_store_set_number(transition->node,
+                               transition->target_value,
+                               transition->value_type);
+
+    attribute_stop_transition(transition->node);
+    return;
+  }
+
+  attribute_store_set_number(transition->node,
+                             next_value,
+                             transition->value_type);
+  if (next_value != transition->target_value) {
+    ctimer_restart(&transition->timer);
+  } else {
+    attribute_stop_transition(transition->node);
+  }
 }
 
 static void fixed_transition_step(void *data)
@@ -189,6 +330,8 @@ sl_status_t attribute_stop_transition(attribute_store_node_t node)
   sl_log_debug(LOG_TAG, "Stopping transition on Attribute ID %d", node);
 
   fixed_transition_pool.erase(node);
+  fixed_cyclic_transition_pool.erase(node);
+  cyclic_transition_pool.erase(node);
   nodes_under_transition.erase(node);
   if (nodes_under_transition.empty()) {
     etimer_stop(&refresh_timer);
@@ -213,6 +356,14 @@ clock_time_t
 bool is_attribute_transition_ongoing(attribute_store_node_t node)
 {
   if (fixed_transition_pool.count(node) > 0) {
+    return true;
+  }
+
+  if (fixed_cyclic_transition_pool.count(node) > 0) {
+    return true;
+  }
+
+  if (cyclic_transition_pool.count(node) > 0) {
     return true;
   }
 
@@ -310,6 +461,56 @@ sl_status_t attribute_start_fixed_transition(
   return SL_STATUS_OK;
 }
 
+sl_status_t attribute_start_fixed_cyclic_transition(
+  attribute_store_node_t node,
+  attribute_store_node_value_state_t value_type,
+  float target_value,
+  float step,
+  float min_value,
+  float max_value,
+  clock_time_t step_interval)
+{
+  attribute_stop_transition(node);
+
+  auto result = fixed_cyclic_transition_pool.insert(
+    std::make_pair(node, std::make_unique<fixed_cyclic_transition>()));
+  auto &e = result.first->second;
+
+  e->node         = node;
+  e->value_type   = value_type;
+  e->step         = step;
+  e->target_value = target_value;
+  e->min_value    = min_value;
+  e->max_value    = max_value;
+
+  ctimer_set(&e->timer, step_interval, fixed_transition_cyclic_step, &(*e));
+  return SL_STATUS_OK;
+}
+
+sl_status_t attribute_start_cyclic_transition(
+  attribute_store_node_t node,
+  attribute_store_node_value_state_t value_type,
+  float step,
+  float min_value,
+  float max_value,
+  clock_time_t step_interval)
+{
+  attribute_stop_transition(node);
+
+  auto result = cyclic_transition_pool.insert(
+    std::make_pair(node, std::make_unique<continuous_cyclic_transition>()));
+  auto &e = result.first->second;
+
+  e->node         = node;
+  e->value_type   = value_type;
+  e->step         = step;
+  e->min_value    = min_value;
+  e->max_value    = max_value;
+
+  ctimer_set(&e->timer, step_interval, continuous_transition_cyclic_step, &(*e));
+  return SL_STATUS_OK;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Contiki Process and thread
 ///////////////////////////////////////////////////////////////////////////////
@@ -324,6 +525,7 @@ PROCESS_THREAD(attribute_transitions_process, ev, data)
     } else if (ev == PROCESS_EVENT_EXIT) {
       sl_log_debug(LOG_TAG, "Teardown of attribute transitions");
       fixed_transition_pool.clear();
+      fixed_cyclic_transition_pool.clear();
     } else if (ev == START_REFRESH_TIMER) {
       etimer_set(&refresh_timer, transition_refresh_rate);
     } else if ((ev == PROCESS_EVENT_TIMER) && (data == &refresh_timer)) {

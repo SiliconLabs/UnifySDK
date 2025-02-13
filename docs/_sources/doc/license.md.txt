@@ -22,10 +22,7 @@ the MSLA applicable to Source Code.
 | MIT                                                                                                          | [CMock](https://github.com/ThrowTheSwitch/CMock)           | Unittesting |
 | MIT                                                                                                          | [Unity](https://github.com/ThrowTheSwitch/Unity)           | Unittesting |
 | MIT                                                                                                          | [React](https://github.com/facebook/react)                 | Dev UI      |
-| MIT, SIL OFL 1.1, Apache 2.0, CCO, Font Awesome Free License, Creative Commons Attribution 4.0 International | [React icons](https://github.com/react-icons/react-icons/) | Dev UI      |
-| Apache 2.0                                                                                                   | [Mbed-TLS](https://github.com/Mbed-TLS/mbedtls)            | CPCd        |
-| LGPL 2.1                                                                                                     | [libavahi-client](https://github.com/lathiat/avahi)        | OTBR        |
-| GPL 2.0                                                                                                      | [libipset](https://ipset.netfilter.org/)                   | OTBR        |
+| MIT, SIL OFL 1.1, Apache 2.0, CCO, Font Awesome Free License, Creative Commons Attribution 4.0 International | [React icons](https://github.com/react-icons/react-icons/) | Dev UI      | 
 
 ## Third Party Rust Crates (libraries)
 

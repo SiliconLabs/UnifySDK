@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -129,11 +129,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5a6f2c33337f413b9ea82f7db87806e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5a6f2c33337f413b9ea82f7db87806e1">count_topics</a> (const std::string &amp;prefix_pattern)</td></tr>
 <tr class="memdesc:a5a6f2c33337f413b9ea82f7db87806e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count the number of topics published.  <a href="structmqtt__client.html#a5a6f2c33337f413b9ea82f7db87806e1">More...</a><br /></td></tr>
 <tr class="separator:a5a6f2c33337f413b9ea82f7db87806e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2790858141f17c040e509a97dff5c90b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a2790858141f17c040e509a97dff5c90b">subscribe</a> (const std::string &amp;topic, const <a class="el" href="structmqtt__client_1_1callback__info.html">callback_info</a> &amp;<a class="el" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>)</td></tr>
+<tr class="memitem:a2790858141f17c040e509a97dff5c90b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a2790858141f17c040e509a97dff5c90b">subscribe</a> (const std::string &amp;topic, const <a class="el" href="structmqtt__client_1_1callback__info.html">callback_info</a> &amp;callback)</td></tr>
 <tr class="separator:a2790858141f17c040e509a97dff5c90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d95b991adfba3c6c9d1066e4053edbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a9d95b991adfba3c6c9d1066e4053edbf">resubscribe</a> ()</td></tr>
 <tr class="separator:a9d95b991adfba3c6c9d1066e4053edbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d6adf6b6ec555b57879f04557d380bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a4d6adf6b6ec555b57879f04557d380bc">unsubscribe</a> (const std::string &amp;topic, const <a class="el" href="structmqtt__client_1_1callback__info.html">callback_info</a> &amp;<a class="el" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>)</td></tr>
+<tr class="memitem:a4d6adf6b6ec555b57879f04557d380bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a4d6adf6b6ec555b57879f04557d380bc">unsubscribe</a> (const std::string &amp;topic, const <a class="el" href="structmqtt__client_1_1callback__info.html">callback_info</a> &amp;callback)</td></tr>
 <tr class="separator:a4d6adf6b6ec555b57879f04557d380bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54c57180be14c620af9652b9fe5b2fcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a54c57180be14c620af9652b9fe5b2fcb">on_connect_callback_set</a> (<a class="el" href="group__mqtt__client.html#ga6bec07692bc9a536777aa87727b2d90b">mqtt_connection_callback_t</a>)</td></tr>
 <tr class="separator:a54c57180be14c620af9652b9fe5b2fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,9 +212,9 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a95953ca6987fa7a223e88df50eef71f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5997c2a32fa64f6238f3ccf769d1f9c1"><td class="memItemLeft" align="right" valign="top">std::deque&lt; <a class="el" href="structmessage__queue__element__t.html">message_queue_element_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5997c2a32fa64f6238f3ccf769d1f9c1">publishing_queue</a></td></tr>
 <tr class="separator:a5997c2a32fa64f6238f3ccf769d1f9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae90330fbc504f4b4075b599875e83cad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__network__management__return__route__queue_8c.html#a57c83765c569589fe4f5e466f6461602">std::queue</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ae90330fbc504f4b4075b599875e83cad">subscription_queue</a></td></tr>
+<tr class="memitem:ae90330fbc504f4b4075b599875e83cad"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ae90330fbc504f4b4075b599875e83cad">subscription_queue</a></td></tr>
 <tr class="separator:ae90330fbc504f4b4075b599875e83cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf81204e2eb0e4e1f48ccd4f574f1f49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__network__management__return__route__queue_8c.html#a57c83765c569589fe4f5e466f6461602">std::queue</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#adf81204e2eb0e4e1f48ccd4f574f1f49">unsubscription_queue</a></td></tr>
+<tr class="memitem:adf81204e2eb0e4e1f48ccd4f574f1f49"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#adf81204e2eb0e4e1f48ccd4f574f1f49">unsubscription_queue</a></td></tr>
 <tr class="separator:adf81204e2eb0e4e1f48ccd4f574f1f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26a5d41fd5c66ac9af82b4b2e5279908"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::vector&lt; <a class="el" href="structmqtt__client_1_1callback__info.html">callback_info</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a26a5d41fd5c66ac9af82b4b2e5279908">subscription_callbacks</a></td></tr>
 <tr class="separator:a26a5d41fd5c66ac9af82b4b2e5279908"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1645,7 +1645,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="zwave__network__management__return__route__queue_8c.html#a57c83765c569589fe4f5e466f6461602">std::queue</a>&lt;std::string&gt; mqtt_client::subscription_queue</td>
+          <td class="memname">std::queue&lt;std::string&gt; mqtt_client::subscription_queue</td>
         </tr>
       </table>
   </td>
@@ -1667,7 +1667,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="zwave__network__management__return__route__queue_8c.html#a57c83765c569589fe4f5e466f6461602">std::queue</a>&lt;std::string&gt; mqtt_client::unsubscription_queue</td>
+          <td class="memname">std::queue&lt;std::string&gt; mqtt_client::unsubscription_queue</td>
         </tr>
       </table>
   </td>
@@ -1688,7 +1688,7 @@ Friends</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structmqtt__client.html">mqtt_client</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:48 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:12 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

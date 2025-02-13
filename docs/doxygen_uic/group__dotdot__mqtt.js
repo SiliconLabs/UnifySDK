@@ -255,9 +255,9 @@ var group__dotdot__mqtt =
       [ "group_name", "structuic__mqtt__dotdot__groups__command__add__group__if__identifying__fields__t.html#abb758bcb3fa52792526aa5ef7ddbc627", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_state_t", "structuic__mqtt__dotdot__scenes__state__t.html", [
-      [ "current_group", "structuic__mqtt__dotdot__scenes__state__t.html#abdfe92a7c4703b4814359dd18522d07e", null ],
+      [ "current_group", "structuic__mqtt__dotdot__scenes__state__t.html#a01ad01a39385fbe7b869a1bf6318b5b1", null ],
       [ "current_scene", "structuic__mqtt__dotdot__scenes__state__t.html#a12280127d485be4134ca022142d058d1", null ],
-      [ "last_configured_by", "structuic__mqtt__dotdot__scenes__state__t.html#a760dd0b1e1a0644985683ee398979e7b", null ],
+      [ "last_configured_by", "structuic__mqtt__dotdot__scenes__state__t.html#a6cc7c973292a6cd88bc68a56d16fd95d", null ],
       [ "name_support", "structuic__mqtt__dotdot__scenes__state__t.html#ab33e98ca4c096e57966d15a364699ba9", null ],
       [ "scene_count", "structuic__mqtt__dotdot__scenes__state__t.html#a82516a1f42b3c03e68a248d2805dd4d0", null ],
       [ "scene_table", "structuic__mqtt__dotdot__scenes__state__t.html#a7374ced659d7156697bdc8ac6d2d4bde", null ],
@@ -276,66 +276,66 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_scenes_command_add_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html", [
       [ "extension_field_sets", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a8bc18488ce12d89be2df44f9223c9d49", null ],
       [ "extension_field_sets_count", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a19a549c14b34c0167976ba63c7a931a6", null ],
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a4991f82376e99b4c6b7138bb6cc41e0c", null ],
-      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#ae3509e7cd8870f1c95ff200fe94f4755", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a2ed966ef8b9aece629b2009513c46bc3", null ],
+      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#ad5f1b236c32a8664a321f8a805f9d555", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#aaba8bc670c86468b6c9a74eabb06f666", null ],
       [ "transition_time", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#afabf52c0867455172eb0e2c5dd25bd37", null ],
       [ "transition_time100ms", "structuic__mqtt__dotdot__scenes__command__add__scene__fields__t.html#a40700f995fb5d00a30d9587edda32be3", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_add_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__add__scene__response__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__add__scene__response__fields__t.html#adec5621eb83bfe5e213e7fb6a5646e8f", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__add__scene__response__fields__t.html#ac571e17c0ecfafdbb8d7ce3bf078673c", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__add__scene__response__fields__t.html#a43f48d3425d8f83a3100a9a1a7f83185", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__add__scene__response__fields__t.html#ae7946fe7cc8d761df50eb2dc1461f753", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_view_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__view__scene__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__view__scene__fields__t.html#a9ab38605f56be7fd637a3128cd5e4c3a", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__view__scene__fields__t.html#acaa6d9ae77d1df23c4107f06b3cb7e36", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__view__scene__fields__t.html#acb82914d1690eadfc0ff8e22fa6f13c0", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_view_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html", [
       [ "extension_field_sets", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#aa36b2dd2debaaaa784e52ddeca39146c", null ],
       [ "extension_field_sets_count", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#a925313382f262b0e73e073ec2bc4062d", null ],
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#a40421cb0fdffe92437c25eb62ecb9d98", null ],
-      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#a6e6595915eff010442245187916b59a0", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#a4d3af3c38f05af20beec02461f0ec9a2", null ],
+      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#a088ac2efe1dbdd08f0eaf422c78c18c3", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#a57e1cec87d0ffe4c0def75199e824277", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#aabb057c1f68e29e711880e1cf5c5865d", null ],
       [ "transition_time", "structuic__mqtt__dotdot__scenes__command__view__scene__response__fields__t.html#ab767e141b0171860c504225e3f3b59b5", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_remove_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__remove__scene__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__scene__fields__t.html#ac756224c15f98d9b4170d4efcd15299f", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__scene__fields__t.html#a341bcac236a246e7020c7d7bfc5e40ed", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__remove__scene__fields__t.html#a881b4868600017d917981c9d950ac44a", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_remove_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__remove__scene__response__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__scene__response__fields__t.html#ab2776ed215fc0cda95fab30295fafa5e", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__scene__response__fields__t.html#adbca3deb80be789b0165a4bf1d1ed347", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__remove__scene__response__fields__t.html#a048a03e382004b5065a4b6fc74a02f38", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__remove__scene__response__fields__t.html#a5ef74927dc0a6a6326cefc5afc1edc73", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_remove_all_scenes_fields_t", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__fields__t.html#a72f9841e3ccfd1a438e11908ea99a9df", null ]
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__fields__t.html#acd536628c1e4d6a3eab49eb5e7056b5f", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_remove_all_scenes_response_fields_t", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__response__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__response__fields__t.html#a7beb0ab3da4ab2cb41a0c52724675f6b", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__response__fields__t.html#aabedd13a9c43f2d5b44fec22f7ed6c4c", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__remove__all__scenes__response__fields__t.html#ad31d7bbba336aee9de487d3bd6e2a1b9", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_store_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__store__scene__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__store__scene__fields__t.html#add7ac5e6d4757ca9c108493e247732a1", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__store__scene__fields__t.html#aba2c1d478025e013b71a076c80bfdd0c", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__store__scene__fields__t.html#acb5e6cec6d3bfb0d7ad2ba528639156d", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_store_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__store__scene__response__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__store__scene__response__fields__t.html#a038fd72fcff32270dbed682eec535c5e", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__store__scene__response__fields__t.html#ad8404bab7be0eeee2445cdbcd01e6ae5", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__store__scene__response__fields__t.html#aeecf6bb13e23cb6b990d4426b3ad08dc", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__store__scene__response__fields__t.html#a5310c2de97bef5f063569af9b6b13763", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_recall_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__recall__scene__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__recall__scene__fields__t.html#ad91a604b3081c376f46f87726646a787", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__recall__scene__fields__t.html#a5b1e7066473000dbc9be6b19d0216d44", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__recall__scene__fields__t.html#a859b34bdc4398fbfa8bb054e2f0bc37f", null ],
       [ "transition_time", "structuic__mqtt__dotdot__scenes__command__recall__scene__fields__t.html#a859be1694c33d87346c9353602d6afcc", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_get_scene_membership_fields_t", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__fields__t.html#ab3b3bca45032fe0cba13997e3dd45b87", null ]
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__fields__t.html#aca690f2151c159d0f4e8852369eb244e", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_get_scene_membership_response_fields_t", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html", [
       [ "capacity", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html#a3dab4f3104e002742c24beb7e98e15a8", null ],
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html#a7649ceac9b1e8bf42754712f3e1ebb22", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html#a2aa7d2eab3fe56649e367c4f1151a589", null ],
       [ "scene_list", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html#a15dde2131d35c7d7a7b26a11aca093b7", null ],
       [ "scene_list_count", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html#a2b72223b4c106120d22224fa7e3a0dd4", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__get__scene__membership__response__fields__t.html#a4d98ef9648d5b112e009396ad89af991", null ]
@@ -343,38 +343,38 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_scenes_command_enhanced_add_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html", [
       [ "extension_field_sets", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#a51cd2da150c725b484ef944601260b18", null ],
       [ "extension_field_sets_count", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#adfc1a3d86d3321ecb9bd78ef192cd0a3", null ],
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#ae7c6b9c3c047b856fe148952a5d301ca", null ],
-      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#a8e9fff4731fe31851829add3f4628c7c", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#ab615ee98ee327914ecfe6665b4512891", null ],
+      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#a33c4faf451e2f7a8bf6e0b596a940a42", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#a2e73aaf07f23c612a542dfd3e4f4cfad", null ],
       [ "transition_time", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__fields__t.html#a7d8452646b5d9a523634d733e87e3df7", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_enhanced_add_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__response__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__response__fields__t.html#af60043ff27bbdfef83993ce2176cb910", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__response__fields__t.html#a1e02dfe8b606be00d4a245a590f503ea", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__response__fields__t.html#af1fd4c83762f3c645344c7c91533c659", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__enhanced__add__scene__response__fields__t.html#a75943d16d752140669fb34f6a6c27559", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_enhanced_view_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__fields__t.html", [
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__fields__t.html#a9a3f96d0b95b64d2523f5ed9979727f8", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__fields__t.html#af0cdb78495db81eb4c00ca16e03003bb", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__fields__t.html#a37c7bb382a91390bfcb5c6f929dfce42", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_enhanced_view_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html", [
       [ "extension_field_sets", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#a33bb59e1feb4fc729dfe6934645f676e", null ],
       [ "extension_field_sets_count", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#a60d540a67711ec433d62b8a4ab94d948", null ],
-      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#a09a19de31ac0976c7fd293f7b47c0b0c", null ],
-      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#a41a7b933dce049fa3261703482b148d9", null ],
+      [ "groupid", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#ace75bce2b05944aad52751775158b7fe", null ],
+      [ "scene_name", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#ab8b8f71db31fc1e74944b2ce53a69515", null ],
       [ "sceneid", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#a62e31e3d8971af31e39f8fe0e8e2938a", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#aedbda74cd6921fee1ad0e465a6dfc19a", null ],
       [ "transition_time", "structuic__mqtt__dotdot__scenes__command__enhanced__view__scene__response__fields__t.html#a2f7fbdb09da5f9d5c275d50ec17a66c2", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_copy_scene_fields_t", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html", [
-      [ "group_identifier_from", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#a678703c2ee1277825667ce2524e7d78a", null ],
-      [ "group_identifier_to", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#ab783ed8d5f7887986a1995059663b94e", null ],
+      [ "group_identifier_from", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#a68e031a3a544910e09ebed2a8e0a53ce", null ],
+      [ "group_identifier_to", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#ac157e8429f422a0dcbfb40d36476b801", null ],
       [ "mode", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#acbfb4dc1d9c0bd24d1b93de98f4cb43c", null ],
       [ "scene_identifier_from", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#ac7e1a174af7b44f42fdaa74adedaa4c6", null ],
       [ "scene_identifier_to", "structuic__mqtt__dotdot__scenes__command__copy__scene__fields__t.html#a1934ce9b924f41e4d37feb7f5f5cd7b4", null ]
     ] ],
     [ "uic_mqtt_dotdot_scenes_command_copy_scene_response_fields_t", "structuic__mqtt__dotdot__scenes__command__copy__scene__response__fields__t.html", [
-      [ "group_identifier_from", "structuic__mqtt__dotdot__scenes__command__copy__scene__response__fields__t.html#a925ce28c099997ecd20a967ae00d7061", null ],
+      [ "group_identifier_from", "structuic__mqtt__dotdot__scenes__command__copy__scene__response__fields__t.html#a6e3321b5e45933adc3001a73d66ed8cc", null ],
       [ "scene_identifier_from", "structuic__mqtt__dotdot__scenes__command__copy__scene__response__fields__t.html#ac90245da8d787a5c37a7afda0411181a", null ],
       [ "status", "structuic__mqtt__dotdot__scenes__command__copy__scene__response__fields__t.html#a9262b36a1bf49cf4a1100429ab1b88ac", null ]
     ] ],
@@ -490,15 +490,15 @@ var group__dotdot__mqtt =
     ] ],
     [ "uic_mqtt_dotdot_alarms_command_reset_alarm_fields_t", "structuic__mqtt__dotdot__alarms__command__reset__alarm__fields__t.html", [
       [ "alarm_code", "structuic__mqtt__dotdot__alarms__command__reset__alarm__fields__t.html#aae478fc2a1324b0d4c19e5d3bab9c6d1", null ],
-      [ "cluster_identifier", "structuic__mqtt__dotdot__alarms__command__reset__alarm__fields__t.html#a1b65566b6588d8e6948ea6dd80a9c6cf", null ]
+      [ "cluster_identifier", "structuic__mqtt__dotdot__alarms__command__reset__alarm__fields__t.html#a9af1dbbb875ba8c4f98a83bc9b23d907", null ]
     ] ],
     [ "uic_mqtt_dotdot_alarms_command_alarm_fields_t", "structuic__mqtt__dotdot__alarms__command__alarm__fields__t.html", [
       [ "alarm_code", "structuic__mqtt__dotdot__alarms__command__alarm__fields__t.html#af47809a9c799587955b3b18e151d97ce", null ],
-      [ "cluster_identifier", "structuic__mqtt__dotdot__alarms__command__alarm__fields__t.html#af1b0000b31642896659c600d2fe46b55", null ]
+      [ "cluster_identifier", "structuic__mqtt__dotdot__alarms__command__alarm__fields__t.html#a3f62761ad010e2eee89960219981033d", null ]
     ] ],
     [ "uic_mqtt_dotdot_alarms_command_get_alarm_response_fields_t", "structuic__mqtt__dotdot__alarms__command__get__alarm__response__fields__t.html", [
       [ "alarm_code", "structuic__mqtt__dotdot__alarms__command__get__alarm__response__fields__t.html#a2f394d6be9dd111e1e2eca254d13127b", null ],
-      [ "cluster_identifier", "structuic__mqtt__dotdot__alarms__command__get__alarm__response__fields__t.html#a7accffff4b1fe0decc981c6526f6ff22", null ],
+      [ "cluster_identifier", "structuic__mqtt__dotdot__alarms__command__get__alarm__response__fields__t.html#ac5ae9ba5a2cd61e8a49909fd8fa1d737", null ],
       [ "status", "structuic__mqtt__dotdot__alarms__command__get__alarm__response__fields__t.html#a39a4ab30f0d86bbe5705cd5691d748be", null ],
       [ "time_stamp", "structuic__mqtt__dotdot__alarms__command__get__alarm__response__fields__t.html#a0dd4ac7677820a515ff42310783297bc", null ]
     ] ],
@@ -506,13 +506,13 @@ var group__dotdot__mqtt =
       [ "dst_end", "structuic__mqtt__dotdot__time__state__t.html#a21433d7c6ce63e5051b975b3d4b963c0", null ],
       [ "dst_shift", "structuic__mqtt__dotdot__time__state__t.html#a560dd9d3bf1bf73aeed41ff5fdd7ac8c", null ],
       [ "dst_start", "structuic__mqtt__dotdot__time__state__t.html#a925f9cd7bd2437705649d830c9a02abe", null ],
-      [ "last_set_time", "structuic__mqtt__dotdot__time__state__t.html#a10cf2c3db6f7e7f033ab7b74c3408cf0", null ],
+      [ "last_set_time", "structuic__mqtt__dotdot__time__state__t.html#a9e6c1a7fc649397b3e57dfaeffa317e1", null ],
       [ "local_time", "structuic__mqtt__dotdot__time__state__t.html#afcc42efbed673ff0d4931d39ab91a45b", null ],
       [ "standard_time", "structuic__mqtt__dotdot__time__state__t.html#a2b70cf946ff698fdc00d06f90d1f5594", null ],
-      [ "time", "structuic__mqtt__dotdot__time__state__t.html#acc574a6f5d72e177ea7a9b7ddd40471b", null ],
+      [ "time", "structuic__mqtt__dotdot__time__state__t.html#a82e476388ddd06bdb07b7b604e7e9171", null ],
       [ "time_status", "structuic__mqtt__dotdot__time__state__t.html#a1e7ac8f922d12430b4ae9171d9fc236d", null ],
       [ "time_zone", "structuic__mqtt__dotdot__time__state__t.html#ac4585a7e190db6a46c81896807c4def5", null ],
-      [ "valid_until_time", "structuic__mqtt__dotdot__time__state__t.html#abaee9bf1210af5d5f4b6545d9413fe85", null ]
+      [ "valid_until_time", "structuic__mqtt__dotdot__time__state__t.html#ac23e56dc600e2df3541de826dc343218", null ]
     ] ],
     [ "uic_mqtt_dotdot_time_updated_state_t", "structuic__mqtt__dotdot__time__updated__state__t.html", [
       [ "dst_end", "structuic__mqtt__dotdot__time__updated__state__t.html#adaa4d42049c38765a6ea044f9f2b3d03", null ],
@@ -709,13 +709,13 @@ var group__dotdot__mqtt =
       [ "pin", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#a3cc2b5615a7ac164f06228a69b74cd97", null ],
       [ "user_status", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#a79d12c37b760bf52d56f5d3ecdf478a5", null ],
       [ "user_type", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#a8752b1d14aa78bd255d9d82d2eff4b96", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#ad128f04ad11d7b82659d624eb241b35b", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__fields__t.html#af4f6281996703e4d2ef5c95eb3eda2b4", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_pin_code_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__pin__code__response__fields__t.html#a5b0ed1eba24a6204910930a81404b457", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__pin__code__fields__t.html", [
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__pin__code__fields__t.html#a68368e1692bd10ce94f0303ef3345c3b", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__pin__code__fields__t.html#a5a541ef16bbf8e16f0fe55df58acada5", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__pin__code__response__fields__t.html", [
       [ "code", "structuic__mqtt__dotdot__door__lock__command__get__pin__code__response__fields__t.html#a7a772ef11db0dd34635fc98b3f6c08be", null ],
@@ -724,7 +724,7 @@ var group__dotdot__mqtt =
       [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__pin__code__response__fields__t.html#a6aafdab3f39ef718b8854e0ca662a5a7", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__pin__code__fields__t.html", [
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__pin__code__fields__t.html#a4a96be5a922cc7834ad4987f5c062dea", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__pin__code__fields__t.html#ad8f873121ab9cb3747230ec1a28bb284", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_pin_code_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__pin__code__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__clear__pin__code__response__fields__t.html#aac545926d2960421f26ff5fe91ac72db", null ]
@@ -734,13 +734,13 @@ var group__dotdot__mqtt =
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_user_status_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__user__status__fields__t.html", [
       [ "user_status", "structuic__mqtt__dotdot__door__lock__command__set__user__status__fields__t.html#ae9303a264aae55234a2b3cf22f337d43", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__user__status__fields__t.html#ab83bc22a47158fc297a37665ea51278e", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__user__status__fields__t.html#a3982f928cac85c8f92ce8c8b5bf738fc", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_user_status_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__user__status__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__user__status__response__fields__t.html#a2f236b1c28c9be9840e23f2bc8994db6", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_user_status_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__user__status__fields__t.html", [
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__user__status__fields__t.html#a72493bd9107a3566099297ee5acd49db", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__user__status__fields__t.html#aeff567f71131cfcb5dcbf0127dac525f", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_user_status_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__user__status__response__fields__t.html", [
       [ "user_status", "structuic__mqtt__dotdot__door__lock__command__get__user__status__response__fields__t.html#aa69e39205f9eb5491f3736accd33fc0f", null ],
@@ -750,17 +750,17 @@ var group__dotdot__mqtt =
       [ "days_mask", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#a078c290359f72d16107002443fbfd4b6", null ],
       [ "end_hour", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#a4082e4105712d302f88cd0e1ecb3f4fb", null ],
       [ "end_minute", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#afa12d3a93ab4d192824cbcde84291079", null ],
-      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#a20a1f3c6ecee832417e016de064d849c", null ],
+      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#ad12a5f8e14407f4aceecd21208b3b570", null ],
       [ "start_hour", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#abfdc61af366f9707e17d17aafb4cfc1a", null ],
       [ "start_minute", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#acee55ec84ee4ba409dbe6445d8700470", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#ae0f53d72c1edc6458abdce104689e907", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__fields__t.html#a8158b56d3085e08919ccd19aa53adc19", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_weekday_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__weekday__schedule__response__fields__t.html#a40c0138964e9abc02d82019122f8227e", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_weekday_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__fields__t.html", [
-      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__fields__t.html#af8dc93173b297ecdb31aebb7681e5d90", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__fields__t.html#a7ce88dd452e18023a826f0c23198bc9a", null ]
+      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__fields__t.html#a94118bfa52eba246d1a7414d84bcd468", null ],
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__fields__t.html#af2df90acef6e32dfee183549580ba487", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_weekday_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__response__fields__t.html", [
       [ "days_mask", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__response__fields__t.html#a29cf77d64b8e31ac938dceaeb9ce470b", null ],
@@ -773,8 +773,8 @@ var group__dotdot__mqtt =
       [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__weekday__schedule__response__fields__t.html#ab2017ead76c54e8e7418a18f41c78f66", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_weekday_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html", [
-      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html#a26e1154e445e6228d353105d9df25e7d", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html#ac960f31cc8ce24e3dcf16a59e1938fad", null ]
+      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html#a8a8392d4d07a260142de7c90ad2e7cfa", null ],
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__fields__t.html#ae42d15d25cd57d21912cd3768711ef85", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_weekday_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__clear__weekday__schedule__response__fields__t.html#ab1560e20e3b3c228f3ce9ea989a4e78b", null ]
@@ -782,15 +782,15 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_door_lock_command_set_year_day_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html", [
       [ "local_end_time", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a090abc490aa0f211cbde899a8ed86db6", null ],
       [ "local_start_time", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a3dc2c585e8286393f9f8d75d9f369e5d", null ],
-      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a81444413b0d7ee3992e29b0a333f1045", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a6b593b5adbc40bc71ee05ff0a7bc73af", null ]
+      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a4f2948788a578692b7cef81e2bb12356", null ],
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__fields__t.html#a34963f4ada0b767d32f500afefeab7b3", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_year_day_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__year__day__schedule__response__fields__t.html#a4221788eada70fa35f20ca84b8319697", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__fields__t.html", [
-      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__fields__t.html#a33cbbffbff2addad51a9b241c10c2548", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__fields__t.html#a5aefc884b7c3406beb38afad720b4d9c", null ]
+      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__fields__t.html#aa58f56817c1068625d453b247d86b488", null ],
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__fields__t.html#a62a56fdc99165aa46c6c2fae6d64ebc0", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__response__fields__t.html", [
       [ "local_end_time", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__response__fields__t.html#a3ea39d8812c899c347d95333a751d84e", null ],
@@ -800,14 +800,14 @@ var group__dotdot__mqtt =
       [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__year__day__schedule__response__fields__t.html#a50bb64baa3811f4fbd32694b573e440a", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_year_day_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__fields__t.html", [
-      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__fields__t.html#adf19beac2c28448c4779c85ccff6d542", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__fields__t.html#a163a7690b2f84ce4466fa6e480431e12", null ]
+      [ "scheduleid", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__fields__t.html#ae73dcbea3d96caa10bf4bc10f049c8f3", null ],
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__fields__t.html#a205a943810c6a3db901e4ddc68893ada", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_year_day_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__clear__year__day__schedule__response__fields__t.html#a197950a6215ba407907b934771e45f25", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_holiday_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__fields__t.html", [
-      [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__fields__t.html#a00c68db68861dd27799912c58dc767b8", null ],
+      [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__fields__t.html#a73d34322a4b7d82445cc88c7d7d49728", null ],
       [ "local_end_time", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__fields__t.html#a78ff282331fc80a1a38d9b2a32dc4738", null ],
       [ "local_start_time", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__fields__t.html#ac40f425c2ff39c0812387b1863d379b9", null ],
       [ "operating_mode_during_holiday", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__fields__t.html#a60e46032f63975bfb02f83057c8649c1", null ]
@@ -816,7 +816,7 @@ var group__dotdot__mqtt =
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__holiday__schedule__response__fields__t.html#a2336dc6befbdc07d210c34a886e5cf6f", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_holiday_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__holiday__schedule__fields__t.html", [
-      [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__holiday__schedule__fields__t.html#a434bcb0bb9dd4fb2eb1e7fbcedb1256a", null ]
+      [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__holiday__schedule__fields__t.html#a6d0d46cd98f05ef0c768ca59f73334e4", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_holiday_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__holiday__schedule__response__fields__t.html", [
       [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__get__holiday__schedule__response__fields__t.html#a57a7b1b63f0ef4f75a718ea782ee5457", null ],
@@ -826,20 +826,20 @@ var group__dotdot__mqtt =
       [ "status", "structuic__mqtt__dotdot__door__lock__command__get__holiday__schedule__response__fields__t.html#a65c8e8b726cf3f27dc87e43a448b8be8", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_holiday_schedule_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__holiday__schedule__fields__t.html", [
-      [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__clear__holiday__schedule__fields__t.html#a6177d0958b5d280fe3e998bdf89b4a96", null ]
+      [ "holiday_scheduleid", "structuic__mqtt__dotdot__door__lock__command__clear__holiday__schedule__fields__t.html#a83a8aff8cd0e80cd31ddb15d65728c0f", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_holiday_schedule_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__holiday__schedule__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__clear__holiday__schedule__response__fields__t.html#ab5266a9751b39c0f965c9304c828aad0", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_user_type_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__user__type__fields__t.html", [
       [ "user_type", "structuic__mqtt__dotdot__door__lock__command__set__user__type__fields__t.html#af129770bf72e030eae33352afd3bd731", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__user__type__fields__t.html#aa48eead46ab3812b954536b9b76180a9", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__user__type__fields__t.html#ab9bb61bb399cfdb1e10b1cc4f5e87470", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_user_type_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__user__type__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__user__type__response__fields__t.html#a3c34aa4e9db787165140e6bcd6910f33", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_user_type_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__user__type__fields__t.html", [
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__user__type__fields__t.html#a6ba3bba8d04ae95a2d01a81d9fe68cb5", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__user__type__fields__t.html#a09e12738df641691eb014a4e570027b9", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_user_type_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__user__type__response__fields__t.html", [
       [ "user_type", "structuic__mqtt__dotdot__door__lock__command__get__user__type__response__fields__t.html#adb62b5eaecdcdb06074bcf800c7afde1", null ],
@@ -849,13 +849,13 @@ var group__dotdot__mqtt =
       [ "rfid_code", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#a9a4ad333e41445c04c0fcd2d6b429b7a", null ],
       [ "user_status", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#a9d39603137d0dc07447c8489f5cadb6f", null ],
       [ "user_type", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#aeb5bac94f02069af1ec80c9cbfb0510f", null ],
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#aa755a4a5b64f6283184a75085cee35d9", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__fields__t.html#a2b2c17b2dcb077b930aa50a0b50c23f8", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_set_rfid_code_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__set__rfid__code__response__fields__t.html#a74e3c916b0ae7a4da3d73949e3675f25", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__rfid__code__fields__t.html", [
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__rfid__code__fields__t.html#abfb85cf03f94db91cc875a9add90ae04", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__rfid__code__fields__t.html#a588c4b6dbb11f64a093795e048a64aa1", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__get__rfid__code__response__fields__t.html", [
       [ "rfid_code", "structuic__mqtt__dotdot__door__lock__command__get__rfid__code__response__fields__t.html#a6e749e3c9d44d24a7a8a82842099f56b", null ],
@@ -864,7 +864,7 @@ var group__dotdot__mqtt =
       [ "userid", "structuic__mqtt__dotdot__door__lock__command__get__rfid__code__response__fields__t.html#a9d014c1f50ef65a6742c1476fa4aa219", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__rfid__code__fields__t.html", [
-      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__rfid__code__fields__t.html#a3e51b2a97f64b579689f5b447db74970", null ]
+      [ "userid", "structuic__mqtt__dotdot__door__lock__command__clear__rfid__code__fields__t.html#a421164fb2d9fb4362226bff5f375e464", null ]
     ] ],
     [ "uic_mqtt_dotdot_door_lock_command_clear_rfid_code_response_fields_t", "structuic__mqtt__dotdot__door__lock__command__clear__rfid__code__response__fields__t.html", [
       [ "status", "structuic__mqtt__dotdot__door__lock__command__clear__rfid__code__response__fields__t.html#a5bd0fe3352c041806e1db838221b2c79", null ]
@@ -1095,7 +1095,7 @@ var group__dotdot__mqtt =
       [ "remote_sensing", "structuic__mqtt__dotdot__thermostat__state__t.html#a0e4d87e62cbb148b62a835d051159e02", null ],
       [ "setpoint_change_amount", "structuic__mqtt__dotdot__thermostat__state__t.html#a2b161f9883b1ab5ae5e81ba09d173f1e", null ],
       [ "setpoint_change_source", "structuic__mqtt__dotdot__thermostat__state__t.html#abef439034d37f7a16f8c6a8f195662b5", null ],
-      [ "setpoint_change_source_timestamp", "structuic__mqtt__dotdot__thermostat__state__t.html#ab905c6fed1cbce742bda1c0f62a186af", null ],
+      [ "setpoint_change_source_timestamp", "structuic__mqtt__dotdot__thermostat__state__t.html#a2044615f849566e75b85038503ecd831", null ],
       [ "start_of_week", "structuic__mqtt__dotdot__thermostat__state__t.html#aab43c55e38705f598a5e5c274599b91f", null ],
       [ "system_mode", "structuic__mqtt__dotdot__thermostat__state__t.html#abf37f1e17726db4056a7a077a5e06e92", null ],
       [ "temperature_setpoint_hold", "structuic__mqtt__dotdot__thermostat__state__t.html#ad916b91594c2712bdcb332839166ec42", null ],
@@ -1450,16 +1450,16 @@ var group__dotdot__mqtt =
       [ "options_override", "structuic__mqtt__dotdot__color__control__command__stop__move__step__fields__t.html#ab4000c9c1a5f6255dd48b72147e68063", null ]
     ] ],
     [ "uic_mqtt_dotdot_color_control_command_move_color_temperature_fields_t", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html", [
-      [ "color_temperature_maximum_mireds", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#ae12d3a3ef92bee284ab20248f5fc7631", null ],
-      [ "color_temperature_minimum_mireds", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#aa746166815904d9ed91df3ae12d651a1", null ],
+      [ "color_temperature_maximum_mireds", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#af766404f02ad1f61f03d9df2f04f4b6a", null ],
+      [ "color_temperature_minimum_mireds", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#a6398f5af8993c58f286a9d62b61ee49d", null ],
       [ "move_mode", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#a7d5ce80797873c7f7e935ba4bf389479", null ],
       [ "options_mask", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#a084b0d5700b80b6544668aa9b0447de6", null ],
       [ "options_override", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#acbe1452b890e56fde7c82a9d175b0517", null ],
       [ "rate", "structuic__mqtt__dotdot__color__control__command__move__color__temperature__fields__t.html#a664fe812962d33e727a6a70bf4902a4b", null ]
     ] ],
     [ "uic_mqtt_dotdot_color_control_command_step_color_temperature_fields_t", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html", [
-      [ "color_temperature_maximum_mireds", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#a27d555f73b8b1082396ea5f180e268f0", null ],
-      [ "color_temperature_minimum_mireds", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#a4a9c7113e060609054136345554e8340", null ],
+      [ "color_temperature_maximum_mireds", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#a1038b0e70492ca228c4ca804ec232308", null ],
+      [ "color_temperature_minimum_mireds", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#abca59db627a4f2714d5c176cb51905dc", null ],
       [ "options_mask", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#ad62fc8db9d47fe18d792084d8452561a", null ],
       [ "options_override", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#a09a8f049b891d00f33936c8efe0c4b2f", null ],
       [ "step_mode", "structuic__mqtt__dotdot__color__control__command__step__color__temperature__fields__t.html#a68d73bcd53eda3e2527892ec3c18129d", null ],
@@ -1698,7 +1698,7 @@ var group__dotdot__mqtt =
     ] ],
     [ "uic_mqtt_dotdot_ias_zone_state_t", "structuic__mqtt__dotdot__ias__zone__state__t.html", [
       [ "current_zone_sensitivity_level", "structuic__mqtt__dotdot__ias__zone__state__t.html#a94d00aa44e4947168e82f9d28fa83937", null ],
-      [ "iascie_address", "structuic__mqtt__dotdot__ias__zone__state__t.html#a737d425eafd02110c83b4482ec483e23", null ],
+      [ "iascie_address", "structuic__mqtt__dotdot__ias__zone__state__t.html#acfa812e92573fd9382a933e8ac7a0815", null ],
       [ "number_of_zone_sensitivity_levels_supported", "structuic__mqtt__dotdot__ias__zone__state__t.html#ad141dda7c7a379ea7ae825d0853f3c5c", null ],
       [ "zone_state", "structuic__mqtt__dotdot__ias__zone__state__t.html#a4ce246ce923ef06b1cf24d39d1101f30", null ],
       [ "zone_status", "structuic__mqtt__dotdot__ias__zone__state__t.html#ac8a9942e3c4982a7bdd6b2e12ce527f4", null ],
@@ -1750,9 +1750,9 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_metering_state_t", "structuic__mqtt__dotdot__metering__state__t.html", [
       [ "current_inlet_energy_carrier_summation", "structuic__mqtt__dotdot__metering__state__t.html#a8894371b59e5b36aef8d52b5d7ca2068", null ],
       [ "current_max_demand_delivered", "structuic__mqtt__dotdot__metering__state__t.html#a6f6a6b95ffb22091632e188fb5dd4b13", null ],
-      [ "current_max_demand_delivered_time", "structuic__mqtt__dotdot__metering__state__t.html#a2bae2eeede8af79eeae29e3abafa6fa8", null ],
+      [ "current_max_demand_delivered_time", "structuic__mqtt__dotdot__metering__state__t.html#a01bb3eacda499d0c6bb36d9144cbbd42", null ],
       [ "current_max_demand_received", "structuic__mqtt__dotdot__metering__state__t.html#adabf2865652d808e790c92248c683c9c", null ],
-      [ "current_max_demand_received_time", "structuic__mqtt__dotdot__metering__state__t.html#a3e7defb70a663ae2c70acf3f3d1ec3ed", null ],
+      [ "current_max_demand_received_time", "structuic__mqtt__dotdot__metering__state__t.html#a9f6d63b90d51e5c7162e6d1ed61c1cbd", null ],
       [ "current_outlet_energy_carrier_summation", "structuic__mqtt__dotdot__metering__state__t.html#ae4dd295ce229f676b03e232d9dbbb54c", null ],
       [ "current_summation_delivered", "structuic__mqtt__dotdot__metering__state__t.html#a8e4842ffd9713b30268ef727759b860c", null ],
       [ "current_summation_received", "structuic__mqtt__dotdot__metering__state__t.html#a093eda036c3e4a2be0501adb06769196", null ],
@@ -1763,12 +1763,12 @@ var group__dotdot__mqtt =
       [ "energy_carrier_summation_formatting", "structuic__mqtt__dotdot__metering__state__t.html#aae723c2ce894ca839380cf853091c78f", null ],
       [ "energy_carrier_unit_of_measure", "structuic__mqtt__dotdot__metering__state__t.html#aa48c10dd4fbf1d6466d7869860e8caf6", null ],
       [ "historical_consumption_formatting", "structuic__mqtt__dotdot__metering__state__t.html#a410c2802a90c16e221235ca41b5239f8", null ],
-      [ "inlet_temperature", "structuic__mqtt__dotdot__metering__state__t.html#a1c2d0b871b9a2724daaa8fdb16fc9f32", null ],
+      [ "inlet_temperature", "structuic__mqtt__dotdot__metering__state__t.html#a43caaba15245f3c7167de99531cea93b", null ],
       [ "metering_device_type", "structuic__mqtt__dotdot__metering__state__t.html#a55c8604b9404279132852c34433c5bd2", null ],
       [ "multiplier", "structuic__mqtt__dotdot__metering__state__t.html#acdc96fdbff6c3e81d932b89b2731b661", null ],
-      [ "outlet_temperature", "structuic__mqtt__dotdot__metering__state__t.html#ac18378fb31b8f0e6366dae2d62d1bad9", null ],
+      [ "outlet_temperature", "structuic__mqtt__dotdot__metering__state__t.html#aa666ba552fd7a7abcfb40348235a623c", null ],
       [ "power_factor", "structuic__mqtt__dotdot__metering__state__t.html#a2d2a54994eaa430ab9b792b756d57b8d", null ],
-      [ "reading_snap_shot_time", "structuic__mqtt__dotdot__metering__state__t.html#ac32bfb255c3d48b2d3219afdb5961f1d", null ],
+      [ "reading_snap_shot_time", "structuic__mqtt__dotdot__metering__state__t.html#a502c86ee616384aff150ef54b778b5d4", null ],
       [ "summation_formatting", "structuic__mqtt__dotdot__metering__state__t.html#a88b1b40c77489ca5370f1f81780e3afa", null ],
       [ "supply_status", "structuic__mqtt__dotdot__metering__state__t.html#a5a5adb1913c4a87c5c52ce3054bde048", null ],
       [ "temperature_formatting", "structuic__mqtt__dotdot__metering__state__t.html#a0f150dbb1f21304a62c65e07c55c77b5", null ],
@@ -2074,13 +2074,13 @@ var group__dotdot__mqtt =
       [ "intervals_count", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__response__fields__t.html#af468d326a1eaee6a281dca928d2e55e7", null ],
       [ "number_of_intervals_delivered", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__response__fields__t.html#ae045fec4d36343afa32b556c6a46d16b", null ],
       [ "profile_interval_period", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__response__fields__t.html#a76fd84a58035ffe992f52ef92eb37804", null ],
-      [ "start_time", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__response__fields__t.html#a899c8e3f51494cac27a3587aa457f2d9", null ],
+      [ "start_time", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__response__fields__t.html#aab3dbe09c4732f51e3aee2b740e67689", null ],
       [ "status", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__response__fields__t.html#a30133390eaa883b7e3aa0c063c148e18", null ]
     ] ],
     [ "uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_fields_t", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__fields__t.html", [
       [ "attributeid", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__fields__t.html#aaaa5ab933f55e1a871079fa8dc8bcb6b", null ],
       [ "number_of_intervals", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__fields__t.html#a201ddb3be6bef84228e49a0e8fbc07c8", null ],
-      [ "start_time", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__fields__t.html#a5b5a99c909fe4e502f5db9c0aad1378d", null ]
+      [ "start_time", "structuic__mqtt__dotdot__electrical__measurement__command__get__measurement__profile__fields__t.html#af6c05335045552ebaea431454574f994", null ]
     ] ],
     [ "uic_mqtt_dotdot_diagnostics_state_t", "structuic__mqtt__dotdot__diagnostics__state__t.html", [
       [ "aps_decrypt_failures", "structuic__mqtt__dotdot__diagnostics__state__t.html#a4fc928f2b4b695e20c08d7d263184541", null ],
@@ -2375,76 +2375,6 @@ var group__dotdot__mqtt =
       [ "first_parameter_id", "structuic__mqtt__dotdot__configuration__parameters__command__discover__parameter__range__fields__t.html#a3fb136d029a954c8914809a015ec25e8", null ],
       [ "last_parameter_id", "structuic__mqtt__dotdot__configuration__parameters__command__discover__parameter__range__fields__t.html#af2356c37a3f17a7c633791e798f210f2", null ]
     ] ],
-    [ "uic_mqtt_dotdot_aox_locator_state_t", "structuic__mqtt__dotdot__aox__locator__state__t.html", [
-      [ "allow_list", "structuic__mqtt__dotdot__aox__locator__state__t.html#adb99dbbebf48830170ee855495ecd289", null ],
-      [ "allow_list_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#a599b6bcdd8f78f07920815872e499792", null ],
-      [ "angle_correction_delay", "structuic__mqtt__dotdot__aox__locator__state__t.html#aedf0ca6623cf2a9262d3728b10cebfef", null ],
-      [ "angle_correction_timeout", "structuic__mqtt__dotdot__aox__locator__state__t.html#a419402d1a7b02d4dcffd5d4f7ec6e6ad", null ],
-      [ "angle_filtering", "structuic__mqtt__dotdot__aox__locator__state__t.html#acd9d9976ae94a74466df6463a45a8f9c", null ],
-      [ "angle_filtering_weight", "structuic__mqtt__dotdot__aox__locator__state__t.html#a39c0a31b678933c19082a8f2a68eb3f1", null ],
-      [ "antenna_array", "structuic__mqtt__dotdot__aox__locator__state__t.html#aa26ba6f4de7fe3d4f2ab71038d65f332", null ],
-      [ "antenna_array_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#a52fee70edefddeaa747ea49be6c95ea8", null ],
-      [ "antenna_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#af23cdfb4b8eb8dac36a08eece37aadb4", null ],
-      [ "aox_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#a1c81b801fa19026d97f424f3cd6c81ee", null ],
-      [ "azimuth_mask", "structuic__mqtt__dotdot__aox__locator__state__t.html#a8d21446894e91d4342137bda73192064", null ],
-      [ "azimuth_mask_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#ad9db11399d5971a412d80a3f425f0c47", null ],
-      [ "cte_length", "structuic__mqtt__dotdot__aox__locator__state__t.html#a6dd2c68f49cd3ca0cbebcbbd4d19b6c6", null ],
-      [ "cte_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#aed544dafe9673ec3700537feffaf11f7", null ],
-      [ "cte_sampling_interval", "structuic__mqtt__dotdot__aox__locator__state__t.html#a193adc8ef154f32e33728c44670743fe", null ],
-      [ "elevation_mask", "structuic__mqtt__dotdot__aox__locator__state__t.html#a3446486697bd472be4d786026c862289", null ],
-      [ "elevation_mask_count", "structuic__mqtt__dotdot__aox__locator__state__t.html#a7e3c76da67536f7a88c119806e35ba51", null ],
-      [ "period_samples", "structuic__mqtt__dotdot__aox__locator__state__t.html#a44f369010f39745d2033a2212adc1774", null ],
-      [ "position_and_orientation", "structuic__mqtt__dotdot__aox__locator__state__t.html#a3ba80b15a1019daedc25e648cf13d457", null ],
-      [ "position_and_orientation_valid", "structuic__mqtt__dotdot__aox__locator__state__t.html#a36788700156387b39ee5916f155a2b25", null ],
-      [ "reporting_mode", "structuic__mqtt__dotdot__aox__locator__state__t.html#a9d695c54c169ff0846fef5fd074fdd07", null ],
-      [ "slot_duration", "structuic__mqtt__dotdot__aox__locator__state__t.html#a6e7e6e9c6988d9c5a0ae5872468a5e6f", null ]
-    ] ],
-    [ "uic_mqtt_dotdot_aox_locator_updated_state_t", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html", [
-      [ "allow_list", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#ade4ae4fd31b487f4057e5a91f65733dd", null ],
-      [ "angle_correction_delay", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#aa4d530c4397e4c92dc4a24a1d466e7f7", null ],
-      [ "angle_correction_timeout", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#aa06b88e2c65b20ba3d449d2bc5213687", null ],
-      [ "angle_filtering", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a1417fa8efa25bb8a198f55f7c50a4f40", null ],
-      [ "angle_filtering_weight", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a1b662c85e10c98ecf005f586b24d5b2a", null ],
-      [ "antenna_array", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#ae3056200454681cff5cf66e35de3f70e", null ],
-      [ "antenna_mode", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a940cebf95d195a9820e1b396c6eeaff0", null ],
-      [ "aox_mode", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#ab095f6f82c2c27470edc8b1de62dff1c", null ],
-      [ "azimuth_mask", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a157762c54d5cc2ea69086a75d510e22e", null ],
-      [ "cte_length", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#aeb28bf713f6882883547778fe601320f", null ],
-      [ "cte_mode", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a38ae6e4a0fba59d9ce349c7404497e6c", null ],
-      [ "cte_sampling_interval", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a497b9986f29c93439f8ad65856857ab4", null ],
-      [ "elevation_mask", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a149c1c7a3f019629f05979ba505fa2e5", null ],
-      [ "period_samples", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a7683fac1619910ed9a071bff298a4cfb", null ],
-      [ "position_and_orientation", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a44412dd1448fa69570f77fc94939f589", null ],
-      [ "position_and_orientation_valid", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a104dcb1798c6914ea5dbb1fc0e221af4", null ],
-      [ "reporting_mode", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#a448664ef67135f320530556f6cfbdba5", null ],
-      [ "slot_duration", "structuic__mqtt__dotdot__aox__locator__updated__state__t.html#aa92e1997fb4cc84c6cb1149bb69dbc5b", null ]
-    ] ],
-    [ "uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html", [
-      [ "channel", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html#aaae358048119cdedb8eba9858b6d0557", null ],
-      [ "rssi", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html#ae3bf12797287940abdca38940dbaccc4", null ],
-      [ "samples", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html#a1499535faaa2bf1df8a5082ad48befad", null ],
-      [ "samples_count", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html#a337aaa6be4e998035b1442d149590807", null ],
-      [ "sequence", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html#ab09bf40187aaae99f9c6aaf85c9b830d", null ],
-      [ "tag_unid", "structuic__mqtt__dotdot__aox__locator__command__iq__report__fields__t.html#a423f8073fd640da9ad03612839d64153", null ]
-    ] ],
-    [ "uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t", "structuic__mqtt__dotdot__aox__locator__command__angle__report__fields__t.html", [
-      [ "deviation", "structuic__mqtt__dotdot__aox__locator__command__angle__report__fields__t.html#a69155d4e5521f673ae76753dd3b6113d", null ],
-      [ "direction", "structuic__mqtt__dotdot__aox__locator__command__angle__report__fields__t.html#a89af32aa22d0b761fc69bf661cfeac66", null ],
-      [ "sequence", "structuic__mqtt__dotdot__aox__locator__command__angle__report__fields__t.html#ad27540ad416e8bd7e02f3fbd4172bc96", null ],
-      [ "tag_unid", "structuic__mqtt__dotdot__aox__locator__command__angle__report__fields__t.html#ac5ae17a015d8201380a4c425e322a28d", null ]
-    ] ],
-    [ "uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t", "structuic__mqtt__dotdot__aox__locator__command__angle__correction__fields__t.html", [
-      [ "deviation", "structuic__mqtt__dotdot__aox__locator__command__angle__correction__fields__t.html#aff02538b2fa93bf403964cc36aeee4f4", null ],
-      [ "direction", "structuic__mqtt__dotdot__aox__locator__command__angle__correction__fields__t.html#a3a76c7493dd4f47bfc0cb6f62a4ac1c3", null ],
-      [ "sequence", "structuic__mqtt__dotdot__aox__locator__command__angle__correction__fields__t.html#aa104a73b39b559c14af1476fffad1da2", null ],
-      [ "tag_unid", "structuic__mqtt__dotdot__aox__locator__command__angle__correction__fields__t.html#a1ee8498a0ac1dbae3c879ac78c39f45b", null ]
-    ] ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_state_t", "structuic__mqtt__dotdot__aox__position__estimation__state__t.html", [
-      [ "position", "structuic__mqtt__dotdot__aox__position__estimation__state__t.html#a82c1f51c8a9affad1a469175143c752e", null ]
-    ] ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_updated_state_t", "structuic__mqtt__dotdot__aox__position__estimation__updated__state__t.html", [
-      [ "position", "structuic__mqtt__dotdot__aox__position__estimation__updated__state__t.html#a16f04cf30ba59780de9128baad170079", null ]
-    ] ],
     [ "uic_mqtt_dotdot_protocol_controller_network_management_state_t", "structuic__mqtt__dotdot__protocol__controller__network__management__state__t.html", [
       [ "network_management_state", "structuic__mqtt__dotdot__protocol__controller__network__management__state__t.html#afac3b557e7a62bb3ddd880d0270615cc", null ]
     ] ],
@@ -2533,21 +2463,14 @@ var group__dotdot__mqtt =
       [ "value", "structuic__mqtt__dotdot__unify__humidity__control__command__setpoint__set__fields__t.html#a4347a4823b4d34022d8d71b12f3a257c", null ]
     ] ],
     [ "group_dispatch_t", "group__dotdot__mqtt.html#ga24b23b20fabeff87ff1b572667057117", null ],
-    [ "uic_mqtt_dotdot_alarms_alarm_callback_t", "group__dotdot__mqtt.html#gab936066d89b037a493ef1442f1ba2a77", null ],
+    [ "uic_mqtt_dotdot_alarms_alarm_callback_t", "group__dotdot__mqtt.html#ga65a5363b82d1e681c7764400f11a0fb5", null ],
     [ "uic_mqtt_dotdot_alarms_force_read_attributes_callback_t", "group__dotdot__mqtt.html#ga1a1b1d1ef4473efba28019c9e9ead4e5", null ],
     [ "uic_mqtt_dotdot_alarms_get_alarm_callback_t", "group__dotdot__mqtt.html#gaacc7a5dbdb3d74c3ce5d13558ff2be27", null ],
-    [ "uic_mqtt_dotdot_alarms_get_alarm_response_callback_t", "group__dotdot__mqtt.html#gace4a0a8a7b2e109a2ad378ca173362c8", null ],
-    [ "uic_mqtt_dotdot_alarms_reset_alarm_callback_t", "group__dotdot__mqtt.html#ga675c714fee87b3b2357fe9e51fb496f9", null ],
+    [ "uic_mqtt_dotdot_alarms_get_alarm_response_callback_t", "group__dotdot__mqtt.html#ga52c7e4b10ad69d1c01a2dfd7ca7bdbf4", null ],
+    [ "uic_mqtt_dotdot_alarms_reset_alarm_callback_t", "group__dotdot__mqtt.html#gabc6ad2323bd13b227253d33fae40fb1a", null ],
     [ "uic_mqtt_dotdot_alarms_reset_alarm_log_callback_t", "group__dotdot__mqtt.html#gabbd36f34adb37ca43fa5d3a110eefe03", null ],
     [ "uic_mqtt_dotdot_alarms_reset_all_alarms_callback_t", "group__dotdot__mqtt.html#gaf449acd3d9b812b5c268a5b55794773e", null ],
     [ "uic_mqtt_dotdot_alarms_write_attributes_callback_t", "group__dotdot__mqtt.html#gac855d494aef3e565f310465c9dc0bf94", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_callback_t", "group__dotdot__mqtt.html#gab3f4d5891a478be0b55d834c1bd6d0cb", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_report_callback_t", "group__dotdot__mqtt.html#gaabe436a8e86e3a731ef424e919005124", null ],
-    [ "uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t", "group__dotdot__mqtt.html#gae88ec918317f40391909d48588e3bbab", null ],
-    [ "uic_mqtt_dotdot_aox_locator_iq_report_callback_t", "group__dotdot__mqtt.html#gae0b743848c85011e9158200cc9e1abe3", null ],
-    [ "uic_mqtt_dotdot_aox_locator_write_attributes_callback_t", "group__dotdot__mqtt.html#ga22f4fb834843e6b4badd6712f89d592c", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t", "group__dotdot__mqtt.html#gae913355a66702af165299534898c5bb5", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t", "group__dotdot__mqtt.html#ga2b0adbf10fdf8c37999d18de326c6e44", null ],
     [ "uic_mqtt_dotdot_application_monitoring_force_read_attributes_callback_t", "group__dotdot__mqtt.html#gabf48d459d666cd336d4c03532763dd60", null ],
     [ "uic_mqtt_dotdot_application_monitoring_log_entry_callback_t", "group__dotdot__mqtt.html#gaa664ed6ede325f0e098d8210c431322f", null ],
     [ "uic_mqtt_dotdot_application_monitoring_write_attributes_callback_t", "group__dotdot__mqtt.html#gaf07a4e9208cb7a1953e7797768894441", null ],
@@ -2577,7 +2500,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_color_control_enhanced_step_hue_callback_t", "group__dotdot__mqtt.html#ga39865b55afaccce52f3a32f6f969ff2e", null ],
     [ "uic_mqtt_dotdot_color_control_force_read_attributes_callback_t", "group__dotdot__mqtt.html#ga8da9fa5334e197f430131bd7ba8da964", null ],
     [ "uic_mqtt_dotdot_color_control_move_color_callback_t", "group__dotdot__mqtt.html#ga371c84cc3a54174be2462d8091e21579", null ],
-    [ "uic_mqtt_dotdot_color_control_move_color_temperature_callback_t", "group__dotdot__mqtt.html#gaf5be59c087f2d26d8407d6c0c13564a2", null ],
+    [ "uic_mqtt_dotdot_color_control_move_color_temperature_callback_t", "group__dotdot__mqtt.html#ga9895afc62af277c9cfb27a3c5fda0419", null ],
     [ "uic_mqtt_dotdot_color_control_move_hue_callback_t", "group__dotdot__mqtt.html#gae7e01db2effaf8b85f1930a7b1bdf752", null ],
     [ "uic_mqtt_dotdot_color_control_move_saturation_callback_t", "group__dotdot__mqtt.html#ga96b232c7a09d27563012dba5d4515d1b", null ],
     [ "uic_mqtt_dotdot_color_control_move_to_color_callback_t", "group__dotdot__mqtt.html#ga0478f152272b72cc286d3323f60d83e5", null ],
@@ -2586,7 +2509,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_color_control_move_to_hue_callback_t", "group__dotdot__mqtt.html#ga32870b51bcf2f0fe75d9e7030e6632cb", null ],
     [ "uic_mqtt_dotdot_color_control_move_to_saturation_callback_t", "group__dotdot__mqtt.html#gaad3b15411be523e787d5baa619eeeed0", null ],
     [ "uic_mqtt_dotdot_color_control_step_color_callback_t", "group__dotdot__mqtt.html#ga029d365664ff72afd39a3425557e7649", null ],
-    [ "uic_mqtt_dotdot_color_control_step_color_temperature_callback_t", "group__dotdot__mqtt.html#ga5f99569a1cc335aaaedd8c214640079b", null ],
+    [ "uic_mqtt_dotdot_color_control_step_color_temperature_callback_t", "group__dotdot__mqtt.html#ga2991945872e395426b1267622f671402", null ],
     [ "uic_mqtt_dotdot_color_control_step_hue_callback_t", "group__dotdot__mqtt.html#ga5defdcf060f073f891af621d7d705ce3", null ],
     [ "uic_mqtt_dotdot_color_control_step_saturation_callback_t", "group__dotdot__mqtt.html#ga20f26f2d3b7e6debceecf43fe4867118", null ],
     [ "uic_mqtt_dotdot_color_control_stop_move_step_callback_t", "group__dotdot__mqtt.html#gafc99fcff8f6c8007ad9a2d2bd5727ca4", null ],
@@ -2610,37 +2533,37 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_callback_t", "group__dotdot__mqtt.html#gac8a183b6a49ad235659190e4708c8d9e", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_all_rfid_codes_response_callback_t", "group__dotdot__mqtt.html#ga9d29d1c4aa75b32924057ff71d228a42", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_credential_callback_t", "group__dotdot__mqtt.html#ga126f27abd418d7fb08c755e6be21e651", null ],
-    [ "uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback_t", "group__dotdot__mqtt.html#ga8679b14ab80f5abd2345d7fcaa919144", null ],
+    [ "uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback_t", "group__dotdot__mqtt.html#gaa58ac81c42f21774ed09f4ee531e7089", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_holiday_schedule_response_callback_t", "group__dotdot__mqtt.html#gada5dc8abc62f841da233a9946b715bb0", null ],
-    [ "uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t", "group__dotdot__mqtt.html#ga811818561773b55fbaea51433aae410a", null ],
+    [ "uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t", "group__dotdot__mqtt.html#ga08b0f7a831e2028f5985ade13c3c185e", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t", "group__dotdot__mqtt.html#ga8b4d2fc7f9d86dfc5b6cf892f67f6e3c", null ],
-    [ "uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t", "group__dotdot__mqtt.html#ga362db35764ccf6ab05f57e21fac9b121", null ],
+    [ "uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t", "group__dotdot__mqtt.html#gac8979d6249717c547fd1e829b9f4c96b", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t", "group__dotdot__mqtt.html#gae99aa51c66d267cc66cdf968fea41c44", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_user_callback_t", "group__dotdot__mqtt.html#gaa2cccb21b98a51eeb14f5fe1baf2b56a", null ],
-    [ "uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback_t", "group__dotdot__mqtt.html#ga6019d12049f27a960760130e4ca96d1d", null ],
+    [ "uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback_t", "group__dotdot__mqtt.html#ga7f9f6cd249e65da98724f7a88d88ff11", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_weekday_schedule_response_callback_t", "group__dotdot__mqtt.html#gaa4811be9d84c015f647d23d134c28e3c", null ],
-    [ "uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback_t", "group__dotdot__mqtt.html#ga4b3cfa4001a1ced89fd61c8c935e5fac", null ],
+    [ "uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback_t", "group__dotdot__mqtt.html#gaf48927c48ec7a5ab77297c096ea6ad74", null ],
     [ "uic_mqtt_dotdot_door_lock_clear_year_day_schedule_response_callback_t", "group__dotdot__mqtt.html#ga9314bce3c2dba7096d2d13f7ef20f90d", null ],
     [ "uic_mqtt_dotdot_door_lock_force_read_attributes_callback_t", "group__dotdot__mqtt.html#gae72adcc2806ff0ce15f861aa26016d77", null ],
     [ "uic_mqtt_dotdot_door_lock_get_credential_status_callback_t", "group__dotdot__mqtt.html#ga200952db368df17020711544bc4506e3", null ],
     [ "uic_mqtt_dotdot_door_lock_get_credential_status_response_callback_t", "group__dotdot__mqtt.html#ga52445a2184533f425515b2b66bc40ead", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback_t", "group__dotdot__mqtt.html#gadcb6aaabfbd43cee9046b8df8297731d", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback_t", "group__dotdot__mqtt.html#ga752d980521d18c2e231c1585b4c475a2", null ],
     [ "uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback_t", "group__dotdot__mqtt.html#ga8d75f58082d8fc077c40a8db00ac04da", null ],
     [ "uic_mqtt_dotdot_door_lock_get_log_record_callback_t", "group__dotdot__mqtt.html#ga456f90d14e7acd10f9271b353d3cc0a7", null ],
     [ "uic_mqtt_dotdot_door_lock_get_log_record_response_callback_t", "group__dotdot__mqtt.html#ga96e0764882a15ea4588e61b826fe576d", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_pin_code_callback_t", "group__dotdot__mqtt.html#ga254376ed2dd0d0362e6d430b4b10cd3a", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_pin_code_callback_t", "group__dotdot__mqtt.html#gaaa31d85b7cb350ff005b07ed2f276322", null ],
     [ "uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t", "group__dotdot__mqtt.html#gab3128804f2a761073db0a454abd3f763", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t", "group__dotdot__mqtt.html#ga71c0171bb3275788766210e5aad9ddc6", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t", "group__dotdot__mqtt.html#ga69ba7db2ca2a41b08ea97ebd773fe97c", null ],
     [ "uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t", "group__dotdot__mqtt.html#ga541f7e76e4f187f57b1fbe88164d68d8", null ],
     [ "uic_mqtt_dotdot_door_lock_get_user_callback_t", "group__dotdot__mqtt.html#ga7a382cd82d18cfd4d19dfe8b63de03cc", null ],
     [ "uic_mqtt_dotdot_door_lock_get_user_response_callback_t", "group__dotdot__mqtt.html#gad64cf6d97c1a932ded9e391217518cf2", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_user_status_callback_t", "group__dotdot__mqtt.html#ga3f6daa5ac51c736044802f20f88dd8ff", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_user_status_callback_t", "group__dotdot__mqtt.html#gac3a1a3f3439c8b75bf8198c92a0d407b", null ],
     [ "uic_mqtt_dotdot_door_lock_get_user_status_response_callback_t", "group__dotdot__mqtt.html#ga2cb5575dd39d57c0b2f190903994066c", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_user_type_callback_t", "group__dotdot__mqtt.html#gadcc552fddfa115c4d0e10dc654d3affb", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_user_type_callback_t", "group__dotdot__mqtt.html#gae78b207c5104b01d9525c76ade3ae479", null ],
     [ "uic_mqtt_dotdot_door_lock_get_user_type_response_callback_t", "group__dotdot__mqtt.html#ga3927318914f6762767ed5f3d70895d46", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback_t", "group__dotdot__mqtt.html#gaafbe8822f4911d677e2f8a54be0763f4", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback_t", "group__dotdot__mqtt.html#ga023f2b667b4b67608768e269e8955204", null ],
     [ "uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback_t", "group__dotdot__mqtt.html#gab138dc400ecd17f2b8d828e4039fc710", null ],
-    [ "uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback_t", "group__dotdot__mqtt.html#ga0cdfbc45ea273b81f1357ac9a64537e9", null ],
+    [ "uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback_t", "group__dotdot__mqtt.html#gaa89c277aededf04802a321e6133b4c45", null ],
     [ "uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback_t", "group__dotdot__mqtt.html#ga297a4d10f7e3eecbf96008e3309a5228", null ],
     [ "uic_mqtt_dotdot_door_lock_lock_door_callback_t", "group__dotdot__mqtt.html#gaf7dbc8d654b14226737f0263ffbdd1fc", null ],
     [ "uic_mqtt_dotdot_door_lock_lock_door_response_callback_t", "group__dotdot__mqtt.html#gac75e2c12ef85bce04d093c1ea11007ec", null ],
@@ -2648,20 +2571,20 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_door_lock_programming_event_notification_callback_t", "group__dotdot__mqtt.html#gab2c695169265ef377ee92c7b232d7f72", null ],
     [ "uic_mqtt_dotdot_door_lock_set_credential_callback_t", "group__dotdot__mqtt.html#ga4051f7572329f5bde186ef37584180d5", null ],
     [ "uic_mqtt_dotdot_door_lock_set_credential_response_callback_t", "group__dotdot__mqtt.html#ga95f45b3fddd17523144b3dc459da3615", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback_t", "group__dotdot__mqtt.html#ga08ddec7873ed9f59fc04a64b9c6a0e93", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback_t", "group__dotdot__mqtt.html#ga46ca8509df304af30085a726e93b5812", null ],
     [ "uic_mqtt_dotdot_door_lock_set_holiday_schedule_response_callback_t", "group__dotdot__mqtt.html#gab249c4d1e246cc883495f0b58d015120", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_pin_code_callback_t", "group__dotdot__mqtt.html#ga8ed5a28a905632be41a26b851965085e", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_pin_code_callback_t", "group__dotdot__mqtt.html#gaef7e08008606139629903eb82abd38f0", null ],
     [ "uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t", "group__dotdot__mqtt.html#ga540bcc0e65c6d3baf54d6c89461feb7d", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t", "group__dotdot__mqtt.html#gab4e6566a1482ff5dbd8d51cd41ee7be8", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t", "group__dotdot__mqtt.html#ga4b3be7347ed5ca86f17130bae0788c90", null ],
     [ "uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t", "group__dotdot__mqtt.html#gaa85fe1df6a67ae33afa5742014902d19", null ],
     [ "uic_mqtt_dotdot_door_lock_set_user_callback_t", "group__dotdot__mqtt.html#ga17648be1d6682ca4f19d883959ebedad", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_user_status_callback_t", "group__dotdot__mqtt.html#ga9e080833c2e5506097fcbe1f603d9aa4", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_user_status_callback_t", "group__dotdot__mqtt.html#gaf85454e30b9b92f1745b617dfff25d7e", null ],
     [ "uic_mqtt_dotdot_door_lock_set_user_status_response_callback_t", "group__dotdot__mqtt.html#gaf24269e4decc1ebe67a5fbc0d07947d4", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_user_type_callback_t", "group__dotdot__mqtt.html#gaceb8e927f2aaf2808b8177b0d9447a93", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_user_type_callback_t", "group__dotdot__mqtt.html#ga9b8c150f347c5e7cd6012cba54e4956e", null ],
     [ "uic_mqtt_dotdot_door_lock_set_user_type_response_callback_t", "group__dotdot__mqtt.html#ga6ae102d1602af49191594dafe9eb2c5a", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback_t", "group__dotdot__mqtt.html#gaa3fd495102e01c15c467e906aebfe463", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback_t", "group__dotdot__mqtt.html#ga3730036d7a9982a38852582b70674561", null ],
     [ "uic_mqtt_dotdot_door_lock_set_weekday_schedule_response_callback_t", "group__dotdot__mqtt.html#ga456c10c469510faad2114403fadaa995", null ],
-    [ "uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback_t", "group__dotdot__mqtt.html#ga893c80fe8da28dbabfb4c57da031691e", null ],
+    [ "uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback_t", "group__dotdot__mqtt.html#ga2dbfd7879afba32047db6e94277441ae", null ],
     [ "uic_mqtt_dotdot_door_lock_set_year_day_schedule_response_callback_t", "group__dotdot__mqtt.html#gae369c759a4ba153dca73a263118781ca", null ],
     [ "uic_mqtt_dotdot_door_lock_toggle_callback_t", "group__dotdot__mqtt.html#gab92c45087a1a1a1e87b9403b9d0a94ac", null ],
     [ "uic_mqtt_dotdot_door_lock_toggle_response_callback_t", "group__dotdot__mqtt.html#gab83c28b96f6d24634e8427adf4ad98dc", null ],
@@ -2674,8 +2597,8 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_electrical_conductivity_measurement_force_read_attributes_callback_t", "group__dotdot__mqtt.html#ga4e7fd5e06b4a590cb0ac0f41192a935e", null ],
     [ "uic_mqtt_dotdot_electrical_conductivity_measurement_write_attributes_callback_t", "group__dotdot__mqtt.html#ga9b40fdb59540f74b6cd43bd6700cab33", null ],
     [ "uic_mqtt_dotdot_electrical_measurement_force_read_attributes_callback_t", "group__dotdot__mqtt.html#ga3b7e3d0063953a589ff2e90b3045726c", null ],
-    [ "uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback_t", "group__dotdot__mqtt.html#ga0f480d9ddacd6b269c148110b2c04541", null ],
-    [ "uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback_t", "group__dotdot__mqtt.html#ga914212541357813c0d087c7aaf4ff32a", null ],
+    [ "uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback_t", "group__dotdot__mqtt.html#gaf99437d9aed749fda31242987a4c39f9", null ],
+    [ "uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback_t", "group__dotdot__mqtt.html#ga732c4284a2e85d82ef35158b6ae6f6e8", null ],
     [ "uic_mqtt_dotdot_electrical_measurement_get_profile_info_callback_t", "group__dotdot__mqtt.html#ga2406cb15a0a9f25f62d8bb7b5360d5fa", null ],
     [ "uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback_t", "group__dotdot__mqtt.html#ga136dfff303b80602118872558fb6ef67", null ],
     [ "uic_mqtt_dotdot_electrical_measurement_write_attributes_callback_t", "group__dotdot__mqtt.html#ga8b0601e919d5f708326d8225e358c103", null ],
@@ -2766,26 +2689,26 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_pump_configuration_and_control_write_attributes_callback_t", "group__dotdot__mqtt.html#ga213315a84e2713b46416477d39685504", null ],
     [ "uic_mqtt_dotdot_relativity_humidity_force_read_attributes_callback_t", "group__dotdot__mqtt.html#gad0c347340fff04225ffd08881504f33b", null ],
     [ "uic_mqtt_dotdot_relativity_humidity_write_attributes_callback_t", "group__dotdot__mqtt.html#ga7424b89ca678c498f870448b0fc5bd2a", null ],
-    [ "uic_mqtt_dotdot_scenes_add_scene_callback_t", "group__dotdot__mqtt.html#gab9ba5e6532777ea52dfbe8dd08a91f98", null ],
-    [ "uic_mqtt_dotdot_scenes_add_scene_response_callback_t", "group__dotdot__mqtt.html#gac397e90d753c6d94407b80738913146e", null ],
-    [ "uic_mqtt_dotdot_scenes_copy_scene_callback_t", "group__dotdot__mqtt.html#gaafc15736002272bb091bf428b972851b", null ],
-    [ "uic_mqtt_dotdot_scenes_copy_scene_response_callback_t", "group__dotdot__mqtt.html#gafdd36ca6eda43382ba818bdbbddb1dbb", null ],
-    [ "uic_mqtt_dotdot_scenes_enhanced_add_scene_callback_t", "group__dotdot__mqtt.html#gad3e7e159f262ba75fdfd7d81742a0a17", null ],
-    [ "uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback_t", "group__dotdot__mqtt.html#ga38e0b17ac1617f25346370dd7d3266aa", null ],
-    [ "uic_mqtt_dotdot_scenes_enhanced_view_scene_callback_t", "group__dotdot__mqtt.html#ga20d2bc8b278d8b1b0ecb0760ee845bb8", null ],
-    [ "uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback_t", "group__dotdot__mqtt.html#ga2227435c80934ea13e2cfb8f4ad2e00c", null ],
+    [ "uic_mqtt_dotdot_scenes_add_scene_callback_t", "group__dotdot__mqtt.html#ga1011e73d93bf270c5e8c7631cc119d44", null ],
+    [ "uic_mqtt_dotdot_scenes_add_scene_response_callback_t", "group__dotdot__mqtt.html#ga4383f8e996bf34bd9e44ea05831af0a0", null ],
+    [ "uic_mqtt_dotdot_scenes_copy_scene_callback_t", "group__dotdot__mqtt.html#ga5e4495d411c2ee1e3253a77d9c01044b", null ],
+    [ "uic_mqtt_dotdot_scenes_copy_scene_response_callback_t", "group__dotdot__mqtt.html#ga5b58bf9c9ad1f3bf1c4b40891c8b3999", null ],
+    [ "uic_mqtt_dotdot_scenes_enhanced_add_scene_callback_t", "group__dotdot__mqtt.html#gaf20ab5c2db913c1776a3b50a463ee029", null ],
+    [ "uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback_t", "group__dotdot__mqtt.html#gaa351533ab1818e772dc0466c60735d99", null ],
+    [ "uic_mqtt_dotdot_scenes_enhanced_view_scene_callback_t", "group__dotdot__mqtt.html#ga6db187de99bd81fcaf4c19fee4da1cf7", null ],
+    [ "uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback_t", "group__dotdot__mqtt.html#gae625ea2889eb50a670d6b09be103d6c8", null ],
     [ "uic_mqtt_dotdot_scenes_force_read_attributes_callback_t", "group__dotdot__mqtt.html#ga1cebf7462146a37e5d1515db2da5e635", null ],
-    [ "uic_mqtt_dotdot_scenes_get_scene_membership_callback_t", "group__dotdot__mqtt.html#gaa5791909ec25319ddf8ae8fe88678bea", null ],
-    [ "uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_t", "group__dotdot__mqtt.html#gab1bf76dc19da3fd42c656321b3defcc2", null ],
-    [ "uic_mqtt_dotdot_scenes_recall_scene_callback_t", "group__dotdot__mqtt.html#ga1715e82736ee956657b9dc9b83b0c40b", null ],
-    [ "uic_mqtt_dotdot_scenes_remove_all_scenes_callback_t", "group__dotdot__mqtt.html#gaaad425e72de978914f726f56e1448480", null ],
-    [ "uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback_t", "group__dotdot__mqtt.html#ga7465585fda9ad3d06f041e27123d2618", null ],
-    [ "uic_mqtt_dotdot_scenes_remove_scene_callback_t", "group__dotdot__mqtt.html#ga74cc7a88d8b6f33aff440f9eb11a4d0c", null ],
-    [ "uic_mqtt_dotdot_scenes_remove_scene_response_callback_t", "group__dotdot__mqtt.html#gaa4076fabef029757f5b05885e4efde65", null ],
-    [ "uic_mqtt_dotdot_scenes_store_scene_callback_t", "group__dotdot__mqtt.html#gaa2ce3ddba7b9f6cd0f2d961e5f7d0df3", null ],
-    [ "uic_mqtt_dotdot_scenes_store_scene_response_callback_t", "group__dotdot__mqtt.html#ga6bda970fff2797de863f5fc22fdeb36d", null ],
-    [ "uic_mqtt_dotdot_scenes_view_scene_callback_t", "group__dotdot__mqtt.html#gac2d6f4bee53123c366b980f7e5c51fab", null ],
-    [ "uic_mqtt_dotdot_scenes_view_scene_response_callback_t", "group__dotdot__mqtt.html#gad71fee4d079e17fe4676b26ab3c7fdd5", null ],
+    [ "uic_mqtt_dotdot_scenes_get_scene_membership_callback_t", "group__dotdot__mqtt.html#gab3de3298c4d1a1ac1eff9d57c9e054cb", null ],
+    [ "uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_t", "group__dotdot__mqtt.html#gab0f11c1717c48ba4a1409376f7077fd0", null ],
+    [ "uic_mqtt_dotdot_scenes_recall_scene_callback_t", "group__dotdot__mqtt.html#gaf0b5009525bfe3b315c3c457e357a9ad", null ],
+    [ "uic_mqtt_dotdot_scenes_remove_all_scenes_callback_t", "group__dotdot__mqtt.html#gad3628934293a48d874ac8495eaf440eb", null ],
+    [ "uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback_t", "group__dotdot__mqtt.html#ga50fbdfedaf343296cd3d5d75b5014ca2", null ],
+    [ "uic_mqtt_dotdot_scenes_remove_scene_callback_t", "group__dotdot__mqtt.html#ga49d49f06e8001abf953a31fd6a2d9668", null ],
+    [ "uic_mqtt_dotdot_scenes_remove_scene_response_callback_t", "group__dotdot__mqtt.html#ga60c8597bcf7adb73fef059eb035d8386", null ],
+    [ "uic_mqtt_dotdot_scenes_store_scene_callback_t", "group__dotdot__mqtt.html#gabd63a01629782c09e8cede9d20fd5b44", null ],
+    [ "uic_mqtt_dotdot_scenes_store_scene_response_callback_t", "group__dotdot__mqtt.html#gac4bed873f8187860f60e278557654dca", null ],
+    [ "uic_mqtt_dotdot_scenes_view_scene_callback_t", "group__dotdot__mqtt.html#ga8c99010426bddd17809eb3a94f41bad8", null ],
+    [ "uic_mqtt_dotdot_scenes_view_scene_response_callback_t", "group__dotdot__mqtt.html#gab209cdfb11f0538e8706e395257c14c8", null ],
     [ "uic_mqtt_dotdot_scenes_write_attributes_callback_t", "group__dotdot__mqtt.html#gae16d33a11d9a76a361b0b89542674ce6", null ],
     [ "uic_mqtt_dotdot_shade_configuration_force_read_attributes_callback_t", "group__dotdot__mqtt.html#gaf56ca866c4a055bd5bd5bf785fbaf585", null ],
     [ "uic_mqtt_dotdot_shade_configuration_write_attributes_callback_t", "group__dotdot__mqtt.html#ga87f92f31dac6480fa03fbef066ca6d9c", null ],
@@ -2793,6 +2716,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_soil_moisture_write_attributes_callback_t", "group__dotdot__mqtt.html#ga2a3d1b82a0b6afb5db05285763309864", null ],
     [ "uic_mqtt_dotdot_state_discover_neighbors_callback_t", "group__dotdot__mqtt.html#ga650a4c2b9b2b6562e19fc1e937b3e1ce", null ],
     [ "uic_mqtt_dotdot_state_discover_security_callback_t", "group__dotdot__mqtt.html#gad0cca3aacd0565abc4539891b3f722da", null ],
+    [ "uic_mqtt_dotdot_state_enable_nls_callback_t", "group__dotdot__mqtt.html#gae5357a4dc4ea28e90dd1bd2ebd4c6f13", null ],
     [ "uic_mqtt_dotdot_state_force_read_attributes_callback_t", "group__dotdot__mqtt.html#ga8bae5ad246d4405fbed6f07816657294", null ],
     [ "uic_mqtt_dotdot_state_interview_callback_t", "group__dotdot__mqtt.html#ga1c5505c6632dd41da00467cea84b3d31", null ],
     [ "uic_mqtt_dotdot_state_remove_callback_t", "group__dotdot__mqtt.html#gae4cf7399dcc5eafcd10ddc5e9017742b", null ],
@@ -2887,70 +2811,6 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_alarms_reset_all_alarms_callback_set", "group__dotdot__mqtt.html#ga40d252c7e6fd4adbe7df5ab5f63e33b4", null ],
     [ "uic_mqtt_dotdot_alarms_reset_all_alarms_callback_unset", "group__dotdot__mqtt.html#ga10060d8dddcf9324fe5647805726d016", null ],
     [ "uic_mqtt_dotdot_alarms_unretain_cluster_revision", "group__dotdot__mqtt.html#ga15913cc61eefb2b0ae682c177b34c55c", null ],
-    [ "uic_mqtt_dotdot_aox_locator_allow_list_publish", "group__dotdot__mqtt.html#ga8545de0679a124adb621f9459e98b6a9", null ],
-    [ "uic_mqtt_dotdot_aox_locator_allow_list_unretain", "group__dotdot__mqtt.html#ga16ee2c3d94f9c6c1973b43757f5b65a2", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_callback_clear", "group__dotdot__mqtt.html#gaaeaaf1742d6e0d51d1508db11828d260", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_callback_set", "group__dotdot__mqtt.html#gadff868fba0d11d05c3749917cfe7e6fa", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_callback_unset", "group__dotdot__mqtt.html#ga761c47971ca63b1f2266820fbc9e5c6d", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_delay_publish", "group__dotdot__mqtt.html#ga6ed31ea364c29d6928373c83ad92a34a", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_delay_unretain", "group__dotdot__mqtt.html#ga7829dfa682318d53d5f60fa24a80f80c", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_timeout_publish", "group__dotdot__mqtt.html#ga37d532ecd1cbc0d49ae6436fc208595d", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_correction_timeout_unretain", "group__dotdot__mqtt.html#ga9e84e9fb95c573c220ed10ffa4bd2b5a", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_filtering_publish", "group__dotdot__mqtt.html#ga046fc8fd6a50f9b7d7f7fe09c9958658", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_filtering_unretain", "group__dotdot__mqtt.html#ga7ea5e43ab22ca84bc7349d0f6b7e4ba3", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_filtering_weight_publish", "group__dotdot__mqtt.html#ga29068ec297563323132adf46d5b1c253", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_filtering_weight_unretain", "group__dotdot__mqtt.html#ga5d9212216138c6c5e2f72e57637533a7", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_report_callback_clear", "group__dotdot__mqtt.html#ga89f934e64ed80aa11e61c75390d1891e", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_report_callback_set", "group__dotdot__mqtt.html#ga781768734f79d115ab5db31fb231cc97", null ],
-    [ "uic_mqtt_dotdot_aox_locator_angle_report_callback_unset", "group__dotdot__mqtt.html#ga1edf7fc16cac710ab0a165ff13aa4c86", null ],
-    [ "uic_mqtt_dotdot_aox_locator_antenna_array_publish", "group__dotdot__mqtt.html#ga5ea4bd8c7b497f83ed36d7a3d25f21aa", null ],
-    [ "uic_mqtt_dotdot_aox_locator_antenna_array_unretain", "group__dotdot__mqtt.html#ga6355313f168c14c7e115502891c0ce60", null ],
-    [ "uic_mqtt_dotdot_aox_locator_antenna_mode_publish", "group__dotdot__mqtt.html#ga9b5761ee5c44dad70aad121d2d1c59c1", null ],
-    [ "uic_mqtt_dotdot_aox_locator_antenna_mode_unretain", "group__dotdot__mqtt.html#ga1ac79b48e29a7853d70b21b228e2211b", null ],
-    [ "uic_mqtt_dotdot_aox_locator_aox_mode_publish", "group__dotdot__mqtt.html#gaaee3829319a477250a420c139b6e84d5", null ],
-    [ "uic_mqtt_dotdot_aox_locator_aox_mode_unretain", "group__dotdot__mqtt.html#ga751951fbe9a7b2895a723a0eed36a4fc", null ],
-    [ "uic_mqtt_dotdot_aox_locator_azimuth_mask_publish", "group__dotdot__mqtt.html#gaf2daac47d7482430e12b227ad80efb2e", null ],
-    [ "uic_mqtt_dotdot_aox_locator_azimuth_mask_unretain", "group__dotdot__mqtt.html#ga7dc67b526aa507f113c9114dd3112585", null ],
-    [ "uic_mqtt_dotdot_aox_locator_cte_length_publish", "group__dotdot__mqtt.html#gaa841af5569e0ef820d3c475d14870f83", null ],
-    [ "uic_mqtt_dotdot_aox_locator_cte_length_unretain", "group__dotdot__mqtt.html#gae9549279c46aa4cbe004cb4a2fa55d3b", null ],
-    [ "uic_mqtt_dotdot_aox_locator_cte_mode_publish", "group__dotdot__mqtt.html#ga046d632dadcc2c8ae4171442311524aa", null ],
-    [ "uic_mqtt_dotdot_aox_locator_cte_mode_unretain", "group__dotdot__mqtt.html#gabdc206613a0e6aae06a7d11ad6268661", null ],
-    [ "uic_mqtt_dotdot_aox_locator_cte_sampling_interval_publish", "group__dotdot__mqtt.html#ga3c06901ff2c6a8fe468d30538e8d5bed", null ],
-    [ "uic_mqtt_dotdot_aox_locator_cte_sampling_interval_unretain", "group__dotdot__mqtt.html#gaf6eb7d2ad3d0c8bb6e4df3c32e98cc08", null ],
-    [ "uic_mqtt_dotdot_aox_locator_elevation_mask_publish", "group__dotdot__mqtt.html#ga95b0a084b9fe2e4180de2581103c1bf6", null ],
-    [ "uic_mqtt_dotdot_aox_locator_elevation_mask_unretain", "group__dotdot__mqtt.html#ga0c537d5d614cd9f7beabd15ba141792b", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_clear", "group__dotdot__mqtt.html#gadc0d4cf6ee9c834a485204b9c89cdf77", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_set", "group__dotdot__mqtt.html#ga15b874481668489c84f915f8439a852b", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_angle_correction_callback_unset", "group__dotdot__mqtt.html#ga94219c9deb241342f32d8b92aa7a9078", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_clear", "group__dotdot__mqtt.html#gafd13b3fc7b58d8895a11423a5e74adc9", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_set", "group__dotdot__mqtt.html#ga497ff0f185f0c6145ff1694219668ac7", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_unset", "group__dotdot__mqtt.html#ga7a286f2cd2e87a42cef09532a483efca", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_clear", "group__dotdot__mqtt.html#gac921a817a8f11244c9dd621da87eb401", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_set", "group__dotdot__mqtt.html#ga96495b9ce05efef18ad58cb56246e870", null ],
-    [ "uic_mqtt_dotdot_aox_locator_generated_iq_report_callback_unset", "group__dotdot__mqtt.html#ga72fa2a68ba56308c03e4921db949cb08", null ],
-    [ "uic_mqtt_dotdot_aox_locator_iq_report_callback_clear", "group__dotdot__mqtt.html#ga975d41d54b495fc125c78f0d63f02301", null ],
-    [ "uic_mqtt_dotdot_aox_locator_iq_report_callback_set", "group__dotdot__mqtt.html#ga60420fbba9152a612a6db7b7e42896fd", null ],
-    [ "uic_mqtt_dotdot_aox_locator_iq_report_callback_unset", "group__dotdot__mqtt.html#ga0c1f6628914d781ec7f79a026ce21c4c", null ],
-    [ "uic_mqtt_dotdot_aox_locator_period_samples_publish", "group__dotdot__mqtt.html#ga042aa1244f2b733be3b067ff408a80f4", null ],
-    [ "uic_mqtt_dotdot_aox_locator_period_samples_unretain", "group__dotdot__mqtt.html#gae813dcd36b92d439fe591eabeb5baa16", null ],
-    [ "uic_mqtt_dotdot_aox_locator_position_and_orientation_publish", "group__dotdot__mqtt.html#ga432aaee1333b8538baf8dbda4858f12b", null ],
-    [ "uic_mqtt_dotdot_aox_locator_position_and_orientation_unretain", "group__dotdot__mqtt.html#gaa42a769dfb9a44fd0c7136d85085c3b8", null ],
-    [ "uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_publish", "group__dotdot__mqtt.html#gac43d0f5fec49088b428c71220d07576c", null ],
-    [ "uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_unretain", "group__dotdot__mqtt.html#ga95c58eb7de9e84003d434276817fe26a", null ],
-    [ "uic_mqtt_dotdot_aox_locator_publish_cluster_revision", "group__dotdot__mqtt.html#ga4ea816ea817c1f596b5e7a8c700b52bc", null ],
-    [ "uic_mqtt_dotdot_aox_locator_publish_empty_supported_commands", "group__dotdot__mqtt.html#ga6cfe5ccfad9a92496eb6a3a5d73811b6", null ],
-    [ "uic_mqtt_dotdot_aox_locator_publish_supported_commands", "group__dotdot__mqtt.html#gacc6f365ff8773cdba451840754c97c71", null ],
-    [ "uic_mqtt_dotdot_aox_locator_reporting_mode_publish", "group__dotdot__mqtt.html#gae95b2139db8de4f0ba4550eb2f9aa445", null ],
-    [ "uic_mqtt_dotdot_aox_locator_reporting_mode_unretain", "group__dotdot__mqtt.html#gac4e813b18200e2fe52770002421e54dd", null ],
-    [ "uic_mqtt_dotdot_aox_locator_slot_duration_publish", "group__dotdot__mqtt.html#ga1505bf2128920bd6b7c7cee0fa62bde6", null ],
-    [ "uic_mqtt_dotdot_aox_locator_slot_duration_unretain", "group__dotdot__mqtt.html#gac50c200b37b9bb3b55fa3bd257a4804f", null ],
-    [ "uic_mqtt_dotdot_aox_locator_unretain_cluster_revision", "group__dotdot__mqtt.html#ga762f586b67d0728df9d5ac7fb21285ef", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_position_publish", "group__dotdot__mqtt.html#ga380c779f23ada9553422858976f2974c", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_position_unretain", "group__dotdot__mqtt.html#gafa52bb3181193ad414f0e61baeea7b47", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_publish_cluster_revision", "group__dotdot__mqtt.html#ga82893c381a4c6131ccd6869acb6ca40c", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_publish_empty_supported_commands", "group__dotdot__mqtt.html#gae7ad906b0c8103ccd4db23ef27ed2455", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_publish_supported_commands", "group__dotdot__mqtt.html#ga36d371c52d2512b99d4103a7239ad1cc", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_unretain_cluster_revision", "group__dotdot__mqtt.html#ga6476f49df246f42566d89781b1940a96", null ],
     [ "uic_mqtt_dotdot_application_monitoring_application_connected_publish", "group__dotdot__mqtt.html#ga646fdd7ad6e7f114be5c697c63a27b82", null ],
     [ "uic_mqtt_dotdot_application_monitoring_application_connected_unretain", "group__dotdot__mqtt.html#ga35fac911df0f0abb46cc3cbc1650d9c5", null ],
     [ "uic_mqtt_dotdot_application_monitoring_application_cpu_average_usage_percent_publish", "group__dotdot__mqtt.html#gaae61e9c96053fa92d4892ef59bf57b49", null ],
@@ -3191,10 +3051,6 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_carbon_monoxide_unretain_cluster_revision", "group__dotdot__mqtt.html#ga63f68ece7c7f1ff383b35b66fe885193", null ],
     [ "uic_mqtt_dotdot_clear_alarms_force_read_attributes_callbacks", "group__dotdot__mqtt.html#ga60666a78af86d387481c769fa44e43fe", null ],
     [ "uic_mqtt_dotdot_clear_alarms_write_attributes_callbacks", "group__dotdot__mqtt.html#ga153d61850099658cd84df9f5574edcdf", null ],
-    [ "uic_mqtt_dotdot_clear_aox_locator_force_read_attributes_callbacks", "group__dotdot__mqtt.html#gabd40d5112fd29fbb8052f804a2ad2a6f", null ],
-    [ "uic_mqtt_dotdot_clear_aox_locator_write_attributes_callbacks", "group__dotdot__mqtt.html#gad7995d86a5caeaf105f2ffce23108e6d", null ],
-    [ "uic_mqtt_dotdot_clear_aox_position_estimation_force_read_attributes_callbacks", "group__dotdot__mqtt.html#gae26f64e97af19f803475af77ae4f822a", null ],
-    [ "uic_mqtt_dotdot_clear_aox_position_estimation_write_attributes_callbacks", "group__dotdot__mqtt.html#gad190b27be846b709eadf3add03ce66c2", null ],
     [ "uic_mqtt_dotdot_clear_application_monitoring_force_read_attributes_callbacks", "group__dotdot__mqtt.html#ga5c2ab0ceaf488bde5e34fb29de03f7b0", null ],
     [ "uic_mqtt_dotdot_clear_application_monitoring_write_attributes_callbacks", "group__dotdot__mqtt.html#ga6eddce8868d502e46af3025d4f93435a", null ],
     [ "uic_mqtt_dotdot_clear_ballast_configuration_force_read_attributes_callbacks", "group__dotdot__mqtt.html#ga2cbc8b9facef538ef4051def21b8e62f", null ],
@@ -4549,7 +4405,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_ias_zone_generated_zone_status_change_notification_callback_clear", "group__dotdot__mqtt.html#ga94bb42af86f74e775d290a0ea6c54801", null ],
     [ "uic_mqtt_dotdot_ias_zone_generated_zone_status_change_notification_callback_set", "group__dotdot__mqtt.html#ga656241cf986b8e821fb9d7d0c4630432", null ],
     [ "uic_mqtt_dotdot_ias_zone_generated_zone_status_change_notification_callback_unset", "group__dotdot__mqtt.html#ga42b72a788c268eb448920e5c289c5621", null ],
-    [ "uic_mqtt_dotdot_ias_zone_iascie_address_publish", "group__dotdot__mqtt.html#ga7d4affe5d2165c1c8276ba3bfe598be8", null ],
+    [ "uic_mqtt_dotdot_ias_zone_iascie_address_publish", "group__dotdot__mqtt.html#gaff867a6b67175699e1abf531f46fa2d0", null ],
     [ "uic_mqtt_dotdot_ias_zone_iascie_address_unretain", "group__dotdot__mqtt.html#ga53af990ff1cf2b2d37cbdfb93e7a9a5d", null ],
     [ "uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback_clear", "group__dotdot__mqtt.html#ga6b5b2964cc21da0fc2f9ab48d5fdc184", null ],
     [ "uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback_set", "group__dotdot__mqtt.html#ga545d87400f069a227cc005030ce25912", null ],
@@ -4742,11 +4598,11 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publish", "group__dotdot__mqtt.html#ga6327731c78634b14541ae3c6140bf4e7", null ],
     [ "uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_unretain", "group__dotdot__mqtt.html#ga2a46185747cb7a0c4bb70236f66f1f0e", null ],
     [ "uic_mqtt_dotdot_metering_current_max_demand_delivered_publish", "group__dotdot__mqtt.html#gaa49fbeab6ba79c913f655f1724773d61", null ],
-    [ "uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish", "group__dotdot__mqtt.html#ga3b6db2de9deda56fd3f1c73f92c9ab73", null ],
+    [ "uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish", "group__dotdot__mqtt.html#gaf1e9ad68b2f33d77e394efa70c5d42f0", null ],
     [ "uic_mqtt_dotdot_metering_current_max_demand_delivered_time_unretain", "group__dotdot__mqtt.html#ga66027496aa4a688b1998c8c81020ba76", null ],
     [ "uic_mqtt_dotdot_metering_current_max_demand_delivered_unretain", "group__dotdot__mqtt.html#ga5c4db35e13ffbf5c1dc10fdd9c92973a", null ],
     [ "uic_mqtt_dotdot_metering_current_max_demand_received_publish", "group__dotdot__mqtt.html#ga150bcbae38e3b23687d1aeeefcf72e53", null ],
-    [ "uic_mqtt_dotdot_metering_current_max_demand_received_time_publish", "group__dotdot__mqtt.html#ga5c64e85151fae43a582a16597196c03f", null ],
+    [ "uic_mqtt_dotdot_metering_current_max_demand_received_time_publish", "group__dotdot__mqtt.html#ga815adf8e5c6a5672b48582cc0fe39b58", null ],
     [ "uic_mqtt_dotdot_metering_current_max_demand_received_time_unretain", "group__dotdot__mqtt.html#gaca91c7a1a1c6828602153bc77bbf787c", null ],
     [ "uic_mqtt_dotdot_metering_current_max_demand_received_unretain", "group__dotdot__mqtt.html#ga6d62737d714f8f06f0a4fca3f962c643", null ],
     [ "uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_publish", "group__dotdot__mqtt.html#ga5e92b2d54cdec74cfe3ea2061f4af297", null ],
@@ -4769,20 +4625,20 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_metering_energy_carrier_unit_of_measure_unretain", "group__dotdot__mqtt.html#ga1525cf4e05310711f262a097f01832fd", null ],
     [ "uic_mqtt_dotdot_metering_historical_consumption_formatting_publish", "group__dotdot__mqtt.html#ga3890b99abaf49b4bca0b5f07d0b75d3c", null ],
     [ "uic_mqtt_dotdot_metering_historical_consumption_formatting_unretain", "group__dotdot__mqtt.html#ga7cba0268fdea5f71afc5d49bb925541c", null ],
-    [ "uic_mqtt_dotdot_metering_inlet_temperature_publish", "group__dotdot__mqtt.html#ga09b9e553d14215132be5b348b4912d70", null ],
+    [ "uic_mqtt_dotdot_metering_inlet_temperature_publish", "group__dotdot__mqtt.html#ga0ed21c3ce05feebdbd421d07ec869f0e", null ],
     [ "uic_mqtt_dotdot_metering_inlet_temperature_unretain", "group__dotdot__mqtt.html#gabb0d17cbbb08817e9a1c45cd1617c9e7", null ],
     [ "uic_mqtt_dotdot_metering_metering_device_type_publish", "group__dotdot__mqtt.html#ga60276a240e45b97559bb1103d32f4295", null ],
     [ "uic_mqtt_dotdot_metering_metering_device_type_unretain", "group__dotdot__mqtt.html#gaf99e8143c997fe54710a5a89443c2f59", null ],
     [ "uic_mqtt_dotdot_metering_multiplier_publish", "group__dotdot__mqtt.html#gabcf1ab3d9ba4eb96f659cc040863abad", null ],
     [ "uic_mqtt_dotdot_metering_multiplier_unretain", "group__dotdot__mqtt.html#gaee0f5109b4b9d9b6070ff0e570e8b22d", null ],
-    [ "uic_mqtt_dotdot_metering_outlet_temperature_publish", "group__dotdot__mqtt.html#gae3039fe882755b6df269b12176c8a01a", null ],
+    [ "uic_mqtt_dotdot_metering_outlet_temperature_publish", "group__dotdot__mqtt.html#gaa55f4820288d51db9bd077fd63f7e15d", null ],
     [ "uic_mqtt_dotdot_metering_outlet_temperature_unretain", "group__dotdot__mqtt.html#ga6d877cc850fc98982327e83fee533608", null ],
     [ "uic_mqtt_dotdot_metering_power_factor_publish", "group__dotdot__mqtt.html#ga7e399afa0b2260c1559b9ff6049a639e", null ],
     [ "uic_mqtt_dotdot_metering_power_factor_unretain", "group__dotdot__mqtt.html#ga53cd04f48701ae705705d08460161e1e", null ],
     [ "uic_mqtt_dotdot_metering_publish_cluster_revision", "group__dotdot__mqtt.html#gadd7a8f13fae7b073c7e4a3e89ccf1db3", null ],
     [ "uic_mqtt_dotdot_metering_publish_empty_supported_commands", "group__dotdot__mqtt.html#ga540e3b76c4b7698e00a9bab5c7bb4480", null ],
     [ "uic_mqtt_dotdot_metering_publish_supported_commands", "group__dotdot__mqtt.html#ga51b0fb83acab4cecb3b18c237a37a746", null ],
-    [ "uic_mqtt_dotdot_metering_reading_snap_shot_time_publish", "group__dotdot__mqtt.html#gacd63902bb9ea75d56015211b58245fe6", null ],
+    [ "uic_mqtt_dotdot_metering_reading_snap_shot_time_publish", "group__dotdot__mqtt.html#ga351005e80ed022822bc114a03fdb4c73", null ],
     [ "uic_mqtt_dotdot_metering_reading_snap_shot_time_unretain", "group__dotdot__mqtt.html#gaa1a9373b44fc8217b68383ea7e0b2dd1", null ],
     [ "uic_mqtt_dotdot_metering_summation_formatting_publish", "group__dotdot__mqtt.html#ga4150e5892e18210b6501c43df159d74f", null ],
     [ "uic_mqtt_dotdot_metering_summation_formatting_unretain", "group__dotdot__mqtt.html#gac633b8aae5945046c9b1aa1dcddb6460", null ],
@@ -5197,7 +5053,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_scenes_copy_scene_response_callback_clear", "group__dotdot__mqtt.html#ga3979519cae2c916b1ec66ef83d7d6aa5", null ],
     [ "uic_mqtt_dotdot_scenes_copy_scene_response_callback_set", "group__dotdot__mqtt.html#ga4f13512a79f1760fe3ad6ef3055855bc", null ],
     [ "uic_mqtt_dotdot_scenes_copy_scene_response_callback_unset", "group__dotdot__mqtt.html#gac2932919940fbd910b463a5a1194869f", null ],
-    [ "uic_mqtt_dotdot_scenes_current_group_publish", "group__dotdot__mqtt.html#ga7f1177be39414ad1aa8e52459c501f3f", null ],
+    [ "uic_mqtt_dotdot_scenes_current_group_publish", "group__dotdot__mqtt.html#ga29c2a014be963821f7e576a385946acc", null ],
     [ "uic_mqtt_dotdot_scenes_current_group_unretain", "group__dotdot__mqtt.html#ga9187400a9e93ff5f50248fdd1ccc0380", null ],
     [ "uic_mqtt_dotdot_scenes_current_scene_publish", "group__dotdot__mqtt.html#ga424c22308be42cd77b2ce485968a6f3d", null ],
     [ "uic_mqtt_dotdot_scenes_current_scene_unretain", "group__dotdot__mqtt.html#gae7143a60c33c542281f3b3a96a4a8c2f", null ],
@@ -5276,7 +5132,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_clear", "group__dotdot__mqtt.html#ga95d94564c969d3cae2a69d4bd566624e", null ],
     [ "uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_set", "group__dotdot__mqtt.html#gab1e5e5413dc700428823c037f46a89c0", null ],
     [ "uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_unset", "group__dotdot__mqtt.html#ga71dfc97ed6b878d6a9bdc77b6305fc1c", null ],
-    [ "uic_mqtt_dotdot_scenes_last_configured_by_publish", "group__dotdot__mqtt.html#ga253e7262bc11dd086b96b432b713b795", null ],
+    [ "uic_mqtt_dotdot_scenes_last_configured_by_publish", "group__dotdot__mqtt.html#gaa6f604850d615908d8f7b3582dbcbeac", null ],
     [ "uic_mqtt_dotdot_scenes_last_configured_by_unretain", "group__dotdot__mqtt.html#gabfff9271a66d7f8348ecccc723acffc4", null ],
     [ "uic_mqtt_dotdot_scenes_name_support_publish", "group__dotdot__mqtt.html#ga130e150bd253de7a7be8baa1bdc30bc3", null ],
     [ "uic_mqtt_dotdot_scenes_name_support_unretain", "group__dotdot__mqtt.html#gadbd160040485782ecdf7493152291080", null ],
@@ -5319,10 +5175,6 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_scenes_view_scene_response_callback_unset", "group__dotdot__mqtt.html#ga1e989887c40511f7122118aa68ec5198", null ],
     [ "uic_mqtt_dotdot_set_alarms_force_read_attributes_callback", "group__dotdot__mqtt.html#ga11a26df30028422d70125d25323c7825", null ],
     [ "uic_mqtt_dotdot_set_alarms_write_attributes_callback", "group__dotdot__mqtt.html#ga6c4bacf95b138e5c8ad0056e5f3f1b05", null ],
-    [ "uic_mqtt_dotdot_set_aox_locator_force_read_attributes_callback", "group__dotdot__mqtt.html#gaaa975e6b49c7b604d176970d12148b0a", null ],
-    [ "uic_mqtt_dotdot_set_aox_locator_write_attributes_callback", "group__dotdot__mqtt.html#gaeb76b3f89cf92708676ca59d8e23075d", null ],
-    [ "uic_mqtt_dotdot_set_aox_position_estimation_force_read_attributes_callback", "group__dotdot__mqtt.html#ga3180ba142203d4248af643db48748c43", null ],
-    [ "uic_mqtt_dotdot_set_aox_position_estimation_write_attributes_callback", "group__dotdot__mqtt.html#ga811c4efe7554dd6d946320f9faa53c9a", null ],
     [ "uic_mqtt_dotdot_set_application_monitoring_force_read_attributes_callback", "group__dotdot__mqtt.html#ga4122f94447d33271eb9f37eb26ff283c", null ],
     [ "uic_mqtt_dotdot_set_application_monitoring_write_attributes_callback", "group__dotdot__mqtt.html#ga221f812917f7c95b5b17ff5253c28c8c", null ],
     [ "uic_mqtt_dotdot_set_ballast_configuration_force_read_attributes_callback", "group__dotdot__mqtt.html#gaae7d13f8bd2541be297b7bc2778a2d5b", null ],
@@ -5460,6 +5312,9 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_state_discover_security_callback_clear", "group__dotdot__mqtt.html#ga8eb52a9b7022729c1e529cb72930bab0", null ],
     [ "uic_mqtt_dotdot_state_discover_security_callback_set", "group__dotdot__mqtt.html#ga659b0663d586d6e5945e6231d70c77df", null ],
     [ "uic_mqtt_dotdot_state_discover_security_callback_unset", "group__dotdot__mqtt.html#gaef4eb31b0060895d415d9af87823ba8c", null ],
+    [ "uic_mqtt_dotdot_state_enable_nls_callback_clear", "group__dotdot__mqtt.html#ga88d5516a81ce9e0a84a391a3883004c9", null ],
+    [ "uic_mqtt_dotdot_state_enable_nls_callback_set", "group__dotdot__mqtt.html#gad5031090a7a4214f32cf4d8084418e1a", null ],
+    [ "uic_mqtt_dotdot_state_enable_nls_callback_unset", "group__dotdot__mqtt.html#ga7cfc58762e94be8e9bb954831a3f58c7", null ],
     [ "uic_mqtt_dotdot_state_endpoint_id_list_publish", "group__dotdot__mqtt.html#ga86e3457a846233eee02fbeaf90c9c71e", null ],
     [ "uic_mqtt_dotdot_state_endpoint_id_list_unretain", "group__dotdot__mqtt.html#ga370d8d4d98bc3c7bd608756e6336e94b", null ],
     [ "uic_mqtt_dotdot_state_generated_discover_neighbors_callback_clear", "group__dotdot__mqtt.html#gab10300d826e97f5ba61c74f97b376011", null ],
@@ -5468,6 +5323,9 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_state_generated_discover_security_callback_clear", "group__dotdot__mqtt.html#ga71c4fa379153cc0d595fc31205eacac1", null ],
     [ "uic_mqtt_dotdot_state_generated_discover_security_callback_set", "group__dotdot__mqtt.html#gaca1aac620f426e80afa62a4378f2ce0e", null ],
     [ "uic_mqtt_dotdot_state_generated_discover_security_callback_unset", "group__dotdot__mqtt.html#gac3c7b8b2d8022eccf2f4a018b22c77cc", null ],
+    [ "uic_mqtt_dotdot_state_generated_enable_nls_callback_clear", "group__dotdot__mqtt.html#gac8d70e2ef1bb38b15e683f578ad9ea5d", null ],
+    [ "uic_mqtt_dotdot_state_generated_enable_nls_callback_set", "group__dotdot__mqtt.html#gacf223cbbbc0eab2209a95525d973fc46", null ],
+    [ "uic_mqtt_dotdot_state_generated_enable_nls_callback_unset", "group__dotdot__mqtt.html#gab099fccba6f0e031cb724f2104c57f5f", null ],
     [ "uic_mqtt_dotdot_state_generated_interview_callback_clear", "group__dotdot__mqtt.html#ga0bde45a759c6016432af288fbc8088cb", null ],
     [ "uic_mqtt_dotdot_state_generated_interview_callback_set", "group__dotdot__mqtt.html#ga20aa3d49b85d1766edfa321164da8cf1", null ],
     [ "uic_mqtt_dotdot_state_generated_interview_callback_unset", "group__dotdot__mqtt.html#gafd58befe155a643d0a35f404e7e925f7", null ],
@@ -5683,7 +5541,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_thermostat_setpoint_change_amount_publish", "group__dotdot__mqtt.html#gad334d90e8f3c875a622656d9aa811799", null ],
     [ "uic_mqtt_dotdot_thermostat_setpoint_change_amount_unretain", "group__dotdot__mqtt.html#gaf89e981ed2be6d4a257bc9d0190c800f", null ],
     [ "uic_mqtt_dotdot_thermostat_setpoint_change_source_publish", "group__dotdot__mqtt.html#ga2781b75aeb4b53943ba0963c1186d032", null ],
-    [ "uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish", "group__dotdot__mqtt.html#ga55d367db5cf61609b7053611ee881385", null ],
+    [ "uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish", "group__dotdot__mqtt.html#ga4dbb3d9da67bc86b3d7fe2bae6bfc941", null ],
     [ "uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_unretain", "group__dotdot__mqtt.html#ga2ee478a4f72b29d30a1c3c206badb93f", null ],
     [ "uic_mqtt_dotdot_thermostat_setpoint_change_source_unretain", "group__dotdot__mqtt.html#ga269a6059525e20b65c1c27f7d88ae9b2", null ],
     [ "uic_mqtt_dotdot_thermostat_setpoint_raise_or_lower_callback_clear", "group__dotdot__mqtt.html#gaa475e83ce2778e554ee2b04601df5e96", null ],
@@ -5730,7 +5588,7 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_time_dst_shift_unretain", "group__dotdot__mqtt.html#gae4eb6844531a925fb8045898a312011d", null ],
     [ "uic_mqtt_dotdot_time_dst_start_publish", "group__dotdot__mqtt.html#gac65aaa6744562002afe495272025af06", null ],
     [ "uic_mqtt_dotdot_time_dst_start_unretain", "group__dotdot__mqtt.html#gaebf295a7f41ec46449b556dcd51e7b64", null ],
-    [ "uic_mqtt_dotdot_time_last_set_time_publish", "group__dotdot__mqtt.html#ga74b75ddf3c4a9b42d0851a010c6e4c40", null ],
+    [ "uic_mqtt_dotdot_time_last_set_time_publish", "group__dotdot__mqtt.html#ga15377add0764514ec305f2a117f10a57", null ],
     [ "uic_mqtt_dotdot_time_last_set_time_unretain", "group__dotdot__mqtt.html#ga06defd075508cbf6a824d86c48c430cb", null ],
     [ "uic_mqtt_dotdot_time_local_time_publish", "group__dotdot__mqtt.html#gae7ab7536f239aab89201fe71e602727d", null ],
     [ "uic_mqtt_dotdot_time_local_time_unretain", "group__dotdot__mqtt.html#ga3a0a8e88ffb8c7f515fb2b1d3c026ddc", null ],
@@ -5739,14 +5597,14 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_time_publish_supported_commands", "group__dotdot__mqtt.html#ga65c0e8737e9f5299ae5832fb103120f7", null ],
     [ "uic_mqtt_dotdot_time_standard_time_publish", "group__dotdot__mqtt.html#gadd98c0c0fc8c64f4d1ff27588c0a5db3", null ],
     [ "uic_mqtt_dotdot_time_standard_time_unretain", "group__dotdot__mqtt.html#ga67535608d1eb685a5ca402114ca9b384", null ],
-    [ "uic_mqtt_dotdot_time_time_publish", "group__dotdot__mqtt.html#gaee8902cc110cfd08a761ccced1fae64e", null ],
+    [ "uic_mqtt_dotdot_time_time_publish", "group__dotdot__mqtt.html#gada9c5fc8c644e1e4000a683e1130d4f7", null ],
     [ "uic_mqtt_dotdot_time_time_status_publish", "group__dotdot__mqtt.html#ga44fdc6c7784cf83ec60add73f5cda26d", null ],
     [ "uic_mqtt_dotdot_time_time_status_unretain", "group__dotdot__mqtt.html#gaf634655af39e02c8b1c5f7951f3718b5", null ],
     [ "uic_mqtt_dotdot_time_time_unretain", "group__dotdot__mqtt.html#gae2171e4ad71784c71f323a30e4327e4b", null ],
     [ "uic_mqtt_dotdot_time_time_zone_publish", "group__dotdot__mqtt.html#ga8d2dd28d53c5107a13c75c9c51bc93e6", null ],
     [ "uic_mqtt_dotdot_time_time_zone_unretain", "group__dotdot__mqtt.html#ga1d3900ef56b1162a70c44d263bf295f7", null ],
     [ "uic_mqtt_dotdot_time_unretain_cluster_revision", "group__dotdot__mqtt.html#ga1ba2d29529b070d8a15b1705e1926f0a", null ],
-    [ "uic_mqtt_dotdot_time_valid_until_time_publish", "group__dotdot__mqtt.html#ga9d07bb9e5954e8066eb2635a44f2f9bf", null ],
+    [ "uic_mqtt_dotdot_time_valid_until_time_publish", "group__dotdot__mqtt.html#ga6224308dd99df507446975abafbe3cc3", null ],
     [ "uic_mqtt_dotdot_time_valid_until_time_unretain", "group__dotdot__mqtt.html#gac11f5e7062c40f87b11bb782aee5ff19", null ],
     [ "uic_mqtt_dotdot_unify_fan_control_generated_set_fan_mode_callback_clear", "group__dotdot__mqtt.html#gaea21bd818e94f4c772d33f02654faf10", null ],
     [ "uic_mqtt_dotdot_unify_fan_control_generated_set_fan_mode_callback_set", "group__dotdot__mqtt.html#gab41113d5d4cdb49588a30e42bb90016f", null ],
@@ -5836,10 +5694,6 @@ var group__dotdot__mqtt =
     [ "uic_mqtt_dotdot_unify_thermostat_unretain_cluster_revision", "group__dotdot__mqtt.html#ga832e060db2b1b2d462c66e79d7b5185b", null ],
     [ "uic_mqtt_dotdot_unset_alarms_force_read_attributes_callback", "group__dotdot__mqtt.html#ga9c57fa53e132d740f9e48b3ed068be16", null ],
     [ "uic_mqtt_dotdot_unset_alarms_write_attributes_callback", "group__dotdot__mqtt.html#ga0e4831eaf5bb02f722e39a64fc25c67e", null ],
-    [ "uic_mqtt_dotdot_unset_aox_locator_force_read_attributes_callback", "group__dotdot__mqtt.html#ga9a7c5fe7bdc012dfa4ede7fe2f889793", null ],
-    [ "uic_mqtt_dotdot_unset_aox_locator_write_attributes_callback", "group__dotdot__mqtt.html#gaf89cd1caacc6c55df7881d38b4611da0", null ],
-    [ "uic_mqtt_dotdot_unset_aox_position_estimation_force_read_attributes_callback", "group__dotdot__mqtt.html#ga49a33ff19eae02bdef6363e24e353f67", null ],
-    [ "uic_mqtt_dotdot_unset_aox_position_estimation_write_attributes_callback", "group__dotdot__mqtt.html#ga00f419158e5cadb228505d0f6f462897", null ],
     [ "uic_mqtt_dotdot_unset_application_monitoring_force_read_attributes_callback", "group__dotdot__mqtt.html#gaddd5226eefcb3847ac3cdf97d8f6eab1", null ],
     [ "uic_mqtt_dotdot_unset_application_monitoring_write_attributes_callback", "group__dotdot__mqtt.html#ga1225e536b7d2e84ff81119ea7973a625", null ],
     [ "uic_mqtt_dotdot_unset_ballast_configuration_force_read_attributes_callback", "group__dotdot__mqtt.html#ga996b2764f7a64a64b72c9729a19f3b8a", null ],

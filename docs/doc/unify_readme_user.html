@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unify Host SDK User guide &mdash; Unify Host SDK</title>
+  <title>Unify SDK User guide &mdash; Unify Host SDK</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -54,9 +54,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="portable_runtime/readme_user.html">Getting Started with Unify using Portable runtime</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="getting_started.html">Running Unify on Raspberry Pi</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Unify Host SDK User guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Unify SDK User guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="getting_started_unify_sdk.html">Getting Started with the Unify Framework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Getting Started with the Multiprotocol Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -97,8 +96,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="unify-host-sdk-user-guide">
-<h1>Unify Host SDK User guide<a class="headerlink" href="#unify-host-sdk-user-guide" title="Permalink to this heading"></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="unify-sdk-user-guide">
+<h1>Unify SDK User guide<a class="headerlink" href="#unify-sdk-user-guide" title="Permalink to this heading"></a></h1>
 <p>This guide contains information which is common to all Unify applications.
 For a having a general setup running, it assumes you have gone over the <a class="reference internal" href="getting_started_unify.html"><span class="doc std std-doc">Getting Started guide</span></a>.
 Details about each application can be found in the application specific user guides.</p>
@@ -139,7 +138,7 @@ configuration parameters, <strong>log.level</strong> and <strong>log.tag_level</
 </div>
 <p>The log level can be set globally and per tag.</p>
 <p>For example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc<span class="w">  </span>--log.level<span class="w"> </span>i<span class="w"> </span>--log.tag_level<span class="w"> </span>uic_component_fixtures:d,mqtt_client:d
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>eed<span class="w"> </span>--eed.datastore_file<span class="w"> </span>./eed.db<span class="w">  </span>--log.level<span class="w"> </span>i<span class="w"> </span>--log.tag_level<span class="w"> </span>uic_component_fixtures:d,mqtt_client:d
 </pre></div>
 </div>
 <p>This will set the global log level to info but it enables the debug on the two
@@ -190,9 +189,9 @@ Set the parameter value to <code class="docutils literal notranslate"><span clas
 </section>
 <section id="configure-log-rotation-syslog">
 <h4>Configure log rotation syslog<a class="headerlink" href="#configure-log-rotation-syslog" title="Permalink to this heading"></a></h4>
-<p>If you have enabled debug logging of the Unify Host SDK packages. Chances are you
-will quite fast load up some big log files in syslog. To mitigate this you
-can change the log rotation in the syslog logrotation file
+<p>If you have enabled debug logging of the Unify SDK packages. Chances are you
+will load up some big log files in syslog quite fast. To mitigate this you
+can change the log rotation in the syslog log rotation file
 <code class="docutils literal notranslate"><span class="pre">/etc/logrotate.d/rsyslog</span></code>. Documentation on log rotation settings can be
 found <a class="reference external" href="https://manpages.debian.org/stretch/logrotate/logrotate.8.en.html">here</a>.</p>
 </section>

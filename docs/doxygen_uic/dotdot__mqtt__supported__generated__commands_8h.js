@@ -1,8 +1,6 @@
 var dotdot__mqtt__supported__generated__commands_8h =
 [
     [ "uic_mqtt_dotdot_alarms_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga2cef2fd6090e2b454d5e371642406183", null ],
-    [ "uic_mqtt_dotdot_aox_locator_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga39e6e5ccdae3702787177f09f5bb5245", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gafd1f192e8894b6ccf92ec1eda6216089", null ],
     [ "uic_mqtt_dotdot_application_monitoring_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gabeacfa2f63bc261fded019b896a8b8dd", null ],
     [ "uic_mqtt_dotdot_ballast_configuration_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#gab08e620258c4161d62fe7a5b60924976", null ],
     [ "uic_mqtt_dotdot_barrier_control_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga5bb0ed8818f8666bb6b3cd35eddd8e6e", null ],
@@ -56,8 +54,6 @@ var dotdot__mqtt__supported__generated__commands_8h =
     [ "uic_mqtt_dotdot_wind_speed_measurement_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga97665d282608ab42938f896756dfced5", null ],
     [ "uic_mqtt_dotdot_window_covering_supported_commands_t", "group__dotdot__mqtt__supported__generated__commands.html#ga96b35792b7daee1c829ba71de3a6cb6a", null ],
     [ "uic_mqtt_dotdot_alarms_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga334244dcbd6e54e9e240acf89e329c98", null ],
-    [ "uic_mqtt_dotdot_aox_locator_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gaed75f9daddf248768066781cdcd65be1", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gaaaaad160fe36fb4e4742b24f95fc7973", null ],
     [ "uic_mqtt_dotdot_application_monitoring_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#gaeee3c2b5949d609088619f857899e777", null ],
     [ "uic_mqtt_dotdot_ballast_configuration_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga59457efb397b2df1e558a58bd7a62ecb", null ],
     [ "uic_mqtt_dotdot_barrier_control_publish_supported_generated_commands", "group__dotdot__mqtt__supported__generated__commands.html#ga6662cd29a442919f91767ffd8d017765", null ],

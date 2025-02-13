@@ -220,4 +220,4 @@ Z-Wave value:
 ## Guide for the development of UAM files
 
 1) Refer [How to Write UAM files](../doc/how_to_write_uam_files.rst)  to get more details abouthow  write UAM files and UAM grammar and scope settings.
-2) Further examples of UAM implementation of Command class etc are explained in detail in ZPC Documentation.
+2) Further examples of UAM implementation of Command class etc are explained in detail in relater chapter of [ZPC Documentation](https://siliconlabssoftware.github.io/z-wave-protocol-controller).

@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,7 +67,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Unify Build Guide</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#build-instructions">Build Instructions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-docker-image">Build Docker Image</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#porting-the-unify-host-sdk">Porting the Unify Host SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#porting-the-unify-sdk">Porting the Unify SDK</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
 </ul>
 </li>
@@ -85,9 +85,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#development-platform-recommendations">Development Platform Recommendations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-eed">Developing EED</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-protocol-controllers">Developing protocol controllers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters">Extend UCL clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters-to-non-zigbee-controllers">Extend UCL clusters to non-zigbee controllers</a></li>
 </ul>
 </li>
 </ul>
@@ -126,7 +126,7 @@ packages for the Raspberry Pi.</p>
 </div>
 <section id="build-instructions">
 <h2>Build Instructions<a class="headerlink" href="#build-instructions" title="Permalink to this heading"></a></h2>
-<p>The Unify Host SDK uses a docker container to provide an appropriate build environment.
+<p>The Unify SDK uses a docker container to provide an appropriate build environment.
 As a prerequisite Docker must be installed on the build host.</p>
 <section id="install-docker">
 <h3>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this heading"></a></h3>
@@ -180,7 +180,6 @@ ninja<span class="w">               </span><span class="c1"># Build binaries</sp
 ninja<span class="w"> </span>deb<span class="w">           </span><span class="c1"># Build Debian Installers (optional)</span>
 </pre></div>
 </div>
-<p>After running this, the <code class="docutils literal notranslate"><span class="pre">zpc</span></code> binary is located in <code class="docutils literal notranslate"><span class="pre">./build/applications/zpc/zpc</span></code>.</p>
 <p>The Debian packages are available as a Zip of all the Debian packages at <code class="docutils literal notranslate"><span class="pre">./build/deb-packages/unify_&lt;version&gt;_arm64.zip</span></code>.</p>
 </section>
 <section id="disabling-the-build-of-a-unify-application">
@@ -189,8 +188,8 @@ ninja<span class="w"> </span>deb<span class="w">           </span><span class="c
 set to OFF for that application while running CMAKE in
 cmake/include/build_permutations.cmake file</p>
 <p>This can also be achieved by passing those variables on the command line with CMAKE</p>
-<p>For e.g. to disable build for ZigPC following command can be used.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>cmake<span class="w"> </span>-GNinja<span class="w"> </span>-DBUILD_ZIGPC<span class="o">=</span>OFF<span class="w"> </span>..
+<p>For e.g. to disable build for NAL following command can be used.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>cmake<span class="w"> </span>-GNinja<span class="w"> </span>-DBUILD_NAL<span class="o">=</span>OFF<span class="w"> </span>..
 </pre></div>
 </div>
 </section>
@@ -215,14 +214,14 @@ ninja<span class="w"> </span>cargo_test
 </div>
 </section>
 </section>
-<section id="porting-the-unify-host-sdk">
-<h2>Porting the Unify Host SDK<a class="headerlink" href="#porting-the-unify-host-sdk" title="Permalink to this heading"></a></h2>
+<section id="porting-the-unify-sdk">
+<h2>Porting the Unify SDK<a class="headerlink" href="#porting-the-unify-sdk" title="Permalink to this heading"></a></h2>
 <p>Porting the Unify SDK to a new platform using Debian Linux should be straightforward.
 However, if components are ported to other Linux distributions it may
 be necessary to update the startup scripts of the components. The Debian
-packages provided with the Unify Host SDK all use the system service <code class="docutils literal notranslate"><span class="pre">systemd</span></code> which
+packages provided with the Unify SDK all use the system service <code class="docutils literal notranslate"><span class="pre">systemd</span></code> which
 takes care of startup and shutdown of the components. For example, the file
-<a class="reference download internal" download="" href="../_downloads/c2ec0a504bd81a82cc1294f6af00b6fe/uic-zpc.service"><span class="xref download myst">uic-zpc.service</span></a> is as
+<span class="xref myst">uic-nal.service</span> is as
 systemd config script. When porting to a new Linux system the systemd config
 files should be used for reference. It is very important that all the Unify
 components runs as a dedicated system user to prevent attackers from

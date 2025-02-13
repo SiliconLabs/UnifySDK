@@ -1,0 +1,9 @@
+target_add_unittest(
+  eed_datastore
+  NAME
+  eed_datastore_test
+  SOURCES
+  eed_datastore_test.c
+  DEPENDS
+  eed_config_mock
+  uic_datastore_mock)

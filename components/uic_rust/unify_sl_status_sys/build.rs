@@ -26,15 +26,7 @@ fn main() {
     let mut status_codes: Vec<(String, String)> = Vec::new();
     let re = Regex::new(r"^#define\s+(SL_STATUS_\w+).+(0[xX][0-9a-fA-F]+)").unwrap();
 
-    let mut path = PathBuf::new();
-    if let Ok(v) = env::var("COMMON_LOCATION") {
-        path.push(v);
-    } else {
-        path.push("../../../");
-    }
-    path.push("include");
-    path.push("sl_status.h");
-    let file = File::open(path).unwrap();
+    let file = File::open("../../../include/sl_status.h").unwrap();
     let reader = BufReader::new(file);
     for line in reader.lines() {
         for cap in re.captures_iter(&line.unwrap()) {

@@ -48,6 +48,7 @@ void mock_call_expect_ex(uint32_t line_number, const char * p_func_name, mock_t 
   *pp_mock                = &mock_call_db[mock_db_idx];
   (*pp_mock)->p_func_name = p_func_name;
   (*pp_mock)->executed    = false;
+  (*pp_mock)->multiple    = false;
   (*pp_mock)->line_number = line_number;
   (*pp_mock)->mock_id     = 0;
   mock_db_idx++;
@@ -121,6 +122,17 @@ bool mock_call_find(char const * const p_function_name, mock_t ** pp_mock)
       return true;
     }
   }
+  for (i = 0; i < mock_db_idx; i++)
+  {
+    if ((true == mock_call_db[i].multiple) &&
+          strcmp(mock_call_db[i].p_func_name, p_function_name) == 0)
+    {
+      *pp_mock = &mock_call_db[i];
+      g_mock_index = i;
+      return true;
+    }
+  }
+
   mock_db_idx = 0;
   stub_db_idx = 0;
   fake_db_idx = 0;

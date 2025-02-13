@@ -84,6 +84,10 @@ This is a manufacturer specific cluster, representing a Node State in our networ
           Controller to check on which security keys/access control a
           node operates -->
       </command>
+      <command id="06" name="EnableNls">
+        <!-- 	This command is used to instruct a Z-Wave node to enable
+          Network Layer Security (NLS) -->
+      </command>
     </commands>
   </server>
 </zcl:cluster>

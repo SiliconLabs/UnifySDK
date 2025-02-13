@@ -31,7 +31,7 @@
 #define NUMBER_OF_ARGS 9
 
 extern uint32_t g_mock_index;
-extern struct _Unity Unity;
+extern struct UNITY_STORAGE_T Unity;
 
 typedef enum
 {
@@ -89,6 +89,7 @@ typedef struct
                                                       the function and not to be mistaken with output values provided thought pointer
                                                       parameters of the function. To have the function returning the value 10, simply do:
                                                       p_mock->return_code.value = 10; */
+  bool         multiple;                          /**< Allow multiple calls*/
   mock_rules_t compare_rule_arg[NUMBER_OF_ARGS]; /**< Compare rule to be used for parameter at index n.
                                                       Default compare rule is COMPARE_STRICT. So this value needs only to be set if the
                                                       parameter should be checked against a different rule, as example, COMPARE_ANY.
@@ -540,46 +541,6 @@ typedef struct
 }while(0)
 
 
-#if __C51__
-#define MOCK_CALL_ACTUAL_ARG1(P_MOCK, ARG0) do {  \
-    P_MOCK->actual_arg[0].value = (uint32_t) ARG0;   \
-  }while(0)
-
-#define MOCK_CALL_ACTUAL_ARG2(P_MOCK, ARG0, ARG1) do {  \
-    P_MOCK->actual_arg[0].value = (uint32_t) ARG0;            \
-    P_MOCK->actual_arg[1].value = (uint32_t) ARG1;            \
-  }while(0)
-
-#define MOCK_CALL_ACTUAL_ARG3(P_MOCK, ARG0, ARG1, ARG2) do {  \
-    P_MOCK->actual_arg[0].value = (uint32_t) ARG0;                  \
-    P_MOCK->actual_arg[1].value = (uint32_t) ARG1;                  \
-    P_MOCK->actual_arg[2].value = (uint32_t) ARG2;                  \
-  }while(0)
-
-#define MOCK_CALL_ACTUAL_ARG4(P_MOCK, ARG0, ARG1, ARG2, ARG3) do { \
-    P_MOCK->actual_arg[0].value = (uint32_t) ARG0;                       \
-    P_MOCK->actual_arg[1].value = (uint32_t) ARG1;                       \
-    P_MOCK->actual_arg[2].value = (uint32_t) ARG2;                       \
-    P_MOCK->actual_arg[3].value = (uint32_t) ARG3;                       \
-  }while(0)
-
-#define MOCK_CALL_ACTUAL_ARG5(P_MOCK, ARG0, ARG1, ARG2, ARG3, ARG4) do {  \
-    P_MOCK->actual_arg[0].value = (uint32_t) ARG0;                              \
-    P_MOCK->actual_arg[1].value = (uint32_t) ARG1;                              \
-    P_MOCK->actual_arg[2].value = (uint32_t) ARG2;                              \
-    P_MOCK->actual_arg[3].value = (uint32_t) ARG3;                              \
-    P_MOCK->actual_arg[4].value = (uint32_t) ARG4;                              \
-  }while(0)
-
-#define MOCK_CALL_ACTUAL_ARG6(P_MOCK, ARG0, ARG1, ARG2, ARG3, ARG4, ARG5) do {  \
-    P_MOCK->actual_arg[0].value = (uint32_t) ARG0;                                    \
-    P_MOCK->actual_arg[1].value = (uint32_t) ARG1;                                    \
-    P_MOCK->actual_arg[2].value = (uint32_t) ARG2;                                    \
-    P_MOCK->actual_arg[3].value = (uint32_t) ARG3;                                    \
-    P_MOCK->actual_arg[4].value = (uint32_t) ARG4;                                    \
-    P_MOCK->actual_arg[5].value = (uint32_t) ARG5;                                    \
-  }while(0)
-#else
 #define MOCK_CALL_ACTUAL_ARG1(P_MOCK, ARG0) do {  \
     P_MOCK->actual_arg[0].pointer = (void *)(uintptr_t) ARG0;   \
   }while(0)
@@ -651,7 +612,6 @@ typedef struct
     P_MOCK->actual_arg[7].pointer = (void *)(uintptr_t) ARG7;                                    \
     P_MOCK->actual_arg[8].pointer = (void *)(uintptr_t) ARG8;                                    \
   }while(0)
-#endif
 
 #define N_ARGS_COUNT(_1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
 #define N_ARGS(...)                                  N_ARGS_COUNT(__VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1)

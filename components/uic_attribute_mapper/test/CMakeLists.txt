@@ -19,9 +19,9 @@ target_add_unittest(attribute_mapper_shared NAME uic_attribute_mapper_eval_test
                     SOURCES attribute_mapper_eval_test.cpp)
 target_include_directories(uic_attribute_mapper_eval_test PRIVATE ../src)
 
-target_add_unittest(attribute_mapper_shared NAME uic_attribute_mapper_uam_test
-                    SOURCES attribute_mapper_uam_test.cpp)
-target_include_directories(uic_attribute_mapper_uam_test PRIVATE ../src)
+#target_add_unittest(attribute_mapper_shared NAME uic_attribute_mapper_uam_test
+#                    SOURCES attribute_mapper_uam_test.cpp)
+#target_include_directories(uic_attribute_mapper_uam_test PRIVATE ../src)
 
 target_add_unittest(
   attribute_mapper_shared NAME uic_attribute_mapper_uam_test_example_1 SOURCES

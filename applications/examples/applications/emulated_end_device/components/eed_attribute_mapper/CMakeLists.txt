@@ -1,0 +1,4 @@
+# EED Attribute Mapper library
+add_library(eed_attribute_mapper src/eed_attribute_mapper.c)
+target_link_libraries(eed_attribute_mapper PUBLIC unify PRIVATE eed_attribute_store)
+target_include_directories(eed_attribute_mapper PUBLIC include)

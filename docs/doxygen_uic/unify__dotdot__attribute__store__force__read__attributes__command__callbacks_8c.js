@@ -2,8 +2,6 @@ var unify__dotdot__attribute__store__force__read__attributes__command__callbacks
 [
     [ "LOG_TAG", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "uic_mqtt_dotdot_alarms_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#abf3f688d7c5a719de617db075c987006", null ],
-    [ "uic_mqtt_dotdot_aox_locator_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#ae867a7ab41dd5e2f5aa3bb4e4840765d", null ],
-    [ "uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a9dce075f4d8706dcc1000c135f2c79cf", null ],
     [ "uic_mqtt_dotdot_ballast_configuration_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a188b0d050ae7418b1729ee4db8fde4cd", null ],
     [ "uic_mqtt_dotdot_barrier_control_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a96351783e92fe34ee15b6add4b6b47c6", null ],
     [ "uic_mqtt_dotdot_basic_force_read_attributes_callback", "unify__dotdot__attribute__store__force__read__attributes__command__callbacks_8c.html#a3ae4770de4e45e423e10b75a8b2c0b8a", null ],

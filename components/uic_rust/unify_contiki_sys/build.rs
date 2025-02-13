@@ -15,61 +15,38 @@ use std::path::PathBuf;
 use unify_build_utils::*;
 
 fn main() -> Result<()> {
-    let include = load_environment("uic_contiki")?.include_directories;
+    // link against libunify
+    println!("cargo:rustc-link-arg=-Wl,-rpath,{}/components", std::env::var("UNIFY_BINARY_DIR")?);
+    println!("cargo:rustc-link-search=native={}/components", std::env::var("UNIFY_BINARY_DIR")?);
+    println!("cargo:rustc-link-lib=unify");
+    bindings()
+}
+
+fn bindings() -> Result<()> {
+    let link_dependencies = load_environment("uic_contiki")?;
+
     let binding_file =
         PathBuf::from(std::env::var("OUT_DIR").expect("OUT_DIR is always set during build stage"))
             .join("binding.rs");
-
-    let headers = match (
-        option_env!("CARGO_LIBUNIFY_DIR"),
-        option_env!("CARGO_MANIFEST_DIR"),
-    ) {
-        (Some(s), _) => {
-            // Search for dependencies in the libunify install output
-            let clock: PathBuf = [s, "include", "uic", "sys", "clock.h"].iter().collect();
-            assert!(clock.is_file());
-            let ctimer: PathBuf = [s, "include", "uic", "sys", "ctimer.h"].iter().collect();
-            assert!(ctimer.is_file());
-            let process: PathBuf = [s, "include", "uic", "sys", "process.h"].iter().collect();
-            assert!(process.is_file());
-            let request_poller: PathBuf = [s, "include", "uic", "include", "request_poller.h"]
-                .iter()
-                .collect();
-            assert!(request_poller.is_file());
-
-            [
-                clock.to_str().unwrap().into(),
-                ctimer.to_str().unwrap().into(),
-                process.to_str().unwrap().into(),
-                request_poller.to_str().unwrap().into(),
-            ]
-        }
-        (None, Some(s)) => {
-            // Search for dependencies within the monorepo
-            let mut p = PathBuf::from(s);
-            assert!(p.is_dir());
-            assert!(p.pop());
-            assert!(p.pop());
-            p.push("uic_contiki");
-            let p = p.to_str().unwrap();
-            [
-                format!("{}/core/sys/clock.h", p),
-                format!("{}/core/sys/ctimer.h", p),
-                format!("{}/core/sys/process.h", p),
-                format!("{}/include/request_poller.h", p),
-            ]
-        }
-        (None, None) => {
-            panic!("Missing environment variable. Expected 'CARGO_LIBUNIFY_DIR' or 'CARGO_MANIFEST_DIR'.")
-        }
-    };
+            
+    let contiki_path = PathBuf::from(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../..",
+        "/uic_contiki"
+    ))
+    .to_string_lossy()
+    .to_string();
 
     generate_bindings(
         &binding_file,
-        &include,
-        // Some("process.*|ctimer_.*|CLOCK_SECOND|.*_poll_.*|clock_.*"),
+        &link_dependencies.include_directories,
+        Some("process.*|ctimer_.*|CLOCK_SECOND|.*_poll_.*|clock_.*"),
         None,
-        None,
-        &headers,
+        &[
+            format!("{}/core/sys/clock.h", contiki_path),
+            format!("{}/core/sys/ctimer.h", contiki_path),
+            format!("{}/core/sys/process.h", contiki_path),
+            format!("{}/include/request_poller.h", contiki_path),
+        ],
     )
 }

@@ -125,7 +125,7 @@ static size_t send_block(int serial_fd, int block_n, std::ifstream &gbl_file)
  * @param gbl_filename File to send
  * @param serial_fd     serial file handle
  * @param progress_callback Progress callback which is called every time we have have sent a 1kb 
- * @return sl_status_t SL_STATUS_OK on succsess
+ * @return sl_status_t SL_STATUS_OK on success
  */
 
 static sl_status_t
@@ -191,6 +191,12 @@ static sl_status_t
         }
         break;
       default:
+        // protection in case xmodem_transfer() is called while there's junk data in the serial buffer
+        if (state == XMODEMState::WAIT_FOR_C && block == 1) {
+          continue;
+        } else {
+          sl_log_debug(LOG_TAG, "XModem: command not handled: 0x%02X", cmd);
+        }
         break;
     }
 
@@ -231,7 +237,8 @@ sl_status_t uic_gbl_interface_detect_bootloader(int serial_fd)
   read_timeout(serial_fd, 100);
 
   //Trigger an update
-  if (write(serial_fd, "3\n", 2) < 2) {
+  char btl_ebl_info = '3';
+  if (write(serial_fd, &btl_ebl_info, 1) < 1) {
     sl_log_error(LOG_TAG, "Bootloader 3 command was not written fully");
     return SL_STATUS_NOT_FOUND;
   }
@@ -261,7 +268,8 @@ sl_status_t uic_gbl_interface_transfer_image(
 {
   if (SL_STATUS_OK == uic_gbl_interface_detect_bootloader(serial_fd)) {
     //Start the XMODEM transfer
-    if (write(serial_fd, "1\n", 2) < 2) {
+    char btl_upload_gbl = '1';
+    if (write(serial_fd, &btl_upload_gbl, 1) < 1) {
       sl_log_error(LOG_TAG,
                      "Bootloader Upload gbl command was not written fully");
     }
@@ -277,7 +285,8 @@ sl_status_t uic_gbl_interface_transfer_image(
   sl_log_debug(LOG_TAG, "Running application");
 
   //Reboot into application
-  if (write(serial_fd, "2\n", 2) < 2) {
+  char btl_run = '2';
+  if (write(serial_fd, &btl_run, 1) < 1) {
     sl_log_error(LOG_TAG, "Bootloader run command was not written fully");
     return SL_STATUS_FAIL;
   }

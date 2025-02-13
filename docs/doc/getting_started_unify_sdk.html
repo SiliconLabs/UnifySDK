@@ -26,8 +26,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Started with the Multiprotocol Setup" href="getting_started_multiprotocol_cpc.html" />
-    <link rel="prev" title="Unify Host SDK User guide" href="unify_readme_user.html" /> 
+    <link rel="next" title="Unify Framework" href="UnifySDK.html" />
+    <link rel="prev" title="Unify SDK User guide" href="unify_readme_user.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -54,9 +54,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="getting_started_unify.html">Getting Started with Unify</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="portable_runtime/readme_user.html">Getting Started with Unify using Portable runtime</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="getting_started.html">Running Unify on Raspberry Pi</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify Host SDK User guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify SDK User guide</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Getting Started with the Unify Framework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Getting Started with the Multiprotocol Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -104,8 +103,7 @@
 <p>Unify Framework has a number of service applications which enables different basic
 functionality. For unlocking all features of the Unify Framework, install the Debian
 packages of the applications below.
-It is recommended to use the Developer GUI for controlling the Unify Framework IoT Protocol Controllers such as <code class="docutils literal notranslate"><span class="pre">ZPC</span></code>,
-<code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> or <code class="docutils literal notranslate"><span class="pre">AoXPC</span></code>.</p>
+It is recommended to use the Developer GUI for controlling the Unify devices in Unify Ecosystem including Emulated End Device(EED)</p>
 <p>For installation steps refer to the <a class="reference internal" href="getting_started.html#how-to-install"><span class="std std-ref">How to install packages</span></a> section.</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="../applications/upvl/readme_user.html"><span class="doc std std-doc">Provisioning List (UPVL) User’s Guide</span></a>.</p></li>
@@ -118,42 +116,10 @@ It is recommended to use the Developer GUI for controlling the Unify Framework I
 <section id="choose-an-iot-protocol">
 <h2>Choose an IoT protocol<a class="headerlink" href="#choose-an-iot-protocol" title="Permalink to this heading"></a></h2>
 <p>For including an IoT protocol stack, you need to install and setup at least one protocol controller.</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#zpc"><span class="std std-ref">Z-Wave Protocol Controller (ZPC)</span></a></p></li>
-<li><p><a class="reference internal" href="#zigpc"><span class="std std-ref">Zigbee Protocol Controller (ZigPC)</span></a></p></li>
-<li><p><a class="reference internal" href="#aoxpc"><span class="std std-ref">Bluetooth Angle of Arrival/Departure Protocol Controller (AoXPC)</span></a></p></li>
-</ul>
-<section id="z-wave-protocol-controller-zpc">
-<span id="zpc"></span><h3>Z-Wave Protocol Controller (ZPC)<a class="headerlink" href="#z-wave-protocol-controller-zpc" title="Permalink to this heading"></a></h3>
-<p><strong>Prerequisite</strong>: Required hardware for using the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code> is a <a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a>
-which is flashed with a SerialAPI firmware.</p>
-<p>The Z-Wave Protocol Controller allows Unify to control Z-Wave devices. Starting
-quickly is achieved by just installing the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> Debian package. This should
-automatically start up the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code> after the configuration steps. You need to
-provide the USB path for the Z-Wave module at the configuration steps.</p>
-<p>A more in depth getting started guide specifically for the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code> is
-<a class="reference internal" href="../applications/zpc/readme_user.html"><span class="doc std std-doc">ZPC User’s Guide</span></a>.</p>
-</section>
-<section id="zigbee-protocol-controller-zigpc">
-<span id="zigpc"></span><h3>Zigbee Protocol Controller (ZigPC)<a class="headerlink" href="#zigbee-protocol-controller-zigpc" title="Permalink to this heading"></a></h3>
-<p><strong>Prerequisite</strong>: Required hardware for using the <code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> is a <a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> which could be EFR32MG12/EFR32xG22
-running NCP or CPC Firmware for Zigbee.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> enables the Unify Framework to control Zigbee devices. Starting quickly
-can be done by simply installing the <code class="docutils literal notranslate"><span class="pre">uic-zigpc</span></code> Debian package and configuring
-the USB device at the configuration step. After installing, the protocol
-controller should be started automatically as a systemd service.</p>
-<p>For more information on getting started with the <code class="docutils literal notranslate"><span class="pre">ZigPC</span></code> is placed in
-<a class="reference internal" href="../applications/zigpc/readme_user.html"><span class="doc std std-doc">ZigPC User’s Guide</span></a>.</p>
-</section>
-<section id="bluetooth-angle-of-arrival-departure-protocol-controller-aoxpc">
-<span id="aoxpc"></span><h3>Bluetooth Angle of Arrival/Departure Protocol Controller (AoXPC)<a class="headerlink" href="#bluetooth-angle-of-arrival-departure-protocol-controller-aoxpc" title="Permalink to this heading"></a></h3>
-<p><strong>Prerequisite</strong>: Required hardware for using the <code class="docutils literal notranslate"><span class="pre">AoXPC</span></code> is a <a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a>
-EFR32xG22 running NCP Firmware for AoXPC.</p>
-<p>Lastly of the protocol controllers the above approach can again be used for the
-<code class="docutils literal notranslate"><span class="pre">AoXPC</span></code>. Installing <code class="docutils literal notranslate"><span class="pre">uic-aoxpc</span></code>, going through configuration steps and it should
-be running.</p>
-<p>For more information on getting started with the <code class="docutils literal notranslate"><span class="pre">AoXPC</span></code> is found in
-<a class="reference internal" href="../applications/aox/applications/aoxpc/readme_user.html"><span class="doc std std-doc">AoXPC User Guide</span></a>.</p>
+<p>For Zwave Protocol controller bring up, please refer to related chapter of <a class="reference external" href="https://siliconlabssoftware.github.io/z-wave-protocol-controller">Z-Wave-Protocol-Controller documentation</a>.</p>
+<section id="emulated-end-device">
+<h3>Emulated End Device<a class="headerlink" href="#emulated-end-device" title="Permalink to this heading"></a></h3>
+<p>For Unify bring up without any protocol controller , <a class="reference internal" href="../applications/examples/applications/emulated_end_device/readme_user.html"><span class="doc std std-doc">EED</span></a> can be used.</p>
 </section>
 <section id="evaluation-after-installation">
 <h3>Evaluation after Installation<a class="headerlink" href="#evaluation-after-installation" title="Permalink to this heading"></a></h3>

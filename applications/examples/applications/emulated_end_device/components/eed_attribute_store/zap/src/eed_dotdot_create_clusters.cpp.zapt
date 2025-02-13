@@ -1,0 +1,125 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2024 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+#include "eed_dotdot_create_clusters.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "unify_dotdot_defined_attribute_types.h"
+#include "eed_cluster_configuration.h"
+#include "eed_attribute_store_helper.h"
+#include "sl_log.h"
+
+#include "attribute.hpp"
+#include "dotdot_mqtt.h"
+
+#include <string.h>
+
+#define LOG_TAG "eed_dotdot_create_clusters"
+
+{{zap_header}}
+
+extern "C" {
+    {{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#unless (clusterWithoutEndpoints label)}}
+void dotdot_create_{{asSnakeCaseLower label}}_wrapper(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id){
+    {{#zcl_attributes}}
+    // Create and set a default value if undefined.
+    {{asAttributeCreateFunction parent.label label}}(unid,endpoint_id);
+    if (false == {{asAttributeIsReportedDefinedFunction parent.label label}}(unid,endpoint_id)){
+    {{#if (isMonotonousArray label)}}
+    {{else if (isStruct type)}}
+    {{asUnderlyingType type}} value = {};
+    {{asAttributeSetFunction parent.label label}}(unid,endpoint_id,REPORTED_ATTRIBUTE, value);
+    {{else if (isString type)}}
+    {{asAttributeSetFunction parent.label label}}(unid,endpoint_id,REPORTED_ATTRIBUTE, "Dummy value");
+    {{else}}
+    {{asAttributeSetFunction parent.label label}}(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<{{asUnderlyingType type}}>(0));
+    {{/if}}
+    }
+
+    {{/zcl_attributes}}
+}
+
+    {{/unless}}
+    {{/if}}
+{{/zcl_clusters}}
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#unless (clusterWithoutEndpoints label)}}
+void dotdot_unretain_{{asSnakeCaseLower label}}_wrapper(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id){
+    char base_topic[256];
+    snprintf(base_topic, sizeof(base_topic), "ucl/by-unid/%s/ep%d", unid, endpoint_id);
+    attribute_store::attribute ep_node = eed_attribute_store_get_endpoint_node(unid, endpoint_id);
+
+    {{#zcl_attributes}}
+    uic_mqtt_dotdot_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type({{asAttributeIdDefine parent.label label}}).delete_node();
+
+    {{/zcl_attributes}}
+
+    uic_mqtt_dotdot_{{asSnakeCaseLower label}}_unretain_cluster_revision(base_topic);
+    uic_mqtt_dotdot_{{asSnakeCaseLower label}}_publish_empty_supported_commands(unid, endpoint_id);
+}
+
+    {{/unless}}
+    {{/if}}
+{{/zcl_clusters}}
+
+    void eed_dotdot_create_clusters(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id) {
+        for (auto& pair : CreateClusterMap) {
+            eed_cluster_attribute_wrapper eed_dotdot_create_attribute_wrapper = pair.second;
+            // Call the dotdot create wrapper function
+            eed_dotdot_create_attribute_wrapper(unid, endpoint_id);
+        }
+    }
+
+    void eed_dotdot_create_cluster_by_name(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id, const char* cluster_name) {
+        auto it = CreateClusterMap.find(cluster_name);
+        if (it != CreateClusterMap.end() && it->second != nullptr) {
+            it->second(unid, endpoint_id);
+        }else {
+            sl_log_error(LOG_TAG, "Provided Cluster name is not valid :%s", cluster_name);
+        }
+    }
+
+    void eed_dotdot_unretain_cluster_by_name(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id, const char* cluster_name) {
+        auto it = CreateUnretainMap.find(cluster_name);
+        if (it != CreateUnretainMap.end() && it->second != nullptr) {
+            it->second(unid, endpoint_id);
+        }else {
+            sl_log_error(LOG_TAG, "Provided Cluster name is not valid :%s", cluster_name);
+        }
+    }
+}
+
+// Map for ClusterIdWrapperPair instances
+std::map<std::string, eed_cluster_attribute_wrapper> CreateClusterMap = {
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#unless (clusterWithoutEndpoints label)}}
+{ "{{label}}", dotdot_create_{{asSnakeCaseLower label}}_wrapper },
+{{/unless}}
+{{/if}}
+{{/zcl_clusters}}
+};
+
+std::map<std::string, eed_cluster_attribute_wrapper> CreateUnretainMap = {
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#unless (clusterWithoutEndpoints label)}}
+{ "{{label}}", dotdot_unretain_{{asSnakeCaseLower label}}_wrapper },
+{{/unless}}
+{{/if}}
+{{/zcl_clusters}}
+};

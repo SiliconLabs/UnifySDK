@@ -1,7 +1,0 @@
-#!/bin/sh
-if type "systemctl" >/dev/null; then
-    systemctl stop uic-zigbeed.service
-    systemctl disable uic-zigbeed.service
-    systemctl stop uic-zigbeed-socat.service
-    systemctl disable uic-zigbeed-socat.service
-fi

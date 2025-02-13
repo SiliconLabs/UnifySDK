@@ -2288,8 +2288,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // SGroupId // SGroupId // SGroupId
-    std::string attribute_type_string           = "SGroupId";
+    // SGroupId // SGroupId // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2298,7 +2298,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Scenes CurrentGroup, "
-                     "type:  SGroupId // SGroupId");
+                     "type:  SGroupId // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2360,8 +2360,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // EUI64 // EUI64 // EUI64
-    std::string attribute_type_string           = "EUI64";
+    // EUI64 // EUI64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2370,7 +2370,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Scenes LastConfiguredBy, "
-                     "type:  EUI64 // EUI64");
+                     "type:  EUI64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -2888,8 +2888,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2898,7 +2898,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time Time, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3080,8 +3080,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3090,7 +3090,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time LastSetTime, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3104,8 +3104,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3114,7 +3114,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time ValidUntilTime, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -6680,8 +6680,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6690,7 +6690,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat SetpointChangeSourceTimestamp, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -10736,8 +10736,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // EUI64 // EUI64 // EUI64
-    std::string attribute_type_string           = "EUI64";
+    // EUI64 // EUI64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10746,7 +10746,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IASZone IASCIEAddress, "
-                     "type:  EUI64 // EUI64");
+                     "type:  EUI64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -10976,8 +10976,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10986,7 +10986,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering ReadingSnapShotTime, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11000,8 +11000,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11010,7 +11010,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentMaxDemandDeliveredTime, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11024,8 +11024,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // UTC
-    std::string attribute_type_string           = "UTC";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11034,7 +11034,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentMaxDemandReceivedTime, "
-                     "type:  UTC // UTC");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11144,8 +11144,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // int24 // int24 // uint32_t
-    std::string attribute_type_string           = "uint32_t";
+    // int24 // int24 // int32_t
+    std::string attribute_type_string           = "int32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11154,7 +11154,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering InletTemperature, "
-                     "type:  int24 // uint32_t");
+                     "type:  int24 // int32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11168,8 +11168,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // int24 // int24 // uint32_t
-    std::string attribute_type_string           = "uint32_t";
+    // int24 // int24 // int32_t
+    std::string attribute_type_string           = "int32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11178,7 +11178,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering OutletTemperature, "
-                     "type:  int24 // uint32_t");
+                     "type:  int24 // int32_t");
     }
 
     status |= attribute_store_register_type(
@@ -16800,462 +16800,6 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     status |= attribute_store_register_type(
       DOTDOT_ATTRIBUTE_ID_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS,
       "ZCL ConfigurationParameters ConfigurationParameters",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator ReportingMode, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE,
-      "ZCL AoXLocator ReportingMode",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // bool // bool // bool
-    std::string attribute_type_string           = "bool";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator PositionAndOrientationValid, "
-                     "type:  bool // bool");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID,
-      "ZCL AoXLocator PositionAndOrientationValid",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // CoordinateAndOrientation // CoordinateAndOrientation // CoordinateAndOrientation
-    std::string attribute_type_string           = "CoordinateAndOrientation";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = BYTE_ARRAY_STORAGE_TYPE;
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator PositionAndOrientation, "
-                     "type:  CoordinateAndOrientation // CoordinateAndOrientation");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION,
-      "ZCL AoXLocator PositionAndOrientation",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // MinMaxPair // MinMaxPair // MinMaxPair
-    std::string attribute_type_string           = "MinMaxPair";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = BYTE_ARRAY_STORAGE_TYPE;
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AzimuthMask, "
-                     "type:  MinMaxPair // MinMaxPair");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK,
-      "ZCL AoXLocator AzimuthMask",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // MinMaxPair // MinMaxPair // MinMaxPair
-    std::string attribute_type_string           = "MinMaxPair";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = BYTE_ARRAY_STORAGE_TYPE;
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator ElevationMask, "
-                     "type:  MinMaxPair // MinMaxPair");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK,
-      "ZCL AoXLocator ElevationMask",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // string // string // const char*
-    std::string attribute_type_string           = "const char*";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = C_STRING_STORAGE_TYPE;
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AllowList, "
-                     "type:  string // const char*");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST,
-      "ZCL AoXLocator AllowList",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AoXMode, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE,
-      "ZCL AoXLocator AoXMode",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AntennaMode, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE,
-      "ZCL AoXLocator AntennaMode",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AntennaArray, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY,
-      "ZCL AoXLocator AntennaArray",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator PeriodSamples, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES,
-      "ZCL AoXLocator PeriodSamples",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // bool // bool // bool
-    std::string attribute_type_string           = "bool";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AngleFiltering, "
-                     "type:  bool // bool");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING,
-      "ZCL AoXLocator AngleFiltering",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // double // double // double
-    std::string attribute_type_string           = "double";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AngleFilteringWeight, "
-                     "type:  double // double");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT,
-      "ZCL AoXLocator AngleFilteringWeight",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AngleCorrectionTimeout, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT,
-      "ZCL AoXLocator AngleCorrectionTimeout",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator AngleCorrectionDelay, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY,
-      "ZCL AoXLocator AngleCorrectionDelay",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // enum8 // enum8 // uint8_t
-    std::string attribute_type_string           = "uint8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator CTEMode, "
-                     "type:  enum8 // uint8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE,
-      "ZCL AoXLocator CTEMode",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator CTESamplingInterval, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL,
-      "ZCL AoXLocator CTESamplingInterval",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator CTELength, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH,
-      "ZCL AoXLocator CTELength",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // int8 // int8 // int8_t
-    std::string attribute_type_string           = "int8_t";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = attribute_storage_type_conversion(attribute_type_string);
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXLocator SlotDuration, "
-                     "type:  int8 // int8_t");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION,
-      "ZCL AoXLocator SlotDuration",
-      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-      storage_type);
-  }
-
-  // clang-format off
-  // clang-format on
-
-  {
-    // EstimatedPosition // EstimatedPosition // EstimatedPosition
-    std::string attribute_type_string           = "EstimatedPosition";
-    attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
-
-    // clang-format off
-    storage_type = BYTE_ARRAY_STORAGE_TYPE;
-
-    if (storage_type == UNKNOWN_STORAGE_TYPE) {
-      sl_log_warning(LOG_TAG,
-                     "Unkown storage type for ZCL AoXPositionEstimation Position, "
-                     "type:  EstimatedPosition // EstimatedPosition");
-    }
-
-    status |= attribute_store_register_type(
-      DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION,
-      "ZCL AoXPositionEstimation Position",
       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
       storage_type);
   }

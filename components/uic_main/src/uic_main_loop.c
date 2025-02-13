@@ -27,11 +27,7 @@
  *
  * Unit is contiki clock_time_t units.
  * FIXME: move this to some global definitions place. */
-#ifdef ZWAVE_BUILD_SYSTEM
-#define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY 0
-#else
 #define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY 300
-#endif
 
 /* Prototypes */
 
@@ -90,13 +86,7 @@ void uic_main_wait_for_file_descriptors(void)
     *
     * Poll handlers are only expected to read the data and post a
     * conktiki event to handle it later. */
-#ifdef ZWAVE_BUILD_SYSTEM
-  if (delay) {
-    uic_main_ext_select(delay);
-  }
-#else
   uic_main_ext_select(delay);
-#endif
 }
 
 bool uic_main_loop(void)

@@ -6643,6 +6643,34 @@ void uic_mqtt_dotdot_state_publish_discover_security_command_to_group(
   uint16_t destination_group_id
 );
 /**
+ * @brief Sends/Publishes a EnableNls command for
+ * the State cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/Commands/EnableNls
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_enable_nls_command(
+  const dotdot_unid_t destination_unid
+);
+
+/**
+ * @brief Sends/Publishes a EnableNls command for
+ * the State cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/State/Commands/EnableNls
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_enable_nls_command_to_group(
+  uint16_t destination_group_id
+);
+/**
  * @brief Sends/Publishes a Bind command for
  * the Binding cluster to a destination.
  *
@@ -6980,123 +7008,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_c
 void uic_mqtt_dotdot_configuration_parameters_publish_discover_parameter_range_command_to_group(
   uint16_t destination_group_id,
   const uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t *fields
-  
-);
-/**
- * @brief Sends/Publishes a IQReport command for
- * the AoXLocator cluster to a destination.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/Commands/IQReport
- *
- * @param destination_unid      The UNID of the node that should receive the command.
- * 
- * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_iq_report_command(
-  const dotdot_unid_t destination_unid,
-  const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-);
-
-/**
- * @brief Sends/Publishes a IQReport command for
- * the AoXLocator cluster to a group.
- *
- * Publication will be made at the following topic
- * ucl/by-group/GroupID/AoXLocator/Commands/IQReport
- *
- * @param destination_group_id  The GroupID that should receive the command.
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_iq_report_command_to_group(
-  uint16_t destination_group_id,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-);
-/**
- * @brief Sends/Publishes a AngleReport command for
- * the AoXLocator cluster to a destination.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/Commands/AngleReport
- *
- * @param destination_unid      The UNID of the node that should receive the command.
- * 
- * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_report_command(
-  const dotdot_unid_t destination_unid,
-  const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-);
-
-/**
- * @brief Sends/Publishes a AngleReport command for
- * the AoXLocator cluster to a group.
- *
- * Publication will be made at the following topic
- * ucl/by-group/GroupID/AoXLocator/Commands/AngleReport
- *
- * @param destination_group_id  The GroupID that should receive the command.
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_report_command_to_group(
-  uint16_t destination_group_id,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-);
-/**
- * @brief Sends/Publishes a AngleCorrection command for
- * the AoXLocator cluster to a destination.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/Commands/AngleCorrection
- *
- * @param destination_unid      The UNID of the node that should receive the command.
- * 
- * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_correction_command(
-  const dotdot_unid_t destination_unid,
-  const dotdot_endpoint_id_t destination_endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-);
-
-/**
- * @brief Sends/Publishes a AngleCorrection command for
- * the AoXLocator cluster to a group.
- *
- * Publication will be made at the following topic
- * ucl/by-group/GroupID/AoXLocator/Commands/AngleCorrection
- *
- * @param destination_group_id  The GroupID that should receive the command.
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_angle_correction_command_to_group(
-  uint16_t destination_group_id,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
   
 );
 /**

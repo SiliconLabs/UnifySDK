@@ -37,7 +37,7 @@ var structuic__mqtt__dotdot__thermostat__state__t =
     [ "remote_sensing", "structuic__mqtt__dotdot__thermostat__state__t.html#a0e4d87e62cbb148b62a835d051159e02", null ],
     [ "setpoint_change_amount", "structuic__mqtt__dotdot__thermostat__state__t.html#a2b161f9883b1ab5ae5e81ba09d173f1e", null ],
     [ "setpoint_change_source", "structuic__mqtt__dotdot__thermostat__state__t.html#abef439034d37f7a16f8c6a8f195662b5", null ],
-    [ "setpoint_change_source_timestamp", "structuic__mqtt__dotdot__thermostat__state__t.html#ab905c6fed1cbce742bda1c0f62a186af", null ],
+    [ "setpoint_change_source_timestamp", "structuic__mqtt__dotdot__thermostat__state__t.html#a2044615f849566e75b85038503ecd831", null ],
     [ "start_of_week", "structuic__mqtt__dotdot__thermostat__state__t.html#aab43c55e38705f598a5e5c274599b91f", null ],
     [ "system_mode", "structuic__mqtt__dotdot__thermostat__state__t.html#abf37f1e17726db4056a7a077a5e06e92", null ],
     [ "temperature_setpoint_hold", "structuic__mqtt__dotdot__thermostat__state__t.html#ad916b91594c2712bdcb332839166ec42", null ],

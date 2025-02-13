@@ -4,19 +4,11 @@ With the Portable runtime, initiating the Unify Network requires minimal effort,
 
 ## Unify Portable Runtime Environment
 
-**Disclaimer**: Currently the Unify Portable Runtime environment does not supports the following protocol:
-   - Bluetooth in Multiprotocol
-   - Thread in Multiprotocol
-   - Matter
-
 **Prerequisites**:
 
-1. [Z-Wave module](https://www.silabs.com/wireless/z-wave) flashed with Z-Wave - NCP Serial API Controller.
-2. [Zigbee module](https://www.silabs.com/wireless/zigbee) EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP
-3. [Bluetooth module](https://www.silabs.com/wireless/bluetooth) EFR32xG22 running NCP Firmware for AoXPC
-4. Docker version > 20.10.12 installed.
-5. docker-compose version > 2.5.1
-6. x86-64/amd64 CPU architecture.
+1. Docker version > 20.10.12 installed.
+2. docker-compose version > 2.5.1
+3. x86-64/amd64 CPU architecture.
 
 The Unify Portable Runtime Environment strives to get Unify running as fast as
 possible on your desktop. The portable runtime comes as a binary executable GUI,
@@ -59,19 +51,16 @@ After initial pre-requisites check, the GUI will render protocol selection page.
 
 <img src="../../portable_runtime/protocols.jpg" width="200" height="250" border="1px">
 
-   **Note**: 
-   - _Zigbee(RCP) is disabled until _MultiProtocol_ is selected and enabled automatically upon enabling _MultiProtocol_
-   - _Zigbee(NCP)_ and _Zigbee(RCP)_ are mutually exclusive options.
-
-By default only Z-Wave (ZPC) is selected. Select other protocols as needed and 
+By default only EED (Emulated End Device) is selected.
 click on `Next`.
 
 ##### Emulated End Device (**Experimental**): 
-Portable runtime supports end device emulation as an experimental feature. The Emulated End Device (EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
-<br>```Note: EED currently emulates a end device that only supports OnOff cluster, so for UMB to process EED as a valid device enable atleast select NAL in the framework service page that follows.```
+Portable runtime supports end device emulation as an experimental feature. The Emulated End Device (EED) is experimental emulation of end device to enable UMB demo without any actual Z-Wave devices.
+<br>```Note: For UMB to process EED with only one cluster as a valid device enable atleast select NAL in the framework service page that follows.```
 
 <br>The EED can be enabled in protocol selection page of latest portable runtime GUI.
-<img src="../../portable_runtime/EED-GUI.png" width="200" height="250" border="1px">
+
+<img src="../../portable_runtime/protocols.jpg" width="200" height="250" border="1px">
 
 #### Framework Services and Application Selection
 <img src="../../portable_runtime/framework_and_application.jpg" width="200" height="250" border="1px">
@@ -83,6 +72,8 @@ Select the framework services and the unify matter bridge application as needed 
 
 #### Configuration
 Select the `Device` for each protocol selected in [Protocol Selection page](#protocol-selection). If Z-Wave was selected then also configure `RF Region`.
+If EED was selected then select preferred Device Type from the dropdown.
+<br>Select AllClustersDevice for all possible device types supported by EED.
 
 <img src="../../portable_runtime/configuration.jpg" width="200" height="250" border="1px">
 
@@ -110,10 +101,6 @@ In case of any issues in bring-up or pre-requisites check, error page is display
 
 <img src="../../portable_runtime/error.jpg" width="200" height="250" border="1px">
 
-## Troubleshooting
-
-In case you run into any issues, a log file is produced in the base directory, called `portable_runtime.log`.
-
 ## Portable Runtime CLI
 
 Portable runtime CLI provides extra functionalities such as <a href="flash-application">flash-app</a>, <a href="#read-devicec-specific-key-dsk">read-dsk</a> where as GUI lacks.
@@ -125,7 +112,7 @@ This should set up the whole Unify Framework ecosystem.
 An example of this can be seen below on a Windows machine.
 
 ```powershell
-PS C:\Users\someuser\Downloads\portable_runtime_windows> .\unify_portable_cli.exe
+PS C:\Users\someuser\Downloads\portable_runtime_windows> .\unify_portable_cli.exe -p "Z-Wave"
 Verifying Docker installation
 devices: 1 device found.
 
@@ -149,45 +136,33 @@ be found in the [Dev GUI User's Guide](../../applications/dev_ui/dev_gui/readme_
 `localhost` to `mqtt-broker`.
 
 ## Portable runtime combinations
-Portable runtime environment now supports more than ZPC. It can run other protocol controllers individually or combination of supported protocol controllers. Also, now the portable runtime environment can be configured to run only the selected framework services.
+Portable runtime environment now supports both ZPC and EED. It can even run EED individually or in combinations of ZPC and supported Applications. Also, now the portable runtime environment can be configured to run only the selected framework services.
 
 **Supported Protocol Controllers**:
 - Z-Wave Protocol Controller (`ZPC`)
-- Zigbee Protocol Controller (`ZigPC`)
-- AoX Protocol Controller (`AoXPC`)
-<br>Note: ZigPC can be run in NCP mode or in RCP mode with multiprotocol setup.
 
 **Supported Applications**:
 - Unify Matter Bridge (`UMB`)
 - Dev-GUI
+- Emulated End Device (EED)
 <br>Note: Dev-GUI Application will be always enabled by default.
 
 ## Advanced options
 
 To start up the environment, run the *unify_portable_cli* binary file.
-With only one device connected with only ZPC, you can just run the *unify_portable_cli* application. For multiple connected devices or new protocol combinations, see below.
+For combinations which require no device, you can just run the *unify_portabke_cli* application. For multiple connected devices or new protocol combinations, see below.
 Once it is running, it will wait for you to press '*CTRL-C*' to end it.
 
 ```console
 unify_portable_cli
 ```
 ### Protocol Controller Selection
-The list of protocol controller to be run can be configured using this option. If this option is not configured by default only ZPC will be run within portable runtime environment.
-<br>The option takes a list of comma-separated predefined strings representing each supported protocol controller.
+The list of protocol controller to be run can be configured using this option. If this option is not configured by default only EED will be run within portable runtime environment.
 <br>The predefined strings are:
    - `Z-Wave` for ZPC
-   - `Zigbee-NCP` for ZigPC in NCP mode
-   - `AoX-Bluetooth` for AoXPC
-   - `MultiProtocol` for multiprotocol (currently only supports ZigPC in RCP mode )
-
 
 ```console
-unify_portable_cli -p "Z-Wave,Zigbee-NCP"
-```
-Note: The list can have single string if only one PC is needed.
-Example:
-```console
-unify_portable_cli -p "Zigbee-NCP"
+unify_portable_cli -p "Z-Wave"
 ```
 
 ### Framework Service Selections
@@ -204,7 +179,7 @@ unify_portable_cli -p "Z-Wave" -m "NAL,GMS"
 ```
 
 ### Unify Matter Bridge selection
-The Unify Matter Bridge is an application that makes legacy devices, such as Z-Wave and Zigbee devices, accessible on a Matter fabric. It does so by acting as an IoT Service in a Unify Framework. Please visit [Unify Matter Bridge](https://siliconlabs.github.io/matter/latest/unify/matter-bridge/readme_overview.html) for more details.
+The Unify Matter Bridge is a reference application that makes legacy devices, such as Z-Wave Devices accessible on a Matter fabric. It does so by acting as an IoT Service in a Unify Framework. Please visit [Unify Matter Bridge](https://siliconlabs.github.io/matter/latest/unify/matter-bridge/readme_overview.html) for more details.
 <br>The Unify Matter Bridge can be configured to be run using `-a` option. This option cannot be used without a protocol selection configuration.
 <br>The option takes a predefined string "UMB" representing Unify Matter Bridge as shown below.
 
@@ -289,12 +264,19 @@ More detailed information about chip-tool can be found in this [link](https://pr
 
 ### Emulated End Device (**Experimental**)
 
-<br>```Note: EED currently emulates a end device that only supports OnOff cluster, so for UMB to process EED as a valid device at least enable NAL service along with EED.```
+<br>```Note: For UMB to process EED with only one cluster as a valid device enable atleast NAL along with EED```
 <br>The Emulated End Device(EED) can be configured to be run using `-a` option. This option cannot be used without a protocol selection configuration.
 <br>The option takes a predefined string "EED" representing Emulated End Device as shown below.
 
 ```console
 unify_portable_cli -a "EED,UMB" -m "NAL"
+```
+
+<br>The EED can be configured to bring up with desired device type using `--eed_device_type`. Supported device types: dimmablelight, onofflight, doorlock, onofflightswitch, lightsensor, occupancysensor, onoffpluginunit, dimmablepluginunit, extendedcolorlight, windowcovering, thermostat, flowsensor, allclustersdevice. Use --eed_device_type "allclustersdevice" for all supported clusters.
+<br>If `--eed_device_type` is not configured by default EED is up with onofflight device type.
+
+```console
+unify_portable_cli -a "EED,UMB" -m "NAL" --eed_device_type "allclustesdevice"
 ```
 
 ### Z-Wave options
@@ -305,7 +287,7 @@ A command-line switch is available to choose a different region from the region 
 Here is an example on how to start it up in the US region.
 
 ```console
-unify_portable_cli --zwave-rf-region US
+unify_portable_cli -p "Z-Wave" --zwave-rf-region US
 ```
 
 #### Serial no
@@ -313,7 +295,7 @@ unify_portable_cli --zwave-rf-region US
 Specifying the device's serial no. that you would like to use, can be done like so:
 
 ```console
-unify_portable_cli --serial-no 440262195
+unify_portable_cli -p "Z-Wave" --serial-no 440262195
 ```
 
 Be aware that running it like this on Linux, requires libqt5network5 to be installed.
@@ -328,7 +310,7 @@ user@portable_runtime_environment:~$ sudo apt install -y --no-install-recommends
 If you have eg. a WSTK board connected to the same network, you can specify its IP address like so:
 
 ```console
-unify_portable_cli --ip-address 10.0.0.12
+unify_portable_cli -p "Z-Wave" --ip-address 10.0.0.12
 ```
 
 #### Direct device
@@ -337,72 +319,7 @@ This method is only supported on Linux.
 By specifying the device path, you can map that device into the portable runtime.
 
 ```console
-user@portable_runtime_environment:~$ unify_portable_cli --device /dev/ttyUSB0.
-```
-### Zigbee Options
-#### Zigbee Device Serial no
-
-Specifying the Zigbee device's serial no. that you would like to use, can be done like so:
-
-```console
-unify_portable_cli --zigpc_serial_no 440262196
-```
-
-Be aware that running it like this on Linux, requires libqt5network5 to be installed.
-For Debian based distro, it can be installed like so:
-
-```console
-user@portable_runtime_environment:~$ sudo apt install -y --no-install-recommends libqt5network5
-```
-
-#### Zigbee IP address
-
-If you have eg. a WSTK board with Zigbee module connected to the same network, you can specify its IP address like so:
-
-```console
-unify_portable_cli --zigpc-ip-address 10.0.0.13
-```
-
-#### Direct device
-
-This method is only supported on Linux.
-By specifying the device path, you can map that Zigbee NCP device into the portable runtime.
-
-```console
-user@portable_runtime_environment:~$ unify_portable_cli --zigpc-device /dev/ttyUSB1.
-```
-
-### AoX Options
-#### AoX Device Serial no
-
-Specifying the AoX BT device's serial no. that you would like to use, can be done like so:
-
-```console
-unify_portable_cli --aoxpc_serial_no 440262196
-```
-
-Be aware that running it like this on Linux, requires libqt5network5 to be installed.
-For Debian based distro, it can be installed like so:
-
-```console
-user@portable_runtime_environment:~$ sudo apt install -y --no-install-recommends libqt5network5
-```
-
-#### AoX IP address
-
-If you have eg. a WSTK board with AoX BT module connected to the same network, you can specify its IP address like so:
-
-```console
-unify_portable_cli --aoxpc-ip-address 10.0.0.13
-```
-
-#### Direct device
-
-This method is only supported on Linux.
-By specifying the device path, you can map that AoX BT NCP device into the portable runtime.
-
-```console
-user@portable_runtime_environment:~$ unify_portable_cli --aoxpc-device /dev/ttyUSB1.
+user@portable_runtime_environment:~$ unify_portable_cli p "Z-Wave" --device /dev/ttyUSB0.
 ```
 
 ### Multiple devices connected
@@ -416,7 +333,7 @@ identify the controller device based on its application name. If that fails,
 you will be asked to select the controller from a the list of the connected
 devices.
 ```console
-unify_portable_cli -p Z-Wave -m UPVL,GMS,NAL
+unify_portable_cli -p "Z-Wave" -m "UPVL,GMS,NAL"
 Verifying Docker installation
 devices: 2 devices found.
 0: 440297793, J-Link EnergyMicro
@@ -439,7 +356,7 @@ Type 0, 1, ... or x to cancel:
 For `rest of the protocols`:
 <br>If you do not specify a serial number, you will be asked to select the controller from a the list of the connected devices.
 ```console
-unify_portable_cli -p Zigbee-NCP -m UPVL,GMS,NAL
+unify_portable_cli -p "Z-Wave" -m "UPVL,GMS,NAL"
 Verifying Docker installation
 devices: 2 devices found.
 0: 440297793, J-Link EnergyMicro
@@ -454,7 +371,7 @@ Device No. | Serial No. | Board No. | Freq. | Application name
          0 | 440297793  | 224710182 | ?     | unknown                      
          1 | 440206482  | 204705627 | ?     | unknown                      
 
-Please select a device for Zigbee-NCP.
+Please select a device for Z-Wave.
 Note that the device's number may change when multiple boards are connected!
 Type 0, 1, ... or x to cancel:
 ```
@@ -520,3 +437,8 @@ be invoked as follows:
 ```console
 unify_portable_cli list-devices
 ```
+
+## Troubleshooting
+In case you want to use different version of UnifySDK or UMB, replace desired packages in portable_runtime_<OS>/resources/docker-files and for commander replace resources/commander such that commander.exe and silink.exe path looks like ./resources/commander/commander.exe and ./resources/commander/silink.exe.
+
+In case you run into any issues, a log file is produced in the base directory, called `portable_runtime.log`.

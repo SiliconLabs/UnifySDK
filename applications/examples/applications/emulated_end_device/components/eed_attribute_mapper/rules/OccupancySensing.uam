@@ -1,0 +1,7 @@
+// ZCL attributes for Occupancy Sensing.
+def zb_OCCUPANCY_SENSOR_TYPE_BITMAP 0x04060002
+
+scope 0 chain_reaction(0) {
+    
+    r'zb_OCCUPANCY_SENSOR_TYPE_BITMAP = if(e'zb_OCCUPANCY_SENSOR_TYPE_BITMAP) 1 undefined
+}

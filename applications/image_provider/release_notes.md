@@ -1,5 +1,7 @@
 # Image Provider Release Notes
 
+## [1.7.0] - Feb 2025
+
 ## [1.6.0] - Aug 2024
 
 ## [1.5.0] - Feb 2024

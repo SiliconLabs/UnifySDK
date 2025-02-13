@@ -1,0 +1,13 @@
+// ZCL PM25 measurement attributes
+def zbPM_25_MEASURED_VALUE     0x0042A0000
+def zbPM_25_MIN_MEASURED_VALUE 0x0042A0001
+def zbPM_25_MAX_MEASURED_VALUE 0x0042A0002
+def zbPM_25_TOLERANCE          0x0042A0003
+
+scope 0 chain_reaction(0) {
+  r'zbPM_25_MIN_MEASURED_VALUE = if(e'zbPM_25_MIN_MEASURED_VALUE) 0 undefined
+
+  r'zbPM_25_MAX_MEASURED_VALUE = if(e'zbPM_25_MAX_MEASURED_VALUE) 1 undefined
+
+  r'zbPM_25_TOLERANCE = if(e'zbPM_25_TOLERANCE) 50 undefined
+}

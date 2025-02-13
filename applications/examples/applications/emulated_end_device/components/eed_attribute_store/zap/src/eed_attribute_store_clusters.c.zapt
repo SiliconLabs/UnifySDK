@@ -1,0 +1,148 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2023 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+// clang-format off
+{{zap_header}}
+// clang-format on
+
+#include "eed_attribute_store_clusters.h"
+#include "eed_attribute_store_attribute_types.h"
+#include "eed_attribute_store_helper.h"
+#include "eed_cluster_configuration.h"
+#include "eed_dotdot_create_clusters.h"
+
+// Unify
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+#include "attribute_timeouts.h"
+#include "attribute_transitions.h"
+#include "unify_dotdot_attribute_store.h"
+#include "unify_dotdot_attribute_store_helpers.h"
+#include "dotdot_cluster_id_definitions.h"
+#include "sl_log.h"
+
+#define LOG_TAG "eed_clusters"
+
+static void set_reported_as_desired(attribute_store_node_t node)
+{
+  attribute_store_set_reported_as_desired(node);
+}
+
+static bool needs_transition(attribute_store_node_t node) 
+{
+  attribute_store_type_t type = attribute_store_get_node_type(node);
+  if (
+    type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT
+    || type
+         == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE
+    || type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT
+    || type
+         == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE) {
+    return true;
+  }
+  return false;
+}
+
+static void on_endpoint_change(attribute_store_node_t endpoint_node,
+                                attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED && change != ATTRIBUTE_DELETED) {
+    return;
+  }
+
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  dotdot_endpoint_id_t endpoint_id = 0;
+  if (SL_STATUS_OK
+      != eed_attribute_store_get_endpoint_from_node(endpoint_node,
+                                                    unid,
+                                                    &endpoint_id)) {
+    sl_log_debug(LOG_TAG,
+                 "Cannot derive UNID/Endpoint from Attribute Store node %d",
+                 endpoint_node);
+    return;
+  }
+  if (change == ATTRIBUTE_DELETED) {
+    return cluster_config_remove_entry(unid, endpoint_id);
+  }
+  if (attribute_store_get_node_child_count(endpoint_node) > 4) {
+    // already have clusters from previous cycle, no need to redo
+    // Note: Without this check, endpoint is filled with all clusters on reset
+    return;
+  }
+
+  // Create all possible attributes under that endpoint, set the numbers to 0 if possible.
+  cluster_config_entry* entry = cluster_config_find_entry(unid, endpoint_id);
+  if (entry != NULL) {
+      for (int i = 0; i < cluster_config_entry_get_cluster_list_size(entry); i++) {
+        const char* cluster_name = cluster_config_entry_get_cluster_list_element(entry, i);
+        eed_dotdot_create_cluster_by_name(unid, endpoint_id, cluster_name);
+      }
+  } else {
+      eed_dotdot_create_clusters(unid, endpoint_id);
+  }
+}
+
+static void on_zcl_desired_value_update(attribute_store_node_t node,
+                                        attribute_store_change_t change)
+{
+  char unid[MAXIMUM_UNID_SIZE]     = {};
+  if (SL_STATUS_OK != eed_attribute_store_get_unid_from_node(node, unid)) {
+    sl_log_debug(LOG_TAG,
+                 "Cannot derive UNID from Attribute Store node %d",
+                 node);
+    return;
+  }
+
+  uint32_t maximum_delay
+    = dotdot_get_state_maximum_command_delay(unid, 0, REPORTED_ATTRIBUTE);
+  if (needs_transition(node))
+  {
+    float target_value
+    = attribute_store_get_number(node, DESIRED_ATTRIBUTE);
+    float current_value
+    = attribute_store_get_number(node, REPORTED_ATTRIBUTE);
+    // transition to target in 10s
+    attribute_start_fixed_transition(node,
+                                     REPORTED_ATTRIBUTE,
+                                     target_value,
+                                     (target_value - current_value) / 10.0f,
+                                     1000);
+  }
+  else {
+    attribute_timeout_set_callback(node,
+                                   maximum_delay * 900,  // 90% of max delay
+                                   &set_reported_as_desired);
+  }
+}
+
+// Public functions
+sl_status_t eed_attribute_store_clusters_init()
+{
+  attribute_store_register_callback_by_type(&on_endpoint_change,
+                                            ATTRIBUTE_ENDPOINT_ID);
+
+  // clang-format off
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  {{#unless (clusterWithoutEndpoints label)}}
+  {{#zcl_attributes}}
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    {{asAttributeIdDefine parent.label label}},
+    DESIRED_ATTRIBUTE);
+  {{/zcl_attributes}}
+  {{/unless}}
+  {{/if}}
+  {{/zcl_clusters}}
+  // clang-format on
+  return SL_STATUS_OK;
+}

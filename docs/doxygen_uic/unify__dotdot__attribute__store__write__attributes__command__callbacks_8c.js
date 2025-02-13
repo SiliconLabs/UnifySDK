@@ -2,8 +2,6 @@ var unify__dotdot__attribute__store__write__attributes__command__callbacks_8c =
 [
     [ "LOG_TAG", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "alarms_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a454538e5a28871c1e9ce68996de76297", null ],
-    [ "aox_locator_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a5bdede5734b84d7400c59a962a26e148", null ],
-    [ "aox_position_estimation_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#ac4d2242421470a62e341f685643082bb", null ],
     [ "application_monitoring_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#aa688c235adc756df77ffce0fd1604aaf", null ],
     [ "ballast_configuration_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#a51303f07250bcffb2316f44147a4df02", null ],
     [ "barrier_control_cluster_write_attributes_callback", "unify__dotdot__attribute__store__write__attributes__command__callbacks_8c.html#ace8c9fa837d8a539eccd8ad372ab8fbe", null ],

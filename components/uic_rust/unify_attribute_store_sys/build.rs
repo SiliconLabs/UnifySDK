@@ -15,119 +15,36 @@ use std::path::PathBuf;
 use unify_build_utils::*;
 
 fn main() -> Result<()> {
-    link_libunify();
+    // link against libunify
+    println!("cargo:rustc-link-arg=-Wl,-rpath,{}/components", std::env::var("UNIFY_BINARY_DIR")?);
+    println!("cargo:rustc-link-search=native={}/components", std::env::var("UNIFY_BINARY_DIR")?);
+    println!("cargo:rustc-link-lib=unify");
     bindings()
 }
 
-/// Link against libunify
-fn link_libunify() {
-    let p = match (
-        option_env!("CARGO_LIBUNIFY_DIR"),
-        option_env!("UNIFY_BINARY_DIR"),
-    ) {
-        (Some(s), _) => {
-            // Search in the libunify install output
-            let mut p = PathBuf::from(s);
-            p.push("lib");
-            println!(
-                "cargo:warning=Looking to link against libunify in {}",
-                p.display()
-            );
-            assert!(p.is_dir(), "{} is not a directory", p.display());
-            let mut so = p.clone();
-            so.push("libunify.so");
-            if !so.is_file() {
-                println!(
-                    "cargo:warning=Did not find libunify. We expected to find it at {}",
-                    so.display()
-                )
-            }
-            p
-        }
-        (None, Some(s)) => {
-            // Search within the monorepo
-            let mut p = PathBuf::from(s);
-            p.push("components");
-            if !p.is_dir() {
-                println!("cargo:warning=The directory {} does not exist", p.display());
-            }
-            let mut so = p.clone();
-            so.push("libunify.so");
-            if !so.is_file() {
-                println!(
-                    "cargo:warning=Did not find libunify. We expected to find it at {}",
-                    so.display()
-                );
-            }
-            p
-        }
-        (None, None) => {
-            panic!("Missing environment variable. Expected 'CARGO_LIBUNIFY_DIR' or 'CARGO_MANIFEST_DIR'.")
-        }
-    };
-    let p = p.to_str().unwrap();
-    println!("cargo:rustc-link-arg=-Wl,-rpath,{}", p);
-    println!("cargo:rustc-link-search=native={}", p);
-    println!("cargo:rustc-link-lib=unify");
-}
-
 fn bindings() -> Result<()> {
-    let include = load_environment("uic_attribute_store")?.include_directories;
+    let link_dependencies = load_environment("uic_attribute_store")?;
+
     let binding_file =
         PathBuf::from(std::env::var("OUT_DIR").expect("OUT_DIR is always set during build stage"))
-            .join("binding.rs");
+            .join("uic_attribute_store.rs");
 
-    let header = match (
-        option_env!("CARGO_LIBUNIFY_DIR"),
-        option_env!("CARGO_MANIFEST_DIR"),
-    ) {
-        (Some(s), _) => {
-            // Search for dependencies in the libunify install output
-            let mut p = PathBuf::from(s);
-            assert!(p.is_dir());
-            p.push("include");
-            assert!(p.is_dir(), "{} is not a directory", p.display());
-            p.push("uic");
-            assert!(p.is_dir(), "{} is not a directory", p.display());
-            vec![format!("{}/*.h", p.to_str().unwrap())]
-        }
-        (None, Some(s)) => {
-            // Search for dependencies within the monorepo
-            let mut p = PathBuf::from(s);
-            assert!(p.is_dir());
-            assert!(p.pop());
-            assert!(p.pop());
-            p.push("uic_attribute_store");
-            assert!(p.is_dir(), "{} is not a directory", p.display());
-            p.push("include");
-            assert!(p.is_dir(), "{} is not a directory", p.display());
+    let components_path = PathBuf::from(concat!(env!("CARGO_MANIFEST_DIR"), "/../.."));
 
-            let attribute_store = format!("{}/*.h", p.to_str().unwrap());
+    let uic_attribute_store = format!("{}/uic_attribute_store/include/*.h", components_path.to_string_lossy());
 
-            let mut p = PathBuf::from(s);
-            assert!(p.is_dir());
-            assert!(p.pop());
-            assert!(p.pop());
-            p.push("uic_attribute_utils");
-            assert!(p.is_dir(), "{} is not a directory", p.display());
-            p.push("include");
-            assert!(p.is_dir(), "{} is not a directory", p.display());
+    let uic_attribute_utils = format!("{}/uic_attribute_utils/include/attribute_timeouts.h", components_path.to_string_lossy()); 
 
-            vec![
-                attribute_store,
-                format!("{}/attribute_timeouts.h", p.to_str().unwrap()),
-            ]
-        }
-        (None, None) => {
-            panic!("Missing environment variable. Expected 'CARGO_LIBUNIFY_DIR' or 'CARGO_MANIFEST_DIR'.")
-        }
-    };
+    let headers = [
+        uic_attribute_store,
+        uic_attribute_utils 
+    ];
 
     generate_bindings(
         &binding_file,
-        &include,
+        &link_dependencies.include_directories,
         Some("attribute_store_.*|ATTRIBUTE_STORE.*|.*attribute_timeout.*|CLOCK_SECOND"),
         None,
-        &header,
+        &headers,
     )
 }

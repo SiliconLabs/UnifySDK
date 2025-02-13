@@ -1170,6 +1170,10 @@ static uic_mqtt_dotdot_state_discover_security_callback_t test_uic_mqtt_dotdot_s
 uic_mqtt_dotdot_state_discover_security_callback_t get_uic_mqtt_dotdot_state_discover_security_callback(){
   return test_uic_mqtt_dotdot_state_discover_security_callback;
 }
+static uic_mqtt_dotdot_state_enable_nls_callback_t test_uic_mqtt_dotdot_state_enable_nls_callback = NULL;
+uic_mqtt_dotdot_state_enable_nls_callback_t get_uic_mqtt_dotdot_state_enable_nls_callback(){
+  return test_uic_mqtt_dotdot_state_enable_nls_callback;
+}
 static uic_mqtt_dotdot_binding_force_read_attributes_callback_t test_uic_mqtt_dotdot_binding_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_binding_write_attributes_callback_t test_uic_mqtt_dotdot_binding_write_attributes_callback = NULL;
 
@@ -1256,38 +1260,6 @@ static uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callbac
 uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_t get_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback(){
   return test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback;
 }
-static uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t test_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback = NULL;
-static uic_mqtt_dotdot_aox_locator_write_attributes_callback_t test_uic_mqtt_dotdot_aox_locator_write_attributes_callback = NULL;
-
-uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t get_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback(){
-  return test_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback;
-}
-uic_mqtt_dotdot_aox_locator_write_attributes_callback_t get_uic_mqtt_dotdot_aox_locator_write_attributes_callback(){
-  return test_uic_mqtt_dotdot_aox_locator_write_attributes_callback;
-}
-
-static uic_mqtt_dotdot_aox_locator_iq_report_callback_t test_uic_mqtt_dotdot_aox_locator_iq_report_callback = NULL;
-uic_mqtt_dotdot_aox_locator_iq_report_callback_t get_uic_mqtt_dotdot_aox_locator_iq_report_callback(){
-  return test_uic_mqtt_dotdot_aox_locator_iq_report_callback;
-}
-static uic_mqtt_dotdot_aox_locator_angle_report_callback_t test_uic_mqtt_dotdot_aox_locator_angle_report_callback = NULL;
-uic_mqtt_dotdot_aox_locator_angle_report_callback_t get_uic_mqtt_dotdot_aox_locator_angle_report_callback(){
-  return test_uic_mqtt_dotdot_aox_locator_angle_report_callback;
-}
-static uic_mqtt_dotdot_aox_locator_angle_correction_callback_t test_uic_mqtt_dotdot_aox_locator_angle_correction_callback = NULL;
-uic_mqtt_dotdot_aox_locator_angle_correction_callback_t get_uic_mqtt_dotdot_aox_locator_angle_correction_callback(){
-  return test_uic_mqtt_dotdot_aox_locator_angle_correction_callback;
-}
-static uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t test_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback = NULL;
-static uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t test_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback = NULL;
-
-uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t get_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback(){
-  return test_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback;
-}
-uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t get_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback(){
-  return test_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback;
-}
-
 static uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_t test_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback = NULL;
 static uic_mqtt_dotdot_protocol_controller_network_management_write_attributes_callback_t test_uic_mqtt_dotdot_protocol_controller_network_management_write_attributes_callback = NULL;
 
@@ -1383,6 +1355,14 @@ void test_color_control_move_to_color_temperature_command();
 void test_color_control_move_color_temperature_command();
 void test_color_control_step_color_temperature_command();
 void test_color_control_stop_move_step_command();
+void test_color_control_move_to_color_command();
+void test_color_control_move_color_command();
+void test_color_control_step_color_command();
+void test_color_control_enhanced_move_to_hue_command();
+void test_color_control_enhanced_move_hue_command();
+void test_color_control_enhanced_step_hue_command();
+void test_color_control_enhanced_move_to_hue_and_saturation_command();
+void test_color_control_color_loop_set();
 void test_on_off_on_command_support();
 void test_on_off_toggle_command_support();
 void test_on_off_on_command_update_desired();
@@ -1395,6 +1375,8 @@ void test_on_off_off_command_support();
 void test_on_off_off_command_update_desired_with_level_supported();
 void test_on_off_on_command_update_desired_with_level_supported_on_level();
 void test_on_off_on_command_update_desired_with_level_supported_last_non_zero_level();
+void test_off_with_effect_command();
+void test_on_with_timed_off_command();
 void test_no_get_endpoint_function_registered();
 void test_publish_no_get_unid_function_registered();
 void test_publish_reported_value();
@@ -1440,6 +1422,7 @@ void test_window_covering_go_to_lift_value_command();
 void test_window_covering_go_to_lift_percentage_command();
 void test_window_covering_go_to_tilt_value_command();
 void test_window_covering_go_to_tilt_percentage_command();
+void test_window_covering_on_mode_update();
 void test_zwave_fan_control_no_get_endpoint_function_registered();
 void test_zwave_fan_control_set_fan_mode_command_support();
 void test_zwave_fan_control_set_fan_mode_command_update_desired();
@@ -2773,6 +2756,11 @@ void uic_mqtt_dotdot_state_discover_security_callback_set_stub(
 {
   test_uic_mqtt_dotdot_state_discover_security_callback = callback;
 }
+void uic_mqtt_dotdot_state_enable_nls_callback_set_stub(
+  const uic_mqtt_dotdot_state_enable_nls_callback_t callback, int cmock_num_calls)
+{
+  test_uic_mqtt_dotdot_state_enable_nls_callback = callback;
+}
 void set_uic_mqtt_dotdot_binding_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_binding_force_read_attributes_callback_t callback, int cmock_num_calls)
 {
@@ -2867,41 +2855,6 @@ void uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_
   const uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_t callback, int cmock_num_calls)
 {
   test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback = callback;
-}
-void set_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_stub(
-  const uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback = callback;
-}
-void set_uic_mqtt_dotdot_aox_locator_write_attributes_callback_stub(
-  const uic_mqtt_dotdot_aox_locator_write_attributes_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_locator_write_attributes_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_iq_report_callback_set_stub(
-  const uic_mqtt_dotdot_aox_locator_iq_report_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_locator_iq_report_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_angle_report_callback_set_stub(
-  const uic_mqtt_dotdot_aox_locator_angle_report_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_locator_angle_report_callback = callback;
-}
-void uic_mqtt_dotdot_aox_locator_angle_correction_callback_set_stub(
-  const uic_mqtt_dotdot_aox_locator_angle_correction_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_locator_angle_correction_callback = callback;
-}
-void set_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_stub(
-  const uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback = callback;
-}
-void set_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_stub(
-  const uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_t callback, int cmock_num_calls)
-{
-  test_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback = callback;
 }
 void set_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_stub(
   const uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_t callback, int cmock_num_calls)
@@ -3805,6 +3758,9 @@ void setUp()
   test_uic_mqtt_dotdot_state_discover_security_callback = NULL;
   uic_mqtt_dotdot_state_discover_security_callback_set_Stub(
     &uic_mqtt_dotdot_state_discover_security_callback_set_stub);
+  test_uic_mqtt_dotdot_state_enable_nls_callback = NULL;
+  uic_mqtt_dotdot_state_enable_nls_callback_set_Stub(
+    &uic_mqtt_dotdot_state_enable_nls_callback_set_stub);
   test_uic_mqtt_dotdot_binding_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_binding_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_binding_force_read_attributes_callback_stub);
@@ -3862,27 +3818,6 @@ void setUp()
   test_uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback = NULL;
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_Stub(
     &uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_set_stub);
-  test_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback = NULL;
-  uic_mqtt_dotdot_set_aox_locator_force_read_attributes_callback_Stub(
-    &set_uic_mqtt_dotdot_aox_locator_force_read_attributes_callback_stub);
-  test_uic_mqtt_dotdot_aox_locator_write_attributes_callback = NULL;
-  uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_Stub(
-    &set_uic_mqtt_dotdot_aox_locator_write_attributes_callback_stub);
-  test_uic_mqtt_dotdot_aox_locator_iq_report_callback = NULL;
-  uic_mqtt_dotdot_aox_locator_iq_report_callback_set_Stub(
-    &uic_mqtt_dotdot_aox_locator_iq_report_callback_set_stub);
-  test_uic_mqtt_dotdot_aox_locator_angle_report_callback = NULL;
-  uic_mqtt_dotdot_aox_locator_angle_report_callback_set_Stub(
-    &uic_mqtt_dotdot_aox_locator_angle_report_callback_set_stub);
-  test_uic_mqtt_dotdot_aox_locator_angle_correction_callback = NULL;
-  uic_mqtt_dotdot_aox_locator_angle_correction_callback_set_Stub(
-    &uic_mqtt_dotdot_aox_locator_angle_correction_callback_set_stub);
-  test_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback = NULL;
-  uic_mqtt_dotdot_set_aox_position_estimation_force_read_attributes_callback_Stub(
-    &set_uic_mqtt_dotdot_aox_position_estimation_force_read_attributes_callback_stub);
-  test_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback = NULL;
-  uic_mqtt_dotdot_set_aox_position_estimation_write_attributes_callback_Stub(
-    &set_uic_mqtt_dotdot_aox_position_estimation_write_attributes_callback_stub);
   test_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback = NULL;
   uic_mqtt_dotdot_set_protocol_controller_network_management_force_read_attributes_callback_Stub(
     &set_uic_mqtt_dotdot_protocol_controller_network_management_force_read_attributes_callback_stub);
@@ -4669,25 +4604,6 @@ void test_automatic_deduction_of_supported_commands()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_name_and_location_name(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_name_and_location_location(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_configuration_parameters_configuration_parameters(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_reporting_mode(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_position_and_orientation_valid(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_position_and_orientation(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_azimuth_mask(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_elevation_mask(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_allow_list(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_aox_mode(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_antenna_mode(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_antenna_array(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_period_samples(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_angle_filtering(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_angle_filtering_weight(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_angle_correction_timeout(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_angle_correction_delay(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_cte_mode(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_cte_sampling_interval(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_cte_length(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_locator_slot_duration(expected_unid,expected_endpoint_id) );
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_aox_position_estimation_position(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_protocol_controller_network_management_network_management_state(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_descriptor_device_type_list(expected_unid,expected_endpoint_id) );
   TEST_ASSERT_EQUAL(SL_STATUS_OK, dotdot_create_unify_fan_control_z_wave_fan_mode(expected_unid,expected_endpoint_id) );
@@ -4910,13 +4826,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_add_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
       uint8_t transition_time100ms_value;
       memset(&transition_time100ms_value, 0x00, sizeof(transition_time100ms_value));
@@ -4941,7 +4857,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -4958,7 +4874,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_view_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -4975,13 +4891,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5002,7 +4918,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5019,7 +4935,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5036,7 +4952,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5049,7 +4965,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5062,7 +4978,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_store_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5079,7 +4995,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5096,7 +5012,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_recall_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5115,7 +5031,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_get_scene_membership_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_get_scene_membership_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5130,7 +5046,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t capacity_value;
       memset(&capacity_value, 0x00, sizeof(capacity_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_get_scene_membership_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5147,13 +5063,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5174,7 +5090,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5191,7 +5107,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -5208,13 +5124,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5237,11 +5153,11 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t mode_value;
       memset(&mode_value, 0x00, sizeof(mode_value));
-      SGroupId group_identifier_from_value;
+      uint16_t group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
       uint8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
-      SGroupId group_identifier_to_value;
+      uint16_t group_identifier_to_value;
       memset(&group_identifier_to_value, 0x00, sizeof(group_identifier_to_value));
       uint8_t scene_identifier_to_value;
       memset(&scene_identifier_to_value, 0x00, sizeof(scene_identifier_to_value));
@@ -5264,7 +5180,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId group_identifier_from_value;
+      uint16_t group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
       uint8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
@@ -5532,7 +5448,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      clusterId cluster_identifier_value;
+      uint16_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_alarms_reset_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5547,7 +5463,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      clusterId cluster_identifier_value;
+      uint16_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_alarms_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5571,7 +5487,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      clusterId cluster_identifier_value;
+      uint16_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
       uint32_t time_stamp_value;
       memset(&time_stamp_value, 0x00, sizeof(time_stamp_value));
@@ -5793,7 +5709,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_pin_code_callback) {
     // Dummy command parameters
-      DrlkPINUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -5827,7 +5743,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_pin_code_callback) {
     // Dummy command parameters
-      DrlkPINUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5861,7 +5777,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback) {
     // Dummy command parameters
-      DrlkPINUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5901,7 +5817,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_status_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -5927,7 +5843,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_status_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_user_status_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -5953,9 +5869,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback) {
     // Dummy command parameters
-      DrlkWeekDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       uint8_t days_mask_value;
       memset(&days_mask_value, 0x00, sizeof(days_mask_value));
@@ -5999,9 +5915,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback) {
     // Dummy command parameters
-      DrlkWeekDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6053,9 +5969,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback) {
     // Dummy command parameters
-      DrlkWeekDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6079,9 +5995,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback) {
     // Dummy command parameters
-      DrlkYearDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       uint32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
@@ -6113,9 +6029,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback) {
     // Dummy command parameters
-      DrlkYearDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6155,9 +6071,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback) {
     // Dummy command parameters
-      DrlkYearDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6181,7 +6097,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback) {
     // Dummy command parameters
-      DrlkHolidayScheduleID holiday_scheduleid_value;
+      uint8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
       uint32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
@@ -6215,7 +6131,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback) {
     // Dummy command parameters
-      DrlkHolidayScheduleID holiday_scheduleid_value;
+      uint8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6253,7 +6169,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback) {
     // Dummy command parameters
-      DrlkHolidayScheduleID holiday_scheduleid_value;
+      uint8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6275,7 +6191,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_type_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -6301,7 +6217,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_type_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_user_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6327,7 +6243,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_rfid_code_callback) {
     // Dummy command parameters
-      DrlkRFIDUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -6361,7 +6277,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback) {
     // Dummy command parameters
-      DrlkRFIDUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -6395,7 +6311,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback) {
     // Dummy command parameters
-      DrlkRFIDUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -7282,9 +7198,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
       uint16_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
-      CCMinMiredsField color_temperature_minimum_mireds_value;
+      uint16_t color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      CCMaxMiredsField color_temperature_maximum_mireds_value;
+      uint16_t color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7315,9 +7231,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&step_size_value, 0x00, sizeof(step_size_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      CCMinMiredsField color_temperature_minimum_mireds_value;
+      uint16_t color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      CCMaxMiredsField color_temperature_maximum_mireds_value;
+      uint16_t color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -7481,7 +7397,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback) {
     // Dummy command parameters
-      UTC start_time_value;
+      uint32_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
       GetMeasurementProfileResponseStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
@@ -7512,7 +7428,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint16_t attributeid_value;
       memset(&attributeid_value, 0x00, sizeof(attributeid_value));
-      UTC start_time_value;
+      uint32_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
       uint8_t number_of_intervals_value;
       memset(&number_of_intervals_value, 0x00, sizeof(number_of_intervals_value));
@@ -7638,6 +7554,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_state_discover_security_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_state_enable_nls_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_state_enable_nls_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }
@@ -7769,77 +7692,6 @@ void test_automatic_deduction_of_supported_commands()
         first_parameter_id_value,
       
         last_parameter_id_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_aox_locator_iq_report_callback) {
-    // Dummy command parameters
-      const char* tag_unid_value;
-      memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-      uint8_t channel_value;
-      memset(&channel_value, 0x00, sizeof(channel_value));
-      int8_t rssi_value;
-      memset(&rssi_value, 0x00, sizeof(rssi_value));
-      int32_t sequence_value;
-      memset(&sequence_value, 0x00, sizeof(sequence_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_aox_locator_iq_report_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        tag_unid_value,
-      
-        channel_value,
-      
-        rssi_value,
-      
-        0, NULL,
-
-        sequence_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_aox_locator_angle_report_callback) {
-    // Dummy command parameters
-      const char* tag_unid_value;
-      memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-      SphericalCoordinates direction_value;
-      memset(&direction_value, 0x00, sizeof(direction_value));
-      SphericalCoordinates deviation_value;
-      memset(&deviation_value, 0x00, sizeof(deviation_value));
-      int32_t sequence_value;
-      memset(&sequence_value, 0x00, sizeof(sequence_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_aox_locator_angle_report_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        tag_unid_value,
-      
-        direction_value,
-      
-        deviation_value,
-      
-        sequence_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_aox_locator_angle_correction_callback) {
-    // Dummy command parameters
-      const char* tag_unid_value;
-      memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-      SphericalCoordinates direction_value;
-      memset(&direction_value, 0x00, sizeof(direction_value));
-      SphericalCoordinates deviation_value;
-      memset(&deviation_value, 0x00, sizeof(deviation_value));
-      int32_t sequence_value;
-      memset(&sequence_value, 0x00, sizeof(sequence_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_FAIL, test_uic_mqtt_dotdot_aox_locator_angle_correction_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        tag_unid_value,
-      
-        direction_value,
-      
-        deviation_value,
-      
-        sequence_value
       
       ));
   }
@@ -8089,13 +7941,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_add_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
       uint8_t transition_time100ms_value;
       memset(&transition_time100ms_value, 0x00, sizeof(transition_time100ms_value));
@@ -8120,7 +7972,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8137,7 +7989,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_view_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8154,13 +8006,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8181,7 +8033,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8198,7 +8050,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8215,7 +8067,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_remove_all_scenes_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8228,7 +8080,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8241,7 +8093,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_store_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8258,7 +8110,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8275,7 +8127,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_recall_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8294,7 +8146,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_get_scene_membership_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_get_scene_membership_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8309,7 +8161,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t capacity_value;
       memset(&capacity_value, 0x00, sizeof(capacity_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_get_scene_membership_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8326,13 +8178,13 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_enhanced_add_scene_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8353,7 +8205,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8370,7 +8222,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_scenes_enhanced_view_scene_callback) {
     // Dummy command parameters
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
@@ -8387,13 +8239,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId groupid_value;
+      uint16_t groupid_value;
       memset(&groupid_value, 0x00, sizeof(groupid_value));
       uint8_t sceneid_value;
       memset(&sceneid_value, 0x00, sizeof(sceneid_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      SSceneName scene_name_value;
+      const char* scene_name_value;
       memset(&scene_name_value, 0x00, sizeof(scene_name_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8416,11 +8268,11 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t mode_value;
       memset(&mode_value, 0x00, sizeof(mode_value));
-      SGroupId group_identifier_from_value;
+      uint16_t group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
       uint8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
-      SGroupId group_identifier_to_value;
+      uint16_t group_identifier_to_value;
       memset(&group_identifier_to_value, 0x00, sizeof(group_identifier_to_value));
       uint8_t scene_identifier_to_value;
       memset(&scene_identifier_to_value, 0x00, sizeof(scene_identifier_to_value));
@@ -8443,7 +8295,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       zclStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
-      SGroupId group_identifier_from_value;
+      uint16_t group_identifier_from_value;
       memset(&group_identifier_from_value, 0x00, sizeof(group_identifier_from_value));
       uint8_t scene_identifier_from_value;
       memset(&scene_identifier_from_value, 0x00, sizeof(scene_identifier_from_value));
@@ -8711,7 +8563,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      clusterId cluster_identifier_value;
+      uint16_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_alarms_reset_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8726,7 +8578,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      clusterId cluster_identifier_value;
+      uint16_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_alarms_alarm_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -8750,7 +8602,7 @@ void test_automatic_deduction_of_supported_commands()
       memset(&status_value, 0x00, sizeof(status_value));
       uint8_t alarm_code_value;
       memset(&alarm_code_value, 0x00, sizeof(alarm_code_value));
-      clusterId cluster_identifier_value;
+      uint16_t cluster_identifier_value;
       memset(&cluster_identifier_value, 0x00, sizeof(cluster_identifier_value));
       uint32_t time_stamp_value;
       memset(&time_stamp_value, 0x00, sizeof(time_stamp_value));
@@ -8972,7 +8824,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_pin_code_callback) {
     // Dummy command parameters
-      DrlkPINUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -9006,7 +8858,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_pin_code_callback) {
     // Dummy command parameters
-      DrlkPINUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9040,7 +8892,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback) {
     // Dummy command parameters
-      DrlkPINUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_pin_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9080,7 +8932,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_status_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -9106,7 +8958,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_status_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_user_status_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9132,9 +8984,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback) {
     // Dummy command parameters
-      DrlkWeekDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       uint8_t days_mask_value;
       memset(&days_mask_value, 0x00, sizeof(days_mask_value));
@@ -9178,9 +9030,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback) {
     // Dummy command parameters
-      DrlkWeekDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9232,9 +9084,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback) {
     // Dummy command parameters
-      DrlkWeekDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9258,9 +9110,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback) {
     // Dummy command parameters
-      DrlkYearDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       uint32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
@@ -9292,9 +9144,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback) {
     // Dummy command parameters
-      DrlkYearDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9334,9 +9186,9 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback) {
     // Dummy command parameters
-      DrlkYearDayScheduleID scheduleid_value;
+      uint8_t scheduleid_value;
       memset(&scheduleid_value, 0x00, sizeof(scheduleid_value));
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9360,7 +9212,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback) {
     // Dummy command parameters
-      DrlkHolidayScheduleID holiday_scheduleid_value;
+      uint8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
       uint32_t local_start_time_value;
       memset(&local_start_time_value, 0x00, sizeof(local_start_time_value));
@@ -9394,7 +9246,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback) {
     // Dummy command parameters
-      DrlkHolidayScheduleID holiday_scheduleid_value;
+      uint8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9432,7 +9284,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback) {
     // Dummy command parameters
-      DrlkHolidayScheduleID holiday_scheduleid_value;
+      uint8_t holiday_scheduleid_value;
       memset(&holiday_scheduleid_value, 0x00, sizeof(holiday_scheduleid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9454,7 +9306,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_user_type_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkUserType user_type_value;
       memset(&user_type_value, 0x00, sizeof(user_type_value));
@@ -9480,7 +9332,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_user_type_callback) {
     // Dummy command parameters
-      DrlkTotalUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_user_type_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9506,7 +9358,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_set_rfid_code_callback) {
     // Dummy command parameters
-      DrlkRFIDUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
       DrlkSettableUserStatus user_status_value;
       memset(&user_status_value, 0x00, sizeof(user_status_value));
@@ -9540,7 +9392,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback) {
     // Dummy command parameters
-      DrlkRFIDUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_get_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -9574,7 +9426,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback) {
     // Dummy command parameters
-      DrlkRFIDUserID userid_value;
+      uint16_t userid_value;
       memset(&userid_value, 0x00, sizeof(userid_value));
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_door_lock_clear_rfid_code_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
@@ -10461,9 +10313,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&move_mode_value, 0x00, sizeof(move_mode_value));
       uint16_t rate_value;
       memset(&rate_value, 0x00, sizeof(rate_value));
-      CCMinMiredsField color_temperature_minimum_mireds_value;
+      uint16_t color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      CCMaxMiredsField color_temperature_maximum_mireds_value;
+      uint16_t color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10494,9 +10346,9 @@ void test_automatic_deduction_of_supported_commands()
       memset(&step_size_value, 0x00, sizeof(step_size_value));
       uint16_t transition_time_value;
       memset(&transition_time_value, 0x00, sizeof(transition_time_value));
-      CCMinMiredsField color_temperature_minimum_mireds_value;
+      uint16_t color_temperature_minimum_mireds_value;
       memset(&color_temperature_minimum_mireds_value, 0x00, sizeof(color_temperature_minimum_mireds_value));
-      CCMaxMiredsField color_temperature_maximum_mireds_value;
+      uint16_t color_temperature_maximum_mireds_value;
       memset(&color_temperature_maximum_mireds_value, 0x00, sizeof(color_temperature_maximum_mireds_value));
       uint8_t options_mask_value;
       memset(&options_mask_value, 0x00, sizeof(options_mask_value));
@@ -10660,7 +10512,7 @@ void test_automatic_deduction_of_supported_commands()
   }
   if (NULL != test_uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback) {
     // Dummy command parameters
-      UTC start_time_value;
+      uint32_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
       GetMeasurementProfileResponseStatus status_value;
       memset(&status_value, 0x00, sizeof(status_value));
@@ -10691,7 +10543,7 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
       uint16_t attributeid_value;
       memset(&attributeid_value, 0x00, sizeof(attributeid_value));
-      UTC start_time_value;
+      uint32_t start_time_value;
       memset(&start_time_value, 0x00, sizeof(start_time_value));
       uint8_t number_of_intervals_value;
       memset(&number_of_intervals_value, 0x00, sizeof(number_of_intervals_value));
@@ -10817,6 +10669,13 @@ void test_automatic_deduction_of_supported_commands()
     // Dummy command parameters
   // Invoke with support check
     TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_state_discover_security_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
+      
+      ));
+  }
+  if (NULL != test_uic_mqtt_dotdot_state_enable_nls_callback) {
+    // Dummy command parameters
+  // Invoke with support check
+    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_state_enable_nls_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
       
       ));
   }
@@ -10948,77 +10807,6 @@ void test_automatic_deduction_of_supported_commands()
         first_parameter_id_value,
       
         last_parameter_id_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_aox_locator_iq_report_callback) {
-    // Dummy command parameters
-      const char* tag_unid_value;
-      memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-      uint8_t channel_value;
-      memset(&channel_value, 0x00, sizeof(channel_value));
-      int8_t rssi_value;
-      memset(&rssi_value, 0x00, sizeof(rssi_value));
-      int32_t sequence_value;
-      memset(&sequence_value, 0x00, sizeof(sequence_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_aox_locator_iq_report_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        tag_unid_value,
-      
-        channel_value,
-      
-        rssi_value,
-      
-        0, NULL,
-
-        sequence_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_aox_locator_angle_report_callback) {
-    // Dummy command parameters
-      const char* tag_unid_value;
-      memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-      SphericalCoordinates direction_value;
-      memset(&direction_value, 0x00, sizeof(direction_value));
-      SphericalCoordinates deviation_value;
-      memset(&deviation_value, 0x00, sizeof(deviation_value));
-      int32_t sequence_value;
-      memset(&sequence_value, 0x00, sizeof(sequence_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_aox_locator_angle_report_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        tag_unid_value,
-      
-        direction_value,
-      
-        deviation_value,
-      
-        sequence_value
-      
-      ));
-  }
-  if (NULL != test_uic_mqtt_dotdot_aox_locator_angle_correction_callback) {
-    // Dummy command parameters
-      const char* tag_unid_value;
-      memset(&tag_unid_value, 0x00, sizeof(tag_unid_value));
-      SphericalCoordinates direction_value;
-      memset(&direction_value, 0x00, sizeof(direction_value));
-      SphericalCoordinates deviation_value;
-      memset(&deviation_value, 0x00, sizeof(deviation_value));
-      int32_t sequence_value;
-      memset(&sequence_value, 0x00, sizeof(sequence_value));
-  // Invoke with support check
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, test_uic_mqtt_dotdot_aox_locator_angle_correction_callback(expected_unid,expected_endpoint_id,UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK
-      ,
-        tag_unid_value,
-      
-        direction_value,
-      
-        deviation_value,
-      
-        sequence_value
       
       ));
   }

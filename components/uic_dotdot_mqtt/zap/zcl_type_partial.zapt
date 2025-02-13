@@ -1,0 +1,9 @@
+{{~#if (is_number_greater_than size 4)~}}
+map32
+{{~else~}}
+{{~#if (is_num_equal size 3)~}}
+map32
+{{~else~}}
+map{{as_zcl_data_type_size type 0 sizeIn='bits'}}
+{{~/if~}}
+{{~/if~}}

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['valid_5funtil_5ftime_0',['valid_until_time',['../structuic__mqtt__dotdot__time__updated__state__t.html#af5e54261a1373ce82086f032284bfaa2',1,'uic_mqtt_dotdot_time_updated_state_t::valid_until_time()'],['../structuic__mqtt__dotdot__time__state__t.html#abaee9bf1210af5d5f4b6545d9413fe85',1,'uic_mqtt_dotdot_time_state_t::valid_until_time()']]],
+  ['valid_5funtil_5ftime_0',['valid_until_time',['../structuic__mqtt__dotdot__time__updated__state__t.html#af5e54261a1373ce82086f032284bfaa2',1,'uic_mqtt_dotdot_time_updated_state_t::valid_until_time()'],['../structuic__mqtt__dotdot__time__state__t.html#ac23e56dc600e2df3541de826dc343218',1,'uic_mqtt_dotdot_time_state_t::valid_until_time()']]],
   ['validated_5fcolor_5fvalue_1',['validated_color_value',['../unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a9b3687d1e55033971f690984034a3f60',1,'unify_dotdot_attribute_store_command_callbacks_color_control.c']]],
   ['validated_5flevel_5fvalue_2',['validated_level_value',['../unify__dotdot__attribute__store__command__callbacks__level_8c.html#a7a03ba34b42525cc20997d14d0898b14',1,'unify_dotdot_attribute_store_command_callbacks_level.c']]],
   ['validator_5fvalidate_5fstring_5fcontains_5fletter_5for_5fdigit_3',['validator_validate_string_contains_letter_or_digit',['../group__uic__validator.html#ga2ee3220a19036683e94c6cfaae511e94',1,'unify_validator.h']]],

@@ -17,7 +17,7 @@
  * @ingroup attribute_store
  *
  * This file defines a C++ wrapper around the attribute store. Using the wrapper
- * will in general make the attribute store access more read able.
+ * will in general make the attribute store access more readable.
  *
  * @{
  */
@@ -29,12 +29,15 @@
 
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
+#include "attribute_store_type_registration.h"
+
 #include <vector>
 #include <stdexcept>
 #include <string>
 #include <iterator>
 #include <functional>
 #include <cstring>
+#include <sstream>  // for ostringstream
 namespace attribute_store
 {
 /**
@@ -92,7 +95,7 @@ class attribute
   }
 
   /**
-   * Get the first parrent of a give type. If this node match the type
+   * Get the first parent of a give type. If this node match the type
    * this node is returned.
    * @ref attribute_store_get_first_parent_with_type
    */
@@ -133,11 +136,12 @@ class attribute
     uint8_t buffer[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH];
     uint8_t size = 0;
     if (get(value_type, (uint8_t *)buffer, &size)) {
-      if constexpr(std::is_same<T,std::string>::value) {
-        return std::string(reinterpret_cast<char*>(buffer));
-      }else if constexpr (is_iterable<T>::value) { // For iterable containers we copy the data
+      if constexpr (std::is_same<T, std::string>::value) {
+        return std::string(reinterpret_cast<char *>(buffer));
+      } else if constexpr (
+        is_iterable<T>::value) {  // For iterable containers we copy the data
         typedef typename T::value_type v_t;
-        //Make sure that value type of the conrainter int,float,bool ... etc
+        //Make sure that value type of the container int,float,bool ... etc
         static_assert(std::is_trivially_copyable<v_t>::value);
         T v;
         v_t *start = reinterpret_cast<v_t *>(buffer);
@@ -158,14 +162,12 @@ class attribute
         return *(reinterpret_cast<T *>(buffer));
       } else {
         throw std::invalid_argument(
-          "Unexpected attribute size for node " + std::to_string(_n)
-          + ".Expected: " + std::to_string(sizeof(T))
-          + ", actual: " + std::to_string(size)
+          "Unexpected attribute size for node " + name_and_id() + ".Expected: "
+          + std::to_string(sizeof(T)) + ", actual: " + std::to_string(size)
           + " value state: " + std::to_string(value_type) + ".");
       }
     } else {
-      throw std::invalid_argument("Unable to read attribute "
-                                  + std::to_string(_n));
+      throw std::invalid_argument("Unable to read attribute " + name_and_id());
     }
   }
 
@@ -178,8 +180,7 @@ class attribute
                                                     value_type,
                                                     value,
                                                     size)) {
-      throw std::invalid_argument("Unable to write attribute "
-                                  + std::to_string(_n));
+      throw std::invalid_argument("Unable to write attribute " + name_and_id());
     } else {
       return *this;
     }
@@ -193,22 +194,24 @@ class attribute
    * value. If the attribute node is invalid an exception will be thrown.
    *
    * @tparam T Data type to write
-   * @param value_type  Desired of reported value
+   * @param value_type  Desired or reported value
    * @param value Value to write
    */
 
-  template<typename T>
-  inline attribute &set(attribute_store_node_value_state_t value_type, const T& value)
+  template<typename T> inline attribute &
+    set(attribute_store_node_value_state_t value_type, const T &value)
   {
-    if constexpr(std::is_same<T,char const*>::value) {
-      // We are storing strings as C Strings with the null termination caracter in the attribute store.
-      return set(value_type, reinterpret_cast<const uint8_t *>(value), std::strlen(value)+1);
-    } else if constexpr(std::is_same<T,std::string>::value) {
-      // We are storing strings as C Strings with the null termination caracter in the attribute store.
-      return set(value_type, value.c_str());
+    if constexpr (std::is_same<T, char const *>::value) {
+      // We are storing strings as C Strings with the null termination character in the attribute store.
+      return set(value_type, std::string(value));
+    } else if constexpr (std::is_same<T, std::string>::value) {
+      // We are storing strings as C Strings with the null termination character in the attribute store.
+      return set(value_type,
+                 reinterpret_cast<const uint8_t *>(value.c_str()),
+                 value.size() + 1);
     } else if constexpr (is_iterable<T>::value) {
       typedef typename T::value_type v_t;
-      //Make sure that value type of the conrainter int,float,bool ... etc
+      //Make sure that value type of the container int,float,bool ... etc
       static_assert(std::is_trivially_copyable<v_t>::value);
 
       //The purpose of this is to convert the iterable container into a linear buffer
@@ -217,13 +220,13 @@ class attribute
       return set(value_type,
                  reinterpret_cast<const uint8_t *>(v.data()),
                  v.size() * sizeof(v_t));
-    }
-    else {
+    } else {
       static_assert(std::is_trivially_copyable<T>::value);
-      return set(value_type, reinterpret_cast<const uint8_t *>(&value), sizeof(T));
+      return set(value_type,
+                 reinterpret_cast<const uint8_t *>(&value),
+                 sizeof(T));
     }
   }
-
 
   inline void clear(attribute_store_node_value_state_t value_type)
   {
@@ -234,7 +237,7 @@ class attribute
   }
 
   /**
-   * @brief Helper to read the repported value
+   * @brief Helper to read the reported value
    */
   template<typename T> T reported() const
   {
@@ -248,21 +251,26 @@ class attribute
     return get<T>(DESIRED_ATTRIBUTE);
   }
 
+  bool exists(attribute_store_node_value_state_t state) const
+  {
+    return attribute_store_is_value_defined(_n, state);
+  }
+
   /**
    * @brief Returns true if this attribute has a desired value
    */
-  bool desired_exists()
+  bool desired_exists() const
   {
-    return attribute_store_is_value_defined(_n, DESIRED_ATTRIBUTE);
+    return exists(DESIRED_ATTRIBUTE);
   }
 
   /**
    * @brief Returns true if this attribute has a reported value
    */
 
-  bool reported_exists()
+  bool reported_exists() const
   {
-    return attribute_store_is_value_defined(_n, REPORTED_ATTRIBUTE);
+    return exists(REPORTED_ATTRIBUTE);
   }
 
   template<typename T> T desired_or_reported()
@@ -281,7 +289,7 @@ class attribute
   }
 
   /**
-   * @brief Helper to write the repported value
+   * @brief Helper to write the reported value
    */
   template<typename T> attribute &set_reported(T v)
   {
@@ -363,13 +371,13 @@ class attribute
   }
 
   /**
-   * @brief Get child by value
+   * @brief Get child by value (reported value)
    *
-   * Get a child by the reppored value of that child. If no matching child is
+   * Get a child by the reported value of that child. If no matching child is
    * found an invalid node is returned.
    *
    * @tparam T Type of value
-   * @param type Desired of repported
+   * @param type Attribute store type
    * @param value The value to search for
    * @return attribute
    */
@@ -378,6 +386,31 @@ class attribute
   {
     for (auto c: children(type)) {
       if (c.reported_exists() && c.reported<T>() == value) {
+        return c;
+      }
+    }
+    return ATTRIBUTE_STORE_INVALID_NODE;
+  }
+
+  /**
+   * @brief Get child by value and state
+   *
+   * Get a child by the given state of that child. If no matching child is
+   * found an invalid node is returned.
+   *
+   * @tparam T Type of value
+   * @param type Attribute store type
+   * @param value The value to search for
+   * @param value_type The value state
+   * @return attribute
+   */
+  template<typename T> attribute
+    child_by_type_and_value(attribute_store_type_t type,
+                            T value,
+                            attribute_store_node_value_state_t value_type) const
+  {
+    for (auto c: children(type)) {
+      if (c.exists(value_type) && c.get<T>(value_type) == value) {
         return c;
       }
     }
@@ -424,25 +457,28 @@ class attribute
   }
 
   /**
-   * @brief Get or add a child of a given attribtue type and value.
+   * @brief Get or add a child of a given attribute type and value.
    *
    * This function will check if this nodes as a child  of a given type and value.
    * If a child exists the child is returned, if it does not exist the child is
-   * created and the repported value is set.
+   * created and the reported value is set.
    */
   template<typename T>
-  attribute emplace_node(attribute_store_type_t type, T val)
+  attribute emplace_node(attribute_store_type_t type,
+                         T val,
+                         attribute_store_node_value_state_t value_state
+                         = REPORTED_ATTRIBUTE)
   {
-    attribute a = child_by_type_and_value(type, val);
+    attribute a = child_by_type_and_value(type, val, value_state);
     if (a.is_valid()) {
       return a;
     } else {
-      return add_node(type).set_reported(val);
+      return add_node(type).set(value_state, val);
     }
   }
 
   /**
-   * @brief Get or add a child of a given attribtue type.
+   * @brief Get or add a child of a given attribute type.
    *
    * This function will check if this nodes as a child  of a given type.
    * If a child exists the child is returned, if it does not exist the child is
@@ -495,6 +531,62 @@ class attribute
     return status;
   }
 
+  std::string name() const
+  {
+    return attribute_store_get_type_name(this->type());
+  }
+
+  std::string name_and_id() const
+  {
+    std::ostringstream out;
+    out << name() << " (Node " << _n << ")";
+    return out.str();
+  }
+
+
+  std::string value_to_string() const
+  {
+    
+    std::string str_value;
+    try {
+      switch (attribute_store_get_storage_type(this->type())) {
+        case UNKNOWN_STORAGE_TYPE:
+        case EMPTY_STORAGE_TYPE:
+        case FIXED_SIZE_STRUCT_STORAGE_TYPE:
+        case INVALID_STORAGE_TYPE:
+          return "Not displayable value for " + name_and_id();
+        case U8_STORAGE_TYPE:
+        case U16_STORAGE_TYPE:
+        case U32_STORAGE_TYPE:
+        case U64_STORAGE_TYPE:
+          str_value = _get_str_value<uint64_t>();
+          break;
+        case I8_STORAGE_TYPE:
+        case I16_STORAGE_TYPE:
+        case I32_STORAGE_TYPE:
+        case I64_STORAGE_TYPE:
+          str_value = _get_str_value<int64_t>();
+          break;
+        case FLOAT_STORAGE_TYPE:
+        case DOUBLE_STORAGE_TYPE:
+          str_value = _get_str_value<double>();
+          break;
+        case C_STRING_STORAGE_TYPE:
+          str_value = _get_str_value<std::string>();
+          break;
+        case BYTE_ARRAY_STORAGE_TYPE:
+          str_value = _get_str_value<std::vector<uint8_t>>();
+          break;
+        default:
+          return "Unkown value type for " + name_and_id();
+      }
+    } catch (...) {
+      return "Can't get values of " + name_and_id();
+    }
+
+    return name_and_id() + " values : " + str_value;
+  }
+
   //type conversion back to attribute_store_node_t
   operator attribute_store_node_t() const
   {
@@ -513,6 +605,40 @@ class attribute
 
   private:
   attribute_store_node_t _n = ATTRIBUTE_STORE_INVALID_NODE;
+
+  template<typename T>
+  std::string _get_str_value() const {
+    auto desired_value = _get_str_value_with_state<T>(DESIRED_ATTRIBUTE);
+    auto reported_value = _get_str_value_with_state<T>(REPORTED_ATTRIBUTE);
+
+    return reported_value + " (" +  desired_value + ")";
+  }
+
+  template<typename T>
+  std::string _get_str_value_with_state(attribute_store_node_value_state_t state) const {
+    if (!exists(state)) {
+      return "<>";
+    }
+    
+    std::string str_value = "";
+
+    if constexpr (std::is_same<T, std::vector<uint8_t>>::value) {
+      str_value = "[";
+      for (uint8_t byte: get<std::vector<uint8_t>>(state)) {
+        str_value += std::to_string(byte) + ",";
+      }
+      str_value.pop_back();
+      str_value += "]";
+    } else if constexpr (std::is_same<T, int64_t>::value
+                         || std::is_same<T, uint64_t>::value
+                         || std::is_same<T, double>::value) {
+      str_value = std::to_string(get<T>(state));
+    } else if constexpr (std::is_same<T, std::string>::value) {
+      str_value = get<std::string>(state);
+    }
+
+    return str_value;
+  }
 };
 
 }  // namespace attribute_store

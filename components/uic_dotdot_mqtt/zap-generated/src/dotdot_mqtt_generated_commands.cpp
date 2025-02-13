@@ -6346,6 +6346,17 @@ void uic_mqtt_dotdot_window_covering_publish_generated_write_attributes_command(
   }
 
 
+  if (attribute_list.mode == true) {
+
+  // This is a single value
+
+  nlohmann::json bitmap_values = WindowCoveringMode.get_bitmap_values_as_json_tree((uint32_t)attribute_values.mode);
+  json_object["Mode"] = bitmap_values;
+
+
+  }
+
+
   // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
   std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
 
@@ -10258,6 +10269,34 @@ void uic_mqtt_dotdot_state_publish_generated_discover_security_command(
                     payload.size(),
                     false);
 }
+/**
+ * @brief Publishes an incoming/generated EnableNls command for
+ * the State cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/GeneratedCommands/EnableNls
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_generated_enable_nls_command(
+  const dotdot_unid_t unid
+) {
+  // Create the topic
+  std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
+  topic += "State/GeneratedCommands/EnableNls";
+
+  std::string payload =
+    get_json_payload_for_state_enable_nls_command(
+    );
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
 
 
 /**
@@ -10862,422 +10901,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_write_attributes
   std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
                       std::to_string(endpoint) + "/";
   topic += "ConfigurationParameters/GeneratedCommands/WriteAttributes";
-
-  nlohmann::json json_object = nlohmann::json::object();
-
-
-  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-/**
- * @brief Publishes an incoming/generated IQReport command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/IQReport
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_iq_report_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/IQReport";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_iq_report_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated AngleReport command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/AngleReport
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_angle_report_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/AngleReport";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_report_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-/**
- * @brief Publishes an incoming/generated AngleCorrection command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/AngleCorrection
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_angle_correction_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-) {
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/AngleCorrection";
-
-  std::string payload =
-    get_json_payload_for_aox_locator_angle_correction_command(
-    fields);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                    payload.c_str(),
-                    payload.size(),
-                    false);
-}
-
-
-/**
- * @brief Publishes an incoming/generated WriteAttributes command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/WriteAttributes
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * @param attribute_values  Values to assign to the attributes
- * @param attribute_list    List of attributes that are written
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_write_attributes_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  uic_mqtt_dotdot_aox_locator_state_t attribute_values,
-  uic_mqtt_dotdot_aox_locator_updated_state_t attribute_list
-){
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXLocator/GeneratedCommands/WriteAttributes";
-
-  nlohmann::json json_object = nlohmann::json::object();
-
-
-  if (attribute_list.reporting_mode == true) {
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_REPORTING_MODE_ENUM_NAME_AVAILABLE
-  json_object["ReportingMode"] = aox_locator_reporting_mode_get_enum_value_name((uint32_t)attribute_values.reporting_mode);
-  #else
-  json_object["ReportingMode"] = static_cast<AoXLocatorReportingMode>(attribute_values.reporting_mode);
-  #endif
-
-
-  }
-
-
-  if (attribute_list.position_and_orientation_valid == true) {
-
-  // This is a single value
-
-  json_object["PositionAndOrientationValid"] = attribute_values.position_and_orientation_valid;
-
-
-  }
-
-
-  if (attribute_list.position_and_orientation == true) {
-
-  // This is a single value
-
-  nlohmann::json json_sub_object = nlohmann::json::object();
-   json_sub_object["CoordinateX"] = attribute_values.position_and_orientation.CoordinateX;
-   json_sub_object["CoordinateY"] = attribute_values.position_and_orientation.CoordinateY;
-   json_sub_object["CoordinateZ"] = attribute_values.position_and_orientation.CoordinateZ;
-   json_sub_object["OrientationX"] = attribute_values.position_and_orientation.OrientationX;
-   json_sub_object["OrientationY"] = attribute_values.position_and_orientation.OrientationY;
-   json_sub_object["OrientationZ"] = attribute_values.position_and_orientation.OrientationZ;
-  json_object["PositionAndOrientation"] = json_sub_object;
-
-
-  }
-
-
-  if (attribute_list.azimuth_mask == true) {
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  json_object["AzimuthMask"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<attribute_values.azimuth_mask_count;i++) {
-    // Struct type
-    nlohmann::json json_sub_object = nlohmann::json::object();
-    json_sub_object["Min"] = attribute_values.azimuth_mask[i].Min;
-    json_sub_object["Max"] = attribute_values.azimuth_mask[i].Max;
-    json_object["AzimuthMask"].push_back(json_sub_object);
-  }
-
-
-  }
-
-
-  if (attribute_list.elevation_mask == true) {
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  json_object["ElevationMask"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<attribute_values.elevation_mask_count;i++) {
-    // Struct type
-    nlohmann::json json_sub_object = nlohmann::json::object();
-    json_sub_object["Min"] = attribute_values.elevation_mask[i].Min;
-    json_sub_object["Max"] = attribute_values.elevation_mask[i].Max;
-    json_object["ElevationMask"].push_back(json_sub_object);
-  }
-
-
-  }
-
-
-  if (attribute_list.allow_list == true) {
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  json_object["AllowList"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<attribute_values.allow_list_count;i++) {
-    // String type
-    json_object["AllowList"].push_back(std::string(attribute_values.allow_list[i]));
-  }
-
-
-  }
-
-
-  if (attribute_list.aox_mode == true) {
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_AOX_MODE_ENUM_NAME_AVAILABLE
-  json_object["AoXMode"] = aox_locator_aox_mode_get_enum_value_name((uint32_t)attribute_values.aox_mode);
-  #else
-  json_object["AoXMode"] = static_cast<AoXLocatorAoXMode>(attribute_values.aox_mode);
-  #endif
-
-
-  }
-
-
-  if (attribute_list.antenna_mode == true) {
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_ANTENNA_MODE_ENUM_NAME_AVAILABLE
-  json_object["AntennaMode"] = aox_locator_antenna_mode_get_enum_value_name((uint32_t)attribute_values.antenna_mode);
-  #else
-  json_object["AntennaMode"] = static_cast<AoXLocatorAntennaMode>(attribute_values.antenna_mode);
-  #endif
-
-
-  }
-
-
-  if (attribute_list.antenna_array == true) {
-
-  // This is a variable size array of the same known type.
-  // Create an array under the value {"value":[]}
-  json_object["AntennaArray"] = nlohmann::json::array();
-
-  for (size_t i = 0; i<attribute_values.antenna_array_count;i++) {
-    json_object["AntennaArray"].push_back(attribute_values.antenna_array[i]);
-  }
-
-
-  }
-
-
-  if (attribute_list.period_samples == true) {
-
-  // This is a single value
-
-  json_object["PeriodSamples"] = attribute_values.period_samples;
-
-
-  }
-
-
-  if (attribute_list.angle_filtering == true) {
-
-  // This is a single value
-
-  json_object["AngleFiltering"] = attribute_values.angle_filtering;
-
-
-  }
-
-
-  if (attribute_list.angle_filtering_weight == true) {
-
-  // This is a single value
-
-  json_object["AngleFilteringWeight"] = attribute_values.angle_filtering_weight;
-
-
-  }
-
-
-  if (attribute_list.angle_correction_timeout == true) {
-
-  // This is a single value
-
-  json_object["AngleCorrectionTimeout"] = attribute_values.angle_correction_timeout;
-
-
-  }
-
-
-  if (attribute_list.angle_correction_delay == true) {
-
-  // This is a single value
-
-  json_object["AngleCorrectionDelay"] = attribute_values.angle_correction_delay;
-
-
-  }
-
-
-  if (attribute_list.cte_mode == true) {
-
-  // This is a single value
-
-  #ifdef AOX_LOCATOR_CTE_MODE_ENUM_NAME_AVAILABLE
-  json_object["CTEMode"] = aox_locator_cte_mode_get_enum_value_name((uint32_t)attribute_values.cte_mode);
-  #else
-  json_object["CTEMode"] = static_cast<AoXLocatorCTEMode>(attribute_values.cte_mode);
-  #endif
-
-
-  }
-
-
-  if (attribute_list.cte_sampling_interval == true) {
-
-  // This is a single value
-
-  json_object["CTESamplingInterval"] = attribute_values.cte_sampling_interval;
-
-
-  }
-
-
-  if (attribute_list.cte_length == true) {
-
-  // This is a single value
-
-  json_object["CTELength"] = attribute_values.cte_length;
-
-
-  }
-
-
-  if (attribute_list.slot_duration == true) {
-
-  // This is a single value
-
-  json_object["SlotDuration"] = attribute_values.slot_duration;
-
-
-  }
-
-
-  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
-  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
-
-  // Publish our command
-  uic_mqtt_publish(topic.c_str(),
-                   payload.c_str(),
-                   payload.size(),
-                   false);
-}
-
-
-
-/**
- * @brief Publishes an incoming/generated WriteAttributes command for
- * the AoXPositionEstimation cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXPositionEstimation/GeneratedCommands/WriteAttributes
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * @param attribute_values  Values to assign to the attributes
- * @param attribute_list    List of attributes that are written
- */
-void uic_mqtt_dotdot_aox_position_estimation_publish_generated_write_attributes_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  uic_mqtt_dotdot_aox_position_estimation_state_t attribute_values,
-  uic_mqtt_dotdot_aox_position_estimation_updated_state_t attribute_list
-){
-  // Create the topic
-  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
-                      std::to_string(endpoint) + "/";
-  topic += "AoXPositionEstimation/GeneratedCommands/WriteAttributes";
 
   nlohmann::json json_object = nlohmann::json::object();
 

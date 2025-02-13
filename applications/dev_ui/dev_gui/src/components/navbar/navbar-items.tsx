@@ -98,14 +98,6 @@ export const NavbarItems: NavbarItem[] = [
     subMenu: SideMenu.NodesConfiguration
   },
   {
-    name: 'Locators',
-    title: 'Locators',
-    path: '/locators',
-    icon: <IoIcons.IoIosLocate />,
-    cName: 'nav-text',
-    subMenu: SideMenu.NodesConfiguration
-  },
-  {
     name: 'OTA',
     title: 'OTA',
     path: '/ota',

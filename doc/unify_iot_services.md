@@ -19,4 +19,5 @@ not suitable for production.
 
 - [Matter Bridge (UMB)](https://siliconlabs.github.io/matter/latest/unify/matter-bridge/index.html)
 
-The Unify Matter Bridge is a Unify IoT Service that enables interaction with Unify devices from a Matter fabric.
+The Unify Matter Bridge is a reference Unify IoT Service that enables interaction
+with Unify devices from a Matter fabric.

@@ -504,7 +504,7 @@ std::string get_json_payload_for_scenes_add_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_add_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid,
 
@@ -544,7 +544,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -574,7 +574,7 @@ std::string get_json_payload_for_scenes_view_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_view_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -606,7 +606,7 @@ void uic_mqtt_dotdot_parse_scenes_view_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid,
 
@@ -642,7 +642,7 @@ std::string get_json_payload_for_scenes_remove_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_remove_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -674,7 +674,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -704,7 +704,7 @@ std::string get_json_payload_for_scenes_remove_all_scenes_command(
  */
 void uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
   nlohmann::json &jsn,
-  SGroupId &groupid
+  uint16_t &groupid
 
 );
 
@@ -734,7 +734,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid
+  uint16_t &groupid
 
 );
 
@@ -762,7 +762,7 @@ std::string get_json_payload_for_scenes_store_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_store_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -794,7 +794,7 @@ void uic_mqtt_dotdot_parse_scenes_store_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -824,7 +824,7 @@ std::string get_json_payload_for_scenes_recall_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_recall_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid,
 
@@ -856,7 +856,7 @@ std::string get_json_payload_for_scenes_get_scene_membership_command(
  */
 void uic_mqtt_dotdot_parse_scenes_get_scene_membership(
   nlohmann::json &jsn,
-  SGroupId &groupid
+  uint16_t &groupid
 
 );
 
@@ -888,7 +888,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
 
   uint8_t &capacity,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   std::vector<uint8_t> &scene_list
 
@@ -918,7 +918,7 @@ std::string get_json_payload_for_scenes_enhanced_add_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid,
 
@@ -956,7 +956,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -986,7 +986,7 @@ std::string get_json_payload_for_scenes_enhanced_view_scene_command(
  */
 void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
   nlohmann::json &jsn,
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid
 
@@ -1018,7 +1018,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &groupid,
+  uint16_t &groupid,
 
   uint8_t &sceneid,
 
@@ -1056,11 +1056,11 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
   nlohmann::json &jsn,
   uint8_t &mode,
 
-  SGroupId &group_identifier_from,
+  uint16_t &group_identifier_from,
 
   uint8_t &scene_identifier_from,
 
-  SGroupId &group_identifier_to,
+  uint16_t &group_identifier_to,
 
   uint8_t &scene_identifier_to
 
@@ -1092,7 +1092,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene_response(
   nlohmann::json &jsn,
   zclStatus &status,
 
-  SGroupId &group_identifier_from,
+  uint16_t &group_identifier_from,
 
   uint8_t &scene_identifier_from
 
@@ -1570,7 +1570,7 @@ void uic_mqtt_dotdot_parse_alarms_reset_alarm(
   nlohmann::json &jsn,
   uint8_t &alarm_code,
 
-  clusterId &cluster_identifier
+  uint16_t &cluster_identifier
 
 );
 
@@ -1600,7 +1600,7 @@ void uic_mqtt_dotdot_parse_alarms_alarm(
   nlohmann::json &jsn,
   uint8_t &alarm_code,
 
-  clusterId &cluster_identifier
+  uint16_t &cluster_identifier
 
 );
 
@@ -1645,7 +1645,7 @@ void uic_mqtt_dotdot_parse_alarms_get_alarm_response(
 
   uint8_t &alarm_code,
 
-  clusterId &cluster_identifier,
+  uint16_t &cluster_identifier,
 
   uint32_t &time_stamp
 
@@ -2155,7 +2155,7 @@ std::string get_json_payload_for_door_lock_set_pin_code_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_pin_code(
   nlohmann::json &jsn,
-  DrlkPINUserID &userid,
+  uint16_t &userid,
 
   DrlkSettableUserStatus &user_status,
 
@@ -2217,7 +2217,7 @@ std::string get_json_payload_for_door_lock_get_pin_code_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_pin_code(
   nlohmann::json &jsn,
-  DrlkPINUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2279,7 +2279,7 @@ std::string get_json_payload_for_door_lock_clear_pin_code_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_clear_pin_code(
   nlohmann::json &jsn,
-  DrlkPINUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2376,7 +2376,7 @@ std::string get_json_payload_for_door_lock_set_user_status_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_user_status(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
 
   DrlkSettableUserStatus &user_status
 
@@ -2434,7 +2434,7 @@ std::string get_json_payload_for_door_lock_get_user_status_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_user_status(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2492,9 +2492,9 @@ std::string get_json_payload_for_door_lock_set_weekday_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
   nlohmann::json &jsn,
-  DrlkWeekDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
 
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
 
   uint8_t &days_mask,
 
@@ -2560,9 +2560,9 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
   nlohmann::json &jsn,
-  DrlkWeekDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
 
-  DrlkTotalUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2632,9 +2632,9 @@ std::string get_json_payload_for_door_lock_clear_weekday_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
   nlohmann::json &jsn,
-  DrlkWeekDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
 
-  DrlkTotalUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2690,9 +2690,9 @@ std::string get_json_payload_for_door_lock_set_year_day_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
   nlohmann::json &jsn,
-  DrlkYearDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
 
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
 
   uint32_t &local_start_time,
 
@@ -2752,9 +2752,9 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
   nlohmann::json &jsn,
-  DrlkYearDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
 
-  DrlkTotalUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2818,9 +2818,9 @@ std::string get_json_payload_for_door_lock_clear_year_day_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
   nlohmann::json &jsn,
-  DrlkYearDayScheduleID &scheduleid,
+  uint8_t &scheduleid,
 
-  DrlkTotalUserID &userid
+  uint16_t &userid
 
 );
 
@@ -2876,7 +2876,7 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
   nlohmann::json &jsn,
-  DrlkHolidayScheduleID &holiday_scheduleid,
+  uint8_t &holiday_scheduleid,
 
   uint32_t &local_start_time,
 
@@ -2938,7 +2938,7 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
   nlohmann::json &jsn,
-  DrlkHolidayScheduleID &holiday_scheduleid
+  uint8_t &holiday_scheduleid
 
 );
 
@@ -3002,7 +3002,7 @@ std::string get_json_payload_for_door_lock_clear_holiday_schedule_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
   nlohmann::json &jsn,
-  DrlkHolidayScheduleID &holiday_scheduleid
+  uint8_t &holiday_scheduleid
 
 );
 
@@ -3058,7 +3058,7 @@ std::string get_json_payload_for_door_lock_set_user_type_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_user_type(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid,
+  uint16_t &userid,
 
   DrlkUserType &user_type
 
@@ -3116,7 +3116,7 @@ std::string get_json_payload_for_door_lock_get_user_type_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_user_type(
   nlohmann::json &jsn,
-  DrlkTotalUserID &userid
+  uint16_t &userid
 
 );
 
@@ -3174,7 +3174,7 @@ std::string get_json_payload_for_door_lock_set_rfid_code_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_set_rfid_code(
   nlohmann::json &jsn,
-  DrlkRFIDUserID &userid,
+  uint16_t &userid,
 
   DrlkSettableUserStatus &user_status,
 
@@ -3236,7 +3236,7 @@ std::string get_json_payload_for_door_lock_get_rfid_code_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_get_rfid_code(
   nlohmann::json &jsn,
-  DrlkRFIDUserID &userid
+  uint16_t &userid
 
 );
 
@@ -3298,7 +3298,7 @@ std::string get_json_payload_for_door_lock_clear_rfid_code_command(
  */
 void uic_mqtt_dotdot_parse_door_lock_clear_rfid_code(
   nlohmann::json &jsn,
-  DrlkRFIDUserID &userid
+  uint16_t &userid
 
 );
 
@@ -4814,9 +4814,9 @@ void uic_mqtt_dotdot_parse_color_control_move_color_temperature(
 
   uint16_t &rate,
 
-  CCMinMiredsField &color_temperature_minimum_mireds,
+  uint16_t &color_temperature_minimum_mireds,
 
-  CCMaxMiredsField &color_temperature_maximum_mireds,
+  uint16_t &color_temperature_maximum_mireds,
 
   uint8_t &options_mask,
 
@@ -4854,9 +4854,9 @@ void uic_mqtt_dotdot_parse_color_control_step_color_temperature(
 
   uint16_t &transition_time,
 
-  CCMinMiredsField &color_temperature_minimum_mireds,
+  uint16_t &color_temperature_minimum_mireds,
 
-  CCMaxMiredsField &color_temperature_maximum_mireds,
+  uint16_t &color_temperature_maximum_mireds,
 
   uint8_t &options_mask,
 
@@ -5362,7 +5362,7 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
  */
 void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_response(
   nlohmann::json &jsn,
-  UTC &start_time,
+  uint32_t &start_time,
 
   GetMeasurementProfileResponseStatus &status,
 
@@ -5402,7 +5402,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
   nlohmann::json &jsn,
   uint16_t &attributeid,
 
-  UTC &start_time,
+  uint32_t &start_time,
 
   uint8_t &number_of_intervals
 
@@ -5569,6 +5569,19 @@ std::string get_json_payload_for_state_interview_command(
  * @returns std::string that contains JSON payload
  */
 std::string get_json_payload_for_state_discover_security_command(
+  
+);
+
+
+
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a State EnableNls command
+ * 
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_state_enable_nls_command(
   
 );
 
@@ -5899,138 +5912,6 @@ void uic_mqtt_dotdot_parse_configuration_parameters_write_attributes(
   nlohmann::json &jsn,
   uic_mqtt_dotdot_configuration_parameters_state_t &new_state,
   uic_mqtt_dotdot_configuration_parameters_updated_state_t &new_updated_state
-);
-
-
-/**
- * @brief Private helper function that will create a JSON string based on the
- * fields of a AoXLocator IQReport command
- * 
- * @param fields       Struct pointer with the list of fields for the command
- * 
- * @returns std::string that contains JSON payload
- */
-std::string get_json_payload_for_aox_locator_iq_report_command(
-  
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-);
-
-
-/**
- * @brief JSON parser for AoXLocator IQReport command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_locator_iq_report(
-  nlohmann::json &jsn,
-  std::string &tag_unid,
-
-  uint8_t &channel,
-
-  int8_t &rssi,
-
-  std::vector<int8_t> &samples,
-
-  int32_t &sequence
-
-);
-
-
-
-/**
- * @brief Private helper function that will create a JSON string based on the
- * fields of a AoXLocator AngleReport command
- * 
- * @param fields       Struct pointer with the list of fields for the command
- * 
- * @returns std::string that contains JSON payload
- */
-std::string get_json_payload_for_aox_locator_angle_report_command(
-  
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-);
-
-
-/**
- * @brief JSON parser for AoXLocator AngleReport command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_locator_angle_report(
-  nlohmann::json &jsn,
-  std::string &tag_unid,
-
-  SphericalCoordinates &direction,
-
-  SphericalCoordinates &deviation,
-
-  int32_t &sequence
-
-);
-
-
-
-/**
- * @brief Private helper function that will create a JSON string based on the
- * fields of a AoXLocator AngleCorrection command
- * 
- * @param fields       Struct pointer with the list of fields for the command
- * 
- * @returns std::string that contains JSON payload
- */
-std::string get_json_payload_for_aox_locator_angle_correction_command(
-  
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-);
-
-
-/**
- * @brief JSON parser for AoXLocator AngleCorrection command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_locator_angle_correction(
-  nlohmann::json &jsn,
-  std::string &tag_unid,
-
-  SphericalCoordinates &direction,
-
-  SphericalCoordinates &deviation,
-
-  int32_t &sequence
-
-);
-
-
-
-/**
- * @brief JSON parser for AoXLocator WriteAttributes command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_locator_write_attributes(
-  nlohmann::json &jsn,
-  uic_mqtt_dotdot_aox_locator_state_t &new_state,
-  uic_mqtt_dotdot_aox_locator_updated_state_t &new_updated_state,
-  std::vector<MinMaxPair> &azimuth_mask,
-  std::vector<MinMaxPair> &elevation_mask,
-  std::vector<const char*> &allow_list,
-  std::vector<int8_t> &antenna_array
-);
-
-
-/**
- * @brief JSON parser for AoXPositionEstimation WriteAttributes command arguments.
- *
- * Parse incoming JSON object to populate command arguments passed in by reference.
- */
-void uic_mqtt_dotdot_parse_aox_position_estimation_write_attributes(
-  nlohmann::json &jsn,
-  uic_mqtt_dotdot_aox_position_estimation_state_t &new_state,
-  uic_mqtt_dotdot_aox_position_estimation_updated_state_t &new_updated_state
 );
 
 

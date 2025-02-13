@@ -1,6 +1,11 @@
 var namespaces_dup =
 [
     [ "ast", "namespaceast.html", "namespaceast" ],
+    [ "attribute_store", "namespaceattribute__store.html", [
+      [ "node_changed_callback", "namespaceattribute__store.html#a730e5a87a43a8a009aa4adcb7b734e20", null ],
+      [ "register_callback_by_type", "namespaceattribute__store.html#a9e00f9ab790a250d53ae8b3edb32893e", null ],
+      [ "register_callback_by_type_and_state", "namespaceattribute__store.html#a82e276bc6adfca2f8fd96f2a5788d08c", null ]
+    ] ],
     [ "image_file_handler", "namespaceimage__file__handler.html", [
       [ "check_if_meta_info_received", "namespaceimage__file__handler.html#aa8dae3716c103fbd75d8aa5874c87df1", null ],
       [ "clear_images_cache", "namespaceimage__file__handler.html#a311c1d29a0750b1d1581db2d1d7476e4", null ],

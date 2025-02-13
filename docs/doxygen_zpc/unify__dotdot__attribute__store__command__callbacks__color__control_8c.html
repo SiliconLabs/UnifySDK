@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -97,6 +97,7 @@ $(document).ready(function(){initNavTree('unify__dotdot__attribute__store__comma
 <code>#include &quot;<a class="el" href="unify__dotdot__defined__attribute__types_8h_source.html">unify_dotdot_defined_attribute_types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="attribute__transitions_8h_source.html">attribute_transitions.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dotdot__mqtt_8h_source.html">dotdot_mqtt.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 </div><table class="memberdecls">
@@ -112,13 +113,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a9b3687d1e55033971f690984034a3f60"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a9b3687d1e55033971f690984034a3f60">validated_color_value</a> (uint8_t color)</td></tr>
 <tr class="memdesc:a9b3687d1e55033971f690984034a3f60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the color is within the allowed range and returns a valid value from it.  <a href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a9b3687d1e55033971f690984034a3f60">More...</a><br /></td></tr>
 <tr class="separator:a9b3687d1e55033971f690984034a3f60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79fb401e70a996e3a1216f238500f7d0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a79fb401e70a996e3a1216f238500f7d0">is_option_active</a> (uint8_t option, uint8_t mask_offset)</td></tr>
+<tr class="separator:a79fb401e70a996e3a1216f238500f7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41960e20f8a9fa3ac7f968d4e2f7a88f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a41960e20f8a9fa3ac7f968d4e2f7a88f">execute_if_off_option_check</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="memdesc:a41960e20f8a9fa3ac7f968d4e2f7a88f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if ExecuteIfOff option allows command execution according to the ZCL specification (5.2.2.3.3).  <a href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a41960e20f8a9fa3ac7f968d4e2f7a88f">More...</a><br /></td></tr>
+<tr class="separator:a41960e20f8a9fa3ac7f968d4e2f7a88f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e13f5f1c0dd0056b000f4705af881b3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a3e13f5f1c0dd0056b000f4705af881b3">set_color_modes</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint8_t color_mode)</td></tr>
 <tr class="memdesc:a3e13f5f1c0dd0056b000f4705af881b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets all the Color modes attributes of a device to the new value. Will set both desired and reported values.  <a href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a3e13f5f1c0dd0056b000f4705af881b3">More...</a><br /></td></tr>
 <tr class="separator:a3e13f5f1c0dd0056b000f4705af881b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade1da473fe7c9a7f690441198a548823"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ade1da473fe7c9a7f690441198a548823">dotdot_set_color_control_temperature_mireds_remaining_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint16_t color_temperature_mireds, uint16_t remaining_time)</td></tr>
-<tr class="separator:ade1da473fe7c9a7f690441198a548823"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2961246db204c6937debb6dea29ddb8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ac2961246db204c6937debb6dea29ddb8">dotdot_set_color_control_hue_saturation_remaining_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint8_t hue, uint8_t saturation, uint16_t remaining_time)</td></tr>
-<tr class="separator:ac2961246db204c6937debb6dea29ddb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a1ad130eecb91a103a7475e0abab217"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a9a1ad130eecb91a103a7475e0abab217">dotdot_set_color_control_temperature_mireds_remaining_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint16_t color_temperature_mireds, float rate, uint16_t remaining_time)</td></tr>
+<tr class="separator:a9a1ad130eecb91a103a7475e0abab217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a020e6757c263c611242b6f2e5cb0827b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a020e6757c263c611242b6f2e5cb0827b">dotdot_set_color_control_hue_saturation_remaining_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint8_t hue, bool hue_valid, float hue_rate, uint8_t saturation, float sat_rate, uint16_t remaining_time)</td></tr>
+<tr class="separator:a020e6757c263c611242b6f2e5cb0827b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576b3841cab89e3ac4ed7896bc40bf19"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a576b3841cab89e3ac4ed7896bc40bf19">dotdot_set_color_control_enhanced_hue_saturation_remaining_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint16_t enhanced_hue, bool hue_valid, float hue_rate, uint8_t saturation, float sat_rate, uint16_t remaining_time)</td></tr>
+<tr class="separator:a576b3841cab89e3ac4ed7896bc40bf19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a054d45e05a801fb9634c07d0fbcf3913"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a054d45e05a801fb9634c07d0fbcf3913">dotdot_set_color_control_colorx_colory_remaining_time</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, uint16_t color_x, float rate_x, uint16_t color_y, float rate_y, uint16_t remaining_time)</td></tr>
+<tr class="separator:a054d45e05a801fb9634c07d0fbcf3913"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47e48049c1c44b18917fa450721c3996"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a47e48049c1c44b18917fa450721c3996">color_control_move_to_hue_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, uint8_t hue, <a class="el" href="group__zap.html#ga9ddd5dd3fe2f9b1b2ef5b66addfa785a">CCDirection</a> direction, uint16_t transition_time, uint8_t options_mask, uint8_t options_override)</td></tr>
 <tr class="separator:a47e48049c1c44b18917fa450721c3996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8571cedf246e25df008458673534d60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ac8571cedf246e25df008458673534d60">color_control_move_hue_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, <a class="el" href="group__zap.html#gae20e61884df7b5cd1ce720d64e2033b9">CCMoveMode</a> move_mode, uint8_t rate, uint8_t options_mask, uint8_t options_override)</td></tr>
@@ -141,24 +151,52 @@ Functions</h2></td></tr>
 <tr class="separator:a90ab66b186b809e048e2e7585af30acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cfaa267630570e8cc271fd1aecab62b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a8cfaa267630570e8cc271fd1aecab62b">color_control_stop_move_step_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, uint8_t options_mask, uint8_t options_override)</td></tr>
 <tr class="separator:a8cfaa267630570e8cc271fd1aecab62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a576ebd1caa12bbfc8f33c8ccfceb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a45a576ebd1caa12bbfc8f33c8ccfceb8">color_control_move_to_color_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, uint16_t colorx, uint16_t colory, uint16_t transition_time, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:a45a576ebd1caa12bbfc8f33c8ccfceb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1ef3f31b167020ef6526d9a7b02abd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ab1ef3f31b167020ef6526d9a7b02abd4">color_control_move_color_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, int16_t ratex, int16_t ratey, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:ab1ef3f31b167020ef6526d9a7b02abd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f72bc638f9fd31ed66d339297a09bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#af0f72bc638f9fd31ed66d339297a09bb">color_control_step_color_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, int16_t stepx, int16_t stepy, uint16_t transition_time, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:af0f72bc638f9fd31ed66d339297a09bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abae7af6d6266304efb10ad99cf17269b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#abae7af6d6266304efb10ad99cf17269b">color_control_enhanced_move_to_hue_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, uint16_t enhanced_hue, <a class="el" href="group__zap.html#ga9ddd5dd3fe2f9b1b2ef5b66addfa785a">CCDirection</a> direction, uint16_t transition_time, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:abae7af6d6266304efb10ad99cf17269b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb52992650405b9ea1a2877bfe077075"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#abb52992650405b9ea1a2877bfe077075">color_control_enhanced_move_hue_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, <a class="el" href="group__zap.html#gae20e61884df7b5cd1ce720d64e2033b9">CCMoveMode</a> move_mode, uint16_t rate, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:abb52992650405b9ea1a2877bfe077075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf6c18ee6b95adb9c237a1e9252b80fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#adf6c18ee6b95adb9c237a1e9252b80fd">color_control_enhanced_step_hue_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, <a class="el" href="group__zap.html#gacd870da540d868019b37b04aa57e21bb">CCStepMode</a> step_mode, uint16_t step_size, uint16_t transition_time, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:adf6c18ee6b95adb9c237a1e9252b80fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc9c82bfdba226d06b05b4271808585b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#adc9c82bfdba226d06b05b4271808585b">color_control_enhanced_move_to_hue_and_saturation_callback</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, uint16_t hue, uint8_t saturation, uint16_t transition_time, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:adc9c82bfdba226d06b05b4271808585b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e870ccc84fecdeca4ddb6d47e844a42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a4e870ccc84fecdeca4ddb6d47e844a42">color_control_color_loop_set</a> (<a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint, <a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a> call_type, uint8_t update_flags, <a class="el" href="group__zap.html#gaf65db0ee4b439735e2d8c5e648787daa">ColorLoopSetAction</a> action, <a class="el" href="group__zap.html#ga49306e0139202d04ab9da1340659d462">CCColorLoopDirection</a> direction, uint16_t time, uint16_t start_hue, uint8_t options_mask, uint8_t options_override)</td></tr>
+<tr class="separator:a4e870ccc84fecdeca4ddb6d47e844a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf57fed6f99cbe8c81609105011f9c431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__color__control__cluster__mapper.html#gaf57fed6f99cbe8c81609105011f9c431">color_control_cluster_mapper_init</a> ()</td></tr>
 <tr class="memdesc:gaf57fed6f99cbe8c81609105011f9c431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intitialise the Color Control cluster mapper.  <a href="group__color__control__cluster__mapper.html#gaf57fed6f99cbe8c81609105011f9c431">More...</a><br /></td></tr>
 <tr class="separator:gaf57fed6f99cbe8c81609105011f9c431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a7fc0579a18f29bd18a01c299584de5fa"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7fc0579a18f29bd18a01c299584de5fa">HUE_SATURATION_BITMASK</a> = 0x1</td></tr>
+<tr class="memitem:a7fc0579a18f29bd18a01c299584de5fa"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7fc0579a18f29bd18a01c299584de5fa">HUE_SATURATION_BITMASK</a> = 0x01</td></tr>
 <tr class="separator:a7fc0579a18f29bd18a01c299584de5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6026263090ca5475b593d0065f1a1887"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a6026263090ca5475b593d0065f1a1887">ENHANCED_HUE_SATURATION_BITMASK</a> = 0x02</td></tr>
+<tr class="separator:a6026263090ca5475b593d0065f1a1887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6919b8a4669a77a771d7d5bc5ff2e110"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a6919b8a4669a77a771d7d5bc5ff2e110">COLOR_LOOP_BITMASK</a> = 0x04</td></tr>
+<tr class="separator:a6919b8a4669a77a771d7d5bc5ff2e110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a0107a218b1284cb63becbf1a1927c"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#ad3a0107a218b1284cb63becbf1a1927c">COLOR_XY_BITMASK</a> = 0x08</td></tr>
+<tr class="separator:ad3a0107a218b1284cb63becbf1a1927c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a5b839fed60f2630ff9c1129813e7c"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a06a5b839fed60f2630ff9c1129813e7c">TEMPERATURE_BITMASK</a> = 0x10</td></tr>
+<tr class="separator:a06a5b839fed60f2630ff9c1129813e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e10c3d5c77de2fd0f83b1eb2152d588"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a5e10c3d5c77de2fd0f83b1eb2152d588">COLOR_COLOR_MODE</a> = 0</td></tr>
 <tr class="separator:a5e10c3d5c77de2fd0f83b1eb2152d588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d383d37742a7b8313c8cec1de36a50f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a8d383d37742a7b8313c8cec1de36a50f">TEMPERATURE_COLOR_MODE</a> = 2</td></tr>
+<tr class="separator:a8d383d37742a7b8313c8cec1de36a50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af27e9cfe48615bc292feeec70c68be04"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#af27e9cfe48615bc292feeec70c68be04">DEFAULT_MAX_ENHANCED_COLOR</a> = 0xffff</td></tr>
+<tr class="separator:af27e9cfe48615bc292feeec70c68be04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20ddf17eeb8b02a2160fb8464b243870"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a20ddf17eeb8b02a2160fb8464b243870">DEFAULT_MAX_COLOR</a> = 0xfe</td></tr>
 <tr class="separator:a20ddf17eeb8b02a2160fb8464b243870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d6cbf1352ae360396c1001930d71e42"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7d6cbf1352ae360396c1001930d71e42">DEFAULT_MIN_COLOR</a> = 0x00</td></tr>
 <tr class="separator:a7d6cbf1352ae360396c1001930d71e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a5b839fed60f2630ff9c1129813e7c"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a06a5b839fed60f2630ff9c1129813e7c">TEMPERATURE_BITMASK</a> = 0x10</td></tr>
-<tr class="separator:a06a5b839fed60f2630ff9c1129813e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d383d37742a7b8313c8cec1de36a50f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a8d383d37742a7b8313c8cec1de36a50f">TEMPERATURE_COLOR_MODE</a> = 2</td></tr>
-<tr class="separator:a8d383d37742a7b8313c8cec1de36a50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1dd05516e60863d69a211f3567152b"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#a7e1dd05516e60863d69a211f3567152b">DEFAULT_MIN_X_Y</a> = 0</td></tr>
+<tr class="separator:a7e1dd05516e60863d69a211f3567152b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcc604a93733dbd1ef569afbfaa159c8"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html#afcc604a93733dbd1ef569afbfaa159c8">DEFAULT_MAX_X_Y</a> = 65279</td></tr>
+<tr class="separator:afcc604a93733dbd1ef569afbfaa159c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a883775616255fa26efe030d1c3d2026d" name="a883775616255fa26efe030d1c3d2026d"></a>
@@ -233,6 +271,390 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a4e870ccc84fecdeca4ddb6d47e844a42" name="a4e870ccc84fecdeca4ddb6d47e844a42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e870ccc84fecdeca4ddb6d47e844a42">&#9670;&nbsp;</a></span>color_control_color_loop_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_color_loop_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>update_flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zap.html#gaf65db0ee4b439735e2d8c5e648787daa">ColorLoopSetAction</a>&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zap.html#ga49306e0139202d04ab9da1340659d462">CCColorLoopDirection</a>&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>start_hue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb52992650405b9ea1a2877bfe077075" name="abb52992650405b9ea1a2877bfe077075"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb52992650405b9ea1a2877bfe077075">&#9670;&nbsp;</a></span>color_control_enhanced_move_hue_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_enhanced_move_hue_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zap.html#gae20e61884df7b5cd1ce720d64e2033b9">CCMoveMode</a>&#160;</td>
+          <td class="paramname"><em>move_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc9c82bfdba226d06b05b4271808585b" name="adc9c82bfdba226d06b05b4271808585b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc9c82bfdba226d06b05b4271808585b">&#9670;&nbsp;</a></span>color_control_enhanced_move_to_hue_and_saturation_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_enhanced_move_to_hue_and_saturation_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>hue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>saturation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>transition_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abae7af6d6266304efb10ad99cf17269b" name="abae7af6d6266304efb10ad99cf17269b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae7af6d6266304efb10ad99cf17269b">&#9670;&nbsp;</a></span>color_control_enhanced_move_to_hue_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_enhanced_move_to_hue_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>enhanced_hue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zap.html#ga9ddd5dd3fe2f9b1b2ef5b66addfa785a">CCDirection</a>&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>transition_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf6c18ee6b95adb9c237a1e9252b80fd" name="adf6c18ee6b95adb9c237a1e9252b80fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf6c18ee6b95adb9c237a1e9252b80fd">&#9670;&nbsp;</a></span>color_control_enhanced_step_hue_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_enhanced_step_hue_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zap.html#gacd870da540d868019b37b04aa57e21bb">CCStepMode</a>&#160;</td>
+          <td class="paramname"><em>step_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>step_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>transition_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1ef3f31b167020ef6526d9a7b02abd4" name="ab1ef3f31b167020ef6526d9a7b02abd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1ef3f31b167020ef6526d9a7b02abd4">&#9670;&nbsp;</a></span>color_control_move_color_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_move_color_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>ratex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>ratey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8a870f1492ef4abe3d4b2649463576fe" name="a8a870f1492ef4abe3d4b2649463576fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8a870f1492ef4abe3d4b2649463576fe">&#9670;&nbsp;</a></span>color_control_move_color_temperature_callback()</h2>
 
@@ -396,6 +818,70 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45a576ebd1caa12bbfc8f33c8ccfceb8" name="a45a576ebd1caa12bbfc8f33c8ccfceb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45a576ebd1caa12bbfc8f33c8ccfceb8">&#9670;&nbsp;</a></span>color_control_move_to_color_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_move_to_color_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>colorx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>colory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>transition_time</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -634,6 +1120,70 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>saturation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>transition_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0f72bc638f9fd31ed66d339297a09bb" name="af0f72bc638f9fd31ed66d339297a09bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f72bc638f9fd31ed66d339297a09bb">&#9670;&nbsp;</a></span>color_control_step_color_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> color_control_step_color_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__dotdot__mqtt.html#gae480a1995ae14a588b13f99209b07997">uic_mqtt_dotdot_callback_call_type_t</a>&#160;</td>
+          <td class="paramname"><em>call_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>stepx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>stepy</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -913,8 +1463,146 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac2961246db204c6937debb6dea29ddb8" name="ac2961246db204c6937debb6dea29ddb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2961246db204c6937debb6dea29ddb8">&#9670;&nbsp;</a></span>dotdot_set_color_control_hue_saturation_remaining_time()</h2>
+<a id="a054d45e05a801fb9634c07d0fbcf3913" name="a054d45e05a801fb9634c07d0fbcf3913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a054d45e05a801fb9634c07d0fbcf3913">&#9670;&nbsp;</a></span>dotdot_set_color_control_colorx_colory_remaining_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void dotdot_set_color_control_colorx_colory_remaining_time </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>color_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rate_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>color_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rate_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>remaining_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a576b3841cab89e3ac4ed7896bc40bf19" name="a576b3841cab89e3ac4ed7896bc40bf19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576b3841cab89e3ac4ed7896bc40bf19">&#9670;&nbsp;</a></span>dotdot_set_color_control_enhanced_hue_saturation_remaining_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void dotdot_set_color_control_enhanced_hue_saturation_remaining_time </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>enhanced_hue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hue_valid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hue_rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>saturation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>sat_rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>remaining_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a020e6757c263c611242b6f2e5cb0827b" name="a020e6757c263c611242b6f2e5cb0827b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020e6757c263c611242b6f2e5cb0827b">&#9670;&nbsp;</a></span>dotdot_set_color_control_hue_saturation_remaining_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -943,8 +1631,26 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hue_valid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hue_rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>saturation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>sat_rate</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -967,8 +1673,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ade1da473fe7c9a7f690441198a548823" name="ade1da473fe7c9a7f690441198a548823"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade1da473fe7c9a7f690441198a548823">&#9670;&nbsp;</a></span>dotdot_set_color_control_temperature_mireds_remaining_time()</h2>
+<a id="a9a1ad130eecb91a103a7475e0abab217" name="a9a1ad130eecb91a103a7475e0abab217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1ad130eecb91a103a7475e0abab217">&#9670;&nbsp;</a></span>dotdot_set_color_control_temperature_mireds_remaining_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -997,8 +1703,103 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>remaining_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41960e20f8a9fa3ac7f968d4e2f7a88f" name="a41960e20f8a9fa3ac7f968d4e2f7a88f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41960e20f8a9fa3ac7f968d4e2f7a88f">&#9670;&nbsp;</a></span>execute_if_off_option_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool execute_if_off_option_check </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a>&#160;</td>
+          <td class="paramname"><em>unid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>options_override</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if ExecuteIfOff option allows command execution according to the ZCL specification (5.2.2.3.3). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unid</td><td>UNID of the node to set. </td></tr>
+    <tr><td class="paramname">endpoint</td><td>Endpoint under which the color mode is set </td></tr>
+    <tr><td class="paramname">options_mask</td><td>Option mask </td></tr>
+    <tr><td class="paramname">options_override</td><td>Option override</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The function first checks ExecuteIfOff bit in option_color_control or in options_override if options_mask contains ExecuteIfOff bit. The function then also evaluates if command can proceed based on ExecuteIfOff option check along with OnOff state</p>
+<dl class="section return"><dt>Returns</dt><dd>bool false if command is not allowed to proceed as ExecuteIfOff option check, true otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a79fb401e70a996e3a1216f238500f7d0" name="a79fb401e70a996e3a1216f238500f7d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79fb401e70a996e3a1216f238500f7d0">&#9670;&nbsp;</a></span>is_option_active()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool is_option_active </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>option</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mask_offset</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1117,6 +1918,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a6919b8a4669a77a771d7d5bc5ff2e110" name="a6919b8a4669a77a771d7d5bc5ff2e110"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6919b8a4669a77a771d7d5bc5ff2e110">&#9670;&nbsp;</a></span>COLOR_LOOP_BITMASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t COLOR_LOOP_BITMASK = 0x04</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3a0107a218b1284cb63becbf1a1927c" name="ad3a0107a218b1284cb63becbf1a1927c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a0107a218b1284cb63becbf1a1927c">&#9670;&nbsp;</a></span>COLOR_XY_BITMASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t COLOR_XY_BITMASK = 0x08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a20ddf17eeb8b02a2160fb8464b243870" name="a20ddf17eeb8b02a2160fb8464b243870"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a20ddf17eeb8b02a2160fb8464b243870">&#9670;&nbsp;</a></span>DEFAULT_MAX_COLOR</h2>
 
@@ -1125,6 +1954,34 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const uint8_t DEFAULT_MAX_COLOR = 0xfe</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af27e9cfe48615bc292feeec70c68be04" name="af27e9cfe48615bc292feeec70c68be04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af27e9cfe48615bc292feeec70c68be04">&#9670;&nbsp;</a></span>DEFAULT_MAX_ENHANCED_COLOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t DEFAULT_MAX_ENHANCED_COLOR = 0xffff</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcc604a93733dbd1ef569afbfaa159c8" name="afcc604a93733dbd1ef569afbfaa159c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcc604a93733dbd1ef569afbfaa159c8">&#9670;&nbsp;</a></span>DEFAULT_MAX_X_Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t DEFAULT_MAX_X_Y = 65279</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1145,6 +2002,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a7e1dd05516e60863d69a211f3567152b" name="a7e1dd05516e60863d69a211f3567152b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1dd05516e60863d69a211f3567152b">&#9670;&nbsp;</a></span>DEFAULT_MIN_X_Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t DEFAULT_MIN_X_Y = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6026263090ca5475b593d0065f1a1887" name="a6026263090ca5475b593d0065f1a1887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6026263090ca5475b593d0065f1a1887">&#9670;&nbsp;</a></span>ENHANCED_HUE_SATURATION_BITMASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint16_t ENHANCED_HUE_SATURATION_BITMASK = 0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7fc0579a18f29bd18a01c299584de5fa" name="a7fc0579a18f29bd18a01c299584de5fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7fc0579a18f29bd18a01c299584de5fa">&#9670;&nbsp;</a></span>HUE_SATURATION_BITMASK</h2>
 
@@ -1152,7 +2037,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint16_t HUE_SATURATION_BITMASK = 0x1</td>
+          <td class="memname">const uint16_t HUE_SATURATION_BITMASK = 0x01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1193,7 +2078,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_112d20045a7ca684343196244a8f6d73.html">unify_dotdot_attribute_store</a></li><li class="navelem"><a class="el" href="dir_4d908a52017a2c1804f64ff3615d4d5e.html">src</a></li><li class="navelem"><a class="el" href="unify__dotdot__attribute__store__command__callbacks__color__control_8c.html">unify_dotdot_attribute_store_command_callbacks_color_control.c</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:45 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:10 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

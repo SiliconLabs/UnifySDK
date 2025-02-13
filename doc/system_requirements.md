@@ -1,6 +1,6 @@
 # System Requirements
 
-The Unify Host SDK is at the moment only implemented for the Linux OS. The table
+The Unify SDK is at the moment only implemented for the Linux OS. The table
 below shows the resource usage of the individual components measured on arm64
 release binaries. No debug symbols included. RAM figures are indicative for
 applications without any data added (i.e. initial memory usage). The measurement
@@ -15,22 +15,15 @@ when running multiple Unify applications that use the same shared library
 
 | Component          |    Flash |                RAM (RSS) |
 | ------------------ | -------: | -----------------------: |
-| libunify           | 15427 kB |                      N/A |
-| uic-aoxpc          |  1507 kB |                 17872 kB |
-| uic-zigpc          |  1485 kB |                 17332 kB |
-| uic-zpc            |  5061 kB |                 24888 kB |
-| uic-gms            |  1579 kB |                 16160 kB |
-| uic-nal            |  1620 kB |                 17324 kB |
-| uic-positioning    |  1420 kB |                 16816 kB |
-| uic-upti-cap       |  1624 kB |                 16276 kB |
-| uic-upti-writer    |  1608 kB |                 16168 kB |
-| uic-image-provider |  1579 kB |                 16440 kB |
-| uic-upvl           |  1628 kB |                 17392 kB |
-| uic-dev-gui        | 48089 kB |                 47440 kB |
-| zigbeed            |  4019 kB |                  3108 kB |
-| Z3Gateway          |   621 kB |                      TBD |
-| uic-cpcd           |   290 kB |                   772 kB |
-| uic-cpc-hci-bridge |    10 kB |                      TBD |
+| libunify           | 16773 kB |                      N/A |
+| uic-zpc            |  5621 kB |                 26048 kB |
+| uic-gms            |  6519 kB |                 18152 kB |
+| uic-nal            |  6609 kB |                 19224 kB |
+| uic-upti-cap       |  6610 kB |                 18080 kB |
+| uic-upti-writer    |  6591 kB |                 18088 kB |
+| uic-image-provider |  6523 kB |                 17980 kB |
+| uic-upvl           |  6616 kB |                 19200 kB |
+| uic-dev-gui        | 48130 kB |                 48676 kB |
 
 The SDK depends on the following Debian packages:
 

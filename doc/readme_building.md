@@ -17,7 +17,7 @@ hidden:
 
 ## Build Instructions
 
-The Unify Host SDK uses a docker container to provide an appropriate build environment.
+The Unify SDK uses a docker container to provide an appropriate build environment.
 As a prerequisite Docker must be installed on the build host.
 
 ### Install Docker
@@ -76,8 +76,6 @@ ninja               # Build binaries
 ninja deb           # Build Debian Installers (optional)
 ```
 
-After running this, the `zpc` binary is located in `./build/applications/zpc/zpc`.
-
 The Debian packages are available as a Zip of all the Debian packages at `./build/deb-packages/unify_<version>_arm64.zip`.
 
 ### Disabling the build of a Unify Application
@@ -88,10 +86,10 @@ cmake/include/build_permutations.cmake file
 
 This can also be achieved by passing those variables on the command line with CMAKE
 
-For e.g. to disable build for ZigPC following command can be used.
+For e.g. to disable build for NAL following command can be used.
 
 ```bash
- cmake -GNinja -DBUILD_ZIGPC=OFF ..
+ cmake -GNinja -DBUILD_NAL=OFF ..
 ```
 
 ### Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host
@@ -117,14 +115,14 @@ ninja test
 ninja cargo_test
 ```
 
-## Porting the Unify Host SDK
+## Porting the Unify SDK
 
 Porting the Unify SDK to a new platform using Debian Linux should be straightforward.
 However, if components are ported to other Linux distributions it may
 be necessary to update the startup scripts of the components. The Debian
-packages provided with the Unify Host SDK all use the system service `systemd` which
+packages provided with the Unify SDK all use the system service `systemd` which
 takes care of startup and shutdown of the components. For example, the file
-[uic-zpc.service](../applications/zpc/scripts/systemd/uic-zpc.service) is as
+[uic-nal.service](../applications/nal/scripts/systemd/uic-nal.service) is as
 systemd config script. When porting to a new Linux system the systemd config
 files should be used for reference. It is very important that all the Unify
 components runs as a dedicated system user to prevent attackers from

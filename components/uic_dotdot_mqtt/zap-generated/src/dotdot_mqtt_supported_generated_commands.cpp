@@ -2378,6 +2378,9 @@ void uic_mqtt_dotdot_state_publish_supported_generated_commands(
   if (command_list->discover_security == true) {
     command_vector.emplace_back("DiscoverSecurity");
   }
+  if (command_list->enable_nls == true) {
+    command_vector.emplace_back("EnableNls");
+  }
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
   }
@@ -2614,101 +2617,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_supported_generated_comman
   if (command_list->discover_parameter_range == true) {
     command_vector.emplace_back("DiscoverParameterRange");
   }
-  if (command_list->write_attributes == true) {
-    command_vector.emplace_back("WriteAttributes");
-  }
-
-  // JSONify, then Stringify
-  nlohmann::json json_payload;
-  json_payload["value"] = command_vector;
-  std::string string_payload = json_payload.dump();
-
-  // Publish to MQTT
-  uic_mqtt_publish(topic.c_str(),
-                   string_payload.c_str(),
-                   string_payload.length(),
-                   true);
-
-}
-
-
-/**
- * @brief Sends/Publishes a the SupportedGenerated commands for
- * the AoXLocator cluster for a UNID/Endpoint
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/SupportedGeneratedCommands
- *
- * @param unid      The UNID of the node on behalf of which the advertisment is made
- * 
- * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
- * 
- * @param command_list      Struct pointer with the fields value indicating if
- *                          individual commands can be generated.
- */
-void uic_mqtt_dotdot_aox_locator_publish_supported_generated_commands(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_supported_commands_t *command_list)
-{
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint);
-  topic +=  "/AoXLocator/SupportedGeneratedCommands";
-
-  // Assemble of vector of strings for the Supported Commands:
-  std::vector<std::string> command_vector;
-  if (command_list->iq_report == true) {
-    command_vector.emplace_back("IQReport");
-  }
-  if (command_list->angle_report == true) {
-    command_vector.emplace_back("AngleReport");
-  }
-  if (command_list->angle_correction == true) {
-    command_vector.emplace_back("AngleCorrection");
-  }
-  if (command_list->write_attributes == true) {
-    command_vector.emplace_back("WriteAttributes");
-  }
-
-  // JSONify, then Stringify
-  nlohmann::json json_payload;
-  json_payload["value"] = command_vector;
-  std::string string_payload = json_payload.dump();
-
-  // Publish to MQTT
-  uic_mqtt_publish(topic.c_str(),
-                   string_payload.c_str(),
-                   string_payload.length(),
-                   true);
-
-}
-
-
-/**
- * @brief Sends/Publishes a the SupportedGenerated commands for
- * the AoXPositionEstimation cluster for a UNID/Endpoint
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXPositionEstimation/SupportedGeneratedCommands
- *
- * @param unid      The UNID of the node on behalf of which the advertisment is made
- * 
- * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
- * 
- * @param command_list      Struct pointer with the fields value indicating if
- *                          individual commands can be generated.
- */
-void uic_mqtt_dotdot_aox_position_estimation_publish_supported_generated_commands(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_position_estimation_supported_commands_t *command_list)
-{
-  std::string topic = "ucl/by-unid/" + std::string(unid);
-  topic +=  "/ep"+ std::to_string(endpoint);
-  topic +=  "/AoXPositionEstimation/SupportedGeneratedCommands";
-
-  // Assemble of vector of strings for the Supported Commands:
-  std::vector<std::string> command_vector;
   if (command_list->write_attributes == true) {
     command_vector.emplace_back("WriteAttributes");
   }

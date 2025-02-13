@@ -11,7 +11,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 #![doc(html_no_source)]
-unify_tools::include_binding!(concat!(env!("OUT_DIR"), "/binding.rs"), uic_attribute_store);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"),"/uic_attribute_store.rs"), uic_attribute_store); 
 
 #[cfg(test)]
 mod uic_attribute_store_tests;

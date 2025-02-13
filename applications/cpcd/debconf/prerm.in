@@ -1,5 +1,0 @@
-#!/bin/sh
-if type "systemctl" > /dev/null; then
-    systemctl stop uic-cpcd.service
-    systemctl disable uic-cpcd.service
-fi

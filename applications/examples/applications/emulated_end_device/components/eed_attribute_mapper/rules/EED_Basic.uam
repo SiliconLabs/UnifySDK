@@ -1,0 +1,9 @@
+// ZCL Attributes for Basic cluster
+def zbBASIC_ZCL_VERSION        0xba5c0000
+
+scope 0 chain_reaction(0) {
+
+  r'zbBASIC_ZCL_VERSION =
+    if (e'zbBASIC_ZCL_VERSION) 3 undefined
+
+}

@@ -93,6 +93,12 @@ static void update_current_level_attribute_after_off_command(
                                      0);
 }
 
+static void reset_attribute_value(attribute_store_node_t node)
+{
+  attribute_store_undefine_desired(node);
+  attribute_store_set_desired_number(node, 0);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Private component callback functions for DotDot MQTT
 ////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +131,11 @@ sl_status_t
       sl_log_debug(LOG_TAG, "Clearing OnOff::OnOff reported value");
       dotdot_on_off_on_off_undefine_reported(unid, endpoint);
     }
+
+    dotdot_set_on_off_global_scene_control(unid,
+                                           endpoint,
+                                           REPORTED_ATTRIBUTE,
+                                           true);
   }
 
   //Additionally, when the OnTime and OffWaitTime attributes are both
@@ -169,7 +180,8 @@ sl_status_t
   }
 
   if (dotdot_is_supported_on_off_on_time(unid, endpoint)) {
-    dotdot_set_on_off_on_time(unid, endpoint, REPORTED_ATTRIBUTE, 0);
+    dotdot_on_off_on_time_undefine_desired(unid, endpoint);
+    dotdot_set_on_off_on_time(unid, endpoint, DESIRED_ATTRIBUTE, 0);
   }
 
   return SL_STATUS_OK;
@@ -235,6 +247,12 @@ sl_status_t on_off_cluster_off_with_effect_command(
   // attribute is equal to TRUE, the server SHALL store its settings in its
   // global scene then set the GlobalSceneControl attribute to FALSE,
   // and if the OnTime attribute is supported set the OnTime attribute to 0.
+  bool update_ontime = false;
+  attribute_store_node_t endpoint_node
+    = unify_dotdot_attributes_get_endpoint_node()(unid, endpoint);
+  attribute_store_node_t ontime_node = attribute_store_get_first_child_by_type(
+    endpoint_node,
+    DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME);
   if (dotdot_get_on_off_global_scene_control(unid,
                                              endpoint,
                                              REPORTED_ATTRIBUTE)) {
@@ -247,13 +265,16 @@ sl_status_t on_off_cluster_off_with_effect_command(
                                            endpoint,
                                            REPORTED_ATTRIBUTE,
                                            false);
-    dotdot_set_on_off_on_time(unid, endpoint, REPORTED_ATTRIBUTE, 0);
+    update_ontime = true;
   }
 
   switch (effect_identifier) {
     case ZCL_OFF_WITH_EFFECT_EFFECT_IDENTIFIER_DELAYED_ALL_OFF:
       if (effect_variant == 0x00) {
         // Fade to off in 0.8 seconds
+        if (update_ontime) {
+          attribute_timeout_set_callback(ontime_node, 900, reset_attribute_value);
+        }
         return level_cluster_mapper_move_to_level_with_on_off(unid,
                                                               endpoint,
                                                               call_type,
@@ -263,6 +284,9 @@ sl_status_t on_off_cluster_off_with_effect_command(
                                                               0);
       } else if (effect_variant == 0x01) {
         // No fade
+        if (update_ontime) {
+          reset_attribute_value(ontime_node);
+        }
         return level_cluster_mapper_move_to_level_with_on_off(unid,
                                                               endpoint,
                                                               call_type,
@@ -272,6 +296,9 @@ sl_status_t on_off_cluster_off_with_effect_command(
                                                               0);
       } else if (effect_variant == 0x02) {
         // 50% dim down in 0.8 seconds then fade to off in 12 seconds
+        if (update_ontime) {
+          attribute_timeout_set_callback(ontime_node, 900, reset_attribute_value);
+        }
         return level_cluster_mapper_move_to_level_with_on_off(unid,
                                                               endpoint,
                                                               call_type,
@@ -284,7 +311,9 @@ sl_status_t on_off_cluster_off_with_effect_command(
     case ZCL_OFF_WITH_EFFECT_EFFECT_IDENTIFIER_DYING_LIGHT:
       if (effect_variant == 0x00) {
         //20% dim up in 0.5s then fade to off in 1 second
-
+        if (update_ontime) {
+          attribute_timeout_set_callback(ontime_node, 1300, reset_attribute_value);
+        }
         /// FIXME this is not quite right
         return level_cluster_mapper_move_to_level_with_on_off(unid,
                                                               endpoint,
@@ -298,10 +327,11 @@ sl_status_t on_off_cluster_off_with_effect_command(
     default:
       break;
   }
+  
   return SL_STATUS_OK;
 }
 
-sl_status_t on_off_cluster_off_with_recall_global_scene_command(
+sl_status_t on_off_cluster_on_with_recall_global_scene_command(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_callback_call_type_t call_type)
@@ -359,6 +389,17 @@ static void
   attribute_store_node_t on_off = attribute_store_get_first_child_by_type(
     endpoint_node,
     DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF);
+
+  if (attribute_store_get_reported_number(on_off)
+      != attribute_store_get_desired_number(on_off)) {
+    if (attribute_store_get_reported_number(on_time)
+        || attribute_store_get_reported_number(off_wait_time)) {
+      attribute_timeout_set_callback(endpoint_node,
+                                   100,
+                                   on_off_on_with_timed_off_timeout);
+    }
+    return;
+  }
 
   if (attribute_store_get_reported_number(on_off) > 0.0) {
     //If the value of the OnOff attribute is equal to TRUE and the value of the
@@ -437,12 +478,14 @@ sl_status_t on_off_on_with_timed_off_callback_set_command(
   //OffWaitTime attribute to the minimum of the OffWaitTime attribute and the
   //value specified in the OffWaitTime field.
   if ((current_wait_time > 0)
-      && (dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE) == false)
-      && (off_wait_time < current_wait_time)) {
-    dotdot_set_on_off_off_wait_time(unid,
-                                    endpoint,
-                                    REPORTED_ATTRIBUTE,
-                                    off_wait_time);
+      && (dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE)
+          == false)) {
+    if (off_wait_time < current_wait_time) {
+      dotdot_set_on_off_off_wait_time(unid,
+                                      endpoint,
+                                      REPORTED_ATTRIBUTE,
+                                      off_wait_time);
+    }
   } else {
     //In all other cases, the server SHALL set the OnTime attribute to the
     //maximum of the OnTime attribute and the value specified in the OnTime
@@ -489,7 +532,7 @@ sl_status_t on_off_cluster_mapper_init()
   uic_mqtt_dotdot_on_off_off_with_effect_callback_set(
     &on_off_cluster_off_with_effect_command);
   uic_mqtt_dotdot_on_off_on_with_recall_global_scene_callback_set(
-    &on_off_cluster_off_with_recall_global_scene_command);
+    &on_off_cluster_on_with_recall_global_scene_command);
   uic_mqtt_dotdot_on_off_on_with_timed_off_callback_set(
     &on_off_on_with_timed_off_callback_set_command);
   return SL_STATUS_OK;

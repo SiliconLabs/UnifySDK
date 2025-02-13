@@ -1,5 +1,0 @@
-#!/bin/sh
-if type "systemctl" > /dev/null; then
-    systemctl stop uic-aoxpc.service
-    systemctl disable uic-aoxpc.service
-fi

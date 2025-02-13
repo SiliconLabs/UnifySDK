@@ -44,11 +44,24 @@ sl_status_t barrier_control_go_to_percent_command(
       return SL_STATUS_FAIL;
     }
   }
-
-  // Bound validation
-  if (percent_open > 100) {
-    percent_open = 100;
+  
+  // Value validation
+  uint8_t capabilities = dotdot_get_barrier_control_capabilities(unid, endpoint, REPORTED_ATTRIBUTE);
+  if(capabilities == 0) {
+    if ((percent_open!=0) && (percent_open!=100)) {
+      sl_log_debug(LOG_TAG,
+                   "BarrierOperator::BarrierPosition Invalid value, only 0 and 100 value are supported");
+    return SL_STATUS_INVALID_PARAMETER;
+    }
   }
+  
+  //Bound Validation
+  if (percent_open > 100) {
+    sl_log_debug(LOG_TAG,
+                   "BarrierOperator::BarrierPosition value out of bounds");
+    return SL_STATUS_INVALID_RANGE;
+  }
+  
   // Update the desired values:
   if (is_desired_value_update_on_commands_enabled()) {
     dotdot_set_barrier_control_barrier_position(unid,

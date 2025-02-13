@@ -25,15 +25,12 @@ This will build the Unify toolchain docker images and name it *uic_arm64*.
 
 | Package         | Needed By | Needed/Used for |
 |:----------------|:----------| :----------|
-|libavahi-client-dev|OTBR|Multicast DNS Service Discovery.|
 |libboost-filesystem-dev|attribute mapper|portable facilities to query and manipulate paths, files, and directories.|
 |libboost-log-dev|uic log|to make logging significantly easier for the application developer.|
 |libboost-program-options-dev|uic config|to make obtaining program options easier for the application developer.|
 |libboost-system-dev|cmake|-|
 |libboost-thread-dev|cmake|-|
 |libedit-dev|uic stdin|generic line editing, history, and tokenization functions.|
-|libjsoncpp-dev|OTBR|JSON reader and writer|
-|libmbedtls-dev|CPCD|crypto and SSL/TLS library|
 |libmosquitto-dev|uic mqtt|mosquitto mqtt library|
 |libreadline-dev|uic stdin|consistency of user interface across discrete programs that need to provide a command line interface.|
 |libsqlite3-dev|uic datastore<br>NAL<br>GMS<br>UPVL|SQL database engine.|
@@ -47,13 +44,13 @@ This will build the Unify toolchain docker images and name it *uic_arm64*.
 |doxygen|build-system|docs generation with Doxygen|
 |dpkg|Docker|package manager for Debian-based systems|
 |ghostscript|build-system|docs generation with Doxygen|
-|git|build-system|download gecko_sdk and cpc-deamon|
-|git-lfs|build-system|download gecko_sdk and cpc-deamon|
+|git|build-system|
+|git-lfs|build-system|For checkout repo in jenkinsfile|
 |graphviz|build-system|For docs generation|
 |libasound2|ZAP generation|-|
 |libgbm1|ZAP generation|-|
 |ninja-build|build-system|Build system|
-|nlohmann-json3-dev|ZigPC<br>ZPC<br>testframework<br> uic dotdot mqtt<br>uic smartstart management|Read JSON from a file.|
+|nlohmann-json3-dev|ZPC<br>testframework<br> uic dotdot mqtt<br>uic smartstart management|Read JSON from a file.|
 |nodejs|Dev-GUI|JavaScript runtime built on Chrome`s|
 |npm|Dev-GUI|package manager for the JavaScript runtime environment Node.js|
 |openjdk-11-jre|build-system|For docs generation|

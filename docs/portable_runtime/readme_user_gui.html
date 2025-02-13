@@ -37,7 +37,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -98,9 +98,6 @@
 </ul>
 <p><strong>Prerequisites</strong>:</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG2X/EFR32xG22 running  for Zigbee NCP or RCP</p></li>
-<li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
 <li><p>Docker version &gt; 20.10.12 installed.</p></li>
 <li><p>docker-compose version &gt; 2.5.1</p></li>
 <li><p>x86-64/amd64 CPU architecture.</p></li>
@@ -140,19 +137,14 @@ This should launch up the Unify Portable Runtime GUI.</p>
 <h4>Protocol Selection<a class="headerlink" href="#protocol-selection" title="Permalink to this heading"></a></h4>
 <p>After initial pre-requisites check, the GUI will render protocol selection page.</p>
 <a class="reference internal image-reference" href="../_images/protocols.jpg"><img alt="../_images/protocols.jpg" src="../_images/protocols.jpg" style="width: 200px; height: 250px;" /></a>
-<p><strong>Note</strong>:</p>
-<ul class="simple">
-<li><p>_Zigbee(RCP) is disabled until <em>MultiProtocol</em> is selected and enabled automatically upon enabling <em>MultiProtocol</em></p></li>
-<li><p><em>Zigbee(NCP)</em> and <em>Zigbee(RCP)</em> are mutually exclusive options.</p></li>
-</ul>
-<p>By default only Z-Wave (ZPC) is selected. Select other protocols as needed and
+<p>By default only EED (Emulated End Device) is selected.
 click on <code class="docutils literal notranslate"><span class="pre">Next</span></code>.</p>
 <section id="emulated-end-device-experimental">
 <h5>Emulated End Device (<strong>Experimental</strong>):<a class="headerlink" href="#emulated-end-device-experimental" title="Permalink to this heading"></a></h5>
-<p>Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Zigbee or Z-Wave devices.
-<br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">EED</span> <span class="pre">currently</span> <span class="pre">emulates</span> <span class="pre">a</span> <span class="pre">end</span> <span class="pre">device</span> <span class="pre">that</span> <span class="pre">only</span> <span class="pre">supports</span> <span class="pre">OnOff</span> <span class="pre">cluster,</span> <span class="pre">so</span> <span class="pre">for</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">enable</span> <span class="pre">atleast</span> <span class="pre">select</span> <span class="pre">NAL</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">framework</span> <span class="pre">service</span> <span class="pre">page</span> <span class="pre">that</span> <span class="pre">follows.</span></code></p>
+<p>Portable runtime supports end device emulation as an experimental feature. The Emulated End Device(EED) is experimental emulation of end device to enable UMB demo without any actual Z-Wave devices.
+<br><code class="docutils literal notranslate"><span class="pre">Note:</span> <span class="pre">For</span> <span class="pre">UMB</span> <span class="pre">to</span> <span class="pre">process</span> <span class="pre">EED</span> <span class="pre">with</span> <span class="pre">only</span> <span class="pre">one</span> <span class="pre">cluster</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">device</span> <span class="pre">enable</span> <span class="pre">atleast</span> <span class="pre">select</span> <span class="pre">NAL</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">framework</span> <span class="pre">service</span> <span class="pre">page</span> <span class="pre">that</span> <span class="pre">follows.</span></code></p>
 <p><br>The EED can be enable in protocol selection page of latest portable runtime GUI.
-<a class="reference internal" href="../_images/EED-GUI.png"><img alt="../_images/EED-GUI.png" src="../_images/EED-GUI.png" style="width: 200px; height: 250px;" /></a></p>
+<a class="reference internal" href="../_images/protocols.jpg"><img alt="../_images/protocols.jpg" src="../_images/protocols.jpg" style="width: 200px; height: 250px;" /></a></p>
 </section>
 </section>
 <section id="framework-services-and-application-selection">
@@ -163,7 +155,9 @@ click on <code class="docutils literal notranslate"><span class="pre">Next</span
 </section>
 <section id="configuration">
 <h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h4>
-<p>Select the <code class="docutils literal notranslate"><span class="pre">Device</span></code> for each protocol selected in <span class="xref myst">Protocol Selection page</span>. If Z-Wave was selected then also configure <code class="docutils literal notranslate"><span class="pre">RF</span> <span class="pre">Region</span></code>.</p>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">Device</span></code> for each protocol selected in <span class="xref myst">Protocol Selection page</span>. If Z-Wave was selected then also configure <code class="docutils literal notranslate"><span class="pre">RF</span> <span class="pre">Region</span></code>.
+If EED was selected then select prefered Device Type from the dropdown.
+<br>Select AllClustersDevice for all possible device types supported by EED.</p>
 <a class="reference internal image-reference" href="../_images/configuration.jpg"><img alt="../_images/configuration.jpg" src="../_images/configuration.jpg" style="width: 200px; height: 250px;" /></a>
 <p>If the required device is not yet connected, connect the device to the host and click <code class="docutils literal notranslate"><span class="pre">Discover</span> <span class="pre">Device</span></code> for it to show up in the drop-down list.</p>
 <p>If you wish manual input serial number or have connected the device remotely over ethernet and wish to input its IP address, tick the <code class="docutils literal notranslate"><span class="pre">manual</span></code> check box and type in the serial-no or IP address of the device.</p>
@@ -189,6 +183,7 @@ click on <code class="docutils literal notranslate"><span class="pre">Next</span
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>In case you want to use different version of UnifySDK or UMB, replace desired packages in portable_runtime_<OS>/resources/docker-files and for commander replace resources/commander such that commander.exe and silink.exe path looks like ./resources/commander/commander.exe and ./resources/commander/silink.exe.</p>
 <p>In case you run into any issues, a log file is produced in the base directory, called <code class="docutils literal notranslate"><span class="pre">portable_runtime.log</span></code>.</p>
 </section>
 </section>

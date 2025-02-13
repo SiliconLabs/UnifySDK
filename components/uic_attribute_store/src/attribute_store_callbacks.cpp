@@ -23,6 +23,9 @@
 // Includes from other components
 #include "sl_log.h"
 
+// Cpp
+#include "attribute_callbacks.hpp"
+
 /// Setup Log tag
 constexpr char LOG_TAG[] = "attribute_store_callbacks";
 
@@ -50,16 +53,29 @@ std::set<attribute_store_node_touch_callback_t> touch_generic_callbacks;
 
 // 3. For modification of any value for a given node type
 std::map<attribute_store_type_t,
-         std::set<attribute_store_node_changed_callback_t>>
+         std::vector<attribute_store::node_changed_callback>> // NOSONAR: std::vector must have a non-const
   type_callbacks;
 
 // 4. Attribute Deletion callbacks
 std::set<attribute_store_node_delete_callback_t> delete_callbacks;
 
 // 5. For modification of a value/state (reported/desired) for a given node type
+std::map<attribute_store_value_callback_setting_t, // NOSONAR: std::vector must have a non-const
+         std::vector<attribute_store::node_changed_callback>>
+  value_callbacks;
+
+// 6. To ensure compatibility with the old C API, that is still in use
+// we keep track of C functions that are registered for type callbacks
+std::map<attribute_store_type_t,
+         std::set<attribute_store_node_changed_callback_t>>
+  c_node_changed_callbacks; // NOSONAR: Global variables should be const.
+
+// 7. To ensure compatibility with the old C API, that is still in use
+// we keep track of C functions that are registered for value callbacks
 std::map<attribute_store_value_callback_setting_t,
          std::set<attribute_store_node_changed_callback_t>>
-  value_callbacks;
+  c_node_value_callbacks;
+
 }  // namespace
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -119,15 +135,10 @@ void attribute_store_invoke_type_callbacks(attribute_store_node_t updated_node,
                                            attribute_store_change_t change)
 {
   // Make the type callbacks:
-  std::set<attribute_store_node_changed_callback_t> callbacks_to_invoke;
   if (type_callbacks.count(type)) {
     for (auto callback_function: type_callbacks[type]) {
-      callbacks_to_invoke.insert(callback_function);
+      callback_function(updated_node, change);
     }
-  }
-
-  for (auto &callback_function: callbacks_to_invoke) {
-    callback_function(updated_node, change);
   }
 }
 
@@ -137,15 +148,9 @@ void attribute_store_invoke_value_callbacks(
   attribute_store_node_value_state_t value_state,
   attribute_store_change_t change)
 {
-  std::set<attribute_store_node_changed_callback_t> callbacks_to_invoke;
   attribute_store_value_callback_setting_t setting = {type, value_state};
-  // Make the type callbacks:
-  if (value_callbacks.count(setting)) {
-    for (auto callback_function: value_callbacks[setting]) {
-      callbacks_to_invoke.insert(callback_function);
-    }
-  }
-  for (auto &callback_function: callbacks_to_invoke) {
+
+  for (auto callback_function: value_callbacks[setting]) {
     callback_function(updated_node, change);
   }
 }
@@ -169,7 +174,9 @@ sl_status_t attribute_store_callbacks_init(void)
   delete_callbacks.clear();
   value_callbacks.clear();
   touch_generic_callbacks.clear();
-
+  c_node_changed_callbacks.clear();
+  c_node_value_callbacks.clear();
+  
   return SL_STATUS_OK;
 }
 
@@ -181,6 +188,8 @@ int attribute_store_callbacks_teardown(void)
   delete_callbacks.clear();
   value_callbacks.clear();
   touch_generic_callbacks.clear();
+  c_node_changed_callbacks.clear();
+  c_node_value_callbacks.clear();
 
   return 0;
 }
@@ -239,7 +248,16 @@ sl_status_t attribute_store_register_callback_by_type(
       type);
     return SL_STATUS_FAIL;
   }
-  type_callbacks[type].insert(callback_function);
+
+  // Here we only register the callback if it's not already registered
+  // This match the old behavior of the C API
+  // We still return SL_STATUS_OK even if it not registered to keep compatibility
+  if (c_node_changed_callbacks.count(type) == 0
+      || c_node_changed_callbacks[type].count(callback_function) == 0) {
+    c_node_changed_callbacks[type].insert(callback_function);
+    attribute_store::register_callback_by_type(callback_function, type);
+  }
+
   return SL_STATUS_OK;
 }
 
@@ -257,7 +275,38 @@ sl_status_t attribute_store_register_callback_by_type_and_state(
                    value_state);
     return SL_STATUS_FAIL;
   }
+
+  // Here we only register the callback if it's not already registered
+  // This match the old behavior of the C API
+  // We still return SL_STATUS_OK even if it not registered to keep compatibility
   attribute_store_value_callback_setting_t setting = {type, value_state};
-  value_callbacks[setting].insert(callback_function);
+  if (c_node_value_callbacks.count(setting) == 0
+      || c_node_value_callbacks[setting].count(callback_function) == 0) {
+    c_node_value_callbacks[setting].insert(callback_function);
+    attribute_store::register_callback_by_type_and_state(callback_function,
+                                                         type,
+                                                         value_state);
+  }
+
   return SL_STATUS_OK;
 }
+
+
+
+namespace attribute_store {
+
+void register_callback_by_type(node_changed_callback callback_function,
+                               attribute_store_type_t type)
+{
+  type_callbacks[type].push_back(callback_function);
+}
+
+void register_callback_by_type_and_state(node_changed_callback callback_function,
+                                         attribute_store_type_t type,
+                                         attribute_store_node_value_state_t value_state)
+{
+  attribute_store_value_callback_setting_t setting = {type, value_state};
+  value_callbacks[setting].push_back(callback_function);
+}
+
+} // namespace attribute_store 

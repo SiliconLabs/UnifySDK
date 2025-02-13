@@ -180,6 +180,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:enumeratedRange max="ffffffff" min="ff800001" name="NegativeNaN" />
       <type:special name="Infinity" value="7f800000" />
       <type:special name="NegativeInfinity" value="ff800000" />
+      <type:length value="4" />
     </restriction>
   </type:type>
   <type:type id="3a" short="double" name="Double precision">
@@ -190,6 +191,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:enumeratedRange max="ffffffffffffffff" min="fff0000000000001" name="NegativeNaN" />
       <type:special name="Infinity" value="7ff0000000000000" />
       <type:special name="NegativeInfinity" value="fff0000000000000" />
+      <type:length value="8" />
     </restriction>
   </type:type>
 
@@ -213,6 +215,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:minInclusive value="0" />
       <type:maxInclusive value="4294967294" />
       <type:invalid value="4294967295" />
+      <type:length value="4" />
     </restriction>
   </type:type>
   <type:type id="e1" short="date" name="Date">
@@ -220,6 +223,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:minInclusive value="0" />
       <type:maxInclusive value="4294967294" />
       <type:invalid value="4294967295" />
+      <type:length value="4" />
     </restriction>
   </type:type>
   <type:type id="e2" short="UTC" name="UTCTime">
@@ -227,6 +231,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:minInclusive value="0" />
       <type:maxInclusive value="4294967294" />
       <type:invalid value="4294967295" />
+      <type:length value="4" />
     </restriction>
   </type:type>
   <!-- Identifiers -->
@@ -235,6 +240,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:minInclusive value="0" />
       <type:maxInclusive value="65534" />
       <type:invalid value="65535" />
+      <type:length value="2" />
     </restriction>
   </type:type>
   <type:type id="e9" short="attribId" name="Attribute ID" discrete="true">
@@ -242,6 +248,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:minInclusive value="0" />
       <type:maxInclusive value="65534" />
       <type:invalid value="65535" />
+      <type:length value="2" />
     </restriction>
   </type:type>
   <type:type id="ea" short="bacOID" name="BACnet OID" discrete="true">
@@ -249,6 +256,7 @@ applicable to this document can be found in the LICENSE.md file.
       <type:minInclusive value="0" />
       <type:maxInclusive value="4294967294" />
       <type:invalid value="4294967295" />
+      <type:length value="4" />
     </restriction>
   </type:type>
   <!-- Misc -->

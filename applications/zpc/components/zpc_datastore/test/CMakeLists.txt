@@ -1,9 +1,0 @@
-target_add_unittest(
-  zpc_datastore
-  NAME
-  zpc_datastore_test
-  SOURCES
-  zpc_datastore_test.c
-  DEPENDS
-  zpc_config_mock
-  uic_datastore_mock)

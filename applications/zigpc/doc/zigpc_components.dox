@@ -1,8 +1,0 @@
-/**
-
-@subpage zigpc_components "ZigPC Components"
-@defgroup zigpc_components ZigPC components
-
-The Zigbee Protocol Controller is made of a number of components, each component is described here.
-
- */

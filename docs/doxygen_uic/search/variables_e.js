@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['name_0',['name',['../structuic__mqtt__dotdot__name__and__location__state__t.html#ac1efcb65c04b4cda924019df633b8a48',1,'uic_mqtt_dotdot_name_and_location_state_t::name()'],['../structprocess.html#a78b62efdeb69a53c334a2fe0909c84cd',1,'process::name()']]],
+  ['name_0',['name',['../structprocess.html#a78b62efdeb69a53c334a2fe0909c84cd',1,'process']]],
   ['name_1',['Name',['../struct__ConfigurationParameter.html#aee5b1d6ff3a7d9c825e318e5fac54dd6',1,'_ConfigurationParameter']]],
-  ['name_2',['name',['../structuic__mqtt__dotdot__name__and__location__updated__state__t.html#a56fd1dec6f9b8a34da8c727a40172a52',1,'uic_mqtt_dotdot_name_and_location_updated_state_t']]],
+  ['name_2',['name',['../structuic__mqtt__dotdot__name__and__location__updated__state__t.html#a56fd1dec6f9b8a34da8c727a40172a52',1,'uic_mqtt_dotdot_name_and_location_updated_state_t::name()'],['../structuic__mqtt__dotdot__name__and__location__state__t.html#ac1efcb65c04b4cda924019df633b8a48',1,'uic_mqtt_dotdot_name_and_location_state_t::name()']]],
   ['name_5fsupport_3',['name_support',['../structuic__mqtt__dotdot__groups__state__t.html#a72b9c00dd5f505bd859cddec83b47899',1,'uic_mqtt_dotdot_groups_state_t::name_support()'],['../structuic__mqtt__dotdot__groups__updated__state__t.html#ae8d975bed48935dba2c8145ebf15c744',1,'uic_mqtt_dotdot_groups_updated_state_t::name_support()'],['../structuic__mqtt__dotdot__scenes__state__t.html#ab33e98ca4c096e57966d15a364699ba9',1,'uic_mqtt_dotdot_scenes_state_t::name_support()'],['../structuic__mqtt__dotdot__scenes__updated__state__t.html#a02335e2c039cd0e91b96944ee2ee3cbe',1,'uic_mqtt_dotdot_scenes_updated_state_t::name_support()']]],
   ['needspoll_4',['needspoll',['../structprocess.html#a2b2ad213f87d7a470caf9f350a436f7c',1,'process']]],
   ['neighbor_5fadded_5',['neighbor_added',['../structuic__mqtt__dotdot__diagnostics__state__t.html#a39d803fba964a1e0ee3af69d2989bebf',1,'uic_mqtt_dotdot_diagnostics_state_t::neighbor_added()'],['../structuic__mqtt__dotdot__diagnostics__updated__state__t.html#af1fb137b63cdc784537332ae997818d7',1,'uic_mqtt_dotdot_diagnostics_updated_state_t::neighbor_added()']]],

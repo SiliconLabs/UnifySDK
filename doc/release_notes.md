@@ -1,10 +1,10 @@
 # Unify Release Notes
 
 Below are descriptions of the changes to our shared components.
-These changes affects all applications based on the Unify Host SDK.
+These changes affects all applications based on the Unify SDK.
 
 For the full documentation of this latest release, go to
-[Unify Host SDK documentation](https://siliconlabs.github.io/UnifySDK).
+[Unify SDK documentation](https://siliconlabs.github.io/UnifySDK).
 
 For the application specific release notes, please follow these links:
 
@@ -13,16 +13,35 @@ For the application specific release notes, please follow these links:
 * [Dev GUI](../applications/dev_ui/dev_gui/release_notes.md)
 * [Image Provider](../applications/image_provider/release_notes.md)
 * [UPVL](../applications/upvl/release_notes.md)
-* [ZigPC](../applications/zigpc/release_notes.md)
-* [ZPC](../applications/zpc/release_notes.md)
 * [UPTICap](../applications/upti_cap/release_notes.md)
 * [UPTIWriter](../applications/upti_writer/release_notes.md)
-* [AoXPC](../applications/aox/applications/aoxpc/release_notes.md)
-* [AoX Positioning application](../applications/aox/applications/positioning/release_notes.md)
-* [CPCd](../applications/cpcd/release_notes.md)
-* [OpenThread Border Router](../applications/openthread_border_router/release_notes.md)
-* [Zigbeed](../applications/zigbeed/release_notes.md)
 * [Portable Runtime](../portable_runtime/release_notes.md)
+* [Emulated End Device](../applications/examples/applications/emulated_end_device/release_notes.md)
+
+## [1.7.0] - Feb 2025
+
+### Added (1.7.0)
+
+* Emulated End Device(EED) application is added supporting majority of Unify clusters with mandatory commands and attributes with Alpha quality.
+
+### Changed (1.7.0)
+
+* Z-Wave Protocol Controller is now released as separate repo.
+  (https://github.com/SiliconLabsSoftware/z-wave-protocol-controller)
+* Portable Runtime CLI and GUI are now released only as assests.
+* Removed/Deprecated AoxPC, ZigPC, Zigbeed and other Host SDK components.
+* Removed the obsolete home_assistant application.
+* Updated the Portable runtime to align with the removed/deprecated components in Unify.
+* ZAP version updated to v2025.01.15
+  
+### Known Issues (1.7.0)
+
+* **UIC-2261**: Attribute Mapper parent operator navigation does not always work (only on left hand sides).
+  _Note_: Avoid using the parent operator in UAM files, use the common_parent_type scope setting instead.
+* **UIC-2228**: Attribute Mapper reducer is disabled due to errors. The mapper will not successfully reduce constant expressions.
+  _Note_: Avoid unnecessary calculations in the UAM files. e.g. write 100 instead of 10*10.
+* **UIC-2725**: The Dotdot MQTT library does not always use enum names, even though the Unify Specification indicates that it should.
+  _Note_: Be tolerant to numbers instead of strings for enums.
 
 ## [1.6.0] - August 2024
 

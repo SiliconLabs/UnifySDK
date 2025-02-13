@@ -3,9 +3,13 @@
     "version": "Unify-dotdot-v1",
     "override": "../../uic_dotdot/zap/addon-override.js",
     "helpers": [
-        "../../uic_dotdot/zap/addon-helper.js",
-        "../../uic_dotdot/zap/addon-base-helper.js"
+        "../../uic_dotdot/zap/addon-helper.js"
     ],
+    "options": {
+        "types": {
+            "CSKey":"uint8_t"
+        }
+    },
     "templates": [{
             "path": "unify_dotdot_defined_attribute_types_h.zapt",
             "name": "Interface for the ZCL/DotDot attributes for the attribute store",

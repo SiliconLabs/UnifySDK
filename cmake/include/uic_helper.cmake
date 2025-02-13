@@ -76,20 +76,20 @@ if(NOT TARGET sl_status_strings)
   if(EXISTS ${COMMON_LOCATION})
     add_custom_command(
       OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
-      COMMAND bash ${COMMON_LOCATION}/scripts/sl_status_strings.sh ${COMMON_LOCATION}/include >
+      COMMAND python3 ${COMMON_LOCATION}/scripts/sl_status_strings.py ${COMMON_LOCATION}/include >
               ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
       DEPENDS ${COMMON_LOCATION}/include/sl_status.h
-              ${COMMON_LOCATION}/scripts/sl_status_strings.sh)
+              ${COMMON_LOCATION}/scripts/sl_status_strings.py)
     add_custom_target(
       sl_status_strings
       DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)
   else()
     add_custom_command(
       OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
-      COMMAND bash ${DIR_OF_UIC_HELPER_CMAKE}/../../scripts/sl_status_strings.sh >
+      COMMAND python3 ${DIR_OF_UIC_HELPER_CMAKE}/../../scripts/sl_status_strings.py ${DIR_OF_UIC_HELPER_CMAKE}/../../include >
               ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
       DEPENDS ${DIR_OF_UIC_HELPER_CMAKE}/../../include/sl_status.h
-              ${DIR_OF_UIC_HELPER_CMAKE}/../../scripts/sl_status_strings.sh)
+              ${DIR_OF_UIC_HELPER_CMAKE}/../../scripts/sl_status_strings.py)
     add_custom_target(
       sl_status_strings
       DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)

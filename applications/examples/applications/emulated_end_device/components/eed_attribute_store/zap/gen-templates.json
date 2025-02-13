@@ -1,0 +1,25 @@
+{
+  "name": "EED Attribute Store",
+  "version": "Unify-dotdot-v1",
+  "override": "../../../../../../../components/uic_dotdot/zap/addon-override.js",
+  "helpers": [
+    "../../../../../../../components/uic_dotdot/zap/addon-helper.js"
+  ],
+  "options": {
+    "types": {
+        "CSKey":"uint8_t"
+    }
+},
+  "templates": [
+    {
+      "path": "src/eed_attribute_store_clusters.c.zapt",
+      "name": "Source file for the ZCL/DotDot attributes EED handling",
+      "output": "src/eed_attribute_store_clusters.c"
+    },
+    {
+      "path": "src/eed_dotdot_create_clusters.cpp.zapt",
+      "name": "Source file for the ZCL/DotDot attributes EED handling",
+      "output": "src/eed_dotdot_create_clusters.cpp"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# Unify Host SDK User guide
+# Unify SDK User guide
 
 This guide contains information which is common to all Unify applications.
 For a having a general setup running, it assumes you have gone over the [Getting Started guide](getting_started_unify.md).
@@ -53,7 +53,7 @@ The log level can be set globally and per tag.
 For example:
 
 ```bash
-zpc  --log.level i --log.tag_level uic_component_fixtures:d,mqtt_client:d
+eed --eed.datastore_file ./eed.db  --log.level i --log.tag_level uic_component_fixtures:d,mqtt_client:d
 ```
 
 This will set the global log level to info but it enables the debug on the two
@@ -89,9 +89,9 @@ Set the parameter value to `0` to turn off this feature.
 
 #### Configure log rotation syslog
 
-If you have enabled debug logging of the Unify Host SDK packages. Chances are you
-will quite fast load up some big log files in syslog. To mitigate this you
-can change the log rotation in the syslog logrotation file
+If you have enabled debug logging of the Unify SDK packages. Chances are you
+will load up some big log files in syslog quite fast. To mitigate this you
+can change the log rotation in the syslog log rotation file
 `/etc/logrotate.d/rsyslog`. Documentation on log rotation settings can be
 found [here](https://manpages.debian.org/stretch/logrotate/logrotate.8.en.html).
 

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="System Metrics Chapter" name="description" />
+<meta content="Metrics" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. System Metrics &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter12-system-metrics.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13. Unify Controller Language Data Model (Experimental)" href="Chapter13-unify-controller-language-data-model.html" />
+    <link rel="prev" title="11. Unify Applications monitoring" href="Chapter11-unify-applications-monitoring.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.7.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_unify.html">Getting Started with Unify</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave and ZigBee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter08-binding.html">8. Binding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter09-descriptor-cluster.html">9. Descriptor Cluster ( Experimental )</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter10-name-and-location-service.html">10. Name and Location Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter11-unify-applications-monitoring.html">11. Unify Applications Monitoring</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">12. System Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter13-unify-controller-language-data-model.html">13. Unify Controller Language Data Model ( Experimental )</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system-metrics">
+<span id="unify-specifications-chapter-system-metrics"></span><h1><span class="section-number">12. </span>System Metrics<a class="headerlink" href="#system-metrics" title="Permalink to this heading"></a></h1>
+<p>This chapter describes how to report and read system metrics. System metrics
+are a diagnostic tool allowing to retrieve data relating to the a machine
+health and performance.</p>
+<section id="overview">
+<h2><span class="section-number">12.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>System metrics intend to provide machine-level diagnostics. Any host/machine
+participating in the system should be able to be configured and reports
+its system metrics data.</p>
+<p>A SystemMetrics Unify cluster has been designed for this reporting purpose.
+It operates as all other clusters, with Attributes, SupportedCommands
+and Commands.</p>
+<p>The difference about this cluster, is that it does not use any UNID, but instead
+Machine IDs. An overview of the publications under this cluster is shown below:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-machine-id/&lt;id&gt;/SystemMetrics/Attributes/&lt;AttributeName&gt;/Reported</span> - {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="w"> </span>}
+<span class="ow">ucl/by-machine-id/&lt;id&gt;/SystemMetrics/SupportedCommands</span> - {<span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;WriteAttributes&quot;</span><span class="p">]</span><span class="w"> </span>}
+<span class="ow">ucl/by-machine-id/&lt;id&gt;/SystemMetrics/Commands/&lt;CommandName&gt;</span> - {<span class="w"> </span><span class="nt">&quot;field1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span>}
+</pre></div>
+</div>
+<p>No endpoints are used for this cluster.</p>
+<p>Note that all communications and commands executions are expected to be
+instantaneous in the <cite>ucl/by-machine-id/</cite> topic space. Therefore, the Desired value
+of attributes MUST NOT be published under this topic space.</p>
+</section>
+<section id="machine-id">
+<h2><span class="section-number">12.2. </span>Machine ID<a class="headerlink" href="#machine-id" title="Permalink to this heading"></a></h2>
+<p>Each Machine connecting to the system is responsible for creating a unique
+Machine ID.</p>
+<p>If no unique machine-id is available natively on the platform running Unify
+components, the following elements can be used as a Machine ID:</p>
+<ul class="simple">
+<li><p><cite>FQDN</cite>: Fully Qualified Domain Name</p></li>
+<li><p><cite>hostname</cite>: Hostname assigned to the machine</p></li>
+<li><p><cite>uuid</cite>: Disk UUIDs</p></li>
+</ul>
+<p>Developers and system integrators SHOULD ensure make sure that Machine IDs
+connected to a given MQTT brokers are unique, so no collisions will happens
+when reporting SystemMetrics.</p>
+</section>
+<section id="example">
+<h2><span class="section-number">12.3. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<p>The minimum required attribute for the System Metrics is the
+<em>ReportingIntervalSeconds</em> attribute. This attribute is a setting that
+controls how often the system metrics attributes are reported, in seconds.
+The value 0 means that the system metrics are not reported.</p>
+<p>System Metrics attributes MUST be published once at startup, and subsequently
+following the frequency configured in the <em>ReportingIntervalSeconds</em> attribute.</p>
+<p><em>ReportingIntervalSeconds</em> SHOULD be set to 0 by default and reporting metrics
+SHOULD be disabled by default.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-9630582207bc34ececdd25487f4832f78b08aa0a.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#008000&gt;MQTT Unsubscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;Machine 1: id raspberrypi&quot; as rpi
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;IoT Service&quot; as iot_service
+
+rpi -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-machine-id/+/SystemMetrics/Commands/+&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-machine-id/+/SystemMetrics/Attributes/#&lt;/font&gt;
+iot_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-machine-id/+/SystemMetrics/SupportedCommands/#&lt;/font&gt;
+
+== System Metrics reporting is ready ==
+
+rpi -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Commands/WriteAttributes&lt;/font&gt;
+rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Attributes/ReportingIntervalSeconds/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:0}
+&amp; mqtt_broker -&gt; iot_service
+
+rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Attributes/DisksUsage/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[{&quot;UUID&quot;:&quot;disk1&quot;,&quot;UsagePercent&quot;: 20.45,&quot;FreeSpaceMB&quot;: 235600.9}]}
+&amp; mqtt_broker -&gt; iot_service
+rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Attributes/CPUUsagePercent/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[8.2]}
+&amp; mqtt_broker -&gt; iot_service
+
+rnote over rpi: Metrics are published once\n but not refreshed.
+
+== IoT Service wants updates every 10 seconds ==
+
+iot_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;ReportingIntervalSeconds&quot;:10}
+&amp; mqtt_broker -&gt; rpi
+rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Attributes/ReportingIntervalSeconds/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:10}
+&amp; mqtt_broker -&gt; iot_service
+
+loop Every 10 seconds
+  rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Attributes/DisksUsage/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[{&quot;UUID&quot;:&quot;disk1&quot;,&quot;UsagePercent&quot;: 20.45,&quot;FreeSpaceMB&quot;: 235600.9}]}
+  &amp; mqtt_broker -&gt; iot_service
+  rpi -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-machine-id/raspberrypi/SystemMetrics/Attributes/CPUUsagePercent/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[8.2]}
+  &amp; mqtt_broker -&gt; iot_service
+end"/>
+</p>
+</section>
+<section id="system-metrics-attributes">
+<h2><span class="section-number">12.4. </span>System Metrics attributes<a class="headerlink" href="#system-metrics-attributes" title="Permalink to this heading"></a></h2>
+<p>System Metrics attributes help reporting the state of a machine on which the
+unify applications are running.</p>
+<p>System Metrics attributes MUST be reported following the
+<em>ReportingIntervalSeconds</em>, but some exceptions MAY be made if an attribute
+changes sporadically, like the <em>PowerPlugged</em> attribute.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

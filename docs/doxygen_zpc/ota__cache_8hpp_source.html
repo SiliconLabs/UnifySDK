@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('ota__cache_8hpp_source.html',''); init
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#a302d770781810737a0798f3557d70cec">   85</a></span>  std::string <a class="code hl_function" href="classTimeoutHandler.html#a302d770781810737a0798f3557d70cec">get_unid</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#af68a8bf727108e78de08ab5b160cdc05">   86</a></span>  std::string <a class="code hl_function" href="classTimeoutHandler.html#af68a8bf727108e78de08ab5b160cdc05">get_subscribe_topic</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#a53837c054fefb7a00dc002293ec1662c">   87</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classTimeoutHandler.html#a53837c054fefb7a00dc002293ec1662c">get_unid_poll_state</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#aca969c491ddfbfe3aa5da3107c4776b0">   88</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classTimeoutHandler.html#aca969c491ddfbfe3aa5da3107c4776b0">set_unid_poll_state</a>(<span class="keywordtype">bool</span> <a class="code hl_variable" href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#aca969c491ddfbfe3aa5da3107c4776b0">   88</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classTimeoutHandler.html#aca969c491ddfbfe3aa5da3107c4776b0">set_unid_poll_state</a>(<span class="keywordtype">bool</span> state) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#ae53892a8ebc55e2d89d7e0d165f1f781">   89</a></span>  <a class="code hl_typedef" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a> <a class="code hl_function" href="classTimeoutHandler.html#ae53892a8ebc55e2d89d7e0d165f1f781">get_image_ready_cb</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classTimeoutHandler.html#a5dac1008cd60998876fcf90b49191b86">   90</a></span>  <a class="code hl_struct" href="structctimer.html">ctimer</a> *<a class="code hl_function" href="classTimeoutHandler.html#a5dac1008cd60998876fcf90b49191b86">get_ctimer_pointer</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};</div>
@@ -276,14 +276,13 @@ $(document).ready(function(){initNavTree('ota__cache_8hpp_source.html',''); init
 <div class="ttc" id="astructuic__ota_1_1meta__t_html"><div class="ttname"><a href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a></div><div class="ttdoc">Struct that describes meta for a new available image.</div><div class="ttdef"><b>Definition:</b> ota.hpp:186</div></div>
 <div class="ttc" id="auic__typedefs_8h_html_aaf28aac2318abc987ffd6f71dcda14c2"><div class="ttname"><a href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a></div><div class="ttdeci">uint8_t dotdot_endpoint_id_t</div><div class="ttdef"><b>Definition:</b> uic_typedefs.h:38</div></div>
 <div class="ttc" id="auic__typedefs_8h_html_afa204c3a4aca223f5345d60519083395"><div class="ttname"><a href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a></div><div class="ttdeci">const char * dotdot_unid_t</div><div class="ttdef"><b>Definition:</b> uic_typedefs.h:39</div></div>
-<div class="ttc" id="azwave__multi__channel__transport_8c_html_a9ad7ce1c8d5add698d70903b7db6d795"><div class="ttname"><a href="zwave__multi__channel__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a></div><div class="ttdeci">static send_data_state_t state</div><div class="ttdef"><b>Definition:</b> zwave_multi_channel_transport.c:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_79802ae3566d880275ef9cc4670d3b68.html">uic_ota</a></li><li class="navelem"><a class="el" href="dir_0c4b3fc701aead651ff7e6f61b61f7ac.html">src</a></li><li class="navelem"><a class="el" href="ota__cache_8hpp.html">ota_cache.hpp</a></li>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:44 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:09 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

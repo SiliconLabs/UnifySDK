@@ -58,7 +58,7 @@ applicable to this document can be found in the LICENSE.md file.
       <attribute id="0104" name="VelocityLift" type="uint16" writable="true" default="0" />
       <attribute id="0105" name="AccelerationTimeLift" type="uint16" writable="true" default="0" />
       <attribute id="0106" name="DecelerationTimeLift" type="uint16" writable="true" default="0" />
-      <attribute id="0107" name="Mode" type="map8" required="true" default="4">
+      <attribute id="0107" name="Mode" type="map8" required="true" writable="true" default="4">
         <bitmap>
           <element name="MotorDirectionReversed" type="bool" mask="01" />
           <element name="CalibrationMode" type="bool" mask="02" shiftRight="1" />

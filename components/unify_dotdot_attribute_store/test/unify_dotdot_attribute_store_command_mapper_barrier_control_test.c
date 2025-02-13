@@ -113,34 +113,19 @@ void test_barrier_control_go_to_percent_command_support()
   dotdot_set_barrier_control_barrier_position(expected_unid,
                                               expected_endpoint_id,
                                               DESIRED_ATTRIBUTE,
-                                              45);
-  // Try higher than 100%
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    uic_mqtt_dotdot_barrier_control_go_to_percent_callback(
-                      expected_unid,
-                      expected_endpoint_id,
-                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
-                      120));
-
+                                              100);
   TEST_ASSERT_EQUAL(
     100,
     dotdot_get_barrier_control_barrier_position(expected_unid,
                                                 expected_endpoint_id,
                                                 DESIRED_ATTRIBUTE));
-
-  // Try a valid value
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+  // Try Value other than 100% or 0%
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_PARAMETER,
                     uic_mqtt_dotdot_barrier_control_go_to_percent_callback(
                       expected_unid,
                       expected_endpoint_id,
                       UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
                       88));
-
-  TEST_ASSERT_EQUAL(
-    88,
-    dotdot_get_barrier_control_barrier_position(expected_unid,
-                                                expected_endpoint_id,
-                                                DESIRED_ATTRIBUTE));
 
   // Update a little the configuration
   test_configuration.clear_reported_on_desired_updates = true;
@@ -158,4 +143,20 @@ void test_barrier_control_go_to_percent_command_support()
     dotdot_get_barrier_control_barrier_position(expected_unid,
                                                 expected_endpoint_id,
                                                 DESIRED_ATTRIBUTE));
+                                                
+  attribute_store_node_t capabilities_node = attribute_store_add_node(
+    DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CAPABILITIES,
+    attribute_store_get_root());
+  uint8_t capabilities = 1;  // Still not supported
+  attribute_store_set_reported(capabilities_node,
+                               &capabilities,
+                               sizeof(capabilities));
+  
+  // Try Value greater than 100%
+  TEST_ASSERT_EQUAL(SL_STATUS_INVALID_RANGE,
+                    uic_mqtt_dotdot_barrier_control_go_to_percent_callback(
+                      expected_unid,
+                      expected_endpoint_id,
+                      UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL,
+                      120));
 }

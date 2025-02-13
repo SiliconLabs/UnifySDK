@@ -5,8 +5,7 @@
 Unify Framework has a number of service applications which enables different basic
 functionality. For unlocking all features of the Unify Framework, install the Debian
 packages of the applications below.
-It is recommended to use the Developer GUI for controlling the Unify Framework IoT Protocol Controllers such as `ZPC`,
-`ZigPC` or `AoXPC`.
+It is recommended to use the Developer GUI for controlling the Unify devices in Unify Ecosystem including Emulated End Device(EED)
 
 For installation steps refer to the [](how-to-install) section.
 
@@ -18,55 +17,13 @@ For installation steps refer to the [](how-to-install) section.
 
 ## Choose an IoT protocol
 
-For including an IoT protocol stack, you need to install and setup at least one protocol controller.
+For including an IoT protocol stack, you need to install and setup at least one protocol controller. 
 
-- [](zpc)
-- [](zigpc)
-- [](aoxpc)
+For Zwave Protocol controller bring up, please refer to related chapter of [Z-Wave-Protocol-Controller documentation](https://siliconlabssoftware.github.io/z-wave-protocol-controller).
 
-(zpc)=
+### Emulated End Device
 
-### Z-Wave Protocol Controller (ZPC)
-
-**Prerequisite**: Required hardware for using the `ZPC` is a [Z-Wave module](https://www.silabs.com/wireless/z-wave)
-which is flashed with a SerialAPI firmware.
-
-The Z-Wave Protocol Controller allows Unify to control Z-Wave devices. Starting
-quickly is achieved by just installing the `uic-zpc` Debian package. This should
-automatically start up the `ZPC` after the configuration steps. You need to
-provide the USB path for the Z-Wave module at the configuration steps.
-
-A more in depth getting started guide specifically for the `ZPC` is
-[ZPC User's Guide](../applications/zpc/readme_user.md).
-
-(zigpc)=
-
-### Zigbee Protocol Controller (ZigPC)
-
-**Prerequisite**: Required hardware for using the `ZigPC` is a [Zigbee module](https://www.silabs.com/wireless/zigbee) which could be EFR32MG12/EFR32xG22
-running NCP or CPC Firmware for Zigbee.
-
-The `ZigPC` enables the Unify Framework to control Zigbee devices. Starting quickly
-can be done by simply installing the `uic-zigpc` Debian package and configuring
-the USB device at the configuration step. After installing, the protocol
-controller should be started automatically as a systemd service.
-
-For more information on getting started with the `ZigPC` is placed in
-[ZigPC User's Guide](../applications/zigpc/readme_user.md).
-
-(aoxpc)=
-
-### Bluetooth Angle of Arrival/Departure Protocol Controller (AoXPC)
-
-**Prerequisite**: Required hardware for using the `AoXPC` is a [Bluetooth module](https://www.silabs.com/wireless/bluetooth)
-EFR32xG22 running NCP Firmware for AoXPC.
-
-Lastly of the protocol controllers the above approach can again be used for the
-`AoXPC`. Installing `uic-aoxpc`, going through configuration steps and it should
-be running.
-
-For more information on getting started with the `AoXPC` is found in
-[AoXPC User Guide](../applications/aox/applications/aoxpc/readme_user.md).
+For Unify bring up without any protocol controller , [EED](../applications/examples/applications/emulated_end_device/readme_user.md) can be used.
 
 ### Evaluation after Installation
 

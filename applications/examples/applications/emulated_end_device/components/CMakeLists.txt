@@ -1,0 +1,9 @@
+add_subdirectory(eed_application_monitoring)
+add_subdirectory(eed_config)
+add_subdirectory(eed_datastore)
+add_subdirectory(eed_attribute_store)
+add_subdirectory(eed_stdin)
+add_subdirectory(eed_node_state)
+add_subdirectory(eed_attribute_mapper)
+add_subdirectory(eed_group_dispatch)
+

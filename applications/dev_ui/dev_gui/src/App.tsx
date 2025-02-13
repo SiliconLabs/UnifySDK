@@ -20,7 +20,6 @@ import RFTelemetryList from './pages/rf-telemetry/rf-telemetry-list/rf-telemetry
 import RFTelemetry from './pages/rf-telemetry/rf-telemetry/rf-telemetry';
 import UPTI from './pages/upti/upti-list/upti-list';
 import UPTITrace from './pages/upti/upti-trace/upti-trace';
-import Locators from './pages/locators/locators';
 import ConfigurationParamsList from './pages/configuration-params/configuration-params-list/configuration-params-list';
 import ConfigurationParams from './pages/configuration-params/configuration-params/configuration-params';
 import SystemMetricsList from './pages/system-metrics/system-metrics-list/system-metrics-list';
@@ -266,7 +265,6 @@ class App extends Component<{}, AppState> {
                   <Redirect from="/rftelemetry/:unid/" exact to="/rftelemetry/" />
                   <Route path='/systemmetrics' exact render={() => <SystemMetricsList  {...baseProps} SystemMetricsList={this.state.SystemMetrics} />} />
                   <Route path='/systemmetrics/:mid' exact render={(pr) => <SystemMetrics IsConnected={this.state.IsConnected || false} SystemMetricsList={this.state.SystemMetrics} Mid={pr.match.params.mid} SocketServer={this.state.SocketServer} />} />
-                  <Route path='/locators' exact render={() => <Locators {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/ota' exact render={() => <OTA ref={this.changeOTA}  {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/app-monitoring' exact render={() => <AppMonitoring ref={this.changeAppMonitoring}  {...baseProps} AppMonitoringList={this.state.AppMonitoringList} />} />
                   <Route path='/configurationparameters' exact render={() => <ConfigurationParamsList ref={this.changeConfParams} {...baseProps} NodeList={this.state.NodeList} />} />

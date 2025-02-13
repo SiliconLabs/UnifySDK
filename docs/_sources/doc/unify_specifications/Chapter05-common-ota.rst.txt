@@ -88,9 +88,6 @@ The table below shows suggestions how to generate different UIID strings.
   * - Technology
     - UIID components
     - Suggestion
-  * - ZigBee
-    - "ZigBee"+ManufacturerCode+ImageType
-    - ZigBee010103
   * - Z-Wave
     - ZWave-ManufacturerID-ProductType-ProductID-FirmwareTarget-HardwareVersion
     - ZWave-0000-0002-0004-00-01

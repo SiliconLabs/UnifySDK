@@ -1,0 +1,24 @@
+// Barrier Control rules
+def zb_MOVING_STATE 0x01030001
+def zb_SAFETY_STATUS 0x01030002
+def zb_CAPABILITIES 0x01030003
+def zb_OPEN_EVENTS 0x01030004
+def zb_CLOSE_EVENTS 0x01030005
+def zb_COMMAND_OPEN_EVENTS 0x01030006
+def zb_COMMAND_CLOSE_EVENTS 0x01030007
+def zb_OPEN_PERIOD 0x01030008
+def zb_CLOSE_PERIOD 0x01030009
+def zb_BARRIER_POSITION 0x0103000a
+
+// Clear desired here, to avoid reported/desired mismatches in the Moving State
+scope 0 chain_reaction(0) clear_desired(1) {
+
+  // If the barrier position reported != desired, then it is moving
+  r'zb_MOVING_STATE =
+    if (fn_is_any_undefined(r'zb_BARRIER_POSITION,d'zb_BARRIER_POSITION)) 0
+    if (r'zb_BARRIER_POSITION > d'zb_BARRIER_POSITION) 1
+    if (r'zb_BARRIER_POSITION < d'zb_BARRIER_POSITION) 2 0
+    
+  r'zb_BARRIER_POSITION = if(e'zb_BARRIER_POSITION) 255 undefined
+  
+}

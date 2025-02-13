@@ -3,9 +3,7 @@
 //To change the stucture of the SupportedClusters, modify supported-clusters.zapt
 
 const SupportedClusters = {
-    AoXLocator: "AoXLocator", 
-	AoXPositionEstimation: "AoXPositionEstimation", 
-	BarrierControl: "BarrierControl", 
+    BarrierControl: "BarrierControl", 
 	Basic: "Basic", 
 	Binding: "Binding", 
 	ColorControl: "ColorControl", 

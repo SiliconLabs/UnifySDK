@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -66,9 +66,9 @@
 <li class="toctree-l2"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#development-platform-recommendations">Development Platform Recommendations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-eed">Developing EED</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#developing-protocol-controllers">Developing protocol controllers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#extend-ucl-clusters">Extend UCL clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extend-ucl-clusters-to-non-zigbee-controllers">Extend UCL clusters to non-zigbee controllers</a></li>
 </ul>
 </li>
 </ul>
@@ -113,86 +113,20 @@
 <p>The IoT or cloud connector must use UCL (MQTT) to communicate with the other components of Unify. See <a class="reference internal" href="how_to_develop_an_iot_service.html"><span class="doc std std-doc">How to Develop an IoT service</span></a> Unify uses MQTT to communicate among each component using the Mosquitto MQTT broker. UCL is the format of the MQTT messages. The <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a> contains the definitions for UCL.</p>
 <p>Also see <a href="../reference_ucl_mqtt/index.html">UCL MQTT API</a></p>
 </section>
+<section id="developing-eed">
+<h2>Developing EED<a class="headerlink" href="#developing-eed" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../applications/examples/applications/emulated_end_device/readme_developer.html"><span class="doc std std-doc">Building EED</span></a> on how to build EED. The section also has some useful notes for developers interested in updating EED.</p>
+</section>
 <section id="developing-protocol-controllers">
 <h2>Developing protocol controllers<a class="headerlink" href="#developing-protocol-controllers" title="Permalink to this heading"></a></h2>
 <p>See <a class="reference internal" href="how_to_develop_a_protocol_controller.html"><span class="doc std std-doc">How to Develop a Protocol Controller</span></a></p>
 <p>The attribute mapper helps to translate protocol commands to UCL MQTT messages.
 See <a class="reference internal" href="how_to_write_uam_files.html"><span class="doc std std-doc">How to write UAM files</span></a></p>
 </section>
-<section id="extend-ucl-clusters">
-<h2>Extend UCL clusters<a class="headerlink" href="#extend-ucl-clusters" title="Permalink to this heading"></a></h2>
-<p>See <a class="reference internal" href="../applications/zpc/how_to_interact_with_clusters.html"><span class="doc std std-doc">How to write a new Cluster</span></a></p>
-<p>It might be needed for non-zigbee controllers if some description are missing.</p>
+<section id="extend-ucl-clusters-to-non-zigbee-controllers">
+<h2>Extend UCL clusters to non-zigbee controllers<a class="headerlink" href="#extend-ucl-clusters-to-non-zigbee-controllers" title="Permalink to this heading"></a></h2>
+<p>Refer related chapter in <a class="reference external" href="https://siliconlabssoftware.github.io/z-wave-protocol-controller">Z-Wave-Protocol-Controller documentation</a></p>
 </section>
-<section id="overview-of-relations-among-unify-applications">
-<h2>Overview of relations among Unify Applications<a class="headerlink" href="#overview-of-relations-among-unify-applications" title="Permalink to this heading"></a></h2>
-<p>The Unify Framework consists of several applications including Protocol Controllers, IoT
-Services (e.g. Developer GUI, UPTICap) and multiple application services that
-facilitate various functionalities such as SmartStart Provisioning, Group
-Management, Name and Location Service and OTA Image Provider.</p>
-<p>The following table presents the relationship amongst Unify Framework applications and
-the Unify Protocol Controllers. If a given component is supported via a
-Protocol Controller, it will be marked as [x].</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th></th>
-<th style="text-align: left;"><a href="../applications/zpc/readme_user.html">ZPC</a></th>
-<th style="text-align: left;"><a href="../applications/zigpc/readme_user.html">ZigPC</a></th>
-<th style="text-align: left;"><a href="../applications/aox/applications/aoxpc/readme_user.html">AoXPC</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../applications/upvl/readme_user.html">UPVL</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/gms/readme_user.html">GMS</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/nal/readme_user.html">NAL</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-</tr>
-<tr>
-<td><a href="../applications/image_provider/readme_user.html">OTA Image Provider</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/dev_ui/dev_gui/readme_user.html">Dev GUI</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-</tr>
-<tr>
-<td><a href="../applications/upti_cap/readme_user.html">UPTICap</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/upti_writer/readme_user.html">UPTIWriter</a></td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;">[x]</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td><a href="../applications/aox/applications/positioning/readme_user.html">AoX Positioning</a></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">[x]</td>
-</tr>
-</tbody>
-</table></section>
 </section>
 
 

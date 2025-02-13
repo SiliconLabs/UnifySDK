@@ -1,5 +1,0 @@
-#!/bin/sh
-if type "systemctl" > /dev/null; then
-    systemctl stop uic-cpc-hci-bridge.service
-    systemctl disable uic-cpc-hci-bridge.service
-fi

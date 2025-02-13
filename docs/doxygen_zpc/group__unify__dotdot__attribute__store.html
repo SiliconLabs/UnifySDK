@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence<span id="projectnumber">&#160;1.7.0</span>
    </div>
   </td>
  </tr>
@@ -136,10 +136,10 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga6332ab831a42ceb452a175065bbc13ba"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#ga6332ab831a42ceb452a175065bbc13ba">endpoint_node_fetching_function_t</a>) (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
+<tr class="memitem:ga6332ab831a42ceb452a175065bbc13ba"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#ga6332ab831a42ceb452a175065bbc13ba">endpoint_node_fetching_function_t</a>) (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint_id)</td></tr>
 <tr class="memdesc:ga6332ab831a42ceb452a175065bbc13ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function signature that retrieves an Attribute Store node that represents a UNID/Endpoint, under which ZCL attributes are located.  <a href="group__unify__dotdot__attribute__store.html#ga6332ab831a42ceb452a175065bbc13ba">More...</a><br /></td></tr>
 <tr class="separator:ga6332ab831a42ceb452a175065bbc13ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga765a48c9ef85bba9d59cd174ccfa3992"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#ga765a48c9ef85bba9d59cd174ccfa3992">unid_fetching_function_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, char *unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> *<a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
+<tr class="memitem:ga765a48c9ef85bba9d59cd174ccfa3992"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#ga765a48c9ef85bba9d59cd174ccfa3992">unid_fetching_function_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, char *unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> *endpoint_id)</td></tr>
 <tr class="memdesc:ga765a48c9ef85bba9d59cd174ccfa3992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function signature that retrieves a the UNID/Endpoint values associated to a given Attribute Store node.  <a href="group__unify__dotdot__attribute__store.html#ga765a48c9ef85bba9d59cd174ccfa3992">More...</a><br /></td></tr>
 <tr class="separator:ga765a48c9ef85bba9d59cd174ccfa3992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5c78ae816c0163f71f886988d3a5dd5c"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#ga5c78ae816c0163f71f886988d3a5dd5c">unid_only_fetching_function_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, char *unid)</td></tr>
@@ -157,7 +157,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga522c8c35b0ecb2b08a61fc76b30b0407"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#ga522c8c35b0ecb2b08a61fc76b30b0407">unify_dotdot_attribute_store_set_configuration</a> (const <a class="el" href="structunify__dotdot__attribute__store__configuration__t.html">unify_dotdot_attribute_store_configuration_t</a> *configuration)</td></tr>
 <tr class="memdesc:ga522c8c35b0ecb2b08a61fc76b30b0407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the Unify Dotdot Attribute Store component.  <a href="group__unify__dotdot__attribute__store.html#ga522c8c35b0ecb2b08a61fc76b30b0407">More...</a><br /></td></tr>
 <tr class="separator:ga522c8c35b0ecb2b08a61fc76b30b0407"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad025ca3a67069c6196a3497f00647484"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#gad025ca3a67069c6196a3497f00647484">unify_dotdot_attribute_store_set_configuration_update_callback</a> (<a class="el" href="group__unify__dotdot__attribute__store.html#ga7655dca8025ff18b1996501149701571">configuration_udpate_callback_t</a> <a class="el" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>)</td></tr>
+<tr class="memitem:gad025ca3a67069c6196a3497f00647484"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__dotdot__attribute__store.html#gad025ca3a67069c6196a3497f00647484">unify_dotdot_attribute_store_set_configuration_update_callback</a> (<a class="el" href="group__unify__dotdot__attribute__store.html#ga7655dca8025ff18b1996501149701571">configuration_udpate_callback_t</a> callback)</td></tr>
 <tr class="memdesc:gad025ca3a67069c6196a3497f00647484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback to be invoked when the Unify Dotdot Attribute Store component configuration has been updated.  <a href="group__unify__dotdot__attribute__store.html#gad025ca3a67069c6196a3497f00647484">More...</a><br /></td></tr>
 <tr class="separator:gad025ca3a67069c6196a3497f00647484"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -204,7 +204,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>(* endpoint_node_fetching_function_t) (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td>
+          <td class="memname">typedef <a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>(* endpoint_node_fetching_function_t) (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> endpoint_id)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -220,7 +220,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* unid_fetching_function_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, char *unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> *<a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td>
+          <td class="memname">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* unid_fetching_function_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, char *unid, <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> *endpoint_id)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -323,7 +323,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 7 2024 15:21:47 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Feb 13 2025 07:20:11 for Z-Wave Protocol Controller Refrence by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>

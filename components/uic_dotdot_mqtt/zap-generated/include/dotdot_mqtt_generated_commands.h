@@ -4519,6 +4519,20 @@ void uic_mqtt_dotdot_state_publish_generated_interview_command(
 void uic_mqtt_dotdot_state_publish_generated_discover_security_command(
   const dotdot_unid_t unid
 );
+/**
+ * @brief Publishes an incoming/generated EnableNls command for
+ * the State cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/State/GeneratedCommands/EnableNls
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * 
+ * 
+ */
+void uic_mqtt_dotdot_state_publish_generated_enable_nls_command(
+  const dotdot_unid_t unid
+);
 
 /**
  * @brief Publishes an incoming/generated WriteAttributes command for
@@ -4822,113 +4836,6 @@ void uic_mqtt_dotdot_configuration_parameters_publish_generated_write_attributes
   const dotdot_endpoint_id_t endpoint,
   uic_mqtt_dotdot_configuration_parameters_state_t attribute_values,
   uic_mqtt_dotdot_configuration_parameters_updated_state_t attribute_list
-);
-
-/**
- * @brief Publishes an incoming/generated IQReport command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/IQReport
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_iq_report_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated AngleReport command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/AngleReport
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_angle_report_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t *fields
-  
-);
-/**
- * @brief Publishes an incoming/generated AngleCorrection command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/AngleCorrection
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * 
- * @param fields                Struct pointer with the fields value of the command
- * 
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_angle_correction_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t *fields
-  
-);
-
-/**
- * @brief Publishes an incoming/generated WriteAttributes command for
- * the AoXLocator cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXLocator/GeneratedCommands/WriteAttributes
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * @param attribute_values  Values to assign to the attributes
- * @param attribute_list    List of attributes that are written
- */
-void uic_mqtt_dotdot_aox_locator_publish_generated_write_attributes_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  uic_mqtt_dotdot_aox_locator_state_t attribute_values,
-  uic_mqtt_dotdot_aox_locator_updated_state_t attribute_list
-);
-
-
-/**
- * @brief Publishes an incoming/generated WriteAttributes command for
- * the AoXPositionEstimation cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/epID/AoXPositionEstimation/GeneratedCommands/WriteAttributes
- *
- * @param unid      The UNID of the node that sent us the command.
- * 
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * 
- * @param attribute_values  Values to assign to the attributes
- * @param attribute_list    List of attributes that are written
- */
-void uic_mqtt_dotdot_aox_position_estimation_publish_generated_write_attributes_command(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  uic_mqtt_dotdot_aox_position_estimation_state_t attribute_values,
-  uic_mqtt_dotdot_aox_position_estimation_updated_state_t attribute_list
 );
 
 /**

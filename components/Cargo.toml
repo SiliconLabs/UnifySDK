@@ -1,4 +1,5 @@
 [workspace]
+resolver = "2"
 
 members = [
     "uic_rust/unify_tools",

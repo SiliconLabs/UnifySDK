@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Unify Name and Location Service" name="description" />
+<meta content="Name, Location, IoT Service" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. Name and Location Service &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/unify_specifications/Chapter10-name-and-location-service.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/charenc.js"></script>
+        <script src="../../_static/js/crypt.js"></script>
+        <script src="../../_static/js/sha1.js"></script>
+        <script src="../../_static/js/html5-qrcode.min.js"></script>
+        <script src="../../_static/js/qr_code_scanner.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11. Unify Applications monitoring" href="Chapter11-unify-applications-monitoring.html" />
+    <link rel="prev" title="9. The Unify Descriptor Cluster (0xFD13) (Experimental)" href="Chapter09-descriptor-cluster.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.7.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Unify Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_unify.html">Getting Started with Unify</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_framework_services.html">Framework Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocol_controllers.html">Protocol Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unify_iot_services.html">IoT Services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_as_developer.html">Getting Started as a Developer</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unify Specifications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Chapter01-architecture-overview.html">1. Unify Architecture Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter02-ZCL-in-uic.html">2. Dotdot ZCL in Unify Framework for Application Level Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter03-network-management.html">3. Network Management Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter04-scenario-mappings.html">4. Scenario mapping to specific PHYs: Z-Wave and ZigBee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter05-common-ota.html">5. Common OTA FW Update Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter06-service-discovery.html">6. Service Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter07-scenes.html">7. Scene Cluster and the Scene Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter08-binding.html">8. Binding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter09-descriptor-cluster.html">9. Descriptor Cluster ( Experimental )</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10. Name and Location Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter11-unify-applications-monitoring.html">11. Unify Applications Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter12-system-metrics.html">12. System Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter13-unify-controller-language-data-model.html">13. Unify Controller Language Data Model ( Experimental )</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards/known-abbreviations.html">Known Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="name-and-location-service">
+<span id="unify-specifications-chapter-name-and-location-service"></span><h1><span class="section-number">10. </span>Name and Location Service<a class="headerlink" href="#name-and-location-service" title="Permalink to this heading"></a></h1>
+<p>This chapter describes the usage of a common naming and location service for
+PAN nodes in the Unify system.</p>
+<p>This functionality allows IoT Services to assign and readback a Name and a
+Location for each node/endpoint.</p>
+<p>The Name and Location Service is a helper MQTT component that allows to
+perform book-keeping on text names and locations that have been assigned.</p>
+<section id="overview">
+<h2><span class="section-number">10.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The Name and Location Service will operate on the NameAndLocation cluster
+(see the <em>Unify_NameAndLocation.xml</em>).</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-40696c06cfed60d779473c8576aa9e0e1db5e3bb.png" alt="' Style for the diagram
+allow_mixing
+skinparam objectBorderColor black
+
+title Name and Location Service
+
+package &quot;PAN 1&quot; &lt;&lt;Cloud&gt;&gt; {
+
+    object &quot;Protocol Controller 1&quot; as pc_1 #FFFFFF
+    package &quot;Nodes&quot; as pan_1_nodes  &lt;&lt;Rectangle&gt;&gt; {
+        object &quot;Node 1&quot; as node_1_1 #FFFFFF
+        object &quot;Node 2&quot; as node_1_2 #FFFFFF
+    }
+}
+
+package &quot;PAN 2&quot; &lt;&lt;Cloud&gt;&gt; {
+
+    object &quot;Protocol Controller 2&quot; as pc_2 #FFFFFF
+    package &quot;Nodes&quot; as pan_2_nodes &lt;&lt;Rectangle&gt;&gt; {
+        object &quot;Node 3&quot; as node_2_1 #FFFFFF
+        object &quot;Node 4&quot; as node_2_2 #FFFFFF
+    }
+}
+
+object &quot;MQTT Broker&quot; as mqtt_broker #FFFFFF
+object &quot;Name and Location\nService&quot; as naming_service #FFFFFF
+
+pc_1 -down-&gt; mqtt_broker: network info\napplication info
+pc_2 -down-&gt; mqtt_broker: network info\napplication info
+
+mqtt_broker -down-&gt; naming_service: State information about nodes
+naming_service -up-&gt; mqtt_broker : Provides Name And Location"/>
+</p>
+</section>
+<section id="name-and-location-service-mechanism">
+<h2><span class="section-number">10.2. </span>Name and Location Service mechanism<a class="headerlink" href="#name-and-location-service-mechanism" title="Permalink to this heading"></a></h2>
+<p>The Name and Location Service listens to publications to the following topic
+filters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/State</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/#</span></code></p></li>
+</ul>
+<p>to determine a list of nodes (UNID) and endpoints in the network.</p>
+<p>For each Node/Endpoint pair in the network, it will provide a
+NameAndLocation cluster on behalf of all nodes.</p>
+<p>The Name and Location Service MUST monitor the presence of a State topic for
+nodes before it provides a cluster for a node. i.e. there must be data published
+at the <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;unid&gt;/State</span></code> topic for all nodes that it provides
+the NameAndLocation cluster for.
+If the State topic for a node is removed (empty retained publication), the
+Name and Location Service MUST stop providing the NameAndLocation cluster
+for all the endpoints for that UNID.</p>
+<p>A simple example with only 1 endpoint is shown in the following diagram:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-1bd23386c3712aab73a6bd381d2b67cc98946c31.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#008000&gt;MQTT Unsubscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;Name and Location Service\nMQTT Client&quot; as naming_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;Protocol Controller\nUNID: pc_1&quot; as pc_1
+participant &quot;PAN Node\nUNID:node_1&quot; as node_1
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Attributes/EndpointIdList/Reported&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/#&lt;/font&gt;
+
+== Name and Location Service is ready ==
+
+rnote over pc_1, node_1: Node added to the\nnetwork and discovered.
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 detected.\nAssuming 1 endpoint
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+== IoT Service can manipulate the Name cluster ==
+
+iot_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;Name&quot;:&quot;Wall outlet&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Wall outlet&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Wall outlet&quot;}
+
+rnote over pc_1: reboots
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;{&quot;NetworkStatus&quot;: &quot;Unavailable&quot;, ...}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 not removed,\nNameAndLocation is still available\neven offline
+
+iot_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;Location&quot;:&quot;Entrance&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Entrance&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Entrance&quot;}
+
+rnote over pc_1, node_1: Removes the node\nfrom the network
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;&lt;i&gt;Empty
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 removed\nunretaining all publications\nfor all its endpoints.
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands
+naming_service -&gt; mqtt_broker: &lt;font color=#008000&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;"/>
+</p>
+<p>If an node has multiple endpoints with functionalities, the Name and Location
+Service will be able to detect publications under for additional endpoints.</p>
+<p>The Name and Location Service SHOULD assume that endpoints do not disappear, even
+if they seem to temporarily loose application functionalities.
+For example, if endpoint 3 was detected but an re-interview makes it go away,
+the Name and Location Service SHOULD continue to provide the NameAndLocation
+for endpoint 3.</p>
+<p>A multi-endpoint example is shown in the following diagram:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-65d92ec2484a3fb01b2dc8e8952fcbde5de9eb53.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;Name and Location Service\nMQTT Client&quot; as naming_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;Protocol Controller\nUNID: pc_1&quot; as pc_1
+participant &quot;PAN Node\nUNID:node_1&quot; as node_1
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/#&lt;/font&gt;
+
+== Name and Location Service is ready ==
+
+rnote over pc_1, node_1: Node added to the\nnetwork and discovered.
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 detected.\nAssuming 1 endpoint
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/Basic/Attributes/PowerSource/Reported \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 / ep1 detected.
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+== IoT Service can manipulate the NameAndLocation cluster ==
+
+iot_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;Name&quot;:&quot;Wall outlet&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Wall outlet&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Wall outlet&quot;}
+
+== If all other application functionalities disappear from ep1, Name And Location stays available ==
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/Basic/Attributes/PowerSource/Reported \n&lt;font color=#00003C&gt;&lt;b&gt;&lt;i&gt;Empty
+&amp; mqtt_broker -&gt; naming_service
+
+iot_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;Location&quot;:&quot;Living room&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Living room&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Living room&quot;}"/>
+</p>
+</section>
+<section id="endpoint-id-list-provided">
+<h2><span class="section-number">10.3. </span>Endpoint ID list provided<a class="headerlink" href="#endpoint-id-list-provided" title="Permalink to this heading"></a></h2>
+<p>If the entire list of Endpoint ID is published under the state cluster
+(<code class="docutils literal notranslate"><span class="pre">EndpointIdList</span></code> attribute), the name and location cluster SHOULD skip
+monitoring existing endpoints based on publications under the
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/+/+/#</span></code> topic filter, and rely exclusively on the value published
+for the reported value of the <code class="docutils literal notranslate"><span class="pre">EndpointIdList</span></code> attribute</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-32ad6b37b90959c32ba17bff59ec625710521a49.png" alt="'Switch to more legible color theme when all figures are ported to plantuml
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign left
+skinparam shadowing false
+skinparam ArrowColor #000000
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam ParticipantBorderColor #001111
+skinparam SequenceLifeLineBorderColor #001111
+skinparam SequenceLifeLineBorderThickness 2
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+hide footbox
+hide footbox
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#008000&gt;MQTT Unsubscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+endlegend
+
+participant &quot;Name and Location Service\nMQTT Client&quot; as naming_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;Protocol Controller\nUNID: pc_1&quot; as pc_1
+participant &quot;PAN Node\nUNID:node_1&quot; as node_1
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Attributes/EndpointIdList/Reported&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/#&lt;/font&gt;
+
+== Name and Location Service is ready ==
+
+rnote over pc_1, node_1: Node added to the\nnetwork and discovered.
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 detected.\nAssuming 1 endpoint
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/Basic/Attributes/PowerSource/Reported \n&lt;font color=#6C2A0D&gt;&lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 / ep1 detected.
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep1/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State/Attributes/EndpointIdList/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[1,2]}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1:\n- ep0 does not exist.\n- ep1/ep2 detected.
+
+naming_service -&gt; mqtt_broker: &lt;font color=#008000&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands&lt;/font&gt;
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep2/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep2/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep2/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep2/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}"/>
+</p>
+</section>
+<section id="overlap-with-the-basic-cluster">
+<h2><span class="section-number">10.4. </span>Overlap with the Basic Cluster<a class="headerlink" href="#overlap-with-the-basic-cluster" title="Permalink to this heading"></a></h2>
+<p>Some PAN nodes are Basic Cluster Servers, and provide the <code class="docutils literal notranslate"><span class="pre">LocationDescription</span></code>
+attributes. If such an attribute is supported by a Basic Cluster Server,
+the Name and Location Service MUST proxy its Location Attribute to the
+Basic Cluster attribute.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-07d866756c38b354a2185d05ab60404e403e8c85.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Proxying the Basic cluster &lt;b&gt;LocationDescription&lt;/b&gt;
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY Messages&lt;/font&gt;
+endlegend
+
+participant &quot;Name and Location Service\nMQTT Client&quot; as naming_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;IoT Service&quot; as iot_service
+participant &quot;Protocol Controller\nUNID: pc_1&quot; as pc_1
+participant &quot;PAN Node\nUNID:node_1&quot; as node_1
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/State/Attributes/EndpointIdList/Reported&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/#&lt;/font&gt;
+
+== Name and Location Service is ready ==
+
+rnote over pc_1, node_1: Node added to the\nnetwork and discovered.
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 detected.\nAssuming 1 endpoint
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+== Protocol Controller publishes more as it interviews the node ==
+
+...
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Basic/Attributes/LocationDescription/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Rooftop&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Rooftop&quot;}
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Basic/Attributes/LocationDescription/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Rooftop&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Rooftop&quot;}
+
+...
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Basic/Attributes/LocationDescription/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Basement&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Basement&quot;}
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Basic/Attributes/LocationDescription/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Basement&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Basement&quot;}
+
+...
+
+
+iot_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep1/NameAndLocation/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;Location&quot;:&quot;Kitchen&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#6C2A0D&gt;ucl/by-unid/node_1/ep0/Basic/Commands/WriteAttributes\n&lt;font color=#6C2A0D&gt;&lt;b&gt;{&quot;LocationDescription&quot;:&quot;Kitchen&quot;}
+&amp; mqtt_broker -&gt; pc_1
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Basic/Attributes/LocationDescription/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Kitchen&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Kitchen&quot;}
+
+pc_1 -&gt; node_1: WriteAttributes
+node_1 -&gt; pc_1: WriteAttributes Response
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/Basic/Attributes/LocationDescription/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Kitchen&quot;}
+&amp; mqtt_broker -&gt; naming_service
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Kitchen&quot;}"/>
+</p>
+</section>
+<section id="pushing-the-information-to-the-end-node">
+<h2><span class="section-number">10.5. </span>Pushing the information to the end node<a class="headerlink" href="#pushing-the-information-to-the-end-node" title="Permalink to this heading"></a></h2>
+<p>The Name and Location Service is provided on behalf of all PAN nodes,
+meaning that PAN node will not be aware that they have a name assigned.</p>
+<p>It is possible for Protocol Controllers to push the information down
+to PAN nodes, if they want to make sure that they would retain this
+information locally.</p>
+<p>If a Protocol Controller intends to do so, it SHOULD subscribe to
+the Reported <code class="docutils literal notranslate"><span class="pre">Name</span></code> attribute in the NameAndLocation cluster and
+assign it to the node when it is updated.</p>
+<p>Protocol Controller MUST NOT try to push the <code class="docutils literal notranslate"><span class="pre">Location</span></code> attribute to a
+PAN node. It SHOULD show the PAN node with the <code class="docutils literal notranslate"><span class="pre">LocationDescription</span></code>
+Attribute supported in the Basic Cluster.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-7a0dae3c9bc87f6447b37e1ec33ea31e923e5074.png" alt="'Style matching the other figures in chapter.
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+legend top
+&lt;font color=#0039FB&gt;MQTT Subscription&lt;/font&gt;
+&lt;font color=#00003C&gt;Retained MQTT Publication&lt;/font&gt;
+&lt;font color=#6C2A0D&gt;Unretained MQTT Publication&lt;/font&gt;
+&lt;font color=#000000&gt;PHY messages&lt;/font&gt;
+endlegend
+
+participant &quot;Name and Location Service\nMQTT Client&quot; as naming_service
+participant &quot;MQTT Broker&quot; as mqtt_broker
+participant &quot;Protocol Controller\nUNID: pc_1&quot; as pc_1
+participant &quot;PAN Node\nUNID:node_1&quot; as node_1
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/#&lt;/font&gt;
+
+== Name and Location Service is ready ==
+
+rnote over pc_1, node_1: Node added to the\nnetwork and discovered.
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/+/+/NameAndLocation/Attributes/+/Reported&lt;/font&gt;
+
+pc_1 -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/State &lt;b&gt;{Non-empty}
+&amp; mqtt_broker -&gt; naming_service
+
+rnote over naming_service: node_1 detected.\nAssuming 1 endpoint
+
+naming_service -&gt; mqtt_broker: &lt;font color=#0039FB&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Commands/WriteAttributes&lt;/font&gt;
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Location/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/SupportedCommands\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:[&quot;WriteAttributes&quot;]}
+
+== Name was updated ==
+
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Desired\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Wall outlet&quot;}
+naming_service -&gt; mqtt_broker: &lt;font color=#00003C&gt;ucl/by-unid/node_1/ep0/NameAndLocation/Attributes/Name/Reported\n&lt;font color=#00003C&gt;&lt;b&gt;{&quot;value&quot;:&quot;Wall outlet&quot;}
+&amp; mqtt_broker -&gt; pc_1
+
+rnote over pc_1: push the information\nto the node
+
+pc_1 -&gt; node_1: Your name is &quot;Wall outlet&quot;
+node_1 -&gt; pc_1: Name updated."/>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2023 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

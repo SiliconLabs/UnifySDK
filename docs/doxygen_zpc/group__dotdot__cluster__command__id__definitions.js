@@ -209,6 +209,7 @@ var group__dotdot__cluster__command__id__definitions =
     [ "DOTDOT_SCENES_VIEW_SCENE_RESPONSE_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#ga0642179fcf4362daea2a1c0128b76c12", null ],
     [ "DOTDOT_STATE_DISCOVER_NEIGHBORS_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#gac87cfdda90b1164ff51b5a54c0e986a0", null ],
     [ "DOTDOT_STATE_DISCOVER_SECURITY_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#ga147a3f1bf50ffe733a58d459146fe713", null ],
+    [ "DOTDOT_STATE_ENABLE_NLS_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#ga032933bf18f27a6e4af9418582269fe2", null ],
     [ "DOTDOT_STATE_INTERVIEW_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#ga7803546304e6e70a53f38adc681b3097", null ],
     [ "DOTDOT_STATE_REMOVE_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#ga10f9e6c33feb2f83fc85f7d59d5febb9", null ],
     [ "DOTDOT_STATE_REMOVE_OFFLINE_COMMAND_ID", "group__dotdot__cluster__command__id__definitions.html#gad569782cdce74c89c44f2fb131cb5798", null ],

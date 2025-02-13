@@ -1,6 +1,6 @@
 import { LocalStorage } from "../../app-types";
 
-export const DeviceTypes = new Map<string, string>([["Any", "Any"], ["ble", "Bluetooth"], ["zb", "Zigbee"], ["zw", "ZWave"]]);
+export const DeviceTypes = new Map<string, string>([["Any", "Any"], ["zw", "ZWave"]]);
 
 export type NodesProps = {
   NodeList: any[],

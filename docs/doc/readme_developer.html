@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -90,9 +90,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#development-platform-recommendations">Development Platform Recommendations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-eed">Developing EED</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-protocol-controllers">Developing protocol controllers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters">Extend UCL clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters-to-non-zigbee-controllers">Extend UCL clusters to non-zigbee controllers</a></li>
 </ul>
 </li>
 </ul>
@@ -180,12 +180,9 @@ i.e. “unify_my_sample_component”.</p></li>
 <h3>Structure<a class="headerlink" href="#structure" title="Permalink to this heading"></a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
 |-- applications/               // Unify application specific code goes here
-|   |-- zpc/                    // ZPC application code
-|   |   |-- components/         // ZPC components
-|   |   `-- ...
-|   |-- zigpc/                  // ZIGPC application code
-|   |   |-- components/         // ZIGPC components
-|   |   `-- ...
+|   |-- examples/                    // Unify Examples
+|   |   |-- applications/
+|   |       |--emulated_end_device/         // Emulated End Device(EED)
 |   |-- gms/                    // GMS application code
 |   |-- upvl/                   // UPVL application code
 |   `-- ...

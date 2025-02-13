@@ -883,6 +883,10 @@ static sl_status_t window_covering_cluster_write_attributes_callback(
      sl_log_debug(LOG_TAG, "Updating desired value for DecelerationTimeLift attribute");
     dotdot_set_window_covering_deceleration_time_lift(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.deceleration_time_lift);
   }
+  if (true == updated_attributes.mode) {
+     sl_log_debug(LOG_TAG, "Updating desired value for Mode attribute");
+    dotdot_set_window_covering_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.mode);
+  }
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -2394,138 +2398,6 @@ static sl_status_t configuration_parameters_cluster_write_attributes_callback(
   return SL_STATUS_OK;
 }
 ////////////////////////////////////////////////////////////////////////////////
-// Start of cluster AoXLocator
-////////////////////////////////////////////////////////////////////////////////
-// WriteAttribute Callbacks aox_locator
-static sl_status_t aox_locator_cluster_write_attributes_callback(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_aox_locator_state_t attributes,
-  uic_mqtt_dotdot_aox_locator_updated_state_t updated_attributes)
-{
-  if (false == is_write_attributes_enabled()) {
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_aox_locator_writable_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  sl_log_debug(LOG_TAG,
-               "aox_locator: Incoming WriteAttributes command for %s, endpoint %d.\n",
-               unid,
-               endpoint_id);
-  if (true == updated_attributes.reporting_mode) {
-     sl_log_debug(LOG_TAG, "Updating desired value for ReportingMode attribute");
-    dotdot_set_aox_locator_reporting_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.reporting_mode);
-  }
-  if (true == updated_attributes.position_and_orientation_valid) {
-     sl_log_debug(LOG_TAG, "Updating desired value for PositionAndOrientationValid attribute");
-    dotdot_set_aox_locator_position_and_orientation_valid(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.position_and_orientation_valid);
-  }
-  if (true == updated_attributes.position_and_orientation) {
-     sl_log_debug(LOG_TAG, "Updating desired value for PositionAndOrientation attribute");
-    dotdot_set_aox_locator_position_and_orientation(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.position_and_orientation);
-  }
-  if (true == updated_attributes.azimuth_mask) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AzimuthMask attribute");
-    dotdot_set_aox_locator_azimuth_mask(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.azimuth_mask_count, attributes.azimuth_mask);
-  }
-  if (true == updated_attributes.elevation_mask) {
-     sl_log_debug(LOG_TAG, "Updating desired value for ElevationMask attribute");
-    dotdot_set_aox_locator_elevation_mask(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.elevation_mask_count, attributes.elevation_mask);
-  }
-  if (true == updated_attributes.allow_list) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AllowList attribute");
-    dotdot_set_aox_locator_allow_list(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.allow_list_count, attributes.allow_list);
-  }
-  if (true == updated_attributes.aox_mode) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AoXMode attribute");
-    dotdot_set_aox_locator_aox_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.aox_mode);
-  }
-  if (true == updated_attributes.antenna_mode) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AntennaMode attribute");
-    dotdot_set_aox_locator_antenna_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.antenna_mode);
-  }
-  if (true == updated_attributes.antenna_array) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AntennaArray attribute");
-    dotdot_set_aox_locator_antenna_array(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.antenna_array_count, attributes.antenna_array);
-  }
-  if (true == updated_attributes.period_samples) {
-     sl_log_debug(LOG_TAG, "Updating desired value for PeriodSamples attribute");
-    dotdot_set_aox_locator_period_samples(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.period_samples);
-  }
-  if (true == updated_attributes.angle_filtering) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AngleFiltering attribute");
-    dotdot_set_aox_locator_angle_filtering(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.angle_filtering);
-  }
-  if (true == updated_attributes.angle_filtering_weight) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AngleFilteringWeight attribute");
-    dotdot_set_aox_locator_angle_filtering_weight(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.angle_filtering_weight);
-  }
-  if (true == updated_attributes.angle_correction_timeout) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AngleCorrectionTimeout attribute");
-    dotdot_set_aox_locator_angle_correction_timeout(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.angle_correction_timeout);
-  }
-  if (true == updated_attributes.angle_correction_delay) {
-     sl_log_debug(LOG_TAG, "Updating desired value for AngleCorrectionDelay attribute");
-    dotdot_set_aox_locator_angle_correction_delay(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.angle_correction_delay);
-  }
-  if (true == updated_attributes.cte_mode) {
-     sl_log_debug(LOG_TAG, "Updating desired value for CTEMode attribute");
-    dotdot_set_aox_locator_cte_mode(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.cte_mode);
-  }
-  if (true == updated_attributes.cte_sampling_interval) {
-     sl_log_debug(LOG_TAG, "Updating desired value for CTESamplingInterval attribute");
-    dotdot_set_aox_locator_cte_sampling_interval(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.cte_sampling_interval);
-  }
-  if (true == updated_attributes.cte_length) {
-     sl_log_debug(LOG_TAG, "Updating desired value for CTELength attribute");
-    dotdot_set_aox_locator_cte_length(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.cte_length);
-  }
-  if (true == updated_attributes.slot_duration) {
-     sl_log_debug(LOG_TAG, "Updating desired value for SlotDuration attribute");
-    dotdot_set_aox_locator_slot_duration(unid, endpoint_id, DESIRED_ATTRIBUTE, attributes.slot_duration);
-  }
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
-// Start of cluster AoXPositionEstimation
-////////////////////////////////////////////////////////////////////////////////
-// WriteAttribute Callbacks aox_position_estimation
-static sl_status_t aox_position_estimation_cluster_write_attributes_callback(
-  const dotdot_unid_t unid,
-  dotdot_endpoint_id_t endpoint_id,
-  uic_mqtt_dotdot_callback_call_type_t call_type,
-  uic_mqtt_dotdot_aox_position_estimation_state_t attributes,
-  uic_mqtt_dotdot_aox_position_estimation_updated_state_t updated_attributes)
-{
-  if (false == is_write_attributes_enabled()) {
-    return SL_STATUS_FAIL;
-  }
-
-  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
-    if (is_automatic_deduction_of_supported_commands_enabled()) {
-      return dotdot_is_any_aox_position_estimation_writable_attribute_supported(unid, endpoint_id) ?
-        SL_STATUS_OK : SL_STATUS_FAIL;
-    } else {
-      return SL_STATUS_FAIL;
-    }
-  }
-
-  sl_log_debug(LOG_TAG,
-               "aox_position_estimation: Incoming WriteAttributes command for %s, endpoint %d.\n",
-               unid,
-               endpoint_id);
-  return SL_STATUS_OK;
-}
-////////////////////////////////////////////////////////////////////////////////
 // Start of cluster ProtocolController-NetworkManagement
 ////////////////////////////////////////////////////////////////////////////////
 // WriteAttribute Callbacks protocol_controller_network_management
@@ -2837,12 +2709,6 @@ sl_status_t
   
   uic_mqtt_dotdot_set_configuration_parameters_write_attributes_callback(
     &configuration_parameters_cluster_write_attributes_callback);
-  
-  uic_mqtt_dotdot_set_aox_locator_write_attributes_callback(
-    &aox_locator_cluster_write_attributes_callback);
-  
-  uic_mqtt_dotdot_set_aox_position_estimation_write_attributes_callback(
-    &aox_position_estimation_cluster_write_attributes_callback);
   
   uic_mqtt_dotdot_set_protocol_controller_network_management_write_attributes_callback(
     &protocol_controller_network_management_cluster_write_attributes_callback);

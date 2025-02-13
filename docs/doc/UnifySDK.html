@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Framework Services" href="unify_framework_services.html" />
-    <link rel="prev" title="Getting Started with the Multiprotocol Setup" href="getting_started_multiprotocol_cpc.html" /> 
+    <link rel="prev" title="Unify Framework Getting Started" href="getting_started_unify_sdk.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -101,13 +101,12 @@
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>The Unify Framework provides software source code and binary packages for Raspberry Pi 4 to
-help build an IoT gateway product. The Unify Framework enables an IoT service to
-control and manage end nodes in several wireless PHY radios (e.g., Z-Wave,
-Zigbee, and so on) supported by Silicon Labs. The Unify Framework uses the Unify
-Controller Language (UCL) as an internal abstraction layer to seamlessly control
-various end nodes that are enabled with multiple wireless PHY radios. The
-detailed architecture of the Unify Framework is described in the
-<a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.</p>
+help build an IoT gateway product. The Unify Framework allows an IoT service to control and
+manage end nodes using supported wireless PHY radio protocol, which is <a class="reference external" href="https://github.com/SiliconLabsSoftware/z-wave-protocol-controller">Z-Wave protocol</a>,
+provided by Silicon Labs. The Unify Framework uses the Unify Controller Language (UCL) as
+an internal abstraction layer to seamlessly control various end nodes that are enabled with
+multiple wireless PHY radios. The detailed architecture of the Unify Framework is described in
+the <a class="reference internal" href="unify_specifications/index.html"><span class="doc std std-doc">Unify Framework Specification</span></a>.</p>
 <p>The Unify Framework uses Unify Framework library to decouple API modules from the PHY
 drivers. This facilitates code reuse and enables easily adding new high-level
 APIs without the need to modify the PHY drivers. The library provides a number
@@ -131,9 +130,11 @@ The old name can still be found in some parts of the Framework.</p>
 <li><p><a class="reference internal" href="unify_framework_services.html"><span class="doc std std-doc">Framework Services</span></a></p></li>
 <li><p><a class="reference internal" href="protocol_controllers.html"><span class="doc std std-doc">Protocol Controllers</span></a></p></li>
 <li><p><a class="reference internal" href="unify_iot_services.html"><span class="doc std std-doc">IOT Services</span></a></p></li>
+<li><p><a class="reference internal" href="../applications/examples/applications/emulated_end_device/readme_user.html"><span class="doc std std-doc">Emulated End Device</span></a></p></li>
 </ul>
 <p>The framework services work with the protocol controllers to facilitate different features such as group management, OTA updates etc. See links above for more details.</p>
 <p>The IOT services interface with the MQTT broker to provide high level functionality on top of the Unify framework. See the link above for more information.</p>
+<p>The Emulated End Device helps to emulate end device with user configured clusters or device emulating a specific device type. See the link above for more information.</p>
 <p>Please read the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a> for details
 on configuring and running Unify Framework applications.</p>
 </section>

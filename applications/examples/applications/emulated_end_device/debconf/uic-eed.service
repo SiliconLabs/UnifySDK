@@ -1,0 +1,15 @@
+[Unit]
+Description=Unify Emulated End Device
+After=network.target mosquitto.service
+
+[Service]
+WorkingDirectory=/var/lib/uic
+ExecStart=/usr/bin/eed
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

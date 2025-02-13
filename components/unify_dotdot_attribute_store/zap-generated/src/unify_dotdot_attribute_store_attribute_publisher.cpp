@@ -3061,7 +3061,7 @@ static void scenes_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP) {
           uic_mqtt_dotdot_scenes_current_group_publish(
             base_topic.c_str(),
-            static_cast<SGroupId>(attr.desired_or_reported<SGroupId>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -3082,7 +3082,7 @@ static void scenes_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_LAST_CONFIGURED_BY) {
           uic_mqtt_dotdot_scenes_last_configured_by_publish(
             base_topic.c_str(),
-            static_cast<EUI64>(attr.desired_or_reported<EUI64>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -3240,7 +3240,7 @@ static void scenes_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP) {
           uic_mqtt_dotdot_scenes_current_group_publish(
             base_topic.c_str(),
-            static_cast<SGroupId>(attr.reported<SGroupId>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -3261,7 +3261,7 @@ static void scenes_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_LAST_CONFIGURED_BY) {
           uic_mqtt_dotdot_scenes_last_configured_by_publish(
             base_topic.c_str(),
-            static_cast<EUI64>(attr.reported<EUI64>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4405,7 +4405,7 @@ static void time_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_TIME_TIME) {
           uic_mqtt_dotdot_time_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -4461,14 +4461,14 @@ static void time_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME) {
           uic_mqtt_dotdot_time_last_set_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME) {
           uic_mqtt_dotdot_time_valid_until_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -4633,7 +4633,7 @@ static void time_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_TIME_TIME) {
           uic_mqtt_dotdot_time_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4689,14 +4689,14 @@ static void time_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME) {
           uic_mqtt_dotdot_time_last_set_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME) {
           uic_mqtt_dotdot_time_valid_until_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -8728,7 +8728,7 @@ static void thermostat_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP) {
           uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -9556,7 +9556,7 @@ static void thermostat_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP) {
           uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -16777,7 +16777,7 @@ static void ias_zone_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_IASCIE_ADDRESS) {
           uic_mqtt_dotdot_ias_zone_iascie_address_publish(
             base_topic.c_str(),
-            static_cast<EUI64>(attr.desired_or_reported<EUI64>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -16960,7 +16960,7 @@ static void ias_zone_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_IASCIE_ADDRESS) {
           uic_mqtt_dotdot_ias_zone_iascie_address_publish(
             base_topic.c_str(),
-            static_cast<EUI64>(attr.reported<EUI64>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17353,21 +17353,21 @@ static void metering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME) {
           uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.desired_or_reported<UTC>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17402,14 +17402,14 @@ static void metering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_INLET_TEMPERATURE) {
           uic_mqtt_dotdot_metering_inlet_temperature_publish(
             base_topic.c_str(),
-            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_OUTLET_TEMPERATURE) {
           uic_mqtt_dotdot_metering_outlet_temperature_publish(
             base_topic.c_str(),
-            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
+            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17821,21 +17821,21 @@ static void metering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME) {
           uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
             base_topic.c_str(),
-            static_cast<UTC>(attr.reported<UTC>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17870,14 +17870,14 @@ static void metering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_INLET_TEMPERATURE) {
           uic_mqtt_dotdot_metering_inlet_temperature_publish(
             base_topic.c_str(),
-            static_cast<uint32_t>(attr.reported<uint32_t>()),
+            static_cast<int32_t>(attr.reported<int32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_OUTLET_TEMPERATURE) {
           uic_mqtt_dotdot_metering_outlet_temperature_publish(
             base_topic.c_str(),
-            static_cast<uint32_t>(attr.reported<uint32_t>()),
+            static_cast<int32_t>(attr.reported<int32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -24471,762 +24471,6 @@ static void configuration_parameters_cluster_cluster_revision_callback(
     if (false == dotdot_is_any_configuration_parameters_attribute_supported(unid, endpoint_id)) {
       base_topic +=  "/ConfigurationParameters";
       sl_log_debug(LOG_TAG, "No more attributes supported for ConfigurationParameters cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
-      uic_mqtt_unretain(base_topic.c_str());
-    }
-  }
-}
-
-
-/**
- * @brief Publishes the desired value of an updated attribute store node for
- * the AoXLocator cluster.
- * @param updated_node Updated attribute store node
- * @param change       Type of change applied
- */
-static void aox_locator_cluster_publish_desired_value_callback(
-   attribute_store_node_t updated_node, attribute_store_change_t change)
-{
-  // clang-format on
-  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
-    return;
-  }
-  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
-    return;
-  }
-  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
-  if (ATTRIBUTE_STORE_INVALID_NODE
-      != attribute_store_get_first_parent_with_type(
-        updated_node,
-        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
-    return;
-  }
-
-  // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]     = {};
-  // clang-format off
-  // clang-format on
-  dotdot_endpoint_id_t endpoint_id = 0;
-  if (SL_STATUS_OK
-      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                     unid,
-                                                     &endpoint_id)) {
-    return;
-  }
-  // clang-format off
-  // clang-format on
-
-  std::string base_topic = "ucl/by-unid/" + std::string(unid);
-  // clang-format off
-  base_topic += "/ep" + std::to_string(endpoint_id);
-  // clang-format on
-
-  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
-  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
-    sl_log_debug(LOG_TAG,
-                 "Warning: Invalid type for Attribute ID %d, "
-                 "this should not happen.",
-                 updated_node);
-    return;
-  }
-
-  // If the value got updated but both Reported and Desired undefined, we skip publication
-  if (false == attribute_store_is_reported_defined(updated_node)
-      && false == attribute_store_is_desired_defined(updated_node)) {
-    sl_log_debug(LOG_TAG,
-                 "Reported/Desired values are undefined. "
-                 "Skipping publication");
-    return;
-  }
-
-  // clang-format off
-  try {
-    attribute_store::attribute attr(updated_node);
-      if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE) {
-          uic_mqtt_dotdot_aox_locator_reporting_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID) {
-          uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_publish(
-            base_topic.c_str(),
-            static_cast<bool>(attr.desired_or_reported<bool>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-        // Skip attribute PositionAndOrientation because it is a struct,
-    // we typically don't save them as structs in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute AoXLocator PositionAndOrientation. Structs are not supported");
-    // Skip attribute AzimuthMask because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute AoXLocator AzimuthMask. Arrays are not supported");
-    // Skip attribute ElevationMask because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute AoXLocator ElevationMask. Arrays are not supported");
-    // Skip attribute AllowList because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute AoXLocator AllowList. Arrays are not supported");
-      if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE) {
-          uic_mqtt_dotdot_aox_locator_aox_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE) {
-          uic_mqtt_dotdot_aox_locator_antenna_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-        // Skip attribute AntennaArray because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute AoXLocator AntennaArray. Arrays are not supported");
-      if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES) {
-          uic_mqtt_dotdot_aox_locator_period_samples_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING) {
-          uic_mqtt_dotdot_aox_locator_angle_filtering_publish(
-            base_topic.c_str(),
-            static_cast<bool>(attr.desired_or_reported<bool>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT) {
-          uic_mqtt_dotdot_aox_locator_angle_filtering_weight_publish(
-            base_topic.c_str(),
-            static_cast<double>(attr.desired_or_reported<double>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT) {
-          uic_mqtt_dotdot_aox_locator_angle_correction_timeout_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY) {
-          uic_mqtt_dotdot_aox_locator_angle_correction_delay_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE) {
-          uic_mqtt_dotdot_aox_locator_cte_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL) {
-          uic_mqtt_dotdot_aox_locator_cte_sampling_interval_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH) {
-          uic_mqtt_dotdot_aox_locator_cte_length_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION) {
-          uic_mqtt_dotdot_aox_locator_slot_duration_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
-            UCL_MQTT_PUBLISH_TYPE_DESIRED);
-        return;
-      }
-      } catch (std::exception &ex) {
-    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
-  }
-}
-
-/**
- * @brief Publishes the reported value of an updated attribute store node for
- * the AoXLocator cluster.
- * @param updated_node Updated attribute store node
- * @param change       Type of change applied
- */
-static void aox_locator_cluster_publish_reported_value_callback(
-   attribute_store_node_t updated_node, attribute_store_change_t change)
-{
-  // clang-format on
-  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
-    return;
-  }
-  if (change == ATTRIBUTE_CREATED) {
-    return;
-  }
-  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
-  if (ATTRIBUTE_STORE_INVALID_NODE
-      != attribute_store_get_first_parent_with_type(
-        updated_node,
-        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
-    return;
-  }
-
-  // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]     = {};
-  // clang-format off
-  // clang-format on
-  dotdot_endpoint_id_t endpoint_id = 0;
-  if (SL_STATUS_OK
-      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                     unid,
-                                                     &endpoint_id)) {
-    return;
-  }
-  // clang-format off
-  // clang-format on
-
-  std::string base_topic = "ucl/by-unid/" + std::string(unid);
-  // clang-format off
-  base_topic += "/ep" + std::to_string(endpoint_id);
-  // clang-format on
-
-  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
-  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
-    sl_log_debug(LOG_TAG,
-                 "Warning: Invalid type for Attribute ID %d, "
-                 "this should not happen.",
-                 updated_node);
-    return;
-  }
-
-  // Deletion case:
-  if (change == ATTRIBUTE_DELETED) {
-    // clang-format off
-    switch(type) {
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::ReportingMode under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_reporting_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::PositionAndOrientationValid under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::PositionAndOrientation under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_position_and_orientation_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AzimuthMask under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_azimuth_mask_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::ElevationMask under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_elevation_mask_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AllowList under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_allow_list_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AoXMode under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_aox_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AntennaMode under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_antenna_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AntennaArray under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_antenna_array_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::PeriodSamples under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_period_samples_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AngleFiltering under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_angle_filtering_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AngleFilteringWeight under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_angle_filtering_weight_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AngleCorrectionTimeout under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_angle_correction_timeout_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::AngleCorrectionDelay under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_angle_correction_delay_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::CTEMode under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_cte_mode_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::CTESamplingInterval under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_cte_sampling_interval_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::CTELength under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_cte_length_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-     case DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXLocator::SlotDuration under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_locator_slot_duration_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-    default:
-    break;
-    }
-    // clang-format on
-    return;
-  }
-
-  // If the value got updated but undefined, we skip publication
-  if (false == attribute_store_is_reported_defined(updated_node)) {
-    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
-    return;
-  }
-
-  // Else we assume update case:
-  // clang-format off
-  try {
-    attribute_store::attribute attr(updated_node);
-      if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE) {
-          uic_mqtt_dotdot_aox_locator_reporting_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID) {
-          uic_mqtt_dotdot_aox_locator_position_and_orientation_valid_publish(
-            base_topic.c_str(),
-            static_cast<bool>(attr.reported<bool>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-        // Skip attribute PositionAndOrientation because it is a struct,
-    // we typically don't save them as structs in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute AoXLocator PositionAndOrientation. Structs are not supported");
-    // Skip attribute AzimuthMask because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute AoXLocator AzimuthMask. Arrays are not supported");
-    // Skip attribute ElevationMask because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute AoXLocator ElevationMask. Arrays are not supported");
-    // Skip attribute AllowList because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute AoXLocator AllowList. Arrays are not supported");
-      if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE) {
-          uic_mqtt_dotdot_aox_locator_aox_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE) {
-          uic_mqtt_dotdot_aox_locator_antenna_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-        // Skip attribute AntennaArray because it is an array,
-    // we typically don't save them as array in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute AoXLocator AntennaArray. Arrays are not supported");
-      if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES) {
-          uic_mqtt_dotdot_aox_locator_period_samples_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING) {
-          uic_mqtt_dotdot_aox_locator_angle_filtering_publish(
-            base_topic.c_str(),
-            static_cast<bool>(attr.reported<bool>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT) {
-          uic_mqtt_dotdot_aox_locator_angle_filtering_weight_publish(
-            base_topic.c_str(),
-            static_cast<double>(attr.reported<double>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT) {
-          uic_mqtt_dotdot_aox_locator_angle_correction_timeout_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY) {
-          uic_mqtt_dotdot_aox_locator_angle_correction_delay_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE) {
-          uic_mqtt_dotdot_aox_locator_cte_mode_publish(
-            base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL) {
-          uic_mqtt_dotdot_aox_locator_cte_sampling_interval_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH) {
-          uic_mqtt_dotdot_aox_locator_cte_length_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-          if (type == DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION) {
-          uic_mqtt_dotdot_aox_locator_slot_duration_publish(
-            base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
-            (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-        return;
-      }
-      } catch (std::exception &ex) {
-    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
-  }
-}
-
-static void aox_locator_cluster_cluster_revision_callback(
-   attribute_store_node_t updated_node, attribute_store_change_t change)
-{
-  // clang-format on
-  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
-    return;
-  }
-
-  // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]     = {};
-  dotdot_endpoint_id_t endpoint_id = 0;
-  // clang-format off
-  // clang-format on
-  if (SL_STATUS_OK
-      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                     unid,
-                                                     &endpoint_id)) {
-    return;
-  }
-  // clang-format off
-  // clang-format on
-
-  std::string base_topic = "ucl/by-unid/" + std::string(unid);
-  // clang-format off
-  base_topic += "/ep" + std::to_string(endpoint_id);
-
-  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
-    // On attribute creation, make sure to publish the attribute revision for the first time
-    std::string cluster_revision_topic = base_topic + "/AoXLocator/Attributes/ClusterRevision";
-    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
-      uic_mqtt_dotdot_aox_locator_publish_cluster_revision(base_topic.c_str(), 1);
-    }
-  }
-
-  if (change == ATTRIBUTE_DELETED) {
-    // Check if we just erased the last attribute under a cluster, if yes, unretain
-    // the Cluster revision too.
-    if (false == dotdot_is_any_aox_locator_attribute_supported(unid, endpoint_id)) {
-      base_topic +=  "/AoXLocator";
-      sl_log_debug(LOG_TAG, "No more attributes supported for AoXLocator cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
-      uic_mqtt_unretain(base_topic.c_str());
-    }
-  }
-}
-
-
-/**
- * @brief Publishes the desired value of an updated attribute store node for
- * the AoXPositionEstimation cluster.
- * @param updated_node Updated attribute store node
- * @param change       Type of change applied
- */
-static void aox_position_estimation_cluster_publish_desired_value_callback(
-   attribute_store_node_t updated_node, attribute_store_change_t change)
-{
-  // clang-format on
-  if (false == is_publish_desired_attribute_values_to_mqtt_enabled()) {
-    return;
-  }
-  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED) {
-    return;
-  }
-  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
-  if (ATTRIBUTE_STORE_INVALID_NODE
-      != attribute_store_get_first_parent_with_type(
-        updated_node,
-        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
-    return;
-  }
-
-  // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]     = {};
-  // clang-format off
-  // clang-format on
-  dotdot_endpoint_id_t endpoint_id = 0;
-  if (SL_STATUS_OK
-      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                     unid,
-                                                     &endpoint_id)) {
-    return;
-  }
-  // clang-format off
-  // clang-format on
-
-  std::string base_topic = "ucl/by-unid/" + std::string(unid);
-  // clang-format off
-  base_topic += "/ep" + std::to_string(endpoint_id);
-  // clang-format on
-
-  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
-  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
-    sl_log_debug(LOG_TAG,
-                 "Warning: Invalid type for Attribute ID %d, "
-                 "this should not happen.",
-                 updated_node);
-    return;
-  }
-
-  // If the value got updated but both Reported and Desired undefined, we skip publication
-  if (false == attribute_store_is_reported_defined(updated_node)
-      && false == attribute_store_is_desired_defined(updated_node)) {
-    sl_log_debug(LOG_TAG,
-                 "Reported/Desired values are undefined. "
-                 "Skipping publication");
-    return;
-  }
-
-  // clang-format off
-  try {
-    attribute_store::attribute attr(updated_node);
-    // Skip attribute Position because it is a struct,
-    // we typically don't save them as structs in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish desired value for attribute AoXPositionEstimation Position. Structs are not supported");
-  } catch (std::exception &ex) {
-    sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
-  }
-}
-
-/**
- * @brief Publishes the reported value of an updated attribute store node for
- * the AoXPositionEstimation cluster.
- * @param updated_node Updated attribute store node
- * @param change       Type of change applied
- */
-static void aox_position_estimation_cluster_publish_reported_value_callback(
-   attribute_store_node_t updated_node, attribute_store_change_t change)
-{
-  // clang-format on
-  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
-    return;
-  }
-  if (change == ATTRIBUTE_CREATED) {
-    return;
-  }
-  // Scene exception: check that the attribute is not under the Scene Table extension, which is a config and not the node's state.
-  if (ATTRIBUTE_STORE_INVALID_NODE
-      != attribute_store_get_first_parent_with_type(
-        updated_node,
-        DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_TABLE)) {
-    return;
-  }
-
-  // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]     = {};
-  // clang-format off
-  // clang-format on
-  dotdot_endpoint_id_t endpoint_id = 0;
-  if (SL_STATUS_OK
-      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                     unid,
-                                                     &endpoint_id)) {
-    return;
-  }
-  // clang-format off
-  // clang-format on
-
-  std::string base_topic = "ucl/by-unid/" + std::string(unid);
-  // clang-format off
-  base_topic += "/ep" + std::to_string(endpoint_id);
-  // clang-format on
-
-  attribute_store_type_t type = attribute_store_get_node_type(updated_node);
-  if (type == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
-    sl_log_debug(LOG_TAG,
-                 "Warning: Invalid type for Attribute ID %d, "
-                 "this should not happen.",
-                 updated_node);
-    return;
-  }
-
-  // Deletion case:
-  if (change == ATTRIBUTE_DELETED) {
-    // clang-format off
-    switch(type) {
-     case DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION:
-        // clang-format on
-        sl_log_debug(LOG_TAG,
-                     "Unretaining AoXPositionEstimation::Position under topic %s",
-                     base_topic.c_str());
-        // clang-format off
-      uic_mqtt_dotdot_aox_position_estimation_position_unretain(base_topic.c_str(), UCL_MQTT_PUBLISH_TYPE_ALL);
-      break;
-    default:
-    break;
-    }
-    // clang-format on
-    return;
-  }
-
-  // If the value got updated but undefined, we skip publication
-  if (false == attribute_store_is_reported_defined(updated_node)) {
-    sl_log_debug(LOG_TAG, "Reported value is undefined. Skipping publication");
-    return;
-  }
-
-  // Else we assume update case:
-  // clang-format off
-  try {
-    attribute_store::attribute attr(updated_node);
-    // Skip attribute Position because it is a struct,
-    // we typically don't save them as structs in the attribute store.
-    sl_log_debug(LOG_TAG,"Warning: Cannot publish reported value for attribute AoXPositionEstimation Position. Structs are not supported");
-  } catch (std::exception &ex) {
-    sl_log_warning(LOG_TAG, "Failed to publish the Reported attribute value: %s", ex.what());
-  }
-}
-
-static void aox_position_estimation_cluster_cluster_revision_callback(
-   attribute_store_node_t updated_node, attribute_store_change_t change)
-{
-  // clang-format on
-  if (false == is_publish_reported_attribute_values_to_mqtt_enabled()) {
-    return;
-  }
-
-  // Get the UNID and EndPoint, and prepare the basic topic
-  char unid[MAXIMUM_UNID_SIZE]     = {};
-  dotdot_endpoint_id_t endpoint_id = 0;
-  // clang-format off
-  // clang-format on
-  if (SL_STATUS_OK
-      != unify_dotdot_attributes_get_unid_endpoint()(updated_node,
-                                                     unid,
-                                                     &endpoint_id)) {
-    return;
-  }
-  // clang-format off
-  // clang-format on
-
-  std::string base_topic = "ucl/by-unid/" + std::string(unid);
-  // clang-format off
-  base_topic += "/ep" + std::to_string(endpoint_id);
-
-  if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_UPDATED)) {
-    // On attribute creation, make sure to publish the attribute revision for the first time
-    std::string cluster_revision_topic = base_topic + "/AoXPositionEstimation/Attributes/ClusterRevision";
-    if (uic_mqtt_count_topics(cluster_revision_topic.c_str()) == 0) {
-      uic_mqtt_dotdot_aox_position_estimation_publish_cluster_revision(base_topic.c_str(), 1);
-    }
-  }
-
-  if (change == ATTRIBUTE_DELETED) {
-    // Check if we just erased the last attribute under a cluster, if yes, unretain
-    // the Cluster revision too.
-    if (false == dotdot_is_any_aox_position_estimation_attribute_supported(unid, endpoint_id)) {
-      base_topic +=  "/AoXPositionEstimation";
-      sl_log_debug(LOG_TAG, "No more attributes supported for AoXPositionEstimation cluster for UNID %s Endpoint %d. Unretaining leftover topics at %s",unid, endpoint_id, base_topic.c_str());
       uic_mqtt_unretain(base_topic.c_str());
     }
   }
@@ -36510,272 +35754,6 @@ sl_status_t unify_dotdot_attribute_store_attribute_publisher_init()
     attribute_store_register_callback_by_type(
       configuration_parameters_cluster_cluster_revision_callback,
       DOTDOT_ATTRIBUTE_ID_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_REPORTING_MODE);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_POSITION_AND_ORIENTATION);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AZIMUTH_MASK);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ELEVATION_MASK);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ALLOW_LIST);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_AOX_MODE);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_MODE);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANTENNA_ARRAY);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_PERIOD_SAMPLES);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_FILTERING_WEIGHT);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_TIMEOUT);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_ANGLE_CORRECTION_DELAY);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_MODE);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_SAMPLING_INTERVAL);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_CTE_LENGTH);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_locator_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_locator_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_LOCATOR_SLOT_DURATION);
-    //Desired attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_position_estimation_cluster_publish_desired_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION,
-      DESIRED_ATTRIBUTE);
-    //Reported attribute state
-    attribute_store_register_callback_by_type_and_state(
-      aox_position_estimation_cluster_publish_reported_value_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION,
-      REPORTED_ATTRIBUTE);
-    //registering a callback when an attribute is created for publishing cluster revision
-    attribute_store_register_callback_by_type(
-      aox_position_estimation_cluster_cluster_revision_callback,
-      DOTDOT_ATTRIBUTE_ID_AOX_POSITION_ESTIMATION_POSITION);
     //Desired attribute state
     attribute_store_register_callback_by_type_and_state(
       protocol_controller_network_management_cluster_publish_desired_value_callback,

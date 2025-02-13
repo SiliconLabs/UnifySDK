@@ -163,8 +163,6 @@ There is currently no support for BLE DSKs in the SmartStart List.
 
 The following are the currently (2022-02-09) supported clusters of the _Dev GUI_:
 
-- AoXLocator
-- AoXPositionEstimation
 - BarrierControl
 - Basic
 - Binding

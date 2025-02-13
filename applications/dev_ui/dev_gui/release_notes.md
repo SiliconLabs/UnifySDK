@@ -1,5 +1,7 @@
 # Dev GUI Release Notes
 
+## [1.7.0] - Feb 2025
+
 ## [1.6.0] - Aug 2024
 
 * Uses yarn instead of npm in the CMake build to improve fetching js deps time

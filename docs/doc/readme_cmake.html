@@ -39,7 +39,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.6.0
+                ver_1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -88,9 +88,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#development-platform-recommendations">Development Platform Recommendations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-iot-services">Developing IoT Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-eed">Developing EED</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#developing-protocol-controllers">Developing protocol controllers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters">Extend UCL clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started_as_developer.html#extend-ucl-clusters-to-non-zigbee-controllers">Extend UCL clusters to non-zigbee controllers</a></li>
 </ul>
 </li>
 </ul>
@@ -315,20 +315,20 @@ After building and running the unit tests, the tool <code class="docutils litera
 </section>
 <section id="debian-package-for-a-unify-component">
 <h2>Debian Package for a Unify Component<a class="headerlink" href="#debian-package-for-a-unify-component" title="Permalink to this heading"></a></h2>
-<p>The Unify Host SDK includes a macro for making a Debian package
+<p>The Unify SDK includes a macro for making a Debian package
 for a component.</p>
 <p>To make a new package, just make CMake component and decorate the
 install artifacts of the package with the component name:</p>
 <p>Ie:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">zpc</span><span class="w"> </span><span class="s">RUNTIME</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s2">&quot;bin&quot;</span><span class="w"> </span><span class="s">COMPONENT</span><span class="w"> </span><span class="s">uic-zpc</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">install</span><span class="p">(</span><span class="s">TARGETS</span><span class="w"> </span><span class="s">eed</span><span class="w"> </span><span class="s">RUNTIME</span><span class="w"> </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s2">&quot;bin&quot;</span><span class="w"> </span><span class="s">COMPONENT</span><span class="w"> </span><span class="s">uic-eed</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Make <em>debconf</em> scripts for the package ie <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">templates</span></code>, <code class="docutils literal notranslate"><span class="pre">postinst</span></code> etc if needed. See <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">debconf</span></code> for details.</p>
 <p>Finally, define a Debian package for the CMake component</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_component_to_uic</span><span class="p">(</span>
-<span class="w">  </span><span class="s">uic-zpc</span><span class="w"> </span><span class="c"># Package Name</span>
-<span class="w">  </span><span class="s2">&quot;Universal IOT controller - Z-Wave protocol Controller&quot;</span>
-<span class="w">  </span><span class="s2">&quot;${CMAKE_PROJECT_NAME}-zpc&quot;</span><span class="w"> </span><span class="c"># Package Debian filename</span>
+<span class="w">  </span><span class="s">uic-eed</span><span class="w"> </span><span class="c"># Package Name</span>
+<span class="w">  </span><span class="s2">&quot;Universal IOT controller - Emulated End Device&quot;</span>
+<span class="w">  </span><span class="s2">&quot;${CMAKE_PROJECT_NAME}-eed&quot;</span><span class="w"> </span><span class="c"># Package Debian filename</span>
 <span class="w">  </span><span class="s2">&quot;libfoo&quot;</span><span class="w"> </span><span class="c"># Package Depends on</span>
 <span class="w">  </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="c"># Package replaces</span>
 <span class="w">  </span><span class="s2">&quot;debconf/config;\</span>

@@ -6,7 +6,7 @@ Rust, but we are committed to put in a continues effort to migrate more
 components. This document describes how to setup, build and develop rust
 components for the Unify Framework.
 
-> The docker images provided by the Unify Host SDK contain already everything
+> The docker images provided by the Unify SDK already contain everything
 > you need to program Rust.
 
 The complexity of building rust components and merging them with other build
