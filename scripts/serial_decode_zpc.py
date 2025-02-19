@@ -1,5 +1,10 @@
 #!/usr/bin/python
+# SPDX-License-Identifier: LicenseRef-MSLA
+# SPDX-FileCopyrightText: Silicon Laboratories Inc. https://www.silabs.com
 '''
+The script was replicated and updated to work with Z/IP Gateway
+See https://github.com/SiliconLabs/zipgateway/pull/30
+
 Created on 08/11/2011
 
 @author: aes
