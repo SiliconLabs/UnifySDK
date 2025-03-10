@@ -1,0 +1,37 @@
+# YAML -*- mode: yaml; tab-width: 2; indent-tabs-mode: nil; coding: utf-8 -*-
+---
+name: Build in rootfs for arch
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    tags:
+       - '*'
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        arch:
+          - amd64
+    steps:
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - id: describe
+        name: Describe HEAD
+        run: |
+          echo "describe=$(git describe --tags --always || echo 0)" | tee $GITHUB_OUTPUT
+      - name: Setup and build
+        run: |
+          ARCH=${{ matrix.arch }} ./scripts/build-rootfs.sh
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}-${{ steps.describe.outputs.describe }}-${{ matrix.arch }}
+          path: build/dist/
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/dist/*
