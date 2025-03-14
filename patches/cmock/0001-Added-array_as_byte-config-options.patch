@@ -1,0 +1,91 @@
+From 2b089523835cf0ab3c4ac66984ee7b02f21a6d9d Mon Sep 17 00:00:00 2001
+From: Philippe Coval <philippe.coval@silabs.com>
+Date: Fri, 24 Apr 2020 14:05:54 +0200
+Subject: [PATCH] Added array_as_byte config options.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+[Anders Esbensen]
+
+Option to check arrays by the number of bytes instead of number of elements.
+
+[Philippe Coval]
+
+This change was applied to a fork (ths_cmock) used in a Z-Wave project.
+It was needed to generate mocks from a header that used annonymous structures.
+
+The observed issue was:
+
+(...)_mock.c:486:123: error: invalid application of ‘sizeof’ to incomplete type ‘struct (...)’
+
+Which was just declared in relative header.
+
+The array_as_byte feature prevent this error.
+
+Author: Anders Esbensen <Anders.Esbensen@silabs.com>
+Origin-Upstream: https://github.com/ThrowTheSwitch/CMock/pull/503
+Origin-SiliconLabs: v2.5.1-74-ga078d10
+Relate-to: https://github.com/SiliconLabsSoftware/z-wave-protocol-controller/issues/75
+Signed-off-by: Philippe Coval <philippe.coval@silabs.com>
+---
+ docs/CMock_Summary.md        | 4 ++++
+ lib/cmock_config.rb          | 1 +
+ lib/cmock_generator_utils.rb | 7 ++++++-
+ 3 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/docs/CMock_Summary.md b/docs/CMock_Summary.md
+index 3183665..5cb201c 100644
+--- a/docs/CMock_Summary.md
++++ b/docs/CMock_Summary.md
+@@ -738,6 +738,10 @@ from the defaults. We've tried to specify what the defaults are below.
+ 
+         GoBananas_ExpectWithArray(b, 2, 2);
+ 
++  `:array_as_byte`:
++  When checking arrays, the element size will always be 1, ie depth is the number
++  of bytes to check.
++
+ * `:fail_on_unexpected_calls`:
+   By default, CMock will fail a test if a mock is called without `_Expect` and `_Ignore`
+   called first. While this forces test writers to be more explicit in their expectations,
+diff --git a/lib/cmock_config.rb b/lib/cmock_config.rb
+index ccbf4dc..27cece4 100644
+--- a/lib/cmock_config.rb
++++ b/lib/cmock_config.rb
+@@ -41,6 +41,7 @@ class CMockConfig
+       :orig_header_include_fmt     => '#include "%s"',
+       :array_size_type             => [],
+       :array_size_name             => 'size|len',
++      :array_as_byte               => false,
+       :skeleton                    => false,
+       :exclude_setjmp_h            => false,
+ 
+diff --git a/lib/cmock_generator_utils.rb b/lib/cmock_generator_utils.rb
+index 83e762f..6f0ddc8 100644
+--- a/lib/cmock_generator_utils.rb
++++ b/lib/cmock_generator_utils.rb
+@@ -21,6 +21,7 @@ class CMockGeneratorUtils
+     @ignore_stateless = @config.plugins.include? :ignore_stateless
+     @treat_as = @config.treat_as
+     @helpers = helpers
++    @array_as_byte = @config.array_as_byte   
+   end
+ 
+   def self.arg_type_with_const(arg)
+@@ -230,7 +231,11 @@ class CMockGeneratorUtils
+         lines << "      { UNITY_TEST_ASSERT_NULL(#{arg_name}, cmock_line, CMockStringExpNULL); }\n"
+         lines << (depth_name != 1 ? "    else if (#{depth_name} == 0)\n      { UNITY_TEST_ASSERT_EQUAL_PTR(#{pre}#{expected}, #{pre}#{arg_name}, cmock_line, CMockStringMismatch); }\n" : '')
+         lines << "    else\n"
+-        lines << "      { UNITY_TEST_ASSERT_EQUAL_MEMORY_ARRAY((void*)(#{pre}#{expected}), (void*)(#{pre}#{arg_name}), sizeof(#{c_type.sub('*', '')}), #{depth_name}, cmock_line, CMockStringMismatch); }\n"
++        if @array_as_byte 
++          lines << "      { UNITY_TEST_ASSERT_EQUAL_MEMORY_ARRAY((void*)(#{pre}#{expected}), (void*)(#{pre}#{arg_name}), 1, #{depth_name}, cmock_line, CMockStringMismatch); }\n"
++        else
++          lines << "      { UNITY_TEST_ASSERT_EQUAL_MEMORY_ARRAY((void*)(#{pre}#{expected}), (void*)(#{pre}#{arg_name}), sizeof(#{c_type.sub('*', '')}), #{depth_name}, cmock_line, CMockStringMismatch); }\n"
++        end
+       end
+     when /_ARRAY/
+       if pre == '&'
+-- 
+2.39.5
+
