@@ -313,6 +313,7 @@ static void do_event(void) CC_REENTRANT_ARG
 
     data     = events[fevent].data;
     receiver = events[fevent].p;
+    int fevent_copy = fevent; /* To be cleared once processed */
 
     /* Since we have seen the new event, we move pointer upwards
        and decrese the number of events. */
@@ -342,6 +343,9 @@ static void do_event(void) CC_REENTRANT_ARG
       /* Make sure that the process actually is running. */
       call_process(receiver, ev, data);
     }
+    /* Clear pointer (to potentially unreachable/freed data) */
+    events[fevent_copy].data = NULL;
+    events[fevent_copy].p = NULL;
   }
 }
 /*---------------------------------------------------------------------------*/
