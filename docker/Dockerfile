@@ -88,11 +88,13 @@ ENV PLANTUML_JAR_PATH=/opt/plantuml.jar
 
 
 # Fetch and install ZAP and dependencies
-RUN apt update \
-  && echo "Latest ZAP .deb URL: https://github.com/project-chip/zap/releases/download/v2025.01.15/zap-linux-x64.deb" \
-  && wget -O /tmp/zap.deb https://github.com/project-chip/zap/releases/download/v2025.01.15/zap-linux-x64.deb \
-  && apt install -y --no-install-recommends /tmp/zap.deb \
-  && rm -rf /var/lib/apt/lists/*
+RUN wget -O /tmp/zap.zip https://github.com/project-chip/zap/releases/download/v2025.06.09/zap-linux-arm64.zip \
+  && echo e0457d340965e153d84ca41addc257a8e4f6b4c1c8dfdb7d105779110e6d8451 /tmp/zap.zip > /tmp/zap.zip.sha256 \
+  && sha256sum -c /tmp/zap.zip.sha256 \
+  && unzip /tmp/zap.zip -d /opt/ \
+  && rm /tmp/zap.zip \
+  && mv /opt/zap-* /opt/zap
+ENV PATH="/opt/zap/bin:${PATH}"
 
 # Unpack SLC CLI
 COPY uic-resources/linux/slc_cli_linux.zip /tmp/slc_cli_linux.zip
