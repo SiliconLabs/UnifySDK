@@ -16,7 +16,7 @@ project?=unifysdk
 BUILD_DEV_GUI?=OFF
 BUILD_IMAGE_PROVIDER?=ON
 
-cmake_options?=-B ${build_dir}
+cmake_options+=-B ${build_dir}
 
 CMAKE_GENERATOR?=Ninja
 export CMAKE_GENERATOR
